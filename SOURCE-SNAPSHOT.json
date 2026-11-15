@@ -25,8 +25,8 @@
     {
       "path": "CHANGELOG.md",
       "source_path": "docs/publication/public-main/CHANGELOG.md",
-      "sha256": "1eb9f601a8ec5670e1c2605f02871e260d77d7f7c5defa87f372f31ea91dbb74",
-      "bytes": 3154,
+      "sha256": "3271c525765da83452ebca0a19c376eace044008d46b1c391409ec0d3845a423",
+      "bytes": 3571,
       "origin": "untracked",
       "selection": "curated_overlay",
       "review": []
@@ -1141,8 +1141,8 @@
     {
       "path": "docs/build.md",
       "source_path": "docs/publication/public-main/docs/build.md",
-      "sha256": "eda6d1d2e66a3af285d1eafee6ae67e397607d2aa5ae098b3872c4b9a0aab9d9",
-      "bytes": 5118,
+      "sha256": "a5964db3d6b5f536afa0718e05f0de37a95ce9227df2bac4ea0b4a455842d8ab",
+      "bytes": 5421,
       "origin": "untracked",
       "selection": "curated_overlay",
       "review": []
@@ -1168,8 +1168,8 @@
     {
       "path": "docs/install.md",
       "source_path": "docs/publication/public-main/docs/install.md",
-      "sha256": "007cac5c83421efbf91ddca344953d9520c72ea41b1130716659c16ed70bfcf1",
-      "bytes": 3090,
+      "sha256": "9a5824819624231909b0aa7a0a52f11fca09e4396d667defe7a5d4b609af4a4a",
+      "bytes": 3170,
       "origin": "untracked",
       "selection": "curated_overlay",
       "review": []
@@ -2896,8 +2896,8 @@
     {
       "path": "genshin_app.spec",
       "source_path": "genshin_app.spec",
-      "sha256": "5821e8f8e45fdc420f28d3bc2c437fc13f50b9853a2f31cda1a5fc31a06afaea",
-      "bytes": 9857,
+      "sha256": "871b5d03d0a51b1424f128abe6f8ec4c7ffd26132e7aff62178caa8045d77a59",
+      "bytes": 9853,
       "origin": "tracked",
       "selection": "allowlist",
       "review": []
@@ -2905,8 +2905,8 @@
     {
       "path": "genshin_installer.spec",
       "source_path": "genshin_installer.spec",
-      "sha256": "084a90c2e28ef4f7d6b97a1bd382a0e83df01be0b3403626a479eb4945c7f7a3",
-      "bytes": 839,
+      "sha256": "be9eae9047489e27336069611b89c7611e0765c691e5eab312970fbd73e986a5",
+      "bytes": 1009,
       "origin": "untracked",
       "selection": "allowlist",
       "review": []
@@ -2914,8 +2914,8 @@
     {
       "path": "genshin_updater.spec",
       "source_path": "genshin_updater.spec",
-      "sha256": "eee8c4a1c6cb3a7af622ef9cbed4ae3e4ef832ec93656972beacd2e7db504afd",
-      "bytes": 1080,
+      "sha256": "bf6d43f389f2a55b32252e8eeb4dbf2c42057d7bd0ff78c462a4a1c7a8a080b9",
+      "bytes": 1250,
       "origin": "tracked",
       "selection": "allowlist",
       "review": []
@@ -2932,8 +2932,8 @@
     {
       "path": "installer_entry.py",
       "source_path": "installer_entry.py",
-      "sha256": "8aea285417930016e4dca93ba0e3daf5c54c66566a0b96b2df9eba9dd4cba942",
-      "bytes": 9338,
+      "sha256": "98431e1ab8b77ee2ef7086b5ccc56c14b0ac9297e13b8e60fc3c7e929535dc3f",
+      "bytes": 10874,
       "origin": "untracked",
       "selection": "allowlist",
       "review": []
@@ -3049,8 +3049,8 @@
     {
       "path": "scripts/app_runtime_release.py",
       "source_path": "scripts/app_runtime_release.py",
-      "sha256": "ed2eb17d8027a66971cd8b11198d48910e1ea464d84f14326e82209f842887ba",
-      "bytes": 2872,
+      "sha256": "24e89560c3b42fb2bcf3d789eb98a9593fc218d1e7149db205f77515d2c07d83",
+      "bytes": 2957,
       "origin": "tracked",
       "selection": "allowlist",
       "review": []
@@ -3220,8 +3220,8 @@
     {
       "path": "scripts/packaging_windows_runtime.py",
       "source_path": "scripts/packaging_windows_runtime.py",
-      "sha256": "b7f4e0f5d4d59446af3d6ebc36769ffb89f65c911bf58c68dd0a476c6fd2159e",
-      "bytes": 894,
+      "sha256": "e028bd5c114d7bd9c0f8fc3effab784d6a0115442e16e2ed9bc35bd9c4abff62",
+      "bytes": 1972,
       "origin": "untracked",
       "selection": "allowlist",
       "review": []
@@ -3441,6 +3441,15 @@
       "origin": "tracked",
       "selection": "allowlist",
       "review": []
+    },
+    {
+      "path": "scripts/verify_frozen_setup_archive.py",
+      "source_path": "scripts/verify_frozen_setup_archive.py",
+      "origin": "untracked",
+      "selection": "setup_hotfix",
+      "review": [],
+      "sha256": "bcc5569ab6cf1db3dbf23756cb059bbb5a5a001ed0c7beafff002c8fcb3f1ef0",
+      "bytes": 3765
     },
     {
       "path": "scripts/verify_gadget_sources_delivery.py",
@@ -8832,6 +8841,15 @@
       "origin": "tracked",
       "selection": "allowlist",
       "review": []
+    },
+    {
+      "path": "src/genshin_app/setup_frozen_qualification.py",
+      "source_path": "src/genshin_app/setup_frozen_qualification.py",
+      "origin": "untracked",
+      "selection": "setup_hotfix",
+      "review": [],
+      "sha256": "5d908a0a553d2ba6b6b0c38976e222ad8109bdc786a5195062bab339ea405af2",
+      "bytes": 9358
     },
     {
       "path": "src/genshin_app/shortcuts.py",
@@ -19747,8 +19765,8 @@
     {
       "path": "tests/test_packaging_windows_runtime.py",
       "source_path": "tests/test_packaging_windows_runtime.py",
-      "sha256": "176b1bff59be6d97d629b794d03312e3714b8d7187d6c401ed30a7263b82e14d",
-      "bytes": 899,
+      "sha256": "58cb916a8e91bc44e403c23ae412042bef4e9c54d9929ce9969a51238a69fc8e",
+      "bytes": 1579,
       "origin": "untracked",
       "selection": "allowlist",
       "review": []
@@ -21909,8 +21927,8 @@
     {
       "path": "tests/test_runtime_reaction_f11cf545.py",
       "source_path": "tests/test_runtime_reaction_f11cf545.py",
-      "sha256": "d3c51a05d08f3ac993cefd0165639326c310118b1fa4037fd8fe09efd021eb8f",
-      "bytes": 9886,
+      "sha256": "704e5c9b5940be37c2bc0779cb9dbe2ae183f3c2b236c0676d88f852a428f730",
+      "bytes": 9891,
       "origin": "tracked",
       "selection": "allowlist",
       "review": []
@@ -22085,6 +22103,15 @@
       "origin": "tracked",
       "selection": "allowlist",
       "review": []
+    },
+    {
+      "path": "tests/test_setup_frozen_qualification.py",
+      "source_path": "tests/test_setup_frozen_qualification.py",
+      "origin": "untracked",
+      "selection": "setup_hotfix",
+      "review": [],
+      "sha256": "4df95e93163afa42b0a71b76d604900a4f01a66f9dd8eefabd7dd68d294830bd",
+      "bytes": 3310
     },
     {
       "path": "tests/test_shared_pool_app_delivery.py",

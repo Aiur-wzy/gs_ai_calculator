@@ -15,7 +15,7 @@ for source_path in (project_root, project_root / "src"):
 from genshin_db.release_profile import validate_database_release_manifest
 from scripts.native_agent_release import validate_staged_native_agent_runtime
 from scripts.app_runtime_release import app_runtime_module_closure
-from scripts.packaging_windows_runtime import omit_windows_system_crt
+from scripts.packaging_windows_runtime import omit_windows_system_crt, runtime_validation_datas
 from genshin_engine.runtime_dependencies import CONTRACT as ENGINE_DEPENDENCY_CONTRACT
 from genshin_engine.runtime_dependencies import FROZEN_MANIFEST, engine_runtime_module_closure
 engine_runtime_modules = sorted(engine_runtime_module_closure(project_root / "src"))
@@ -155,7 +155,7 @@ a = Analysis(
         ("src/genshin_db/display_alias_reference.json", "genshin_db"),
         ("src/genshin_db/resources/mechanics", "genshin_db/resources/mechanics"),
         ("src/genshin_db/resources/mechanisms", "genshin_db/resources/mechanisms"),
-        ("src/genshin_runtime/resources/*.json", "genshin_runtime/resources"),
+        *runtime_validation_datas(project_root),
         (str(engine_dependency_manifest), "genshin_engine"),
         (str(native_runtime), "agent-runtime"),
         (str(native_release), "native-agent-release"),

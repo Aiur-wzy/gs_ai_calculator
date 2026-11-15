@@ -4,7 +4,7 @@
 
 首个正式发行是 App **0.46.0-r19**，配套数据库为 **db-7.2.50-r6**。支持 Windows 10/11 x64。请以[应用发行页](https://github.com/Aiur-wzy/gs_ai_calculator/releases)和[数据库发行页](https://github.com/Aiur-wzy/gs_ai_calculator_db/releases)实际提供的附件和 SHA-256 校验值为准。仓库源码 ZIP 不包含 EXE 或完整数据库。
 
-1. 下载并解压小安装器 ZIP，运行 `GenshinCalcSetup.exe`。
+1. 从[官方下载页](https://aiur-wzy.github.io/gs_ai_calculator/)下载 Windows 小安装器修复版，解压后运行 `GenshinCalcSetup.exe`。
 2. 选择「安装程序和数据库（推荐）」即可安装完整组合。选择「只安装程序，稍后下载数据库」可先装应用，随后在 GUI 中选择「下载数据库」。首次安装受签名索引约束，并会验证下载文件。
 3. 程序安装在 `%LOCALAPPDATA%\GenshinCalcStable\app`，默认用户资料目录为 `%LOCALAPPDATA%\GenshinCalcStable\data`。正式版从新的资料目录开始，不继承旧开发版会话和设置。自己保留的独立方案可按需在新版打开。
 

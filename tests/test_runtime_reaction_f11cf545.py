@@ -171,7 +171,8 @@ def test_query_scope_and_caller_mutation_do_not_expand_recipe(f11_reaction_db):
         query(f11_reaction_db, "electro")
 
 
-def test_resource_is_included_by_production_spec_glob():
-    spec = (ROOT / "genshin_app.spec").read_text("utf8")
-    assert '("src/genshin_runtime/resources/*.json", "genshin_runtime/resources")' in spec
-    assert (ROOT / "src/genshin_runtime/resources/reaction_damage_f11cf545_profile.json").is_file()
+def test_resource_is_included_by_release_packaging_inventory():
+    from scripts.packaging_windows_runtime import runtime_validation_datas
+
+    assert (str(ROOT / "src/genshin_runtime/resources/reaction_damage_f11cf545_profile.json"),
+            "genshin_runtime/resources") in runtime_validation_datas(ROOT)

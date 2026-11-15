@@ -5,12 +5,14 @@ from pathlib import Path
 project_root = Path(SPECPATH).resolve()
 if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
-from scripts.packaging_windows_runtime import omit_windows_system_crt
+from scripts.packaging_windows_runtime import (
+    omit_windows_system_crt, runtime_validation_datas, verify_runtime_validation_archive,
+)
 
 a = Analysis(
     [str(project_root / "installer_entry.py")],
     pathex=[str(project_root / "src")],
-    binaries=[], datas=[], hiddenimports=[], hookspath=[], runtime_hooks=[],
+    binaries=[], datas=runtime_validation_datas(project_root), hiddenimports=[], hookspath=[], runtime_hooks=[],
     excludes=["webview", "genshin_engine", "genshin_app.agent_chat"],
     noarchive=False,
 )
@@ -22,3 +24,4 @@ exe = EXE(
     name="GenshinCalcSetup", debug=False, bootloader_ignore_signals=False,
     strip=False, upx=False, console=False, icon=None,
 )
+verify_runtime_validation_archive(Path(exe.name), project_root)

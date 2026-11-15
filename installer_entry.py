@@ -2,22 +2,44 @@
 from __future__ import annotations
 
 import argparse
+from pathlib import Path
 from queue import Empty, Queue
 from threading import Event, Thread
 
 
+def _failure_reasons(error):
+    from genshin_app.setup_frozen_qualification import installation_error_chain
+
+    return list(dict.fromkeys(row.get("reason", row["type"]) for row in installation_error_chain(error)))
+
+
 def main(argv=None):
+    parser = argparse.ArgumentParser()
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument("--uninstall", action="store_true")
+    mode.add_argument("--self-check", action="store_true")
+    mode.add_argument("--verify-frozen-install", action="store_true")
+    for flag in ("--index", "--app-archive", "--database-archive", "--sandbox-root", "--report"):
+        parser.add_argument(flag, type=Path, help=argparse.SUPPRESS)
+    args = parser.parse_args(argv)
+    inputs = (args.index, args.app_archive, args.database_archive, args.sandbox_root, args.report)
+    if args.verify_frozen_install:
+        if not all(inputs):
+            parser.error("a signed index, both release archives, sandbox root, and report are required")
+        from genshin_app.setup_frozen_qualification import verify_frozen_install
+
+        return verify_frozen_install(index=args.index, app_archive=args.app_archive,
+                                     database_archive=args.database_archive, sandbox_root=args.sandbox_root,
+                                     report=args.report)
+    if any(inputs):
+        parser.error("qualification inputs are only accepted in --verify-frozen-install mode")
+    if args.self_check:
+        return 0
+
     import tkinter as tk
     from tkinter import filedialog, messagebox, ttk
 
     from genshin_app.product_first_install import build_first_install_coordinator
-
-    parser = argparse.ArgumentParser()
-    parser.add_argument("--uninstall", action="store_true")
-    parser.add_argument("--self-check", action="store_true")
-    args = parser.parse_args(argv)
-    if args.self_check:
-        return 0
 
     window = tk.Tk()
     window.title("卸载原神拉表" if args.uninstall else "安装原神拉表")
@@ -59,7 +81,7 @@ def main(argv=None):
             try:
                 events.put((task, function()))
             except Exception as error:  # noqa: BLE001 - user-facing thread boundary
-                events.put(("failed", getattr(error, "reason", type(error).__name__)))
+                events.put(("failed", _failure_reasons(error)))
 
         Thread(target=run, daemon=False).start()
 
@@ -174,10 +196,14 @@ def main(argv=None):
                     status.set(f"程序已卸载，用户资料保留在\n{value['preserved_data_directory']}{note}")
                 else:
                     action = "卸载" if args.uninstall else "安装"
-                    if value in {"product_first_install_cancelled", "product_uninstall_cancelled"}:
+                    reason = value[0]
+                    if reason in {"product_first_install_cancelled", "product_uninstall_cancelled"}:
                         status.set(f"已取消{action}。")
                     else:
-                        status.set(f"{action}尚未完成。{value}")
+                        message = ("安装文件已就绪，但程序和数据库未通过安装验证。"
+                                   if reason == "release_pair_helper_first_install_recovery_required"
+                                   else f"{action}尚未完成。")
+                        status.set(message + "\n" + " → ".join(value))
                     if previews:
                         install.configure(state="normal")
                     messagebox.showinfo(window.title(), status.get(), parent=window)
