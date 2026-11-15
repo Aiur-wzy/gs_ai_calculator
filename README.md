@@ -1,5 +1,9 @@
 # 原神拉表 · GS AI Calculator
 
+> **[官方下载页](https://aiur-wzy.github.io/gs_ai_calculator/)**
+>
+> 下载 Windows 小安装器、免安装程序和数据库。
+
 原神拉表是 Windows 上的队伍排轴、能量与伤害计算工具。Agent 查询资料并整理计算输入，引擎执行计算；GUI 用于查看动作、Buff 和伤害时间轴，人工审核和寻找问题。
 
 ## 当前推荐的使用方式
