@@ -24,16 +24,16 @@ APP_DIR_NAME = "GenshinCalcStable"
 # Advance the database ID/sequence only when database content or its own
 # release contract changes.  App compatibility is declared by PairManifest,
 # not by minting a duplicate database release.
-APP_RELEASE_ID = "app-0.46.0-r19"
-RELEASE_PAIR_ID = "pair-0.46.0-r19-db-7.2.50-r6"
+APP_RELEASE_ID = "app-0.46.0-r20"
+RELEASE_PAIR_ID = "pair-0.46.0-r20-db-7.2.50-r6"
 # APP_VERSION is the feature version; each release ID identifies one immutable
 # package and may never be reused for a different rebuild.
-RELEASE_PAIR_SEQUENCE = 1
+RELEASE_PAIR_SEQUENCE = 2
 # Exact bytes of the last accepted predecessor pair used by the portable
 # release build.  This prevents a builder from selecting an arbitrary older
 # in-repository pair merely because its sequence and database happen to look
 # compatible.  Advance this pin only after accepting a new portable candidate.
-ACCEPTED_PREDECESSOR_PAIR_MANIFEST_SHA256 = ""
+ACCEPTED_PREDECESSOR_PAIR_MANIFEST_SHA256 = "5e69574f542a85ffb535820d8232600a5d593b827d99391ec21d6dba4a6c4057"
 DATABASE_PAIR_POLICY = "exact"
 DATABASE_RELEASE_ID = "db-7.2.50-r6"
 DATABASE_RELEASE_SEQUENCE = 8
@@ -41,7 +41,7 @@ DATABASE_RELEASE_CHANNEL = "stable"
 DATABASE_RELEASE_MANIFEST_URL = "https://aiur-wzy.github.io/gs_ai_calculator/latest.json"
 # Public verification keys are release inputs, not user preferences.  Each
 # item is {key_id, algorithm="rsa-pss-sha256", modulus_hex, exponent}.  The
-# first stable build verifies releases with the owner's offline public key.
+# Stable builds verify releases with the owner's offline public key.
 DATABASE_RELEASE_TRUST_KEYS: tuple[dict[str, object], ...] = (
     {'key_id': '8330b1e85d36355db432ce6fdfaf54ba3faad529724dba275d03c77c8440f1df', 'algorithm': 'rsa-pss-sha256', 'modulus_hex': 'eb3802468297c736e4051ef50c3c4b72e2cae9632349ffdf3529d3f9467a74e2a48f763d21d88b6d91f017dae50642d72d895fa52c20c1814531f77030b8c6860c363ffef9fada3dab01bed048e4b91f6357bf53347e278346495f4be08d1391efc03684b8ddfca823193bd5107f1543ecd38cfade1dc23968f724eafa1f89247b56c3d3ae4245b75798684ca9f706a8ef594bc3b7d6319584881ea4c17ee43957da68e0ea79f19478594d265794d5bf5da57d932be5324dd2370e49669a5aecce9c382e813ce5f5fad9c08ca59fc4d3f3f63851ef5ffb5322bb0a2d11b709dcc9ea15cba1881cbf5693b7d167ff66a5a181d951f0a7724f77abad88fa817da59f8e5c849bf99a9794b5db9e99aa1b42652a451957233332ba7d4bbd44c202109a73c17996542412a6a98e35a41fa05ed65587d1a1afd27f08bf4e8480a9b98a3390759bb6f7c3a1fde1b674476b12156ca4a33957565ca4bc36d47f49d724160fec01b034e0c9889b82027afa5237455998625af9c429d8a019fcd9da7bbb47', 'exponent': 65537},
 )

@@ -5,7 +5,9 @@ from __future__ import annotations
 import hashlib
 import json
 import os
+import re
 import shutil
+import sys
 from collections.abc import Callable
 from contextlib import contextmanager
 from pathlib import Path
@@ -13,6 +15,7 @@ from uuid import uuid4
 
 from genshin_app import version
 from genshin_app.database_transaction import (
+    ACTIVATION_JOURNAL,
     atomic_json,
     journal_pending,
     profile_writer,
@@ -42,7 +45,9 @@ from genshin_app.release_pair_transport import stage_release_pair_artifacts
 from genshin_app.release_pair_trust import build_trust_verifier
 from genshin_app.release_pair_update import (
     LIVE_DATABASE_MANIFEST_FILENAME,
+    LIVE_DATABASE_RECEIPT_FILENAME,
     LIVE_PAIR_MANIFEST_FILENAME,
+    PAIR_UPDATE_JOURNAL_FILENAME,
     _verify_app,
     create_signed_discovery_trust_assertion,
     prepare_release_pair_handoff,
@@ -120,8 +125,9 @@ class _FirstInstallCoordinator:
 
     def uninstall_preview(self):
         profile, row = self._installed_registration()
-        app = reject_reparse_chain(profile / "app", reason="product_uninstall_app_path_invalid")
         data = profile / "data"
+        self._require_update_idle(profile, data)
+        app = reject_reparse_chain(profile / "app", reason="product_uninstall_app_path_invalid")
         document, _ = self._signed_installed_source(data, row)
         pair = document["pair_manifest"]
         manifest = _verify_app(app, pair, independent=True)
@@ -129,6 +135,196 @@ class _FirstInstallCoordinator:
                 "preserved_data_directory": str(data),
                 "confirmation_digest": digest({"registration": row, "signed_release": document,
                                                "manifest_sha256": manifest["manifest_sha256"]})}
+
+    def _pair_journal(self, profile):
+        from .release_pair_update import read_pair_update_journal
+
+        workspace = profile / "update-workspace"
+        if not os.path.lexists(workspace):
+            return None
+        workspace = reject_reparse_chain(workspace, reason="product_repair_profile_path_invalid")
+        journal_path = workspace / PAIR_UPDATE_JOURNAL_FILENAME
+        if os.path.lexists(journal_path):
+            reject_reparse_chain(journal_path, reason="product_repair_profile_path_invalid")
+        return read_pair_update_journal(workspace)
+
+    def _require_update_idle(self, profile, data, *, allow_prepared=False):
+        for path in (data, data / ".update.lock", data / ACTIVATION_JOURNAL):
+            if os.path.lexists(path):
+                reject_reparse_chain(path, reason="product_repair_profile_path_invalid")
+        if journal_pending(read_activation_journal(data)):
+            raise FirstInstallError("product_setup_database_recovery_pending")
+        journal = self._pair_journal(profile)
+        if journal and journal["state"] != "cleanup_complete" and not (
+            allow_prepared and journal["state"] == "handoff_ready"
+        ):
+            raise FirstInstallError("product_setup_pair_recovery_pending")
+
+    def _repair_profile(self):
+        profile, row = self._installed_registration()
+        app = reject_reparse_chain(profile / "app", reason="product_repair_app_path_invalid")
+        data_path = profile / "data"
+        if row.get("database_state") == "database_not_installed" and not os.path.lexists(
+            data_path / LIVE_PAIR_MANIFEST_FILENAME
+        ):
+            raise FirstInstallError("product_repair_database_not_installed")
+        data = reject_reparse_chain(data_path, reason="product_repair_data_path_invalid")
+        self._require_update_idle(profile, data, allow_prepared=True)
+        workspace = profile / "update-workspace"
+        cache = data / "cache"
+        paths = (cache, cache / "product-release-index.json", cache / "product-release-index.lock",
+                 data / "genshin.db", data / LIVE_DATABASE_RECEIPT_FILENAME)
+        for path in paths:
+            if os.path.lexists(path):
+                reject_reparse_chain(path, reason="product_repair_profile_path_invalid")
+        if row.get("installation_state") == "uninstalled" or not (data / "genshin.db").is_file():
+            raise FirstInstallError("product_repair_signed_install_required")
+        document, has_database = self._signed_installed_source(data, row)
+        if not has_database:
+            raise FirstInstallError("product_repair_signed_install_required")
+        return profile, app, data, workspace, document
+
+    def interrupted_update_preview(self):
+        """Offer a separate recovery action without selecting any new release."""
+        if not os.path.lexists(self._profile / "update-workspace"):
+            return None
+        profile, row = self._installed_registration()
+        if row.get("installation_state") == "uninstalled":
+            return None
+        journal = self._pair_journal(profile)
+        if not journal or journal["state"] not in {
+            "handoff_ready", "activation_started", "postchecked", "committed", "operational", "rolled_back",
+        }:
+            return None
+        return {"mode": "recover_interrupted_update", "install_directory": str(profile),
+                "operation_id": journal["operation_id"], "update_state": journal["state"],
+                "previous_pair_id": journal["rollback_release_pair_id"],
+                "target_pair_id": journal["target_release_pair_id"],
+                "confirmation_digest": digest(journal)}
+
+    def recover_interrupted_update(self, confirmation_digest, *, user_confirmed, progress=None):
+        from .database_legacy_processes import packaged_peer_processes
+        from .release_pair_helper import recover_interrupted_pair_update
+
+        if user_confirmed is not True:
+            raise FirstInstallError("product_first_install_confirmation_required")
+        lock = self._cache / "first-install.lock"
+        self._check_cache_path(lock)
+        try:
+            with file_lock(lock, timeout=0):
+                choice = self.interrupted_update_preview()
+                if choice is None or choice["confirmation_digest"] != confirmation_digest:
+                    raise FirstInstallError("product_first_install_confirmation_mismatch")
+                root = Path(choice["install_directory"])
+                data = reject_reparse_chain(root / "data", reason="product_repair_data_path_invalid")
+                if os.path.lexists(data / ".update.lock"):
+                    reject_reparse_chain(data / ".update.lock", reason="product_repair_data_path_invalid")
+                with profile_writer(data, timeout=0):
+                    if self.interrupted_update_preview() != choice:
+                        raise FirstInstallError("product_first_install_confirmation_mismatch")
+                    if packaged_peer_processes(include_updaters=True):
+                        raise FirstInstallError("database_legacy_instance_running")
+                    _emit_phase(progress, "committing")
+                    return recover_interrupted_pair_update(root / "update-workspace", root / "app", data,
+                                                           operation_id=choice["operation_id"], user_confirmed=True)
+        except LockBusyError as error:
+            raise FirstInstallError("product_first_install_busy") from error
+
+    def _repair_coordinator(self, app, data, workspace, *, launcher=None):
+        from .release_pair_coordinator import ReleasePairCoordinator
+
+        executable = Path(sys.executable).resolve()
+        if executable.is_relative_to(app):
+            raise FirstInstallError("product_repair_requires_standalone_setup")
+        return ReleasePairCoordinator(data_dir=data, active_app_root=app, workspace=workspace,
+                                      discovery_url=self._url, channel="stable", trust_verifier=self._trust_verifier,
+                                      updater_locator=lambda: {"executable": executable},
+                                      restart_relative="GenshinCalcGUI.exe",
+                                      **({"launcher": launcher} if launcher is not None else {}))
+
+    def _repair_selection(self, coordinator, installed):
+        discovered = coordinator.discover()
+        if not discovered.get("authoritative") or not discovered.get("product_index"):
+            raise FirstInstallError(discovered.get("reason") or "product_repair_release_unavailable")
+        pair, database = installed["pair_manifest"], installed["database_manifest"]
+        if (discovered["installed_pair"] != pair or discovered["installed_database"] != database
+                or discovered["product_index"]["pairs"].get(pair["release_pair_id"]) != installed):
+            raise FirstInstallError("product_repair_installed_pair_not_in_signed_index")
+        choice = next((option for option in discovered["update_options"]
+                       if option["mode"] == "app_only" and option["reuse_database"] and not option["reuse_app"]
+                       and option["document"]["database_manifest"] == database), None)
+        if choice is None:
+            raise FirstInstallError("product_repair_no_signed_app_successor")
+        return discovered, choice
+
+    def repair_preview(self):
+        """Offer a signed successor App for this exact installed database."""
+        profile, app, data, workspace, current = self._repair_profile()
+        _, choice = self._repair_selection(self._repair_coordinator(app, data, workspace), current)
+        document = choice["document"]
+        pair = document["pair_manifest"]
+        return {"mode": "repair_installed_app", "install_directory": str(profile),
+                "installed_app_release_id": current["pair_manifest"]["app"]["app_release_id"],
+                "app_release_id": pair["app"]["app_release_id"],
+                "database_release_id": document["database_manifest"]["database_release_id"],
+                "release_pair_id": pair["release_pair_id"], "confirmation_digest": choice["confirmation_digest"],
+                "download_bytes": {"app": document["artifacts"]["app"]["size_bytes"], "database": 0}}
+
+    def repair_install(self, confirmation_digest, *, user_confirmed, cancel_check=None, progress=None):
+        """Apply the signed App successor using Setup instead of the old installed updater."""
+        from .database_legacy_processes import packaged_peer_processes
+        from .release_pair_helper import execute_external_pair_update
+        from .release_pair_update import inspect_pair_update_handoff
+
+        if user_confirmed is not True:
+            raise FirstInstallError("product_first_install_confirmation_required")
+
+        def check_quiet(profile, data):
+            if cancel_check is not None and cancel_check():
+                raise FirstInstallError("product_first_install_cancelled")
+            if packaged_peer_processes(include_updaters=True):
+                raise FirstInstallError("database_legacy_instance_running")
+            self._require_update_idle(profile, data, allow_prepared=True)
+
+        lock = self._cache / "first-install.lock"
+        self._check_cache_path(lock)
+        try:
+            with file_lock(lock, timeout=0):
+                profile, app, data, workspace, current = self._repair_profile()
+                check_quiet(profile, data)
+                completed = None
+
+                def activate(_executable, request):
+                    nonlocal completed
+                    match = re.fullmatch(r"helper-request-([0-9a-f]{32})\.json", request.name)
+                    if match is None or request.parent != workspace:
+                        raise FirstInstallError("product_repair_handoff_invalid")
+                    operation_id = match[1]
+                    with profile_writer(data, timeout=0):
+                        check_quiet(profile, data)
+                        handoff = inspect_pair_update_handoff(workspace, operation_id=operation_id)
+                        if (handoff["database_mode"] != "reuse_installed" or not handoff["independent_app"]
+                                or handoff["pair_manifest"] != choice["document"]["pair_manifest"]):
+                            raise FirstInstallError("product_repair_handoff_invalid")
+                        _emit_phase(progress, "committing")
+                        completed = execute_external_pair_update(
+                            workspace, app, data, operation_id=operation_id, current_user=True)
+                    return {"accepted": True, "method": "setup_in_process"}
+
+                coordinator = self._repair_coordinator(app, data, workspace, launcher=activate)
+                discovered, choice = self._repair_selection(coordinator, current)
+                if confirmation_digest != choice["confirmation_digest"]:
+                    raise FirstInstallError("product_first_install_confirmation_mismatch")
+                _emit_phase(progress, "downloading")
+                coordinator.prepare_and_launch(discovered, confirmed_document_sha256=confirmation_digest,
+                                               user_confirmed=True, cancel_check=cancel_check, progress=progress)
+                if completed is None or completed.get("status") != "complete":
+                    raise FirstInstallError("product_repair_incomplete")
+        except LockBusyError as error:
+            raise FirstInstallError("product_first_install_busy") from error
+        return {"status": "complete", "install_directory": str(profile),
+                "release_pair_id": completed["release_pair_id"], "database_state": "preserved",
+                "requires_restart": True}
 
     def uninstall(self, confirmation_digest, *, user_confirmed, cancel_check=None, progress=None):
         """Move only the authenticated App tree out of service, retaining the profile."""
@@ -140,12 +336,12 @@ class _FirstInstallCoordinator:
             raise FirstInstallError("product_uninstall_cancelled")
         profile, registration = self._installed_registration()
         data = profile / "data"
-        if os.path.lexists(data):
-            reject_reparse_chain(data, reason="product_uninstall_profile_path_invalid")
-        self._check_cache_path()
+        self._require_update_idle(profile, data)
+        lock = self._cache / "first-install.lock"
+        self._check_cache_path(lock)
         try:
-            with file_lock(self._cache / "first-install.lock", timeout=0), profile_writer(data, timeout=0):
-                if packaged_peer_processes():
+            with file_lock(lock, timeout=0), profile_writer(data, timeout=0):
+                if packaged_peer_processes(include_updaters=True):
                     raise FirstInstallError("database_legacy_instance_running")
                 selected = self.uninstall_preview()
                 if selected["confirmation_digest"] != confirmation_digest:
@@ -258,8 +454,7 @@ class _FirstInstallCoordinator:
         if row.get("installation_state") != "uninstalled":
             raise FirstInstallError("product_first_install_existing_profile")
         data = profile / "data"
-        if os.path.lexists(data):
-            reject_reparse_chain(data, reason="product_first_install_profile_path_invalid")
+        self._require_update_idle(profile, data)
         document, has_database = self._signed_installed_source(data, row)
         return {"mode": "reinstall", "document": document, "has_database": has_database,
                 "confirmation_digest": digest({"mode": "reinstall", "signed_release": document,
@@ -455,7 +650,7 @@ class _FirstInstallCoordinator:
             )
             _download_https(artifact, archive, timeout=30, maximum_bytes=MAX_APP_ARCHIVE_BYTES,
                             cancel_check=cancel_check, cache_dir=cache, progress=progress)
-            extracted = _extract_app_archive(archive, profile / "app")
+            extracted = _extract_app_archive(archive, profile / "app", cancel_check=cancel_check)
             if (extracted["unpacked_size_bytes"], extracted["files"]) != (
                     artifact["unpacked_size_bytes"], artifact["unpacked_files"]):
                 raise FirstInstallError("release_pair_app_archive_declared_shape_mismatch")
@@ -486,12 +681,11 @@ class _FirstInstallCoordinator:
 
         profile, registration = self._installed_registration()
         data = profile / "data"
+        self._require_update_idle(profile, data)
         with profile_writer(data, timeout=0):
             if self._reinstall_selection() != selection:
                 raise FirstInstallError("product_first_install_confirmation_mismatch")
-            if journal_pending(read_activation_journal(data)):
-                raise FirstInstallError("product_reinstall_database_recovery_pending")
-            if packaged_peer_processes():
+            if packaged_peer_processes(include_updaters=True):
                 raise FirstInstallError("database_legacy_instance_running")
             check_cancelled()
             _emit_phase(progress, "committing")

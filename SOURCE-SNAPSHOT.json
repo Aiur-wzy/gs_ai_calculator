@@ -1,79 +1,79 @@
 {
   "contract": "genshin-public-source-snapshot-v1",
   "repository": "main",
-  "source_revision": "842a7b6ea7b7fa116a5e8f08266a3a2a9a4878d5",
+  "source_revision": "21f0a7b17879e1b2e59de74e33b2d432d0c1eebf",
   "rules_sha256": "2f1d604fd9a4f405d987a6592ebe8b370e715848351f0c8550b19375f638c1e2",
   "files": [
     {
       "path": ".gitattributes",
-      "source_path": "docs/publication/public-main/.gitattributes",
+      "source_path": ".gitattributes",
       "sha256": "25da197a67cbd452b8f1d6cdde3095e1560b50ad75186658b714d7e78ffea7d8",
       "bytes": 91,
-      "origin": "untracked",
-      "selection": "curated_overlay",
+      "origin": "tracked",
+      "selection": "allowlist",
       "review": []
     },
     {
       "path": ".gitignore",
-      "source_path": "docs/publication/public-main/.gitignore",
+      "source_path": ".gitignore",
       "sha256": "d37b6ad7cb988606d94481f0fc28c1ea50137b7266e665dc68688007044c008c",
       "bytes": 252,
-      "origin": "untracked",
-      "selection": "curated_overlay",
+      "origin": "tracked",
+      "selection": "allowlist",
       "review": []
     },
     {
       "path": "CHANGELOG.md",
-      "source_path": "docs/publication/public-main/CHANGELOG.md",
-      "sha256": "3271c525765da83452ebca0a19c376eace044008d46b1c391409ec0d3845a423",
-      "bytes": 3571,
-      "origin": "untracked",
+      "source_path": "CHANGELOG.md",
+      "sha256": "7ce033e844bffa35bca7dc872cb5ceaec34c22d5ec818eb746376600d33f4925",
+      "bytes": 4121,
+      "origin": "tracked",
       "selection": "curated_overlay",
       "review": []
     },
     {
       "path": "CONTRIBUTING.md",
-      "source_path": "docs/publication/public-main/CONTRIBUTING.md",
+      "source_path": "CONTRIBUTING.md",
       "sha256": "d1012ed65eb6c9a80198f31f6ba43a56285bb7ed9198bd7c25b3e110386b52b9",
       "bytes": 1302,
-      "origin": "untracked",
-      "selection": "curated_overlay",
+      "origin": "tracked",
+      "selection": "allowlist",
       "review": []
     },
     {
       "path": "LICENSE",
-      "source_path": "docs/publication/public-main/LICENSE",
+      "source_path": "LICENSE",
       "sha256": "03072ef7a02808539800347c1be8f8f768f19fc55f49995feddb9a1c08f67a4d",
       "bytes": 1086,
-      "origin": "untracked",
-      "selection": "curated_overlay",
+      "origin": "tracked",
+      "selection": "allowlist",
       "review": []
     },
     {
       "path": "README.md",
-      "source_path": "docs/publication/public-main/README.md",
-      "sha256": "f2050ec9c5fe43b07771ba059891752c2b87381ed81142fa62c37537ce610c02",
+      "source_path": "README.md",
+      "sha256": "99074118a9bb2496d81dcfcba54938792b4aa9aa19bd8a833e176cadf7ef43cb",
       "bytes": 3018,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "curated_overlay",
       "review": []
     },
     {
       "path": "SECURITY.md",
-      "source_path": "docs/publication/public-main/SECURITY.md",
+      "source_path": "SECURITY.md",
       "sha256": "f43f125d0899ab1a429080797cae6892e1a91cc12419efdc0ae22d0d39a2f6f5",
       "bytes": 672,
-      "origin": "untracked",
-      "selection": "curated_overlay",
+      "origin": "tracked",
+      "selection": "allowlist",
       "review": []
     },
     {
       "path": "THIRD_PARTY_NOTICES.md",
-      "source_path": "docs/publication/public-main/THIRD_PARTY_NOTICES.md",
+      "source_path": "THIRD_PARTY_NOTICES.md",
       "sha256": "c529c81bae6f3629d47f4ab4f99b7a8aecada459d0cb5ba82e58e90f52802b1f",
       "bytes": 1733,
-      "origin": "untracked",
-      "selection": "curated_overlay",
+      "origin": "tracked",
+      "selection": "allowlist",
       "review": []
     },
     {
@@ -108,7 +108,7 @@
       "source_path": "agent-runtime/dsh-client-shell-runtime-manifest.json",
       "sha256": "9c5d48d9e8d3b221c5be4c52a786e74cb45050853484633b90b8d4c2c57327d1",
       "bytes": 5065378,
-      "origin": "generated",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -225,7 +225,7 @@
       "source_path": "agent-runtime/src/dsh-cli-task-review-plugin.mjs",
       "sha256": "9af6945a5c845b9d0e56bf67cc12c0ec72a7c4cd32a5602ebc5e23f6b3862e3d",
       "bytes": 4349,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -270,7 +270,7 @@
       "source_path": "agent-runtime/src/dsh-task-review-experiments.mjs",
       "sha256": "d736ecc5e7e50c10235a558e22be147d3347c42be95c5091b82eb180ed3ed0b9",
       "bytes": 1872,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -279,7 +279,7 @@
       "source_path": "agent-runtime/src/dsh-task-review-integration-probe.mjs",
       "sha256": "9f7f594c248b9ed27e65583a34e55cf32f5534ab7ad41efe48f9abee66057fda",
       "bytes": 4809,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -288,7 +288,7 @@
       "source_path": "agent-runtime/src/dsh-task-review-probe.mjs",
       "sha256": "0af55e556587149da71a6a29317f48ead2034d0fc92f79b2f176be7b0386a445",
       "bytes": 9437,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -297,7 +297,7 @@
       "source_path": "agent-runtime/src/dsh-task-review.mjs",
       "sha256": "4710aff1a795ad0d49bc21aaf3ca3e0141ce897c8d2b1f7b1e05ab402949468b",
       "bytes": 10234,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -414,7 +414,7 @@
       "source_path": "agent-runtime/src/native-dsh-app-context-projection-probe.mjs",
       "sha256": "0e0e28b7b37ba50a62643771b1c3883ea99e7fa38c8cb3b739d3d6eb2a56937b",
       "bytes": 3405,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -423,7 +423,7 @@
       "source_path": "agent-runtime/src/native-dsh-app-context-projection.mjs",
       "sha256": "cfbee20c97460dae5023dd7340d5232e66646caff1a1aea4e4b6728ab871bd96",
       "bytes": 1974,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -1089,7 +1089,7 @@
       "source_path": "agent-runtime/src/publication-usage.mjs",
       "sha256": "696209780f1c15f55491ffa02b1930f4c433e64f867e074e049d043576c69949",
       "bytes": 6118,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -1140,37 +1140,37 @@
     },
     {
       "path": "docs/build.md",
-      "source_path": "docs/publication/public-main/docs/build.md",
-      "sha256": "a5964db3d6b5f536afa0718e05f0de37a95ce9227df2bac4ea0b4a455842d8ab",
-      "bytes": 5421,
-      "origin": "untracked",
+      "source_path": "docs/build.md",
+      "sha256": "0eea88dec6bf606cf8cebd4995873d69ac167a3afeb4adc68d93ada6e763961f",
+      "bytes": 5564,
+      "origin": "tracked",
       "selection": "curated_overlay",
       "review": []
     },
     {
       "path": "docs/cli-workflow.md",
-      "source_path": "docs/publication/public-main/docs/cli-workflow.md",
-      "sha256": "b2b3fa6b191d52532019e7eef619400bba549dac635e6ebc9c8ef4fff6c53b16",
-      "bytes": 4112,
-      "origin": "untracked",
+      "source_path": "docs/cli-workflow.md",
+      "sha256": "edb2f9ad04bcdcec871e664ab024a957f2b37edc9ff85b4a2c0a99983fa70d37",
+      "bytes": 4106,
+      "origin": "tracked",
       "selection": "curated_overlay",
       "review": []
     },
     {
       "path": "docs/data-notice.md",
-      "source_path": "docs/publication/public-main/docs/data-notice.md",
+      "source_path": "docs/data-notice.md",
       "sha256": "cd1e70f7a9666e21f9e7b842c1d30a3be5da7cfc32451b406e6567bcc09dd013",
       "bytes": 1535,
-      "origin": "untracked",
-      "selection": "curated_overlay",
+      "origin": "tracked",
+      "selection": "allowlist",
       "review": []
     },
     {
       "path": "docs/install.md",
-      "source_path": "docs/publication/public-main/docs/install.md",
-      "sha256": "9a5824819624231909b0aa7a0a52f11fca09e4396d667defe7a5d4b609af4a4a",
-      "bytes": 3170,
-      "origin": "untracked",
+      "source_path": "docs/install.md",
+      "sha256": "448b1d3f9854410a8c3db7680f07bb65b7e78f057a2ecd9ae200d57c30411509",
+      "bytes": 5301,
+      "origin": "tracked",
       "selection": "curated_overlay",
       "review": []
     },
@@ -1278,7 +1278,7 @@
       "source_path": "frontend/dsh-client-accepted-manifest.json",
       "sha256": "615620017934ff229fa788ad5f6ba7004716a112b41e1ca4489725087a6867ca",
       "bytes": 25667,
-      "origin": "generated",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -1332,7 +1332,7 @@
       "source_path": "frontend/packages/dsh-client-domain/lib/build-manifest.json",
       "sha256": "a9e3da23508325f396e4a7dd04276da40da3e7c15b1087ff5d73f476a778d750",
       "bytes": 954,
-      "origin": "generated",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -1341,7 +1341,7 @@
       "source_path": "frontend/packages/dsh-client-domain/lib/client.js",
       "sha256": "bae7cbf940383ab6f2140a4db20e7369b57795c7625aa284e67ec405b4e78aab",
       "bytes": 218828,
-      "origin": "generated",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -1350,7 +1350,7 @@
       "source_path": "frontend/packages/dsh-client-domain/lib/client.js.map",
       "sha256": "84f74d4aee913fa7ab1fed735232c009020a2cc7571b5dbfed58da37fc932da4",
       "bytes": 334306,
-      "origin": "generated",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -2673,7 +2673,7 @@
       "source_path": "frontend/src/dsh/app-task-review.test.tsx",
       "sha256": "8ee436ef091da4d1c52aec127f4b38b0956de74147c953f489c3fe4a41a896cd",
       "bytes": 2807,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -2682,7 +2682,7 @@
       "source_path": "frontend/src/dsh/app-task-review.tsx",
       "sha256": "e6e3c6f75425079def274556346d18a205ca148d450672c568a4faaec7e024ae",
       "bytes": 8295,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -2905,37 +2905,37 @@
     {
       "path": "genshin_installer.spec",
       "source_path": "genshin_installer.spec",
-      "sha256": "be9eae9047489e27336069611b89c7611e0765c691e5eab312970fbd73e986a5",
+      "sha256": "4edabec9ab918b296e002e4eadafeae62501e78149d3c8df0cdbd3a99c45d755",
       "bytes": 1009,
-      "origin": "untracked",
-      "selection": "allowlist",
+      "origin": "tracked",
+      "selection": "curated_overlay",
       "review": []
     },
     {
       "path": "genshin_updater.spec",
       "source_path": "genshin_updater.spec",
-      "sha256": "bf6d43f389f2a55b32252e8eeb4dbf2c42057d7bd0ff78c462a4a1c7a8a080b9",
+      "sha256": "70326c36bba55bb27762b84e34e39fb4cfa576007865d531af9c841ae7981b50",
       "bytes": 1250,
       "origin": "tracked",
-      "selection": "allowlist",
+      "selection": "curated_overlay",
       "review": []
     },
     {
       "path": "installer.iss",
       "source_path": "installer.iss",
-      "sha256": "e824af8b81fe5abe69e055f1e9a647d08d16617e41b351c87af18bdaf60a2b62",
-      "bytes": 6250,
+      "sha256": "268e84c6d2c3e4f621c911a18148651b5428fd449d5553a49d4f0c7ab74a3030",
+      "bytes": 6347,
       "origin": "tracked",
-      "selection": "allowlist",
+      "selection": "curated_overlay",
       "review": []
     },
     {
       "path": "installer_entry.py",
       "source_path": "installer_entry.py",
-      "sha256": "98431e1ab8b77ee2ef7086b5ccc56c14b0ac9297e13b8e60fc3c7e929535dc3f",
-      "bytes": 10874,
-      "origin": "untracked",
-      "selection": "allowlist",
+      "sha256": "d08cb487247cc1303e1e77150ac7d017efeae8765432e7648dc652d06da37a83",
+      "bytes": 17169,
+      "origin": "tracked",
+      "selection": "curated_overlay",
       "review": []
     },
     {
@@ -2943,7 +2943,7 @@
       "source_path": "plugins/dsh-task-review/README.md",
       "sha256": "7909d18d012a61fa0a738de624f637b71d12b96578999ee81c776e237664206f",
       "bytes": 1193,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -2952,7 +2952,7 @@
       "source_path": "plugins/dsh-task-review/compatibility.json",
       "sha256": "c8b2b162913caa178c7a30abb9d5729bde65514cc44a300c0d947f97d29de51b",
       "bytes": 412,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -2961,7 +2961,7 @@
       "source_path": "plugins/dsh-task-review/dsh-cli-task-review-plugin.mjs",
       "sha256": "9af6945a5c845b9d0e56bf67cc12c0ec72a7c4cd32a5602ebc5e23f6b3862e3d",
       "bytes": 4349,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -2970,7 +2970,7 @@
       "source_path": "plugins/dsh-task-review/dsh-task-review.mjs",
       "sha256": "4710aff1a795ad0d49bc21aaf3ca3e0141ce897c8d2b1f7b1e05ab402949468b",
       "bytes": 10234,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -2979,7 +2979,7 @@
       "source_path": "plugins/dsh-task-review/index.mjs",
       "sha256": "e02cecc27f97cf11a1c56eb2670a41168a4a8b64190231d58664bfcaa721ebbb",
       "bytes": 149,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -2988,7 +2988,7 @@
       "source_path": "plugins/dsh-task-review/package.json",
       "sha256": "0b0630f855ea40d35447439627662fc312dd0aeedca4fc5edddfa4dccb1b72af",
       "bytes": 350,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -2997,7 +2997,7 @@
       "source_path": "plugins/dsh-task-review/public-lifecycle-probe.cjs",
       "sha256": "c30f9ec48266cd58d10797e9f2c7cb40539be2e0328efcd8976b463c359e4b14",
       "bytes": 6841,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -3012,29 +3012,38 @@
     },
     {
       "path": "release-inputs/README.md",
-      "source_path": "docs/publication/public-main/release-inputs/README.md",
+      "source_path": "release-inputs/README.md",
       "sha256": "dc2f62325ad53c2b91a2aa1dde2ce4548ad700ccff5437cf3b33954d629466a4",
       "bytes": 632,
-      "origin": "untracked",
-      "selection": "curated_overlay",
+      "origin": "tracked",
+      "selection": "allowlist",
       "review": []
     },
     {
       "path": "release-inputs/r17-release-pair-manifest.json",
-      "source_path": "docs/publication/public-main/release-inputs/r17-release-pair-manifest.json",
+      "source_path": "release-inputs/r17-release-pair-manifest.json",
       "sha256": "b500ad9b3a07276369f1cf9eff11e9feaaab4d107cbe32be728899f7c89f8892",
       "bytes": 1049,
-      "origin": "untracked",
+      "origin": "tracked",
+      "selection": "allowlist",
+      "review": []
+    },
+    {
+      "path": "release-inputs/r19-release-pair-manifest.json",
+      "source_path": "release-inputs/r19-release-pair-manifest.json",
+      "sha256": "5e69574f542a85ffb535820d8232600a5d593b827d99391ec21d6dba4a6c4057",
+      "bytes": 1037,
+      "origin": "tracked",
       "selection": "curated_overlay",
       "review": []
     },
     {
       "path": "release-inputs/r4/database-release-manifest.json",
-      "source_path": "docs/publication/public-main/release-inputs/r4/database-release-manifest.json",
+      "source_path": "release-inputs/r4/database-release-manifest.json",
       "sha256": "a21282217e9ec773bf914ddfa553444e98d9dc54636b721a53a47d13880f8c99",
       "bytes": 18960,
-      "origin": "untracked",
-      "selection": "curated_overlay",
+      "origin": "tracked",
+      "selection": "allowlist",
       "review": []
     },
     {
@@ -3076,19 +3085,19 @@
     {
       "path": "scripts/build_dist.py",
       "source_path": "scripts/build_dist.py",
-      "sha256": "9979c835f68500f79b53c3b14ecd79589e4e07bed392e46c56c2349044a501e4",
-      "bytes": 53606,
+      "sha256": "d59988793fe66a587fd09026dd573e2cd3521b441a0b1ab63193dc5def1d1602",
+      "bytes": 54429,
       "origin": "tracked",
-      "selection": "allowlist",
+      "selection": "curated_overlay",
       "review": []
     },
     {
       "path": "scripts/build_release_pair_feed.py",
       "source_path": "scripts/build_release_pair_feed.py",
-      "sha256": "2b3cc20effa0f7c1861eed9cbed2f671a16f318248fdabed66657db8b8a48bcd",
-      "bytes": 17486,
+      "sha256": "95e71c334368632da92601c35a30b948f4fe38dffe4a86ca8c9fe00eb8ee242f",
+      "bytes": 25393,
       "origin": "tracked",
-      "selection": "allowlist",
+      "selection": "curated_overlay",
       "review": []
     },
     {
@@ -3105,7 +3114,7 @@
       "source_path": "scripts/export_public_source.py",
       "sha256": "4fff35abb1de0ae434872209c0599b6004b47906f2519ab4969d1c88f246989a",
       "bytes": 14940,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -3114,7 +3123,7 @@
       "source_path": "scripts/export_release_public_key.py",
       "sha256": "402dd76adc5e6aebea930e6ea25fabf9a86e9ec21b30cd44de4f92276e0da7e7",
       "bytes": 2161,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -3150,7 +3159,7 @@
       "source_path": "scripts/maintenance/build_entity_publication_candidate.py",
       "sha256": "30549f0b703fdc664ecba87bd77d7c4a1cd88f4e0c6071e63499331219ec058b",
       "bytes": 5897,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -3177,7 +3186,7 @@
       "source_path": "scripts/maintenance/propose_entity_publication_release.py",
       "sha256": "e99ef42709d1f735e965777783d3ce9d3308bff413a1810c773cc1f1f6dc5295",
       "bytes": 14467,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -3204,7 +3213,7 @@
       "source_path": "scripts/package_dsh_task_review.py",
       "sha256": "3f536e0b468e85ad19d1f086c6af41d0101c4dd5a241ebceb112ff9aa5b23b42",
       "bytes": 1778,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -3220,10 +3229,19 @@
     {
       "path": "scripts/packaging_windows_runtime.py",
       "source_path": "scripts/packaging_windows_runtime.py",
-      "sha256": "e028bd5c114d7bd9c0f8fc3effab784d6a0115442e16e2ed9bc35bd9c4abff62",
-      "bytes": 1972,
-      "origin": "untracked",
-      "selection": "allowlist",
+      "sha256": "b047b1abce83051e82377e69330f95c0b1b50932032306d14a0ad8e64d5d3cd4",
+      "bytes": 5064,
+      "origin": "tracked",
+      "selection": "curated_overlay",
+      "review": []
+    },
+    {
+      "path": "scripts/product_site_publication.py",
+      "source_path": "scripts/product_site_publication.py",
+      "sha256": "c7624acf8aa663dcf73011668f7b04c5c5abab6cf11124ad044748a3c4659068",
+      "bytes": 3071,
+      "origin": "tracked",
+      "selection": "curated_overlay",
       "review": []
     },
     {
@@ -3231,7 +3249,7 @@
       "source_path": "scripts/release_license_evidence.py",
       "sha256": "929fc9d036d4ec3517b620d9afcb3bce080d8b642d5e4ce6263dd661c7e86ad6",
       "bytes": 5069,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -3445,11 +3463,11 @@
     {
       "path": "scripts/verify_frozen_setup_archive.py",
       "source_path": "scripts/verify_frozen_setup_archive.py",
-      "origin": "untracked",
-      "selection": "setup_hotfix",
-      "review": [],
-      "sha256": "bcc5569ab6cf1db3dbf23756cb059bbb5a5a001ed0c7beafff002c8fcb3f1ef0",
-      "bytes": 3765
+      "sha256": "45f41675df69a2aed4ed994fe8d5cdb1adfa0ba70b9faa4cf5d3a108f484128f",
+      "bytes": 4686,
+      "origin": "tracked",
+      "selection": "curated_overlay",
+      "review": []
     },
     {
       "path": "scripts/verify_gadget_sources_delivery.py",
@@ -3508,10 +3526,10 @@
     {
       "path": "scripts/verify_public_release_downloads.py",
       "source_path": "scripts/verify_public_release_downloads.py",
-      "sha256": "b4ae9060057908ec8b4d6642bd8bcb96e1984fa3715f50c969519f572b3677df",
-      "bytes": 4939,
-      "origin": "untracked",
-      "selection": "allowlist",
+      "sha256": "cf8e738f54efda988b8a6a8089ae37857c9e7ca49234bfde1cef100e5b4cb0ba",
+      "bytes": 9628,
+      "origin": "tracked",
+      "selection": "curated_overlay",
       "review": []
     },
     {
@@ -3561,10 +3579,10 @@
     },
     {
       "path": "site/index.html",
-      "source_path": "docs/publication/public-main/site/index.html",
-      "sha256": "11a25ba90d90160a56d3e1fd1a84da897b9a617dc8b0c7e96a580c4a9ee14c9e",
+      "source_path": "site/index.html",
+      "sha256": "c8b9da3f5d81ef91b04a2d691304ce56bf6d30f04e1720e7e410da3fc5146024",
       "bytes": 1727,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "curated_overlay",
       "review": []
     },
@@ -3645,7 +3663,7 @@
       "source_path": "skill/references/app-mechanics/authoring-assistance.md",
       "sha256": "b7b2ae4536c19aa9d33ac43d1ae9c0bba604ff580a839bebf497d3a62346c7b6",
       "bytes": 8945,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -3654,7 +3672,7 @@
       "source_path": "skill/references/app-mechanics/authoring-guide.md",
       "sha256": "37604429e2595f84660eb6ec85bf4e067f654a522886c3fdcbfab36687540923",
       "bytes": 5417,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -3663,7 +3681,7 @@
       "source_path": "skill/references/app-mechanics/authoring-intents.json",
       "sha256": "f0786eeb0ed26fcd5413466bb2ad32a5affedc1a2ff3353a3eb5a5f9bda7e525",
       "bytes": 6941,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -3771,7 +3789,7 @@
       "source_path": "skill/references/app-mechanics/native-causal-example.md",
       "sha256": "ce6c1568e6a6359563ce57247df2f7c6ea26432eeaf9e1d5c6583dcc36ef44d0",
       "bytes": 16944,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -4131,7 +4149,7 @@
       "source_path": "skill/references/workflow/task-evidence.md",
       "sha256": "f9c3fd62d9e7857d486c91fdef88a980636dbdab01c9f282e205680c51b54770",
       "bytes": 6060,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -4185,7 +4203,7 @@
       "source_path": "src/genshin_app/advisory_observation.py",
       "sha256": "05a803beece1770d4d72a32a84ab5045300c78bf0912fdb755fa8728e70f084f",
       "bytes": 854,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -4383,7 +4401,7 @@
       "source_path": "src/genshin_app/agent_chat/feedback_context.py",
       "sha256": "a74baa8a0cbc95c7b62f8d78802a4ccbb52fcffb73555731fabfb43d20f4a3ff",
       "bytes": 4392,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -5211,7 +5229,7 @@
       "source_path": "src/genshin_app/agent_chat/native_task_source.py",
       "sha256": "36d67899e6f2cf7f41cd5dea719b67774af0755fa81200ddc836fc02cd4c5ef8",
       "bytes": 2435,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -5328,7 +5346,7 @@
       "source_path": "src/genshin_app/agent_chat/operation_attempts.py",
       "sha256": "347375e64446e36825203b261c2b469fb00e0483dade4863798423d9b18b2b20",
       "bytes": 12335,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -5427,7 +5445,7 @@
       "source_path": "src/genshin_app/agent_chat/task_report_actions.py",
       "sha256": "3a3c89e742c3248951cad84ee4e15f59e46b97432c0ee8bc9fc1e0278fb7d6e0",
       "bytes": 2513,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -5481,7 +5499,7 @@
       "source_path": "src/genshin_app/authoring_assistance.py",
       "sha256": "65255fd67b55fea19ce74a0fa3ce53527f2ca1c53f4b9b872b986b0c047b7bc3",
       "bytes": 17279,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -5490,7 +5508,7 @@
       "source_path": "src/genshin_app/authoring_fragments.py",
       "sha256": "0e6e2f12e9ae4c721e5812ca227ed832c30469863c388fafe3a4e40c95d9ebc3",
       "bytes": 17903,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -5499,7 +5517,7 @@
       "source_path": "src/genshin_app/authoring_operations.py",
       "sha256": "49988d26529e5c7d9e9d5994db9a63ec0cbcdeb8ddf49d6e7b0f2b2b821e79b5",
       "bytes": 7507,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -5526,7 +5544,7 @@
       "source_path": "src/genshin_app/calculation_capacity.py",
       "sha256": "24366d6d247c042495be6ffc43931e6853a6a13a255fa27492d9835f46bec77f",
       "bytes": 711,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -5625,7 +5643,7 @@
       "source_path": "src/genshin_app/calculation_scope.py",
       "sha256": "ebb8b612965bed6cc4599fc015499104649f063e03349737b74467f550a603f1",
       "bytes": 5039,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -5661,7 +5679,7 @@
       "source_path": "src/genshin_app/cli_client.py",
       "sha256": "5c0ba917c8a84d48e4c37679f4d3c88126ed0fdd049530a496a9fdde273b7f7c",
       "bytes": 9759,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -5670,7 +5688,7 @@
       "source_path": "src/genshin_app/cli_dispatch.py",
       "sha256": "5dafad38a3e1f8040dcf1547c39ff49a1b17e2a17d1d91fa1d97f8421b26699b",
       "bytes": 3349,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -5679,7 +5697,7 @@
       "source_path": "src/genshin_app/cli_session.py",
       "sha256": "ae38c9141c236ccba4100e2b0ceda839df2b428de4ad97a1e9a03b5154723ebf",
       "bytes": 15283,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -5697,7 +5715,7 @@
       "source_path": "src/genshin_app/damage_count_observation.py",
       "sha256": "f8a037bcbdba7fdfcc387f4069e2c9d5418293a744d8d9d5c1b8072b5db44284",
       "bytes": 4455,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -5722,10 +5740,10 @@
     {
       "path": "src/genshin_app/database_legacy_processes.py",
       "source_path": "src/genshin_app/database_legacy_processes.py",
-      "sha256": "90039c2753cdafc4f9dcef47c2a10e36224653553c097c3be1c6073f422ccce9",
-      "bytes": 2524,
+      "sha256": "0c33208f92ef0e2d01e942d3c82a738819986a0bf751b32942b90b42362d2f52",
+      "bytes": 2687,
       "origin": "tracked",
-      "selection": "allowlist",
+      "selection": "curated_overlay",
       "review": []
     },
     {
@@ -5769,7 +5787,7 @@
       "source_path": "src/genshin_app/declared_observations.py",
       "sha256": "c3bf22b4f27cb201f6ea239acd3be409ef89be696b6cda2737010301b89b6112",
       "bytes": 14939,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -5778,7 +5796,7 @@
       "source_path": "src/genshin_app/default_assistance.py",
       "sha256": "f64ce997a5717a15854aa5f2388b7845fdf1f35d792cc974485afb90681fb32d",
       "bytes": 3420,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -5787,7 +5805,7 @@
       "source_path": "src/genshin_app/diagnostic_facts.py",
       "sha256": "bba742aa6be6f5564b94726ebe67adc210d0af465d80d54c9be80b2a04dade24",
       "bytes": 903,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -5805,7 +5823,7 @@
       "source_path": "src/genshin_app/effect_observation.py",
       "sha256": "e5b117d82710417c872a9dbe1c6b6f24fe4f914822d0a9edd07b7f6ff0d1169f",
       "bytes": 21314,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -6759,7 +6777,7 @@
       "source_path": "src/genshin_app/equipment/panel_provenance.py",
       "sha256": "f28a8be0df307befe302aa17b63b50ca72d2d7916a888d6fbd0fd8f0c64cf1b2",
       "bytes": 722,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -7497,7 +7515,7 @@
       "source_path": "src/genshin_app/gui/ports/report_delivery.py",
       "sha256": "43e31b04a9b4117085d987fbbd4a0b21de56d629e4ad437c97325f8aa1dd6952",
       "bytes": 11440,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -7938,7 +7956,7 @@
       "source_path": "src/genshin_app/gui/web/business-ui.js",
       "sha256": "2213cfc82e3710b4d693c2efe56e2a7dc4e6b0005d1ec9dd10104747f76783fc",
       "bytes": 289111,
-      "origin": "generated",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -8008,10 +8026,10 @@
     {
       "path": "src/genshin_app/gui/web/data.js",
       "source_path": "src/genshin_app/gui/web/data.js",
-      "sha256": "1e33c29860de7112149be9e432ee1fff172a118aa9b4a23354fcb029a2dcd9b6",
-      "bytes": 33147,
+      "sha256": "063cf7e14074a7a6215575ddfe5b43738c660372c1074e40e45947557c4392cb",
+      "bytes": 33920,
       "origin": "tracked",
-      "selection": "allowlist",
+      "selection": "curated_overlay",
       "review": []
     },
     {
@@ -8055,7 +8073,7 @@
       "source_path": "src/genshin_app/gui/web/dsh-production-manifest.json",
       "sha256": "4408fb6c72dc0ae0b59696c01449e4e39da98ec1c61bd6dfc3ece64ee8d2090c",
       "bytes": 1116,
-      "origin": "generated",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -8064,7 +8082,7 @@
       "source_path": "src/genshin_app/gui/web/dsh-production.css",
       "sha256": "4d404ae12f897fa5cea0be80848c46554f99ab81dc04c3b6410b721dddeb0230",
       "bytes": 1538294,
-      "origin": "generated",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -8073,7 +8091,7 @@
       "source_path": "src/genshin_app/gui/web/dsh-production.js",
       "sha256": "ae8753dc7af4890dda9c3a38eb8d2ca4318d268e648d1e9aad586ee5778eaece",
       "bytes": 4861938,
-      "origin": "generated",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -8577,7 +8595,7 @@
       "source_path": "src/genshin_app/panel_assistance.py",
       "sha256": "502b6543b25ef2014caa9094dae9f3c491018e0e785ed77b891766459b5dd5b4",
       "bytes": 6055,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -8604,17 +8622,17 @@
       "source_path": "src/genshin_app/product_database_setup.py",
       "sha256": "369340c1fc6fce9e7e91caedf0bda90e988e40aeed1010da6d35f9876ff935ba",
       "bytes": 15419,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
     {
       "path": "src/genshin_app/product_first_install.py",
       "source_path": "src/genshin_app/product_first_install.py",
-      "sha256": "5bd6039c44bd3b984a48e2da22c259f828700a1ba93f0355a4be36511f0aa129",
-      "bytes": 27499,
-      "origin": "untracked",
-      "selection": "allowlist",
+      "sha256": "07a8e49cdbbf3a36a2469f87d6e376b131cdfcee99372ff30a3d249918cb4732",
+      "bytes": 39299,
+      "origin": "tracked",
+      "selection": "curated_overlay",
       "review": []
     },
     {
@@ -8622,17 +8640,17 @@
       "source_path": "src/genshin_app/product_install_contract.py",
       "sha256": "999b67074b669f5acc5cc0599e634da2d9e4a0ce94e118e7a76a28b267308cdf",
       "bytes": 322,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
     {
       "path": "src/genshin_app/product_release_index.py",
       "source_path": "src/genshin_app/product_release_index.py",
-      "sha256": "d5c72e364b6bc96245ecdc905fce9075fa2d71089f95a15331582ea4c3737b23",
-      "bytes": 12565,
-      "origin": "untracked",
-      "selection": "allowlist",
+      "sha256": "94b28c37aa713f9b8579cbaf589e60244375c2b4129123099f9bb04145b9f067",
+      "bytes": 15247,
+      "origin": "tracked",
+      "selection": "curated_overlay",
       "review": []
     },
     {
@@ -8640,7 +8658,7 @@
       "source_path": "src/genshin_app/public_appendix_query.py",
       "sha256": "826ea52af3796d667b8874ac0b297382f8857df8b89677c21e4423187033361f",
       "bytes": 5792,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -8658,7 +8676,7 @@
       "source_path": "src/genshin_app/publication_usage.py",
       "sha256": "d70d98783ca733a7dddb7bbda788f833b1a47d73344a18f7ba0a89e9ee3747fb",
       "bytes": 7642,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -8694,80 +8712,80 @@
       "source_path": "src/genshin_app/recovery_descriptors.py",
       "sha256": "34f09ca5199a106e3c40324d0b02644e687682f627187f7eff8649cc3590ee0a",
       "bytes": 1713,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
     {
       "path": "src/genshin_app/release_pair_coordinator.py",
       "source_path": "src/genshin_app/release_pair_coordinator.py",
-      "sha256": "4d8b7180fc0342259c3c26f9b98298e4f8ae7e7755708ce20b60fbf024be01e2",
-      "bytes": 29718,
+      "sha256": "2b9e46ef0bf646de5ef400181948ca9e907253d85632727f54f797544ba4677f",
+      "bytes": 32615,
       "origin": "tracked",
-      "selection": "allowlist",
+      "selection": "curated_overlay",
       "review": []
     },
     {
       "path": "src/genshin_app/release_pair_discovery.py",
       "source_path": "src/genshin_app/release_pair_discovery.py",
-      "sha256": "3ab3015bccfeb29556b6264fae612c5361663efce87ddb993db411b5362d840f",
-      "bytes": 21637,
+      "sha256": "4a3b2c50a11c602edbc74982747e473918a2123d0d0a3b1ca4bffd3fb3ae075c",
+      "bytes": 21839,
       "origin": "tracked",
-      "selection": "allowlist",
+      "selection": "curated_overlay",
       "review": []
     },
     {
       "path": "src/genshin_app/release_pair_feed.py",
       "source_path": "src/genshin_app/release_pair_feed.py",
-      "sha256": "7e89220d99f441672619c84cbd4e523b8b5cd177cf6ab8ad6b273335c3c51169",
-      "bytes": 21039,
+      "sha256": "a96ca0532674bfd1e85e0f4981f09fafe22e5adf0daae1d68ee9bfa1d1425a24",
+      "bytes": 26129,
       "origin": "tracked",
-      "selection": "allowlist",
+      "selection": "curated_overlay",
       "review": []
     },
     {
       "path": "src/genshin_app/release_pair_helper.py",
       "source_path": "src/genshin_app/release_pair_helper.py",
-      "sha256": "e54822d611cf3f20209c898c4536cfb91d549ff911f6776d520f963e3c4f807f",
-      "bytes": 31708,
+      "sha256": "aea20522b64dca1b90017964e64981c401cb1e3bce6ad6e4c2f7cd220a99a80d",
+      "bytes": 41051,
       "origin": "tracked",
-      "selection": "allowlist",
+      "selection": "curated_overlay",
       "review": []
     },
     {
       "path": "src/genshin_app/release_pair_storage.py",
       "source_path": "src/genshin_app/release_pair_storage.py",
-      "sha256": "63b41aa274c7d04510613400046c4460e4ec02b9f2593a2491805e7633e80232",
-      "bytes": 10980,
+      "sha256": "90ac1618cd44e6df3b7dadf911c43d1d5627f86f057b57472cdc0fe2df5a71da",
+      "bytes": 11232,
       "origin": "tracked",
-      "selection": "allowlist",
+      "selection": "curated_overlay",
       "review": []
     },
     {
       "path": "src/genshin_app/release_pair_transport.py",
       "source_path": "src/genshin_app/release_pair_transport.py",
-      "sha256": "ed6fd88aea52cb9c46dcd1077ee36c0b63c4d5acd8150218e88d761c35256c9e",
-      "bytes": 25833,
+      "sha256": "9fd5c454f18544c2b5b760a8bcb7540895e59e34097c70483c55b3c32d5f2c8f",
+      "bytes": 29526,
       "origin": "tracked",
-      "selection": "allowlist",
+      "selection": "curated_overlay",
       "review": []
     },
     {
       "path": "src/genshin_app/release_pair_trust.py",
       "source_path": "src/genshin_app/release_pair_trust.py",
-      "sha256": "a54f8e383e2692ba7c7a2e05aa534629ed81f69ebbcc6b3672f7cd17323a1b14",
-      "bytes": 6660,
+      "sha256": "520da437939b7d2dbd57bec00964ce07a30f1a790fe4a32686638b5683bda4a2",
+      "bytes": 6879,
       "origin": "tracked",
-      "selection": "allowlist",
+      "selection": "curated_overlay",
       "review": []
     },
     {
       "path": "src/genshin_app/release_pair_update.py",
       "source_path": "src/genshin_app/release_pair_update.py",
-      "sha256": "355cc24fc201430afc0bdf8c9009e10f204bda7101da6dfe26532a0417c17d1e",
-      "bytes": 60033,
+      "sha256": "aeb049cfb192af77fed396ccc84c049dacd5bb184b3f40192c093d3cb4d78d95",
+      "bytes": 60279,
       "origin": "tracked",
-      "selection": "allowlist",
+      "selection": "curated_overlay",
       "review": []
     },
     {
@@ -8791,10 +8809,10 @@
     {
       "path": "src/genshin_app/release_update_service.py",
       "source_path": "src/genshin_app/release_update_service.py",
-      "sha256": "96ade8d77dae9c37cf8088423dbb6dd206d2305254148c10abdfe541851eb74c",
-      "bytes": 11087,
+      "sha256": "10fc8db0441c36a1d59a29a9240627c99c6da7ef08abd97f4ae63d39ed87b782",
+      "bytes": 12512,
       "origin": "tracked",
-      "selection": "allowlist",
+      "selection": "curated_overlay",
       "review": []
     },
     {
@@ -8845,11 +8863,11 @@
     {
       "path": "src/genshin_app/setup_frozen_qualification.py",
       "source_path": "src/genshin_app/setup_frozen_qualification.py",
-      "origin": "untracked",
-      "selection": "setup_hotfix",
-      "review": [],
-      "sha256": "5d908a0a553d2ba6b6b0c38976e222ad8109bdc786a5195062bab339ea405af2",
-      "bytes": 9358
+      "sha256": "758feda8f1b78587b47864414b67effa03fe6a62369929aa2f21054fd3556629",
+      "bytes": 19004,
+      "origin": "tracked",
+      "selection": "curated_overlay",
+      "review": []
     },
     {
       "path": "src/genshin_app/shortcuts.py",
@@ -8892,7 +8910,7 @@
       "source_path": "src/genshin_app/task_evidence.py",
       "sha256": "a442acb24edb29255021944f2512935ba71edcd2de0e61230e7757bf7bc6b348",
       "bytes": 22232,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -8901,7 +8919,7 @@
       "source_path": "src/genshin_app/task_evidence_scope.py",
       "sha256": "d6d9ca8abf1ab5ea40024976eda938f124db38b5d07211308efd3027bacdaeb6",
       "bytes": 3522,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -8910,7 +8928,7 @@
       "source_path": "src/genshin_app/task_source_sections.py",
       "sha256": "aeed2d7761518c08b8e462895040dbd13c36bcae55ccf0b762be50b4331a5d7d",
       "bytes": 2388,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -8925,11 +8943,11 @@
     },
     {
       "path": "src/genshin_app/version.py",
-      "source_path": "build/publication-signing/stable-version.py",
-      "sha256": "065e8027d8ff31f29dd5718fc188f15b0d1b3191cca1294d629d26643d21bf9a",
-      "bytes": 5415,
-      "origin": "generated",
-      "selection": "production_build_source",
+      "source_path": "src/genshin_app/version.py",
+      "sha256": "a878f367a8873487b76553a95a71409eb9ad1f98ff9b099688657165434233e9",
+      "bytes": 5472,
+      "origin": "tracked",
+      "selection": "curated_overlay",
       "review": []
     },
     {
@@ -9045,7 +9063,7 @@
       "source_path": "src/genshin_app/workflow_workspace.py",
       "sha256": "321819cd7e81a7eea49f96ed983c41ae7e0c07faa9ba906f92555d7abab394de",
       "bytes": 9871,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -9288,7 +9306,7 @@
       "source_path": "src/genshin_db/parameter_references.py",
       "sha256": "56c5f977cee49d8f7adfb9b9e082c47be0348a3a422f3dbef32ec1bfc1e7a92c",
       "bytes": 4757,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -9306,7 +9324,7 @@
       "source_path": "src/genshin_db/publication_evidence.py",
       "sha256": "a6ae7b2419690f1b610cd8bc7ef4288e48fc4a1af5f6d704cede46ae5c577274",
       "bytes": 6409,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -9333,7 +9351,7 @@
       "source_path": "src/genshin_db/release_hygiene.py",
       "sha256": "9c13283fc4526153f221c6fa519b72b05ec50979f5e58e62b40ad3749f8186e7",
       "bytes": 4183,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -9612,7 +9630,7 @@
       "source_path": "src/genshin_db/runtime_catalog_projection.py",
       "sha256": "19b03309113343043a1841b5bcd2e462b5c718f6a16b2e6cc56db49ecb33e5eb",
       "bytes": 2422,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -10692,7 +10710,7 @@
       "source_path": "src/genshin_engine/particle_quantities.py",
       "sha256": "2d28b40caa03eddec7a1111bad340ff6c6921286afafa007cdd1526bbda12c9a",
       "bytes": 3093,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -11088,7 +11106,7 @@
       "source_path": "src/genshin_engine/runtime_reference_audit.py",
       "sha256": "18940b03a764961af766ed2b285771facbe5b3aa2f9bd5cb6e18fadb4a62dcf9",
       "bytes": 6165,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -11502,7 +11520,7 @@
       "source_path": "src/genshin_engine/target_condition_evidence.py",
       "sha256": "074bb1ee43ef59e38be6965fcf7b2a78e1096f68ff80b3977996cf03469ef415",
       "bytes": 2893,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -11520,7 +11538,7 @@
       "source_path": "src/genshin_engine/target_status.py",
       "sha256": "dbd7477be952c60712afaeb00c9d696e1c7dcf46bca946e59357b2c945e00604",
       "bytes": 6038,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -11673,7 +11691,7 @@
       "source_path": "src/genshin_runtime/operation_timing.py",
       "sha256": "4c0c1efd4103ca26c69c081f51c45b6c3abb00c86f337770c855296f314e416b",
       "bytes": 786,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -12557,7 +12575,7 @@
       "source_path": "tests/fixtures/gui-api-public-contract-r16-additive.json",
       "sha256": "fe26057d92a71582df09411737b047252838f054f6b50adb54c8ccdbe4d6989f",
       "bytes": 1923,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -12566,7 +12584,7 @@
       "source_path": "tests/fixtures/gui-api-public-contract-r18-additive.json",
       "sha256": "84cea03f5c84f997b3914ed343d626f4a2c29fc3a7fd5556d190222e5562aac5",
       "bytes": 553,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -13583,10 +13601,10 @@
     {
       "path": "tests/gui_data.test.cjs",
       "source_path": "tests/gui_data.test.cjs",
-      "sha256": "42cdc93ef90761cc39f7060ddbd28cbd674edecb3d56afb04366a72c9e6ce5e3",
-      "bytes": 17490,
+      "sha256": "5b181ab147c3e913d8b09c2acb52f0e4547c5095d26153dc70d493fc225d2755",
+      "bytes": 18536,
       "origin": "tracked",
-      "selection": "allowlist",
+      "selection": "curated_overlay",
       "review": []
     },
     {
@@ -14791,7 +14809,7 @@
       "source_path": "tests/test_advisory_failure_isolation.py",
       "sha256": "e3b0506768b9b07c2d3ce53e3335790e93d2b0412b82de8149e7bc39b6739df5",
       "bytes": 1741,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -15641,7 +15659,7 @@
       "source_path": "tests/test_authoring_assistance.py",
       "sha256": "960983053f714389f7e6db9dc876ec53a7c016b564c782275176bf4917caa9e6",
       "bytes": 21094,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -15695,7 +15713,7 @@
       "source_path": "tests/test_average_particle_quantities.py",
       "sha256": "b82a68cec61c6e3b095bc5d48f382cedba80f82314aeb292749dc7f02dc2c9a7",
       "bytes": 9497,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -15792,10 +15810,10 @@
     {
       "path": "tests/test_build_candidate_database.py",
       "source_path": "tests/test_build_candidate_database.py",
-      "sha256": "51061d0fac2b4694f35c2ffd95a8adc046c1eaa9aafed294f25d0be1252ff48d",
-      "bytes": 29162,
+      "sha256": "91ae561e3528c9ea5e0245dd46e95252cd462f15512c9b6e785126fd2e76a701",
+      "bytes": 30091,
       "origin": "tracked",
-      "selection": "allowlist",
+      "selection": "curated_overlay",
       "review": []
     },
     {
@@ -15857,7 +15875,7 @@
       "source_path": "tests/test_calculation_capacity.py",
       "sha256": "2796c563c6410be00681ee21f937611fc07392ddfd6c60ac830845b40b496fae",
       "bytes": 2199,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -15956,7 +15974,7 @@
       "source_path": "tests/test_calculation_observation_evidence.py",
       "sha256": "4626cf73d46e746ec383d01a48dd490fa9437a79f5659ccec0e861b57882e48e",
       "bytes": 4654,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -16640,7 +16658,7 @@
       "source_path": "tests/test_default_calculation_assistance.py",
       "sha256": "27ba69e0071db0701c679d7b2d8a31941adc9a66016faa326a774be69b8f94a5",
       "bytes": 4810,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -16757,7 +16775,7 @@
       "source_path": "tests/test_effect_observation.py",
       "sha256": "fbe745a223e3186424ae1402349805942c806746c0b9062121f10dc1d6db5b41",
       "bytes": 3026,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -16766,7 +16784,7 @@
       "source_path": "tests/test_effect_observation_causal.py",
       "sha256": "be4f05df752a9cb7857f7e0297112cce399def32f9b44faaa41e6bfea73a2c29",
       "bytes": 10887,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -17207,7 +17225,7 @@
       "source_path": "tests/test_entity_publication_evidence.py",
       "sha256": "f2eadc03097d1fd41e1c9bb4a8a059b476f3dc855e779a9508374b009fa9a6ce",
       "bytes": 5652,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": [
         "machine_path"
@@ -17740,7 +17758,7 @@
       "source_path": "tests/test_frontend_document_projection_utf8.py",
       "sha256": "18d2f4420ca749cffc13ffa7532a1bc1ab491584249d342291718ebb3f7b94ce",
       "bytes": 2249,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -18174,7 +18192,7 @@
       "source_path": "tests/test_lunar_bloom_reserve_execution.py",
       "sha256": "6c8162989e39ba891b8ccbd984af7501229f73370b0d24a1d3a8a9b19e91a584",
       "bytes": 11071,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -18318,7 +18336,7 @@
       "source_path": "tests/test_mechanics_stellar_swirl_selector_family.py",
       "sha256": "6be0b0f5370b7cdd1d90f4170f78a00a34938980e2b866ff49f7d58506b45862",
       "bytes": 3944,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -18785,7 +18803,7 @@
       "source_path": "tests/test_native_authoring_assistance.py",
       "sha256": "3bbd50d3ced4200afd5166a521f31d6d688c66ff4aedcdce07421e960408f8ef",
       "bytes": 2732,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -18990,7 +19008,7 @@
       "source_path": "tests/test_native_dsh_diagnostic_rebind.py",
       "sha256": "79439f3ea6f7fcfb46175458be087be036eb06b2caabe2d748e2c32313568af1",
       "bytes": 3390,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -19399,7 +19417,7 @@
       "source_path": "tests/test_native_preflight_producer_feedback.py",
       "sha256": "85e57b49c52b1b6669e4fe2160a90f939010e519661acd70fb667d4010365109",
       "bytes": 3704,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -19740,7 +19758,7 @@
       "source_path": "tests/test_operation_attempt_feedback.py",
       "sha256": "1f0ab2c9e2e73368236806896d816bc104bd98855b6a82f58e6f8d8878a796ba",
       "bytes": 15335,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -19765,10 +19783,10 @@
     {
       "path": "tests/test_packaging_windows_runtime.py",
       "source_path": "tests/test_packaging_windows_runtime.py",
-      "sha256": "58cb916a8e91bc44e403c23ae412042bef4e9c54d9929ce9969a51238a69fc8e",
-      "bytes": 1579,
-      "origin": "untracked",
-      "selection": "allowlist",
+      "sha256": "35a9d2d8e1441cc0a59ca987693eec80b9322d240e2abb80265d22a643fe81a6",
+      "bytes": 5214,
+      "origin": "tracked",
+      "selection": "curated_overlay",
       "review": []
     },
     {
@@ -20091,10 +20109,10 @@
     {
       "path": "tests/test_portable_build_execution_policy.py",
       "source_path": "tests/test_portable_build_execution_policy.py",
-      "sha256": "642358b6818106a171fab35f34466d13059e999c64a09b9028694b83390037e7",
-      "bytes": 21521,
+      "sha256": "ce6ddf6c127cc847c2d94ee750cc8003d26ee439fc1514fa4fd00191ad44b9fb",
+      "bytes": 22909,
       "origin": "tracked",
-      "selection": "allowlist",
+      "selection": "curated_overlay",
       "review": []
     },
     {
@@ -20109,10 +20127,10 @@
     {
       "path": "tests/test_product_release_index.py",
       "source_path": "tests/test_product_release_index.py",
-      "sha256": "9767f9c54ad51f15268d251987c478e32d194babdce6c9e0aeb81d45b95bdc4b",
-      "bytes": 45936,
-      "origin": "untracked",
-      "selection": "allowlist",
+      "sha256": "37b89581366e1a70d9f841d733441ff8d9189796301bbb614592635ef1de9016",
+      "bytes": 59224,
+      "origin": "tracked",
+      "selection": "curated_overlay",
       "review": []
     },
     {
@@ -20165,7 +20183,7 @@
       "source_path": "tests/test_public_source_export.py",
       "sha256": "44a589e279a2e8af5fba38ddedfe1480c0ec3a063d57409c58e64c34464cdb29",
       "bytes": 6609,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -20183,7 +20201,7 @@
       "source_path": "tests/test_publication_usage.py",
       "sha256": "87da4548f4292e88a035b5cc1a4b0f6f2996f7d4273d2830e77711391ae4318f",
       "bytes": 4138,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -20237,7 +20255,7 @@
       "source_path": "tests/test_r16_cooldown_and_identity.py",
       "sha256": "aff7f400f66ebc6ce6e45b4bcde139df12538e7d5056885d1802a37a7574770b",
       "bytes": 3489,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -20246,7 +20264,7 @@
       "source_path": "tests/test_r16_damage_execution_counts.py",
       "sha256": "e68a81e15c5fa403c8b5018cf138261cd45963cfe69655c11a314758186b14f0",
       "bytes": 1153,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -20255,7 +20273,7 @@
       "source_path": "tests/test_r16_reporting_projection_reuse.py",
       "sha256": "7a761939849dfa03f3fee4f7337e19c3ca9f9ba159fd16898b08be8dd913acba",
       "bytes": 1325,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -20264,7 +20282,7 @@
       "source_path": "tests/test_r16_stable_event_references.py",
       "sha256": "6bb3a0792406249f4f18d68ace38768d6404ffdf0631d0350ede32d29078cf0f",
       "bytes": 4422,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -20273,7 +20291,7 @@
       "source_path": "tests/test_r16_stellar_field_foundation.py",
       "sha256": "09eab9e256629a29dd400482179b672222c8a6f33f607a87e005a13395a50ec6",
       "bytes": 2593,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -20282,7 +20300,7 @@
       "source_path": "tests/test_r16_target_observation_storage.py",
       "sha256": "0e176e5b435fd04f397e82614ce0bfaafdcbd79d39b592231a74829b2b0df20e",
       "bytes": 2704,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -20291,7 +20309,7 @@
       "source_path": "tests/test_r16_target_status.py",
       "sha256": "3b9144ff06838e0fae8b60d2216dd1061bfdba0a660b3b9d9555fee1dc20cab3",
       "bytes": 6479,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -20300,7 +20318,7 @@
       "source_path": "tests/test_r17_catalog_projection.py",
       "sha256": "fbb24a705948763493f2a722058431e4c265e560f99f499ab12c85567c093528",
       "bytes": 2174,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -20309,7 +20327,7 @@
       "source_path": "tests/test_r18_authoring_operations.py",
       "sha256": "8b7d291190e4dc5f7df67c5f46aa32776f9d62d26260e11ea44fc457e5203e00",
       "bytes": 6014,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -20318,7 +20336,7 @@
       "source_path": "tests/test_r18_calculation_feedback.py",
       "sha256": "18e069963622a6765c574022fe046ad1277efed5022abee30d097469d8d02c2e",
       "bytes": 5483,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -20327,7 +20345,7 @@
       "source_path": "tests/test_r18_cli_session.py",
       "sha256": "d93f5dd7bad33cd2bd805db0abe4d1ed46dd039057f03a0e8a3a2959a56a9d25",
       "bytes": 8748,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -20336,7 +20354,7 @@
       "source_path": "tests/test_r18_declared_observations.py",
       "sha256": "bf8548173fef527ebd51160997fd1d5ca66760311614b72e71ef6463aba75542",
       "bytes": 6788,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -20345,7 +20363,7 @@
       "source_path": "tests/test_r18_feedback_classification.py",
       "sha256": "e2fe48d256c2c4e48ebd1873ab75fc211e2f9acb8ac88cdeffacbec4964f2164",
       "bytes": 1459,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -20354,7 +20372,7 @@
       "source_path": "tests/test_r18_feedback_closure.py",
       "sha256": "43b7dfcce943576c91196976980944d4ae665e724897bb4fe1b7cdfbd35f81a0",
       "bytes": 10385,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -20363,7 +20381,7 @@
       "source_path": "tests/test_r18_native_task_source.py",
       "sha256": "34f036859bc17f6ec80738da4b23b506ebd8d90e1634f4aeb646bbb4b777e13b",
       "bytes": 3628,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -20372,7 +20390,7 @@
       "source_path": "tests/test_r18_next_cli_lifecycle.py",
       "sha256": "3166c4a4e6d10d0ec490dad97dc2accb591b7b77de1ec66976e17410f5624f15",
       "bytes": 5727,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -20381,7 +20399,7 @@
       "source_path": "tests/test_r18_next_diagnostic_facts.py",
       "sha256": "8b61b0ba535491e6fe3fca5c35903131a587a08039af41ceaea6c2fb3897630d",
       "bytes": 4273,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -20390,7 +20408,7 @@
       "source_path": "tests/test_r18_source_navigation.py",
       "sha256": "e3128e6db327efc3975b2ffc2fb490fa6df010d12ec86b5ebd054d9ec96bc5ce",
       "bytes": 1348,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -20399,7 +20417,7 @@
       "source_path": "tests/test_r18_task_evidence.py",
       "sha256": "ebeb4efae16f30f00b055b292578f5a3546bf13f6f1354b84546d91e8430df01",
       "bytes": 19411,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -20408,7 +20426,7 @@
       "source_path": "tests/test_r18_work_card_routing.py",
       "sha256": "c4d20d3ab6a9d5b8c17fabd6564212bbe43e8120ec7feefcf4ff966c8d755384",
       "bytes": 12789,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -20417,7 +20435,7 @@
       "source_path": "tests/test_r18_workspace_native.py",
       "sha256": "f0532ab811f9e4494a5e445d204e449c699c24418d74f627ca244b1c988dad6b",
       "bytes": 2921,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -20685,64 +20703,73 @@
     {
       "path": "tests/test_release_pair_coordinator.py",
       "source_path": "tests/test_release_pair_coordinator.py",
-      "sha256": "b07fb8769a5faeb0137b9ccc82bdc8853a961a263e6d5d97ccce465947bba0a4",
-      "bytes": 12416,
+      "sha256": "44c51ef72f9aaeb0b391c5717e53934ad7b29fc31b49f42979a393cde837bc78",
+      "bytes": 13065,
       "origin": "tracked",
-      "selection": "allowlist",
+      "selection": "curated_overlay",
       "review": []
     },
     {
       "path": "tests/test_release_pair_discovery.py",
       "source_path": "tests/test_release_pair_discovery.py",
-      "sha256": "1aef9f14213eef3c727713cea12c419a79bff9be658a8fb493dabc6a2bda4c8e",
-      "bytes": 12199,
+      "sha256": "3d72a5ac3de208205ae357a06fbc661479f517741941d822805524b541be99e3",
+      "bytes": 13561,
       "origin": "tracked",
-      "selection": "allowlist",
+      "selection": "curated_overlay",
       "review": []
     },
     {
       "path": "tests/test_release_pair_feed.py",
       "source_path": "tests/test_release_pair_feed.py",
-      "sha256": "8f7032a086d12ef73fab849dc225149d3c12fafb4e97a2ad107d53f19bb344db",
-      "bytes": 8957,
+      "sha256": "6514368bcde910c447a4f33e0ca75b1eb9a8cf96f734e08aedf05273e89a6ec3",
+      "bytes": 15547,
       "origin": "tracked",
-      "selection": "allowlist",
+      "selection": "curated_overlay",
       "review": []
     },
     {
       "path": "tests/test_release_pair_helper.py",
       "source_path": "tests/test_release_pair_helper.py",
-      "sha256": "13ab62db0273414d488c9008efa7aa81acdcdfd287b303ff5737bda5304869b5",
-      "bytes": 17519,
+      "sha256": "75ffa86177886d8b173738a880047997564b598bbeb694d0faa1fdef08ea0bfe",
+      "bytes": 18001,
       "origin": "tracked",
-      "selection": "allowlist",
+      "selection": "curated_overlay",
+      "review": []
+    },
+    {
+      "path": "tests/test_release_pair_recovery.py",
+      "source_path": "tests/test_release_pair_recovery.py",
+      "sha256": "90465a98d8df19e1d7e28a763dc7b036f826dbe82f919934081fcc8a4b892491",
+      "bytes": 7801,
+      "origin": "tracked",
+      "selection": "curated_overlay",
       "review": []
     },
     {
       "path": "tests/test_release_pair_storage.py",
       "source_path": "tests/test_release_pair_storage.py",
-      "sha256": "cd3b0fd605a0d20657ffda1843cadfd57927a551319bcfc3051a6513f76c8f2f",
-      "bytes": 3732,
+      "sha256": "f8c0a9e6287b470b68fba3b029eb0cd497c1f41c00238a637ce829a0c5ae4b0f",
+      "bytes": 3979,
       "origin": "tracked",
-      "selection": "allowlist",
+      "selection": "curated_overlay",
       "review": []
     },
     {
       "path": "tests/test_release_pair_transport.py",
       "source_path": "tests/test_release_pair_transport.py",
-      "sha256": "8f0dbf0d5a5eea83f3e99df278aabd0720ef4dc271a1328463bfa80164abe466",
-      "bytes": 9751,
+      "sha256": "fa7d2ad82f0f68b4aede8635b309235fa0eb1cac9540661ecca5db2d930258f1",
+      "bytes": 15182,
       "origin": "tracked",
-      "selection": "allowlist",
+      "selection": "curated_overlay",
       "review": []
     },
     {
       "path": "tests/test_release_pair_trust.py",
       "source_path": "tests/test_release_pair_trust.py",
-      "sha256": "c3f6b3158638d346db451d9e52a29fde3b7a6fca3dbe3b844c93d599f9811a20",
-      "bytes": 4304,
+      "sha256": "0aa99fd0e49d891c1387c18fda8d6c850d82c696096f0f792b39f481aa49b87f",
+      "bytes": 4680,
       "origin": "tracked",
-      "selection": "allowlist",
+      "selection": "curated_overlay",
       "review": []
     },
     {
@@ -20752,6 +20779,24 @@
       "bytes": 17010,
       "origin": "tracked",
       "selection": "allowlist",
+      "review": []
+    },
+    {
+      "path": "tests/test_release_product_publisher.py",
+      "source_path": "tests/test_release_product_publisher.py",
+      "sha256": "65d20e6f33d99872e19dd841433998e4c97acbf287ebc48f6cc8e3243a651528",
+      "bytes": 10201,
+      "origin": "tracked",
+      "selection": "curated_overlay",
+      "review": []
+    },
+    {
+      "path": "tests/test_release_public_site_history.py",
+      "source_path": "tests/test_release_public_site_history.py",
+      "sha256": "1616e224d7632c7b8ece9beff9de8559791b31a2c978fabbc2cface07717edd1",
+      "bytes": 8053,
+      "origin": "tracked",
+      "selection": "curated_overlay",
       "review": []
     },
     {
@@ -20766,10 +20811,10 @@
     {
       "path": "tests/test_release_update_service.py",
       "source_path": "tests/test_release_update_service.py",
-      "sha256": "565871b0971c46a2e8efe9cc85dd37064e9b6bda56f4835bf5c9114f2006676d",
-      "bytes": 7174,
+      "sha256": "e42a0bd1790eb774e4fda359eb69f1141fec0cea1600c7825a8032b105ee0e6d",
+      "bytes": 7487,
       "origin": "tracked",
-      "selection": "allowlist",
+      "selection": "curated_overlay",
       "review": []
     },
     {
@@ -21056,7 +21101,7 @@
       "source_path": "tests/test_resource_reaction_v4.py",
       "sha256": "deb67c8601187c003d75a813f3fbcb706a9aed584dfa2d33ff335b2b3a21f66a",
       "bytes": 15554,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -21659,7 +21704,7 @@
       "source_path": "tests/test_runtime_generated_references.py",
       "sha256": "f216b728742a26a24919dff41f6a4df8cb8b07f9e961d077fc035679f26c47c8",
       "bytes": 9445,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -22028,7 +22073,7 @@
       "source_path": "tests/test_sacrificial_cooldown_authoring.py",
       "sha256": "753e1427de82db07f8e8c7ee10373073e7edbe2085ebcee786c252e75336d85f",
       "bytes": 3313,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -22107,11 +22152,11 @@
     {
       "path": "tests/test_setup_frozen_qualification.py",
       "source_path": "tests/test_setup_frozen_qualification.py",
-      "origin": "untracked",
-      "selection": "setup_hotfix",
-      "review": [],
-      "sha256": "4df95e93163afa42b0a71b76d604900a4f01a66f9dd8eefabd7dd68d294830bd",
-      "bytes": 3310
+      "sha256": "f0a970d7e15e43cf446606f671bd0859eff336cdbb0a84f7d0426d552dfbe605",
+      "bytes": 5671,
+      "origin": "tracked",
+      "selection": "curated_overlay",
+      "review": []
     },
     {
       "path": "tests/test_shared_pool_app_delivery.py",
@@ -22244,7 +22289,7 @@
       "source_path": "tests/test_skill_native_causal_example.py",
       "sha256": "862c19e18b09bbc842de9a56fd9e1ff249ca077c0b75be601a7e92c7cb320059",
       "bytes": 9098,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -23000,7 +23045,7 @@
       "source_path": "third_party/reviewed-licenses/README.md",
       "sha256": "9c9db713fd52273a0fccb75ac9b06522648c430a5a89510f5b814dfd37dc80ed",
       "bytes": 3711,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -23009,7 +23054,7 @@
       "source_path": "third_party/reviewed-licenses/manifest.json",
       "sha256": "815fb7714e568c39704c5ecda653e379f32b1d948765b4981638ee5ba70bf1a1",
       "bytes": 53050,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -23018,7 +23063,7 @@
       "source_path": "third_party/reviewed-licenses/texts/Apache-standard.txt",
       "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
       "bytes": 11358,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -23027,7 +23072,7 @@
       "source_path": "third_party/reviewed-licenses/texts/MIT-standard-terms.txt",
       "sha256": "83330a27667f812efa9c7cdaefd4c83f95b57a7454323a61ee29291312640468",
       "bytes": 1023,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -23036,7 +23081,7 @@
       "source_path": "third_party/reviewed-licenses/texts/aws-LICENSE.txt",
       "sha256": "edea91454b811f127fbdea3d86f378f6719bd372ed440abf82b232f6fca06c3d",
       "bytes": 11352,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -23045,7 +23090,7 @@
       "source_path": "third_party/reviewed-licenses/texts/aws-sdk--credential-provider-http-declaration.json",
       "sha256": "f12f546e53234f5f145258c809ea4d9bd856276e843f801fb2494a2ab07224b4",
       "bytes": 379,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -23054,7 +23099,7 @@
       "source_path": "third_party/reviewed-licenses/texts/aws-sdk--credential-provider-login-declaration.json",
       "sha256": "5b6dc415ca20ffd1f45e318c52fd628133cf4fd3b6fa2f387f45924b0512faa2",
       "bytes": 381,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -23063,7 +23108,7 @@
       "source_path": "third_party/reviewed-licenses/texts/aws-sdk--nested-clients-declaration.json",
       "sha256": "39cea6fab0c64c886451855506685858e9ba1768ea444b75b98a6b7ef82cff32",
       "bytes": 350,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -23072,7 +23117,7 @@
       "source_path": "third_party/reviewed-licenses/texts/brotli-README.txt",
       "sha256": "8a8bac543fccf52a64708ff3315ca2be90e3e4c270634df1e4e4b51f0ee9c5d7",
       "bytes": 1913,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -23081,7 +23126,7 @@
       "source_path": "third_party/reviewed-licenses/texts/brotli-declaration.json",
       "sha256": "1c979d8bee350b82f4758f52f2365d22b49fc04588d98bfc1650cad701303cea",
       "bytes": 217,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -23090,7 +23135,7 @@
       "source_path": "third_party/reviewed-licenses/texts/brotli-google-notice.txt",
       "sha256": "bc670957aaf188b069c48d4afe455bf0c276ec0f37994bdf435e3ad89e22a8a8",
       "bytes": 602,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -23099,7 +23144,7 @@
       "source_path": "third_party/reviewed-licenses/texts/clr-loader-LICENSE.txt",
       "sha256": "dd6bdca10cdc3b24c6b0b6cef5fd611b7feb6917f127833283ddcdb310d3b453",
       "bytes": 1079,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -23108,7 +23153,7 @@
       "source_path": "third_party/reviewed-licenses/texts/data-uri-README.txt",
       "sha256": "a7cc4332acfa1f9b6530e01aac77fefe74f2efa32579215fddaa473013f9a25c",
       "bytes": 2926,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -23117,7 +23162,7 @@
       "source_path": "third_party/reviewed-licenses/texts/data-uri-to-buffer-declaration.json",
       "sha256": "68b8cf0e4dbcb469b08d34ddd74ae566f8f7cb635bacb6cae6ed0e7f8bfcd0ab",
       "bytes": 260,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -23126,7 +23171,7 @@
       "source_path": "third_party/reviewed-licenses/texts/deepseek-ai--dsh-experimental-inspector-declaration.json",
       "sha256": "193b13b571b75dae6c12b69c6cd282a9e8e9d0bb3a4c8ff17afa867ebf6aae9b",
       "bytes": 266,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -23135,7 +23180,7 @@
       "source_path": "third_party/reviewed-licenses/texts/deepseek-ai--libreoffice-kit-win32-x64-declaration.json",
       "sha256": "defc8a7a8022d4f51d091c688c2398c326ee0d546543b90d698e2a640ccfc59e",
       "bytes": 246,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -23144,7 +23189,7 @@
       "source_path": "third_party/reviewed-licenses/texts/dfa-README.txt",
       "sha256": "30bd445925aa53205ff7f9afa6a43e21358fab656e471df6e028431aefc426c7",
       "bytes": 3201,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -23153,7 +23198,7 @@
       "source_path": "third_party/reviewed-licenses/texts/dfa-declaration.json",
       "sha256": "ed65561ceba58d7fa81aa0fb04a96f8b5c30ba84da959486415e13be1de93516",
       "bytes": 214,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -23162,7 +23207,7 @@
       "source_path": "third_party/reviewed-licenses/texts/dsh-LICENSE.txt",
       "sha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
       "bytes": 1065,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -23171,7 +23216,7 @@
       "source_path": "third_party/reviewed-licenses/texts/earendil-works--pi-ai-declaration.json",
       "sha256": "8c68f6206e1edf6df88952f782800ecda4e0759dcff55151cea1ae2ec69daa80",
       "bytes": 241,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -23180,7 +23225,7 @@
       "source_path": "third_party/reviewed-licenses/texts/earendil-works--pi-telemetry-declaration.json",
       "sha256": "9f24e90973b3456450b43c04217919025e212138e5fa4f6f066170ad723c2684",
       "bytes": 255,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -23189,7 +23234,7 @@
       "source_path": "third_party/reviewed-licenses/texts/fontkit-README.txt",
       "sha256": "8a1cf12d8ae7277f047c3000af7677927f2da9243627223ba5715d40df4979d6",
       "bytes": 13254,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -23198,7 +23243,7 @@
       "source_path": "third_party/reviewed-licenses/texts/fontkit-declaration.json",
       "sha256": "12233e2ed0ead70c2fa59541276f8fde374e0e45f1ca806a799ab049b3c52e0e",
       "bytes": 210,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -23207,7 +23252,7 @@
       "source_path": "third_party/reviewed-licenses/texts/inspector-source-availability.txt",
       "sha256": "a180972a6811e38924e19522dbd93de4d6141dd37a6e4c642098ad4539d91eb3",
       "bytes": 519,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -23216,7 +23261,7 @@
       "source_path": "third_party/reviewed-licenses/texts/inspector/lib/devtools/LICENSE",
       "sha256": "ff11d445fb41a1087c7630e120ab15f1a2cb67c1b707173cb494141805fca35e",
       "bytes": 1537,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -23225,7 +23270,7 @@
       "source_path": "third_party/reviewed-licenses/texts/inspector/lib/devtools/third_party/acorn/package/LICENSE",
       "sha256": "76a876cf886ff9be2a8b5e2e86514fed06223c8c9f0c1e9ee9606e93841e00b7",
       "bytes": 1099,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -23234,7 +23279,7 @@
       "source_path": "third_party/reviewed-licenses/texts/inspector/lib/devtools/third_party/axe-core/LICENSE",
       "sha256": "af175b9d96ee93c21a036152e1b905b0b95304d4ae8c2c921c7609100ba8df7e",
       "bytes": 15921,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -23243,7 +23288,7 @@
       "source_path": "third_party/reviewed-licenses/texts/inspector/lib/devtools/third_party/chromium/LICENSE",
       "sha256": "ff11d445fb41a1087c7630e120ab15f1a2cb67c1b707173cb494141805fca35e",
       "bytes": 1537,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -23252,7 +23297,7 @@
       "source_path": "third_party/reviewed-licenses/texts/inspector/lib/devtools/third_party/codemirror.next/LICENSE",
       "sha256": "aa8f65819a471c1a25fb3c0816c5a75e45f009b7899d292ee3cc70d9dbdd8f7e",
       "bytes": 1112,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -23261,7 +23306,7 @@
       "source_path": "third_party/reviewed-licenses/texts/inspector/lib/devtools/third_party/codemirror/package/LICENSE",
       "sha256": "a3f2fe2ac6b471aa80c737c5d283dd049bdc903a73835ee6d4d2cac02fdd53bf",
       "bytes": 1107,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -23270,7 +23315,7 @@
       "source_path": "third_party/reviewed-licenses/texts/inspector/lib/devtools/third_party/csp_evaluator/package/LICENSE",
       "sha256": "58d1e17ffe5109a7ae296caafcadfdbe6a7d176f0bc4ab01e12a689b0499d8bd",
       "bytes": 11357,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -23279,7 +23324,7 @@
       "source_path": "third_party/reviewed-licenses/texts/inspector/lib/devtools/third_party/diff/LICENSE",
       "sha256": "58d1e17ffe5109a7ae296caafcadfdbe6a7d176f0bc4ab01e12a689b0499d8bd",
       "bytes": 11357,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -23288,7 +23333,7 @@
       "source_path": "third_party/reviewed-licenses/texts/inspector/lib/devtools/third_party/i18n/LICENSE",
       "sha256": "7ec9661a8afafab1eee3523d6f1a193eff76314a5ab10b4ce96aefd87621b0c3",
       "bytes": 11342,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -23297,7 +23342,7 @@
       "source_path": "third_party/reviewed-licenses/texts/inspector/lib/devtools/third_party/intl-messageformat/LICENSE",
       "sha256": "0212e9ffd60f4c2e05426ac172b91266256b9ff4c0f0156e85b761a1d6f5e17f",
       "bytes": 1560,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -23306,7 +23351,7 @@
       "source_path": "third_party/reviewed-licenses/texts/inspector/lib/devtools/third_party/intl-messageformat/package/LICENSE.md",
       "sha256": "ef3882f3b2cf9e1c07172adbf49b7c72a5c75d8a01f3b3ed4777117364ca43fa",
       "bytes": 1560,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -23315,7 +23360,7 @@
       "source_path": "third_party/reviewed-licenses/texts/inspector/lib/devtools/third_party/json5/LICENSE",
       "sha256": "53e59feb13058722d977c699eb0407c7bce2f93c949b681bbd2ff31698535927",
       "bytes": 1145,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -23324,7 +23369,7 @@
       "source_path": "third_party/reviewed-licenses/texts/inspector/lib/devtools/third_party/legacy-javascript/LICENSE",
       "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
       "bytes": 11358,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -23333,7 +23378,7 @@
       "source_path": "third_party/reviewed-licenses/texts/inspector/lib/devtools/third_party/lighthouse/LICENSE",
       "sha256": "7ec9661a8afafab1eee3523d6f1a193eff76314a5ab10b4ce96aefd87621b0c3",
       "bytes": 11342,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -23342,7 +23387,7 @@
       "source_path": "third_party/reviewed-licenses/texts/inspector/lib/devtools/third_party/lit/LICENSE",
       "sha256": "45d31799d0db956cc3eb5469346abbd9b7025babc5ff29fab10d7095da992ef1",
       "bytes": 1517,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -23351,7 +23396,7 @@
       "source_path": "third_party/reviewed-licenses/texts/inspector/lib/devtools/third_party/marked/LICENSE",
       "sha256": "91968bf678e8c3d94ebf8596e98ca9cb5fca1c6555b53f721a940cb50f1b3d66",
       "bytes": 2618,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -23360,7 +23405,7 @@
       "source_path": "third_party/reviewed-licenses/texts/inspector/lib/devtools/third_party/marked/package/LICENSE.md",
       "sha256": "8e3a3f82f59a60958f56ca08f445647c32a4733dc7ca6c2c46f6eb898471ab9c",
       "bytes": 2942,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -23369,7 +23414,7 @@
       "source_path": "third_party/reviewed-licenses/texts/inspector/lib/devtools/third_party/puppeteer-replay/package/LICENSE",
       "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
       "bytes": 11358,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -23378,7 +23423,7 @@
       "source_path": "third_party/reviewed-licenses/texts/inspector/lib/devtools/third_party/puppeteer/LICENSE",
       "sha256": "a27ca07269b3518550b2e83aed13eadd7d14d924b5864e14889b40cf227530ca",
       "bytes": 11344,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -23387,7 +23432,7 @@
       "source_path": "third_party/reviewed-licenses/texts/inspector/lib/devtools/third_party/puppeteer/third_party/mitt/LICENSE",
       "sha256": "4687b3b5b6eb3af13be50891dd67dab9e85bdca3f41c63d3e33b3364d6a717b5",
       "bytes": 1068,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -23396,7 +23441,7 @@
       "source_path": "third_party/reviewed-licenses/texts/inspector/lib/devtools/third_party/puppeteer/third_party/parsel/LICENSE",
       "sha256": "eb0fa16c7452341017d97ac695c737cd19a8a47e8a87edd66db9493017c0d077",
       "bytes": 1065,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -23405,7 +23450,7 @@
       "source_path": "third_party/reviewed-licenses/texts/inspector/lib/devtools/third_party/puppeteer/third_party/rxjs/LICENSE",
       "sha256": "a8d80f63116de4ec1abd3800ec98f68e0acba524f12db62518868649a722f631",
       "bytes": 11061,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -23414,7 +23459,7 @@
       "source_path": "third_party/reviewed-licenses/texts/inspector/lib/devtools/third_party/source-map-scopes-codec/LICENSE",
       "sha256": "53b4475d1cda8c46465bbaff85432631f0830cc2c0a4b28234b7e4d12d862e7b",
       "bytes": 1479,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -23423,7 +23468,7 @@
       "source_path": "third_party/reviewed-licenses/texts/inspector/lib/devtools/third_party/source-map-scopes-codec/package/LICENSE",
       "sha256": "53b4475d1cda8c46465bbaff85432631f0830cc2c0a4b28234b7e4d12d862e7b",
       "bytes": 1479,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -23432,7 +23477,7 @@
       "source_path": "third_party/reviewed-licenses/texts/inspector/lib/devtools/third_party/third-party-web/LICENSE",
       "sha256": "e1f2a92813d0a7160c8bb0e27da66ec2f6599f2832ae5b4d9f95c108e60af5e6",
       "bytes": 1079,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -23441,7 +23486,7 @@
       "source_path": "third_party/reviewed-licenses/texts/inspector/lib/devtools/third_party/third-party-web/package/LICENSE",
       "sha256": "e1f2a92813d0a7160c8bb0e27da66ec2f6599f2832ae5b4d9f95c108e60af5e6",
       "bytes": 1079,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -23450,7 +23495,7 @@
       "source_path": "third_party/reviewed-licenses/texts/inspector/lib/devtools/third_party/vscode.web-custom-data/package/LICENSE.md",
       "sha256": "c2cfccb812fe482101a8f04597dfc5a9991a6b2748266c47ac91b6a5aae15383",
       "bytes": 1141,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -23459,7 +23504,7 @@
       "source_path": "third_party/reviewed-licenses/texts/inspector/lib/devtools/third_party/wasmparser/package/LICENSE",
       "sha256": "0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594",
       "bytes": 10174,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -23468,7 +23513,7 @@
       "source_path": "third_party/reviewed-licenses/texts/inspector/lib/devtools/third_party/web-vitals/package/LICENSE",
       "sha256": "bfdeded4040e05da31ca9b6239dc83bd23fa26ac8db87342a7ca4363f68916ff",
       "bytes": 11342,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -23477,7 +23522,7 @@
       "source_path": "third_party/reviewed-licenses/texts/koffi-package--LICENSE.txt.txt",
       "sha256": "22bcbbbacd739b026a8dc484f62a31484ce4c4e31f3408b60b29b4e41d62b290",
       "bytes": 1117,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -23486,7 +23531,7 @@
       "source_path": "third_party/reviewed-licenses/texts/koffi-package--vendor--node-addon-api--LICENSE.md.txt",
       "sha256": "89024017b88a9f2b763f79b941a4f2db3b4428edfcacdc0b23866b2da633ad0c",
       "bytes": 1150,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -23495,7 +23540,7 @@
       "source_path": "third_party/reviewed-licenses/texts/koffi-package--vendor--node-api-headers--LICENSE.txt",
       "sha256": "a553508f516031c91f3af1148d44970cb81bbae6c4f091be6835d39cc252238c",
       "bytes": 1064,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -23504,7 +23549,7 @@
       "source_path": "third_party/reviewed-licenses/texts/koromix--koffi-win32-x64-declaration.json",
       "sha256": "da00a7948d346ac7984179466a72b8a6fc6ecec435d8825fe15abc88a9df2787",
       "bytes": 305,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -23513,7 +23558,7 @@
       "source_path": "third_party/reviewed-licenses/texts/libreoffice-source-availability.txt",
       "sha256": "f12b15f0f776fc68df2cd9dc3ef4532bc737b3f04fae95629b07ca11472ce1cb",
       "bytes": 798,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -23522,7 +23567,7 @@
       "source_path": "third_party/reviewed-licenses/texts/libreoffice/licenses/DeepSeek-Harness-MIT.txt",
       "sha256": "69393380a3ec85c465dd4b22497a5de04c3408435126d8f50930d46de3886034",
       "bytes": 1797,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -23531,7 +23576,7 @@
       "source_path": "third_party/reviewed-licenses/texts/libreoffice/licenses/LibreOffice-MPL-2.0.txt",
       "sha256": "1f256ecad192880510e84ad60474eab7589218784b9a50bc7ceee34c2b91f1d5",
       "bytes": 16725,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -23540,7 +23585,7 @@
       "source_path": "third_party/reviewed-licenses/texts/libreoffice/licenses/LibreOffice-third-party.html",
       "sha256": "6ef5eb44a3b8127960c27cb9c038fe89c221e139431ef33057c70811d91026ea",
       "bytes": 351625,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -23549,7 +23594,7 @@
       "source_path": "third_party/reviewed-licenses/texts/libreoffice/program/NOTICE",
       "sha256": "8d34210ebbfaee4ba258ef7b30c3044170f356ab82c8259c81b53860bcdeef7b",
       "bytes": 1859,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -23558,7 +23603,7 @@
       "source_path": "third_party/reviewed-licenses/texts/libreoffice/program/license.txt",
       "sha256": "9a7e34fbf3903507665e3ec7ca8b3d0c11f73bf2d5a0d754a079ab9f505bafef",
       "bytes": 316506,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -23567,7 +23612,7 @@
       "source_path": "third_party/reviewed-licenses/texts/node-v24.19.0-LICENSE.txt",
       "sha256": "d9c4eeda951d6d08f4aa1316b61aafcf67e6da5f79b18f8edeb56fa6abdc038c",
       "bytes": 160552,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -23576,7 +23621,7 @@
       "source_path": "third_party/reviewed-licenses/texts/onnx-LICENSE.txt",
       "sha256": "2f07c72751aed99790b8a4869cf2311df85a860b22ded05fa22803587a48922c",
       "bytes": 1073,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -23585,7 +23630,7 @@
       "source_path": "third_party/reviewed-licenses/texts/onnx-NOTICES.txt",
       "sha256": "0e07b95f3a8d6230037707c5c4a2b554d12c4cb67369669ac255635528ffcee2",
       "bytes": 325054,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -23594,7 +23639,7 @@
       "source_path": "third_party/reviewed-licenses/texts/pi-pinned-LICENSE.txt",
       "sha256": "0457f5bcec3b3b211605dfb5d1a49042fd638f3686a410fe099c24a25af13c48",
       "bytes": 1069,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -23603,7 +23648,7 @@
       "source_path": "third_party/reviewed-licenses/texts/proxy-agent-negotiate-declaration.json",
       "sha256": "c76af557ada55f0d818b6f5a56b90d739a26e94837cc1fe05ec1c538a379128d",
       "bytes": 293,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -23612,7 +23657,7 @@
       "source_path": "third_party/reviewed-licenses/texts/proxy-tools-LICENSE.txt",
       "sha256": "a428fb8a2e762af3eb0a6edbbb88e9b42ccfee80fd9b423958bcacf9b9abbfe4",
       "bytes": 1436,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -23621,7 +23666,7 @@
       "source_path": "third_party/reviewed-licenses/texts/proxy-tools-source.txt",
       "sha256": "d1539d95e1a713c068ca81d42e047b2c76568964cf277596d4e19efb22f476be",
       "bytes": 6409,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -23630,7 +23675,7 @@
       "source_path": "third_party/reviewed-licenses/texts/pywebview-LICENSE.txt",
       "sha256": "4a988dd3598832cd3653de20dc33cb677d0fb53ab5551c879ca31280ae653675",
       "bytes": 1518,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -23639,7 +23684,7 @@
       "source_path": "third_party/reviewed-licenses/texts/saxes-LICENSE.txt",
       "sha256": "0fac2374380621b22e6b50451057721a9c52935b02d16d106a9f04897f061d0e",
       "bytes": 3011,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -23648,7 +23693,7 @@
       "source_path": "third_party/reviewed-licenses/texts/saxes-declaration.json",
       "sha256": "b8630e854e4bc80d0c3383ac7a80965966561346cddeea1a09f68f473ffdb013",
       "bytes": 178,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -23657,7 +23702,7 @@
       "source_path": "third_party/reviewed-licenses/texts/sherpa-LICENSE.txt",
       "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
       "bytes": 11358,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -23666,7 +23711,7 @@
       "source_path": "third_party/reviewed-licenses/texts/sherpa-onnx-node-declaration.json",
       "sha256": "6602528f5f4f120772f74d3e52c3e2585f74b29eb40b9c47fc44a3b703d2c639",
       "bytes": 227,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -23675,7 +23720,7 @@
       "source_path": "third_party/reviewed-licenses/texts/sherpa-onnx-win-x64-declaration.json",
       "sha256": "985cf26a5eb2a2f6aecec9f0bdd6c85137a734881eb36195bfe2d916b5606e50",
       "bytes": 230,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -23684,7 +23729,7 @@
       "source_path": "third_party/reviewed-licenses/texts/standardwebhooks-declaration.json",
       "sha256": "5118337007b6af9c2bc74f6dcee1a0fce5fe3ca3c2c53902ba9c21563b9b0c7a",
       "bytes": 182,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -23693,7 +23738,7 @@
       "source_path": "third_party/reviewed-licenses/texts/standardwebhooks-libraries-LICENSE.txt",
       "sha256": "5ec8c7b26b64d881a6706617bed25c049f97f2f35de034c756de8546fd6dbe27",
       "bytes": 1088,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -23702,7 +23747,7 @@
       "source_path": "third_party/reviewed-licenses/texts/xterm--addon-serialize-declaration.json",
       "sha256": "77f294618f011e69d7fceaa68d4df928c9b35aefbaf5233e090b8bb4fd64a387",
       "bytes": 261,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -23711,7 +23756,7 @@
       "source_path": "third_party/reviewed-licenses/texts/xterm--headless-declaration.json",
       "sha256": "6334065f094fd2e7ad46bef12a6a5a3d2404568ff0b0192f55bc99de2420ec2f",
       "bytes": 129,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },
@@ -23720,7 +23765,7 @@
       "source_path": "third_party/reviewed-licenses/texts/xterm-LICENSE.txt",
       "sha256": "b569f629d00f2626a8100df2a1798210535621e42164dfd426a6fe5aac7b0ccd",
       "bytes": 1261,
-      "origin": "untracked",
+      "origin": "tracked",
       "selection": "allowlist",
       "review": []
     },

@@ -122,6 +122,11 @@ def test_complete_envelopes_first_error_and_collaborator_order_match_reference(t
     before = (tmp_path / "genshin.db").read_bytes()
     expected = run_adapter(ReferenceReleaseGuiPort, tmp_path, monkeypatch, case)
     actual = run_adapter(ReleaseGuiPort, tmp_path, monkeypatch, case)
+    if case.get("discovery_error"):
+        rows = json.loads(expected[0])
+        rows[3] = {"code": 1, "message": "无法完成更新检查。请核对当前安装状态。",
+                   "reason": "release_pair_discovery_url_invalid"}
+        expected = json.dumps(rows, ensure_ascii=False), expected[1]
     assert actual == expected
     assert (tmp_path / "genshin.db").read_bytes() == before
 

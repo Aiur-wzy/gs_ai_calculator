@@ -731,6 +731,9 @@ def test_updater_build_uses_onefile_sibling_and_writes_hash_receipt(
         (output / module.UPDATER_EXE_FILENAME).write_bytes(b"frozen updater")
         return SimpleNamespace(returncode=0)
 
+    checks = []
+    monkeypatch.setattr(module, "verify_updater_archive",
+                        lambda path, project: checks.append((path, project, path.read_bytes())))
     monkeypatch.setattr(module.subprocess, "run", run)
     code, executable, receipt_path, receipt = module._build_updater_artifact(
         dist_root=dist_root,
@@ -745,6 +748,7 @@ def test_updater_build_uses_onefile_sibling_and_writes_hash_receipt(
     assert executable == (
         dist_root / module.UPDATER_ARTIFACT_DIRECTORY / module.UPDATER_EXE_FILENAME
     )
+    assert checks == [(executable, root, b"frozen updater")]
     assert receipt_path == executable.parent / module.UPDATER_RECEIPT_FILENAME
     assert receipt == json.loads(receipt_path.read_text(encoding="utf-8"))
     assert receipt["updater"]["sha256"] == hashlib.sha256(
@@ -786,6 +790,22 @@ def test_updater_build_failure_cleans_only_updater_candidate(
     assert executable is None and receipt_path is None and receipt is None
     assert not (dist_root / module.UPDATER_ARTIFACT_DIRECTORY).exists()
     assert (main_dist / "keep.txt").read_text(encoding="utf-8") == "main candidate"
+
+
+def test_build_refuses_onefile_updater_without_valid_archive(builder, monkeypatch):
+    module, root = builder
+    allowed = root / "dist"
+    output = allowed / "release-broken"
+
+    def run(command, **_kwargs):
+        destination = Path(command[command.index("--distpath") + 1])
+        destination.mkdir(parents=True)
+        (destination / module.UPDATER_EXE_FILENAME).write_bytes(b"missing PyInstaller archive")
+        return SimpleNamespace(returncode=0)
+
+    monkeypatch.setattr(module.subprocess, "run", run)
+    assert module._build_updater_artifact(dist_root=output, allowed_root=allowed) == (1, None, None, None)
+    assert not (output / module.UPDATER_ARTIFACT_DIRECTORY).exists()
 
 
 def test_updater_entry_and_spec_define_a_separate_onefile_executable():

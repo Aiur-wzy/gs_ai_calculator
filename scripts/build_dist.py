@@ -49,6 +49,7 @@ from packaged_database_upgrade import (
     load_predecessor_database,
     run_packaged_database_upgrade_smoke,
 )
+from packaging_windows_runtime import verify_runtime_validation_directory
 from release_supply_chain import (
     DEFAULT_LICENSE_EVIDENCE,
     LICENSE_MANIFEST_FILENAME,
@@ -61,6 +62,7 @@ from release_supply_chain import (
     verify_package_file_manifest,
     write_package_file_manifest,
 )
+from verify_frozen_setup_archive import verify_archive as verify_updater_archive
 
 from genshin_app import version as app_version
 from genshin_app.database_bootstrap import LIVE_MANIFEST_FILENAME
@@ -325,7 +327,7 @@ def _qualify_packaged_app_startup(
 
 def _write_build_qualification(
     *, dist_root: Path, pair_manifest: dict, package_receipt: dict,
-    native_receipt: dict, startup: dict,
+    native_receipt: dict, runtime_resource_hashes: dict[str, str], startup: dict,
 ) -> Path:
     """Write audit evidence outside the sealed App inventory, never a grant."""
     path = dist_root / "build-qualification.json"
@@ -340,6 +342,7 @@ def _write_build_qualification(
         "static_checks": {
             "database_artifact": "passed", "release_pair_binding": "passed",
             "package_inventory": package_receipt, "native_runtime": native_receipt,
+            "runtime_validation_resource_sha256": runtime_resource_hashes,
         },
         "app_startup": startup,
         "execution_authority": "none",
@@ -580,8 +583,10 @@ def _build_updater_artifact(
             != os.path.normcase(str(canonical_exe))
         ):
             raise ValueError("更新器构建布局不是受控普通目录")
+        verify_updater_archive(updater_exe, ROOT)
         receipt_path, receipt = _write_updater_artifact_receipt(updater_exe)
-    except (OSError, ValueError, json.JSONDecodeError):
+    except (OSError, ValueError) as error:
+        print(f"\n警告：更新器归档未通过校验：{type(error).__name__}")
         try:
             _cleanup_failed_candidate(dist=updater_root, allowed_root=allowed_root)
         except ValueError:
@@ -1043,6 +1048,13 @@ def main() -> int:
         _cleanup_failed_candidate(dist=dist, allowed_root=allowed_root)
         return 1
     try:
+        runtime_resource_hashes = verify_runtime_validation_directory(dist / "_internal", ROOT)
+    except (OSError, ValueError) as error:
+        reason = getattr(error, "reason", type(error).__name__)
+        print(f"\n警告：最终包数据库校验资源不完整：{reason}")
+        _cleanup_failed_candidate(dist=dist, allowed_root=allowed_root)
+        return 1
+    try:
         engine_archive_receipt = validate_engine_package_archive(dist)
     except EngineRuntimePackageError as error:
         print(f"\n警告：最终包引擎动态依赖资格失败：{error.reason}")
@@ -1207,7 +1219,7 @@ def main() -> int:
         qualification_path = _write_build_qualification(
             dist_root=dist_root, pair_manifest=pair_manifest,
             package_receipt=verified_package, native_receipt=native_package_receipt,
-            startup=startup_smoke,
+            runtime_resource_hashes=runtime_resource_hashes, startup=startup_smoke,
         )
     except (OSError, TypeError, ValueError):
         print("\n警告：构建资格收据写入失败；候选未发布")

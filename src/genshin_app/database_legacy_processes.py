@@ -6,7 +6,7 @@ import os
 from ctypes import wintypes
 
 
-def packaged_peer_processes() -> list[dict]:
+def packaged_peer_processes(*, include_updaters: bool = False) -> list[dict]:
     """Conservatively ask users to close other App/CLI instances, never kill.
 
     Toolhelp enumerates executable names in one OS snapshot; unlike checking
@@ -34,15 +34,17 @@ def packaged_peer_processes() -> list[dict]:
     snapshot = kernel.CreateToolhelp32Snapshot(2, 0)
     if snapshot == ctypes.c_void_p(-1).value:
         raise OSError(ctypes.get_last_error(), "无法检查其他应用实例")
+    names = {"genshincalc.exe", "genshincalcgui.exe", "genshinupdater.exe"}
+    if include_updaters:
+        # Only callers outside the onefile updater may request this name.
+        names.add("genshincalcupdater.exe")
     try:
         entry = ProcessEntry()
         entry.dwSize = ctypes.sizeof(entry)
         present = kernel.Process32FirstW(snapshot, ctypes.byref(entry))
         found = []
         while present:
-            if entry.th32ProcessID != os.getpid() and entry.szExeFile.lower() in {
-                "genshincalc.exe", "genshincalcgui.exe", "genshinupdater.exe",
-            }:
+            if entry.th32ProcessID != os.getpid() and entry.szExeFile.lower() in names:
                 found.append({"pid": int(entry.th32ProcessID), "name": entry.szExeFile})
             present = kernel.Process32NextW(snapshot, ctypes.byref(entry))
         last = ctypes.get_last_error()

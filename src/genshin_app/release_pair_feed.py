@@ -22,6 +22,7 @@ import shutil
 import stat
 import urllib.parse
 import zipfile
+import zlib
 from collections.abc import Mapping, Sequence
 from pathlib import Path, PurePosixPath
 from typing import Any
@@ -32,6 +33,7 @@ from genshin_app.product_release_index import PER_USER_UPDATER_RELATIVE
 from genshin_app.release_pair_discovery import (
     DISCOVERY_CONTRACT,
     DISCOVERY_SCHEMA_VERSION,
+    MAX_DOCUMENT_BYTES,
     ReleasePairDiscoveryError,
     validate_latest_document,
 )
@@ -198,15 +200,16 @@ def _artifact_url(base: str, filename: str) -> str:
     return f"{base}/{urllib.parse.quote(filename, safe='._-')}"
 
 
-def _read_json(path: Path, reason: str, *, maximum: int = 2 * 1024 * 1024) -> dict:
+def _read_json(path: Path, reason: str, *, maximum: int = MAX_DOCUMENT_BYTES) -> dict:
     try:
-        raw = path.read_bytes()
+        with path.open("rb") as source:
+            raw = source.read(maximum + 1)
         if not 2 <= len(raw) <= maximum:
             _fail(reason)
         value = json.loads(raw.decode("utf-8"))
     except ReleasePairFeedError:
         raise
-    except (OSError, UnicodeError, json.JSONDecodeError) as error:
+    except (OSError, ValueError, RecursionError) as error:
         raise ReleasePairFeedError(reason) from error
     if type(value) is not dict:
         _fail(reason)
@@ -230,11 +233,7 @@ def _validate_feed_receipt(feed: Path) -> dict[str, Any]:
     if hashlib.sha256(_canonical(body)).hexdigest() != receipt["receipt_sha256"]:
         _fail("release_pair_feed_receipt_invalid")
     expected = receipt["files"]
-    actual_names = {
-        path.name
-        for path in feed.iterdir()
-        if path.is_file() and path.name != FEED_RECEIPT_FILENAME
-    }
+    actual_names = {path.name for path in feed.iterdir() if path.name != FEED_RECEIPT_FILENAME}
     if set(expected) != actual_names:
         _fail("release_pair_feed_file_set_mismatch")
     for name, identity in expected.items():
@@ -261,6 +260,26 @@ def _validate_feed_receipt(feed: Path) -> dict[str, Any]:
         ):
             _fail("release_pair_feed_file_identity_mismatch")
     return receipt
+
+
+def _check_signed_artifact_binding(receipt: dict, document: dict) -> None:
+    pair = document["pair_manifest"]
+    database = document["database_manifest"]
+    artifacts = document["artifacts"]
+    independent_app = artifacts["app"]["format"] == "app-zip"
+    app_id = pair["app"]["app_release_id"] if independent_app else pair["release_pair_id"]
+    suffix = ".sqlite.gz" if artifacts["database"]["format"] == "sqlite-gzip" else ".sqlite"
+    filenames = {"app": _filename(app_id, ".app.zip"),
+                 "database": _filename(database["database_release_id"], suffix)}
+    if (receipt.get("artifacts") != artifacts or receipt.get("channel") != document["channel"]
+            or receipt.get("release_pair_id") != pair["release_pair_id"]
+            or receipt.get("database_release_id") != database["database_release_id"]
+            or set(receipt["files"]) != {*filenames.values(), UNSIGNED_DOCUMENT_FILENAME, SIGNING_PAYLOAD_FILENAME}):
+        _fail("release_pair_feed_signed_artifact_mismatch")
+    for kind, filename in filenames.items():
+        signed = artifacts[kind]
+        if receipt["files"][filename] != {key: signed[key] for key in ("sha256", "size_bytes")}:
+            _fail("release_pair_feed_signed_artifact_mismatch")
 
 
 def _validate_inputs(
@@ -334,6 +353,55 @@ def _validate_inputs(
     return app, db, pair, database_manifest, app_verification
 
 
+def _accepted_database_artifact(
+    pair_path: Path,
+    archive: Path,
+    *,
+    pair: dict,
+    database_manifest: dict,
+    trust_keys: Sequence[Mapping[str, Any]],
+    requested_url: str | None,
+) -> dict:
+    if _reparse(pair_path) or not pair_path.is_file() or _reparse(archive) or not archive.is_file():
+        _fail("release_pair_feed_database_reuse_input_invalid")
+    verifier = build_trust_verifier(trust_keys)
+    if verifier is None:
+        _fail("release_pair_feed_trust_keys_unconfigured")
+    proof = _read_json(pair_path, "release_pair_feed_database_reuse_proof_invalid")
+    try:
+        signed, trusted = validate_latest_document(
+            proof, expected_channel=pair["channel"], trust_verifier=verifier, allow_unsigned_dev=False,
+        )
+    except ReleasePairDiscoveryError as error:
+        raise ReleasePairFeedError("release_pair_feed_database_reuse_proof_invalid") from error
+    if not trusted:
+        _fail("release_pair_feed_database_reuse_proof_untrusted")
+    artifact = signed["artifacts"]["database"]
+    if (signed["database_manifest"] != database_manifest
+            or signed["pair_manifest"]["pair_sequence"] >= pair["pair_sequence"]
+            or artifact["format"] != "sqlite-gzip"):
+        _fail("release_pair_feed_database_reuse_manifest_mismatch")
+    if requested_url is not None and requested_url != artifact["url"]:
+        _fail("release_pair_feed_database_reuse_url_mismatch")
+    if archive.stat().st_size != artifact["size_bytes"] or _sha256(archive) != artifact["sha256"]:
+        _fail("release_pair_feed_database_reuse_archive_mismatch")
+
+    expanded = hashlib.sha256()
+    remaining = artifact["unpacked_size_bytes"]
+    try:
+        with gzip.open(archive, "rb") as stream:
+            while chunk := stream.read(min(4 * 1024 * 1024, remaining + 1)):
+                remaining -= len(chunk)
+                if remaining < 0:
+                    _fail("release_pair_feed_database_reuse_expanded_mismatch")
+                expanded.update(chunk)
+    except (OSError, EOFError, zlib.error) as error:
+        raise ReleasePairFeedError("release_pair_feed_database_reuse_archive_invalid") from error
+    if remaining != 0 or expanded.hexdigest() != artifact["unpacked_sha256"]:
+        _fail("release_pair_feed_database_reuse_expanded_mismatch")
+    return artifact
+
+
 def prepare_release_pair_feed(
     *,
     app_root: Path,
@@ -344,9 +412,15 @@ def prepare_release_pair_feed(
     output_directory: Path,
     independent_app: bool = False,
     database_base_url: str | None = None,
+    accepted_database_source_pair: Path | None = None,
+    accepted_database_archive: Path | None = None,
+    trust_keys: Sequence[Mapping[str, Any]] = (),
 ) -> dict[str, Any]:
-    """Create complete artifacts and an exact external-signing payload."""
+    """Create an exact signing payload, retaining an accepted database gzip when supplied."""
 
+    reuse = accepted_database_source_pair is not None or accepted_database_archive is not None
+    if reuse and (not independent_app or accepted_database_source_pair is None or accepted_database_archive is None):
+        _fail("release_pair_feed_database_reuse_inputs_required")
     output = Path(output_directory)
     if output.exists():
         _fail("release_pair_feed_output_exists")
@@ -368,8 +442,20 @@ def prepare_release_pair_feed(
         database_name = _filename(database_manifest["database_release_id"], ".sqlite.gz" if independent_app else ".sqlite")
         app_artifact = temporary / app_name
         database_artifact = temporary / database_name
+        reused_descriptor = None
+        if reuse:
+            reused_descriptor = _accepted_database_artifact(
+                Path(accepted_database_source_pair), Path(accepted_database_archive),
+                pair=pair, database_manifest=database_manifest, trust_keys=trust_keys,
+                requested_url=_artifact_url(database_base, database_name) if database_base_url is not None else None,
+            )
         _deterministic_zip(app, app_artifact)
-        if independent_app:
+        if reused_descriptor is not None:
+            shutil.copyfile(Path(accepted_database_archive), database_artifact)
+            if (database_artifact.stat().st_size != reused_descriptor["size_bytes"]
+                    or _sha256(database_artifact) != reused_descriptor["sha256"]):
+                _fail("release_pair_feed_database_reuse_archive_mismatch")
+        elif independent_app:
             copied_sha = hashlib.sha256()
             copied_size = 0
             with (db.open("rb") as source, database_artifact.open("xb") as packed,
@@ -407,14 +493,14 @@ def prepare_release_pair_feed(
                 "unpacked_size_bytes": unpacked_size,
                 "unpacked_files": len(unpacked_members),
             },
-            "database": {
+            "database": reused_descriptor if reused_descriptor is not None else {
                 "url": _artifact_url(database_base, database_name),
                 "sha256": _sha256(database_artifact),
                 "size_bytes": database_artifact.stat().st_size,
                 "format": "sqlite-gzip" if independent_app else "sqlite",
             },
         }
-        if independent_app:
+        if independent_app and reused_descriptor is None:
             artifacts["database"].update(unpacked_sha256=database_manifest["database"]["sha256"],
                                          unpacked_size_bytes=database_manifest["database"]["size_bytes"])
         payload = {
@@ -509,10 +595,11 @@ def finalize_release_pair_feed(
     payload = {key: copy.deepcopy(value) for key, value in unsigned.items() if key != "signature"}
     canonical_path = feed / SIGNING_PAYLOAD_FILENAME
     try:
-        canonical = canonical_path.read_bytes()
+        with canonical_path.open("rb") as source:
+            canonical = source.read(MAX_DOCUMENT_BYTES + 1)
     except OSError as error:
         raise ReleasePairFeedError("release_pair_feed_signing_payload_missing") from error
-    if canonical != _canonical(payload):
+    if len(canonical) > MAX_DOCUMENT_BYTES or canonical != _canonical(payload):
         _fail("release_pair_feed_signing_payload_mismatch")
     if hashlib.sha256(canonical).hexdigest() != receipt["signing_payload_sha256"]:
         _fail("release_pair_feed_signing_payload_mismatch")
@@ -531,6 +618,7 @@ def finalize_release_pair_feed(
         raise ReleasePairFeedError(error.reason) from error
     if trusted is not True or checked != document:
         _fail("release_pair_feed_signature_untrusted")
+    _check_signed_artifact_binding(receipt, checked)
     _write_json(target, checked)
     return {
         "status": "finalized",

@@ -1,6 +1,6 @@
 # 源码构建
 
-本版源码对应正式 App **0.46.0-r19** 与数据库 **db-7.2.50-r6**。Git 源码不带 SQLite、Node 可执行文件或已安装依赖。完整构建需取得相同发行的数据库文件及清单。
+本版源码对应正式 App **0.46.0-r20** 与数据库 **db-7.2.50-r6**。Git 源码不带 SQLite、Node 可执行文件或已安装依赖。完整构建需取得相同发行的数据库文件及清单。
 
 ## 先核对源码
 
@@ -62,12 +62,12 @@ node scripts/generate_dsh_client_shell_manifest.mjs agent-runtime frontend agent
 | `data/database-release-manifest.json` | 与该 r6 字节对应的正式发行清单 |
 | `agent-runtime/node.exe` | 与锁定发行匹配的 Windows Node |
 
-r6 发行清单和数据库包由[数据发行页](https://github.com/Aiur-wzy/gs_ai_calculator_db/releases)提供。首个正式版没有同渠道前代。`release-inputs/` 中的历史清单只用于复验旧开发版。
+r6 发行清单和数据库包由[数据发行页](https://github.com/Aiur-wzy/gs_ai_calculator_db/releases)提供。同渠道前代的配对清单保存在 `release-inputs/r19-release-pair-manifest.json`，与公开 r19 发行文件一致。
 
 准备齐全后，先读取 `python scripts/build_dist.py --help`，再使用：
 
 ```powershell
-python scripts/build_dist.py --dist-root dist/local-r19 --database data/genshin.db --accepted-database-manifest data/database-release-manifest.json --native-node agent-runtime/node.exe --no-app-execution
+python scripts/build_dist.py --dist-root dist/local-r20 --database data/genshin.db --accepted-database-manifest data/database-release-manifest.json --accepted-predecessor-pair-manifest release-inputs/r19-release-pair-manifest.json --released-at 2026-11-15T11:06:58+00:00 --native-node agent-runtime/node.exe --no-app-execution
 ```
 
 `--no-app-execution` 不启动生成的 App，但仍执行 Node 和打包资源校验。`--native-plan-only` 只生成构建计划，仍需配套数据库与锁定运行时输入。实际编译结束后须核对包内版本和文件清单。

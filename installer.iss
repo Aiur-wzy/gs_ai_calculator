@@ -1,4 +1,5 @@
-; 原神拉表 Windows 安装包（G5）
+; 历史开发版的 Windows 机器级离线安装包。
+; 公开正式版使用 genshin_installer.spec 构建当前用户小安装器。
 ; 前置：先运行 scripts/build_dist.py；构建脚本会固定本次版本和候选目录
 ; 构建：Inno Setup 6 编译本脚本（iscc installer.iss 或 IDE 打开编译）
 

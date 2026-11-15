@@ -8,6 +8,8 @@ import shutil
 from pathlib import Path
 from typing import Any
 
+from .windows_known_folders import WindowsPathAuthorityError, reject_reparse_chain
+
 MIN_RESERVE_BYTES = 512 * 1024 * 1024
 RESERVE_DIVISOR = 20  # five percent, with MIN_RESERVE_BYTES as the floor
 
@@ -91,7 +93,10 @@ def _allocated(size: int, files: int, cluster: int) -> int:
 def directory_shape(root: Path) -> dict[str, int]:
     """Return exact regular-file count/logical bytes and reject links."""
 
-    supplied = Path(root).resolve(strict=True)
+    try:
+        supplied = reject_reparse_chain(Path(root), reason="release_pair_storage_tree_invalid")
+    except WindowsPathAuthorityError as error:
+        raise ReleasePairStorageError(error.reason) from error
     files = 0
     size = 0
     for directory, names, filenames in os.walk(supplied, followlinks=False):

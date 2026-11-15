@@ -22,7 +22,8 @@ import urllib.parse
 import urllib.request
 import zipfile
 from collections.abc import Callable, Mapping
-from pathlib import Path, PurePosixPath
+from http.client import HTTPException, IncompleteRead
+from pathlib import Path, PurePosixPath, PureWindowsPath
 from typing import Any
 from uuid import uuid4
 
@@ -31,6 +32,8 @@ from genshin_app.release_pair_discovery import _validate_artifact
 TRANSPORT_RECEIPT_CONTRACT = "genshin-release-pair-transport-receipt-v1"
 TRANSPORT_RECEIPT_FILENAME = "release-pair-transport-receipt.json"
 TRANSPORT_SCHEMA_VERSION = 1
+_STAGING_OWNER = {"contract": "genshin-release-pair-transport-staging-v1"}
+_STAGING_OWNER_FILENAME = "release-pair-transport-owner.json"
 MAX_APP_ARCHIVE_BYTES = 4 * 1024 * 1024 * 1024
 MAX_DATABASE_BYTES = 2 * 1024 * 1024 * 1024
 MAX_APP_UNPACKED_BYTES = 16 * 1024 * 1024 * 1024
@@ -139,6 +142,8 @@ def _download_https(
             final = urllib.parse.urlparse(response.geturl())
             if final.scheme.lower() != "https":
                 _fail("release_pair_artifact_redirect_not_https")
+            if getattr(response, "status", 200) != 200:
+                _fail("release_pair_artifact_content_range_invalid")
             encoding = response.headers.get("Content-Encoding")
             if encoding not in (None, "", "identity"):
                 _fail("release_pair_artifact_content_encoding_unsupported")
@@ -173,7 +178,7 @@ def _download_https(
         return {"sha256": actual, "size_bytes": written}
     except ReleasePairTransportError:
         raise
-    except (OSError, TimeoutError, urllib.error.URLError, urllib.error.HTTPError) as error:
+    except (OSError, HTTPException) as error:
         raise ReleasePairTransportError(
             "release_pair_artifact_download_failed"
         ) from error
@@ -217,12 +222,15 @@ def _download_cached(locator, destination, cache_dir, *, timeout, cancel_check, 
                 finished.unlink()
             cache_hit = finished.is_file()
             if not cache_hit:
-                _resume_download(locator, partial, metadata, timeout=timeout,
-                                 cancel_check=cancel_check, progress=progress)
-                if partial.stat().st_size != size or _cached_file_digest(partial, cancel_check) != key:
-                    partial.unlink(missing_ok=True)
-                    metadata.unlink(missing_ok=True)
-                    _fail("release_pair_artifact_sha256_mismatch")
+                complete_partial = (partial.is_file() and partial.stat().st_size == size
+                                    and _cached_file_digest(partial, cancel_check) == key)
+                if not complete_partial:
+                    _resume_download(locator, partial, metadata, timeout=timeout,
+                                     cancel_check=cancel_check, progress=progress)
+                    if partial.stat().st_size != size or _cached_file_digest(partial, cancel_check) != key:
+                        partial.unlink(missing_ok=True)
+                        metadata.unlink(missing_ok=True)
+                        _fail("release_pair_artifact_sha256_mismatch")
                 os.replace(partial, finished)
                 metadata.unlink(missing_ok=True)
             with finished.open("rb") as source, destination.open("xb") as output:
@@ -243,7 +251,7 @@ def _download_cached(locator, destination, cache_dir, *, timeout, cancel_check, 
                     _fail("release_pair_artifact_sha256_mismatch")
     except LockBusyError as error:
         raise ReleasePairTransportError("release_pair_artifact_download_busy") from error
-    except (OSError, TimeoutError, urllib.error.URLError, urllib.error.HTTPError) as error:
+    except (OSError, HTTPException) as error:
         if created_destination:
             destination.unlink(missing_ok=True)
         raise ReleasePairTransportError("release_pair_artifact_download_failed") from error
@@ -302,7 +310,13 @@ def _resume_download(locator, partial, metadata, *, timeout, cancel_check, progr
                 while True:
                     if cancel_check is not None and cancel_check():
                         _fail("release_pair_artifact_download_cancelled")
-                    block = response.read(CHUNK_BYTES)
+                    try:
+                        block = response.read(CHUNK_BYTES)
+                    except IncompleteRead as error:
+                        if len(error.partial) > size - written:
+                            _fail("release_pair_artifact_size_mismatch")
+                        output.write(error.partial)
+                        raise
                     if not block:
                         break
                     written += len(block)
@@ -322,13 +336,14 @@ def _resume_download(locator, partial, metadata, *, timeout, cancel_check, progr
 
 
 def _safe_zip_member(info: zipfile.ZipInfo) -> PurePosixPath:
-    name = info.filename
+    name = info.orig_filename
     if not name or "\\" in name or "\x00" in name:
         _fail("release_pair_app_archive_member_invalid")
     path = PurePosixPath(name)
-    if path.is_absolute() or any(part in {"", ".", ".."} for part in path.parts):
+    if path.is_absolute() or not path.parts or path.as_posix() != name.removesuffix("/"):
         _fail("release_pair_app_archive_member_invalid")
-    if any(":" in part for part in path.parts):
+    if any(part == ".." or part != part.rstrip(" .") or re.search(r'[<>:"|?*\x00-\x1f]', part)
+           or PureWindowsPath(part).is_reserved() for part in path.parts):
         _fail("release_pair_app_archive_member_invalid")
     mode = info.external_attr >> 16
     if stat.S_ISLNK(mode):
@@ -336,18 +351,21 @@ def _safe_zip_member(info: zipfile.ZipInfo) -> PurePosixPath:
     return path
 
 
-def _extract_app_archive(archive: Path, destination: Path) -> dict[str, Any]:
+def _extract_app_archive(archive: Path, destination: Path, *, cancel_check: CancelCheck | None = None) -> dict[str, Any]:
     try:
         with zipfile.ZipFile(archive) as package:
             members = package.infolist()
             if not members or len(members) > MAX_APP_MEMBERS:
                 _fail("release_pair_app_archive_member_limit_exceeded")
             total = 0
+            seen = set()
             checked: list[tuple[zipfile.ZipInfo, PurePosixPath]] = []
             for info in members:
                 member = _safe_zip_member(info)
-                if info.file_size < 0:
+                key = member.as_posix().casefold()
+                if info.file_size < 0 or key in seen:
                     _fail("release_pair_app_archive_member_invalid")
+                seen.add(key)
                 total += info.file_size
                 if total > MAX_APP_UNPACKED_BYTES:
                     _fail("release_pair_app_archive_size_limit_exceeded")
@@ -355,6 +373,8 @@ def _extract_app_archive(archive: Path, destination: Path) -> dict[str, Any]:
             destination.mkdir(parents=True)
             root = destination.resolve(strict=True)
             for info, member in checked:
+                if cancel_check is not None and cancel_check():
+                    _fail("release_pair_artifact_download_cancelled")
                 target = destination.joinpath(*member.parts)
                 if info.is_dir():
                     target.mkdir(parents=True, exist_ok=True)
@@ -364,7 +384,10 @@ def _extract_app_archive(archive: Path, destination: Path) -> dict[str, Any]:
                 if root != resolved_parent and root not in resolved_parent.parents:
                     _fail("release_pair_app_archive_path_escape")
                 with package.open(info, "r") as source, target.open("xb") as output:
-                    shutil.copyfileobj(source, output, CHUNK_BYTES)
+                    while block := source.read(CHUNK_BYTES):
+                        if cancel_check is not None and cancel_check():
+                            _fail("release_pair_artifact_download_cancelled")
+                        output.write(block)
             manifest = destination / "PACKAGE-FILES.sha256"
             if not manifest.is_file() or _is_reparse_point(manifest):
                 _fail("release_pair_app_package_manifest_missing")
@@ -407,6 +430,43 @@ def _validated_discovery(
     return artifacts, manifests
 
 
+def discard_orphaned_release_staging(workspace: Path) -> bool:
+    """Discard only transport-owned staging after the caller has excluded a live journal."""
+    root = Path(workspace).absolute()
+    staging = root / "staging"
+    if not os.path.lexists(staging):
+        return False
+    if (any(_is_reparse_point(path) for path in (staging, root, *root.parents))
+            or not staging.is_dir() or staging.resolve(strict=True).parent != root.resolve(strict=True)):
+        _fail("release_pair_transport_workspace_invalid")
+
+    def read_control(name):
+        path = staging / name
+        if not path.is_file() or _is_reparse_point(path):
+            return None
+        try:
+            with path.open("rb") as source:
+                raw = source.read(16 * 1024 + 1)
+            return json.loads(raw) if len(raw) <= 16 * 1024 else None
+        except (OSError, ValueError, RecursionError):
+            return None
+
+    if not any(staging.iterdir()):
+        staging.rmdir()
+        return True
+    if read_control(_STAGING_OWNER_FILENAME) != _STAGING_OWNER:
+        # Older releases leave a completed, self-consistent receipt instead.
+        receipt = read_control(TRANSPORT_RECEIPT_FILENAME)
+        if not isinstance(receipt, dict) or receipt.get("contract") != TRANSPORT_RECEIPT_CONTRACT:
+            _fail("release_pair_transport_recovery_required")
+        checksum = receipt.pop("receipt_sha256", None)
+        if (receipt.get("schema_version") != TRANSPORT_SCHEMA_VERSION
+                or hashlib.sha256(_canonical(receipt)).hexdigest() != checksum):
+            _fail("release_pair_transport_recovery_required")
+    shutil.rmtree(staging)
+    return True
+
+
 def stage_release_pair_artifacts(
     discovery_result: Mapping[str, Any],
     workspace: Path,
@@ -439,17 +499,18 @@ def stage_release_pair_artifacts(
                                                 ("database", reuse_installed_database)) if not reused}
     if local_artifacts is not None and set(local_artifacts) != expected_local:
         _fail("release_pair_local_artifacts_invalid")
-    root = Path(workspace)
-    root.mkdir(parents=True, exist_ok=True)
-    root = root.resolve(strict=True)
-    if _is_reparse_point(root):
+    root = Path(workspace).absolute()
+    if any(_is_reparse_point(parent) for parent in (root, *root.parents)):
         _fail("release_pair_transport_workspace_invalid")
+    root.mkdir(parents=True, exist_ok=True)
     staging = root / "staging"
-    if staging.exists():
+    if os.path.lexists(staging):
         _fail("release_pair_transport_recovery_required")
     temporary = root / f".staging-{uuid4().hex}"
     temporary.mkdir()
     try:
+        _write_json_atomic(temporary / _STAGING_OWNER_FILENAME, _STAGING_OWNER)
+
         def stage(kind, destination, maximum_bytes):
             locator = artifacts[kind]
             if local_artifacts is None:
@@ -484,7 +545,7 @@ def stage_release_pair_artifacts(
         extraction = None
         if not reuse_installed_app:
             app_download = stage("app", app_archive, MAX_APP_ARCHIVE_BYTES)
-            extraction = _extract_app_archive(app_archive, temporary / "app")
+            extraction = _extract_app_archive(app_archive, temporary / "app", cancel_check=cancel_check)
             if (extraction["unpacked_size_bytes"] != artifacts["app"]["unpacked_size_bytes"]
                     or extraction["files"] != artifacts["app"]["unpacked_files"]):
                 _fail("release_pair_app_archive_declared_shape_mismatch")
@@ -535,16 +596,22 @@ def stage_release_pair_artifacts(
             receipt["app_mode"] = "reuse_installed"
         receipt["receipt_sha256"] = hashlib.sha256(_canonical(receipt)).hexdigest()
         _write_json_atomic(temporary / TRANSPORT_RECEIPT_FILENAME, receipt)
+        if os.path.lexists(staging):
+            _fail("release_pair_transport_recovery_required")
         try:
-            os.replace(temporary, staging)
+            os.rename(temporary, staging)
         except OSError:
-            # Some Windows/AppContainer filesystems reject a directory rename
-            # even on one volume.  ``staging`` is still fail-closed: the
-            # receipt was written last, and any interrupted copy is treated as
-            # recovery-required rather than a reusable candidate.
-            if staging.exists():
-                raise
-            shutil.move(str(temporary), str(staging))
+            # AppContainer may deny a same-volume directory rename. Reserve
+            # the name and publish its receipt only after all files are copied.
+            try:
+                staging.mkdir()
+            except FileExistsError as error:
+                raise ReleasePairTransportError("release_pair_transport_recovery_required") from error
+            _write_json_atomic(staging / _STAGING_OWNER_FILENAME, _STAGING_OWNER)
+            shutil.copytree(temporary, staging, dirs_exist_ok=True, ignore=lambda path, _names:
+                            (TRANSPORT_RECEIPT_FILENAME, _STAGING_OWNER_FILENAME) if Path(path) == temporary else ())
+            _write_json_atomic(staging / TRANSPORT_RECEIPT_FILENAME, receipt)
+            shutil.rmtree(temporary, ignore_errors=True)
         return copy.deepcopy(receipt)
     except Exception:
         if temporary.exists():

@@ -30,15 +30,22 @@ from genshin_app.database_release_reuse import (
     DatabaseReleaseReuseError,
     verified_reusable_database,
 )
+from genshin_app.database_transaction import profile_writer
 from genshin_app.package_integrity import PackageIntegrityError, _read_package_manifest
 from genshin_app.product_release_index import PER_USER_UPDATER_RELATIVE
 from genshin_app.release_pair_discovery import discover_latest_release_pair
-from genshin_app.release_pair_helper import HELPER_RESULT_CONTRACT
+from genshin_app.release_pair_helper import (
+    HELPER_RESULT_CONTRACT,
+    discard_prepared_pair_update,
+)
 from genshin_app.release_pair_storage import (
     ReleasePairStorageError,
     preflight_before_download,
 )
-from genshin_app.release_pair_transport import stage_release_pair_artifacts
+from genshin_app.release_pair_transport import (
+    discard_orphaned_release_staging,
+    stage_release_pair_artifacts,
+)
 from genshin_app.release_pair_trust import build_trust_verifier
 from genshin_app.version import APP_DIR_NAME
 from genshin_app.windows_known_folders import (
@@ -50,6 +57,7 @@ from genshin_app.windows_known_folders import (
     reject_effective_write_access,
     reject_reparse_chain,
 )
+from genshin_db.locking import LockBusyError, file_lock
 from genshin_db.release_profile import (
     DatabaseReleaseError,
     load_database_release_manifest,
@@ -352,7 +360,8 @@ class ReleasePairCoordinator:
     ):
         self.data_dir = Path(data_dir).resolve()
         self.active_app_root = Path(active_app_root).resolve()
-        self.workspace = Path(workspace).resolve()
+        self._supplied_workspace = Path(workspace).absolute()
+        self.workspace = self._supplied_workspace.resolve()
         self.discovery_url = discovery_url
         self.channel = channel
         self.trust_verifier = trust_verifier
@@ -454,12 +463,33 @@ class ReleasePairCoordinator:
             "launcher": launched,
         }
 
+    def _clear_orphaned_staging(self, expected_journal):
+        if not os.path.lexists(self.workspace / "staging"):
+            return
+        profile_lock = self.data_dir / ".update.lock"
+        if os.path.lexists(profile_lock) and _is_reparse_point(profile_lock):
+            _fail("release_pair_transport_workspace_invalid")
+        try:
+            with profile_writer(self.data_dir, timeout=0):
+                current = release_pair_update.read_pair_update_journal(self.workspace)
+                if current != expected_journal or (current is not None and current["state"] != "cleanup_complete"):
+                    _fail("release_pair_update_recovery_required")
+                discard_orphaned_release_staging(self._supplied_workspace)
+        except LockBusyError as error:
+            raise ReleasePairCoordinatorError("release_pair_update_profile_busy") from error
+        except OSError as error:
+            raise ReleasePairCoordinatorError("release_pair_transport_cleanup_failed") from error
+
     @contextmanager
     def _one_operation(self):
         if not self._operation_lock.acquire(blocking=False):
             _fail("release_pair_update_busy")
         try:
-            yield
+            try:
+                with file_lock(self.workspace / ".release-prepare.lock", timeout=0):
+                    yield
+            except LockBusyError as error:
+                raise ReleasePairCoordinatorError("release_pair_update_busy") from error
         finally:
             self._operation_lock.release()
 
@@ -469,12 +499,25 @@ class ReleasePairCoordinator:
         *,
         confirmed_document_sha256: str,
         user_confirmed: bool,
+        cancel_check: Callable[[], bool] | None = None,
+        progress: Callable[[dict[str, Any]], None] | None = None,
     ) -> dict[str, Any]:
         if user_confirmed is not True:
             _fail("release_pair_update_confirmation_required")
+
+        def cancelled() -> bool:
+            return self._cancel.is_set() or (cancel_check is not None and cancel_check())
+
+        def record(value: dict[str, Any]) -> None:
+            self._record_progress(value)
+            if progress is not None:
+                progress(dict(value))
+
         with self._one_operation():
             self._cancel.clear()
             self._progress = None
+            if cancelled():
+                _fail("release_pair_artifact_download_cancelled")
             if self.availability()["available"] is not True:
                 _fail("release_pair_update_coordinator_unavailable")
             latest = self.discover()
@@ -505,13 +548,24 @@ class ReleasePairCoordinator:
 
             existing = release_pair_update.read_pair_update_journal(self.workspace)
             if existing is not None and existing["state"] == "handoff_ready":
-                inspected = release_pair_update.inspect_pair_update_handoff(
-                    self.workspace,
-                    operation_id=existing["operation_id"],
-                )
-                if inspected["pair_manifest"] != latest["pair_manifest"]:
+                target_id = latest["pair_manifest"]["release_pair_id"]
+                if cancelled():
+                    _fail("release_pair_artifact_download_cancelled")
+                handoff = release_pair_update._read_handoff(self.workspace, existing)
+                previous_selection = handoff["target"]["trust_assertion"].get("product_selection")
+                if existing["target_release_pair_id"] == target_id and previous_selection == product_selection:
+                    inspected = release_pair_update.inspect_pair_update_handoff(
+                        self.workspace,
+                        operation_id=existing["operation_id"],
+                    )
+                    if inspected["pair_manifest"] != latest["pair_manifest"]:
+                        _fail("release_pair_update_recovery_required")
+                    return self._launch(existing["operation_id"])
+                if selected is None:
                     _fail("release_pair_update_recovery_required")
-                return self._launch(existing["operation_id"])
+                discard_prepared_pair_update(self.workspace, self.active_app_root, self.data_dir,
+                                             operation_id=existing["operation_id"])
+                existing = release_pair_update.read_pair_update_journal(self.workspace)
             if existing is not None and existing["state"] != "cleanup_complete":
                 _fail("release_pair_update_recovery_required")
 
@@ -528,6 +582,7 @@ class ReleasePairCoordinator:
                 raise ReleasePairCoordinatorError(reason) from error
             if selected is not None and selected["reuse_database"] != reuse_installed_database:
                 _fail("release_pair_update_confirmation_mismatch")
+            self._clear_orphaned_staging(existing)
             artifacts = latest.get("artifacts")
             try:
                 if type(artifacts) is not dict:
@@ -560,19 +615,19 @@ class ReleasePairCoordinator:
                 latest,
                 self.workspace,
                 confirmed_document_sha256=latest["document_sha256"] if selected is not None else confirmed_document_sha256,
-                cancel_check=self._cancel.is_set,
+                cancel_check=cancelled,
                 reuse_installed_database=reuse_installed_database,
                 **({"reuse_installed_app": reuse_installed_app, "cache_dir": self.workspace / "artifact-cache",
-                    "progress": self._record_progress} if selected is not None else {}),
+                    "progress": record} if selected is not None else {}),
             )
             try:
-                if self._cancel.is_set():
+                if cancelled():
                     _fail("release_pair_artifact_download_cancelled")
                 if selected is not None:
                     from genshin_db.locking import lock_is_held
                     if lock_is_held(self.data_dir / ".update.lock"):
                         _fail("release_pair_update_profile_busy")
-                self._record_progress({"phase": "verifying", "cancellable": False})
+                record({"phase": "verifying", "cancellable": False})
                 production = self.channel == "stable"
                 trust_assertion = (
                     release_pair_update.create_signed_discovery_trust_assertion(
@@ -617,7 +672,7 @@ class ReleasePairCoordinator:
                     "requires_restart": False,
                 }
             launched = self._launch(prepared["operation_id"])
-            self._record_progress({"phase": "waiting_for_exit", "cancellable": False})
+            record({"phase": "waiting_for_exit", "cancellable": False})
             return {
                 **launched,
                 "release_pair_id": latest["release_pair_id"],

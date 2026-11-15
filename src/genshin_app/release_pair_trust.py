@@ -55,8 +55,12 @@ def _decode_signature(value: str) -> bytes:
         # keeps external signing tools simple without accepting another
         # textual alphabet.
         raw = value.encode("ascii")
-        raw += b"=" * (-len(raw) % 4)
-        return base64.b64decode(raw, altchars=b"-_", validate=True)
+        padded = raw + b"=" * (-len(raw) % 4)
+        signature = base64.b64decode(padded, altchars=b"-_", validate=True)
+        expected = base64.urlsafe_b64encode(signature)
+        if raw not in (expected, expected.rstrip(b"=")):
+            raise ValueError("non-canonical base64url signature")
+        return signature
     except (UnicodeEncodeError, ValueError) as error:
         raise ReleasePairTrustError(
             "release_pair_signature_value_invalid"

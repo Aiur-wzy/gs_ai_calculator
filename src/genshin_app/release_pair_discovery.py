@@ -17,8 +17,10 @@ import urllib.parse
 import urllib.request
 from collections.abc import Callable, Mapping
 from datetime import UTC, datetime
+from http.client import HTTPException
 from pathlib import Path
 from typing import Any
+from uuid import uuid4
 
 from genshin_db.release_profile import (
     DatabaseReleaseError,
@@ -34,6 +36,8 @@ CACHE_SCHEMA_VERSION = 1
 RESULT_CONTRACT = "genshin-release-pair-discovery-result-v1"
 DEFAULT_TIMEOUT_SECONDS = 3.0
 MAX_DOCUMENT_BYTES = 2 * 1024 * 1024
+# The cache adds local metadata to a document that may fill the wire budget.
+MAX_CACHE_BYTES = MAX_DOCUMENT_BYTES + 128 * 1024
 MAX_DECLARED_ARTIFACT_BYTES = 8 * 1024 * 1024 * 1024
 MAX_DECLARED_APP_UNPACKED_BYTES = 16 * 1024 * 1024 * 1024
 MAX_DECLARED_APP_FILES = 100_000
@@ -265,32 +269,26 @@ def _load_cache(path: Path, *, expected_url: str, expected_channel: str) -> dict
     if not path.is_file():
         return None
     try:
-        raw = path.read_bytes()
-        if len(raw) > MAX_DOCUMENT_BYTES:
-            return None
+        with path.open("rb") as handle:
+            raw = _read_limited(handle, limit=MAX_CACHE_BYTES)
         return _validate_cache(
             json.loads(raw.decode("utf-8")),
             expected_url=expected_url,
             expected_channel=expected_channel,
         )
-    except (OSError, UnicodeError, json.JSONDecodeError, ReleasePairDiscoveryError):
+    except (OSError, ValueError, RecursionError):
         return None
 
 
 def _write_cache(path: Path, value: Mapping[str, Any]) -> None:
     target = Path(path)
     target.parent.mkdir(parents=True, exist_ok=True)
-    temporary = target.with_name(target.name + ".tmp")
-    raw = json.dumps(
-        value,
-        ensure_ascii=False,
-        sort_keys=True,
-        indent=2,
-    ).encode("utf-8") + b"\n"
-    if len(raw) > MAX_DOCUMENT_BYTES:
+    temporary = target.with_name(f".{target.name}.{uuid4().hex}.tmp")
+    raw = _canonical(value)
+    if len(raw) > MAX_CACHE_BYTES:
         raise ReleasePairDiscoveryError("release_pair_discovery_cache_too_large")
     try:
-        with temporary.open("wb") as handle:
+        with temporary.open("xb") as handle:
             handle.write(raw)
             handle.flush()
             os.fsync(handle.fileno())
@@ -319,8 +317,11 @@ def _fetch_https(url: str, *, etag: str | None, timeout: float) -> tuple[int, by
             return response.status, _read_limited(response), response.headers.get("ETag")
     except urllib.error.HTTPError as error:
         if error.code == 304:
-            return 304, b"", error.headers.get("ETag")
+            with error:
+                return 304, b"", error.headers.get("ETag")
         raise
+    except HTTPException as error:
+        raise OSError("invalid release metadata response") from error
 
 
 def _result(
@@ -414,7 +415,7 @@ def discover_latest_release_pair(
             )
         except ReleasePairDiscoveryError:
             raise
-        except (OSError, UnicodeError, json.JSONDecodeError) as error:
+        except (OSError, ValueError, RecursionError) as error:
             raise ReleasePairDiscoveryError(
                 "release_pair_discovery_test_source_invalid"
             ) from error
@@ -475,7 +476,7 @@ def discover_latest_release_pair(
             raise ReleasePairDiscoveryError("release_pair_discovery_http_status")
         try:
             value = json.loads(body.decode("utf-8"))
-        except (UnicodeError, json.JSONDecodeError) as error:
+        except (ValueError, RecursionError) as error:
             raise ReleasePairDiscoveryError(
                 "release_pair_discovery_document_invalid"
             ) from error
@@ -494,7 +495,8 @@ def discover_latest_release_pair(
             "fetched_at": check_time,
             "document": document,
         }
-        _write_cache(Path(cache_path), cache_value)
+        if trusted:
+            _write_cache(Path(cache_path), cache_value)
         return _result(
             status="available" if trusted else "untrusted",
             source="remote",

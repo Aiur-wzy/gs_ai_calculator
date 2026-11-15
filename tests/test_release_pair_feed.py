@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import copy
+import gzip
 import hashlib
 import json
 import zipfile
@@ -8,6 +10,11 @@ from pathlib import Path
 import pytest
 
 from genshin_app import release_pair_feed as feed
+from genshin_app.product_release_index import validate_product_release_index
+from tests import test_product_release_index as product_fixtures
+from tests.test_product_release_index import _signed, _verify
+
+releases = product_fixtures.releases
 
 
 def _fixture(tmp_path: Path, monkeypatch):
@@ -217,3 +224,118 @@ def test_finalize_rehashes_every_prepared_artifact_before_publishing(tmp_path, m
             trust_keys=(),
         )
     assert tampered.value.reason == "release_pair_feed_file_identity_mismatch"
+
+
+def test_finalize_rejects_artifact_even_if_unsigned_receipt_matches_it(tmp_path, monkeypatch):
+    _fixture(tmp_path, monkeypatch)
+    directory = tmp_path / "feed"
+    receipt = feed.prepare_release_pair_feed(
+        app_root=tmp_path / "app", database=tmp_path / "genshin.db", pair_manifest_path=tmp_path / "pair.json",
+        database_manifest_path=tmp_path / "database.json", base_url="https://updates.example/releases",
+        output_directory=directory,
+    )
+    name = next(name for name in receipt["files"] if name.endswith(".sqlite"))
+    (directory / name).write_bytes(b"changed staged bytes")
+    receipt["files"][name] = {"sha256": feed._sha256(directory / name), "size_bytes": (directory / name).stat().st_size}
+    receipt.pop("receipt_sha256")
+    receipt["receipt_sha256"] = hashlib.sha256(feed._canonical(receipt)).hexdigest()
+    (directory / feed.FEED_RECEIPT_FILENAME).write_text(json.dumps(receipt), encoding="utf-8")
+    signature = tmp_path / "signature.json"
+    signature.write_text('{"algorithm":"rsa-pss-sha256","key_id":"k","value":"fixture"}', encoding="utf-8")
+    monkeypatch.setattr(feed, "build_trust_verifier", lambda _keys: lambda *_args: True)
+    monkeypatch.setattr(feed, "validate_latest_document", lambda document, **_kwargs: (document, True))
+
+    with pytest.raises(feed.ReleasePairFeedError, match="signed_artifact_mismatch"):
+        feed.finalize_release_pair_feed(feed_directory=directory, signature_path=signature, trust_keys=())
+    assert not (directory / feed.FINAL_DOCUMENT_FILENAME).exists()
+
+
+@pytest.fixture
+def accepted_database_archive(tmp_path, monkeypatch, releases):
+    apps, databases, documents, _, index = releases
+    database, _ = databases[1]
+    archive = tmp_path / "original-database.sqlite.gz"
+    archive.write_bytes(gzip.compress(database.read_bytes(), compresslevel=1, mtime=42))
+    previous = copy.deepcopy(documents[1, 1])
+    old_descriptor = previous["artifacts"]["database"]
+    old_descriptor.update(sha256=feed._sha256(archive), size_bytes=archive.stat().st_size)
+    proof_path = tmp_path / "accepted-source-pair.json"
+
+    def write_proof(proof, *, sign=True):
+        if sign:
+            proof = _signed({key: value for key, value in proof.items() if key != "signature"})
+        proof_path.write_text(json.dumps(proof), encoding="utf-8")
+        return proof
+
+    previous = write_proof(previous)
+    monkeypatch.setattr(feed, "build_trust_verifier", lambda keys: _verify if keys else None)
+    parameters = {
+        "app_root": apps[2][0],
+        "database": database,
+        "pair_manifest_path": tmp_path / "pair-2-1.json",
+        "database_manifest_path": tmp_path / "database-1.json",
+        "base_url": "https://example.invalid/app-2",
+        "output_directory": tmp_path / "new-feed",
+        "independent_app": True,
+        "accepted_database_source_pair": proof_path,
+        "accepted_database_archive": archive,
+        "trust_keys": ({"fixture": True},),
+    }
+    return parameters, previous, write_proof, index
+
+
+def test_successor_index_retains_exact_signed_database_asset(accepted_database_archive):
+    parameters, previous, _, index = accepted_database_archive
+    receipt = feed.prepare_release_pair_feed(**parameters)
+    output = parameters["output_directory"]
+    old_archive = parameters["accepted_database_archive"]
+    db_manifest = previous["database_manifest"]
+    output_archive = output / f'{db_manifest["database_release_id"]}.sqlite.gz'
+    assert output_archive.read_bytes() == old_archive.read_bytes()
+    assert receipt["artifacts"]["database"] == previous["artifacts"]["database"]
+    unsigned = json.loads((output / feed.UNSIGNED_DOCUMENT_FILENAME).read_bytes())
+    signature = _signed({k: v for k, v in unsigned.items() if k != "signature"})["signature"]
+    signature_path = output.parent / "new-signature.json"
+    signature_path.write_text(json.dumps(signature), encoding="utf-8")
+    assert feed.finalize_release_pair_feed(
+        feed_directory=output, signature_path=signature_path, trust_keys=parameters["trust_keys"],
+    )["status"] == "finalized"
+    successor = json.loads((output / feed.FINAL_DOCUMENT_FILENAME).read_bytes())
+    assert successor["database_manifest"] == db_manifest
+    assert successor["artifacts"]["database"] == previous["artifacts"]["database"]
+    assert successor["artifacts"]["app"] != previous["artifacts"]["app"]
+    index = _signed({**index, "pairs": [previous, successor], "latest_database_release_id": db_manifest["database_release_id"]})
+    checked = validate_product_release_index(index, channel="stable", trust_verifier=_verify)
+    assert checked["latest"] == ("app-product-2", db_manifest["database_release_id"])
+
+
+@pytest.mark.parametrize("fault, error", [
+    ("missing_proof", "database_reuse_inputs_required"),
+    ("unsigned", "database_reuse_proof_untrusted"),
+    ("tampered_proof", "database_reuse_proof_untrusted"),
+    ("url_override", "database_reuse_url_mismatch"),
+    ("tampered_archive", "database_reuse_archive_mismatch"),
+    ("wrong_expanded_bytes", "database_reuse_expanded_mismatch"),
+])
+def test_reused_database_requires_signed_archive_identity(accepted_database_archive, fault, error):
+    parameters, previous, write_proof, _ = accepted_database_archive
+    archive = parameters["accepted_database_archive"]
+    if fault == "missing_proof":
+        del parameters["accepted_database_source_pair"]
+    elif fault == "unsigned":
+        write_proof({**previous, "signature": None}, sign=False)
+    elif fault == "tampered_proof":
+        previous["artifacts"]["database"]["url"] = "https://example.invalid/different.sqlite.gz"
+        write_proof(previous, sign=False)
+    elif fault == "url_override":
+        parameters["database_base_url"] = "https://example.invalid/different"
+    elif fault == "tampered_archive":
+        original = archive.read_bytes()
+        archive.write_bytes(original[:-1] + bytes([original[-1] ^ 1]))
+    else:
+        archive.write_bytes(gzip.compress(b"wrong database"))
+        previous["artifacts"]["database"].update(sha256=feed._sha256(archive), size_bytes=archive.stat().st_size)
+        write_proof(previous)
+    with pytest.raises(feed.ReleasePairFeedError, match=error):
+        feed.prepare_release_pair_feed(**parameters)
+    assert not parameters["output_directory"].exists()

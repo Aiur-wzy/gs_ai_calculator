@@ -106,10 +106,14 @@ def test_directory_shape_counts_all_files_and_rejects_links(tmp_path):
     assert storage.directory_shape(root) == {"bytes": 8, "files": 2}
 
     alias = root / "alias"
+    alias_root = tmp_path / "alias-root"
     try:
         alias.symlink_to(root / "one")
+        alias_root.symlink_to(root, target_is_directory=True)
     except OSError:
         pytest.skip("symlink creation unavailable")
+    with pytest.raises(storage.ReleasePairStorageError, match="release_pair_storage_tree_invalid"):
+        storage.directory_shape(alias_root)
     with pytest.raises(storage.ReleasePairStorageError) as failure:
         storage.directory_shape(root)
     assert failure.value.reason == "release_pair_storage_tree_invalid"

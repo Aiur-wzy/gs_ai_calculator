@@ -30,7 +30,7 @@ const web = path.join(__dirname, '..', 'src', 'genshin_app', 'gui', 'web');
 
 function setup() {
   const nodes = new Map();
-  const world = {console, addEventListener() {}};
+  const world = {console, setInterval, clearInterval, addEventListener() {}};
   world.window = world;
   world.document = {
     createElement: (tag) => new Element(tag),
@@ -304,4 +304,22 @@ test('pair update confirms the exact digest and exits only after external handof
   await DV.updateDatabase();
   assert.deepEqual(calls,[['update','d'.repeat(64),true],['close']]);
   assert.match(nodes.get('#db-update-status').textContent,/更新器已接管/);
+});
+
+test('the update remains pending when the user declines to close the App', async () => {
+  const {world, DV, nodes} = setup();
+  world.confirm = () => true;
+  world.pywebview.api.update_database = async () => ({code: 0, data: {action: 'handoff_launched'}});
+  world.AgentWorkbenchApp = {ready: true, requestClose() {}, lifecycleController: {settle: async () => false}};
+  DV.state.databaseUpdate = {update_action_available: true, confirmation_digest: 'd'.repeat(64)};
+  await DV.updateDatabase();
+  assert.match(nodes.get('#db-update-status').textContent, /保持打开，更新尚未安装/);
+});
+
+test('cancel during final install reports the update is still in progress', async () => {
+  const {world, DV, nodes} = setup();
+  world.pywebview.api.cancel_database_update = async () => ({code: 0, data: {cancel_requested: false}});
+  DV.state.databaseUpdateRunning = true;
+  await DV.updateDatabase();
+  assert.match(nodes.get('#db-update-status').textContent, /正在完成安装和校验，此时无法取消/);
 });

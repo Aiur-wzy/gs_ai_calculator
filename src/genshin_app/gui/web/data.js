@@ -453,6 +453,7 @@ DV.loadOverview = async () => {
 };
 
 DV.checkDatabaseUpdate = async () => {
+  if (DV.state.databaseUpdateRunning) return;
   const request = ++DV.state.updateRequest;
   const r = await callApi("check_database_update");
   if (request !== DV.state.updateRequest) return;
@@ -530,8 +531,12 @@ DV.chooseLocalDatabase = async () => {
 
 DV.updateDatabase = async (selection) => {
   if(DV.state.databaseUpdateRunning){
+    const request = DV.state.updateRequest;
     const cancelled=await callApi("cancel_database_update");
-    DS.setText($("#db-update-status"),cancelled.code?cancelled.message:"正在取消更新下载…");
+    if (request !== DV.state.updateRequest || !DV.state.databaseUpdateRunning) return;
+    const message = cancelled.code ? cancelled.message : cancelled.data?.cancel_requested === false
+      ? "正在完成安装和校验，此时无法取消。" : "正在取消更新下载…";
+    DS.setText($("#db-update-status"), message);
     return;
   }
   const local=selection?.local_package===true&&selection?.mode==="database_setup";
@@ -592,14 +597,14 @@ DV.updateDatabase = async (selection) => {
     "旧版本会话与结果不会直接继续计算。"
   );
   if(!confirmed)return;
-  ++DV.state.updateRequest;
+  const request = ++DV.state.updateRequest;
   DV.state.databaseUpdateRunning=true;
   $("#data-update").disabled = false;
   $("#data-update").textContent = "取消下载";
   $("#db-update-status").textContent = "正在下载并检查选定的更新…";
   const progressTimer=setInterval(async()=>{
     const progress=await callApi("database_update_progress");
-    if (!DV.state.databaseUpdateRunning || progress.code || !progress.data) return;
+    if (request !== DV.state.updateRequest || !DV.state.databaseUpdateRunning || progress.code || !progress.data) return;
     const status=progress.data;
     $("#data-update").disabled=status.cancellable===false;
     if(status.cancellable===false)DS.setText($("#db-update-status"),"正在完成安装和校验…");
@@ -630,9 +635,18 @@ DV.updateDatabase = async (selection) => {
   if(r.data.action!=="handoff_launched"){
     DS.setText($("#db-update-status"),"更新尚未进入安装阶段。");return;
   }
-  DS.setText($("#db-update-status"),"更新器已接管，正在关闭当前 App…");
-  if (window.AgentWorkbenchApp?.ready) window.AgentWorkbenchApp.requestClose();
-  else if (window.WB?.requestClose?.() === true || !window.WB?.requestClose) await callApi("confirm_close");
+  const status = $("#db-update-status");
+  DS.setText(status, "更新器已接管。请确认关闭应用，关闭后开始安装。");
+  if (window.AgentWorkbenchApp?.ready) {
+    window.AgentWorkbenchApp.requestClose();
+    if (await window.AgentWorkbenchApp.lifecycleController?.settle?.() !== false) return;
+  } else if (!window.WB?.requestClose || window.WB.requestClose() === true) {
+    const closed = await callApi("confirm_close");
+    if (closed.code === 0 && closed.data?.closed === true) return;
+  }
+  if (request === DV.state.updateRequest) {
+    DS.setText(status, "应用保持打开，更新尚未安装。请保存编辑后重试更新。");
+  }
 };
 
 DV.init = async () => {

@@ -122,6 +122,7 @@ def completed_builder(builder, monkeypatch):
             "native-agent-release/supply-chain", package / "_internal/native-agent-release/supply-chain")
         (package / "GenshinCalc.exe").write_bytes(b"not an executable")
         (package / "GenshinCalcGUI.exe").write_bytes(b"not an executable")
+        shutil.copytree(root / "src/genshin_runtime", package / "_internal/genshin_runtime")
         return SimpleNamespace(returncode=0)
 
     def native_gate(*_args, **_kwargs):
@@ -155,6 +156,10 @@ def completed_builder(builder, monkeypatch):
     version = root / "src/genshin_app/version.py"
     version.parent.mkdir(parents=True)
     version.write_text(f"APP_VERSION = {module.app_version.APP_VERSION!r}\n", encoding="utf8")
+    resources = root / "src/genshin_runtime/resources"
+    resources.mkdir(parents=True)
+    (resources / "profiles.json").write_bytes(b"{}\n")
+    (resources / "action_dispatch_profiles.json").write_bytes(b'{"fixture": true}\n')
     state["argv"] = ["build_dist.py", "--dist-root", "dist/policy-fixture", "--new-database-release"]
     return module, state
 
@@ -176,6 +181,8 @@ def test_real_main_preserves_static_gates_and_records_actual_execution_policy(
     assert receipt["app_startup"]["status"] == expected
     assert receipt["status"] == ("built_pending_user_acceptance" if no_app else "built_and_smoke_verified")
     assert receipt["static_checks"]["native_runtime"] == {"state": "fixture_verified"}
+    resource_proof = receipt["static_checks"]["runtime_validation_resource_sha256"]
+    assert resource_proof["genshin_runtime/resources/profiles.json"] == hashlib.sha256(b"{}\n").hexdigest()
     assert receipt["execution_authority"] == "none"
     actual = module.verify_package_file_manifest(package)
     assert actual["manifest_sha256"] == receipt["static_checks"]["package_inventory"]["manifest_sha256"]
@@ -276,6 +283,25 @@ def test_no_app_policy_cannot_bypass_engine_dependency_failure(completed_builder
     assert "engine_dynamic_dependency_missing" in output
     assert '"entry": "GenshinCalc.exe"' in output and '"modules": ["runtime.root"]' in output
     assert "raw_secret" not in output and "must never print" not in output
+
+
+def test_no_app_policy_cannot_accept_a_missing_database_validation_file(completed_builder, monkeypatch, capsys):
+    module, state = completed_builder
+    inert_build = module.subprocess.run
+    candidate = state["dist_root"] / "GenshinCalc"
+
+    def run(command, **kwargs):
+        result = inert_build(command, **kwargs)
+        (candidate / "_internal/genshin_runtime/resources/action_dispatch_profiles.json").unlink()
+        return result
+
+    monkeypatch.setattr(module.subprocess, "run", run)
+    monkeypatch.setattr(module.sys, "argv", [*state["argv"], "--no-app-execution"])
+    assert module.main() == 1
+    assert state["calls"] == ["pyinstaller"]
+    assert not candidate.exists()
+    assert not (state["dist_root"] / "build-qualification.json").exists()
+    assert "runtime_validation_resource_missing" in capsys.readouterr().out
 
 
 def test_archive_failure_prints_only_closed_safe_entry_and_module_identities():
@@ -429,6 +455,6 @@ def test_atomic_qualification_failure_leaves_no_temporary_success(tmp_path, monk
     monkeypatch.setattr(build_dist.os, "replace", fail)
     with pytest.raises(OSError):
         build_dist._write_build_qualification(dist_root=tmp_path,
-            pair_manifest={}, package_receipt={}, native_receipt={},
+            pair_manifest={}, package_receipt={}, native_receipt={}, runtime_resource_hashes={},
             startup={"status": "not_run_user_acceptance"})
     assert list(tmp_path.iterdir()) == []

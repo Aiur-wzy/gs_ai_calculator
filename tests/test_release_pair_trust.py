@@ -70,6 +70,14 @@ def test_invalid_or_duplicate_compiled_keys_fail_closed():
     assert duplicate.value.reason == "release_pair_trust_key_duplicate"
 
 
+def test_signature_encoding_uses_base64url_with_optional_canonical_padding():
+    assert trust._decode_signature("_w") == b"\xff"
+    assert trust._decode_signature("_w==") == b"\xff"
+    for spelling in ("/w==", "_w=", "_x==", "_w==="):
+        with pytest.raises(trust.ReleasePairTrustError, match="signature_value_invalid"):
+            trust._decode_signature(spelling)
+
+
 def test_rsa_pss_sha256_interoperates_with_node_crypto_vector():
     """Keep the dependency-free verifier pinned to a real external signer.
 

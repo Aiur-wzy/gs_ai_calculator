@@ -5,40 +5,67 @@ import argparse
 import hashlib
 import json
 import marshal
+import struct
+import zlib
 from pathlib import Path
 from types import CodeType
 
 if __package__:
     from .engine_runtime_release import _code_contract
+    from .packaging_windows_runtime import (
+        RUNTIME_NORMALIZATION_REGISTRY,
+        verify_runtime_validation_archive,
+    )
 else:
     from engine_runtime_release import _code_contract
+    from packaging_windows_runtime import (
+        RUNTIME_NORMALIZATION_REGISTRY,
+        verify_runtime_validation_archive,
+    )
 
 ROOT = Path(__file__).resolve().parents[1]
-REGISTRY = "genshin_runtime/resources/profiles.json"
-COMMON_MODULES = ("genshin_db.release_migration", "genshin_runtime.normalization")
+COMMON_MODULES = (
+    "genshin_app.database_release_reuse",
+    "genshin_app.database_transaction",
+    "genshin_app.product_release_index",
+    "genshin_app.release_pair_helper",
+    "genshin_app.release_pair_trust",
+    "genshin_app.release_pair_update",
+    "genshin_db.release_migration",
+    "genshin_db.release_profile",
+    "genshin_db.runtime_store",
+    "genshin_db.semantic_store",
+    "genshin_runtime.normalization",
+)
 ENTRY_MODULES = {
-    "GenshinCalcSetup.exe": ("genshin_app.product_first_install", "genshin_app.setup_frozen_qualification"),
-    "GenshinCalcUpdater.exe": ("genshin_app.release_pair_helper",),
+    "GenshinCalcSetup.exe": ("genshin_app.product_first_install", "genshin_app.release_pair_transport",
+                             "genshin_app.setup_frozen_qualification"),
+    "GenshinCalcUpdater.exe": (),
 }
 ENTRY_SCRIPTS = {"GenshinCalcSetup.exe": "installer_entry", "GenshinCalcUpdater.exe": "updater_entry"}
 
 
 def verify_archive(executable: Path, project_root: Path = ROOT) -> dict:
-    from PyInstaller.archive.readers import CArchiveReader
+    from PyInstaller.archive.readers import (
+        ArchiveReadError,
+        CArchiveReader,
+        NotAnArchiveError,
+    )
 
     path = Path(executable).resolve(strict=True)
     expected_modules = ENTRY_MODULES.get(path.name)
     if expected_modules is None or not path.is_file():
         raise ValueError("setup_archive_executable_invalid")
-    archive = CArchiveReader(str(path))
-    entries = [name for name in archive.toc if name.replace("\\", "/") == REGISTRY]
-    if len(entries) != 1:
-        raise ValueError(f"setup_archive_normalization_registry_missing:{path.name}")
     project = Path(project_root).resolve(strict=True)
+    try:
+        return _verify_archive(CArchiveReader(str(path)), path, project, expected_modules)
+    except (ArchiveReadError, NotAnArchiveError, EOFError, struct.error, zlib.error) as error:
+        raise ValueError(f"setup_archive_unreadable:{path.name}") from error
+
+
+def _verify_archive(archive, path: Path, project: Path, expected_modules) -> dict:
     source = project / "src"
-    bundled_registry = archive.extract(entries[0])
-    if bundled_registry != (source / REGISTRY).read_bytes():
-        raise ValueError(f"setup_archive_normalization_registry_mismatch:{path.name}")
+    resource_hashes = verify_runtime_validation_archive(path, project, archive=archive)
     python_archives = [name for name, row in archive.toc.items() if row[-1] == "z"]
     if len(python_archives) != 1:
         raise ValueError(f"setup_archive_python_inventory_invalid:{path.name}")
@@ -58,13 +85,18 @@ def verify_archive(executable: Path, project_root: Path = ROOT) -> dict:
     entry = ENTRY_SCRIPTS[path.name]
     if entry not in archive.toc or archive.toc[entry][-1] != "s":
         raise ValueError(f"setup_archive_entry_missing:{path.name}")
-    require_current_source(marshal.loads(archive.extract(entry)), project / f"{entry}.py", entry)
+    try:
+        entry_code = marshal.loads(archive.extract(entry))
+    except ValueError as error:
+        raise ValueError(f"setup_archive_entry_invalid:{path.name}") from error
+    require_current_source(entry_code, project / f"{entry}.py", entry)
     with path.open("rb") as stream:
         executable_sha256 = hashlib.file_digest(stream, "sha256").hexdigest()
     return {
         "contract": "genshin-setup-archive-verification-v1", "status": "verified",
         "executable": path.name, "executable_sha256": executable_sha256, "modules": modules, "entry": entry,
-        "normalization_registry_sha256": hashlib.sha256(bundled_registry).hexdigest(),
+        "normalization_registry_sha256": resource_hashes[RUNTIME_NORMALIZATION_REGISTRY],
+        "runtime_validation_resource_sha256": resource_hashes,
     }
 
 

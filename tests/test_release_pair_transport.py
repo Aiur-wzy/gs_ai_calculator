@@ -3,6 +3,7 @@ from __future__ import annotations
 import hashlib
 import io
 import zipfile
+from http.client import IncompleteRead
 from pathlib import Path
 
 import pytest
@@ -85,6 +86,52 @@ def test_stage_binds_confirmation_and_publishes_only_complete_tree(tmp_path, mon
             confirmed_document_sha256="0" * 64,
         )
     assert stale.value.reason == "release_pair_update_confirmation_mismatch"
+
+
+def test_stage_copy_fallback_keeps_incomplete_tree_without_receipt(tmp_path, monkeypatch):
+    app_path = tmp_path / "source.zip"
+    app = _app_archive(app_path)
+    database = tmp_path / "source.db"
+    database.write_bytes(b"sqlite-package")
+    result = _result(app, database.read_bytes())
+    workspace = tmp_path / "update"
+    staging = workspace / "staging"
+
+    def denied_rename(*_args):
+        raise PermissionError("fixture cannot rename staged directory")
+
+    def interrupted_copy(source, destination, *, dirs_exist_ok, ignore):
+        assert Path(destination) == staging and staging.is_dir() and dirs_exist_ok
+        assert transport.TRANSPORT_RECEIPT_FILENAME in ignore(str(source), [])
+        (staging / "part").write_bytes(b"copy not complete")
+        raise OSError("fixture was interrupted during copy")
+
+    with monkeypatch.context() as fault:
+        fault.setattr(transport.os, "rename", denied_rename)
+        fault.setattr(transport.shutil, "copytree", interrupted_copy)
+        with pytest.raises(OSError, match="interrupted during copy"):
+            transport.stage_release_pair_artifacts(result, workspace, confirmed_document_sha256="d" * 64,
+                                                   local_artifacts={"app": app_path, "database": database})
+    assert (staging / "part").is_file()
+    assert not (staging / transport.TRANSPORT_RECEIPT_FILENAME).exists()
+    assert not list(workspace.glob(".staging-*"))
+    with pytest.raises(transport.ReleasePairTransportError, match="recovery_required"):
+        transport.stage_release_pair_artifacts(result, workspace, confirmed_document_sha256="d" * 64)
+    assert transport.discard_orphaned_release_staging(workspace)
+    assert not staging.exists()
+    transport.stage_release_pair_artifacts(result, workspace, confirmed_document_sha256="d" * 64,
+                                           local_artifacts={"app": app_path, "database": database})
+    assert (staging / transport.TRANSPORT_RECEIPT_FILENAME).is_file()
+
+
+def test_unknown_staging_tree_is_not_removed(tmp_path):
+    staging = tmp_path / "staging"
+    staging.mkdir()
+    sentinel = staging / "unknown.json"
+    sentinel.write_text('{"keep":true}', encoding="utf-8")
+    with pytest.raises(transport.ReleasePairTransportError, match="recovery_required"):
+        transport.discard_orphaned_release_staging(tmp_path)
+    assert sentinel.is_file()
 
 
 def test_stage_app_only_reuse_never_downloads_database(tmp_path, monkeypatch):
@@ -178,6 +225,35 @@ def test_zip_path_traversal_and_links_are_rejected(tmp_path):
     assert not (tmp_path / "outside.txt").exists()
 
 
+@pytest.mark.parametrize("member", ["docs//example.txt", "docs/./example.txt", "docs/trailing.", "APP.BIN"])
+def test_zip_rejects_nonportable_names_before_extraction(tmp_path, member):
+    archive = tmp_path / "unsafe.zip"
+    _app_archive(archive, unsafe=member)
+    target = tmp_path / "app"
+    with pytest.raises(transport.ReleasePairTransportError, match="archive_member_invalid"):
+        transport._extract_app_archive(archive, target)
+    assert not target.exists()
+
+
+def test_stage_app_only_can_cancel_during_extraction_without_a_ready_receipt(tmp_path, monkeypatch):
+    app = _app_archive(tmp_path / "source.zip")
+    workspace = tmp_path / "work"
+    result = _result(app, b"reused database")
+    active = False
+
+    def downloaded(_locator, destination, **_kwargs):
+        nonlocal active
+        destination.write_bytes(app)
+        active = True
+        return {"sha256": _sha(app), "size_bytes": len(app)}
+
+    monkeypatch.setattr(transport, "_download_https", downloaded)
+    with pytest.raises(transport.ReleasePairTransportError, match="download_cancelled"):
+        transport.stage_release_pair_artifacts(result, workspace, confirmed_document_sha256="d" * 64,
+                                               reuse_installed_database=True, cancel_check=lambda: active)
+    assert not (workspace / "staging").exists() and not list(workspace.glob(".staging-*"))
+
+
 class _Response:
     def __init__(self, body: bytes):
         self._stream = io.BytesIO(body)
@@ -259,3 +335,38 @@ def test_cancelled_download_resumes_only_a_verified_range(tmp_path, monkeypatch,
     assert transport._download_https(locator, tmp_path / "reused", **settings,
                                      cancel_check=None)["download_reused"] is True
     assert len(calls) == 2
+
+
+@pytest.mark.parametrize("partial_size", [5, 13])
+def test_incomplete_http_read_preserves_verified_resume_path(tmp_path, monkeypatch, partial_size):
+    raw = b"one-two-three"
+    locator = {"url": "https://updates.example/file", "sha256": _sha(raw), "size_bytes": len(raw)}
+    cache = tmp_path / "cache"
+    calls = []
+
+    class InterruptedResponse(_Response):
+        def read(self, size=-1):
+            raise IncompleteRead(raw[:partial_size], len(raw) - partial_size)
+
+    def fetch(_url, *, timeout, range_headers):
+        calls.append(range_headers)
+        if len(calls) == 1:
+            response = InterruptedResponse(raw)
+        else:
+            assert range_headers == {"Range": f"bytes={partial_size}-", "If-Range": '"v1"'}
+            response = _Response(raw[partial_size:])
+            response.status = 206
+            response.headers["Content-Range"] = f"bytes {partial_size}-{len(raw) - 1}/{len(raw)}"
+        response.headers["ETag"] = '"v1"'
+        return response
+
+    monkeypatch.setattr(transport, "_open_https", fetch)
+    destination = tmp_path / "file"
+    options = {"timeout": 1, "maximum_bytes": 1024, "cache_dir": cache, "cancel_check": None}
+    with pytest.raises(transport.ReleasePairTransportError, match="download_failed"):
+        transport._download_https(locator, destination, **options)
+    assert not destination.exists()
+    assert next(cache.glob("*.part")).read_bytes() == raw[:partial_size]
+    transport._download_https(locator, destination, **options)
+    assert destination.read_bytes() == raw
+    assert len(calls) == (1 if partial_size == len(raw) else 2)

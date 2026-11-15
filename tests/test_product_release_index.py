@@ -182,6 +182,56 @@ def test_index_options_expiry_and_replay(tmp_path, monkeypatch, releases):
         discover_product_index(*args, channel="stable", trust_verifier=_verify)
 
 
+def test_index_304_observes_a_concurrent_cache_advance(tmp_path, monkeypatch, releases):
+    *_, payload = releases
+    args = ("https://example.invalid/latest.json", tmp_path / "cache" / "index.json")
+    newer = _signed({**payload, "index_sequence": payload["index_sequence"] + 1})
+
+    def discover():
+        return discover_product_index(*args, channel="stable", trust_verifier=_verify)
+
+    monkeypatch.setattr(product_release_index, "_fetch_https", lambda *_a, **_kw: (200, canonical(_signed(payload)), '"old"'))
+    discover()
+
+    def delayed_304(_url, *, etag, timeout):
+        assert etag == '"old"'
+        with monkeypatch.context() as update:
+            update.setattr(product_release_index, "_fetch_https", lambda *_a, **_kw: (200, canonical(newer), '"new"'))
+            assert discover()["signed_index"] == newer
+        return 304, b"", '"old"'
+
+    monkeypatch.setattr(product_release_index, "_fetch_https", delayed_304)
+    assert discover()["signed_index"] == newer
+
+
+@pytest.mark.parametrize("mutation", ["rollback", "app_bytes", "database_bytes", "pair_identity"])
+def test_index_advance_cannot_rebind_stable_releases(tmp_path, monkeypatch, releases, mutation):
+    _, _, documents, _, payload = releases
+    response = [_signed(payload)]
+    monkeypatch.setattr(product_release_index, "_fetch_https", lambda *_a, **_kw: (200, canonical(response[0]), '"index"'))
+    args = ("https://example.invalid/latest.json", tmp_path / "cache" / "index.json")
+    discover_product_index(*args, channel="stable", trust_verifier=_verify)
+    following = copy.deepcopy(payload)
+    following["index_sequence"] += 1
+    reason = "product_release_artifact_identity_conflict"
+    if mutation == "rollback":
+        following.update(apps=following["apps"][:1], pairs=[documents[1, 1]],
+                         latest_app_release_id="app-product-1", latest_database_release_id="db-7.0.0-r1")
+        reason = "product_release_index_artifact_replay"
+    else:
+        for document in following["pairs"]:
+            if mutation == "app_bytes":
+                document["artifacts"]["app"]["sha256"] = "f" * 64
+            elif mutation == "database_bytes":
+                document["artifacts"]["database"]["sha256"] = "f" * 64
+            elif document["pair_manifest"]["pair_sequence"] == 4:
+                document["pair_manifest"]["pair_sequence"] = 5
+            document["signature"] = _signature({key: value for key, value in document.items() if key != "signature"})
+    response[0] = _signed(following)
+    with pytest.raises(ReleasePairDiscoveryError, match=reason):
+        discover_product_index(*args, channel="stable", trust_verifier=_verify)
+
+
 def test_public_site_publishes_the_exact_signed_index_and_offline_pair(tmp_path, monkeypatch, releases):
     monkeypatch.syspath_prepend(str(Path(__file__).resolve().parents[1] / "scripts"))
     from scripts import build_release_pair_feed
@@ -455,6 +505,8 @@ def test_app_only_and_later_signed_database_setup(monkeypatch, releases, first_i
     assert downloads == [documents[2, 2]["artifacts"]["app"]["url"]]
     assert not (data / "genshin.db").exists()
     assert not (data / LIVE_PAIR_PROOF_FILENAME).exists()
+    with pytest.raises(product_first_install.FirstInstallError, match="product_repair_database_not_installed"):
+        installer.repair_preview()
     before = _sha(app / "app.bin")
     setup = DatabaseSetup(data, app, url=version.DATABASE_RELEASE_MANIFEST_URL,
                           trust_verifier=_verify, app_release_id="app-product-2", app_version=version.APP_VERSION)
@@ -541,7 +593,8 @@ def test_default_uninstall_removes_only_registered_app_and_keeps_data(monkeypatc
     with pytest.raises(product_first_install.FirstInstallError, match="confirmation_mismatch"):
         installer.uninstall("wrong", user_confirmed=True)
     with monkeypatch.context() as patch:
-        patch.setattr(database_legacy_processes, "packaged_peer_processes", lambda: [{"name": "GenshinCalcGUI.exe"}])
+        patch.setattr(database_legacy_processes, "packaged_peer_processes",
+                      lambda *, include_updaters=False: [{"name": "GenshinCalcUpdater.exe"}] if include_updaters else [])
         with pytest.raises(product_first_install.FirstInstallError, match="instance_running"):
             installer.uninstall(selection["confirmation_digest"], user_confirmed=True)
     assert installer.uninstall(selection["confirmation_digest"], user_confirmed=True)["status"] == "uninstalled"
@@ -550,11 +603,37 @@ def test_default_uninstall_removes_only_registered_app_and_keeps_data(monkeypatc
     assert _sha(profile / "data" / "genshin.db") == digest
 
 
+@pytest.mark.parametrize("state", ["handoff_ready", "activation_started", "operational"])
+def test_uninstall_and_reinstall_wait_for_pending_pair_recovery(first_install, monkeypatch, state):
+    installer, local, _, _ = first_install
+    initial = installer.preview()
+    installer.install(user_confirmed=True, confirmation_digest=initial["confirmation_digest"])
+    profile = local / version.APP_DIR_NAME
+    app = profile / "app"
+    db = profile / "data" / "genshin.db"
+    hashes = (_sha(app / "app.bin"), _sha(db))
+    consent = installer.uninstall_preview()["confirmation_digest"]
+    (profile / "update-workspace").mkdir()
+    latest = [{"state": state}]
+    monkeypatch.setattr(update, "read_pair_update_journal", lambda _path: latest[0])
+    with pytest.raises(product_first_install.FirstInstallError, match="pair_recovery_pending"):
+        installer.uninstall(consent, user_confirmed=True)
+    assert (_sha(app / "app.bin"), _sha(db)) == hashes
+    with pytest.raises(product_first_install.FirstInstallError, match="pair_recovery_pending"):
+        installer.uninstall_preview()
+    latest[0] = None
+    assert installer.uninstall(consent, user_confirmed=True)["status"] == "uninstalled"
+    latest[0] = {"state": state}
+    with pytest.raises(product_first_install.FirstInstallError, match="pair_recovery_pending"):
+        installer.preview()
+    assert _sha(db) == hashes[1]
+
+
 def test_reinstall_uses_retained_signed_pair_and_preserves_database_and_user_files(monkeypatch, first_install):
     from genshin_app import database_legacy_processes
 
     installer, local, _, downloads = first_install
-    monkeypatch.setattr(database_legacy_processes, "packaged_peer_processes", list)
+    monkeypatch.setattr(database_legacy_processes, "packaged_peer_processes", lambda **_options: [])
     choice = installer.preview()
     installer.install(user_confirmed=True, confirmation_digest=choice["confirmation_digest"])
     profile = local / version.APP_DIR_NAME
@@ -746,6 +825,163 @@ def test_current_user_install_cold_boot_and_repeat_independent_updates(monkeypat
     (app / PER_USER_UPDATER_RELATIVE).write_bytes(b"changed helper")
     assert not service.availability()["available"]
     assert len(calls) == 3
+
+
+def test_standalone_setup_repairs_installed_app_with_its_exact_database(monkeypatch, releases, first_install):
+    from genshin_app import database_legacy_processes
+
+    apps, _, documents, _, payload = releases
+    setup, local, index, downloads = first_install
+    initial = {**payload, "latest_app_release_id": "app-product-1", "latest_database_release_id": "db-7.0.0-r1",
+               "apps": payload["apps"][:1], "pairs": [documents[1, 1]], "index_sequence": payload["index_sequence"] - 1}
+    index[0] = canonical(_signed(initial))
+    preview = setup.preview()
+    setup.install(user_confirmed=True, confirmation_digest=preview["confirmation_digest"])
+    profile = local / version.APP_DIR_NAME
+    app, data, workspace = profile / "app", profile / "data", profile / "update-workspace"
+    user_data = data / "settings.json"
+    user_data.write_bytes(b"original profile data")
+    db_hash = _sha(data / "genshin.db")
+    before = _sha(app / "app.bin")
+    downloads.clear()
+
+    no_bridge = {**payload, "pairs": [documents[1, 1], documents[2, 2]],
+                 "index_sequence": payload["index_sequence"] - 1}
+    index[0] = canonical(_signed(no_bridge))
+    with pytest.raises(product_first_install.FirstInstallError, match="no_signed_app_successor"):
+        setup.repair_preview()
+    assert not downloads
+
+    index[0] = canonical(_signed(payload))
+    preview = setup.repair_preview()
+    assert preview["mode"] == "repair_installed_app"
+    assert preview["release_pair_id"] == "pair-product-2-1" and preview["download_bytes"]["database"] == 0
+    consent = preview["confirmation_digest"]
+    with pytest.raises(product_first_install.FirstInstallError, match="confirmation_required"):
+        setup.repair_install(consent, user_confirmed=False)
+    with pytest.raises(product_first_install.FirstInstallError, match="confirmation_mismatch"):
+        setup.repair_install("different", user_confirmed=True)
+    assert not downloads
+
+    peers = [[], [{"pid": 123, "name": "GenshinCalcUpdater.exe"}]]
+    checked_updater_names = []
+
+    def processes(*, include_updaters=False):
+        checked_updater_names.append(include_updaters)
+        return peers.pop(0) if peers else []
+
+    monkeypatch.setattr(database_legacy_processes, "packaged_peer_processes", processes)
+    with pytest.raises(product_first_install.FirstInstallError, match="database_legacy_instance_running"):
+        setup.repair_install(consent, user_confirmed=True)
+    assert update.read_pair_update_journal(workspace)["state"] == "handoff_ready"
+    assert _sha(app / "app.bin") == before
+    assert downloads == [documents[2, 1]["artifacts"]["app"]["url"]]
+    assert checked_updater_names[:2] == [True, True]
+
+    result = setup.repair_install(consent, user_confirmed=True)
+    assert result["status"] == "complete" and result["database_state"] == "preserved"
+    assert _sha(data / "genshin.db") == db_hash
+    assert _sha(app / "app.bin") == _sha(apps[2][0] / "app.bin")
+    assert user_data.read_bytes() == b"original profile data"
+    assert json.loads((data / LIVE_PAIR_PROOF_FILENAME).read_bytes()) == documents[2, 1]
+    assert update.read_pair_update_journal(workspace)["state"] == "cleanup_complete"
+    assert downloads == [documents[2, 1]["artifacts"]["app"]["url"]]
+
+
+def test_frozen_upgrade_qualification_uses_signed_local_files_and_keeps_profile(
+    tmp_path, monkeypatch, releases, first_install,
+):
+    from genshin_app import database_legacy_processes, release_pair_trust
+    from genshin_app import setup_frozen_qualification as qualification
+
+    _, _, documents, sources, payload = releases
+    previous, target = documents[1, 1], documents[2, 1]
+    previous_index, index = tmp_path / "previous.json", tmp_path / "target.json"
+    same_db = {**payload, "latest_database_release_id": "db-7.0.0-r1"}
+    previous_index.write_bytes(canonical(_signed({**same_db, "latest_app_release_id": "app-product-1",
+        "apps": payload["apps"][:1], "pairs": [previous], "index_sequence": payload["index_sequence"] - 1})))
+    index.write_bytes(canonical(_signed({**same_db, "pairs": [previous, target]})))
+    monkeypatch.setattr(release_pair_trust, "build_trust_verifier", lambda _keys: _verify)
+    monkeypatch.setattr(version, "APP_RELEASE_ID", "app-product-2")
+    monkeypatch.setattr(version, "DATABASE_RELEASE_ID", "db-7.0.0-r1")
+    monkeypatch.setattr(version, "RELEASE_PAIR_ID", "pair-product-2-1")
+    monkeypatch.setattr(version, "RELEASE_PAIR_SEQUENCE", target["pair_manifest"]["pair_sequence"])
+    monkeypatch.setattr(database_legacy_processes, "packaged_peer_processes", lambda **_options: [])
+    monkeypatch.setattr(database_bootstrap, "DATABASE_RELEASE_CHANNEL", "stable")
+    monkeypatch.setattr(database_bootstrap, "APP_RELEASE_ID", "app-product-2")
+
+    def admit(profile, document):
+        assert profile == first_install[1] / "qualification" / version.APP_DIR_NAME
+        assert document == target
+        return database_bootstrap.prepare_database_startup(
+            profile / "data", resource_root=profile / "app" / "_internal", app_package_root=profile / "app",
+            pair_policy="exact",
+        )
+
+    monkeypatch.setattr(qualification, "_verify_startup_admission", admit)
+    sandbox = first_install[1] / "qualification"
+    sandbox.mkdir()
+    db = sources[previous["artifacts"]["database"]["url"]]
+    old_app = sources[previous["artifacts"]["app"]["url"]]
+    new_app = sources[target["artifacts"]["app"]["url"]]
+    outcome = qualification._verify_local_upgrade(sandbox, previous_index, old_app, index, new_app, db)
+
+    assert outcome["status"] == "verified"
+    assert outcome["qualification"] == "frozen_setup_same_database_upgrade"
+    assert outcome["local_transport"]["index_responses"] >= 2
+    assert outcome["local_transport"]["app_archives"] == 1
+    assert outcome["local_transport"]["database_archives"] == 0
+    assert outcome["previous"]["database_sha256"] == outcome["target"]["database_sha256"]
+    assert outcome["previous"]["app_inventory_sha256"] != outcome["target"]["app_inventory_sha256"]
+    assert set(outcome["preserved_profile_marker_sha256"]) == {"settings", "session", "plan", "registration"}
+    assert outcome["startup_admission"]["can_start"] is True and outcome["journal_state"] == "cleanup_complete"
+    assert all(duration >= 0 for duration in outcome["elapsed_seconds"].values())
+    assert not first_install[3]  # no fallback to the fixture's ordinary network seam
+
+    invalid = {**same_db, "pairs": [previous, target]}
+    index.write_bytes(canonical({**invalid, "signature": _signature(same_db)}))
+    with pytest.raises(ReleasePairDiscoveryError, match="signature"):
+        qualification._verify_local_upgrade(sandbox, previous_index, old_app, index, new_app, db)
+
+
+@pytest.mark.parametrize(("initial_state", "later_state"), [
+    ("handoff_ready", "activation_started"),
+    ("activation_started", "postchecked"),
+])
+def test_standalone_setup_requires_current_consent_to_recover_an_interrupted_update(
+    first_install, monkeypatch, initial_state, later_state,
+):
+    from genshin_app import database_legacy_processes
+
+    setup, local, _, downloads = first_install
+    first = setup.preview()
+    setup.install(user_confirmed=True, confirmation_digest=first["confirmation_digest"])
+    profile = local / version.APP_DIR_NAME
+    (profile / "update-workspace").mkdir()
+    journal = {"state": initial_state, "operation_id": "a" * 32,
+               "rollback_release_pair_id": "pair-current", "target_release_pair_id": "pair-target"}
+    monkeypatch.setattr(update, "read_pair_update_journal", lambda _workspace: journal)
+    calls = []
+    monkeypatch.setattr(helper, "recover_interrupted_pair_update",
+                        lambda *paths, **params: calls.append((paths, params)) or {"status": "recovered"})
+    monkeypatch.setattr(database_legacy_processes, "packaged_peer_processes", lambda **_options: [])
+    review = setup.interrupted_update_preview()
+    assert review["mode"] == "recover_interrupted_update" and review["operation_id"] == journal["operation_id"]
+    installed_downloads = list(downloads)
+
+    with pytest.raises(product_first_install.FirstInstallError, match="confirmation_required"):
+        setup.recover_interrupted_update(review["confirmation_digest"], user_confirmed=False)
+    journal["state"] = later_state
+    with pytest.raises(product_first_install.FirstInstallError, match="confirmation_mismatch"):
+        setup.recover_interrupted_update(review["confirmation_digest"], user_confirmed=True)
+    assert not calls and downloads == installed_downloads
+
+    current = setup.interrupted_update_preview()
+    result = setup.recover_interrupted_update(current["confirmation_digest"], user_confirmed=True)
+    assert result["status"] == "recovered"
+    assert calls == [((profile / "update-workspace", profile / "app", profile / "data"),
+                      {"operation_id": journal["operation_id"], "user_confirmed": True})]
+    assert downloads == installed_downloads
 
 
 def test_first_install_requires_fresh_consent_and_signed_metadata(first_install, releases):

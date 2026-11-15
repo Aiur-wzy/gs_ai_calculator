@@ -18,7 +18,7 @@ CLI 是本地计算工具，不是模型客户端。外部 Agent 负责理解任
 .\GenshinCalc.exe system check-update
 ```
 
-App 和数据库的当前发行标识可从更新状态中核对。本版首发应识别为 **`app-0.46.0-r19`** 和 **`db-7.2.50-r6`**。`capabilities` 描述工具能力，`db status` 显示所用资料，`system check-update` 会尝试联系已配置的正式更新入口。使用已校验且已装好的应用和数据进行普通计算时，可离线运行。
+App 和数据库的当前发行标识可从更新状态中核对。本版应识别为 **`app-0.46.0-r20`** 和 **`db-7.2.50-r6`**。`capabilities` 描述工具能力，`db status` 显示所用资料，`system check-update` 会尝试联系已配置的正式更新入口。使用已校验且已装好的应用和数据进行普通计算时，可离线运行。
 
 将相同版本的 `skill/SKILL.md` 和 CLI 入口交给 Agent。正式 EXE 默认读取 `%LOCALAPPDATA%\GenshinCalcStable\data`。如需选择另一个已经受验的数据目录，把 `--data-dir` 放在子命令前。源码命令用于开发和构建，实际计算仍须通过该运行环境的版本和数据库校验。详见[构建说明](build.md)。
 

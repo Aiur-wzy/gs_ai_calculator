@@ -19,20 +19,31 @@ def main(argv=None):
     mode.add_argument("--uninstall", action="store_true")
     mode.add_argument("--self-check", action="store_true")
     mode.add_argument("--verify-frozen-install", action="store_true")
-    for flag in ("--index", "--app-archive", "--database-archive", "--sandbox-root", "--report"):
+    mode.add_argument("--verify-frozen-upgrade", action="store_true", help=argparse.SUPPRESS)
+    for flag in ("--index", "--app-archive", "--database-archive", "--sandbox-root", "--report",
+                 "--previous-index", "--previous-app-archive"):
         parser.add_argument(flag, type=Path, help=argparse.SUPPRESS)
     args = parser.parse_args(argv)
     inputs = (args.index, args.app_archive, args.database_archive, args.sandbox_root, args.report)
+    previous = (args.previous_index, args.previous_app_archive)
     if args.verify_frozen_install:
-        if not all(inputs):
-            parser.error("a signed index, both release archives, sandbox root, and report are required")
+        if not all(inputs) or any(previous):
+            parser.error("install qualification requires one signed index, both release archives, sandbox root, and report")
         from genshin_app.setup_frozen_qualification import verify_frozen_install
 
         return verify_frozen_install(index=args.index, app_archive=args.app_archive,
                                      database_archive=args.database_archive, sandbox_root=args.sandbox_root,
                                      report=args.report)
-    if any(inputs):
-        parser.error("qualification inputs are only accepted in --verify-frozen-install mode")
+    if args.verify_frozen_upgrade:
+        if not all(inputs + previous):
+            parser.error("upgrade qualification requires both signed indexes and App archives, the shared database archive, sandbox root, and report")
+        from genshin_app.setup_frozen_qualification import verify_frozen_upgrade
+
+        return verify_frozen_upgrade(previous_index=args.previous_index, previous_app_archive=args.previous_app_archive,
+                                     index=args.index, app_archive=args.app_archive, database_archive=args.database_archive,
+                                     sandbox_root=args.sandbox_root, report=args.report)
+    if any(inputs + previous):
+        parser.error("qualification inputs are only accepted in a named frozen qualification mode")
     if args.self_check:
         return 0
 
@@ -40,6 +51,7 @@ def main(argv=None):
     from tkinter import filedialog, messagebox, ttk
 
     from genshin_app.product_first_install import build_first_install_coordinator
+    from genshin_app.product_install_contract import FirstInstallError
 
     window = tk.Tk()
     window.title("卸载原神拉表" if args.uninstall else "安装原神拉表")
@@ -57,11 +69,13 @@ def main(argv=None):
     previews = {}
     local_files = None
 
+    install_modes = []
     if not args.uninstall:
-        ttk.Radiobutton(content, text="安装程序和数据库（推荐）", value=False,
-                        variable=selected, command=lambda: update_choice()).pack(anchor="w")
-        ttk.Radiobutton(content, text="只安装程序，稍后下载数据库", value=True,
-                        variable=selected, command=lambda: update_choice()).pack(anchor="w")
+        for label, value in (("安装程序和数据库（推荐）", False), ("只安装程序，稍后下载数据库", True)):
+            button = ttk.Radiobutton(content, text=label, value=value, variable=selected,
+                                     command=lambda: update_choice())
+            button.pack(anchor="w")
+            install_modes.append(button)
     ttk.Label(content, textvariable=status, wraplength=410, justify="left").pack(anchor="w", pady=16)
     progress.pack(fill="x")
     buttons = ttk.Frame(content)
@@ -90,7 +104,15 @@ def main(argv=None):
         operation = build_first_install_coordinator()
         if args.uninstall:
             return {False: operation.uninstall_preview()}
-        first = operation.preview()
+        recovery = operation.interrupted_update_preview()
+        if recovery is not None:
+            return {False: recovery}
+        try:
+            first = operation.preview()
+        except FirstInstallError as error:
+            if error.reason != "product_first_install_existing_profile":
+                raise
+            return {False: operation.repair_preview()}
         return {False: first, True: first if first.get("mode") == "reinstall" else operation.preview(app_only=True)}
 
     def choose_offline():
@@ -117,9 +139,34 @@ def main(argv=None):
             status.set(f"将卸载程序 {choice['app_release_id']}。\n数据库、方案、聊天和设置会保留。")
             install.configure(state="normal")
             return
+        if choice.get("mode") == "recover_interrupted_update":
+            window.title("恢复上次原神拉表更新")
+            for button in install_modes:
+                button.pack_forget()
+            offline.pack_forget()
+            pending = (f"操作编号 {choice['operation_id']}\n"
+                       f"{choice['previous_pair_id']} → {choice['target_pair_id']}\n")
+            if choice["update_state"] == "handoff_ready":
+                status.set(pending + "上次更新已准备但尚未安装。关闭原神拉表后，可以清理暂存的更新。"
+                           "安装器会先核对当前安装，并保留现有程序、数据库和用户资料。")
+                install.configure(text="清理尚未执行的更新", state="normal")
+            else:
+                status.set(pending + "上次更新尚未安全收尾。关闭原神拉表后，安装器可以核对记录并恢复。")
+                install.configure(text="恢复上次更新", state="normal")
+            return
         sizes = choice["download_bytes"]
         def mib(value):
             return f"{value / (1024 * 1024):.1f} MiB"
+        if choice.get("mode") == "repair_installed_app":
+            window.title("更新已安装的原神拉表")
+            for button in install_modes:
+                button.pack_forget()
+            offline.pack_forget()
+            status.set(f"程序 {choice['installed_app_release_id']} → {choice['app_release_id']} · {mib(sizes['app'])}\n"
+                       f"保留数据库 {choice['database_release_id']}、设置、会话和方案。\n"
+                       "请先关闭所有原神拉表窗口和命令行进程，再点「更新程序」。")
+            install.configure(text="更新程序", state="normal")
+            return
         details = [f"程序 {choice['app_release_id']} · {mib(sizes['app'])}"]
         if choice.get("mode") == "local_pair":
             details.insert(0, "使用本地发行包，安装前校验全部文件。")
@@ -141,6 +188,22 @@ def main(argv=None):
             if messagebox.askokcancel("卸载原神拉表", "请关闭原神拉表窗口后确认卸载。", parent=window):
                 status.set("正在核对已安装的文件…")
                 worker("uninstalled", lambda: operation.uninstall(
+                    choice["confirmation_digest"], user_confirmed=True, cancel_check=cancelled.is_set,
+                    progress=lambda value: events.put(("progress", value))))
+            return
+        if choice.get("mode") == "recover_interrupted_update":
+            detail = ("确认清理尚未执行的更新暂存文件，保留当前安装？"
+                      if choice["update_state"] == "handoff_ready" else "确认恢复尚未完成的更新？")
+            if messagebox.askokcancel("恢复上次更新", detail, parent=window):
+                worker("recovered", lambda: operation.recover_interrupted_update(
+                    choice["confirmation_digest"], user_confirmed=True,
+                    progress=lambda value: events.put(("progress", value))))
+            return
+        if choice.get("mode") == "repair_installed_app":
+            if messagebox.askokcancel("更新原神拉表", f"更新到 {choice['app_release_id']}，保留当前数据库和用户资料？",
+                                       parent=window):
+                status.set("正在下载并验证签名程序…")
+                worker("installed", lambda: operation.repair_install(
                     choice["confirmation_digest"], user_confirmed=True, cancel_check=cancelled.is_set,
                     progress=lambda value: events.put(("progress", value))))
             return
@@ -179,13 +242,24 @@ def main(argv=None):
                     offline.configure(state="normal")
                 if state == "preview":
                     previews = value
+                    if previews.get(False, {}).get("mode") in {"repair_installed_app", "recover_interrupted_update"}:
+                        selected.set(False)
                     update_choice()
                 elif state == "installed":
                     progress.configure(value=100)
                     previews = {}
                     note = ("\n可从开始菜单打开原神拉表。" if value.get("shortcut") == "created"
                             else "\n可打开安装目录中的 GenshinCalcGUI.exe。")
-                    status.set(f"安装完成\n{value['install_directory']}{note}")
+                    action = "程序已更新，数据库和用户资料已保留。" if value.get("database_state") == "preserved" else "安装完成"
+                    status.set(f"{action}\n{value['install_directory']}{note}")
+                elif state == "recovered":
+                    progress.configure(value=100)
+                    previews = {}
+                    if value.get("action") == "discarded_prepared_update":
+                        status.set("已清理尚未执行的更新。现有安装和用户资料已保留。\n"
+                                   "如需更新或卸载，请重新打开安装器。")
+                    else:
+                        status.set("上次更新已完成恢复。可以重新打开原神拉表。")
                 elif state == "uninstalled":
                     previews = {}
                     note = ""
@@ -195,10 +269,22 @@ def main(argv=None):
                         note += "\n开始菜单中仍有快捷方式，可自行移除。"
                     status.set(f"程序已卸载，用户资料保留在\n{value['preserved_data_directory']}{note}")
                 else:
-                    action = "卸载" if args.uninstall else "安装"
+                    setup_mode = previews.get(False, {}).get("mode")
+                    action = {"repair_installed_app": "更新", "recover_interrupted_update": "恢复"}.get(
+                        setup_mode, "卸载" if args.uninstall else "安装")
                     reason = value[0]
                     if reason in {"product_first_install_cancelled", "product_uninstall_cancelled"}:
                         status.set(f"已取消{action}。")
+                    elif reason == "database_legacy_instance_running":
+                        status.set("请先关闭原神拉表、命令行或正在运行的更新器，再重试。")
+                    elif reason == "product_repair_no_signed_app_successor":
+                        status.set("当前数据库没有可用的签名程序更新，已保留现有安装。")
+                    elif reason == "product_repair_database_not_installed":
+                        status.set("当前只安装了程序。请先打开原神拉表，在资料库下载数据库或选择本地发行包，再更新程序。")
+                    elif reason == "product_setup_pair_recovery_pending":
+                        status.set("上次程序更新尚未收尾。请直接打开新版安装器，先处理上次更新。")
+                    elif reason == "product_setup_database_recovery_pending":
+                        status.set("上次数据库安装尚未收尾。请先在原神拉表内完成恢复，再执行此操作。")
                     else:
                         message = ("安装文件已就绪，但程序和数据库未通过安装验证。"
                                    if reason == "release_pair_helper_first_install_recovery_required"

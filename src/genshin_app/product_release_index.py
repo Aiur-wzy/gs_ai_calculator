@@ -8,7 +8,7 @@ from pathlib import Path
 from typing import Any
 from urllib.error import URLError
 
-from genshin_db.locking import file_lock
+from genshin_db.locking import LockBusyError, file_lock
 
 from .release_pair_discovery import (
     CACHE_CONTRACT,
@@ -82,7 +82,7 @@ def validate_product_release_index(value: Any, *, channel: str, trust_verifier,
     payload = {key: item for key, item in value.items() if key != "signature"}
     try:
         encoded = canonical(value)
-    except (TypeError, ValueError, OverflowError) as error:
+    except (TypeError, ValueError, OverflowError, RecursionError) as error:
         raise ReleasePairDiscoveryError("product_release_index_invalid") from error
     if len(encoded) > MAX_DOCUMENT_BYTES:
         _invalid("release_pair_discovery_too_large")
@@ -182,7 +182,13 @@ def release_options(index: dict, current_pair: dict, current_database: dict) -> 
             continue
         document = index["pairs"][pair_id]
         target_pair = document["pair_manifest"]
-        if not changes_app and document["artifacts"]["app"]["format"] != "app-zip":
+        if not changes_app and (
+            document["artifacts"]["app"]["format"] != "app-zip"
+            or target_pair["app"]["app_version"] != current_pair["app"]["app_version"]
+            or target_pair["app"]["artifact_manifest"] != current_pair["app"]["artifact_manifest"]
+        ):
+            continue
+        if not changes_database and document["database_manifest"] != current_database:
             continue
         if (target_pair["pair_sequence"] <= current_pair["pair_sequence"]
                 or (changes_app and index["app_sequences"][combination[0]] <= installed_app_sequence)
@@ -195,6 +201,50 @@ def release_options(index: dict, current_pair: dict, current_database: dict) -> 
     return options
 
 
+def _release_identities(index: dict) -> dict:
+    identities: dict[str, dict] = {"app": {}, "database": {}, "pair": {}}
+    for identifier, document in index["pairs"].items():
+        pair = document["pair_manifest"]
+        app = pair["app"]
+        database = document["database_manifest"]
+        app_bytes, database_bytes = ({key: value for key, value in document["artifacts"][kind].items() if key != "url"}
+                                     for kind in ("app", "database"))
+        identities["app"][app["app_release_id"]] = app["app_version"], app["artifact_manifest"], app_bytes
+        identities["database"][database["database_release_id"]] = database, database_bytes
+        identities["pair"][identifier] = pair
+    return identities
+
+
+def _check_index_progress(index: dict, previous: dict) -> None:
+    sequence = index["signed_index"]["index_sequence"]
+    previous_sequence = previous["signed_index"]["index_sequence"]
+    if sequence < previous_sequence:
+        _invalid("product_release_index_replay")
+    if sequence == previous_sequence:
+        if index["index_sha256"] != previous["index_sha256"]:
+            _invalid("product_release_index_sequence_conflict")
+        return
+
+    for key in ("app_sequences", "database_sequences"):
+        current, retained = index[key], previous[key]
+        if max(current.values()) < max(retained.values()):
+            _invalid("product_release_index_artifact_replay")
+        sequence_owners = {number: identifier for identifier, number in retained.items()}
+        if any(retained.get(identifier, number) != number or sequence_owners.get(number, identifier) != identifier
+               for identifier, number in current.items()):
+            _invalid("product_release_artifact_sequence_conflict")
+
+    retained = _release_identities(previous)
+    current = _release_identities(index)
+    for kind, records in current.items():
+        if any(retained[kind].get(identifier, record) != record for identifier, record in records.items()):
+            _invalid("product_release_artifact_identity_conflict")
+    pair_sequence_owners = {pair["pair_sequence"]: identifier for identifier, pair in retained["pair"].items()}
+    if any(pair_sequence_owners.get(pair["pair_sequence"], identifier) != identifier
+           for identifier, pair in current["pair"].items()):
+        _invalid("product_release_artifact_sequence_conflict")
+
+
 def discover_product_index(url: str, cache_path: Path, *, channel: str, trust_verifier) -> dict:
     """Keep the last verified index as a monotonic, re-verifiable replay guard."""
     cache = _load_cache(cache_path, expected_url=url, expected_channel=channel)
@@ -203,38 +253,40 @@ def discover_product_index(url: str, cache_path: Path, *, channel: str, trust_ve
                                         timeout=DEFAULT_TIMEOUT_SECONDS)
     except (OSError, URLError, TimeoutError) as error:
         raise ReleasePairDiscoveryError("release_pair_discovery_network_unavailable") from error
-    if status == 304 and cache is not None:
-        return validate_product_release_index(cache["document"], channel=channel,
-                                              trust_verifier=trust_verifier)
-    if status != 200 or len(body) > MAX_DOCUMENT_BYTES:
+    if status not in (200, 304) or (status == 304 and (cache is None or not cache["etag"])):
         _invalid("release_pair_discovery_http_status")
+    index = None
+    if status == 200:
+        if len(body) > MAX_DOCUMENT_BYTES:
+            _invalid("release_pair_discovery_too_large")
+        try:
+            value = json.loads(body)
+        except (ValueError, RecursionError) as error:
+            raise ReleasePairDiscoveryError("product_release_index_invalid") from error
+        if not isinstance(value, dict) or value.get("contract") != INDEX_CONTRACT:
+            if cache is not None:
+                _invalid("product_release_index_legacy_replay")
+            _invalid("product_release_index_not_published")
+        index = validate_product_release_index(value, channel=channel, trust_verifier=trust_verifier)
     try:
-        value = json.loads(body)
-    except (UnicodeError, json.JSONDecodeError) as error:
-        raise ReleasePairDiscoveryError("product_release_index_invalid") from error
-    if not isinstance(value, dict) or value.get("contract") != INDEX_CONTRACT:
-        if cache is not None:
-            _invalid("product_release_index_legacy_replay")
-        _invalid("product_release_index_not_published")
-    index = validate_product_release_index(value, channel=channel, trust_verifier=trust_verifier)
-    cache_path.parent.mkdir(parents=True, exist_ok=True)
-    with file_lock(cache_path.with_suffix(".lock"), timeout=5):
-        current = _load_cache(cache_path, expected_url=url, expected_channel=channel)
-        if current is not None:
-            previous = validate_product_release_index(current["document"], channel=channel,
-                                                      trust_verifier=trust_verifier, for_install=False)
-            if value["index_sequence"] < previous["signed_index"]["index_sequence"]:
-                _invalid("product_release_index_replay")
-            if (value["index_sequence"] == previous["signed_index"]["index_sequence"]
-                    and index["index_sha256"] != previous["index_sha256"]):
-                _invalid("product_release_index_sequence_conflict")
-            for key in ("app_sequences", "database_sequences"):
-                identities = previous[key]
-                if any(identities.get(identifier, sequence) != sequence for identifier, sequence in index[key].items()):
-                    _invalid("product_release_artifact_sequence_conflict")
-        _write_cache(cache_path, {"contract": CACHE_CONTRACT, "schema_version": CACHE_SCHEMA_VERSION,
-                                 "url": url, "channel": channel, "etag": etag,
-                                 "fetched_at": datetime.now(UTC).isoformat(), "document": value})
+        with file_lock(cache_path.with_suffix(".lock"), timeout=5):
+            current = _load_cache(cache_path, expected_url=url, expected_channel=channel)
+            if index is None:
+                if current is None:
+                    _invalid("release_pair_discovery_304_without_cache")
+                return validate_product_release_index(current["document"], channel=channel,
+                                                      trust_verifier=trust_verifier)
+            if current is not None:
+                previous = validate_product_release_index(current["document"], channel=channel,
+                                                          trust_verifier=trust_verifier, for_install=False)
+                _check_index_progress(index, previous)
+            _write_cache(cache_path, {"contract": CACHE_CONTRACT, "schema_version": CACHE_SCHEMA_VERSION,
+                                     "url": url, "channel": channel, "etag": etag,
+                                     "fetched_at": datetime.now(UTC).isoformat(), "document": index["signed_index"]})
+    except LockBusyError as error:
+        raise ReleasePairDiscoveryError("product_release_index_cache_busy") from error
+    except OSError as error:
+        raise ReleasePairDiscoveryError("product_release_index_cache_unavailable") from error
     return index
 
 

@@ -2,9 +2,9 @@
 
 ## 安装正式版
 
-首个正式发行是 App **0.46.0-r19**，配套数据库为 **db-7.2.50-r6**。支持 Windows 10/11 x64。请以[应用发行页](https://github.com/Aiur-wzy/gs_ai_calculator/releases)和[数据库发行页](https://github.com/Aiur-wzy/gs_ai_calculator_db/releases)实际提供的附件和 SHA-256 校验值为准。仓库源码 ZIP 不包含 EXE 或完整数据库。
+当前正式发行是 App **0.46.0-r20**，配套数据库为 **db-7.2.50-r6**。支持 Windows 10/11 x64。请以[应用发行页](https://github.com/Aiur-wzy/gs_ai_calculator/releases)和[数据库发行页](https://github.com/Aiur-wzy/gs_ai_calculator_db/releases)实际提供的附件和 SHA-256 校验值为准。仓库源码 ZIP 不包含 EXE 或完整数据库。
 
-1. 从[官方下载页](https://aiur-wzy.github.io/gs_ai_calculator/)下载 Windows 小安装器修复版，解压后运行 `GenshinCalcSetup.exe`。
+1. 从[官方下载页](https://aiur-wzy.github.io/gs_ai_calculator/)下载 Windows 小安装器，解压后运行 `GenshinCalcSetup.exe`。
 2. 选择「安装程序和数据库（推荐）」即可安装完整组合。选择「只安装程序，稍后下载数据库」可先装应用，随后在 GUI 中选择「下载数据库」。首次安装受签名索引约束，并会验证下载文件。
 3. 程序安装在 `%LOCALAPPDATA%\GenshinCalcStable\app`，默认用户资料目录为 `%LOCALAPPDATA%\GenshinCalcStable\data`。正式版从新的资料目录开始，不继承旧开发版会话和设置。自己保留的独立方案可按需在新版打开。
 
@@ -13,6 +13,8 @@
 ## 使用独立程序 ZIP
 
 解压整个应用目录并保留其中的资源和依赖。`GenshinCalc.exe` 是 CLI 入口，`GenshinCalcGUI.exe` 是图形界面入口。独立程序 ZIP 未内置数据库。初次打开 GUI 时，可按界面提示下载配套数据库，或选择本地数据库包及对应的 `database-install-pair.json` 补装。
+
+如果程序版本早于下载页默认版本，可在页面的「兼容组合与离线补装」选择该程序对应的签名清单和数据库包。核对清单所列程序版本后再安装。
 
 当前推荐由 GPT-6.1 Sol 或更高能力模型通过 CLI 完成排轴和计算，再用 GUI 打开方案、人工看图审核。应用内原生 Agent 与 DeepSeek 在复杂任务中仍不稳定。参见 [CLI 工作流](cli-workflow.md)。
 
@@ -29,5 +31,21 @@
 - 要完整离线安装，先下载对应版本的签名索引 `latest.json`、应用 ZIP 和数据库包。在 Setup 中点击「使用离线发行包」，依次选择这三个文件。
 - 在线更新会列出通过验签且与已装版本兼容的组合。可选范围随发行变化，可能包含仅更新程序、仅更新数据库或同时更新。
 - 在终端执行 `GenshinCalcSetup.exe --uninstall` 可卸载通过 Setup 安装的程序。此操作保留数据库、方案、会话和设置。
+
+## 正式版 r19 的同库升级与更新恢复
+
+已发布的 **r19 安装器修复版 hotfix.1** 修复了首次安装时漏带数据库校验资源的问题，仍安装 r19 和 db-7.2.50-r6。它和下文的后继版本升级是两次不同的交付。
+
+下列操作适用于提供同库升级和恢复功能的新版 Setup。可用版本以[官方下载页](https://aiur-wzy.github.io/gs_ai_calculator/)及其签名发布索引为准。
+
+1. 已通过 Setup 安装 r19 并装有配套数据库时，关闭 App、CLI 和仍在运行的更新器，再直接打开新版 `GenshinCalcSetup.exe`。
+2. 如果官网签名索引提供与当前库配套的新程序，安装器会显示旧版本、新版本、所保留的数据库及下载大小。确认后点「更新程序」。本次只下载程序，保留数据库、设置、会话和方案。完成后重新打开 App。
+3. 如果 r19 当初选择了「只安装程序」，请先在 App 的「资料库」安装配套数据库。离线时点击「选择本地发行包」，依次选择数据库包和下载页中对应 r19 的签名补装清单。安装后重新打开 App，再使用同库升级。便携 ZIP 应按便携使用方式处理；Setup 自动识别的是由 Setup 登记的正式安装。
+
+更新中断后，直接打开新版 Setup，按界面提示处理：
+
+- 「清理尚未执行的更新」先核对当前安装，再清理上次准备的暂存文件。现有 App、数据库和用户资料全部保留。完成后重新打开 Setup，即可重新检查升级或卸载。
+- 「恢复上次更新」会根据已验证的提交记录恢复原组合，或为已经提交的组合完成清理。恢复前会显示原版本组合、目标组合和操作编号，并要求确认。
+- 有未收尾的更新时，Setup 会暂缓卸载和重装。若旧安装器已移除程序且新版无法恢复，请保留资料目录和更新记录，并记录错误码和操作编号。
 
 普通 CLI 查询和计算无需在 App 内配置 DeepSeek Key。数据库可能收录未上线、测试、废弃和状态未知的条目，采用未上线或未知实体前需要确认。详见[数据声明](data-notice.md)。

@@ -6,7 +6,10 @@ from copy import deepcopy
 from dataclasses import replace
 from threading import Lock
 
+from .release_pair_coordinator import ReleasePairCoordinatorError
 from .release_pair_discovery import ReleasePairDiscoveryError
+from .release_pair_helper import read_update_outcome
+from .release_pair_update import ReleasePairUpdateError
 from .release_update_contracts import (
     ReleaseUpdateFailure,
     ReleaseUpdateSettings,
@@ -92,7 +95,6 @@ class ReleaseUpdateService:
                 LIVE_DATABASE_MANIFEST_FILENAME,
                 LIVE_PAIR_MANIFEST_FILENAME,
                 LIVE_PAIR_PROOF_FILENAME,
-                ReleasePairUpdateError,
                 read_live_product_proof,
             )
 
@@ -125,10 +127,25 @@ class ReleaseUpdateService:
             )
             result = discovered_database_status(discovered, state, identity, current)
             self._discovery = discovered if discovered.get("authoritative") is True else None
+            if identity.release_channel == "stable":
+                workspace = getattr(coordinator, "workspace", None)
+                outcome = read_update_outcome(workspace) if workspace is not None else None
+                if outcome is not None and outcome["status"] == "failed":
+                    result["last_update_failure"] = outcome
+                    notes = {
+                        "handoff_ready": "上次更新尚未替换文件。可重新检查并重试。",
+                        "operational": "上次更新已生效，收尾未完成。请用新版安装器检查恢复状态。",
+                        "cleanup_complete": "上次更新收尾失败。请查看错误原因。",
+                    }
+                    message = ("上次更新失败，原版本已恢复。" if outcome["previous_pair_restored"] else
+                               notes.get(outcome["state"], "上次更新中断。请用新版安装器恢复后再继续。"))
+                    reason = outcome["reason"]
+                    result["message"] = f"{message}（{reason}）" if reason else message
             return result
-        except (ReleasePairDiscoveryError, OSError, ValueError) as error:
+        except (ReleasePairCoordinatorError, ReleasePairDiscoveryError, ReleasePairUpdateError, OSError, ValueError) as error:
             self._discovery = None
-            raise ReleaseUpdateFailure(f"检查数据更新失败: {error}") from None
+            raise ReleaseUpdateFailure("无法完成更新检查。请核对当前安装状态。",
+                                       getattr(error, "reason", "release_pair_update_check_failed")) from error
 
     def update_database(self, confirmation_digest="", user_confirmed=False):
         if self.settings.host_network_restricted or self.settings.shared_read_only:

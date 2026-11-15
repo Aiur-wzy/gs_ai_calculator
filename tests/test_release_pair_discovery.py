@@ -292,6 +292,34 @@ def test_unsigned_stable_is_informational_but_unsigned_dev_fixture_is_explicit(
     assert dev["authoritative"] is True
 
 
+def test_untrusted_response_keeps_the_last_verified_cache(monkeypatch, tmp_path):
+    url = "https://updates.example/latest.json"
+    cache = tmp_path / "cache.json"
+    answer = [_document()]
+    monkeypatch.setattr(discovery, "_fetch_https", lambda *_a, **_kw: (200, json.dumps(answer[0]).encode(), '"update"'))
+
+    def check():
+        return discovery.discover_latest_release_pair(url=url, cache_path=cache, channel="stable",
+                                                      trust_verifier=lambda *_a: True)
+
+    assert check()["authoritative"] is True
+    saved = cache.read_bytes()
+    answer[0] = _document(signature=False)
+    assert check()["status"] == "untrusted"
+    assert cache.read_bytes() == saved
+
+
+def test_cache_size_budget_accounts_for_its_local_metadata(tmp_path):
+    cache = tmp_path / "cache.json"
+    url = "https://updates.example/latest.json"
+    value = {"contract": discovery.CACHE_CONTRACT, "schema_version": discovery.CACHE_SCHEMA_VERSION,
+             "url": url, "channel": "stable", "etag": None, "fetched_at": "2026-11-15T06:00:00+00:00",
+             "document": {"contents": "x" * (discovery.MAX_DOCUMENT_BYTES - 32)}}
+    discovery._write_cache(cache, value)
+    assert cache.stat().st_size > discovery.MAX_DOCUMENT_BYTES
+    assert discovery._load_cache(cache, expected_url=url, expected_channel="stable") == value
+
+
 def test_disabled_non_https_and_raw_upstream_are_not_release_pairs(monkeypatch, tmp_path):
     disabled = discovery.discover_latest_release_pair(
         url=None,

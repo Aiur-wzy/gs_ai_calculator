@@ -9,16 +9,33 @@ import json
 import os
 import shutil
 import sys
+from collections.abc import Sequence
 from datetime import datetime
 from pathlib import Path
 from tempfile import TemporaryDirectory
-from urllib.parse import urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT / "src") not in sys.path:
     sys.path.insert(0, str(ROOT / "src"))
 
 from release_supply_chain import SupplyChainError, write_package_file_manifest
+
+if __package__:
+    from .product_site_publication import (
+        OFFLINE_PAIR_CATALOG,
+        OFFLINE_PAIR_DIRECTORY,
+        offline_pair_catalog,
+        site_downloads,
+        validate_setup_locator,
+    )
+else:
+    from product_site_publication import (
+        OFFLINE_PAIR_CATALOG,
+        OFFLINE_PAIR_DIRECTORY,
+        offline_pair_catalog,
+        site_downloads,
+        validate_setup_locator,
+    )
 
 from genshin_app import version
 from genshin_app.package_integrity import (
@@ -29,6 +46,8 @@ from genshin_app.package_integrity import (
 from genshin_app.product_release_index import (
     INDEX_CONTRACT,
     PER_USER_UPDATER_RELATIVE,
+    _check_index_progress,
+    _stamp,
     canonical,
     validate_product_release_index,
 )
@@ -71,6 +90,10 @@ def _parser() -> argparse.ArgumentParser:
     prepare.add_argument("--base-url", required=True)
     prepare.add_argument("--database-base-url")
     prepare.add_argument("--independent-app", action="store_true")
+    prepare.add_argument("--accepted-database-source-pair", type=Path,
+                         help="原数据库压缩包对应的已签名配对，沿用原下载地址")
+    prepare.add_argument("--accepted-database-archive", type=Path,
+                         help="原已发布 SQLite gzip，复用原始字节")
     prepare.add_argument("--output", type=Path, required=True)
     finalize = commands.add_parser("finalize", help="验证外部签名并生成latest.json")
     finalize.add_argument("--feed", type=Path, required=True)
@@ -79,6 +102,14 @@ def _parser() -> argparse.ArgumentParser:
     initial.add_argument("--pair-document", type=Path, required=True)
     initial.add_argument("--expires-at", required=True)
     initial.add_argument("--output", type=Path, required=True)
+    following = commands.add_parser("index-next", help="从已签索引和新增已签配对生成下一版待签索引")
+    following.add_argument("--previous-index", type=Path, required=True)
+    changes = following.add_mutually_exclusive_group(required=True)
+    changes.add_argument("--pair-document", type=Path, action="append", help="新增已签配对，可重复指定")
+    changes.add_argument("--renew", action="store_true", help="仅延长索引有效期，保留现有版本和配对")
+    following.add_argument("--released-at", required=True)
+    following.add_argument("--expires-at", required=True)
+    following.add_argument("--output", type=Path, required=True)
     app = commands.add_parser("prepare-app", help="从已核验构建生成无数据库的独立 App 工件目录")
     app.add_argument("--source", type=Path, required=True)
     app.add_argument("--updater", type=Path, required=True)
@@ -186,6 +217,87 @@ def prepare_first_index(pair_document_path: Path, expires_at: str, output: Path,
     return {"status": "prepared", "index_sequence": 1, "release_pair_id": pair["release_pair_id"]}
 
 
+def _qualify_unsigned_index(payload, *, previous, trust_keys, trust_verifier, released):
+    # The local outer envelope is still unsigned. Reserve enough bytes for any
+    # pinned signing key and send every real signature to the pinned verifier.
+    signatures = [previous["signed_index"]["signature"]]
+    for key in trust_keys:
+        size = (int(key["modulus_hex"], 16).bit_length() + 7) // 8
+        signatures.append({"algorithm": ALGORITHM, "key_id": key["key_id"],
+                           "value": base64.urlsafe_b64encode(bytes(size)).decode("ascii")})
+    placeholder = dict(max(signatures, key=lambda signature: len(canonical(signature))))
+
+    def verify_candidate(data, signature):
+        if signature is placeholder:
+            return data == payload
+        return trust_verifier(data, signature)
+
+    index = validate_product_release_index({**payload, "signature": placeholder}, channel="stable",
+                                           trust_verifier=verify_candidate, now=released)
+    _check_index_progress(index, previous)
+    return index
+
+
+def prepare_next_index(previous_path: Path, pair_paths: Sequence[Path], released_at: str, expires_at: str,
+                       output: Path, trust_keys, *, renew: bool = False) -> dict:
+    """Append explicitly verified compatible pairs, or renew only the publication envelope."""
+    if bool(pair_paths) == renew:
+        raise ReleasePairFeedError("product_release_next_index_inputs_invalid")
+    verifier = build_trust_verifier(trust_keys)
+    past = _read_json(previous_path, "product_release_index_invalid")
+    previous = validate_product_release_index(past, channel="stable", trust_verifier=verifier, for_install=False)
+    released, expires = _stamp(released_at), _stamp(expires_at)
+    if (released <= _stamp(past["released_at"]) or expires <= released
+            or (renew and expires <= _stamp(past["expires_at"]))):
+        raise ReleasePairFeedError("product_release_next_index_time_invalid")
+
+    app_sequences = dict(previous["app_sequences"])
+    database_sequences = dict(previous["database_sequences"])
+    app_sequence = max(app_sequences.values())
+    latest_db_sequence = max(database_sequences.values())
+    latest_pair_sequence = max(entry["pair_manifest"]["pair_sequence"] for entry in previous["pairs"].values())
+    apps = list(past["apps"])
+    pairs = list(past["pairs"])
+    additions = []
+    for path in pair_paths:
+        original = _read_json(path, "product_release_index_pair_invalid")
+        document, trusted = validate_latest_document(original, expected_channel="stable", trust_verifier=verifier,
+                                                      allow_unsigned_dev=False)
+        if not trusted:
+            raise ReleasePairFeedError("product_release_pair_signature_untrusted")
+        pair, database = document["pair_manifest"], document["database_manifest"]
+        if (pair["pair_policy"] != "exact" or document["artifacts"]["app"]["format"] != "app-zip"
+                or _stamp(pair["released_at"]) > released or _stamp(database["released_at"]) > released):
+            raise ReleasePairFeedError("product_release_next_index_pair_invalid")
+        if pair["pair_sequence"] <= latest_pair_sequence:
+            raise ReleasePairFeedError("product_release_next_index_pair_sequence_invalid")
+        if (database["database_release_id"] not in previous["database_sequences"]
+                and database["release_sequence"] <= latest_db_sequence):
+            raise ReleasePairFeedError("product_release_next_index_database_sequence_invalid")
+        additions.append((pair["pair_sequence"], original, pair, database))
+
+    for _sequence, original, pair, database in sorted(additions, key=lambda row: row[0]):
+        app_id, db_id = pair["app"]["app_release_id"], database["database_release_id"]
+        if app_id not in app_sequences:
+            app_sequence += 1
+            app_sequences[app_id] = app_sequence
+            apps.append({"app_release_id": app_id, "release_sequence": app_sequence, "released_at": pair["released_at"]})
+        database_sequences[db_id] = database["release_sequence"]
+        pairs.append(original)
+
+    payload = {key: value for key, value in past.items() if key != "signature"}
+    payload.update(index_sequence=past["index_sequence"] + 1, released_at=released_at, expires_at=expires_at,
+                   latest_app_release_id=max(app_sequences, key=app_sequences.get),
+                   latest_database_release_id=max(database_sequences, key=database_sequences.get),
+                   apps=apps, pairs=pairs)
+    index = _qualify_unsigned_index(payload, previous=previous, trust_keys=trust_keys, trust_verifier=verifier,
+                                    released=released)
+    with output.open("xb") as stream:
+        stream.write(canonical({**payload, "signature": None}))
+    return {"status": "prepared", "index_sequence": payload["index_sequence"],
+            "release_pair_id": index["combinations"][index["latest"]], "added_pairs": len(additions), "renewed": renew}
+
+
 def finalize_product_site(index_path: Path, signature_path: Path, output: Path, trust_keys, *,
                           setup_asset_path: Path | None = None) -> dict:
     output = output.resolve()
@@ -204,25 +316,38 @@ def finalize_product_site(index_path: Path, signature_path: Path, output: Path, 
                     f'{html.escape(release_id)}（{artifacts[kind]["size_bytes"] / 1024**2:.1f} MiB）'
                     f'<details><summary>SHA-256</summary><code>{artifacts[kind]["sha256"]}</code></details></li>'
                     for kind, label, release_id in (("app", "免安装程序", application), ("database", "数据库包", database)))
+    setup = None
     if setup_asset_path is not None:
-        setup = _read_json(setup_asset_path, "product_release_setup_asset_invalid", maximum=64 * 1024)
-        if set(setup) != {"url", "sha256", "size_bytes"}:
-            raise ReleasePairFeedError("product_release_setup_asset_invalid")
-        url = urlsplit(setup["url"] if isinstance(setup["url"], str) else "")
-        digest = setup["sha256"]
-        if (url.scheme != "https" or not url.hostname or url.username is not None or url.password is not None
-                or url.fragment or not isinstance(digest, str) or len(digest) != 64
-                or any(char not in "0123456789abcdef" for char in digest)
-                or type(setup["size_bytes"]) is not int or not 0 < setup["size_bytes"] < 2 * 1024**3):
-            raise ReleasePairFeedError("product_release_setup_asset_invalid")
+        try:
+            setup = validate_setup_locator(_read_json(setup_asset_path, "product_release_setup_asset_invalid",
+                                                      maximum=64 * 1024))
+        except ValueError as error:
+            raise ReleasePairFeedError("product_release_setup_asset_invalid") from error
         links = (f'<li><a href="{html.escape(setup["url"], quote=True)}">Windows 小安装器</a> '
                  f'（{setup["size_bytes"] / 1024**2:.1f} MiB）'
                  f'<details><summary>SHA-256</summary><code>{setup["sha256"]}</code></details></li>') + links
+    site_downloads(validated, latest, setup)
+    catalog = offline_pair_catalog(validated)
+    catalog_links = []
+    for row in catalog["pairs"]:
+        selected = validated["pairs"][row["release_pair_id"]]["artifacts"]
+        app_url, database_url = (html.escape(selected[kind]["url"], quote=True) for kind in ("app", "database"))
+        label = html.escape(f'{row["app_release_id"]} / {row["database_release_id"]}')
+        current = "（当前推荐）" if row["release_pair_id"] == catalog["current_pair_id"] else ""
+        catalog_links.append(f'<li>{label}{current} · <a href="{row["document"]}">签名补装清单</a> · '
+                             f'<a href="{app_url}">程序包</a> · <a href="{database_url}">数据库包</a></li>')
+    archive = ('<section><h2>兼容组合与离线补装</h2><p>按已安装的程序版本选择签名补装清单。'
+               f'<a href="{OFFLINE_PAIR_CATALOG}">查看组合清单</a>。</p>'
+               f'<ul>{"".join(catalog_links)}</ul></section>')
     with TemporaryDirectory(dir=output.parent, prefix=".product-site-") as staging:
         target = Path(staging) / "site"
         target.mkdir()
         (target / "latest.json").write_bytes(canonical(signed))
         (target / "database-install-pair.json").write_bytes(canonical(latest))
+        (target / OFFLINE_PAIR_CATALOG).write_bytes(canonical(catalog))
+        (target / OFFLINE_PAIR_DIRECTORY).mkdir()
+        for row in catalog["pairs"]:
+            (target / row["document"]).write_bytes(canonical(validated["pairs"][row["release_pair_id"]]))
         (target / ".nojekyll").touch()
         (target / "index.html").write_text(
             '<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" '
@@ -237,13 +362,15 @@ def finalize_product_site(index_path: Path, signature_path: Path, output: Path, 
             '<p>免安装版解压后直接打开。可以在应用内联网下载数据库，也可以选择本页的数据库包和'
             '<a href="database-install-pair.json">本地补装签名清单</a>。'
             '使用安装器作整套离线安装时，请同时下载应用包、数据库包和<a href="latest.json">签名更新索引</a>。</p>'
+            f'{archive}'
             '<p>本项目为非官方工具，仅供学习参考。角色、武器和套装资料可能尚未正式上线。'
             '基础游戏数据整理自 <a href="https://gitlab.com/GuraFoundation/YuanShenResources">YuanShenResources</a>。'
             '使用相关资料前请核对其状态。</p></main></html>',
             encoding="utf-8",
         )
         os.replace(target, output)
-    return {"status": "finalized", "index_sha256": validated["index_sha256"]}
+    return {"status": "finalized", "index_sha256": validated["index_sha256"],
+            "offline_pair_documents": len(catalog["pairs"])}
 
 
 def main(argv: list[str] | None = None) -> int:
@@ -259,6 +386,9 @@ def main(argv: list[str] | None = None) -> int:
                 output_directory=args.output,
                 independent_app=args.independent_app,
                 database_base_url=args.database_base_url,
+                accepted_database_source_pair=args.accepted_database_source_pair,
+                accepted_database_archive=args.accepted_database_archive,
+                trust_keys=version.DATABASE_RELEASE_TRUST_KEYS,
             )
         elif args.command == "finalize":
             result = finalize_release_pair_feed(
@@ -268,6 +398,9 @@ def main(argv: list[str] | None = None) -> int:
             )
         elif args.command == "index-first":
             result = prepare_first_index(args.pair_document, args.expires_at, args.output, version.DATABASE_RELEASE_TRUST_KEYS)
+        elif args.command == "index-next":
+            result = prepare_next_index(args.previous_index, args.pair_document or (), args.released_at,
+                                        args.expires_at, args.output, version.DATABASE_RELEASE_TRUST_KEYS, renew=args.renew)
         elif args.command == "prepare-app":
             result = prepare_independent_app(args.source, args.output, updater=args.updater)
         elif args.command == "prepare-pair":

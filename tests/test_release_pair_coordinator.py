@@ -7,6 +7,7 @@ from pathlib import Path
 import pytest
 
 from genshin_app import release_pair_coordinator as coordinator
+from genshin_app import release_pair_transport as transport
 from genshin_app.release_pair_storage import ReleasePairStorageError
 from genshin_app.windows_known_folders import WindowsPathAuthorityError
 
@@ -143,6 +144,14 @@ def test_exact_confirmation_stages_prepares_and_launches_external_helper(
         restart_relative="GenshinCalcGUI.exe",
         parent_pid=4321,
     )
+    orphan = instance.workspace / "staging"
+    orphan.mkdir(parents=True)
+    orphan_receipt = {"contract": transport.TRANSPORT_RECEIPT_CONTRACT,
+                      "schema_version": transport.TRANSPORT_SCHEMA_VERSION,
+                      "document_sha256": "a" * 64}
+    orphan_receipt["receipt_sha256"] = hashlib.sha256(transport._canonical(orphan_receipt)).hexdigest()
+    (orphan / transport.TRANSPORT_RECEIPT_FILENAME).write_text(json.dumps(orphan_receipt), encoding="utf-8")
+    (orphan / "stale-old-app.zip").write_bytes(b"orphaned")
     monkeypatch.setattr(instance, "discover", lambda: latest)
     monkeypatch.setattr(
         coordinator,
@@ -170,11 +179,11 @@ def test_exact_confirmation_stages_prepares_and_launches_external_helper(
             "database_manifest": {"database": {"size_bytes": 4}},
         },
     )
-    monkeypatch.setattr(
-        coordinator,
-        "preflight_before_download",
-        lambda **_kwargs: {"sufficient": True},
-    )
+    def preflight(**_kwargs):
+        assert not orphan.exists()
+        return {"sufficient": True}
+
+    monkeypatch.setattr(coordinator, "preflight_before_download", preflight)
     monkeypatch.setattr(
         coordinator.release_pair_update,
         "prepare_release_pair_handoff",

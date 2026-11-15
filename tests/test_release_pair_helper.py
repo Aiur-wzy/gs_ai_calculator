@@ -341,15 +341,32 @@ def test_helper_waits_for_gui_exit_and_restarts_only_after_postcheck(
 ):
     item = _fixture(tmp_path)
     calls = _patch_flow(monkeypatch, item)
+    owns_writer = False
+    original_writer = helper.profile_writer
+
+    from contextlib import contextmanager
+
+    @contextmanager
+    def tracked_writer(data):
+        nonlocal owns_writer
+        with original_writer(data):
+            owns_writer = True
+            try:
+                yield
+            finally:
+                owns_writer = False
 
     def wait(pid, timeout):
+        assert not owns_writer
         calls.append(("wait", pid, timeout))
 
     def launch(active, relative):
+        assert not owns_writer
         calls.append(("restart", relative))
         assert (Path(active) / "app.bin").read_bytes() == b"new-app"
         return 77
 
+    monkeypatch.setattr(helper, "profile_writer", tracked_writer)
     monkeypatch.setattr(helper, "_wait_for_parent_exit", wait)
     monkeypatch.setattr(helper, "_launch_replacement", launch)
     result = helper.execute_external_pair_update(

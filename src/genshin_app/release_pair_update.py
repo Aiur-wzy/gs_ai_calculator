@@ -188,7 +188,8 @@ def _write_json_atomic(path: Path, value: Mapping[str, Any]) -> None:
 
 def _read_json(path: Path, reason: str) -> dict[str, Any]:
     try:
-        raw = path.read_bytes()
+        with path.open("rb") as stream:
+            raw = stream.read(MAX_CONTROL_FILE_BYTES + 1)
         if not raw or len(raw) > MAX_CONTROL_FILE_BYTES:
             _fail(reason)
         value = json.loads(raw.decode("utf-8"))
@@ -274,7 +275,7 @@ def _independent_app(trust: Mapping[str, Any]) -> bool:
 
 
 def _verify_product_selection(trust: Mapping[str, Any], current: dict | None, *, reuse_app: bool,
-                              reuse_database: bool) -> None:
+                              reuse_database: bool, for_install: bool = True) -> None:
     selection = trust.get("product_selection")
     if not isinstance(selection, dict) or set(selection) != {"signed_index", "confirmation_digest"}:
         _fail("product_release_selection_required")
@@ -285,6 +286,7 @@ def _verify_product_selection(trust: Mapping[str, Any], current: dict | None, *,
         index = validate_product_release_index(
             selection["signed_index"], channel=channel,
             trust_verifier=build_trust_verifier(DATABASE_RELEASE_TRUST_KEYS),
+            for_install=for_install,
         )
         if current is None:
             option = first_install_option(index)
@@ -618,6 +620,7 @@ def _validate_current(
     current: Mapping[str, Any],
     *,
     production: bool,
+    proof_directory: Path | None = None,
 ) -> dict[str, Any]:
     required = {
         "app_root",
@@ -635,7 +638,8 @@ def _validate_current(
     )
     app_root = Path(current["app_root"])
     database_path = Path(current["database"])
-    independent = read_live_product_proof(database_path.parent, pair, manifest) is not None
+    proof_root = database_path.parent if proof_directory is None else proof_directory
+    independent = read_live_product_proof(proof_root, pair, manifest) is not None
     app_verification = _verify_app(app_root, pair, independent=independent)
     try:
         receipt = validate_database_live_receipt(dict(current["live_receipt"]))
