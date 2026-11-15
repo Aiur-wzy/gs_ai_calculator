@@ -1,0 +1,10 @@
+{
+  "name": "sherpa-onnx-win-x64",
+  "version": "1.13.8",
+  "license": "Apache-2.0",
+  "author": "The next-gen Kaldi team",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/csukuangfj/sherpa-onnx.git"
+  }
+}

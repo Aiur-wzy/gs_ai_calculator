@@ -1,0 +1,90 @@
+{
+  "contract_id": "special-reaction-handler-registry-v1",
+  "schema_version": 1,
+  "registry_fingerprint": "6f583ef61d9eb2a112da668394b1cb79b52425fe19b3ed770291e6056e34ce36",
+  "selection": "exact family/contract/implementation/profile/capabilities/fingerprints",
+  "legacy_model_v1": "fixed contract_version=1 and implementation_version=1; never latest",
+  "handlers": [
+    {
+      "family": "lunar_bloom",
+      "contract_version": 1,
+      "implementation_version": 1,
+      "profile_schema_version": 1,
+      "capabilities": [
+        "deadline_production",
+        "direct_damage",
+        "replace",
+        "resource_consumption"
+      ],
+      "handler_fingerprint": "0985b72777be1e84a51144cc7cf5639377f8a99347f1c1fce1fc9a33bd37b037",
+      "registry_fingerprint": "6f583ef61d9eb2a112da668394b1cb79b52425fe19b3ed770291e6056e34ce36",
+      "schema_version": 1,
+      "contract_id": "resolved-reaction-handler-v1"
+    },
+    {
+      "family": "lunar_crystallize",
+      "contract_version": 1,
+      "implementation_version": 1,
+      "profile_schema_version": 1,
+      "capabilities": [
+        "deadline_production",
+        "direct_damage",
+        "replace"
+      ],
+      "handler_fingerprint": "2848eb7b21e371f726adb233cc4ec0e1bed6760c4c3eec6257b59f5294fbc79d",
+      "registry_fingerprint": "6f583ef61d9eb2a112da668394b1cb79b52425fe19b3ed770291e6056e34ce36",
+      "schema_version": 1,
+      "contract_id": "resolved-reaction-handler-v1"
+    },
+    {
+      "family": "lunar_electro",
+      "contract_version": 1,
+      "implementation_version": 1,
+      "profile_schema_version": 1,
+      "capabilities": [
+        "deadline_production",
+        "direct_damage",
+        "replace",
+        "tick_admission",
+        "world_consumer"
+      ],
+      "handler_fingerprint": "261f761f7553e717649c6ebc0b21cbca982563ecc4e6ba1b641356244711d70f",
+      "registry_fingerprint": "6f583ef61d9eb2a112da668394b1cb79b52425fe19b3ed770291e6056e34ce36",
+      "schema_version": 1,
+      "contract_id": "resolved-reaction-handler-v1"
+    },
+    {
+      "family": "stellar_superconduct",
+      "contract_version": 1,
+      "implementation_version": 1,
+      "profile_schema_version": 1,
+      "capabilities": [
+        "deadline_production",
+        "direct_damage",
+        "replace",
+        "state_projection"
+      ],
+      "handler_fingerprint": "aeb2479fe6c186aeffc2b7185957b80300cee72a8e781efeb1167095b92a0e39",
+      "registry_fingerprint": "6f583ef61d9eb2a112da668394b1cb79b52425fe19b3ed770291e6056e34ce36",
+      "schema_version": 1,
+      "contract_id": "resolved-reaction-handler-v1"
+    },
+    {
+      "family": "stellar_swirl",
+      "contract_version": 1,
+      "implementation_version": 1,
+      "profile_schema_version": 1,
+      "capabilities": [
+        "damage_projection",
+        "deadline_production",
+        "packet_replacement",
+        "replace",
+        "world_consumer"
+      ],
+      "handler_fingerprint": "bfb70c7927d425afe236aae3f120136b903848dbd6eb7d65755534948fecaf7a",
+      "registry_fingerprint": "6f583ef61d9eb2a112da668394b1cb79b52425fe19b3ed770291e6056e34ce36",
+      "schema_version": 1,
+      "contract_id": "resolved-reaction-handler-v1"
+    }
+  ]
+}

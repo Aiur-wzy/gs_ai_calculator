@@ -1,0 +1,152 @@
+{
+  "case": "pressure",
+  "source": "fixture://historical/pressure-r1/calculated.json",
+  "source_bytes": 11914715,
+  "source_sha256": "42e6471a2b6faddf2e2f8031adcc7ca62d2cb1cbd699433f564dab8ad2315b59",
+  "oracle_sha256": "1412c66eee13b28680e022b46b1a2e4c3d4e826f4bf88e1f95493c5072ac6883",
+  "file_read_parse_seconds": 0.09676200000103563,
+  "phases": {
+    "request_and_snapshot": 1.545369400002528,
+    "actual_engine_execution": 11.899602200021036,
+    "unpack": 28.77094269997906,
+    "projection": 4.727075700007845
+  },
+  "counts": {
+    "request_and_snapshot": 2,
+    "unpack": 1,
+    "actual_engine_execution": 1,
+    "projection": 12
+  },
+  "request": {
+    "requests": [
+      {
+        "view": "resource_reactions",
+        "filters": {},
+        "offset": 0,
+        "limit": 50
+      },
+      {
+        "view": "resource_reactions",
+        "filters": {},
+        "offset": 50,
+        "limit": 50
+      },
+      {
+        "view": "resource_reactions",
+        "filters": {},
+        "offset": 100,
+        "limit": 50
+      },
+      {
+        "view": "resource_reactions",
+        "filters": {},
+        "offset": 150,
+        "limit": 50
+      },
+      {
+        "view": "resource_reactions",
+        "filters": {},
+        "offset": 200,
+        "limit": 50
+      },
+      {
+        "view": "resource_reactions",
+        "filters": {},
+        "offset": 250,
+        "limit": 50
+      },
+      {
+        "view": "resource_reactions",
+        "filters": {},
+        "offset": 300,
+        "limit": 50
+      },
+      {
+        "view": "resource_reactions",
+        "filters": {},
+        "offset": 350,
+        "limit": 50
+      },
+      {
+        "view": "resource_reactions",
+        "filters": {},
+        "offset": 400,
+        "limit": 50
+      },
+      {
+        "view": "resource_reactions",
+        "filters": {},
+        "offset": 450,
+        "limit": 50
+      },
+      {
+        "view": "resource_reactions",
+        "filters": {},
+        "offset": 500,
+        "limit": 50
+      },
+      {
+        "view": "resource_reactions",
+        "filters": {},
+        "offset": 550,
+        "limit": 50
+      }
+    ]
+  },
+  "batch_seconds": 35.45586289995117,
+  "response_bytes": 1031366,
+  "exact_pages": [
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true,
+    true
+  ],
+  "rows": 600,
+  "status": "passed",
+  "budgets": [
+    {
+      "role": "snapshot",
+      "work": 2267237,
+      "maximum": 24000000,
+      "closed": true,
+      "stopped": false
+    },
+    {
+      "role": "projection",
+      "work": 7169732,
+      "maximum": 8000000,
+      "closed": true,
+      "stopped": false
+    }
+  ],
+  "verification_sessions": [
+    {
+      "scope": "same_operation_execution_replay_only_no_source_authority",
+      "closed": true,
+      "stopped": false,
+      "usage": {
+        "requests": 1,
+        "executions": 1,
+        "cache_hits": 0,
+        "work": 12965188,
+        "retained_input_bytes": 371658,
+        "retained_output_bytes": 13612607,
+        "returned_bytes": 13612607
+      }
+    }
+  ],
+  "memory": {
+    "method": "psutil RSS sample every 25ms; observation, not physical memory guarantee",
+    "baseline_loaded_input_rss": 94748672,
+    "observed_peak_rss": 207409152,
+    "observed_delta_rss": 112660480
+  }
+}

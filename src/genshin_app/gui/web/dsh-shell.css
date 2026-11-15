@@ -1,0 +1,44 @@
+/* DSH owns its root and theme. This file sizes the desktop carrier only. */
+html,body {width:100%;height:100%;margin:0;overflow:hidden;}
+#dsh-app-root {width:100%;height:100%;min-height:0;isolation:isolate;}
+#genshin-editor-parking {display:none;}
+.gs-legacy-island,.gs-legacy-island[data-theme-resolved] {height:100%;width:100%;min-width:0;min-height:0;display:flex;flex-direction:column;overflow:hidden;
+  --color-canvas:var(--dsw-alias-bg-base);--color-surface:var(--dsw-alias-bg-base);--color-surface-elevated:var(--dsw-alias-bg-layer-1);
+  --color-sidebar:var(--dsw-alias-bg-layer-1);--color-overlay:var(--dsw-alias-bg-overlay);--color-input:var(--dsw-alias-bg-base);
+  --color-text-primary:var(--dsw-alias-label-primary);--color-text-secondary:var(--dsw-alias-label-secondary);--color-text-muted:var(--dsw-alias-label-tertiary);
+  --color-border-subtle:var(--dsw-alias-border-l2);--color-border-strong:var(--dsw-alias-border-l1);--color-accent:var(--dsw-alias-state-business-primary);
+  --color-accent-strong:var(--dsw-alias-state-business-primary);--color-text-link:var(--dsw-alias-state-business-primary);--color-focus-ring:var(--dsw-alias-state-business-primary);
+  --color-control-hover:var(--dsw-alias-interactive-bg-hover);--color-control-pressed:var(--dsw-alias-interactive-bg-active);--color-control-selected:var(--dsw-alias-interactive-bg-hover-accent);
+  --color-danger:var(--dsw-alias-state-error-primary);--color-danger-surface:var(--dsw-alias-interactive-bg-hover-danger);--color-warning:var(--dsw-alias-state-warn-label);--color-warning-surface:var(--dsw-alias-state-warn-tertiary);
+  --bg:var(--dsw-alias-bg-base);--panel:var(--dsw-alias-bg-base);--border:var(--dsw-alias-border-l2);--text:var(--dsw-alias-label-primary);--muted:var(--dsw-alias-label-secondary);}
+.gs-legacy-island,.gs-legacy-island[data-theme-resolved] {
+  --color-success:var(--dsw-alias-state-success-primary);--color-success-surface:var(--dsw-alias-state-success-tertiary);
+  --color-running:var(--dsw-alias-state-business-primary);--color-waiting:var(--dsw-alias-state-warn-label);--color-text-disabled:var(--dsw-alias-label-caption);
+  --color-code:var(--dsw-alias-bg-module-platform);--color-scrim:var(--dsw-alias-bg-mask-2);--color-shadow:var(--dsw-alias-bg-mask-2);
+  --color-selection:var(--dsw-alias-bg-document-selection);--color-on-accent:var(--dsw-static-neutral-00);
+  --color-axis-label:var(--dsw-alias-label-primary);--color-axis-label-muted:var(--dsw-alias-label-secondary);--color-axis-grid:var(--dsw-alias-border-l2);
+  --color-axis-lane-even:var(--dsw-alias-bg-base);--color-axis-lane-odd:var(--dsw-alias-bg-layer-1);--color-axis-coverage-lane:var(--dsw-alias-bg-layer-1);
+  --color-axis-event-border:var(--dsw-alias-border-l1);--color-axis-exhausted:var(--dsw-alias-label-tertiary);
+  --accent:var(--color-accent);--panel2:var(--color-surface-elevated);--border-strong:var(--color-border-strong);--border-subtle:var(--color-border-subtle);
+  --control-hover:var(--color-control-hover);--control-pressed:var(--color-control-pressed);--control-selected:var(--color-control-selected);
+  --text-primary:var(--color-text-primary);--text-secondary:var(--color-text-secondary);--text-disabled:var(--color-text-disabled);
+  --surface-canvas:var(--color-canvas);--surface-elevated:var(--color-surface-elevated);--surface-input:var(--color-input);--surface-sidebar:var(--color-sidebar);
+  --scrim:var(--color-scrim);--shadow-color:var(--color-shadow);
+}
+.gs-legacy-island[hidden] {display:none!important;}
+.gs-legacy-island .workspace-global-sidebar,.gs-legacy-island .workspace-sidebar-resizer,.gs-legacy-island .workspace-sidebar-scrim,
+.gs-legacy-island .workspace-sidebar-mobile-toggle,.gs-legacy-island #agent-chat-toggle,.gs-legacy-island #tab-agent {display:none!important;}
+.gs-legacy-island .workspace-app-shell {grid-template-columns:minmax(0,1fr)!important;}
+.gs-legacy-island .workspace-content-shell {grid-column:1;}
+.gs-editor-workbench {height:100%;min-height:0;display:grid;overflow:hidden;}
+.gs-editor-business[hidden] {display:none;}
+.gs-editor-business {display:flex;flex-direction:column;min-width:0;min-height:0;overflow:hidden;}
+.gs-editor-business .gs-editor-host {flex:1;}
+.gs-editor-toolbar {display:flex;justify-content:flex-end;border-bottom:1px solid var(--dsw-alias-border-l2);padding:3px 8px;}
+.gs-editor-assistant {display:flex;flex-direction:column;min-height:0;min-width:0;background:var(--dsw-alias-bg-base);border-left:1px solid var(--dsw-alias-border-l2);}
+.gs-editor-assistant>header {display:flex;align-items:center;flex-wrap:wrap;gap:4px;padding:6px 8px;border-bottom:1px solid var(--dsw-alias-border-l2);}
+.gs-editor-assistant>header strong {margin-right:auto;color:var(--dsw-alias-label-primary);}
+.gs-editor-assistant-content {flex:1;min-height:0;overflow:hidden;display:flex;}
+.gs-editor-assistant-content>div {min-height:0;min-width:0;flex:1;}
+.gs-editor-assistant-resizer {cursor:col-resize;background:var(--dsw-alias-border-l2);touch-action:none;}
+.gs-editor-assistant-resizer:focus-visible {outline:2px solid var(--dsw-alias-state-business-primary);}

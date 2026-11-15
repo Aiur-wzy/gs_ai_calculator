@@ -1,0 +1,353 @@
+{
+  "contract": "genshin-historical-runtime-source-snapshot-v1",
+  "schema_version": 1,
+  "commit": "224708edc8056f27e9ffc4eacabe797d75274636",
+  "history_only": true,
+  "execution_authority": "none",
+  "fixture_scope": "Exact prior reviewed source snapshot; not current f11 support.",
+  "archive": {
+    "filename": "runtime-sources-224708ed.zip",
+    "sha256": "3855f7867899f6247618662069bc2b09f0860b0c760f9839333576e844569c64",
+    "size_bytes": 1844076,
+    "representation": "exact_git_blob_members"
+  },
+  "member_count": 18,
+  "sources": [
+    {
+      "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Ayaka.json",
+      "git_blob_sha256": "5885eabc9a59bcecea1517c99dac67ab5e470adce69396d9faa00e0ec01cc324",
+      "git_blob_bytes": 183677,
+      "workspace_sha256": "2beea7e6200734562905688c9c4c92390822ef85eb58e34b80e5127a9a97ca3b",
+      "workspace_bytes": 189871,
+      "materialization": "lf_to_historical_crlf",
+      "consumers": [
+        {
+          "resource": "attack_metadata_profiles.json",
+          "pointer": "/evidence/files/0"
+        }
+      ]
+    },
+    {
+      "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Diluc.json",
+      "git_blob_sha256": "6de7308028c35d479479c081e5199dc98fd447889d4251301ac55ad2a694f544",
+      "git_blob_bytes": 109383,
+      "workspace_sha256": "d4f0de13132ac1378c6f4e3013d5260335f34b0e426fbc5380f5621c1de96945",
+      "workspace_bytes": 113200,
+      "materialization": "lf_to_historical_crlf",
+      "consumers": [
+        {
+          "resource": "cast_sequence_profiles.json",
+          "pointer": "/profiles/0/ability_source"
+        }
+      ]
+    },
+    {
+      "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Kazuha.json",
+      "git_blob_sha256": "691536d219d6a4eda8f3580272a558b778e2f4b416351eeadf04d6b5e2d72186",
+      "git_blob_bytes": 295491,
+      "workspace_sha256": "70a81465b8049a76ad6f3c18e1ef2eff82ea5b1fcaef9d9db7b10e009553426f",
+      "workspace_bytes": 304811,
+      "materialization": "lf_to_historical_crlf",
+      "consumers": [
+        {
+          "resource": "passive_benefit_profiles.json",
+          "pointer": "/files/5"
+        },
+        {
+          "resource": "attack_metadata_profiles.json",
+          "pointer": "/evidence/files/1"
+        }
+      ]
+    },
+    {
+      "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Kokomi.json",
+      "git_blob_sha256": "111ec670e6f9ec515e04a0715bfcc8aedd55eef4c81ca5813f70cbb8ad1207a4",
+      "git_blob_bytes": 209387,
+      "workspace_sha256": "631d338807aee083729f42c8f0a55ac795d707abb9b4460f22d2d0c7d14b7adc",
+      "workspace_bytes": 216241,
+      "materialization": "lf_to_historical_crlf",
+      "consumers": [
+        {
+          "resource": "attack_metadata_profiles.json",
+          "pointer": "/evidence/files/3"
+        }
+      ]
+    },
+    {
+      "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Shenhe.json",
+      "git_blob_sha256": "cbc4208bca8a3e8456e179e0dc546b346ee1f7e6ccc9ae67637c0f2d4e24e885",
+      "git_blob_bytes": 166746,
+      "workspace_sha256": "9949f5c28fbaeddb2257f44eed8cadae2b8cd1c19514792fc7d2e7069ca284cc",
+      "workspace_bytes": 172091,
+      "materialization": "lf_to_historical_crlf",
+      "consumers": [
+        {
+          "resource": "attack_metadata_profiles.json",
+          "pointer": "/evidence/files/2"
+        }
+      ]
+    },
+    {
+      "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+      "git_blob_sha256": "7f5151cdc23e85ca9ba5e6a003601710f49030daf94298dd49eb9eb5b429ed77",
+      "git_blob_bytes": 427579,
+      "workspace_sha256": "75fb6e13556ce18d5855a20eb2f5ab944091c0bf300a39e1b461dbbac0824c2a",
+      "workspace_bytes": 441348,
+      "materialization": "lf_to_historical_crlf",
+      "consumers": [
+        {
+          "resource": "reaction_benefit_profiles.json",
+          "pointer": "/files/0"
+        },
+        {
+          "resource": "target_state_profiles.json",
+          "pointer": "/files/0"
+        }
+      ]
+    },
+    {
+      "source_path": "BinOutput/Ability/Temp/TeamAbilities/ConfigAbility_TeamResonance.json",
+      "git_blob_sha256": "4a03b4130a8a433a4f06f66ce1abdeabeba409843177d3e3a8a45a71d38c806e",
+      "git_blob_bytes": 39642,
+      "workspace_sha256": "2dfceec4e719c38a7ca890346d9e423af43ff6599164fa51e552d4e767e7f75b",
+      "workspace_bytes": 40918,
+      "materialization": "lf_to_historical_crlf",
+      "consumers": [
+        {
+          "resource": "target_state_profiles.json",
+          "pointer": "/files/1"
+        }
+      ]
+    },
+    {
+      "source_path": "BinOutput/Talent/AvatarTalents/ConfigTalent_Kazuha.json",
+      "git_blob_sha256": "95a3fdee3d29427fd71131f0c4ae295e122c066382df407cafcd292f7983bcdf",
+      "git_blob_bytes": 9197,
+      "workspace_sha256": "0c8a948580d2a8806fef335fd9daaeaf674cffe7ebecca52b733b12c326faeb4",
+      "workspace_bytes": 9532,
+      "materialization": "lf_to_historical_crlf",
+      "consumers": [
+        {
+          "resource": "passive_benefit_profiles.json",
+          "pointer": "/files/4"
+        },
+        {
+          "resource": "energy_trigger_profiles.json",
+          "pointer": "/entry_sources/4"
+        },
+        {
+          "resource": "limited_hit_benefit_profiles.json",
+          "pointer": "/entry_sources/4"
+        },
+        {
+          "resource": "talent_level_profiles.json",
+          "pointer": "/evidence/non_level_pairs/1/current"
+        },
+        {
+          "resource": "talent_level_profiles.json",
+          "pointer": "/evidence/non_level_pairs/2/current"
+        }
+      ]
+    },
+    {
+      "source_path": "BinOutput/Talent/AvatarTalents/ConfigTalent_Shenhe.json",
+      "git_blob_sha256": "241dff69ceb951812b8dee6602aa718a5b8dfe4d54b99ffb4398994ae72663ae",
+      "git_blob_bytes": 8679,
+      "workspace_sha256": "0ca0eb7e9131fdf8293e65ad8498b15cdf88d440f40a0b9ab928e8df98c415c8",
+      "workspace_bytes": 8998,
+      "materialization": "lf_to_historical_crlf",
+      "consumers": [
+        {
+          "resource": "energy_trigger_profiles.json",
+          "pointer": "/entry_sources/5"
+        },
+        {
+          "resource": "limited_hit_benefit_profiles.json",
+          "pointer": "/entry_sources/5"
+        },
+        {
+          "resource": "talent_level_profiles.json",
+          "pointer": "/evidence/non_level_pairs/0/current"
+        }
+      ]
+    },
+    {
+      "source_path": "BinOutput/Talent/RelicTalents/ConfigAffix_Relic.json",
+      "git_blob_sha256": "84bf25a63d5c35e00eb829c93946e130099408382560ad4878e31d69afcc822e",
+      "git_blob_bytes": 49341,
+      "workspace_sha256": "0937b29eb3f02b07aacdc02abdcf0af460ac7cb5cf951207ff626ba27b4052ba",
+      "workspace_bytes": 51344,
+      "materialization": "lf_to_historical_crlf",
+      "consumers": [
+        {
+          "resource": "reaction_benefit_profiles.json",
+          "pointer": "/files/1"
+        },
+        {
+          "resource": "target_state_profiles.json",
+          "pointer": "/files/2"
+        }
+      ]
+    },
+    {
+      "source_path": "ExcelBinOutput/AttackAttenuationExcelConfigData.json",
+      "git_blob_sha256": "01445f75daca788d0269710604c63af8fad86a38b3fc53f2b92a4b6ca8feaea4",
+      "git_blob_bytes": 168547,
+      "workspace_sha256": "1e3bc593e4d55f66d59c95c61db691f41e36ce616429129ed0a373679127fa7f",
+      "workspace_bytes": 181164,
+      "materialization": "lf_to_historical_crlf",
+      "consumers": [
+        {
+          "test": "test_passive_sources_app.py",
+          "purpose": "same exact historical snapshot dependency"
+        }
+      ]
+    },
+    {
+      "source_path": "ExcelBinOutput/AvatarExcelConfigData.json",
+      "git_blob_sha256": "d6fb33533a05fed29c411fa55db769480698c2d6c2511154d635eb7393996a53",
+      "git_blob_bytes": 369444,
+      "workspace_sha256": "bc9a4a11b7e0e40c6eadd75ca2c99752b17802521591a8df65f4995c5b0e4801",
+      "workspace_bytes": 381067,
+      "materialization": "lf_to_historical_crlf",
+      "consumers": [
+        {
+          "resource": "passive_benefit_profiles.json",
+          "pointer": "/files/0"
+        },
+        {
+          "resource": "energy_trigger_profiles.json",
+          "pointer": "/entry_sources/0"
+        },
+        {
+          "resource": "limited_hit_benefit_profiles.json",
+          "pointer": "/entry_sources/0"
+        }
+      ]
+    },
+    {
+      "source_path": "ExcelBinOutput/AvatarPromoteExcelConfigData.json",
+      "git_blob_sha256": "cd35038132f7f4191178e991abe0395dafd0f281d1b37f942d9935d6a49264ee",
+      "git_blob_bytes": 652846,
+      "workspace_sha256": "d998c67261ab4fd7479e264813adfa039548f9d8f3223c34f45df4c911ee2b8b",
+      "workspace_bytes": 687848,
+      "materialization": "lf_to_historical_crlf",
+      "consumers": [
+        {
+          "resource": "passive_benefit_profiles.json",
+          "pointer": "/files/2"
+        }
+      ]
+    },
+    {
+      "source_path": "ExcelBinOutput/AvatarSkillDepotExcelConfigData.json",
+      "git_blob_sha256": "66280c26aeb3c6bdda502e81eee2449021dbfc5ba608de4cb2903c710b1cd877",
+      "git_blob_bytes": 128895,
+      "workspace_sha256": "841ccf30a9dcb0f9851c1ca1a3f37bfd53d7e83a1bf5f38ea6f9b4dedb69e896",
+      "workspace_bytes": 137361,
+      "materialization": "lf_to_historical_crlf",
+      "consumers": [
+        {
+          "resource": "passive_benefit_profiles.json",
+          "pointer": "/files/1"
+        },
+        {
+          "resource": "energy_trigger_profiles.json",
+          "pointer": "/entry_sources/1"
+        },
+        {
+          "resource": "limited_hit_benefit_profiles.json",
+          "pointer": "/entry_sources/1"
+        }
+      ]
+    },
+    {
+      "source_path": "ExcelBinOutput/AvatarSkillExcelConfigData.json",
+      "git_blob_sha256": "70c5cc4b669af3fd44d8de46f8ca37804b3b6d61890503d048d872f4caea06fa",
+      "git_blob_bytes": 564057,
+      "workspace_sha256": "d6c09879a0c162d7b1fdd5ad4c29e0ae457d1e41a7b853d209a6e272caad2e6e",
+      "workspace_bytes": 587276,
+      "materialization": "lf_to_historical_crlf",
+      "consumers": [
+        {
+          "resource": "cast_sequence_profiles.json",
+          "pointer": "/profiles/0/skill_source"
+        },
+        {
+          "resource": "energy_trigger_profiles.json",
+          "pointer": "/entry_sources/2"
+        },
+        {
+          "resource": "limited_hit_benefit_profiles.json",
+          "pointer": "/entry_sources/2"
+        },
+        {
+          "test": "test_passive_sources_app.py",
+          "purpose": "same exact historical snapshot dependency"
+        }
+      ]
+    },
+    {
+      "source_path": "ExcelBinOutput/AvatarTalentExcelConfigData.json",
+      "git_blob_sha256": "46a20579ceb5e6a614775259d91ae727ddbd3a5fd850788be5d401e5461d0255",
+      "git_blob_bytes": 360564,
+      "workspace_sha256": "95d7bd50e9c7e3bedc852a8dc28353babb49f7d0b214ec68483764678fcfe8a8",
+      "workspace_bytes": 381331,
+      "materialization": "lf_to_historical_crlf",
+      "consumers": [
+        {
+          "resource": "talent_level_profiles.json",
+          "pointer": "/evidence/non_level_pairs/0/current/parameter_record_origin"
+        },
+        {
+          "resource": "talent_level_profiles.json",
+          "pointer": "/evidence/non_level_pairs/1/current/parameter_record_origin"
+        },
+        {
+          "resource": "talent_level_profiles.json",
+          "pointer": "/evidence/non_level_pairs/2/current/parameter_record_origin"
+        }
+      ]
+    },
+    {
+      "source_path": "ExcelBinOutput/EquipAffixExcelConfigData.json",
+      "git_blob_sha256": "1ab75da49770dc042c2cabc5e7603798de7ef82800ce5519fd02e190362586cf",
+      "git_blob_bytes": 533764,
+      "workspace_sha256": "67cce4b66ecfae8ab20b4567005ff0e2efa76446af1fcc71d99e8a2383def4e6",
+      "workspace_bytes": 566972,
+      "materialization": "lf_to_historical_crlf",
+      "consumers": [
+        {
+          "resource": "reaction_benefit_profiles.json",
+          "pointer": "/files/2"
+        },
+        {
+          "resource": "target_state_profiles.json",
+          "pointer": "/files/3"
+        }
+      ]
+    },
+    {
+      "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+      "git_blob_sha256": "7ea37860f8957a7730192298a7ae3da2bef50ceafed14e1c41a13a889fba205f",
+      "git_blob_bytes": 9435429,
+      "workspace_sha256": "852113c53187be005ba398d8afc787809a75853d6d2c29f8240897bc13102362",
+      "workspace_bytes": 10001891,
+      "materialization": "lf_to_historical_crlf",
+      "consumers": [
+        {
+          "resource": "passive_benefit_profiles.json",
+          "pointer": "/files/3"
+        },
+        {
+          "resource": "energy_trigger_profiles.json",
+          "pointer": "/entry_sources/3"
+        },
+        {
+          "resource": "limited_hit_benefit_profiles.json",
+          "pointer": "/entry_sources/3"
+        }
+      ]
+    }
+  ]
+}

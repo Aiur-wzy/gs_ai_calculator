@@ -1,0 +1,38 @@
+{
+  "contract": "genshin-native-bridge-vectors-v1",
+  "payloads": [
+    {
+      "name": "unicode_values_and_safe_integers",
+      "value": {
+        "state": "running",
+        "values": [1, true, null],
+        "text": "中文"
+      },
+      "sha256": "85a08b95ac4594674b1ff7d560f02653081ab8a3da5047b11c637a6f0882584a"
+    },
+    {
+      "name": "nested_usage",
+      "value": {
+        "usage": {
+          "input_tokens": 7,
+          "output_tokens": 3
+        },
+        "labels": ["冰", "火"],
+        "ok": true
+      },
+      "sha256": "6d1df0d639967865f3f0477678dcd73723b281c3d844a971de2969439d1fbea8"
+    }
+  ],
+  "raw_arguments": [
+    {
+      "name": "decimal_and_unicode_keys",
+      "raw": "{\"倍率\":1.25,\"hits\":[1,2,3],\"label\":\"冰伤\"}",
+      "sha256": "e194166781a8053309a7dd0dcd0c400bbf4ddb9b55d26f8ae6eecc15b48f7f21"
+    },
+    {
+      "name": "whitespace_is_identity",
+      "raw": "{\"value\":1} ",
+      "sha256": "1a39facc000d8c1316d176754a836afe4ee5994daa63ac04f8c28014ec309e30"
+    }
+  ]
+}

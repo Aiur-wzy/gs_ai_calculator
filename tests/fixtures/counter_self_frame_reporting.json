@@ -1,0 +1,705 @@
+{
+  "historical": {
+    "contract": "resource-counter-views-self-frame-v2",
+    "execution": "mechanics_event_queue",
+    "scope": "current_provider_or_self_frame_classic_damage",
+    "trace": [
+      {
+        "type": "counter_view_read",
+        "receipt_id": "counter-view:1",
+        "event_id": "h0",
+        "run_id": "0:h0",
+        "cycle": 0,
+        "t": 0.16,
+        "time_us": 160000,
+        "rule_id": "view-benefit",
+        "effect_id": "value",
+        "instance_id": "view-benefit:0:cast",
+        "effect_source_id": "view-benefit",
+        "domain": "self",
+        "sample": "self_frame",
+        "frame_selection": "historical_reference",
+        "frame_id": "counter-frame:1",
+        "capture_context": {
+          "origin": 0,
+          "run_id": "0:output",
+          "event_id": "output",
+          "time_us": 150000
+        },
+        "character": "a",
+        "expression": {
+          "kind": "counter_view",
+          "view_id": "read",
+          "sample": "self_frame",
+          "factor": 1
+        },
+        "reading": {
+          "contract": "counter-view-reading-v1",
+          "view_id": "read",
+          "source_id": "view-benefit",
+          "counter_source_id": "source:counter",
+          "owner": "a",
+          "counter_id": "count",
+          "pool_id": "pool",
+          "key": "total",
+          "raw_atoms": 8,
+          "unit_scale": 10,
+          "numerator": 8,
+          "denominator": 10,
+          "uncapped_numerator": 8,
+          "cap_applied": false,
+          "remainder_atoms": null,
+          "transform": {
+            "kind": "scaled"
+          },
+          "definition_fingerprint": "c755ec78b996367c8ca7660dca3d779afffc929b0d51dc955c60f938ceaa42b6",
+          "counter_cursor": {
+            "control_sequence": 3,
+            "ledger_sequence": 1
+          },
+          "lifecycle": {
+            "id": "field",
+            "phase": "established",
+            "generation_uid": "@generation:deda31b6239b858d6aeb6035e36326e9f4696b23356d9d33437365ed44d27204",
+            "revision": 1,
+            "created_us": 0,
+            "established_us": 0,
+            "end_us": 400000,
+            "established_observed": true,
+            "closing_us": null
+          },
+          "history_scope": "since_last_reset",
+          "sampling_authority": "mechanics_committed_ledger_observation",
+          "qualification": "frozen_member_current_gate_accepted",
+          "source_approval": "not_evaluated"
+        },
+        "gate_qualification": {
+          "kind": "not_required",
+          "instance_id": "view-benefit:0:cast",
+          "event_run_id": "0:h0"
+        },
+        "source_value": 0.8,
+        "value": 0.8,
+        "single_value": 0.8,
+        "layer_count": 1,
+        "combined_value": 0.8
+      },
+      {
+        "type": "counter_view_read",
+        "receipt_id": "counter-view:2",
+        "event_id": "h1",
+        "run_id": "0:h1",
+        "cycle": 0,
+        "t": 0.25,
+        "time_us": 250000,
+        "rule_id": "view-benefit",
+        "effect_id": "value",
+        "instance_id": "view-benefit:0:cast",
+        "effect_source_id": "view-benefit",
+        "domain": "self",
+        "sample": "self_frame",
+        "frame_selection": "historical_reference",
+        "frame_id": "counter-frame:1",
+        "capture_context": {
+          "origin": 0,
+          "run_id": "0:output",
+          "event_id": "output",
+          "time_us": 150000
+        },
+        "character": "a",
+        "expression": {
+          "kind": "counter_view",
+          "view_id": "read",
+          "sample": "self_frame",
+          "factor": 1
+        },
+        "reading": {
+          "contract": "counter-view-reading-v1",
+          "view_id": "read",
+          "source_id": "view-benefit",
+          "counter_source_id": "source:counter",
+          "owner": "a",
+          "counter_id": "count",
+          "pool_id": "pool",
+          "key": "total",
+          "raw_atoms": 8,
+          "unit_scale": 10,
+          "numerator": 8,
+          "denominator": 10,
+          "uncapped_numerator": 8,
+          "cap_applied": false,
+          "remainder_atoms": null,
+          "transform": {
+            "kind": "scaled"
+          },
+          "definition_fingerprint": "c755ec78b996367c8ca7660dca3d779afffc929b0d51dc955c60f938ceaa42b6",
+          "counter_cursor": {
+            "control_sequence": 3,
+            "ledger_sequence": 1
+          },
+          "lifecycle": {
+            "id": "field",
+            "phase": "established",
+            "generation_uid": "@generation:deda31b6239b858d6aeb6035e36326e9f4696b23356d9d33437365ed44d27204",
+            "revision": 1,
+            "created_us": 0,
+            "established_us": 0,
+            "end_us": 400000,
+            "established_observed": true,
+            "closing_us": null
+          },
+          "history_scope": "since_last_reset",
+          "sampling_authority": "mechanics_committed_ledger_observation",
+          "qualification": "frozen_member_current_gate_accepted",
+          "source_approval": "not_evaluated"
+        },
+        "gate_qualification": {
+          "kind": "not_required",
+          "instance_id": "view-benefit:0:cast",
+          "event_run_id": "0:h1"
+        },
+        "source_value": 0.8,
+        "value": 0.8,
+        "single_value": 0.8,
+        "layer_count": 1,
+        "combined_value": 0.8
+      },
+      {
+        "type": "counter_view_read",
+        "receipt_id": "counter-view:3",
+        "event_id": "h2",
+        "run_id": "0:h2",
+        "cycle": 0,
+        "t": 0.35,
+        "time_us": 350000,
+        "rule_id": "view-benefit",
+        "effect_id": "value",
+        "instance_id": "view-benefit:0:cast",
+        "effect_source_id": "view-benefit",
+        "domain": "self",
+        "sample": "self_frame",
+        "frame_selection": "historical_reference",
+        "frame_id": "counter-frame:1",
+        "capture_context": {
+          "origin": 0,
+          "run_id": "0:output",
+          "event_id": "output",
+          "time_us": 150000
+        },
+        "character": "a",
+        "expression": {
+          "kind": "counter_view",
+          "view_id": "read",
+          "sample": "self_frame",
+          "factor": 1
+        },
+        "reading": {
+          "contract": "counter-view-reading-v1",
+          "view_id": "read",
+          "source_id": "view-benefit",
+          "counter_source_id": "source:counter",
+          "owner": "a",
+          "counter_id": "count",
+          "pool_id": "pool",
+          "key": "total",
+          "raw_atoms": 8,
+          "unit_scale": 10,
+          "numerator": 8,
+          "denominator": 10,
+          "uncapped_numerator": 8,
+          "cap_applied": false,
+          "remainder_atoms": null,
+          "transform": {
+            "kind": "scaled"
+          },
+          "definition_fingerprint": "c755ec78b996367c8ca7660dca3d779afffc929b0d51dc955c60f938ceaa42b6",
+          "counter_cursor": {
+            "control_sequence": 3,
+            "ledger_sequence": 1
+          },
+          "lifecycle": {
+            "id": "field",
+            "phase": "established",
+            "generation_uid": "@generation:deda31b6239b858d6aeb6035e36326e9f4696b23356d9d33437365ed44d27204",
+            "revision": 1,
+            "created_us": 0,
+            "established_us": 0,
+            "end_us": 400000,
+            "established_observed": true,
+            "closing_us": null
+          },
+          "history_scope": "since_last_reset",
+          "sampling_authority": "mechanics_committed_ledger_observation",
+          "qualification": "frozen_member_current_gate_accepted",
+          "source_approval": "not_evaluated"
+        },
+        "gate_qualification": {
+          "kind": "not_required",
+          "instance_id": "view-benefit:0:cast",
+          "event_run_id": "0:h2"
+        },
+        "source_value": 0.8,
+        "value": 0.8,
+        "single_value": 0.8,
+        "layer_count": 1,
+        "combined_value": 0.8
+      }
+    ],
+    "limits": {
+      "reads": 40000,
+      "trace_bytes": 8388608
+    },
+    "reads": 3,
+    "trace_bytes": 5020,
+    "source_approval": "not_evaluated_by_engine",
+    "historical_capture": {
+      "contract": "counter-self-frame-actual-v2",
+      "capture_trace": [
+        {
+          "type": "counter_frame_capture",
+          "authority": "mechanics_committed_ledger_observation",
+          "frame_id": "counter-frame:1",
+          "context": {
+            "origin": 0,
+            "run_id": "0:output",
+            "event_id": "output",
+            "time_us": 150000
+          },
+          "cycle": 0,
+          "time_us": 150000,
+          "t": 0.15,
+          "event_id": "output",
+          "run_id": "0:output",
+          "program_fingerprint": "c755ec78b996367c8ca7660dca3d779afffc929b0d51dc955c60f938ceaa42b6",
+          "reader_program_fingerprint": "cfebe719c9c98544338dc7faa8aba03308701824e28d0f17e0292a5b01a68b99",
+          "member_count": 1,
+          "reading_count": 1
+        },
+        {
+          "type": "counter_frame_capture",
+          "authority": "mechanics_committed_ledger_observation",
+          "frame_id": "counter-frame:2",
+          "context": {
+            "origin": 1,
+            "run_id": "1:output",
+            "event_id": "output",
+            "time_us": 1150000
+          },
+          "cycle": 1,
+          "time_us": 1150000,
+          "t": 1.15,
+          "event_id": "output",
+          "run_id": "1:output",
+          "program_fingerprint": "c755ec78b996367c8ca7660dca3d779afffc929b0d51dc955c60f938ceaa42b6",
+          "reader_program_fingerprint": "cfebe719c9c98544338dc7faa8aba03308701824e28d0f17e0292a5b01a68b99",
+          "member_count": 1,
+          "reading_count": 1
+        }
+      ],
+      "usage": {
+        "frames": 2,
+        "members": 2,
+        "frame_bytes": 4364,
+        "reads": 3,
+        "trace_bytes": 4195,
+        "capture_work": 6,
+        "read_work": 3
+      },
+      "verification_bytes": 87055,
+      "snapshot_storage_bytes": 1076,
+      "limits": {
+        "verification_bytes": 268435456,
+        "snapshot_bytes": 8388608
+      },
+      "source_approval": "not_evaluated_by_engine"
+    }
+  },
+  "current_no_reference": {
+    "contract": "resource-counter-views-self-frame-v2",
+    "execution": "mechanics_event_queue",
+    "scope": "current_provider_or_self_frame_classic_damage",
+    "trace": [
+      {
+        "type": "counter_view_read",
+        "receipt_id": "counter-view:1",
+        "event_id": "h0",
+        "run_id": "0:h0",
+        "cycle": 0,
+        "t": 0.16,
+        "time_us": 160000,
+        "rule_id": "view-benefit",
+        "effect_id": "value",
+        "instance_id": "view-benefit:0:cast",
+        "effect_source_id": "view-benefit",
+        "domain": "self",
+        "sample": "self_frame",
+        "character": "a",
+        "expression": {
+          "kind": "counter_view",
+          "view_id": "read",
+          "sample": "self_frame",
+          "factor": 1
+        },
+        "reading": {
+          "contract": "counter-view-reading-v1",
+          "view_id": "read",
+          "source_id": "view-benefit",
+          "counter_source_id": "source:counter",
+          "owner": "a",
+          "counter_id": "count",
+          "pool_id": "pool",
+          "key": "total",
+          "raw_atoms": 8,
+          "unit_scale": 10,
+          "numerator": 8,
+          "denominator": 10,
+          "uncapped_numerator": 8,
+          "cap_applied": false,
+          "remainder_atoms": null,
+          "transform": {
+            "kind": "scaled"
+          },
+          "definition_fingerprint": "c755ec78b996367c8ca7660dca3d779afffc929b0d51dc955c60f938ceaa42b6",
+          "counter_cursor": {
+            "control_sequence": 3,
+            "ledger_sequence": 1
+          },
+          "lifecycle": {
+            "id": "field",
+            "phase": "established",
+            "generation_uid": "@generation:deda31b6239b858d6aeb6035e36326e9f4696b23356d9d33437365ed44d27204",
+            "revision": 1,
+            "created_us": 0,
+            "established_us": 0,
+            "end_us": 400000,
+            "established_observed": true,
+            "closing_us": null
+          },
+          "history_scope": "since_last_reset",
+          "sampling_authority": "mechanics_committed_ledger",
+          "qualification": "current_rule_instance_accepted",
+          "source_approval": "not_evaluated"
+        },
+        "source_value": 0.8,
+        "value": 0.8,
+        "single_value": 0.8,
+        "layer_count": 1,
+        "combined_value": 0.8,
+        "frame_selection": "current_no_self_reference",
+        "gate_qualification": {
+          "kind": "not_required",
+          "instance_id": "view-benefit:0:cast",
+          "event_run_id": "0:h0"
+        }
+      },
+      {
+        "type": "counter_view_read",
+        "receipt_id": "counter-view:2",
+        "event_id": "h1",
+        "run_id": "0:h1",
+        "cycle": 0,
+        "t": 0.25,
+        "time_us": 250000,
+        "rule_id": "view-benefit",
+        "effect_id": "value",
+        "instance_id": "view-benefit:0:cast",
+        "effect_source_id": "view-benefit",
+        "domain": "self",
+        "sample": "self_frame",
+        "character": "a",
+        "expression": {
+          "kind": "counter_view",
+          "view_id": "read",
+          "sample": "self_frame",
+          "factor": 1
+        },
+        "reading": {
+          "contract": "counter-view-reading-v1",
+          "view_id": "read",
+          "source_id": "view-benefit",
+          "counter_source_id": "source:counter",
+          "owner": "a",
+          "counter_id": "count",
+          "pool_id": "pool",
+          "key": "total",
+          "raw_atoms": 16,
+          "unit_scale": 10,
+          "numerator": 16,
+          "denominator": 10,
+          "uncapped_numerator": 16,
+          "cap_applied": false,
+          "remainder_atoms": null,
+          "transform": {
+            "kind": "scaled"
+          },
+          "definition_fingerprint": "c755ec78b996367c8ca7660dca3d779afffc929b0d51dc955c60f938ceaa42b6",
+          "counter_cursor": {
+            "control_sequence": 4,
+            "ledger_sequence": 2
+          },
+          "lifecycle": {
+            "id": "field",
+            "phase": "established",
+            "generation_uid": "@generation:deda31b6239b858d6aeb6035e36326e9f4696b23356d9d33437365ed44d27204",
+            "revision": 1,
+            "created_us": 0,
+            "established_us": 0,
+            "end_us": 400000,
+            "established_observed": true,
+            "closing_us": null
+          },
+          "history_scope": "since_last_reset",
+          "sampling_authority": "mechanics_committed_ledger",
+          "qualification": "current_rule_instance_accepted",
+          "source_approval": "not_evaluated"
+        },
+        "source_value": 1.6,
+        "value": 1.6,
+        "single_value": 1.6,
+        "layer_count": 1,
+        "combined_value": 1.6,
+        "frame_selection": "current_no_self_reference",
+        "gate_qualification": {
+          "kind": "not_required",
+          "instance_id": "view-benefit:0:cast",
+          "event_run_id": "0:h1"
+        }
+      },
+      {
+        "type": "counter_view_read",
+        "receipt_id": "counter-view:3",
+        "event_id": "h2",
+        "run_id": "0:h2",
+        "cycle": 0,
+        "t": 0.35,
+        "time_us": 350000,
+        "rule_id": "view-benefit",
+        "effect_id": "value",
+        "instance_id": "view-benefit:0:cast",
+        "effect_source_id": "view-benefit",
+        "domain": "self",
+        "sample": "self_frame",
+        "character": "a",
+        "expression": {
+          "kind": "counter_view",
+          "view_id": "read",
+          "sample": "self_frame",
+          "factor": 1
+        },
+        "reading": {
+          "contract": "counter-view-reading-v1",
+          "view_id": "read",
+          "source_id": "view-benefit",
+          "counter_source_id": "source:counter",
+          "owner": "a",
+          "counter_id": "count",
+          "pool_id": "pool",
+          "key": "total",
+          "raw_atoms": 19,
+          "unit_scale": 10,
+          "numerator": 19,
+          "denominator": 10,
+          "uncapped_numerator": 19,
+          "cap_applied": false,
+          "remainder_atoms": null,
+          "transform": {
+            "kind": "scaled"
+          },
+          "definition_fingerprint": "c755ec78b996367c8ca7660dca3d779afffc929b0d51dc955c60f938ceaa42b6",
+          "counter_cursor": {
+            "control_sequence": 5,
+            "ledger_sequence": 3
+          },
+          "lifecycle": {
+            "id": "field",
+            "phase": "established",
+            "generation_uid": "@generation:deda31b6239b858d6aeb6035e36326e9f4696b23356d9d33437365ed44d27204",
+            "revision": 1,
+            "created_us": 0,
+            "established_us": 0,
+            "end_us": 400000,
+            "established_observed": true,
+            "closing_us": null
+          },
+          "history_scope": "since_last_reset",
+          "sampling_authority": "mechanics_committed_ledger",
+          "qualification": "current_rule_instance_accepted",
+          "source_approval": "not_evaluated"
+        },
+        "source_value": 1.9,
+        "value": 1.9,
+        "single_value": 1.9,
+        "layer_count": 1,
+        "combined_value": 1.9,
+        "frame_selection": "current_no_self_reference",
+        "gate_qualification": {
+          "kind": "not_required",
+          "instance_id": "view-benefit:0:cast",
+          "event_run_id": "0:h2"
+        }
+      }
+    ],
+    "limits": {
+      "reads": 40000,
+      "trace_bytes": 8388608
+    },
+    "reads": 3,
+    "trace_bytes": 4639,
+    "source_approval": "not_evaluated_by_engine",
+    "historical_capture": {
+      "contract": "counter-self-frame-actual-v2",
+      "capture_trace": [],
+      "usage": {
+        "frames": 0,
+        "members": 0,
+        "frame_bytes": 2,
+        "reads": 0,
+        "trace_bytes": 2,
+        "capture_work": 0,
+        "read_work": 0
+      },
+      "verification_bytes": 32806,
+      "snapshot_storage_bytes": 2,
+      "limits": {
+        "verification_bytes": 268435456,
+        "snapshot_bytes": 8388608
+      },
+      "source_approval": "not_evaluated_by_engine"
+    }
+  },
+  "frozen_two_layers": {
+    "contract": "resource-counter-views-self-frame-v2",
+    "execution": "mechanics_event_queue",
+    "scope": "current_provider_or_self_frame_classic_damage",
+    "trace": [
+      {
+        "type": "counter_view_read",
+        "receipt_id": "counter-view:1",
+        "event_id": "h0",
+        "run_id": "0:h0",
+        "cycle": 0,
+        "t": 0.25,
+        "time_us": 250000,
+        "rule_id": "view-benefit",
+        "effect_id": "value",
+        "instance_id": "view-benefit:initial:0",
+        "effect_source_id": "view-benefit",
+        "domain": "self",
+        "sample": "self_frame",
+        "frame_selection": "historical_reference",
+        "frame_id": "counter-frame:1",
+        "capture_context": {
+          "origin": 0,
+          "run_id": "0:output",
+          "event_id": "output",
+          "time_us": 150000
+        },
+        "character": "a",
+        "expression": {
+          "kind": "counter_view",
+          "view_id": "read",
+          "sample": "self_frame",
+          "factor": 1
+        },
+        "reading": {
+          "contract": "counter-view-reading-v1",
+          "view_id": "read",
+          "source_id": "view-benefit",
+          "counter_source_id": "source:counter",
+          "owner": "a",
+          "counter_id": "count",
+          "pool_id": "pool",
+          "key": "total",
+          "raw_atoms": 8,
+          "unit_scale": 10,
+          "numerator": 8,
+          "denominator": 10,
+          "uncapped_numerator": 8,
+          "cap_applied": false,
+          "remainder_atoms": null,
+          "transform": {
+            "kind": "scaled"
+          },
+          "definition_fingerprint": "2806ead7fe55961363e65dd7aae7efee20c1a382c0919585cb48c542ea9be2a0",
+          "counter_cursor": {
+            "control_sequence": 3,
+            "ledger_sequence": 1
+          },
+          "lifecycle": {
+            "id": "field",
+            "phase": "established",
+            "generation_uid": "@generation:deda31b6239b858d6aeb6035e36326e9f4696b23356d9d33437365ed44d27204",
+            "revision": 1,
+            "created_us": 0,
+            "established_us": 0,
+            "end_us": 400000,
+            "established_observed": true,
+            "closing_us": null
+          },
+          "history_scope": "since_last_reset",
+          "sampling_authority": "mechanics_committed_ledger_observation",
+          "qualification": "frozen_member_current_gate_accepted",
+          "source_approval": "not_evaluated"
+        },
+        "gate_qualification": {
+          "kind": "not_required",
+          "instance_id": "view-benefit:initial:0",
+          "event_run_id": "0:h0"
+        },
+        "source_value": 0.8,
+        "value": 0.8,
+        "single_value": 0.8,
+        "layer_count": 2,
+        "combined_value": 1.6
+      }
+    ],
+    "limits": {
+      "reads": 40000,
+      "trace_bytes": 8388608
+    },
+    "reads": 1,
+    "trace_bytes": 1680,
+    "source_approval": "not_evaluated_by_engine",
+    "historical_capture": {
+      "contract": "counter-self-frame-actual-v2",
+      "capture_trace": [
+        {
+          "type": "counter_frame_capture",
+          "authority": "mechanics_committed_ledger_observation",
+          "frame_id": "counter-frame:1",
+          "context": {
+            "origin": 0,
+            "run_id": "0:output",
+            "event_id": "output",
+            "time_us": 150000
+          },
+          "cycle": 0,
+          "time_us": 150000,
+          "t": 0.15,
+          "event_id": "output",
+          "run_id": "0:output",
+          "program_fingerprint": "2806ead7fe55961363e65dd7aae7efee20c1a382c0919585cb48c542ea9be2a0",
+          "reader_program_fingerprint": "5e5f9d6dafe429d3cde6d4a23b5a2fea8ea7fdfe951f52dfb4ad684f033d1062",
+          "member_count": 1,
+          "reading_count": 1
+        }
+      ],
+      "usage": {
+        "frames": 1,
+        "members": 1,
+        "frame_bytes": 2184,
+        "reads": 1,
+        "trace_bytes": 1402,
+        "capture_work": 3,
+        "read_work": 1
+      },
+      "verification_bytes": 40425,
+      "snapshot_storage_bytes": 315,
+      "limits": {
+        "verification_bytes": 268435456,
+        "snapshot_bytes": 8388608
+      },
+      "source_approval": "not_evaluated_by_engine"
+    }
+  }
+}

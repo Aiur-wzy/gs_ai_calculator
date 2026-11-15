@@ -1,0 +1,2688 @@
+{
+  "kind": "genshin-plan",
+  "plan_version": 3,
+  "plan_id": "1fd02373-6db4-4a18-8aab-900f37f1df82",
+  "revision": 0,
+  "manual_template": {
+    "version": 2,
+    "form": "resolved",
+    "id_registry_version": 1,
+    "type_definitions": {
+      "damage_types": []
+    },
+    "enemy": {
+      "level": 90,
+      "resistance": {
+        "default": 0.1
+      }
+    },
+    "characters": [
+      {
+        "id": "a",
+        "level": 90,
+        "stats": {
+          "atk": 2000,
+          "base_atk": 1000,
+          "em": 0,
+          "crit_rate": 0,
+          "crit_dmg": 0.5,
+          "energy_recharge": 1
+        },
+        "name": "神里绫华（工程校验面板）"
+      }
+    ],
+    "hits": [
+      {
+        "id": "h0",
+        "t": 0.2,
+        "character": "a",
+        "skill": "工程单次命中（非完整技能模拟）",
+        "hit_name": "释放前战技伤害",
+        "damage_type_ids": [
+          "damage.elemental_skill"
+        ],
+        "damage_system": "classic",
+        "element": "cryo",
+        "multiplier": 1
+      },
+      {
+        "id": "h1",
+        "t": 1.2,
+        "character": "a",
+        "skill": "工程单次命中（非完整技能模拟）",
+        "hit_name": "宗室生效内爆发伤害",
+        "damage_type_ids": [
+          "damage.elemental_burst"
+        ],
+        "damage_system": "classic",
+        "element": "cryo",
+        "multiplier": 1
+      },
+      {
+        "id": "h2",
+        "t": 13.0,
+        "character": "a",
+        "skill": "工程单次命中（非完整技能模拟）",
+        "hit_name": "宗室到期边界爆发伤害",
+        "damage_type_ids": [
+          "damage.elemental_burst"
+        ],
+        "damage_system": "classic",
+        "element": "cryo",
+        "multiplier": 1
+      }
+    ],
+    "buffs": [],
+    "switches": [],
+    "loop_duration": 14,
+    "meta": {
+      "name": "上游宗室2+4联动工程校验（14秒）"
+    }
+  },
+  "equipment_inputs": {
+    "a": {
+      "mode": "panel",
+      "panel_policy": "static_included",
+      "character_ref": {
+        "db_character_id": 10000002,
+        "version_line": "release"
+      },
+      "weapon": null,
+      "artifact_sets": [
+        {
+          "set_id": 15007,
+          "count": 4
+        }
+      ],
+      "data_version": {
+        "version_line": "release",
+        "upstream_commit": "9424e4e556bd80e5196be7d3c52723d3a35b30e7",
+        "equipment_schema_version": 1,
+        "built_at": "2026-09-13T19:57:51.658448+00:00"
+      },
+      "source_refs": [
+        {
+          "kind": "manual",
+          "note": "工程面板：ATK2000、基础ATK1000，无暴击，90级同级怪10%抗性；不含被测宗室爆发分类增伤，普通常驻属性已含。时序与单次倍率仅用于边界校验，不是绫华实战技能轴。"
+        }
+      ]
+    }
+  },
+  "effect_bindings": [
+    {
+      "binding_id": "binding.47d83b656fa9ec10ebd8cd47",
+      "provider_character_id": "a",
+      "owner": {
+        "kind": "artifact_set",
+        "set_id": 15007,
+        "required_count": 2,
+        "affix_id": 2150070
+      },
+      "source_refs": [
+        {
+          "table": "EquipAffixExcelConfigData",
+          "key": {
+            "affixId": 2150070
+          },
+          "field": null,
+          "upstream_commit": "9424e4e556bd80e5196be7d3c52723d3a35b30e7"
+        }
+      ],
+      "source_fingerprint": "865138313635b045f7ec1f2f01c4dbb3f3d86a5c147c829a70623447d2e69ea9",
+      "coverage": {
+        "state": "unreviewed",
+        "reviewed_by": null,
+        "source_fingerprint": null,
+        "note": null
+      },
+      "parts": [],
+      "upstream_recipe": {
+        "schema_version": 1,
+        "scenario": {
+          "profile_id": "equipment-effects-fixed-single-player",
+          "profile_version": 1,
+          "accepted_assumptions_fingerprint": "e9c135d35c42450deb508962ddc5138d8a65bafedc6b374eb4318b1ee3c6de41",
+          "single_player_fixed": true,
+          "all_targets_monsters": true,
+          "single_unique_provider": true,
+          "no_external_state_changes": true,
+          "max_party_distance": 40,
+          "static_policy": "execute"
+        },
+        "ability_refs": [
+          {
+            "ability_id": "q",
+            "skill_id": 10019
+          }
+        ]
+      }
+    },
+    {
+      "binding_id": "binding.db5ce90ba28a43ef18579d1a",
+      "provider_character_id": "a",
+      "owner": {
+        "kind": "artifact_set",
+        "set_id": 15007,
+        "required_count": 4,
+        "affix_id": 2150071
+      },
+      "source_refs": [
+        {
+          "table": "EquipAffixExcelConfigData",
+          "key": {
+            "affixId": 2150071
+          },
+          "field": null,
+          "upstream_commit": "9424e4e556bd80e5196be7d3c52723d3a35b30e7"
+        }
+      ],
+      "source_fingerprint": "b02224839106311cb61175bf0e7682572a56fe24b68c55fb20af1c55ecb61ca7",
+      "coverage": {
+        "state": "unreviewed",
+        "reviewed_by": null,
+        "source_fingerprint": null,
+        "note": null
+      },
+      "parts": [],
+      "upstream_recipe": {
+        "schema_version": 1,
+        "scenario": {
+          "profile_id": "equipment-effects-fixed-single-player",
+          "profile_version": 1,
+          "accepted_assumptions_fingerprint": "d98be0f11494f7484a8bb2a970298fa3b1cd1ef3871bd4f2de0e50cb7be2e472",
+          "single_player_fixed": true,
+          "all_targets_monsters": true,
+          "single_unique_provider": true,
+          "no_external_state_changes": true,
+          "max_party_distance": 40,
+          "static_policy": "execute"
+        },
+        "ability_refs": [
+          {
+            "ability_id": "q",
+            "skill_id": 10019
+          }
+        ]
+      }
+    }
+  ],
+  "manual_effect_dependencies": [],
+  "rotation_tuning": {
+    "buff_hit_matches": []
+  },
+  "resolution": {
+    "state": "ready",
+    "composer_version": "1.3.0",
+    "input_fingerprint": "95ef4159c6fa3ba5a46e9005d1de1a6cffae87581ebf5d2d469c331f2fc6f273",
+    "source_fingerprint": "28b8e9a6acd67fe29b871f07219303143efd393ca7b10d1bc818d99adf16e625",
+    "output_fingerprint": "318d4989432d0e45a07a56c438b91b0141e13e3aa09241afad06231dd77215f3",
+    "missing_inputs": [],
+    "warnings": [],
+    "contribution_report": {
+      "characters": {
+        "a": {
+          "base": {
+            "atk": 1000
+          },
+          "static": {
+            "atk": 2000,
+            "base_atk": 1000,
+            "em": 0,
+            "crit_rate": 0,
+            "crit_dmg": 0.5,
+            "energy_recharge": 1
+          },
+          "final": {
+            "atk": 2000,
+            "base_atk": 1000,
+            "em": 0,
+            "crit_rate": 0,
+            "crit_dmg": 0.5,
+            "energy_recharge": 1
+          },
+          "contributions": []
+        }
+      },
+      "generated_outputs": [
+        {
+          "binding_id": "binding.47d83b656fa9ec10ebd8cd47",
+          "part_id": "upstream",
+          "buff": {
+            "id": "generated.buff.1840f09816c6c40e38d24bdbc4c93f47",
+            "source": "上游结构编译·常驻分类增伤",
+            "start": 0,
+            "end": 14,
+            "scope": "team",
+            "target": "a",
+            "effects": [
+              {
+                "id": "value",
+                "benefit_type_id": "benefit.dmg_bonus.all",
+                "zone": "dmg_bonus",
+                "stat": "all",
+                "applies_to": {
+                  "mode": "types",
+                  "damage_type_ids": [
+                    "damage.elemental_burst"
+                  ]
+                },
+                "value": 0.20000000298023224
+              }
+            ],
+            "extensions": {
+              "owner": "a",
+              "source_id": "binding.47d83b656fa9ec10ebd8cd47:upstream"
+            }
+          }
+        },
+        {
+          "binding_id": "binding.db5ce90ba28a43ef18579d1a",
+          "part_id": "upstream",
+          "mechanics_rule_id": "upstream.10a1d58656eb108e3c9f7d27"
+        }
+      ],
+      "equipment_sources": {
+        "a": {
+          "artifacts": {},
+          "main_stats": {},
+          "sets": {
+            "15007": {
+              "artifact_set": {
+                "id": 15007,
+                "affix_group_id": 215007,
+                "source_rank_level": 5,
+                "icon": "UI_RelicIcon_15007_4",
+                "disable_filter": null,
+                "bag_sort_value": 20,
+                "name": "昔日宗室之仪",
+                "name_text_map_hash": "1750139131",
+                "name_source": {
+                  "table": "EquipAffixExcelConfigData",
+                  "record_id": 2150070,
+                  "text_map_hash": "1750139131",
+                  "language": "CHS",
+                  "upstream_commit": "9424e4e556bd80e5196be7d3c52723d3a35b30e7"
+                },
+                "name_status": "present",
+                "version_line": "release",
+                "required_counts": [
+                  2,
+                  4
+                ],
+                "contains_ids": [
+                  81340,
+                  81320,
+                  81350,
+                  81310,
+                  81330
+                ],
+                "source_missing_fields": [
+                  "disableFilter"
+                ],
+                "source_refs": [
+                  {
+                    "table": "ReliquarySetExcelConfigData",
+                    "key": {
+                      "setId": 15007
+                    },
+                    "field": null,
+                    "upstream_commit": "9424e4e556bd80e5196be7d3c52723d3a35b30e7"
+                  }
+                ],
+                "catalog_rarities": [
+                  4,
+                  5
+                ],
+                "configured_rarities": [
+                  3,
+                  4,
+                  5
+                ],
+                "in_codex": true
+              },
+              "effects": [
+                {
+                  "required_count": 2,
+                  "source_index": 0,
+                  "relation_status": "present",
+                  "effect": {
+                    "affix_id": 2150070,
+                    "affix_group_id": 215007,
+                    "source_level": 0,
+                    "name": "昔日宗室之仪",
+                    "name_text_map_hash": "1750139131",
+                    "name_source": {
+                      "table": "EquipAffixExcelConfigData",
+                      "record_id": 2150070,
+                      "text_map_hash": "1750139131",
+                      "language": "CHS",
+                      "upstream_commit": "9424e4e556bd80e5196be7d3c52723d3a35b30e7"
+                    },
+                    "name_status": "present",
+                    "desc_template": "元素爆发造成的伤害提升20%。",
+                    "desc_source": {
+                      "table": "EquipAffixExcelConfigData",
+                      "record_id": 2150070,
+                      "text_map_hash": "4115763393",
+                      "language": "CHS",
+                      "upstream_commit": "9424e4e556bd80e5196be7d3c52723d3a35b30e7"
+                    },
+                    "desc_status": "present",
+                    "open_config": "Relic_ElementalBurstUp",
+                    "version_line": "release",
+                    "param_list": [
+                      0.20000000298023224,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0
+                    ],
+                    "add_props": [
+                      {},
+                      {},
+                      {}
+                    ],
+                    "source_missing_fields": [
+                      "level"
+                    ],
+                    "source_refs": [
+                      {
+                        "table": "EquipAffixExcelConfigData",
+                        "key": {
+                          "affixId": 2150070
+                        },
+                        "field": null,
+                        "upstream_commit": "9424e4e556bd80e5196be7d3c52723d3a35b30e7"
+                      }
+                    ],
+                    "annotations": []
+                  }
+                },
+                {
+                  "required_count": 4,
+                  "source_index": 1,
+                  "relation_status": "present",
+                  "effect": {
+                    "affix_id": 2150071,
+                    "affix_group_id": 215007,
+                    "source_level": 1,
+                    "name": "昔日宗室之仪",
+                    "name_text_map_hash": "1751039235",
+                    "name_source": {
+                      "table": "EquipAffixExcelConfigData",
+                      "record_id": 2150071,
+                      "text_map_hash": "1751039235",
+                      "language": "CHS",
+                      "upstream_commit": "9424e4e556bd80e5196be7d3c52723d3a35b30e7"
+                    },
+                    "name_status": "present",
+                    "desc_template": "施放元素爆发后，队伍中所有角色攻击力提升20%，持续12秒。该效果不可叠加。",
+                    "desc_source": {
+                      "table": "EquipAffixExcelConfigData",
+                      "record_id": 2150071,
+                      "text_map_hash": "2492204417",
+                      "language": "CHS",
+                      "upstream_commit": "9424e4e556bd80e5196be7d3c52723d3a35b30e7"
+                    },
+                    "desc_status": "present",
+                    "open_config": "Relic_TeamAtkupAfterElementalBurst",
+                    "version_line": "release",
+                    "param_list": [
+                      0.20000000298023224,
+                      12,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0
+                    ],
+                    "add_props": [
+                      {},
+                      {},
+                      {}
+                    ],
+                    "source_missing_fields": [],
+                    "source_refs": [
+                      {
+                        "table": "EquipAffixExcelConfigData",
+                        "key": {
+                          "affixId": 2150071
+                        },
+                        "field": null,
+                        "upstream_commit": "9424e4e556bd80e5196be7d3c52723d3a35b30e7"
+                      }
+                    ],
+                    "annotations": []
+                  }
+                }
+              ],
+              "piece_refs": [
+                {
+                  "artifact_id": 81410,
+                  "equip_type": "EQUIP_RING",
+                  "rarity": 4,
+                  "codex_id": 30108104
+                },
+                {
+                  "artifact_id": 81420,
+                  "equip_type": "EQUIP_NECKLACE",
+                  "rarity": 4,
+                  "codex_id": 30108104
+                },
+                {
+                  "artifact_id": 81430,
+                  "equip_type": "EQUIP_DRESS",
+                  "rarity": 4,
+                  "codex_id": 30108104
+                },
+                {
+                  "artifact_id": 81440,
+                  "equip_type": "EQUIP_BRACER",
+                  "rarity": 4,
+                  "codex_id": 30108104
+                },
+                {
+                  "artifact_id": 81450,
+                  "equip_type": "EQUIP_SHOES",
+                  "rarity": 4,
+                  "codex_id": 30108104
+                },
+                {
+                  "artifact_id": 81510,
+                  "equip_type": "EQUIP_RING",
+                  "rarity": 5,
+                  "codex_id": 30108105
+                },
+                {
+                  "artifact_id": 81520,
+                  "equip_type": "EQUIP_NECKLACE",
+                  "rarity": 5,
+                  "codex_id": 30108105
+                },
+                {
+                  "artifact_id": 81530,
+                  "equip_type": "EQUIP_DRESS",
+                  "rarity": 5,
+                  "codex_id": 30108105
+                },
+                {
+                  "artifact_id": 81540,
+                  "equip_type": "EQUIP_BRACER",
+                  "rarity": 5,
+                  "codex_id": 30108105
+                },
+                {
+                  "artifact_id": 81550,
+                  "equip_type": "EQUIP_SHOES",
+                  "rarity": 5,
+                  "codex_id": 30108105
+                }
+              ],
+              "piece_refs_total": 10,
+              "piece_refs_truncated": false,
+              "annotations": [],
+              "warnings": [],
+              "data_version": {
+                "version_line": "release",
+                "upstream_commit": "9424e4e556bd80e5196be7d3c52723d3a35b30e7",
+                "equipment_schema_version": 1,
+                "built_at": "2026-09-13T19:57:51.658448+00:00"
+              }
+            }
+          },
+          "base_sources": [
+            {
+              "contribution_id": "manual_template.characters.a.stats.base_atk",
+              "stat": "atk",
+              "value": 1000,
+              "source_refs": [
+                {
+                  "kind": "manual",
+                  "note": "工程面板：ATK2000、基础ATK1000，无暴击，90级同级怪10%抗性；不含被测宗室爆发分类增伤，普通常驻属性已含。时序与单次倍率仅用于边界校验，不是绫华实战技能轴。"
+                }
+              ],
+              "note": "初始面板显式给定的基础值，不从最终属性逆推"
+            }
+          ],
+          "mode": "panel",
+          "panel_policy": "static_included",
+          "source_refs": [
+            {
+              "kind": "manual",
+              "note": "工程面板：ATK2000、基础ATK1000，无暴击，90级同级怪10%抗性；不含被测宗室爆发分类增伤，普通常驻属性已含。时序与单次倍率仅用于边界校验，不是绫华实战技能轴。"
+            }
+          ],
+          "character": {
+            "id": 10000002,
+            "version_line": "release",
+            "name": "神里绫华",
+            "desc": "稻妻「社奉行」神里家的大小姐。端庄而文雅，聪慧又坚韧。",
+            "rarity": 5,
+            "weapon_type": "WEAPON_SWORD_ONE_HAND",
+            "element": "冰",
+            "hp_90": 12858.207019053749,
+            "atk_90": 342.0250962186219,
+            "def_90": 783.9254743546844,
+            "hp_100": 13772.107364923228,
+            "atk_100": 418.9759547343383,
+            "def_100": 839.6427665671508,
+            "ascension_prop": "暴击伤害",
+            "ascension_value": 0.3840000033378601,
+            "crit_rate": 0.05000000074505806,
+            "crit_dmg": 0.5,
+            "charge_efficiency": 1.0,
+            "grow_curves": {
+              "HP": "GROW_CURVE_HP_S5",
+              "ATK": "GROW_CURVE_ATTACK_S5",
+              "DEF": "GROW_CURVE_HP_S5"
+            },
+            "skill_depot_id": 201,
+            "promote_id": 2
+          }
+        }
+      }
+    },
+    "context_fingerprint": "8ffd42324d9d801932b21916f9c36d2938b257084f745a8d46aea85ebabb3ee8",
+    "effect_requirements": [
+      {
+        "binding_id": "binding.47d83b656fa9ec10ebd8cd47",
+        "provider_character_id": "a",
+        "owner": {
+          "kind": "artifact_set",
+          "set_id": 15007,
+          "required_count": 2,
+          "affix_id": 2150070
+        },
+        "source_refs": [
+          {
+            "table": "EquipAffixExcelConfigData",
+            "key": {
+              "affixId": 2150070
+            },
+            "field": null,
+            "upstream_commit": "9424e4e556bd80e5196be7d3c52723d3a35b30e7"
+          }
+        ],
+        "source_fingerprint": "865138313635b045f7ec1f2f01c4dbb3f3d86a5c147c829a70623447d2e69ea9",
+        "effect": {
+          "affix_id": 2150070,
+          "affix_group_id": 215007,
+          "source_level": 0,
+          "name": "昔日宗室之仪",
+          "name_text_map_hash": "1750139131",
+          "name_source": {
+            "table": "EquipAffixExcelConfigData",
+            "record_id": 2150070,
+            "text_map_hash": "1750139131",
+            "language": "CHS",
+            "upstream_commit": "9424e4e556bd80e5196be7d3c52723d3a35b30e7"
+          },
+          "name_status": "present",
+          "desc_template": "元素爆发造成的伤害提升20%。",
+          "desc_source": {
+            "table": "EquipAffixExcelConfigData",
+            "record_id": 2150070,
+            "text_map_hash": "4115763393",
+            "language": "CHS",
+            "upstream_commit": "9424e4e556bd80e5196be7d3c52723d3a35b30e7"
+          },
+          "desc_status": "present",
+          "open_config": "Relic_ElementalBurstUp",
+          "version_line": "release",
+          "param_list": [
+            0.20000000298023224,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "add_props": [
+            {},
+            {},
+            {}
+          ],
+          "source_missing_fields": [
+            "level"
+          ],
+          "source_refs": [
+            {
+              "table": "EquipAffixExcelConfigData",
+              "key": {
+                "affixId": 2150070
+              },
+              "field": null,
+              "upstream_commit": "9424e4e556bd80e5196be7d3c52723d3a35b30e7"
+            }
+          ],
+          "annotations": []
+        },
+        "proposed_binding": {
+          "binding_id": "binding.47d83b656fa9ec10ebd8cd47",
+          "provider_character_id": "a",
+          "owner": {
+            "kind": "artifact_set",
+            "set_id": 15007,
+            "required_count": 2,
+            "affix_id": 2150070
+          },
+          "source_refs": [
+            {
+              "table": "EquipAffixExcelConfigData",
+              "key": {
+                "affixId": 2150070
+              },
+              "field": null,
+              "upstream_commit": "9424e4e556bd80e5196be7d3c52723d3a35b30e7"
+            }
+          ],
+          "source_fingerprint": "865138313635b045f7ec1f2f01c4dbb3f3d86a5c147c829a70623447d2e69ea9",
+          "coverage": {
+            "state": "unreviewed",
+            "reviewed_by": null,
+            "source_fingerprint": null,
+            "note": null
+          },
+          "parts": []
+        }
+      },
+      {
+        "binding_id": "binding.db5ce90ba28a43ef18579d1a",
+        "provider_character_id": "a",
+        "owner": {
+          "kind": "artifact_set",
+          "set_id": 15007,
+          "required_count": 4,
+          "affix_id": 2150071
+        },
+        "source_refs": [
+          {
+            "table": "EquipAffixExcelConfigData",
+            "key": {
+              "affixId": 2150071
+            },
+            "field": null,
+            "upstream_commit": "9424e4e556bd80e5196be7d3c52723d3a35b30e7"
+          }
+        ],
+        "source_fingerprint": "b02224839106311cb61175bf0e7682572a56fe24b68c55fb20af1c55ecb61ca7",
+        "effect": {
+          "affix_id": 2150071,
+          "affix_group_id": 215007,
+          "source_level": 1,
+          "name": "昔日宗室之仪",
+          "name_text_map_hash": "1751039235",
+          "name_source": {
+            "table": "EquipAffixExcelConfigData",
+            "record_id": 2150071,
+            "text_map_hash": "1751039235",
+            "language": "CHS",
+            "upstream_commit": "9424e4e556bd80e5196be7d3c52723d3a35b30e7"
+          },
+          "name_status": "present",
+          "desc_template": "施放元素爆发后，队伍中所有角色攻击力提升20%，持续12秒。该效果不可叠加。",
+          "desc_source": {
+            "table": "EquipAffixExcelConfigData",
+            "record_id": 2150071,
+            "text_map_hash": "2492204417",
+            "language": "CHS",
+            "upstream_commit": "9424e4e556bd80e5196be7d3c52723d3a35b30e7"
+          },
+          "desc_status": "present",
+          "open_config": "Relic_TeamAtkupAfterElementalBurst",
+          "version_line": "release",
+          "param_list": [
+            0.20000000298023224,
+            12,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "add_props": [
+            {},
+            {},
+            {}
+          ],
+          "source_missing_fields": [],
+          "source_refs": [
+            {
+              "table": "EquipAffixExcelConfigData",
+              "key": {
+                "affixId": 2150071
+              },
+              "field": null,
+              "upstream_commit": "9424e4e556bd80e5196be7d3c52723d3a35b30e7"
+            }
+          ],
+          "annotations": []
+        },
+        "proposed_binding": {
+          "binding_id": "binding.db5ce90ba28a43ef18579d1a",
+          "provider_character_id": "a",
+          "owner": {
+            "kind": "artifact_set",
+            "set_id": 15007,
+            "required_count": 4,
+            "affix_id": 2150071
+          },
+          "source_refs": [
+            {
+              "table": "EquipAffixExcelConfigData",
+              "key": {
+                "affixId": 2150071
+              },
+              "field": null,
+              "upstream_commit": "9424e4e556bd80e5196be7d3c52723d3a35b30e7"
+            }
+          ],
+          "source_fingerprint": "b02224839106311cb61175bf0e7682572a56fe24b68c55fb20af1c55ecb61ca7",
+          "coverage": {
+            "state": "unreviewed",
+            "reviewed_by": null,
+            "source_fingerprint": null,
+            "note": null
+          },
+          "parts": []
+        }
+      }
+    ],
+    "match_previews": [],
+    "manual_dependency_previews": [],
+    "data_versions": [
+      {
+        "version_line": "release",
+        "upstream_commit": "9424e4e556bd80e5196be7d3c52723d3a35b30e7",
+        "equipment_schema_version": 1,
+        "built_at": "2026-09-13T19:57:51.658448+00:00"
+      },
+      {
+        "kind": "database",
+        "character_id": 10000002,
+        "version_line": "release",
+        "level": 90,
+        "upstream_commit": "9424e4e556bd80e5196be7d3c52723d3a35b30e7",
+        "built_at": "2026-09-13T19:57:50.972600+00:00",
+        "fields": [
+          "atk_90",
+          "hp_90",
+          "def_90",
+          "crit_rate",
+          "crit_dmg",
+          "charge_efficiency",
+          "ascension_prop",
+          "ascension_value"
+        ],
+        "value_fingerprint": "766735606f82c01753c34b84b308ff0230e795926c7ff0d1089e545fb1128eda"
+      }
+    ],
+    "assumptions": [
+      "a 使用给定初始面板，已含两件套等常驻属性；武器成长及圣遗物词条不再加算",
+      "binding.47d83b656fa9ec10ebd8cd47：采用受限上游适配模型，游戏语义包含显式假设，尚未完全验证",
+      "binding.db5ce90ba28a43ef18579d1a：采用受限上游适配模型，游戏语义包含显式假设，尚未完全验证"
+    ],
+    "upstream_compilations": [
+      {
+        "status": "ready",
+        "execution_status": "ready",
+        "gameplay_semantics_status": "assumed_in_scope",
+        "issues": [],
+        "rules": [],
+        "initial_rules": [],
+        "static_parts": [
+          {
+            "part_id": "upstream",
+            "label": "上游常驻分类增伤",
+            "state": "resolved",
+            "rule": {
+              "kind": "constant",
+              "value": 0.20000000298023224
+            },
+            "delivery": {
+              "kind": "buff",
+              "start": 0,
+              "end": 14,
+              "scope": "team",
+              "target": "a",
+              "source": "上游结构编译·常驻分类增伤",
+              "effect": {
+                "id": "value",
+                "benefit_type_id": "benefit.dmg_bonus.all",
+                "zone": "dmg_bonus",
+                "stat": "all",
+                "applies_to": {
+                  "mode": "types",
+                  "damage_type_ids": [
+                    "damage.elemental_burst"
+                  ]
+                }
+              }
+            },
+            "conditions": [
+              {
+                "condition_id": "upstream-profile",
+                "description": "已采用的受限结构适配场景",
+                "state": "confirmed",
+                "scope": "always",
+                "intervals": [],
+                "evidence": [
+                  {
+                    "kind": "compiler_profile",
+                    "profile_id": "equipment-effects-fixed-single-player",
+                    "profile_version": 1
+                  }
+                ]
+              }
+            ],
+            "dependencies": {
+              "mode": "source_only",
+              "context_fingerprint": null,
+              "note": "每次组合重新编译；机器适配证明不等于人工游戏审核。"
+            },
+            "reason": null,
+            "extensions": {
+              "upstream_compiled": true
+            }
+          }
+        ],
+        "parts": [
+          {
+            "part_id": "upstream",
+            "label": "上游常驻分类增伤",
+            "state": "resolved",
+            "rule": {
+              "kind": "constant",
+              "value": 0.20000000298023224
+            },
+            "delivery": {
+              "kind": "buff",
+              "start": 0,
+              "end": 14,
+              "scope": "team",
+              "target": "a",
+              "source": "上游结构编译·常驻分类增伤",
+              "effect": {
+                "id": "value",
+                "benefit_type_id": "benefit.dmg_bonus.all",
+                "zone": "dmg_bonus",
+                "stat": "all",
+                "applies_to": {
+                  "mode": "types",
+                  "damage_type_ids": [
+                    "damage.elemental_burst"
+                  ]
+                }
+              }
+            },
+            "conditions": [
+              {
+                "condition_id": "upstream-profile",
+                "description": "已采用的受限结构适配场景",
+                "state": "confirmed",
+                "scope": "always",
+                "intervals": [],
+                "evidence": [
+                  {
+                    "kind": "compiler_profile",
+                    "profile_id": "equipment-effects-fixed-single-player",
+                    "profile_version": 1
+                  }
+                ]
+              }
+            ],
+            "dependencies": {
+              "mode": "source_only",
+              "context_fingerprint": null,
+              "note": "每次组合重新编译；机器适配证明不等于人工游戏审核。"
+            },
+            "reason": null,
+            "extensions": {
+              "upstream_compiled": true
+            }
+          }
+        ],
+        "semantic_assumptions": [
+          {
+            "path": "/abilities/0/payload/isDynamicAbility",
+            "raw_value": true,
+            "assumption": "固定装备与参数窗口中不执行额外动态装配；true标记的完整原生含义尚未验证。",
+            "status": "unverified_game_semantics",
+            "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+            "source_json_pointer": "/30/Default/isDynamicAbility"
+          },
+          {
+            "path": "/abilities/0/payload/LKLPDIMKLKI/elementDurability",
+            "raw_value": 100,
+            "assumption": "固定原始默认容器在当前装备/参数/存活状态不变场景不额外产生数值或事件；未证明其一般游戏语义。",
+            "status": "unverified_game_semantics",
+            "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+            "source_json_pointer": "/30/Default/LKLPDIMKLKI/elementDurability"
+          },
+          {
+            "path": "/abilities/0/payload/LKLPDIMKLKI/minus_one",
+            "raw_value": -1,
+            "assumption": "固定原始默认容器在当前装备/参数/存活状态不变场景不额外产生数值或事件；未证明其一般游戏语义。",
+            "status": "unverified_game_semantics",
+            "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+            "source_json_pointer": "/30/Default/LKLPDIMKLKI/minus_one"
+          },
+          {
+            "path": "/abilities/0/payload/LKLPDIMKLKI/IAKPBCLBNKF",
+            "raw_value": -1,
+            "assumption": "固定原始默认容器在当前装备/参数/存活状态不变场景不额外产生数值或事件；未证明其一般游戏语义。",
+            "status": "unverified_game_semantics",
+            "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+            "source_json_pointer": "/30/Default/LKLPDIMKLKI/IAKPBCLBNKF"
+          },
+          {
+            "path": "/abilities/0/payload/LKLPDIMKLKI/isLimitedProperties",
+            "raw_value": true,
+            "assumption": "固定原始默认容器在当前装备/参数/存活状态不变场景不额外产生数值或事件；未证明其一般游戏语义。",
+            "status": "unverified_game_semantics",
+            "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+            "source_json_pointer": "/30/Default/LKLPDIMKLKI/isLimitedProperties"
+          },
+          {
+            "path": "/talent/operations/0/CLGIKOPIKBC",
+            "raw_value": true,
+            "assumption": "true开关在固定单人普通装备装配场景不改变已声明参数；一般语义未验证。",
+            "status": "unverified_game_semantics",
+            "source_path": "BinOutput/Talent/RelicTalents/ConfigAffix_Relic.json",
+            "source_json_pointer": "/Relic_ElementalBurstUp/0/CLGIKOPIKBC"
+          },
+          {
+            "path": "/talent/operations/1/CLGIKOPIKBC",
+            "raw_value": true,
+            "assumption": "true开关在固定单人普通装备装配场景不改变已声明参数；一般语义未验证。",
+            "status": "unverified_game_semantics",
+            "source_path": "BinOutput/Talent/RelicTalents/ConfigAffix_Relic.json",
+            "source_json_pointer": "/Relic_ElementalBurstUp/1/CLGIKOPIKBC"
+          },
+          {
+            "path": "/abilities/0/payload/abilityMixins/0/actorIceSubHurtDelta",
+            "raw_value": -1,
+            "assumption": "−1为精确匹配哨兵；不参与本受限模型的冰伤运算，不宣称字段一般语义已知。",
+            "status": "unverified_game_semantics",
+            "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+            "source_json_pointer": "/30/Default/abilityMixins/0/actorIceSubHurtDelta"
+          },
+          {
+            "path": "/abilities/0/payload/abilityMixins/0/predicates/0/value",
+            "raw_value": -1,
+            "assumption": "在明确单Monster目标场景中−1哨兵不改变entityTypes过滤；原生选择语义未完全验证。",
+            "status": "unverified_game_semantics",
+            "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+            "source_json_pointer": "/30/Default/abilityMixins/0/predicates/0/value"
+          },
+          {
+            "path": "/abilities/0/payload/abilityMixins/0/attackTags",
+            "raw_value": [
+              "Elemental_Burst"
+            ],
+            "assumption": "调用者已声明命中的damage_type_ids符合对应上游攻击标签分类；本期不从动画独立验证命中分类。",
+            "status": "unverified_game_semantics",
+            "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+            "source_json_pointer": "/30/Default/abilityMixins/0/attackTags"
+          }
+        ],
+        "provenance": {
+          "compiler_version": 1,
+          "profile_id": "equipment-effects-fixed-single-player",
+          "profile_version": 1,
+          "source": {
+            "kind": "equip_affix",
+            "affix_id": 2150070,
+            "affix_group_id": 215007,
+            "source_level": 0,
+            "version_line": "release",
+            "snapshot_id": "9272526f6f5860cc5fd114c0a4cc089c66b7e244e8c1aadc9ae3826023da23d0",
+            "upstream_commit": "9424e4e556bd80e5196be7d3c52723d3a35b30e7"
+          },
+          "content_fingerprint": "5ef955f20b5fb17a043886181a9bc73b5f9a8e1ee92611e66ae0979e9a7e99a2",
+          "actual_bundle_fingerprint": "2de38bb19fbcbe022edaa131bd6861cf4f080d3356d7e7699961a46281cdbfaf",
+          "parameter_bindings": {
+            "Rate": {
+              "operation_pointer": "/Relic_ElementalBurstUp/1",
+              "parameter_slot": 0,
+              "source": "ExcelBinOutput/EquipAffixExcelConfigData.json"
+            }
+          },
+          "parameters": {
+            "Rate": 0.20000000298023224
+          },
+          "field_usage": [
+            {
+              "path": "/owner",
+              "classification": "consumed",
+              "value": "a"
+            },
+            {
+              "path": "/source_id",
+              "classification": "consumed",
+              "value": "binding.47d83b656fa9ec10ebd8cd47:upstream"
+            },
+            {
+              "path": "/period",
+              "classification": "consumed",
+              "value": 14
+            },
+            {
+              "path": "/source/snapshot_id",
+              "classification": "consumed",
+              "value": "9272526f6f5860cc5fd114c0a4cc089c66b7e244e8c1aadc9ae3826023da23d0"
+            },
+            {
+              "path": "/source/upstream_commit",
+              "classification": "consumed",
+              "value": "9424e4e556bd80e5196be7d3c52723d3a35b30e7"
+            },
+            {
+              "path": "/param_list/0",
+              "classification": "consumed",
+              "value": 0.20000000298023224
+            },
+            {
+              "path": "/param_list/1",
+              "classification": "consumed",
+              "value": 0
+            },
+            {
+              "path": "/param_list/2",
+              "classification": "consumed",
+              "value": 0
+            },
+            {
+              "path": "/param_list/3",
+              "classification": "consumed",
+              "value": 0
+            },
+            {
+              "path": "/param_list/4",
+              "classification": "consumed",
+              "value": 0
+            },
+            {
+              "path": "/param_list/5",
+              "classification": "consumed",
+              "value": 0
+            },
+            {
+              "path": "/param_list/6",
+              "classification": "consumed",
+              "value": 0
+            },
+            {
+              "path": "/param_list/7",
+              "classification": "consumed",
+              "value": 0
+            },
+            {
+              "path": "/affix/source_path",
+              "classification": "consumed",
+              "value": "ExcelBinOutput/EquipAffixExcelConfigData.json"
+            },
+            {
+              "path": "/affix/source_sha256",
+              "classification": "consumed",
+              "value": "a033acd70ac085421f2c0eb4eb06c0d74b7676b9a652bfe37881ed0680b089b2"
+            },
+            {
+              "path": "/affix/record/addProps",
+              "classification": "consumed",
+              "value": [
+                {},
+                {},
+                {}
+              ],
+              "source_path": "ExcelBinOutput/EquipAffixExcelConfigData.json",
+              "source_json_pointer": "/1313/addProps"
+            },
+            {
+              "path": "/affix/record/openConfig",
+              "classification": "consumed",
+              "value": "Relic_ElementalBurstUp",
+              "source_path": "ExcelBinOutput/EquipAffixExcelConfigData.json",
+              "source_json_pointer": "/1313/openConfig"
+            },
+            {
+              "path": "/abilities/0/definition_id",
+              "classification": "consumed",
+              "value": "24b2409ecf1f146f1fc832d7cfa1af435cfea447c43c72bd180725a7ca387ddf"
+            },
+            {
+              "path": "/abilities/0/source_path",
+              "classification": "consumed",
+              "value": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json"
+            },
+            {
+              "path": "/abilities/0/source_sha256",
+              "classification": "consumed",
+              "value": "e273a8e4fc5928829bbac96ae61b46003c7bfd95ffe3a24e8b6a080609a409f7"
+            },
+            {
+              "path": "/talent/definition_id",
+              "classification": "consumed",
+              "value": "919a11fa99c4b2888fe43e4854ee085a8ec37e8929b50bbfa9081ebbf5ae821b"
+            },
+            {
+              "path": "/talent/source_path",
+              "classification": "consumed",
+              "value": "BinOutput/Talent/RelicTalents/ConfigAffix_Relic.json"
+            },
+            {
+              "path": "/talent/source_sha256",
+              "classification": "consumed",
+              "value": "5f11748a02b7862d3de3d0d564e918d2df3fedd098191990b220c1d580d5ad97"
+            },
+            {
+              "path": "/talent/json_pointer",
+              "classification": "consumed",
+              "value": "/Relic_ElementalBurstUp"
+            },
+            {
+              "path": "/abilities/0/payload/isDynamicAbility",
+              "classification": "assumed_under_profile",
+              "value": true,
+              "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+              "source_json_pointer": "/30/Default/isDynamicAbility"
+            },
+            {
+              "path": "/abilities/0/payload/LKLPDIMKLKI/elementDurability",
+              "classification": "assumed_under_profile",
+              "value": 100,
+              "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+              "source_json_pointer": "/30/Default/LKLPDIMKLKI/elementDurability"
+            },
+            {
+              "path": "/abilities/0/payload/LKLPDIMKLKI/minus_one",
+              "classification": "assumed_under_profile",
+              "value": -1,
+              "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+              "source_json_pointer": "/30/Default/LKLPDIMKLKI/minus_one"
+            },
+            {
+              "path": "/abilities/0/payload/LKLPDIMKLKI/IAKPBCLBNKF",
+              "classification": "assumed_under_profile",
+              "value": -1,
+              "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+              "source_json_pointer": "/30/Default/LKLPDIMKLKI/IAKPBCLBNKF"
+            },
+            {
+              "path": "/abilities/0/payload/LKLPDIMKLKI/isLimitedProperties",
+              "classification": "assumed_under_profile",
+              "value": true,
+              "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+              "source_json_pointer": "/30/Default/LKLPDIMKLKI/isLimitedProperties"
+            },
+            {
+              "path": "/abilities/0/payload/abilityName",
+              "classification": "consumed",
+              "value": "Relic_ElementalBurstUp",
+              "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+              "source_json_pointer": "/30/Default/abilityName"
+            },
+            {
+              "path": "/abilities/0/payload/abilitySpecials/Rate",
+              "classification": "consumed",
+              "value": 0,
+              "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+              "source_json_pointer": "/30/Default/abilitySpecials/Rate"
+            },
+            {
+              "path": "/talent/operations/0/$type",
+              "classification": "consumed",
+              "value": "AddAbility",
+              "source_path": "BinOutput/Talent/RelicTalents/ConfigAffix_Relic.json",
+              "source_json_pointer": "/Relic_ElementalBurstUp/0/$type"
+            },
+            {
+              "path": "/talent/operations/0/CLGIKOPIKBC",
+              "classification": "assumed_under_profile",
+              "value": true,
+              "source_path": "BinOutput/Talent/RelicTalents/ConfigAffix_Relic.json",
+              "source_json_pointer": "/Relic_ElementalBurstUp/0/CLGIKOPIKBC"
+            },
+            {
+              "path": "/talent/operations/0/abilityName",
+              "classification": "consumed",
+              "value": "Relic_ElementalBurstUp",
+              "source_path": "BinOutput/Talent/RelicTalents/ConfigAffix_Relic.json",
+              "source_json_pointer": "/Relic_ElementalBurstUp/0/abilityName"
+            },
+            {
+              "path": "/talent/operations/1/$type",
+              "classification": "consumed",
+              "value": "ModifyAbility",
+              "source_path": "BinOutput/Talent/RelicTalents/ConfigAffix_Relic.json",
+              "source_json_pointer": "/Relic_ElementalBurstUp/1/$type"
+            },
+            {
+              "path": "/talent/operations/1/CLGIKOPIKBC",
+              "classification": "assumed_under_profile",
+              "value": true,
+              "source_path": "BinOutput/Talent/RelicTalents/ConfigAffix_Relic.json",
+              "source_json_pointer": "/Relic_ElementalBurstUp/1/CLGIKOPIKBC"
+            },
+            {
+              "path": "/talent/operations/1/abilityName",
+              "classification": "consumed",
+              "value": "Relic_ElementalBurstUp",
+              "source_path": "BinOutput/Talent/RelicTalents/ConfigAffix_Relic.json",
+              "source_json_pointer": "/Relic_ElementalBurstUp/1/abilityName"
+            },
+            {
+              "path": "/talent/operations/1/paramDelta",
+              "classification": "consumed",
+              "value": "%1",
+              "source_path": "BinOutput/Talent/RelicTalents/ConfigAffix_Relic.json",
+              "source_json_pointer": "/Relic_ElementalBurstUp/1/paramDelta"
+            },
+            {
+              "path": "/talent/operations/1/paramSpecial",
+              "classification": "consumed",
+              "value": "Rate",
+              "source_path": "BinOutput/Talent/RelicTalents/ConfigAffix_Relic.json",
+              "source_json_pointer": "/Relic_ElementalBurstUp/1/paramSpecial"
+            },
+            {
+              "path": "/abilities/0/payload/abilityMixins/0/$type",
+              "classification": "consumed",
+              "value": "ModifyDamageMixin",
+              "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+              "source_json_pointer": "/30/Default/abilityMixins/0/$type"
+            },
+            {
+              "path": "/abilities/0/payload/abilityMixins/0/actorIceSubHurtDelta",
+              "classification": "assumed_under_profile",
+              "value": -1,
+              "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+              "source_json_pointer": "/30/Default/abilityMixins/0/actorIceSubHurtDelta"
+            },
+            {
+              "path": "/abilities/0/payload/abilityMixins/0/predicates/0/$type",
+              "classification": "consumed",
+              "value": "ByEntityTypes",
+              "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+              "source_json_pointer": "/30/Default/abilityMixins/0/predicates/0/$type"
+            },
+            {
+              "path": "/abilities/0/payload/abilityMixins/0/predicates/0/target",
+              "classification": "consumed",
+              "value": "Target",
+              "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+              "source_json_pointer": "/30/Default/abilityMixins/0/predicates/0/target"
+            },
+            {
+              "path": "/abilities/0/payload/abilityMixins/0/predicates/0/entityTypes",
+              "classification": "consumed",
+              "value": [
+                "Monster"
+              ],
+              "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+              "source_json_pointer": "/30/Default/abilityMixins/0/predicates/0/entityTypes"
+            },
+            {
+              "path": "/abilities/0/payload/abilityMixins/0/predicates/0/value",
+              "classification": "assumed_under_profile",
+              "value": -1,
+              "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+              "source_json_pointer": "/30/Default/abilityMixins/0/predicates/0/value"
+            },
+            {
+              "path": "/abilities/0/payload/abilityMixins/0/attackTags",
+              "classification": "consumed",
+              "value": [
+                "Elemental_Burst"
+              ],
+              "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+              "source_json_pointer": "/30/Default/abilityMixins/0/attackTags"
+            },
+            {
+              "path": "/abilities/0/payload/abilityMixins/0/damagePercentageRatio",
+              "classification": "consumed",
+              "parameter": "Rate",
+              "value": 0.20000000298023224,
+              "binding": {
+                "operation_pointer": "/Relic_ElementalBurstUp/1",
+                "parameter_slot": 0,
+                "source": "ExcelBinOutput/EquipAffixExcelConfigData.json"
+              },
+              "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+              "source_json_pointer": "/30/Default/abilityMixins/0/damagePercentageRatio"
+            },
+            {
+              "path": "/scenario/profile_id",
+              "classification": "consumed",
+              "value": "equipment-effects-fixed-single-player"
+            },
+            {
+              "path": "/scenario/profile_version",
+              "classification": "consumed",
+              "value": 1
+            },
+            {
+              "path": "/scenario/single_player_fixed",
+              "classification": "consumed",
+              "value": true
+            },
+            {
+              "path": "/scenario/all_targets_monsters",
+              "classification": "consumed",
+              "value": true
+            },
+            {
+              "path": "/scenario/single_unique_provider",
+              "classification": "consumed",
+              "value": true
+            },
+            {
+              "path": "/scenario/no_external_state_changes",
+              "classification": "consumed",
+              "value": true
+            },
+            {
+              "path": "/scenario/max_party_distance",
+              "classification": "consumed",
+              "value": 40
+            }
+          ],
+          "assumptions_fingerprint": "e9c135d35c42450deb508962ddc5138d8a65bafedc6b374eb4318b1ee3c6de41",
+          "source_mapping": {
+            "talent": {
+              "source_path": "BinOutput/Talent/RelicTalents/ConfigAffix_Relic.json",
+              "json_pointer": "/Relic_ElementalBurstUp",
+              "source_sha256": "5f11748a02b7862d3de3d0d564e918d2df3fedd098191990b220c1d580d5ad97"
+            },
+            "affix": {
+              "source_path": "ExcelBinOutput/EquipAffixExcelConfigData.json",
+              "json_pointer": "/1313",
+              "source_sha256": "a033acd70ac085421f2c0eb4eb06c0d74b7676b9a652bfe37881ed0680b089b2"
+            }
+          },
+          "ability_sources": [
+            {
+              "definition_id": "24b2409ecf1f146f1fc832d7cfa1af435cfea447c43c72bd180725a7ca387ddf",
+              "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+              "json_pointer": "/30/Default",
+              "source_sha256": "e273a8e4fc5928829bbac96ae61b46003c7bfd95ffe3a24e8b6a080609a409f7"
+            }
+          ]
+        },
+        "coverage_certificate": {
+          "kind": "compiler_scope_certificate",
+          "human_reviewed": false,
+          "source_complete": true,
+          "requested_source_status": "ready",
+          "interpreted_fields": 45,
+          "assumed_fields": 10,
+          "gameplay_verified": false
+        },
+        "required_scenario": [],
+        "unique_keys": [],
+        "actual_bundle_fingerprint": "2de38bb19fbcbe022edaa131bd6861cf4f080d3356d7e7699961a46281cdbfaf",
+        "assumptions_fingerprint": "e9c135d35c42450deb508962ddc5138d8a65bafedc6b374eb4318b1ee3c6de41",
+        "source_identity": {
+          "version_line": "release",
+          "affix_id": "2150070",
+          "provider": "a"
+        },
+        "execution_fingerprint": "751814e15320ebc5b35ee5a508c7a2a93253428b2cdb1beea5b07ff783e6cf0b",
+        "binding_id": "binding.47d83b656fa9ec10ebd8cd47",
+        "compilation_fingerprint": "83dd5c45966868aee542f081e0596735d6134e07dadad6a41629502e5585edac"
+      },
+      {
+        "status": "ready",
+        "execution_status": "ready",
+        "gameplay_semantics_status": "assumed_in_scope",
+        "issues": [],
+        "rules": [
+          {
+            "id": "upstream.10a1d58656eb108e3c9f7d27",
+            "name_zh": "上游爆发触发·全队攻击加成",
+            "owner": "a",
+            "source_id": "binding.db5ce90ba28a43ef18579d1a:upstream",
+            "trigger": {
+              "event": "action_start",
+              "phase": "post",
+              "characters": [
+                "a"
+              ],
+              "action_type_ids": [
+                "action.elemental_burst"
+              ],
+              "action_ids": [
+                "burst-cast"
+              ]
+            },
+            "beneficiaries": {
+              "mode": "team",
+              "scope": "locked"
+            },
+            "timing": {
+              "delay": 0,
+              "duration": 12,
+              "cooldown": 0,
+              "cooldown_anchor": "success"
+            },
+            "stacking": {
+              "max": 1,
+              "add": 1,
+              "policy": "refresh"
+            },
+            "effects": [
+              {
+                "id": "value",
+                "benefit_type_id": "benefit.stat_pct.atk",
+                "value": 0.20000000298023224,
+                "domain": "self"
+              }
+            ],
+            "status": "assumed",
+            "source": "上游结构编译；明确适配profile下的成功爆发语义"
+          }
+        ],
+        "initial_rules": [
+          {
+            "rule_id": "upstream.10a1d58656eb108e3c9f7d27",
+            "cooldown_remaining": 0,
+            "instances": []
+          }
+        ],
+        "static_parts": [],
+        "parts": [
+          {
+            "part_id": "upstream",
+            "label": "上游爆发触发全队攻击加成",
+            "state": "resolved",
+            "rule": {
+              "kind": "mechanics",
+              "rule_id": "upstream.10a1d58656eb108e3c9f7d27"
+            },
+            "delivery": {
+              "kind": "mechanics"
+            },
+            "conditions": [
+              {
+                "condition_id": "upstream-profile",
+                "description": "已采用的受限结构适配场景",
+                "state": "confirmed",
+                "scope": "always",
+                "intervals": [],
+                "evidence": [
+                  {
+                    "kind": "compiler_profile",
+                    "profile_id": "equipment-effects-fixed-single-player",
+                    "profile_version": 1
+                  }
+                ]
+              }
+            ],
+            "dependencies": {
+              "mode": "source_only",
+              "context_fingerprint": null,
+              "note": "每次组合重新编译；机器适配证明不等于人工游戏审核。"
+            },
+            "reason": null,
+            "extensions": {
+              "upstream_compiled": true
+            }
+          }
+        ],
+        "semantic_assumptions": [
+          {
+            "path": "/abilities/0/payload/isDynamicAbility",
+            "raw_value": true,
+            "assumption": "固定装备与参数窗口中不执行额外动态装配；true标记的完整原生含义尚未验证。",
+            "status": "unverified_game_semantics",
+            "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+            "source_json_pointer": "/31/Default/isDynamicAbility"
+          },
+          {
+            "path": "/abilities/0/payload/LKLPDIMKLKI/elementDurability",
+            "raw_value": 100,
+            "assumption": "固定原始默认容器在当前装备/参数/存活状态不变场景不额外产生数值或事件；未证明其一般游戏语义。",
+            "status": "unverified_game_semantics",
+            "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+            "source_json_pointer": "/31/Default/LKLPDIMKLKI/elementDurability"
+          },
+          {
+            "path": "/abilities/0/payload/LKLPDIMKLKI/minus_one",
+            "raw_value": -1,
+            "assumption": "固定原始默认容器在当前装备/参数/存活状态不变场景不额外产生数值或事件；未证明其一般游戏语义。",
+            "status": "unverified_game_semantics",
+            "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+            "source_json_pointer": "/31/Default/LKLPDIMKLKI/minus_one"
+          },
+          {
+            "path": "/abilities/0/payload/LKLPDIMKLKI/IAKPBCLBNKF",
+            "raw_value": -1,
+            "assumption": "固定原始默认容器在当前装备/参数/存活状态不变场景不额外产生数值或事件；未证明其一般游戏语义。",
+            "status": "unverified_game_semantics",
+            "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+            "source_json_pointer": "/31/Default/LKLPDIMKLKI/IAKPBCLBNKF"
+          },
+          {
+            "path": "/abilities/0/payload/LKLPDIMKLKI/isLimitedProperties",
+            "raw_value": true,
+            "assumption": "固定原始默认容器在当前装备/参数/存活状态不变场景不额外产生数值或事件；未证明其一般游戏语义。",
+            "status": "unverified_game_semantics",
+            "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+            "source_json_pointer": "/31/Default/LKLPDIMKLKI/isLimitedProperties"
+          },
+          {
+            "path": "/talent/operations/0/CLGIKOPIKBC",
+            "raw_value": true,
+            "assumption": "true开关在固定单人普通装备装配场景不改变已声明参数；一般语义未验证。",
+            "status": "unverified_game_semantics",
+            "source_path": "BinOutput/Talent/RelicTalents/ConfigAffix_Relic.json",
+            "source_json_pointer": "/Relic_TeamAtkupAfterElementalBurst/0/CLGIKOPIKBC"
+          },
+          {
+            "path": "/talent/operations/1/CLGIKOPIKBC",
+            "raw_value": true,
+            "assumption": "true开关在固定单人普通装备装配场景不改变已声明参数；一般语义未验证。",
+            "status": "unverified_game_semantics",
+            "source_path": "BinOutput/Talent/RelicTalents/ConfigAffix_Relic.json",
+            "source_json_pointer": "/Relic_TeamAtkupAfterElementalBurst/1/CLGIKOPIKBC"
+          },
+          {
+            "path": "/talent/operations/2/CLGIKOPIKBC",
+            "raw_value": true,
+            "assumption": "true开关在固定单人普通装备装配场景不改变已声明参数；一般语义未验证。",
+            "status": "unverified_game_semantics",
+            "source_path": "BinOutput/Talent/RelicTalents/ConfigAffix_Relic.json",
+            "source_json_pointer": "/Relic_TeamAtkupAfterElementalBurst/2/CLGIKOPIKBC"
+          },
+          {
+            "path": "/abilities/0/payload/abilityMixins/0/actorIceSubHurtDelta",
+            "raw_value": -1,
+            "assumption": "−1为精确匹配哨兵；不参与本受限模型的冰伤运算，不宣称字段一般语义已知。",
+            "status": "unverified_game_semantics",
+            "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+            "source_json_pointer": "/31/Default/abilityMixins/0/actorIceSubHurtDelta"
+          },
+          {
+            "path": "/abilities/0/payload/abilityMixins/0/clearSkillIdDelay",
+            "raw_value": 0.20000000298023224,
+            "assumption": "每个D20已准入爆发只桥接一次成功事件，不模拟客户端重复技能通知及原生清理时间。",
+            "status": "unverified_game_semantics",
+            "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+            "source_json_pointer": "/31/Default/abilityMixins/0/clearSkillIdDelay"
+          },
+          {
+            "path": "/abilities/0/payload/abilityMixins/0/onTriggerUltimateSkill/0/actorIceSubHurtDelta",
+            "raw_value": -1,
+            "assumption": "−1为精确匹配哨兵；不参与本受限模型的冰伤运算，不宣称字段一般语义已知。",
+            "status": "unverified_game_semantics",
+            "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+            "source_json_pointer": "/31/Default/abilityMixins/0/onTriggerUltimateSkill/0/actorIceSubHurtDelta"
+          },
+          {
+            "path": "/abilities/0/payload/abilityMixins/0/onTriggerUltimateSkill/0/doOffStage",
+            "raw_value": false,
+            "assumption": "提供者在前台成功Q时执行；此值不把AllPlayerAvatars缩为前台受益者，范围内后台队员也受益。",
+            "status": "unverified_game_semantics",
+            "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+            "source_json_pointer": "/31/Default/abilityMixins/0/onTriggerUltimateSkill/0/doOffStage"
+          },
+          {
+            "path": "/abilities/0/payload/abilityMixins/0/onTriggerUltimateSkill/0/canBeHandledOnRecover",
+            "raw_value": true,
+            "assumption": "本场景无恢复/死亡/离队，不模拟一般恢复处理。",
+            "status": "unverified_game_semantics",
+            "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+            "source_json_pointer": "/31/Default/abilityMixins/0/onTriggerUltimateSkill/0/canBeHandledOnRecover"
+          },
+          {
+            "path": "/abilities/0/payload/abilityMixins/0/onTriggerUltimateSkill/1/actorIceSubHurtDelta",
+            "raw_value": -1,
+            "assumption": "−1为精确匹配哨兵；不参与本受限模型的冰伤运算，不宣称字段一般语义已知。",
+            "status": "unverified_game_semantics",
+            "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+            "source_json_pointer": "/31/Default/abilityMixins/0/onTriggerUltimateSkill/1/actorIceSubHurtDelta"
+          },
+          {
+            "path": "/abilities/0/payload/abilityMixins/0/onTriggerUltimateSkill/1/doOffStage",
+            "raw_value": false,
+            "assumption": "提供者在前台成功Q时执行；此值不把AllPlayerAvatars缩为前台受益者，范围内后台队员也受益。",
+            "status": "unverified_game_semantics",
+            "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+            "source_json_pointer": "/31/Default/abilityMixins/0/onTriggerUltimateSkill/1/doOffStage"
+          },
+          {
+            "path": "/abilities/0/payload/abilityMixins/0/onTriggerUltimateSkill/1/canBeHandledOnRecover",
+            "raw_value": true,
+            "assumption": "本场景无恢复/死亡/离队，不模拟一般恢复处理。",
+            "status": "unverified_game_semantics",
+            "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+            "source_json_pointer": "/31/Default/abilityMixins/0/onTriggerUltimateSkill/1/canBeHandledOnRecover"
+          },
+          {
+            "path": "/abilities/0/payload/modifiers/UNIQUE_Relic_TeamAtkupAfterElementalBurst/elementDurability",
+            "raw_value": 100,
+            "assumption": "仅按精确默认值采用受限适配，不将modifier耐久作为攻击附着量。",
+            "status": "unverified_game_semantics",
+            "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+            "source_json_pointer": "/31/Default/modifiers/UNIQUE_Relic_TeamAtkupAfterElementalBurst/elementDurability"
+          },
+          {
+            "path": "/abilities/0/payload/modifiers/UNIQUE_Relic_TeamAtkupAfterElementalBurst/minus_one",
+            "raw_value": -1,
+            "assumption": "仅按精确默认值采用受限适配，不将modifier耐久作为攻击附着量。",
+            "status": "unverified_game_semantics",
+            "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+            "source_json_pointer": "/31/Default/modifiers/UNIQUE_Relic_TeamAtkupAfterElementalBurst/minus_one"
+          },
+          {
+            "path": "/abilities/0/payload/modifiers/UNIQUE_Relic_TeamAtkupAfterElementalBurst/IAKPBCLBNKF",
+            "raw_value": -1,
+            "assumption": "仅按精确默认值采用受限适配，不将modifier耐久作为攻击附着量。",
+            "status": "unverified_game_semantics",
+            "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+            "source_json_pointer": "/31/Default/modifiers/UNIQUE_Relic_TeamAtkupAfterElementalBurst/IAKPBCLBNKF"
+          },
+          {
+            "path": "/abilities/0/payload/modifiers/UNIQUE_Relic_TeamAtkupAfterElementalBurst/isLimitedProperties",
+            "raw_value": true,
+            "assumption": "仅按精确默认值采用受限适配，不将modifier耐久作为攻击附着量。",
+            "status": "unverified_game_semantics",
+            "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+            "source_json_pointer": "/31/Default/modifiers/UNIQUE_Relic_TeamAtkupAfterElementalBurst/isLimitedProperties"
+          },
+          {
+            "path": "/abilities/0/payload/modifiers/UNIQUE_Relic_TeamAtkupAfterElementalBurst/reApplyModifierOnStateChange",
+            "raw_value": true,
+            "assumption": "常量参数、单一提供者、无恢复/死亡/离队/形态或装备变化；不复现一般重应用与争抢语义。",
+            "status": "unverified_game_semantics",
+            "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+            "source_json_pointer": "/31/Default/modifiers/UNIQUE_Relic_TeamAtkupAfterElementalBurst/reApplyModifierOnStateChange"
+          },
+          {
+            "path": "/abilities/0/payload/modifiers/UNIQUE_Relic_TeamAtkupAfterElementalBurst/isUnique",
+            "raw_value": true,
+            "assumption": "常量参数、单一提供者、无恢复/死亡/离队/形态或装备变化；不复现一般重应用与争抢语义。",
+            "status": "unverified_game_semantics",
+            "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+            "source_json_pointer": "/31/Default/modifiers/UNIQUE_Relic_TeamAtkupAfterElementalBurst/isUnique"
+          },
+          {
+            "path": "/abilities/0/payload/modifiers/UNIQUE_Relic_TeamAtkupAfterElementalBurst/buffID",
+            "raw_value": 10001,
+            "assumption": "固定状态标识不参与本模型伤害运算；没有监听该状态的其它未知来源。",
+            "status": "unverified_game_semantics",
+            "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+            "source_json_pointer": "/31/Default/modifiers/UNIQUE_Relic_TeamAtkupAfterElementalBurst/buffID"
+          },
+          {
+            "path": "/abilities/0/payload/modifiers/UNIQUE_Relic_TeamAtkupAfterElementalBurst/state",
+            "raw_value": "AttackUp",
+            "assumption": "仅消费显式攻击属性，不模拟其它未知状态监听者。",
+            "status": "unverified_game_semantics",
+            "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+            "source_json_pointer": "/31/Default/modifiers/UNIQUE_Relic_TeamAtkupAfterElementalBurst/state"
+          }
+        ],
+        "provenance": {
+          "compiler_version": 1,
+          "profile_id": "equipment-effects-fixed-single-player",
+          "profile_version": 1,
+          "source": {
+            "kind": "equip_affix",
+            "affix_id": 2150071,
+            "affix_group_id": 215007,
+            "source_level": 1,
+            "version_line": "release",
+            "snapshot_id": "9272526f6f5860cc5fd114c0a4cc089c66b7e244e8c1aadc9ae3826023da23d0",
+            "upstream_commit": "9424e4e556bd80e5196be7d3c52723d3a35b30e7"
+          },
+          "content_fingerprint": "573d3e17b82b5a2eb890dc38605501392167eef5e5596c277d15548ae845ef0d",
+          "actual_bundle_fingerprint": "7a48ff8ef5d8085d57d384f885c5a2fed7ae4920cfdd7a69f73dde7c30580b35",
+          "parameter_bindings": {
+            "Rate": {
+              "operation_pointer": "/Relic_TeamAtkupAfterElementalBurst/1",
+              "parameter_slot": 0,
+              "source": "ExcelBinOutput/EquipAffixExcelConfigData.json"
+            },
+            "Time": {
+              "operation_pointer": "/Relic_TeamAtkupAfterElementalBurst/2",
+              "parameter_slot": 1,
+              "source": "ExcelBinOutput/EquipAffixExcelConfigData.json"
+            }
+          },
+          "parameters": {
+            "Rate": 0.20000000298023224,
+            "Time": 12
+          },
+          "field_usage": [
+            {
+              "path": "/owner",
+              "classification": "consumed",
+              "value": "a"
+            },
+            {
+              "path": "/source_id",
+              "classification": "consumed",
+              "value": "binding.db5ce90ba28a43ef18579d1a:upstream"
+            },
+            {
+              "path": "/period",
+              "classification": "consumed",
+              "value": 14
+            },
+            {
+              "path": "/source/snapshot_id",
+              "classification": "consumed",
+              "value": "9272526f6f5860cc5fd114c0a4cc089c66b7e244e8c1aadc9ae3826023da23d0"
+            },
+            {
+              "path": "/source/upstream_commit",
+              "classification": "consumed",
+              "value": "9424e4e556bd80e5196be7d3c52723d3a35b30e7"
+            },
+            {
+              "path": "/param_list/0",
+              "classification": "consumed",
+              "value": 0.20000000298023224
+            },
+            {
+              "path": "/param_list/1",
+              "classification": "consumed",
+              "value": 12
+            },
+            {
+              "path": "/param_list/2",
+              "classification": "consumed",
+              "value": 0
+            },
+            {
+              "path": "/param_list/3",
+              "classification": "consumed",
+              "value": 0
+            },
+            {
+              "path": "/param_list/4",
+              "classification": "consumed",
+              "value": 0
+            },
+            {
+              "path": "/param_list/5",
+              "classification": "consumed",
+              "value": 0
+            },
+            {
+              "path": "/param_list/6",
+              "classification": "consumed",
+              "value": 0
+            },
+            {
+              "path": "/param_list/7",
+              "classification": "consumed",
+              "value": 0
+            },
+            {
+              "path": "/affix/source_path",
+              "classification": "consumed",
+              "value": "ExcelBinOutput/EquipAffixExcelConfigData.json"
+            },
+            {
+              "path": "/affix/source_sha256",
+              "classification": "consumed",
+              "value": "a033acd70ac085421f2c0eb4eb06c0d74b7676b9a652bfe37881ed0680b089b2"
+            },
+            {
+              "path": "/affix/record/addProps",
+              "classification": "consumed",
+              "value": [
+                {},
+                {},
+                {}
+              ],
+              "source_path": "ExcelBinOutput/EquipAffixExcelConfigData.json",
+              "source_json_pointer": "/1314/addProps"
+            },
+            {
+              "path": "/affix/record/openConfig",
+              "classification": "consumed",
+              "value": "Relic_TeamAtkupAfterElementalBurst",
+              "source_path": "ExcelBinOutput/EquipAffixExcelConfigData.json",
+              "source_json_pointer": "/1314/openConfig"
+            },
+            {
+              "path": "/abilities/0/definition_id",
+              "classification": "consumed",
+              "value": "690827d9f0ea1c4eb67880343ccc52547866a7ca6c305a93cbc2820f99b6b52a"
+            },
+            {
+              "path": "/abilities/0/source_path",
+              "classification": "consumed",
+              "value": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json"
+            },
+            {
+              "path": "/abilities/0/source_sha256",
+              "classification": "consumed",
+              "value": "e273a8e4fc5928829bbac96ae61b46003c7bfd95ffe3a24e8b6a080609a409f7"
+            },
+            {
+              "path": "/talent/definition_id",
+              "classification": "consumed",
+              "value": "5627a37e54d3afa9d6e89c3f4c1310e90dc7c89c978ec6ff90144534edfe458b"
+            },
+            {
+              "path": "/talent/source_path",
+              "classification": "consumed",
+              "value": "BinOutput/Talent/RelicTalents/ConfigAffix_Relic.json"
+            },
+            {
+              "path": "/talent/source_sha256",
+              "classification": "consumed",
+              "value": "5f11748a02b7862d3de3d0d564e918d2df3fedd098191990b220c1d580d5ad97"
+            },
+            {
+              "path": "/talent/json_pointer",
+              "classification": "consumed",
+              "value": "/Relic_TeamAtkupAfterElementalBurst"
+            },
+            {
+              "path": "/abilities/0/payload/isDynamicAbility",
+              "classification": "assumed_under_profile",
+              "value": true,
+              "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+              "source_json_pointer": "/31/Default/isDynamicAbility"
+            },
+            {
+              "path": "/abilities/0/payload/LKLPDIMKLKI/elementDurability",
+              "classification": "assumed_under_profile",
+              "value": 100,
+              "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+              "source_json_pointer": "/31/Default/LKLPDIMKLKI/elementDurability"
+            },
+            {
+              "path": "/abilities/0/payload/LKLPDIMKLKI/minus_one",
+              "classification": "assumed_under_profile",
+              "value": -1,
+              "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+              "source_json_pointer": "/31/Default/LKLPDIMKLKI/minus_one"
+            },
+            {
+              "path": "/abilities/0/payload/LKLPDIMKLKI/IAKPBCLBNKF",
+              "classification": "assumed_under_profile",
+              "value": -1,
+              "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+              "source_json_pointer": "/31/Default/LKLPDIMKLKI/IAKPBCLBNKF"
+            },
+            {
+              "path": "/abilities/0/payload/LKLPDIMKLKI/isLimitedProperties",
+              "classification": "assumed_under_profile",
+              "value": true,
+              "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+              "source_json_pointer": "/31/Default/LKLPDIMKLKI/isLimitedProperties"
+            },
+            {
+              "path": "/abilities/0/payload/abilityName",
+              "classification": "consumed",
+              "value": "Relic_TeamAtkupAfterElementalBurst",
+              "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+              "source_json_pointer": "/31/Default/abilityName"
+            },
+            {
+              "path": "/abilities/0/payload/abilitySpecials/Rate",
+              "classification": "consumed",
+              "value": 0,
+              "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+              "source_json_pointer": "/31/Default/abilitySpecials/Rate"
+            },
+            {
+              "path": "/abilities/0/payload/abilitySpecials/Time",
+              "classification": "consumed",
+              "value": 0,
+              "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+              "source_json_pointer": "/31/Default/abilitySpecials/Time"
+            },
+            {
+              "path": "/talent/operations/0/$type",
+              "classification": "consumed",
+              "value": "AddAbility",
+              "source_path": "BinOutput/Talent/RelicTalents/ConfigAffix_Relic.json",
+              "source_json_pointer": "/Relic_TeamAtkupAfterElementalBurst/0/$type"
+            },
+            {
+              "path": "/talent/operations/0/CLGIKOPIKBC",
+              "classification": "assumed_under_profile",
+              "value": true,
+              "source_path": "BinOutput/Talent/RelicTalents/ConfigAffix_Relic.json",
+              "source_json_pointer": "/Relic_TeamAtkupAfterElementalBurst/0/CLGIKOPIKBC"
+            },
+            {
+              "path": "/talent/operations/0/abilityName",
+              "classification": "consumed",
+              "value": "Relic_TeamAtkupAfterElementalBurst",
+              "source_path": "BinOutput/Talent/RelicTalents/ConfigAffix_Relic.json",
+              "source_json_pointer": "/Relic_TeamAtkupAfterElementalBurst/0/abilityName"
+            },
+            {
+              "path": "/talent/operations/1/$type",
+              "classification": "consumed",
+              "value": "ModifyAbility",
+              "source_path": "BinOutput/Talent/RelicTalents/ConfigAffix_Relic.json",
+              "source_json_pointer": "/Relic_TeamAtkupAfterElementalBurst/1/$type"
+            },
+            {
+              "path": "/talent/operations/1/CLGIKOPIKBC",
+              "classification": "assumed_under_profile",
+              "value": true,
+              "source_path": "BinOutput/Talent/RelicTalents/ConfigAffix_Relic.json",
+              "source_json_pointer": "/Relic_TeamAtkupAfterElementalBurst/1/CLGIKOPIKBC"
+            },
+            {
+              "path": "/talent/operations/1/abilityName",
+              "classification": "consumed",
+              "value": "Relic_TeamAtkupAfterElementalBurst",
+              "source_path": "BinOutput/Talent/RelicTalents/ConfigAffix_Relic.json",
+              "source_json_pointer": "/Relic_TeamAtkupAfterElementalBurst/1/abilityName"
+            },
+            {
+              "path": "/talent/operations/1/paramDelta",
+              "classification": "consumed",
+              "value": "%1",
+              "source_path": "BinOutput/Talent/RelicTalents/ConfigAffix_Relic.json",
+              "source_json_pointer": "/Relic_TeamAtkupAfterElementalBurst/1/paramDelta"
+            },
+            {
+              "path": "/talent/operations/1/paramSpecial",
+              "classification": "consumed",
+              "value": "Rate",
+              "source_path": "BinOutput/Talent/RelicTalents/ConfigAffix_Relic.json",
+              "source_json_pointer": "/Relic_TeamAtkupAfterElementalBurst/1/paramSpecial"
+            },
+            {
+              "path": "/talent/operations/2/$type",
+              "classification": "consumed",
+              "value": "ModifyAbility",
+              "source_path": "BinOutput/Talent/RelicTalents/ConfigAffix_Relic.json",
+              "source_json_pointer": "/Relic_TeamAtkupAfterElementalBurst/2/$type"
+            },
+            {
+              "path": "/talent/operations/2/CLGIKOPIKBC",
+              "classification": "assumed_under_profile",
+              "value": true,
+              "source_path": "BinOutput/Talent/RelicTalents/ConfigAffix_Relic.json",
+              "source_json_pointer": "/Relic_TeamAtkupAfterElementalBurst/2/CLGIKOPIKBC"
+            },
+            {
+              "path": "/talent/operations/2/abilityName",
+              "classification": "consumed",
+              "value": "Relic_TeamAtkupAfterElementalBurst",
+              "source_path": "BinOutput/Talent/RelicTalents/ConfigAffix_Relic.json",
+              "source_json_pointer": "/Relic_TeamAtkupAfterElementalBurst/2/abilityName"
+            },
+            {
+              "path": "/talent/operations/2/paramDelta",
+              "classification": "consumed",
+              "value": "%2",
+              "source_path": "BinOutput/Talent/RelicTalents/ConfigAffix_Relic.json",
+              "source_json_pointer": "/Relic_TeamAtkupAfterElementalBurst/2/paramDelta"
+            },
+            {
+              "path": "/talent/operations/2/paramSpecial",
+              "classification": "consumed",
+              "value": "Time",
+              "source_path": "BinOutput/Talent/RelicTalents/ConfigAffix_Relic.json",
+              "source_json_pointer": "/Relic_TeamAtkupAfterElementalBurst/2/paramSpecial"
+            },
+            {
+              "path": "/abilities/0/payload/abilityMixins/0/$type",
+              "classification": "consumed",
+              "value": "OnAvatarUseSkillMixin",
+              "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+              "source_json_pointer": "/31/Default/abilityMixins/0/$type"
+            },
+            {
+              "path": "/abilities/0/payload/abilityMixins/0/actorIceSubHurtDelta",
+              "classification": "assumed_under_profile",
+              "value": -1,
+              "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+              "source_json_pointer": "/31/Default/abilityMixins/0/actorIceSubHurtDelta"
+            },
+            {
+              "path": "/abilities/0/payload/abilityMixins/0/clearSkillIdDelay",
+              "classification": "assumed_under_profile",
+              "value": 0.20000000298023224,
+              "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+              "source_json_pointer": "/31/Default/abilityMixins/0/clearSkillIdDelay"
+            },
+            {
+              "path": "/abilities/0/payload/abilityMixins/0/onTriggerUltimateSkill/0/$type",
+              "classification": "consumed",
+              "value": "RemoveUniqueModifier",
+              "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+              "source_json_pointer": "/31/Default/abilityMixins/0/onTriggerUltimateSkill/0/$type"
+            },
+            {
+              "path": "/abilities/0/payload/abilityMixins/0/onTriggerUltimateSkill/0/target",
+              "classification": "consumed",
+              "value": "AllPlayerAvatars",
+              "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+              "source_json_pointer": "/31/Default/abilityMixins/0/onTriggerUltimateSkill/0/target"
+            },
+            {
+              "path": "/abilities/0/payload/abilityMixins/0/onTriggerUltimateSkill/0/actorIceSubHurtDelta",
+              "classification": "assumed_under_profile",
+              "value": -1,
+              "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+              "source_json_pointer": "/31/Default/abilityMixins/0/onTriggerUltimateSkill/0/actorIceSubHurtDelta"
+            },
+            {
+              "path": "/abilities/0/payload/abilityMixins/0/onTriggerUltimateSkill/0/doOffStage",
+              "classification": "assumed_under_profile",
+              "value": false,
+              "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+              "source_json_pointer": "/31/Default/abilityMixins/0/onTriggerUltimateSkill/0/doOffStage"
+            },
+            {
+              "path": "/abilities/0/payload/abilityMixins/0/onTriggerUltimateSkill/0/canBeHandledOnRecover",
+              "classification": "assumed_under_profile",
+              "value": true,
+              "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+              "source_json_pointer": "/31/Default/abilityMixins/0/onTriggerUltimateSkill/0/canBeHandledOnRecover"
+            },
+            {
+              "path": "/abilities/0/payload/abilityMixins/0/onTriggerUltimateSkill/0/predicates/0/$type",
+              "classification": "consumed",
+              "value": "ByTargetPositionToSelfPosition",
+              "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+              "source_json_pointer": "/31/Default/abilityMixins/0/onTriggerUltimateSkill/0/predicates/0/$type"
+            },
+            {
+              "path": "/abilities/0/payload/abilityMixins/0/onTriggerUltimateSkill/0/predicates/0/target",
+              "classification": "consumed",
+              "value": "Target",
+              "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+              "source_json_pointer": "/31/Default/abilityMixins/0/onTriggerUltimateSkill/0/predicates/0/target"
+            },
+            {
+              "path": "/abilities/0/payload/abilityMixins/0/onTriggerUltimateSkill/0/predicates/0/logic",
+              "classification": "consumed",
+              "value": "LesserOrEqual",
+              "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+              "source_json_pointer": "/31/Default/abilityMixins/0/onTriggerUltimateSkill/0/predicates/0/logic"
+            },
+            {
+              "path": "/abilities/0/payload/abilityMixins/0/onTriggerUltimateSkill/0/predicates/0/value",
+              "classification": "consumed",
+              "value": 40,
+              "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+              "source_json_pointer": "/31/Default/abilityMixins/0/onTriggerUltimateSkill/0/predicates/0/value"
+            },
+            {
+              "path": "/abilities/0/payload/abilityMixins/0/onTriggerUltimateSkill/0/modifierName",
+              "classification": "consumed",
+              "value": "UNIQUE_Relic_TeamAtkupAfterElementalBurst",
+              "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+              "source_json_pointer": "/31/Default/abilityMixins/0/onTriggerUltimateSkill/0/modifierName"
+            },
+            {
+              "path": "/abilities/0/payload/abilityMixins/0/onTriggerUltimateSkill/1/$type",
+              "classification": "consumed",
+              "value": "ApplyModifier",
+              "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+              "source_json_pointer": "/31/Default/abilityMixins/0/onTriggerUltimateSkill/1/$type"
+            },
+            {
+              "path": "/abilities/0/payload/abilityMixins/0/onTriggerUltimateSkill/1/target",
+              "classification": "consumed",
+              "value": "AllPlayerAvatars",
+              "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+              "source_json_pointer": "/31/Default/abilityMixins/0/onTriggerUltimateSkill/1/target"
+            },
+            {
+              "path": "/abilities/0/payload/abilityMixins/0/onTriggerUltimateSkill/1/actorIceSubHurtDelta",
+              "classification": "assumed_under_profile",
+              "value": -1,
+              "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+              "source_json_pointer": "/31/Default/abilityMixins/0/onTriggerUltimateSkill/1/actorIceSubHurtDelta"
+            },
+            {
+              "path": "/abilities/0/payload/abilityMixins/0/onTriggerUltimateSkill/1/doOffStage",
+              "classification": "assumed_under_profile",
+              "value": false,
+              "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+              "source_json_pointer": "/31/Default/abilityMixins/0/onTriggerUltimateSkill/1/doOffStage"
+            },
+            {
+              "path": "/abilities/0/payload/abilityMixins/0/onTriggerUltimateSkill/1/canBeHandledOnRecover",
+              "classification": "assumed_under_profile",
+              "value": true,
+              "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+              "source_json_pointer": "/31/Default/abilityMixins/0/onTriggerUltimateSkill/1/canBeHandledOnRecover"
+            },
+            {
+              "path": "/abilities/0/payload/abilityMixins/0/onTriggerUltimateSkill/1/predicates/0/$type",
+              "classification": "consumed",
+              "value": "ByTargetPositionToSelfPosition",
+              "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+              "source_json_pointer": "/31/Default/abilityMixins/0/onTriggerUltimateSkill/1/predicates/0/$type"
+            },
+            {
+              "path": "/abilities/0/payload/abilityMixins/0/onTriggerUltimateSkill/1/predicates/0/target",
+              "classification": "consumed",
+              "value": "Target",
+              "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+              "source_json_pointer": "/31/Default/abilityMixins/0/onTriggerUltimateSkill/1/predicates/0/target"
+            },
+            {
+              "path": "/abilities/0/payload/abilityMixins/0/onTriggerUltimateSkill/1/predicates/0/logic",
+              "classification": "consumed",
+              "value": "LesserOrEqual",
+              "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+              "source_json_pointer": "/31/Default/abilityMixins/0/onTriggerUltimateSkill/1/predicates/0/logic"
+            },
+            {
+              "path": "/abilities/0/payload/abilityMixins/0/onTriggerUltimateSkill/1/predicates/0/value",
+              "classification": "consumed",
+              "value": 40,
+              "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+              "source_json_pointer": "/31/Default/abilityMixins/0/onTriggerUltimateSkill/1/predicates/0/value"
+            },
+            {
+              "path": "/abilities/0/payload/abilityMixins/0/onTriggerUltimateSkill/1/modifierName",
+              "classification": "consumed",
+              "value": "UNIQUE_Relic_TeamAtkupAfterElementalBurst",
+              "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+              "source_json_pointer": "/31/Default/abilityMixins/0/onTriggerUltimateSkill/1/modifierName"
+            },
+            {
+              "path": "/abilities/0/payload/modifiers/UNIQUE_Relic_TeamAtkupAfterElementalBurst/elementDurability",
+              "classification": "assumed_under_profile",
+              "value": 100,
+              "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+              "source_json_pointer": "/31/Default/modifiers/UNIQUE_Relic_TeamAtkupAfterElementalBurst/elementDurability"
+            },
+            {
+              "path": "/abilities/0/payload/modifiers/UNIQUE_Relic_TeamAtkupAfterElementalBurst/minus_one",
+              "classification": "assumed_under_profile",
+              "value": -1,
+              "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+              "source_json_pointer": "/31/Default/modifiers/UNIQUE_Relic_TeamAtkupAfterElementalBurst/minus_one"
+            },
+            {
+              "path": "/abilities/0/payload/modifiers/UNIQUE_Relic_TeamAtkupAfterElementalBurst/IAKPBCLBNKF",
+              "classification": "assumed_under_profile",
+              "value": -1,
+              "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+              "source_json_pointer": "/31/Default/modifiers/UNIQUE_Relic_TeamAtkupAfterElementalBurst/IAKPBCLBNKF"
+            },
+            {
+              "path": "/abilities/0/payload/modifiers/UNIQUE_Relic_TeamAtkupAfterElementalBurst/isLimitedProperties",
+              "classification": "assumed_under_profile",
+              "value": true,
+              "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+              "source_json_pointer": "/31/Default/modifiers/UNIQUE_Relic_TeamAtkupAfterElementalBurst/isLimitedProperties"
+            },
+            {
+              "path": "/abilities/0/payload/modifiers/UNIQUE_Relic_TeamAtkupAfterElementalBurst/reApplyModifierOnStateChange",
+              "classification": "assumed_under_profile",
+              "value": true,
+              "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+              "source_json_pointer": "/31/Default/modifiers/UNIQUE_Relic_TeamAtkupAfterElementalBurst/reApplyModifierOnStateChange"
+            },
+            {
+              "path": "/abilities/0/payload/modifiers/UNIQUE_Relic_TeamAtkupAfterElementalBurst/isUnique",
+              "classification": "assumed_under_profile",
+              "value": true,
+              "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+              "source_json_pointer": "/31/Default/modifiers/UNIQUE_Relic_TeamAtkupAfterElementalBurst/isUnique"
+            },
+            {
+              "path": "/abilities/0/payload/modifiers/UNIQUE_Relic_TeamAtkupAfterElementalBurst/buffID",
+              "classification": "assumed_under_profile",
+              "value": 10001,
+              "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+              "source_json_pointer": "/31/Default/modifiers/UNIQUE_Relic_TeamAtkupAfterElementalBurst/buffID"
+            },
+            {
+              "path": "/abilities/0/payload/modifiers/UNIQUE_Relic_TeamAtkupAfterElementalBurst/state",
+              "classification": "assumed_under_profile",
+              "value": "AttackUp",
+              "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+              "source_json_pointer": "/31/Default/modifiers/UNIQUE_Relic_TeamAtkupAfterElementalBurst/state"
+            },
+            {
+              "path": "/abilities/0/payload/modifiers/UNIQUE_Relic_TeamAtkupAfterElementalBurst/properties/Actor_AttackRatio",
+              "classification": "consumed",
+              "parameter": "Rate",
+              "value": 0.20000000298023224,
+              "binding": {
+                "operation_pointer": "/Relic_TeamAtkupAfterElementalBurst/1",
+                "parameter_slot": 0,
+                "source": "ExcelBinOutput/EquipAffixExcelConfigData.json"
+              },
+              "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+              "source_json_pointer": "/31/Default/modifiers/UNIQUE_Relic_TeamAtkupAfterElementalBurst/properties/Actor_AttackRatio"
+            },
+            {
+              "path": "/abilities/0/payload/modifiers/UNIQUE_Relic_TeamAtkupAfterElementalBurst/duration",
+              "classification": "consumed",
+              "parameter": "Time",
+              "value": 12,
+              "binding": {
+                "operation_pointer": "/Relic_TeamAtkupAfterElementalBurst/2",
+                "parameter_slot": 1,
+                "source": "ExcelBinOutput/EquipAffixExcelConfigData.json"
+              },
+              "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+              "source_json_pointer": "/31/Default/modifiers/UNIQUE_Relic_TeamAtkupAfterElementalBurst/duration"
+            },
+            {
+              "path": "/abilities/0/payload/modifiers/UNIQUE_Relic_TeamAtkupAfterElementalBurst/duration",
+              "classification": "consumed",
+              "value": 12,
+              "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+              "source_json_pointer": "/31/Default/modifiers/UNIQUE_Relic_TeamAtkupAfterElementalBurst/duration"
+            },
+            {
+              "path": "/scenario/profile_id",
+              "classification": "consumed",
+              "value": "equipment-effects-fixed-single-player"
+            },
+            {
+              "path": "/scenario/profile_version",
+              "classification": "consumed",
+              "value": 1
+            },
+            {
+              "path": "/scenario/single_player_fixed",
+              "classification": "consumed",
+              "value": true
+            },
+            {
+              "path": "/scenario/all_targets_monsters",
+              "classification": "consumed",
+              "value": true
+            },
+            {
+              "path": "/scenario/single_unique_provider",
+              "classification": "consumed",
+              "value": true
+            },
+            {
+              "path": "/scenario/no_external_state_changes",
+              "classification": "consumed",
+              "value": true
+            },
+            {
+              "path": "/scenario/max_party_distance",
+              "classification": "consumed",
+              "value": 40
+            }
+          ],
+          "assumptions_fingerprint": "d98be0f11494f7484a8bb2a970298fa3b1cd1ef3871bd4f2de0e50cb7be2e472",
+          "source_mapping": {
+            "talent": {
+              "source_path": "BinOutput/Talent/RelicTalents/ConfigAffix_Relic.json",
+              "json_pointer": "/Relic_TeamAtkupAfterElementalBurst",
+              "source_sha256": "5f11748a02b7862d3de3d0d564e918d2df3fedd098191990b220c1d580d5ad97"
+            },
+            "affix": {
+              "source_path": "ExcelBinOutput/EquipAffixExcelConfigData.json",
+              "json_pointer": "/1314",
+              "source_sha256": "a033acd70ac085421f2c0eb4eb06c0d74b7676b9a652bfe37881ed0680b089b2"
+            }
+          },
+          "ability_sources": [
+            {
+              "definition_id": "690827d9f0ea1c4eb67880343ccc52547866a7ca6c305a93cbc2820f99b6b52a",
+              "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+              "json_pointer": "/31/Default",
+              "source_sha256": "e273a8e4fc5928829bbac96ae61b46003c7bfd95ffe3a24e8b6a080609a409f7"
+            }
+          ]
+        },
+        "coverage_certificate": {
+          "kind": "compiler_scope_certificate",
+          "human_reviewed": false,
+          "source_complete": true,
+          "requested_source_status": "ready",
+          "interpreted_fields": 62,
+          "assumed_fields": 24,
+          "gameplay_verified": false
+        },
+        "required_scenario": [],
+        "unique_keys": [
+          "UNIQUE_Relic_TeamAtkupAfterElementalBurst"
+        ],
+        "actual_bundle_fingerprint": "7a48ff8ef5d8085d57d384f885c5a2fed7ae4920cfdd7a69f73dde7c30580b35",
+        "assumptions_fingerprint": "d98be0f11494f7484a8bb2a970298fa3b1cd1ef3871bd4f2de0e50cb7be2e472",
+        "source_identity": {
+          "version_line": "release",
+          "affix_id": "2150071",
+          "provider": "a"
+        },
+        "execution_fingerprint": "2ba83f53081ad6b8fcdbc06a0bd82709b2c90cbbab075661aa9cf805d5a4d4b5",
+        "binding_id": "binding.db5ce90ba28a43ef18579d1a",
+        "compilation_fingerprint": "d48b416284db247286adbb3067d2a9567d2f59ed589deb49295917f6ad380a57"
+      }
+    ],
+    "upstream_semantics": {
+      "execution_status": "ready",
+      "gameplay_semantics_status": "assumed_in_scope",
+      "conditional_semantics": true,
+      "message": "仅在列明的场景和精确适配假设内执行；不代表完整游戏仿真。",
+      "compilation_fingerprints": [
+        "83dd5c45966868aee542f081e0596735d6134e07dadad6a41629502e5585edac",
+        "d48b416284db247286adbb3067d2a9567d2f59ed589deb49295917f6ad380a57"
+      ]
+    }
+  },
+  "resolved_template": {
+    "version": 2,
+    "form": "resolved",
+    "id_registry_version": 1,
+    "type_definitions": {
+      "damage_types": []
+    },
+    "enemy": {
+      "level": 90,
+      "resistance": {
+        "default": 0.1
+      }
+    },
+    "characters": [
+      {
+        "id": "a",
+        "level": 90,
+        "stats": {
+          "atk": 2000,
+          "base_atk": 1000,
+          "em": 0,
+          "crit_rate": 0,
+          "crit_dmg": 0.5,
+          "energy_recharge": 1
+        },
+        "name": "神里绫华（工程校验面板）"
+      }
+    ],
+    "hits": [
+      {
+        "id": "h0",
+        "t": 0.2,
+        "character": "a",
+        "skill": "工程单次命中（非完整技能模拟）",
+        "hit_name": "释放前战技伤害",
+        "damage_type_ids": [
+          "damage.elemental_skill"
+        ],
+        "damage_system": "classic",
+        "element": "cryo",
+        "multiplier": 1,
+        "snapshot": false
+      },
+      {
+        "id": "h1",
+        "t": 1.2,
+        "character": "a",
+        "skill": "工程单次命中（非完整技能模拟）",
+        "hit_name": "宗室生效内爆发伤害",
+        "damage_type_ids": [
+          "damage.elemental_burst"
+        ],
+        "damage_system": "classic",
+        "element": "cryo",
+        "multiplier": 1,
+        "snapshot": false
+      },
+      {
+        "id": "h2",
+        "t": 13.0,
+        "character": "a",
+        "skill": "工程单次命中（非完整技能模拟）",
+        "hit_name": "宗室到期边界爆发伤害",
+        "damage_type_ids": [
+          "damage.elemental_burst"
+        ],
+        "damage_system": "classic",
+        "element": "cryo",
+        "multiplier": 1,
+        "snapshot": false
+      }
+    ],
+    "buffs": [
+      {
+        "id": "mechanics:h1",
+        "name": "机制派生收益·宗室生效内爆发伤害",
+        "source": "声明式机制逐命中投影",
+        "start": 1.2,
+        "end": 1.200001,
+        "scope": "team",
+        "target": "a",
+        "effects": [
+          {
+            "id": "upstream.10a1d58656eb108e3c9f7d27:value:0",
+            "benefit_type_id": "benefit.stat_pct.atk",
+            "zone": "stat_pct",
+            "stat": "atk",
+            "value": 0.20000000298023224,
+            "applies_to": {
+              "mode": "hits",
+              "hit_ids": [
+                "h1"
+              ]
+            }
+          },
+          {
+            "id": "manual:generated.buff.1840f09816c6c40e38d24bdbc4c93f47:value:0",
+            "benefit_type_id": "benefit.dmg_bonus.all",
+            "zone": "dmg_bonus",
+            "stat": "all",
+            "applies_to": {
+              "mode": "hits",
+              "hit_ids": [
+                "h1"
+              ]
+            },
+            "value": 0.20000000298023224
+          }
+        ]
+      },
+      {
+        "id": "mechanics:h2",
+        "name": "机制派生收益·宗室到期边界爆发伤害",
+        "source": "声明式机制逐命中投影",
+        "start": 13.0,
+        "end": 13.000001,
+        "scope": "team",
+        "target": "a",
+        "effects": [
+          {
+            "id": "manual:generated.buff.1840f09816c6c40e38d24bdbc4c93f47:value:0",
+            "benefit_type_id": "benefit.dmg_bonus.all",
+            "zone": "dmg_bonus",
+            "stat": "all",
+            "applies_to": {
+              "mode": "hits",
+              "hit_ids": [
+                "h2"
+              ]
+            },
+            "value": 0.20000000298023224
+          }
+        ]
+      }
+    ],
+    "switches": [
+      {
+        "t": 0,
+        "character": "a"
+      }
+    ],
+    "loop_duration": 14,
+    "meta": {
+      "name": "上游宗室2+4联动工程校验（14秒）",
+      "assumptions": [
+        "a 使用给定初始面板，已含两件套等常驻属性；武器成长及圣遗物词条不再加算",
+        "binding.47d83b656fa9ec10ebd8cd47：采用受限上游适配模型，游戏语义包含显式假设，尚未完全验证",
+        "binding.db5ce90ba28a43ef18579d1a：采用受限上游适配模型，游戏语义包含显式假设，尚未完全验证"
+      ],
+      "equipment_resolution": {
+        "composer_version": "1.3.0",
+        "source_fingerprint": "28b8e9a6acd67fe29b871f07219303143efd393ca7b10d1bc818d99adf16e625",
+        "data_versions": [
+          {
+            "version_line": "release",
+            "upstream_commit": "9424e4e556bd80e5196be7d3c52723d3a35b30e7",
+            "equipment_schema_version": 1,
+            "built_at": "2026-09-13T19:57:51.658448+00:00"
+          },
+          {
+            "kind": "database",
+            "character_id": 10000002,
+            "version_line": "release",
+            "level": 90,
+            "upstream_commit": "9424e4e556bd80e5196be7d3c52723d3a35b30e7",
+            "built_at": "2026-09-13T19:57:50.972600+00:00",
+            "fields": [
+              "atk_90",
+              "hp_90",
+              "def_90",
+              "crit_rate",
+              "crit_dmg",
+              "charge_efficiency",
+              "ascension_prop",
+              "ascension_value"
+            ],
+            "value_fingerprint": "766735606f82c01753c34b84b308ff0230e795926c7ff0d1089e545fb1128eda"
+          }
+        ]
+      }
+    }
+  },
+  "rotation_model": {
+    "schema_version": 1,
+    "period": 14,
+    "max_cycles": 3,
+    "initial_frontline": "a",
+    "characters": [
+      {
+        "id": "a",
+        "element": "cryo",
+        "energy_recharge": 1,
+        "energy_capacity": 80,
+        "initial_energy": 80,
+        "status": "assumed",
+        "source": "虚构确定性工程情景"
+      }
+    ],
+    "abilities": [
+      {
+        "id": "e",
+        "character": "a",
+        "action_type_id": "action.elemental_skill",
+        "cooldown": null,
+        "energy": null,
+        "status": "assumed",
+        "source": "虚构确定性工程情景"
+      },
+      {
+        "id": "q",
+        "character": "a",
+        "action_type_id": "action.elemental_burst",
+        "cooldown": {
+          "group": "ayaka-burst",
+          "duration": 20,
+          "charges": 1,
+          "start": "action_start",
+          "recovery": "sequential"
+        },
+        "energy": {
+          "required": 80,
+          "amount": 80
+        },
+        "status": "assumed",
+        "source": "虚构确定性工程情景"
+      }
+    ],
+    "actions": [
+      {
+        "id": "cast",
+        "ability_id": "e",
+        "start": 0,
+        "occupation_end": 0.1,
+        "order": 0,
+        "repeat": {
+          "mode": "once"
+        },
+        "status": "assumed",
+        "source": "虚构确定性工程情景"
+      },
+      {
+        "id": "burst-cast",
+        "ability_id": "q",
+        "start": 1,
+        "occupation_end": 1.1,
+        "order": 0,
+        "repeat": {
+          "mode": "once"
+        },
+        "status": "assumed",
+        "source": "虚构确定性工程情景"
+      }
+    ],
+    "events": [
+      {
+        "id": "burst-energy",
+        "type": "energy_spend",
+        "t": 1,
+        "order": 1,
+        "action_id": "burst-cast",
+        "character": "a",
+        "required": 80,
+        "amount": 80,
+        "repeat": {
+          "mode": "once"
+        },
+        "status": "assumed",
+        "source": "数据库基础爆发耗能80，工程初态满能量"
+      }
+    ],
+    "initial_cooldowns": [
+      {
+        "character": "a",
+        "group": "ayaka-burst",
+        "ready_in": []
+      }
+    ]
+  },
+  "mechanics_model": {
+    "schema_version": 1,
+    "rules": [],
+    "hit_events": [
+      {
+        "hit_id": "h0",
+        "action_id": "cast",
+        "order": 10
+      },
+      {
+        "hit_id": "h1",
+        "action_id": "burst-cast",
+        "order": 11
+      },
+      {
+        "hit_id": "h2",
+        "action_id": "burst-cast",
+        "order": 12
+      }
+    ],
+    "hit_patterns": [],
+    "condition_events": [],
+    "initial_state": {
+      "rules": []
+    }
+  }
+}

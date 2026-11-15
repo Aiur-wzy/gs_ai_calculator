@@ -1,0 +1,1668 @@
+{
+  "schema_version": 1,
+  "id": "mechanisms.v1.candidates",
+  "facts": [
+    {
+      "id": "skill.current-atk-limited-addition.rule.addition",
+      "revision": 1,
+      "subject": {
+        "target_type": "character",
+        "target_id": 10000063
+      },
+      "payload": {
+        "id": "skill.current-atk-limited-addition.rule.addition",
+        "revision": 1,
+        "kind": "rule_template",
+        "claim": {
+          "key": "addition",
+          "rule": {
+            "name_zh": "冰翎",
+            "trigger": {
+              "event": "action_start",
+              "phase": "pre"
+            },
+            "beneficiaries": {
+              "mode": "team",
+              "scope": "locked"
+            },
+            "timing": {
+              "cooldown": 0,
+              "cooldown_anchor": "success"
+            },
+            "stacking": {
+              "max": 1,
+              "add": 1,
+              "policy": "replace"
+            },
+            "quota": {
+              "scope": "per_beneficiary",
+              "refresh": "reset",
+              "consume": {
+                "event": "hit",
+                "phase": "pre",
+                "elements": [
+                  "cryo"
+                ],
+                "damage_type_ids": [
+                  "damage.normal_attack",
+                  "damage.charged_attack",
+                  "damage.plunging_attack",
+                  "damage.elemental_skill",
+                  "damage.elemental_burst"
+                ]
+              }
+            },
+            "effects": [
+              {
+                "id": "addition",
+                "benefit_type_id": "benefit.base_add.all",
+                "domain": "provider",
+                "value": {
+                  "kind": "stat",
+                  "subject": "owner",
+                  "stat": "atk",
+                  "sample": "current"
+                },
+                "filter": {
+                  "event": "hit",
+                  "phase": "pre",
+                  "elements": [
+                    "cryo"
+                  ],
+                  "damage_type_ids": [
+                    "damage.normal_attack",
+                    "damage.charged_attack",
+                    "damage.plunging_attack",
+                    "damage.elemental_skill",
+                    "damage.elemental_burst"
+                  ]
+                }
+              }
+            ]
+          },
+          "value_bindings": [
+            {
+              "target": "timing.duration",
+              "parameter_ref": "duration"
+            },
+            {
+              "target": "quota.capacity",
+              "parameter_ref": "capacity"
+            },
+            {
+              "target": "effects.addition.value.factor",
+              "parameter_ref": "factor"
+            }
+          ],
+          "execution_ports": [
+            {
+              "target": "owner",
+              "role": "provider"
+            },
+            {
+              "target": "trigger.action_ids",
+              "role": "qualifying_actions"
+            },
+            {
+              "target": "timing.delay",
+              "role": "activation_delay"
+            }
+          ],
+          "requirements": [
+            "single_target",
+            "ordinary_stat_read",
+            "fresh_empty_instance",
+            "fixed_party",
+            "range_declared",
+            "no_hitlag",
+            "no_unmodelled_cancel",
+            "activation_before_initial_hit",
+            "qualified_action_origin",
+            "no_duplicate_source"
+          ]
+        },
+        "evidence_tier": "experimental_reference",
+        "evidence_refs": [
+          "proud",
+          "talent",
+          "ability",
+          "reference"
+        ]
+      },
+      "evidence": [
+        {
+          "id": "avatar",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/AvatarExcelConfigData.json#/50",
+          "sha256": "29c0ded55f56a400463b48c852659b099a22b8c60dc62473b2321c68c75ee7c2"
+        },
+        {
+          "id": "depot",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/AvatarSkillDepotExcelConfigData.json#/123",
+          "sha256": "a7c2656240415fc6fe5e4acc77b01c3ec4cd27edfb6b8c9dcf72613c4cd1c223"
+        },
+        {
+          "id": "skill",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/AvatarSkillExcelConfigData.json#/279",
+          "sha256": "6f1d808d8cb23a192aa0ab16ad3a592fad3f6182a1c1500192ea0c2ba5d81692"
+        },
+        {
+          "id": "proud",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/ProudSkillExcelConfigData.json#/4442",
+          "sha256": "a6e181bbebf72b6b6647bb8cb9eeba16a2a730dde51d93474891b501990d29b2"
+        },
+        {
+          "id": "talent",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Talent/AvatarTalents/ConfigTalent_Shenhe.json#/Shenhe_SkillUpgrade_2",
+          "sha256": "da6348f8c14f6cd6e4330b421e11f32647b2a9581cb4261ae0b87b6891c53c5d"
+        },
+        {
+          "id": "ability",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Shenhe.json#/6/Default",
+          "sha256": "3de611539675a3defc9f5239a8f3fd88a83c2e444ea6ee12b8e3bb8ba0f087d4"
+        },
+        {
+          "id": "reference",
+          "kind": "reference_implementation",
+          "locator": "repository:src/genshin_runtime/resources/limited_hit_benefit_profiles.json",
+          "sha256": "cdcc28d5c919436caed6571940973700aa1cbba84850374d1f2104f4b0cba45c"
+        }
+      ],
+      "applicability": {
+        "version_line": "release",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "normalization_fingerprint": "4b792020b8fbfffd4103b4e019065602f205f42d46a8f6bcb995c6f76d278cb1"
+      },
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "id": "skill.current-atk-limited-addition.parameter.factor",
+      "revision": 1,
+      "subject": {
+        "target_type": "character",
+        "target_id": 10000063
+      },
+      "payload": {
+        "id": "skill.current-atk-limited-addition.parameter.factor",
+        "revision": 1,
+        "kind": "parameter_role",
+        "claim": {
+          "ref": "factor",
+          "value_type": "finite_number",
+          "unit": "ratio",
+          "targets": [
+            {
+              "rule_key": "addition",
+              "target": "effects.addition.value.factor"
+            }
+          ]
+        },
+        "evidence_tier": "upstream_structural",
+        "evidence_refs": [
+          "proud",
+          "talent",
+          "ability"
+        ]
+      },
+      "evidence": [
+        {
+          "id": "avatar",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/AvatarExcelConfigData.json#/50",
+          "sha256": "29c0ded55f56a400463b48c852659b099a22b8c60dc62473b2321c68c75ee7c2"
+        },
+        {
+          "id": "depot",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/AvatarSkillDepotExcelConfigData.json#/123",
+          "sha256": "a7c2656240415fc6fe5e4acc77b01c3ec4cd27edfb6b8c9dcf72613c4cd1c223"
+        },
+        {
+          "id": "skill",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/AvatarSkillExcelConfigData.json#/279",
+          "sha256": "6f1d808d8cb23a192aa0ab16ad3a592fad3f6182a1c1500192ea0c2ba5d81692"
+        },
+        {
+          "id": "proud",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/ProudSkillExcelConfigData.json#/4442",
+          "sha256": "a6e181bbebf72b6b6647bb8cb9eeba16a2a730dde51d93474891b501990d29b2"
+        },
+        {
+          "id": "talent",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Talent/AvatarTalents/ConfigTalent_Shenhe.json#/Shenhe_SkillUpgrade_2",
+          "sha256": "da6348f8c14f6cd6e4330b421e11f32647b2a9581cb4261ae0b87b6891c53c5d"
+        },
+        {
+          "id": "ability",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Shenhe.json#/6/Default",
+          "sha256": "3de611539675a3defc9f5239a8f3fd88a83c2e444ea6ee12b8e3bb8ba0f087d4"
+        },
+        {
+          "id": "reference",
+          "kind": "reference_implementation",
+          "locator": "repository:src/genshin_runtime/resources/limited_hit_benefit_profiles.json",
+          "sha256": "cdcc28d5c919436caed6571940973700aa1cbba84850374d1f2104f4b0cba45c"
+        }
+      ],
+      "applicability": {
+        "version_line": "release",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "normalization_fingerprint": "4b792020b8fbfffd4103b4e019065602f205f42d46a8f6bcb995c6f76d278cb1"
+      },
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "id": "skill.current-atk-limited-addition.parameter.duration",
+      "revision": 1,
+      "subject": {
+        "target_type": "character",
+        "target_id": 10000063
+      },
+      "payload": {
+        "id": "skill.current-atk-limited-addition.parameter.duration",
+        "revision": 1,
+        "kind": "parameter_role",
+        "claim": {
+          "ref": "duration",
+          "value_type": "seconds_exact_us",
+          "unit": "seconds",
+          "targets": [
+            {
+              "rule_key": "addition",
+              "target": "timing.duration"
+            }
+          ]
+        },
+        "evidence_tier": "upstream_structural",
+        "evidence_refs": [
+          "proud",
+          "talent",
+          "ability"
+        ]
+      },
+      "evidence": [
+        {
+          "id": "avatar",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/AvatarExcelConfigData.json#/50",
+          "sha256": "29c0ded55f56a400463b48c852659b099a22b8c60dc62473b2321c68c75ee7c2"
+        },
+        {
+          "id": "depot",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/AvatarSkillDepotExcelConfigData.json#/123",
+          "sha256": "a7c2656240415fc6fe5e4acc77b01c3ec4cd27edfb6b8c9dcf72613c4cd1c223"
+        },
+        {
+          "id": "skill",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/AvatarSkillExcelConfigData.json#/279",
+          "sha256": "6f1d808d8cb23a192aa0ab16ad3a592fad3f6182a1c1500192ea0c2ba5d81692"
+        },
+        {
+          "id": "proud",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/ProudSkillExcelConfigData.json#/4442",
+          "sha256": "a6e181bbebf72b6b6647bb8cb9eeba16a2a730dde51d93474891b501990d29b2"
+        },
+        {
+          "id": "talent",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Talent/AvatarTalents/ConfigTalent_Shenhe.json#/Shenhe_SkillUpgrade_2",
+          "sha256": "da6348f8c14f6cd6e4330b421e11f32647b2a9581cb4261ae0b87b6891c53c5d"
+        },
+        {
+          "id": "ability",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Shenhe.json#/6/Default",
+          "sha256": "3de611539675a3defc9f5239a8f3fd88a83c2e444ea6ee12b8e3bb8ba0f087d4"
+        },
+        {
+          "id": "reference",
+          "kind": "reference_implementation",
+          "locator": "repository:src/genshin_runtime/resources/limited_hit_benefit_profiles.json",
+          "sha256": "cdcc28d5c919436caed6571940973700aa1cbba84850374d1f2104f4b0cba45c"
+        }
+      ],
+      "applicability": {
+        "version_line": "release",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "normalization_fingerprint": "4b792020b8fbfffd4103b4e019065602f205f42d46a8f6bcb995c6f76d278cb1"
+      },
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "id": "skill.current-atk-limited-addition.parameter.capacity",
+      "revision": 1,
+      "subject": {
+        "target_type": "character",
+        "target_id": 10000063
+      },
+      "payload": {
+        "id": "skill.current-atk-limited-addition.parameter.capacity",
+        "revision": 1,
+        "kind": "parameter_role",
+        "claim": {
+          "ref": "capacity",
+          "value_type": "positive_integer",
+          "unit": "count",
+          "targets": [
+            {
+              "rule_key": "addition",
+              "target": "quota.capacity"
+            }
+          ]
+        },
+        "evidence_tier": "upstream_structural",
+        "evidence_refs": [
+          "proud",
+          "talent",
+          "ability"
+        ]
+      },
+      "evidence": [
+        {
+          "id": "avatar",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/AvatarExcelConfigData.json#/50",
+          "sha256": "29c0ded55f56a400463b48c852659b099a22b8c60dc62473b2321c68c75ee7c2"
+        },
+        {
+          "id": "depot",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/AvatarSkillDepotExcelConfigData.json#/123",
+          "sha256": "a7c2656240415fc6fe5e4acc77b01c3ec4cd27edfb6b8c9dcf72613c4cd1c223"
+        },
+        {
+          "id": "skill",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/AvatarSkillExcelConfigData.json#/279",
+          "sha256": "6f1d808d8cb23a192aa0ab16ad3a592fad3f6182a1c1500192ea0c2ba5d81692"
+        },
+        {
+          "id": "proud",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/ProudSkillExcelConfigData.json#/4442",
+          "sha256": "a6e181bbebf72b6b6647bb8cb9eeba16a2a730dde51d93474891b501990d29b2"
+        },
+        {
+          "id": "talent",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Talent/AvatarTalents/ConfigTalent_Shenhe.json#/Shenhe_SkillUpgrade_2",
+          "sha256": "da6348f8c14f6cd6e4330b421e11f32647b2a9581cb4261ae0b87b6891c53c5d"
+        },
+        {
+          "id": "ability",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Shenhe.json#/6/Default",
+          "sha256": "3de611539675a3defc9f5239a8f3fd88a83c2e444ea6ee12b8e3bb8ba0f087d4"
+        },
+        {
+          "id": "reference",
+          "kind": "reference_implementation",
+          "locator": "repository:src/genshin_runtime/resources/limited_hit_benefit_profiles.json",
+          "sha256": "cdcc28d5c919436caed6571940973700aa1cbba84850374d1f2104f4b0cba45c"
+        }
+      ],
+      "applicability": {
+        "version_line": "release",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "normalization_fingerprint": "4b792020b8fbfffd4103b4e019065602f205f42d46a8f6bcb995c6f76d278cb1"
+      },
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "id": "passive.swirl-elemental-bonus.rule.hydro",
+      "revision": 1,
+      "subject": {
+        "target_type": "character",
+        "target_id": 10000047
+      },
+      "payload": {
+        "id": "passive.swirl-elemental-bonus.rule.hydro",
+        "revision": 1,
+        "kind": "rule_template",
+        "claim": {
+          "key": "hydro",
+          "rule": {
+            "name_zh": "扩散触发水元素增伤",
+            "trigger": {
+              "event": "elemental_reaction",
+              "phase": "post",
+              "reaction_types": [
+                "swirl"
+              ],
+              "reaction_elements": [
+                "hydro"
+              ],
+              "owner_presence": "any"
+            },
+            "beneficiaries": {
+              "mode": "team",
+              "scope": "locked"
+            },
+            "timing": {
+              "delay": 0,
+              "cooldown": 0,
+              "cooldown_anchor": "success"
+            },
+            "stacking": {
+              "max": 1,
+              "add": 1,
+              "policy": "refresh"
+            },
+            "effects": [
+              {
+                "id": "bonus",
+                "benefit_type_id": "benefit.dmg_bonus.hydro",
+                "domain": "self",
+                "value": {
+                  "kind": "stat",
+                  "subject": "owner",
+                  "stat": "em",
+                  "sample": "trigger"
+                }
+              }
+            ]
+          },
+          "value_bindings": [
+            {
+              "target": "timing.duration",
+              "parameter_ref": "duration"
+            },
+            {
+              "target": "effects.bonus.value.factor",
+              "parameter_ref": "factor"
+            }
+          ],
+          "execution_ports": [
+            {
+              "target": "owner",
+              "role": "provider"
+            },
+            {
+              "target": "trigger.characters",
+              "role": "provider_characters"
+            }
+          ],
+          "requirements": [
+            "single_target",
+            "fresh_empty_instance",
+            "fixed_party",
+            "range_declared",
+            "no_hitlag",
+            "qualified_reaction_origin",
+            "fixed_nonextra_em_equality",
+            "no_dynamic_em",
+            "no_duplicate_source"
+          ]
+        },
+        "evidence_tier": "experimental_reference",
+        "evidence_refs": [
+          "proud",
+          "talent",
+          "ability",
+          "reference"
+        ]
+      },
+      "evidence": [
+        {
+          "id": "avatar",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/AvatarExcelConfigData.json#/34",
+          "sha256": "4aa7772affeacd541e7fb529415b030bd6c7d6efe87cfdf83ac77a0557f301ed"
+        },
+        {
+          "id": "depot",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/AvatarSkillDepotExcelConfigData.json#/97",
+          "sha256": "504dda55d61a261ed581f9f10fcd39858ba3ea8fbc2d0d4175d9429923ddc7e5"
+        },
+        {
+          "id": "proud",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/ProudSkillExcelConfigData.json#/3534",
+          "sha256": "a4f87c40d2a0adbd30d57e3ca4e59f916964a0f019264b4648f8be523dabd017"
+        },
+        {
+          "id": "talent",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Talent/AvatarTalents/ConfigTalent_Kazuha.json#/Kazuha_PermanentSkill_2",
+          "sha256": "a8e2c9ba9338997876456b42d189745d9335e6128240ad39c1e302dae095729c"
+        },
+        {
+          "id": "ability",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Kazuha.json#/23/Default",
+          "sha256": "192a940a2d326f54c0e62a0fcaf46f3010c05ada65bc02add3293d13a925072b"
+        },
+        {
+          "id": "promote",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/AvatarPromoteExcelConfigData.json#/230",
+          "sha256": "0b53b614dcde8be5149a3a8f3a398b54746e428ccad4fad1869abcb533b535cb"
+        },
+        {
+          "id": "reference",
+          "kind": "reference_implementation",
+          "locator": "repository:src/genshin_runtime/resources/passive_benefit_profiles.json",
+          "sha256": "5059bb8a9d6ea5f37d684534e0c6d3fb04bd718ae0c4820f2c753fcbfb3ee762"
+        }
+      ],
+      "applicability": {
+        "version_line": "release",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "normalization_fingerprint": "4b792020b8fbfffd4103b4e019065602f205f42d46a8f6bcb995c6f76d278cb1"
+      },
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "id": "passive.swirl-elemental-bonus.rule.cryo",
+      "revision": 1,
+      "subject": {
+        "target_type": "character",
+        "target_id": 10000047
+      },
+      "payload": {
+        "id": "passive.swirl-elemental-bonus.rule.cryo",
+        "revision": 1,
+        "kind": "rule_template",
+        "claim": {
+          "key": "cryo",
+          "rule": {
+            "name_zh": "扩散触发冰元素增伤",
+            "trigger": {
+              "event": "elemental_reaction",
+              "phase": "post",
+              "reaction_types": [
+                "swirl"
+              ],
+              "reaction_elements": [
+                "cryo"
+              ],
+              "owner_presence": "any"
+            },
+            "beneficiaries": {
+              "mode": "team",
+              "scope": "locked"
+            },
+            "timing": {
+              "delay": 0,
+              "cooldown": 0,
+              "cooldown_anchor": "success"
+            },
+            "stacking": {
+              "max": 1,
+              "add": 1,
+              "policy": "refresh"
+            },
+            "effects": [
+              {
+                "id": "bonus",
+                "benefit_type_id": "benefit.dmg_bonus.cryo",
+                "domain": "self",
+                "value": {
+                  "kind": "stat",
+                  "subject": "owner",
+                  "stat": "em",
+                  "sample": "trigger"
+                }
+              }
+            ]
+          },
+          "value_bindings": [
+            {
+              "target": "timing.duration",
+              "parameter_ref": "duration"
+            },
+            {
+              "target": "effects.bonus.value.factor",
+              "parameter_ref": "factor"
+            }
+          ],
+          "execution_ports": [
+            {
+              "target": "owner",
+              "role": "provider"
+            },
+            {
+              "target": "trigger.characters",
+              "role": "provider_characters"
+            }
+          ],
+          "requirements": [
+            "single_target",
+            "fresh_empty_instance",
+            "fixed_party",
+            "range_declared",
+            "no_hitlag",
+            "qualified_reaction_origin",
+            "fixed_nonextra_em_equality",
+            "no_dynamic_em",
+            "no_duplicate_source"
+          ]
+        },
+        "evidence_tier": "experimental_reference",
+        "evidence_refs": [
+          "proud",
+          "talent",
+          "ability",
+          "reference"
+        ]
+      },
+      "evidence": [
+        {
+          "id": "avatar",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/AvatarExcelConfigData.json#/34",
+          "sha256": "4aa7772affeacd541e7fb529415b030bd6c7d6efe87cfdf83ac77a0557f301ed"
+        },
+        {
+          "id": "depot",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/AvatarSkillDepotExcelConfigData.json#/97",
+          "sha256": "504dda55d61a261ed581f9f10fcd39858ba3ea8fbc2d0d4175d9429923ddc7e5"
+        },
+        {
+          "id": "proud",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/ProudSkillExcelConfigData.json#/3534",
+          "sha256": "a4f87c40d2a0adbd30d57e3ca4e59f916964a0f019264b4648f8be523dabd017"
+        },
+        {
+          "id": "talent",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Talent/AvatarTalents/ConfigTalent_Kazuha.json#/Kazuha_PermanentSkill_2",
+          "sha256": "a8e2c9ba9338997876456b42d189745d9335e6128240ad39c1e302dae095729c"
+        },
+        {
+          "id": "ability",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Kazuha.json#/23/Default",
+          "sha256": "192a940a2d326f54c0e62a0fcaf46f3010c05ada65bc02add3293d13a925072b"
+        },
+        {
+          "id": "promote",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/AvatarPromoteExcelConfigData.json#/230",
+          "sha256": "0b53b614dcde8be5149a3a8f3a398b54746e428ccad4fad1869abcb533b535cb"
+        },
+        {
+          "id": "reference",
+          "kind": "reference_implementation",
+          "locator": "repository:src/genshin_runtime/resources/passive_benefit_profiles.json",
+          "sha256": "5059bb8a9d6ea5f37d684534e0c6d3fb04bd718ae0c4820f2c753fcbfb3ee762"
+        }
+      ],
+      "applicability": {
+        "version_line": "release",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "normalization_fingerprint": "4b792020b8fbfffd4103b4e019065602f205f42d46a8f6bcb995c6f76d278cb1"
+      },
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "id": "passive.swirl-elemental-bonus.parameter.factor",
+      "revision": 1,
+      "subject": {
+        "target_type": "character",
+        "target_id": 10000047
+      },
+      "payload": {
+        "id": "passive.swirl-elemental-bonus.parameter.factor",
+        "revision": 1,
+        "kind": "parameter_role",
+        "claim": {
+          "ref": "factor",
+          "value_type": "finite_number",
+          "unit": "ratio",
+          "targets": [
+            {
+              "rule_key": "hydro",
+              "target": "effects.bonus.value.factor"
+            },
+            {
+              "rule_key": "cryo",
+              "target": "effects.bonus.value.factor"
+            }
+          ]
+        },
+        "evidence_tier": "upstream_structural",
+        "evidence_refs": [
+          "proud",
+          "talent",
+          "ability"
+        ]
+      },
+      "evidence": [
+        {
+          "id": "avatar",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/AvatarExcelConfigData.json#/34",
+          "sha256": "4aa7772affeacd541e7fb529415b030bd6c7d6efe87cfdf83ac77a0557f301ed"
+        },
+        {
+          "id": "depot",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/AvatarSkillDepotExcelConfigData.json#/97",
+          "sha256": "504dda55d61a261ed581f9f10fcd39858ba3ea8fbc2d0d4175d9429923ddc7e5"
+        },
+        {
+          "id": "proud",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/ProudSkillExcelConfigData.json#/3534",
+          "sha256": "a4f87c40d2a0adbd30d57e3ca4e59f916964a0f019264b4648f8be523dabd017"
+        },
+        {
+          "id": "talent",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Talent/AvatarTalents/ConfigTalent_Kazuha.json#/Kazuha_PermanentSkill_2",
+          "sha256": "a8e2c9ba9338997876456b42d189745d9335e6128240ad39c1e302dae095729c"
+        },
+        {
+          "id": "ability",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Kazuha.json#/23/Default",
+          "sha256": "192a940a2d326f54c0e62a0fcaf46f3010c05ada65bc02add3293d13a925072b"
+        },
+        {
+          "id": "promote",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/AvatarPromoteExcelConfigData.json#/230",
+          "sha256": "0b53b614dcde8be5149a3a8f3a398b54746e428ccad4fad1869abcb533b535cb"
+        },
+        {
+          "id": "reference",
+          "kind": "reference_implementation",
+          "locator": "repository:src/genshin_runtime/resources/passive_benefit_profiles.json",
+          "sha256": "5059bb8a9d6ea5f37d684534e0c6d3fb04bd718ae0c4820f2c753fcbfb3ee762"
+        }
+      ],
+      "applicability": {
+        "version_line": "release",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "normalization_fingerprint": "4b792020b8fbfffd4103b4e019065602f205f42d46a8f6bcb995c6f76d278cb1"
+      },
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "id": "passive.swirl-elemental-bonus.parameter.duration",
+      "revision": 1,
+      "subject": {
+        "target_type": "character",
+        "target_id": 10000047
+      },
+      "payload": {
+        "id": "passive.swirl-elemental-bonus.parameter.duration",
+        "revision": 1,
+        "kind": "parameter_role",
+        "claim": {
+          "ref": "duration",
+          "value_type": "seconds_exact_us",
+          "unit": "seconds",
+          "targets": [
+            {
+              "rule_key": "hydro",
+              "target": "timing.duration"
+            },
+            {
+              "rule_key": "cryo",
+              "target": "timing.duration"
+            }
+          ]
+        },
+        "evidence_tier": "upstream_structural",
+        "evidence_refs": [
+          "proud",
+          "talent",
+          "ability"
+        ]
+      },
+      "evidence": [
+        {
+          "id": "avatar",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/AvatarExcelConfigData.json#/34",
+          "sha256": "4aa7772affeacd541e7fb529415b030bd6c7d6efe87cfdf83ac77a0557f301ed"
+        },
+        {
+          "id": "depot",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/AvatarSkillDepotExcelConfigData.json#/97",
+          "sha256": "504dda55d61a261ed581f9f10fcd39858ba3ea8fbc2d0d4175d9429923ddc7e5"
+        },
+        {
+          "id": "proud",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/ProudSkillExcelConfigData.json#/3534",
+          "sha256": "a4f87c40d2a0adbd30d57e3ca4e59f916964a0f019264b4648f8be523dabd017"
+        },
+        {
+          "id": "talent",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Talent/AvatarTalents/ConfigTalent_Kazuha.json#/Kazuha_PermanentSkill_2",
+          "sha256": "a8e2c9ba9338997876456b42d189745d9335e6128240ad39c1e302dae095729c"
+        },
+        {
+          "id": "ability",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Kazuha.json#/23/Default",
+          "sha256": "192a940a2d326f54c0e62a0fcaf46f3010c05ada65bc02add3293d13a925072b"
+        },
+        {
+          "id": "promote",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/AvatarPromoteExcelConfigData.json#/230",
+          "sha256": "0b53b614dcde8be5149a3a8f3a398b54746e428ccad4fad1869abcb533b535cb"
+        },
+        {
+          "id": "reference",
+          "kind": "reference_implementation",
+          "locator": "repository:src/genshin_runtime/resources/passive_benefit_profiles.json",
+          "sha256": "5059bb8a9d6ea5f37d684534e0c6d3fb04bd718ae0c4820f2c753fcbfb3ee762"
+        }
+      ],
+      "applicability": {
+        "version_line": "release",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "normalization_fingerprint": "4b792020b8fbfffd4103b4e019065602f205f42d46a8f6bcb995c6f76d278cb1"
+      },
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    }
+  ],
+  "descriptors": [
+    {
+      "id": "skill.current-atk-limited-addition",
+      "revision": 1,
+      "subject": {
+        "target_type": "character",
+        "target_id": 10000063
+      },
+      "payload": {
+        "descriptor": {
+          "schema_version": 1,
+          "mechanism_id": "skill.current-atk-limited-addition",
+          "revision": 1,
+          "evidence_fact_ids": [
+            "skill.current-atk-limited-addition.rule.addition@1",
+            "skill.current-atk-limited-addition.parameter.factor@1",
+            "skill.current-atk-limited-addition.parameter.duration@1",
+            "skill.current-atk-limited-addition.parameter.capacity@1"
+          ],
+          "rule_templates": [
+            {
+              "key": "addition",
+              "rule": {
+                "name_zh": "冰翎",
+                "trigger": {
+                  "event": "action_start",
+                  "phase": "pre"
+                },
+                "beneficiaries": {
+                  "mode": "team",
+                  "scope": "locked"
+                },
+                "timing": {
+                  "cooldown": 0,
+                  "cooldown_anchor": "success"
+                },
+                "stacking": {
+                  "max": 1,
+                  "add": 1,
+                  "policy": "replace"
+                },
+                "quota": {
+                  "scope": "per_beneficiary",
+                  "refresh": "reset",
+                  "consume": {
+                    "event": "hit",
+                    "phase": "pre",
+                    "elements": [
+                      "cryo"
+                    ],
+                    "damage_type_ids": [
+                      "damage.normal_attack",
+                      "damage.charged_attack",
+                      "damage.plunging_attack",
+                      "damage.elemental_skill",
+                      "damage.elemental_burst"
+                    ]
+                  }
+                },
+                "effects": [
+                  {
+                    "id": "addition",
+                    "benefit_type_id": "benefit.base_add.all",
+                    "domain": "provider",
+                    "value": {
+                      "kind": "stat",
+                      "subject": "owner",
+                      "stat": "atk",
+                      "sample": "current"
+                    },
+                    "filter": {
+                      "event": "hit",
+                      "phase": "pre",
+                      "elements": [
+                        "cryo"
+                      ],
+                      "damage_type_ids": [
+                        "damage.normal_attack",
+                        "damage.charged_attack",
+                        "damage.plunging_attack",
+                        "damage.elemental_skill",
+                        "damage.elemental_burst"
+                      ]
+                    }
+                  }
+                ]
+              },
+              "value_bindings": [
+                {
+                  "target": "timing.duration",
+                  "parameter_ref": "duration"
+                },
+                {
+                  "target": "quota.capacity",
+                  "parameter_ref": "capacity"
+                },
+                {
+                  "target": "effects.addition.value.factor",
+                  "parameter_ref": "factor"
+                }
+              ],
+              "execution_ports": [
+                {
+                  "target": "owner",
+                  "role": "provider"
+                },
+                {
+                  "target": "trigger.action_ids",
+                  "role": "qualifying_actions"
+                },
+                {
+                  "target": "timing.delay",
+                  "role": "activation_delay"
+                }
+              ],
+              "requirements": [
+                "single_target",
+                "ordinary_stat_read",
+                "fresh_empty_instance",
+                "fixed_party",
+                "range_declared",
+                "no_hitlag",
+                "no_unmodelled_cancel",
+                "activation_before_initial_hit",
+                "qualified_action_origin",
+                "no_duplicate_source"
+              ]
+            }
+          ]
+        },
+        "source_binding": {
+          "schema_version": 1,
+          "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+          "normalization_fingerprint": "4b792020b8fbfffd4103b4e019065602f205f42d46a8f6bcb995c6f76d278cb1",
+          "subject": {
+            "target_type": "character",
+            "target_id": 10000063
+          },
+          "selection": {
+            "character_id": 10000063,
+            "skill_depot_id": 6301,
+            "skill_id": 10632,
+            "constellation": 0,
+            "talent_level": 10,
+            "slot": "skill",
+            "variant": "hold"
+          },
+          "nodes": [
+            {
+              "id": "avatar",
+              "definition_kind": "excel_record",
+              "source_path": "ExcelBinOutput/AvatarExcelConfigData.json",
+              "json_pointer": "/50",
+              "source_sha256": "d3b4ce3253e6c4a11ffca5bfad200f53c00b86dabeb9a14eb505556954e87aee",
+              "node_sha256": "29c0ded55f56a400463b48c852659b099a22b8c60dc62473b2321c68c75ee7c2"
+            },
+            {
+              "id": "depot",
+              "definition_kind": "excel_record",
+              "source_path": "ExcelBinOutput/AvatarSkillDepotExcelConfigData.json",
+              "json_pointer": "/123",
+              "source_sha256": "76058ddd01946435248d158ef4cc659ba995643c5635e9948161ce47a7ed814b",
+              "node_sha256": "a7c2656240415fc6fe5e4acc77b01c3ec4cd27edfb6b8c9dcf72613c4cd1c223"
+            },
+            {
+              "id": "skill",
+              "definition_kind": "excel_record",
+              "source_path": "ExcelBinOutput/AvatarSkillExcelConfigData.json",
+              "json_pointer": "/279",
+              "source_sha256": "f86481ed705468ba3e7a4b05e05eade9c89cf3add291308c3469859728ae96db",
+              "node_sha256": "6f1d808d8cb23a192aa0ab16ad3a592fad3f6182a1c1500192ea0c2ba5d81692"
+            },
+            {
+              "id": "proud",
+              "definition_kind": "excel_record",
+              "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+              "json_pointer": "/4442",
+              "source_sha256": "4897a68ebc6772e7b553a58a548a3756a1cf9b6e9ca22250bb0da987a3fa4d70",
+              "node_sha256": "a6e181bbebf72b6b6647bb8cb9eeba16a2a730dde51d93474891b501990d29b2"
+            },
+            {
+              "id": "talent",
+              "definition_kind": "talent_config",
+              "source_path": "BinOutput/Talent/AvatarTalents/ConfigTalent_Shenhe.json",
+              "json_pointer": "/Shenhe_SkillUpgrade_2",
+              "source_sha256": "0ca0eb7e9131fdf8293e65ad8498b15cdf88d440f40a0b9ab928e8df98c415c8",
+              "node_sha256": "da6348f8c14f6cd6e4330b421e11f32647b2a9581cb4261ae0b87b6891c53c5d"
+            },
+            {
+              "id": "ability",
+              "definition_kind": "ability",
+              "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Shenhe.json",
+              "json_pointer": "/6/Default",
+              "source_sha256": "9949f5c28fbaeddb2257f44eed8cadae2b8cd1c19514792fc7d2e7069ca284cc",
+              "node_sha256": "3de611539675a3defc9f5239a8f3fd88a83c2e444ea6ee12b8e3bb8ba0f087d4"
+            }
+          ],
+          "parameters": [
+            {
+              "ref": "factor",
+              "value_type": "finite_number",
+              "unit": "ratio",
+              "node_id": "proud",
+              "pointer": "/paramList/2"
+            },
+            {
+              "ref": "duration",
+              "value_type": "seconds_exact_us",
+              "unit": "seconds",
+              "node_id": "proud",
+              "pointer": "/paramList/4"
+            },
+            {
+              "ref": "capacity",
+              "value_type": "positive_integer",
+              "unit": "count",
+              "node_id": "proud",
+              "pointer": "/paramList/6"
+            }
+          ],
+          "evidence": [
+            {
+              "id": "avatar",
+              "kind": "runtime_node",
+              "locator": "ExcelBinOutput/AvatarExcelConfigData.json#/50",
+              "sha256": "29c0ded55f56a400463b48c852659b099a22b8c60dc62473b2321c68c75ee7c2"
+            },
+            {
+              "id": "depot",
+              "kind": "runtime_node",
+              "locator": "ExcelBinOutput/AvatarSkillDepotExcelConfigData.json#/123",
+              "sha256": "a7c2656240415fc6fe5e4acc77b01c3ec4cd27edfb6b8c9dcf72613c4cd1c223"
+            },
+            {
+              "id": "skill",
+              "kind": "runtime_node",
+              "locator": "ExcelBinOutput/AvatarSkillExcelConfigData.json#/279",
+              "sha256": "6f1d808d8cb23a192aa0ab16ad3a592fad3f6182a1c1500192ea0c2ba5d81692"
+            },
+            {
+              "id": "proud",
+              "kind": "runtime_node",
+              "locator": "ExcelBinOutput/ProudSkillExcelConfigData.json#/4442",
+              "sha256": "a6e181bbebf72b6b6647bb8cb9eeba16a2a730dde51d93474891b501990d29b2"
+            },
+            {
+              "id": "talent",
+              "kind": "runtime_node",
+              "locator": "BinOutput/Talent/AvatarTalents/ConfigTalent_Shenhe.json#/Shenhe_SkillUpgrade_2",
+              "sha256": "da6348f8c14f6cd6e4330b421e11f32647b2a9581cb4261ae0b87b6891c53c5d"
+            },
+            {
+              "id": "ability",
+              "kind": "runtime_node",
+              "locator": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Shenhe.json#/6/Default",
+              "sha256": "3de611539675a3defc9f5239a8f3fd88a83c2e444ea6ee12b8e3bb8ba0f087d4"
+            },
+            {
+              "id": "reference",
+              "kind": "reference_implementation",
+              "locator": "repository:src/genshin_runtime/resources/limited_hit_benefit_profiles.json",
+              "sha256": "cdcc28d5c919436caed6571940973700aa1cbba84850374d1f2104f4b0cba45c"
+            }
+          ],
+          "coverage": {
+            "whole_source_status": "partial",
+            "excluded_branches": [
+              "只覆盖已验C0有效10级长按来源；点按/命座/多目标/真实空间移除/卡肉/未知取消未支持",
+              "完整源其他伤害、产球、增伤等不由此描述承担；provider属性贡献须经本轴检查"
+            ],
+            "unknown_branches": []
+          }
+        }
+      },
+      "evidence": [
+        {
+          "id": "avatar",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/AvatarExcelConfigData.json#/50",
+          "sha256": "29c0ded55f56a400463b48c852659b099a22b8c60dc62473b2321c68c75ee7c2"
+        },
+        {
+          "id": "depot",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/AvatarSkillDepotExcelConfigData.json#/123",
+          "sha256": "a7c2656240415fc6fe5e4acc77b01c3ec4cd27edfb6b8c9dcf72613c4cd1c223"
+        },
+        {
+          "id": "skill",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/AvatarSkillExcelConfigData.json#/279",
+          "sha256": "6f1d808d8cb23a192aa0ab16ad3a592fad3f6182a1c1500192ea0c2ba5d81692"
+        },
+        {
+          "id": "proud",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/ProudSkillExcelConfigData.json#/4442",
+          "sha256": "a6e181bbebf72b6b6647bb8cb9eeba16a2a730dde51d93474891b501990d29b2"
+        },
+        {
+          "id": "talent",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Talent/AvatarTalents/ConfigTalent_Shenhe.json#/Shenhe_SkillUpgrade_2",
+          "sha256": "da6348f8c14f6cd6e4330b421e11f32647b2a9581cb4261ae0b87b6891c53c5d"
+        },
+        {
+          "id": "ability",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Shenhe.json#/6/Default",
+          "sha256": "3de611539675a3defc9f5239a8f3fd88a83c2e444ea6ee12b8e3bb8ba0f087d4"
+        },
+        {
+          "id": "reference",
+          "kind": "reference_implementation",
+          "locator": "repository:src/genshin_runtime/resources/limited_hit_benefit_profiles.json",
+          "sha256": "cdcc28d5c919436caed6571940973700aa1cbba84850374d1f2104f4b0cba45c"
+        }
+      ],
+      "applicability": {
+        "version_line": "release",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "normalization_fingerprint": "4b792020b8fbfffd4103b4e019065602f205f42d46a8f6bcb995c6f76d278cb1"
+      },
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    },
+    {
+      "id": "passive.swirl-elemental-bonus",
+      "revision": 1,
+      "subject": {
+        "target_type": "character",
+        "target_id": 10000047
+      },
+      "payload": {
+        "descriptor": {
+          "schema_version": 1,
+          "mechanism_id": "passive.swirl-elemental-bonus",
+          "revision": 1,
+          "evidence_fact_ids": [
+            "passive.swirl-elemental-bonus.rule.hydro@1",
+            "passive.swirl-elemental-bonus.rule.cryo@1",
+            "passive.swirl-elemental-bonus.parameter.factor@1",
+            "passive.swirl-elemental-bonus.parameter.duration@1"
+          ],
+          "rule_templates": [
+            {
+              "key": "hydro",
+              "rule": {
+                "name_zh": "扩散触发水元素增伤",
+                "trigger": {
+                  "event": "elemental_reaction",
+                  "phase": "post",
+                  "reaction_types": [
+                    "swirl"
+                  ],
+                  "reaction_elements": [
+                    "hydro"
+                  ],
+                  "owner_presence": "any"
+                },
+                "beneficiaries": {
+                  "mode": "team",
+                  "scope": "locked"
+                },
+                "timing": {
+                  "delay": 0,
+                  "cooldown": 0,
+                  "cooldown_anchor": "success"
+                },
+                "stacking": {
+                  "max": 1,
+                  "add": 1,
+                  "policy": "refresh"
+                },
+                "effects": [
+                  {
+                    "id": "bonus",
+                    "benefit_type_id": "benefit.dmg_bonus.hydro",
+                    "domain": "self",
+                    "value": {
+                      "kind": "stat",
+                      "subject": "owner",
+                      "stat": "em",
+                      "sample": "trigger"
+                    }
+                  }
+                ]
+              },
+              "value_bindings": [
+                {
+                  "target": "timing.duration",
+                  "parameter_ref": "duration"
+                },
+                {
+                  "target": "effects.bonus.value.factor",
+                  "parameter_ref": "factor"
+                }
+              ],
+              "execution_ports": [
+                {
+                  "target": "owner",
+                  "role": "provider"
+                },
+                {
+                  "target": "trigger.characters",
+                  "role": "provider_characters"
+                }
+              ],
+              "requirements": [
+                "single_target",
+                "fresh_empty_instance",
+                "fixed_party",
+                "range_declared",
+                "no_hitlag",
+                "qualified_reaction_origin",
+                "fixed_nonextra_em_equality",
+                "no_dynamic_em",
+                "no_duplicate_source"
+              ]
+            },
+            {
+              "key": "cryo",
+              "rule": {
+                "name_zh": "扩散触发冰元素增伤",
+                "trigger": {
+                  "event": "elemental_reaction",
+                  "phase": "post",
+                  "reaction_types": [
+                    "swirl"
+                  ],
+                  "reaction_elements": [
+                    "cryo"
+                  ],
+                  "owner_presence": "any"
+                },
+                "beneficiaries": {
+                  "mode": "team",
+                  "scope": "locked"
+                },
+                "timing": {
+                  "delay": 0,
+                  "cooldown": 0,
+                  "cooldown_anchor": "success"
+                },
+                "stacking": {
+                  "max": 1,
+                  "add": 1,
+                  "policy": "refresh"
+                },
+                "effects": [
+                  {
+                    "id": "bonus",
+                    "benefit_type_id": "benefit.dmg_bonus.cryo",
+                    "domain": "self",
+                    "value": {
+                      "kind": "stat",
+                      "subject": "owner",
+                      "stat": "em",
+                      "sample": "trigger"
+                    }
+                  }
+                ]
+              },
+              "value_bindings": [
+                {
+                  "target": "timing.duration",
+                  "parameter_ref": "duration"
+                },
+                {
+                  "target": "effects.bonus.value.factor",
+                  "parameter_ref": "factor"
+                }
+              ],
+              "execution_ports": [
+                {
+                  "target": "owner",
+                  "role": "provider"
+                },
+                {
+                  "target": "trigger.characters",
+                  "role": "provider_characters"
+                }
+              ],
+              "requirements": [
+                "single_target",
+                "fresh_empty_instance",
+                "fixed_party",
+                "range_declared",
+                "no_hitlag",
+                "qualified_reaction_origin",
+                "fixed_nonextra_em_equality",
+                "no_dynamic_em",
+                "no_duplicate_source"
+              ]
+            }
+          ]
+        },
+        "source_binding": {
+          "schema_version": 1,
+          "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+          "normalization_fingerprint": "4b792020b8fbfffd4103b4e019065602f205f42d46a8f6bcb995c6f76d278cb1",
+          "subject": {
+            "target_type": "character",
+            "target_id": 10000047
+          },
+          "selection": {
+            "character_id": 10000047,
+            "skill_depot_id": 4701,
+            "proud_skill_id": 472201,
+            "character_level": 90,
+            "ascension": 6,
+            "constellation": 0
+          },
+          "nodes": [
+            {
+              "id": "avatar",
+              "definition_kind": "excel_record",
+              "source_path": "ExcelBinOutput/AvatarExcelConfigData.json",
+              "json_pointer": "/34",
+              "source_sha256": "d3b4ce3253e6c4a11ffca5bfad200f53c00b86dabeb9a14eb505556954e87aee",
+              "node_sha256": "4aa7772affeacd541e7fb529415b030bd6c7d6efe87cfdf83ac77a0557f301ed"
+            },
+            {
+              "id": "depot",
+              "definition_kind": "excel_record",
+              "source_path": "ExcelBinOutput/AvatarSkillDepotExcelConfigData.json",
+              "json_pointer": "/97",
+              "source_sha256": "76058ddd01946435248d158ef4cc659ba995643c5635e9948161ce47a7ed814b",
+              "node_sha256": "504dda55d61a261ed581f9f10fcd39858ba3ea8fbc2d0d4175d9429923ddc7e5"
+            },
+            {
+              "id": "proud",
+              "definition_kind": "excel_record",
+              "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+              "json_pointer": "/3534",
+              "source_sha256": "4897a68ebc6772e7b553a58a548a3756a1cf9b6e9ca22250bb0da987a3fa4d70",
+              "node_sha256": "a4f87c40d2a0adbd30d57e3ca4e59f916964a0f019264b4648f8be523dabd017"
+            },
+            {
+              "id": "talent",
+              "definition_kind": "talent_config",
+              "source_path": "BinOutput/Talent/AvatarTalents/ConfigTalent_Kazuha.json",
+              "json_pointer": "/Kazuha_PermanentSkill_2",
+              "source_sha256": "0c8a948580d2a8806fef335fd9daaeaf674cffe7ebecca52b733b12c326faeb4",
+              "node_sha256": "a8e2c9ba9338997876456b42d189745d9335e6128240ad39c1e302dae095729c"
+            },
+            {
+              "id": "ability",
+              "definition_kind": "ability",
+              "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Kazuha.json",
+              "json_pointer": "/23/Default",
+              "source_sha256": "70a81465b8049a76ad6f3c18e1ef2eff82ea5b1fcaef9d9db7b10e009553426f",
+              "node_sha256": "192a940a2d326f54c0e62a0fcaf46f3010c05ada65bc02add3293d13a925072b"
+            },
+            {
+              "id": "promote",
+              "definition_kind": "excel_record",
+              "source_path": "ExcelBinOutput/AvatarPromoteExcelConfigData.json",
+              "json_pointer": "/230",
+              "source_sha256": "d998c67261ab4fd7479e264813adfa039548f9d8f3223c34f45df4c911ee2b8b",
+              "node_sha256": "0b53b614dcde8be5149a3a8f3a398b54746e428ccad4fad1869abcb533b535cb"
+            }
+          ],
+          "parameters": [
+            {
+              "ref": "factor",
+              "value_type": "finite_number",
+              "unit": "ratio",
+              "node_id": "proud",
+              "pointer": "/paramList/0"
+            },
+            {
+              "ref": "duration",
+              "value_type": "seconds_exact_us",
+              "unit": "seconds",
+              "node_id": "proud",
+              "pointer": "/paramList/1"
+            }
+          ],
+          "evidence": [
+            {
+              "id": "avatar",
+              "kind": "runtime_node",
+              "locator": "ExcelBinOutput/AvatarExcelConfigData.json#/34",
+              "sha256": "4aa7772affeacd541e7fb529415b030bd6c7d6efe87cfdf83ac77a0557f301ed"
+            },
+            {
+              "id": "depot",
+              "kind": "runtime_node",
+              "locator": "ExcelBinOutput/AvatarSkillDepotExcelConfigData.json#/97",
+              "sha256": "504dda55d61a261ed581f9f10fcd39858ba3ea8fbc2d0d4175d9429923ddc7e5"
+            },
+            {
+              "id": "proud",
+              "kind": "runtime_node",
+              "locator": "ExcelBinOutput/ProudSkillExcelConfigData.json#/3534",
+              "sha256": "a4f87c40d2a0adbd30d57e3ca4e59f916964a0f019264b4648f8be523dabd017"
+            },
+            {
+              "id": "talent",
+              "kind": "runtime_node",
+              "locator": "BinOutput/Talent/AvatarTalents/ConfigTalent_Kazuha.json#/Kazuha_PermanentSkill_2",
+              "sha256": "a8e2c9ba9338997876456b42d189745d9335e6128240ad39c1e302dae095729c"
+            },
+            {
+              "id": "ability",
+              "kind": "runtime_node",
+              "locator": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Kazuha.json#/23/Default",
+              "sha256": "192a940a2d326f54c0e62a0fcaf46f3010c05ada65bc02add3293d13a925072b"
+            },
+            {
+              "id": "promote",
+              "kind": "runtime_node",
+              "locator": "ExcelBinOutput/AvatarPromoteExcelConfigData.json#/230",
+              "sha256": "0b53b614dcde8be5149a3a8f3a398b54746e428ccad4fad1869abcb533b535cb"
+            },
+            {
+              "id": "reference",
+              "kind": "reference_implementation",
+              "locator": "repository:src/genshin_runtime/resources/passive_benefit_profiles.json",
+              "sha256": "5059bb8a9d6ea5f37d684534e0c6d3fb04bd718ae0c4820f2c753fcbfb3ee762"
+            }
+          ],
+          "coverage": {
+            "whole_source_status": "partial",
+            "excluded_branches": [
+              "只覆盖已验固有天赋普通冰水扩散、受审风父动作、90级突破6/C0；火雷/特殊扩散/传播未支持",
+              "NONEXTRA与总精通必须在本轴明确相等；动态精通、范围、未计入初始面板等由执行资格检查"
+            ],
+            "unknown_branches": []
+          }
+        }
+      },
+      "evidence": [
+        {
+          "id": "avatar",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/AvatarExcelConfigData.json#/34",
+          "sha256": "4aa7772affeacd541e7fb529415b030bd6c7d6efe87cfdf83ac77a0557f301ed"
+        },
+        {
+          "id": "depot",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/AvatarSkillDepotExcelConfigData.json#/97",
+          "sha256": "504dda55d61a261ed581f9f10fcd39858ba3ea8fbc2d0d4175d9429923ddc7e5"
+        },
+        {
+          "id": "proud",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/ProudSkillExcelConfigData.json#/3534",
+          "sha256": "a4f87c40d2a0adbd30d57e3ca4e59f916964a0f019264b4648f8be523dabd017"
+        },
+        {
+          "id": "talent",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Talent/AvatarTalents/ConfigTalent_Kazuha.json#/Kazuha_PermanentSkill_2",
+          "sha256": "a8e2c9ba9338997876456b42d189745d9335e6128240ad39c1e302dae095729c"
+        },
+        {
+          "id": "ability",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Kazuha.json#/23/Default",
+          "sha256": "192a940a2d326f54c0e62a0fcaf46f3010c05ada65bc02add3293d13a925072b"
+        },
+        {
+          "id": "promote",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/AvatarPromoteExcelConfigData.json#/230",
+          "sha256": "0b53b614dcde8be5149a3a8f3a398b54746e428ccad4fad1869abcb533b535cb"
+        },
+        {
+          "id": "reference",
+          "kind": "reference_implementation",
+          "locator": "repository:src/genshin_runtime/resources/passive_benefit_profiles.json",
+          "sha256": "5059bb8a9d6ea5f37d684534e0c6d3fb04bd718ae0c4820f2c753fcbfb3ee762"
+        }
+      ],
+      "applicability": {
+        "version_line": "release",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "normalization_fingerprint": "4b792020b8fbfffd4103b4e019065602f205f42d46a8f6bcb995c6f76d278cb1"
+      },
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      }
+    }
+  ],
+  "heads": [
+    {
+      "record_kind": "fact",
+      "record_id": "skill.current-atk-limited-addition.rule.addition",
+      "revision": 1,
+      "expected_head_revision": null
+    },
+    {
+      "record_kind": "fact",
+      "record_id": "skill.current-atk-limited-addition.parameter.factor",
+      "revision": 1,
+      "expected_head_revision": null
+    },
+    {
+      "record_kind": "fact",
+      "record_id": "skill.current-atk-limited-addition.parameter.duration",
+      "revision": 1,
+      "expected_head_revision": null
+    },
+    {
+      "record_kind": "fact",
+      "record_id": "skill.current-atk-limited-addition.parameter.capacity",
+      "revision": 1,
+      "expected_head_revision": null
+    },
+    {
+      "record_kind": "descriptor",
+      "record_id": "skill.current-atk-limited-addition",
+      "revision": 1,
+      "expected_head_revision": null
+    },
+    {
+      "record_kind": "fact",
+      "record_id": "passive.swirl-elemental-bonus.rule.hydro",
+      "revision": 1,
+      "expected_head_revision": null
+    },
+    {
+      "record_kind": "fact",
+      "record_id": "passive.swirl-elemental-bonus.rule.cryo",
+      "revision": 1,
+      "expected_head_revision": null
+    },
+    {
+      "record_kind": "fact",
+      "record_id": "passive.swirl-elemental-bonus.parameter.factor",
+      "revision": 1,
+      "expected_head_revision": null
+    },
+    {
+      "record_kind": "fact",
+      "record_id": "passive.swirl-elemental-bonus.parameter.duration",
+      "revision": 1,
+      "expected_head_revision": null
+    },
+    {
+      "record_kind": "descriptor",
+      "record_id": "passive.swirl-elemental-bonus",
+      "revision": 1,
+      "expected_head_revision": null
+    }
+  ]
+}

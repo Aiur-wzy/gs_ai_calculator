@@ -1,0 +1,474 @@
+{
+  "kind": "genshin-plan",
+  "plan_version": 3,
+  "plan_id": "f5166842-2271-42a8-8efb-e17250158f66",
+  "revision": 0,
+  "manual_template": {
+    "version": 2,
+    "form": "resolved",
+    "id_registry_version": 1,
+    "type_definitions": {
+      "damage_types": []
+    },
+    "enemy": {
+      "level": 90,
+      "resistance": {
+        "default": 0.1
+      }
+    },
+    "characters": [
+      {
+        "id": "a",
+        "level": 90,
+        "stats": {
+          "atk": 100,
+          "base_atk": 50,
+          "em": 0,
+          "crit_rate": 0,
+          "crit_dmg": 0.5,
+          "energy_recharge": 1
+        },
+        "name": "工程角色"
+      }
+    ],
+    "hits": [
+      {
+        "id": "h0",
+        "t": 0.2,
+        "character": "a",
+        "skill": "工程技能",
+        "hit_name": "工程连续命中",
+        "damage_type_ids": [
+          "damage.elemental_skill"
+        ],
+        "damage_system": "classic",
+        "element": "cryo",
+        "multiplier": 1
+      }
+    ],
+    "buffs": [],
+    "switches": [],
+    "loop_duration": 10,
+    "meta": {
+      "name": "声明式机制工程示例",
+      "assumptions": [
+        "虚构工程输入，用于验证接口与状态机，不是游戏队伍答案"
+      ]
+    }
+  },
+  "equipment_inputs": {},
+  "effect_bindings": [
+    {
+      "binding_id": "binding",
+      "provider_character_id": "a",
+      "owner": {
+        "kind": "manual",
+        "note": "独立工程机制"
+      },
+      "source_refs": [
+        {
+          "kind": "manual",
+          "note": "确定性虚构案例，无游戏队伍答案"
+        }
+      ],
+      "source_fingerprint": "d8d99d28b8579a7861093b12e15e0dd1c946bd7ea7bfbd9d98bc8eb6ac7dd708",
+      "coverage": {
+        "state": "complete",
+        "reviewed_by": "工程测试",
+        "note": "已核对虚构输入范围",
+        "source_fingerprint": "d8d99d28b8579a7861093b12e15e0dd1c946bd7ea7bfbd9d98bc8eb6ac7dd708"
+      },
+      "parts": [
+        {
+          "part_id": "part",
+          "label": "独立工程收益",
+          "state": "resolved",
+          "rule": {
+            "kind": "mechanics",
+            "rule_id": "boost"
+          },
+          "delivery": {
+            "kind": "mechanics"
+          },
+          "conditions": [],
+          "dependencies": {
+            "mode": "source_only",
+            "context_fingerprint": null,
+            "note": "显式声明"
+          },
+          "reason": null
+        }
+      ]
+    }
+  ],
+  "manual_effect_dependencies": [],
+  "rotation_tuning": {
+    "buff_hit_matches": []
+  },
+  "resolution": {
+    "state": "ready",
+    "composer_version": "1.2.0",
+    "input_fingerprint": "54bf297d243a80dc7d5039a6b7018177ac6766386fbc3261af1f99ecee6bde31",
+    "source_fingerprint": "9bf616f1d606030fa31381fb1a6ecf988744fcf0dc77086e211ad9e5579a473b",
+    "output_fingerprint": "bf59b12a702a4884a5a3668018a2ef7d8c2c4741f9872ab4944247e1323fd157",
+    "missing_inputs": [],
+    "warnings": [],
+    "contribution_report": {
+      "characters": {},
+      "generated_outputs": [
+        {
+          "binding_id": "binding",
+          "part_id": "part",
+          "mechanics_rule_id": "boost"
+        }
+      ],
+      "equipment_sources": {}
+    },
+    "context_fingerprint": "f3786a3a42a6d0471ec5e464167bc72af81f88864973b4f2fb9a3222586d9438",
+    "effect_requirements": [
+      {
+        "binding_id": "binding",
+        "provider_character_id": "a",
+        "owner": {
+          "kind": "manual",
+          "note": "独立工程机制"
+        },
+        "source_refs": [
+          {
+            "kind": "manual",
+            "note": "确定性虚构案例，无游戏队伍答案"
+          }
+        ],
+        "source_fingerprint": "d8d99d28b8579a7861093b12e15e0dd1c946bd7ea7bfbd9d98bc8eb6ac7dd708",
+        "effect": {
+          "owner": {
+            "kind": "manual",
+            "note": "独立工程机制"
+          },
+          "source_refs": [
+            {
+              "kind": "manual",
+              "note": "确定性虚构案例，无游戏队伍答案"
+            }
+          ]
+        },
+        "proposed_binding": {
+          "binding_id": "binding",
+          "provider_character_id": "a",
+          "owner": {
+            "kind": "manual",
+            "note": "独立工程机制"
+          },
+          "source_refs": [
+            {
+              "kind": "manual",
+              "note": "确定性虚构案例，无游戏队伍答案"
+            }
+          ],
+          "source_fingerprint": "d8d99d28b8579a7861093b12e15e0dd1c946bd7ea7bfbd9d98bc8eb6ac7dd708",
+          "coverage": {
+            "state": "complete",
+            "reviewed_by": "工程测试",
+            "note": "已核对虚构输入范围",
+            "source_fingerprint": "d8d99d28b8579a7861093b12e15e0dd1c946bd7ea7bfbd9d98bc8eb6ac7dd708"
+          },
+          "parts": [
+            {
+              "part_id": "part",
+              "label": "独立工程收益",
+              "state": "resolved",
+              "rule": {
+                "kind": "mechanics",
+                "rule_id": "boost"
+              },
+              "delivery": {
+                "kind": "mechanics"
+              },
+              "conditions": [],
+              "dependencies": {
+                "mode": "source_only",
+                "context_fingerprint": null,
+                "note": "显式声明"
+              },
+              "reason": null
+            }
+          ]
+        }
+      }
+    ],
+    "match_previews": [],
+    "manual_dependency_previews": [],
+    "data_versions": [],
+    "assumptions": [
+      "虚构工程输入，用于验证接口与状态机，不是游戏队伍答案"
+    ]
+  },
+  "resolved_template": {
+    "version": 2,
+    "form": "resolved",
+    "id_registry_version": 1,
+    "type_definitions": {
+      "damage_types": []
+    },
+    "enemy": {
+      "level": 90,
+      "resistance": {
+        "default": 0.1
+      }
+    },
+    "characters": [
+      {
+        "id": "a",
+        "level": 90,
+        "stats": {
+          "atk": 100,
+          "base_atk": 50,
+          "em": 0,
+          "crit_rate": 0,
+          "crit_dmg": 0.5,
+          "energy_recharge": 1
+        },
+        "name": "工程角色"
+      }
+    ],
+    "hits": [
+      {
+        "id": "ticks:1",
+        "t": 0.2,
+        "character": "a",
+        "skill": "工程技能",
+        "hit_name": "工程连续命中",
+        "damage_type_ids": [
+          "damage.elemental_skill"
+        ],
+        "damage_system": "classic",
+        "element": "cryo",
+        "multiplier": 1,
+        "count": 1,
+        "snapshot": false
+      },
+      {
+        "id": "ticks:2",
+        "t": 0.4,
+        "character": "a",
+        "skill": "工程技能",
+        "hit_name": "工程连续命中",
+        "damage_type_ids": [
+          "damage.elemental_skill"
+        ],
+        "damage_system": "classic",
+        "element": "cryo",
+        "multiplier": 1,
+        "count": 1,
+        "snapshot": false
+      },
+      {
+        "id": "ticks:3",
+        "t": 0.6,
+        "character": "a",
+        "skill": "工程技能",
+        "hit_name": "工程连续命中",
+        "damage_type_ids": [
+          "damage.elemental_skill"
+        ],
+        "damage_system": "classic",
+        "element": "cryo",
+        "multiplier": 1,
+        "count": 1,
+        "snapshot": false
+      }
+    ],
+    "buffs": [
+      {
+        "id": "mechanics:ticks:1",
+        "name": "机制派生收益·工程连续命中",
+        "source": "声明式机制逐命中投影",
+        "start": 0.2,
+        "end": 0.200001,
+        "scope": "team",
+        "target": "a",
+        "effects": [
+          {
+            "id": "boost:value:0",
+            "benefit_type_id": "benefit.dmg_bonus.all",
+            "zone": "dmg_bonus",
+            "stat": "all",
+            "value": 1,
+            "applies_to": {
+              "mode": "hits",
+              "hit_ids": [
+                "ticks:1"
+              ]
+            }
+          }
+        ]
+      },
+      {
+        "id": "mechanics:ticks:2",
+        "name": "机制派生收益·工程连续命中",
+        "source": "声明式机制逐命中投影",
+        "start": 0.4,
+        "end": 0.400001,
+        "scope": "team",
+        "target": "a",
+        "effects": [
+          {
+            "id": "boost:value:0",
+            "benefit_type_id": "benefit.dmg_bonus.all",
+            "zone": "dmg_bonus",
+            "stat": "all",
+            "value": 1,
+            "applies_to": {
+              "mode": "hits",
+              "hit_ids": [
+                "ticks:2"
+              ]
+            }
+          }
+        ]
+      }
+    ],
+    "switches": [
+      {
+        "t": 0,
+        "character": "a"
+      }
+    ],
+    "loop_duration": 10,
+    "meta": {
+      "name": "声明式机制工程示例",
+      "assumptions": [
+        "虚构工程输入，用于验证接口与状态机，不是游戏队伍答案"
+      ],
+      "equipment_resolution": {
+        "composer_version": "1.2.0",
+        "source_fingerprint": "9bf616f1d606030fa31381fb1a6ecf988744fcf0dc77086e211ad9e5579a473b",
+        "data_versions": []
+      }
+    }
+  },
+  "rotation_model": {
+    "schema_version": 1,
+    "period": 10,
+    "max_cycles": 3,
+    "initial_frontline": "a",
+    "characters": [
+      {
+        "id": "a",
+        "element": "cryo",
+        "energy_recharge": 1,
+        "energy_capacity": 10,
+        "initial_energy": 10,
+        "status": "assumed",
+        "source": "虚构确定性工程情景"
+      }
+    ],
+    "abilities": [
+      {
+        "id": "e",
+        "character": "a",
+        "action_type_id": "action.elemental_skill",
+        "cooldown": null,
+        "energy": null,
+        "status": "assumed",
+        "source": "虚构确定性工程情景"
+      }
+    ],
+    "actions": [
+      {
+        "id": "cast",
+        "ability_id": "e",
+        "start": 0,
+        "occupation_end": 0.1,
+        "order": 0,
+        "repeat": {
+          "mode": "each_cycle"
+        },
+        "status": "assumed",
+        "source": "虚构确定性工程情景"
+      }
+    ],
+    "events": [],
+    "initial_cooldowns": []
+  },
+  "mechanics_model": {
+    "schema_version": 1,
+    "rules": [
+      {
+        "id": "boost",
+        "name_zh": "工程两次增伤",
+        "owner": "a",
+        "source_id": "binding:part",
+        "trigger": {
+          "event": "action_start",
+          "phase": "pre",
+          "action_ids": [
+            "cast"
+          ]
+        },
+        "beneficiaries": {
+          "mode": "team",
+          "scope": "locked"
+        },
+        "timing": {
+          "delay": 0,
+          "duration": 2,
+          "cooldown": 0,
+          "cooldown_anchor": "success"
+        },
+        "stacking": {
+          "max": 1,
+          "add": 1,
+          "policy": "refresh"
+        },
+        "effects": [
+          {
+            "id": "value",
+            "benefit_type_id": "benefit.dmg_bonus.all",
+            "value": 1,
+            "domain": "self"
+          }
+        ],
+        "status": "assumed",
+        "source": "虚构确定性工程情景",
+        "quota": {
+          "capacity": 2,
+          "scope": "per_beneficiary",
+          "refresh": "reset",
+          "consume": {
+            "event": "hit",
+            "phase": "pre"
+          }
+        }
+      }
+    ],
+    "hit_events": [],
+    "hit_patterns": [
+      {
+        "id": "ticks",
+        "prototype_hit_id": "h0",
+        "action_id": "cast",
+        "offsets": [
+          0.2,
+          0.4,
+          0.6
+        ],
+        "orders": [
+          10,
+          11,
+          12
+        ]
+      }
+    ],
+    "condition_events": [],
+    "initial_state": {
+      "rules": [
+        {
+          "rule_id": "boost",
+          "cooldown_remaining": 0,
+          "instances": []
+        }
+      ]
+    }
+  }
+}

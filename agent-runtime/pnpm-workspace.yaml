@@ -1,0 +1,20 @@
+packages:
+  - .
+
+# pnpm 11 reads project install options here; .npmrc remains auth/backward
+# compatibility metadata. The portable Windows contract requires real hoisting.
+nodeLinker: hoisted
+
+# Install-script policy is independent of the full DSH capability registration.
+# Keep these reviewed lifecycle scripts disabled; public runtime imports and
+# shipped native/prebuilt assets are validated separately. Settle pending install
+# metadata through pinned pnpm, never by editing its receipt or silently allowing scripts.
+allowBuilds:
+  '@deepseek-ai/dsh-subprocess-local': false
+  '@google/genai': false
+  koffi: false
+  node-pty: false
+  protobufjs: false
+
+patchedDependencies:
+  '@deepseek-ai/cordis@4.0.5': patches/@deepseek-ai__cordis@4.0.5.patch

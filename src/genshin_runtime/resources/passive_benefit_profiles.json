@@ -1,0 +1,1746 @@
+{
+  "schema_version": 1,
+  "profile_id": "inherent-ordinary-swirl-bonus-v1",
+  "profile_version": 2,
+  "commit": "224708edc8056f27e9ffc4eacabe797d75274636",
+  "old_commit": "9424e4e556bd80e5196be7d3c52723d3a35b30e7",
+  "fields": {
+    "EMGBJJOIENB": "onAdded",
+    "LFIJIMIMBIH": "modifierMixins",
+    "HDOJNFJLKAP": "reactionTypes",
+    "KHJMNJNEADF": "actions",
+    "OMALBHAAHHA": "range",
+    "GPPCPGHLDHL": "stacking"
+  },
+  "types": {
+    "ANDAIHHJDIB": "DoActionByElementReactionMixin"
+  },
+  "admission": {
+    "avatar": {
+      "source_path": "ExcelBinOutput/AvatarExcelConfigData.json",
+      "json_pointer": "/34",
+      "node_sha256": "4aa7772affeacd541e7fb529415b030bd6c7d6efe87cfdf83ac77a0557f301ed"
+    },
+    "depot": {
+      "source_path": "ExcelBinOutput/AvatarSkillDepotExcelConfigData.json",
+      "json_pointer": "/97",
+      "node_sha256": "504dda55d61a261ed581f9f10fcd39858ba3ea8fbc2d0d4175d9429923ddc7e5"
+    },
+    "promote": {
+      "source_path": "ExcelBinOutput/AvatarPromoteExcelConfigData.json",
+      "json_pointer": "/230",
+      "node_sha256": "0b53b614dcde8be5149a3a8f3a398b54746e428ccad4fad1869abcb533b535cb"
+    },
+    "ability": {
+      "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Kazuha.json",
+      "json_pointer": "/23/Default",
+      "node_sha256": "192a940a2d326f54c0e62a0fcaf46f3010c05ada65bc02add3293d13a925072b"
+    },
+    "talent": {
+      "source_path": "BinOutput/Talent/AvatarTalents/ConfigTalent_Kazuha.json",
+      "json_pointer": "/Kazuha_PermanentSkill_2",
+      "node_sha256": "a8e2c9ba9338997876456b42d189745d9335e6128240ad39c1e302dae095729c"
+    },
+    "proud": {
+      "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+      "json_pointer": "/3535",
+      "node_sha256": "a4f87c40d2a0adbd30d57e3ca4e59f916964a0f019264b4648f8be523dabd017"
+    }
+  },
+  "files": [
+    {
+      "source_path": "ExcelBinOutput/AvatarExcelConfigData.json",
+      "workspace_source_sha256": "bc9a4a11b7e0e40c6eadd75ca2c99752b17802521591a8df65f4995c5b0e4801",
+      "git_blob_sha256": "d6fb33533a05fed29c411fa55db769480698c2d6c2511154d635eb7393996a53",
+      "workspace_bytes": 381067,
+      "old_source_sha256": "ecedebd99ce7dc0f982e7c70fa7a85464353be6d45121a9f9ed51af95cfa6773",
+      "raw_equal": false,
+      "crlf_only_equal": true
+    },
+    {
+      "source_path": "ExcelBinOutput/AvatarSkillDepotExcelConfigData.json",
+      "workspace_source_sha256": "841ccf30a9dcb0f9851c1ca1a3f37bfd53d7e83a1bf5f38ea6f9b4dedb69e896",
+      "git_blob_sha256": "66280c26aeb3c6bdda502e81eee2449021dbfc5ba608de4cb2903c710b1cd877",
+      "workspace_bytes": 137361,
+      "old_source_sha256": "760b7181526456bade7ff2a7d81f1ddd2e853cde16f7c0ef60f6371cfa312d02",
+      "raw_equal": false,
+      "crlf_only_equal": true
+    },
+    {
+      "source_path": "ExcelBinOutput/AvatarPromoteExcelConfigData.json",
+      "workspace_source_sha256": "d998c67261ab4fd7479e264813adfa039548f9d8f3223c34f45df4c911ee2b8b",
+      "git_blob_sha256": "cd35038132f7f4191178e991abe0395dafd0f281d1b37f942d9935d6a49264ee",
+      "workspace_bytes": 687848,
+      "old_source_sha256": "f709d9116da2f5e6bf88548f4449d8dbe165d233663aef795c7a7ecfd2e4dd6b",
+      "raw_equal": false,
+      "crlf_only_equal": true
+    },
+    {
+      "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+      "workspace_source_sha256": "852113c53187be005ba398d8afc787809a75853d6d2c29f8240897bc13102362",
+      "git_blob_sha256": "7ea37860f8957a7730192298a7ae3da2bef50ceafed14e1c41a13a889fba205f",
+      "workspace_bytes": 10001891,
+      "old_source_sha256": "362994ae091a71c1ee94667b5f7c9bb3b46b97a36a0050699320cc277d25a45d",
+      "raw_equal": false,
+      "crlf_only_equal": true
+    },
+    {
+      "source_path": "BinOutput/Talent/AvatarTalents/ConfigTalent_Kazuha.json",
+      "workspace_source_sha256": "0c8a948580d2a8806fef335fd9daaeaf674cffe7ebecca52b733b12c326faeb4",
+      "git_blob_sha256": "95a3fdee3d29427fd71131f0c4ae295e122c066382df407cafcd292f7983bcdf",
+      "workspace_bytes": 9532,
+      "old_source_sha256": "d7f08c03c2bf46059950b2d62e089b75ea49faeaf61233f994138c317726c348",
+      "raw_equal": false,
+      "crlf_only_equal": true
+    },
+    {
+      "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Kazuha.json",
+      "workspace_source_sha256": "70a81465b8049a76ad6f3c18e1ef2eff82ea5b1fcaef9d9db7b10e009553426f",
+      "git_blob_sha256": "691536d219d6a4eda8f3580272a558b778e2f4b416351eeadf04d6b5e2d72186",
+      "workspace_bytes": 304811,
+      "old_source_sha256": "af04f2220ef130d0ecb70ead2275d3067565394bd5f54eb8cc2e812e91e4955d",
+      "raw_equal": false,
+      "crlf_only_equal": true
+    }
+  ],
+  "mapping_evidence": {
+    "kind": "complete_old_new_parents",
+    "nodes": [
+      {
+        "path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Kazuha.json",
+        "identity": "Avatar_Kazuha_PermanentSkill_2",
+        "old_pointer": "/23/Default",
+        "pointer": "/23/Default",
+        "old_node_sha256": "4f72e592d6c371f37d4ae4b5e2d9334e57d459ac7448ffb53466e5cf55f9980e",
+        "node_sha256": "192a940a2d326f54c0e62a0fcaf46f3010c05ada65bc02add3293d13a925072b",
+        "old_raw": {
+          "onAdded": [
+            {
+              "$type": "AttachModifier",
+              "actorIceSubHurtDelta": -1,
+              "doOffStage": false,
+              "modifierName": "Avatar_Kazuha_PermanentSkill_2_Handler",
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "abilitySpecials": {
+            "Kazuha_PermanentSkill_2_Duration": 0,
+            "Kazuha_PermanentSkill_2_Factor": 0
+          },
+          "isDynamicAbility": true,
+          "abilityName": "Avatar_Kazuha_PermanentSkill_2",
+          "modifiers": {
+            "Avatar_Kazuha_PermanentSkill_2_Handler": {
+              "elementDurability": 100,
+              "minus_one": -1,
+              "modifierMixins": [
+                {
+                  "$type": "DoActionByElementReactionMixin",
+                  "actorIceSubHurtDelta": -1,
+                  "actions": [
+                    {
+                      "$type": "RemoveUniqueModifier",
+                      "target": "AllPlayerAvatars",
+                      "actorIceSubHurtDelta": -1,
+                      "doOffStage": true,
+                      "modifierName": "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Fire",
+                      "predicates": [
+                        {
+                          "$type": "ByTargetPositionToSelfPosition",
+                          "target": "Target",
+                          "value": 40,
+                          "logic": "LesserOrEqual"
+                        }
+                      ],
+                      "canBeHandledOnRecover": true
+                    },
+                    {
+                      "$type": "ApplyModifier",
+                      "target": "AllPlayerAvatars",
+                      "actorIceSubHurtDelta": -1,
+                      "doOffStage": true,
+                      "modifierName": "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Fire",
+                      "predicates": [
+                        {
+                          "$type": "ByTargetPositionToSelfPosition",
+                          "target": "Target",
+                          "value": 40,
+                          "logic": "LesserOrEqual"
+                        }
+                      ],
+                      "canBeHandledOnRecover": true
+                    }
+                  ],
+                  "reactionTypes": [
+                    "SwirlFire"
+                  ],
+                  "entityTypes": [
+                    "Monster"
+                  ],
+                  "range": 20
+                },
+                {
+                  "$type": "DoActionByElementReactionMixin",
+                  "actorIceSubHurtDelta": -1,
+                  "actions": [
+                    {
+                      "$type": "RemoveUniqueModifier",
+                      "target": "AllPlayerAvatars",
+                      "actorIceSubHurtDelta": -1,
+                      "doOffStage": true,
+                      "modifierName": "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Water",
+                      "predicates": [
+                        {
+                          "$type": "ByTargetPositionToSelfPosition",
+                          "target": "Target",
+                          "value": 40,
+                          "logic": "LesserOrEqual"
+                        }
+                      ],
+                      "canBeHandledOnRecover": true
+                    },
+                    {
+                      "$type": "ApplyModifier",
+                      "target": "AllPlayerAvatars",
+                      "actorIceSubHurtDelta": -1,
+                      "doOffStage": true,
+                      "modifierName": "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Water",
+                      "predicates": [
+                        {
+                          "$type": "ByTargetPositionToSelfPosition",
+                          "target": "Target",
+                          "value": 40,
+                          "logic": "LesserOrEqual"
+                        }
+                      ],
+                      "canBeHandledOnRecover": true
+                    }
+                  ],
+                  "reactionTypes": [
+                    "SwirlWater"
+                  ],
+                  "entityTypes": [
+                    "Monster"
+                  ],
+                  "range": 20
+                },
+                {
+                  "$type": "DoActionByElementReactionMixin",
+                  "actorIceSubHurtDelta": -1,
+                  "actions": [
+                    {
+                      "$type": "RemoveUniqueModifier",
+                      "target": "AllPlayerAvatars",
+                      "actorIceSubHurtDelta": -1,
+                      "doOffStage": true,
+                      "modifierName": "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Electric",
+                      "predicates": [
+                        {
+                          "$type": "ByTargetPositionToSelfPosition",
+                          "target": "Target",
+                          "value": 40,
+                          "logic": "LesserOrEqual"
+                        }
+                      ],
+                      "canBeHandledOnRecover": true
+                    },
+                    {
+                      "$type": "ApplyModifier",
+                      "target": "AllPlayerAvatars",
+                      "actorIceSubHurtDelta": -1,
+                      "doOffStage": true,
+                      "modifierName": "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Electric",
+                      "predicates": [
+                        {
+                          "$type": "ByTargetPositionToSelfPosition",
+                          "target": "Target",
+                          "value": 40,
+                          "logic": "LesserOrEqual"
+                        }
+                      ],
+                      "canBeHandledOnRecover": true
+                    }
+                  ],
+                  "reactionTypes": [
+                    "SwirlElectric"
+                  ],
+                  "entityTypes": [
+                    "Monster"
+                  ],
+                  "range": 20
+                },
+                {
+                  "$type": "DoActionByElementReactionMixin",
+                  "actorIceSubHurtDelta": -1,
+                  "actions": [
+                    {
+                      "$type": "RemoveUniqueModifier",
+                      "target": "AllPlayerAvatars",
+                      "actorIceSubHurtDelta": -1,
+                      "doOffStage": true,
+                      "modifierName": "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Ice",
+                      "predicates": [
+                        {
+                          "$type": "ByTargetPositionToSelfPosition",
+                          "target": "Target",
+                          "value": 40,
+                          "logic": "LesserOrEqual"
+                        }
+                      ],
+                      "canBeHandledOnRecover": true
+                    },
+                    {
+                      "$type": "ApplyModifier",
+                      "target": "AllPlayerAvatars",
+                      "actorIceSubHurtDelta": -1,
+                      "doOffStage": true,
+                      "modifierName": "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Ice",
+                      "predicates": [
+                        {
+                          "$type": "ByTargetPositionToSelfPosition",
+                          "target": "Target",
+                          "value": 40,
+                          "logic": "LesserOrEqual"
+                        }
+                      ],
+                      "canBeHandledOnRecover": true
+                    }
+                  ],
+                  "reactionTypes": [
+                    "SwirlIce",
+                    "StarSwirlIce"
+                  ],
+                  "entityTypes": [
+                    "Monster"
+                  ],
+                  "range": 20
+                }
+              ],
+              "IAKPBCLBNKF": -1,
+              "isLimitedProperties": true
+            },
+            "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Electric": {
+              "stacking": "Unique",
+              "duration": "Kazuha_PermanentSkill_2_Duration",
+              "elementDurability": 100,
+              "minus_one": -1,
+              "IAKPBCLBNKF": -1,
+              "reApplyModifierOnStateChange": true,
+              "isUnique": true,
+              "isLimitedProperties": true,
+              "properties": {
+                "Actor_ElecAddHurtExtraDelta": [
+                  "Kazuha_PermanentSkill_2_Factor",
+                  "FIGHT_PROP_NONEXTRA_ELEMENT_MASTERY",
+                  "MUL"
+                ]
+              },
+              "buffID": 10001,
+              "state": "AttackUp"
+            },
+            "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Fire": {
+              "stacking": "Unique",
+              "duration": "Kazuha_PermanentSkill_2_Duration",
+              "elementDurability": 100,
+              "minus_one": -1,
+              "IAKPBCLBNKF": -1,
+              "reApplyModifierOnStateChange": true,
+              "isUnique": true,
+              "isLimitedProperties": true,
+              "properties": {
+                "Actor_FireAddHurtExtraDelta": [
+                  "Kazuha_PermanentSkill_2_Factor",
+                  "FIGHT_PROP_NONEXTRA_ELEMENT_MASTERY",
+                  "MUL"
+                ]
+              },
+              "buffID": 10001,
+              "state": "AttackUp"
+            },
+            "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Ice": {
+              "stacking": "Unique",
+              "duration": "Kazuha_PermanentSkill_2_Duration",
+              "elementDurability": 100,
+              "minus_one": -1,
+              "IAKPBCLBNKF": -1,
+              "reApplyModifierOnStateChange": true,
+              "isUnique": true,
+              "isLimitedProperties": true,
+              "properties": {
+                "Actor_IceAddHurtExtraDelta": [
+                  "Kazuha_PermanentSkill_2_Factor",
+                  "FIGHT_PROP_NONEXTRA_ELEMENT_MASTERY",
+                  "MUL"
+                ]
+              },
+              "buffID": 10001,
+              "state": "AttackUp"
+            },
+            "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Water": {
+              "stacking": "Unique",
+              "duration": "Kazuha_PermanentSkill_2_Duration",
+              "elementDurability": 100,
+              "minus_one": -1,
+              "IAKPBCLBNKF": -1,
+              "reApplyModifierOnStateChange": true,
+              "isUnique": true,
+              "isLimitedProperties": true,
+              "properties": {
+                "Actor_WaterAddHurtExtraDelta": [
+                  "Kazuha_PermanentSkill_2_Factor",
+                  "FIGHT_PROP_NONEXTRA_ELEMENT_MASTERY",
+                  "MUL"
+                ]
+              },
+              "buffID": 10001,
+              "state": "AttackUp"
+            }
+          },
+          "LKLPDIMKLKI": {
+            "elementDurability": 100,
+            "minus_one": -1,
+            "IAKPBCLBNKF": -1,
+            "isLimitedProperties": true
+          }
+        },
+        "raw": {
+          "EMGBJJOIENB": [
+            {
+              "$type": "CDANEAFAFKM",
+              "AMOLMPHFPHJ": -1,
+              "ILELAOFJIKJ": true,
+              "LDFBDMNIADI": "Avatar_Kazuha_PermanentSkill_2_Handler",
+              "LJFIEGHHLOB": false
+            }
+          ],
+          "GPPBBDEICKP": {
+            "Avatar_Kazuha_PermanentSkill_2_Handler": {
+              "DBGOKAKAHFP": 100,
+              "DOALDLPNGMF": -1,
+              "KFOMCJGGPPC": -1,
+              "LFIJIMIMBIH": [
+                {
+                  "$type": "ANDAIHHJDIB",
+                  "AMOLMPHFPHJ": -1,
+                  "HDOJNFJLKAP": [
+                    "SwirlFire"
+                  ],
+                  "KHJMNJNEADF": [
+                    {
+                      "$type": "GCINLBBPONN",
+                      "AMOLMPHFPHJ": -1,
+                      "BDHBNCEEPPK": "AllPlayerAvatars",
+                      "IJDGNIIOHLM": [
+                        {
+                          "$type": "OLNGCABMCGI",
+                          "BDHBNCEEPPK": "Target",
+                          "DKCBCJCHEBF": "LesserOrEqual",
+                          "PDIFFCBMGMO": 40
+                        }
+                      ],
+                      "ILELAOFJIKJ": true,
+                      "LDFBDMNIADI": "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Fire",
+                      "LJFIEGHHLOB": true
+                    },
+                    {
+                      "$type": "BINBHGLANKO",
+                      "AMOLMPHFPHJ": -1,
+                      "BDHBNCEEPPK": "AllPlayerAvatars",
+                      "IJDGNIIOHLM": [
+                        {
+                          "$type": "OLNGCABMCGI",
+                          "BDHBNCEEPPK": "Target",
+                          "DKCBCJCHEBF": "LesserOrEqual",
+                          "PDIFFCBMGMO": 40
+                        }
+                      ],
+                      "ILELAOFJIKJ": true,
+                      "LDFBDMNIADI": "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Fire",
+                      "LJFIEGHHLOB": true
+                    }
+                  ],
+                  "LJBBKGIFJDB": [
+                    "Monster"
+                  ],
+                  "OMALBHAAHHA": 20
+                },
+                {
+                  "$type": "ANDAIHHJDIB",
+                  "AMOLMPHFPHJ": -1,
+                  "HDOJNFJLKAP": [
+                    "SwirlWater"
+                  ],
+                  "KHJMNJNEADF": [
+                    {
+                      "$type": "GCINLBBPONN",
+                      "AMOLMPHFPHJ": -1,
+                      "BDHBNCEEPPK": "AllPlayerAvatars",
+                      "IJDGNIIOHLM": [
+                        {
+                          "$type": "OLNGCABMCGI",
+                          "BDHBNCEEPPK": "Target",
+                          "DKCBCJCHEBF": "LesserOrEqual",
+                          "PDIFFCBMGMO": 40
+                        }
+                      ],
+                      "ILELAOFJIKJ": true,
+                      "LDFBDMNIADI": "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Water",
+                      "LJFIEGHHLOB": true
+                    },
+                    {
+                      "$type": "BINBHGLANKO",
+                      "AMOLMPHFPHJ": -1,
+                      "BDHBNCEEPPK": "AllPlayerAvatars",
+                      "IJDGNIIOHLM": [
+                        {
+                          "$type": "OLNGCABMCGI",
+                          "BDHBNCEEPPK": "Target",
+                          "DKCBCJCHEBF": "LesserOrEqual",
+                          "PDIFFCBMGMO": 40
+                        }
+                      ],
+                      "ILELAOFJIKJ": true,
+                      "LDFBDMNIADI": "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Water",
+                      "LJFIEGHHLOB": true
+                    }
+                  ],
+                  "LJBBKGIFJDB": [
+                    "Monster"
+                  ],
+                  "OMALBHAAHHA": 20
+                },
+                {
+                  "$type": "ANDAIHHJDIB",
+                  "AMOLMPHFPHJ": -1,
+                  "HDOJNFJLKAP": [
+                    "SwirlElectric"
+                  ],
+                  "KHJMNJNEADF": [
+                    {
+                      "$type": "GCINLBBPONN",
+                      "AMOLMPHFPHJ": -1,
+                      "BDHBNCEEPPK": "AllPlayerAvatars",
+                      "IJDGNIIOHLM": [
+                        {
+                          "$type": "OLNGCABMCGI",
+                          "BDHBNCEEPPK": "Target",
+                          "DKCBCJCHEBF": "LesserOrEqual",
+                          "PDIFFCBMGMO": 40
+                        }
+                      ],
+                      "ILELAOFJIKJ": true,
+                      "LDFBDMNIADI": "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Electric",
+                      "LJFIEGHHLOB": true
+                    },
+                    {
+                      "$type": "BINBHGLANKO",
+                      "AMOLMPHFPHJ": -1,
+                      "BDHBNCEEPPK": "AllPlayerAvatars",
+                      "IJDGNIIOHLM": [
+                        {
+                          "$type": "OLNGCABMCGI",
+                          "BDHBNCEEPPK": "Target",
+                          "DKCBCJCHEBF": "LesserOrEqual",
+                          "PDIFFCBMGMO": 40
+                        }
+                      ],
+                      "ILELAOFJIKJ": true,
+                      "LDFBDMNIADI": "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Electric",
+                      "LJFIEGHHLOB": true
+                    }
+                  ],
+                  "LJBBKGIFJDB": [
+                    "Monster"
+                  ],
+                  "OMALBHAAHHA": 20
+                },
+                {
+                  "$type": "ANDAIHHJDIB",
+                  "AMOLMPHFPHJ": -1,
+                  "HDOJNFJLKAP": [
+                    "SwirlIce",
+                    "StarSwirlIce"
+                  ],
+                  "KHJMNJNEADF": [
+                    {
+                      "$type": "GCINLBBPONN",
+                      "AMOLMPHFPHJ": -1,
+                      "BDHBNCEEPPK": "AllPlayerAvatars",
+                      "IJDGNIIOHLM": [
+                        {
+                          "$type": "OLNGCABMCGI",
+                          "BDHBNCEEPPK": "Target",
+                          "DKCBCJCHEBF": "LesserOrEqual",
+                          "PDIFFCBMGMO": 40
+                        }
+                      ],
+                      "ILELAOFJIKJ": true,
+                      "LDFBDMNIADI": "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Ice",
+                      "LJFIEGHHLOB": true
+                    },
+                    {
+                      "$type": "BINBHGLANKO",
+                      "AMOLMPHFPHJ": -1,
+                      "BDHBNCEEPPK": "AllPlayerAvatars",
+                      "IJDGNIIOHLM": [
+                        {
+                          "$type": "OLNGCABMCGI",
+                          "BDHBNCEEPPK": "Target",
+                          "DKCBCJCHEBF": "LesserOrEqual",
+                          "PDIFFCBMGMO": 40
+                        }
+                      ],
+                      "ILELAOFJIKJ": true,
+                      "LDFBDMNIADI": "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Ice",
+                      "LJFIEGHHLOB": true
+                    }
+                  ],
+                  "LJBBKGIFJDB": [
+                    "Monster"
+                  ],
+                  "OMALBHAAHHA": 20
+                }
+              ],
+              "PPKOPMBNPJH": true
+            },
+            "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Electric": {
+              "BNEJPEMIMEH": true,
+              "BOCCNJLBFCJ": "AttackUp",
+              "DBGOKAKAHFP": 100,
+              "DIELNIJPCJJ": true,
+              "DOALDLPNGMF": -1,
+              "GPPCPGHLDHL": "Unique",
+              "ILKPFPGAIGI": {
+                "Actor_ElecAddHurtExtraDelta": [
+                  "Kazuha_PermanentSkill_2_Factor",
+                  "FIGHT_PROP_NONEXTRA_ELEMENT_MASTERY",
+                  "MUL"
+                ]
+              },
+              "JFBBDPFLCEF": 10001,
+              "JPEAFDFPKAN": "Kazuha_PermanentSkill_2_Duration",
+              "KFOMCJGGPPC": -1,
+              "PPKOPMBNPJH": true
+            },
+            "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Fire": {
+              "BNEJPEMIMEH": true,
+              "BOCCNJLBFCJ": "AttackUp",
+              "DBGOKAKAHFP": 100,
+              "DIELNIJPCJJ": true,
+              "DOALDLPNGMF": -1,
+              "GPPCPGHLDHL": "Unique",
+              "ILKPFPGAIGI": {
+                "Actor_FireAddHurtExtraDelta": [
+                  "Kazuha_PermanentSkill_2_Factor",
+                  "FIGHT_PROP_NONEXTRA_ELEMENT_MASTERY",
+                  "MUL"
+                ]
+              },
+              "JFBBDPFLCEF": 10001,
+              "JPEAFDFPKAN": "Kazuha_PermanentSkill_2_Duration",
+              "KFOMCJGGPPC": -1,
+              "PPKOPMBNPJH": true
+            },
+            "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Ice": {
+              "BNEJPEMIMEH": true,
+              "BOCCNJLBFCJ": "AttackUp",
+              "DBGOKAKAHFP": 100,
+              "DIELNIJPCJJ": true,
+              "DOALDLPNGMF": -1,
+              "GPPCPGHLDHL": "Unique",
+              "ILKPFPGAIGI": {
+                "Actor_IceAddHurtExtraDelta": [
+                  "Kazuha_PermanentSkill_2_Factor",
+                  "FIGHT_PROP_NONEXTRA_ELEMENT_MASTERY",
+                  "MUL"
+                ]
+              },
+              "JFBBDPFLCEF": 10001,
+              "JPEAFDFPKAN": "Kazuha_PermanentSkill_2_Duration",
+              "KFOMCJGGPPC": -1,
+              "PPKOPMBNPJH": true
+            },
+            "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Water": {
+              "BNEJPEMIMEH": true,
+              "BOCCNJLBFCJ": "AttackUp",
+              "DBGOKAKAHFP": 100,
+              "DIELNIJPCJJ": true,
+              "DOALDLPNGMF": -1,
+              "GPPCPGHLDHL": "Unique",
+              "ILKPFPGAIGI": {
+                "Actor_WaterAddHurtExtraDelta": [
+                  "Kazuha_PermanentSkill_2_Factor",
+                  "FIGHT_PROP_NONEXTRA_ELEMENT_MASTERY",
+                  "MUL"
+                ]
+              },
+              "JFBBDPFLCEF": 10001,
+              "JPEAFDFPKAN": "Kazuha_PermanentSkill_2_Duration",
+              "KFOMCJGGPPC": -1,
+              "PPKOPMBNPJH": true
+            }
+          },
+          "IIBMNPFLNMJ": "Avatar_Kazuha_PermanentSkill_2",
+          "LOEHLJGBGAC": {
+            "Kazuha_PermanentSkill_2_Duration": 0,
+            "Kazuha_PermanentSkill_2_Factor": 0
+          },
+          "OMAIGDMCJBO": {
+            "DBGOKAKAHFP": 100,
+            "DOALDLPNGMF": -1,
+            "KFOMCJGGPPC": -1,
+            "PPKOPMBNPJH": true
+          },
+          "PODJJJHGAMO": true
+        },
+        "current_existing_normalization": {
+          "EMGBJJOIENB": [
+            {
+              "$type": "AttachModifier",
+              "actorIceSubHurtDelta": -1,
+              "canBeHandledOnRecover": true,
+              "modifierName": "Avatar_Kazuha_PermanentSkill_2_Handler",
+              "doOffStage": false
+            }
+          ],
+          "modifiers": {
+            "Avatar_Kazuha_PermanentSkill_2_Handler": {
+              "elementDurability": 100,
+              "IAKPBCLBNKF": -1,
+              "minus_one": -1,
+              "LFIJIMIMBIH": [
+                {
+                  "$type": "ANDAIHHJDIB",
+                  "actorIceSubHurtDelta": -1,
+                  "HDOJNFJLKAP": [
+                    "SwirlFire"
+                  ],
+                  "KHJMNJNEADF": [
+                    {
+                      "$type": "RemoveUniqueModifier",
+                      "actorIceSubHurtDelta": -1,
+                      "target": "AllPlayerAvatars",
+                      "predicates": [
+                        {
+                          "$type": "ByTargetPositionToSelfPosition",
+                          "target": "Target",
+                          "logic": "LesserOrEqual",
+                          "value": 40
+                        }
+                      ],
+                      "canBeHandledOnRecover": true,
+                      "modifierName": "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Fire",
+                      "doOffStage": true
+                    },
+                    {
+                      "$type": "ApplyModifier",
+                      "actorIceSubHurtDelta": -1,
+                      "target": "AllPlayerAvatars",
+                      "predicates": [
+                        {
+                          "$type": "ByTargetPositionToSelfPosition",
+                          "target": "Target",
+                          "logic": "LesserOrEqual",
+                          "value": 40
+                        }
+                      ],
+                      "canBeHandledOnRecover": true,
+                      "modifierName": "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Fire",
+                      "doOffStage": true
+                    }
+                  ],
+                  "entityTypes": [
+                    "Monster"
+                  ],
+                  "OMALBHAAHHA": 20
+                },
+                {
+                  "$type": "ANDAIHHJDIB",
+                  "actorIceSubHurtDelta": -1,
+                  "HDOJNFJLKAP": [
+                    "SwirlWater"
+                  ],
+                  "KHJMNJNEADF": [
+                    {
+                      "$type": "RemoveUniqueModifier",
+                      "actorIceSubHurtDelta": -1,
+                      "target": "AllPlayerAvatars",
+                      "predicates": [
+                        {
+                          "$type": "ByTargetPositionToSelfPosition",
+                          "target": "Target",
+                          "logic": "LesserOrEqual",
+                          "value": 40
+                        }
+                      ],
+                      "canBeHandledOnRecover": true,
+                      "modifierName": "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Water",
+                      "doOffStage": true
+                    },
+                    {
+                      "$type": "ApplyModifier",
+                      "actorIceSubHurtDelta": -1,
+                      "target": "AllPlayerAvatars",
+                      "predicates": [
+                        {
+                          "$type": "ByTargetPositionToSelfPosition",
+                          "target": "Target",
+                          "logic": "LesserOrEqual",
+                          "value": 40
+                        }
+                      ],
+                      "canBeHandledOnRecover": true,
+                      "modifierName": "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Water",
+                      "doOffStage": true
+                    }
+                  ],
+                  "entityTypes": [
+                    "Monster"
+                  ],
+                  "OMALBHAAHHA": 20
+                },
+                {
+                  "$type": "ANDAIHHJDIB",
+                  "actorIceSubHurtDelta": -1,
+                  "HDOJNFJLKAP": [
+                    "SwirlElectric"
+                  ],
+                  "KHJMNJNEADF": [
+                    {
+                      "$type": "RemoveUniqueModifier",
+                      "actorIceSubHurtDelta": -1,
+                      "target": "AllPlayerAvatars",
+                      "predicates": [
+                        {
+                          "$type": "ByTargetPositionToSelfPosition",
+                          "target": "Target",
+                          "logic": "LesserOrEqual",
+                          "value": 40
+                        }
+                      ],
+                      "canBeHandledOnRecover": true,
+                      "modifierName": "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Electric",
+                      "doOffStage": true
+                    },
+                    {
+                      "$type": "ApplyModifier",
+                      "actorIceSubHurtDelta": -1,
+                      "target": "AllPlayerAvatars",
+                      "predicates": [
+                        {
+                          "$type": "ByTargetPositionToSelfPosition",
+                          "target": "Target",
+                          "logic": "LesserOrEqual",
+                          "value": 40
+                        }
+                      ],
+                      "canBeHandledOnRecover": true,
+                      "modifierName": "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Electric",
+                      "doOffStage": true
+                    }
+                  ],
+                  "entityTypes": [
+                    "Monster"
+                  ],
+                  "OMALBHAAHHA": 20
+                },
+                {
+                  "$type": "ANDAIHHJDIB",
+                  "actorIceSubHurtDelta": -1,
+                  "HDOJNFJLKAP": [
+                    "SwirlIce",
+                    "StarSwirlIce"
+                  ],
+                  "KHJMNJNEADF": [
+                    {
+                      "$type": "RemoveUniqueModifier",
+                      "actorIceSubHurtDelta": -1,
+                      "target": "AllPlayerAvatars",
+                      "predicates": [
+                        {
+                          "$type": "ByTargetPositionToSelfPosition",
+                          "target": "Target",
+                          "logic": "LesserOrEqual",
+                          "value": 40
+                        }
+                      ],
+                      "canBeHandledOnRecover": true,
+                      "modifierName": "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Ice",
+                      "doOffStage": true
+                    },
+                    {
+                      "$type": "ApplyModifier",
+                      "actorIceSubHurtDelta": -1,
+                      "target": "AllPlayerAvatars",
+                      "predicates": [
+                        {
+                          "$type": "ByTargetPositionToSelfPosition",
+                          "target": "Target",
+                          "logic": "LesserOrEqual",
+                          "value": 40
+                        }
+                      ],
+                      "canBeHandledOnRecover": true,
+                      "modifierName": "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Ice",
+                      "doOffStage": true
+                    }
+                  ],
+                  "entityTypes": [
+                    "Monster"
+                  ],
+                  "OMALBHAAHHA": 20
+                }
+              ],
+              "isLimitedProperties": true
+            },
+            "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Electric": {
+              "reApplyModifierOnStateChange": true,
+              "state": "AttackUp",
+              "elementDurability": 100,
+              "isUnique": true,
+              "IAKPBCLBNKF": -1,
+              "GPPCPGHLDHL": "Unique",
+              "properties": {
+                "Actor_ElecAddHurtExtraDelta": [
+                  "Kazuha_PermanentSkill_2_Factor",
+                  "FIGHT_PROP_NONEXTRA_ELEMENT_MASTERY",
+                  "MUL"
+                ]
+              },
+              "buffID": 10001,
+              "duration": "Kazuha_PermanentSkill_2_Duration",
+              "minus_one": -1,
+              "isLimitedProperties": true
+            },
+            "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Fire": {
+              "reApplyModifierOnStateChange": true,
+              "state": "AttackUp",
+              "elementDurability": 100,
+              "isUnique": true,
+              "IAKPBCLBNKF": -1,
+              "GPPCPGHLDHL": "Unique",
+              "properties": {
+                "Actor_FireAddHurtExtraDelta": [
+                  "Kazuha_PermanentSkill_2_Factor",
+                  "FIGHT_PROP_NONEXTRA_ELEMENT_MASTERY",
+                  "MUL"
+                ]
+              },
+              "buffID": 10001,
+              "duration": "Kazuha_PermanentSkill_2_Duration",
+              "minus_one": -1,
+              "isLimitedProperties": true
+            },
+            "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Ice": {
+              "reApplyModifierOnStateChange": true,
+              "state": "AttackUp",
+              "elementDurability": 100,
+              "isUnique": true,
+              "IAKPBCLBNKF": -1,
+              "GPPCPGHLDHL": "Unique",
+              "properties": {
+                "Actor_IceAddHurtExtraDelta": [
+                  "Kazuha_PermanentSkill_2_Factor",
+                  "FIGHT_PROP_NONEXTRA_ELEMENT_MASTERY",
+                  "MUL"
+                ]
+              },
+              "buffID": 10001,
+              "duration": "Kazuha_PermanentSkill_2_Duration",
+              "minus_one": -1,
+              "isLimitedProperties": true
+            },
+            "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Water": {
+              "reApplyModifierOnStateChange": true,
+              "state": "AttackUp",
+              "elementDurability": 100,
+              "isUnique": true,
+              "IAKPBCLBNKF": -1,
+              "GPPCPGHLDHL": "Unique",
+              "properties": {
+                "Actor_WaterAddHurtExtraDelta": [
+                  "Kazuha_PermanentSkill_2_Factor",
+                  "FIGHT_PROP_NONEXTRA_ELEMENT_MASTERY",
+                  "MUL"
+                ]
+              },
+              "buffID": 10001,
+              "duration": "Kazuha_PermanentSkill_2_Duration",
+              "minus_one": -1,
+              "isLimitedProperties": true
+            }
+          },
+          "abilityName": "Avatar_Kazuha_PermanentSkill_2",
+          "abilitySpecials": {
+            "Kazuha_PermanentSkill_2_Duration": 0,
+            "Kazuha_PermanentSkill_2_Factor": 0
+          },
+          "LKLPDIMKLKI": {
+            "elementDurability": 100,
+            "IAKPBCLBNKF": -1,
+            "minus_one": -1,
+            "isLimitedProperties": true
+          },
+          "isDynamicAbility": true
+        },
+        "local_whole_node_equals_old": true
+      },
+      {
+        "path": "BinOutput/Talent/AvatarTalents/ConfigTalent_Kazuha.json",
+        "identity": "Kazuha_PermanentSkill_2",
+        "old_pointer": "/Kazuha_PermanentSkill_2",
+        "pointer": "/Kazuha_PermanentSkill_2",
+        "old_node_sha256": "c6680995f289e77a5993f336d01c4f2ccd445fce3867cfc74a84a1a1f606fb26",
+        "node_sha256": "a8e2c9ba9338997876456b42d189745d9335e6128240ad39c1e302dae095729c",
+        "old_raw": [
+          {
+            "$type": "AddAbility",
+            "CLGIKOPIKBC": true,
+            "abilityName": "Avatar_Kazuha_PermanentSkill_2"
+          },
+          {
+            "$type": "ModifyAbility",
+            "CLGIKOPIKBC": true,
+            "abilityName": "Avatar_Kazuha_PermanentSkill_2",
+            "paramDelta": "%1",
+            "paramSpecial": "Kazuha_PermanentSkill_2_Factor"
+          },
+          {
+            "$type": "ModifyAbility",
+            "CLGIKOPIKBC": true,
+            "abilityName": "Avatar_Kazuha_PermanentSkill_2",
+            "paramDelta": "%2",
+            "paramSpecial": "Kazuha_PermanentSkill_2_Duration"
+          }
+        ],
+        "raw": [
+          {
+            "$type": "JPCAAJGEELO",
+            "GBPFBNHLOFD": true,
+            "IIBMNPFLNMJ": "Avatar_Kazuha_PermanentSkill_2"
+          },
+          {
+            "$type": "BIAHEMMGABC",
+            "GBPFBNHLOFD": true,
+            "IIBMNPFLNMJ": "Avatar_Kazuha_PermanentSkill_2",
+            "PCABAADALND": "%1",
+            "PEOJKHKHAKL": "Kazuha_PermanentSkill_2_Factor"
+          },
+          {
+            "$type": "BIAHEMMGABC",
+            "GBPFBNHLOFD": true,
+            "IIBMNPFLNMJ": "Avatar_Kazuha_PermanentSkill_2",
+            "PCABAADALND": "%2",
+            "PEOJKHKHAKL": "Kazuha_PermanentSkill_2_Duration"
+          }
+        ],
+        "current_existing_normalization": [
+          {
+            "$type": "AddAbility",
+            "CLGIKOPIKBC": true,
+            "abilityName": "Avatar_Kazuha_PermanentSkill_2"
+          },
+          {
+            "$type": "ModifyAbility",
+            "CLGIKOPIKBC": true,
+            "abilityName": "Avatar_Kazuha_PermanentSkill_2",
+            "paramDelta": "%1",
+            "paramSpecial": "Kazuha_PermanentSkill_2_Factor"
+          },
+          {
+            "$type": "ModifyAbility",
+            "CLGIKOPIKBC": true,
+            "abilityName": "Avatar_Kazuha_PermanentSkill_2",
+            "paramDelta": "%2",
+            "paramSpecial": "Kazuha_PermanentSkill_2_Duration"
+          }
+        ],
+        "local_whole_node_equals_old": true
+      },
+      {
+        "path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+        "identity": "Kazuha_PermanentSkill_2",
+        "old_pointer": "/3437",
+        "pointer": "/3535",
+        "old_node_sha256": "a4f87c40d2a0adbd30d57e3ca4e59f916964a0f019264b4648f8be523dabd017",
+        "node_sha256": "a4f87c40d2a0adbd30d57e3ca4e59f916964a0f019264b4648f8be523dabd017",
+        "old_raw": {
+          "paramList": [
+            0.00039999998989515007,
+            8,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "proudSkillGroupId": 4722,
+          "uniqueDescTextMapHash": 2250417292,
+          "unlockProudSkillParam": "PROUD_SKILL_DISPLAY_BREAK",
+          "addProps": [
+            {},
+            {}
+          ],
+          "proudSkillType": 2,
+          "icon": "UI_Talent_S_Kazuha_06",
+          "breakLevel": 4,
+          "filterConds": [
+            "TALENT_FILTER_NONE",
+            "TALENT_FILTER_NONE"
+          ],
+          "proudSkillId": 472201,
+          "descTextMapHash": 1440992683,
+          "unlockDescTextMapHash": 409536634,
+          "lifeEffectParams": [
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "paramDescList": [
+            2594384006,
+            3119538614,
+            1930022367,
+            2615074119,
+            2049532110,
+            2681571370,
+            4122201103,
+            134503485,
+            2679894420,
+            1694944599,
+            93706644,
+            3120810347,
+            561069335,
+            3393080323,
+            1625368966,
+            1905574397,
+            1346909681,
+            1085718955,
+            3928889799,
+            2303569389
+          ],
+          "additionalDescTextMapHash": 1846223020,
+          "openConfig": "Kazuha_PermanentSkill_2",
+          "costItems": [
+            {},
+            {},
+            {},
+            {}
+          ],
+          "level": 1,
+          "nameTextMapHash": 138639421
+        },
+        "raw": {
+          "paramList": [
+            0.00039999998989515007,
+            8,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "breakLevel": 4,
+          "proudSkillId": 472201,
+          "filterConds": [
+            "TALENT_FILTER_NONE",
+            "TALENT_FILTER_NONE"
+          ],
+          "proudSkillGroupId": 4722,
+          "addProps": [
+            {},
+            {}
+          ],
+          "paramDescList": [
+            2594384006,
+            3119538614,
+            1930022367,
+            2615074119,
+            2049532110,
+            2681571370,
+            4122201103,
+            134503485,
+            2679894420,
+            1694944599,
+            93706644,
+            3120810347,
+            561069335,
+            3393080323,
+            1625368966,
+            1905574397,
+            1346909681,
+            1085718955,
+            3928889799,
+            2303569389
+          ],
+          "openConfig": "Kazuha_PermanentSkill_2",
+          "lifeEffectParams": [
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "unlockDescTextMapHash": 409536634,
+          "costItems": [
+            {},
+            {},
+            {},
+            {}
+          ],
+          "icon": "UI_Talent_S_Kazuha_06",
+          "level": 1,
+          "proudSkillType": 2,
+          "uniqueDescTextMapHash": 2250417292,
+          "additionalDescTextMapHash": 1846223020,
+          "nameTextMapHash": 138639421,
+          "descTextMapHash": 1440992683,
+          "unlockProudSkillParam": "PROUD_SKILL_DISPLAY_BREAK"
+        }
+      }
+    ],
+    "parent_checks": [
+      {
+        "path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Kazuha.json",
+        "identity": "Avatar_Kazuha_PermanentSkill_2",
+        "category": "field",
+        "token": "EMGBJJOIENB",
+        "semantic": "onAdded",
+        "pointer": "/23/Default",
+        "old_pointer": "/23/Default",
+        "node_sha256": "192a940a2d326f54c0e62a0fcaf46f3010c05ada65bc02add3293d13a925072b",
+        "old_node_sha256": "4f72e592d6c371f37d4ae4b5e2d9334e57d459ac7448ffb53466e5cf55f9980e",
+        "whole_parent_equals_old": true
+      },
+      {
+        "path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Kazuha.json",
+        "identity": "Avatar_Kazuha_PermanentSkill_2",
+        "category": "field",
+        "token": "LFIJIMIMBIH",
+        "semantic": "modifierMixins",
+        "pointer": "/23/Default/GPPBBDEICKP/Avatar_Kazuha_PermanentSkill_2_Handler",
+        "old_pointer": "/23/Default/modifiers/Avatar_Kazuha_PermanentSkill_2_Handler",
+        "node_sha256": "867d2799e8bb18c2e7a9f79e8e1b596108ad3a20e99ccd95c798fd26dbc67b2d",
+        "old_node_sha256": "f36bbf078f3ce57aef3eb847fc1bff0fad9d5122294c44f80f7f525d31ed3027",
+        "whole_parent_equals_old": true
+      },
+      {
+        "path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Kazuha.json",
+        "identity": "Avatar_Kazuha_PermanentSkill_2",
+        "category": "field",
+        "token": "HDOJNFJLKAP",
+        "semantic": "reactionTypes",
+        "pointer": "/23/Default/GPPBBDEICKP/Avatar_Kazuha_PermanentSkill_2_Handler/LFIJIMIMBIH/0",
+        "old_pointer": "/23/Default/modifiers/Avatar_Kazuha_PermanentSkill_2_Handler/modifierMixins/0",
+        "node_sha256": "8273967157cae3c990c1490b05e92b736102ec7c0ca54c6c7dfbb1cd1d52721e",
+        "old_node_sha256": "d1c41b4ccf5125d5a1634976b80f880c8a188bd5007e0fa8fe542b91a59617c3",
+        "whole_parent_equals_old": true
+      },
+      {
+        "path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Kazuha.json",
+        "identity": "Avatar_Kazuha_PermanentSkill_2",
+        "category": "field",
+        "token": "KHJMNJNEADF",
+        "semantic": "actions",
+        "pointer": "/23/Default/GPPBBDEICKP/Avatar_Kazuha_PermanentSkill_2_Handler/LFIJIMIMBIH/0",
+        "old_pointer": "/23/Default/modifiers/Avatar_Kazuha_PermanentSkill_2_Handler/modifierMixins/0",
+        "node_sha256": "8273967157cae3c990c1490b05e92b736102ec7c0ca54c6c7dfbb1cd1d52721e",
+        "old_node_sha256": "d1c41b4ccf5125d5a1634976b80f880c8a188bd5007e0fa8fe542b91a59617c3",
+        "whole_parent_equals_old": true
+      },
+      {
+        "path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Kazuha.json",
+        "identity": "Avatar_Kazuha_PermanentSkill_2",
+        "category": "field",
+        "token": "OMALBHAAHHA",
+        "semantic": "range",
+        "pointer": "/23/Default/GPPBBDEICKP/Avatar_Kazuha_PermanentSkill_2_Handler/LFIJIMIMBIH/0",
+        "old_pointer": "/23/Default/modifiers/Avatar_Kazuha_PermanentSkill_2_Handler/modifierMixins/0",
+        "node_sha256": "8273967157cae3c990c1490b05e92b736102ec7c0ca54c6c7dfbb1cd1d52721e",
+        "old_node_sha256": "d1c41b4ccf5125d5a1634976b80f880c8a188bd5007e0fa8fe542b91a59617c3",
+        "whole_parent_equals_old": true
+      },
+      {
+        "path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Kazuha.json",
+        "identity": "Avatar_Kazuha_PermanentSkill_2",
+        "category": "type",
+        "token": "ANDAIHHJDIB",
+        "semantic": "DoActionByElementReactionMixin",
+        "pointer": "/23/Default/GPPBBDEICKP/Avatar_Kazuha_PermanentSkill_2_Handler/LFIJIMIMBIH/0",
+        "old_pointer": "/23/Default/modifiers/Avatar_Kazuha_PermanentSkill_2_Handler/modifierMixins/0",
+        "node_sha256": "8273967157cae3c990c1490b05e92b736102ec7c0ca54c6c7dfbb1cd1d52721e",
+        "old_node_sha256": "d1c41b4ccf5125d5a1634976b80f880c8a188bd5007e0fa8fe542b91a59617c3",
+        "whole_parent_equals_old": true
+      },
+      {
+        "path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Kazuha.json",
+        "identity": "Avatar_Kazuha_PermanentSkill_2",
+        "category": "field",
+        "token": "HDOJNFJLKAP",
+        "semantic": "reactionTypes",
+        "pointer": "/23/Default/GPPBBDEICKP/Avatar_Kazuha_PermanentSkill_2_Handler/LFIJIMIMBIH/1",
+        "old_pointer": "/23/Default/modifiers/Avatar_Kazuha_PermanentSkill_2_Handler/modifierMixins/1",
+        "node_sha256": "3a000581c362bcf59928ce285ac234295166b528e71cb5d0f4be3c0748e15f7e",
+        "old_node_sha256": "ae6e3f23dfbbc807c8360f323e2c4c038a1552992a5e85247540533b823fc69d",
+        "whole_parent_equals_old": true
+      },
+      {
+        "path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Kazuha.json",
+        "identity": "Avatar_Kazuha_PermanentSkill_2",
+        "category": "field",
+        "token": "KHJMNJNEADF",
+        "semantic": "actions",
+        "pointer": "/23/Default/GPPBBDEICKP/Avatar_Kazuha_PermanentSkill_2_Handler/LFIJIMIMBIH/1",
+        "old_pointer": "/23/Default/modifiers/Avatar_Kazuha_PermanentSkill_2_Handler/modifierMixins/1",
+        "node_sha256": "3a000581c362bcf59928ce285ac234295166b528e71cb5d0f4be3c0748e15f7e",
+        "old_node_sha256": "ae6e3f23dfbbc807c8360f323e2c4c038a1552992a5e85247540533b823fc69d",
+        "whole_parent_equals_old": true
+      },
+      {
+        "path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Kazuha.json",
+        "identity": "Avatar_Kazuha_PermanentSkill_2",
+        "category": "field",
+        "token": "OMALBHAAHHA",
+        "semantic": "range",
+        "pointer": "/23/Default/GPPBBDEICKP/Avatar_Kazuha_PermanentSkill_2_Handler/LFIJIMIMBIH/1",
+        "old_pointer": "/23/Default/modifiers/Avatar_Kazuha_PermanentSkill_2_Handler/modifierMixins/1",
+        "node_sha256": "3a000581c362bcf59928ce285ac234295166b528e71cb5d0f4be3c0748e15f7e",
+        "old_node_sha256": "ae6e3f23dfbbc807c8360f323e2c4c038a1552992a5e85247540533b823fc69d",
+        "whole_parent_equals_old": true
+      },
+      {
+        "path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Kazuha.json",
+        "identity": "Avatar_Kazuha_PermanentSkill_2",
+        "category": "type",
+        "token": "ANDAIHHJDIB",
+        "semantic": "DoActionByElementReactionMixin",
+        "pointer": "/23/Default/GPPBBDEICKP/Avatar_Kazuha_PermanentSkill_2_Handler/LFIJIMIMBIH/1",
+        "old_pointer": "/23/Default/modifiers/Avatar_Kazuha_PermanentSkill_2_Handler/modifierMixins/1",
+        "node_sha256": "3a000581c362bcf59928ce285ac234295166b528e71cb5d0f4be3c0748e15f7e",
+        "old_node_sha256": "ae6e3f23dfbbc807c8360f323e2c4c038a1552992a5e85247540533b823fc69d",
+        "whole_parent_equals_old": true
+      },
+      {
+        "path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Kazuha.json",
+        "identity": "Avatar_Kazuha_PermanentSkill_2",
+        "category": "field",
+        "token": "HDOJNFJLKAP",
+        "semantic": "reactionTypes",
+        "pointer": "/23/Default/GPPBBDEICKP/Avatar_Kazuha_PermanentSkill_2_Handler/LFIJIMIMBIH/2",
+        "old_pointer": "/23/Default/modifiers/Avatar_Kazuha_PermanentSkill_2_Handler/modifierMixins/2",
+        "node_sha256": "ef2e66584bc0a19806bcb700b4ac47882a8ada1286803ab04a2bbb9b427b0dd4",
+        "old_node_sha256": "2203e0e98c1ddcd5e0a8a3dc535d3ee30fa10559e2ffaefe3c20a824dfcccb8a",
+        "whole_parent_equals_old": true
+      },
+      {
+        "path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Kazuha.json",
+        "identity": "Avatar_Kazuha_PermanentSkill_2",
+        "category": "field",
+        "token": "KHJMNJNEADF",
+        "semantic": "actions",
+        "pointer": "/23/Default/GPPBBDEICKP/Avatar_Kazuha_PermanentSkill_2_Handler/LFIJIMIMBIH/2",
+        "old_pointer": "/23/Default/modifiers/Avatar_Kazuha_PermanentSkill_2_Handler/modifierMixins/2",
+        "node_sha256": "ef2e66584bc0a19806bcb700b4ac47882a8ada1286803ab04a2bbb9b427b0dd4",
+        "old_node_sha256": "2203e0e98c1ddcd5e0a8a3dc535d3ee30fa10559e2ffaefe3c20a824dfcccb8a",
+        "whole_parent_equals_old": true
+      },
+      {
+        "path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Kazuha.json",
+        "identity": "Avatar_Kazuha_PermanentSkill_2",
+        "category": "field",
+        "token": "OMALBHAAHHA",
+        "semantic": "range",
+        "pointer": "/23/Default/GPPBBDEICKP/Avatar_Kazuha_PermanentSkill_2_Handler/LFIJIMIMBIH/2",
+        "old_pointer": "/23/Default/modifiers/Avatar_Kazuha_PermanentSkill_2_Handler/modifierMixins/2",
+        "node_sha256": "ef2e66584bc0a19806bcb700b4ac47882a8ada1286803ab04a2bbb9b427b0dd4",
+        "old_node_sha256": "2203e0e98c1ddcd5e0a8a3dc535d3ee30fa10559e2ffaefe3c20a824dfcccb8a",
+        "whole_parent_equals_old": true
+      },
+      {
+        "path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Kazuha.json",
+        "identity": "Avatar_Kazuha_PermanentSkill_2",
+        "category": "type",
+        "token": "ANDAIHHJDIB",
+        "semantic": "DoActionByElementReactionMixin",
+        "pointer": "/23/Default/GPPBBDEICKP/Avatar_Kazuha_PermanentSkill_2_Handler/LFIJIMIMBIH/2",
+        "old_pointer": "/23/Default/modifiers/Avatar_Kazuha_PermanentSkill_2_Handler/modifierMixins/2",
+        "node_sha256": "ef2e66584bc0a19806bcb700b4ac47882a8ada1286803ab04a2bbb9b427b0dd4",
+        "old_node_sha256": "2203e0e98c1ddcd5e0a8a3dc535d3ee30fa10559e2ffaefe3c20a824dfcccb8a",
+        "whole_parent_equals_old": true
+      },
+      {
+        "path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Kazuha.json",
+        "identity": "Avatar_Kazuha_PermanentSkill_2",
+        "category": "field",
+        "token": "HDOJNFJLKAP",
+        "semantic": "reactionTypes",
+        "pointer": "/23/Default/GPPBBDEICKP/Avatar_Kazuha_PermanentSkill_2_Handler/LFIJIMIMBIH/3",
+        "old_pointer": "/23/Default/modifiers/Avatar_Kazuha_PermanentSkill_2_Handler/modifierMixins/3",
+        "node_sha256": "0a0024930c0fcdb43719008b5e35ab0e2f80f93c37286542827bcf7f61936ec4",
+        "old_node_sha256": "010c2afe8d62b42b00fc266b71071d8d86e351bb4bb1d3463c92af5701c64acb",
+        "whole_parent_equals_old": true
+      },
+      {
+        "path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Kazuha.json",
+        "identity": "Avatar_Kazuha_PermanentSkill_2",
+        "category": "field",
+        "token": "KHJMNJNEADF",
+        "semantic": "actions",
+        "pointer": "/23/Default/GPPBBDEICKP/Avatar_Kazuha_PermanentSkill_2_Handler/LFIJIMIMBIH/3",
+        "old_pointer": "/23/Default/modifiers/Avatar_Kazuha_PermanentSkill_2_Handler/modifierMixins/3",
+        "node_sha256": "0a0024930c0fcdb43719008b5e35ab0e2f80f93c37286542827bcf7f61936ec4",
+        "old_node_sha256": "010c2afe8d62b42b00fc266b71071d8d86e351bb4bb1d3463c92af5701c64acb",
+        "whole_parent_equals_old": true
+      },
+      {
+        "path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Kazuha.json",
+        "identity": "Avatar_Kazuha_PermanentSkill_2",
+        "category": "field",
+        "token": "OMALBHAAHHA",
+        "semantic": "range",
+        "pointer": "/23/Default/GPPBBDEICKP/Avatar_Kazuha_PermanentSkill_2_Handler/LFIJIMIMBIH/3",
+        "old_pointer": "/23/Default/modifiers/Avatar_Kazuha_PermanentSkill_2_Handler/modifierMixins/3",
+        "node_sha256": "0a0024930c0fcdb43719008b5e35ab0e2f80f93c37286542827bcf7f61936ec4",
+        "old_node_sha256": "010c2afe8d62b42b00fc266b71071d8d86e351bb4bb1d3463c92af5701c64acb",
+        "whole_parent_equals_old": true
+      },
+      {
+        "path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Kazuha.json",
+        "identity": "Avatar_Kazuha_PermanentSkill_2",
+        "category": "type",
+        "token": "ANDAIHHJDIB",
+        "semantic": "DoActionByElementReactionMixin",
+        "pointer": "/23/Default/GPPBBDEICKP/Avatar_Kazuha_PermanentSkill_2_Handler/LFIJIMIMBIH/3",
+        "old_pointer": "/23/Default/modifiers/Avatar_Kazuha_PermanentSkill_2_Handler/modifierMixins/3",
+        "node_sha256": "0a0024930c0fcdb43719008b5e35ab0e2f80f93c37286542827bcf7f61936ec4",
+        "old_node_sha256": "010c2afe8d62b42b00fc266b71071d8d86e351bb4bb1d3463c92af5701c64acb",
+        "whole_parent_equals_old": true
+      },
+      {
+        "path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Kazuha.json",
+        "identity": "Avatar_Kazuha_PermanentSkill_2",
+        "category": "field",
+        "token": "GPPCPGHLDHL",
+        "semantic": "stacking",
+        "pointer": "/23/Default/GPPBBDEICKP/UNIQUE_Avatar_Kazuha_PermanentSkill_2_Electric",
+        "old_pointer": "/23/Default/modifiers/UNIQUE_Avatar_Kazuha_PermanentSkill_2_Electric",
+        "node_sha256": "1a534b6126497732bc33b614b4b036df25209c425840ce1cb87d0926f5c8f433",
+        "old_node_sha256": "4afda7d9584eff8a1ad332e3370be95afc626f398bd34a65a60f79611b480d04",
+        "whole_parent_equals_old": true
+      },
+      {
+        "path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Kazuha.json",
+        "identity": "Avatar_Kazuha_PermanentSkill_2",
+        "category": "field",
+        "token": "GPPCPGHLDHL",
+        "semantic": "stacking",
+        "pointer": "/23/Default/GPPBBDEICKP/UNIQUE_Avatar_Kazuha_PermanentSkill_2_Fire",
+        "old_pointer": "/23/Default/modifiers/UNIQUE_Avatar_Kazuha_PermanentSkill_2_Fire",
+        "node_sha256": "a629527c75801a5bf98c5df7015cc55c7a3db68526ef7a160e599c015126eda8",
+        "old_node_sha256": "0484ebeb81d6674267ed3a3da4318894e2db3331e8c3684ec37b1de42e2eb4a9",
+        "whole_parent_equals_old": true
+      },
+      {
+        "path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Kazuha.json",
+        "identity": "Avatar_Kazuha_PermanentSkill_2",
+        "category": "field",
+        "token": "GPPCPGHLDHL",
+        "semantic": "stacking",
+        "pointer": "/23/Default/GPPBBDEICKP/UNIQUE_Avatar_Kazuha_PermanentSkill_2_Ice",
+        "old_pointer": "/23/Default/modifiers/UNIQUE_Avatar_Kazuha_PermanentSkill_2_Ice",
+        "node_sha256": "901a662de127e1defc4656e400af9985136dcdb6c392442f24632c5777165d24",
+        "old_node_sha256": "68e296912833620f8d60e3c124bb884ce1ed1a0e702c175cfcd3a8ad2d439d8b",
+        "whole_parent_equals_old": true
+      },
+      {
+        "path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Kazuha.json",
+        "identity": "Avatar_Kazuha_PermanentSkill_2",
+        "category": "field",
+        "token": "GPPCPGHLDHL",
+        "semantic": "stacking",
+        "pointer": "/23/Default/GPPBBDEICKP/UNIQUE_Avatar_Kazuha_PermanentSkill_2_Water",
+        "old_pointer": "/23/Default/modifiers/UNIQUE_Avatar_Kazuha_PermanentSkill_2_Water",
+        "node_sha256": "bd66c07322caeecb74bdcc497646bcb56ace75b5c121a7d6d118ea95b7704082",
+        "old_node_sha256": "938f9ae0d76a0667012af8d1e2c5d871fd908a220927910695a1a514876fa1b4",
+        "whole_parent_equals_old": true
+      }
+    ]
+  },
+  "identity_evidence": {
+    "avatar": {
+      "label": "avatar",
+      "source_path": "ExcelBinOutput/AvatarExcelConfigData.json",
+      "json_pointer": "/34",
+      "node_sha256": "4aa7772affeacd541e7fb529415b030bd6c7d6efe87cfdf83ac77a0557f301ed",
+      "raw": {
+        "featureTagGroupID": 10000047,
+        "scriptDataPathHash": "7535910857308706620",
+        "qualityType": "QUALITY_ORANGE",
+        "prefabPathHash": "13729919875118868783",
+        "firstPropPriority": "FIGHT_PROP_CHARGE_EFFICIENCY",
+        "secondPropPriority": "FIGHT_PROP_ELEMENT_MASTERY",
+        "CHCOOENOOJM": "4975904732025136974",
+        "controllerPathHash": "8594492037099145806",
+        "defenseBase": 62.82149887084961,
+        "coopPicNameHash": "5156196381719149781",
+        "initialWeapon": 11101,
+        "deformationMeshPathHash": "856195021060268183",
+        "iconName": "UI_AvatarIcon_Kazuha",
+        "combatConfigHash": "9919316577460724427",
+        "FJDGJCDPMEM": 174508081,
+        "critical": 0.05000000074505806,
+        "imageName": "AvatarImage_Forward_Kazuha",
+        "bodyType": "BODY_BOY",
+        "avatarPromoteRewardIdList": [
+          900341,
+          900343,
+          900345
+        ],
+        "criticalHurt": 0.5,
+        "manekinJsonConfigHash": "16299747622145493304",
+        "avatarIdentityType": "AVATAR_IDENTITY_NORMAL",
+        "propGrowCurves": [
+          {
+            "growCurve": "GROW_CURVE_HP_S5",
+            "type": "FIGHT_PROP_BASE_HP"
+          },
+          {
+            "growCurve": "GROW_CURVE_ATTACK_S5",
+            "type": "FIGHT_PROP_BASE_ATTACK"
+          },
+          {
+            "growCurve": "GROW_CURVE_HP_S5",
+            "type": "FIGHT_PROP_BASE_DEFENSE"
+          }
+        ],
+        "prefabPathRagdollHash": "12044930433670696283",
+        "KADLDGKLEPC": "3577882297361955787",
+        "id": 10000047,
+        "skillDepotId": 4701,
+        "avatarPromoteId": 47,
+        "manekinMotionConfig": 103,
+        "gachaImageNameHash": "6703640860938636082",
+        "tags": [
+          "None"
+        ],
+        "avatarPromoteRewardLevelList": [
+          1,
+          3,
+          5
+        ],
+        "controllerPathRemoteHash": "8724502986145879757",
+        "chargeEfficiency": 1,
+        "attackBase": 23.08880043029785,
+        "gachaCardNameHash": "1460850770816805667",
+        "prefabPathRemoteHash": "1068836673489435371",
+        "sideIconName": "UI_AvatarIcon_Side_Kazuha",
+        "nameTextMapHash": 88505754,
+        "useType": "AVATAR_FORMAL",
+        "descTextMapHash": 174508081,
+        "staminaRecoverSpeed": 25,
+        "hpBase": 1039.1187744140625,
+        "weaponType": "WEAPON_SWORD_ONE_HAND",
+        "manekinPathHash": "17888060824724456623",
+        "animatorConfigPathHash": "14167135086670867959",
+        "POCCNIJNACM": "13630099632347331557"
+      }
+    },
+    "depot": {
+      "label": "skill_depot",
+      "source_path": "ExcelBinOutput/AvatarSkillDepotExcelConfigData.json",
+      "json_pointer": "/97",
+      "node_sha256": "504dda55d61a261ed581f9f10fcd39858ba3ea8fbc2d0d4175d9429923ddc7e5",
+      "raw": {
+        "subSkills": [
+          10101,
+          10102,
+          10001,
+          10473,
+          10474,
+          5047010
+        ],
+        "talents": [
+          471,
+          472,
+          473,
+          474,
+          475,
+          476
+        ],
+        "skills": [
+          10471,
+          10472,
+          0,
+          0
+        ],
+        "inherentProudSkillOpens": [
+          {
+            "proudSkillGroupId": 4721,
+            "needAvatarPromoteLevel": 1
+          },
+          {
+            "proudSkillGroupId": 4722,
+            "needAvatarPromoteLevel": 4
+          },
+          {
+            "proudSkillGroupId": 4723
+          },
+          {},
+          {}
+        ],
+        "talentStarName": "Talent_Kazuha",
+        "energySkill": 10475,
+        "id": 4701,
+        "specialProudSkillOpens": [
+          {},
+          {}
+        ],
+        "extraAbilities": [
+          "",
+          "",
+          ""
+        ]
+      }
+    },
+    "promote": {
+      "label": "progression_cap",
+      "source_path": "ExcelBinOutput/AvatarPromoteExcelConfigData.json",
+      "json_pointer": "/230",
+      "node_sha256": "0b53b614dcde8be5149a3a8f3a398b54746e428ccad4fad1869abcb533b535cb",
+      "raw": {
+        "requiredPlayerLevel": 50,
+        "scoinCost": 120000,
+        "addProps": [
+          {
+            "propType": "FIGHT_PROP_BASE_HP",
+            "value": 4267.18359375
+          },
+          {
+            "propType": "FIGHT_PROP_BASE_DEFENSE",
+            "value": 257.9849853515625
+          },
+          {
+            "propType": "FIGHT_PROP_BASE_ATTACK",
+            "value": 94.80816650390625
+          },
+          {
+            "propType": "FIGHT_PROP_ELEMENT_MASTERY",
+            "value": 115.19999694824219
+          }
+        ],
+        "unlockMaxLevel": 90,
+        "costItems": [
+          {
+            "count": 6,
+            "id": 104154
+          },
+          {
+            "count": 20,
+            "id": 113022
+          },
+          {
+            "count": 60,
+            "id": 101206
+          },
+          {
+            "count": 24,
+            "id": 112037
+          }
+        ],
+        "avatarPromoteId": 47,
+        "promoteLevel": 6
+      }
+    }
+  },
+  "reference_sources": [
+    {
+      "repository": "https://github.com/KQM-git/TCL",
+      "commit": "106c0f3f1b349df0d76297243c72cd0dc043aa01",
+      "commit_date": "2026-10-01T05:59:19Z",
+      "path": "docs/characters/anemo/kaedehara-kazuha.md",
+      "url": "https://raw.githubusercontent.com/KQM-git/TCL/106c0f3f1b349df0d76297243c72cd0dc043aa01/docs/characters/anemo/kaedehara-kazuha.md",
+      "sha256": "8300620ede62e03d72bed4478b8caa287855a6f1c67dfcce89f07dffd68ea650",
+      "bytes": 10403,
+      "local_file": "kqm-docs_characters_anemo_kaedehara-kazuha.md"
+    },
+    {
+      "repository": "https://github.com/KQM-git/TCL",
+      "commit": "106c0f3f1b349df0d76297243c72cd0dc043aa01",
+      "commit_date": "2026-10-01T05:59:19Z",
+      "path": "docs/evidence/characters/anemo/kaedehara-kazuha.md",
+      "url": "https://raw.githubusercontent.com/KQM-git/TCL/106c0f3f1b349df0d76297243c72cd0dc043aa01/docs/evidence/characters/anemo/kaedehara-kazuha.md",
+      "sha256": "033df047f1761741c65171aa7889817c91658a78ac3e8de3513fbc274847d059",
+      "bytes": 19740,
+      "local_file": "kqm-docs_evidence_characters_anemo_kaedehara-kazuha.md"
+    },
+    {
+      "repository": "https://github.com/KQM-git/TCL",
+      "commit": "106c0f3f1b349df0d76297243c72cd0dc043aa01",
+      "commit_date": "2026-10-01T05:59:19Z",
+      "path": "docs/combat-mechanics/damage/damage-formula.md",
+      "url": "https://raw.githubusercontent.com/KQM-git/TCL/106c0f3f1b349df0d76297243c72cd0dc043aa01/docs/combat-mechanics/damage/damage-formula.md",
+      "sha256": "5e51b3ecce4f8f58cbf4853765f7102f2898c2b334d00d21387b8e3b8efae39c",
+      "bytes": 22369,
+      "local_file": "kqm-docs_combat-mechanics_damage_damage-formula.md"
+    },
+    {
+      "repository": "https://github.com/KQM-git/TCL",
+      "commit": "106c0f3f1b349df0d76297243c72cd0dc043aa01",
+      "commit_date": "2026-10-01T05:59:19Z",
+      "path": "docs/evidence/characters/dendro/tighnari.md",
+      "url": "https://raw.githubusercontent.com/KQM-git/TCL/106c0f3f1b349df0d76297243c72cd0dc043aa01/docs/evidence/characters/dendro/tighnari.md",
+      "sha256": "601440c9ae470f0318ddd4e3be79d638ae94af4a85f645b86ae403d1593d3103",
+      "bytes": 8446,
+      "local_file": "kqm-docs_evidence_characters_dendro_tighnari.md"
+    }
+  ],
+  "semantics": {
+    "evidence_tier": "reference_mechanics_with_declared_scope_not_current_client_measurement",
+    "reaction_eligibility": "Only fresh calibrated C0 E ability parent chains admitted by App; weapon Swirl is not equivalent to an ability reaction.",
+    "provider_presence": "Ordinary ability Swirl may trigger on or off field; onAdded.doOffStage is not a listener foreground filter.",
+    "fixed_stat_view": "Raw NONEXTRA_ELEMENT_MASTERY reads ordinary em only under an explicit fixed-panel equality declaration; all potential provider EM writes remain unsupported.",
+    "sampling": "Read provider EM on reaction trigger, freeze that value for the instance; beneficiary dmg_bonus belongs to self domain and obeys its own snapshot.",
+    "unique_replace": "RemoveUniqueModifier then ApplyModifier becomes one single-provider single-layer refresh; later values replace earlier values, not max. Different elements are independent.",
+    "targets": "Single-player fixed team inside the raw party predicate range; ordinary single Monster origin inside raw listener range. Units are not inferred.",
+    "initial_state": "No existing source instances and no recipient panel already contains this conditional bonus, explicitly declared.",
+    "dynamic_lifecycle": "Fixed party/equipment/progression and no external remove/recover/state-change or hitlag effects; general lifecycle remains unsupported.",
+    "partial_scope": "Only ordinary hydro/cryo branches projected; fire/electro/Star branches and propagation remain recorded but unsupported."
+  }
+}

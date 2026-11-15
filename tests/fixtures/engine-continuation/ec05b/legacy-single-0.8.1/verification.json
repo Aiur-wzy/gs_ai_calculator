@@ -1,0 +1,56 @@
+{
+  "version": "0.8.1",
+  "exe_sha256": "7e6deea8289c2a5808420f1a273b7d58fc6f0feb50706be9a775bef76a8ee6d1",
+  "items": [
+    {
+      "id": "ayaka-e",
+      "file": "result-00.json",
+      "file_sha256": "086b1812b78ef49580e2e0c28dd39b0c7482ecf386b54b7e58945074fa641dfd",
+      "data_sha256": "b934611368e186602acb6a3d83a4bb739cef08cbb9e2d1b544b9169246c1c17d"
+    },
+    {
+      "id": "kazuha-e",
+      "file": "result-01.json",
+      "file_sha256": "86ea68e87f01e6c2955cfd7a53316bf3638874fc62e3383b02548a686056ddf3",
+      "data_sha256": "0dd7ea3ff4270523ec1058213219f7e8007b2e50a80924e1793fd15860463810"
+    },
+    {
+      "id": "ayaka-e-p0",
+      "file": "result-02.json",
+      "file_sha256": "be51cb79622bb4b1e8a9a3be4a4e50b081380b38e40fd4d181beb8e4cf95c478",
+      "data_sha256": "9a94b66d236720a8c8031b1a05c8b6baff81bc5207565115674c98cff4204771"
+    },
+    {
+      "id": "kazuha-e-p0",
+      "file": "result-03.json",
+      "file_sha256": "80703f10be77c1615c2eb208b1eefbcce975c6fca8c7d3510d033d8d92f5c885",
+      "data_sha256": "ebe9799fef8a285a28c5de3375dae2900a0f2a5fb9c554747ab26a772a3d10df"
+    },
+    {
+      "id": "default-icd",
+      "file": "result-04.json",
+      "file_sha256": "db4d0b0da22046c72c36415b58944a9d162ce3f2b0cd1432f6dea171b60cf169",
+      "data_sha256": "7fb53f220bd21248805a976b409e61af096c55465ef3e360943d9fa03f636355"
+    },
+    {
+      "id": "swirl-water",
+      "file": "result-05.json",
+      "file_sha256": "94bbac329e3bf8c8076611fe74a57b5daef9b12fb55b4a779916c5ba6d88e54e",
+      "data_sha256": "eb81eb71871d22a1ae5a5fe6260f49c74a33291624a683cdd31c95c02ad362d3"
+    },
+    {
+      "id": "swirl-ice",
+      "file": "result-06.json",
+      "file_sha256": "af8029297dc2cf9091150a1000c5213a695db526d25422e1ad02e0f47f1854b2",
+      "data_sha256": "a555c28cf4cf0945df291573ebce202c848d1222f5e725cfce065abe14bc1c27"
+    },
+    {
+      "id": "explicit-affix",
+      "file": "result-07.json",
+      "file_sha256": "cbd3b1791e1212b6d10efe18def6cbc51563d80f4193e1ba07a89d15b9a26207",
+      "data_sha256": "1bab0d0143754f2fdf959c749f88202492636f2c833ff61fb233297156ed1cb6"
+    }
+  ],
+  "request_sha256": "d183aae084bd1da13f9ca8a802e30753d379542765002b79d63a02395a755656",
+  "hash_convention": "sorted-key compact UTF8 JSON of the complete single-query payload"
+}

@@ -1,0 +1,5 @@
+Inspector 0.2.1-rc.5 is MIT; its embedded Chromium DevTools and third-party files retain their separate licences.
+DevTools source: https://github.com/ChromeDevTools/devtools-frontend/tree/0e1186138ed519d9659c1874bf6375eca4483c72
+The embedded axe-core notice is MPL-2.0. Its source revision is d02dba3223fefe525438330e40b5da5de81eeeb5:
+https://github.com/dequelabs/axe-core/tree/d02dba3223fefe525438330e40b5da5de81eeeb5
+Upstream provenance: front_end/third_party/axe-core/README.chromium at the DevTools revision above.

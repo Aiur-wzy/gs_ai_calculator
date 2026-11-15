@@ -1,0 +1,790 @@
+{
+  "bundle_version": 1,
+  "status": "ready",
+  "issues": [],
+  "snapshot": {
+    "version_line": "release",
+    "snapshot_id": "4f989711cf8c3cd2e9d8c57f0ef79691cceb5b58d9d5333535b6619ca814d4ee",
+    "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+    "state": "ready",
+    "index_state": "ready",
+    "indexer_version": "4",
+    "normalization": {
+      "normalization_version": 2,
+      "profile_id": "upstream-34208429-reviewed-schema-v1",
+      "mapping_fingerprint": "506862bc6c0bf033d8272b75f193cd2a620fc513320b3223d07afcc6f04356e2",
+      "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53"
+    }
+  },
+  "source": {
+    "kind": "equip_affix",
+    "affix_id": 2150021,
+    "affix_group_id": 215002,
+    "source_level": 1,
+    "version_line": "release",
+    "snapshot_id": "4f989711cf8c3cd2e9d8c57f0ef79691cceb5b58d9d5333535b6619ca814d4ee",
+    "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53"
+  },
+  "param_list": [
+    0.6000000238418579,
+    0.4000000059604645,
+    10,
+    0.20000000298023224,
+    0,
+    0,
+    0,
+    0
+  ],
+  "affix": {
+    "source_path": "ExcelBinOutput/EquipAffixExcelConfigData.json",
+    "source_sha256": "67cce4b66ecfae8ab20b4567005ff0e2efa76446af1fcc71d99e8a2383def4e6",
+    "json_pointer": "/1309",
+    "record": {
+      "paramList": [
+        0.6000000238418579,
+        0.4000000059604645,
+        10,
+        0.20000000298023224,
+        0,
+        0,
+        0,
+        0
+      ],
+      "addProps": [
+        {},
+        {},
+        {}
+      ],
+      "openConfig": "Relic_ReactionWindEnhance",
+      "affixId": 2150021,
+      "id": 215002,
+      "level": 1,
+      "nameTextMapHash": 1562600667,
+      "descTextMapHash": 2340004313
+    }
+  },
+  "talent": {
+    "source_path": "BinOutput/Talent/RelicTalents/ConfigAffix_Relic.json",
+    "source_sha256": "0937b29eb3f02b07aacdc02abdcf0af460ac7cb5cf951207ff626ba27b4052ba",
+    "json_pointer": "/Relic_ReactionWindEnhance",
+    "operations": [
+      {
+        "$type": "JPCAAJGEELO",
+        "GBPFBNHLOFD": true,
+        "IIBMNPFLNMJ": "Relic_ReactionWindEnhance"
+      },
+      {
+        "$type": "BIAHEMMGABC",
+        "GBPFBNHLOFD": true,
+        "IIBMNPFLNMJ": "Relic_ReactionWindEnhance",
+        "PCABAADALND": "%1",
+        "PEOJKHKHAKL": "ReactionUp"
+      },
+      {
+        "$type": "BIAHEMMGABC",
+        "GBPFBNHLOFD": true,
+        "IIBMNPFLNMJ": "Relic_ReactionWindEnhance",
+        "PCABAADALND": "%2",
+        "PEOJKHKHAKL": "ResistDown"
+      },
+      {
+        "$type": "BIAHEMMGABC",
+        "GBPFBNHLOFD": true,
+        "IIBMNPFLNMJ": "Relic_ReactionWindEnhance",
+        "PCABAADALND": "%3",
+        "PEOJKHKHAKL": "Dura"
+      },
+      {
+        "$type": "BIAHEMMGABC",
+        "GBPFBNHLOFD": true,
+        "IIBMNPFLNMJ": "Relic_ReactionWindEnhance",
+        "PCABAADALND": "%4",
+        "PEOJKHKHAKL": "ReactionUp_Star"
+      }
+    ],
+    "definition_id": "17497716a7f95347c69749e33bdac030749c68b67d82045825daa01f49aae699"
+  },
+  "abilities": [
+    {
+      "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+      "source_sha256": "96c506df3e2a2b12871b3a8b381c7851ea5aa7d5eb432b18553255e078ce3803",
+      "json_pointer": "/25/Default",
+      "payload": {
+        "EMGBJJOIENB": [
+          {
+            "$type": "CDANEAFAFKM",
+            "AMOLMPHFPHJ": -1,
+            "ILELAOFJIKJ": true,
+            "LDFBDMNIADI": "UNIQUE_Relic_ReactionWindEnhance_Handler",
+            "LJFIEGHHLOB": false
+          }
+        ],
+        "GPPBBDEICKP": {
+          "UNIQUE_Relic_ElementElecDefDown": {
+            "BNEJPEMIMEH": true,
+            "BOCCNJLBFCJ": "DefenseDown",
+            "DBGOKAKAHFP": 100,
+            "DIELNIJPCJJ": true,
+            "DOALDLPNGMF": -1,
+            "ILKPFPGAIGI": {
+              "Actor_ElecSubHurtDelta": [
+                "ResistDown",
+                "Minus",
+                "MUL"
+              ]
+            },
+            "JPEAFDFPKAN": "Dura",
+            "KFOMCJGGPPC": -1,
+            "PPKOPMBNPJH": true
+          },
+          "UNIQUE_Relic_ElementFireDefDown": {
+            "BNEJPEMIMEH": true,
+            "BOCCNJLBFCJ": "DefenseDown",
+            "DBGOKAKAHFP": 100,
+            "DIELNIJPCJJ": true,
+            "DOALDLPNGMF": -1,
+            "ILKPFPGAIGI": {
+              "Actor_FireSubHurtDelta": [
+                "ResistDown",
+                "Minus",
+                "MUL"
+              ]
+            },
+            "JPEAFDFPKAN": "Dura",
+            "KFOMCJGGPPC": -1,
+            "PPKOPMBNPJH": true
+          },
+          "UNIQUE_Relic_ElementIceDefDown": {
+            "BNEJPEMIMEH": true,
+            "BOCCNJLBFCJ": "DefenseDown",
+            "DBGOKAKAHFP": 100,
+            "DIELNIJPCJJ": true,
+            "DOALDLPNGMF": -1,
+            "ILKPFPGAIGI": {
+              "Actor_IceSubHurtDelta": [
+                "ResistDown",
+                "Minus",
+                "MUL"
+              ]
+            },
+            "JPEAFDFPKAN": "Dura",
+            "KFOMCJGGPPC": -1,
+            "PPKOPMBNPJH": true
+          },
+          "UNIQUE_Relic_ElementWaterDefDown": {
+            "BNEJPEMIMEH": true,
+            "BOCCNJLBFCJ": "DefenseDown",
+            "DBGOKAKAHFP": 100,
+            "DIELNIJPCJJ": true,
+            "DOALDLPNGMF": -1,
+            "ILKPFPGAIGI": {
+              "Actor_WaterSubHurtDelta": [
+                "ResistDown",
+                "Minus",
+                "MUL"
+              ]
+            },
+            "JPEAFDFPKAN": "Dura",
+            "KFOMCJGGPPC": -1,
+            "PPKOPMBNPJH": true
+          },
+          "UNIQUE_Relic_ReactionWindEnhance_Handler": {
+            "BNEJPEMIMEH": true,
+            "DBGOKAKAHFP": 100,
+            "DIELNIJPCJJ": true,
+            "DOALDLPNGMF": -1,
+            "ILKPFPGAIGI": {
+              "Actor_ElemReactStarSwirlIceDelta": "ReactionUp_Star",
+              "Actor_ElemReactStarSwirlWindDelta": "ReactionUp_Star",
+              "Actor_ElemReactSwirlElectricDelta": "ReactionUp",
+              "Actor_ElemReactSwirlFireDelta": "ReactionUp",
+              "Actor_ElemReactSwirlIceDelta": "ReactionUp",
+              "Actor_ElemReactSwirlWaterDelta": "ReactionUp"
+            },
+            "KFOMCJGGPPC": -1,
+            "LBABCICJBKE": [
+              {
+                "$type": "PBIOEEHFHFD",
+                "AMOLMPHFPHJ": -1,
+                "BDHBNCEEPPK": "Target",
+                "ILELAOFJIKJ": true,
+                "LJFIEGHHLOB": false,
+                "MJKPCGCAPLK": [
+                  {
+                    "$type": "DPNJGLIMCHM",
+                    "BDHBNCEEPPK": "Target",
+                    "BFDEHDNLNJH": [
+                      "Swirl_FireDamage",
+                      "Swirl_WaterDamage",
+                      "Swirl_ElectricDamage",
+                      "Swirl_IceDamage",
+                      "Self_Swirl_FireDamage",
+                      "Self_Swirl_WaterDamage",
+                      "Self_Swirl_ElectricDamage",
+                      "Self_Swirl_IceDamage"
+                    ]
+                  }
+                ],
+                "MLJNNELMEFL": [
+                  {
+                    "$type": "BINBHGLANKO",
+                    "AMOLMPHFPHJ": -1,
+                    "BDHBNCEEPPK": "Target",
+                    "IJDGNIIOHLM": [
+                      {
+                        "$type": "LEHABIJBEAO",
+                        "BDHBNCEEPPK": "Target",
+                        "JOFNJODFEDG": "Fire"
+                      },
+                      {
+                        "$type": "BKCJECHCDKG",
+                        "BDHBNCEEPPK": "Target",
+                        "FJGEDPNBGCG": -1,
+                        "LJBBKGIFJDB": [
+                          "Monster"
+                        ]
+                      }
+                    ],
+                    "ILELAOFJIKJ": true,
+                    "LDFBDMNIADI": "UNIQUE_Relic_ElementFireDefDown",
+                    "LJFIEGHHLOB": false
+                  },
+                  {
+                    "$type": "BINBHGLANKO",
+                    "AMOLMPHFPHJ": -1,
+                    "BDHBNCEEPPK": "Target",
+                    "IJDGNIIOHLM": [
+                      {
+                        "$type": "LEHABIJBEAO",
+                        "BDHBNCEEPPK": "Target",
+                        "JOFNJODFEDG": "Water"
+                      },
+                      {
+                        "$type": "BKCJECHCDKG",
+                        "BDHBNCEEPPK": "Target",
+                        "FJGEDPNBGCG": -1,
+                        "LJBBKGIFJDB": [
+                          "Monster"
+                        ]
+                      }
+                    ],
+                    "ILELAOFJIKJ": true,
+                    "LDFBDMNIADI": "UNIQUE_Relic_ElementWaterDefDown",
+                    "LJFIEGHHLOB": false
+                  },
+                  {
+                    "$type": "BINBHGLANKO",
+                    "AMOLMPHFPHJ": -1,
+                    "BDHBNCEEPPK": "Target",
+                    "IJDGNIIOHLM": [
+                      {
+                        "$type": "LEHABIJBEAO",
+                        "BDHBNCEEPPK": "Target",
+                        "JOFNJODFEDG": "Electric"
+                      },
+                      {
+                        "$type": "BKCJECHCDKG",
+                        "BDHBNCEEPPK": "Target",
+                        "FJGEDPNBGCG": -1,
+                        "LJBBKGIFJDB": [
+                          "Monster"
+                        ]
+                      }
+                    ],
+                    "ILELAOFJIKJ": true,
+                    "LDFBDMNIADI": "UNIQUE_Relic_ElementElecDefDown",
+                    "LJFIEGHHLOB": false
+                  },
+                  {
+                    "$type": "BINBHGLANKO",
+                    "AMOLMPHFPHJ": -1,
+                    "BDHBNCEEPPK": "Target",
+                    "IJDGNIIOHLM": [
+                      {
+                        "$type": "LEHABIJBEAO",
+                        "BDHBNCEEPPK": "Target",
+                        "JOFNJODFEDG": "Ice"
+                      },
+                      {
+                        "$type": "BKCJECHCDKG",
+                        "BDHBNCEEPPK": "Target",
+                        "FJGEDPNBGCG": -1,
+                        "LJBBKGIFJDB": [
+                          "Monster"
+                        ]
+                      }
+                    ],
+                    "ILELAOFJIKJ": true,
+                    "LDFBDMNIADI": "UNIQUE_Relic_ElementIceDefDown",
+                    "LJFIEGHHLOB": false
+                  }
+                ]
+              }
+            ],
+            "LFIJIMIMBIH": [
+              {
+                "$type": "ANDAIHHJDIB",
+                "AMOLMPHFPHJ": -1,
+                "HDOJNFJLKAP": [
+                  "SwirlFire"
+                ],
+                "KHJMNJNEADF": [
+                  {
+                    "$type": "BINBHGLANKO",
+                    "AMOLMPHFPHJ": -1,
+                    "BDHBNCEEPPK": "Other",
+                    "ILELAOFJIKJ": true,
+                    "LDFBDMNIADI": "UNIQUE_Relic_ElementFireDefDown",
+                    "LJFIEGHHLOB": false
+                  }
+                ],
+                "LJBBKGIFJDB": [
+                  "Monster"
+                ],
+                "OMALBHAAHHA": 20
+              },
+              {
+                "$type": "ANDAIHHJDIB",
+                "AMOLMPHFPHJ": -1,
+                "HDOJNFJLKAP": [
+                  "SwirlWater"
+                ],
+                "KHJMNJNEADF": [
+                  {
+                    "$type": "BINBHGLANKO",
+                    "AMOLMPHFPHJ": -1,
+                    "BDHBNCEEPPK": "Other",
+                    "ILELAOFJIKJ": true,
+                    "LDFBDMNIADI": "UNIQUE_Relic_ElementWaterDefDown",
+                    "LJFIEGHHLOB": false
+                  }
+                ],
+                "LJBBKGIFJDB": [
+                  "Monster"
+                ],
+                "OMALBHAAHHA": 20
+              },
+              {
+                "$type": "ANDAIHHJDIB",
+                "AMOLMPHFPHJ": -1,
+                "HDOJNFJLKAP": [
+                  "SwirlElectric"
+                ],
+                "KHJMNJNEADF": [
+                  {
+                    "$type": "BINBHGLANKO",
+                    "AMOLMPHFPHJ": -1,
+                    "BDHBNCEEPPK": "Other",
+                    "ILELAOFJIKJ": true,
+                    "LDFBDMNIADI": "UNIQUE_Relic_ElementElecDefDown",
+                    "LJFIEGHHLOB": false
+                  }
+                ],
+                "LJBBKGIFJDB": [
+                  "Monster"
+                ],
+                "OMALBHAAHHA": 20
+              },
+              {
+                "$type": "ANDAIHHJDIB",
+                "AMOLMPHFPHJ": -1,
+                "HDOJNFJLKAP": [
+                  "SwirlIce",
+                  "StarSwirlIce"
+                ],
+                "KHJMNJNEADF": [
+                  {
+                    "$type": "BINBHGLANKO",
+                    "AMOLMPHFPHJ": -1,
+                    "BDHBNCEEPPK": "Other",
+                    "ILELAOFJIKJ": true,
+                    "LDFBDMNIADI": "UNIQUE_Relic_ElementIceDefDown",
+                    "LJFIEGHHLOB": false
+                  }
+                ],
+                "LJBBKGIFJDB": [
+                  "Monster"
+                ],
+                "OMALBHAAHHA": 20
+              }
+            ],
+            "PPKOPMBNPJH": true
+          }
+        },
+        "IIBMNPFLNMJ": "Relic_ReactionWindEnhance",
+        "LOEHLJGBGAC": {
+          "Dura": 0,
+          "Minus": -1,
+          "ReactionUp": 0,
+          "ReactionUp_Star": 0,
+          "ResistDown": 0
+        },
+        "OMAIGDMCJBO": {
+          "DBGOKAKAHFP": 100,
+          "DOALDLPNGMF": -1,
+          "KFOMCJGGPPC": -1,
+          "PPKOPMBNPJH": true
+        },
+        "PODJJJHGAMO": true
+      },
+      "definition_id": "125b10be72bfcf0f1eb64dfe4b59f50e2a19a63d8b97f65dd4ac7ca89e0d1f13",
+      "variant_key": "Default"
+    }
+  ],
+  "references": [
+    {
+      "reference_id": "41326657486916e62dbac2f668cb2cb53105f80e09e989768a50250f9b466e7a",
+      "from_definition_id": "125b10be72bfcf0f1eb64dfe4b59f50e2a19a63d8b97f65dd4ac7ca89e0d1f13",
+      "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+      "json_pointer": "/25/Default/EMGBJJOIENB/0/LDFBDMNIADI",
+      "field_name": "modifierName",
+      "relation_kind": "modifier_operation",
+      "target_kind": "modifier",
+      "source_order": 0,
+      "presence_status": "present",
+      "resolution_status": "resolved",
+      "resolved_definition_id": "16131fa9b3dd1548ef116141522d4ec5999399ffc577d738ba51cb1ddbdb6b9b",
+      "extraction_rule_id": "4",
+      "version_line": "release",
+      "snapshot_id": "4f989711cf8c3cd2e9d8c57f0ef79691cceb5b58d9d5333535b6619ca814d4ee",
+      "target_key": "UNIQUE_Relic_ReactionWindEnhance_Handler",
+      "scope": {
+        "owner_definition_id": "125b10be72bfcf0f1eb64dfe4b59f50e2a19a63d8b97f65dd4ac7ca89e0d1f13"
+      },
+      "candidate_ids": [
+        "16131fa9b3dd1548ef116141522d4ec5999399ffc577d738ba51cb1ddbdb6b9b"
+      ]
+    },
+    {
+      "reference_id": "3cd3528c288b2f11f8beee05a736a74a465d978247ffbdca1899facf71109718",
+      "from_definition_id": "16131fa9b3dd1548ef116141522d4ec5999399ffc577d738ba51cb1ddbdb6b9b",
+      "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+      "json_pointer": "/25/Default/GPPBBDEICKP/UNIQUE_Relic_ReactionWindEnhance_Handler/LBABCICJBKE/0/MLJNNELMEFL/0/LDFBDMNIADI",
+      "field_name": "modifierName",
+      "relation_kind": "modifier_operation",
+      "target_kind": "modifier",
+      "source_order": 0,
+      "presence_status": "present",
+      "resolution_status": "resolved",
+      "resolved_definition_id": "26e2ffef883f911b80e4cadbb0c5d269bb809523ca378fd7ab39e5afa554e4a0",
+      "extraction_rule_id": "4",
+      "version_line": "release",
+      "snapshot_id": "4f989711cf8c3cd2e9d8c57f0ef79691cceb5b58d9d5333535b6619ca814d4ee",
+      "target_key": "UNIQUE_Relic_ElementFireDefDown",
+      "scope": {
+        "owner_definition_id": "125b10be72bfcf0f1eb64dfe4b59f50e2a19a63d8b97f65dd4ac7ca89e0d1f13"
+      },
+      "candidate_ids": [
+        "26e2ffef883f911b80e4cadbb0c5d269bb809523ca378fd7ab39e5afa554e4a0"
+      ]
+    },
+    {
+      "reference_id": "bb7b62e9167d6af92083cd5408a4769752f74e45ccfccd31c4f97d4410c801bf",
+      "from_definition_id": "16131fa9b3dd1548ef116141522d4ec5999399ffc577d738ba51cb1ddbdb6b9b",
+      "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+      "json_pointer": "/25/Default/GPPBBDEICKP/UNIQUE_Relic_ReactionWindEnhance_Handler/LBABCICJBKE/0/MLJNNELMEFL/1/LDFBDMNIADI",
+      "field_name": "modifierName",
+      "relation_kind": "modifier_operation",
+      "target_kind": "modifier",
+      "source_order": 1,
+      "presence_status": "present",
+      "resolution_status": "resolved",
+      "resolved_definition_id": "23e861615ef769af72f3218e3ae3a2bbb67943fce1959d296f0fb3b78e5b1d50",
+      "extraction_rule_id": "4",
+      "version_line": "release",
+      "snapshot_id": "4f989711cf8c3cd2e9d8c57f0ef79691cceb5b58d9d5333535b6619ca814d4ee",
+      "target_key": "UNIQUE_Relic_ElementWaterDefDown",
+      "scope": {
+        "owner_definition_id": "125b10be72bfcf0f1eb64dfe4b59f50e2a19a63d8b97f65dd4ac7ca89e0d1f13"
+      },
+      "candidate_ids": [
+        "23e861615ef769af72f3218e3ae3a2bbb67943fce1959d296f0fb3b78e5b1d50"
+      ]
+    },
+    {
+      "reference_id": "66b8814b75350d081d33df7c9c20c0021496efc65a2421a7fbad8368556af814",
+      "from_definition_id": "16131fa9b3dd1548ef116141522d4ec5999399ffc577d738ba51cb1ddbdb6b9b",
+      "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+      "json_pointer": "/25/Default/GPPBBDEICKP/UNIQUE_Relic_ReactionWindEnhance_Handler/LBABCICJBKE/0/MLJNNELMEFL/2/LDFBDMNIADI",
+      "field_name": "modifierName",
+      "relation_kind": "modifier_operation",
+      "target_kind": "modifier",
+      "source_order": 2,
+      "presence_status": "present",
+      "resolution_status": "resolved",
+      "resolved_definition_id": "0720a743e5cff74b141bf013373986fe74fb0ba6864295b2d6d0aaf4b4b246b9",
+      "extraction_rule_id": "4",
+      "version_line": "release",
+      "snapshot_id": "4f989711cf8c3cd2e9d8c57f0ef79691cceb5b58d9d5333535b6619ca814d4ee",
+      "target_key": "UNIQUE_Relic_ElementElecDefDown",
+      "scope": {
+        "owner_definition_id": "125b10be72bfcf0f1eb64dfe4b59f50e2a19a63d8b97f65dd4ac7ca89e0d1f13"
+      },
+      "candidate_ids": [
+        "0720a743e5cff74b141bf013373986fe74fb0ba6864295b2d6d0aaf4b4b246b9"
+      ]
+    },
+    {
+      "reference_id": "81b6e490122ddf0c7dfe1bf37d30f8d0793335511b897f354e4891fd2cecea90",
+      "from_definition_id": "16131fa9b3dd1548ef116141522d4ec5999399ffc577d738ba51cb1ddbdb6b9b",
+      "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+      "json_pointer": "/25/Default/GPPBBDEICKP/UNIQUE_Relic_ReactionWindEnhance_Handler/LBABCICJBKE/0/MLJNNELMEFL/3/LDFBDMNIADI",
+      "field_name": "modifierName",
+      "relation_kind": "modifier_operation",
+      "target_kind": "modifier",
+      "source_order": 3,
+      "presence_status": "present",
+      "resolution_status": "resolved",
+      "resolved_definition_id": "ddaabbbeec6c062f8c1df5fd5a36c529707c3a39202cfdbdf30da9b6ec11bd62",
+      "extraction_rule_id": "4",
+      "version_line": "release",
+      "snapshot_id": "4f989711cf8c3cd2e9d8c57f0ef79691cceb5b58d9d5333535b6619ca814d4ee",
+      "target_key": "UNIQUE_Relic_ElementIceDefDown",
+      "scope": {
+        "owner_definition_id": "125b10be72bfcf0f1eb64dfe4b59f50e2a19a63d8b97f65dd4ac7ca89e0d1f13"
+      },
+      "candidate_ids": [
+        "ddaabbbeec6c062f8c1df5fd5a36c529707c3a39202cfdbdf30da9b6ec11bd62"
+      ]
+    },
+    {
+      "reference_id": "d251021053ffe399881f5327443b7ee6bb9c40748ffe502c169a7fee6b3647c9",
+      "from_definition_id": "16131fa9b3dd1548ef116141522d4ec5999399ffc577d738ba51cb1ddbdb6b9b",
+      "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+      "json_pointer": "/25/Default/GPPBBDEICKP/UNIQUE_Relic_ReactionWindEnhance_Handler/LFIJIMIMBIH/0/KHJMNJNEADF/0/LDFBDMNIADI",
+      "field_name": "modifierName",
+      "relation_kind": "modifier_operation",
+      "target_kind": "modifier",
+      "source_order": 4,
+      "presence_status": "present",
+      "resolution_status": "resolved",
+      "resolved_definition_id": "26e2ffef883f911b80e4cadbb0c5d269bb809523ca378fd7ab39e5afa554e4a0",
+      "extraction_rule_id": "4",
+      "version_line": "release",
+      "snapshot_id": "4f989711cf8c3cd2e9d8c57f0ef79691cceb5b58d9d5333535b6619ca814d4ee",
+      "target_key": "UNIQUE_Relic_ElementFireDefDown",
+      "scope": {
+        "owner_definition_id": "125b10be72bfcf0f1eb64dfe4b59f50e2a19a63d8b97f65dd4ac7ca89e0d1f13"
+      },
+      "candidate_ids": [
+        "26e2ffef883f911b80e4cadbb0c5d269bb809523ca378fd7ab39e5afa554e4a0"
+      ]
+    },
+    {
+      "reference_id": "3a0cd3a65aea659c2242b74a90df7c43acf9816a2cb8c525e34d7bf793ac2afe",
+      "from_definition_id": "16131fa9b3dd1548ef116141522d4ec5999399ffc577d738ba51cb1ddbdb6b9b",
+      "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+      "json_pointer": "/25/Default/GPPBBDEICKP/UNIQUE_Relic_ReactionWindEnhance_Handler/LFIJIMIMBIH/1/KHJMNJNEADF/0/LDFBDMNIADI",
+      "field_name": "modifierName",
+      "relation_kind": "modifier_operation",
+      "target_kind": "modifier",
+      "source_order": 5,
+      "presence_status": "present",
+      "resolution_status": "resolved",
+      "resolved_definition_id": "23e861615ef769af72f3218e3ae3a2bbb67943fce1959d296f0fb3b78e5b1d50",
+      "extraction_rule_id": "4",
+      "version_line": "release",
+      "snapshot_id": "4f989711cf8c3cd2e9d8c57f0ef79691cceb5b58d9d5333535b6619ca814d4ee",
+      "target_key": "UNIQUE_Relic_ElementWaterDefDown",
+      "scope": {
+        "owner_definition_id": "125b10be72bfcf0f1eb64dfe4b59f50e2a19a63d8b97f65dd4ac7ca89e0d1f13"
+      },
+      "candidate_ids": [
+        "23e861615ef769af72f3218e3ae3a2bbb67943fce1959d296f0fb3b78e5b1d50"
+      ]
+    },
+    {
+      "reference_id": "46a308deb51330ffac6db3730cf934d45e0ff16bfd99b9ce138378c00c9bc5e9",
+      "from_definition_id": "16131fa9b3dd1548ef116141522d4ec5999399ffc577d738ba51cb1ddbdb6b9b",
+      "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+      "json_pointer": "/25/Default/GPPBBDEICKP/UNIQUE_Relic_ReactionWindEnhance_Handler/LFIJIMIMBIH/2/KHJMNJNEADF/0/LDFBDMNIADI",
+      "field_name": "modifierName",
+      "relation_kind": "modifier_operation",
+      "target_kind": "modifier",
+      "source_order": 6,
+      "presence_status": "present",
+      "resolution_status": "resolved",
+      "resolved_definition_id": "0720a743e5cff74b141bf013373986fe74fb0ba6864295b2d6d0aaf4b4b246b9",
+      "extraction_rule_id": "4",
+      "version_line": "release",
+      "snapshot_id": "4f989711cf8c3cd2e9d8c57f0ef79691cceb5b58d9d5333535b6619ca814d4ee",
+      "target_key": "UNIQUE_Relic_ElementElecDefDown",
+      "scope": {
+        "owner_definition_id": "125b10be72bfcf0f1eb64dfe4b59f50e2a19a63d8b97f65dd4ac7ca89e0d1f13"
+      },
+      "candidate_ids": [
+        "0720a743e5cff74b141bf013373986fe74fb0ba6864295b2d6d0aaf4b4b246b9"
+      ]
+    },
+    {
+      "reference_id": "7e62a18498aaa6aa5ba77684344b53d72a8aa1f22fc3f746004cffd8e65be6a7",
+      "from_definition_id": "16131fa9b3dd1548ef116141522d4ec5999399ffc577d738ba51cb1ddbdb6b9b",
+      "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+      "json_pointer": "/25/Default/GPPBBDEICKP/UNIQUE_Relic_ReactionWindEnhance_Handler/LFIJIMIMBIH/3/KHJMNJNEADF/0/LDFBDMNIADI",
+      "field_name": "modifierName",
+      "relation_kind": "modifier_operation",
+      "target_kind": "modifier",
+      "source_order": 7,
+      "presence_status": "present",
+      "resolution_status": "resolved",
+      "resolved_definition_id": "ddaabbbeec6c062f8c1df5fd5a36c529707c3a39202cfdbdf30da9b6ec11bd62",
+      "extraction_rule_id": "4",
+      "version_line": "release",
+      "snapshot_id": "4f989711cf8c3cd2e9d8c57f0ef79691cceb5b58d9d5333535b6619ca814d4ee",
+      "target_key": "UNIQUE_Relic_ElementIceDefDown",
+      "scope": {
+        "owner_definition_id": "125b10be72bfcf0f1eb64dfe4b59f50e2a19a63d8b97f65dd4ac7ca89e0d1f13"
+      },
+      "candidate_ids": [
+        "ddaabbbeec6c062f8c1df5fd5a36c529707c3a39202cfdbdf30da9b6ec11bd62"
+      ]
+    },
+    {
+      "reference_id": "cecbae6e58d983ad89c6d1a7a191255c7268f9ffb4579450f06cb9f8b7a7fb3f",
+      "from_definition_id": "17497716a7f95347c69749e33bdac030749c68b67d82045825daa01f49aae699",
+      "source_path": "BinOutput/Talent/RelicTalents/ConfigAffix_Relic.json",
+      "json_pointer": "/Relic_ReactionWindEnhance/0/IIBMNPFLNMJ",
+      "field_name": "abilityName",
+      "relation_kind": "ability_operation",
+      "target_kind": "ability",
+      "source_order": 0,
+      "presence_status": "present",
+      "resolution_status": "resolved",
+      "resolved_definition_id": "125b10be72bfcf0f1eb64dfe4b59f50e2a19a63d8b97f65dd4ac7ca89e0d1f13",
+      "extraction_rule_id": "4",
+      "version_line": "release",
+      "snapshot_id": "4f989711cf8c3cd2e9d8c57f0ef79691cceb5b58d9d5333535b6619ca814d4ee",
+      "target_key": "Relic_ReactionWindEnhance",
+      "scope": {
+        "owner_definition_id": null
+      },
+      "candidate_ids": [
+        "125b10be72bfcf0f1eb64dfe4b59f50e2a19a63d8b97f65dd4ac7ca89e0d1f13"
+      ]
+    },
+    {
+      "reference_id": "67d8b96be9f4b0072ec009c16ea40a0c3dfb5a6afd8ac7576638cd881c5f882a",
+      "from_definition_id": "17497716a7f95347c69749e33bdac030749c68b67d82045825daa01f49aae699",
+      "source_path": "BinOutput/Talent/RelicTalents/ConfigAffix_Relic.json",
+      "json_pointer": "/Relic_ReactionWindEnhance/1/IIBMNPFLNMJ",
+      "field_name": "abilityName",
+      "relation_kind": "ability_operation",
+      "target_kind": "ability",
+      "source_order": 1,
+      "presence_status": "present",
+      "resolution_status": "resolved",
+      "resolved_definition_id": "125b10be72bfcf0f1eb64dfe4b59f50e2a19a63d8b97f65dd4ac7ca89e0d1f13",
+      "extraction_rule_id": "4",
+      "version_line": "release",
+      "snapshot_id": "4f989711cf8c3cd2e9d8c57f0ef79691cceb5b58d9d5333535b6619ca814d4ee",
+      "target_key": "Relic_ReactionWindEnhance",
+      "scope": {
+        "owner_definition_id": null
+      },
+      "candidate_ids": [
+        "125b10be72bfcf0f1eb64dfe4b59f50e2a19a63d8b97f65dd4ac7ca89e0d1f13"
+      ]
+    },
+    {
+      "reference_id": "4f8310d8391c6548b714cbc37145c86ccbd2e6f5c9fd2527f21bd6a7f4f0c5eb",
+      "from_definition_id": "17497716a7f95347c69749e33bdac030749c68b67d82045825daa01f49aae699",
+      "source_path": "BinOutput/Talent/RelicTalents/ConfigAffix_Relic.json",
+      "json_pointer": "/Relic_ReactionWindEnhance/2/IIBMNPFLNMJ",
+      "field_name": "abilityName",
+      "relation_kind": "ability_operation",
+      "target_kind": "ability",
+      "source_order": 2,
+      "presence_status": "present",
+      "resolution_status": "resolved",
+      "resolved_definition_id": "125b10be72bfcf0f1eb64dfe4b59f50e2a19a63d8b97f65dd4ac7ca89e0d1f13",
+      "extraction_rule_id": "4",
+      "version_line": "release",
+      "snapshot_id": "4f989711cf8c3cd2e9d8c57f0ef79691cceb5b58d9d5333535b6619ca814d4ee",
+      "target_key": "Relic_ReactionWindEnhance",
+      "scope": {
+        "owner_definition_id": null
+      },
+      "candidate_ids": [
+        "125b10be72bfcf0f1eb64dfe4b59f50e2a19a63d8b97f65dd4ac7ca89e0d1f13"
+      ]
+    },
+    {
+      "reference_id": "fbac912b70850ad2928f111b769fb6ce53a86557c3e45ba67c065f2193444bd6",
+      "from_definition_id": "17497716a7f95347c69749e33bdac030749c68b67d82045825daa01f49aae699",
+      "source_path": "BinOutput/Talent/RelicTalents/ConfigAffix_Relic.json",
+      "json_pointer": "/Relic_ReactionWindEnhance/3/IIBMNPFLNMJ",
+      "field_name": "abilityName",
+      "relation_kind": "ability_operation",
+      "target_kind": "ability",
+      "source_order": 3,
+      "presence_status": "present",
+      "resolution_status": "resolved",
+      "resolved_definition_id": "125b10be72bfcf0f1eb64dfe4b59f50e2a19a63d8b97f65dd4ac7ca89e0d1f13",
+      "extraction_rule_id": "4",
+      "version_line": "release",
+      "snapshot_id": "4f989711cf8c3cd2e9d8c57f0ef79691cceb5b58d9d5333535b6619ca814d4ee",
+      "target_key": "Relic_ReactionWindEnhance",
+      "scope": {
+        "owner_definition_id": null
+      },
+      "candidate_ids": [
+        "125b10be72bfcf0f1eb64dfe4b59f50e2a19a63d8b97f65dd4ac7ca89e0d1f13"
+      ]
+    },
+    {
+      "reference_id": "7ddbd00f18cf56af15d9242869af7a8fa8879240dd6aaafe917b8af9b56ddbd9",
+      "from_definition_id": "17497716a7f95347c69749e33bdac030749c68b67d82045825daa01f49aae699",
+      "source_path": "BinOutput/Talent/RelicTalents/ConfigAffix_Relic.json",
+      "json_pointer": "/Relic_ReactionWindEnhance/4/IIBMNPFLNMJ",
+      "field_name": "abilityName",
+      "relation_kind": "ability_operation",
+      "target_kind": "ability",
+      "source_order": 4,
+      "presence_status": "present",
+      "resolution_status": "resolved",
+      "resolved_definition_id": "125b10be72bfcf0f1eb64dfe4b59f50e2a19a63d8b97f65dd4ac7ca89e0d1f13",
+      "extraction_rule_id": "4",
+      "version_line": "release",
+      "snapshot_id": "4f989711cf8c3cd2e9d8c57f0ef79691cceb5b58d9d5333535b6619ca814d4ee",
+      "target_key": "Relic_ReactionWindEnhance",
+      "scope": {
+        "owner_definition_id": null
+      },
+      "candidate_ids": [
+        "125b10be72bfcf0f1eb64dfe4b59f50e2a19a63d8b97f65dd4ac7ca89e0d1f13"
+      ]
+    },
+    {
+      "reference_id": "f0c67d0fbcdbaba7a3eec6152b0b4dc87880a235aaad76f20eac13dfa57fc288",
+      "from_definition_id": "d0368143dc37aefd495d91063e92b1518a9e1a89be08341d93ba3330ba2cbac4",
+      "source_path": "ExcelBinOutput/EquipAffixExcelConfigData.json",
+      "json_pointer": "/1309/openConfig",
+      "field_name": "openConfig",
+      "relation_kind": "open_config",
+      "target_kind": "talent_config",
+      "source_order": 0,
+      "presence_status": "present",
+      "resolution_status": "resolved",
+      "resolved_definition_id": "17497716a7f95347c69749e33bdac030749c68b67d82045825daa01f49aae699",
+      "extraction_rule_id": "4",
+      "version_line": "release",
+      "snapshot_id": "4f989711cf8c3cd2e9d8c57f0ef79691cceb5b58d9d5333535b6619ca814d4ee",
+      "target_key": "Relic_ReactionWindEnhance",
+      "scope": {
+        "owner_definition_id": null
+      },
+      "candidate_ids": [
+        "17497716a7f95347c69749e33bdac030749c68b67d82045825daa01f49aae699"
+      ]
+    }
+  ],
+  "reference_closed": true,
+  "execution_support": "not_evaluated",
+  "normalization": {
+    "normalization_version": 2,
+    "profile_id": "upstream-34208429-reviewed-schema-v1",
+    "mapping_fingerprint": "506862bc6c0bf033d8272b75f193cd2a620fc513320b3223d07afcc6f04356e2",
+    "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53"
+  },
+  "content_fingerprint": "456f79c8071bd9e79b8c6a96a440ff2fd20187f39cd9ab98ef2ebdc02bd26680"
+}

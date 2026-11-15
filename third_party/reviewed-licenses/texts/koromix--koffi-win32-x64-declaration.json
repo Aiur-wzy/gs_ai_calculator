@@ -1,0 +1,14 @@
+{
+  "name": "@koromix/koffi-win32-x64",
+  "version": "3.1.1",
+  "license": "MIT",
+  "author": {
+    "name": "Niels Martignène",
+    "email": "niels.martignene@protonmail.com",
+    "url": "https://koromix.dev/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Koromix/koffi"
+  }
+}

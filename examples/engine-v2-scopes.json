@@ -1,0 +1,106 @@
+{
+  "version": 2,
+  "form": "resolved",
+  "meta": {
+    "name": "v2收益范围示例",
+    "assumptions": [
+      "人工参数仅用于演示分类，不是游戏角色推荐配装"
+    ]
+  },
+  "enemy": {
+    "level": 90,
+    "resistance": {
+      "default": 0.1
+    }
+  },
+  "characters": [
+    {
+      "id": "char1",
+      "level": 90,
+      "stats": {
+        "atk": 1000,
+        "base_atk": 500,
+        "crit_rate": 0,
+        "crit_dmg": 0.5
+      }
+    }
+  ],
+  "switches": [],
+  "buffs": [
+    {
+      "id": "b.demo",
+      "source": "人工效果范围演示",
+      "start": 0,
+      "end": 5,
+      "scope": "team",
+      "effects": [
+        {
+          "id": "e.atk",
+          "benefit_type_id": "benefit.stat_add.atk",
+          "zone": "stat_add",
+          "stat": "atk",
+          "value": 100,
+          "applies_to": {
+            "mode": "all"
+          }
+        },
+        {
+          "id": "e.burst",
+          "benefit_type_id": "benefit.dmg_bonus.all",
+          "zone": "dmg_bonus",
+          "stat": "all",
+          "value": 0.2,
+          "applies_to": {
+            "mode": "types",
+            "damage_type_ids": [
+              "damage.elemental_burst"
+            ]
+          }
+        }
+      ]
+    }
+  ],
+  "hits": [
+    {
+      "id": "h.normal",
+      "damage_type_ids": [
+        "damage.normal_attack"
+      ],
+      "t": 1,
+      "character": "char1",
+      "skill": "h.normal",
+      "multiplier": 1,
+      "damage_system": "classic",
+      "element": "physical"
+    },
+    {
+      "id": "h.burst",
+      "damage_type_ids": [
+        "damage.elemental_burst"
+      ],
+      "t": 1,
+      "character": "char1",
+      "skill": "h.burst",
+      "multiplier": 1,
+      "damage_system": "classic",
+      "element": "physical"
+    },
+    {
+      "id": "h.extra",
+      "damage_type_ids": [
+        "damage.other"
+      ],
+      "t": 1,
+      "character": "char1",
+      "skill": "h.extra",
+      "multiplier": 1,
+      "damage_system": "classic",
+      "element": "physical"
+    }
+  ],
+  "loop_duration": 20,
+  "id_registry_version": 1,
+  "type_definitions": {
+    "damage_types": []
+  }
+}

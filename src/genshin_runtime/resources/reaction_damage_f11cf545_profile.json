@@ -1,0 +1,1119 @@
+{
+  "recipe_id": "ordinary-swirl-origin-source-f11cf545-v3",
+  "recipe_version": 3,
+  "commit": "f11cf545a7eee32a29999f960ebfba305f896ed3",
+  "source_path": "BinOutput/Ability/Temp/ConfigAbility_Element.json",
+  "evidence_reference": {
+    "old_commit": "224708edc8056f27e9ffc4eacabe797d75274636",
+    "old_recipe_id": "ordinary-swirl-origin-source-224708ed-v2",
+    "old_byte_representation": "exact git blob via git show; JSON node hashes equal the accepted old worktree despite line-ending differences",
+    "old_source_sha256": "85a807c3386ed68e782234ce174c45be670d073f123b59bd016be493727fee5f",
+    "new_source_sha256": "d91e0520a13820845347bc2287faa9f4d2a2f80d27fc192a2a6fc69328efdb42",
+    "method": "Exact unique ability name; isomorphic whole-node raw leaf values; unique sibling subtree anchors only, never array order or repeated scalar order; known field/type namespaces separated.",
+    "whole_ability_cases": [
+      "Water",
+      "Ice",
+      "Fire",
+      "Electric"
+    ],
+    "opaque_policy": "Old and new opaque identifiers are retained without semantic promotion. Electric is a source-review holdout, not a supported query element.",
+    "whole_ability_evidence": [
+      {
+        "ability_name": "ElementAbility_Swirl_Water",
+        "old_pointer": "/31/Default",
+        "new_pointer": "/31/Default",
+        "old_node_sha256": "4da162528403f014ee694a38bbd3eb54c3317a17842d85e5db5c464b365d1d08",
+        "new_node_sha256": "686904693e19ddda4e59021b7f059e843fa6f81ec88f642c0947945180242ef8",
+        "whole_identifier_erased_body_sha256": "431e2f83f3c25aaf06e8b2d7139ede3a90a1d02cb1ab635e05480380b724b18d",
+        "scope": "Full source shape and leaf-value identity; only the separately witnessed known fields/types gain names. Opaque fields/types remain opaque."
+      },
+      {
+        "ability_name": "ElementAbility_Swirl_Ice",
+        "old_pointer": "/32/Default",
+        "new_pointer": "/32/Default",
+        "old_node_sha256": "184e63d245de039cbe3d8ba5ea96ea17910de906f8e1bbe1d551a962a30b690d",
+        "new_node_sha256": "48a6811eab10f625292edf0d18d6711b93c579eb5bf33c1abcbaac5c19853d8b",
+        "whole_identifier_erased_body_sha256": "a6045757732b4ce646bde40d75e1f72174476e74b3ed62b70c1b81075f30f502",
+        "scope": "Full source shape and leaf-value identity; only the separately witnessed known fields/types gain names. Opaque fields/types remain opaque."
+      },
+      {
+        "ability_name": "ElementAbility_Swirl_Fire",
+        "old_pointer": "/29/Default",
+        "new_pointer": "/29/Default",
+        "old_node_sha256": "72be132c1b06615b7066934620f6eceed84899b402800968196715613533d41e",
+        "new_node_sha256": "5d1c95045f69486417e1aa8731f2204a74d3b5bd56352b2568994d589c892008",
+        "whole_identifier_erased_body_sha256": "f4f6dcc60a7ca0a2cd195c49cc2e90a9daa89968298ca07bd0cea83db9e27555",
+        "scope": "Full source shape and leaf-value identity; only the separately witnessed known fields/types gain names. Opaque fields/types remain opaque."
+      },
+      {
+        "ability_name": "ElementAbility_Swirl_Electric",
+        "old_pointer": "/30/Default",
+        "new_pointer": "/30/Default",
+        "old_node_sha256": "d73a281bd9148a66f13c552f0594e218e2affd312d9e4ae2f6cc9ad910685def",
+        "new_node_sha256": "3838518bdc9bb4707dde77904d882ca822348c01320ca0215605ebb3b1d1b872",
+        "whole_identifier_erased_body_sha256": "f741ebdc26958699690245543e967f8ed9104093e61c3b5bf2c1860e33722533",
+        "scope": "Full source shape and leaf-value identity; only the separately witnessed known fields/types gain names. Opaque fields/types remain opaque."
+      }
+    ]
+  },
+  "elements": {
+    "hydro": {
+      "ability_name": "ElementAbility_Swirl_Water",
+      "modifier_name": "Swirl_Water",
+      "expected_node_sha256": "686904693e19ddda4e59021b7f059e843fa6f81ec88f642c0947945180242ef8",
+      "old_ability_pointer": "/31/Default",
+      "reviewed_ability_pointer": "/31/Default"
+    },
+    "cryo": {
+      "ability_name": "ElementAbility_Swirl_Ice",
+      "modifier_name": "Swirl_Ice",
+      "expected_node_sha256": "48a6811eab10f625292edf0d18d6711b93c579eb5bf33c1abcbaac5c19853d8b",
+      "old_ability_pointer": "/32/Default",
+      "reviewed_ability_pointer": "/32/Default"
+    },
+    "pyro": {
+      "ability_name": "ElementAbility_Swirl_Fire",
+      "modifier_name": "Swirl_Fire",
+      "expected_node_sha256": "5d1c95045f69486417e1aa8731f2204a74d3b5bd56352b2568994d589c892008",
+      "old_ability_pointer": "/29/Default",
+      "reviewed_ability_pointer": "/29/Default"
+    }
+  },
+  "fields": {
+    "LALLGDIJKDE": "onAbilityStart",
+    "JJPDCLCLGPO": "compareType",
+    "KLHKFDCNFIG": "key",
+    "NDJFACCPAGC": "onAdded",
+    "LCOCHKLDAPI": "attackEvent",
+    "NEPCKIHEKAN": "attackPattern",
+    "CCKFCNPINKB": "radius",
+    "LONMFMMEPNN": "attackInfo",
+    "IHBPPDOIFAL": "attackProperty",
+    "JLMAGGHIAEE": "elementType",
+    "BJNOBFDFNGG": "attenuationGroup",
+    "OGFCMIBOMMM": "targetType",
+    "CCGMCELKANH": "attacker",
+    "JKNFJDNBFPG": "campTargetType",
+    "PKJCDAOPENG": "campBaseOn",
+    "FGADGCECOEJ": "damageExtra",
+    "HJCIMBGEGIA": "attenuationTag",
+    "EOBMOFPGMLP": "attackTag",
+    "BGPBLBIFCEG": "modifierMixins",
+    "IFOFEDHMHLF": "type",
+    "DCCCAMPGPPD": "limitTime"
+  },
+  "types": {
+    "BJMKIMHMMBD": "ApplyLevelModifier",
+    "CAOJLAOHHDE": "ByTargetGlobalValue",
+    "AJAKLIIJEBA": "ByNot",
+    "CODLAMLJMMJ": "TriggerAttackEvent",
+    "BEOMKCAJJFP": "ConfigAttackSphere",
+    "ALJBCOCLPOO": "DamageByAttackValue",
+    "DMJAIJGGNBD": "ByIsTargetCamp",
+    "GEELEIOBHCD": "RejectAttackMixin"
+  },
+  "field_evidence": [
+    {
+      "raw_key": "LALLGDIJKDE",
+      "old_semantic_key": "onAbilityStart",
+      "witness_count": 4,
+      "reviewed_abilities": [
+        "ElementAbility_Swirl_Electric",
+        "ElementAbility_Swirl_Fire",
+        "ElementAbility_Swirl_Ice",
+        "ElementAbility_Swirl_Water"
+      ],
+      "anchor": {
+        "ability_name": "ElementAbility_Swirl_Water",
+        "old_pointer": "/31/Default/ECFFDLHMCLK",
+        "new_pointer": "/31/Default/LALLGDIJKDE",
+        "old_raw_value_sha256": "3f3a040b7366b4177baf7c8cb467b64cd68848710161b879ad3b61b3ef1a5b01",
+        "new_raw_value_sha256": "c06d977b1c656198f81e6a8869f5ad8af7e963146112b9ec011269aecae34d56",
+        "semantic": "onAbilityStart",
+        "old_parent_body_signature": "431e2f83f3c25aaf06e8b2d7139ede3a90a1d02cb1ab635e05480380b724b18d",
+        "new_parent_body_signature": "431e2f83f3c25aaf06e8b2d7139ede3a90a1d02cb1ab635e05480380b724b18d",
+        "old_parent_sha256": "4da162528403f014ee694a38bbd3eb54c3317a17842d85e5db5c464b365d1d08",
+        "new_parent_sha256": "686904693e19ddda4e59021b7f059e843fa6f81ec88f642c0947945180242ef8"
+      },
+      "holdout_anchor": {
+        "ability_name": "ElementAbility_Swirl_Electric",
+        "old_pointer": "/30/Default/ECFFDLHMCLK",
+        "new_pointer": "/30/Default/LALLGDIJKDE",
+        "old_raw_value_sha256": "a71b07b99c66f97c62408229d71a1ab712cfac7c1b2e6c5b8c165984092a39e5",
+        "new_raw_value_sha256": "30e091234fcfa85a9553233646ec297caa685b99378c7306e2034e37f292f512",
+        "semantic": "onAbilityStart",
+        "old_parent_body_signature": "f741ebdc26958699690245543e967f8ed9104093e61c3b5bf2c1860e33722533",
+        "new_parent_body_signature": "f741ebdc26958699690245543e967f8ed9104093e61c3b5bf2c1860e33722533",
+        "old_parent_sha256": "d73a281bd9148a66f13c552f0594e218e2affd312d9e4ae2f6cc9ad910685def",
+        "new_parent_sha256": "3838518bdc9bb4707dde77904d882ca822348c01320ca0215605ebb3b1d1b872"
+      }
+    },
+    {
+      "raw_key": "JJPDCLCLGPO",
+      "old_semantic_key": "compareType",
+      "witness_count": 4,
+      "reviewed_abilities": [
+        "ElementAbility_Swirl_Electric",
+        "ElementAbility_Swirl_Fire",
+        "ElementAbility_Swirl_Ice",
+        "ElementAbility_Swirl_Water"
+      ],
+      "anchor": {
+        "ability_name": "ElementAbility_Swirl_Water",
+        "old_pointer": "/31/Default/ECFFDLHMCLK/0/IJDGNIIOHLM/0/NJJFOACNFGL",
+        "new_pointer": "/31/Default/LALLGDIJKDE/0/LJFDPHDMOBJ/0/JJPDCLCLGPO",
+        "old_raw_value_sha256": "ba0dc8fff39495d3106f2d7bc3c09dcc15b057ddf01c0e1afa74f8ade52d959c",
+        "new_raw_value_sha256": "ba0dc8fff39495d3106f2d7bc3c09dcc15b057ddf01c0e1afa74f8ade52d959c",
+        "semantic": "compareType",
+        "old_parent_body_signature": "d9d72dabe51eef551d64049db1a88cf3f4d8633e4c74f262a7fb0371bcdcb628",
+        "new_parent_body_signature": "d9d72dabe51eef551d64049db1a88cf3f4d8633e4c74f262a7fb0371bcdcb628",
+        "old_parent_sha256": "86ed1e1f51650e4deeb456d3bd1f44b77b4e0627b02520b8e8ecd374f38d50ab",
+        "new_parent_sha256": "ef1a53a4152ce679c2699cb23c226aea18486b1c6bc60e1e3527a3971ba42872"
+      },
+      "holdout_anchor": {
+        "ability_name": "ElementAbility_Swirl_Electric",
+        "old_pointer": "/30/Default/ECFFDLHMCLK/0/IJDGNIIOHLM/0/NJJFOACNFGL",
+        "new_pointer": "/30/Default/LALLGDIJKDE/0/LJFDPHDMOBJ/0/JJPDCLCLGPO",
+        "old_raw_value_sha256": "ba0dc8fff39495d3106f2d7bc3c09dcc15b057ddf01c0e1afa74f8ade52d959c",
+        "new_raw_value_sha256": "ba0dc8fff39495d3106f2d7bc3c09dcc15b057ddf01c0e1afa74f8ade52d959c",
+        "semantic": "compareType",
+        "old_parent_body_signature": "612465bda94b82f1e33f02ccd16b42342b6eafa5f0fa5c99b6c3c4f04b43f75b",
+        "new_parent_body_signature": "612465bda94b82f1e33f02ccd16b42342b6eafa5f0fa5c99b6c3c4f04b43f75b",
+        "old_parent_sha256": "5ad0ad97d05ddc4e744d90b80454d04450b00453ab09b5b2765ebb7bc157334d",
+        "new_parent_sha256": "3d821dd0ed7f61282f87323889222ad785587d4cb519aeff6e1bc10c8c6b4575"
+      }
+    },
+    {
+      "raw_key": "KLHKFDCNFIG",
+      "old_semantic_key": "key",
+      "witness_count": 8,
+      "reviewed_abilities": [
+        "ElementAbility_Swirl_Electric",
+        "ElementAbility_Swirl_Fire",
+        "ElementAbility_Swirl_Ice",
+        "ElementAbility_Swirl_Water"
+      ],
+      "anchor": {
+        "ability_name": "ElementAbility_Swirl_Water",
+        "old_pointer": "/31/Default/ECFFDLHMCLK/0/IJDGNIIOHLM/0/PEELJBICEHE",
+        "new_pointer": "/31/Default/LALLGDIJKDE/0/LJFDPHDMOBJ/0/KLHKFDCNFIG",
+        "old_raw_value_sha256": "a31845bf75f31d4beed69552e466a1dff1db0d5c94b2be9fcb1c47f416670a80",
+        "new_raw_value_sha256": "a31845bf75f31d4beed69552e466a1dff1db0d5c94b2be9fcb1c47f416670a80",
+        "semantic": "key",
+        "old_parent_body_signature": "d9d72dabe51eef551d64049db1a88cf3f4d8633e4c74f262a7fb0371bcdcb628",
+        "new_parent_body_signature": "d9d72dabe51eef551d64049db1a88cf3f4d8633e4c74f262a7fb0371bcdcb628",
+        "old_parent_sha256": "86ed1e1f51650e4deeb456d3bd1f44b77b4e0627b02520b8e8ecd374f38d50ab",
+        "new_parent_sha256": "ef1a53a4152ce679c2699cb23c226aea18486b1c6bc60e1e3527a3971ba42872"
+      },
+      "holdout_anchor": {
+        "ability_name": "ElementAbility_Swirl_Electric",
+        "old_pointer": "/30/Default/ECFFDLHMCLK/1/IJDGNIIOHLM/0/PEELJBICEHE",
+        "new_pointer": "/30/Default/LALLGDIJKDE/1/LJFDPHDMOBJ/0/KLHKFDCNFIG",
+        "old_raw_value_sha256": "be78cafad3d00cdc4dda5379374be05c1ad99ff5dac7bd078e68d3879f610a53",
+        "new_raw_value_sha256": "be78cafad3d00cdc4dda5379374be05c1ad99ff5dac7bd078e68d3879f610a53",
+        "semantic": "key",
+        "old_parent_body_signature": "6c4e26062a93d078f7ca9b25b46216a52d338e1d30abf1b04bac13dde6c9aac0",
+        "new_parent_body_signature": "6c4e26062a93d078f7ca9b25b46216a52d338e1d30abf1b04bac13dde6c9aac0",
+        "old_parent_sha256": "7adbb7862be43279e179574214587738939496f0e70213667ef7e97773112ad3",
+        "new_parent_sha256": "b027410a6366ada73c4d6957bf0b1c5d8c31f454eb46b22a443ea0c288547cd9"
+      }
+    },
+    {
+      "raw_key": "NDJFACCPAGC",
+      "old_semantic_key": "onAdded",
+      "witness_count": 8,
+      "reviewed_abilities": [
+        "ElementAbility_Swirl_Electric",
+        "ElementAbility_Swirl_Fire",
+        "ElementAbility_Swirl_Ice",
+        "ElementAbility_Swirl_Water"
+      ],
+      "anchor": {
+        "ability_name": "ElementAbility_Swirl_Water",
+        "old_pointer": "/31/Default/GPPBBDEICKP/Swirl_Water/EMGBJJOIENB",
+        "new_pointer": "/31/Default/PGMKHCKJIKM/Swirl_Water/NDJFACCPAGC",
+        "old_raw_value_sha256": "e7114071edc1011f61992d0337cfb95ad1ea6ec84b193fac020835584c4c4b54",
+        "new_raw_value_sha256": "82289365a1b08c69e80dcf2d3831ac33c2355fc9f408b265752b88bcbef9c598",
+        "semantic": "onAdded",
+        "old_parent_body_signature": "5082d8a651a097119575781eade100950bd3626933990281f6aec312e6ba2ee8",
+        "new_parent_body_signature": "5082d8a651a097119575781eade100950bd3626933990281f6aec312e6ba2ee8",
+        "old_parent_sha256": "1611b5aead99e75d4b3cbe70ca0b2cac39dd28e8664fcb72cb7b043f116bea28",
+        "new_parent_sha256": "99cf42e6d7e8e344989610ccdf2a65ddb22eef351ea95a0b66e76a6615dc9ff9"
+      },
+      "holdout_anchor": {
+        "ability_name": "ElementAbility_Swirl_Electric",
+        "old_pointer": "/30/Default/GPPBBDEICKP/Swirl_Electric_Alter/EMGBJJOIENB",
+        "new_pointer": "/30/Default/PGMKHCKJIKM/Swirl_Electric_Alter/NDJFACCPAGC",
+        "old_raw_value_sha256": "4cb3dfc90c83727cdf397ff4abd41c09a437ca21971e371ac3d2580c6744168c",
+        "new_raw_value_sha256": "798f2de490b6c8665f089ad07c9309c4785cae7340fa93028c84016275149e6c",
+        "semantic": "onAdded",
+        "old_parent_body_signature": "dc13230cbb47c4b72932459c8fb23af9d9349d11e09ca07bc5f42fe85454ce45",
+        "new_parent_body_signature": "dc13230cbb47c4b72932459c8fb23af9d9349d11e09ca07bc5f42fe85454ce45",
+        "old_parent_sha256": "6c5930fd1a6550e56a8533eaff1b55f9eb0495d57642fadbf4a570a37c0eeaa2",
+        "new_parent_sha256": "e7621df90a7bac31ef53755ce8ec5269b317d020bba9e5b43183cf983ca91ac8"
+      }
+    },
+    {
+      "raw_key": "LCOCHKLDAPI",
+      "old_semantic_key": "attackEvent",
+      "witness_count": 8,
+      "reviewed_abilities": [
+        "ElementAbility_Swirl_Electric",
+        "ElementAbility_Swirl_Fire",
+        "ElementAbility_Swirl_Ice",
+        "ElementAbility_Swirl_Water"
+      ],
+      "anchor": {
+        "ability_name": "ElementAbility_Swirl_Water",
+        "old_pointer": "/31/Default/GPPBBDEICKP/Swirl_Water/EMGBJJOIENB/1/IDCIIIFMDCM",
+        "new_pointer": "/31/Default/PGMKHCKJIKM/Swirl_Water/NDJFACCPAGC/1/LCOCHKLDAPI",
+        "old_raw_value_sha256": "40f23420b9355c6dac7476f5957bf7df84beffda4207e76c7d85a30cf94d0531",
+        "new_raw_value_sha256": "ed6d8bec7ce4c2f9b8959ed70a36d4ad9cc2208914642d35304c98ca6846e24c",
+        "semantic": "attackEvent",
+        "old_parent_body_signature": "d3a7ebe38c2bd9228c906fe75aed025ce1c5cc79f0c757647f81ba5b47dc3b9b",
+        "new_parent_body_signature": "d3a7ebe38c2bd9228c906fe75aed025ce1c5cc79f0c757647f81ba5b47dc3b9b",
+        "old_parent_sha256": "8d2aefd4f90cd07f95e8d15f1bc4c66fca73fd66050e6e8edb167e6c2f137dba",
+        "new_parent_sha256": "afa6a37d5b42e3a7a101fa612e2e0358d32bb313c05517dfd489a0a3ea48969b"
+      },
+      "holdout_anchor": {
+        "ability_name": "ElementAbility_Swirl_Electric",
+        "old_pointer": "/30/Default/GPPBBDEICKP/Swirl_Electric_Alter/EMGBJJOIENB/1/IDCIIIFMDCM",
+        "new_pointer": "/30/Default/PGMKHCKJIKM/Swirl_Electric_Alter/NDJFACCPAGC/1/LCOCHKLDAPI",
+        "old_raw_value_sha256": "189e9d5f8364747b691e88c7de6d3f560957b4c8be754046b5f21bf448dfe7f9",
+        "new_raw_value_sha256": "aae5517e5e5109e30cd647ab3f0b1880ebe3649043098652166ed36a596dc9fa",
+        "semantic": "attackEvent",
+        "old_parent_body_signature": "ba0522a2224889e192ab7b516c270a5cabd8e2b13ee80aa207f02153d8611236",
+        "new_parent_body_signature": "ba0522a2224889e192ab7b516c270a5cabd8e2b13ee80aa207f02153d8611236",
+        "old_parent_sha256": "5deab270d6b6bf83bc0e5899793acc0110449fa693325bb5afc8fc3bafc7f1d4",
+        "new_parent_sha256": "b8f6e1a8aedefd362a6cee54c2505be2a49300bbf3b20746cac3cca74df86b03"
+      }
+    },
+    {
+      "raw_key": "NEPCKIHEKAN",
+      "old_semantic_key": "attackPattern",
+      "witness_count": 8,
+      "reviewed_abilities": [
+        "ElementAbility_Swirl_Electric",
+        "ElementAbility_Swirl_Fire",
+        "ElementAbility_Swirl_Ice",
+        "ElementAbility_Swirl_Water"
+      ],
+      "anchor": {
+        "ability_name": "ElementAbility_Swirl_Water",
+        "old_pointer": "/31/Default/GPPBBDEICKP/Swirl_Water/EMGBJJOIENB/1/IDCIIIFMDCM/CEIJEFJBMBL",
+        "new_pointer": "/31/Default/PGMKHCKJIKM/Swirl_Water/NDJFACCPAGC/1/LCOCHKLDAPI/NEPCKIHEKAN",
+        "old_raw_value_sha256": "5c71c3977c8f925302a4ef13872290868c2ae1aff169c48fdc6dca021e1a1b87",
+        "new_raw_value_sha256": "ca470d709dbdab781ee75cad868938a7f9c40af05a3e76371d027f0ecdca89ab",
+        "semantic": "attackPattern",
+        "old_parent_body_signature": "893439037e1d05bccd5f7392c9fbe19c9c7f2a3e21b190ce8842d0c86d1856e5",
+        "new_parent_body_signature": "893439037e1d05bccd5f7392c9fbe19c9c7f2a3e21b190ce8842d0c86d1856e5",
+        "old_parent_sha256": "40f23420b9355c6dac7476f5957bf7df84beffda4207e76c7d85a30cf94d0531",
+        "new_parent_sha256": "ed6d8bec7ce4c2f9b8959ed70a36d4ad9cc2208914642d35304c98ca6846e24c"
+      },
+      "holdout_anchor": {
+        "ability_name": "ElementAbility_Swirl_Electric",
+        "old_pointer": "/30/Default/GPPBBDEICKP/Swirl_Electric_Alter/EMGBJJOIENB/1/IDCIIIFMDCM/CEIJEFJBMBL",
+        "new_pointer": "/30/Default/PGMKHCKJIKM/Swirl_Electric_Alter/NDJFACCPAGC/1/LCOCHKLDAPI/NEPCKIHEKAN",
+        "old_raw_value_sha256": "195186780b11bcaa706fe90e45bb957e46412015fefb7cd5e152dcce8c370bfe",
+        "new_raw_value_sha256": "d929f694a71f76d45508efbdaf51223e904a27b8797689abfa5c039143942596",
+        "semantic": "attackPattern",
+        "old_parent_body_signature": "de57c5afaaf33be232d9c0d279fc117c36d9d68e52b114bbbb7e01be8d330121",
+        "new_parent_body_signature": "de57c5afaaf33be232d9c0d279fc117c36d9d68e52b114bbbb7e01be8d330121",
+        "old_parent_sha256": "189e9d5f8364747b691e88c7de6d3f560957b4c8be754046b5f21bf448dfe7f9",
+        "new_parent_sha256": "aae5517e5e5109e30cd647ab3f0b1880ebe3649043098652166ed36a596dc9fa"
+      }
+    },
+    {
+      "raw_key": "CCKFCNPINKB",
+      "old_semantic_key": "radius",
+      "witness_count": 8,
+      "reviewed_abilities": [
+        "ElementAbility_Swirl_Electric",
+        "ElementAbility_Swirl_Fire",
+        "ElementAbility_Swirl_Ice",
+        "ElementAbility_Swirl_Water"
+      ],
+      "anchor": {
+        "ability_name": "ElementAbility_Swirl_Water",
+        "old_pointer": "/31/Default/GPPBBDEICKP/Swirl_Water/EMGBJJOIENB/1/IDCIIIFMDCM/CEIJEFJBMBL/BKCIBHHMGEE",
+        "new_pointer": "/31/Default/PGMKHCKJIKM/Swirl_Water/NDJFACCPAGC/1/LCOCHKLDAPI/NEPCKIHEKAN/CCKFCNPINKB",
+        "old_raw_value_sha256": "e7f6c011776e8db7cd330b54174fd76f7d0216b612387a5ffcfb81e6f0919683",
+        "new_raw_value_sha256": "e7f6c011776e8db7cd330b54174fd76f7d0216b612387a5ffcfb81e6f0919683",
+        "semantic": "radius",
+        "old_parent_body_signature": "bdb7e360b30de7a75bdfa2f7d4644f4635935c854decbdcb3521d6e40ad662d4",
+        "new_parent_body_signature": "bdb7e360b30de7a75bdfa2f7d4644f4635935c854decbdcb3521d6e40ad662d4",
+        "old_parent_sha256": "5c71c3977c8f925302a4ef13872290868c2ae1aff169c48fdc6dca021e1a1b87",
+        "new_parent_sha256": "ca470d709dbdab781ee75cad868938a7f9c40af05a3e76371d027f0ecdca89ab"
+      },
+      "holdout_anchor": {
+        "ability_name": "ElementAbility_Swirl_Electric",
+        "old_pointer": "/30/Default/GPPBBDEICKP/Swirl_Electric_Alter/EMGBJJOIENB/1/IDCIIIFMDCM/CEIJEFJBMBL/BKCIBHHMGEE",
+        "new_pointer": "/30/Default/PGMKHCKJIKM/Swirl_Electric_Alter/NDJFACCPAGC/1/LCOCHKLDAPI/NEPCKIHEKAN/CCKFCNPINKB",
+        "old_raw_value_sha256": "6b51d431df5d7f141cbececcf79edf3dd861c3b4069f0b11661a3eefacbba918",
+        "new_raw_value_sha256": "6b51d431df5d7f141cbececcf79edf3dd861c3b4069f0b11661a3eefacbba918",
+        "semantic": "radius",
+        "old_parent_body_signature": "6456825b3f999ced1c98d36720b6288e052709896273dc9b0ecfba34e034d2d8",
+        "new_parent_body_signature": "6456825b3f999ced1c98d36720b6288e052709896273dc9b0ecfba34e034d2d8",
+        "old_parent_sha256": "195186780b11bcaa706fe90e45bb957e46412015fefb7cd5e152dcce8c370bfe",
+        "new_parent_sha256": "d929f694a71f76d45508efbdaf51223e904a27b8797689abfa5c039143942596"
+      }
+    },
+    {
+      "raw_key": "LONMFMMEPNN",
+      "old_semantic_key": "attackInfo",
+      "witness_count": 16,
+      "reviewed_abilities": [
+        "ElementAbility_Swirl_Electric",
+        "ElementAbility_Swirl_Fire",
+        "ElementAbility_Swirl_Ice",
+        "ElementAbility_Swirl_Water"
+      ],
+      "anchor": {
+        "ability_name": "ElementAbility_Swirl_Water",
+        "old_pointer": "/31/Default/GPPBBDEICKP/Swirl_Water/EMGBJJOIENB/1/IDCIIIFMDCM/LGHDGGJIJOK",
+        "new_pointer": "/31/Default/PGMKHCKJIKM/Swirl_Water/NDJFACCPAGC/1/LCOCHKLDAPI/LONMFMMEPNN",
+        "old_raw_value_sha256": "01a20b9616d9b706ec2ac4868b25569e109c89f5baf09a6172d502ace5494db9",
+        "new_raw_value_sha256": "69d32b6e4bbf35ea47c6ccc806ae81f1b8163953ea4e511bce3cca926a61fe62",
+        "semantic": "attackInfo",
+        "old_parent_body_signature": "893439037e1d05bccd5f7392c9fbe19c9c7f2a3e21b190ce8842d0c86d1856e5",
+        "new_parent_body_signature": "893439037e1d05bccd5f7392c9fbe19c9c7f2a3e21b190ce8842d0c86d1856e5",
+        "old_parent_sha256": "40f23420b9355c6dac7476f5957bf7df84beffda4207e76c7d85a30cf94d0531",
+        "new_parent_sha256": "ed6d8bec7ce4c2f9b8959ed70a36d4ad9cc2208914642d35304c98ca6846e24c"
+      },
+      "holdout_anchor": {
+        "ability_name": "ElementAbility_Swirl_Electric",
+        "old_pointer": "/30/Default/GPPBBDEICKP/Swirl_Electric_Alter/EMGBJJOIENB/2/LGHDGGJIJOK",
+        "new_pointer": "/30/Default/PGMKHCKJIKM/Swirl_Electric_Alter/NDJFACCPAGC/2/LONMFMMEPNN",
+        "old_raw_value_sha256": "44d148cffe3c0abcb8bc651cb3cba8945883c8eae64a3a9f3fe7eab3e067870e",
+        "new_raw_value_sha256": "6cbfee82d1857646df2e0fd47bc3cbd3f48e0988cc5378c0797522d6bf7a166f",
+        "semantic": "attackInfo",
+        "old_parent_body_signature": "436595649c04b24b07e032de47a8cf8c7e3223ddfaa6aacdc3334d4857cda8ad",
+        "new_parent_body_signature": "436595649c04b24b07e032de47a8cf8c7e3223ddfaa6aacdc3334d4857cda8ad",
+        "old_parent_sha256": "36e609bfaa9bae3ba39cde5e681ed956efb2437c617017112e1dc3f07693c086",
+        "new_parent_sha256": "794369fb1421d237abcf06d9effe850008f58ab8ed715c31422ad3a769b8762e"
+      }
+    },
+    {
+      "raw_key": "IHBPPDOIFAL",
+      "old_semantic_key": "attackProperty",
+      "witness_count": 16,
+      "reviewed_abilities": [
+        "ElementAbility_Swirl_Electric",
+        "ElementAbility_Swirl_Fire",
+        "ElementAbility_Swirl_Ice",
+        "ElementAbility_Swirl_Water"
+      ],
+      "anchor": {
+        "ability_name": "ElementAbility_Swirl_Water",
+        "old_pointer": "/31/Default/GPPBBDEICKP/Swirl_Water/EMGBJJOIENB/1/IDCIIIFMDCM/LGHDGGJIJOK/EHKJIDFINEK",
+        "new_pointer": "/31/Default/PGMKHCKJIKM/Swirl_Water/NDJFACCPAGC/1/LCOCHKLDAPI/LONMFMMEPNN/IHBPPDOIFAL",
+        "old_raw_value_sha256": "ad7dbeb3daa9f718a4b962721d7476684c90d54c53d8331fdc359ee3c1812692",
+        "new_raw_value_sha256": "44c20178492cc92da1455e77a5c42073f019e6002f54147bfb302fed297ba7e6",
+        "semantic": "attackProperty",
+        "old_parent_body_signature": "a23de4f094bcfe724f1715b7a88f49e9460eb647a037999e3e1925f7e06ec38b",
+        "new_parent_body_signature": "a23de4f094bcfe724f1715b7a88f49e9460eb647a037999e3e1925f7e06ec38b",
+        "old_parent_sha256": "01a20b9616d9b706ec2ac4868b25569e109c89f5baf09a6172d502ace5494db9",
+        "new_parent_sha256": "69d32b6e4bbf35ea47c6ccc806ae81f1b8163953ea4e511bce3cca926a61fe62"
+      },
+      "holdout_anchor": {
+        "ability_name": "ElementAbility_Swirl_Electric",
+        "old_pointer": "/30/Default/GPPBBDEICKP/Swirl_Electric_Alter/EMGBJJOIENB/2/LGHDGGJIJOK/EHKJIDFINEK",
+        "new_pointer": "/30/Default/PGMKHCKJIKM/Swirl_Electric_Alter/NDJFACCPAGC/2/LONMFMMEPNN/IHBPPDOIFAL",
+        "old_raw_value_sha256": "0c40f0197ae3598f16117d79d2d64be9c8ef6832aa714abdb3c9dcf7b6c6b32e",
+        "new_raw_value_sha256": "994b845b50948cd0fb75bae0a929c6bd7cb04a7b5c1e84eae02f3fb2f221bf08",
+        "semantic": "attackProperty",
+        "old_parent_body_signature": "67049b887200c112e9ce3e83e80c3f8e8a5834a871ecb5a35d2c66a08b591fc1",
+        "new_parent_body_signature": "67049b887200c112e9ce3e83e80c3f8e8a5834a871ecb5a35d2c66a08b591fc1",
+        "old_parent_sha256": "44d148cffe3c0abcb8bc651cb3cba8945883c8eae64a3a9f3fe7eab3e067870e",
+        "new_parent_sha256": "6cbfee82d1857646df2e0fd47bc3cbd3f48e0988cc5378c0797522d6bf7a166f"
+      }
+    },
+    {
+      "raw_key": "JLMAGGHIAEE",
+      "old_semantic_key": "elementType",
+      "witness_count": 16,
+      "reviewed_abilities": [
+        "ElementAbility_Swirl_Electric",
+        "ElementAbility_Swirl_Fire",
+        "ElementAbility_Swirl_Ice",
+        "ElementAbility_Swirl_Water"
+      ],
+      "anchor": {
+        "ability_name": "ElementAbility_Swirl_Water",
+        "old_pointer": "/31/Default/GPPBBDEICKP/Swirl_Water/EMGBJJOIENB/1/IDCIIIFMDCM/LGHDGGJIJOK/EHKJIDFINEK/EPPIDAILPBN",
+        "new_pointer": "/31/Default/PGMKHCKJIKM/Swirl_Water/NDJFACCPAGC/1/LCOCHKLDAPI/LONMFMMEPNN/IHBPPDOIFAL/JLMAGGHIAEE",
+        "old_raw_value_sha256": "04e2fe221ac3b26ea8a04a86a453e2790a325eb5a957a2ef2a1d03be4009d9bc",
+        "new_raw_value_sha256": "04e2fe221ac3b26ea8a04a86a453e2790a325eb5a957a2ef2a1d03be4009d9bc",
+        "semantic": "elementType",
+        "old_parent_body_signature": "640a1a81b4658c0c6e8f3ff98254e1ac38fe6f02c333cc0858f7ddc15853dc71",
+        "new_parent_body_signature": "640a1a81b4658c0c6e8f3ff98254e1ac38fe6f02c333cc0858f7ddc15853dc71",
+        "old_parent_sha256": "ad7dbeb3daa9f718a4b962721d7476684c90d54c53d8331fdc359ee3c1812692",
+        "new_parent_sha256": "44c20178492cc92da1455e77a5c42073f019e6002f54147bfb302fed297ba7e6"
+      },
+      "holdout_anchor": {
+        "ability_name": "ElementAbility_Swirl_Electric",
+        "old_pointer": "/30/Default/GPPBBDEICKP/Swirl_Electric_Alter/EMGBJJOIENB/2/LGHDGGJIJOK/EHKJIDFINEK/EPPIDAILPBN",
+        "new_pointer": "/30/Default/PGMKHCKJIKM/Swirl_Electric_Alter/NDJFACCPAGC/2/LONMFMMEPNN/IHBPPDOIFAL/JLMAGGHIAEE",
+        "old_raw_value_sha256": "fdaef0f6b72182e4d74db7aec2b782e6040f71e6c8613580aab3c1e99441b1d1",
+        "new_raw_value_sha256": "fdaef0f6b72182e4d74db7aec2b782e6040f71e6c8613580aab3c1e99441b1d1",
+        "semantic": "elementType",
+        "old_parent_body_signature": "8f7001ca17b67df58aa621b34f93ac13beb7a9aaa5c7c8a1c6061978a307cc4b",
+        "new_parent_body_signature": "8f7001ca17b67df58aa621b34f93ac13beb7a9aaa5c7c8a1c6061978a307cc4b",
+        "old_parent_sha256": "0c40f0197ae3598f16117d79d2d64be9c8ef6832aa714abdb3c9dcf7b6c6b32e",
+        "new_parent_sha256": "994b845b50948cd0fb75bae0a929c6bd7cb04a7b5c1e84eae02f3fb2f221bf08"
+      }
+    },
+    {
+      "raw_key": "BJNOBFDFNGG",
+      "old_semantic_key": "attenuationGroup",
+      "witness_count": 16,
+      "reviewed_abilities": [
+        "ElementAbility_Swirl_Electric",
+        "ElementAbility_Swirl_Fire",
+        "ElementAbility_Swirl_Ice",
+        "ElementAbility_Swirl_Water"
+      ],
+      "anchor": {
+        "ability_name": "ElementAbility_Swirl_Water",
+        "old_pointer": "/31/Default/GPPBBDEICKP/Swirl_Water/EMGBJJOIENB/1/IDCIIIFMDCM/LGHDGGJIJOK/HGLEEJNPBEB",
+        "new_pointer": "/31/Default/PGMKHCKJIKM/Swirl_Water/NDJFACCPAGC/1/LCOCHKLDAPI/LONMFMMEPNN/BJNOBFDFNGG",
+        "old_raw_value_sha256": "746288da43c1fe9707e62c9551c3e220688d276a4f86c7f5f9a937498d9c6f6d",
+        "new_raw_value_sha256": "746288da43c1fe9707e62c9551c3e220688d276a4f86c7f5f9a937498d9c6f6d",
+        "semantic": "attenuationGroup",
+        "old_parent_body_signature": "a23de4f094bcfe724f1715b7a88f49e9460eb647a037999e3e1925f7e06ec38b",
+        "new_parent_body_signature": "a23de4f094bcfe724f1715b7a88f49e9460eb647a037999e3e1925f7e06ec38b",
+        "old_parent_sha256": "01a20b9616d9b706ec2ac4868b25569e109c89f5baf09a6172d502ace5494db9",
+        "new_parent_sha256": "69d32b6e4bbf35ea47c6ccc806ae81f1b8163953ea4e511bce3cca926a61fe62"
+      },
+      "holdout_anchor": {
+        "ability_name": "ElementAbility_Swirl_Electric",
+        "old_pointer": "/30/Default/GPPBBDEICKP/Swirl_Electric_Alter/EMGBJJOIENB/2/LGHDGGJIJOK/HGLEEJNPBEB",
+        "new_pointer": "/30/Default/PGMKHCKJIKM/Swirl_Electric_Alter/NDJFACCPAGC/2/LONMFMMEPNN/BJNOBFDFNGG",
+        "old_raw_value_sha256": "746288da43c1fe9707e62c9551c3e220688d276a4f86c7f5f9a937498d9c6f6d",
+        "new_raw_value_sha256": "746288da43c1fe9707e62c9551c3e220688d276a4f86c7f5f9a937498d9c6f6d",
+        "semantic": "attenuationGroup",
+        "old_parent_body_signature": "67049b887200c112e9ce3e83e80c3f8e8a5834a871ecb5a35d2c66a08b591fc1",
+        "new_parent_body_signature": "67049b887200c112e9ce3e83e80c3f8e8a5834a871ecb5a35d2c66a08b591fc1",
+        "old_parent_sha256": "44d148cffe3c0abcb8bc651cb3cba8945883c8eae64a3a9f3fe7eab3e067870e",
+        "new_parent_sha256": "6cbfee82d1857646df2e0fd47bc3cbd3f48e0988cc5378c0797522d6bf7a166f"
+      }
+    },
+    {
+      "raw_key": "OGFCMIBOMMM",
+      "old_semantic_key": "targetType",
+      "witness_count": 8,
+      "reviewed_abilities": [
+        "ElementAbility_Swirl_Electric",
+        "ElementAbility_Swirl_Fire",
+        "ElementAbility_Swirl_Ice",
+        "ElementAbility_Swirl_Water"
+      ],
+      "anchor": {
+        "ability_name": "ElementAbility_Swirl_Water",
+        "old_pointer": "/31/Default/GPPBBDEICKP/Swirl_Water/EMGBJJOIENB/1/NMKBOEALDEF",
+        "new_pointer": "/31/Default/PGMKHCKJIKM/Swirl_Water/NDJFACCPAGC/1/OGFCMIBOMMM",
+        "old_raw_value_sha256": "a85a2064566afb2b44000514a9a638d81e20ff0e2260eeaef990d0c69e0163ce",
+        "new_raw_value_sha256": "a85a2064566afb2b44000514a9a638d81e20ff0e2260eeaef990d0c69e0163ce",
+        "semantic": "targetType",
+        "old_parent_body_signature": "d3a7ebe38c2bd9228c906fe75aed025ce1c5cc79f0c757647f81ba5b47dc3b9b",
+        "new_parent_body_signature": "d3a7ebe38c2bd9228c906fe75aed025ce1c5cc79f0c757647f81ba5b47dc3b9b",
+        "old_parent_sha256": "8d2aefd4f90cd07f95e8d15f1bc4c66fca73fd66050e6e8edb167e6c2f137dba",
+        "new_parent_sha256": "afa6a37d5b42e3a7a101fa612e2e0358d32bb313c05517dfd489a0a3ea48969b"
+      },
+      "holdout_anchor": {
+        "ability_name": "ElementAbility_Swirl_Electric",
+        "old_pointer": "/30/Default/GPPBBDEICKP/Swirl_Electric_Alter/EMGBJJOIENB/1/NMKBOEALDEF",
+        "new_pointer": "/30/Default/PGMKHCKJIKM/Swirl_Electric_Alter/NDJFACCPAGC/1/OGFCMIBOMMM",
+        "old_raw_value_sha256": "a85a2064566afb2b44000514a9a638d81e20ff0e2260eeaef990d0c69e0163ce",
+        "new_raw_value_sha256": "a85a2064566afb2b44000514a9a638d81e20ff0e2260eeaef990d0c69e0163ce",
+        "semantic": "targetType",
+        "old_parent_body_signature": "ba0522a2224889e192ab7b516c270a5cabd8e2b13ee80aa207f02153d8611236",
+        "new_parent_body_signature": "ba0522a2224889e192ab7b516c270a5cabd8e2b13ee80aa207f02153d8611236",
+        "old_parent_sha256": "5deab270d6b6bf83bc0e5899793acc0110449fa693325bb5afc8fc3bafc7f1d4",
+        "new_parent_sha256": "b8f6e1a8aedefd362a6cee54c2505be2a49300bbf3b20746cac3cca74df86b03"
+      }
+    },
+    {
+      "raw_key": "CCGMCELKANH",
+      "old_semantic_key": "attacker",
+      "witness_count": 1,
+      "reviewed_abilities": [
+        "ElementAbility_Swirl_Water"
+      ],
+      "anchor": {
+        "ability_name": "ElementAbility_Swirl_Water",
+        "old_pointer": "/31/Default/GPPBBDEICKP/Swirl_Water/EMGBJJOIENB/2/GLBBADIPHFL",
+        "new_pointer": "/31/Default/PGMKHCKJIKM/Swirl_Water/NDJFACCPAGC/2/CCGMCELKANH",
+        "old_raw_value_sha256": "747e524ba0d00c268f3a3d1418638ef5fd94e0ba3e516bfaaa71ec66b522fc5c",
+        "new_raw_value_sha256": "747e524ba0d00c268f3a3d1418638ef5fd94e0ba3e516bfaaa71ec66b522fc5c",
+        "semantic": "attacker",
+        "old_parent_body_signature": "1936ce8eac6e488d973ba6d13b80c6b55e4fe3af299e65caf9c124e353316ea8",
+        "new_parent_body_signature": "1936ce8eac6e488d973ba6d13b80c6b55e4fe3af299e65caf9c124e353316ea8",
+        "old_parent_sha256": "ca0a401a67714000fafc3a5190877cdcc37ac2e40a141145df9d7163fb1a0c04",
+        "new_parent_sha256": "8b6cb48debec928b5fcd513d1eab3eca8726515b547ee8ed7fc7b312667433db"
+      }
+    },
+    {
+      "raw_key": "JKNFJDNBFPG",
+      "old_semantic_key": "campTargetType",
+      "witness_count": 8,
+      "reviewed_abilities": [
+        "ElementAbility_Swirl_Electric",
+        "ElementAbility_Swirl_Fire",
+        "ElementAbility_Swirl_Ice",
+        "ElementAbility_Swirl_Water"
+      ],
+      "anchor": {
+        "ability_name": "ElementAbility_Swirl_Water",
+        "old_pointer": "/31/Default/GPPBBDEICKP/Swirl_Water/EMGBJJOIENB/2/IJDGNIIOHLM/0/BBGMLDFBFFH",
+        "new_pointer": "/31/Default/PGMKHCKJIKM/Swirl_Water/NDJFACCPAGC/2/LJFDPHDMOBJ/0/JKNFJDNBFPG",
+        "old_raw_value_sha256": "a85a2064566afb2b44000514a9a638d81e20ff0e2260eeaef990d0c69e0163ce",
+        "new_raw_value_sha256": "a85a2064566afb2b44000514a9a638d81e20ff0e2260eeaef990d0c69e0163ce",
+        "semantic": "campTargetType",
+        "old_parent_body_signature": "755c849dbe94455e554f1b448ee0748753b6f440a2f8e8499203fa657332405c",
+        "new_parent_body_signature": "755c849dbe94455e554f1b448ee0748753b6f440a2f8e8499203fa657332405c",
+        "old_parent_sha256": "bf19bfcb86ec63a82b9412e749e080b4fd618f6ed7bba62b83d1f6e9ac5b1ea1",
+        "new_parent_sha256": "dd613b6d7869ebf60902a65f352c3af5690c1bc9b4abf1bf3d1a0df234772e44"
+      },
+      "holdout_anchor": {
+        "ability_name": "ElementAbility_Swirl_Electric",
+        "old_pointer": "/30/Default/GPPBBDEICKP/Swirl_Electric_Alter/EMGBJJOIENB/2/IJDGNIIOHLM/0/BBGMLDFBFFH",
+        "new_pointer": "/30/Default/PGMKHCKJIKM/Swirl_Electric_Alter/NDJFACCPAGC/2/LJFDPHDMOBJ/0/JKNFJDNBFPG",
+        "old_raw_value_sha256": "a85a2064566afb2b44000514a9a638d81e20ff0e2260eeaef990d0c69e0163ce",
+        "new_raw_value_sha256": "a85a2064566afb2b44000514a9a638d81e20ff0e2260eeaef990d0c69e0163ce",
+        "semantic": "campTargetType",
+        "old_parent_body_signature": "755c849dbe94455e554f1b448ee0748753b6f440a2f8e8499203fa657332405c",
+        "new_parent_body_signature": "755c849dbe94455e554f1b448ee0748753b6f440a2f8e8499203fa657332405c",
+        "old_parent_sha256": "bf19bfcb86ec63a82b9412e749e080b4fd618f6ed7bba62b83d1f6e9ac5b1ea1",
+        "new_parent_sha256": "dd613b6d7869ebf60902a65f352c3af5690c1bc9b4abf1bf3d1a0df234772e44"
+      }
+    },
+    {
+      "raw_key": "PKJCDAOPENG",
+      "old_semantic_key": "campBaseOn",
+      "witness_count": 8,
+      "reviewed_abilities": [
+        "ElementAbility_Swirl_Electric",
+        "ElementAbility_Swirl_Fire",
+        "ElementAbility_Swirl_Ice",
+        "ElementAbility_Swirl_Water"
+      ],
+      "anchor": {
+        "ability_name": "ElementAbility_Swirl_Water",
+        "old_pointer": "/31/Default/GPPBBDEICKP/Swirl_Water/EMGBJJOIENB/2/IJDGNIIOHLM/0/HMKPLHNHDLB",
+        "new_pointer": "/31/Default/PGMKHCKJIKM/Swirl_Water/NDJFACCPAGC/2/LJFDPHDMOBJ/0/PKJCDAOPENG",
+        "old_raw_value_sha256": "c643461fffb9306d9c2ee3674d5998326932fe9f4baf555c940f1562287a35dc",
+        "new_raw_value_sha256": "c643461fffb9306d9c2ee3674d5998326932fe9f4baf555c940f1562287a35dc",
+        "semantic": "campBaseOn",
+        "old_parent_body_signature": "755c849dbe94455e554f1b448ee0748753b6f440a2f8e8499203fa657332405c",
+        "new_parent_body_signature": "755c849dbe94455e554f1b448ee0748753b6f440a2f8e8499203fa657332405c",
+        "old_parent_sha256": "bf19bfcb86ec63a82b9412e749e080b4fd618f6ed7bba62b83d1f6e9ac5b1ea1",
+        "new_parent_sha256": "dd613b6d7869ebf60902a65f352c3af5690c1bc9b4abf1bf3d1a0df234772e44"
+      },
+      "holdout_anchor": {
+        "ability_name": "ElementAbility_Swirl_Electric",
+        "old_pointer": "/30/Default/GPPBBDEICKP/Swirl_Electric_Alter/EMGBJJOIENB/2/IJDGNIIOHLM/0/HMKPLHNHDLB",
+        "new_pointer": "/30/Default/PGMKHCKJIKM/Swirl_Electric_Alter/NDJFACCPAGC/2/LJFDPHDMOBJ/0/PKJCDAOPENG",
+        "old_raw_value_sha256": "c643461fffb9306d9c2ee3674d5998326932fe9f4baf555c940f1562287a35dc",
+        "new_raw_value_sha256": "c643461fffb9306d9c2ee3674d5998326932fe9f4baf555c940f1562287a35dc",
+        "semantic": "campBaseOn",
+        "old_parent_body_signature": "755c849dbe94455e554f1b448ee0748753b6f440a2f8e8499203fa657332405c",
+        "new_parent_body_signature": "755c849dbe94455e554f1b448ee0748753b6f440a2f8e8499203fa657332405c",
+        "old_parent_sha256": "bf19bfcb86ec63a82b9412e749e080b4fd618f6ed7bba62b83d1f6e9ac5b1ea1",
+        "new_parent_sha256": "dd613b6d7869ebf60902a65f352c3af5690c1bc9b4abf1bf3d1a0df234772e44"
+      }
+    },
+    {
+      "raw_key": "FGADGCECOEJ",
+      "old_semantic_key": "damageExtra",
+      "witness_count": 14,
+      "reviewed_abilities": [
+        "ElementAbility_Swirl_Electric",
+        "ElementAbility_Swirl_Fire",
+        "ElementAbility_Swirl_Ice",
+        "ElementAbility_Swirl_Water"
+      ],
+      "anchor": {
+        "ability_name": "ElementAbility_Swirl_Water",
+        "old_pointer": "/31/Default/GPPBBDEICKP/Swirl_Water/EMGBJJOIENB/2/LGHDGGJIJOK/EHKJIDFINEK/EMILGODPBIG",
+        "new_pointer": "/31/Default/PGMKHCKJIKM/Swirl_Water/NDJFACCPAGC/2/LONMFMMEPNN/IHBPPDOIFAL/FGADGCECOEJ",
+        "old_raw_value_sha256": "20948816b0cc58226893f01ae595898b2373f64abd31a6e5b7cd07d37fa66689",
+        "new_raw_value_sha256": "20948816b0cc58226893f01ae595898b2373f64abd31a6e5b7cd07d37fa66689",
+        "semantic": "damageExtra",
+        "old_parent_body_signature": "cf1467560008246e1a16cba29486b4cabd53aa5a7c461281cc1acda00136faee",
+        "new_parent_body_signature": "cf1467560008246e1a16cba29486b4cabd53aa5a7c461281cc1acda00136faee",
+        "old_parent_sha256": "3cc34f23e6f7ef6eaee16473260d0c1201876c51b1981df100491e01f807f129",
+        "new_parent_sha256": "f4b15c01a5271cb8e7bdafbd7246f70a8f915110948a20ef4654a49b696fbe9c"
+      },
+      "holdout_anchor": {
+        "ability_name": "ElementAbility_Swirl_Electric",
+        "old_pointer": "/30/Default/GPPBBDEICKP/Swirl_Electric_Alter/EMGBJJOIENB/2/LGHDGGJIJOK/EHKJIDFINEK/EMILGODPBIG",
+        "new_pointer": "/30/Default/PGMKHCKJIKM/Swirl_Electric_Alter/NDJFACCPAGC/2/LONMFMMEPNN/IHBPPDOIFAL/FGADGCECOEJ",
+        "old_raw_value_sha256": "ff95e46d52be290315b2aa7007efa9c295d65b2c97738048dd3d420b019129d6",
+        "new_raw_value_sha256": "ff95e46d52be290315b2aa7007efa9c295d65b2c97738048dd3d420b019129d6",
+        "semantic": "damageExtra",
+        "old_parent_body_signature": "8f7001ca17b67df58aa621b34f93ac13beb7a9aaa5c7c8a1c6061978a307cc4b",
+        "new_parent_body_signature": "8f7001ca17b67df58aa621b34f93ac13beb7a9aaa5c7c8a1c6061978a307cc4b",
+        "old_parent_sha256": "0c40f0197ae3598f16117d79d2d64be9c8ef6832aa714abdb3c9dcf7b6c6b32e",
+        "new_parent_sha256": "994b845b50948cd0fb75bae0a929c6bd7cb04a7b5c1e84eae02f3fb2f221bf08"
+      }
+    },
+    {
+      "raw_key": "HJCIMBGEGIA",
+      "old_semantic_key": "attenuationTag",
+      "witness_count": 16,
+      "reviewed_abilities": [
+        "ElementAbility_Swirl_Electric",
+        "ElementAbility_Swirl_Fire",
+        "ElementAbility_Swirl_Ice",
+        "ElementAbility_Swirl_Water"
+      ],
+      "anchor": {
+        "ability_name": "ElementAbility_Swirl_Water",
+        "old_pointer": "/31/Default/GPPBBDEICKP/Swirl_Water/EMGBJJOIENB/2/LGHDGGJIJOK/FHNDLIJJDEA",
+        "new_pointer": "/31/Default/PGMKHCKJIKM/Swirl_Water/NDJFACCPAGC/2/LONMFMMEPNN/HJCIMBGEGIA",
+        "old_raw_value_sha256": "bb7d20b46b8a18670ad0ea28fa67c245d1c87215bdc8f43f667f53d5baf27ad4",
+        "new_raw_value_sha256": "bb7d20b46b8a18670ad0ea28fa67c245d1c87215bdc8f43f667f53d5baf27ad4",
+        "semantic": "attenuationTag",
+        "old_parent_body_signature": "4c8d7048c79979d183b30db52ee911ea1ea0baa588466598d915bd93406b78dc",
+        "new_parent_body_signature": "4c8d7048c79979d183b30db52ee911ea1ea0baa588466598d915bd93406b78dc",
+        "old_parent_sha256": "c836e1768043c3c8d3fa2ed9aeb7990358f4c27d857e6b66b3bd860c7b668cf6",
+        "new_parent_sha256": "070236555831d918bf9512bdd394da7dffb018290cd5626ee3d4486432ec5634"
+      },
+      "holdout_anchor": {
+        "ability_name": "ElementAbility_Swirl_Electric",
+        "old_pointer": "/30/Default/GPPBBDEICKP/Swirl_Electric_Alter/EMGBJJOIENB/2/LGHDGGJIJOK/FHNDLIJJDEA",
+        "new_pointer": "/30/Default/PGMKHCKJIKM/Swirl_Electric_Alter/NDJFACCPAGC/2/LONMFMMEPNN/HJCIMBGEGIA",
+        "old_raw_value_sha256": "d718cc994251083d320e5198443f79e45ebd20a6e06a9dc22f4d28fe2d3dc6c7",
+        "new_raw_value_sha256": "d718cc994251083d320e5198443f79e45ebd20a6e06a9dc22f4d28fe2d3dc6c7",
+        "semantic": "attenuationTag",
+        "old_parent_body_signature": "67049b887200c112e9ce3e83e80c3f8e8a5834a871ecb5a35d2c66a08b591fc1",
+        "new_parent_body_signature": "67049b887200c112e9ce3e83e80c3f8e8a5834a871ecb5a35d2c66a08b591fc1",
+        "old_parent_sha256": "44d148cffe3c0abcb8bc651cb3cba8945883c8eae64a3a9f3fe7eab3e067870e",
+        "new_parent_sha256": "6cbfee82d1857646df2e0fd47bc3cbd3f48e0988cc5378c0797522d6bf7a166f"
+      }
+    },
+    {
+      "raw_key": "EOBMOFPGMLP",
+      "old_semantic_key": "attackTag",
+      "witness_count": 24,
+      "reviewed_abilities": [
+        "ElementAbility_Swirl_Electric",
+        "ElementAbility_Swirl_Fire",
+        "ElementAbility_Swirl_Ice",
+        "ElementAbility_Swirl_Water"
+      ],
+      "anchor": {
+        "ability_name": "ElementAbility_Swirl_Water",
+        "old_pointer": "/31/Default/GPPBBDEICKP/Swirl_Water/EMGBJJOIENB/2/LGHDGGJIJOK/IAFHAPFBBOB",
+        "new_pointer": "/31/Default/PGMKHCKJIKM/Swirl_Water/NDJFACCPAGC/2/LONMFMMEPNN/EOBMOFPGMLP",
+        "old_raw_value_sha256": "e6b921f1afcb40646e3e33af0b31eb07294871c7c7c1b26ab0e21bda2f415641",
+        "new_raw_value_sha256": "e6b921f1afcb40646e3e33af0b31eb07294871c7c7c1b26ab0e21bda2f415641",
+        "semantic": "attackTag",
+        "old_parent_body_signature": "4c8d7048c79979d183b30db52ee911ea1ea0baa588466598d915bd93406b78dc",
+        "new_parent_body_signature": "4c8d7048c79979d183b30db52ee911ea1ea0baa588466598d915bd93406b78dc",
+        "old_parent_sha256": "c836e1768043c3c8d3fa2ed9aeb7990358f4c27d857e6b66b3bd860c7b668cf6",
+        "new_parent_sha256": "070236555831d918bf9512bdd394da7dffb018290cd5626ee3d4486432ec5634"
+      },
+      "holdout_anchor": {
+        "ability_name": "ElementAbility_Swirl_Electric",
+        "old_pointer": "/30/Default/GPPBBDEICKP/Swirl_Electric_Alter/LFIJIMIMBIH/0/IAFHAPFBBOB",
+        "new_pointer": "/30/Default/PGMKHCKJIKM/Swirl_Electric_Alter/BGPBLBIFCEG/0/EOBMOFPGMLP",
+        "old_raw_value_sha256": "d718cc994251083d320e5198443f79e45ebd20a6e06a9dc22f4d28fe2d3dc6c7",
+        "new_raw_value_sha256": "d718cc994251083d320e5198443f79e45ebd20a6e06a9dc22f4d28fe2d3dc6c7",
+        "semantic": "attackTag",
+        "old_parent_body_signature": "e13b9e4b2f796a6f252fcda7347bfdb36be96607732b157fdc1d8505ea564059",
+        "new_parent_body_signature": "e13b9e4b2f796a6f252fcda7347bfdb36be96607732b157fdc1d8505ea564059",
+        "old_parent_sha256": "c8711bd4ce2e2cac1feacd3b0e3a99cd9a820775156ec81471aee3086fad6202",
+        "new_parent_sha256": "f1fb49c9b594375855d32f33e528564e62b6d511f563117e227badc3ceb624ca"
+      }
+    },
+    {
+      "raw_key": "BGPBLBIFCEG",
+      "old_semantic_key": "modifierMixins",
+      "witness_count": 8,
+      "reviewed_abilities": [
+        "ElementAbility_Swirl_Electric",
+        "ElementAbility_Swirl_Fire",
+        "ElementAbility_Swirl_Ice",
+        "ElementAbility_Swirl_Water"
+      ],
+      "anchor": {
+        "ability_name": "ElementAbility_Swirl_Water",
+        "old_pointer": "/31/Default/GPPBBDEICKP/Swirl_Water/LFIJIMIMBIH",
+        "new_pointer": "/31/Default/PGMKHCKJIKM/Swirl_Water/BGPBLBIFCEG",
+        "old_raw_value_sha256": "dbcf1d8f01fe7ee46a9474875600bccada12c0a14176db4df9d94281041f6496",
+        "new_raw_value_sha256": "ba1db929d0db8a5bf7720488083c0841cc7dfc4a928d29e283f81be543f2ae5b",
+        "semantic": "modifierMixins",
+        "old_parent_body_signature": "5082d8a651a097119575781eade100950bd3626933990281f6aec312e6ba2ee8",
+        "new_parent_body_signature": "5082d8a651a097119575781eade100950bd3626933990281f6aec312e6ba2ee8",
+        "old_parent_sha256": "1611b5aead99e75d4b3cbe70ca0b2cac39dd28e8664fcb72cb7b043f116bea28",
+        "new_parent_sha256": "99cf42e6d7e8e344989610ccdf2a65ddb22eef351ea95a0b66e76a6615dc9ff9"
+      },
+      "holdout_anchor": {
+        "ability_name": "ElementAbility_Swirl_Electric",
+        "old_pointer": "/30/Default/GPPBBDEICKP/Swirl_Electric_Alter/LFIJIMIMBIH",
+        "new_pointer": "/30/Default/PGMKHCKJIKM/Swirl_Electric_Alter/BGPBLBIFCEG",
+        "old_raw_value_sha256": "76e1c09317c442bf68073c716cf2c76983a3cfae5e8eb1a0a9e8dd68c6966433",
+        "new_raw_value_sha256": "759a3edb3510821330721ad5e1fcb1b1b2ebf345d3425a39a9bb68fe8396b39a",
+        "semantic": "modifierMixins",
+        "old_parent_body_signature": "dc13230cbb47c4b72932459c8fb23af9d9349d11e09ca07bc5f42fe85454ce45",
+        "new_parent_body_signature": "dc13230cbb47c4b72932459c8fb23af9d9349d11e09ca07bc5f42fe85454ce45",
+        "old_parent_sha256": "6c5930fd1a6550e56a8533eaff1b55f9eb0495d57642fadbf4a570a37c0eeaa2",
+        "new_parent_sha256": "e7621df90a7bac31ef53755ce8ec5269b317d020bba9e5b43183cf983ca91ac8"
+      }
+    },
+    {
+      "raw_key": "IFOFEDHMHLF",
+      "old_semantic_key": "type",
+      "witness_count": 8,
+      "reviewed_abilities": [
+        "ElementAbility_Swirl_Electric",
+        "ElementAbility_Swirl_Fire",
+        "ElementAbility_Swirl_Ice",
+        "ElementAbility_Swirl_Water"
+      ],
+      "anchor": {
+        "ability_name": "ElementAbility_Swirl_Water",
+        "old_pointer": "/31/Default/GPPBBDEICKP/Swirl_Water/LFIJIMIMBIH/0/IELLPMKLAIO",
+        "new_pointer": "/31/Default/PGMKHCKJIKM/Swirl_Water/BGPBLBIFCEG/0/IFOFEDHMHLF",
+        "old_raw_value_sha256": "c5e73f819eb2d4a4ca94b657cdc7a4013d596939f80263afebe20a3438e95268",
+        "new_raw_value_sha256": "c5e73f819eb2d4a4ca94b657cdc7a4013d596939f80263afebe20a3438e95268",
+        "semantic": "type",
+        "old_parent_body_signature": "3a878b980f3b48e1351dc1a9477698b42d68528b25f70baac51a638cf0dbc155",
+        "new_parent_body_signature": "3a878b980f3b48e1351dc1a9477698b42d68528b25f70baac51a638cf0dbc155",
+        "old_parent_sha256": "9f624eb6cdd696e87735748059cc57a989b49fc85477554f03f0cd0024e56b13",
+        "new_parent_sha256": "60fc0a59689a2a5ab8b79404cf9fd5e11fe08522f10ebaaf54d4d9d9a7861b2b"
+      },
+      "holdout_anchor": {
+        "ability_name": "ElementAbility_Swirl_Electric",
+        "old_pointer": "/30/Default/GPPBBDEICKP/Swirl_Electric_Alter/LFIJIMIMBIH/0/IELLPMKLAIO",
+        "new_pointer": "/30/Default/PGMKHCKJIKM/Swirl_Electric_Alter/BGPBLBIFCEG/0/IFOFEDHMHLF",
+        "old_raw_value_sha256": "c5e73f819eb2d4a4ca94b657cdc7a4013d596939f80263afebe20a3438e95268",
+        "new_raw_value_sha256": "c5e73f819eb2d4a4ca94b657cdc7a4013d596939f80263afebe20a3438e95268",
+        "semantic": "type",
+        "old_parent_body_signature": "e13b9e4b2f796a6f252fcda7347bfdb36be96607732b157fdc1d8505ea564059",
+        "new_parent_body_signature": "e13b9e4b2f796a6f252fcda7347bfdb36be96607732b157fdc1d8505ea564059",
+        "old_parent_sha256": "c8711bd4ce2e2cac1feacd3b0e3a99cd9a820775156ec81471aee3086fad6202",
+        "new_parent_sha256": "f1fb49c9b594375855d32f33e528564e62b6d511f563117e227badc3ceb624ca"
+      }
+    },
+    {
+      "raw_key": "DCCCAMPGPPD",
+      "old_semantic_key": "limitTime",
+      "witness_count": 8,
+      "reviewed_abilities": [
+        "ElementAbility_Swirl_Electric",
+        "ElementAbility_Swirl_Fire",
+        "ElementAbility_Swirl_Ice",
+        "ElementAbility_Swirl_Water"
+      ],
+      "anchor": {
+        "ability_name": "ElementAbility_Swirl_Water",
+        "old_pointer": "/31/Default/GPPBBDEICKP/Swirl_Water/LFIJIMIMBIH/0/NNIMBKJLFNL",
+        "new_pointer": "/31/Default/PGMKHCKJIKM/Swirl_Water/BGPBLBIFCEG/0/DCCCAMPGPPD",
+        "old_raw_value_sha256": "78263e2326125e2c418da6972f3dc0e1507527b0c4993202abb125a98b81079e",
+        "new_raw_value_sha256": "78263e2326125e2c418da6972f3dc0e1507527b0c4993202abb125a98b81079e",
+        "semantic": "limitTime",
+        "old_parent_body_signature": "3a878b980f3b48e1351dc1a9477698b42d68528b25f70baac51a638cf0dbc155",
+        "new_parent_body_signature": "3a878b980f3b48e1351dc1a9477698b42d68528b25f70baac51a638cf0dbc155",
+        "old_parent_sha256": "9f624eb6cdd696e87735748059cc57a989b49fc85477554f03f0cd0024e56b13",
+        "new_parent_sha256": "60fc0a59689a2a5ab8b79404cf9fd5e11fe08522f10ebaaf54d4d9d9a7861b2b"
+      },
+      "holdout_anchor": {
+        "ability_name": "ElementAbility_Swirl_Electric",
+        "old_pointer": "/30/Default/GPPBBDEICKP/Swirl_Electric_Alter/LFIJIMIMBIH/0/NNIMBKJLFNL",
+        "new_pointer": "/30/Default/PGMKHCKJIKM/Swirl_Electric_Alter/BGPBLBIFCEG/0/DCCCAMPGPPD",
+        "old_raw_value_sha256": "78263e2326125e2c418da6972f3dc0e1507527b0c4993202abb125a98b81079e",
+        "new_raw_value_sha256": "78263e2326125e2c418da6972f3dc0e1507527b0c4993202abb125a98b81079e",
+        "semantic": "limitTime",
+        "old_parent_body_signature": "e13b9e4b2f796a6f252fcda7347bfdb36be96607732b157fdc1d8505ea564059",
+        "new_parent_body_signature": "e13b9e4b2f796a6f252fcda7347bfdb36be96607732b157fdc1d8505ea564059",
+        "old_parent_sha256": "c8711bd4ce2e2cac1feacd3b0e3a99cd9a820775156ec81471aee3086fad6202",
+        "new_parent_sha256": "f1fb49c9b594375855d32f33e528564e62b6d511f563117e227badc3ceb624ca"
+      }
+    }
+  ],
+  "type_evidence": [
+    {
+      "raw_type": "BJMKIMHMMBD",
+      "old_semantic_type": "ApplyLevelModifier",
+      "witness_count": 8,
+      "reviewed_abilities": [
+        "ElementAbility_Swirl_Electric",
+        "ElementAbility_Swirl_Fire",
+        "ElementAbility_Swirl_Ice",
+        "ElementAbility_Swirl_Water"
+      ],
+      "anchor": {
+        "ability_name": "ElementAbility_Swirl_Water",
+        "old_pointer": "/31/Default/ECFFDLHMCLK/0/$type",
+        "new_pointer": "/31/Default/LALLGDIJKDE/0/$type",
+        "old_raw_value_sha256": "e7f2ffdb752ff0b90f3c31433d38f732700f1102fc0323c06d9759bed4475a7b",
+        "new_raw_value_sha256": "e62b9d5392eb9e21edf9751181eaed303731f5d652cc7340a850334dcb5aeddb",
+        "semantic": "ApplyLevelModifier",
+        "old_parent_body_signature": "2402ea6092a2c0e884d6bfc6d117d941b65995b0df905248971ef76a0ae9d0e0",
+        "new_parent_body_signature": "2402ea6092a2c0e884d6bfc6d117d941b65995b0df905248971ef76a0ae9d0e0",
+        "old_parent_sha256": "1258e1be0b49951565bf44618df23b2f5ae84927cfd574ea8d40a94f76029965",
+        "new_parent_sha256": "0307f8d351c079c1d06edb0f036d580cfdddde94c85572ad523580e03b36f050"
+      },
+      "holdout_anchor": {
+        "ability_name": "ElementAbility_Swirl_Electric",
+        "old_pointer": "/30/Default/ECFFDLHMCLK/1/$type",
+        "new_pointer": "/30/Default/LALLGDIJKDE/1/$type",
+        "old_raw_value_sha256": "e7f2ffdb752ff0b90f3c31433d38f732700f1102fc0323c06d9759bed4475a7b",
+        "new_raw_value_sha256": "e62b9d5392eb9e21edf9751181eaed303731f5d652cc7340a850334dcb5aeddb",
+        "semantic": "ApplyLevelModifier",
+        "old_parent_body_signature": "74b1cdbc7531c2d83fe32046de04a18bcb35452382381cce8d48184d7a7bac92",
+        "new_parent_body_signature": "74b1cdbc7531c2d83fe32046de04a18bcb35452382381cce8d48184d7a7bac92",
+        "old_parent_sha256": "4e3d52657a2a1560aba07930ce9eccc8f083292cc8608b25ec6aaa30991842b3",
+        "new_parent_sha256": "bed4ac6b214d52ef4055974da53136e08683e24cb2f65a55801808834b44fa61"
+      }
+    },
+    {
+      "raw_type": "CAOJLAOHHDE",
+      "old_semantic_type": "ByTargetGlobalValue",
+      "witness_count": 8,
+      "reviewed_abilities": [
+        "ElementAbility_Swirl_Electric",
+        "ElementAbility_Swirl_Fire",
+        "ElementAbility_Swirl_Ice",
+        "ElementAbility_Swirl_Water"
+      ],
+      "anchor": {
+        "ability_name": "ElementAbility_Swirl_Water",
+        "old_pointer": "/31/Default/ECFFDLHMCLK/0/IJDGNIIOHLM/0/$type",
+        "new_pointer": "/31/Default/LALLGDIJKDE/0/LJFDPHDMOBJ/0/$type",
+        "old_raw_value_sha256": "75bfaf1b5d567e56b200eb627fe14c188b01304003f237351bf048b6ee48ee7d",
+        "new_raw_value_sha256": "7d27338159d4de6c3718070123d25a6af5ceb297de9e9aa4a52208fbea36d59d",
+        "semantic": "ByTargetGlobalValue",
+        "old_parent_body_signature": "d9d72dabe51eef551d64049db1a88cf3f4d8633e4c74f262a7fb0371bcdcb628",
+        "new_parent_body_signature": "d9d72dabe51eef551d64049db1a88cf3f4d8633e4c74f262a7fb0371bcdcb628",
+        "old_parent_sha256": "86ed1e1f51650e4deeb456d3bd1f44b77b4e0627b02520b8e8ecd374f38d50ab",
+        "new_parent_sha256": "ef1a53a4152ce679c2699cb23c226aea18486b1c6bc60e1e3527a3971ba42872"
+      },
+      "holdout_anchor": {
+        "ability_name": "ElementAbility_Swirl_Electric",
+        "old_pointer": "/30/Default/ECFFDLHMCLK/1/IJDGNIIOHLM/0/$type",
+        "new_pointer": "/30/Default/LALLGDIJKDE/1/LJFDPHDMOBJ/0/$type",
+        "old_raw_value_sha256": "75bfaf1b5d567e56b200eb627fe14c188b01304003f237351bf048b6ee48ee7d",
+        "new_raw_value_sha256": "7d27338159d4de6c3718070123d25a6af5ceb297de9e9aa4a52208fbea36d59d",
+        "semantic": "ByTargetGlobalValue",
+        "old_parent_body_signature": "6c4e26062a93d078f7ca9b25b46216a52d338e1d30abf1b04bac13dde6c9aac0",
+        "new_parent_body_signature": "6c4e26062a93d078f7ca9b25b46216a52d338e1d30abf1b04bac13dde6c9aac0",
+        "old_parent_sha256": "7adbb7862be43279e179574214587738939496f0e70213667ef7e97773112ad3",
+        "new_parent_sha256": "b027410a6366ada73c4d6957bf0b1c5d8c31f454eb46b22a443ea0c288547cd9"
+      }
+    },
+    {
+      "raw_type": "AJAKLIIJEBA",
+      "old_semantic_type": "ByNot",
+      "witness_count": 8,
+      "reviewed_abilities": [
+        "ElementAbility_Swirl_Electric",
+        "ElementAbility_Swirl_Fire",
+        "ElementAbility_Swirl_Ice",
+        "ElementAbility_Swirl_Water"
+      ],
+      "anchor": {
+        "ability_name": "ElementAbility_Swirl_Water",
+        "old_pointer": "/31/Default/ECFFDLHMCLK/0/IJDGNIIOHLM/1/$type",
+        "new_pointer": "/31/Default/LALLGDIJKDE/0/LJFDPHDMOBJ/1/$type",
+        "old_raw_value_sha256": "3db0aa43115ec2265978a882bf3bd5f45eacbc5ba5a8de4ca6931c8e24c4ef7f",
+        "new_raw_value_sha256": "2a4d9ffd32f580d126fa73d73438e3cc0bff0537b30926d5895349d56f95ee23",
+        "semantic": "ByNot",
+        "old_parent_body_signature": "8d8195a55e05347649c664e68944dc77b72f4f6911df983505a274aa2e0d8492",
+        "new_parent_body_signature": "8d8195a55e05347649c664e68944dc77b72f4f6911df983505a274aa2e0d8492",
+        "old_parent_sha256": "b1ccfd895a681af2a9cd15268b1a8ac60f20a0a3b364eec32cee88eccd16e1a8",
+        "new_parent_sha256": "949da4d56bce120ade467cbff284b72a959026faedb7af179e324c81941d18fe"
+      },
+      "holdout_anchor": {
+        "ability_name": "ElementAbility_Swirl_Electric",
+        "old_pointer": "/30/Default/ECFFDLHMCLK/1/IJDGNIIOHLM/1/$type",
+        "new_pointer": "/30/Default/LALLGDIJKDE/1/LJFDPHDMOBJ/1/$type",
+        "old_raw_value_sha256": "3db0aa43115ec2265978a882bf3bd5f45eacbc5ba5a8de4ca6931c8e24c4ef7f",
+        "new_raw_value_sha256": "2a4d9ffd32f580d126fa73d73438e3cc0bff0537b30926d5895349d56f95ee23",
+        "semantic": "ByNot",
+        "old_parent_body_signature": "8d8195a55e05347649c664e68944dc77b72f4f6911df983505a274aa2e0d8492",
+        "new_parent_body_signature": "8d8195a55e05347649c664e68944dc77b72f4f6911df983505a274aa2e0d8492",
+        "old_parent_sha256": "b1ccfd895a681af2a9cd15268b1a8ac60f20a0a3b364eec32cee88eccd16e1a8",
+        "new_parent_sha256": "949da4d56bce120ade467cbff284b72a959026faedb7af179e324c81941d18fe"
+      }
+    },
+    {
+      "raw_type": "CODLAMLJMMJ",
+      "old_semantic_type": "TriggerAttackEvent",
+      "witness_count": 8,
+      "reviewed_abilities": [
+        "ElementAbility_Swirl_Electric",
+        "ElementAbility_Swirl_Fire",
+        "ElementAbility_Swirl_Ice",
+        "ElementAbility_Swirl_Water"
+      ],
+      "anchor": {
+        "ability_name": "ElementAbility_Swirl_Water",
+        "old_pointer": "/31/Default/GPPBBDEICKP/Swirl_Water/EMGBJJOIENB/1/$type",
+        "new_pointer": "/31/Default/PGMKHCKJIKM/Swirl_Water/NDJFACCPAGC/1/$type",
+        "old_raw_value_sha256": "d49ebaf86b65be3cfc5dc555ec873c0dbcbf314b23ee360546f94a9439068c43",
+        "new_raw_value_sha256": "270f8b2027588da2987ddec86f24be3c79c4050ca5cbb9bd219b77e0f9109317",
+        "semantic": "TriggerAttackEvent",
+        "old_parent_body_signature": "d3a7ebe38c2bd9228c906fe75aed025ce1c5cc79f0c757647f81ba5b47dc3b9b",
+        "new_parent_body_signature": "d3a7ebe38c2bd9228c906fe75aed025ce1c5cc79f0c757647f81ba5b47dc3b9b",
+        "old_parent_sha256": "8d2aefd4f90cd07f95e8d15f1bc4c66fca73fd66050e6e8edb167e6c2f137dba",
+        "new_parent_sha256": "afa6a37d5b42e3a7a101fa612e2e0358d32bb313c05517dfd489a0a3ea48969b"
+      },
+      "holdout_anchor": {
+        "ability_name": "ElementAbility_Swirl_Electric",
+        "old_pointer": "/30/Default/GPPBBDEICKP/Swirl_Electric_Alter/EMGBJJOIENB/1/$type",
+        "new_pointer": "/30/Default/PGMKHCKJIKM/Swirl_Electric_Alter/NDJFACCPAGC/1/$type",
+        "old_raw_value_sha256": "d49ebaf86b65be3cfc5dc555ec873c0dbcbf314b23ee360546f94a9439068c43",
+        "new_raw_value_sha256": "270f8b2027588da2987ddec86f24be3c79c4050ca5cbb9bd219b77e0f9109317",
+        "semantic": "TriggerAttackEvent",
+        "old_parent_body_signature": "ba0522a2224889e192ab7b516c270a5cabd8e2b13ee80aa207f02153d8611236",
+        "new_parent_body_signature": "ba0522a2224889e192ab7b516c270a5cabd8e2b13ee80aa207f02153d8611236",
+        "old_parent_sha256": "5deab270d6b6bf83bc0e5899793acc0110449fa693325bb5afc8fc3bafc7f1d4",
+        "new_parent_sha256": "b8f6e1a8aedefd362a6cee54c2505be2a49300bbf3b20746cac3cca74df86b03"
+      }
+    },
+    {
+      "raw_type": "BEOMKCAJJFP",
+      "old_semantic_type": "ConfigAttackSphere",
+      "witness_count": 8,
+      "reviewed_abilities": [
+        "ElementAbility_Swirl_Electric",
+        "ElementAbility_Swirl_Fire",
+        "ElementAbility_Swirl_Ice",
+        "ElementAbility_Swirl_Water"
+      ],
+      "anchor": {
+        "ability_name": "ElementAbility_Swirl_Water",
+        "old_pointer": "/31/Default/GPPBBDEICKP/Swirl_Water/EMGBJJOIENB/1/IDCIIIFMDCM/CEIJEFJBMBL/$type",
+        "new_pointer": "/31/Default/PGMKHCKJIKM/Swirl_Water/NDJFACCPAGC/1/LCOCHKLDAPI/NEPCKIHEKAN/$type",
+        "old_raw_value_sha256": "de7fa55557c644c3728c1f093b979f39c4a8a5e54b3a3650fed435a4ae06a23d",
+        "new_raw_value_sha256": "cff8aad9107a50f0e6d52daebb0af45aacc997233308a739985b47071f8b63c0",
+        "semantic": "ConfigAttackSphere",
+        "old_parent_body_signature": "bdb7e360b30de7a75bdfa2f7d4644f4635935c854decbdcb3521d6e40ad662d4",
+        "new_parent_body_signature": "bdb7e360b30de7a75bdfa2f7d4644f4635935c854decbdcb3521d6e40ad662d4",
+        "old_parent_sha256": "5c71c3977c8f925302a4ef13872290868c2ae1aff169c48fdc6dca021e1a1b87",
+        "new_parent_sha256": "ca470d709dbdab781ee75cad868938a7f9c40af05a3e76371d027f0ecdca89ab"
+      },
+      "holdout_anchor": {
+        "ability_name": "ElementAbility_Swirl_Electric",
+        "old_pointer": "/30/Default/GPPBBDEICKP/Swirl_Electric_Alter/EMGBJJOIENB/1/IDCIIIFMDCM/CEIJEFJBMBL/$type",
+        "new_pointer": "/30/Default/PGMKHCKJIKM/Swirl_Electric_Alter/NDJFACCPAGC/1/LCOCHKLDAPI/NEPCKIHEKAN/$type",
+        "old_raw_value_sha256": "de7fa55557c644c3728c1f093b979f39c4a8a5e54b3a3650fed435a4ae06a23d",
+        "new_raw_value_sha256": "cff8aad9107a50f0e6d52daebb0af45aacc997233308a739985b47071f8b63c0",
+        "semantic": "ConfigAttackSphere",
+        "old_parent_body_signature": "6456825b3f999ced1c98d36720b6288e052709896273dc9b0ecfba34e034d2d8",
+        "new_parent_body_signature": "6456825b3f999ced1c98d36720b6288e052709896273dc9b0ecfba34e034d2d8",
+        "old_parent_sha256": "195186780b11bcaa706fe90e45bb957e46412015fefb7cd5e152dcce8c370bfe",
+        "new_parent_sha256": "d929f694a71f76d45508efbdaf51223e904a27b8797689abfa5c039143942596"
+      }
+    },
+    {
+      "raw_type": "ALJBCOCLPOO",
+      "old_semantic_type": "DamageByAttackValue",
+      "witness_count": 8,
+      "reviewed_abilities": [
+        "ElementAbility_Swirl_Electric",
+        "ElementAbility_Swirl_Fire",
+        "ElementAbility_Swirl_Ice",
+        "ElementAbility_Swirl_Water"
+      ],
+      "anchor": {
+        "ability_name": "ElementAbility_Swirl_Water",
+        "old_pointer": "/31/Default/GPPBBDEICKP/Swirl_Water/EMGBJJOIENB/2/$type",
+        "new_pointer": "/31/Default/PGMKHCKJIKM/Swirl_Water/NDJFACCPAGC/2/$type",
+        "old_raw_value_sha256": "33aa237ec4d574715a25d977988179456ed19fd703d2dbb054b33ba149a77e1d",
+        "new_raw_value_sha256": "dba18fc9a71401c5d235ee0c5b1f1068b2b997cc2649a28ddb32d5f50410b5ef",
+        "semantic": "DamageByAttackValue",
+        "old_parent_body_signature": "1936ce8eac6e488d973ba6d13b80c6b55e4fe3af299e65caf9c124e353316ea8",
+        "new_parent_body_signature": "1936ce8eac6e488d973ba6d13b80c6b55e4fe3af299e65caf9c124e353316ea8",
+        "old_parent_sha256": "ca0a401a67714000fafc3a5190877cdcc37ac2e40a141145df9d7163fb1a0c04",
+        "new_parent_sha256": "8b6cb48debec928b5fcd513d1eab3eca8726515b547ee8ed7fc7b312667433db"
+      },
+      "holdout_anchor": {
+        "ability_name": "ElementAbility_Swirl_Electric",
+        "old_pointer": "/30/Default/GPPBBDEICKP/Swirl_Electric_Alter/EMGBJJOIENB/2/$type",
+        "new_pointer": "/30/Default/PGMKHCKJIKM/Swirl_Electric_Alter/NDJFACCPAGC/2/$type",
+        "old_raw_value_sha256": "33aa237ec4d574715a25d977988179456ed19fd703d2dbb054b33ba149a77e1d",
+        "new_raw_value_sha256": "dba18fc9a71401c5d235ee0c5b1f1068b2b997cc2649a28ddb32d5f50410b5ef",
+        "semantic": "DamageByAttackValue",
+        "old_parent_body_signature": "436595649c04b24b07e032de47a8cf8c7e3223ddfaa6aacdc3334d4857cda8ad",
+        "new_parent_body_signature": "436595649c04b24b07e032de47a8cf8c7e3223ddfaa6aacdc3334d4857cda8ad",
+        "old_parent_sha256": "36e609bfaa9bae3ba39cde5e681ed956efb2437c617017112e1dc3f07693c086",
+        "new_parent_sha256": "794369fb1421d237abcf06d9effe850008f58ab8ed715c31422ad3a769b8762e"
+      }
+    },
+    {
+      "raw_type": "DMJAIJGGNBD",
+      "old_semantic_type": "ByIsTargetCamp",
+      "witness_count": 8,
+      "reviewed_abilities": [
+        "ElementAbility_Swirl_Electric",
+        "ElementAbility_Swirl_Fire",
+        "ElementAbility_Swirl_Ice",
+        "ElementAbility_Swirl_Water"
+      ],
+      "anchor": {
+        "ability_name": "ElementAbility_Swirl_Water",
+        "old_pointer": "/31/Default/GPPBBDEICKP/Swirl_Water/EMGBJJOIENB/2/IJDGNIIOHLM/0/$type",
+        "new_pointer": "/31/Default/PGMKHCKJIKM/Swirl_Water/NDJFACCPAGC/2/LJFDPHDMOBJ/0/$type",
+        "old_raw_value_sha256": "c1b6eb31a03faf4e99a41d3016ebf525ee4eb470637f0ecd797b9b116e1246a3",
+        "new_raw_value_sha256": "d3184b82229b4cbdda0bb04ff1542dd449a6e7d54914bc2694311a6ce41e3394",
+        "semantic": "ByIsTargetCamp",
+        "old_parent_body_signature": "755c849dbe94455e554f1b448ee0748753b6f440a2f8e8499203fa657332405c",
+        "new_parent_body_signature": "755c849dbe94455e554f1b448ee0748753b6f440a2f8e8499203fa657332405c",
+        "old_parent_sha256": "bf19bfcb86ec63a82b9412e749e080b4fd618f6ed7bba62b83d1f6e9ac5b1ea1",
+        "new_parent_sha256": "dd613b6d7869ebf60902a65f352c3af5690c1bc9b4abf1bf3d1a0df234772e44"
+      },
+      "holdout_anchor": {
+        "ability_name": "ElementAbility_Swirl_Electric",
+        "old_pointer": "/30/Default/GPPBBDEICKP/Swirl_Electric_Alter/EMGBJJOIENB/2/IJDGNIIOHLM/0/$type",
+        "new_pointer": "/30/Default/PGMKHCKJIKM/Swirl_Electric_Alter/NDJFACCPAGC/2/LJFDPHDMOBJ/0/$type",
+        "old_raw_value_sha256": "c1b6eb31a03faf4e99a41d3016ebf525ee4eb470637f0ecd797b9b116e1246a3",
+        "new_raw_value_sha256": "d3184b82229b4cbdda0bb04ff1542dd449a6e7d54914bc2694311a6ce41e3394",
+        "semantic": "ByIsTargetCamp",
+        "old_parent_body_signature": "755c849dbe94455e554f1b448ee0748753b6f440a2f8e8499203fa657332405c",
+        "new_parent_body_signature": "755c849dbe94455e554f1b448ee0748753b6f440a2f8e8499203fa657332405c",
+        "old_parent_sha256": "bf19bfcb86ec63a82b9412e749e080b4fd618f6ed7bba62b83d1f6e9ac5b1ea1",
+        "new_parent_sha256": "dd613b6d7869ebf60902a65f352c3af5690c1bc9b4abf1bf3d1a0df234772e44"
+      }
+    },
+    {
+      "raw_type": "GEELEIOBHCD",
+      "old_semantic_type": "RejectAttackMixin",
+      "witness_count": 8,
+      "reviewed_abilities": [
+        "ElementAbility_Swirl_Electric",
+        "ElementAbility_Swirl_Fire",
+        "ElementAbility_Swirl_Ice",
+        "ElementAbility_Swirl_Water"
+      ],
+      "anchor": {
+        "ability_name": "ElementAbility_Swirl_Water",
+        "old_pointer": "/31/Default/GPPBBDEICKP/Swirl_Water/LFIJIMIMBIH/0/$type",
+        "new_pointer": "/31/Default/PGMKHCKJIKM/Swirl_Water/BGPBLBIFCEG/0/$type",
+        "old_raw_value_sha256": "68e85ccd705f0f4f813be6b89220ada5c988b155fb3624d3ddff68eb6194d20c",
+        "new_raw_value_sha256": "9490c45238b164e09f0cca44ca62da38b15a7c473b18cbb5c1c8abeeba498cca",
+        "semantic": "RejectAttackMixin",
+        "old_parent_body_signature": "3a878b980f3b48e1351dc1a9477698b42d68528b25f70baac51a638cf0dbc155",
+        "new_parent_body_signature": "3a878b980f3b48e1351dc1a9477698b42d68528b25f70baac51a638cf0dbc155",
+        "old_parent_sha256": "9f624eb6cdd696e87735748059cc57a989b49fc85477554f03f0cd0024e56b13",
+        "new_parent_sha256": "60fc0a59689a2a5ab8b79404cf9fd5e11fe08522f10ebaaf54d4d9d9a7861b2b"
+      },
+      "holdout_anchor": {
+        "ability_name": "ElementAbility_Swirl_Electric",
+        "old_pointer": "/30/Default/GPPBBDEICKP/Swirl_Electric_Alter/LFIJIMIMBIH/0/$type",
+        "new_pointer": "/30/Default/PGMKHCKJIKM/Swirl_Electric_Alter/BGPBLBIFCEG/0/$type",
+        "old_raw_value_sha256": "68e85ccd705f0f4f813be6b89220ada5c988b155fb3624d3ddff68eb6194d20c",
+        "new_raw_value_sha256": "9490c45238b164e09f0cca44ca62da38b15a7c473b18cbb5c1c8abeeba498cca",
+        "semantic": "RejectAttackMixin",
+        "old_parent_body_signature": "e13b9e4b2f796a6f252fcda7347bfdb36be96607732b157fdc1d8505ea564059",
+        "new_parent_body_signature": "e13b9e4b2f796a6f252fcda7347bfdb36be96607732b157fdc1d8505ea564059",
+        "old_parent_sha256": "c8711bd4ce2e2cac1feacd3b0e3a99cd9a820775156ec81471aee3086fad6202",
+        "new_parent_sha256": "f1fb49c9b594375855d32f33e528564e62b6d511f563117e227badc3ceb624ca"
+      }
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "contract": "gui-foundation-production-assets-v1",
+  "assets": [
+    {
+      "name": "gui-foundation-v2.js",
+      "bytes": 16004,
+      "sha256": "994b1002f6df5bf9059b829b7cca5c4bba37fbb5406bef9527811cbf0d799d0e"
+    },
+    {
+      "name": "gui-foundation-tokens.css",
+      "bytes": 18319,
+      "sha256": "e375f0a1c69d11d95b574f9f5423ac1da042faa4c782910011dd44b56b713e4b"
+    }
+  ]
+}

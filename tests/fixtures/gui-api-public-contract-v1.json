@@ -1,0 +1,586 @@
+{
+  "contract": "genshin-gui-api-public-signatures-v1",
+  "source": "2026-11-05 pre-G7 production GuiApi; DSH inherited methods unchanged",
+  "methods": {
+    "get_startup_file": {
+      "arguments": "self",
+      "returns": "dict"
+    },
+    "editor_initialized": {
+      "arguments": "self",
+      "returns": "dict"
+    },
+    "confirm_close": {
+      "arguments": "self",
+      "returns": "dict"
+    },
+    "agent_detect": {
+      "arguments": "self",
+      "returns": null
+    },
+    "agent_connect": {
+      "arguments": "self, connection",
+      "returns": null
+    },
+    "agent_forget_credential": {
+      "arguments": "self, provider_id",
+      "returns": null
+    },
+    "agent_budget_settings": {
+      "arguments": "self",
+      "returns": null
+    },
+    "agent_update_budget_settings": {
+      "arguments": "self, overrides, expected_generation=None",
+      "returns": null
+    },
+    "agent_reset_budget_settings": {
+      "arguments": "self, expected_generation=None",
+      "returns": null
+    },
+    "agent_dsh_settings": {
+      "arguments": "self",
+      "returns": null
+    },
+    "agent_update_dsh_settings": {
+      "arguments": "self, overrides, expected_generation=None",
+      "returns": null
+    },
+    "agent_reset_dsh_settings": {
+      "arguments": "self, expected_generation=None",
+      "returns": null
+    },
+    "agent_start": {
+      "arguments": "self, request",
+      "returns": null
+    },
+    "agent_send": {
+      "arguments": "self, session_id, message, client_request_id=None, current_document=None, workspace=None, current_payload=None",
+      "returns": null
+    },
+    "agent_resume": {
+      "arguments": "self, session_id, current_document, workspace=None, current_payload=None",
+      "returns": null
+    },
+    "agent_poll": {
+      "arguments": "self, session_id, after_seq=0",
+      "returns": null
+    },
+    "agent_wait_events": {
+      "arguments": "self, session_id, after_seq=0, subscription_generation=0, timeout_ms=12000",
+      "returns": null
+    },
+    "agent_turn_outline": {
+      "arguments": "self, session_id, request=None",
+      "returns": null
+    },
+    "agent_search_conversation": {
+      "arguments": "self, session_id, request",
+      "returns": null
+    },
+    "agent_load_turn_window": {
+      "arguments": "self, session_id, request",
+      "returns": null
+    },
+    "agent_telemetry_bundle": {
+      "arguments": "self, session_id, request=None",
+      "returns": null
+    },
+    "agent_workbench_projection": {
+      "arguments": "self, session_id",
+      "returns": null
+    },
+    "agent_submit_question_batch_answer": {
+      "arguments": "self, session_id, request",
+      "returns": null
+    },
+    "agent_enqueue_workbench_inbox": {
+      "arguments": "self, session_id, request",
+      "returns": null
+    },
+    "agent_revise_workbench_inbox": {
+      "arguments": "self, session_id, request",
+      "returns": null
+    },
+    "agent_cancel_workbench_inbox": {
+      "arguments": "self, session_id, request",
+      "returns": null
+    },
+    "agent_reorder_workbench_inbox": {
+      "arguments": "self, session_id, request",
+      "returns": null
+    },
+    "agent_promote_workbench_inbox": {
+      "arguments": "self, session_id, request",
+      "returns": null
+    },
+    "agent_list_document_checkpoints": {
+      "arguments": "self, session_id, offset=0, limit=50",
+      "returns": null
+    },
+    "agent_document_restore_status": {
+      "arguments": "self, session_id",
+      "returns": null
+    },
+    "agent_create_document_checkpoint": {
+      "arguments": "self, session_id, request",
+      "returns": null
+    },
+    "agent_preview_document_checkpoint": {
+      "arguments": "self, session_id, checkpoint_id, from_checkpoint_id=None",
+      "returns": null
+    },
+    "agent_rename_document_checkpoint": {
+      "arguments": "self, session_id, request",
+      "returns": null
+    },
+    "agent_delete_document_checkpoint": {
+      "arguments": "self, session_id, request",
+      "returns": null
+    },
+    "agent_prepare_document_restore": {
+      "arguments": "self, session_id, request",
+      "returns": null
+    },
+    "agent_mark_document_restore_applied": {
+      "arguments": "self, session_id, request",
+      "returns": null
+    },
+    "agent_advance_document_restore_baseline": {
+      "arguments": "self, session_id, request",
+      "returns": null
+    },
+    "agent_commit_document_restore": {
+      "arguments": "self, session_id, request",
+      "returns": null
+    },
+    "agent_abort_document_restore": {
+      "arguments": "self, session_id, request",
+      "returns": null
+    },
+    "agent_mark_document_restore_recovery_required": {
+      "arguments": "self, session_id, request",
+      "returns": null
+    },
+    "agent_reconcile_document_restore": {
+      "arguments": "self, session_id, request",
+      "returns": null
+    },
+    "agent_runtime_status": {
+      "arguments": "self, after_seq=0, subscription_generation=0",
+      "returns": null
+    },
+    "agent_wait_runtime_status": {
+      "arguments": "self, after_seq=0, subscription_generation=0, timeout_ms=12000",
+      "returns": null
+    },
+    "agent_notify_system_resume": {
+      "arguments": "self",
+      "returns": null
+    },
+    "agent_prepare_runtime": {
+      "arguments": "self, purpose='send'",
+      "returns": null
+    },
+    "agent_runtime_prepare_status": {
+      "arguments": "self, operation_id",
+      "returns": null
+    },
+    "agent_wait_runtime_prepare": {
+      "arguments": "self, operation_id, timeout_ms=12000",
+      "returns": null
+    },
+    "agent_cancel_runtime_prepare": {
+      "arguments": "self, operation_id",
+      "returns": null
+    },
+    "agent_stop": {
+      "arguments": "self, session_id",
+      "returns": null
+    },
+    "agent_candidate": {
+      "arguments": "self, session_id",
+      "returns": null
+    },
+    "agent_accept": {
+      "arguments": "self, session_id, kind, document, expected_revision, expected_receipt, baseline_payload=None",
+      "returns": null
+    },
+    "agent_candidate_applied": {
+      "arguments": "self, session_id, kind, document, expected_revision, expected_receipt, workspace=None, actual_payload=None",
+      "returns": null
+    },
+    "agent_abort_candidate_application": {
+      "arguments": "self, session_id, current_document, workspace=None, current_payload=None",
+      "returns": null
+    },
+    "agent_recover_candidate_application": {
+      "arguments": "self, session_id, current_document, workspace=None, current_payload=None, discard_current=False",
+      "returns": null
+    },
+    "agent_recover_last_applied_whiteboard_projection": {
+      "arguments": "self, session_id, current_document, workspace=None, current_payload=None, allow_unsaved_target=False",
+      "returns": null
+    },
+    "agent_candidate_read": {
+      "arguments": "self, session_id, resource, pointer='', offset=0, limit=50",
+      "returns": null
+    },
+    "agent_whiteboard_apply_equipment": {
+      "arguments": "self, session_id, delivery_capability, board",
+      "returns": null
+    },
+    "agent_publish_committed_whiteboard_result": {
+      "arguments": "self, session_id, delivery_capability, output_path, expected_revision, expected_receipt",
+      "returns": null
+    },
+    "agent_resolve_app_action": {
+      "arguments": "self, session_id, action_id, status, workspace=None, message=None",
+      "returns": null
+    },
+    "agent_present_app_action": {
+      "arguments": "self, session_id, action_id, workspace=None",
+      "returns": null
+    },
+    "agent_claim_app_action": {
+      "arguments": "self, session_id, action_id, ui_receipt, workspace=None",
+      "returns": null
+    },
+    "agent_settle_app_action": {
+      "arguments": "self, session_id, action_id, ui_receipt, outcome, workspace=None",
+      "returns": null
+    },
+    "agent_recover_app_action_without_replay": {
+      "arguments": "self, session_id, action_id, ui_receipt",
+      "returns": null
+    },
+    "agent_sessions": {
+      "arguments": "self",
+      "returns": null
+    },
+    "agent_rename_session": {
+      "arguments": "self, session_id, request",
+      "returns": null
+    },
+    "agent_archive_session": {
+      "arguments": "self, session_id, request",
+      "returns": null
+    },
+    "agent_mark_session_read": {
+      "arguments": "self, session_id, request",
+      "returns": null
+    },
+    "agent_forget": {
+      "arguments": "self, session_id",
+      "returns": null
+    },
+    "agent_shutdown": {
+      "arguments": "self",
+      "returns": null
+    },
+    "ping": {
+      "arguments": "self",
+      "returns": "dict"
+    },
+    "open_external_link": {
+      "arguments": "self, url: str",
+      "returns": "dict"
+    },
+    "document_json_call": {
+      "arguments": "self, method: str, args_text: str",
+      "returns": "str"
+    },
+    "check_update": {
+      "arguments": "self",
+      "returns": "dict"
+    },
+    "get_enums": {
+      "arguments": "self",
+      "returns": "dict"
+    },
+    "get_display_catalog": {
+      "arguments": "self, version_line: str='release'",
+      "returns": "dict"
+    },
+    "plan_capabilities": {
+      "arguments": "self",
+      "returns": "dict"
+    },
+    "action_capacity_model_candidates": {
+      "arguments": "self, plan: dict, actor_id: str, ability_ids: list[str], cursor=None, page_size: int=16, view: str='all'",
+      "returns": "dict"
+    },
+    "action_admission_model_candidates": {
+      "arguments": "self, plan: dict, actor_id: str, ability_id: str, cursor=None, page_size: int=16, view: str='all'",
+      "returns": "dict"
+    },
+    "action_admission_preview": {
+      "arguments": "self, plan: dict, request: dict",
+      "returns": "dict"
+    },
+    "whiteboard_action_admission_model_candidates": {
+      "arguments": "self, board: dict, actor_id: str, action_id: str, cursor=None, page_size: int=16, view: str='all'",
+      "returns": "dict"
+    },
+    "whiteboard_action_capacity_model_candidates": {
+      "arguments": "self, board: dict, actor_id: str, action_ids: list[str], cursor=None, page_size: int=16, view: str='all'",
+      "returns": "dict"
+    },
+    "whiteboard_capabilities": {
+      "arguments": "self",
+      "returns": null
+    },
+    "whiteboard_new": {
+      "arguments": "self",
+      "returns": null
+    },
+    "whiteboard_validate": {
+      "arguments": "self, board",
+      "returns": null
+    },
+    "whiteboard_load": {
+      "arguments": "self, path",
+      "returns": null
+    },
+    "whiteboard_save": {
+      "arguments": "self, path, board, expected_file_sha=None",
+      "returns": null
+    },
+    "whiteboard_handoff": {
+      "arguments": "self, board, output_dir",
+      "returns": null
+    },
+    "whiteboard_read_result": {
+      "arguments": "self, board, path",
+      "returns": null
+    },
+    "whiteboard_apply_equipment": {
+      "arguments": "self, board, previous_board=None, previous_result_path=None",
+      "returns": null
+    },
+    "new_plan": {
+      "arguments": "self, template: dict | None=None",
+      "returns": "dict"
+    },
+    "enable_mechanics": {
+      "arguments": "self, plan: dict",
+      "returns": "dict"
+    },
+    "assemble_attack_source": {
+      "arguments": "self, plan: dict, request: dict",
+      "returns": "dict"
+    },
+    "assemble_periodic_source": {
+      "arguments": "self, plan: dict, request: dict",
+      "returns": "dict"
+    },
+    "mechanics_capabilities": {
+      "arguments": "self",
+      "returns": "dict"
+    },
+    "validate_mechanics_model": {
+      "arguments": "self, model: dict",
+      "returns": "dict"
+    },
+    "query_context": {
+      "arguments": "self, request: dict",
+      "returns": "dict"
+    },
+    "query_runtime": {
+      "arguments": "self, request: dict",
+      "returns": "dict"
+    },
+    "export_formula_workbook": {
+      "arguments": "self, plan: dict, name: str='', session_id: str | None=None",
+      "returns": "dict"
+    },
+    "load_plan": {
+      "arguments": "self, path: str",
+      "returns": "dict"
+    },
+    "save_plan": {
+      "arguments": "self, path: str, plan: dict, expected_file_sha: str | None=None",
+      "returns": "dict"
+    },
+    "compose_equipment_plan": {
+      "arguments": "self, plan: dict",
+      "returns": "dict"
+    },
+    "prepare_attribute_review": {
+      "arguments": "self, plan: dict, note: str",
+      "returns": "dict"
+    },
+    "preview_equipment_edit": {
+      "arguments": "self, plan: dict, previous_plan: dict",
+      "returns": "dict"
+    },
+    "apply_data_update": {
+      "arguments": "self, plan: dict",
+      "returns": "dict"
+    },
+    "detach_character": {
+      "arguments": "self, plan: dict, character_id: str",
+      "returns": "dict"
+    },
+    "prepare_character_input": {
+      "arguments": "self, db_character_id: int, level: int=90, version_line: str='release'",
+      "returns": "dict"
+    },
+    "character_panel_basis": {
+      "arguments": "self, db_character_id: int, level: int=90, version_line: str='release', weapon: dict | None=None",
+      "returns": "dict"
+    },
+    "run_plan_calc": {
+      "arguments": "self, plan: dict, session_id: str | None=None",
+      "returns": "dict"
+    },
+    "inspect_calculation_diagnostics": {
+      "arguments": "self, value: dict, request: dict | None=None",
+      "returns": "dict"
+    },
+    "export_plan_result": {
+      "arguments": "self, plan: dict, fmt: str, name: str='', session_id: str | None=None",
+      "returns": "dict"
+    },
+    "export_resolved_plan": {
+      "arguments": "self, plan: dict, path: str",
+      "returns": "dict"
+    },
+    "inspect_plan_file": {
+      "arguments": "self, path: str",
+      "returns": "dict"
+    },
+    "list_plan_details": {
+      "arguments": "self",
+      "returns": "dict"
+    },
+    "list_plans": {
+      "arguments": "self",
+      "returns": "dict"
+    },
+    "new_template": {
+      "arguments": "self",
+      "returns": "dict"
+    },
+    "load_template": {
+      "arguments": "self, path: str",
+      "returns": "dict"
+    },
+    "save_template": {
+      "arguments": "self, path: str, template: dict",
+      "returns": "dict"
+    },
+    "run_calc": {
+      "arguments": "self, template: dict",
+      "returns": "dict"
+    },
+    "rotation_capabilities": {
+      "arguments": "self",
+      "returns": "dict"
+    },
+    "check_rotation": {
+      "arguments": "self, document: dict",
+      "returns": "dict"
+    },
+    "load_rotation_model": {
+      "arguments": "self, path: str",
+      "returns": "dict"
+    },
+    "export_result": {
+      "arguments": "self, result: dict, fmt: str, name: str=''",
+      "returns": "dict"
+    },
+    "db_overview": {
+      "arguments": "self",
+      "returns": "dict"
+    },
+    "db_capabilities": {
+      "arguments": "self",
+      "returns": "dict"
+    },
+    "list_weapons": {
+      "arguments": "self, name='', weapon_type='', rarity=0, catalog_scope='codex', version_line='release', page=1, page_size=50",
+      "returns": "dict"
+    },
+    "weapon_detail": {
+      "arguments": "self, weapon_id, version_line='release'",
+      "returns": "dict"
+    },
+    "weapon_stats": {
+      "arguments": "self, weapon_id, level, ascension, version_line='release'",
+      "returns": "dict"
+    },
+    "list_artifact_sets": {
+      "arguments": "self, name='', rarity=0, catalog_scope='codex', version_line='release', page=1, page_size=50",
+      "returns": "dict"
+    },
+    "artifact_set_detail": {
+      "arguments": "self, set_id, version_line='release'",
+      "returns": "dict"
+    },
+    "list_artifacts": {
+      "arguments": "self, name='', set_id=None, equip_type='', rarity=0, catalog_scope='codex', version_line='release', page=1, page_size=50",
+      "returns": "dict"
+    },
+    "artifact_detail": {
+      "arguments": "self, artifact_id, version_line='release'",
+      "returns": "dict"
+    },
+    "artifact_main_props": {
+      "arguments": "self, depot_id, prop_type='', version_line='release', page=1, page_size=50",
+      "returns": "dict"
+    },
+    "artifact_substats": {
+      "arguments": "self, depot_id, prop_type='', version_line='release', page=1, page_size=50",
+      "returns": "dict"
+    },
+    "artifact_main_stats": {
+      "arguments": "self, artifact_id, level, main_prop_id, version_line='release'",
+      "returns": "dict"
+    },
+    "equip_affix_detail": {
+      "arguments": "self, affix_id, version_line='release'",
+      "returns": "dict"
+    },
+    "check_database_update": {
+      "arguments": "self",
+      "returns": "dict"
+    },
+    "update_database": {
+      "arguments": "self, confirmation_digest: str='', user_confirmed: bool=False",
+      "returns": "dict"
+    },
+    "cancel_database_update": {
+      "arguments": "self",
+      "returns": "dict"
+    },
+    "list_characters": {
+      "arguments": "self, name: str='', element: str='', rarity: int=0, version_line: str='release', page: int=1, page_size: int=50",
+      "returns": "dict"
+    },
+    "character_detail": {
+      "arguments": "self, char_id: int, version_line: str='release'",
+      "returns": "dict"
+    },
+    "search_data": {
+      "arguments": "self, q: str, version_line: str='release'",
+      "returns": "dict"
+    },
+    "list_annotations": {
+      "arguments": "self, target_type: str='', target_id: int=0, status: str='all', version_line: str='release', page: int=1, page_size: int=100",
+      "returns": "dict"
+    },
+    "create_annotation": {
+      "arguments": "self, target_type: str, target_id: int, content: str, category: str='', title: str='', version_line: str | None=None",
+      "returns": "dict"
+    },
+    "update_annotation": {
+      "arguments": "self, ann_id: int, fields: dict",
+      "returns": "dict"
+    },
+    "delete_annotation": {
+      "arguments": "self, ann_id: int",
+      "returns": "dict"
+    }
+  }
+}

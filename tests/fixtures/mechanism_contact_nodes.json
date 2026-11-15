@@ -1,0 +1,1398 @@
+{
+  "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+  "files": [
+    {
+      "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+      "workspace_sha256": "96c506df3e2a2b12871b3a8b381c7851ea5aa7d5eb432b18553255e078ce3803",
+      "git_raw_sha256": "054060efb77e23720b3e79172fabac3e30dfb2c27636d11362c9f5432d1655f8",
+      "old_raw_sha256": "e273a8e4fc5928829bbac96ae61b46003c7bfd95ffe3a24e8b6a080609a409f7",
+      "workspace_git_crlf_only_or_equal": true
+    },
+    {
+      "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Catalyst.json",
+      "workspace_sha256": "3fa4037e5b7672db80b9531799f4f2b9e3d28caf3ff552754a1fb08c8b5e41d5",
+      "git_raw_sha256": "f167ffb0efd4b4c7c15844dc6f9afe039fbc898d511806671979d17275b6eacc",
+      "old_raw_sha256": "ed48b7ef7a44017707ca07346e285cbf932bfff387e0230cedf465da6827adca",
+      "workspace_git_crlf_only_or_equal": true
+    },
+    {
+      "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Sword.json",
+      "workspace_sha256": "721efa01e8043a06d239316038406305f2417afabdc6ecacf962881dd1a9a689",
+      "git_raw_sha256": "cddedea61ce15b2c9c6c10b04243e36cb05b52ab131ba0725377a1faa1a3fa63",
+      "old_raw_sha256": "069f7560445ad61527bbeed6d8ee63f436503732fbcd5f20bf275e99ca53cbf2",
+      "workspace_git_crlf_only_or_equal": true
+    },
+    {
+      "source_path": "BinOutput/Talent/RelicTalents/ConfigAffix_Relic.json",
+      "workspace_sha256": "0937b29eb3f02b07aacdc02abdcf0af460ac7cb5cf951207ff626ba27b4052ba",
+      "git_raw_sha256": "84bf25a63d5c35e00eb829c93946e130099408382560ad4878e31d69afcc822e",
+      "old_raw_sha256": "5f11748a02b7862d3de3d0d564e918d2df3fedd098191990b220c1d580d5ad97",
+      "workspace_git_crlf_only_or_equal": true
+    },
+    {
+      "source_path": "BinOutput/Talent/EquipTalents/ConfigAffix_Catalyst.json",
+      "workspace_sha256": "00dec3b91555177e1e9a738082b8b9603acce3cd1ee0ca809640ce2259d84228",
+      "git_raw_sha256": "f177b89a919d7bf3e281750a800683f468ce31d4da0d0aa320c15a49275597b7",
+      "old_raw_sha256": "d38288d52ba8ed7d9af89098902f6f3915813baa834a9138e4a512074b6f3b72",
+      "workspace_git_crlf_only_or_equal": true
+    },
+    {
+      "source_path": "BinOutput/Talent/EquipTalents/ConfigAffix_Sword.json",
+      "workspace_sha256": "aef6ee7beec2385f78e77e280861ff2e2c774dbfd5f2134567e99310d92195e5",
+      "git_raw_sha256": "7d22ad59097fe20e31f318b316d68495b2ea9ef2e97f58b31a4375b44a35d11c",
+      "old_raw_sha256": "dd274fff65d02868f57335f7d18140ec0f71915a28893f4f7bf34cd61d5358eb",
+      "workspace_git_crlf_only_or_equal": true
+    },
+    {
+      "source_path": "ExcelBinOutput/ReliquarySetExcelConfigData.json",
+      "workspace_sha256": "d915f4a2e353aefc19116b80bf127d578e5c0cdcd505bbe9da1c66c502163f7e",
+      "git_raw_sha256": "711546b4b9d20f9979adb8457631e9121b7752c4241e8a395a7ec19188c14baf",
+      "old_raw_sha256": "5375835e4cd86972c8ec92ae990949e84d1929b90fca0603880306ed2b8881fb",
+      "workspace_git_crlf_only_or_equal": true
+    },
+    {
+      "source_path": "ExcelBinOutput/WeaponExcelConfigData.json",
+      "workspace_sha256": "dec1e4206c09bbe845e2415d7df008dcd6d36d430273687dd279d5a5534e3a5c",
+      "git_raw_sha256": "2e7299b20a31d1dae5e3851e97597f82db362d7bb18c23373eef0ccd01424058",
+      "old_raw_sha256": "008f221c6bd5479303db173f7d419b0833952d243e5d7928f2610c2f4f8fc72d",
+      "workspace_git_crlf_only_or_equal": true
+    },
+    {
+      "source_path": "ExcelBinOutput/EquipAffixExcelConfigData.json",
+      "workspace_sha256": "67cce4b66ecfae8ab20b4567005ff0e2efa76446af1fcc71d99e8a2383def4e6",
+      "git_raw_sha256": "1ab75da49770dc042c2cabc5e7603798de7ef82800ce5519fd02e190362586cf",
+      "old_raw_sha256": "a033acd70ac085421f2c0eb4eb06c0d74b7676b9a652bfe37881ed0680b089b2",
+      "workspace_git_crlf_only_or_equal": true
+    }
+  ],
+  "nodes": [
+    {
+      "id": "setId:15025",
+      "source_path": "ExcelBinOutput/ReliquarySetExcelConfigData.json",
+      "pointer": "/42",
+      "node_sha256": "647cc41c86654011efe65cef82315a9ecb093e10b7f8107a2f38cfe8aaa18ef6",
+      "raw": {
+        "textList": [
+          235670334,
+          2351156819
+        ],
+        "EquipAffixId": 215025,
+        "rankLevel": 5,
+        "bagSortValue": 40,
+        "containsList": [
+          20442,
+          20422,
+          20452,
+          20412,
+          20432
+        ],
+        "setNeedNum": [
+          2,
+          4
+        ],
+        "setIcon": "UI_RelicIcon_15025_4",
+        "setId": 15025,
+        "dungeonGroup": [
+          5052,
+          5053
+        ]
+      },
+      "old_pointer": "/42",
+      "old_node_sha256": "647cc41c86654011efe65cef82315a9ecb093e10b7f8107a2f38cfe8aaa18ef6",
+      "old_raw": {
+        "dungeonGroup": [
+          5052,
+          5053
+        ],
+        "setNeedNum": [
+          2,
+          4
+        ],
+        "setId": 15025,
+        "EquipAffixId": 215025,
+        "textList": [
+          235670334,
+          2351156819
+        ],
+        "containsList": [
+          20442,
+          20422,
+          20452,
+          20412,
+          20432
+        ],
+        "setIcon": "UI_RelicIcon_15025_4",
+        "bagSortValue": 40,
+        "rankLevel": 5
+      },
+      "definition_kind": "excel_record"
+    },
+    {
+      "id": "affixId:2150251",
+      "source_path": "ExcelBinOutput/EquipAffixExcelConfigData.json",
+      "pointer": "/1350",
+      "node_sha256": "6a3a051b35dabc10d0a691fbf0a78ba25730e4ffa88b9176657a2abb4bf60a03",
+      "raw": {
+        "paramList": [
+          0.30000001192092896,
+          8,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "addProps": [
+          {},
+          {},
+          {}
+        ],
+        "openConfig": "Relic_ReactionGrassEnhance",
+        "affixId": 2150251,
+        "id": 215025,
+        "level": 1,
+        "nameTextMapHash": 1675078771,
+        "descTextMapHash": 1381267761
+      },
+      "old_pointer": "/1345",
+      "old_node_sha256": "6a3a051b35dabc10d0a691fbf0a78ba25730e4ffa88b9176657a2abb4bf60a03",
+      "old_raw": {
+        "paramList": [
+          0.30000001192092896,
+          8,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "id": 215025,
+        "addProps": [
+          {},
+          {},
+          {}
+        ],
+        "affixId": 2150251,
+        "descTextMapHash": 1381267761,
+        "openConfig": "Relic_ReactionGrassEnhance",
+        "level": 1,
+        "nameTextMapHash": 1675078771
+      },
+      "definition_kind": "excel_record"
+    },
+    {
+      "id": "talent:Relic_ReactionGrassEnhance",
+      "source_path": "BinOutput/Talent/RelicTalents/ConfigAffix_Relic.json",
+      "pointer": "/Relic_ReactionGrassEnhance",
+      "node_sha256": "00630b4a16994d5da0f334615c3ad5c834d911c1c21b241353ba445dcba889df",
+      "raw": [
+        {
+          "$type": "JPCAAJGEELO",
+          "GBPFBNHLOFD": true,
+          "IIBMNPFLNMJ": "Relic_ReactionGrassEnhance"
+        },
+        {
+          "$type": "BIAHEMMGABC",
+          "GBPFBNHLOFD": true,
+          "IIBMNPFLNMJ": "Relic_ReactionGrassEnhance",
+          "PCABAADALND": "%1",
+          "PEOJKHKHAKL": "ResistDown"
+        },
+        {
+          "$type": "BIAHEMMGABC",
+          "GBPFBNHLOFD": true,
+          "IIBMNPFLNMJ": "Relic_ReactionGrassEnhance",
+          "PCABAADALND": "%2",
+          "PEOJKHKHAKL": "Dura"
+        }
+      ],
+      "old_pointer": "/Relic_ReactionGrassEnhance",
+      "old_node_sha256": "8a994c59519977162c4a456d9a824b309d7dc96888d6613e5b34e4b96e8336c7",
+      "old_raw": [
+        {
+          "$type": "AddAbility",
+          "CLGIKOPIKBC": true,
+          "abilityName": "Relic_ReactionGrassEnhance"
+        },
+        {
+          "$type": "ModifyAbility",
+          "CLGIKOPIKBC": true,
+          "abilityName": "Relic_ReactionGrassEnhance",
+          "paramDelta": "%1",
+          "paramSpecial": "ResistDown"
+        },
+        {
+          "$type": "ModifyAbility",
+          "CLGIKOPIKBC": true,
+          "abilityName": "Relic_ReactionGrassEnhance",
+          "paramDelta": "%2",
+          "paramSpecial": "Dura"
+        }
+      ],
+      "definition_kind": "talent_config"
+    },
+    {
+      "id": "ability:Relic_ReactionGrassEnhance",
+      "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+      "pointer": "/51/Default",
+      "node_sha256": "898a4b08204b533415770c041f6baf98b9b58b00a8aa15c2d29040559c7e19a0",
+      "raw": {
+        "EMGBJJOIENB": [
+          {
+            "$type": "CDANEAFAFKM",
+            "AMOLMPHFPHJ": -1,
+            "ILELAOFJIKJ": true,
+            "LDFBDMNIADI": "UNIQUE_Relic_ReactionGrassEnhance_Handler",
+            "LJFIEGHHLOB": false
+          }
+        ],
+        "GPPBBDEICKP": {
+          "UNIQUE_Relic_ReactionGrassEnhance_ApplyBuff": {
+            "BNEJPEMIMEH": true,
+            "BOCCNJLBFCJ": "DefenseDown",
+            "DBGOKAKAHFP": 100,
+            "DIELNIJPCJJ": true,
+            "DOALDLPNGMF": -1,
+            "ILKPFPGAIGI": {
+              "Actor_GrassSubHurtDelta": [
+                0,
+                1,
+                "ResistDown",
+                "MUL",
+                "SUB"
+              ]
+            },
+            "JPEAFDFPKAN": "Dura",
+            "KFOMCJGGPPC": -1,
+            "PPKOPMBNPJH": true
+          },
+          "UNIQUE_Relic_ReactionGrassEnhance_Handler": {
+            "DBGOKAKAHFP": 100,
+            "DIELNIJPCJJ": true,
+            "DOALDLPNGMF": -1,
+            "KFOMCJGGPPC": -1,
+            "LBABCICJBKE": [
+              {
+                "$type": "PBIOEEHFHFD",
+                "AMOLMPHFPHJ": -1,
+                "BDHBNCEEPPK": "Target",
+                "ILELAOFJIKJ": true,
+                "LJFIEGHHLOB": true,
+                "MJKPCGCAPLK": [
+                  {
+                    "$type": "BKCJECHCDKG",
+                    "BDHBNCEEPPK": "Target",
+                    "FJGEDPNBGCG": -1,
+                    "LJBBKGIFJDB": [
+                      "Monster"
+                    ]
+                  },
+                  {
+                    "$type": "MMPLBPOHMGL",
+                    "BDHBNCEEPPK": "Target",
+                    "NJJFOACNFGL": "NoneOrEqual",
+                    "PEELJBICEHE": "_ANIMAL_ENTITY_TYPE"
+                  },
+                  {
+                    "$type": "DPNJGLIMCHM",
+                    "BDHBNCEEPPK": "Target",
+                    "BFDEHDNLNJH": [
+                      "Elemental_Art",
+                      "Elemental_Art_Hold",
+                      "Elemental_Art_Extra",
+                      "Elemental_Burst"
+                    ]
+                  }
+                ],
+                "MLJNNELMEFL": [
+                  {
+                    "$type": "BINBHGLANKO",
+                    "AMOLMPHFPHJ": -1,
+                    "BDHBNCEEPPK": "Target",
+                    "ILELAOFJIKJ": true,
+                    "LDFBDMNIADI": "UNIQUE_Relic_ReactionGrassEnhance_ApplyBuff",
+                    "LJFIEGHHLOB": true
+                  }
+                ]
+              }
+            ],
+            "PPKOPMBNPJH": true
+          }
+        },
+        "IIBMNPFLNMJ": "Relic_ReactionGrassEnhance",
+        "LOEHLJGBGAC": {
+          "Dura": 0,
+          "ResistDown": 0
+        },
+        "OMAIGDMCJBO": {
+          "DBGOKAKAHFP": 100,
+          "DOALDLPNGMF": -1,
+          "KFOMCJGGPPC": -1,
+          "PPKOPMBNPJH": true
+        },
+        "PODJJJHGAMO": true
+      },
+      "old_pointer": "/51/Default",
+      "old_node_sha256": "213a8cb6d05da61a319b27943060b6e1d2f9f066803c2c5ac91fcd44f44472ae",
+      "old_raw": {
+        "onAdded": [
+          {
+            "$type": "AttachModifier",
+            "actorIceSubHurtDelta": -1,
+            "doOffStage": false,
+            "modifierName": "UNIQUE_Relic_ReactionGrassEnhance_Handler",
+            "canBeHandledOnRecover": true
+          }
+        ],
+        "abilitySpecials": {
+          "Dura": 0,
+          "ResistDown": 0
+        },
+        "isDynamicAbility": true,
+        "abilityName": "Relic_ReactionGrassEnhance",
+        "modifiers": {
+          "UNIQUE_Relic_ReactionGrassEnhance_ApplyBuff": {
+            "duration": "Dura",
+            "elementDurability": 100,
+            "minus_one": -1,
+            "IAKPBCLBNKF": -1,
+            "reApplyModifierOnStateChange": true,
+            "isUnique": true,
+            "isLimitedProperties": true,
+            "properties": {
+              "Actor_GrassSubHurtDelta": [
+                0,
+                1,
+                "ResistDown",
+                "MUL",
+                "SUB"
+              ]
+            },
+            "state": "DefenseDown"
+          },
+          "UNIQUE_Relic_ReactionGrassEnhance_Handler": {
+            "onAttackLanded": [
+              {
+                "$type": "Predicated",
+                "targetPredicates": [
+                  {
+                    "$type": "ByEntityTypes",
+                    "target": "Target",
+                    "value": -1,
+                    "entityTypes": [
+                      "Monster"
+                    ]
+                  },
+                  {
+                    "$type": "ByTargetGlobalValue",
+                    "key": "_ANIMAL_ENTITY_TYPE",
+                    "target": "Target",
+                    "compareType": "NoneOrEqual"
+                  },
+                  {
+                    "$type": "ByAttackTags",
+                    "target": "Target",
+                    "attackTags": [
+                      "Elemental_Art",
+                      "Elemental_Art_Hold",
+                      "Elemental_Art_Extra",
+                      "Elemental_Burst"
+                    ]
+                  }
+                ],
+                "target": "Target",
+                "actorIceSubHurtDelta": -1,
+                "doOffStage": true,
+                "successActions": [
+                  {
+                    "$type": "ApplyModifier",
+                    "target": "Target",
+                    "actorIceSubHurtDelta": -1,
+                    "doOffStage": true,
+                    "modifierName": "UNIQUE_Relic_ReactionGrassEnhance_ApplyBuff",
+                    "canBeHandledOnRecover": true
+                  }
+                ],
+                "canBeHandledOnRecover": true
+              }
+            ],
+            "elementDurability": 100,
+            "minus_one": -1,
+            "IAKPBCLBNKF": -1,
+            "isUnique": true,
+            "isLimitedProperties": true
+          }
+        },
+        "LKLPDIMKLKI": {
+          "elementDurability": 100,
+          "minus_one": -1,
+          "IAKPBCLBNKF": -1,
+          "isLimitedProperties": true
+        }
+      },
+      "definition_kind": "ability"
+    },
+    {
+      "id": "id:11407",
+      "source_path": "ExcelBinOutput/WeaponExcelConfigData.json",
+      "pointer": "/24",
+      "node_sha256": "93a794d0352d5773097ee3a6b7469e7208f496cffeda4e5eecb4a58a52c591d2",
+      "raw": {
+        "skillAffix": [
+          111407,
+          0
+        ],
+        "BCFAMEFLAIA": 191407,
+        "weight": 1,
+        "gadgetId": 50011407,
+        "weaponPromoteId": 11407,
+        "rank": 10,
+        "itemType": "ITEM_WEAPON",
+        "destroyReturnMaterialCount": [
+          0
+        ],
+        "destroyReturnMaterial": [
+          0
+        ],
+        "icon": "UI_EquipIcon_Sword_Exotic",
+        "awakenTexture": "ART/Equip/AvatarEquip/Equip_Sword_Exotic/Equip_Sword_Exotic_OverrideTexture/Equip_Sword_Exotic_02_Tex_Diffuse",
+        "rankLevel": 4,
+        "id": 11407,
+        "awakenCosts": [
+          1000,
+          2000,
+          4000,
+          8000
+        ],
+        "initialLockState": 2,
+        "weaponProp": [
+          {
+            "initValue": 42.4010009765625,
+            "propType": "FIGHT_PROP_BASE_ATTACK",
+            "type": "GROW_CURVE_ATTACK_201"
+          },
+          {
+            "initValue": 36,
+            "propType": "FIGHT_PROP_ELEMENT_MASTERY",
+            "type": "GROW_CURVE_CRITICAL_201"
+          }
+        ],
+        "gachaCardNameHash": "2753762402572902932",
+        "awakenIcon": "UI_EquipIcon_Sword_Exotic_Awaken",
+        "nameTextMapHash": 4103021923,
+        "weaponBaseExp": 50000,
+        "descTextMapHash": 904885541,
+        "awakenLightMapTexture": "ART/Equip/AvatarEquip/Equip_Sword_Exotic/Equip_Sword_Exotic_OverrideTexture/Equip_Sword_Exotic_02_Tex_Lightmap",
+        "weaponType": "WEAPON_SWORD_ONE_HAND"
+      },
+      "old_pointer": "/24",
+      "old_node_sha256": "d6835479717a8b2f3ad8cf6005571e630d318cc8d5bded6339da5fdb8be74d6e",
+      "old_raw": {
+        "rank": 10,
+        "itemType": "ITEM_WEAPON",
+        "gachaCardNameHash": "2753762402572902932",
+        "id": 11407,
+        "weaponBaseExp": 50000,
+        "awakenLightMapTexture": "ART/Equip/AvatarEquip/Equip_Sword_Exotic/Equip_Sword_Exotic_OverrideTexture/Equip_Sword_Exotic_02_Tex_Lightmap",
+        "weight": 1,
+        "awakenTexture": "ART/Equip/AvatarEquip/Equip_Sword_Exotic/Equip_Sword_Exotic_OverrideTexture/Equip_Sword_Exotic_02_Tex_Diffuse",
+        "icon": "UI_EquipIcon_Sword_Exotic",
+        "weaponType": "WEAPON_SWORD_ONE_HAND",
+        "gadgetId": 50011407,
+        "awakenCosts": [
+          1000,
+          2000,
+          4000,
+          8000
+        ],
+        "weaponPromoteId": 11407,
+        "descTextMapHash": 904885541,
+        "initialLockState": 2,
+        "LAJDDBLOPIO": 191407,
+        "destroyReturnMaterialCount": [
+          0
+        ],
+        "awakenIcon": "UI_EquipIcon_Sword_Exotic_Awaken",
+        "rankLevel": 4,
+        "weaponProp": [
+          {
+            "propType": "FIGHT_PROP_BASE_ATTACK",
+            "type": "GROW_CURVE_ATTACK_201",
+            "initValue": 42.4010009765625
+          },
+          {
+            "propType": "FIGHT_PROP_ELEMENT_MASTERY",
+            "type": "GROW_CURVE_CRITICAL_201",
+            "initValue": 36
+          }
+        ],
+        "skillAffix": [
+          111407,
+          0
+        ],
+        "destroyReturnMaterial": [
+          0
+        ],
+        "nameTextMapHash": 4103021923
+      },
+      "definition_kind": "excel_record"
+    },
+    {
+      "id": "affixId:1114070",
+      "source_path": "ExcelBinOutput/EquipAffixExcelConfigData.json",
+      "pointer": "/60",
+      "node_sha256": "d3c4d0a9b25950f5e3be918df9ac4c8b7f34306c96953cf3b02217f428f6d39d",
+      "raw": {
+        "paramList": [
+          0.05999999865889549,
+          1,
+          6,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "addProps": [
+          {},
+          {},
+          {}
+        ],
+        "openConfig": "Weapon_Sword_AttackGainFullDamgeUpBuff",
+        "affixId": 1114070,
+        "id": 111407,
+        "nameTextMapHash": 3208149443,
+        "descTextMapHash": 4042639489
+      },
+      "old_pointer": "/60",
+      "old_node_sha256": "d3c4d0a9b25950f5e3be918df9ac4c8b7f34306c96953cf3b02217f428f6d39d",
+      "old_raw": {
+        "paramList": [
+          0.05999999865889549,
+          1,
+          6,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "id": 111407,
+        "addProps": [
+          {},
+          {},
+          {}
+        ],
+        "affixId": 1114070,
+        "descTextMapHash": 4042639489,
+        "openConfig": "Weapon_Sword_AttackGainFullDamgeUpBuff",
+        "nameTextMapHash": 3208149443
+      },
+      "definition_kind": "excel_record"
+    },
+    {
+      "id": "talent:Weapon_Sword_AttackGainFullDamgeUpBuff",
+      "source_path": "BinOutput/Talent/EquipTalents/ConfigAffix_Sword.json",
+      "pointer": "/Weapon_Sword_AttackGainFullDamgeUpBuff",
+      "node_sha256": "2be347f74c882b3155308705a059991c92520aabbe6db38542e6c2b3e1dc30be",
+      "raw": [
+        {
+          "$type": "JPCAAJGEELO",
+          "GBPFBNHLOFD": true,
+          "IIBMNPFLNMJ": "Weapon_Sword_AttackGainFullDamgeUpBuff"
+        },
+        {
+          "$type": "BIAHEMMGABC",
+          "GBPFBNHLOFD": true,
+          "IIBMNPFLNMJ": "Weapon_Sword_AttackGainFullDamgeUpBuff",
+          "PCABAADALND": "%1",
+          "PEOJKHKHAKL": "Rate"
+        },
+        {
+          "$type": "BIAHEMMGABC",
+          "GBPFBNHLOFD": true,
+          "IIBMNPFLNMJ": "Weapon_Sword_AttackGainFullDamgeUpBuff",
+          "PCABAADALND": "%2",
+          "PEOJKHKHAKL": "Inter_CD"
+        },
+        {
+          "$type": "BIAHEMMGABC",
+          "GBPFBNHLOFD": true,
+          "IIBMNPFLNMJ": "Weapon_Sword_AttackGainFullDamgeUpBuff",
+          "PCABAADALND": "%3",
+          "PEOJKHKHAKL": "Time"
+        }
+      ],
+      "old_pointer": "/Weapon_Sword_AttackGainFullDamgeUpBuff",
+      "old_node_sha256": "a4f7ad24df0dafbd18b5b32b0f4c9c8a600a0745ec0ab877ab1b0e01e3fea2bd",
+      "old_raw": [
+        {
+          "$type": "AddAbility",
+          "CLGIKOPIKBC": true,
+          "abilityName": "Weapon_Sword_AttackGainFullDamgeUpBuff"
+        },
+        {
+          "$type": "ModifyAbility",
+          "CLGIKOPIKBC": true,
+          "abilityName": "Weapon_Sword_AttackGainFullDamgeUpBuff",
+          "paramDelta": "%1",
+          "paramSpecial": "Rate"
+        },
+        {
+          "$type": "ModifyAbility",
+          "CLGIKOPIKBC": true,
+          "abilityName": "Weapon_Sword_AttackGainFullDamgeUpBuff",
+          "paramDelta": "%2",
+          "paramSpecial": "Inter_CD"
+        },
+        {
+          "$type": "ModifyAbility",
+          "CLGIKOPIKBC": true,
+          "abilityName": "Weapon_Sword_AttackGainFullDamgeUpBuff",
+          "paramDelta": "%3",
+          "paramSpecial": "Time"
+        }
+      ],
+      "definition_kind": "talent_config"
+    },
+    {
+      "id": "ability:Weapon_Sword_AttackGainFullDamgeUpBuff",
+      "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Sword.json",
+      "pointer": "/13/Default",
+      "node_sha256": "120d407537d65742cb7297b9a11ca751270d458bb3e8d31c5c731c3f38d90950",
+      "raw": {
+        "EMGBJJOIENB": [
+          {
+            "$type": "CDANEAFAFKM",
+            "AMOLMPHFPHJ": -1,
+            "ILELAOFJIKJ": true,
+            "LDFBDMNIADI": "UNIQUE_Sword_AttackGainFullDamgeUpBuff_Handler",
+            "LJFIEGHHLOB": false
+          }
+        ],
+        "FBHJJNMDIPC": [
+          {
+            "$type": "HEFGCBLOFON",
+            "AMOLMPHFPHJ": -1,
+            "CEFBAEAODEG": true,
+            "KDJEMONNHAM": "_ABILITY_Sword_AttackGainFullDamgeUpBuff",
+            "LBLIPKGCBLK": [
+              0.5,
+              1.5,
+              2.5
+            ],
+            "MIHMOMGJDOL": [
+              "UNIQUE_Sword_AttackGainFullDamgeUpBuff1",
+              "UNIQUE_Sword_AttackGainFullDamgeUpBuff2"
+            ]
+          }
+        ],
+        "GPPBBDEICKP": {
+          "UNIQUE_Sword_AttackGainFullDamgeUpBuff1": {
+            "BNEJPEMIMEH": true,
+            "DBGOKAKAHFP": 100,
+            "DIELNIJPCJJ": true,
+            "DOALDLPNGMF": -1,
+            "EMGBJJOIENB": [
+              {
+                "$type": "PMNJOIIOFJI",
+                "AMOLMPHFPHJ": -1,
+                "BEIMGAKABJN": "Eff_Weapon_Attack_Stack1",
+                "HJIHBAANFLE": 1,
+                "ILELAOFJIKJ": true,
+                "JMMALEJDAEF": -1,
+                "LJFIEGHHLOB": false,
+                "MLFLDPAGADG": {
+                  "EEFLHEKBODJ": {
+                    "BNJLEBLGEKB": 180
+                  },
+                  "GNFICELAKIB": 10,
+                  "HECMDGIAGKM": 2,
+                  "POPNBJAHNFK": {
+                    "ONEHKOHOCBH": 180
+                  }
+                }
+              }
+            ],
+            "ILKPFPGAIGI": {
+              "Actor_AddHurtDelta": "Rate"
+            },
+            "KFOMCJGGPPC": -1,
+            "PPKOPMBNPJH": true
+          },
+          "UNIQUE_Sword_AttackGainFullDamgeUpBuff2": {
+            "BNEJPEMIMEH": true,
+            "DBGOKAKAHFP": 100,
+            "DIELNIJPCJJ": true,
+            "DOALDLPNGMF": -1,
+            "EMGBJJOIENB": [
+              {
+                "$type": "PMNJOIIOFJI",
+                "AMOLMPHFPHJ": -1,
+                "BEIMGAKABJN": "Eff_Weapon_Attack_Stack2",
+                "HJIHBAANFLE": 1,
+                "ILELAOFJIKJ": true,
+                "JMMALEJDAEF": -1,
+                "LJFIEGHHLOB": false,
+                "MLFLDPAGADG": {
+                  "EEFLHEKBODJ": {
+                    "BNJLEBLGEKB": 180
+                  },
+                  "GNFICELAKIB": 10,
+                  "HECMDGIAGKM": 2,
+                  "POPNBJAHNFK": {
+                    "ONEHKOHOCBH": 180
+                  }
+                }
+              }
+            ],
+            "ILKPFPGAIGI": {
+              "Actor_AddHurtDelta": [
+                "Rate",
+                2,
+                "MUL"
+              ]
+            },
+            "KFOMCJGGPPC": -1,
+            "PPKOPMBNPJH": true
+          },
+          "UNIQUE_Sword_AttackGainFullDamgeUpBuff_CD": {
+            "DBGOKAKAHFP": 100,
+            "DIELNIJPCJJ": true,
+            "DOALDLPNGMF": -1,
+            "EMGBJJOIENB": [
+              {
+                "$type": "NENBNMKHMBP",
+                "AMOLMPHFPHJ": -1,
+                "CPOPMBDLLOG": true,
+                "ILELAOFJIKJ": true,
+                "LJFIEGHHLOB": false,
+                "NPADJOJCCBG": 2,
+                "PDIFFCBMGMO": 1,
+                "PEELJBICEHE": "_ABILITY_Sword_AttackGainFullDamgeUpBuff"
+              },
+              {
+                "$type": "BINBHGLANKO",
+                "AMOLMPHFPHJ": -1,
+                "ILELAOFJIKJ": true,
+                "LDFBDMNIADI": "UNIQUE_Sword_AttackGainFullDamgeUpBuff_Timer",
+                "LJFIEGHHLOB": false
+              }
+            ],
+            "GPPCPGHLDHL": "Unique",
+            "JPEAFDFPKAN": "Inter_CD",
+            "KFOMCJGGPPC": -1,
+            "PPKOPMBNPJH": true
+          },
+          "UNIQUE_Sword_AttackGainFullDamgeUpBuff_Handler": {
+            "DBGOKAKAHFP": 100,
+            "DIELNIJPCJJ": true,
+            "DOALDLPNGMF": -1,
+            "KFOMCJGGPPC": -1,
+            "LBABCICJBKE": [
+              {
+                "$type": "PBIOEEHFHFD",
+                "AMOLMPHFPHJ": -1,
+                "BDHBNCEEPPK": "Target",
+                "ILELAOFJIKJ": true,
+                "LJFIEGHHLOB": false,
+                "MJKPCGCAPLK": [
+                  {
+                    "$type": "BKCJECHCDKG",
+                    "BDHBNCEEPPK": "Target",
+                    "FJGEDPNBGCG": -1,
+                    "LJBBKGIFJDB": [
+                      "Monster"
+                    ]
+                  },
+                  {
+                    "$type": "KFIBKGLJJAD",
+                    "BDHBNCEEPPK": "Target",
+                    "IJDGNIIOHLM": [
+                      {
+                        "$type": "LEHABIJBEAO",
+                        "BDHBNCEEPPK": "Target",
+                        "JOFNJODFEDG": "Wind"
+                      },
+                      {
+                        "$type": "LEHABIJBEAO",
+                        "BDHBNCEEPPK": "Target",
+                        "JOFNJODFEDG": "Fire"
+                      },
+                      {
+                        "$type": "LEHABIJBEAO",
+                        "BDHBNCEEPPK": "Target",
+                        "JOFNJODFEDG": "Water"
+                      },
+                      {
+                        "$type": "LEHABIJBEAO",
+                        "BDHBNCEEPPK": "Target",
+                        "JOFNJODFEDG": "Ice"
+                      },
+                      {
+                        "$type": "LEHABIJBEAO",
+                        "BDHBNCEEPPK": "Target",
+                        "JOFNJODFEDG": "Electric"
+                      },
+                      {
+                        "$type": "LEHABIJBEAO",
+                        "BDHBNCEEPPK": "Target",
+                        "JOFNJODFEDG": "Rock"
+                      },
+                      {
+                        "$type": "LEHABIJBEAO",
+                        "BDHBNCEEPPK": "Target",
+                        "JOFNJODFEDG": "Grass"
+                      }
+                    ]
+                  }
+                ],
+                "MLJNNELMEFL": [
+                  {
+                    "$type": "BINBHGLANKO",
+                    "AMOLMPHFPHJ": -1,
+                    "ILELAOFJIKJ": true,
+                    "LDFBDMNIADI": "UNIQUE_Sword_AttackGainFullDamgeUpBuff_CD",
+                    "LJFIEGHHLOB": false
+                  }
+                ]
+              }
+            ],
+            "PPKOPMBNPJH": true
+          },
+          "UNIQUE_Sword_AttackGainFullDamgeUpBuff_Timer": {
+            "DBGOKAKAHFP": 100,
+            "DIELNIJPCJJ": true,
+            "DOALDLPNGMF": -1,
+            "HHDOFNHCIAE": [
+              {
+                "$type": "NENBNMKHMBP",
+                "AMOLMPHFPHJ": -1,
+                "CPOPMBDLLOG": true,
+                "ILELAOFJIKJ": true,
+                "LJFIEGHHLOB": true,
+                "PDIFFCBMGMO": -2,
+                "PEELJBICEHE": "_ABILITY_Sword_AttackGainFullDamgeUpBuff"
+              }
+            ],
+            "JPEAFDFPKAN": "Time",
+            "KFOMCJGGPPC": -1,
+            "PPKOPMBNPJH": true
+          }
+        },
+        "HHDOFNHCIAE": [
+          {
+            "$type": "NENBNMKHMBP",
+            "AMOLMPHFPHJ": -1,
+            "CPOPMBDLLOG": true,
+            "ILELAOFJIKJ": true,
+            "LJFIEGHHLOB": true,
+            "PEELJBICEHE": "_ABILITY_Sword_AttackGainFullDamgeUpBuff"
+          }
+        ],
+        "IIBMNPFLNMJ": "Weapon_Sword_AttackGainFullDamgeUpBuff",
+        "LOEHLJGBGAC": {
+          "Inter_CD": 0,
+          "Rate": 0,
+          "Time": 0
+        },
+        "OMAIGDMCJBO": {
+          "DBGOKAKAHFP": 100,
+          "DOALDLPNGMF": -1,
+          "KFOMCJGGPPC": -1,
+          "PPKOPMBNPJH": true
+        },
+        "PODJJJHGAMO": true
+      },
+      "old_pointer": "/13/Default",
+      "old_node_sha256": "91562250f787b9f2cf3f4f6beffa425ddbffe14af6d40dac480af61be12e8ca2",
+      "old_raw": {
+        "onAdded": [
+          {
+            "$type": "AttachModifier",
+            "actorIceSubHurtDelta": -1,
+            "doOffStage": false,
+            "modifierName": "UNIQUE_Sword_AttackGainFullDamgeUpBuff_Handler",
+            "canBeHandledOnRecover": true
+          }
+        ],
+        "abilitySpecials": {
+          "Inter_CD": 0,
+          "Rate": 0,
+          "Time": 0
+        },
+        "isDynamicAbility": true,
+        "abilityName": "Weapon_Sword_AttackGainFullDamgeUpBuff",
+        "modifiers": {
+          "UNIQUE_Sword_AttackGainFullDamgeUpBuff1": {
+            "onAdded": [
+              {
+                "$type": "AttachEffect",
+                "actorIceSubHurtDelta": -1,
+                "scale": 1,
+                "doOffStage": false,
+                "born": {
+                  "APKLAIJMEIL": {
+                    "HHNLJKNBKPP": 180
+                  },
+                  "value": 10,
+                  "direction": {
+                    "maxAngle": 180
+                  },
+                  "onGroundRaycastUpDist": 2
+                },
+                "effectPattern": "Eff_Weapon_Attack_Stack1",
+                "effectTempleteID": -1,
+                "canBeHandledOnRecover": true
+              }
+            ],
+            "elementDurability": 100,
+            "minus_one": -1,
+            "IAKPBCLBNKF": -1,
+            "reApplyModifierOnStateChange": true,
+            "isUnique": true,
+            "isLimitedProperties": true,
+            "properties": {
+              "Actor_AddHurtDelta": "Rate"
+            }
+          },
+          "UNIQUE_Sword_AttackGainFullDamgeUpBuff2": {
+            "onAdded": [
+              {
+                "$type": "AttachEffect",
+                "actorIceSubHurtDelta": -1,
+                "scale": 1,
+                "doOffStage": false,
+                "born": {
+                  "APKLAIJMEIL": {
+                    "HHNLJKNBKPP": 180
+                  },
+                  "value": 10,
+                  "direction": {
+                    "maxAngle": 180
+                  },
+                  "onGroundRaycastUpDist": 2
+                },
+                "effectPattern": "Eff_Weapon_Attack_Stack2",
+                "effectTempleteID": -1,
+                "canBeHandledOnRecover": true
+              }
+            ],
+            "elementDurability": 100,
+            "minus_one": -1,
+            "IAKPBCLBNKF": -1,
+            "reApplyModifierOnStateChange": true,
+            "isUnique": true,
+            "isLimitedProperties": true,
+            "properties": {
+              "Actor_AddHurtDelta": [
+                "Rate",
+                2,
+                "MUL"
+              ]
+            }
+          },
+          "UNIQUE_Sword_AttackGainFullDamgeUpBuff_CD": {
+            "onAdded": [
+              {
+                "$type": "AddGlobalValue",
+                "key": "_ABILITY_Sword_AttackGainFullDamgeUpBuff",
+                "useLimitRange": true,
+                "value": 1,
+                "actorIceSubHurtDelta": -1,
+                "doOffStage": false,
+                "canBeHandledOnRecover": true,
+                "maxValue": 2
+              },
+              {
+                "$type": "ApplyModifier",
+                "actorIceSubHurtDelta": -1,
+                "doOffStage": false,
+                "modifierName": "UNIQUE_Sword_AttackGainFullDamgeUpBuff_Timer",
+                "canBeHandledOnRecover": true
+              }
+            ],
+            "stacking": "Unique",
+            "duration": "Inter_CD",
+            "elementDurability": 100,
+            "minus_one": -1,
+            "IAKPBCLBNKF": -1,
+            "isUnique": true,
+            "isLimitedProperties": true
+          },
+          "UNIQUE_Sword_AttackGainFullDamgeUpBuff_Handler": {
+            "onAttackLanded": [
+              {
+                "$type": "Predicated",
+                "targetPredicates": [
+                  {
+                    "$type": "ByEntityTypes",
+                    "target": "Target",
+                    "value": -1,
+                    "entityTypes": [
+                      "Monster"
+                    ]
+                  },
+                  {
+                    "$type": "ByAny",
+                    "target": "Target",
+                    "predicates": [
+                      {
+                        "$type": "ByHitElement",
+                        "target": "Target",
+                        "element": "Wind"
+                      },
+                      {
+                        "$type": "ByHitElement",
+                        "target": "Target",
+                        "element": "Fire"
+                      },
+                      {
+                        "$type": "ByHitElement",
+                        "target": "Target",
+                        "element": "Water"
+                      },
+                      {
+                        "$type": "ByHitElement",
+                        "target": "Target",
+                        "element": "Ice"
+                      },
+                      {
+                        "$type": "ByHitElement",
+                        "target": "Target",
+                        "element": "Electric"
+                      },
+                      {
+                        "$type": "ByHitElement",
+                        "target": "Target",
+                        "element": "Rock"
+                      },
+                      {
+                        "$type": "ByHitElement",
+                        "target": "Target",
+                        "element": "Grass"
+                      }
+                    ]
+                  }
+                ],
+                "target": "Target",
+                "actorIceSubHurtDelta": -1,
+                "doOffStage": false,
+                "successActions": [
+                  {
+                    "$type": "ApplyModifier",
+                    "actorIceSubHurtDelta": -1,
+                    "doOffStage": false,
+                    "modifierName": "UNIQUE_Sword_AttackGainFullDamgeUpBuff_CD",
+                    "canBeHandledOnRecover": true
+                  }
+                ],
+                "canBeHandledOnRecover": true
+              }
+            ],
+            "elementDurability": 100,
+            "minus_one": -1,
+            "IAKPBCLBNKF": -1,
+            "isUnique": true,
+            "isLimitedProperties": true
+          },
+          "UNIQUE_Sword_AttackGainFullDamgeUpBuff_Timer": {
+            "duration": "Time",
+            "elementDurability": 100,
+            "minus_one": -1,
+            "onRemoved": [
+              {
+                "$type": "AddGlobalValue",
+                "key": "_ABILITY_Sword_AttackGainFullDamgeUpBuff",
+                "useLimitRange": true,
+                "value": -2,
+                "actorIceSubHurtDelta": -1,
+                "doOffStage": true,
+                "canBeHandledOnRecover": true
+              }
+            ],
+            "IAKPBCLBNKF": -1,
+            "isUnique": true,
+            "isLimitedProperties": true
+          }
+        },
+        "onRemoved": [
+          {
+            "$type": "AddGlobalValue",
+            "key": "_ABILITY_Sword_AttackGainFullDamgeUpBuff",
+            "useLimitRange": true,
+            "actorIceSubHurtDelta": -1,
+            "doOffStage": true,
+            "canBeHandledOnRecover": true
+          }
+        ],
+        "LKLPDIMKLKI": {
+          "elementDurability": 100,
+          "minus_one": -1,
+          "IAKPBCLBNKF": -1,
+          "isLimitedProperties": true
+        },
+        "abilityMixins": [
+          {
+            "$type": "AttachModifierToSelfGlobalValueMixin",
+            "valueSteps": [
+              0.5,
+              1.5,
+              2.5
+            ],
+            "actorIceSubHurtDelta": -1,
+            "modifierNameSteps": [
+              "UNIQUE_Sword_AttackGainFullDamgeUpBuff1",
+              "UNIQUE_Sword_AttackGainFullDamgeUpBuff2"
+            ],
+            "removeAppliedModifier": true,
+            "globalValueKey": "_ABILITY_Sword_AttackGainFullDamgeUpBuff"
+          }
+        ]
+      },
+      "definition_kind": "ability"
+    },
+    {
+      "id": "affixId:1114071",
+      "source_path": "ExcelBinOutput/EquipAffixExcelConfigData.json",
+      "pointer": "/61",
+      "node_sha256": "b32796235685f4e87d4f8df68700bdae69ad68261d8a6018402232e0f4f5dc2a",
+      "raw": {
+        "paramList": [
+          0.07500000298023224,
+          1,
+          6,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "addProps": [
+          {},
+          {},
+          {}
+        ],
+        "openConfig": "Weapon_Sword_AttackGainFullDamgeUpBuff",
+        "affixId": 1114071,
+        "id": 111407,
+        "level": 1,
+        "nameTextMapHash": 1443190843,
+        "descTextMapHash": 215695545
+      },
+      "old_pointer": "/61",
+      "old_node_sha256": "b32796235685f4e87d4f8df68700bdae69ad68261d8a6018402232e0f4f5dc2a",
+      "old_raw": {
+        "paramList": [
+          0.07500000298023224,
+          1,
+          6,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "id": 111407,
+        "addProps": [
+          {},
+          {},
+          {}
+        ],
+        "affixId": 1114071,
+        "descTextMapHash": 215695545,
+        "openConfig": "Weapon_Sword_AttackGainFullDamgeUpBuff",
+        "level": 1,
+        "nameTextMapHash": 1443190843
+      },
+      "definition_kind": "excel_record"
+    },
+    {
+      "id": "affixId:1114072",
+      "source_path": "ExcelBinOutput/EquipAffixExcelConfigData.json",
+      "pointer": "/62",
+      "node_sha256": "c844332bc66041284f67445b43431863ad4c7c7e71423cf2d30ae95f5213fe23",
+      "raw": {
+        "paramList": [
+          0.09000000357627869,
+          1,
+          6,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "addProps": [
+          {},
+          {},
+          {}
+        ],
+        "openConfig": "Weapon_Sword_AttackGainFullDamgeUpBuff",
+        "affixId": 1114072,
+        "id": 111407,
+        "level": 2,
+        "nameTextMapHash": 184857835,
+        "descTextMapHash": 527933905
+      },
+      "old_pointer": "/62",
+      "old_node_sha256": "c844332bc66041284f67445b43431863ad4c7c7e71423cf2d30ae95f5213fe23",
+      "old_raw": {
+        "paramList": [
+          0.09000000357627869,
+          1,
+          6,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "id": 111407,
+        "addProps": [
+          {},
+          {},
+          {}
+        ],
+        "affixId": 1114072,
+        "descTextMapHash": 527933905,
+        "openConfig": "Weapon_Sword_AttackGainFullDamgeUpBuff",
+        "level": 2,
+        "nameTextMapHash": 184857835
+      },
+      "definition_kind": "excel_record"
+    },
+    {
+      "id": "affixId:1114073",
+      "source_path": "ExcelBinOutput/EquipAffixExcelConfigData.json",
+      "pointer": "/63",
+      "node_sha256": "2aeecfd504edfdd49e9ec6bbd3661e4907bc7a7c04db6ee19b71f55c9d2ca8e7",
+      "raw": {
+        "paramList": [
+          0.10499999672174454,
+          1,
+          6,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "addProps": [
+          {},
+          {},
+          {}
+        ],
+        "openConfig": "Weapon_Sword_AttackGainFullDamgeUpBuff",
+        "affixId": 1114073,
+        "id": 111407,
+        "level": 3,
+        "nameTextMapHash": 2831639755,
+        "descTextMapHash": 1988092129
+      },
+      "old_pointer": "/63",
+      "old_node_sha256": "2aeecfd504edfdd49e9ec6bbd3661e4907bc7a7c04db6ee19b71f55c9d2ca8e7",
+      "old_raw": {
+        "paramList": [
+          0.10499999672174454,
+          1,
+          6,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "id": 111407,
+        "addProps": [
+          {},
+          {},
+          {}
+        ],
+        "affixId": 1114073,
+        "descTextMapHash": 1988092129,
+        "openConfig": "Weapon_Sword_AttackGainFullDamgeUpBuff",
+        "level": 3,
+        "nameTextMapHash": 2831639755
+      },
+      "definition_kind": "excel_record"
+    },
+    {
+      "id": "affixId:1114074",
+      "source_path": "ExcelBinOutput/EquipAffixExcelConfigData.json",
+      "pointer": "/64",
+      "node_sha256": "260b4b294b7f4a53adf1c16f8c2888df3f9939c6bef6361a8685a6b869beb4d4",
+      "raw": {
+        "paramList": [
+          0.11999999731779099,
+          1,
+          6,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "addProps": [
+          {},
+          {},
+          {}
+        ],
+        "openConfig": "Weapon_Sword_AttackGainFullDamgeUpBuff",
+        "affixId": 1114074,
+        "id": 111407,
+        "level": 4,
+        "nameTextMapHash": 1485302923,
+        "descTextMapHash": 452775993
+      },
+      "old_pointer": "/64",
+      "old_node_sha256": "260b4b294b7f4a53adf1c16f8c2888df3f9939c6bef6361a8685a6b869beb4d4",
+      "old_raw": {
+        "paramList": [
+          0.11999999731779099,
+          1,
+          6,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "id": 111407,
+        "addProps": [
+          {},
+          {},
+          {}
+        ],
+        "affixId": 1114074,
+        "descTextMapHash": 452775993,
+        "openConfig": "Weapon_Sword_AttackGainFullDamgeUpBuff",
+        "level": 4,
+        "nameTextMapHash": 1485302923
+      },
+      "definition_kind": "excel_record"
+    }
+  ],
+  "reference_implementations": [
+    {
+      "repository": "genshinsim/gcsim",
+      "commit": "8792c73d64439feb74fa139c3b745022952b3dc9",
+      "path": "internal/artifacts/deepwood/deepwood.go",
+      "url": "https://raw.githubusercontent.com/genshinsim/gcsim/8792c73d64439feb74fa139c3b745022952b3dc9/internal/artifacts/deepwood/deepwood.go",
+      "sha256": "84b775e2d75897b32d3db389e4862849c1c5c3fbb1af5732e6d03cf465c7dfb9",
+      "text": "package deepwood\n\nimport (\n\t\"fmt\"\n\n\t\"github.com/genshinsim/gcsim/pkg/core\"\n\t\"github.com/genshinsim/gcsim/pkg/core/attacks\"\n\t\"github.com/genshinsim/gcsim/pkg/core/attributes\"\n\t\"github.com/genshinsim/gcsim/pkg/core/event\"\n\t\"github.com/genshinsim/gcsim/pkg/core/glog\"\n\t\"github.com/genshinsim/gcsim/pkg/core/info\"\n\t\"github.com/genshinsim/gcsim/pkg/core/player/character\"\n\t\"github.com/genshinsim/gcsim/pkg/enemy\"\n\t\"github.com/genshinsim/gcsim/pkg/modifier\"\n)\n\ntype Set struct {\n\tIndex int\n\tCount int\n}\n\nfunc (s *Set) SetIndex(idx int) { s.Index = idx }\nfunc (s *Set) GetCount() int    { return s.Count }\nfunc (s *Set) Init() error      { return nil }\n\n// 2-Piece Bonus: Dendro DMG Bonus +15%.\n// 4-Piece Bonus: After Elemental Skills or Bursts hit opponents, the targets’ Dendro RES will be decreased by 30% for 8s.\n// This effect can be triggered even if the equipping character is not on the field.\nfunc NewSet(c *core.Core, char *character.CharWrapper, count int, param map[string]int) (info.Set, error) {\n\ts := Set{Count: count}\n\n\tif count >= 2 {\n\t\tm := make([]float64, attributes.EndStatType)\n\t\tm[attributes.DendroP] = 0.15\n\t\tchar.AddStatMod(character.StatMod{\n\t\t\tBase:         modifier.NewBase(\"dm-2pc\", -1),\n\t\t\tAffectedStat: attributes.DendroP,\n\t\t\tAmount: func() []float64 {\n\t\t\t\treturn m\n\t\t\t},\n\t\t})\n\t}\n\tif count >= 4 {\n\t\tc.Events.Subscribe(event.OnEnemyDamage, func(args ...any) {\n\t\t\tatk := args[1].(*info.AttackEvent)\n\t\t\tt, ok := args[0].(*enemy.Enemy)\n\t\t\tif !ok {\n\t\t\t\treturn\n\t\t\t}\n\t\t\tif atk.Info.ActorIndex != char.Index() {\n\t\t\t\treturn\n\t\t\t}\n\n\t\t\tif atk.Info.AttackTag != attacks.AttackTagElementalArt && atk.Info.AttackTag != attacks.AttackTagElementalArtHold && atk.Info.AttackTag != attacks.AttackTagElementalBurst {\n\t\t\t\treturn\n\t\t\t}\n\n\t\t\tt.AddResistMod(info.ResistMod{\n\t\t\t\tBase:  modifier.NewBaseWithHitlag(\"dm-4pc\", 8*60),\n\t\t\t\tEle:   attributes.Dendro,\n\t\t\t\tValue: -0.3,\n\t\t\t})\n\t\t\tc.Log.NewEvent(\"dm 4pc proc\", glog.LogArtifactEvent, char.Index()).Write(\"char\", char.Index())\n\t\t}, fmt.Sprintf(\"dm-4pc-%v\", char.Base.Key.String()))\n\t}\n\n\treturn &s, nil\n}\n",
+      "evidence_class": "primary_reference_implementation_not_game_execution"
+    },
+    {
+      "repository": "genshinsim/gcsim",
+      "commit": "8792c73d64439feb74fa139c3b745022952b3dc9",
+      "path": "internal/weapons/sword/ironsting/ironsting.go",
+      "url": "https://raw.githubusercontent.com/genshinsim/gcsim/8792c73d64439feb74fa139c3b745022952b3dc9/internal/weapons/sword/ironsting/ironsting.go",
+      "sha256": "e5f103259e4b5bfe06e1966ab14a8675df6cf16ecc102d9fdcc7861864985e0c",
+      "text": "package ironsting\n\nimport (\n\t\"fmt\"\n\n\t\"github.com/genshinsim/gcsim/pkg/core\"\n\t\"github.com/genshinsim/gcsim/pkg/core/attributes\"\n\t\"github.com/genshinsim/gcsim/pkg/core/event\"\n\t\"github.com/genshinsim/gcsim/pkg/core/info\"\n\t\"github.com/genshinsim/gcsim/pkg/core/player/character\"\n\t\"github.com/genshinsim/gcsim/pkg/modifier\"\n)\n\ntype Weapon struct {\n\tIndex  int\n\tstacks int\n\tbuff   []float64\n}\n\nfunc (w *Weapon) SetIndex(idx int) { w.Index = idx }\nfunc (w *Weapon) Init() error      { return nil }\n\nconst (\n\ticdKey  = \"ironsting-icd\"\n\tbuffKey = \"ironsting\"\n)\n\n// Dealing Elemental DMG increases all DMG by 6% for 6s. Max 2 stacks. Can occur once every 1s.\nfunc NewWeapon(c *core.Core, char *character.CharWrapper, p info.WeaponProfile) (info.Weapon, error) {\n\tw := &Weapon{}\n\tr := p.Refine\n\n\tdmgbuff := 0.045 + 0.015*float64(r)\n\tw.buff = make([]float64, attributes.EndStatType)\n\n\tc.Events.Subscribe(event.OnEnemyDamage, func(args ...any) {\n\t\tatk := args[1].(*info.AttackEvent)\n\t\tif c.Player.Active() != char.Index() {\n\t\t\treturn\n\t\t}\n\t\tif atk.Info.ActorIndex != char.Index() {\n\t\t\treturn\n\t\t}\n\t\tif atk.Info.Element == attributes.Physical {\n\t\t\treturn\n\t\t}\n\t\tif char.StatusIsActive(icdKey) {\n\t\t\treturn\n\t\t}\n\t\tchar.AddStatus(icdKey, 60, true)\n\t\tif !char.StatModIsActive(buffKey) {\n\t\t\tw.stacks = 0\n\t\t}\n\t\tif w.stacks < 2 {\n\t\t\tw.stacks++\n\t\t\tw.buff[attributes.DmgP] = dmgbuff * float64(w.stacks)\n\t\t}\n\t\t// refresh mod\n\t\tchar.AddStatMod(character.StatMod{\n\t\t\tBase:         modifier.NewBaseWithHitlag(\"ironsting\", 360),\n\t\t\tAffectedStat: attributes.NoStat,\n\t\t\tAmount: func() []float64 {\n\t\t\t\treturn w.buff\n\t\t\t},\n\t\t})\n\t}, fmt.Sprintf(\"ironsting-%v\", char.Base.Key.String()))\n\n\treturn w, nil\n}\n",
+      "evidence_class": "primary_reference_implementation_not_game_execution"
+    }
+  ]
+}

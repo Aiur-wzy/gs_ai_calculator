@@ -1,0 +1,151 @@
+{
+  "schema_version": 1,
+  "collection_id": "native.special-reactions.v1",
+  "revision": 1,
+  "status": "reviewed",
+  "profiles": {
+    "stellar_superconduct": {
+      "profile_id": "native.stellar_superconduct.v1",
+      "profile_revision": 1,
+      "profile_content_hash": "5fe4c9c5f80048dfff4327ee0ce4a255ad907baa20cd0187510f37adc8007459",
+      "confirmed_ready": true,
+      "parameters": {
+        "field_duration_seconds": 6,
+        "settlement_interval_seconds": 4,
+        "refresh_mode": "refresh_without_window_reset"
+      },
+      "evidence_refs": [
+        {
+          "kind": "community_mechanics",
+          "url": "https://keqingmains.com/misc/stellar-reaction-guide/"
+        },
+        {
+          "kind": "community_duration",
+          "url": "https://mobalytics.gg/genshin-impact/guides/stellar-conduct"
+        },
+        {
+          "kind": "upstream_textmap",
+          "revision": "342084292ba4c3c6ec2bc34c045de4de72ae8d53"
+        }
+      ]
+    },
+    "stellar_swirl": {
+      "profile_id": "native.stellar_swirl.v1",
+      "profile_revision": 1,
+      "profile_content_hash": "1ecfc7c1a7a627fa38c8bb528605ccdcb607df8f6f5162eca1a9fdef3dd4b552",
+      "confirmed_ready": true,
+      "parameters": {
+        "upgrade_threshold": 3,
+        "early_detonation_threshold": 6,
+        "detonation_delay_seconds": 3,
+        "ice_application_gu": 1,
+        "creation_batch_cap_once": true,
+        "existing_vortex_counts_each_reaction": true
+      },
+      "evidence_refs": [
+        {
+          "kind": "community_mechanics",
+          "url": "https://keqingmains.com/misc/stellar-reaction-guide/"
+        },
+        {
+          "kind": "upstream_textmap",
+          "revision": "342084292ba4c3c6ec2bc34c045de4de72ae8d53"
+        }
+      ]
+    },
+    "lunar_electro": {
+      "profile_id": "native.lunar_electro.v1",
+      "profile_revision": 1,
+      "profile_content_hash": "6e77b6eaec3d534e6fee04ac6595d63864e45e90151f8a1e80c29e6a041462f7",
+      "confirmed_ready": true,
+      "parameters": {
+        "first_tick_delay_seconds": 0.25,
+        "tick_interval_seconds": 2,
+        "duration_seconds": 6,
+        "refresh_mode": "extend_without_phase_reset",
+        "aura_consumption_gu": 0.4
+      },
+      "evidence_refs": [
+        {
+          "kind": "community_mechanics",
+          "url": "https://keqingmains.com/misc/lunar/"
+        },
+        {
+          "kind": "community_cloud",
+          "url": "https://www.hoyodex.com/wiki/genshin-impact/direct-lunar-charged"
+        }
+      ]
+    },
+    "lunar_bloom": {
+      "profile_id": "native.lunar_bloom.v1",
+      "profile_revision": 1,
+      "profile_content_hash": "3b84c5bd0448994aa567a00c360836863ed43cbb2d8e8748784117054d3e502a",
+      "confirmed_ready": true,
+      "parameters": {
+        "dew_interval_seconds": 2.5,
+        "dew_cap": 3,
+        "backlog_per_reaction": 1,
+        "same_parent_backlog_cap_once": true,
+        "full_cap_queue_policy": "pending"
+      },
+      "evidence_refs": [
+        {
+          "kind": "community_mechanics",
+          "url": "https://keqingmains.com/misc/lunar/"
+        },
+        {
+          "kind": "upstream_textmap",
+          "revision": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+          "text_hashes": [
+            3366567793,
+            3255519296
+          ]
+        },
+        {
+          "kind": "unresolved_boundary",
+          "id": "full-cap-queue-policy",
+          "status": "pending"
+        }
+      ]
+    },
+    "lunar_crystallize": {
+      "profile_id": "native.lunar_crystallize.v1",
+      "profile_revision": 1,
+      "profile_content_hash": "01bcf23b58d99c6eadbc601d6517967e3799019cf21c0dfa4edf2f0591ea7bc1",
+      "confirmed_ready": false,
+      "parameters": {
+        "harmony_threshold": 3,
+        "cages_per_reaction": 3,
+        "common_cooldown_seconds": 0,
+        "cage_duration_seconds": 9,
+        "harmony_counter_cap": 4,
+        "harmony_attack_cooldown_seconds": null,
+        "harmony_attack_cooldown_scope": null
+      },
+      "evidence_refs": [
+        {
+          "kind": "community_mechanics",
+          "url": "https://keqingmains.com/misc/lunar/"
+        },
+        {
+          "kind": "upstream_textmap",
+          "revision": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+          "text_hashes": [
+            3206849664,
+            4155940224
+          ]
+        },
+        {
+          "kind": "community_spatial_and_lifetime_detail",
+          "url": "https://news.17173.com/content/02122026/114149373.shtml",
+          "status": "community_verified"
+        },
+        {
+          "kind": "unresolved_boundary",
+          "id": "harmony-attack-cooldown-value-and-scope",
+          "status": "pending"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,207 @@
+{
+  "description": "虚构工程示例：每位受益者独立两次收益，第三次命中不再享受。不是实战排轴答案。",
+  "template": {
+    "version": 2,
+    "form": "resolved",
+    "id_registry_version": 1,
+    "type_definitions": {
+      "damage_types": []
+    },
+    "enemy": {
+      "level": 90,
+      "resistance": {
+        "default": 0.1
+      }
+    },
+    "characters": [
+      {
+        "id": "a",
+        "level": 90,
+        "stats": {
+          "atk": 100,
+          "base_atk": 50,
+          "em": 0,
+          "crit_rate": 0,
+          "crit_dmg": 0.5
+        }
+      }
+    ],
+    "hits": [
+      {
+        "id": "h0",
+        "t": 0.2,
+        "character": "a",
+        "skill": "工程技能",
+        "hit_name": "h0",
+        "damage_type_ids": [
+          "damage.elemental_skill"
+        ],
+        "damage_system": "classic",
+        "element": "cryo",
+        "multiplier": 1
+      },
+      {
+        "id": "h1",
+        "t": 0.3,
+        "character": "a",
+        "skill": "工程技能",
+        "hit_name": "h1",
+        "damage_type_ids": [
+          "damage.elemental_skill"
+        ],
+        "damage_system": "classic",
+        "element": "cryo",
+        "multiplier": 1
+      },
+      {
+        "id": "h2",
+        "t": 0.4,
+        "character": "a",
+        "skill": "工程技能",
+        "hit_name": "h2",
+        "damage_type_ids": [
+          "damage.elemental_skill"
+        ],
+        "damage_system": "classic",
+        "element": "cryo",
+        "multiplier": 1
+      }
+    ],
+    "buffs": [],
+    "switches": [],
+    "loop_duration": 10
+  },
+  "rotation_model": {
+    "schema_version": 1,
+    "period": 10,
+    "max_cycles": 3,
+    "initial_frontline": "a",
+    "characters": [
+      {
+        "id": "a",
+        "element": "cryo",
+        "energy_recharge": 1,
+        "energy_capacity": 10,
+        "initial_energy": 10,
+        "status": "assumed",
+        "source": "虚构确定性工程情景"
+      }
+    ],
+    "abilities": [
+      {
+        "id": "e",
+        "character": "a",
+        "action_type_id": "action.elemental_skill",
+        "cooldown": null,
+        "energy": null,
+        "status": "assumed",
+        "source": "虚构确定性工程情景"
+      }
+    ],
+    "actions": [
+      {
+        "id": "cast",
+        "ability_id": "e",
+        "start": 0,
+        "occupation_end": 0.1,
+        "order": 0,
+        "repeat": {
+          "mode": "each_cycle"
+        },
+        "status": "assumed",
+        "source": "虚构确定性工程情景"
+      }
+    ],
+    "events": [],
+    "initial_cooldowns": []
+  },
+  "mechanics_model": {
+    "schema_version": 1,
+    "rules": [
+      {
+        "id": "boost",
+        "name_zh": "工程收益",
+        "owner": "a",
+        "source_id": "boost",
+        "trigger": {
+          "event": "action_start",
+          "phase": "pre",
+          "action_ids": [
+            "cast"
+          ]
+        },
+        "beneficiaries": {
+          "mode": "team",
+          "scope": "locked"
+        },
+        "timing": {
+          "delay": 0,
+          "duration": 2,
+          "cooldown": 0,
+          "cooldown_anchor": "success"
+        },
+        "stacking": {
+          "max": 1,
+          "add": 1,
+          "policy": "refresh"
+        },
+        "effects": [
+          {
+            "id": "value",
+            "benefit_type_id": "benefit.dmg_bonus.all",
+            "value": 1,
+            "domain": "self"
+          }
+        ],
+        "status": "assumed",
+        "source": "虚构确定性工程情景",
+        "quota": {
+          "capacity": 2,
+          "scope": "per_beneficiary",
+          "refresh": "reset",
+          "consume": {
+            "event": "hit",
+            "phase": "pre"
+          }
+        }
+      }
+    ],
+    "hit_events": [
+      {
+        "hit_id": "h0",
+        "action_id": "cast",
+        "order": 10
+      },
+      {
+        "hit_id": "h1",
+        "action_id": "cast",
+        "order": 11
+      },
+      {
+        "hit_id": "h2",
+        "action_id": "cast",
+        "order": 12
+      }
+    ],
+    "hit_patterns": [],
+    "condition_events": [],
+    "initial_state": {
+      "rules": [
+        {
+          "rule_id": "boost",
+          "cooldown_remaining": 0,
+          "instances": []
+        }
+      ]
+    }
+  },
+  "expected": {
+    "status": "passed",
+    "damage_per_hit": [
+      90.0,
+      90.0,
+      45.0
+    ],
+    "total_damage": 225.0
+  }
+}

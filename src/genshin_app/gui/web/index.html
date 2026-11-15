@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>原神拉表</title>
+<script src="theme.js"></script>
+<link rel="stylesheet" href="legacy-island.css">
+<link rel="stylesheet" href="dsh-production.css">
+<link rel="stylesheet" href="dsh-shell.css">
+</head>
+<body>
+<div id="genshin-editor-parking"><div id="genshin-legacy-editor" class="gs-legacy-island" hidden>
+<header class="desktop-header">
+  <h1>原神拉表</h1>
+  <span id="app-build-badge" class="app-build-badge hidden" aria-label="构建类型"></span>
+  <div id="workspace-menubar" class="workspace-menubar" role="menubar" aria-label="应用菜单"></div>
+  <span class="desktop-caption">排轴工作台</span>
+  <button id="agent-chat-toggle" type="button" aria-expanded="false" aria-controls="agent-chat">打开助手</button>
+</header>
+<div id="update-banner" class="hidden"></div>
+<section id="development-acceptance-banner" class="development-acceptance-banner hidden" role="status" aria-live="polite">
+  <strong id="development-acceptance-title">本地开发验收版</strong>
+  <span id="development-acceptance-message">本轮仅用于无密钥验收。外网已禁用，请勿输入真实 API Key。</span>
+</section>
+
+<nav class="workspace-nav" aria-label="工作区">
+  <button class="tab active" data-tab="whiteboard">排轴白板</button>
+  <button class="tab" data-tab="rotation">计算模型<span class="workspace-nav-qualifier">高级</span></button>
+  <button class="tab" data-tab="result">计算报告</button>
+  <button class="tab" data-tab="data">资料库</button>
+  <button id="agent-page-tab" class="tab" data-tab="agent">AI 助手</button>
+</nav>
+
+<section id="workspace-page-chrome" class="workspace-page-chrome" aria-label="当前页面">
+  <div class="workspace-page-identity">
+    <span id="workspace-page-kicker" class="workspace-page-kicker">工作区</span>
+    <h2 id="workspace-page-title">排轴白板</h2>
+    <span id="workspace-document-summary" class="workspace-document-summary">尚未打开文档</span>
+  </div>
+  <div id="workspace-quick" class="workspace-quick" aria-label="当前页面主要操作"></div>
+  <details id="workspace-status-hub" class="workspace-status-hub">
+    <summary><span id="workspace-status-summary">尚未打开文档</span><span id="workspace-notice-count">无新动态</span></summary>
+    <div id="workspace-notice-list" class="workspace-notice-list" aria-label="最近状态与技术详情"></div>
+  </details>
+</section>
+<section id="workspace-attention-shelf" class="workspace-attention-shelf" aria-live="polite" hidden>
+  <strong>需要处理</strong><span id="workspace-attention-message"></span><span id="workspace-attention-count"></span>
+</section>
+
+<main>
+  <section id="tab-whiteboard" class="panel active" aria-label="排轴白板"></section>
+  <section id="tab-rotation" class="panel" aria-label="计算模型（高级）">
+    <div class="toolbar workspace-command-store" aria-hidden="true" hidden>
+      <select id="plan-select"><option value="">— 方案库 —</option></select>
+      <input id="tpl-path" type="text" placeholder="模板路径（留空=未保存的新模板）">
+      <button id="btn-new">新建</button>
+      <button id="btn-new-plan">新装备方案</button>
+      <button id="btn-load">加载</button>
+      <button id="btn-save">保存方案</button>
+      <button id="btn-equipment">装备与面板</button>
+      <button id="btn-manual-copy">手工数值副本</button>
+      <span class="sep"></span>
+      <button id="btn-add-hit">+事件</button>
+      <button id="btn-add-buff">+增益</button>
+      <button id="btn-add-switch">+切人</button>
+      <button id="btn-rotation-checks">动作与能量</button>
+      <button id="btn-mechanics">机制规则与过程</button>
+    </div>
+    <div class="workspace-document"><div id="workspace-plan-title" class="workspace-document-title">未命名方案</div><details class="workspace-plan-state"><summary>方案状态</summary><div id="plan-status" class="hint" role="status"></div></details><span class="workspace-document-spacer"></span><span class="workspace-layout-buttons" data-workspace-controls="rotation"></span></div>
+    <div id="equipment-editor" class="hidden"></div>
+    <div id="rotation-main" class="rotation-layout team-collapsed">
+      <aside id="team-panel" class="side"></aside>
+      <div class="timeline-pane">
+        <div class="axis-commandbar">
+        <div id="timeline-modes" class="timeline-modes" role="group" aria-label="选择时间轴视图"></div>
+        <div class="timeline-tools" role="group" aria-label="时间轴视图">
+          <button id="timeline-team" aria-pressed="false" hidden>角色面板</button>
+          <button id="timeline-zoom-out" title="缩小时间轴" aria-label="缩小时间轴">−</button>
+          <span id="timeline-scale" aria-live="polite">100%</span>
+          <button id="timeline-zoom-in" title="放大时间轴" aria-label="放大时间轴">＋</button>
+          <button id="timeline-fit">适应全轴</button>
+          <button id="timeline-pan" aria-pressed="false" title="拖动空白或中键也可平移">平移</button>
+          <button id="timeline-calculate" hidden>计算并更新视图</button>
+        </div>
+        </div>
+        <div id="timeline-filters" class="timeline-filters" aria-label="显示内容筛选"></div>
+        <div id="timeline-legend" class="timeline-legend" aria-label="事件颜色与图形图例"></div>
+        <div id="timeline-empty-state" class="timeline-empty-state" role="status" hidden></div>
+        <div id="timeline-wrap" tabindex="0" aria-label="时间轴；方向键移动，加减键缩放，零键适应全轴"><svg id="timeline" xmlns="http://www.w3.org/2000/svg"></svg></div>
+        <div class="axis-statusbar"><div id="timeline-stats" class="timeline-stats" aria-live="polite"></div><details class="axis-help"><summary>操作与说明</summary><div class="axis-help-panel"><div id="timeline-note" class="timeline-note" role="status"></div><p class="timeline-help">Ctrl＋滚轮缩放 · Shift＋滚轮横移 · 拖动空白或中键平移</p></div></details></div>
+      </div>
+      <aside class="timeline-inspector" aria-label="事件信息">
+        <div id="timeline-detail" class="timeline-detail" aria-label="选中事件详情">点击事件查看详情；密集事件可展开逐条查看。</div>
+        <div id="prop-panel" class="side hidden"></div>
+      </aside>
+    </div>
+    <div id="rotation-checks" class="side hidden"></div>
+    <div id="mechanics-editor" class="side hidden"></div>
+  </section>
+
+  <section id="tab-result" class="panel">
+    <div class="toolbar workspace-command-store" aria-hidden="true" hidden>
+      <button id="btn-calc">计算</button>
+      <span class="sep"></span>
+      <button id="btn-exp-json">导出结构化数据</button>
+      <button id="btn-exp-xlsx">导出结果快照表</button>
+      <button id="btn-exp-formula">导出活公式工作簿</button>
+      <button id="btn-exp-csv">导出文本表格</button>
+      <button id="btn-resolved">导出数值模板</button>
+    </div>
+    <div id="result-body"></div>
+  </section>
+
+  <section id="tab-data" class="panel">
+    <div class="toolbar">
+      <select id="data-category"><option value="character">角色</option><option value="weapon">武器</option><option value="set">圣遗物套装</option><option value="artifact">圣遗物单件</option></select>
+      <input id="data-q" type="text" placeholder="角色名称模糊搜索（回车确认）">
+      <button id="data-search">搜索</button>
+      <span id="data-filter-summary" class="data-filter-summary">角色 · 默认范围</span>
+      <details id="data-tools-panel" class="data-tools-panel">
+        <summary>筛选与工具</summary>
+        <div class="data-tools-popover">
+          <label>元素<select id="data-element">
+            <option value="">全部元素</option>
+            <option>火</option><option>水</option><option>雷</option><option>冰</option>
+            <option>风</option><option>岩</option><option>草</option>
+          </select></label>
+          <label>星级<select id="data-rarity">
+            <option value="">全部星级</option>
+            <option value="5">五星</option>
+            <option value="4">四星</option>
+          </select></label>
+          <label>资料版本<select id="data-version-line"></select></label>
+          <div class="data-tool-actions">
+            <button id="data-update" hidden disabled>更新应用与数据库</button>
+            <button id="data-annotations" hidden>追加机制资料</button>
+          </div>
+          <span id="db-update-status" class="muted" role="status"></span>
+          <details id="db-version-panel" class="database-version-panel">
+            <summary>版本详情</summary>
+            <pre id="db-version-details" class="database-version-details"></pre>
+          </details>
+        </div>
+      </details>
+    </div>
+    <div id="equipment-filters" class="eq-toolbar hidden"></div>
+    <div class="data-layout">
+      <aside id="data-list" class="side"></aside>
+      <div id="data-detail" class="side"></div>
+    </div>
+  </section>
+  <section id="tab-agent" class="panel agent-workspace-page" aria-label="AI 排轴助手">
+    <div id="agent-page-host" class="agent-page-host">
+      <aside id="agent-chat" class="agent-chat" aria-label="AI 排轴助手" hidden></aside>
+    </div>
+  </section>
+</main>
+
+<div id="app-overlay-root" aria-live="off"></div>
+
+<footer><span id="status-bar">就绪</span><span id="ping-status" class="badge">连接中…</span></footer>
+</div></div>
+<div id="dsh-app-root" aria-label="原神拉表工作台"><p role="status">正在打开工作台…</p></div>
+<script src="json-transport.js"></script>
+<script src="display.js"></script>
+<script src="rotation.js"></script>
+<script src="panel.js"></script>
+<script src="chars.js"></script>
+<script src="effect-description.js"></script>
+<script src="business-ui.js"></script>
+<script src="timeline-data.js"></script>
+<script src="candidate-projection.js"></script>
+<script src="timeline-view.js"></script>
+<script src="timeline.js"></script>
+<script src="result.js"></script>
+<script src="format.js"></script>
+<script src="data.js"></script>
+<script src="gui-foundation-v2.js"></script>
+<script src="ui.js"></script>
+<!-- Pure App document/CAS adapter; no legacy Agent lifecycle scripts. -->
+<script src="agent-document-adapter.js"></script>
+<script src="context-menu.js"></script>
+<script src="workspace-kernel.js"></script>
+<script src="plans.js"></script>
+<script src="equipment-data.js"></script>
+<script src="equipment.js"></script>
+<script src="equipment-workbench.js"></script>
+<script src="equipment-workbench-native.js"></script>
+<script src="effect-editor.js"></script>
+<script src="reaction-benefits.js"></script>
+<script src="reaction-em.js"></script>
+<script src="static-inclusions.js"></script>
+<script src="passive-sources.js"></script>
+<script src="checks.js"></script>
+<script src="counter-frames.js"></script>
+<script src="reaction-resources.js"></script>
+<script src="mechanics.js"></script>
+<script src="action-resources.js"></script>
+<script src="action-capacities.js"></script>
+<script src="action-admissions.js"></script>
+<script src="action-events.js"></script>
+<script src="snapshot-captures.js"></script>
+<script src="attack-metadata.js"></script>
+<script src="attack-assembly.js"></script>
+<script src="periodic-attacks.js"></script>
+<script src="periodic-assembly.js"></script>
+<script src="energy-generation.js"></script>
+<script src="limited-hit-benefit.js"></script>
+<script src="mechanism-sources.js"></script>
+<script src="external-damage.js"></script>
+<script src="whiteboard.js"></script>
+<script src="workspace.js"></script>
+<script src="candidate-application.js"></script>
+<script src="app-file-actions.js"></script>
+<script src="webview-smoke.js"></script>
+<script src="app.js"></script>
+<script src="dsh-production.js"></script>
+</body>
+</html>

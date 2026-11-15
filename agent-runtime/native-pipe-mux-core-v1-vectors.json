@@ -1,0 +1,41 @@
+{
+  "contract": "genshin-native-pipe-mux-core-v1",
+  "productionOwner": false,
+  "capacityEvidence": {
+    "observedMuxQueueHighWaterItems": null,
+    "observedMuxQueueHighWaterBytes": null,
+    "observedGuiProjectionHighWater": 22187,
+    "defaultQueueItems": 131072,
+    "defaultQueueBytes": 536870912,
+    "hardConnectionFrames": 524288,
+    "hardConnectionBytes": 2147483648,
+    "hardSafetyItems": 524288,
+    "hardSafetyBytes": 2147483648
+  },
+  "scheduler": {
+    "priority_burst": 2,
+    "drr_quantum_bytes": 4
+  },
+  "messages": [
+    {"lane":"control","payload_kind":"control","payload":"C1","message_id":"c1","trusted_class":"control"},
+    {"lane":"control","payload_kind":"control","payload":"C2","message_id":"c2","trusted_class":"control"},
+    {"lane":"control","payload_kind":"control","payload":"C3","message_id":"c3","trusted_class":"control"},
+    {"lane":"control","payload_kind":"control","payload":"C4","message_id":"c4","trusted_class":"control"},
+    {"lane":"legacy_turn","payload_kind":"legacy_frame","payload":"N1","message_id":"n1","trusted_class":"normal"},
+    {"lane":"legacy_turn","payload_kind":"legacy_frame","payload":"U1","message_id":"u1","trusted_class":"urgent"},
+    {"lane":"remote_unary","payload_kind":"remote_call","payload":"R1","message_id":"r1","trusted_class":"normal"},
+    {"lane":"remote_stream","payload_kind":"stream_data","payload":"S1","message_id":"s1","stream_id":"stream-1","stream_seq":1,"trusted_class":"normal"},
+    {"lane":"bundle","payload_kind":"bundle_chunk","payload":"B1","message_id":"b1","trusted_class":"normal"}
+  ],
+  "expected": [
+    {"message_id":"c1","lane":"control","global_seq":1,"lane_seq":1,"priority":"control","payload_hex":"4331"},
+    {"message_id":"c2","lane":"control","global_seq":2,"lane_seq":2,"priority":"control","payload_hex":"4332"},
+    {"message_id":"c3","lane":"control","global_seq":3,"lane_seq":3,"priority":"control","payload_hex":"4333"},
+    {"message_id":"c4","lane":"control","global_seq":4,"lane_seq":4,"priority":"control","payload_hex":"4334"},
+    {"message_id":"n1","lane":"legacy_turn","global_seq":5,"lane_seq":1,"priority":"normal","payload_hex":"4e31"},
+    {"message_id":"u1","lane":"legacy_turn","global_seq":6,"lane_seq":2,"priority":"urgent","payload_hex":"5531"},
+    {"message_id":"r1","lane":"remote_unary","global_seq":7,"lane_seq":1,"priority":"normal","payload_hex":"5231"},
+    {"message_id":"s1","lane":"remote_stream","global_seq":8,"lane_seq":1,"priority":"normal","payload_hex":"5331"},
+    {"message_id":"b1","lane":"bundle","global_seq":9,"lane_seq":1,"priority":"normal","payload_hex":"4231"}
+  ]
+}

@@ -1,0 +1,440 @@
+{
+  "facts_version": 1,
+  "status": "ready",
+  "snapshot": {
+    "version_line": "release",
+    "state": "ready",
+    "index_state": "ready",
+    "schema_version": 1,
+    "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+    "snapshot_id": "1b620db802a937506dc870cc25c08b5c7c336a01b193b945e9471d75c3bee172",
+    "execution_support": "not_evaluated",
+    "built_at": "2026-10-01T19:46:55.591099+00:00",
+    "profile_id": "upstream-combat-catalog-v1",
+    "profile_version": 1,
+    "indexer_version": "4",
+    "manifest_fingerprint": "b14c57925636407203b679f5517dd51ec9a5249e42a792157cb72269f55b32e6",
+    "counts": {
+      "runtime_definition": 152351,
+      "runtime_parameter_binding": 6082,
+      "runtime_reference": 165747,
+      "runtime_source": 3356
+    },
+    "reference_states": {
+      "ambiguous": 157,
+      "external_asset": 10445,
+      "missing": 89,
+      "resolved": 145772,
+      "unsupported_reference_form": 9284
+    },
+    "normalization": {
+      "mapping_fingerprint": "506862bc6c0bf033d8272b75f193cd2a620fc513320b3223d07afcc6f04356e2",
+      "normalization_version": 2,
+      "profile_id": "upstream-34208429-reviewed-schema-v1",
+      "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53"
+    }
+  },
+  "selection": {
+    "character_id": 10000002,
+    "skill_depot_id": 201,
+    "skill_id": 10018,
+    "slot": "skill",
+    "matching_slots": [
+      "skill"
+    ],
+    "constellation": 0,
+    "active_constellation_ids": []
+  },
+  "level": {
+    "base_level": null,
+    "effective_level": 10,
+    "source": "explicit_effective_level",
+    "constellation_applied": false,
+    "constellation_level_support": "not_applicable"
+  },
+  "records": {
+    "avatar": {
+      "definition": {
+        "definition_id": "4fe8ebc978de6f62ee5a7d2428877734d3c84272191c29d2a75b23c2bd455151",
+        "definition_kind": "excel_record",
+        "owner_definition_id": null,
+        "source_path": "ExcelBinOutput/AvatarExcelConfigData.json",
+        "json_pointer": "/1",
+        "variant_key": null,
+        "namespace_key": "excel",
+        "node_sha256": "dae54239630afddd4a369f89e7cfb7fc894b2b1e03a71fd97fffc00429e94953",
+        "exact_key": {
+          "id": 10000002
+        }
+      },
+      "source_path": "ExcelBinOutput/AvatarExcelConfigData.json",
+      "json_pointer": "/1",
+      "source_sha256": "d3b4ce3253e6c4a11ffca5bfad200f53c00b86dabeb9a14eb505556954e87aee",
+      "fields": {
+        "id": 10000002,
+        "skillDepotId": 201,
+        "combatConfigHash": "15882421641119660365",
+        "animatorConfigPathHash": "2055198892552039615"
+      },
+      "field_pointers": {
+        "id": "/1/id",
+        "skillDepotId": "/1/skillDepotId",
+        "combatConfigHash": "/1/combatConfigHash",
+        "animatorConfigPathHash": "/1/animatorConfigPathHash"
+      }
+    },
+    "depot": {
+      "definition": {
+        "definition_id": "f8ad9e0724cb42ffdd48be5f0e87977d9a9b12d4803f4516152bba7270d4a076",
+        "definition_kind": "excel_record",
+        "owner_definition_id": null,
+        "source_path": "ExcelBinOutput/AvatarSkillDepotExcelConfigData.json",
+        "json_pointer": "/62",
+        "variant_key": null,
+        "namespace_key": "excel",
+        "node_sha256": "7531e8cd4328dd655dbd9d1d9c5843a3abf9aedce64c1b41636f152acd09cb8e",
+        "exact_key": {
+          "id": 201
+        }
+      },
+      "source_path": "ExcelBinOutput/AvatarSkillDepotExcelConfigData.json",
+      "json_pointer": "/62",
+      "source_sha256": "76058ddd01946435248d158ef4cc659ba995643c5635e9948161ce47a7ed814b",
+      "fields": {
+        "id": 201,
+        "skills": [
+          10024,
+          10018,
+          10013,
+          0
+        ],
+        "subSkills": [
+          10020,
+          10021,
+          10052,
+          10053,
+          10111,
+          10001,
+          5002010
+        ],
+        "energySkill": 10019,
+        "talents": [
+          21,
+          22,
+          23,
+          24,
+          25,
+          26
+        ],
+        "inherentProudSkillOpens": [
+          {
+            "proudSkillGroupId": 221,
+            "needAvatarPromoteLevel": 1
+          },
+          {
+            "proudSkillGroupId": 222,
+            "needAvatarPromoteLevel": 4
+          },
+          {
+            "proudSkillGroupId": 223
+          },
+          {},
+          {}
+        ],
+        "extraAbilities": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "field_pointers": {
+        "id": "/62/id",
+        "skills": "/62/skills",
+        "subSkills": "/62/subSkills",
+        "energySkill": "/62/energySkill",
+        "talents": "/62/talents",
+        "inherentProudSkillOpens": "/62/inherentProudSkillOpens",
+        "extraAbilities": "/62/extraAbilities"
+      }
+    },
+    "skill": {
+      "definition": {
+        "definition_id": "ad704019e3fd5c4a29c3bc155aff9e7f6a3dabe6223998b7328d8b2887805c88",
+        "definition_kind": "excel_record",
+        "owner_definition_id": null,
+        "source_path": "ExcelBinOutput/AvatarSkillExcelConfigData.json",
+        "json_pointer": "/12",
+        "variant_key": null,
+        "namespace_key": "excel",
+        "node_sha256": "d50815e160fde2272c5ad34652baec9de6849160f99127544acf51a2be9f3113",
+        "exact_key": {
+          "id": 10018
+        }
+      },
+      "source_path": "ExcelBinOutput/AvatarSkillExcelConfigData.json",
+      "json_pointer": "/12",
+      "source_sha256": "f86481ed705468ba3e7a4b05e05eade9c89cf3add291308c3469859728ae96db",
+      "fields": {
+        "id": 10018,
+        "proudSkillGroupId": 232,
+        "triggerID": 2,
+        "cdTime": 10,
+        "maxChargeNum": 1,
+        "nameTextMapHash": 682887613,
+        "descTextMapHash": 4048562608
+      },
+      "field_pointers": {
+        "id": "/12/id",
+        "proudSkillGroupId": "/12/proudSkillGroupId",
+        "triggerID": "/12/triggerID",
+        "cdTime": "/12/cdTime",
+        "maxChargeNum": "/12/maxChargeNum",
+        "nameTextMapHash": "/12/nameTextMapHash",
+        "descTextMapHash": "/12/descTextMapHash"
+      }
+    },
+    "proud_skill": {
+      "definition": {
+        "definition_id": "9ff642de424486c76734876c7714b6f88db9339301ad34debb981808efded552",
+        "definition_kind": "excel_record",
+        "owner_definition_id": null,
+        "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+        "json_pointer": "/2349",
+        "variant_key": null,
+        "namespace_key": "excel",
+        "node_sha256": "9e9d46446dc8d36dc84d6c8f72f983b1424fc629485ee164ff7a509c647428d4",
+        "exact_key": {
+          "proudSkillId": 23210
+        }
+      },
+      "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+      "json_pointer": "/2349",
+      "source_sha256": "4897a68ebc6772e7b553a58a548a3756a1cf9b6e9ca22250bb0da987a3fa4d70",
+      "fields": {
+        "proudSkillId": 23210,
+        "proudSkillGroupId": 232,
+        "level": 10,
+        "paramList": [
+          4.305600166320801,
+          10,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "paramDescList": [
+          3661881678,
+          3416857774,
+          2019429567,
+          396845527,
+          1926361390,
+          1427445954,
+          518918559,
+          1817442693,
+          3923929340,
+          2606499255,
+          2231138420,
+          3467381835,
+          2852795863,
+          2445608363,
+          2281251894,
+          4197558653,
+          1785625969,
+          2507590715,
+          4115891231,
+          3274265973
+        ],
+        "openConfig": "Ayaka_SkillUpgrade_2"
+      },
+      "field_pointers": {
+        "proudSkillId": "/2349/proudSkillId",
+        "proudSkillGroupId": "/2349/proudSkillGroupId",
+        "level": "/2349/level",
+        "paramList": "/2349/paramList",
+        "paramDescList": "/2349/paramDescList",
+        "openConfig": "/2349/openConfig"
+      }
+    }
+  },
+  "talents": [
+    {
+      "role": "skill_level",
+      "definition": {
+        "definition_id": "4306df4b6de30dd9cdf89f3b0419369dacc4dc5ca9e5c0c6d0938ca01d4835b7",
+        "definition_kind": "talent_config",
+        "owner_definition_id": null,
+        "source_path": "BinOutput/Talent/AvatarTalents/ConfigTalent_Ayaka.json",
+        "json_pointer": "/Ayaka_SkillUpgrade_2",
+        "variant_key": null,
+        "namespace_key": "talent",
+        "node_sha256": "bb33464cb1e1936fdfd6f87809ef1e3bffa13578fb8d55227eae224f4f4f5cd2",
+        "exact_key": "Ayaka_SkillUpgrade_2"
+      },
+      "source_path": "BinOutput/Talent/AvatarTalents/ConfigTalent_Ayaka.json",
+      "json_pointer": "/Ayaka_SkillUpgrade_2",
+      "source_sha256": "c667b504dcc857e67eef83468d5f7e32a62b707e3771e00b08c48f2abb47ae32",
+      "parameter_record_origin": {
+        "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+        "json_pointer": "/2349",
+        "source_sha256": "4897a68ebc6772e7b553a58a548a3756a1cf9b6e9ca22250bb0da987a3fa4d70"
+      },
+      "param_list": [
+        4.305600166320801,
+        10,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "operations_raw": [
+        {
+          "$type": "BIAHEMMGABC",
+          "GBPFBNHLOFD": true,
+          "IIBMNPFLNMJ": "Avatar_Ayaka_Icespine_Strike_New",
+          "PCABAADALND": "%1",
+          "PEOJKHKHAKL": "Icespine_Damage"
+        }
+      ],
+      "operations_normalized": [
+        {
+          "$type": "ModifyAbility",
+          "CLGIKOPIKBC": true,
+          "abilityName": "Avatar_Ayaka_Icespine_Strike_New",
+          "paramDelta": "%1",
+          "paramSpecial": "Icespine_Damage"
+        }
+      ],
+      "references": [
+        {
+          "reference_id": "9d265b1b11e617807a8725159fee2d11c79e17f179579ba7c146601a1d0e641c",
+          "from_definition_id": "4306df4b6de30dd9cdf89f3b0419369dacc4dc5ca9e5c0c6d0938ca01d4835b7",
+          "source_path": "BinOutput/Talent/AvatarTalents/ConfigTalent_Ayaka.json",
+          "json_pointer": "/Ayaka_SkillUpgrade_2/0/IIBMNPFLNMJ",
+          "field_name": "abilityName",
+          "relation_kind": "ability_operation",
+          "target_kind": "ability",
+          "source_order": 0,
+          "presence_status": "present",
+          "resolution_status": "resolved",
+          "resolved_definition_id": "8d4c0a0d32f15c5296d9898264472d4bd124d93d254c7426b0f016c51df7515e",
+          "extraction_rule_id": "4",
+          "version_line": "release",
+          "snapshot_id": "1b620db802a937506dc870cc25c08b5c7c336a01b193b945e9471d75c3bee172",
+          "target_key": "Avatar_Ayaka_Icespine_Strike_New",
+          "scope": {
+            "owner_definition_id": null
+          },
+          "candidate_ids": [
+            "8d4c0a0d32f15c5296d9898264472d4bd124d93d254c7426b0f016c51df7515e"
+          ]
+        }
+      ],
+      "execution_support": "not_evaluated"
+    }
+  ],
+  "parameter_bindings": [
+    {
+      "role": "skill_level",
+      "operation_pointer": "/Ayaka_SkillUpgrade_2/0",
+      "source_path": "BinOutput/Talent/AvatarTalents/ConfigTalent_Ayaka.json",
+      "parameter_name": "Icespine_Damage",
+      "raw_expression": "%1",
+      "operation_semantics": "not_evaluated",
+      "target": {
+        "ability_name": "Avatar_Ayaka_Icespine_Strike_New",
+        "relation": "parameter_modification_target",
+        "candidate_ids": [
+          "8d4c0a0d32f15c5296d9898264472d4bd124d93d254c7426b0f016c51df7515e"
+        ],
+        "resolution_status": "resolved",
+        "origin": {
+          "source_path": "BinOutput/Talent/AvatarTalents/ConfigTalent_Ayaka.json",
+          "json_pointer": "/Ayaka_SkillUpgrade_2",
+          "source_sha256": "c667b504dcc857e67eef83468d5f7e32a62b707e3771e00b08c48f2abb47ae32"
+        }
+      },
+      "parameter_input_status": "resolved",
+      "parameter_input": 4.305600166320801,
+      "parameter_input_origin": {
+        "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+        "json_pointer": "/2349/paramList/0",
+        "source_sha256": "4897a68ebc6772e7b553a58a548a3756a1cf9b6e9ca22250bb0da987a3fa4d70"
+      }
+    }
+  ],
+  "ability_candidates": [
+    {
+      "definition_id": "8d4c0a0d32f15c5296d9898264472d4bd124d93d254c7426b0f016c51df7515e",
+      "definition_kind": "ability",
+      "owner_definition_id": null,
+      "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Ayaka.json",
+      "json_pointer": "/12/Default",
+      "variant_key": "Default",
+      "namespace_key": "Temp",
+      "node_sha256": "b4c09681b1d2efbdb6b438a03cb85155659461011f521e76f3c95e7669866d9c",
+      "exact_key": "Avatar_Ayaka_Icespine_Strike_New"
+    }
+  ],
+  "direct_skill_ability": null,
+  "issues": [],
+  "action_dispatch": {
+    "status": "pending",
+    "reasons": [
+      "avatar_resource_identity_unresolved",
+      "action_trigger_semantics_not_compiled"
+    ]
+  },
+  "execution_support": "not_evaluated",
+  "limits": {
+    "max_bytes": 262144,
+    "max_operations": 128,
+    "max_abilities": 64,
+    "max_issues": 256
+  },
+  "notes": [
+    "ready仅表示所列资料关系已装配，不证明动作派发、时序、技能完整效果或可执行性",
+    "Talent原始操作可查询不代表支持执行，所有操作语义均未评估",
+    "ModifyAbility目标是参数修改对象，不能作为技能释放入口",
+    "parameter_input是参数表输入值，不是执行修改后最终ability参数",
+    "未解释的字段原样保留；数值缺失不默认为0；elementDurability不转换为GU"
+  ],
+  "content_fingerprint": "c96db0b9a57dc0e6b8ea93f2c4948d934d641034ce552557608b9849233a1865"
+}

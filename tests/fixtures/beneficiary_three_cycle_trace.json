@@ -1,0 +1,329 @@
+{
+  "report_window": {
+    "contract": "buff-state-timeline-v1",
+    "version": 1,
+    "duration": 10,
+    "execution_limit": 10,
+    "execution_status": "passed",
+    "excluded": [],
+    "notes": [
+      "持续条表示声明规则或明确输入区间的状态；筛选、前台限制、目标条件和快照取样仍以逐击计算为准。",
+      "区间右端不包含；同刻事件的先后与该次命中收益请查看计算流水。"
+    ]
+  },
+  "qualified_trace_records": [
+    {
+      "type": "trigger_rejected",
+      "reason": "no_eligible_beneficiary",
+      "rule_id": "qualified",
+      "event_id": "tick0",
+      "t": 0.12,
+      "cycle": 0,
+      "beneficiary_selection": {
+        "contract": "beneficiary-eligibility-v1",
+        "event_id": "tick0",
+        "selection_t": 0.12,
+        "frontline": "a",
+        "base_candidates": [
+          "a"
+        ],
+        "recipients": [],
+        "excluded": [
+          {
+            "character": "a",
+            "reason": "excluded_owner"
+          }
+        ]
+      }
+    },
+    {
+      "type": "activation",
+      "t": 0.5,
+      "rule_id": "qualified",
+      "name_zh": "工程收益",
+      "instance_id": "qualified:0:tick1",
+      "event_id": "tick1",
+      "cycle": 0,
+      "beneficiaries": [
+        "b"
+      ],
+      "expires_at": [
+        1.5
+      ],
+      "layers": 1,
+      "quota": {},
+      "cooldown_until": 0.5,
+      "beneficiary_selection": {
+        "contract": "beneficiary-eligibility-v1",
+        "event_id": "tick1",
+        "selection_t": 0.5,
+        "frontline": "b",
+        "base_candidates": [
+          "b"
+        ],
+        "recipients": [
+          "b"
+        ],
+        "excluded": []
+      }
+    },
+    {
+      "type": "trigger_rejected",
+      "reason": "no_eligible_beneficiary",
+      "rule_id": "qualified",
+      "event_id": "tick2",
+      "t": 1.0,
+      "cycle": 0,
+      "beneficiary_selection": {
+        "contract": "beneficiary-eligibility-v1",
+        "event_id": "tick2",
+        "selection_t": 1.0,
+        "frontline": "c",
+        "base_candidates": [
+          "c"
+        ],
+        "recipients": [],
+        "excluded": [
+          {
+            "character": "c",
+            "reason": "not_in_whitelist"
+          }
+        ]
+      }
+    },
+    {
+      "type": "trigger_rejected",
+      "reason": "no_eligible_beneficiary",
+      "rule_id": "qualified",
+      "event_id": "tick3",
+      "t": 1.3,
+      "cycle": 0,
+      "beneficiary_selection": {
+        "contract": "beneficiary-eligibility-v1",
+        "event_id": "tick3",
+        "selection_t": 1.3,
+        "frontline": "a",
+        "base_candidates": [
+          "a"
+        ],
+        "recipients": [],
+        "excluded": [
+          {
+            "character": "a",
+            "reason": "excluded_owner"
+          }
+        ]
+      }
+    },
+    {
+      "type": "trigger_rejected",
+      "reason": "no_eligible_beneficiary",
+      "rule_id": "qualified",
+      "event_id": "tick0",
+      "t": 10.12,
+      "cycle": 1,
+      "beneficiary_selection": {
+        "contract": "beneficiary-eligibility-v1",
+        "event_id": "tick0",
+        "selection_t": 10.12,
+        "frontline": "a",
+        "base_candidates": [
+          "a"
+        ],
+        "recipients": [],
+        "excluded": [
+          {
+            "character": "a",
+            "reason": "excluded_owner"
+          }
+        ]
+      }
+    },
+    {
+      "type": "activation",
+      "t": 10.5,
+      "rule_id": "qualified",
+      "name_zh": "工程收益",
+      "instance_id": "qualified:1:tick1",
+      "event_id": "tick1",
+      "cycle": 1,
+      "beneficiaries": [
+        "b"
+      ],
+      "expires_at": [
+        11.5
+      ],
+      "layers": 1,
+      "quota": {},
+      "cooldown_until": 10.5,
+      "beneficiary_selection": {
+        "contract": "beneficiary-eligibility-v1",
+        "event_id": "tick1",
+        "selection_t": 10.5,
+        "frontline": "b",
+        "base_candidates": [
+          "b"
+        ],
+        "recipients": [
+          "b"
+        ],
+        "excluded": []
+      }
+    },
+    {
+      "type": "trigger_rejected",
+      "reason": "no_eligible_beneficiary",
+      "rule_id": "qualified",
+      "event_id": "tick2",
+      "t": 11.0,
+      "cycle": 1,
+      "beneficiary_selection": {
+        "contract": "beneficiary-eligibility-v1",
+        "event_id": "tick2",
+        "selection_t": 11.0,
+        "frontline": "c",
+        "base_candidates": [
+          "c"
+        ],
+        "recipients": [],
+        "excluded": [
+          {
+            "character": "c",
+            "reason": "not_in_whitelist"
+          }
+        ]
+      }
+    },
+    {
+      "type": "trigger_rejected",
+      "reason": "no_eligible_beneficiary",
+      "rule_id": "qualified",
+      "event_id": "tick3",
+      "t": 11.3,
+      "cycle": 1,
+      "beneficiary_selection": {
+        "contract": "beneficiary-eligibility-v1",
+        "event_id": "tick3",
+        "selection_t": 11.3,
+        "frontline": "a",
+        "base_candidates": [
+          "a"
+        ],
+        "recipients": [],
+        "excluded": [
+          {
+            "character": "a",
+            "reason": "excluded_owner"
+          }
+        ]
+      }
+    },
+    {
+      "type": "trigger_rejected",
+      "reason": "no_eligible_beneficiary",
+      "rule_id": "qualified",
+      "event_id": "tick0",
+      "t": 20.12,
+      "cycle": 2,
+      "beneficiary_selection": {
+        "contract": "beneficiary-eligibility-v1",
+        "event_id": "tick0",
+        "selection_t": 20.12,
+        "frontline": "a",
+        "base_candidates": [
+          "a"
+        ],
+        "recipients": [],
+        "excluded": [
+          {
+            "character": "a",
+            "reason": "excluded_owner"
+          }
+        ]
+      }
+    },
+    {
+      "type": "activation",
+      "t": 20.5,
+      "rule_id": "qualified",
+      "name_zh": "工程收益",
+      "instance_id": "qualified:2:tick1",
+      "event_id": "tick1",
+      "cycle": 2,
+      "beneficiaries": [
+        "b"
+      ],
+      "expires_at": [
+        21.5
+      ],
+      "layers": 1,
+      "quota": {},
+      "cooldown_until": 20.5,
+      "beneficiary_selection": {
+        "contract": "beneficiary-eligibility-v1",
+        "event_id": "tick1",
+        "selection_t": 20.5,
+        "frontline": "b",
+        "base_candidates": [
+          "b"
+        ],
+        "recipients": [
+          "b"
+        ],
+        "excluded": []
+      }
+    },
+    {
+      "type": "trigger_rejected",
+      "reason": "no_eligible_beneficiary",
+      "rule_id": "qualified",
+      "event_id": "tick2",
+      "t": 21.0,
+      "cycle": 2,
+      "beneficiary_selection": {
+        "contract": "beneficiary-eligibility-v1",
+        "event_id": "tick2",
+        "selection_t": 21.0,
+        "frontline": "c",
+        "base_candidates": [
+          "c"
+        ],
+        "recipients": [],
+        "excluded": [
+          {
+            "character": "c",
+            "reason": "not_in_whitelist"
+          }
+        ]
+      }
+    },
+    {
+      "type": "trigger_rejected",
+      "reason": "no_eligible_beneficiary",
+      "rule_id": "qualified",
+      "event_id": "tick3",
+      "t": 21.3,
+      "cycle": 2,
+      "beneficiary_selection": {
+        "contract": "beneficiary-eligibility-v1",
+        "event_id": "tick3",
+        "selection_t": 21.3,
+        "frontline": "a",
+        "base_candidates": [
+          "a"
+        ],
+        "recipients": [],
+        "excluded": [
+          {
+            "character": "a",
+            "reason": "excluded_owner"
+          }
+        ]
+      }
+    }
+  ],
+  "_fixture_provenance": {
+    "original_sha256": "77ec5bbed8f9ff037639bf2a1afcc55ffdb20480fea92f6df56a6a5cde6d5c84",
+    "scope": "Twelve actual recorded qualification decisions across three verification cycles; only the first declared ten-second input window belongs to this report."
+  }
+}

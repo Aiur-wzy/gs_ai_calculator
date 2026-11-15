@@ -1,0 +1,5534 @@
+{
+  "profile_id": "single-contact-energy-trigger-reference-v1",
+  "profile_version": 2,
+  "compiler": "reference-energy-trigger-v1",
+  "compiler_version": 1,
+  "commit": "224708edc8056f27e9ffc4eacabe797d75274636",
+  "old_commit": "9424e4e556bd80e5196be7d3c52723d3a35b30e7",
+  "evidence_tier": "bounded_reference_not_full_ability",
+  "parents": {
+    "controller": {
+      "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Kazuha.json",
+      "new_pointer": "/3/Default",
+      "new_node_sha256": "6e967c817760cbb76848d764c0e4148e91be52182c2b3dcadc2fd97378a39ee1",
+      "new_raw": {
+        "EMGBJJOIENB": [
+          {
+            "$type": "CDANEAFAFKM",
+            "AMOLMPHFPHJ": -1,
+            "ILELAOFJIKJ": true,
+            "LDFBDMNIADI": "Avatar_Kazuha_ElementalArt_HitCheck",
+            "LJFIEGHHLOB": false
+          },
+          {
+            "$type": "HGFNHPLICPI",
+            "AMOLMPHFPHJ": -1,
+            "ILELAOFJIKJ": true,
+            "LJFIEGHHLOB": true,
+            "PEELJBICEHE": "_ABILITY_Kazuha_ElementalArt_ClickOrHold_Mark"
+          }
+        ],
+        "FBHJJNMDIPC": [
+          {
+            "$type": "IHHKDCLJJIH",
+            "ACFKMLJKONM": 10472,
+            "AMOLMPHFPHJ": -1,
+            "BBIOILJMAAB": [
+              "Kazuha_ElementalArt_BS"
+            ],
+            "BKEPFPGBOKI": "EndHoldTrigger",
+            "DOJHFJGBLOB": [
+              3
+            ],
+            "JBPIIMOKEPG": "NextLoopTrigger",
+            "MNHAHPEBFNI": -1,
+            "PLFHNENNAEN": [
+              "Kazuha_ElementalArt_Charge"
+            ]
+          },
+          {
+            "$type": "LAJOBHCLKFH",
+            "AMOLMPHFPHJ": -1,
+            "GJHGMFEADDF": -1,
+            "JEILHICOEOE": [
+              "Kazuha_ElementalArt_BS",
+              "Kazuha_ElementalArt_Air"
+            ],
+            "LDFBDMNIADI": "Avatar_Kazuha_ElementalArt_ResetMixType"
+          }
+        ],
+        "GPPBBDEICKP": {
+          "Avatar_Kazuha_ElementalArt_AddHitMark": {
+            "DBGOKAKAHFP": 100,
+            "DOALDLPNGMF": -1,
+            "EMGBJJOIENB": [
+              {
+                "$type": "HGFNHPLICPI",
+                "AMOLMPHFPHJ": -1,
+                "ILELAOFJIKJ": true,
+                "LJFIEGHHLOB": true,
+                "PDIFFCBMGMO": 1,
+                "PEELJBICEHE": "_ABILITY_Kazuha_ElementalArt_HitMark"
+              }
+            ],
+            "HHDOFNHCIAE": [
+              {
+                "$type": "HGFNHPLICPI",
+                "AMOLMPHFPHJ": -1,
+                "ILELAOFJIKJ": true,
+                "LJFIEGHHLOB": true,
+                "PEELJBICEHE": "_ABILITY_Kazuha_ElementalArt_HitMark"
+              }
+            ],
+            "JPEAFDFPKAN": 1.5,
+            "KFOMCJGGPPC": -1,
+            "PPKOPMBNPJH": true
+          },
+          "Avatar_Kazuha_ElementalArt_DropBall": {
+            "DBGOKAKAHFP": 100,
+            "DOALDLPNGMF": -1,
+            "EMGBJJOIENB": [
+              {
+                "$type": "EDAOLCMCEBI",
+                "AMOLMPHFPHJ": -1,
+                "AOCCEKAGBFB": 9,
+                "HHENHNHHHDA": 1,
+                "IJDGNIIOHLM": [
+                  {
+                    "$type": "MMPLBPOHMGL",
+                    "BDHBNCEEPPK": "Target",
+                    "PDIFFCBMGMO": 1,
+                    "PEELJBICEHE": "_ABILITY_Kazuha_ElementalArt_ClickOrHold_Mark"
+                  }
+                ],
+                "ILELAOFJIKJ": true,
+                "KKMLMJNCLLG": 2021,
+                "LJFIEGHHLOB": true,
+                "MLFLDPAGADG": {
+                  "$type": "PKAELLAMAGL",
+                  "EEFLHEKBODJ": {
+                    "BNJLEBLGEKB": 180
+                  },
+                  "FDGFPGIDACF": {
+                    "IOPIFIJFBHI": 1,
+                    "LBLJIHBEDKH": 0.5
+                  },
+                  "GNFICELAKIB": 10,
+                  "HECMDGIAGKM": 2,
+                  "POPNBJAHNFK": {
+                    "ONEHKOHOCBH": 180
+                  }
+                }
+              },
+              {
+                "$type": "EDAOLCMCEBI",
+                "AMOLMPHFPHJ": -1,
+                "AOCCEKAGBFB": 12,
+                "HHENHNHHHDA": 1,
+                "IJDGNIIOHLM": [
+                  {
+                    "$type": "MMPLBPOHMGL",
+                    "BDHBNCEEPPK": "Target",
+                    "PDIFFCBMGMO": 2,
+                    "PEELJBICEHE": "_ABILITY_Kazuha_ElementalArt_ClickOrHold_Mark"
+                  }
+                ],
+                "ILELAOFJIKJ": true,
+                "KKMLMJNCLLG": 2021,
+                "LJFIEGHHLOB": true,
+                "MLFLDPAGADG": {
+                  "$type": "PKAELLAMAGL",
+                  "EEFLHEKBODJ": {
+                    "BNJLEBLGEKB": 180
+                  },
+                  "FDGFPGIDACF": {
+                    "IOPIFIJFBHI": 1,
+                    "LBLJIHBEDKH": 0.5
+                  },
+                  "GNFICELAKIB": 10,
+                  "HECMDGIAGKM": 2,
+                  "POPNBJAHNFK": {
+                    "ONEHKOHOCBH": 180
+                  }
+                }
+              }
+            ],
+            "GPPCPGHLDHL": "Unique",
+            "JPEAFDFPKAN": 0.20000000298023224,
+            "KFOMCJGGPPC": -1,
+            "PPKOPMBNPJH": true
+          },
+          "Avatar_Kazuha_ElementalArt_HitCheck": {
+            "DBGOKAKAHFP": 100,
+            "DOALDLPNGMF": -1,
+            "KFOMCJGGPPC": -1,
+            "LBABCICJBKE": [
+              {
+                "$type": "BINBHGLANKO",
+                "AMOLMPHFPHJ": -1,
+                "BDHBNCEEPPK": "Target",
+                "IJDGNIIOHLM": [
+                  {
+                    "$type": "DPNJGLIMCHM",
+                    "BDHBNCEEPPK": "Target",
+                    "BFDEHDNLNJH": [
+                      "Elemental_Art"
+                    ]
+                  },
+                  {
+                    "$type": "BKCJECHCDKG",
+                    "BDHBNCEEPPK": "Target",
+                    "FJGEDPNBGCG": -1,
+                    "LJBBKGIFJDB": [
+                      "Monster"
+                    ]
+                  }
+                ],
+                "ILELAOFJIKJ": true,
+                "LDFBDMNIADI": "Avatar_Kazuha_ElementalArt_AddHitMark",
+                "LJFIEGHHLOB": false
+              },
+              {
+                "$type": "PBIOEEHFHFD",
+                "AMOLMPHFPHJ": -1,
+                "BDHBNCEEPPK": "Target",
+                "ILELAOFJIKJ": true,
+                "LJFIEGHHLOB": false,
+                "MJKPCGCAPLK": [
+                  {
+                    "$type": "DPNJGLIMCHM",
+                    "BDHBNCEEPPK": "Target",
+                    "BFDEHDNLNJH": [
+                      "Elemental_Art"
+                    ]
+                  },
+                  {
+                    "$type": "BKCJECHCDKG",
+                    "BDHBNCEEPPK": "Target",
+                    "FJGEDPNBGCG": -1,
+                    "LJBBKGIFJDB": [
+                      "Monster"
+                    ]
+                  },
+                  {
+                    "$type": "MMPLBPOHMGL",
+                    "BDHBNCEEPPK": "Target",
+                    "NJJFOACNFGL": "NoneOrEqual",
+                    "PEELJBICEHE": "_ANIMAL_ENTITY_TYPE"
+                  }
+                ],
+                "MLJNNELMEFL": [
+                  {
+                    "$type": "BINBHGLANKO",
+                    "AMOLMPHFPHJ": -1,
+                    "ILELAOFJIKJ": true,
+                    "LDFBDMNIADI": "Avatar_Kazuha_ElementalArt_DropBall",
+                    "LJFIEGHHLOB": true
+                  }
+                ]
+              },
+              {
+                "$type": "BINBHGLANKO",
+                "AMOLMPHFPHJ": -1,
+                "BDHBNCEEPPK": "Target",
+                "IJDGNIIOHLM": [
+                  {
+                    "$type": "DPNJGLIMCHM",
+                    "BDHBNCEEPPK": "Target",
+                    "BFDEHDNLNJH": [
+                      "Elemental_Art"
+                    ]
+                  },
+                  {
+                    "$type": "BKCJECHCDKG",
+                    "BDHBNCEEPPK": "Target",
+                    "FJGEDPNBGCG": -1,
+                    "LJBBKGIFJDB": [
+                      "Monster"
+                    ]
+                  }
+                ],
+                "ILELAOFJIKJ": true,
+                "LDFBDMNIADI": "Avatar_Kazuha_ElementalArt_MonsterTail",
+                "LJFIEGHHLOB": false
+              }
+            ],
+            "PPKOPMBNPJH": true
+          },
+          "Avatar_Kazuha_ElementalArt_MonsterTail": {
+            "DBGOKAKAHFP": 100,
+            "DOALDLPNGMF": -1,
+            "EMGBJJOIENB": [
+              {
+                "$type": "PMNJOIIOFJI",
+                "AMOLMPHFPHJ": -1,
+                "BEIMGAKABJN": "Eff_Avatar_Boy_Sword_Kazuha_ElementalArt_MonsterTail",
+                "HJIHBAANFLE": 1,
+                "ILELAOFJIKJ": true,
+                "JMMALEJDAEF": -1,
+                "LJFIEGHHLOB": false,
+                "MLFLDPAGADG": {
+                  "EEFLHEKBODJ": {
+                    "BNJLEBLGEKB": 180
+                  },
+                  "GNFICELAKIB": 10,
+                  "HECMDGIAGKM": 2,
+                  "POPNBJAHNFK": {
+                    "ONEHKOHOCBH": 180
+                  }
+                }
+              }
+            ],
+            "JPEAFDFPKAN": 1.5,
+            "KFOMCJGGPPC": -1,
+            "LFIJIMIMBIH": [
+              {
+                "$type": "PMLGFJHHBML",
+                "AMOLMPHFPHJ": -1,
+                "ECNBIPILCKJ": 1,
+                "KOJDDEHOHAD": true,
+                "LLMFCDIPMHD": [
+                  {
+                    "$type": "CCJFIHGEMBO",
+                    "AMOLMPHFPHJ": -1,
+                    "ILELAOFJIKJ": true,
+                    "LDFBDMNIADI": "Avatar_Kazuha_ElementalArt_MonsterTail",
+                    "LJFIEGHHLOB": false
+                  }
+                ],
+                "OKLEHJIICDN": 1
+              }
+            ],
+            "OKAKOKDOAIM": [
+              {
+                "$type": "CCJFIHGEMBO",
+                "AMOLMPHFPHJ": -1,
+                "ILELAOFJIKJ": true,
+                "LDFBDMNIADI": "Avatar_Kazuha_ElementalArt_MonsterTail",
+                "LJFIEGHHLOB": false
+              }
+            ],
+            "PPKOPMBNPJH": true
+          },
+          "Avatar_Kazuha_ElementalArt_ResetMixType": {
+            "DBGOKAKAHFP": 100,
+            "DOALDLPNGMF": -1,
+            "EMGBJJOIENB": [
+              {
+                "$type": "HGFNHPLICPI",
+                "AMOLMPHFPHJ": -1,
+                "ILELAOFJIKJ": true,
+                "LJFIEGHHLOB": true,
+                "PEELJBICEHE": "_ABILITY_Kazuha_ElementalArt_MixType"
+              }
+            ],
+            "KFOMCJGGPPC": -1,
+            "PPKOPMBNPJH": true
+          }
+        },
+        "IIBMNPFLNMJ": "Avatar_Kazuha_ElementalArt_Check",
+        "OMAIGDMCJBO": {
+          "DBGOKAKAHFP": 100,
+          "DOALDLPNGMF": -1,
+          "KFOMCJGGPPC": -1,
+          "PPKOPMBNPJH": true
+        }
+      },
+      "old_pointer": "/3/Default",
+      "old_node_sha256": "d569695037bb9ceb56a7d0eefbc80effaaa169f6d265d2c11cd377e84144ffb6",
+      "old_raw": {
+        "onAdded": [
+          {
+            "$type": "AttachModifier",
+            "actorIceSubHurtDelta": -1,
+            "doOffStage": false,
+            "modifierName": "Avatar_Kazuha_ElementalArt_HitCheck",
+            "canBeHandledOnRecover": true
+          },
+          {
+            "$type": "SetGlobalValue",
+            "key": "_ABILITY_Kazuha_ElementalArt_ClickOrHold_Mark",
+            "actorIceSubHurtDelta": -1,
+            "doOffStage": true,
+            "canBeHandledOnRecover": true
+          }
+        ],
+        "abilityName": "Avatar_Kazuha_ElementalArt_Check",
+        "modifiers": {
+          "Avatar_Kazuha_ElementalArt_AddHitMark": {
+            "onAdded": [
+              {
+                "$type": "SetGlobalValue",
+                "key": "_ABILITY_Kazuha_ElementalArt_HitMark",
+                "value": 1,
+                "actorIceSubHurtDelta": -1,
+                "doOffStage": true,
+                "canBeHandledOnRecover": true
+              }
+            ],
+            "duration": 1.5,
+            "elementDurability": 100,
+            "minus_one": -1,
+            "onRemoved": [
+              {
+                "$type": "SetGlobalValue",
+                "key": "_ABILITY_Kazuha_ElementalArt_HitMark",
+                "actorIceSubHurtDelta": -1,
+                "doOffStage": true,
+                "canBeHandledOnRecover": true
+              }
+            ],
+            "IAKPBCLBNKF": -1,
+            "isLimitedProperties": true
+          },
+          "Avatar_Kazuha_ElementalArt_DropBall": {
+            "onAdded": [
+              {
+                "$type": "GenerateElemBall",
+                "actorIceSubHurtDelta": -1,
+                "doOffStage": true,
+                "configID": 2021,
+                "born": {
+                  "$type": "ConfigBornBySelf",
+                  "offset": {
+                    "x": 1,
+                    "z": 0.5
+                  },
+                  "APKLAIJMEIL": {
+                    "HHNLJKNBKPP": 180
+                  },
+                  "value": 10,
+                  "direction": {
+                    "maxAngle": 180
+                  },
+                  "onGroundRaycastUpDist": 2
+                },
+                "baseEnergy": 9,
+                "ratio": 1,
+                "predicates": [
+                  {
+                    "$type": "ByTargetGlobalValue",
+                    "key": "_ABILITY_Kazuha_ElementalArt_ClickOrHold_Mark",
+                    "target": "Target",
+                    "value": 1
+                  }
+                ],
+                "canBeHandledOnRecover": true
+              },
+              {
+                "$type": "GenerateElemBall",
+                "actorIceSubHurtDelta": -1,
+                "doOffStage": true,
+                "configID": 2021,
+                "born": {
+                  "$type": "ConfigBornBySelf",
+                  "offset": {
+                    "x": 1,
+                    "z": 0.5
+                  },
+                  "APKLAIJMEIL": {
+                    "HHNLJKNBKPP": 180
+                  },
+                  "value": 10,
+                  "direction": {
+                    "maxAngle": 180
+                  },
+                  "onGroundRaycastUpDist": 2
+                },
+                "baseEnergy": 12,
+                "ratio": 1,
+                "predicates": [
+                  {
+                    "$type": "ByTargetGlobalValue",
+                    "key": "_ABILITY_Kazuha_ElementalArt_ClickOrHold_Mark",
+                    "target": "Target",
+                    "value": 2
+                  }
+                ],
+                "canBeHandledOnRecover": true
+              }
+            ],
+            "stacking": "Unique",
+            "duration": 0.20000000298023224,
+            "elementDurability": 100,
+            "minus_one": -1,
+            "IAKPBCLBNKF": -1,
+            "isLimitedProperties": true
+          },
+          "Avatar_Kazuha_ElementalArt_HitCheck": {
+            "onAttackLanded": [
+              {
+                "$type": "ApplyModifier",
+                "target": "Target",
+                "actorIceSubHurtDelta": -1,
+                "doOffStage": false,
+                "modifierName": "Avatar_Kazuha_ElementalArt_AddHitMark",
+                "predicates": [
+                  {
+                    "$type": "ByAttackTags",
+                    "target": "Target",
+                    "attackTags": [
+                      "Elemental_Art"
+                    ]
+                  },
+                  {
+                    "$type": "ByEntityTypes",
+                    "target": "Target",
+                    "value": -1,
+                    "entityTypes": [
+                      "Monster"
+                    ]
+                  }
+                ],
+                "canBeHandledOnRecover": true
+              },
+              {
+                "$type": "Predicated",
+                "targetPredicates": [
+                  {
+                    "$type": "ByAttackTags",
+                    "target": "Target",
+                    "attackTags": [
+                      "Elemental_Art"
+                    ]
+                  },
+                  {
+                    "$type": "ByEntityTypes",
+                    "target": "Target",
+                    "value": -1,
+                    "entityTypes": [
+                      "Monster"
+                    ]
+                  },
+                  {
+                    "$type": "ByTargetGlobalValue",
+                    "key": "_ANIMAL_ENTITY_TYPE",
+                    "target": "Target",
+                    "compareType": "NoneOrEqual"
+                  }
+                ],
+                "target": "Target",
+                "actorIceSubHurtDelta": -1,
+                "doOffStage": false,
+                "successActions": [
+                  {
+                    "$type": "ApplyModifier",
+                    "actorIceSubHurtDelta": -1,
+                    "doOffStage": true,
+                    "modifierName": "Avatar_Kazuha_ElementalArt_DropBall",
+                    "canBeHandledOnRecover": true
+                  }
+                ],
+                "canBeHandledOnRecover": true
+              },
+              {
+                "$type": "ApplyModifier",
+                "target": "Target",
+                "actorIceSubHurtDelta": -1,
+                "doOffStage": false,
+                "modifierName": "Avatar_Kazuha_ElementalArt_MonsterTail",
+                "predicates": [
+                  {
+                    "$type": "ByAttackTags",
+                    "target": "Target",
+                    "attackTags": [
+                      "Elemental_Art"
+                    ]
+                  },
+                  {
+                    "$type": "ByEntityTypes",
+                    "target": "Target",
+                    "value": -1,
+                    "entityTypes": [
+                      "Monster"
+                    ]
+                  }
+                ],
+                "canBeHandledOnRecover": true
+              }
+            ],
+            "elementDurability": 100,
+            "minus_one": -1,
+            "IAKPBCLBNKF": -1,
+            "isLimitedProperties": true
+          },
+          "Avatar_Kazuha_ElementalArt_MonsterTail": {
+            "onAdded": [
+              {
+                "$type": "AttachEffect",
+                "actorIceSubHurtDelta": -1,
+                "scale": 1,
+                "doOffStage": false,
+                "born": {
+                  "APKLAIJMEIL": {
+                    "HHNLJKNBKPP": 180
+                  },
+                  "value": 10,
+                  "direction": {
+                    "maxAngle": 180
+                  },
+                  "onGroundRaycastUpDist": 2
+                },
+                "effectPattern": "Eff_Avatar_Boy_Sword_Kazuha_ElementalArt_MonsterTail",
+                "effectTempleteID": -1,
+                "canBeHandledOnRecover": true
+              }
+            ],
+            "onCrash": [
+              {
+                "$type": "RemoveModifier",
+                "actorIceSubHurtDelta": -1,
+                "doOffStage": false,
+                "modifierName": "Avatar_Kazuha_ElementalArt_MonsterTail",
+                "canBeHandledOnRecover": true
+              }
+            ],
+            "duration": 1.5,
+            "elementDurability": 100,
+            "minus_one": -1,
+            "modifierMixins": [
+              {
+                "$type": "VelocityDetectMixin",
+                "actorIceSubHurtDelta": -1,
+                "minSpeed": 1,
+                "onNegedge": [
+                  {
+                    "$type": "RemoveModifier",
+                    "actorIceSubHurtDelta": -1,
+                    "doOffStage": false,
+                    "modifierName": "Avatar_Kazuha_ElementalArt_MonsterTail",
+                    "canBeHandledOnRecover": true
+                  }
+                ],
+                "maxSpeed": 1,
+                "detectOnStart": true
+              }
+            ],
+            "IAKPBCLBNKF": -1,
+            "isLimitedProperties": true
+          },
+          "Avatar_Kazuha_ElementalArt_ResetMixType": {
+            "onAdded": [
+              {
+                "$type": "SetGlobalValue",
+                "key": "_ABILITY_Kazuha_ElementalArt_MixType",
+                "actorIceSubHurtDelta": -1,
+                "doOffStage": true,
+                "canBeHandledOnRecover": true
+              }
+            ],
+            "elementDurability": 100,
+            "minus_one": -1,
+            "IAKPBCLBNKF": -1,
+            "isLimitedProperties": true
+          }
+        },
+        "LKLPDIMKLKI": {
+          "elementDurability": 100,
+          "minus_one": -1,
+          "IAKPBCLBNKF": -1,
+          "isLimitedProperties": true
+        },
+        "abilityMixins": [
+          {
+            "$type": "SkillButtonHoldChargeMixin",
+            "actorIceSubHurtDelta": -1,
+            "nextLoopTriggerID": "NextLoopTrigger",
+            "skillID": 10472,
+            "beforeStateIDs": [
+              "Kazuha_ElementalArt_BS"
+            ],
+            "beforeHoldDuration": -1,
+            "chargeLoopStateIDs": [
+              "Kazuha_ElementalArt_Charge"
+            ],
+            "chargeLoopDurations": [
+              3
+            ],
+            "endHoldTrigger": "EndHoldTrigger"
+          },
+          {
+            "$type": "AttachToStateIDMixin",
+            "stateIDs": [
+              "Kazuha_ElementalArt_BS",
+              "Kazuha_ElementalArt_Air"
+            ],
+            "actorIceSubHurtDelta": -1,
+            "modifierName": "Avatar_Kazuha_ElementalArt_ResetMixType",
+            "value": -1
+          }
+        ]
+      }
+    },
+    "tap": {
+      "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Kazuha.json",
+      "new_pointer": "/7/Default",
+      "new_node_sha256": "e2c54b9458cccf73f2b149d46375dfe7cecb4502e047ce60d07a706ee0f3fd09",
+      "new_raw": {
+        "ECFFDLHMCLK": [
+          {
+            "$type": "BINBHGLANKO",
+            "AMOLMPHFPHJ": -1,
+            "ILELAOFJIKJ": true,
+            "LDFBDMNIADI": "Avatar_Kazuha_ElementalArt_EnterCD",
+            "LJFIEGHHLOB": false
+          },
+          {
+            "$type": "BINBHGLANKO",
+            "AMOLMPHFPHJ": -1,
+            "ILELAOFJIKJ": true,
+            "LDFBDMNIADI": "Avatar_Kazuha_ElementalArt_Click_Detect",
+            "LJFIEGHHLOB": false
+          },
+          {
+            "$type": "BINBHGLANKO",
+            "AMOLMPHFPHJ": -1,
+            "ILELAOFJIKJ": true,
+            "LDFBDMNIADI": "Avatar_Kazuha_EmptyJump_Strike",
+            "LJFIEGHHLOB": false
+          },
+          {
+            "$type": "BINBHGLANKO",
+            "AMOLMPHFPHJ": -1,
+            "IJDGNIIOHLM": [
+              {
+                "$type": "DIOFPDKDAIG",
+                "BDHBNCEEPPK": "Target",
+                "JPCEGCMOHNI": "Kazuha_PermanentSkill_1"
+              }
+            ],
+            "ILELAOFJIKJ": true,
+            "LDFBDMNIADI": "Avatar_Kazuha_EmptyJump_MixDetect",
+            "LJFIEGHHLOB": false
+          },
+          {
+            "$type": "AHICIAHHALJ",
+            "AMOLMPHFPHJ": -1,
+            "IIBMNPFLNMJ": "Avatar_Kazuha_PermanentSkill_1_Mix",
+            "IJDGNIIOHLM": [
+              {
+                "$type": "DIOFPDKDAIG",
+                "BDHBNCEEPPK": "Target",
+                "JPCEGCMOHNI": "Kazuha_PermanentSkill_1"
+              }
+            ],
+            "ILELAOFJIKJ": true,
+            "LJFIEGHHLOB": false,
+            "LPFPKHHKGIB": "Other"
+          },
+          {
+            "$type": "AHICIAHHALJ",
+            "AMOLMPHFPHJ": -1,
+            "IIBMNPFLNMJ": "Avatar_Kazuha_Constellation_6",
+            "IJDGNIIOHLM": [
+              {
+                "$type": "DIOFPDKDAIG",
+                "BDHBNCEEPPK": "Target",
+                "JPCEGCMOHNI": "Kazuha_Constellation_6"
+              }
+            ],
+            "ILELAOFJIKJ": true,
+            "LJFIEGHHLOB": false,
+            "LPFPKHHKGIB": "Other"
+          },
+          {
+            "$type": "BINBHGLANKO",
+            "AMOLMPHFPHJ": -1,
+            "ILELAOFJIKJ": true,
+            "LDFBDMNIADI": "Avatar_Kazuha_EmptyJump_CreateWindZone",
+            "LJFIEGHHLOB": false
+          },
+          {
+            "$type": "BINBHGLANKO",
+            "AMOLMPHFPHJ": -1,
+            "ILELAOFJIKJ": true,
+            "LDFBDMNIADI": "Avatar_Kazuha_EmptyJump_DragCamera",
+            "LJFIEGHHLOB": false
+          }
+        ],
+        "FBHJJNMDIPC": [
+          {
+            "$type": "BIODPHLIIMC",
+            "AMOLMPHFPHJ": -1,
+            "DMOEMFMCLCG": 1,
+            "DNONAJNPHLB": 10473,
+            "GIKCHCCCCBP": "AvatarSpecial",
+            "ICKLCNJHNNE": 10473
+          },
+          {
+            "$type": "LAJOBHCLKFH",
+            "AMOLMPHFPHJ": -1,
+            "GJHGMFEADDF": -1,
+            "JEILHICOEOE": [
+              "Kazuha_ElementalArt_Landed",
+              "Kazuha_ElementalArt_Air"
+            ],
+            "LDFBDMNIADI": "Avatar_Kazuha_EmptyJump_Effect"
+          },
+          {
+            "$type": "BDCJJMBPFLP",
+            "AMOLMPHFPHJ": -1,
+            "EADEIJEKAGH": -1,
+            "FOEMEIOECMA": true,
+            "HBNFMFKEGFI": 90,
+            "JEILHICOEOE": [
+              "Kazuha_ElementalArt_Landed",
+              "Kazuha_ElementalArt_Air"
+            ]
+          }
+        ],
+        "GPPBBDEICKP": {
+          "Avatar_Kazuha_ElementalArt_Click_Detect": {
+            "DBGOKAKAHFP": 100,
+            "DOALDLPNGMF": -1,
+            "EMGBJJOIENB": [
+              {
+                "$type": "HGFNHPLICPI",
+                "AMOLMPHFPHJ": -1,
+                "ILELAOFJIKJ": true,
+                "LJFIEGHHLOB": true,
+                "PDIFFCBMGMO": 1,
+                "PEELJBICEHE": "_ABILITY_Kazuha_ElementalArt_ClickOrHold_Mark"
+              }
+            ],
+            "JPEAFDFPKAN": 0.10000000149011612,
+            "KFOMCJGGPPC": -1,
+            "PPKOPMBNPJH": true
+          },
+          "Avatar_Kazuha_ElementalArt_EnterCD": {
+            "DBGOKAKAHFP": 100,
+            "DOALDLPNGMF": -1,
+            "EMGBJJOIENB": [
+              {
+                "$type": "FLNAIHPCKOC",
+                "ACFKMLJKONM": 10472,
+                "AMOLMPHFPHJ": -1,
+                "IJDGNIIOHLM": [
+                  {
+                    "$type": "IHGKAFICMGI",
+                    "ACFKMLJKONM": 10472,
+                    "BDHBNCEEPPK": "Target"
+                  }
+                ],
+                "ILELAOFJIKJ": true,
+                "IODFBPJBHOB": 1,
+                "LJFIEGHHLOB": false,
+                "NABFCPIKHEO": 1,
+                "NKOFINBNOOK": 1
+              },
+              {
+                "$type": "FLNAIHPCKOC",
+                "ACFKMLJKONM": 10473,
+                "AMOLMPHFPHJ": -1,
+                "IJDGNIIOHLM": [
+                  {
+                    "$type": "IHGKAFICMGI",
+                    "ACFKMLJKONM": 10473,
+                    "BDHBNCEEPPK": "Target"
+                  }
+                ],
+                "ILELAOFJIKJ": true,
+                "IODFBPJBHOB": 1,
+                "LJFIEGHHLOB": false,
+                "NABFCPIKHEO": 1,
+                "NKOFINBNOOK": 1
+              }
+            ],
+            "JPEAFDFPKAN": 0.10000000149011612,
+            "KFOMCJGGPPC": -1,
+            "PPKOPMBNPJH": true
+          },
+          "Avatar_Kazuha_EmptyJump_CreateWindZone": {
+            "DBGOKAKAHFP": 100,
+            "DOALDLPNGMF": -1,
+            "EMGBJJOIENB": [
+              {
+                "$type": "PBIOEEHFHFD",
+                "AMOLMPHFPHJ": -1,
+                "ILELAOFJIKJ": true,
+                "LJFIEGHHLOB": false,
+                "MJKPCGCAPLK": [
+                  {
+                    "$type": "LAHNIAGGAID",
+                    "BDHBNCEEPPK": "Target",
+                    "DKCBCJCHEBF": "Lesser",
+                    "GGGLOMBDHBB": "Both",
+                    "PDIFFCBMGMO": 2
+                  }
+                ],
+                "MLJNNELMEFL": [
+                  {
+                    "$type": "CCMGOLHOADE",
+                    "AMOLMPHFPHJ": -1,
+                    "BBGMLDFBFFH": "Enemy",
+                    "BMEPMJIOPDC": 41047001,
+                    "EBNIOBFDHEN": {
+                      "CBINIBBHIKE": 0.5,
+                      "CGDBBHHIINM": true,
+                      "HPMHFMDGBLM": 0.5,
+                      "JAILLBHLHNO": true
+                    },
+                    "ILELAOFJIKJ": true,
+                    "KGHIIEPKAAM": true,
+                    "LJFIEGHHLOB": false,
+                    "MFNOGAGFMKF": 1001,
+                    "MLFLDPAGADG": {
+                      "$type": "PKAELLAMAGL",
+                      "EEFLHEKBODJ": {
+                        "BNJLEBLGEKB": 180
+                      },
+                      "GNFICELAKIB": 10,
+                      "HECMDGIAGKM": 2,
+                      "LMBGHPGJIAP": true,
+                      "POPNBJAHNFK": {
+                        "ONEHKOHOCBH": 180
+                      }
+                    }
+                  }
+                ],
+                "PAPFFKOKPML": [
+                  {
+                    "$type": "CCMGOLHOADE",
+                    "AMOLMPHFPHJ": -1,
+                    "BBGMLDFBFFH": "Enemy",
+                    "BMEPMJIOPDC": 41047001,
+                    "EBNIOBFDHEN": {
+                      "CBINIBBHIKE": 0.5,
+                      "CGDBBHHIINM": true,
+                      "HPMHFMDGBLM": 0.5,
+                      "JAILLBHLHNO": true
+                    },
+                    "ILELAOFJIKJ": true,
+                    "KGHIIEPKAAM": true,
+                    "LJFIEGHHLOB": false,
+                    "MFNOGAGFMKF": 1001,
+                    "MLFLDPAGADG": {
+                      "$type": "PKAELLAMAGL",
+                      "EEFLHEKBODJ": {
+                        "BNJLEBLGEKB": 180
+                      },
+                      "FDGFPGIDACF": {
+                        "IOPIFIJFBHI": -1
+                      },
+                      "GNFICELAKIB": 10,
+                      "HECMDGIAGKM": 2,
+                      "POPNBJAHNFK": {
+                        "ONEHKOHOCBH": 180
+                      }
+                    }
+                  }
+                ]
+              }
+            ],
+            "JPEAFDFPKAN": 0.30000001192092896,
+            "KFOMCJGGPPC": -1,
+            "PPKOPMBNPJH": true
+          },
+          "Avatar_Kazuha_EmptyJump_DragCamera": {
+            "DBGOKAKAHFP": 100,
+            "DOALDLPNGMF": -1,
+            "EMGBJJOIENB": [
+              {
+                "$type": "NCMGFENKCDP",
+                "AMOLMPHFPHJ": -1,
+                "ILELAOFJIKJ": true,
+                "LJFIEGHHLOB": false,
+                "OENJCBPIBJB": {
+                  "DCCEDKEOHHI": 1,
+                  "EJHKJOKFCJE": 7,
+                  "MALOIEBIGMD": 0.4000000059604645,
+                  "MHGBHGOEOCJ": 1,
+                  "PLLEFEFFEKN": true
+                }
+              }
+            ],
+            "JPEAFDFPKAN": 0.5,
+            "KFOMCJGGPPC": -1,
+            "PPKOPMBNPJH": true
+          },
+          "Avatar_Kazuha_EmptyJump_Effect": {
+            "DBGOKAKAHFP": 100,
+            "DOALDLPNGMF": -1,
+            "EMGBJJOIENB": [
+              {
+                "$type": "MOOAODKIBCM",
+                "AMOLMPHFPHJ": -1,
+                "BEIMGAKABJN": "Eff_Avatar_Boy_Sword_Kazuha_ElementalArt_EmptyJump",
+                "HJIHBAANFLE": 1,
+                "ILELAOFJIKJ": true,
+                "JMMALEJDAEF": -1,
+                "LJFIEGHHLOB": false,
+                "MLFLDPAGADG": {
+                  "EEFLHEKBODJ": {
+                    "BNJLEBLGEKB": 180
+                  },
+                  "GNFICELAKIB": 10,
+                  "HECMDGIAGKM": 2,
+                  "POPNBJAHNFK": {
+                    "ONEHKOHOCBH": 180
+                  }
+                }
+              }
+            ],
+            "JPEAFDFPKAN": 0.10000000149011612,
+            "KFOMCJGGPPC": -1,
+            "PPKOPMBNPJH": true
+          },
+          "Avatar_Kazuha_EmptyJump_MixDetect": {
+            "DBGOKAKAHFP": 100,
+            "DOALDLPNGMF": -1,
+            "EMGBJJOIENB": [
+              {
+                "$type": "MMHMEBEEKGK",
+                "AMOLMPHFPHJ": -1,
+                "IDCIIIFMDCM": {
+                  "CEIJEFJBMBL": {
+                    "$type": "BOOONJENCDB",
+                    "BKCIBHHMGEE": 5,
+                    "CHKHGBFIPCB": 360,
+                    "COBJECNAEOG": 1,
+                    "EAJAHKDHNJM": {
+                      "GMEKLJBJADO": {
+                        "KJCBAFKFFMP": 1,
+                        "PGPNDGBABNI": true
+                      }
+                    },
+                    "EHFMPIOJOLN": "TriggerNoRepeat",
+                    "LDJMMNPDKHC": true,
+                    "MLFLDPAGADG": {
+                      "$type": "PKAELLAMAGL",
+                      "EEFLHEKBODJ": {
+                        "BNJLEBLGEKB": 180
+                      },
+                      "FDGFPGIDACF": {
+                        "IOPIFIJFBHI": -1.5
+                      },
+                      "GNFICELAKIB": 10,
+                      "HECMDGIAGKM": 2,
+                      "POPNBJAHNFK": {
+                        "ONEHKOHOCBH": 180
+                      }
+                    },
+                    "NDGCJAKHDGH": 4
+                  },
+                  "LGHDGGJIJOK": {
+                    "BKLFAECNFOF": {
+                      "EIAGIEDFLHJ": {
+                        "KJCBAFKFFMP": 1,
+                        "PGPNDGBABNI": true
+                      },
+                      "IHBPFOBEJKN": "default"
+                    },
+                    "EHKJIDFINEK": {
+                      "DBGOKAKAHFP": 1,
+                      "EPPIDAILPBN": "AntiFire",
+                      "FDGDIBBILMD": "None",
+                      "JDOLIAEMINM": 1,
+                      "PEPDKCDHNIM": "Default"
+                    },
+                    "HDIFFKOHDNL": {
+                      "OGGEIBICAHC": "Shake"
+                    },
+                    "HGLEEJNPBEB": "default",
+                    "IAFHAPFBBOB": "Kazuha_ElementalArt_Mix_Detect",
+                    "IJFOFLPPGHK": {
+                      "EANBEIIKCIL": {
+                        "BGINHMBLECN": 0.11999999731779099,
+                        "HMANOMCGFLK": true,
+                        "KBAIICCLOEF": 0.5,
+                        "PJGAOELGLIF": 0.11999999731779099
+                      },
+                      "KDBKDJBCACN": 20
+                    },
+                    "NMMJKLAHOHH": {
+                      "EIAGIEDFLHJ": {
+                        "KJCBAFKFFMP": 1,
+                        "PGPNDGBABNI": true
+                      },
+                      "IHBPFOBEJKN": "default"
+                    }
+                  }
+                },
+                "ILELAOFJIKJ": true,
+                "LJFIEGHHLOB": false,
+                "NMKBOEALDEF": "All"
+              }
+            ],
+            "JPEAFDFPKAN": 0.30000001192092896,
+            "KFOMCJGGPPC": -1,
+            "PPKOPMBNPJH": true
+          },
+          "Avatar_Kazuha_EmptyJump_Strike": {
+            "DBGOKAKAHFP": 100,
+            "DOALDLPNGMF": -1,
+            "EMGBJJOIENB": [
+              {
+                "$type": "PBIOEEHFHFD",
+                "AMOLMPHFPHJ": -1,
+                "ILELAOFJIKJ": true,
+                "LJFIEGHHLOB": false,
+                "MJKPCGCAPLK": [
+                  {
+                    "$type": "LAHNIAGGAID",
+                    "BDHBNCEEPPK": "Target",
+                    "DKCBCJCHEBF": "Lesser",
+                    "GGGLOMBDHBB": "Both",
+                    "PDIFFCBMGMO": 2
+                  }
+                ],
+                "MLJNNELMEFL": [
+                  {
+                    "$type": "MMHMEBEEKGK",
+                    "AMOLMPHFPHJ": -1,
+                    "IDCIIIFMDCM": {
+                      "CEIJEFJBMBL": {
+                        "$type": "BOOONJENCDB",
+                        "BKCIBHHMGEE": 5,
+                        "CHKHGBFIPCB": 360,
+                        "COBJECNAEOG": 1,
+                        "EAJAHKDHNJM": {
+                          "GMEKLJBJADO": {
+                            "KJCBAFKFFMP": 1,
+                            "PGPNDGBABNI": true
+                          }
+                        },
+                        "EHFMPIOJOLN": "TriggerNoRepeat",
+                        "MLFLDPAGADG": {
+                          "$type": "PKAELLAMAGL",
+                          "EEFLHEKBODJ": {
+                            "BNJLEBLGEKB": 180
+                          },
+                          "FDGFPGIDACF": {
+                            "IOPIFIJFBHI": -1.5
+                          },
+                          "GNFICELAKIB": 10,
+                          "HECMDGIAGKM": 2,
+                          "LMBGHPGJIAP": true,
+                          "POPNBJAHNFK": {
+                            "ONEHKOHOCBH": 180
+                          }
+                        },
+                        "NDGCJAKHDGH": 4
+                      },
+                      "LGHDGGJIJOK": {
+                        "BKLFAECNFOF": {
+                          "EIAGIEDFLHJ": {
+                            "KJCBAFKFFMP": 1,
+                            "PGPNDGBABNI": true
+                          },
+                          "IHBPFOBEJKN": "default"
+                        },
+                        "EHKJIDFINEK": {
+                          "DBGOKAKAHFP": 25,
+                          "EPPIDAILPBN": "Wind",
+                          "FBAEEIPKEHO": 150,
+                          "JDOLIAEMINM": 1,
+                          "KOLOHIDMHHE": "ElementalArt_EmptyJump_Damage",
+                          "PEPDKCDHNIM": "Range"
+                        },
+                        "HDIFFKOHDNL": {
+                          "OGGEIBICAHC": "Shake"
+                        },
+                        "HGLEEJNPBEB": "default",
+                        "IAFHAPFBBOB": "Elemental_Art",
+                        "IJFOFLPPGHK": {
+                          "AKEAAAMAHBH": "CustomVector",
+                          "EANBEIIKCIL": {
+                            "BGINHMBLECN": 0.11999999731779099,
+                            "HMANOMCGFLK": true,
+                            "KBAIICCLOEF": 0.5,
+                            "PJGAOELGLIF": 0.11999999731779099
+                          },
+                          "IKAFKIJNDOO": 0.11999999731779099,
+                          "INFKIOGHNPI": {
+                            "_x": -1,
+                            "_y": 0.5
+                          },
+                          "KDBKDJBCACN": 20,
+                          "MABMBBAJLAC": 0.20000000298023224
+                        },
+                        "NMMJKLAHOHH": {
+                          "ANBHPFEONOL": 0.05000000074505806,
+                          "EIAGIEDFLHJ": {
+                            "KJCBAFKFFMP": 1,
+                            "PGPNDGBABNI": true
+                          },
+                          "IHBPFOBEJKN": "default",
+                          "LHEILBMGANH": "ByHitDirectionInverse",
+                          "NHEHLACIFKG": {
+                            "DLKJKJCJAFG": "Air",
+                            "KLHCPLKCLBB": 800,
+                            "MNPBFNAGNAF": 100
+                          },
+                          "PAPNKKIKAOC": "LV7"
+                        }
+                      }
+                    },
+                    "ILELAOFJIKJ": true,
+                    "LJFIEGHHLOB": false,
+                    "NMKBOEALDEF": "Enemy"
+                  }
+                ],
+                "PAPFFKOKPML": [
+                  {
+                    "$type": "MMHMEBEEKGK",
+                    "AMOLMPHFPHJ": -1,
+                    "IDCIIIFMDCM": {
+                      "CEIJEFJBMBL": {
+                        "$type": "BOOONJENCDB",
+                        "BKCIBHHMGEE": 5,
+                        "CHKHGBFIPCB": 360,
+                        "COBJECNAEOG": 1,
+                        "EAJAHKDHNJM": {
+                          "GMEKLJBJADO": {
+                            "KJCBAFKFFMP": 1,
+                            "PGPNDGBABNI": true
+                          }
+                        },
+                        "EHFMPIOJOLN": "TriggerNoRepeat",
+                        "MLFLDPAGADG": {
+                          "$type": "PKAELLAMAGL",
+                          "EEFLHEKBODJ": {
+                            "BNJLEBLGEKB": 180
+                          },
+                          "FDGFPGIDACF": {
+                            "IOPIFIJFBHI": -2
+                          },
+                          "GNFICELAKIB": 10,
+                          "HECMDGIAGKM": 2,
+                          "POPNBJAHNFK": {
+                            "ONEHKOHOCBH": 180
+                          }
+                        },
+                        "NDGCJAKHDGH": 4
+                      },
+                      "LGHDGGJIJOK": {
+                        "BKLFAECNFOF": {
+                          "EIAGIEDFLHJ": {
+                            "KJCBAFKFFMP": 1,
+                            "PGPNDGBABNI": true
+                          },
+                          "IHBPFOBEJKN": "default"
+                        },
+                        "EHKJIDFINEK": {
+                          "DBGOKAKAHFP": 25,
+                          "EPPIDAILPBN": "Wind",
+                          "FBAEEIPKEHO": 150,
+                          "JDOLIAEMINM": 1,
+                          "KOLOHIDMHHE": "ElementalArt_EmptyJump_Damage",
+                          "PEPDKCDHNIM": "Range"
+                        },
+                        "HDIFFKOHDNL": {
+                          "OGGEIBICAHC": "Shake"
+                        },
+                        "HGLEEJNPBEB": "default",
+                        "IAFHAPFBBOB": "Elemental_Art",
+                        "IJFOFLPPGHK": {
+                          "AKEAAAMAHBH": "CustomVector",
+                          "EANBEIIKCIL": {
+                            "BGINHMBLECN": 0.11999999731779099,
+                            "HMANOMCGFLK": true,
+                            "KBAIICCLOEF": 0.5,
+                            "PJGAOELGLIF": 0.11999999731779099
+                          },
+                          "IKAFKIJNDOO": 0.11999999731779099,
+                          "INFKIOGHNPI": {
+                            "_x": -1,
+                            "_y": 0.5
+                          },
+                          "KDBKDJBCACN": 20,
+                          "MABMBBAJLAC": 0.20000000298023224
+                        },
+                        "NMMJKLAHOHH": {
+                          "ANBHPFEONOL": 0.05000000074505806,
+                          "EIAGIEDFLHJ": {
+                            "KJCBAFKFFMP": 1,
+                            "PGPNDGBABNI": true
+                          },
+                          "IHBPFOBEJKN": "default",
+                          "LHEILBMGANH": "ByHitDirectionInverse",
+                          "NHEHLACIFKG": {
+                            "DLKJKJCJAFG": "Air",
+                            "KLHCPLKCLBB": 800,
+                            "MNPBFNAGNAF": 100
+                          },
+                          "PAPNKKIKAOC": "LV7"
+                        }
+                      }
+                    },
+                    "ILELAOFJIKJ": true,
+                    "LJFIEGHHLOB": false,
+                    "NMKBOEALDEF": "Enemy"
+                  }
+                ]
+              }
+            ],
+            "JPEAFDFPKAN": 0.30000001192092896,
+            "KFOMCJGGPPC": -1,
+            "PPKOPMBNPJH": true
+          }
+        },
+        "IIBMNPFLNMJ": "Avatar_Kazuha_ElementalArt_EmptyJump",
+        "LOEHLJGBGAC": {
+          "ElementalArt_EmptyJump_Damage": 0
+        },
+        "OMAIGDMCJBO": {
+          "DBGOKAKAHFP": 100,
+          "DOALDLPNGMF": -1,
+          "KFOMCJGGPPC": -1,
+          "PPKOPMBNPJH": true
+        }
+      },
+      "old_pointer": "/7/Default",
+      "old_node_sha256": "31f8e846d8ddb7de02128ba6255ac00a2170b73225b40cb83bd86da15070dff7",
+      "old_raw": {
+        "abilitySpecials": {
+          "ElementalArt_EmptyJump_Damage": 0
+        },
+        "abilityName": "Avatar_Kazuha_ElementalArt_EmptyJump",
+        "modifiers": {
+          "Avatar_Kazuha_ElementalArt_Click_Detect": {
+            "onAdded": [
+              {
+                "$type": "SetGlobalValue",
+                "key": "_ABILITY_Kazuha_ElementalArt_ClickOrHold_Mark",
+                "value": 1,
+                "actorIceSubHurtDelta": -1,
+                "doOffStage": true,
+                "canBeHandledOnRecover": true
+              }
+            ],
+            "duration": 0.10000000149011612,
+            "elementDurability": 100,
+            "minus_one": -1,
+            "IAKPBCLBNKF": -1,
+            "isLimitedProperties": true
+          },
+          "Avatar_Kazuha_ElementalArt_EnterCD": {
+            "onAdded": [
+              {
+                "$type": "AvatarSkillStart",
+                "cdRatio": 1,
+                "costStaminaRatio": 1,
+                "actorIceSubHurtDelta": -1,
+                "doOffStage": false,
+                "skillID": 10472,
+                "predicates": [
+                  {
+                    "$type": "BySkillReady",
+                    "target": "Target",
+                    "skillID": 10472
+                  }
+                ],
+                "canBeHandledOnRecover": true
+              },
+              {
+                "$type": "AvatarSkillStart",
+                "cdRatio": 1,
+                "costStaminaRatio": 1,
+                "actorIceSubHurtDelta": -1,
+                "doOffStage": false,
+                "skillID": 10473,
+                "predicates": [
+                  {
+                    "$type": "BySkillReady",
+                    "target": "Target",
+                    "skillID": 10473
+                  }
+                ],
+                "canBeHandledOnRecover": true
+              }
+            ],
+            "duration": 0.10000000149011612,
+            "elementDurability": 100,
+            "minus_one": -1,
+            "IAKPBCLBNKF": -1,
+            "isLimitedProperties": true
+          },
+          "Avatar_Kazuha_EmptyJump_CreateWindZone": {
+            "onAdded": [
+              {
+                "$type": "Predicated",
+                "targetPredicates": [
+                  {
+                    "$type": "ByTargetAltitude",
+                    "target": "Target",
+                    "value": 2,
+                    "logic": "Lesser",
+                    "TargetAltitudeType": "Both"
+                  }
+                ],
+                "actorIceSubHurtDelta": -1,
+                "doOffStage": false,
+                "failActions": [
+                  {
+                    "$type": "CreateGadget",
+                    "actorIceSubHurtDelta": -1,
+                    "doOffStage": false,
+                    "campTargetType": "Enemy",
+                    "born": {
+                      "$type": "ConfigBornBySelf",
+                      "offset": {
+                        "x": -1
+                      },
+                      "APKLAIJMEIL": {
+                        "HHNLJKNBKPP": 180
+                      },
+                      "value": 10,
+                      "direction": {
+                        "maxAngle": 180
+                      },
+                      "onGroundRaycastUpDist": 2
+                    },
+                    "campID": 1001,
+                    "KLGHKKGGHEA": {
+                      "CBLLACNAMON": true,
+                      "DBOLJFPPFGI": 0.5,
+                      "JOCOGLBCMEJ": 0.5,
+                      "LKEBJHCDOHB": true
+                    },
+                    "gadgetID": 41047001,
+                    "canBeHandledOnRecover": true,
+                    "lifeByOwnerV2": true
+                  }
+                ],
+                "successActions": [
+                  {
+                    "$type": "CreateGadget",
+                    "actorIceSubHurtDelta": -1,
+                    "doOffStage": false,
+                    "campTargetType": "Enemy",
+                    "born": {
+                      "$type": "ConfigBornBySelf",
+                      "APKLAIJMEIL": {
+                        "HHNLJKNBKPP": 180
+                      },
+                      "value": 10,
+                      "direction": {
+                        "maxAngle": 180
+                      },
+                      "onGroundRaycastUpDist": 2,
+                      "onGround": true
+                    },
+                    "campID": 1001,
+                    "KLGHKKGGHEA": {
+                      "CBLLACNAMON": true,
+                      "DBOLJFPPFGI": 0.5,
+                      "JOCOGLBCMEJ": 0.5,
+                      "LKEBJHCDOHB": true
+                    },
+                    "gadgetID": 41047001,
+                    "canBeHandledOnRecover": true,
+                    "lifeByOwnerV2": true
+                  }
+                ],
+                "canBeHandledOnRecover": true
+              }
+            ],
+            "duration": 0.30000001192092896,
+            "elementDurability": 100,
+            "minus_one": -1,
+            "IAKPBCLBNKF": -1,
+            "isLimitedProperties": true
+          },
+          "Avatar_Kazuha_EmptyJump_DragCamera": {
+            "onAdded": [
+              {
+                "$type": "AvatarCameraParam",
+                "actorIceSubHurtDelta": -1,
+                "doOffStage": false,
+                "cameraParam": {
+                  "ELHHLIGJFDD": 1,
+                  "forceRadiusDuration": 0.4000000059604645,
+                  "shouldKeepForceRadius": true,
+                  "OJENIIDAGKM": 1,
+                  "forceRadius": 7
+                },
+                "canBeHandledOnRecover": true
+              }
+            ],
+            "duration": 0.5,
+            "elementDurability": 100,
+            "minus_one": -1,
+            "IAKPBCLBNKF": -1,
+            "isLimitedProperties": true
+          },
+          "Avatar_Kazuha_EmptyJump_Effect": {
+            "onAdded": [
+              {
+                "$type": "FireEffect",
+                "actorIceSubHurtDelta": -1,
+                "scale": 1,
+                "doOffStage": false,
+                "born": {
+                  "APKLAIJMEIL": {
+                    "HHNLJKNBKPP": 180
+                  },
+                  "value": 10,
+                  "direction": {
+                    "maxAngle": 180
+                  },
+                  "onGroundRaycastUpDist": 2
+                },
+                "effectPattern": "Eff_Avatar_Boy_Sword_Kazuha_ElementalArt_EmptyJump",
+                "effectTempleteID": -1,
+                "canBeHandledOnRecover": true
+              }
+            ],
+            "duration": 0.10000000149011612,
+            "elementDurability": 100,
+            "minus_one": -1,
+            "IAKPBCLBNKF": -1,
+            "isLimitedProperties": true
+          },
+          "Avatar_Kazuha_EmptyJump_MixDetect": {
+            "onAdded": [
+              {
+                "$type": "TriggerAttackEvent",
+                "targetType": "All",
+                "actorIceSubHurtDelta": -1,
+                "doOffStage": false,
+                "attackEvent": {
+                  "attackInfo": {
+                    "attackTag": "Kazuha_ElementalArt_Mix_Detect",
+                    "HBOOKFMCODC": {
+                      "BPIJOAMNKIH": {
+                        "GGOHGMFHHEC": true,
+                        "value": 1
+                      },
+                      "onHitEffectName": "default"
+                    },
+                    "hitPattern": {
+                      "BPIJOAMNKIH": {
+                        "GGOHGMFHHEC": true,
+                        "value": 1
+                      },
+                      "onHitEffectName": "default"
+                    },
+                    "INKGMIHAPMA": {
+                      "NDIBGPPKGJP": "Shake"
+                    },
+                    "cameraShake": {
+                      "shakeDistance": 20,
+                      "extension": {
+                        "rangeAttenuation": 0.5,
+                        "baseOnCamera": true,
+                        "baseCycle": 0.11999999731779099,
+                        "cycleDamping": 0.11999999731779099
+                      }
+                    },
+                    "attenuationGroup": "default",
+                    "attackProperty": {
+                      "elementType": "AntiFire",
+                      "elementDurability": 1,
+                      "elementRank": 1,
+                      "attackType": "Default",
+                      "strikeType": "None"
+                    }
+                  },
+                  "attackPattern": {
+                    "$type": "ConfigAttackCircle",
+                    "BBCMILAIPCE": true,
+                    "fanAngle": 360,
+                    "height": 4,
+                    "born": {
+                      "$type": "ConfigBornBySelf",
+                      "offset": {
+                        "x": -1.5
+                      },
+                      "APKLAIJMEIL": {
+                        "HHNLJKNBKPP": 180
+                      },
+                      "value": 10,
+                      "direction": {
+                        "maxAngle": 180
+                      },
+                      "onGroundRaycastUpDist": 2
+                    },
+                    "MPNIJNGFBIH": {
+                      "INOCAOHPEBB": {
+                        "GGOHGMFHHEC": true,
+                        "value": 1
+                      }
+                    },
+                    "triggerType": "TriggerNoRepeat",
+                    "radius": 5,
+                    "massiveAttackRatio": 1
+                  }
+                },
+                "canBeHandledOnRecover": true
+              }
+            ],
+            "duration": 0.30000001192092896,
+            "elementDurability": 100,
+            "minus_one": -1,
+            "IAKPBCLBNKF": -1,
+            "isLimitedProperties": true
+          },
+          "Avatar_Kazuha_EmptyJump_Strike": {
+            "onAdded": [
+              {
+                "$type": "Predicated",
+                "targetPredicates": [
+                  {
+                    "$type": "ByTargetAltitude",
+                    "target": "Target",
+                    "value": 2,
+                    "logic": "Lesser",
+                    "TargetAltitudeType": "Both"
+                  }
+                ],
+                "actorIceSubHurtDelta": -1,
+                "doOffStage": false,
+                "failActions": [
+                  {
+                    "$type": "TriggerAttackEvent",
+                    "targetType": "Enemy",
+                    "actorIceSubHurtDelta": -1,
+                    "doOffStage": false,
+                    "attackEvent": {
+                      "attackInfo": {
+                        "attackTag": "Elemental_Art",
+                        "HBOOKFMCODC": {
+                          "BPIJOAMNKIH": {
+                            "GGOHGMFHHEC": true,
+                            "value": 1
+                          },
+                          "onHitEffectName": "default"
+                        },
+                        "hitPattern": {
+                          "hitImpulseType": "LV7",
+                          "hitHaltTimeScale": 0.05000000074505806,
+                          "BPIJOAMNKIH": {
+                            "GGOHGMFHHEC": true,
+                            "value": 1
+                          },
+                          "onHitEffectName": "default",
+                          "overrideHitImpulse": {
+                            "hitImpulseX": 100,
+                            "hitLevel": "Air",
+                            "hitImpulseY": 800
+                          },
+                          "retreatType": "ByHitDirectionInverse"
+                        },
+                        "INKGMIHAPMA": {
+                          "NDIBGPPKGJP": "Shake"
+                        },
+                        "cameraShake": {
+                          "shakeType": "CustomVector",
+                          "shakeDistance": 20,
+                          "extension": {
+                            "rangeAttenuation": 0.5,
+                            "baseOnCamera": true,
+                            "baseCycle": 0.11999999731779099,
+                            "cycleDamping": 0.11999999731779099
+                          },
+                          "shakeTime": 0.11999999731779099,
+                          "shakeRange": 0.20000000298023224,
+                          "shakeDir": {
+                            "x": -1,
+                            "y": 0.5
+                          }
+                        },
+                        "attenuationGroup": "default",
+                        "attackProperty": {
+                          "elementType": "Wind",
+                          "elementDurability": 25,
+                          "enBreak": 150,
+                          "elementRank": 1,
+                          "attackType": "Range",
+                          "damagePercentage": "ElementalArt_EmptyJump_Damage"
+                        }
+                      },
+                      "attackPattern": {
+                        "$type": "ConfigAttackCircle",
+                        "fanAngle": 360,
+                        "height": 4,
+                        "born": {
+                          "$type": "ConfigBornBySelf",
+                          "offset": {
+                            "x": -2
+                          },
+                          "APKLAIJMEIL": {
+                            "HHNLJKNBKPP": 180
+                          },
+                          "value": 10,
+                          "direction": {
+                            "maxAngle": 180
+                          },
+                          "onGroundRaycastUpDist": 2
+                        },
+                        "MPNIJNGFBIH": {
+                          "INOCAOHPEBB": {
+                            "GGOHGMFHHEC": true,
+                            "value": 1
+                          }
+                        },
+                        "triggerType": "TriggerNoRepeat",
+                        "radius": 5,
+                        "massiveAttackRatio": 1
+                      }
+                    },
+                    "canBeHandledOnRecover": true
+                  }
+                ],
+                "successActions": [
+                  {
+                    "$type": "TriggerAttackEvent",
+                    "targetType": "Enemy",
+                    "actorIceSubHurtDelta": -1,
+                    "doOffStage": false,
+                    "attackEvent": {
+                      "attackInfo": {
+                        "attackTag": "Elemental_Art",
+                        "HBOOKFMCODC": {
+                          "BPIJOAMNKIH": {
+                            "GGOHGMFHHEC": true,
+                            "value": 1
+                          },
+                          "onHitEffectName": "default"
+                        },
+                        "hitPattern": {
+                          "hitImpulseType": "LV7",
+                          "hitHaltTimeScale": 0.05000000074505806,
+                          "BPIJOAMNKIH": {
+                            "GGOHGMFHHEC": true,
+                            "value": 1
+                          },
+                          "onHitEffectName": "default",
+                          "overrideHitImpulse": {
+                            "hitImpulseX": 100,
+                            "hitLevel": "Air",
+                            "hitImpulseY": 800
+                          },
+                          "retreatType": "ByHitDirectionInverse"
+                        },
+                        "INKGMIHAPMA": {
+                          "NDIBGPPKGJP": "Shake"
+                        },
+                        "cameraShake": {
+                          "shakeType": "CustomVector",
+                          "shakeDistance": 20,
+                          "extension": {
+                            "rangeAttenuation": 0.5,
+                            "baseOnCamera": true,
+                            "baseCycle": 0.11999999731779099,
+                            "cycleDamping": 0.11999999731779099
+                          },
+                          "shakeTime": 0.11999999731779099,
+                          "shakeRange": 0.20000000298023224,
+                          "shakeDir": {
+                            "x": -1,
+                            "y": 0.5
+                          }
+                        },
+                        "attenuationGroup": "default",
+                        "attackProperty": {
+                          "elementType": "Wind",
+                          "elementDurability": 25,
+                          "enBreak": 150,
+                          "elementRank": 1,
+                          "attackType": "Range",
+                          "damagePercentage": "ElementalArt_EmptyJump_Damage"
+                        }
+                      },
+                      "attackPattern": {
+                        "$type": "ConfigAttackCircle",
+                        "fanAngle": 360,
+                        "height": 4,
+                        "born": {
+                          "$type": "ConfigBornBySelf",
+                          "offset": {
+                            "x": -1.5
+                          },
+                          "APKLAIJMEIL": {
+                            "HHNLJKNBKPP": 180
+                          },
+                          "value": 10,
+                          "direction": {
+                            "maxAngle": 180
+                          },
+                          "onGroundRaycastUpDist": 2,
+                          "onGround": true
+                        },
+                        "MPNIJNGFBIH": {
+                          "INOCAOHPEBB": {
+                            "GGOHGMFHHEC": true,
+                            "value": 1
+                          }
+                        },
+                        "triggerType": "TriggerNoRepeat",
+                        "radius": 5,
+                        "massiveAttackRatio": 1
+                      }
+                    },
+                    "canBeHandledOnRecover": true
+                  }
+                ],
+                "canBeHandledOnRecover": true
+              }
+            ],
+            "duration": 0.30000001192092896,
+            "elementDurability": 100,
+            "minus_one": -1,
+            "IAKPBCLBNKF": -1,
+            "isLimitedProperties": true
+          }
+        },
+        "onAbilityStart": [
+          {
+            "$type": "ApplyModifier",
+            "actorIceSubHurtDelta": -1,
+            "doOffStage": false,
+            "modifierName": "Avatar_Kazuha_ElementalArt_EnterCD",
+            "canBeHandledOnRecover": true
+          },
+          {
+            "$type": "ApplyModifier",
+            "actorIceSubHurtDelta": -1,
+            "doOffStage": false,
+            "modifierName": "Avatar_Kazuha_ElementalArt_Click_Detect",
+            "canBeHandledOnRecover": true
+          },
+          {
+            "$type": "ApplyModifier",
+            "actorIceSubHurtDelta": -1,
+            "doOffStage": false,
+            "modifierName": "Avatar_Kazuha_EmptyJump_Strike",
+            "canBeHandledOnRecover": true
+          },
+          {
+            "$type": "ApplyModifier",
+            "actorIceSubHurtDelta": -1,
+            "doOffStage": false,
+            "modifierName": "Avatar_Kazuha_EmptyJump_MixDetect",
+            "predicates": [
+              {
+                "$type": "ByUnlockTalentParam",
+                "talentParam": "Kazuha_PermanentSkill_1",
+                "target": "Target"
+              }
+            ],
+            "canBeHandledOnRecover": true
+          },
+          {
+            "$type": "TriggerAbility",
+            "actorIceSubHurtDelta": -1,
+            "doOffStage": false,
+            "abilityName": "Avatar_Kazuha_PermanentSkill_1_Mix",
+            "target": "Other",
+            "predicates": [
+              {
+                "$type": "ByUnlockTalentParam",
+                "talentParam": "Kazuha_PermanentSkill_1",
+                "target": "Target"
+              }
+            ],
+            "canBeHandledOnRecover": true
+          },
+          {
+            "$type": "TriggerAbility",
+            "actorIceSubHurtDelta": -1,
+            "doOffStage": false,
+            "abilityName": "Avatar_Kazuha_Constellation_6",
+            "target": "Other",
+            "predicates": [
+              {
+                "$type": "ByUnlockTalentParam",
+                "talentParam": "Kazuha_Constellation_6",
+                "target": "Target"
+              }
+            ],
+            "canBeHandledOnRecover": true
+          },
+          {
+            "$type": "ApplyModifier",
+            "actorIceSubHurtDelta": -1,
+            "doOffStage": false,
+            "modifierName": "Avatar_Kazuha_EmptyJump_CreateWindZone",
+            "canBeHandledOnRecover": true
+          },
+          {
+            "$type": "ApplyModifier",
+            "actorIceSubHurtDelta": -1,
+            "doOffStage": false,
+            "modifierName": "Avatar_Kazuha_EmptyJump_DragCamera",
+            "canBeHandledOnRecover": true
+          }
+        ],
+        "LKLPDIMKLKI": {
+          "elementDurability": 100,
+          "minus_one": -1,
+          "IAKPBCLBNKF": -1,
+          "isLimitedProperties": true
+        },
+        "abilityMixins": [
+          {
+            "$type": "AvatarChangeSkillMixin",
+            "actorIceSubHurtDelta": -1,
+            "flySkillID": 10473,
+            "priority": "AvatarSpecial",
+            "index": 1,
+            "jumpSkillID": 10473
+          },
+          {
+            "$type": "AttachToStateIDMixin",
+            "stateIDs": [
+              "Kazuha_ElementalArt_Landed",
+              "Kazuha_ElementalArt_Air"
+            ],
+            "actorIceSubHurtDelta": -1,
+            "modifierName": "Avatar_Kazuha_EmptyJump_Effect",
+            "value": -1
+          },
+          {
+            "$type": "AvatarSteerByCameraMixin",
+            "stateIDs": [
+              "Kazuha_ElementalArt_Landed",
+              "Kazuha_ElementalArt_Air"
+            ],
+            "actorIceSubHurtDelta": -1,
+            "angularSpeed": 90,
+            "HKKBPPNNBMH": -1,
+            "canReviveStamina": true
+          }
+        ]
+      }
+    },
+    "hold": {
+      "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Kazuha.json",
+      "new_pointer": "/9/Default",
+      "new_node_sha256": "972d08c84dfbf0cb26c6d9de2f9fcb88d8413c6e73d6d856fc8b5809f3592616",
+      "new_raw": {
+        "ECFFDLHMCLK": [
+          {
+            "$type": "BINBHGLANKO",
+            "AMOLMPHFPHJ": -1,
+            "ILELAOFJIKJ": true,
+            "LDFBDMNIADI": "Avatar_Kazuha_ElementalArt_Hold_EnterCD",
+            "LJFIEGHHLOB": false
+          },
+          {
+            "$type": "BINBHGLANKO",
+            "AMOLMPHFPHJ": -1,
+            "ILELAOFJIKJ": true,
+            "LDFBDMNIADI": "Avatar_Kazuha_ElementalArt_Hold_Detect",
+            "LJFIEGHHLOB": false
+          },
+          {
+            "$type": "BINBHGLANKO",
+            "AMOLMPHFPHJ": -1,
+            "ILELAOFJIKJ": true,
+            "LDFBDMNIADI": "Avatar_Kazuha_FlyAway_Strike",
+            "LJFIEGHHLOB": false
+          },
+          {
+            "$type": "BINBHGLANKO",
+            "AMOLMPHFPHJ": -1,
+            "IJDGNIIOHLM": [
+              {
+                "$type": "DIOFPDKDAIG",
+                "BDHBNCEEPPK": "Target",
+                "JPCEGCMOHNI": "Kazuha_PermanentSkill_1"
+              }
+            ],
+            "ILELAOFJIKJ": true,
+            "LDFBDMNIADI": "Avatar_Kazuha_FlyAway_MixDetect",
+            "LJFIEGHHLOB": false
+          },
+          {
+            "$type": "AHICIAHHALJ",
+            "AMOLMPHFPHJ": -1,
+            "IIBMNPFLNMJ": "Avatar_Kazuha_PermanentSkill_1_Mix",
+            "IJDGNIIOHLM": [
+              {
+                "$type": "DIOFPDKDAIG",
+                "BDHBNCEEPPK": "Target",
+                "JPCEGCMOHNI": "Kazuha_PermanentSkill_1"
+              }
+            ],
+            "ILELAOFJIKJ": true,
+            "LJFIEGHHLOB": false,
+            "LPFPKHHKGIB": "Other"
+          },
+          {
+            "$type": "AHICIAHHALJ",
+            "AMOLMPHFPHJ": -1,
+            "IIBMNPFLNMJ": "Avatar_Kazuha_Constellation_6",
+            "IJDGNIIOHLM": [
+              {
+                "$type": "DIOFPDKDAIG",
+                "BDHBNCEEPPK": "Target",
+                "JPCEGCMOHNI": "Kazuha_Constellation_6"
+              }
+            ],
+            "ILELAOFJIKJ": true,
+            "LJFIEGHHLOB": false,
+            "LPFPKHHKGIB": "Other"
+          },
+          {
+            "$type": "BINBHGLANKO",
+            "AMOLMPHFPHJ": -1,
+            "ILELAOFJIKJ": true,
+            "LDFBDMNIADI": "Avatar_Kazuha_FlyAway_WindZone",
+            "LJFIEGHHLOB": false
+          },
+          {
+            "$type": "BINBHGLANKO",
+            "AMOLMPHFPHJ": -1,
+            "ILELAOFJIKJ": true,
+            "LDFBDMNIADI": "Avatar_Kazuha_FlyAway_CameraBlur",
+            "LJFIEGHHLOB": false
+          },
+          {
+            "$type": "BINBHGLANKO",
+            "AMOLMPHFPHJ": -1,
+            "ILELAOFJIKJ": true,
+            "LDFBDMNIADI": "Avatar_Kazuha_FlyAway_DragCamera",
+            "LJFIEGHHLOB": false
+          }
+        ],
+        "GPPBBDEICKP": {
+          "Avatar_Kazuha_ElementalArt_Hold_Detect": {
+            "DBGOKAKAHFP": 100,
+            "DOALDLPNGMF": -1,
+            "EMGBJJOIENB": [
+              {
+                "$type": "HGFNHPLICPI",
+                "AMOLMPHFPHJ": -1,
+                "ILELAOFJIKJ": true,
+                "LJFIEGHHLOB": true,
+                "PDIFFCBMGMO": 2,
+                "PEELJBICEHE": "_ABILITY_Kazuha_ElementalArt_ClickOrHold_Mark"
+              }
+            ],
+            "JPEAFDFPKAN": 0.10000000149011612,
+            "KFOMCJGGPPC": -1,
+            "PPKOPMBNPJH": true
+          },
+          "Avatar_Kazuha_ElementalArt_Hold_EnterCD": {
+            "DBGOKAKAHFP": 100,
+            "DOALDLPNGMF": -1,
+            "EMGBJJOIENB": [
+              {
+                "$type": "FLNAIHPCKOC",
+                "ACFKMLJKONM": 10472,
+                "AMOLMPHFPHJ": -1,
+                "IJDGNIIOHLM": [
+                  {
+                    "$type": "IHGKAFICMGI",
+                    "ACFKMLJKONM": 10472,
+                    "BDHBNCEEPPK": "Target"
+                  }
+                ],
+                "ILELAOFJIKJ": true,
+                "IODFBPJBHOB": 1.5,
+                "LJFIEGHHLOB": false,
+                "NABFCPIKHEO": 1,
+                "NKOFINBNOOK": 1
+              },
+              {
+                "$type": "FLNAIHPCKOC",
+                "ACFKMLJKONM": 10473,
+                "AMOLMPHFPHJ": -1,
+                "IJDGNIIOHLM": [
+                  {
+                    "$type": "IHGKAFICMGI",
+                    "ACFKMLJKONM": 10473,
+                    "BDHBNCEEPPK": "Target"
+                  }
+                ],
+                "ILELAOFJIKJ": true,
+                "IODFBPJBHOB": 1.5,
+                "LJFIEGHHLOB": false,
+                "NABFCPIKHEO": 1,
+                "NKOFINBNOOK": 1
+              }
+            ],
+            "JPEAFDFPKAN": 0.5,
+            "KFOMCJGGPPC": -1,
+            "PPKOPMBNPJH": true
+          },
+          "Avatar_Kazuha_FlyAway_CameraBlur": {
+            "DBGOKAKAHFP": 100,
+            "DOALDLPNGMF": -1,
+            "JPEAFDFPKAN": 0.20000000298023224,
+            "KFOMCJGGPPC": -1,
+            "LFIJIMIMBIH": [
+              {
+                "$type": "IMDMMNLDHGE",
+                "AMOLMPHFPHJ": -1,
+                "GDDDHIEEHLI": {
+                  "DNJFCHCLNII": 0.25,
+                  "OOFEMAOIBFN": 0.15000000596046448
+                }
+              }
+            ],
+            "PPKOPMBNPJH": true
+          },
+          "Avatar_Kazuha_FlyAway_DragCamera": {
+            "DBGOKAKAHFP": 100,
+            "DOALDLPNGMF": -1,
+            "EMGBJJOIENB": [
+              {
+                "$type": "NCMGFENKCDP",
+                "AMOLMPHFPHJ": -1,
+                "ILELAOFJIKJ": true,
+                "LJFIEGHHLOB": false,
+                "OENJCBPIBJB": {
+                  "DCCEDKEOHHI": 1,
+                  "EJHKJOKFCJE": 8,
+                  "MALOIEBIGMD": 0.4000000059604645,
+                  "MHGBHGOEOCJ": 1,
+                  "PLLEFEFFEKN": true
+                }
+              }
+            ],
+            "JPEAFDFPKAN": 0.5,
+            "KFOMCJGGPPC": -1,
+            "PPKOPMBNPJH": true
+          },
+          "Avatar_Kazuha_FlyAway_MixDetect": {
+            "DBGOKAKAHFP": 100,
+            "DOALDLPNGMF": -1,
+            "EMGBJJOIENB": [
+              {
+                "$type": "MMHMEBEEKGK",
+                "AMOLMPHFPHJ": -1,
+                "IDCIIIFMDCM": {
+                  "CEIJEFJBMBL": {
+                    "$type": "BOOONJENCDB",
+                    "BKCIBHHMGEE": 9,
+                    "CHKHGBFIPCB": 360,
+                    "COBJECNAEOG": 0.5,
+                    "EAJAHKDHNJM": {
+                      "GMEKLJBJADO": {
+                        "KJCBAFKFFMP": 1,
+                        "PGPNDGBABNI": true
+                      }
+                    },
+                    "EHFMPIOJOLN": "TriggerNoRepeat",
+                    "LDJMMNPDKHC": true,
+                    "MLFLDPAGADG": {
+                      "$type": "PKAELLAMAGL",
+                      "EEFLHEKBODJ": {
+                        "BNJLEBLGEKB": 180
+                      },
+                      "FDGFPGIDACF": {
+                        "IOPIFIJFBHI": -1.5
+                      },
+                      "GNFICELAKIB": 10,
+                      "HECMDGIAGKM": 2,
+                      "LMBGHPGJIAP": true,
+                      "POPNBJAHNFK": {
+                        "ONEHKOHOCBH": 180
+                      }
+                    },
+                    "NDGCJAKHDGH": 4
+                  },
+                  "LGHDGGJIJOK": {
+                    "BKLFAECNFOF": {
+                      "EIAGIEDFLHJ": {
+                        "KJCBAFKFFMP": 1,
+                        "PGPNDGBABNI": true
+                      },
+                      "IHBPFOBEJKN": "default"
+                    },
+                    "EHKJIDFINEK": {
+                      "DBGOKAKAHFP": 1,
+                      "EPPIDAILPBN": "AntiFire",
+                      "FDGDIBBILMD": "None",
+                      "JDOLIAEMINM": 1,
+                      "PEPDKCDHNIM": "Default"
+                    },
+                    "HDIFFKOHDNL": {
+                      "OGGEIBICAHC": "Shake"
+                    },
+                    "HGLEEJNPBEB": "default",
+                    "IAFHAPFBBOB": "Kazuha_ElementalArt_Mix_Detect",
+                    "IJFOFLPPGHK": {
+                      "EANBEIIKCIL": {
+                        "BGINHMBLECN": 0.11999999731779099,
+                        "HMANOMCGFLK": true,
+                        "KBAIICCLOEF": 0.5,
+                        "PJGAOELGLIF": 0.11999999731779099
+                      },
+                      "KDBKDJBCACN": 20
+                    },
+                    "NMMJKLAHOHH": {
+                      "EIAGIEDFLHJ": {
+                        "KJCBAFKFFMP": 1,
+                        "PGPNDGBABNI": true
+                      },
+                      "IHBPFOBEJKN": "default"
+                    }
+                  }
+                },
+                "ILELAOFJIKJ": true,
+                "LJFIEGHHLOB": false,
+                "NMKBOEALDEF": "All"
+              }
+            ],
+            "JPEAFDFPKAN": 0.30000001192092896,
+            "KFOMCJGGPPC": -1,
+            "PPKOPMBNPJH": true
+          },
+          "Avatar_Kazuha_FlyAway_Strike": {
+            "DBGOKAKAHFP": 100,
+            "DOALDLPNGMF": -1,
+            "EMGBJJOIENB": [
+              {
+                "$type": "MMHMEBEEKGK",
+                "AMOLMPHFPHJ": -1,
+                "IDCIIIFMDCM": {
+                  "CEIJEFJBMBL": {
+                    "$type": "BOOONJENCDB",
+                    "BKCIBHHMGEE": 9,
+                    "CHKHGBFIPCB": 360,
+                    "COBJECNAEOG": 0.30000001192092896,
+                    "EAJAHKDHNJM": {
+                      "GMEKLJBJADO": {
+                        "KJCBAFKFFMP": 1,
+                        "PGPNDGBABNI": true
+                      }
+                    },
+                    "EHFMPIOJOLN": "TriggerNoRepeat",
+                    "MLFLDPAGADG": {
+                      "$type": "PKAELLAMAGL",
+                      "EEFLHEKBODJ": {
+                        "BNJLEBLGEKB": 180
+                      },
+                      "FDGFPGIDACF": {
+                        "IOPIFIJFBHI": -1.5
+                      },
+                      "GNFICELAKIB": 10,
+                      "HECMDGIAGKM": 2,
+                      "LMBGHPGJIAP": true,
+                      "POPNBJAHNFK": {
+                        "ONEHKOHOCBH": 180
+                      }
+                    },
+                    "NDGCJAKHDGH": 4
+                  },
+                  "LGHDGGJIJOK": {
+                    "BKLFAECNFOF": {
+                      "EIAGIEDFLHJ": {
+                        "KJCBAFKFFMP": 1,
+                        "PGPNDGBABNI": true
+                      },
+                      "IHBPFOBEJKN": "default"
+                    },
+                    "EHKJIDFINEK": {
+                      "DBGOKAKAHFP": 50,
+                      "EPPIDAILPBN": "Wind",
+                      "FBAEEIPKEHO": 300,
+                      "JDOLIAEMINM": 1,
+                      "KOLOHIDMHHE": "ElementalArt_FlyAway_Damage",
+                      "PEPDKCDHNIM": "Range"
+                    },
+                    "HDIFFKOHDNL": {
+                      "OGGEIBICAHC": "Shake"
+                    },
+                    "HGLEEJNPBEB": "default",
+                    "IAFHAPFBBOB": "Elemental_Art",
+                    "IJFOFLPPGHK": {
+                      "EANBEIIKCIL": {
+                        "BGINHMBLECN": 0.11999999731779099,
+                        "HMANOMCGFLK": true,
+                        "KBAIICCLOEF": 0.5,
+                        "PJGAOELGLIF": 0.11999999731779099
+                      },
+                      "KDBKDJBCACN": 20
+                    },
+                    "NMMJKLAHOHH": {
+                      "ANBHPFEONOL": 0.05000000074505806,
+                      "EIAGIEDFLHJ": {
+                        "KJCBAFKFFMP": 1,
+                        "PGPNDGBABNI": true
+                      },
+                      "IHBPFOBEJKN": "default",
+                      "LHEILBMGANH": "ByHitDirectionInverse",
+                      "NHEHLACIFKG": {
+                        "DLKJKJCJAFG": "Air",
+                        "KLHCPLKCLBB": 800
+                      },
+                      "PAPNKKIKAOC": "LV7"
+                    }
+                  }
+                },
+                "ILELAOFJIKJ": true,
+                "LJFIEGHHLOB": false,
+                "NMKBOEALDEF": "Enemy"
+              }
+            ],
+            "JPEAFDFPKAN": 0.30000001192092896,
+            "KFOMCJGGPPC": -1,
+            "PPKOPMBNPJH": true
+          },
+          "Avatar_Kazuha_FlyAway_WindZone": {
+            "DBGOKAKAHFP": 100,
+            "DOALDLPNGMF": -1,
+            "EMGBJJOIENB": [
+              {
+                "$type": "ECIDIEHOIME",
+                "AMOLMPHFPHJ": -1,
+                "EGBBAAMDMBN": "攻击了",
+                "ILELAOFJIKJ": true,
+                "LJFIEGHHLOB": false
+              },
+              {
+                "$type": "MOOAODKIBCM",
+                "AMOLMPHFPHJ": -1,
+                "BEIMGAKABJN": "Eff_Avatar_Boy_Sword_Kazuha_ElementalArt_Hold_FlyAway",
+                "HJIHBAANFLE": 1,
+                "ILELAOFJIKJ": true,
+                "JMMALEJDAEF": -1,
+                "LJFIEGHHLOB": false,
+                "MLFLDPAGADG": {
+                  "$type": "PKAELLAMAGL",
+                  "EEFLHEKBODJ": {
+                    "BNJLEBLGEKB": 180
+                  },
+                  "GLGBHDDEIEP": true,
+                  "GNFICELAKIB": 10,
+                  "HECMDGIAGKM": 2,
+                  "POPNBJAHNFK": {
+                    "ONEHKOHOCBH": 180
+                  }
+                }
+              },
+              {
+                "$type": "CCMGOLHOADE",
+                "AMOLMPHFPHJ": -1,
+                "BBGMLDFBFFH": "Enemy",
+                "BMEPMJIOPDC": 41047002,
+                "EBNIOBFDHEN": {
+                  "CBINIBBHIKE": 0.5,
+                  "CGDBBHHIINM": true,
+                  "HPMHFMDGBLM": 0.5,
+                  "JAILLBHLHNO": true
+                },
+                "ILELAOFJIKJ": true,
+                "KGHIIEPKAAM": true,
+                "LJFIEGHHLOB": false,
+                "MFNOGAGFMKF": 1001,
+                "MLFLDPAGADG": {
+                  "$type": "PKAELLAMAGL",
+                  "EEFLHEKBODJ": {
+                    "BNJLEBLGEKB": 180
+                  },
+                  "GLGBHDDEIEP": true,
+                  "GNFICELAKIB": 10,
+                  "HECMDGIAGKM": 2,
+                  "POPNBJAHNFK": {
+                    "ONEHKOHOCBH": 180
+                  }
+                }
+              }
+            ],
+            "JPEAFDFPKAN": 0.30000001192092896,
+            "KFOMCJGGPPC": -1,
+            "PPKOPMBNPJH": true
+          }
+        },
+        "IIBMNPFLNMJ": "Avatar_Kazuha_ElementalArt_FlyAway",
+        "LOEHLJGBGAC": {
+          "ElementalArt_FlyAway_Damage": 0
+        },
+        "OMAIGDMCJBO": {
+          "DBGOKAKAHFP": 100,
+          "DOALDLPNGMF": -1,
+          "KFOMCJGGPPC": -1,
+          "PPKOPMBNPJH": true
+        }
+      },
+      "old_pointer": "/9/Default",
+      "old_node_sha256": "e9b79cf46fa1fc294213d82d1f371ba5652e6802aff986739a5fb9ef78cf5ae6",
+      "old_raw": {
+        "abilitySpecials": {
+          "ElementalArt_FlyAway_Damage": 0
+        },
+        "abilityName": "Avatar_Kazuha_ElementalArt_FlyAway",
+        "modifiers": {
+          "Avatar_Kazuha_ElementalArt_Hold_Detect": {
+            "onAdded": [
+              {
+                "$type": "SetGlobalValue",
+                "key": "_ABILITY_Kazuha_ElementalArt_ClickOrHold_Mark",
+                "value": 2,
+                "actorIceSubHurtDelta": -1,
+                "doOffStage": true,
+                "canBeHandledOnRecover": true
+              }
+            ],
+            "duration": 0.10000000149011612,
+            "elementDurability": 100,
+            "minus_one": -1,
+            "IAKPBCLBNKF": -1,
+            "isLimitedProperties": true
+          },
+          "Avatar_Kazuha_ElementalArt_Hold_EnterCD": {
+            "onAdded": [
+              {
+                "$type": "AvatarSkillStart",
+                "cdRatio": 1,
+                "costStaminaRatio": 1,
+                "actorIceSubHurtDelta": -1,
+                "doOffStage": false,
+                "skillID": 10472,
+                "predicates": [
+                  {
+                    "$type": "BySkillReady",
+                    "target": "Target",
+                    "skillID": 10472
+                  }
+                ],
+                "canBeHandledOnRecover": true
+              },
+              {
+                "$type": "AvatarSkillStart",
+                "cdRatio": 1,
+                "costStaminaRatio": 1,
+                "actorIceSubHurtDelta": -1,
+                "doOffStage": false,
+                "skillID": 10473,
+                "predicates": [
+                  {
+                    "$type": "BySkillReady",
+                    "target": "Target",
+                    "skillID": 10473
+                  }
+                ],
+                "canBeHandledOnRecover": true
+              }
+            ],
+            "duration": 0.5,
+            "elementDurability": 100,
+            "minus_one": -1,
+            "IAKPBCLBNKF": -1,
+            "isLimitedProperties": true
+          },
+          "Avatar_Kazuha_FlyAway_CameraBlur": {
+            "duration": 0.20000000298023224,
+            "elementDurability": 100,
+            "minus_one": -1,
+            "modifierMixins": [
+              {
+                "$type": "CameraBlurMixin",
+                "actorIceSubHurtDelta": -1,
+                "cameraRadialBlur": {
+                  "fadeTime": 0.15000000596046448,
+                  "power": 0.25
+                }
+              }
+            ],
+            "IAKPBCLBNKF": -1,
+            "isLimitedProperties": true
+          },
+          "Avatar_Kazuha_FlyAway_DragCamera": {
+            "onAdded": [
+              {
+                "$type": "AvatarCameraParam",
+                "actorIceSubHurtDelta": -1,
+                "doOffStage": false,
+                "cameraParam": {
+                  "ELHHLIGJFDD": 1,
+                  "forceRadiusDuration": 0.4000000059604645,
+                  "shouldKeepForceRadius": true,
+                  "OJENIIDAGKM": 1,
+                  "forceRadius": 8
+                },
+                "canBeHandledOnRecover": true
+              }
+            ],
+            "duration": 0.5,
+            "elementDurability": 100,
+            "minus_one": -1,
+            "IAKPBCLBNKF": -1,
+            "isLimitedProperties": true
+          },
+          "Avatar_Kazuha_FlyAway_MixDetect": {
+            "onAdded": [
+              {
+                "$type": "TriggerAttackEvent",
+                "targetType": "All",
+                "actorIceSubHurtDelta": -1,
+                "doOffStage": false,
+                "attackEvent": {
+                  "attackInfo": {
+                    "attackTag": "Kazuha_ElementalArt_Mix_Detect",
+                    "HBOOKFMCODC": {
+                      "BPIJOAMNKIH": {
+                        "GGOHGMFHHEC": true,
+                        "value": 1
+                      },
+                      "onHitEffectName": "default"
+                    },
+                    "hitPattern": {
+                      "BPIJOAMNKIH": {
+                        "GGOHGMFHHEC": true,
+                        "value": 1
+                      },
+                      "onHitEffectName": "default"
+                    },
+                    "INKGMIHAPMA": {
+                      "NDIBGPPKGJP": "Shake"
+                    },
+                    "cameraShake": {
+                      "shakeDistance": 20,
+                      "extension": {
+                        "rangeAttenuation": 0.5,
+                        "baseOnCamera": true,
+                        "baseCycle": 0.11999999731779099,
+                        "cycleDamping": 0.11999999731779099
+                      }
+                    },
+                    "attenuationGroup": "default",
+                    "attackProperty": {
+                      "elementType": "AntiFire",
+                      "elementDurability": 1,
+                      "elementRank": 1,
+                      "attackType": "Default",
+                      "strikeType": "None"
+                    }
+                  },
+                  "attackPattern": {
+                    "$type": "ConfigAttackCircle",
+                    "BBCMILAIPCE": true,
+                    "fanAngle": 360,
+                    "height": 4,
+                    "born": {
+                      "$type": "ConfigBornBySelf",
+                      "offset": {
+                        "x": -1.5
+                      },
+                      "APKLAIJMEIL": {
+                        "HHNLJKNBKPP": 180
+                      },
+                      "value": 10,
+                      "direction": {
+                        "maxAngle": 180
+                      },
+                      "onGroundRaycastUpDist": 2,
+                      "onGround": true
+                    },
+                    "MPNIJNGFBIH": {
+                      "INOCAOHPEBB": {
+                        "GGOHGMFHHEC": true,
+                        "value": 1
+                      }
+                    },
+                    "triggerType": "TriggerNoRepeat",
+                    "radius": 9,
+                    "massiveAttackRatio": 0.5
+                  }
+                },
+                "canBeHandledOnRecover": true
+              }
+            ],
+            "duration": 0.30000001192092896,
+            "elementDurability": 100,
+            "minus_one": -1,
+            "IAKPBCLBNKF": -1,
+            "isLimitedProperties": true
+          },
+          "Avatar_Kazuha_FlyAway_Strike": {
+            "onAdded": [
+              {
+                "$type": "TriggerAttackEvent",
+                "targetType": "Enemy",
+                "actorIceSubHurtDelta": -1,
+                "doOffStage": false,
+                "attackEvent": {
+                  "attackInfo": {
+                    "attackTag": "Elemental_Art",
+                    "HBOOKFMCODC": {
+                      "BPIJOAMNKIH": {
+                        "GGOHGMFHHEC": true,
+                        "value": 1
+                      },
+                      "onHitEffectName": "default"
+                    },
+                    "hitPattern": {
+                      "hitImpulseType": "LV7",
+                      "hitHaltTimeScale": 0.05000000074505806,
+                      "BPIJOAMNKIH": {
+                        "GGOHGMFHHEC": true,
+                        "value": 1
+                      },
+                      "onHitEffectName": "default",
+                      "overrideHitImpulse": {
+                        "hitLevel": "Air",
+                        "hitImpulseY": 800
+                      },
+                      "retreatType": "ByHitDirectionInverse"
+                    },
+                    "INKGMIHAPMA": {
+                      "NDIBGPPKGJP": "Shake"
+                    },
+                    "cameraShake": {
+                      "shakeDistance": 20,
+                      "extension": {
+                        "rangeAttenuation": 0.5,
+                        "baseOnCamera": true,
+                        "baseCycle": 0.11999999731779099,
+                        "cycleDamping": 0.11999999731779099
+                      }
+                    },
+                    "attenuationGroup": "default",
+                    "attackProperty": {
+                      "elementType": "Wind",
+                      "elementDurability": 50,
+                      "enBreak": 300,
+                      "elementRank": 1,
+                      "attackType": "Range",
+                      "damagePercentage": "ElementalArt_FlyAway_Damage"
+                    }
+                  },
+                  "attackPattern": {
+                    "$type": "ConfigAttackCircle",
+                    "fanAngle": 360,
+                    "height": 4,
+                    "born": {
+                      "$type": "ConfigBornBySelf",
+                      "offset": {
+                        "x": -1.5
+                      },
+                      "APKLAIJMEIL": {
+                        "HHNLJKNBKPP": 180
+                      },
+                      "value": 10,
+                      "direction": {
+                        "maxAngle": 180
+                      },
+                      "onGroundRaycastUpDist": 2,
+                      "onGround": true
+                    },
+                    "MPNIJNGFBIH": {
+                      "INOCAOHPEBB": {
+                        "GGOHGMFHHEC": true,
+                        "value": 1
+                      }
+                    },
+                    "triggerType": "TriggerNoRepeat",
+                    "radius": 9,
+                    "massiveAttackRatio": 0.30000001192092896
+                  }
+                },
+                "canBeHandledOnRecover": true
+              }
+            ],
+            "duration": 0.30000001192092896,
+            "elementDurability": 100,
+            "minus_one": -1,
+            "IAKPBCLBNKF": -1,
+            "isLimitedProperties": true
+          },
+          "Avatar_Kazuha_FlyAway_WindZone": {
+            "onAdded": [
+              {
+                "$type": "DebugLog",
+                "actorIceSubHurtDelta": -1,
+                "doOffStage": false,
+                "content": "攻击了",
+                "canBeHandledOnRecover": true
+              },
+              {
+                "$type": "FireEffect",
+                "actorIceSubHurtDelta": -1,
+                "scale": 1,
+                "doOffStage": false,
+                "born": {
+                  "$type": "ConfigBornBySelf",
+                  "APKLAIJMEIL": {
+                    "HHNLJKNBKPP": 180
+                  },
+                  "value": 10,
+                  "direction": {
+                    "maxAngle": 180
+                  },
+                  "onGroundRaycastUpDist": 2,
+                  "alongGround": true
+                },
+                "effectPattern": "Eff_Avatar_Boy_Sword_Kazuha_ElementalArt_Hold_FlyAway",
+                "effectTempleteID": -1,
+                "canBeHandledOnRecover": true
+              },
+              {
+                "$type": "CreateGadget",
+                "actorIceSubHurtDelta": -1,
+                "doOffStage": false,
+                "campTargetType": "Enemy",
+                "born": {
+                  "$type": "ConfigBornBySelf",
+                  "APKLAIJMEIL": {
+                    "HHNLJKNBKPP": 180
+                  },
+                  "value": 10,
+                  "direction": {
+                    "maxAngle": 180
+                  },
+                  "onGroundRaycastUpDist": 2,
+                  "alongGround": true
+                },
+                "campID": 1001,
+                "KLGHKKGGHEA": {
+                  "CBLLACNAMON": true,
+                  "DBOLJFPPFGI": 0.5,
+                  "JOCOGLBCMEJ": 0.5,
+                  "LKEBJHCDOHB": true
+                },
+                "gadgetID": 41047002,
+                "canBeHandledOnRecover": true,
+                "lifeByOwnerV2": true
+              }
+            ],
+            "duration": 0.30000001192092896,
+            "elementDurability": 100,
+            "minus_one": -1,
+            "IAKPBCLBNKF": -1,
+            "isLimitedProperties": true
+          }
+        },
+        "onAbilityStart": [
+          {
+            "$type": "ApplyModifier",
+            "actorIceSubHurtDelta": -1,
+            "doOffStage": false,
+            "modifierName": "Avatar_Kazuha_ElementalArt_Hold_EnterCD",
+            "canBeHandledOnRecover": true
+          },
+          {
+            "$type": "ApplyModifier",
+            "actorIceSubHurtDelta": -1,
+            "doOffStage": false,
+            "modifierName": "Avatar_Kazuha_ElementalArt_Hold_Detect",
+            "canBeHandledOnRecover": true
+          },
+          {
+            "$type": "ApplyModifier",
+            "actorIceSubHurtDelta": -1,
+            "doOffStage": false,
+            "modifierName": "Avatar_Kazuha_FlyAway_Strike",
+            "canBeHandledOnRecover": true
+          },
+          {
+            "$type": "ApplyModifier",
+            "actorIceSubHurtDelta": -1,
+            "doOffStage": false,
+            "modifierName": "Avatar_Kazuha_FlyAway_MixDetect",
+            "predicates": [
+              {
+                "$type": "ByUnlockTalentParam",
+                "talentParam": "Kazuha_PermanentSkill_1",
+                "target": "Target"
+              }
+            ],
+            "canBeHandledOnRecover": true
+          },
+          {
+            "$type": "TriggerAbility",
+            "actorIceSubHurtDelta": -1,
+            "doOffStage": false,
+            "abilityName": "Avatar_Kazuha_PermanentSkill_1_Mix",
+            "target": "Other",
+            "predicates": [
+              {
+                "$type": "ByUnlockTalentParam",
+                "talentParam": "Kazuha_PermanentSkill_1",
+                "target": "Target"
+              }
+            ],
+            "canBeHandledOnRecover": true
+          },
+          {
+            "$type": "TriggerAbility",
+            "actorIceSubHurtDelta": -1,
+            "doOffStage": false,
+            "abilityName": "Avatar_Kazuha_Constellation_6",
+            "target": "Other",
+            "predicates": [
+              {
+                "$type": "ByUnlockTalentParam",
+                "talentParam": "Kazuha_Constellation_6",
+                "target": "Target"
+              }
+            ],
+            "canBeHandledOnRecover": true
+          },
+          {
+            "$type": "ApplyModifier",
+            "actorIceSubHurtDelta": -1,
+            "doOffStage": false,
+            "modifierName": "Avatar_Kazuha_FlyAway_WindZone",
+            "canBeHandledOnRecover": true
+          },
+          {
+            "$type": "ApplyModifier",
+            "actorIceSubHurtDelta": -1,
+            "doOffStage": false,
+            "modifierName": "Avatar_Kazuha_FlyAway_CameraBlur",
+            "canBeHandledOnRecover": true
+          },
+          {
+            "$type": "ApplyModifier",
+            "actorIceSubHurtDelta": -1,
+            "doOffStage": false,
+            "modifierName": "Avatar_Kazuha_FlyAway_DragCamera",
+            "canBeHandledOnRecover": true
+          }
+        ],
+        "LKLPDIMKLKI": {
+          "elementDurability": 100,
+          "minus_one": -1,
+          "IAKPBCLBNKF": -1,
+          "isLimitedProperties": true
+        }
+      }
+    },
+    "local_hold": {
+      "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Shenhe.json",
+      "new_pointer": "/6/Default",
+      "new_node_sha256": "3de611539675a3defc9f5239a8f3fd88a83c2e444ea6ee12b8e3bb8ba0f087d4",
+      "new_raw": {
+        "ECFFDLHMCLK": [
+          {
+            "$type": "FLNAIHPCKOC",
+            "ACFKMLJKONM": 10632,
+            "AMOLMPHFPHJ": -1,
+            "ILELAOFJIKJ": true,
+            "IODFBPJBHOB": 1.5,
+            "LJFIEGHHLOB": false,
+            "NABFCPIKHEO": 1,
+            "NKOFINBNOOK": 1
+          },
+          {
+            "$type": "PBIOEEHFHFD",
+            "AMOLMPHFPHJ": -1,
+            "BDHBNCEEPPK": "Caster",
+            "ILELAOFJIKJ": true,
+            "LJFIEGHHLOB": false,
+            "MJKPCGCAPLK": [
+              {
+                "$type": "DIOFPDKDAIG",
+                "BDHBNCEEPPK": "Target",
+                "JPCEGCMOHNI": "Shenhe_Constellation_4"
+              }
+            ],
+            "MLJNNELMEFL": [
+              {
+                "$type": "OCEDAFPEKBM",
+                "AMOLMPHFPHJ": -1,
+                "ILELAOFJIKJ": true,
+                "KDJEMONNHAM": "_ABILITY_Shenhe_ElementalArt_Buff_Talent_ExtraDMG_Ratio",
+                "LJFIEGHHLOB": false,
+                "MMIFLLENIBJ": "Buff_Talent_ExtraDMG_Ratio"
+              },
+              {
+                "$type": "HGFNHPLICPI",
+                "AMOLMPHFPHJ": -1,
+                "ILELAOFJIKJ": true,
+                "LJFIEGHHLOB": false,
+                "PEELJBICEHE": "_ABILITY_Shenhe_ElementalArt_Buff_Talent_Level"
+              },
+              {
+                "$type": "HGFNHPLICPI",
+                "AMOLMPHFPHJ": -1,
+                "ILELAOFJIKJ": true,
+                "LJFIEGHHLOB": false,
+                "PEELJBICEHE": "_ABILITY_Shenhe_ElementalArt_Buff_Talent_ExtraDMG_Ratio"
+              }
+            ]
+          },
+          {
+            "$type": "EFICNPHHFJA",
+            "AMOLMPHFPHJ": -1,
+            "BEIMGAKABJN": "Eff_Avatar_Lady_Pole_Shenhe_ElementalArt_Rune_Charge",
+            "ILELAOFJIKJ": true,
+            "KGEKINJPCFB": "Attack_H",
+            "LJFIEGHHLOB": false
+          },
+          {
+            "$type": "GCINLBBPONN",
+            "AMOLMPHFPHJ": -1,
+            "BDHBNCEEPPK": "AllPlayerAvatars",
+            "IJDGNIIOHLM": [
+              {
+                "$type": "OLNGCABMCGI",
+                "BDHBNCEEPPK": "Target",
+                "DKCBCJCHEBF": "LesserOrEqual",
+                "PDIFFCBMGMO": 40
+              }
+            ],
+            "ILELAOFJIKJ": true,
+            "LDFBDMNIADI": "UNIQUE_Shenhe_ElementalArt_L_Buff_Handler",
+            "LJFIEGHHLOB": true
+          },
+          {
+            "$type": "GCINLBBPONN",
+            "AMOLMPHFPHJ": -1,
+            "BDHBNCEEPPK": "AllPlayerAvatars",
+            "IJDGNIIOHLM": [
+              {
+                "$type": "OLNGCABMCGI",
+                "BDHBNCEEPPK": "Target",
+                "DKCBCJCHEBF": "LesserOrEqual",
+                "PDIFFCBMGMO": 40
+              }
+            ],
+            "ILELAOFJIKJ": true,
+            "LDFBDMNIADI": "UNIQUE_Shenhe_ElementalArt_H_Buff_Handler",
+            "LJFIEGHHLOB": true
+          },
+          {
+            "$type": "CDANEAFAFKM",
+            "AMOLMPHFPHJ": -1,
+            "BDHBNCEEPPK": "AllPlayerAvatars",
+            "IJDGNIIOHLM": [
+              {
+                "$type": "OLNGCABMCGI",
+                "BDHBNCEEPPK": "Target",
+                "DKCBCJCHEBF": "LesserOrEqual",
+                "PDIFFCBMGMO": 40
+              },
+              {
+                "$type": "BHIEGOJLEBB",
+                "BDHBNCEEPPK": "Target"
+              }
+            ],
+            "ILELAOFJIKJ": true,
+            "LDFBDMNIADI": "UNIQUE_Shenhe_ElementalArt_H_Buff_Handler",
+            "LJFIEGHHLOB": true
+          },
+          {
+            "$type": "CDANEAFAFKM",
+            "AMOLMPHFPHJ": -1,
+            "BDHBNCEEPPK": "AllPlayerAvatars",
+            "IJDGNIIOHLM": [
+              {
+                "$type": "OLNGCABMCGI",
+                "BDHBNCEEPPK": "Target",
+                "DKCBCJCHEBF": "LesserOrEqual",
+                "PDIFFCBMGMO": 40
+              },
+              {
+                "$type": "DIOFPDKDAIG",
+                "BDHBNCEEPPK": "Target",
+                "JPCEGCMOHNI": "Shenhe_PermanentSkill_2"
+              },
+              {
+                "$type": "BHIEGOJLEBB",
+                "BDHBNCEEPPK": "Target"
+              }
+            ],
+            "ILELAOFJIKJ": true,
+            "LDFBDMNIADI": "UNIQUE_Shenhe_ElementalArt_H_Extra_Buff",
+            "LJFIEGHHLOB": true
+          },
+          {
+            "$type": "MOOAODKIBCM",
+            "AMOLMPHFPHJ": -1,
+            "BEIMGAKABJN": "Eff_Avatar_Lady_Pole_Shenhe_ElementalArt_H_Attack",
+            "HJIHBAANFLE": 1,
+            "ILELAOFJIKJ": true,
+            "JMMALEJDAEF": -1,
+            "LJFIEGHHLOB": false,
+            "MLFLDPAGADG": {
+              "$type": "PKAELLAMAGL",
+              "EEFLHEKBODJ": {
+                "BNJLEBLGEKB": 180
+              },
+              "FDGFPGIDACF": {
+                "LBLJIHBEDKH": 1.5
+              },
+              "GNFICELAKIB": 10,
+              "HECMDGIAGKM": 2,
+              "POPNBJAHNFK": {
+                "ONEHKOHOCBH": 180
+              }
+            }
+          },
+          {
+            "$type": "MMHMEBEEKGK",
+            "AMOLMPHFPHJ": -1,
+            "IDCIIIFMDCM": {
+              "CEIJEFJBMBL": {
+                "$type": "FKADOLEBLHD",
+                "BKCIBHHMGEE": "ElementalArt_H_Radius",
+                "COBJECNAEOG": 1,
+                "EAJAHKDHNJM": {
+                  "GMEKLJBJADO": {
+                    "KJCBAFKFFMP": 1,
+                    "PGPNDGBABNI": true
+                  }
+                },
+                "EHFMPIOJOLN": "TriggerNoRepeat",
+                "MLFLDPAGADG": {
+                  "$type": "PKAELLAMAGL",
+                  "EEFLHEKBODJ": {
+                    "BNJLEBLGEKB": 180
+                  },
+                  "FDGFPGIDACF": {
+                    "IOPIFIJFBHI": 0.800000011920929,
+                    "LBLJIHBEDKH": 1.5
+                  },
+                  "GNFICELAKIB": 10,
+                  "HECMDGIAGKM": 2,
+                  "POPNBJAHNFK": {
+                    "ONEHKOHOCBH": 180
+                  }
+                },
+                "PJIJHIAFGPD": "CenterToSide"
+              },
+              "LGHDGGJIJOK": {
+                "BKLFAECNFOF": {
+                  "EIAGIEDFLHJ": {
+                    "KJCBAFKFFMP": 1,
+                    "PGPNDGBABNI": true
+                  },
+                  "IHBPFOBEJKN": "default"
+                },
+                "EHKJIDFINEK": {
+                  "DBGOKAKAHFP": 50,
+                  "EPPIDAILPBN": "Ice",
+                  "FBAEEIPKEHO": 200,
+                  "FDGDIBBILMD": "Slash",
+                  "JDOLIAEMINM": 1,
+                  "KALBHJILPDA": "Buff_Talent_ExtraDMG_Ratio",
+                  "KOLOHIDMHHE": "Elemental_Art_H_Damage",
+                  "PEPDKCDHNIM": "Default"
+                },
+                "HDIFFKOHDNL": {
+                  "OGGEIBICAHC": "Shake"
+                },
+                "HGLEEJNPBEB": "default",
+                "IAFHAPFBBOB": "Elemental_Art",
+                "IJFOFLPPGHK": {
+                  "EANBEIIKCIL": {
+                    "BGINHMBLECN": 0.11999999731779099,
+                    "HMANOMCGFLK": true,
+                    "KBAIICCLOEF": 0.5,
+                    "PJGAOELGLIF": 0.11999999731779099
+                  },
+                  "KDBKDJBCACN": 20
+                },
+                "NMMJKLAHOHH": {
+                  "EIAGIEDFLHJ": {
+                    "KJCBAFKFFMP": 1,
+                    "PGPNDGBABNI": true
+                  },
+                  "IHBPFOBEJKN": "default",
+                  "LHEILBMGANH": "ByHitDirection",
+                  "PAPNKKIKAOC": "LV2"
+                }
+              }
+            },
+            "ILELAOFJIKJ": true,
+            "LJFIEGHHLOB": false,
+            "NMKBOEALDEF": "Enemy"
+          }
+        ],
+        "EMGBJJOIENB": [
+          {
+            "$type": "BINBHGLANKO",
+            "AMOLMPHFPHJ": -1,
+            "ILELAOFJIKJ": true,
+            "LDFBDMNIADI": "Shenhe_ElementalArt_ElemBall_Handler",
+            "LJFIEGHHLOB": false
+          }
+        ],
+        "GPPBBDEICKP": {
+          "ElementalArt_ElemBall": {
+            "DBGOKAKAHFP": 100,
+            "DOALDLPNGMF": -1,
+            "EMGBJJOIENB": [
+              {
+                "$type": "EDAOLCMCEBI",
+                "AMOLMPHFPHJ": -1,
+                "AOCCEKAGBFB": 12,
+                "HHENHNHHHDA": 1,
+                "ILELAOFJIKJ": true,
+                "KKMLMJNCLLG": 2022,
+                "LJFIEGHHLOB": true,
+                "MLFLDPAGADG": {
+                  "$type": "KCOKCEJLEMA",
+                  "CCNPIPFLFAL": {
+                    "$type": "AAKJDEPKNHH",
+                    "BFIKJDKPACL": 1.5,
+                    "EDBLANFLPBB": 0.5
+                  },
+                  "EEFLHEKBODJ": {
+                    "BNJLEBLGEKB": 180
+                  },
+                  "GNFICELAKIB": 10,
+                  "HECMDGIAGKM": 2,
+                  "POPNBJAHNFK": {
+                    "ONEHKOHOCBH": 180
+                  }
+                }
+              }
+            ],
+            "GPPCPGHLDHL": "Unique",
+            "JPEAFDFPKAN": 0.5,
+            "KFOMCJGGPPC": -1,
+            "PPKOPMBNPJH": true
+          },
+          "Shenhe_ElementalArt_ElemBall_Handler": {
+            "DBGOKAKAHFP": 100,
+            "DOALDLPNGMF": -1,
+            "GPPCPGHLDHL": "Unique",
+            "KFOMCJGGPPC": -1,
+            "LPMFNGFGMCE": [
+              {
+                "$type": "PBIOEEHFHFD",
+                "AMOLMPHFPHJ": -1,
+                "BDHBNCEEPPK": "Other",
+                "ILELAOFJIKJ": true,
+                "LJFIEGHHLOB": false,
+                "MJKPCGCAPLK": [
+                  {
+                    "$type": "DPNJGLIMCHM",
+                    "BDHBNCEEPPK": "Target",
+                    "BFDEHDNLNJH": [
+                      "Elemental_Art"
+                    ]
+                  },
+                  {
+                    "$type": "BIMGEEAOLLH",
+                    "BDHBNCEEPPK": "Target",
+                    "PEPDKCDHNIM": "Default"
+                  },
+                  {
+                    "$type": "BKCJECHCDKG",
+                    "BDHBNCEEPPK": "Target",
+                    "FJGEDPNBGCG": -1,
+                    "LJBBKGIFJDB": [
+                      "Monster"
+                    ]
+                  },
+                  {
+                    "$type": "MMPLBPOHMGL",
+                    "BDHBNCEEPPK": "Target",
+                    "NJJFOACNFGL": "NoneOrEqual",
+                    "PEELJBICEHE": "_ANIMAL_ENTITY_TYPE"
+                  }
+                ],
+                "MLJNNELMEFL": [
+                  {
+                    "$type": "BINBHGLANKO",
+                    "AMOLMPHFPHJ": -1,
+                    "ILELAOFJIKJ": true,
+                    "LDFBDMNIADI": "ElementalArt_ElemBall",
+                    "LJFIEGHHLOB": false
+                  }
+                ]
+              }
+            ],
+            "PPKOPMBNPJH": true
+          },
+          "UNIQUE_Shenhe_ElementalArt_H_Buff": {
+            "DBGOKAKAHFP": 100,
+            "DIELNIJPCJJ": true,
+            "DOALDLPNGMF": -1,
+            "GPPCPGHLDHL": "Unique",
+            "KFOMCJGGPPC": -1,
+            "LFIJIMIMBIH": [
+              {
+                "$type": "DCFENNHBEMG",
+                "AMOLMPHFPHJ": -1,
+                "BFDEHDNLNJH": [
+                  "NormalAttack_01",
+                  "NormalAttack_02",
+                  "NormalAttack_03",
+                  "NormalAttack_04",
+                  "NormalAttack_05",
+                  "NormalAttack_06",
+                  "ExtraAttack",
+                  "FallingAttack",
+                  "Elemental_Art",
+                  "Elemental_Art_Hold",
+                  "Elemental_Art_Extra",
+                  "Elemental_Burst"
+                ],
+                "EMILGODPBIG": [
+                  "FIGHT_PROP_CUR_ATTACK",
+                  "Attack2ExtraRatio",
+                  "MUL"
+                ],
+                "IJDGNIIOHLM": [
+                  {
+                    "$type": "LEHABIJBEAO",
+                    "BDHBNCEEPPK": "Target",
+                    "JOFNJODFEDG": "Ice"
+                  },
+                  {
+                    "$type": "BKCJECHCDKG",
+                    "BDHBNCEEPPK": "Target",
+                    "FJGEDPNBGCG": -1,
+                    "LJBBKGIFJDB": [
+                      "Monster"
+                    ]
+                  },
+                  {
+                    "$type": "MMPLBPOHMGL",
+                    "BDHBNCEEPPK": "Target",
+                    "NJJFOACNFGL": "NoneOrEqual",
+                    "PEELJBICEHE": "_ANIMAL_ENTITY_TYPE"
+                  }
+                ],
+                "IMHIGCHNNCA": "ElementalArt_H_Buff_Count",
+                "KFNJNNEOFCB": [
+                  {
+                    "$type": "GCINLBBPONN",
+                    "AMOLMPHFPHJ": -1,
+                    "ILELAOFJIKJ": true,
+                    "LDFBDMNIADI": "UNIQUE_Shenhe_ElementalArt_H_Buff_FX",
+                    "LJFIEGHHLOB": true
+                  }
+                ],
+                "MLJNNELMEFL": [
+                  {
+                    "$type": "AHICIAHHALJ",
+                    "AMOLMPHFPHJ": -1,
+                    "BDHBNCEEPPK": "Caster",
+                    "IIBMNPFLNMJ": "Avatar_Shenhe_Constellation_4",
+                    "IJDGNIIOHLM": [
+                      {
+                        "$type": "DIOFPDKDAIG",
+                        "BDHBNCEEPPK": "Target",
+                        "JPCEGCMOHNI": "Shenhe_Constellation_4"
+                      }
+                    ],
+                    "ILELAOFJIKJ": true,
+                    "LJFIEGHHLOB": true,
+                    "LPFPKHHKGIB": "Other"
+                  }
+                ]
+              }
+            ],
+            "PPKOPMBNPJH": true
+          },
+          "UNIQUE_Shenhe_ElementalArt_H_Buff_FX": {
+            "DBGOKAKAHFP": 100,
+            "DIELNIJPCJJ": true,
+            "DOALDLPNGMF": -1,
+            "EMGBJJOIENB": [
+              {
+                "$type": "PMNJOIIOFJI",
+                "AMOLMPHFPHJ": -1,
+                "BEIMGAKABJN": "Eff_Avatar_Lady_Pole_Shenhe_ElementalArt_Buff_Loop",
+                "HJIHBAANFLE": 1,
+                "ILELAOFJIKJ": true,
+                "JMMALEJDAEF": -1,
+                "LJFIEGHHLOB": true,
+                "MLFLDPAGADG": {
+                  "EEFLHEKBODJ": {
+                    "BNJLEBLGEKB": 180
+                  },
+                  "GNFICELAKIB": 10,
+                  "HECMDGIAGKM": 2,
+                  "POPNBJAHNFK": {
+                    "ONEHKOHOCBH": 180
+                  }
+                }
+              }
+            ],
+            "GPPCPGHLDHL": "Unique",
+            "KFOMCJGGPPC": -1,
+            "PPKOPMBNPJH": true
+          },
+          "UNIQUE_Shenhe_ElementalArt_H_Buff_Handler": {
+            "DBGOKAKAHFP": 100,
+            "DIELNIJPCJJ": true,
+            "DOALDLPNGMF": -1,
+            "EMGBJJOIENB": [
+              {
+                "$type": "CDANEAFAFKM",
+                "AMOLMPHFPHJ": -1,
+                "ILELAOFJIKJ": true,
+                "LDFBDMNIADI": "UNIQUE_Shenhe_ElementalArt_H_Buff_FX",
+                "LJFIEGHHLOB": true
+              },
+              {
+                "$type": "PBIOEEHFHFD",
+                "AMOLMPHFPHJ": -1,
+                "BDHBNCEEPPK": "Caster",
+                "ILELAOFJIKJ": true,
+                "LJFIEGHHLOB": true,
+                "MJKPCGCAPLK": [
+                  {
+                    "$type": "DIOFPDKDAIG",
+                    "BDHBNCEEPPK": "Target",
+                    "JPCEGCMOHNI": "Shenhe_Constellation_6"
+                  }
+                ],
+                "MLJNNELMEFL": [
+                  {
+                    "$type": "CDANEAFAFKM",
+                    "AMOLMPHFPHJ": -1,
+                    "ILELAOFJIKJ": true,
+                    "LDFBDMNIADI": "UNIQUE_Shenhe_ElementalArt_H_Talent_Buff",
+                    "LJFIEGHHLOB": true
+                  }
+                ],
+                "PAPFFKOKPML": [
+                  {
+                    "$type": "CDANEAFAFKM",
+                    "AMOLMPHFPHJ": -1,
+                    "ILELAOFJIKJ": true,
+                    "LDFBDMNIADI": "UNIQUE_Shenhe_ElementalArt_H_Buff",
+                    "LJFIEGHHLOB": true
+                  }
+                ]
+              }
+            ],
+            "FMBHOKCHKOH": [
+              {
+                "$type": "PBIOEEHFHFD",
+                "AMOLMPHFPHJ": -1,
+                "ILELAOFJIKJ": true,
+                "LJFIEGHHLOB": true,
+                "MJKPCGCAPLK": [
+                  {
+                    "$type": "OLNGCABMCGI",
+                    "BDHBNCEEPPK": "Caster",
+                    "DKCBCJCHEBF": "LesserOrEqual",
+                    "NJJFOACNFGL": "XYZ",
+                    "PDIFFCBMGMO": 50
+                  }
+                ],
+                "PAPFFKOKPML": [
+                  {
+                    "$type": "GCINLBBPONN",
+                    "AMOLMPHFPHJ": -1,
+                    "ILELAOFJIKJ": true,
+                    "LDFBDMNIADI": "UNIQUE_Shenhe_ElementalArt_H_Buff_Handler",
+                    "LJFIEGHHLOB": true
+                  }
+                ]
+              }
+            ],
+            "GPPCPGHLDHL": "Unique",
+            "JFLGPLCIOEC": 0.30000001192092896,
+            "JPEAFDFPKAN": "ElementalArt_H_Buff_Time",
+            "KFOMCJGGPPC": -1,
+            "PPKOPMBNPJH": true
+          },
+          "UNIQUE_Shenhe_ElementalArt_H_Extra_Buff": {
+            "BOCCNJLBFCJ": "AttackUp",
+            "DBGOKAKAHFP": 100,
+            "DIELNIJPCJJ": true,
+            "DOALDLPNGMF": -1,
+            "GPPCPGHLDHL": "RefreshUniqueDurability",
+            "JPEAFDFPKAN": "ElementalArt_H_Extra_Buff_Time",
+            "KFOMCJGGPPC": -1,
+            "LFIJIMIMBIH": [
+              {
+                "$type": "GBFENLIGHEJ",
+                "AMOLMPHFPHJ": -1,
+                "BFDEHDNLNJH": [
+                  "NormalAttack_01",
+                  "NormalAttack_02",
+                  "NormalAttack_03",
+                  "NormalAttack_04",
+                  "NormalAttack_05",
+                  "NormalAttack_06",
+                  "ExtraAttack",
+                  "FallingAttack"
+                ],
+                "KALBHJILPDA": "ElementalArt_H_Extra_Buff_Ratio"
+              }
+            ],
+            "PPKOPMBNPJH": true
+          },
+          "UNIQUE_Shenhe_ElementalArt_H_Talent_Buff": {
+            "DBGOKAKAHFP": 100,
+            "DIELNIJPCJJ": true,
+            "DOALDLPNGMF": -1,
+            "GPPCPGHLDHL": "Unique",
+            "KFOMCJGGPPC": -1,
+            "LFIJIMIMBIH": [
+              {
+                "$type": "DCFENNHBEMG",
+                "AMOLMPHFPHJ": -1,
+                "APGEFBAAIOD": [
+                  {
+                    "$type": "DPNJGLIMCHM",
+                    "BDHBNCEEPPK": "Target",
+                    "BFDEHDNLNJH": [
+                      "FallingAttack",
+                      "Elemental_Art",
+                      "Elemental_Art_Hold",
+                      "Elemental_Art_Extra",
+                      "Elemental_Burst"
+                    ]
+                  }
+                ],
+                "BFDEHDNLNJH": [
+                  "NormalAttack_01",
+                  "NormalAttack_02",
+                  "NormalAttack_03",
+                  "NormalAttack_04",
+                  "NormalAttack_05",
+                  "NormalAttack_06",
+                  "ExtraAttack",
+                  "FallingAttack",
+                  "Elemental_Art",
+                  "Elemental_Art_Hold",
+                  "Elemental_Art_Extra",
+                  "Elemental_Burst"
+                ],
+                "EMILGODPBIG": [
+                  "FIGHT_PROP_CUR_ATTACK",
+                  "Attack2ExtraRatio",
+                  "MUL"
+                ],
+                "IJDGNIIOHLM": [
+                  {
+                    "$type": "LEHABIJBEAO",
+                    "BDHBNCEEPPK": "Target",
+                    "JOFNJODFEDG": "Ice"
+                  },
+                  {
+                    "$type": "BKCJECHCDKG",
+                    "BDHBNCEEPPK": "Target",
+                    "FJGEDPNBGCG": -1,
+                    "LJBBKGIFJDB": [
+                      "Monster"
+                    ]
+                  },
+                  {
+                    "$type": "MMPLBPOHMGL",
+                    "BDHBNCEEPPK": "Target",
+                    "NJJFOACNFGL": "NoneOrEqual",
+                    "PEELJBICEHE": "_ANIMAL_ENTITY_TYPE"
+                  }
+                ],
+                "IMHIGCHNNCA": "ElementalArt_H_Buff_Count",
+                "KFNJNNEOFCB": [
+                  {
+                    "$type": "GCINLBBPONN",
+                    "AMOLMPHFPHJ": -1,
+                    "ILELAOFJIKJ": true,
+                    "LDFBDMNIADI": "UNIQUE_Shenhe_ElementalArt_H_Buff_FX",
+                    "LJFIEGHHLOB": true
+                  }
+                ],
+                "MLJNNELMEFL": [
+                  {
+                    "$type": "AHICIAHHALJ",
+                    "AMOLMPHFPHJ": -1,
+                    "BDHBNCEEPPK": "Caster",
+                    "IIBMNPFLNMJ": "Avatar_Shenhe_Constellation_4",
+                    "IJDGNIIOHLM": [
+                      {
+                        "$type": "DIOFPDKDAIG",
+                        "BDHBNCEEPPK": "Target",
+                        "JPCEGCMOHNI": "Shenhe_Constellation_4"
+                      }
+                    ],
+                    "ILELAOFJIKJ": true,
+                    "LJFIEGHHLOB": true,
+                    "LPFPKHHKGIB": "Other"
+                  }
+                ]
+              }
+            ],
+            "PPKOPMBNPJH": true
+          }
+        },
+        "IIBMNPFLNMJ": "Avatar_Shenhe_ElementalArt_Attack_H",
+        "LOEHLJGBGAC": {
+          "Attack2ExtraRatio": 0,
+          "ElementalArt_H_Buff_Count": 0,
+          "ElementalArt_H_Buff_Time": 0,
+          "ElementalArt_H_Extra_Buff_Ratio": 0,
+          "ElementalArt_H_Extra_Buff_Time": 0,
+          "ElementalArt_H_Radius": 4,
+          "Elemental_Art_H_Damage": 0
+        },
+        "OMAIGDMCJBO": {
+          "DBGOKAKAHFP": 100,
+          "DOALDLPNGMF": -1,
+          "KFOMCJGGPPC": -1,
+          "PPKOPMBNPJH": true
+        }
+      },
+      "old_pointer": "/6/Default",
+      "old_node_sha256": "9e88c94ec5fd60f6fb4aeba1e935d7df12ac1be77ead706eaa8bd10dffb80cfa",
+      "old_raw": {
+        "onAdded": [
+          {
+            "$type": "ApplyModifier",
+            "actorIceSubHurtDelta": -1,
+            "doOffStage": false,
+            "modifierName": "Shenhe_ElementalArt_ElemBall_Handler",
+            "canBeHandledOnRecover": true
+          }
+        ],
+        "abilitySpecials": {
+          "Attack2ExtraRatio": 0,
+          "ElementalArt_H_Buff_Count": 0,
+          "ElementalArt_H_Buff_Time": 0,
+          "ElementalArt_H_Extra_Buff_Ratio": 0,
+          "ElementalArt_H_Extra_Buff_Time": 0,
+          "ElementalArt_H_Radius": 4,
+          "Elemental_Art_H_Damage": 0
+        },
+        "abilityName": "Avatar_Shenhe_ElementalArt_Attack_H",
+        "modifiers": {
+          "ElementalArt_ElemBall": {
+            "onAdded": [
+              {
+                "$type": "GenerateElemBall",
+                "actorIceSubHurtDelta": -1,
+                "doOffStage": true,
+                "configID": 2022,
+                "born": {
+                  "$type": "ConfigBornByTarget",
+                  "APKLAIJMEIL": {
+                    "HHNLJKNBKPP": 180
+                  },
+                  "bornRandom": {
+                    "$type": "BornRandomFromCenter",
+                    "maxRandomRange": 1.5,
+                    "minRandomRange": 0.5
+                  },
+                  "value": 10,
+                  "direction": {
+                    "maxAngle": 180
+                  },
+                  "onGroundRaycastUpDist": 2
+                },
+                "baseEnergy": 12,
+                "ratio": 1,
+                "canBeHandledOnRecover": true
+              }
+            ],
+            "stacking": "Unique",
+            "duration": 0.5,
+            "elementDurability": 100,
+            "minus_one": -1,
+            "IAKPBCLBNKF": -1,
+            "isLimitedProperties": true
+          },
+          "Shenhe_ElementalArt_ElemBall_Handler": {
+            "stacking": "Unique",
+            "elementDurability": 100,
+            "minus_one": -1,
+            "IAKPBCLBNKF": -1,
+            "isLimitedProperties": true,
+            "onHittingOther": [
+              {
+                "$type": "Predicated",
+                "targetPredicates": [
+                  {
+                    "$type": "ByAttackTags",
+                    "target": "Target",
+                    "attackTags": [
+                      "Elemental_Art"
+                    ]
+                  },
+                  {
+                    "$type": "PPKMHGEGLHG",
+                    "target": "Target",
+                    "attackType": "Default"
+                  },
+                  {
+                    "$type": "ByEntityTypes",
+                    "target": "Target",
+                    "value": -1,
+                    "entityTypes": [
+                      "Monster"
+                    ]
+                  },
+                  {
+                    "$type": "ByTargetGlobalValue",
+                    "key": "_ANIMAL_ENTITY_TYPE",
+                    "target": "Target",
+                    "compareType": "NoneOrEqual"
+                  }
+                ],
+                "target": "Other",
+                "actorIceSubHurtDelta": -1,
+                "doOffStage": false,
+                "successActions": [
+                  {
+                    "$type": "ApplyModifier",
+                    "actorIceSubHurtDelta": -1,
+                    "doOffStage": false,
+                    "modifierName": "ElementalArt_ElemBall",
+                    "canBeHandledOnRecover": true
+                  }
+                ],
+                "canBeHandledOnRecover": true
+              }
+            ]
+          },
+          "UNIQUE_Shenhe_ElementalArt_H_Buff": {
+            "stacking": "Unique",
+            "elementDurability": 100,
+            "minus_one": -1,
+            "modifierMixins": [
+              {
+                "$type": "ModifyDamageCountMixin",
+                "actorIceSubHurtDelta": -1,
+                "maxModifyCount": "ElementalArt_H_Buff_Count",
+                "damageExtra": [
+                  "FIGHT_PROP_CUR_ATTACK",
+                  "Attack2ExtraRatio",
+                  "MUL"
+                ],
+                "predicates": [
+                  {
+                    "$type": "ByHitElement",
+                    "target": "Target",
+                    "element": "Ice"
+                  },
+                  {
+                    "$type": "ByEntityTypes",
+                    "target": "Target",
+                    "value": -1,
+                    "entityTypes": [
+                      "Monster"
+                    ]
+                  },
+                  {
+                    "$type": "ByTargetGlobalValue",
+                    "key": "_ANIMAL_ENTITY_TYPE",
+                    "target": "Target",
+                    "compareType": "NoneOrEqual"
+                  }
+                ],
+                "successActions": [
+                  {
+                    "$type": "TriggerAbility",
+                    "target": "Other",
+                    "actorIceSubHurtDelta": -1,
+                    "doOffStage": true,
+                    "abilityName": "Avatar_Shenhe_Constellation_4",
+                    "predicates": [
+                      {
+                        "$type": "ByUnlockTalentParam",
+                        "talentParam": "Shenhe_Constellation_4",
+                        "target": "Target"
+                      }
+                    ],
+                    "canBeHandledOnRecover": true
+                  }
+                ],
+                "attackTags": [
+                  "NormalAttack_01",
+                  "NormalAttack_02",
+                  "NormalAttack_03",
+                  "NormalAttack_04",
+                  "NormalAttack_05",
+                  "NormalAttack_06",
+                  "ExtraAttack",
+                  "FallingAttack",
+                  "Elemental_Art",
+                  "Elemental_Art_Hold",
+                  "Elemental_Art_Extra",
+                  "Elemental_Burst"
+                ],
+                "maxCountActions": [
+                  {
+                    "$type": "RemoveUniqueModifier",
+                    "actorIceSubHurtDelta": -1,
+                    "doOffStage": true,
+                    "modifierName": "UNIQUE_Shenhe_ElementalArt_H_Buff_FX",
+                    "canBeHandledOnRecover": true
+                  }
+                ]
+              }
+            ],
+            "IAKPBCLBNKF": -1,
+            "isUnique": true,
+            "isLimitedProperties": true
+          },
+          "UNIQUE_Shenhe_ElementalArt_H_Buff_FX": {
+            "onAdded": [
+              {
+                "$type": "AttachEffect",
+                "actorIceSubHurtDelta": -1,
+                "scale": 1,
+                "doOffStage": true,
+                "born": {
+                  "APKLAIJMEIL": {
+                    "HHNLJKNBKPP": 180
+                  },
+                  "value": 10,
+                  "direction": {
+                    "maxAngle": 180
+                  },
+                  "onGroundRaycastUpDist": 2
+                },
+                "effectPattern": "Eff_Avatar_Lady_Pole_Shenhe_ElementalArt_Buff_Loop",
+                "effectTempleteID": -1,
+                "canBeHandledOnRecover": true
+              }
+            ],
+            "stacking": "Unique",
+            "elementDurability": 100,
+            "minus_one": -1,
+            "IAKPBCLBNKF": -1,
+            "isUnique": true,
+            "isLimitedProperties": true
+          },
+          "UNIQUE_Shenhe_ElementalArt_H_Buff_Handler": {
+            "onAdded": [
+              {
+                "$type": "AttachModifier",
+                "actorIceSubHurtDelta": -1,
+                "doOffStage": true,
+                "modifierName": "UNIQUE_Shenhe_ElementalArt_H_Buff_FX",
+                "canBeHandledOnRecover": true
+              },
+              {
+                "$type": "Predicated",
+                "targetPredicates": [
+                  {
+                    "$type": "ByUnlockTalentParam",
+                    "talentParam": "Shenhe_Constellation_6",
+                    "target": "Target"
+                  }
+                ],
+                "target": "Caster",
+                "actorIceSubHurtDelta": -1,
+                "doOffStage": true,
+                "failActions": [
+                  {
+                    "$type": "AttachModifier",
+                    "actorIceSubHurtDelta": -1,
+                    "doOffStage": true,
+                    "modifierName": "UNIQUE_Shenhe_ElementalArt_H_Buff",
+                    "canBeHandledOnRecover": true
+                  }
+                ],
+                "successActions": [
+                  {
+                    "$type": "AttachModifier",
+                    "actorIceSubHurtDelta": -1,
+                    "doOffStage": true,
+                    "modifierName": "UNIQUE_Shenhe_ElementalArt_H_Talent_Buff",
+                    "canBeHandledOnRecover": true
+                  }
+                ],
+                "canBeHandledOnRecover": true
+              }
+            ],
+            "stacking": "Unique",
+            "thinkInterval": 0.30000001192092896,
+            "duration": "ElementalArt_H_Buff_Time",
+            "elementDurability": 100,
+            "minus_one": -1,
+            "IAKPBCLBNKF": -1,
+            "onThinkInterval": [
+              {
+                "$type": "Predicated",
+                "targetPredicates": [
+                  {
+                    "$type": "ByTargetPositionToSelfPosition",
+                    "target": "Caster",
+                    "value": 50,
+                    "compareType": "XYZ",
+                    "logic": "LesserOrEqual"
+                  }
+                ],
+                "actorIceSubHurtDelta": -1,
+                "doOffStage": true,
+                "failActions": [
+                  {
+                    "$type": "RemoveUniqueModifier",
+                    "actorIceSubHurtDelta": -1,
+                    "doOffStage": true,
+                    "modifierName": "UNIQUE_Shenhe_ElementalArt_H_Buff_Handler",
+                    "canBeHandledOnRecover": true
+                  }
+                ],
+                "canBeHandledOnRecover": true
+              }
+            ],
+            "isUnique": true,
+            "isLimitedProperties": true
+          },
+          "UNIQUE_Shenhe_ElementalArt_H_Extra_Buff": {
+            "stacking": "RefreshUniqueDurability",
+            "duration": "ElementalArt_H_Extra_Buff_Time",
+            "elementDurability": 100,
+            "minus_one": -1,
+            "modifierMixins": [
+              {
+                "$type": "ModifyDamageMixin",
+                "actorIceSubHurtDelta": -1,
+                "damagePercentageRatio": "ElementalArt_H_Extra_Buff_Ratio",
+                "attackTags": [
+                  "NormalAttack_01",
+                  "NormalAttack_02",
+                  "NormalAttack_03",
+                  "NormalAttack_04",
+                  "NormalAttack_05",
+                  "NormalAttack_06",
+                  "ExtraAttack",
+                  "FallingAttack"
+                ]
+              }
+            ],
+            "IAKPBCLBNKF": -1,
+            "isUnique": true,
+            "isLimitedProperties": true,
+            "state": "AttackUp"
+          },
+          "UNIQUE_Shenhe_ElementalArt_H_Talent_Buff": {
+            "stacking": "Unique",
+            "elementDurability": 100,
+            "minus_one": -1,
+            "modifierMixins": [
+              {
+                "$type": "ModifyDamageCountMixin",
+                "actorIceSubHurtDelta": -1,
+                "maxModifyCount": "ElementalArt_H_Buff_Count",
+                "damageExtra": [
+                  "FIGHT_PROP_CUR_ATTACK",
+                  "Attack2ExtraRatio",
+                  "MUL"
+                ],
+                "predicates": [
+                  {
+                    "$type": "ByHitElement",
+                    "target": "Target",
+                    "element": "Ice"
+                  },
+                  {
+                    "$type": "ByEntityTypes",
+                    "target": "Target",
+                    "value": -1,
+                    "entityTypes": [
+                      "Monster"
+                    ]
+                  },
+                  {
+                    "$type": "ByTargetGlobalValue",
+                    "key": "_ANIMAL_ENTITY_TYPE",
+                    "target": "Target",
+                    "compareType": "NoneOrEqual"
+                  }
+                ],
+                "successActions": [
+                  {
+                    "$type": "TriggerAbility",
+                    "target": "Other",
+                    "actorIceSubHurtDelta": -1,
+                    "doOffStage": true,
+                    "abilityName": "Avatar_Shenhe_Constellation_4",
+                    "predicates": [
+                      {
+                        "$type": "ByUnlockTalentParam",
+                        "talentParam": "Shenhe_Constellation_4",
+                        "target": "Target"
+                      }
+                    ],
+                    "canBeHandledOnRecover": true
+                  }
+                ],
+                "NPBEOPFONKA": [
+                  {
+                    "$type": "ByAttackTags",
+                    "target": "Target",
+                    "attackTags": [
+                      "FallingAttack",
+                      "Elemental_Art",
+                      "Elemental_Art_Hold",
+                      "Elemental_Art_Extra",
+                      "Elemental_Burst"
+                    ]
+                  }
+                ],
+                "attackTags": [
+                  "NormalAttack_01",
+                  "NormalAttack_02",
+                  "NormalAttack_03",
+                  "NormalAttack_04",
+                  "NormalAttack_05",
+                  "NormalAttack_06",
+                  "ExtraAttack",
+                  "FallingAttack",
+                  "Elemental_Art",
+                  "Elemental_Art_Hold",
+                  "Elemental_Art_Extra",
+                  "Elemental_Burst"
+                ],
+                "maxCountActions": [
+                  {
+                    "$type": "RemoveUniqueModifier",
+                    "actorIceSubHurtDelta": -1,
+                    "doOffStage": true,
+                    "modifierName": "UNIQUE_Shenhe_ElementalArt_H_Buff_FX",
+                    "canBeHandledOnRecover": true
+                  }
+                ]
+              }
+            ],
+            "IAKPBCLBNKF": -1,
+            "isUnique": true,
+            "isLimitedProperties": true
+          }
+        },
+        "onAbilityStart": [
+          {
+            "$type": "AvatarSkillStart",
+            "cdRatio": 1,
+            "costStaminaRatio": 1,
+            "actorIceSubHurtDelta": -1,
+            "doOffStage": false,
+            "skillID": 10632,
+            "canBeHandledOnRecover": true
+          },
+          {
+            "$type": "Predicated",
+            "targetPredicates": [
+              {
+                "$type": "ByUnlockTalentParam",
+                "talentParam": "Shenhe_Constellation_4",
+                "target": "Target"
+              }
+            ],
+            "target": "Caster",
+            "actorIceSubHurtDelta": -1,
+            "doOffStage": false,
+            "successActions": [
+              {
+                "$type": "SetGlobalValueToOverrideMap",
+                "overrideMapKey": "Buff_Talent_ExtraDMG_Ratio",
+                "actorIceSubHurtDelta": -1,
+                "doOffStage": false,
+                "globalValueKey": "_ABILITY_Shenhe_ElementalArt_Buff_Talent_ExtraDMG_Ratio",
+                "canBeHandledOnRecover": true
+              },
+              {
+                "$type": "SetGlobalValue",
+                "key": "_ABILITY_Shenhe_ElementalArt_Buff_Talent_Level",
+                "actorIceSubHurtDelta": -1,
+                "doOffStage": false,
+                "canBeHandledOnRecover": true
+              },
+              {
+                "$type": "SetGlobalValue",
+                "key": "_ABILITY_Shenhe_ElementalArt_Buff_Talent_ExtraDMG_Ratio",
+                "actorIceSubHurtDelta": -1,
+                "doOffStage": false,
+                "canBeHandledOnRecover": true
+              }
+            ],
+            "canBeHandledOnRecover": true
+          },
+          {
+            "$type": "SendEffectTrigger",
+            "actorIceSubHurtDelta": -1,
+            "doOffStage": false,
+            "parameter": "Attack_H",
+            "effectPattern": "Eff_Avatar_Lady_Pole_Shenhe_ElementalArt_Rune_Charge",
+            "canBeHandledOnRecover": true
+          },
+          {
+            "$type": "RemoveUniqueModifier",
+            "target": "AllPlayerAvatars",
+            "actorIceSubHurtDelta": -1,
+            "doOffStage": true,
+            "modifierName": "UNIQUE_Shenhe_ElementalArt_L_Buff_Handler",
+            "predicates": [
+              {
+                "$type": "ByTargetPositionToSelfPosition",
+                "target": "Target",
+                "value": 40,
+                "logic": "LesserOrEqual"
+              }
+            ],
+            "canBeHandledOnRecover": true
+          },
+          {
+            "$type": "RemoveUniqueModifier",
+            "target": "AllPlayerAvatars",
+            "actorIceSubHurtDelta": -1,
+            "doOffStage": true,
+            "modifierName": "UNIQUE_Shenhe_ElementalArt_H_Buff_Handler",
+            "predicates": [
+              {
+                "$type": "ByTargetPositionToSelfPosition",
+                "target": "Target",
+                "value": 40,
+                "logic": "LesserOrEqual"
+              }
+            ],
+            "canBeHandledOnRecover": true
+          },
+          {
+            "$type": "AttachModifier",
+            "target": "AllPlayerAvatars",
+            "actorIceSubHurtDelta": -1,
+            "doOffStage": true,
+            "modifierName": "UNIQUE_Shenhe_ElementalArt_H_Buff_Handler",
+            "predicates": [
+              {
+                "$type": "ByTargetPositionToSelfPosition",
+                "target": "Target",
+                "value": 40,
+                "logic": "LesserOrEqual"
+              },
+              {
+                "$type": "ByEntityIsAlive",
+                "target": "Target"
+              }
+            ],
+            "canBeHandledOnRecover": true
+          },
+          {
+            "$type": "AttachModifier",
+            "target": "AllPlayerAvatars",
+            "actorIceSubHurtDelta": -1,
+            "doOffStage": true,
+            "modifierName": "UNIQUE_Shenhe_ElementalArt_H_Extra_Buff",
+            "predicates": [
+              {
+                "$type": "ByTargetPositionToSelfPosition",
+                "target": "Target",
+                "value": 40,
+                "logic": "LesserOrEqual"
+              },
+              {
+                "$type": "ByUnlockTalentParam",
+                "talentParam": "Shenhe_PermanentSkill_2",
+                "target": "Target"
+              },
+              {
+                "$type": "ByEntityIsAlive",
+                "target": "Target"
+              }
+            ],
+            "canBeHandledOnRecover": true
+          },
+          {
+            "$type": "FireEffect",
+            "actorIceSubHurtDelta": -1,
+            "scale": 1,
+            "doOffStage": false,
+            "born": {
+              "$type": "ConfigBornBySelf",
+              "offset": {
+                "z": 1.5
+              },
+              "APKLAIJMEIL": {
+                "HHNLJKNBKPP": 180
+              },
+              "value": 10,
+              "direction": {
+                "maxAngle": 180
+              },
+              "onGroundRaycastUpDist": 2
+            },
+            "effectPattern": "Eff_Avatar_Lady_Pole_Shenhe_ElementalArt_H_Attack",
+            "effectTempleteID": -1,
+            "canBeHandledOnRecover": true
+          },
+          {
+            "$type": "TriggerAttackEvent",
+            "targetType": "Enemy",
+            "actorIceSubHurtDelta": -1,
+            "doOffStage": false,
+            "attackEvent": {
+              "attackInfo": {
+                "attackTag": "Elemental_Art",
+                "HBOOKFMCODC": {
+                  "BPIJOAMNKIH": {
+                    "GGOHGMFHHEC": true,
+                    "value": 1
+                  },
+                  "onHitEffectName": "default"
+                },
+                "hitPattern": {
+                  "hitImpulseType": "LV2",
+                  "BPIJOAMNKIH": {
+                    "GGOHGMFHHEC": true,
+                    "value": 1
+                  },
+                  "onHitEffectName": "default",
+                  "retreatType": "ByHitDirection"
+                },
+                "INKGMIHAPMA": {
+                  "NDIBGPPKGJP": "Shake"
+                },
+                "cameraShake": {
+                  "shakeDistance": 20,
+                  "extension": {
+                    "rangeAttenuation": 0.5,
+                    "baseOnCamera": true,
+                    "baseCycle": 0.11999999731779099,
+                    "cycleDamping": 0.11999999731779099
+                  }
+                },
+                "attenuationGroup": "default",
+                "attackProperty": {
+                  "elementType": "Ice",
+                  "elementDurability": 50,
+                  "enBreak": 200,
+                  "elementRank": 1,
+                  "attackType": "Default",
+                  "strikeType": "Slash",
+                  "damagePercentageRatio": "Buff_Talent_ExtraDMG_Ratio",
+                  "damagePercentage": "Elemental_Art_H_Damage"
+                }
+              },
+              "attackPattern": {
+                "$type": "ConfigAttackSphere",
+                "detectDirection": "CenterToSide",
+                "born": {
+                  "$type": "ConfigBornBySelf",
+                  "offset": {
+                    "x": 0.800000011920929,
+                    "z": 1.5
+                  },
+                  "APKLAIJMEIL": {
+                    "HHNLJKNBKPP": 180
+                  },
+                  "value": 10,
+                  "direction": {
+                    "maxAngle": 180
+                  },
+                  "onGroundRaycastUpDist": 2
+                },
+                "MPNIJNGFBIH": {
+                  "INOCAOHPEBB": {
+                    "GGOHGMFHHEC": true,
+                    "value": 1
+                  }
+                },
+                "triggerType": "TriggerNoRepeat",
+                "radius": "ElementalArt_H_Radius",
+                "massiveAttackRatio": 1
+              }
+            },
+            "canBeHandledOnRecover": true
+          }
+        ],
+        "LKLPDIMKLKI": {
+          "elementDurability": 100,
+          "minus_one": -1,
+          "IAKPBCLBNKF": -1,
+          "isLimitedProperties": true
+        }
+      }
+    }
+  },
+  "families": [
+    {
+      "id": "mark_selected_initial_attack_v1",
+      "variant": "tap",
+      "parent": "tap",
+      "controller": "controller",
+      "metadata_required": true,
+      "predicate_semantics": "decoded_local_shape",
+      "parameter_special": "ElementalArt_EmptyJump_Damage",
+      "attack_paths": [
+        "/GPPBBDEICKP/Avatar_Kazuha_EmptyJump_Strike/EMGBJJOIENB/0/PAPFFKOKPML/0",
+        "/GPPBBDEICKP/Avatar_Kazuha_EmptyJump_Strike/EMGBJJOIENB/0/MLJNNELMEFL/0"
+      ],
+      "attack_info_suffix": "/IDCIIIFMDCM/LGHDGGJIJOK",
+      "property_suffix": "/EHKJIDFINEK",
+      "listener_path": "/GPPBBDEICKP/Avatar_Kazuha_ElementalArt_HitCheck/LBABCICJBKE/1",
+      "generator_modifier_path": "/GPPBBDEICKP/Avatar_Kazuha_ElementalArt_DropBall",
+      "generate_path": "/GPPBBDEICKP/Avatar_Kazuha_ElementalArt_DropBall/EMGBJJOIENB/0",
+      "duration": 0.20000000298023224,
+      "reference_frames": 12,
+      "mark": {
+        "key": "_ABILITY_Kazuha_ElementalArt_ClickOrHold_Mark",
+        "value": 1,
+        "writer_path": "/GPPBBDEICKP/Avatar_Kazuha_ElementalArt_Click_Detect/EMGBJJOIENB/0",
+        "writer_attach_path": "/ECFFDLHMCLK/1",
+        "attack_attach_path": "/ECFFDLHMCLK/2",
+        "read_path": "/GPPBBDEICKP/Avatar_Kazuha_ElementalArt_DropBall/EMGBJJOIENB/0/IJDGNIIOHLM/0"
+      },
+      "skill_id_path": "/FBHJJNMDIPC/0/ACFKMLJKONM",
+      "mount_required": true,
+      "metadata_identity": {
+        "parent": "/modifiers/Avatar_Kazuha_EmptyJump_Strike",
+        "branches": [
+          "/modifiers/Avatar_Kazuha_EmptyJump_Strike/onAdded/0/failActions/0/attackEvent/attackInfo/attackProperty",
+          "/modifiers/Avatar_Kazuha_EmptyJump_Strike/onAdded/0/successActions/0/attackEvent/attackInfo/attackProperty"
+        ]
+      }
+    },
+    {
+      "id": "mark_selected_initial_attack_v1",
+      "variant": "hold",
+      "parent": "hold",
+      "controller": "controller",
+      "metadata_required": true,
+      "predicate_semantics": "decoded_local_shape",
+      "parameter_special": "ElementalArt_FlyAway_Damage",
+      "attack_paths": [
+        "/GPPBBDEICKP/Avatar_Kazuha_FlyAway_Strike/EMGBJJOIENB/0"
+      ],
+      "attack_info_suffix": "/IDCIIIFMDCM/LGHDGGJIJOK",
+      "property_suffix": "/EHKJIDFINEK",
+      "listener_path": "/GPPBBDEICKP/Avatar_Kazuha_ElementalArt_HitCheck/LBABCICJBKE/1",
+      "generator_modifier_path": "/GPPBBDEICKP/Avatar_Kazuha_ElementalArt_DropBall",
+      "generate_path": "/GPPBBDEICKP/Avatar_Kazuha_ElementalArt_DropBall/EMGBJJOIENB/1",
+      "duration": 0.20000000298023224,
+      "reference_frames": 12,
+      "mark": {
+        "key": "_ABILITY_Kazuha_ElementalArt_ClickOrHold_Mark",
+        "value": 2,
+        "writer_path": "/GPPBBDEICKP/Avatar_Kazuha_ElementalArt_Hold_Detect/EMGBJJOIENB/0",
+        "writer_attach_path": "/ECFFDLHMCLK/1",
+        "attack_attach_path": "/ECFFDLHMCLK/2",
+        "read_path": "/GPPBBDEICKP/Avatar_Kazuha_ElementalArt_DropBall/EMGBJJOIENB/1/IJDGNIIOHLM/0"
+      },
+      "skill_id_path": "/FBHJJNMDIPC/0/ACFKMLJKONM",
+      "mount_required": true,
+      "metadata_identity": {
+        "parent": "/modifiers/Avatar_Kazuha_FlyAway_Strike",
+        "branches": [
+          "/modifiers/Avatar_Kazuha_FlyAway_Strike/onAdded/0/attackEvent/attackInfo/attackProperty"
+        ]
+      }
+    },
+    {
+      "id": "ability_local_initial_attack_v1",
+      "variant": "hold",
+      "parent": "local_hold",
+      "controller": "local_hold",
+      "metadata_required": false,
+      "predicate_semantics": "reference_adapted_not_decoded",
+      "parameter_special": "Elemental_Art_H_Damage",
+      "attack_paths": [
+        "/ECFFDLHMCLK/8"
+      ],
+      "attack_info_suffix": "/IDCIIIFMDCM/LGHDGGJIJOK",
+      "property_suffix": "/EHKJIDFINEK",
+      "listener_path": "/GPPBBDEICKP/Shenhe_ElementalArt_ElemBall_Handler/LPMFNGFGMCE/0",
+      "generator_modifier_path": "/GPPBBDEICKP/ElementalArt_ElemBall",
+      "generate_path": "/GPPBBDEICKP/ElementalArt_ElemBall/EMGBJJOIENB/0",
+      "duration": 0.5,
+      "reference_frames": 30,
+      "mark": null,
+      "skill_id_path": null,
+      "mount_required": false
+    }
+  ],
+  "mount": {
+    "source_path": "BinOutput/Avatar/ConfigAvatar_Kazuha.json",
+    "new_pointer": "/IPFAFECPFAE",
+    "new_node_sha256": "bccfd80cc7ca42184823fc02eed895ee384398f5342076834606fa042b1c445c",
+    "new_raw": [
+      {
+        "IIBMNPFLNMJ": "Avatar_Kazuha_ExtraAttack",
+        "NOLOIJJMMDG": "Avatar_Kazuha_ExtraAttack"
+      },
+      {
+        "IIBMNPFLNMJ": "Avatar_Kazuha_FallingAnthem",
+        "NOLOIJJMMDG": "Avatar_Kazuha_FallingAnthem"
+      },
+      {
+        "IIBMNPFLNMJ": "Avatar_Kazuha_ElementalArt_Check",
+        "NOLOIJJMMDG": "Avatar_Kazuha_ElementalArt_Check"
+      },
+      {
+        "IIBMNPFLNMJ": "Avatar_Kazuha_ElementalArt_AirCheck",
+        "NOLOIJJMMDG": "Avatar_Kazuha_ElementalArt_AirCheck"
+      },
+      {
+        "IIBMNPFLNMJ": "Avatar_Kazuha_ElementalArt_Charge",
+        "NOLOIJJMMDG": "Avatar_Kazuha_ElementalArt_Charge"
+      },
+      {
+        "IIBMNPFLNMJ": "Avatar_Kazuha_ElementalArt_Charge_Remove",
+        "NOLOIJJMMDG": "Avatar_Kazuha_ElementalArt_Charge_Remove"
+      },
+      {
+        "IIBMNPFLNMJ": "Avatar_Kazuha_ElementalArt_EmptyJump",
+        "NOLOIJJMMDG": "Avatar_Kazuha_ElementalArt_EmptyJump"
+      },
+      {
+        "IIBMNPFLNMJ": "Avatar_Kazuha_ElementalArt_FlyAway",
+        "NOLOIJJMMDG": "Avatar_Kazuha_ElementalArt_FlyAway"
+      },
+      {
+        "IIBMNPFLNMJ": "Avatar_Kazuha_ElementalBurst",
+        "NOLOIJJMMDG": "Avatar_Kazuha_ElementalBurst"
+      },
+      {
+        "IIBMNPFLNMJ": "Avatar_Kazuha_ElementalBurst_ScreenEffect",
+        "NOLOIJJMMDG": "Avatar_Kazuha_ElementalBurst_ScreenEffect"
+      },
+      {
+        "IIBMNPFLNMJ": "Avatar_Kazuha_ElementalBurst_Strike_Mix",
+        "NOLOIJJMMDG": "Avatar_Kazuha_ElementalBurst_Strike_Mix"
+      },
+      {
+        "IIBMNPFLNMJ": "Avatar_Kazuha_NormalAttack_Handler",
+        "NOLOIJJMMDG": "Avatar_Kazuha_NormalAttack_Handler"
+      },
+      {
+        "IIBMNPFLNMJ": "Avatar_Kazuha_NormalAttack_DamageHandler",
+        "NOLOIJJMMDG": "Avatar_Kazuha_NormalAttack_DamageHandler"
+      }
+    ],
+    "old_pointer": "/abilities",
+    "old_node_sha256": "8d3cb998f18cd93d76d4d2d72d724701f967143f38c10602c132bc2c4a33d52a",
+    "old_raw": [
+      {
+        "abilityName": "Avatar_Kazuha_ExtraAttack",
+        "abilityID": "Avatar_Kazuha_ExtraAttack"
+      },
+      {
+        "abilityName": "Avatar_Kazuha_FallingAnthem",
+        "abilityID": "Avatar_Kazuha_FallingAnthem"
+      },
+      {
+        "abilityName": "Avatar_Kazuha_ElementalArt_Check",
+        "abilityID": "Avatar_Kazuha_ElementalArt_Check"
+      },
+      {
+        "abilityName": "Avatar_Kazuha_ElementalArt_AirCheck",
+        "abilityID": "Avatar_Kazuha_ElementalArt_AirCheck"
+      },
+      {
+        "abilityName": "Avatar_Kazuha_ElementalArt_Charge",
+        "abilityID": "Avatar_Kazuha_ElementalArt_Charge"
+      },
+      {
+        "abilityName": "Avatar_Kazuha_ElementalArt_Charge_Remove",
+        "abilityID": "Avatar_Kazuha_ElementalArt_Charge_Remove"
+      },
+      {
+        "abilityName": "Avatar_Kazuha_ElementalArt_EmptyJump",
+        "abilityID": "Avatar_Kazuha_ElementalArt_EmptyJump"
+      },
+      {
+        "abilityName": "Avatar_Kazuha_ElementalArt_FlyAway",
+        "abilityID": "Avatar_Kazuha_ElementalArt_FlyAway"
+      },
+      {
+        "abilityName": "Avatar_Kazuha_ElementalBurst",
+        "abilityID": "Avatar_Kazuha_ElementalBurst"
+      },
+      {
+        "abilityName": "Avatar_Kazuha_ElementalBurst_ScreenEffect",
+        "abilityID": "Avatar_Kazuha_ElementalBurst_ScreenEffect"
+      },
+      {
+        "abilityName": "Avatar_Kazuha_ElementalBurst_Strike_Mix",
+        "abilityID": "Avatar_Kazuha_ElementalBurst_Strike_Mix"
+      },
+      {
+        "abilityName": "Avatar_Kazuha_NormalAttack_Handler",
+        "abilityID": "Avatar_Kazuha_NormalAttack_Handler"
+      },
+      {
+        "abilityName": "Avatar_Kazuha_NormalAttack_DamageHandler",
+        "abilityID": "Avatar_Kazuha_NormalAttack_DamageHandler"
+      }
+    ]
+  },
+  "primary_sources": [
+    {
+      "repository": "genshinsim/gcsim",
+      "commit": "8792c73d64439feb74fa139c3b745022952b3dc9",
+      "path": "internal/characters/kazuha/skill.go",
+      "url": "https://raw.githubusercontent.com/genshinsim/gcsim/8792c73d64439feb74fa139c3b745022952b3dc9/internal/characters/kazuha/skill.go",
+      "file": "gcsim-kazuha-skill.go",
+      "bytes": 4872,
+      "sha256": "416c1e0209900e912ab4a4e71c6c71fb4db901890781139e4cb01fa98a37b9cf"
+    },
+    {
+      "repository": "genshinsim/gcsim",
+      "commit": "8792c73d64439feb74fa139c3b745022952b3dc9",
+      "path": "internal/characters/shenhe/skill.go",
+      "url": "https://raw.githubusercontent.com/genshinsim/gcsim/8792c73d64439feb74fa139c3b745022952b3dc9/internal/characters/shenhe/skill.go",
+      "file": "gcsim-shenhe-skill.go",
+      "bytes": 6193,
+      "sha256": "644dd1a5ff5a13995ade85459b304a8361a8828e6de847dd3de5f12971ef80f6"
+    },
+    {
+      "repository": "KQM-git/TCL",
+      "commit": "6f0ab0c8641c7960b9cb1f0f3fca06120949e01f",
+      "path": "docs/evidence/characters/anemo/kaedehara-kazuha.md",
+      "url": "https://raw.githubusercontent.com/KQM-git/TCL/6f0ab0c8641c7960b9cb1f0f3fca06120949e01f/docs/evidence/characters/anemo/kaedehara-kazuha.md",
+      "file": "kqm-kazuha.md",
+      "bytes": 17704,
+      "sha256": "ab7619b007611b9ec9745bb4c216997dc25afd767a47c43fe910824abf11bcbb"
+    },
+    {
+      "repository": "KQM-git/TCL",
+      "commit": "6f0ab0c8641c7960b9cb1f0f3fca06120949e01f",
+      "path": "docs/evidence/characters/cryo/shenhe.md",
+      "url": "https://raw.githubusercontent.com/KQM-git/TCL/6f0ab0c8641c7960b9cb1f0f3fca06120949e01f/docs/evidence/characters/cryo/shenhe.md",
+      "file": "kqm-shenhe.md",
+      "bytes": 8229,
+      "sha256": "387cb517bb0e8feeac0d1df78e5809b9aa3f3fd07b199ab94b24b8482ebf0ebe"
+    },
+    {
+      "repository": "genshinsim/gcsim",
+      "commit": "8792c73d64439feb74fa139c3b745022952b3dc9",
+      "path": "pkg/core/player/character/mods.go",
+      "url": "https://raw.githubusercontent.com/genshinsim/gcsim/8792c73d64439feb74fa139c3b745022952b3dc9/pkg/core/player/character/mods.go",
+      "file": "gcsim-mods.go",
+      "bytes": 9874,
+      "sha256": "9bbd839185035bdef1657cf981f56038e07f60d07cd2d76a7adaecfa555521db"
+    },
+    {
+      "repository": "genshinsim/gcsim",
+      "commit": "8792c73d64439feb74fa139c3b745022952b3dc9",
+      "path": "pkg/modifier/modifier.go",
+      "url": "https://raw.githubusercontent.com/genshinsim/gcsim/8792c73d64439feb74fa139c3b745022952b3dc9/pkg/modifier/modifier.go",
+      "file": "gcsim-modifier.go",
+      "bytes": 3952,
+      "sha256": "72a7147ad114cba1b017973de7b11944af23ed040a6bba3aa91b28cb5e9d98a6"
+    }
+  ],
+  "field_evidence": {
+    "unknown_predicate": {
+      "$type": "PPKMHGEGLHG",
+      "target": "Target",
+      "attackType": "Default"
+    },
+    "old_talent": {
+      "source_path": "BinOutput/Talent/AvatarTalents/ConfigTalent_Shenhe.json",
+      "source_sha256": "093e74c7ffe0fe2fb67c3df60c14955aab4e33ad549feeba06083ea19c469c0e",
+      "pointer": "/Shenhe_SkillUpgrade_2",
+      "node_sha256": "599e8e2a9a0828079e49a6984a13efd96d2ab7d814ffafa766894772675b9d23",
+      "raw": [
+        {
+          "$type": "ModifyAbility",
+          "CLGIKOPIKBC": true,
+          "abilityName": "Avatar_Shenhe_ElementalArt_Bullet",
+          "paramDelta": "%1",
+          "paramSpecial": "Elemental_Art_L_Damage"
+        },
+        {
+          "$type": "ModifyAbility",
+          "CLGIKOPIKBC": true,
+          "abilityName": "Avatar_Shenhe_ElementalArt_Attack_H",
+          "paramDelta": "%2",
+          "paramSpecial": "Elemental_Art_H_Damage"
+        },
+        {
+          "$type": "ModifyAbility",
+          "CLGIKOPIKBC": true,
+          "abilityName": "Avatar_Shenhe_ElementalArt_Attack_L",
+          "paramDelta": "%3",
+          "paramSpecial": "Attack2ExtraRatio"
+        },
+        {
+          "$type": "ModifyAbility",
+          "CLGIKOPIKBC": true,
+          "abilityName": "Avatar_Shenhe_ElementalArt_Attack_H",
+          "paramDelta": "%3",
+          "paramSpecial": "Attack2ExtraRatio"
+        },
+        {
+          "$type": "ModifyAbility",
+          "CLGIKOPIKBC": true,
+          "abilityName": "Avatar_Shenhe_ElementalArt_Attack_L",
+          "paramDelta": "%4",
+          "paramSpecial": "ElementalArt_L_Buff_Time"
+        },
+        {
+          "$type": "ModifyAbility",
+          "CLGIKOPIKBC": true,
+          "abilityName": "Avatar_Shenhe_ElementalArt_Attack_H",
+          "paramDelta": "%5",
+          "paramSpecial": "ElementalArt_H_Buff_Time"
+        },
+        {
+          "$type": "ModifyAbility",
+          "CLGIKOPIKBC": true,
+          "abilityName": "Avatar_Shenhe_ElementalArt_Attack_L",
+          "paramDelta": "%6",
+          "paramSpecial": "ElementalArt_L_Buff_Count"
+        },
+        {
+          "$type": "ModifyAbility",
+          "CLGIKOPIKBC": true,
+          "abilityName": "Avatar_Shenhe_ElementalArt_Attack_H",
+          "paramDelta": "%7",
+          "paramSpecial": "ElementalArt_H_Buff_Count"
+        }
+      ]
+    }
+  },
+  "unit_profile_id": "grasscutter-element-energy-items-v1",
+  "reference_policy": {
+    "hitlag_policy": "zero_hitlag_reference",
+    "fps": 60,
+    "isolation": "ceil(max(raw_duration,reference_frames/60)*1000000); strict_greater",
+    "not_a_cooldown": true,
+    "grasscutter_modifier_execution": "TODO_not_evidence",
+    "mount_identity": "same_exact_config_membership_and_exact_skill_id_not_combat_hash_mapping"
+  },
+  "fixture_evidence": {
+    "materials": [
+      {
+        "source_path": "ExcelBinOutput/MaterialExcelConfigData.json",
+        "new_pointer": "/6032",
+        "new_node_sha256": "6ee1876e6856459dab2572bbee47a72133efeccc6c0d75ce1949527adc8808c2",
+        "new_raw": {
+          "specialDescTextMapHash": 3652812081,
+          "gadgetId": 70610002,
+          "maxUseCount": 99,
+          "itemType": "ITEM_MATERIAL",
+          "effectDescTextMapHash": 832648359,
+          "interactionTitleTextMapHash": 3154185447,
+          "itemUse": [
+            {
+              "useOp": "ITEM_USE_ADD_ELEM_ENERGY",
+              "useParam": [
+                "2",
+                "3",
+                "1",
+                "",
+                ""
+              ]
+            },
+            {
+              "useParam": [
+                "",
+                "",
+                ""
+              ]
+            },
+            {
+              "useParam": [
+                "",
+                ""
+              ]
+            }
+          ],
+          "materialType": "MATERIAL_ADSORBATE",
+          "icon": "UI_ItemIcon_2018",
+          "id": 2018,
+          "typeDescTextMapHash": 867875902,
+          "isForceGetHint": true,
+          "stackLimit": 1000,
+          "nameTextMapHash": 3848492180,
+          "descTextMapHash": 2046093525,
+          "useTarget": "ITEM_USE_TARGET_CUR_TEAM"
+        },
+        "old_pointer": "/5947",
+        "old_node_sha256": "6ee1876e6856459dab2572bbee47a72133efeccc6c0d75ce1949527adc8808c2",
+        "old_raw": {
+          "maxUseCount": 99,
+          "stackLimit": 1000,
+          "itemType": "ITEM_MATERIAL",
+          "id": 2018,
+          "icon": "UI_ItemIcon_2018",
+          "isForceGetHint": true,
+          "effectDescTextMapHash": 832648359,
+          "specialDescTextMapHash": 3652812081,
+          "materialType": "MATERIAL_ADSORBATE",
+          "gadgetId": 70610002,
+          "typeDescTextMapHash": 867875902,
+          "useTarget": "ITEM_USE_TARGET_CUR_TEAM",
+          "descTextMapHash": 2046093525,
+          "interactionTitleTextMapHash": 3154185447,
+          "itemUse": [
+            {
+              "useOp": "ITEM_USE_ADD_ELEM_ENERGY",
+              "useParam": [
+                "2",
+                "3",
+                "1",
+                "",
+                ""
+              ]
+            },
+            {
+              "useParam": [
+                "",
+                "",
+                ""
+              ]
+            },
+            {
+              "useParam": [
+                "",
+                ""
+              ]
+            }
+          ],
+          "nameTextMapHash": 3848492180
+        }
+      },
+      {
+        "source_path": "ExcelBinOutput/MaterialExcelConfigData.json",
+        "new_pointer": "/6036",
+        "new_node_sha256": "eb229277974716d1d8dbb5ee29024f9b3fa9a5d9482e2de17c0c617020b26042",
+        "new_raw": {
+          "specialDescTextMapHash": 925592617,
+          "gadgetId": 70610005,
+          "maxUseCount": 99,
+          "itemType": "ITEM_MATERIAL",
+          "effectDescTextMapHash": 29144463,
+          "interactionTitleTextMapHash": 927295911,
+          "itemUse": [
+            {
+              "useOp": "ITEM_USE_ADD_ELEM_ENERGY",
+              "useParam": [
+                "7",
+                "3",
+                "1",
+                "",
+                ""
+              ]
+            },
+            {
+              "useParam": [
+                "",
+                "",
+                ""
+              ]
+            },
+            {
+              "useParam": [
+                "",
+                ""
+              ]
+            }
+          ],
+          "materialType": "MATERIAL_ADSORBATE",
+          "icon": "UI_ItemIcon_2021",
+          "id": 2021,
+          "typeDescTextMapHash": 2641021046,
+          "isForceGetHint": true,
+          "stackLimit": 1000,
+          "nameTextMapHash": 4242158892,
+          "descTextMapHash": 2285410613,
+          "useTarget": "ITEM_USE_TARGET_CUR_TEAM"
+        },
+        "old_pointer": "/5951",
+        "old_node_sha256": "eb229277974716d1d8dbb5ee29024f9b3fa9a5d9482e2de17c0c617020b26042",
+        "old_raw": {
+          "maxUseCount": 99,
+          "stackLimit": 1000,
+          "itemType": "ITEM_MATERIAL",
+          "id": 2021,
+          "icon": "UI_ItemIcon_2021",
+          "isForceGetHint": true,
+          "effectDescTextMapHash": 29144463,
+          "specialDescTextMapHash": 925592617,
+          "materialType": "MATERIAL_ADSORBATE",
+          "gadgetId": 70610005,
+          "typeDescTextMapHash": 2641021046,
+          "useTarget": "ITEM_USE_TARGET_CUR_TEAM",
+          "descTextMapHash": 2285410613,
+          "interactionTitleTextMapHash": 927295911,
+          "itemUse": [
+            {
+              "useOp": "ITEM_USE_ADD_ELEM_ENERGY",
+              "useParam": [
+                "7",
+                "3",
+                "1",
+                "",
+                ""
+              ]
+            },
+            {
+              "useParam": [
+                "",
+                "",
+                ""
+              ]
+            },
+            {
+              "useParam": [
+                "",
+                ""
+              ]
+            }
+          ],
+          "nameTextMapHash": 4242158892
+        }
+      },
+      {
+        "source_path": "ExcelBinOutput/MaterialExcelConfigData.json",
+        "new_pointer": "/6037",
+        "new_node_sha256": "76c302b799a81053621774a71cea48cea5f24cb328ccaa94f15831bec88099ec",
+        "new_raw": {
+          "specialDescTextMapHash": 23634361,
+          "gadgetId": 70610006,
+          "maxUseCount": 99,
+          "itemType": "ITEM_MATERIAL",
+          "effectDescTextMapHash": 2527388735,
+          "interactionTitleTextMapHash": 438731175,
+          "itemUse": [
+            {
+              "useOp": "ITEM_USE_ADD_ELEM_ENERGY",
+              "useParam": [
+                "5",
+                "3",
+                "1",
+                "",
+                ""
+              ]
+            },
+            {
+              "useParam": [
+                "",
+                "",
+                ""
+              ]
+            },
+            {
+              "useParam": [
+                "",
+                ""
+              ]
+            }
+          ],
+          "materialType": "MATERIAL_ADSORBATE",
+          "icon": "UI_ItemIcon_2022",
+          "id": 2022,
+          "typeDescTextMapHash": 1912176854,
+          "isForceGetHint": true,
+          "stackLimit": 1000,
+          "nameTextMapHash": 2763502948,
+          "descTextMapHash": 987198469,
+          "useTarget": "ITEM_USE_TARGET_CUR_TEAM"
+        },
+        "old_pointer": "/5952",
+        "old_node_sha256": "76c302b799a81053621774a71cea48cea5f24cb328ccaa94f15831bec88099ec",
+        "old_raw": {
+          "maxUseCount": 99,
+          "stackLimit": 1000,
+          "itemType": "ITEM_MATERIAL",
+          "id": 2022,
+          "icon": "UI_ItemIcon_2022",
+          "isForceGetHint": true,
+          "effectDescTextMapHash": 2527388735,
+          "specialDescTextMapHash": 23634361,
+          "materialType": "MATERIAL_ADSORBATE",
+          "gadgetId": 70610006,
+          "typeDescTextMapHash": 1912176854,
+          "useTarget": "ITEM_USE_TARGET_CUR_TEAM",
+          "descTextMapHash": 987198469,
+          "interactionTitleTextMapHash": 438731175,
+          "itemUse": [
+            {
+              "useOp": "ITEM_USE_ADD_ELEM_ENERGY",
+              "useParam": [
+                "5",
+                "3",
+                "1",
+                "",
+                ""
+              ]
+            },
+            {
+              "useParam": [
+                "",
+                "",
+                ""
+              ]
+            },
+            {
+              "useParam": [
+                "",
+                ""
+              ]
+            }
+          ],
+          "nameTextMapHash": 2763502948
+        }
+      }
+    ],
+    "records": [
+      {
+        "source_path": "ExcelBinOutput/AvatarExcelConfigData.json",
+        "json_pointer": "/34",
+        "node_sha256": "4aa7772affeacd541e7fb529415b030bd6c7d6efe87cfdf83ac77a0557f301ed",
+        "raw": {
+          "featureTagGroupID": 10000047,
+          "scriptDataPathHash": "7535910857308706620",
+          "qualityType": "QUALITY_ORANGE",
+          "prefabPathHash": "13729919875118868783",
+          "firstPropPriority": "FIGHT_PROP_CHARGE_EFFICIENCY",
+          "secondPropPriority": "FIGHT_PROP_ELEMENT_MASTERY",
+          "CHCOOENOOJM": "4975904732025136974",
+          "controllerPathHash": "8594492037099145806",
+          "defenseBase": 62.82149887084961,
+          "coopPicNameHash": "5156196381719149781",
+          "initialWeapon": 11101,
+          "deformationMeshPathHash": "856195021060268183",
+          "iconName": "UI_AvatarIcon_Kazuha",
+          "combatConfigHash": "9919316577460724427",
+          "FJDGJCDPMEM": 174508081,
+          "critical": 0.05000000074505806,
+          "imageName": "AvatarImage_Forward_Kazuha",
+          "bodyType": "BODY_BOY",
+          "avatarPromoteRewardIdList": [
+            900341,
+            900343,
+            900345
+          ],
+          "criticalHurt": 0.5,
+          "manekinJsonConfigHash": "16299747622145493304",
+          "avatarIdentityType": "AVATAR_IDENTITY_NORMAL",
+          "propGrowCurves": [
+            {
+              "growCurve": "GROW_CURVE_HP_S5",
+              "type": "FIGHT_PROP_BASE_HP"
+            },
+            {
+              "growCurve": "GROW_CURVE_ATTACK_S5",
+              "type": "FIGHT_PROP_BASE_ATTACK"
+            },
+            {
+              "growCurve": "GROW_CURVE_HP_S5",
+              "type": "FIGHT_PROP_BASE_DEFENSE"
+            }
+          ],
+          "prefabPathRagdollHash": "12044930433670696283",
+          "KADLDGKLEPC": "3577882297361955787",
+          "id": 10000047,
+          "skillDepotId": 4701,
+          "avatarPromoteId": 47,
+          "manekinMotionConfig": 103,
+          "gachaImageNameHash": "6703640860938636082",
+          "tags": [
+            "None"
+          ],
+          "avatarPromoteRewardLevelList": [
+            1,
+            3,
+            5
+          ],
+          "controllerPathRemoteHash": "8724502986145879757",
+          "chargeEfficiency": 1,
+          "attackBase": 23.08880043029785,
+          "gachaCardNameHash": "1460850770816805667",
+          "prefabPathRemoteHash": "1068836673489435371",
+          "sideIconName": "UI_AvatarIcon_Side_Kazuha",
+          "nameTextMapHash": 88505754,
+          "useType": "AVATAR_FORMAL",
+          "descTextMapHash": 174508081,
+          "staminaRecoverSpeed": 25,
+          "hpBase": 1039.1187744140625,
+          "weaponType": "WEAPON_SWORD_ONE_HAND",
+          "manekinPathHash": "17888060824724456623",
+          "animatorConfigPathHash": "14167135086670867959",
+          "POCCNIJNACM": "13630099632347331557"
+        }
+      },
+      {
+        "source_path": "ExcelBinOutput/AvatarSkillDepotExcelConfigData.json",
+        "json_pointer": "/97",
+        "node_sha256": "504dda55d61a261ed581f9f10fcd39858ba3ea8fbc2d0d4175d9429923ddc7e5",
+        "raw": {
+          "subSkills": [
+            10101,
+            10102,
+            10001,
+            10473,
+            10474,
+            5047010
+          ],
+          "talents": [
+            471,
+            472,
+            473,
+            474,
+            475,
+            476
+          ],
+          "skills": [
+            10471,
+            10472,
+            0,
+            0
+          ],
+          "inherentProudSkillOpens": [
+            {
+              "proudSkillGroupId": 4721,
+              "needAvatarPromoteLevel": 1
+            },
+            {
+              "proudSkillGroupId": 4722,
+              "needAvatarPromoteLevel": 4
+            },
+            {
+              "proudSkillGroupId": 4723
+            },
+            {},
+            {}
+          ],
+          "talentStarName": "Talent_Kazuha",
+          "energySkill": 10475,
+          "id": 4701,
+          "specialProudSkillOpens": [
+            {},
+            {}
+          ],
+          "extraAbilities": [
+            "",
+            "",
+            ""
+          ]
+        }
+      },
+      {
+        "source_path": "ExcelBinOutput/AvatarSkillExcelConfigData.json",
+        "json_pointer": "/215",
+        "node_sha256": "4d657d54887550a392904af883a4b4dac5a714eb2c1f4331b744304db80741b4",
+        "raw": {
+          "lockWeightParams": [
+            1,
+            1,
+            0.30000001192092896,
+            0
+          ],
+          "lockShape": "CircleLockEnemyR8H6HC",
+          "proudSkillGroupId": 4732,
+          "skillIcon": "Skill_S_Kazuha_01",
+          "maxChargeNum": 1,
+          "isAttackCameraLock": true,
+          "id": 10472,
+          "extraDescTextMapHash": 3106696311,
+          "triggerID": 2,
+          "uniqueDescTextMapHash": 2055227563,
+          "cdTime": 6,
+          "nameTextMapHash": 3645236685,
+          "descTextMapHash": 3589501064
+        }
+      },
+      {
+        "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+        "json_pointer": "/3561",
+        "node_sha256": "611e43dae224de61c725b016700916a14abfd8ce9e613268a14541338cd34aa8",
+        "raw": {
+          "paramList": [
+            3.4560000896453857,
+            6,
+            4.694399833679199,
+            9,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "breakLevel": 6,
+          "proudSkillId": 473210,
+          "filterConds": [
+            "TALENT_FILTER_NONE",
+            "TALENT_FILTER_NONE"
+          ],
+          "proudSkillGroupId": 4732,
+          "coinCost": 700000,
+          "addProps": [
+            {},
+            {}
+          ],
+          "paramDescList": [
+            738282510,
+            1865076974,
+            482589087,
+            3106904503,
+            2602190854,
+            4287001698,
+            3899800583,
+            351964629,
+            1794832860,
+            3116719279,
+            1389239324,
+            3676582115,
+            3804464487,
+            3290771723,
+            328976526,
+            3823544605,
+            2861976617,
+            964340747,
+            351476087,
+            4232819173
+          ],
+          "openConfig": "Kazuha_SkillUpgrade_2",
+          "lifeEffectParams": [
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "unlockDescTextMapHash": 1077969042,
+          "costItems": [
+            {
+              "count": 16,
+              "id": 104315
+            },
+            {
+              "count": 12,
+              "id": 112037
+            },
+            {
+              "count": 2,
+              "id": 113019
+            },
+            {
+              "count": 1,
+              "id": 104319
+            }
+          ],
+          "icon": "Skill_S_Kazuha_01",
+          "level": 10,
+          "proudSkillType": 3,
+          "uniqueDescTextMapHash": 2298142844,
+          "additionalDescTextMapHash": 2936836364,
+          "nameTextMapHash": 2119607613,
+          "descTextMapHash": 2744201299
+        }
+      },
+      {
+        "source_path": "ExcelBinOutput/AvatarExcelConfigData.json",
+        "json_pointer": "/50",
+        "node_sha256": "29c0ded55f56a400463b48c852659b099a22b8c60dc62473b2321c68c75ee7c2",
+        "raw": {
+          "featureTagGroupID": 10000063,
+          "scriptDataPathHash": "3744219756526631032",
+          "qualityType": "QUALITY_ORANGE",
+          "prefabPathHash": "18306633649200384003",
+          "firstPropPriority": "FIGHT_PROP_CHARGE_EFFICIENCY",
+          "secondPropPriority": "FIGHT_PROP_ATTACK_PERCENT",
+          "CHCOOENOOJM": "17293845908373695380",
+          "controllerPathHash": "11438927723139524610",
+          "defenseBase": 64.61640167236328,
+          "coopPicNameHash": "5230390790852908273",
+          "initialWeapon": 13101,
+          "deformationMeshPathHash": "2132204517517738195",
+          "iconName": "UI_AvatarIcon_Shenhe",
+          "combatConfigHash": "15364837967956993371",
+          "FJDGJCDPMEM": 373064729,
+          "critical": 0.05000000074505806,
+          "imageName": "AvatarImage_Forward_Shenhe",
+          "bodyType": "BODY_LADY",
+          "avatarPromoteRewardIdList": [
+            900461,
+            900463,
+            900465
+          ],
+          "criticalHurt": 0.5,
+          "manekinJsonConfigHash": "15345224479718544217",
+          "avatarIdentityType": "AVATAR_IDENTITY_NORMAL",
+          "propGrowCurves": [
+            {
+              "growCurve": "GROW_CURVE_HP_S5",
+              "type": "FIGHT_PROP_BASE_HP"
+            },
+            {
+              "growCurve": "GROW_CURVE_ATTACK_S5",
+              "type": "FIGHT_PROP_BASE_ATTACK"
+            },
+            {
+              "growCurve": "GROW_CURVE_HP_S5",
+              "type": "FIGHT_PROP_BASE_DEFENSE"
+            }
+          ],
+          "prefabPathRagdollHash": "10393663125980178205",
+          "KADLDGKLEPC": "12146487876740279348",
+          "id": 10000063,
+          "skillDepotId": 6301,
+          "avatarPromoteId": 63,
+          "manekinMotionConfig": 103,
+          "gachaImageNameHash": "4592797104242092676",
+          "tags": [
+            "None"
+          ],
+          "avatarPromoteRewardLevelList": [
+            1,
+            3,
+            5
+          ],
+          "controllerPathRemoteHash": "932679866898810169",
+          "chargeEfficiency": 1,
+          "attackBase": 23.64739990234375,
+          "gachaCardNameHash": "12201318973846706835",
+          "prefabPathRemoteHash": "8179503891665583026",
+          "sideIconName": "UI_AvatarIcon_Side_Shenhe",
+          "nameTextMapHash": 334242122,
+          "useType": "AVATAR_FORMAL",
+          "descTextMapHash": 373064729,
+          "staminaRecoverSpeed": 25,
+          "hpBase": 1011.4725341796875,
+          "weaponType": "WEAPON_POLE",
+          "manekinPathHash": "6276796366205445844",
+          "animatorConfigPathHash": "15521519964846876947",
+          "POCCNIJNACM": "8739842748631856957"
+        }
+      },
+      {
+        "source_path": "ExcelBinOutput/AvatarSkillDepotExcelConfigData.json",
+        "json_pointer": "/123",
+        "node_sha256": "a7c2656240415fc6fe5e4acc77b01c3ec4cd27edfb6b8c9dcf72613c4cd1c223",
+        "raw": {
+          "subSkills": [
+            10101,
+            10102,
+            10002,
+            5063010
+          ],
+          "talents": [
+            631,
+            632,
+            633,
+            634,
+            635,
+            636
+          ],
+          "skills": [
+            10631,
+            10632,
+            0,
+            0
+          ],
+          "inherentProudSkillOpens": [
+            {
+              "proudSkillGroupId": 6321,
+              "needAvatarPromoteLevel": 1
+            },
+            {
+              "proudSkillGroupId": 6322,
+              "needAvatarPromoteLevel": 4
+            },
+            {
+              "proudSkillGroupId": 6323
+            },
+            {},
+            {}
+          ],
+          "talentStarName": "Talent_Shenhe",
+          "energySkill": 10635,
+          "id": 6301,
+          "specialProudSkillOpens": [
+            {},
+            {}
+          ],
+          "extraAbilities": [
+            "",
+            "",
+            ""
+          ]
+        }
+      },
+      {
+        "source_path": "ExcelBinOutput/AvatarSkillExcelConfigData.json",
+        "json_pointer": "/279",
+        "node_sha256": "6f1d808d8cb23a192aa0ab16ad3a592fad3f6182a1c1500192ea0c2ba5d81692",
+        "raw": {
+          "lockWeightParams": [
+            1,
+            1,
+            0.30000001192092896,
+            0
+          ],
+          "lockShape": "CircleLockEnemyR8H6HC",
+          "proudSkillGroupId": 6332,
+          "skillIcon": "Skill_S_Shenhe_01",
+          "maxChargeNum": 1,
+          "isAttackCameraLock": true,
+          "id": 10632,
+          "extraDescTextMapHash": 112287855,
+          "triggerID": 2,
+          "uniqueDescTextMapHash": 363534619,
+          "cdTime": 10,
+          "nameTextMapHash": 3028595085,
+          "descTextMapHash": 917615616
+        }
+      },
+      {
+        "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+        "json_pointer": "/4443",
+        "node_sha256": "a6e181bbebf72b6b6647bb8cb9eeba16a2a730dde51d93474891b501990d29b2",
+        "raw": {
+          "paramList": [
+            2.5055999755859375,
+            3.398400068283081,
+            0.8218079805374146,
+            10,
+            15,
+            5,
+            7,
+            10,
+            15,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "breakLevel": 6,
+          "proudSkillId": 633210,
+          "filterConds": [
+            "TALENT_FILTER_NONE",
+            "TALENT_FILTER_NONE"
+          ],
+          "proudSkillGroupId": 6332,
+          "coinCost": 700000,
+          "addProps": [
+            {},
+            {}
+          ],
+          "paramDescList": [
+            338598198,
+            3748551894,
+            2412562703,
+            3270216079,
+            2456011150,
+            1257001458,
+            3657772095,
+            2378985909,
+            2281396724,
+            1831074055,
+            2783431748,
+            4070236307,
+            2480586015,
+            755916851,
+            1685366094,
+            806778045,
+            3271405977,
+            2419331531,
+            370644415,
+            2975128941
+          ],
+          "openConfig": "Shenhe_SkillUpgrade_2",
+          "lifeEffectParams": [
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "unlockDescTextMapHash": 1290363914,
+          "costItems": [
+            {
+              "count": 16,
+              "id": 104312
+            },
+            {
+              "count": 12,
+              "id": 112040
+            },
+            {
+              "count": 2,
+              "id": 113026
+            },
+            {
+              "count": 1,
+              "id": 104319
+            }
+          ],
+          "icon": "Skill_A_01",
+          "level": 10,
+          "proudSkillType": 3,
+          "uniqueDescTextMapHash": 3017602084,
+          "additionalDescTextMapHash": 3126856028,
+          "nameTextMapHash": 3408260341,
+          "descTextMapHash": 3779407987
+        }
+      }
+    ],
+    "talents": [
+      {
+        "source_path": "BinOutput/Talent/AvatarTalents/ConfigTalent_Kazuha.json",
+        "name": "Kazuha_SkillUpgrade_2",
+        "raw": [
+          {
+            "$type": "BIAHEMMGABC",
+            "GBPFBNHLOFD": true,
+            "IIBMNPFLNMJ": "Avatar_Kazuha_ElementalArt_EmptyJump",
+            "PCABAADALND": "%1",
+            "PEOJKHKHAKL": "ElementalArt_EmptyJump_Damage"
+          },
+          {
+            "$type": "BIAHEMMGABC",
+            "GBPFBNHLOFD": true,
+            "IIBMNPFLNMJ": "Avatar_Kazuha_ElementalArt_FlyAway",
+            "PCABAADALND": "%3",
+            "PEOJKHKHAKL": "ElementalArt_FlyAway_Damage"
+          }
+        ],
+        "node_sha256": "29f2892d1718e53c858bd4385d12fc25215e1c2d198fb3b5cdcfcadb460c963b"
+      },
+      {
+        "source_path": "BinOutput/Talent/AvatarTalents/ConfigTalent_Shenhe.json",
+        "name": "Shenhe_SkillUpgrade_2",
+        "raw": [
+          {
+            "$type": "BIAHEMMGABC",
+            "GBPFBNHLOFD": true,
+            "IIBMNPFLNMJ": "Avatar_Shenhe_ElementalArt_Bullet",
+            "PCABAADALND": "%1",
+            "PEOJKHKHAKL": "Elemental_Art_L_Damage"
+          },
+          {
+            "$type": "BIAHEMMGABC",
+            "GBPFBNHLOFD": true,
+            "IIBMNPFLNMJ": "Avatar_Shenhe_ElementalArt_Attack_H",
+            "PCABAADALND": "%2",
+            "PEOJKHKHAKL": "Elemental_Art_H_Damage"
+          },
+          {
+            "$type": "BIAHEMMGABC",
+            "GBPFBNHLOFD": true,
+            "IIBMNPFLNMJ": "Avatar_Shenhe_ElementalArt_Attack_L",
+            "PCABAADALND": "%3",
+            "PEOJKHKHAKL": "Attack2ExtraRatio"
+          },
+          {
+            "$type": "BIAHEMMGABC",
+            "GBPFBNHLOFD": true,
+            "IIBMNPFLNMJ": "Avatar_Shenhe_ElementalArt_Attack_H",
+            "PCABAADALND": "%3",
+            "PEOJKHKHAKL": "Attack2ExtraRatio"
+          },
+          {
+            "$type": "BIAHEMMGABC",
+            "GBPFBNHLOFD": true,
+            "IIBMNPFLNMJ": "Avatar_Shenhe_ElementalArt_Attack_L",
+            "PCABAADALND": "%4",
+            "PEOJKHKHAKL": "ElementalArt_L_Buff_Time"
+          },
+          {
+            "$type": "BIAHEMMGABC",
+            "GBPFBNHLOFD": true,
+            "IIBMNPFLNMJ": "Avatar_Shenhe_ElementalArt_Attack_H",
+            "PCABAADALND": "%5",
+            "PEOJKHKHAKL": "ElementalArt_H_Buff_Time"
+          },
+          {
+            "$type": "BIAHEMMGABC",
+            "GBPFBNHLOFD": true,
+            "IIBMNPFLNMJ": "Avatar_Shenhe_ElementalArt_Attack_L",
+            "PCABAADALND": "%6",
+            "PEOJKHKHAKL": "ElementalArt_L_Buff_Count"
+          },
+          {
+            "$type": "BIAHEMMGABC",
+            "GBPFBNHLOFD": true,
+            "IIBMNPFLNMJ": "Avatar_Shenhe_ElementalArt_Attack_H",
+            "PCABAADALND": "%7",
+            "PEOJKHKHAKL": "ElementalArt_H_Buff_Count"
+          }
+        ],
+        "node_sha256": "da6348f8c14f6cd6e4330b421e11f32647b2a9581cb4261ae0b87b6891c53c5d"
+      }
+    ]
+  },
+  "entry_sources": [
+    {
+      "source_path": "ExcelBinOutput/AvatarExcelConfigData.json",
+      "worktree_sha256": "bc9a4a11b7e0e40c6eadd75ca2c99752b17802521591a8df65f4995c5b0e4801",
+      "git_raw_sha256": "d6fb33533a05fed29c411fa55db769480698c2d6c2511154d635eb7393996a53"
+    },
+    {
+      "source_path": "ExcelBinOutput/AvatarSkillDepotExcelConfigData.json",
+      "worktree_sha256": "841ccf30a9dcb0f9851c1ca1a3f37bfd53d7e83a1bf5f38ea6f9b4dedb69e896",
+      "git_raw_sha256": "66280c26aeb3c6bdda502e81eee2449021dbfc5ba608de4cb2903c710b1cd877"
+    },
+    {
+      "source_path": "ExcelBinOutput/AvatarSkillExcelConfigData.json",
+      "worktree_sha256": "d6c09879a0c162d7b1fdd5ad4c29e0ae457d1e41a7b853d209a6e272caad2e6e",
+      "git_raw_sha256": "70c5cc4b669af3fd44d8de46f8ca37804b3b6d61890503d048d872f4caea06fa"
+    },
+    {
+      "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+      "worktree_sha256": "852113c53187be005ba398d8afc787809a75853d6d2c29f8240897bc13102362",
+      "git_raw_sha256": "7ea37860f8957a7730192298a7ae3da2bef50ceafed14e1c41a13a889fba205f"
+    },
+    {
+      "source_path": "BinOutput/Talent/AvatarTalents/ConfigTalent_Kazuha.json",
+      "worktree_sha256": "0c8a948580d2a8806fef335fd9daaeaf674cffe7ebecca52b733b12c326faeb4",
+      "git_raw_sha256": "95a3fdee3d29427fd71131f0c4ae295e122c066382df407cafcd292f7983bcdf"
+    },
+    {
+      "source_path": "BinOutput/Talent/AvatarTalents/ConfigTalent_Shenhe.json",
+      "worktree_sha256": "0ca0eb7e9131fdf8293e65ad8498b15cdf88d440f40a0b9ab928e8df98c415c8",
+      "git_raw_sha256": "241dff69ceb951812b8dee6602aa718a5b8dfe4d54b99ffb4398994ae72663ae"
+    }
+  ],
+  "static_reference_checks": {
+    "kind": "static_evidence_checks_only",
+    "formal_db_opened": false,
+    "simulator_executed": false,
+    "game_retested": false,
+    "source_hash_checks": [
+      {
+        "file": "AbilityModifierController.java",
+        "sha256": "c2ad55abf3d92b3620f4b45222dd51ce2ad3936d221239b9d9f543393b7f29e5",
+        "bytes": 521,
+        "passed": true
+      },
+      {
+        "file": "ActionApplyModifier.java",
+        "sha256": "f12978420f0bc8b2e506b92fb7355b27073d177428e10eafd139fd80db4170cf",
+        "bytes": 1423,
+        "passed": true
+      },
+      {
+        "file": "Ability.java",
+        "sha256": "45cd6d436ee105adaa613eb710dc8fcce3b295b214a6957af3dead8d01bb25e2",
+        "bytes": 4193,
+        "passed": true
+      },
+      {
+        "file": "gcsim-kazuha-skill.go",
+        "sha256": "416c1e0209900e912ab4a4e71c6c71fb4db901890781139e4cb01fa98a37b9cf",
+        "bytes": 4872,
+        "passed": true
+      },
+      {
+        "file": "gcsim-shenhe-skill.go",
+        "sha256": "644dd1a5ff5a13995ade85459b304a8361a8828e6de847dd3de5f12971ef80f6",
+        "bytes": 6193,
+        "passed": true
+      },
+      {
+        "file": "kqm-kazuha.md",
+        "sha256": "ab7619b007611b9ec9745bb4c216997dc25afd767a47c43fe910824abf11bcbb",
+        "bytes": 17704,
+        "passed": true
+      },
+      {
+        "file": "kqm-shenhe.md",
+        "sha256": "387cb517bb0e8feeac0d1df78e5809b9aa3f3fd07b199ab94b24b8482ebf0ebe",
+        "bytes": 8229,
+        "passed": true
+      },
+      {
+        "file": "gcsim-mods.go",
+        "sha256": "9bbd839185035bdef1657cf981f56038e07f60d07cd2d76a7adaecfa555521db",
+        "bytes": 9874,
+        "passed": true
+      },
+      {
+        "file": "gcsim-modifier.go",
+        "sha256": "72a7147ad114cba1b017973de7b11944af23ed040a6bba3aa91b28cb5e9d98a6",
+        "bytes": 3952,
+        "passed": true
+      }
+    ],
+    "specific_code_locations": [
+      {
+        "file": "ActionApplyModifier.java",
+        "line": 33,
+        "text": "return false; // TODO"
+      },
+      {
+        "file": "ActionApplyModifier.java",
+        "line": 29,
+        "text": "// modifier.onAdded();"
+      },
+      {
+        "file": "gcsim-kazuha-skill.go",
+        "line": 64,
+        "text": "func (c *char) makeParticleCB(count float64) info.AttackCBFunc {"
+      },
+      {
+        "file": "gcsim-kazuha-skill.go",
+        "line": 69,
+        "text": "if c.StatusIsActive(particleICDKey) {"
+      },
+      {
+        "file": "gcsim-kazuha-skill.go",
+        "line": 72,
+        "text": "c.AddStatus(particleICDKey, 0.2*60, true)"
+      },
+      {
+        "file": "gcsim-kazuha-skill.go",
+        "line": 95,
+        "text": "c.makeParticleCB(3),"
+      },
+      {
+        "file": "gcsim-kazuha-skill.go",
+        "line": 145,
+        "text": "c.makeParticleCB(4),"
+      },
+      {
+        "file": "gcsim-shenhe-skill.go",
+        "line": 142,
+        "text": "c.holdParticleCB,"
+      },
+      {
+        "file": "gcsim-shenhe-skill.go",
+        "line": 164,
+        "text": "func (c *char) holdParticleCB(a info.AttackCB) {"
+      },
+      {
+        "file": "gcsim-shenhe-skill.go",
+        "line": 168,
+        "text": "if c.StatusIsActive(holdParticleICDKey) {"
+      },
+      {
+        "file": "gcsim-shenhe-skill.go",
+        "line": 171,
+        "text": "c.AddStatus(holdParticleICDKey, 0.5*60, true)"
+      },
+      {
+        "file": "gcsim-shenhe-skill.go",
+        "line": 173,
+        "text": "c.Core.QueueParticle(c.Base.Key.String(), 4, attributes.Cryo, c.ParticleDelay)"
+      },
+      {
+        "file": "gcsim-mods.go",
+        "line": 60,
+        "text": "mod.ModExpiry = *c.f + mod.Dur"
+      },
+      {
+        "file": "gcsim-mods.go",
+        "line": 182,
+        "text": "_, ok := modifier.FindCheckExpiry(&c.mods, key, *c.f)"
+      },
+      {
+        "file": "gcsim-modifier.go",
+        "line": 28,
+        "text": "func (t *Base) Expiry() int             { return t.ModExpiry + t.extension }"
+      },
+      {
+        "file": "gcsim-modifier.go",
+        "line": 130,
+        "text": "if (*slice)[ind].Expiry() < f && (*slice)[ind].Expiry() > -1 {"
+      }
+    ],
+    "reference_status": "ready_as_bounded_reference_not_generic_unique_vm",
+    "unsupported": [
+      "actual_hitlag_extension",
+      "generic_modifier_lifecycle",
+      "Shenhe_predicate_type_decoding"
+    ]
+  }
+}

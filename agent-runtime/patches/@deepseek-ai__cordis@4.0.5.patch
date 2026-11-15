@@ -1,0 +1,41 @@
+diff --git a/lib/index.js b/lib/index.js
+index 8f198c05e00abf8d0c542fdc68d2cb7d0deacd89..b552407a72463f8bde0d63d4d4357f6ec3b3d868 100644
+--- a/lib/index.js
++++ b/lib/index.js
+@@ -1434,11 +1434,14 @@ var Fiber = class {
+ 			return;
+ 		}
+ 		config = this._resolveConfig(config);
+-		this.context.waterfall(this, "internal/update", config, noSave, () => {
++		const pending = this.context.waterfall(this, "internal/update", config, noSave, () => {
+ 			this.config = config;
+ 			this._error = void 0;
+ 			return this.restart();
+ 		});
++		if (pending && typeof pending.then === "function") Promise.resolve(pending).catch(() => {
++			this.ctx.logger.error("cordis_update_lifecycle_rejected");
++		});
+ 	}
+ };
+ //#endregion
+diff --git a/src/fiber.ts b/src/fiber.ts
+index 6bb1caa7a5c66c0129cbd88b94e6d9a01025b455..65816d62286db2cf3e1d3b066cabe46d8b5851e5 100644
+--- a/src/fiber.ts
++++ b/src/fiber.ts
+@@ -745,10 +745,15 @@ export class Fiber {
+       return
+     }
+     config = this._resolveConfig(config)
+-    this.context.waterfall(this, 'internal/update', config, noSave, () => {
++    const pending = this.context.waterfall(this, 'internal/update', config, noSave, () => {
+       this.config = config
+       this._error = undefined
+       return this.restart()
+     })
++    if (pending && typeof pending.then === 'function') {
++      Promise.resolve(pending).catch(() => {
++        this.ctx.logger.error('cordis_update_lifecycle_rejected')
++      })
++    }
+   }
+ }

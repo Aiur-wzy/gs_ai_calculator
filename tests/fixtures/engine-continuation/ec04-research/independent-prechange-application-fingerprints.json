@@ -1,0 +1,9 @@
+{
+  "captured_on": "2026-10-02",
+  "method": "Public get_runtime_attenuation_profile before EC04 channel implementation, read-only production DB",
+  "snapshot_id": "1b620db802a937506dc870cc25c08b5c7c336a01b193b945e9471d75c3bee172",
+  "groups": {
+    "default": "c6031fdf67a483d89cf684ecdd08475345cb0f4ef7ac21c33c8e928efe0ecae2",
+    "ElementReaction_Damage_Attenuation_1": "8c33c8f67d1cc3a67c680551adcab113937440709af0a8232f65cedb699be891"
+  }
+}

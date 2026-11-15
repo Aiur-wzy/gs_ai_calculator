@@ -1,0 +1,1344 @@
+{
+  "profile_version": 1,
+  "status": "ready",
+  "snapshot": {
+    "version_line": "release",
+    "state": "ready",
+    "index_state": "ready",
+    "schema_version": 1,
+    "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+    "snapshot_id": "1b620db802a937506dc870cc25c08b5c7c336a01b193b945e9471d75c3bee172",
+    "execution_support": "not_evaluated",
+    "built_at": "2026-10-01T19:46:55.591099+00:00",
+    "profile_id": "upstream-combat-catalog-v1",
+    "profile_version": 1,
+    "indexer_version": "4",
+    "manifest_fingerprint": "b14c57925636407203b679f5517dd51ec9a5249e42a792157cb72269f55b32e6",
+    "counts": {
+      "runtime_definition": 152351,
+      "runtime_parameter_binding": 6082,
+      "runtime_reference": 165747,
+      "runtime_source": 3356
+    },
+    "reference_states": {
+      "ambiguous": 157,
+      "external_asset": 10445,
+      "missing": 89,
+      "resolved": 145772,
+      "unsupported_reference_form": 9284
+    },
+    "normalization": {
+      "mapping_fingerprint": "506862bc6c0bf033d8272b75f193cd2a620fc513320b3223d07afcc6f04356e2",
+      "normalization_version": 2,
+      "profile_id": "upstream-34208429-reviewed-schema-v1",
+      "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53"
+    }
+  },
+  "selection": {
+    "reaction_type": "swirl",
+    "element": "hydro",
+    "branch": "ordinary",
+    "scope": "origin_target"
+  },
+  "sources": {
+    "ability": {
+      "source_path": "BinOutput/Ability/Temp/ConfigAbility_Element.json",
+      "json_pointer": "/31/Default",
+      "source_sha256": "61e9d601c8408266069b4e7c27b9271d54184e697550d93a4268a40d8a737823",
+      "definition_id": "214687c6874e497465e2c6ecdbd22b7a8dd5069dd1da76a5b291b66e433671d7",
+      "node_sha256": "4da162528403f014ee694a38bbd3eb54c3317a17842d85e5db5c464b365d1d08"
+    },
+    "origin_attack": {
+      "owner_definition_id": "214687c6874e497465e2c6ecdbd22b7a8dd5069dd1da76a5b291b66e433671d7",
+      "source_path": "BinOutput/Ability/Temp/ConfigAbility_Element.json",
+      "source_sha256": "61e9d601c8408266069b4e7c27b9271d54184e697550d93a4268a40d8a737823",
+      "json_pointer": "/31/Default/GPPBBDEICKP/Swirl_Water/EMGBJJOIENB/2",
+      "node_sha256": "ca0a401a67714000fafc3a5190877cdcc37ac2e40a141145df9d7163fb1a0c04"
+    },
+    "group_reference": {
+      "owner_definition_id": "214687c6874e497465e2c6ecdbd22b7a8dd5069dd1da76a5b291b66e433671d7",
+      "source_path": "BinOutput/Ability/Temp/ConfigAbility_Element.json",
+      "source_sha256": "61e9d601c8408266069b4e7c27b9271d54184e697550d93a4268a40d8a737823",
+      "json_pointer": "/31/Default/GPPBBDEICKP/Swirl_Water/EMGBJJOIENB/2/LGHDGGJIJOK/HGLEEJNPBEB",
+      "node_sha256": "746288da43c1fe9707e62c9551c3e220688d276a4f86c7f5f9a937498d9c6f6d",
+      "raw": "ElementReaction_Damage_Attenuation_1"
+    },
+    "attenuation": {
+      "source_path": "ExcelBinOutput/AttackAttenuationExcelConfigData.json",
+      "json_pointer": "/87",
+      "source_sha256": "07cd969d728431de86df463344ecda18c3883a681dc5dc830bfa6f5917a9a512",
+      "definition_id": "d3c670c9754fa7cc1fda1cf071673b546d3103eb8fd8e2dda9f530d8eeb17ffb",
+      "node_sha256": "38c52ee4952353db2787c22148abeff5d4c9dc491bf587b1d15cc6c25f5edb96",
+      "definition": {
+        "definition_id": "d3c670c9754fa7cc1fda1cf071673b546d3103eb8fd8e2dda9f530d8eeb17ffb",
+        "definition_kind": "excel_record",
+        "owner_definition_id": null,
+        "source_path": "ExcelBinOutput/AttackAttenuationExcelConfigData.json",
+        "json_pointer": "/87",
+        "variant_key": null,
+        "namespace_key": "public_config",
+        "node_sha256": "38c52ee4952353db2787c22148abeff5d4c9dc491bf587b1d15cc6c25f5edb96",
+        "exact_key": {
+          "group": "ElementReaction_Damage_Attenuation_1"
+        }
+      },
+      "field_pointers": {
+        "group": "/87/group",
+        "resetCycle": "/87/resetCycle",
+        "damageSequence": "/87/damageSequence"
+      }
+    }
+  },
+  "projection": {
+    "semantics": "ordinary-swirl-origin-damage-source-v1",
+    "reset_cycle_seconds_raw": 0.5,
+    "reset_cycle_ticks": 500000,
+    "reset_cycle_seconds_rounded": 0.5,
+    "rounding_error_seconds": 0.0,
+    "rounding_method": "decimal_roundtrip_half_even_to_microseconds",
+    "max_absolute_rounding_error_seconds": 5e-07,
+    "damage_sequence": [
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "sequence_exhausted_coefficient": 0,
+    "sequence_semantics": "finite-binary-damage-sequence-v1",
+    "group": "ElementReaction_Damage_Attenuation_1",
+    "attacker": {
+      "present": true,
+      "value": "Self",
+      "default": "not_inferred"
+    },
+    "factor": {
+      "raw": 0.6000000238418579,
+      "execution": "not_compiled"
+    },
+    "base_reaction_damage": {
+      "raw_initial": 0,
+      "runtime_injection": "unknown"
+    }
+  },
+  "execution": {
+    "sequence_status": "ready",
+    "ability_execution": "pending",
+    "owner_resolution": "not_evaluated",
+    "reaction_dispatch": "not_evaluated",
+    "semantics": "source_relation_only"
+  },
+  "raw_nodes": {
+    "entries": {
+      "owner_definition_id": "214687c6874e497465e2c6ecdbd22b7a8dd5069dd1da76a5b291b66e433671d7",
+      "source_path": "BinOutput/Ability/Temp/ConfigAbility_Element.json",
+      "source_sha256": "61e9d601c8408266069b4e7c27b9271d54184e697550d93a4268a40d8a737823",
+      "json_pointer": "/31/Default/ECFFDLHMCLK",
+      "node_sha256": "3f3a040b7366b4177baf7c8cb467b64cd68848710161b879ad3b61b3ef1a5b01",
+      "raw": [
+        {
+          "$type": "KKKOBMBLEDP",
+          "AMOLMPHFPHJ": -1,
+          "BDHBNCEEPPK": "Target",
+          "IJDGNIIOHLM": [
+            {
+              "$type": "MMPLBPOHMGL",
+              "BDHBNCEEPPK": "Team",
+              "NJJFOACNFGL": "NoneOrEqual",
+              "PEELJBICEHE": "_IS_SWRIL_WATER_ALTER"
+            },
+            {
+              "$type": "GMLKPHCEPIJ",
+              "BDHBNCEEPPK": "Target",
+              "IJDGNIIOHLM": [
+                {
+                  "$type": "BKCJECHCDKG",
+                  "BDHBNCEEPPK": "Target",
+                  "FJGEDPNBGCG": -1,
+                  "LJBBKGIFJDB": [
+                    "Grass",
+                    "Water"
+                  ]
+                }
+              ]
+            }
+          ],
+          "ILELAOFJIKJ": true,
+          "LDFBDMNIADI": "Swirl_Water",
+          "LJFIEGHHLOB": false
+        },
+        {
+          "$type": "KKKOBMBLEDP",
+          "AMOLMPHFPHJ": -1,
+          "BDHBNCEEPPK": "Target",
+          "IJDGNIIOHLM": [
+            {
+              "$type": "MMPLBPOHMGL",
+              "BDHBNCEEPPK": "Team",
+              "PDIFFCBMGMO": 1,
+              "PEELJBICEHE": "_IS_SWRIL_WATER_ALTER"
+            },
+            {
+              "$type": "GMLKPHCEPIJ",
+              "BDHBNCEEPPK": "Target",
+              "IJDGNIIOHLM": [
+                {
+                  "$type": "BKCJECHCDKG",
+                  "BDHBNCEEPPK": "Target",
+                  "FJGEDPNBGCG": -1,
+                  "LJBBKGIFJDB": [
+                    "Grass",
+                    "Water"
+                  ]
+                }
+              ]
+            }
+          ],
+          "ILELAOFJIKJ": true,
+          "LDFBDMNIADI": "Swirl_Water_Alter",
+          "LJFIEGHHLOB": false
+        }
+      ]
+    },
+    "ordinary_modifier": {
+      "owner_definition_id": "214687c6874e497465e2c6ecdbd22b7a8dd5069dd1da76a5b291b66e433671d7",
+      "source_path": "BinOutput/Ability/Temp/ConfigAbility_Element.json",
+      "source_sha256": "61e9d601c8408266069b4e7c27b9271d54184e697550d93a4268a40d8a737823",
+      "json_pointer": "/31/Default/GPPBBDEICKP/Swirl_Water",
+      "node_sha256": "1611b5aead99e75d4b3cbe70ca0b2cac39dd28e8664fcb72cb7b043f116bea28",
+      "raw": {
+        "DBGOKAKAHFP": 100,
+        "DOALDLPNGMF": -1,
+        "EMGBJJOIENB": [
+          {
+            "$type": "MOOAODKIBCM",
+            "AMOLMPHFPHJ": -1,
+            "BEIMGAKABJN": "Eff_Element_Swirl_Water",
+            "HJIHBAANFLE": 1,
+            "ILELAOFJIKJ": true,
+            "JMMALEJDAEF": -1,
+            "LJFIEGHHLOB": false,
+            "MLFLDPAGADG": {
+              "$type": "KLOKLNFANBP",
+              "EEFLHEKBODJ": {
+                "BNJLEBLGEKB": 180
+              },
+              "GNFICELAKIB": 10,
+              "HECMDGIAGKM": 2,
+              "POPNBJAHNFK": {
+                "ONEHKOHOCBH": 180
+              }
+            }
+          },
+          {
+            "$type": "MMHMEBEEKGK",
+            "AMOLMPHFPHJ": -1,
+            "BDHBNCEEPPK": "Applier",
+            "IDCIIIFMDCM": {
+              "CEIJEFJBMBL": {
+                "$type": "FKADOLEBLHD",
+                "BKCIBHHMGEE": 6,
+                "COBJECNAEOG": 1,
+                "EAJAHKDHNJM": {
+                  "GMEKLJBJADO": {
+                    "KJCBAFKFFMP": 1,
+                    "PGPNDGBABNI": true
+                  }
+                },
+                "EHFMPIOJOLN": "TriggerNoRepeat",
+                "MLFLDPAGADG": {
+                  "$type": "KLOKLNFANBP",
+                  "EEFLHEKBODJ": {
+                    "BNJLEBLGEKB": 180
+                  },
+                  "GNFICELAKIB": 10,
+                  "HECMDGIAGKM": 2,
+                  "POPNBJAHNFK": {
+                    "ONEHKOHOCBH": 180
+                  }
+                }
+              },
+              "LGHDGGJIJOK": {
+                "BKLFAECNFOF": {
+                  "EIAGIEDFLHJ": {
+                    "KJCBAFKFFMP": 1,
+                    "PGPNDGBABNI": true
+                  },
+                  "IHBPFOBEJKN": "default"
+                },
+                "EHKJIDFINEK": {
+                  "DBGOKAKAHFP": [
+                    "Swirl_Durability",
+                    1.25,
+                    "MUL",
+                    25,
+                    "ADD"
+                  ],
+                  "EPPIDAILPBN": "Water",
+                  "FBAEEIPKEHO": 30,
+                  "JDOLIAEMINM": 1,
+                  "MKFHLNAHKDI": true,
+                  "PEPDKCDHNIM": "Default"
+                },
+                "FHNDLIJJDEA": "Swirl_WaterDamage",
+                "HDIFFKOHDNL": {
+                  "OGGEIBICAHC": "Shake"
+                },
+                "HGLEEJNPBEB": "ElementReaction_Damage_Attenuation_1",
+                "IAFHAPFBBOB": "Swirl_WaterDamage",
+                "IJFOFLPPGHK": {
+                  "EANBEIIKCIL": {
+                    "BGINHMBLECN": 0.11999999731779099,
+                    "HMANOMCGFLK": true,
+                    "KBAIICCLOEF": 0.5,
+                    "PJGAOELGLIF": 0.11999999731779099
+                  },
+                  "KDBKDJBCACN": 20
+                },
+                "NMMJKLAHOHH": {
+                  "ANBHPFEONOL": 0.05000000074505806,
+                  "EIAGIEDFLHJ": {
+                    "KJCBAFKFFMP": 1,
+                    "PGPNDGBABNI": true
+                  },
+                  "IHBPFOBEJKN": "default",
+                  "PAPNKKIKAOC": "LV1"
+                }
+              }
+            },
+            "ILELAOFJIKJ": true,
+            "LJFIEGHHLOB": false,
+            "NMKBOEALDEF": "Enemy"
+          },
+          {
+            "$type": "CODEHPJKBAM",
+            "AMOLMPHFPHJ": -1,
+            "GLBBADIPHFL": "Self",
+            "IJDGNIIOHLM": [
+              {
+                "$type": "HBMAFPHCHDB",
+                "BBGMLDFBFFH": "Enemy",
+                "BDHBNCEEPPK": "Target",
+                "HMKPLHNHDLB": "Applier"
+              }
+            ],
+            "ILELAOFJIKJ": true,
+            "LGHDGGJIJOK": {
+              "BKLFAECNFOF": {
+                "EIAGIEDFLHJ": {
+                  "KJCBAFKFFMP": 1,
+                  "PGPNDGBABNI": true
+                },
+                "IHBPFOBEJKN": "default"
+              },
+              "EHKJIDFINEK": {
+                "EMILGODPBIG": [
+                  "ElementAbility_Swirl_Water_BaseReactionDamage",
+                  "Swirl_Water_Damage_Factor",
+                  "MUL"
+                ],
+                "EPPIDAILPBN": "Water",
+                "FBAEEIPKEHO": 130,
+                "JDOLIAEMINM": 1,
+                "MKFHLNAHKDI": true,
+                "PEPDKCDHNIM": "Default"
+              },
+              "FHNDLIJJDEA": "Swirl_WaterDamage",
+              "HDIFFKOHDNL": {
+                "OGGEIBICAHC": "Shake"
+              },
+              "HGLEEJNPBEB": "ElementReaction_Damage_Attenuation_1",
+              "IAFHAPFBBOB": "Self_Swirl_WaterDamage",
+              "IJFOFLPPGHK": {
+                "EANBEIIKCIL": {
+                  "BGINHMBLECN": 0.11999999731779099,
+                  "HMANOMCGFLK": true,
+                  "KBAIICCLOEF": 0.5,
+                  "PJGAOELGLIF": 0.11999999731779099
+                },
+                "KDBKDJBCACN": 20
+              },
+              "NMMJKLAHOHH": {
+                "ANBHPFEONOL": 0.05000000074505806,
+                "EIAGIEDFLHJ": {
+                  "KJCBAFKFFMP": 1,
+                  "PGPNDGBABNI": true
+                },
+                "IHBPFOBEJKN": "default",
+                "PAPNKKIKAOC": "LV1"
+              }
+            },
+            "LJFIEGHHLOB": false,
+            "MLFLDPAGADG": {
+              "$type": "LFADEGOIHMK",
+              "EEFLHEKBODJ": {
+                "BNJLEBLGEKB": 180
+              },
+              "GMDPALPODJP": "RootNode",
+              "GNFICELAKIB": 10,
+              "HECMDGIAGKM": 2,
+              "POPNBJAHNFK": {
+                "ONEHKOHOCBH": 180
+              }
+            }
+          }
+        ],
+        "JPEAFDFPKAN": 0.10000000149011612,
+        "KFOMCJGGPPC": -1,
+        "LFIJIMIMBIH": [
+          {
+            "$type": "FOPHOEOKIFI",
+            "AMOLMPHFPHJ": -1,
+            "IAFHAPFBBOB": "Swirl_WaterDamage",
+            "IELLPMKLAIO": "RejectAll",
+            "NNIMBKJLFNL": 0.009999999776482582
+          }
+        ],
+        "PPKOPMBNPJH": true
+      }
+    },
+    "alter_modifier": {
+      "owner_definition_id": "214687c6874e497465e2c6ecdbd22b7a8dd5069dd1da76a5b291b66e433671d7",
+      "source_path": "BinOutput/Ability/Temp/ConfigAbility_Element.json",
+      "source_sha256": "61e9d601c8408266069b4e7c27b9271d54184e697550d93a4268a40d8a737823",
+      "json_pointer": "/31/Default/GPPBBDEICKP/Swirl_Water_Alter",
+      "node_sha256": "d254d83e2edff011790d4b484cb6c4ac6cf7b60ec8807f507d06fea6ed0cf7e2",
+      "raw": {
+        "DBGOKAKAHFP": 100,
+        "DOALDLPNGMF": -1,
+        "EMGBJJOIENB": [
+          {
+            "$type": "MOOAODKIBCM",
+            "AMOLMPHFPHJ": -1,
+            "BEIMGAKABJN": "Eff_Element_Swirl_Water_Alter",
+            "HJIHBAANFLE": 1,
+            "ILELAOFJIKJ": true,
+            "JMMALEJDAEF": -1,
+            "LJFIEGHHLOB": false,
+            "MLFLDPAGADG": {
+              "$type": "KLOKLNFANBP",
+              "EEFLHEKBODJ": {
+                "BNJLEBLGEKB": 180
+              },
+              "GNFICELAKIB": 10,
+              "HECMDGIAGKM": 2,
+              "POPNBJAHNFK": {
+                "ONEHKOHOCBH": 180
+              }
+            }
+          },
+          {
+            "$type": "MMHMEBEEKGK",
+            "AMOLMPHFPHJ": -1,
+            "BDHBNCEEPPK": "Applier",
+            "IDCIIIFMDCM": {
+              "CEIJEFJBMBL": {
+                "$type": "FKADOLEBLHD",
+                "BKCIBHHMGEE": 12,
+                "COBJECNAEOG": 1,
+                "EAJAHKDHNJM": {
+                  "GMEKLJBJADO": {
+                    "KJCBAFKFFMP": 1,
+                    "PGPNDGBABNI": true
+                  }
+                },
+                "EHFMPIOJOLN": "TriggerNoRepeat",
+                "MLFLDPAGADG": {
+                  "$type": "KLOKLNFANBP",
+                  "EEFLHEKBODJ": {
+                    "BNJLEBLGEKB": 180
+                  },
+                  "GNFICELAKIB": 10,
+                  "HECMDGIAGKM": 2,
+                  "POPNBJAHNFK": {
+                    "ONEHKOHOCBH": 180
+                  }
+                }
+              },
+              "LGHDGGJIJOK": {
+                "BKLFAECNFOF": {
+                  "EIAGIEDFLHJ": {
+                    "KJCBAFKFFMP": 1,
+                    "PGPNDGBABNI": true
+                  },
+                  "IHBPFOBEJKN": "default"
+                },
+                "EHKJIDFINEK": {
+                  "DBGOKAKAHFP": [
+                    "Swirl_Durability",
+                    1.25,
+                    "MUL",
+                    25,
+                    "ADD"
+                  ],
+                  "EPPIDAILPBN": "Water",
+                  "FBAEEIPKEHO": 30,
+                  "JDOLIAEMINM": 1,
+                  "MKFHLNAHKDI": true,
+                  "PEPDKCDHNIM": "Default"
+                },
+                "FHNDLIJJDEA": "Swirl_WaterDamage",
+                "HDIFFKOHDNL": {
+                  "OGGEIBICAHC": "Shake"
+                },
+                "HGLEEJNPBEB": "ElementReaction_Damage_Attenuation_1",
+                "IAFHAPFBBOB": "Swirl_WaterDamage",
+                "IJFOFLPPGHK": {
+                  "EANBEIIKCIL": {
+                    "BGINHMBLECN": 0.11999999731779099,
+                    "HMANOMCGFLK": true,
+                    "KBAIICCLOEF": 0.5,
+                    "PJGAOELGLIF": 0.11999999731779099
+                  },
+                  "KDBKDJBCACN": 20
+                },
+                "NMMJKLAHOHH": {
+                  "ANBHPFEONOL": 0.05000000074505806,
+                  "EIAGIEDFLHJ": {
+                    "KJCBAFKFFMP": 1,
+                    "PGPNDGBABNI": true
+                  },
+                  "IHBPFOBEJKN": "default",
+                  "PAPNKKIKAOC": "LV1"
+                }
+              }
+            },
+            "ILELAOFJIKJ": true,
+            "LJFIEGHHLOB": false,
+            "NMKBOEALDEF": "Enemy"
+          },
+          {
+            "$type": "CODEHPJKBAM",
+            "AMOLMPHFPHJ": -1,
+            "IJDGNIIOHLM": [
+              {
+                "$type": "HBMAFPHCHDB",
+                "BBGMLDFBFFH": "Enemy",
+                "BDHBNCEEPPK": "Target",
+                "HMKPLHNHDLB": "Applier"
+              }
+            ],
+            "ILELAOFJIKJ": true,
+            "LGHDGGJIJOK": {
+              "BKLFAECNFOF": {
+                "EIAGIEDFLHJ": {
+                  "KJCBAFKFFMP": 1,
+                  "PGPNDGBABNI": true
+                },
+                "IHBPFOBEJKN": "default"
+              },
+              "EHKJIDFINEK": {
+                "EMILGODPBIG": [
+                  "ElementAbility_Swirl_Water_BaseReactionDamage",
+                  "Swirl_Water_Alter_Damage_Factor",
+                  "MUL"
+                ],
+                "EPPIDAILPBN": "Water",
+                "FBAEEIPKEHO": 130,
+                "JDOLIAEMINM": 1,
+                "MKFHLNAHKDI": true,
+                "PEPDKCDHNIM": "Default"
+              },
+              "FHNDLIJJDEA": "Swirl_WaterDamage",
+              "HDIFFKOHDNL": {
+                "OGGEIBICAHC": "Shake"
+              },
+              "HGLEEJNPBEB": "ElementReaction_Damage_Attenuation_1",
+              "IAFHAPFBBOB": "Self_Swirl_WaterDamage",
+              "IJFOFLPPGHK": {
+                "EANBEIIKCIL": {
+                  "BGINHMBLECN": 0.11999999731779099,
+                  "HMANOMCGFLK": true,
+                  "KBAIICCLOEF": 0.5,
+                  "PJGAOELGLIF": 0.11999999731779099
+                },
+                "KDBKDJBCACN": 20
+              },
+              "NMMJKLAHOHH": {
+                "ANBHPFEONOL": 0.05000000074505806,
+                "EIAGIEDFLHJ": {
+                  "KJCBAFKFFMP": 1,
+                  "PGPNDGBABNI": true
+                },
+                "IHBPFOBEJKN": "default",
+                "PAPNKKIKAOC": "LV1"
+              }
+            },
+            "LJFIEGHHLOB": false,
+            "MLFLDPAGADG": {
+              "$type": "LFADEGOIHMK",
+              "EEFLHEKBODJ": {
+                "BNJLEBLGEKB": 180
+              },
+              "GMDPALPODJP": "RootNode",
+              "GNFICELAKIB": 10,
+              "HECMDGIAGKM": 2,
+              "POPNBJAHNFK": {
+                "ONEHKOHOCBH": 180
+              }
+            }
+          }
+        ],
+        "JPEAFDFPKAN": 0.10000000149011612,
+        "KFOMCJGGPPC": -1,
+        "LFIJIMIMBIH": [
+          {
+            "$type": "FOPHOEOKIFI",
+            "AMOLMPHFPHJ": -1,
+            "IAFHAPFBBOB": "Swirl_WaterDamage",
+            "IELLPMKLAIO": "RejectAll",
+            "NNIMBKJLFNL": 0.009999999776482582
+          }
+        ],
+        "PPKOPMBNPJH": true
+      }
+    },
+    "ability_specials": {
+      "owner_definition_id": "214687c6874e497465e2c6ecdbd22b7a8dd5069dd1da76a5b291b66e433671d7",
+      "source_path": "BinOutput/Ability/Temp/ConfigAbility_Element.json",
+      "source_sha256": "61e9d601c8408266069b4e7c27b9271d54184e697550d93a4268a40d8a737823",
+      "json_pointer": "/31/Default/LOEHLJGBGAC",
+      "node_sha256": "b1ff3a647571ac9ae1c281f1c7dbe29787ca39f6656e9d8f6612de359a4ee27d",
+      "raw": {
+        "ElementAbility_Swirl_Water_BaseReactionDamage": 0,
+        "Swirl_Durability": 1,
+        "Swirl_Water_Alter_Damage_Factor": 2.4000000953674316,
+        "Swirl_Water_Damage_Factor": 0.6000000238418579
+      }
+    },
+    "attenuation": {
+      "source_path": "ExcelBinOutput/AttackAttenuationExcelConfigData.json",
+      "json_pointer": "/87",
+      "source_sha256": "07cd969d728431de86df463344ecda18c3883a681dc5dc830bfa6f5917a9a512",
+      "definition_id": "d3c670c9754fa7cc1fda1cf071673b546d3103eb8fd8e2dda9f530d8eeb17ffb",
+      "node_sha256": "38c52ee4952353db2787c22148abeff5d4c9dc491bf587b1d15cc6c25f5edb96",
+      "definition": {
+        "definition_id": "d3c670c9754fa7cc1fda1cf071673b546d3103eb8fd8e2dda9f530d8eeb17ffb",
+        "definition_kind": "excel_record",
+        "owner_definition_id": null,
+        "source_path": "ExcelBinOutput/AttackAttenuationExcelConfigData.json",
+        "json_pointer": "/87",
+        "variant_key": null,
+        "namespace_key": "public_config",
+        "node_sha256": "38c52ee4952353db2787c22148abeff5d4c9dc491bf587b1d15cc6c25f5edb96",
+        "exact_key": {
+          "group": "ElementReaction_Damage_Attenuation_1"
+        }
+      },
+      "field_pointers": {
+        "group": "/87/group",
+        "resetCycle": "/87/resetCycle",
+        "damageSequence": "/87/damageSequence"
+      },
+      "raw": {
+        "group": "ElementReaction_Damage_Attenuation_1",
+        "durabilitySequence": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "enbreakSequence": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "resetCycle": 0.5,
+        "damageSequence": [
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    }
+  },
+  "separate_star_abilities": [
+    {
+      "source_path": "BinOutput/Ability/Temp/ConfigAbility_Element.json",
+      "json_pointer": "/33/Default",
+      "source_sha256": "61e9d601c8408266069b4e7c27b9271d54184e697550d93a4268a40d8a737823",
+      "definition_id": "b1fa7f26f1f1d85d18ff16735fe3918adf90834fde130b456a5f352024805d90",
+      "node_sha256": "bb5bb7affa389face782dfbb43cf7c0c54a20747cad47364d2dda84e2914c141",
+      "ability_name": "ElementAbility_StarSwirl_Ice",
+      "execution": "not_evaluated"
+    },
+    {
+      "source_path": "BinOutput/Ability/Temp/ConfigAbility_Element.json",
+      "json_pointer": "/34/Default",
+      "source_sha256": "61e9d601c8408266069b4e7c27b9271d54184e697550d93a4268a40d8a737823",
+      "definition_id": "c79d06a59587fbfa8bed9a9a9c552d7c0117f4d04932e4fa96e3de25ed4f61a3",
+      "node_sha256": "0c13f58e6157bea9f827c45886a934ac64ea392b2db24ac17fb40558fa4a6ead",
+      "ability_name": "ElementAbility_StarSwirl_Ice_Gadget",
+      "execution": "not_evaluated"
+    }
+  ],
+  "mapping_evidence": {
+    "recipe_id": "ordinary-swirl-origin-source-34208429-v1",
+    "recipe_version": 1,
+    "commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+    "mapping_fingerprint": "7ecac55a9eb583f6da75a126372e60d3e002fe0ce6c534e38c9f4e4bf512ff0a",
+    "expected_node_sha256": "4da162528403f014ee694a38bbd3eb54c3317a17842d85e5db5c464b365d1d08",
+    "evidence_reference": {
+      "old_commit": "9424e4e556bd80e5196be7d3c52723d3a35b30e7",
+      "old_source_sha256": "3785e819ec0b1df4120d59d946a7f1b4031e5e6db8541fa5fb9106047f652bfe",
+      "new_source_sha256": "61e9d601c8408266069b4e7c27b9271d54184e697550d93a4268a40d8a737823",
+      "method": "exact_unique_ability_name_structural_leaf_values_and_unambiguous_parent_anchors",
+      "whole_ability_cases": [
+        "Water",
+        "Ice",
+        "Fire",
+        "Electric"
+      ]
+    },
+    "field_evidence": [
+      {
+        "raw_key": "ECFFDLHMCLK",
+        "old_semantic_key": "onAbilityStart",
+        "paired_occurrences": 4,
+        "unique_anchor_occurrences": 4,
+        "holdout_occurrences": 2,
+        "anchor": {
+          "ability": "ElementAbility_Swirl_Water",
+          "set": "target",
+          "new_pointer": "/31/Default/ECFFDLHMCLK",
+          "old_pointer": "/31/Default/onAbilityStart",
+          "new_value_sha256": "3f3a040b7366b4177baf7c8cb467b64cd68848710161b879ad3b61b3ef1a5b01",
+          "old_value_sha256": "857a5e2ac4e1f0abe3455a729fb55b586167c0e797b8ae79a364ada693e855aa",
+          "shape_value_equal": true,
+          "unique_within_both_parents": true,
+          "new_sibling_candidates": [
+            "ECFFDLHMCLK"
+          ],
+          "old_sibling_candidates": [
+            "onAbilityStart"
+          ],
+          "value": null
+        }
+      },
+      {
+        "raw_key": "EMGBJJOIENB",
+        "old_semantic_key": "onAdded",
+        "paired_occurrences": 8,
+        "unique_anchor_occurrences": 8,
+        "holdout_occurrences": 4,
+        "anchor": {
+          "ability": "ElementAbility_Swirl_Water",
+          "set": "target",
+          "new_pointer": "/31/Default/GPPBBDEICKP/Swirl_Water/EMGBJJOIENB",
+          "old_pointer": "/31/Default/modifiers/Swirl_Water/onAdded",
+          "new_value_sha256": "e7114071edc1011f61992d0337cfb95ad1ea6ec84b193fac020835584c4c4b54",
+          "old_value_sha256": "b95068893dc1760a9829ac5571b977cebf7839e782dee7a03af7e45f8468470a",
+          "shape_value_equal": true,
+          "unique_within_both_parents": true,
+          "new_sibling_candidates": [
+            "EMGBJJOIENB"
+          ],
+          "old_sibling_candidates": [
+            "onAdded"
+          ],
+          "value": null
+        }
+      },
+      {
+        "raw_key": "LFIJIMIMBIH",
+        "old_semantic_key": "modifierMixins",
+        "paired_occurrences": 8,
+        "unique_anchor_occurrences": 8,
+        "holdout_occurrences": 4,
+        "anchor": {
+          "ability": "ElementAbility_Swirl_Water",
+          "set": "target",
+          "new_pointer": "/31/Default/GPPBBDEICKP/Swirl_Water/LFIJIMIMBIH",
+          "old_pointer": "/31/Default/modifiers/Swirl_Water/modifierMixins",
+          "new_value_sha256": "dbcf1d8f01fe7ee46a9474875600bccada12c0a14176db4df9d94281041f6496",
+          "old_value_sha256": "ed69c977fa96adf06fce30299c448e918ba91f3bb635d7e3cde0a41d20da1106",
+          "shape_value_equal": true,
+          "unique_within_both_parents": true,
+          "new_sibling_candidates": [
+            "LFIJIMIMBIH"
+          ],
+          "old_sibling_candidates": [
+            "modifierMixins"
+          ],
+          "value": null
+        }
+      },
+      {
+        "raw_key": "IDCIIIFMDCM",
+        "old_semantic_key": "attackEvent",
+        "paired_occurrences": 8,
+        "unique_anchor_occurrences": 8,
+        "holdout_occurrences": 4,
+        "anchor": {
+          "ability": "ElementAbility_Swirl_Water",
+          "set": "target",
+          "new_pointer": "/31/Default/GPPBBDEICKP/Swirl_Water/EMGBJJOIENB/1/IDCIIIFMDCM",
+          "old_pointer": "/31/Default/modifiers/Swirl_Water/onAdded/1/attackEvent",
+          "new_value_sha256": "40f23420b9355c6dac7476f5957bf7df84beffda4207e76c7d85a30cf94d0531",
+          "old_value_sha256": "accf41bb258bd49e769686e4a05aea829cc2aeae5121eaf8eeeaa05ebd3b3417",
+          "shape_value_equal": true,
+          "unique_within_both_parents": true,
+          "new_sibling_candidates": [
+            "IDCIIIFMDCM"
+          ],
+          "old_sibling_candidates": [
+            "attackEvent"
+          ],
+          "value": null
+        }
+      },
+      {
+        "raw_key": "LGHDGGJIJOK",
+        "old_semantic_key": "attackInfo",
+        "paired_occurrences": 16,
+        "unique_anchor_occurrences": 16,
+        "holdout_occurrences": 8,
+        "anchor": {
+          "ability": "ElementAbility_Swirl_Water",
+          "set": "target",
+          "new_pointer": "/31/Default/GPPBBDEICKP/Swirl_Water/EMGBJJOIENB/1/IDCIIIFMDCM/LGHDGGJIJOK",
+          "old_pointer": "/31/Default/modifiers/Swirl_Water/onAdded/1/attackEvent/attackInfo",
+          "new_value_sha256": "01a20b9616d9b706ec2ac4868b25569e109c89f5baf09a6172d502ace5494db9",
+          "old_value_sha256": "f10be726eec717d0c71f60ff524196a0fead832b6280032f4b3280d7758279f6",
+          "shape_value_equal": true,
+          "unique_within_both_parents": true,
+          "new_sibling_candidates": [
+            "LGHDGGJIJOK"
+          ],
+          "old_sibling_candidates": [
+            "attackInfo"
+          ],
+          "value": null
+        }
+      },
+      {
+        "raw_key": "EHKJIDFINEK",
+        "old_semantic_key": "attackProperty",
+        "paired_occurrences": 16,
+        "unique_anchor_occurrences": 16,
+        "holdout_occurrences": 8,
+        "anchor": {
+          "ability": "ElementAbility_Swirl_Water",
+          "set": "target",
+          "new_pointer": "/31/Default/GPPBBDEICKP/Swirl_Water/EMGBJJOIENB/1/IDCIIIFMDCM/LGHDGGJIJOK/EHKJIDFINEK",
+          "old_pointer": "/31/Default/modifiers/Swirl_Water/onAdded/1/attackEvent/attackInfo/attackProperty",
+          "new_value_sha256": "ad7dbeb3daa9f718a4b962721d7476684c90d54c53d8331fdc359ee3c1812692",
+          "old_value_sha256": "32ac1252a484a6e7f53e0b6663bd020b09409cd031e37dde52d20833f7e447bb",
+          "shape_value_equal": true,
+          "unique_within_both_parents": true,
+          "new_sibling_candidates": [
+            "EHKJIDFINEK"
+          ],
+          "old_sibling_candidates": [
+            "attackProperty"
+          ],
+          "value": null
+        }
+      },
+      {
+        "raw_key": "HGLEEJNPBEB",
+        "old_semantic_key": "attenuationGroup",
+        "paired_occurrences": 16,
+        "unique_anchor_occurrences": 16,
+        "holdout_occurrences": 8,
+        "anchor": {
+          "ability": "ElementAbility_Swirl_Water",
+          "set": "target",
+          "new_pointer": "/31/Default/GPPBBDEICKP/Swirl_Water/EMGBJJOIENB/1/IDCIIIFMDCM/LGHDGGJIJOK/HGLEEJNPBEB",
+          "old_pointer": "/31/Default/modifiers/Swirl_Water/onAdded/1/attackEvent/attackInfo/attenuationGroup",
+          "new_value_sha256": "746288da43c1fe9707e62c9551c3e220688d276a4f86c7f5f9a937498d9c6f6d",
+          "old_value_sha256": "746288da43c1fe9707e62c9551c3e220688d276a4f86c7f5f9a937498d9c6f6d",
+          "shape_value_equal": true,
+          "unique_within_both_parents": true,
+          "new_sibling_candidates": [
+            "HGLEEJNPBEB"
+          ],
+          "old_sibling_candidates": [
+            "attenuationGroup"
+          ],
+          "value": "ElementReaction_Damage_Attenuation_1"
+        }
+      },
+      {
+        "raw_key": "IAFHAPFBBOB",
+        "old_semantic_key": "attackTag",
+        "paired_occurrences": 24,
+        "unique_anchor_occurrences": 16,
+        "holdout_occurrences": 12,
+        "anchor": {
+          "ability": "ElementAbility_Swirl_Water",
+          "set": "target",
+          "new_pointer": "/31/Default/GPPBBDEICKP/Swirl_Water/EMGBJJOIENB/2/LGHDGGJIJOK/IAFHAPFBBOB",
+          "old_pointer": "/31/Default/modifiers/Swirl_Water/onAdded/2/attackInfo/attackTag",
+          "new_value_sha256": "e6b921f1afcb40646e3e33af0b31eb07294871c7c7c1b26ab0e21bda2f415641",
+          "old_value_sha256": "e6b921f1afcb40646e3e33af0b31eb07294871c7c7c1b26ab0e21bda2f415641",
+          "shape_value_equal": true,
+          "unique_within_both_parents": true,
+          "new_sibling_candidates": [
+            "IAFHAPFBBOB"
+          ],
+          "old_sibling_candidates": [
+            "attackTag"
+          ],
+          "value": "Self_Swirl_WaterDamage"
+        }
+      },
+      {
+        "raw_key": "FHNDLIJJDEA",
+        "old_semantic_key": "attenuationTag",
+        "paired_occurrences": 16,
+        "unique_anchor_occurrences": 8,
+        "holdout_occurrences": 8,
+        "anchor": {
+          "ability": "ElementAbility_Swirl_Water",
+          "set": "target",
+          "new_pointer": "/31/Default/GPPBBDEICKP/Swirl_Water/EMGBJJOIENB/2/LGHDGGJIJOK/FHNDLIJJDEA",
+          "old_pointer": "/31/Default/modifiers/Swirl_Water/onAdded/2/attackInfo/attenuationTag",
+          "new_value_sha256": "bb7d20b46b8a18670ad0ea28fa67c245d1c87215bdc8f43f667f53d5baf27ad4",
+          "old_value_sha256": "bb7d20b46b8a18670ad0ea28fa67c245d1c87215bdc8f43f667f53d5baf27ad4",
+          "shape_value_equal": true,
+          "unique_within_both_parents": true,
+          "new_sibling_candidates": [
+            "FHNDLIJJDEA"
+          ],
+          "old_sibling_candidates": [
+            "attenuationTag"
+          ],
+          "value": "Swirl_WaterDamage"
+        }
+      },
+      {
+        "raw_key": "EPPIDAILPBN",
+        "old_semantic_key": "elementType",
+        "paired_occurrences": 16,
+        "unique_anchor_occurrences": 16,
+        "holdout_occurrences": 8,
+        "anchor": {
+          "ability": "ElementAbility_Swirl_Water",
+          "set": "target",
+          "new_pointer": "/31/Default/GPPBBDEICKP/Swirl_Water/EMGBJJOIENB/1/IDCIIIFMDCM/LGHDGGJIJOK/EHKJIDFINEK/EPPIDAILPBN",
+          "old_pointer": "/31/Default/modifiers/Swirl_Water/onAdded/1/attackEvent/attackInfo/attackProperty/elementType",
+          "new_value_sha256": "04e2fe221ac3b26ea8a04a86a453e2790a325eb5a957a2ef2a1d03be4009d9bc",
+          "old_value_sha256": "04e2fe221ac3b26ea8a04a86a453e2790a325eb5a957a2ef2a1d03be4009d9bc",
+          "shape_value_equal": true,
+          "unique_within_both_parents": true,
+          "new_sibling_candidates": [
+            "EPPIDAILPBN"
+          ],
+          "old_sibling_candidates": [
+            "elementType"
+          ],
+          "value": "Water"
+        }
+      },
+      {
+        "raw_key": "EMILGODPBIG",
+        "old_semantic_key": "damageExtra",
+        "paired_occurrences": 14,
+        "unique_anchor_occurrences": 14,
+        "holdout_occurrences": 8,
+        "anchor": {
+          "ability": "ElementAbility_Swirl_Water",
+          "set": "target",
+          "new_pointer": "/31/Default/GPPBBDEICKP/Swirl_Water/EMGBJJOIENB/2/LGHDGGJIJOK/EHKJIDFINEK/EMILGODPBIG",
+          "old_pointer": "/31/Default/modifiers/Swirl_Water/onAdded/2/attackInfo/attackProperty/damageExtra",
+          "new_value_sha256": "20948816b0cc58226893f01ae595898b2373f64abd31a6e5b7cd07d37fa66689",
+          "old_value_sha256": "20948816b0cc58226893f01ae595898b2373f64abd31a6e5b7cd07d37fa66689",
+          "shape_value_equal": true,
+          "unique_within_both_parents": true,
+          "new_sibling_candidates": [
+            "EMILGODPBIG"
+          ],
+          "old_sibling_candidates": [
+            "damageExtra"
+          ],
+          "value": null
+        }
+      },
+      {
+        "raw_key": "GLBBADIPHFL",
+        "old_semantic_key": "attacker",
+        "paired_occurrences": 1,
+        "unique_anchor_occurrences": 1,
+        "holdout_occurrences": 0,
+        "anchor": {
+          "ability": "ElementAbility_Swirl_Water",
+          "set": "target",
+          "new_pointer": "/31/Default/GPPBBDEICKP/Swirl_Water/EMGBJJOIENB/2/GLBBADIPHFL",
+          "old_pointer": "/31/Default/modifiers/Swirl_Water/onAdded/2/attacker",
+          "new_value_sha256": "747e524ba0d00c268f3a3d1418638ef5fd94e0ba3e516bfaaa71ec66b522fc5c",
+          "old_value_sha256": "747e524ba0d00c268f3a3d1418638ef5fd94e0ba3e516bfaaa71ec66b522fc5c",
+          "shape_value_equal": true,
+          "unique_within_both_parents": true,
+          "new_sibling_candidates": [
+            "GLBBADIPHFL"
+          ],
+          "old_sibling_candidates": [
+            "attacker"
+          ],
+          "value": "Self"
+        }
+      },
+      {
+        "raw_key": "NMKBOEALDEF",
+        "old_semantic_key": "targetType",
+        "paired_occurrences": 8,
+        "unique_anchor_occurrences": 8,
+        "holdout_occurrences": 4,
+        "anchor": {
+          "ability": "ElementAbility_Swirl_Water",
+          "set": "target",
+          "new_pointer": "/31/Default/GPPBBDEICKP/Swirl_Water/EMGBJJOIENB/1/NMKBOEALDEF",
+          "old_pointer": "/31/Default/modifiers/Swirl_Water/onAdded/1/targetType",
+          "new_value_sha256": "a85a2064566afb2b44000514a9a638d81e20ff0e2260eeaef990d0c69e0163ce",
+          "old_value_sha256": "a85a2064566afb2b44000514a9a638d81e20ff0e2260eeaef990d0c69e0163ce",
+          "shape_value_equal": true,
+          "unique_within_both_parents": true,
+          "new_sibling_candidates": [
+            "NMKBOEALDEF"
+          ],
+          "old_sibling_candidates": [
+            "targetType"
+          ],
+          "value": "Enemy"
+        }
+      },
+      {
+        "raw_key": "PEELJBICEHE",
+        "old_semantic_key": "key",
+        "paired_occurrences": 8,
+        "unique_anchor_occurrences": 8,
+        "holdout_occurrences": 4,
+        "anchor": {
+          "ability": "ElementAbility_Swirl_Water",
+          "set": "target",
+          "new_pointer": "/31/Default/ECFFDLHMCLK/0/IJDGNIIOHLM/0/PEELJBICEHE",
+          "old_pointer": "/31/Default/onAbilityStart/0/predicates/0/key",
+          "new_value_sha256": "a31845bf75f31d4beed69552e466a1dff1db0d5c94b2be9fcb1c47f416670a80",
+          "old_value_sha256": "a31845bf75f31d4beed69552e466a1dff1db0d5c94b2be9fcb1c47f416670a80",
+          "shape_value_equal": true,
+          "unique_within_both_parents": true,
+          "new_sibling_candidates": [
+            "PEELJBICEHE"
+          ],
+          "old_sibling_candidates": [
+            "key"
+          ],
+          "value": "_IS_SWRIL_WATER_ALTER"
+        }
+      },
+      {
+        "raw_key": "NJJFOACNFGL",
+        "old_semantic_key": "compareType",
+        "paired_occurrences": 4,
+        "unique_anchor_occurrences": 4,
+        "holdout_occurrences": 2,
+        "anchor": {
+          "ability": "ElementAbility_Swirl_Water",
+          "set": "target",
+          "new_pointer": "/31/Default/ECFFDLHMCLK/0/IJDGNIIOHLM/0/NJJFOACNFGL",
+          "old_pointer": "/31/Default/onAbilityStart/0/predicates/0/compareType",
+          "new_value_sha256": "ba0dc8fff39495d3106f2d7bc3c09dcc15b057ddf01c0e1afa74f8ade52d959c",
+          "old_value_sha256": "ba0dc8fff39495d3106f2d7bc3c09dcc15b057ddf01c0e1afa74f8ade52d959c",
+          "shape_value_equal": true,
+          "unique_within_both_parents": true,
+          "new_sibling_candidates": [
+            "NJJFOACNFGL"
+          ],
+          "old_sibling_candidates": [
+            "compareType"
+          ],
+          "value": "NoneOrEqual"
+        }
+      },
+      {
+        "raw_key": "HMKPLHNHDLB",
+        "old_semantic_key": "campBaseOn",
+        "paired_occurrences": 8,
+        "unique_anchor_occurrences": 8,
+        "holdout_occurrences": 4,
+        "anchor": {
+          "ability": "ElementAbility_Swirl_Water",
+          "set": "target",
+          "new_pointer": "/31/Default/GPPBBDEICKP/Swirl_Water/EMGBJJOIENB/2/IJDGNIIOHLM/0/HMKPLHNHDLB",
+          "old_pointer": "/31/Default/modifiers/Swirl_Water/onAdded/2/predicates/0/campBaseOn",
+          "new_value_sha256": "c643461fffb9306d9c2ee3674d5998326932fe9f4baf555c940f1562287a35dc",
+          "old_value_sha256": "c643461fffb9306d9c2ee3674d5998326932fe9f4baf555c940f1562287a35dc",
+          "shape_value_equal": true,
+          "unique_within_both_parents": true,
+          "new_sibling_candidates": [
+            "HMKPLHNHDLB"
+          ],
+          "old_sibling_candidates": [
+            "campBaseOn"
+          ],
+          "value": "Applier"
+        }
+      },
+      {
+        "raw_key": "BBGMLDFBFFH",
+        "old_semantic_key": "campTargetType",
+        "paired_occurrences": 8,
+        "unique_anchor_occurrences": 8,
+        "holdout_occurrences": 4,
+        "anchor": {
+          "ability": "ElementAbility_Swirl_Water",
+          "set": "target",
+          "new_pointer": "/31/Default/GPPBBDEICKP/Swirl_Water/EMGBJJOIENB/2/IJDGNIIOHLM/0/BBGMLDFBFFH",
+          "old_pointer": "/31/Default/modifiers/Swirl_Water/onAdded/2/predicates/0/campTargetType",
+          "new_value_sha256": "a85a2064566afb2b44000514a9a638d81e20ff0e2260eeaef990d0c69e0163ce",
+          "old_value_sha256": "a85a2064566afb2b44000514a9a638d81e20ff0e2260eeaef990d0c69e0163ce",
+          "shape_value_equal": true,
+          "unique_within_both_parents": true,
+          "new_sibling_candidates": [
+            "BBGMLDFBFFH"
+          ],
+          "old_sibling_candidates": [
+            "campTargetType"
+          ],
+          "value": "Enemy"
+        }
+      },
+      {
+        "raw_key": "IELLPMKLAIO",
+        "old_semantic_key": "type",
+        "paired_occurrences": 8,
+        "unique_anchor_occurrences": 8,
+        "holdout_occurrences": 4,
+        "anchor": {
+          "ability": "ElementAbility_Swirl_Water",
+          "set": "target",
+          "new_pointer": "/31/Default/GPPBBDEICKP/Swirl_Water/LFIJIMIMBIH/0/IELLPMKLAIO",
+          "old_pointer": "/31/Default/modifiers/Swirl_Water/modifierMixins/0/type",
+          "new_value_sha256": "c5e73f819eb2d4a4ca94b657cdc7a4013d596939f80263afebe20a3438e95268",
+          "old_value_sha256": "c5e73f819eb2d4a4ca94b657cdc7a4013d596939f80263afebe20a3438e95268",
+          "shape_value_equal": true,
+          "unique_within_both_parents": true,
+          "new_sibling_candidates": [
+            "IELLPMKLAIO"
+          ],
+          "old_sibling_candidates": [
+            "type"
+          ],
+          "value": "RejectAll"
+        }
+      },
+      {
+        "raw_key": "NNIMBKJLFNL",
+        "old_semantic_key": "limitTime",
+        "paired_occurrences": 8,
+        "unique_anchor_occurrences": 8,
+        "holdout_occurrences": 4,
+        "anchor": {
+          "ability": "ElementAbility_Swirl_Water",
+          "set": "target",
+          "new_pointer": "/31/Default/GPPBBDEICKP/Swirl_Water/LFIJIMIMBIH/0/NNIMBKJLFNL",
+          "old_pointer": "/31/Default/modifiers/Swirl_Water/modifierMixins/0/limitTime",
+          "new_value_sha256": "78263e2326125e2c418da6972f3dc0e1507527b0c4993202abb125a98b81079e",
+          "old_value_sha256": "78263e2326125e2c418da6972f3dc0e1507527b0c4993202abb125a98b81079e",
+          "shape_value_equal": true,
+          "unique_within_both_parents": true,
+          "new_sibling_candidates": [
+            "NNIMBKJLFNL"
+          ],
+          "old_sibling_candidates": [
+            "limitTime"
+          ],
+          "value": 0.009999999776482582
+        }
+      },
+      {
+        "raw_key": "CEIJEFJBMBL",
+        "old_semantic_key": "attackPattern",
+        "paired_occurrences": 8,
+        "unique_anchor_occurrences": 8,
+        "holdout_occurrences": 4,
+        "anchor": {
+          "ability": "ElementAbility_Swirl_Water",
+          "set": "target",
+          "new_pointer": "/31/Default/GPPBBDEICKP/Swirl_Water/EMGBJJOIENB/1/IDCIIIFMDCM/CEIJEFJBMBL",
+          "old_pointer": "/31/Default/modifiers/Swirl_Water/onAdded/1/attackEvent/attackPattern",
+          "new_value_sha256": "5c71c3977c8f925302a4ef13872290868c2ae1aff169c48fdc6dca021e1a1b87",
+          "old_value_sha256": "cf89bae9609336281b5fabd4e8c9d9f72c92916201005263eb205a704cc0c443",
+          "shape_value_equal": true,
+          "unique_within_both_parents": true,
+          "new_sibling_candidates": [
+            "CEIJEFJBMBL"
+          ],
+          "old_sibling_candidates": [
+            "attackPattern"
+          ],
+          "value": null
+        }
+      },
+      {
+        "raw_key": "BKCIBHHMGEE",
+        "old_semantic_key": "radius",
+        "paired_occurrences": 8,
+        "unique_anchor_occurrences": 8,
+        "holdout_occurrences": 4,
+        "anchor": {
+          "ability": "ElementAbility_Swirl_Water",
+          "set": "target",
+          "new_pointer": "/31/Default/GPPBBDEICKP/Swirl_Water/EMGBJJOIENB/1/IDCIIIFMDCM/CEIJEFJBMBL/BKCIBHHMGEE",
+          "old_pointer": "/31/Default/modifiers/Swirl_Water/onAdded/1/attackEvent/attackPattern/radius",
+          "new_value_sha256": "e7f6c011776e8db7cd330b54174fd76f7d0216b612387a5ffcfb81e6f0919683",
+          "old_value_sha256": "e7f6c011776e8db7cd330b54174fd76f7d0216b612387a5ffcfb81e6f0919683",
+          "shape_value_equal": true,
+          "unique_within_both_parents": true,
+          "new_sibling_candidates": [
+            "BKCIBHHMGEE"
+          ],
+          "old_sibling_candidates": [
+            "radius"
+          ],
+          "value": 6
+        }
+      }
+    ],
+    "type_evidence": [
+      {
+        "raw_type": "KKKOBMBLEDP",
+        "old_semantic_type": "ApplyLevelModifier",
+        "anchor": {
+          "ability": "ElementAbility_Swirl_Water",
+          "new_pointer": "/31/Default/ECFFDLHMCLK/0/$type",
+          "old_pointer": "/31/Default/onAbilityStart/0/$type",
+          "old_type": "ApplyLevelModifier",
+          "anchored_node_shape_equal": true
+        }
+      },
+      {
+        "raw_type": "MMPLBPOHMGL",
+        "old_semantic_type": "ByTargetGlobalValue",
+        "anchor": {
+          "ability": "ElementAbility_Swirl_Water",
+          "new_pointer": "/31/Default/ECFFDLHMCLK/0/IJDGNIIOHLM/0/$type",
+          "old_pointer": "/31/Default/onAbilityStart/0/predicates/0/$type",
+          "old_type": "ByTargetGlobalValue",
+          "anchored_node_shape_equal": true
+        }
+      },
+      {
+        "raw_type": "GMLKPHCEPIJ",
+        "old_semantic_type": "ByNot",
+        "anchor": {
+          "ability": "ElementAbility_Swirl_Water",
+          "new_pointer": "/31/Default/ECFFDLHMCLK/0/IJDGNIIOHLM/1/$type",
+          "old_pointer": "/31/Default/onAbilityStart/0/predicates/1/$type",
+          "old_type": "ByNot",
+          "anchored_node_shape_equal": true
+        }
+      },
+      {
+        "raw_type": "MMHMEBEEKGK",
+        "old_semantic_type": "TriggerAttackEvent",
+        "anchor": {
+          "ability": "ElementAbility_Swirl_Water",
+          "new_pointer": "/31/Default/GPPBBDEICKP/Swirl_Water/EMGBJJOIENB/1/$type",
+          "old_pointer": "/31/Default/modifiers/Swirl_Water/onAdded/1/$type",
+          "old_type": "TriggerAttackEvent",
+          "anchored_node_shape_equal": true
+        }
+      },
+      {
+        "raw_type": "CODEHPJKBAM",
+        "old_semantic_type": "DamageByAttackValue",
+        "anchor": {
+          "ability": "ElementAbility_Swirl_Water",
+          "new_pointer": "/31/Default/GPPBBDEICKP/Swirl_Water/EMGBJJOIENB/2/$type",
+          "old_pointer": "/31/Default/modifiers/Swirl_Water/onAdded/2/$type",
+          "old_type": "DamageByAttackValue",
+          "anchored_node_shape_equal": true
+        }
+      },
+      {
+        "raw_type": "HBMAFPHCHDB",
+        "old_semantic_type": "ByIsTargetCamp",
+        "anchor": {
+          "ability": "ElementAbility_Swirl_Water",
+          "new_pointer": "/31/Default/GPPBBDEICKP/Swirl_Water/EMGBJJOIENB/2/IJDGNIIOHLM/0/$type",
+          "old_pointer": "/31/Default/modifiers/Swirl_Water/onAdded/2/predicates/0/$type",
+          "old_type": "ByIsTargetCamp",
+          "anchored_node_shape_equal": true
+        }
+      },
+      {
+        "raw_type": "FOPHOEOKIFI",
+        "old_semantic_type": "RejectAttackMixin",
+        "anchor": {
+          "ability": "ElementAbility_Swirl_Water",
+          "new_pointer": "/31/Default/GPPBBDEICKP/Swirl_Water/LFIJIMIMBIH/0/$type",
+          "old_pointer": "/31/Default/modifiers/Swirl_Water/modifierMixins/0/$type",
+          "old_type": "RejectAttackMixin",
+          "anchored_node_shape_equal": true
+        }
+      },
+      {
+        "raw_type": "FKADOLEBLHD",
+        "old_semantic_type": "ConfigAttackSphere",
+        "anchor": {
+          "ability": "ElementAbility_Swirl_Water",
+          "new_pointer": "/31/Default/GPPBBDEICKP/Swirl_Water/EMGBJJOIENB/1/IDCIIIFMDCM/CEIJEFJBMBL/$type",
+          "old_pointer": "/31/Default/modifiers/Swirl_Water/onAdded/1/attackEvent/attackPattern/$type",
+          "old_type": "ConfigAttackSphere",
+          "anchored_node_shape_equal": true
+        }
+      }
+    ]
+  },
+  "issues": [
+    {
+      "code": "native_attacker_context_not_evaluated"
+    },
+    {
+      "code": "base_reaction_damage_injection_unknown"
+    },
+    {
+      "code": "native_branch_defaults_not_evaluated"
+    },
+    {
+      "code": "alter_unsupported"
+    },
+    {
+      "code": "star_unsupported"
+    },
+    {
+      "code": "propagation_unsupported"
+    }
+  ],
+  "limits": {
+    "max_bytes": 131072,
+    "max_nodes": 4096,
+    "max_operations": 16,
+    "max_typed_nodes": 64,
+    "max_modifiers": 2,
+    "max_issues": 32
+  },
+  "content_fingerprint": "21679fa0c448125762a1dd0d629b2b4aa1bfe67063c4a1d4dff2c31a9d7da7f3"
+}

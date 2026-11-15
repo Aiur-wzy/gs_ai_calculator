@@ -1,0 +1,1974 @@
+[
+  {
+    "profile_id": "equipment-static-included-v1",
+    "profile_version": 1,
+    "profile_fingerprint": "6dc628f5a73a244ad3bfe9d987fc08f91ecba2590abfa430eb3158fe64f5f39e",
+    "verification_scope": "materialized_consistency_no_source_authority",
+    "source_authority": "not_granted",
+    "requires_fresh_db_admission": true,
+    "status": "shape_ready",
+    "issues": [],
+    "declaration": {
+      "delivery": "already_in_given_panel",
+      "numeric_application": false,
+      "basis_authority": "caller_given_panel_policy",
+      "nonextra_authority": "not_inferred",
+      "provider": "engineering-actor",
+      "kind": "artifact_set",
+      "set_id": 10001,
+      "count": 4,
+      "required_count": 2,
+      "source_index": 0,
+      "affix_id": 2100010,
+      "affix_group_id": 210001,
+      "properties": [
+        {
+          "source_index": 0,
+          "prop_type": "FIGHT_PROP_ATTACK_PERCENT",
+          "stat": "atk",
+          "unit": "ratio",
+          "value": 0.18000000715255737,
+          "application": "base_fraction_already_in_panel"
+        }
+      ],
+      "panel_fingerprint": "22d5a8e2d871dee214a50078289f298044be1d8aaf3516aa0dbfab03d7c9f239",
+      "panel_policy": "static_included",
+      "provenance": {
+        "snapshot_id": "8c9106736d92b586d5c0258c2b96600e8b777a308655b7427da16d5b5d6e86d9",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "version_line": "release",
+        "parent": {
+          "source_path": "ExcelBinOutput/ReliquarySetExcelConfigData.json",
+          "json_pointer": "/0",
+          "source_sha256": "d915f4a2e353aefc19116b80bf127d578e5c0cdcd505bbe9da1c66c502163f7e"
+        },
+        "parent_node_sha256": "cb3ed06ecff019aad71851e20b7d4a7c36a8effdd8698d10e9cd4949fb405951",
+        "affix": {
+          "source_path": "ExcelBinOutput/EquipAffixExcelConfigData.json",
+          "json_pointer": "/1272",
+          "source_sha256": "67cce4b66ecfae8ab20b4567005ff0e2efa76446af1fcc71d99e8a2383def4e6"
+        },
+        "affix_node_sha256": "8b7a41be5177cb29380a0fe20cfc217fc1e203ed28ebcdf7bcaede7814f8cfff",
+        "parent_content_fingerprint": "3561513d3bffcc2204c140c7b1dec337bfcc0ff8e68ff49e96a5a37b44785361",
+        "source_content_fingerprint": "c18f816894814e3e54a31f12bde78fc4b1b20224a243b7631f9c841b1c9216df",
+        "normalized_fingerprint": "723f42b6bda276ea665c5aec6f5dd74567e5fad8a9c10f3ff31641cfd40c56f5"
+      }
+    },
+    "material_fingerprint": "9580beed5a4fccc3b498b328f9757f157997e475497cbeaa7fc02725f5537225",
+    "certificate_fingerprint": "db79b78eaabb87fdf84c0da2b53d66a76a6938748789a7090801ff2fc2d249e1"
+  },
+  {
+    "profile_id": "equipment-static-included-v1",
+    "profile_version": 1,
+    "profile_fingerprint": "6dc628f5a73a244ad3bfe9d987fc08f91ecba2590abfa430eb3158fe64f5f39e",
+    "verification_scope": "materialized_consistency_no_source_authority",
+    "source_authority": "not_granted",
+    "requires_fresh_db_admission": true,
+    "status": "shape_ready",
+    "issues": [],
+    "declaration": {
+      "delivery": "already_in_given_panel",
+      "numeric_application": false,
+      "basis_authority": "caller_given_panel_policy",
+      "nonextra_authority": "not_inferred",
+      "provider": "engineering-actor",
+      "kind": "artifact_set",
+      "set_id": 10002,
+      "count": 4,
+      "required_count": 2,
+      "source_index": 0,
+      "affix_id": 2100020,
+      "affix_group_id": 210002,
+      "properties": [
+        {
+          "source_index": 0,
+          "prop_type": "FIGHT_PROP_ATTACK_PERCENT",
+          "stat": "atk",
+          "unit": "ratio",
+          "value": 0.18000000715255737,
+          "application": "base_fraction_already_in_panel"
+        }
+      ],
+      "panel_fingerprint": "22d5a8e2d871dee214a50078289f298044be1d8aaf3516aa0dbfab03d7c9f239",
+      "panel_policy": "static_included",
+      "provenance": {
+        "snapshot_id": "8c9106736d92b586d5c0258c2b96600e8b777a308655b7427da16d5b5d6e86d9",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "version_line": "release",
+        "parent": {
+          "source_path": "ExcelBinOutput/ReliquarySetExcelConfigData.json",
+          "json_pointer": "/1",
+          "source_sha256": "d915f4a2e353aefc19116b80bf127d578e5c0cdcd505bbe9da1c66c502163f7e"
+        },
+        "parent_node_sha256": "03aa6f6fed2e1366908d28c82053d228fe3b0fa736f3ec2cc4c797fb08cecae8",
+        "affix": {
+          "source_path": "ExcelBinOutput/EquipAffixExcelConfigData.json",
+          "json_pointer": "/1274",
+          "source_sha256": "67cce4b66ecfae8ab20b4567005ff0e2efa76446af1fcc71d99e8a2383def4e6"
+        },
+        "affix_node_sha256": "3bab2e149a367344bae7b124fee85ac2252ef85def9f087e98aa7d2fd96ea370",
+        "parent_content_fingerprint": "87380c69e1dc2beb83036ca0a9a16fa8e2fe24e46d61f90e34db3f198cf91b59",
+        "source_content_fingerprint": "d3e5a582cf32ae787654b9c512eea50434d0754f6af910c183d9d8754d585939",
+        "normalized_fingerprint": "2cd85b24f4ec08757db9bd274f4e1698606ba077b1ce7701cfa31178259221a8"
+      }
+    },
+    "material_fingerprint": "a884c1cffbec4adfe10878399a755d80516fe07408b5b2b1f9d23a60eabdfa34",
+    "certificate_fingerprint": "03872e8100317f7baa1097daa9c863f7e40210e8e276cdf8664dba99f463c7e5"
+  },
+  {
+    "profile_id": "equipment-static-included-v1",
+    "profile_version": 1,
+    "profile_fingerprint": "6dc628f5a73a244ad3bfe9d987fc08f91ecba2590abfa430eb3158fe64f5f39e",
+    "verification_scope": "materialized_consistency_no_source_authority",
+    "source_authority": "not_granted",
+    "requires_fresh_db_admission": true,
+    "status": "shape_ready",
+    "issues": [],
+    "declaration": {
+      "delivery": "already_in_given_panel",
+      "numeric_application": false,
+      "basis_authority": "caller_given_panel_policy",
+      "nonextra_authority": "not_inferred",
+      "provider": "engineering-actor",
+      "kind": "artifact_set",
+      "set_id": 10003,
+      "count": 4,
+      "required_count": 2,
+      "source_index": 0,
+      "affix_id": 2100030,
+      "affix_group_id": 210003,
+      "properties": [
+        {
+          "source_index": 0,
+          "prop_type": "FIGHT_PROP_DEFENSE_PERCENT",
+          "stat": "def",
+          "unit": "ratio",
+          "value": 0.30000001192092896,
+          "application": "base_fraction_already_in_panel"
+        }
+      ],
+      "panel_fingerprint": "22d5a8e2d871dee214a50078289f298044be1d8aaf3516aa0dbfab03d7c9f239",
+      "panel_policy": "static_included",
+      "provenance": {
+        "snapshot_id": "8c9106736d92b586d5c0258c2b96600e8b777a308655b7427da16d5b5d6e86d9",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "version_line": "release",
+        "parent": {
+          "source_path": "ExcelBinOutput/ReliquarySetExcelConfigData.json",
+          "json_pointer": "/2",
+          "source_sha256": "d915f4a2e353aefc19116b80bf127d578e5c0cdcd505bbe9da1c66c502163f7e"
+        },
+        "parent_node_sha256": "4249fb2cdce9da7a1235a2b20b86c2c3ebfa2a4800e286aa0dbc4560e42a422b",
+        "affix": {
+          "source_path": "ExcelBinOutput/EquipAffixExcelConfigData.json",
+          "json_pointer": "/1276",
+          "source_sha256": "67cce4b66ecfae8ab20b4567005ff0e2efa76446af1fcc71d99e8a2383def4e6"
+        },
+        "affix_node_sha256": "c50d5142aea4463e70e963bcc24bff2ea46f1134c7bf17b0d5359b8c2973c1ed",
+        "parent_content_fingerprint": "cf217f03b9e3dcf7c4dbbc3a65653cbe88b5f90b3643ed65dfcda97e50db30b0",
+        "source_content_fingerprint": "2c862e1100e0f03a03402f85908d6e26e7e2877657834413ac9178588c444620",
+        "normalized_fingerprint": "7633e12067a4c7008c460c8ca98900b6cb45b36632e53b07e596750167ab0054"
+      }
+    },
+    "material_fingerprint": "ded1c433762ed209e3cfbeb80628beb2117a1926efc25eda1371ac5218c7052e",
+    "certificate_fingerprint": "d2f935dab9bc644e5b8db185bc6054c4677deef399fff6fdc007884f3f60f708"
+  },
+  {
+    "profile_id": "equipment-static-included-v1",
+    "profile_version": 1,
+    "profile_fingerprint": "6dc628f5a73a244ad3bfe9d987fc08f91ecba2590abfa430eb3158fe64f5f39e",
+    "verification_scope": "materialized_consistency_no_source_authority",
+    "source_authority": "not_granted",
+    "requires_fresh_db_admission": true,
+    "status": "shape_ready",
+    "issues": [],
+    "declaration": {
+      "delivery": "already_in_given_panel",
+      "numeric_application": false,
+      "basis_authority": "caller_given_panel_policy",
+      "nonextra_authority": "not_inferred",
+      "provider": "engineering-actor",
+      "kind": "artifact_set",
+      "set_id": 10005,
+      "count": 4,
+      "required_count": 2,
+      "source_index": 0,
+      "affix_id": 2100050,
+      "affix_group_id": 210005,
+      "properties": [
+        {
+          "source_index": 0,
+          "prop_type": "FIGHT_PROP_CRITICAL",
+          "stat": "crit_rate",
+          "unit": "ratio",
+          "value": 0.11999999731779099,
+          "application": "already_in_panel"
+        }
+      ],
+      "panel_fingerprint": "22d5a8e2d871dee214a50078289f298044be1d8aaf3516aa0dbfab03d7c9f239",
+      "panel_policy": "static_included",
+      "provenance": {
+        "snapshot_id": "8c9106736d92b586d5c0258c2b96600e8b777a308655b7427da16d5b5d6e86d9",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "version_line": "release",
+        "parent": {
+          "source_path": "ExcelBinOutput/ReliquarySetExcelConfigData.json",
+          "json_pointer": "/4",
+          "source_sha256": "d915f4a2e353aefc19116b80bf127d578e5c0cdcd505bbe9da1c66c502163f7e"
+        },
+        "parent_node_sha256": "6a83d8dd15ca4a1274bea3292ee8e5c5ede4746662be8a9edaf4dbfb9aaf577c",
+        "affix": {
+          "source_path": "ExcelBinOutput/EquipAffixExcelConfigData.json",
+          "json_pointer": "/1280",
+          "source_sha256": "67cce4b66ecfae8ab20b4567005ff0e2efa76446af1fcc71d99e8a2383def4e6"
+        },
+        "affix_node_sha256": "9b631d4688de744ab238c612566174126e57b6ece5fdc5327be995cf2fd8b359",
+        "parent_content_fingerprint": "4bfd6a1e60ec4c3cf4d5cdf60de9ac859a6a879d83c94c6488557d98479b5fe9",
+        "source_content_fingerprint": "4314bb7cf0f706a08f4e3787a69f8f75d0025433895f586efb37c9b2a8f6e70c",
+        "normalized_fingerprint": "e83a92604f9808b0625aeb589922681388bc4d01883f887f97e6b7948e486453"
+      }
+    },
+    "material_fingerprint": "dbc78aaea0833ed1050180ffeef21b794584c8c167e98509073e78fe277d3959",
+    "certificate_fingerprint": "27e353fa753c7bfa77e62fea463a513dfeb2ad44049a8dc284629aee1c0eed33"
+  },
+  {
+    "profile_id": "equipment-static-included-v1",
+    "profile_version": 1,
+    "profile_fingerprint": "6dc628f5a73a244ad3bfe9d987fc08f91ecba2590abfa430eb3158fe64f5f39e",
+    "verification_scope": "materialized_consistency_no_source_authority",
+    "source_authority": "not_granted",
+    "requires_fresh_db_admission": true,
+    "status": "shape_ready",
+    "issues": [],
+    "declaration": {
+      "delivery": "already_in_given_panel",
+      "numeric_application": false,
+      "basis_authority": "caller_given_panel_policy",
+      "nonextra_authority": "not_inferred",
+      "provider": "engineering-actor",
+      "kind": "artifact_set",
+      "set_id": 10007,
+      "count": 4,
+      "required_count": 2,
+      "source_index": 0,
+      "affix_id": 2100070,
+      "affix_group_id": 210007,
+      "properties": [
+        {
+          "source_index": 0,
+          "prop_type": "FIGHT_PROP_ELEMENT_MASTERY",
+          "stat": "em",
+          "unit": "flat",
+          "value": 80,
+          "application": "already_in_panel"
+        }
+      ],
+      "panel_fingerprint": "22d5a8e2d871dee214a50078289f298044be1d8aaf3516aa0dbfab03d7c9f239",
+      "panel_policy": "static_included",
+      "provenance": {
+        "snapshot_id": "8c9106736d92b586d5c0258c2b96600e8b777a308655b7427da16d5b5d6e86d9",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "version_line": "release",
+        "parent": {
+          "source_path": "ExcelBinOutput/ReliquarySetExcelConfigData.json",
+          "json_pointer": "/6",
+          "source_sha256": "d915f4a2e353aefc19116b80bf127d578e5c0cdcd505bbe9da1c66c502163f7e"
+        },
+        "parent_node_sha256": "b6b45942949217259dfec0f17c3a8d09f7077f9113ebceea05e7c22a95c40bb1",
+        "affix": {
+          "source_path": "ExcelBinOutput/EquipAffixExcelConfigData.json",
+          "json_pointer": "/1284",
+          "source_sha256": "67cce4b66ecfae8ab20b4567005ff0e2efa76446af1fcc71d99e8a2383def4e6"
+        },
+        "affix_node_sha256": "38a359e6e9038b16c528aefd3b038764b88463134945e3b1884bc9ec409b032a",
+        "parent_content_fingerprint": "dd573fdbb01fad4326ee46c2124cf8a4bf3232bf532084f2c69a57fee71193fa",
+        "source_content_fingerprint": "db04d4f4f9a2ed5d1c07c40c60a1b456cd6be5cbb08590ac7e6f6d4a9f68bedd",
+        "normalized_fingerprint": "7a8367879ac24b7ba34f650e97f6c3170001f8df9f80d9d01a0b2ed4f96103b8"
+      }
+    },
+    "material_fingerprint": "f35e9c39c6fac83835d731ec281627c7fd69491ef99d8a6b944bfe42a16ad27b",
+    "certificate_fingerprint": "912d135db0fe7d08e95fdc5543b27aee1766d102346beedcd72bb6dcbbb56f47"
+  },
+  {
+    "profile_id": "equipment-static-included-v1",
+    "profile_version": 1,
+    "profile_fingerprint": "6dc628f5a73a244ad3bfe9d987fc08f91ecba2590abfa430eb3158fe64f5f39e",
+    "verification_scope": "materialized_consistency_no_source_authority",
+    "source_authority": "not_granted",
+    "requires_fresh_db_admission": true,
+    "status": "shape_ready",
+    "issues": [],
+    "declaration": {
+      "delivery": "already_in_given_panel",
+      "numeric_application": false,
+      "basis_authority": "caller_given_panel_policy",
+      "nonextra_authority": "not_inferred",
+      "provider": "engineering-actor",
+      "kind": "artifact_set",
+      "set_id": 10009,
+      "count": 4,
+      "required_count": 2,
+      "source_index": 0,
+      "affix_id": 2100090,
+      "affix_group_id": 210009,
+      "properties": [
+        {
+          "source_index": 0,
+          "prop_type": "FIGHT_PROP_CHARGE_EFFICIENCY",
+          "stat": "energy_recharge",
+          "unit": "ratio",
+          "value": 0.20000000298023224,
+          "application": "already_in_panel"
+        }
+      ],
+      "panel_fingerprint": "22d5a8e2d871dee214a50078289f298044be1d8aaf3516aa0dbfab03d7c9f239",
+      "panel_policy": "static_included",
+      "provenance": {
+        "snapshot_id": "8c9106736d92b586d5c0258c2b96600e8b777a308655b7427da16d5b5d6e86d9",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "version_line": "release",
+        "parent": {
+          "source_path": "ExcelBinOutput/ReliquarySetExcelConfigData.json",
+          "json_pointer": "/8",
+          "source_sha256": "d915f4a2e353aefc19116b80bf127d578e5c0cdcd505bbe9da1c66c502163f7e"
+        },
+        "parent_node_sha256": "8db4bf57a1f5792768c08ade32c7f6bee78c2d0e4acdbedd6fb77d22511b145e",
+        "affix": {
+          "source_path": "ExcelBinOutput/EquipAffixExcelConfigData.json",
+          "json_pointer": "/1288",
+          "source_sha256": "67cce4b66ecfae8ab20b4567005ff0e2efa76446af1fcc71d99e8a2383def4e6"
+        },
+        "affix_node_sha256": "81248df1ec4f9a78e72693d03117154cdde7aad297d8486cd6fb81fa097c161e",
+        "parent_content_fingerprint": "2bfc0aa3931402257d480c7017e5d0d4c334e81849ab624b8cfe6840f45413e4",
+        "source_content_fingerprint": "c55eb80f428cfbdd18659d352937ddbd6af7b3d212599b87ca14e40b381ebbbc",
+        "normalized_fingerprint": "fa69864aa8158559abfae221c602af80cc11288eb959a8a18a77ff4009bdd9c5"
+      }
+    },
+    "material_fingerprint": "5e534b04d753bcf09d26c1c848ea0fb239eead56c04b9995f13a9f85447b9cd4",
+    "certificate_fingerprint": "814c17106767e65892f6869d80cd365da1030f9c775c8d35b8897a02ddaf9cb4"
+  },
+  {
+    "profile_id": "equipment-static-included-v1",
+    "profile_version": 1,
+    "profile_fingerprint": "6dc628f5a73a244ad3bfe9d987fc08f91ecba2590abfa430eb3158fe64f5f39e",
+    "verification_scope": "materialized_consistency_no_source_authority",
+    "source_authority": "not_granted",
+    "requires_fresh_db_admission": true,
+    "status": "shape_ready",
+    "issues": [],
+    "declaration": {
+      "delivery": "already_in_given_panel",
+      "numeric_application": false,
+      "basis_authority": "caller_given_panel_policy",
+      "nonextra_authority": "not_inferred",
+      "provider": "engineering-actor",
+      "kind": "artifact_set",
+      "set_id": 10010,
+      "count": 4,
+      "required_count": 2,
+      "source_index": 0,
+      "affix_id": 2100100,
+      "affix_group_id": 210010,
+      "properties": [
+        {
+          "source_index": 0,
+          "prop_type": "FIGHT_PROP_HP",
+          "stat": "hp",
+          "unit": "flat",
+          "value": 1000,
+          "application": "already_in_panel"
+        }
+      ],
+      "panel_fingerprint": "22d5a8e2d871dee214a50078289f298044be1d8aaf3516aa0dbfab03d7c9f239",
+      "panel_policy": "static_included",
+      "provenance": {
+        "snapshot_id": "8c9106736d92b586d5c0258c2b96600e8b777a308655b7427da16d5b5d6e86d9",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "version_line": "release",
+        "parent": {
+          "source_path": "ExcelBinOutput/ReliquarySetExcelConfigData.json",
+          "json_pointer": "/9",
+          "source_sha256": "d915f4a2e353aefc19116b80bf127d578e5c0cdcd505bbe9da1c66c502163f7e"
+        },
+        "parent_node_sha256": "715b35619b506ccdabe8ff683cde5c88ea2076e4a52e34644d7b921bd1aa8177",
+        "affix": {
+          "source_path": "ExcelBinOutput/EquipAffixExcelConfigData.json",
+          "json_pointer": "/1290",
+          "source_sha256": "67cce4b66ecfae8ab20b4567005ff0e2efa76446af1fcc71d99e8a2383def4e6"
+        },
+        "affix_node_sha256": "4eb895c2f9caff3b8371381ef2d0ba5e0cc40f5beb5544c86b27ac7d06d4dd78",
+        "parent_content_fingerprint": "2367c7cf27ce7eee85b98ea8fc239dfc1065449d1f14fa99b30f4f720f0f31af",
+        "source_content_fingerprint": "cb0b0bf5b87dee2f54ad39b1bcbd32ea8fb1d3a2af2a4dc3f140a6dfcf82b043",
+        "normalized_fingerprint": "7bc6d4f0219aa70a0bdd965bcede04f880addefe6a6475fbb1b9dd0dbc41725b"
+      }
+    },
+    "material_fingerprint": "aa20ded304a54509e968b5e5de5698bafa972ddbadcfa8aaf97af1e8483f875d",
+    "certificate_fingerprint": "5c23d4c5e2c3bce421af86bf90136aecd990c43338c194473d6abe322edd52d0"
+  },
+  {
+    "profile_id": "equipment-static-included-v1",
+    "profile_version": 1,
+    "profile_fingerprint": "6dc628f5a73a244ad3bfe9d987fc08f91ecba2590abfa430eb3158fe64f5f39e",
+    "verification_scope": "materialized_consistency_no_source_authority",
+    "source_authority": "not_granted",
+    "requires_fresh_db_admission": true,
+    "status": "shape_ready",
+    "issues": [],
+    "declaration": {
+      "delivery": "already_in_given_panel",
+      "numeric_application": false,
+      "basis_authority": "caller_given_panel_policy",
+      "nonextra_authority": "not_inferred",
+      "provider": "engineering-actor",
+      "kind": "artifact_set",
+      "set_id": 10011,
+      "count": 4,
+      "required_count": 2,
+      "source_index": 0,
+      "affix_id": 2100110,
+      "affix_group_id": 210011,
+      "properties": [
+        {
+          "source_index": 0,
+          "prop_type": "FIGHT_PROP_DEFENSE",
+          "stat": "def",
+          "unit": "flat",
+          "value": 100,
+          "application": "already_in_panel"
+        }
+      ],
+      "panel_fingerprint": "22d5a8e2d871dee214a50078289f298044be1d8aaf3516aa0dbfab03d7c9f239",
+      "panel_policy": "static_included",
+      "provenance": {
+        "snapshot_id": "8c9106736d92b586d5c0258c2b96600e8b777a308655b7427da16d5b5d6e86d9",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "version_line": "release",
+        "parent": {
+          "source_path": "ExcelBinOutput/ReliquarySetExcelConfigData.json",
+          "json_pointer": "/10",
+          "source_sha256": "d915f4a2e353aefc19116b80bf127d578e5c0cdcd505bbe9da1c66c502163f7e"
+        },
+        "parent_node_sha256": "1b5d7b89033f0734196aee0e0626afc46cebdd9125a6fc0b665bd96d91565e2f",
+        "affix": {
+          "source_path": "ExcelBinOutput/EquipAffixExcelConfigData.json",
+          "json_pointer": "/1292",
+          "source_sha256": "67cce4b66ecfae8ab20b4567005ff0e2efa76446af1fcc71d99e8a2383def4e6"
+        },
+        "affix_node_sha256": "9da59f9996be39269dd8666a8f3af67c6738ebc801cc041dc13dc45fab0675c9",
+        "parent_content_fingerprint": "eaec4f9e0abc574ba7fdc08f87f1ab9bb518fec909939b3fc32bbe580ab1b91d",
+        "source_content_fingerprint": "b6b3eea6a0c2ee0926685d9404e9945072194653bfa17299421ee1146e29a091",
+        "normalized_fingerprint": "59fe3834bf10c0febedbd908ed8a9aad1462b3d8419032dbdda6377c31ccde2d"
+      }
+    },
+    "material_fingerprint": "67505bec65c4ab3cdc791ec7a6e815cf05db03d7571ae8270da1d891c72469f4",
+    "certificate_fingerprint": "fcbee0708a1d817c3feac93ad7defc85074936047ca23aa46a64b0ff9913472e"
+  },
+  {
+    "profile_id": "equipment-static-included-v1",
+    "profile_version": 1,
+    "profile_fingerprint": "6dc628f5a73a244ad3bfe9d987fc08f91ecba2590abfa430eb3158fe64f5f39e",
+    "verification_scope": "materialized_consistency_no_source_authority",
+    "source_authority": "not_granted",
+    "requires_fresh_db_admission": true,
+    "status": "shape_ready",
+    "issues": [],
+    "declaration": {
+      "delivery": "already_in_given_panel",
+      "numeric_application": false,
+      "basis_authority": "caller_given_panel_policy",
+      "nonextra_authority": "not_inferred",
+      "provider": "engineering-actor",
+      "kind": "artifact_set",
+      "set_id": 10012,
+      "count": 4,
+      "required_count": 2,
+      "source_index": 0,
+      "affix_id": 2100120,
+      "affix_group_id": 210012,
+      "properties": [
+        {
+          "source_index": 0,
+          "prop_type": "FIGHT_PROP_CHARGE_EFFICIENCY",
+          "stat": "energy_recharge",
+          "unit": "ratio",
+          "value": 0.20000000298023224,
+          "application": "already_in_panel"
+        }
+      ],
+      "panel_fingerprint": "22d5a8e2d871dee214a50078289f298044be1d8aaf3516aa0dbfab03d7c9f239",
+      "panel_policy": "static_included",
+      "provenance": {
+        "snapshot_id": "8c9106736d92b586d5c0258c2b96600e8b777a308655b7427da16d5b5d6e86d9",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "version_line": "release",
+        "parent": {
+          "source_path": "ExcelBinOutput/ReliquarySetExcelConfigData.json",
+          "json_pointer": "/11",
+          "source_sha256": "d915f4a2e353aefc19116b80bf127d578e5c0cdcd505bbe9da1c66c502163f7e"
+        },
+        "parent_node_sha256": "535ddec892176d93a0aba5671ca9342453f302b27334ed408069e19fcc9f8e49",
+        "affix": {
+          "source_path": "ExcelBinOutput/EquipAffixExcelConfigData.json",
+          "json_pointer": "/1294",
+          "source_sha256": "67cce4b66ecfae8ab20b4567005ff0e2efa76446af1fcc71d99e8a2383def4e6"
+        },
+        "affix_node_sha256": "32942fc41e35162c817b9d4e675fa91bfd6eaf9315f1c7da126d1e9eb0a76b24",
+        "parent_content_fingerprint": "d499d38f28f32f9f6547d4f0c81e52a24828530fb52c935c9b26cd5cbb62cbeb",
+        "source_content_fingerprint": "799e2b7c847fc818215655ce55a5f4de096f151df3c8d272aad1c3c2e08bdc9a",
+        "normalized_fingerprint": "9c37c63239fb82866a0ca3377e21e89180f1c73c2b0d8557a3be300efda24c1d"
+      }
+    },
+    "material_fingerprint": "734a9d1810733f72ce3199838cd90f3a1156a704d0c472a9a25ce7534c826dfc",
+    "certificate_fingerprint": "a57d188459b931276b53fbb159ae523491fa205382575b02edbb72e03a2e69dc"
+  },
+  {
+    "profile_id": "equipment-static-included-v1",
+    "profile_version": 1,
+    "profile_fingerprint": "6dc628f5a73a244ad3bfe9d987fc08f91ecba2590abfa430eb3158fe64f5f39e",
+    "verification_scope": "materialized_consistency_no_source_authority",
+    "source_authority": "not_granted",
+    "requires_fresh_db_admission": true,
+    "status": "shape_ready",
+    "issues": [],
+    "declaration": {
+      "delivery": "already_in_given_panel",
+      "numeric_application": false,
+      "basis_authority": "caller_given_panel_policy",
+      "nonextra_authority": "not_inferred",
+      "provider": "engineering-actor",
+      "kind": "artifact_set",
+      "set_id": 14001,
+      "count": 4,
+      "required_count": 2,
+      "source_index": 0,
+      "affix_id": 2140010,
+      "affix_group_id": 214001,
+      "properties": [
+        {
+          "source_index": 0,
+          "prop_type": "FIGHT_PROP_ICE_ADD_HURT",
+          "stat": "dmg_bonus:cryo",
+          "unit": "ratio",
+          "value": 0.15000000596046448,
+          "application": "already_in_panel"
+        }
+      ],
+      "panel_fingerprint": "22d5a8e2d871dee214a50078289f298044be1d8aaf3516aa0dbfab03d7c9f239",
+      "panel_policy": "static_included",
+      "provenance": {
+        "snapshot_id": "8c9106736d92b586d5c0258c2b96600e8b777a308655b7427da16d5b5d6e86d9",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "version_line": "release",
+        "parent": {
+          "source_path": "ExcelBinOutput/ReliquarySetExcelConfigData.json",
+          "json_pointer": "/13",
+          "source_sha256": "d915f4a2e353aefc19116b80bf127d578e5c0cdcd505bbe9da1c66c502163f7e"
+        },
+        "parent_node_sha256": "0c02703cadee62c48d1a8cdf7815459c3cfc09fb1a0a4a890ef294e755edb161",
+        "affix": {
+          "source_path": "ExcelBinOutput/EquipAffixExcelConfigData.json",
+          "json_pointer": "/1298",
+          "source_sha256": "67cce4b66ecfae8ab20b4567005ff0e2efa76446af1fcc71d99e8a2383def4e6"
+        },
+        "affix_node_sha256": "2efed9f45d367d8a63ba6b3b158bc0a597c388bada8f46e851fb8c74904d2500",
+        "parent_content_fingerprint": "2f239411d1341f00d09017ea27d0a04c9e7418f92b42417f84138844adc1016a",
+        "source_content_fingerprint": "a2091608a0ba0994dc1281f0dc2487b32033a6bb5f260554f2400a959399b63d",
+        "normalized_fingerprint": "67411b0cb2b6979096f7a79b00dc7cccc40304cab1047fd5821c1137dcb5b7bf"
+      }
+    },
+    "material_fingerprint": "833e7636051f31dffed45b87fde914f6aa6ca721ec6303f5644482d0314ec156",
+    "certificate_fingerprint": "ae9511ce223db734cbe38f795338f0faaebfcbbb656bb0f795f3711aa53f6545"
+  },
+  {
+    "profile_id": "equipment-static-included-v1",
+    "profile_version": 1,
+    "profile_fingerprint": "6dc628f5a73a244ad3bfe9d987fc08f91ecba2590abfa430eb3158fe64f5f39e",
+    "verification_scope": "materialized_consistency_no_source_authority",
+    "source_authority": "not_granted",
+    "requires_fresh_db_admission": true,
+    "status": "shape_ready",
+    "issues": [],
+    "declaration": {
+      "delivery": "already_in_given_panel",
+      "numeric_application": false,
+      "basis_authority": "caller_given_panel_policy",
+      "nonextra_authority": "not_inferred",
+      "provider": "engineering-actor",
+      "kind": "artifact_set",
+      "set_id": 15001,
+      "count": 4,
+      "required_count": 2,
+      "source_index": 0,
+      "affix_id": 2150010,
+      "affix_group_id": 215001,
+      "properties": [
+        {
+          "source_index": 0,
+          "prop_type": "FIGHT_PROP_ATTACK_PERCENT",
+          "stat": "atk",
+          "unit": "ratio",
+          "value": 0.18000000715255737,
+          "application": "base_fraction_already_in_panel"
+        }
+      ],
+      "panel_fingerprint": "22d5a8e2d871dee214a50078289f298044be1d8aaf3516aa0dbfab03d7c9f239",
+      "panel_policy": "static_included",
+      "provenance": {
+        "snapshot_id": "8c9106736d92b586d5c0258c2b96600e8b777a308655b7427da16d5b5d6e86d9",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "version_line": "release",
+        "parent": {
+          "source_path": "ExcelBinOutput/ReliquarySetExcelConfigData.json",
+          "json_pointer": "/18",
+          "source_sha256": "d915f4a2e353aefc19116b80bf127d578e5c0cdcd505bbe9da1c66c502163f7e"
+        },
+        "parent_node_sha256": "dc9122c81c015be29881cc74f153058339bcffe2023a9b61c311194878f3900b",
+        "affix": {
+          "source_path": "ExcelBinOutput/EquipAffixExcelConfigData.json",
+          "json_pointer": "/1306",
+          "source_sha256": "67cce4b66ecfae8ab20b4567005ff0e2efa76446af1fcc71d99e8a2383def4e6"
+        },
+        "affix_node_sha256": "ee3c5b155ba46050f32560f9ef24b1256eb1585987c1c99d21ed74bcf10038c4",
+        "parent_content_fingerprint": "f0453ebac9214b4357ceedadc1c3c522bc519347e6d8241a94566c2b3226f484",
+        "source_content_fingerprint": "308b8f8650a8889be9cba615f830d39c72bbe88e89a607d05f338bf655be91c2",
+        "normalized_fingerprint": "956da11c6db9fa4a1af6a1e87f719b66264a075721a18be374bf258245f5e1fe"
+      }
+    },
+    "material_fingerprint": "4e8e5996b6fcfc7517fbc25f37b64b2a717f4ba11a5bc4a5ca2f2d910731dce6",
+    "certificate_fingerprint": "b8d53917e219d158f6d35fa86506720b23d71cc09a5ddec9d6a9cecf1a0d8469"
+  },
+  {
+    "profile_id": "equipment-static-included-v1",
+    "profile_version": 1,
+    "profile_fingerprint": "6dc628f5a73a244ad3bfe9d987fc08f91ecba2590abfa430eb3158fe64f5f39e",
+    "verification_scope": "materialized_consistency_no_source_authority",
+    "source_authority": "not_granted",
+    "requires_fresh_db_admission": true,
+    "status": "shape_ready",
+    "issues": [],
+    "declaration": {
+      "delivery": "already_in_given_panel",
+      "numeric_application": false,
+      "basis_authority": "caller_given_panel_policy",
+      "nonextra_authority": "not_inferred",
+      "provider": "engineering-actor",
+      "kind": "artifact_set",
+      "set_id": 15002,
+      "count": 4,
+      "required_count": 2,
+      "source_index": 0,
+      "affix_id": 2150020,
+      "affix_group_id": 215002,
+      "properties": [
+        {
+          "source_index": 0,
+          "prop_type": "FIGHT_PROP_WIND_ADD_HURT",
+          "stat": "dmg_bonus:anemo",
+          "unit": "ratio",
+          "value": 0.15000000596046448,
+          "application": "already_in_panel"
+        }
+      ],
+      "panel_fingerprint": "22d5a8e2d871dee214a50078289f298044be1d8aaf3516aa0dbfab03d7c9f239",
+      "panel_policy": "static_included",
+      "provenance": {
+        "snapshot_id": "8c9106736d92b586d5c0258c2b96600e8b777a308655b7427da16d5b5d6e86d9",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "version_line": "release",
+        "parent": {
+          "source_path": "ExcelBinOutput/ReliquarySetExcelConfigData.json",
+          "json_pointer": "/19",
+          "source_sha256": "d915f4a2e353aefc19116b80bf127d578e5c0cdcd505bbe9da1c66c502163f7e"
+        },
+        "parent_node_sha256": "10e8e551cbef20aedeed08c0b53ee0778ab62bf79ecddc1676c79e7e38a0e0a8",
+        "affix": {
+          "source_path": "ExcelBinOutput/EquipAffixExcelConfigData.json",
+          "json_pointer": "/1308",
+          "source_sha256": "67cce4b66ecfae8ab20b4567005ff0e2efa76446af1fcc71d99e8a2383def4e6"
+        },
+        "affix_node_sha256": "d568086926106279a7076dc74a3840fc720a9bc878042e27486ff35e8d74a4ed",
+        "parent_content_fingerprint": "586e2e93f6bf02440da03153ff26404a1624eb76d6a3fd871a44401181ce4598",
+        "source_content_fingerprint": "0506c404b822ae0dff781c37cfb8a5544fdd42cb347338d255a1fd95c19dd3c1",
+        "normalized_fingerprint": "dab7ede424c189c7b4d5f35661d279ae0bc982039182cbf7f1f4d68eb3a5044f"
+      }
+    },
+    "material_fingerprint": "4445e1642bc04f4e04a075871ad7354481adcd7b53ab2c256bed7263ba056e9e",
+    "certificate_fingerprint": "21263d526702087a10d9af1448486af440633258a35f677c24e4a42c9967fba1"
+  },
+  {
+    "profile_id": "equipment-static-included-v1",
+    "profile_version": 1,
+    "profile_fingerprint": "6dc628f5a73a244ad3bfe9d987fc08f91ecba2590abfa430eb3158fe64f5f39e",
+    "verification_scope": "materialized_consistency_no_source_authority",
+    "source_authority": "not_granted",
+    "requires_fresh_db_admission": true,
+    "status": "shape_ready",
+    "issues": [],
+    "declaration": {
+      "delivery": "already_in_given_panel",
+      "numeric_application": false,
+      "basis_authority": "caller_given_panel_policy",
+      "nonextra_authority": "not_inferred",
+      "provider": "engineering-actor",
+      "kind": "artifact_set",
+      "set_id": 15003,
+      "count": 4,
+      "required_count": 2,
+      "source_index": 0,
+      "affix_id": 2150030,
+      "affix_group_id": 215003,
+      "properties": [
+        {
+          "source_index": 0,
+          "prop_type": "FIGHT_PROP_ELEMENT_MASTERY",
+          "stat": "em",
+          "unit": "flat",
+          "value": 80,
+          "application": "already_in_panel"
+        }
+      ],
+      "panel_fingerprint": "22d5a8e2d871dee214a50078289f298044be1d8aaf3516aa0dbfab03d7c9f239",
+      "panel_policy": "static_included",
+      "provenance": {
+        "snapshot_id": "8c9106736d92b586d5c0258c2b96600e8b777a308655b7427da16d5b5d6e86d9",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "version_line": "release",
+        "parent": {
+          "source_path": "ExcelBinOutput/ReliquarySetExcelConfigData.json",
+          "json_pointer": "/20",
+          "source_sha256": "d915f4a2e353aefc19116b80bf127d578e5c0cdcd505bbe9da1c66c502163f7e"
+        },
+        "parent_node_sha256": "e681ec45e7ca2367b1a9b4e98dd4c861ada7523aaa924597487a3f45ba2affb8",
+        "affix": {
+          "source_path": "ExcelBinOutput/EquipAffixExcelConfigData.json",
+          "json_pointer": "/1310",
+          "source_sha256": "67cce4b66ecfae8ab20b4567005ff0e2efa76446af1fcc71d99e8a2383def4e6"
+        },
+        "affix_node_sha256": "18b63a6e89839ebe2675e170d4cf8e72e26c6b8b67cbb6097ef8961e7f9994b2",
+        "parent_content_fingerprint": "e64f7043de5870700af6aa06ec5c5f241722029286bc3d5301157efab3aae315",
+        "source_content_fingerprint": "fd106ceb5a5a4c917b456b167832f8d55e2cde1bfcf38122b12c00e723096c48",
+        "normalized_fingerprint": "52655d7b5db23e2ec779c41355b615f59354a407eea1737aa932ded9b321a662"
+      }
+    },
+    "material_fingerprint": "59b385311e5bf8fb5915556f37bba4b051b9c2faf3c42f8186d92f7430a6776a",
+    "certificate_fingerprint": "597643bad5b494adde11bac9de76148a0cb75ae9253037d819de567026b7eacd"
+  },
+  {
+    "profile_id": "equipment-static-included-v1",
+    "profile_version": 1,
+    "profile_fingerprint": "6dc628f5a73a244ad3bfe9d987fc08f91ecba2590abfa430eb3158fe64f5f39e",
+    "verification_scope": "materialized_consistency_no_source_authority",
+    "source_authority": "not_granted",
+    "requires_fresh_db_admission": true,
+    "status": "shape_ready",
+    "issues": [],
+    "declaration": {
+      "delivery": "already_in_given_panel",
+      "numeric_application": false,
+      "basis_authority": "caller_given_panel_policy",
+      "nonextra_authority": "not_inferred",
+      "provider": "engineering-actor",
+      "kind": "artifact_set",
+      "set_id": 15004,
+      "count": 4,
+      "required_count": 2,
+      "source_index": 0,
+      "affix_id": 2150040,
+      "affix_group_id": 215004,
+      "properties": [
+        {
+          "source_index": 0,
+          "prop_type": "FIGHT_PROP_ICE_ADD_HURT",
+          "stat": "dmg_bonus:cryo",
+          "unit": "ratio",
+          "value": 0.15000000596046448,
+          "application": "already_in_panel"
+        }
+      ],
+      "panel_fingerprint": "22d5a8e2d871dee214a50078289f298044be1d8aaf3516aa0dbfab03d7c9f239",
+      "panel_policy": "static_included",
+      "provenance": {
+        "snapshot_id": "8c9106736d92b586d5c0258c2b96600e8b777a308655b7427da16d5b5d6e86d9",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "version_line": "release",
+        "parent": {
+          "source_path": "ExcelBinOutput/ReliquarySetExcelConfigData.json",
+          "json_pointer": "/21",
+          "source_sha256": "d915f4a2e353aefc19116b80bf127d578e5c0cdcd505bbe9da1c66c502163f7e"
+        },
+        "parent_node_sha256": "e32c3c911967625ca6b59ebbb5354f50d0d9c5efcfa6c864c823ed5aa1b50091",
+        "affix": {
+          "source_path": "ExcelBinOutput/EquipAffixExcelConfigData.json",
+          "json_pointer": "/1312",
+          "source_sha256": "67cce4b66ecfae8ab20b4567005ff0e2efa76446af1fcc71d99e8a2383def4e6"
+        },
+        "affix_node_sha256": "154fa1dc6ae75ff8d35f38b80a6692d81dc49f56b64b88cc11f2316e51dcb838",
+        "parent_content_fingerprint": "e97864c0b2845b9b58181667998cb37ba96550791ae9801801b88c857a56a646",
+        "source_content_fingerprint": "2a9da1c63ff3061b95950d562ecbd5caa2811292fb2df1371fd7f1c221f806cb",
+        "normalized_fingerprint": "be8544efd881c36929f83b6a7d4fc63072f7cbb349ac8759f95746b9bf38e946"
+      }
+    },
+    "material_fingerprint": "c937ee5cf92787cb3ba5ea847f30dfe3e6b6536e4887bb597ce153298cb85ac2",
+    "certificate_fingerprint": "b0b1bf34773b303840ba9e3106a668d6734f0018a1256f1cacfcbcbb31e59a84"
+  },
+  {
+    "profile_id": "equipment-static-included-v1",
+    "profile_version": 1,
+    "profile_fingerprint": "6dc628f5a73a244ad3bfe9d987fc08f91ecba2590abfa430eb3158fe64f5f39e",
+    "verification_scope": "materialized_consistency_no_source_authority",
+    "source_authority": "not_granted",
+    "requires_fresh_db_admission": true,
+    "status": "shape_ready",
+    "issues": [],
+    "declaration": {
+      "delivery": "already_in_given_panel",
+      "numeric_application": false,
+      "basis_authority": "caller_given_panel_policy",
+      "nonextra_authority": "not_inferred",
+      "provider": "engineering-actor",
+      "kind": "artifact_set",
+      "set_id": 15005,
+      "count": 4,
+      "required_count": 2,
+      "source_index": 0,
+      "affix_id": 2150050,
+      "affix_group_id": 215005,
+      "properties": [
+        {
+          "source_index": 0,
+          "prop_type": "FIGHT_PROP_ELEC_ADD_HURT",
+          "stat": "dmg_bonus:electro",
+          "unit": "ratio",
+          "value": 0.15000000596046448,
+          "application": "already_in_panel"
+        }
+      ],
+      "panel_fingerprint": "22d5a8e2d871dee214a50078289f298044be1d8aaf3516aa0dbfab03d7c9f239",
+      "panel_policy": "static_included",
+      "provenance": {
+        "snapshot_id": "8c9106736d92b586d5c0258c2b96600e8b777a308655b7427da16d5b5d6e86d9",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "version_line": "release",
+        "parent": {
+          "source_path": "ExcelBinOutput/ReliquarySetExcelConfigData.json",
+          "json_pointer": "/22",
+          "source_sha256": "d915f4a2e353aefc19116b80bf127d578e5c0cdcd505bbe9da1c66c502163f7e"
+        },
+        "parent_node_sha256": "b913985a4e85494c1c956f77610252b2524de301d92ece996810544ed3ce8154",
+        "affix": {
+          "source_path": "ExcelBinOutput/EquipAffixExcelConfigData.json",
+          "json_pointer": "/1314",
+          "source_sha256": "67cce4b66ecfae8ab20b4567005ff0e2efa76446af1fcc71d99e8a2383def4e6"
+        },
+        "affix_node_sha256": "97d2609d6099c8bf067f43633647b92a8ee23dc388b48d96318d71075d27c98a",
+        "parent_content_fingerprint": "dd7e762685fe6f61f1bacbe0a8d41c4a0f52baf32dcc20ec95435c750ce29de9",
+        "source_content_fingerprint": "6dee1f1432b371c06789c71adf1e3886bdecc7295e51593f4ce0d0910b83f935",
+        "normalized_fingerprint": "27903eef5efb4e80e184006d8751bd93d20a27ffaed802835f9537b1f9e8544f"
+      }
+    },
+    "material_fingerprint": "a8ee0c19b12f5d72b6c8b00d2e9407a77d143c863f59d4cf063e3d04a81736b0",
+    "certificate_fingerprint": "b36ac42fbceb12da18fd2dcf7c0545937f34d744ca0f8504d08757dc8865f483"
+  },
+  {
+    "profile_id": "equipment-static-included-v1",
+    "profile_version": 1,
+    "profile_fingerprint": "6dc628f5a73a244ad3bfe9d987fc08f91ecba2590abfa430eb3158fe64f5f39e",
+    "verification_scope": "materialized_consistency_no_source_authority",
+    "source_authority": "not_granted",
+    "requires_fresh_db_admission": true,
+    "status": "shape_ready",
+    "issues": [],
+    "declaration": {
+      "delivery": "already_in_given_panel",
+      "numeric_application": false,
+      "basis_authority": "caller_given_panel_policy",
+      "nonextra_authority": "not_inferred",
+      "provider": "engineering-actor",
+      "kind": "artifact_set",
+      "set_id": 15006,
+      "count": 4,
+      "required_count": 2,
+      "source_index": 0,
+      "affix_id": 2150060,
+      "affix_group_id": 215006,
+      "properties": [
+        {
+          "source_index": 0,
+          "prop_type": "FIGHT_PROP_FIRE_ADD_HURT",
+          "stat": "dmg_bonus:pyro",
+          "unit": "ratio",
+          "value": 0.15000000596046448,
+          "application": "already_in_panel"
+        }
+      ],
+      "panel_fingerprint": "22d5a8e2d871dee214a50078289f298044be1d8aaf3516aa0dbfab03d7c9f239",
+      "panel_policy": "static_included",
+      "provenance": {
+        "snapshot_id": "8c9106736d92b586d5c0258c2b96600e8b777a308655b7427da16d5b5d6e86d9",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "version_line": "release",
+        "parent": {
+          "source_path": "ExcelBinOutput/ReliquarySetExcelConfigData.json",
+          "json_pointer": "/23",
+          "source_sha256": "d915f4a2e353aefc19116b80bf127d578e5c0cdcd505bbe9da1c66c502163f7e"
+        },
+        "parent_node_sha256": "226b9a2a11ec4162ce1bde551e1758718980633ad55409186c5dd3b7de1e909d",
+        "affix": {
+          "source_path": "ExcelBinOutput/EquipAffixExcelConfigData.json",
+          "json_pointer": "/1316",
+          "source_sha256": "67cce4b66ecfae8ab20b4567005ff0e2efa76446af1fcc71d99e8a2383def4e6"
+        },
+        "affix_node_sha256": "e4dcf9bd4cd41a6b64b4d523e581037b985e2d55988f48aa83152c67bb8b552f",
+        "parent_content_fingerprint": "07286e2078e4604fce35e312784ed2e41b1f739d1841d017ac169fcf56b40ff1",
+        "source_content_fingerprint": "a8656f3d87b7b8ee7dbe6f6469f521f7f6ce9c55c9ac98d78b8b9859895c54ab",
+        "normalized_fingerprint": "c728f121278fb415f2b9e976e7ef7e36ed3a80353f0c7240081355e384c546db"
+      }
+    },
+    "material_fingerprint": "b27c07570eec0d383fa82d73332908cf5ec6f8c4a2407a92a8a20e4704a4d167",
+    "certificate_fingerprint": "baa7b048addfa17d00343191d820ff785d5dec8c336d3455c6463f50510bad9d"
+  },
+  {
+    "profile_id": "equipment-static-included-v1",
+    "profile_version": 1,
+    "profile_fingerprint": "6dc628f5a73a244ad3bfe9d987fc08f91ecba2590abfa430eb3158fe64f5f39e",
+    "verification_scope": "materialized_consistency_no_source_authority",
+    "source_authority": "not_granted",
+    "requires_fresh_db_admission": true,
+    "status": "shape_ready",
+    "issues": [],
+    "declaration": {
+      "delivery": "already_in_given_panel",
+      "numeric_application": false,
+      "basis_authority": "caller_given_panel_policy",
+      "nonextra_authority": "not_inferred",
+      "provider": "engineering-actor",
+      "kind": "artifact_set",
+      "set_id": 15008,
+      "count": 4,
+      "required_count": 2,
+      "source_index": 0,
+      "affix_id": 2150080,
+      "affix_group_id": 215008,
+      "properties": [
+        {
+          "source_index": 0,
+          "prop_type": "FIGHT_PROP_PHYSICAL_ADD_HURT",
+          "stat": "dmg_bonus:physical",
+          "unit": "ratio",
+          "value": 0.25,
+          "application": "already_in_panel"
+        }
+      ],
+      "panel_fingerprint": "22d5a8e2d871dee214a50078289f298044be1d8aaf3516aa0dbfab03d7c9f239",
+      "panel_policy": "static_included",
+      "provenance": {
+        "snapshot_id": "8c9106736d92b586d5c0258c2b96600e8b777a308655b7427da16d5b5d6e86d9",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "version_line": "release",
+        "parent": {
+          "source_path": "ExcelBinOutput/ReliquarySetExcelConfigData.json",
+          "json_pointer": "/25",
+          "source_sha256": "d915f4a2e353aefc19116b80bf127d578e5c0cdcd505bbe9da1c66c502163f7e"
+        },
+        "parent_node_sha256": "fcc57ad42aac9e08bab24082042a7108dfcade172d373f5260b58d39551c9fcc",
+        "affix": {
+          "source_path": "ExcelBinOutput/EquipAffixExcelConfigData.json",
+          "json_pointer": "/1320",
+          "source_sha256": "67cce4b66ecfae8ab20b4567005ff0e2efa76446af1fcc71d99e8a2383def4e6"
+        },
+        "affix_node_sha256": "6f000c24a866ea45a8f60ce5ce3e7cd4515fd5ed34f990fb109d3756dae559e4",
+        "parent_content_fingerprint": "d2e3bef2777f085b3747c84e26f2c8f8c2af0e0e2b1b76102a323f612757b519",
+        "source_content_fingerprint": "0b0b6dc30fe48318f5818f1d4cfecbb87d8a70617539fdde1d61e64070ae978d",
+        "normalized_fingerprint": "09c439e18002c244934091bd4536f00903bb9d598322fada85e79c9c16e9c917"
+      }
+    },
+    "material_fingerprint": "88e05096f939446d5844b2530e32186c1b579440f9824ece0f5812bd0de65a9f",
+    "certificate_fingerprint": "48a0a15953e4ee0f417ae9e3e825c2920a416f828d2ee38ebc56d3feb374e1fd"
+  },
+  {
+    "profile_id": "equipment-static-included-v1",
+    "profile_version": 1,
+    "profile_fingerprint": "6dc628f5a73a244ad3bfe9d987fc08f91ecba2590abfa430eb3158fe64f5f39e",
+    "verification_scope": "materialized_consistency_no_source_authority",
+    "source_authority": "not_granted",
+    "requires_fresh_db_admission": true,
+    "status": "shape_ready",
+    "issues": [],
+    "declaration": {
+      "delivery": "already_in_given_panel",
+      "numeric_application": false,
+      "basis_authority": "caller_given_panel_policy",
+      "nonextra_authority": "not_inferred",
+      "provider": "engineering-actor",
+      "kind": "artifact_set",
+      "set_id": 15014,
+      "count": 4,
+      "required_count": 2,
+      "source_index": 0,
+      "affix_id": 2150140,
+      "affix_group_id": 215014,
+      "properties": [
+        {
+          "source_index": 0,
+          "prop_type": "FIGHT_PROP_ROCK_ADD_HURT",
+          "stat": "dmg_bonus:geo",
+          "unit": "ratio",
+          "value": 0.15000000596046448,
+          "application": "already_in_panel"
+        }
+      ],
+      "panel_fingerprint": "22d5a8e2d871dee214a50078289f298044be1d8aaf3516aa0dbfab03d7c9f239",
+      "panel_policy": "static_included",
+      "provenance": {
+        "snapshot_id": "8c9106736d92b586d5c0258c2b96600e8b777a308655b7427da16d5b5d6e86d9",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "version_line": "release",
+        "parent": {
+          "source_path": "ExcelBinOutput/ReliquarySetExcelConfigData.json",
+          "json_pointer": "/31",
+          "source_sha256": "d915f4a2e353aefc19116b80bf127d578e5c0cdcd505bbe9da1c66c502163f7e"
+        },
+        "parent_node_sha256": "3c5613f0f8cc1bad44ccb5ed0b07910074d8e4d73c51bede92a41b8bb077650a",
+        "affix": {
+          "source_path": "ExcelBinOutput/EquipAffixExcelConfigData.json",
+          "json_pointer": "/1327",
+          "source_sha256": "67cce4b66ecfae8ab20b4567005ff0e2efa76446af1fcc71d99e8a2383def4e6"
+        },
+        "affix_node_sha256": "2764a15ba173b86fbc20b0d6afb49db1428ed976b4e567694aaa5435c1263498",
+        "parent_content_fingerprint": "fed5ccdb2c6a36a57e5d6cd621334faea3b89a3681098dd311b6320d0fc44a87",
+        "source_content_fingerprint": "c92485933cbcec1ba3ab00cdf12e7a67dd7da542bffbb39ac91fab885d9d1597",
+        "normalized_fingerprint": "1aa88d44dea6787a97908d858109315041e0af486cb3aa53498c79147f5f5482"
+      }
+    },
+    "material_fingerprint": "8888f95047049290c4bca88ac72d4e57d4afb52fbb8da6927bcd4672041af2b2",
+    "certificate_fingerprint": "a183e8f75c88c6ce1fd0876780459a45803c0860e44f8557fefddd2b2ec4d06e"
+  },
+  {
+    "profile_id": "equipment-static-included-v1",
+    "profile_version": 1,
+    "profile_fingerprint": "6dc628f5a73a244ad3bfe9d987fc08f91ecba2590abfa430eb3158fe64f5f39e",
+    "verification_scope": "materialized_consistency_no_source_authority",
+    "source_authority": "not_granted",
+    "requires_fresh_db_admission": true,
+    "status": "shape_ready",
+    "issues": [],
+    "declaration": {
+      "delivery": "already_in_given_panel",
+      "numeric_application": false,
+      "basis_authority": "caller_given_panel_policy",
+      "nonextra_authority": "not_inferred",
+      "provider": "engineering-actor",
+      "kind": "artifact_set",
+      "set_id": 15016,
+      "count": 4,
+      "required_count": 2,
+      "source_index": 0,
+      "affix_id": 2150160,
+      "affix_group_id": 215016,
+      "properties": [
+        {
+          "source_index": 0,
+          "prop_type": "FIGHT_PROP_WATER_ADD_HURT",
+          "stat": "dmg_bonus:hydro",
+          "unit": "ratio",
+          "value": 0.15000000596046448,
+          "application": "already_in_panel"
+        }
+      ],
+      "panel_fingerprint": "22d5a8e2d871dee214a50078289f298044be1d8aaf3516aa0dbfab03d7c9f239",
+      "panel_policy": "static_included",
+      "provenance": {
+        "snapshot_id": "8c9106736d92b586d5c0258c2b96600e8b777a308655b7427da16d5b5d6e86d9",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "version_line": "release",
+        "parent": {
+          "source_path": "ExcelBinOutput/ReliquarySetExcelConfigData.json",
+          "json_pointer": "/33",
+          "source_sha256": "d915f4a2e353aefc19116b80bf127d578e5c0cdcd505bbe9da1c66c502163f7e"
+        },
+        "parent_node_sha256": "03f4fdd83306687fb495a2760dd307acdeaa77a6e03176004d023543a20d1f67",
+        "affix": {
+          "source_path": "ExcelBinOutput/EquipAffixExcelConfigData.json",
+          "json_pointer": "/1331",
+          "source_sha256": "67cce4b66ecfae8ab20b4567005ff0e2efa76446af1fcc71d99e8a2383def4e6"
+        },
+        "affix_node_sha256": "a0a9095f468cf13491bb3dbc472e8aeae23206630e92afb581294dfa48ba1479",
+        "parent_content_fingerprint": "350c15b76d37dd94b0bb781f7ed666c222a7e38e832e7991d24483bf1cb2a9af",
+        "source_content_fingerprint": "f1572155522683ebb09830e892b0f7627f2eb20f2661216f5ab3ce6c00053467",
+        "normalized_fingerprint": "38e1482dffa147d6b611bcbcca9cb5957c8d5dff47ccfcc3c35ea9ec9f1d51a7"
+      }
+    },
+    "material_fingerprint": "fb032076abec81ae410050542381ba92123fe6646499b73889d1009b59f08611",
+    "certificate_fingerprint": "51007e2fdbdb796220ea1b694eee848ad35545378d61e1719755af8cbfe16725"
+  },
+  {
+    "profile_id": "equipment-static-included-v1",
+    "profile_version": 1,
+    "profile_fingerprint": "6dc628f5a73a244ad3bfe9d987fc08f91ecba2590abfa430eb3158fe64f5f39e",
+    "verification_scope": "materialized_consistency_no_source_authority",
+    "source_authority": "not_granted",
+    "requires_fresh_db_admission": true,
+    "status": "shape_ready",
+    "issues": [],
+    "declaration": {
+      "delivery": "already_in_given_panel",
+      "numeric_application": false,
+      "basis_authority": "caller_given_panel_policy",
+      "nonextra_authority": "not_inferred",
+      "provider": "engineering-actor",
+      "kind": "artifact_set",
+      "set_id": 15017,
+      "count": 4,
+      "required_count": 2,
+      "source_index": 0,
+      "affix_id": 2150170,
+      "affix_group_id": 215017,
+      "properties": [
+        {
+          "source_index": 0,
+          "prop_type": "FIGHT_PROP_HP_PERCENT",
+          "stat": "hp",
+          "unit": "ratio",
+          "value": 0.20000000298023224,
+          "application": "base_fraction_already_in_panel"
+        }
+      ],
+      "panel_fingerprint": "22d5a8e2d871dee214a50078289f298044be1d8aaf3516aa0dbfab03d7c9f239",
+      "panel_policy": "static_included",
+      "provenance": {
+        "snapshot_id": "8c9106736d92b586d5c0258c2b96600e8b777a308655b7427da16d5b5d6e86d9",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "version_line": "release",
+        "parent": {
+          "source_path": "ExcelBinOutput/ReliquarySetExcelConfigData.json",
+          "json_pointer": "/34",
+          "source_sha256": "d915f4a2e353aefc19116b80bf127d578e5c0cdcd505bbe9da1c66c502163f7e"
+        },
+        "parent_node_sha256": "28b765ef55ba9d7089dbb6fac2388c60234cb77418a3ca90c9fa6b786feac626",
+        "affix": {
+          "source_path": "ExcelBinOutput/EquipAffixExcelConfigData.json",
+          "json_pointer": "/1333",
+          "source_sha256": "67cce4b66ecfae8ab20b4567005ff0e2efa76446af1fcc71d99e8a2383def4e6"
+        },
+        "affix_node_sha256": "04eec93a85cdcfd20811a164b828a97f677f6fc661727aab14c7b793e33a310b",
+        "parent_content_fingerprint": "e11155e1f354dce87ff0391bc0356e9c6a26408e9a7db1e29dd126217f07727f",
+        "source_content_fingerprint": "4e04eee8345b9c82efb833a509a0ed9d9ad2bcf071fa9a565bd91eac95617fd8",
+        "normalized_fingerprint": "00ae39c7f9848b213fd64ade6fcad6ec0e103e383d6ea5e72ce79cafef7cf431"
+      }
+    },
+    "material_fingerprint": "3be0dff97a4d2872d4b2a6cea920d4427c522196f6c3d424c3065bd6b8a9fe68",
+    "certificate_fingerprint": "c8f5281e2408bd1fb1eb141427aa34db7e2c25d96268d0405ffa6972c2a9202a"
+  },
+  {
+    "profile_id": "equipment-static-included-v1",
+    "profile_version": 1,
+    "profile_fingerprint": "6dc628f5a73a244ad3bfe9d987fc08f91ecba2590abfa430eb3158fe64f5f39e",
+    "verification_scope": "materialized_consistency_no_source_authority",
+    "source_authority": "not_granted",
+    "requires_fresh_db_admission": true,
+    "status": "shape_ready",
+    "issues": [],
+    "declaration": {
+      "delivery": "already_in_given_panel",
+      "numeric_application": false,
+      "basis_authority": "caller_given_panel_policy",
+      "nonextra_authority": "not_inferred",
+      "provider": "engineering-actor",
+      "kind": "artifact_set",
+      "set_id": 15018,
+      "count": 4,
+      "required_count": 2,
+      "source_index": 0,
+      "affix_id": 2150180,
+      "affix_group_id": 215018,
+      "properties": [
+        {
+          "source_index": 0,
+          "prop_type": "FIGHT_PROP_PHYSICAL_ADD_HURT",
+          "stat": "dmg_bonus:physical",
+          "unit": "ratio",
+          "value": 0.25,
+          "application": "already_in_panel"
+        }
+      ],
+      "panel_fingerprint": "22d5a8e2d871dee214a50078289f298044be1d8aaf3516aa0dbfab03d7c9f239",
+      "panel_policy": "static_included",
+      "provenance": {
+        "snapshot_id": "8c9106736d92b586d5c0258c2b96600e8b777a308655b7427da16d5b5d6e86d9",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "version_line": "release",
+        "parent": {
+          "source_path": "ExcelBinOutput/ReliquarySetExcelConfigData.json",
+          "json_pointer": "/35",
+          "source_sha256": "d915f4a2e353aefc19116b80bf127d578e5c0cdcd505bbe9da1c66c502163f7e"
+        },
+        "parent_node_sha256": "8b8d003ba933aa7f0ab0da2fdc8ac2fb2657e769c7eb18be2b76f03a96145256",
+        "affix": {
+          "source_path": "ExcelBinOutput/EquipAffixExcelConfigData.json",
+          "json_pointer": "/1335",
+          "source_sha256": "67cce4b66ecfae8ab20b4567005ff0e2efa76446af1fcc71d99e8a2383def4e6"
+        },
+        "affix_node_sha256": "84d116cd317c0d2445ce2937ccbf9c3940f46f8dfec1523cd18e1b2dee04c1fe",
+        "parent_content_fingerprint": "4c7dff8af00eb56a5f52573850dd77cbffdfaa14f8d35829f136f395886bdee0",
+        "source_content_fingerprint": "f9cb84ad21dd43019047e60ec7012780bec3e85c8a472a7224355d4e91c93552",
+        "normalized_fingerprint": "12a1f5f5c8e85cd587bf8952334c32415c8659d6bd00c7e041ffbbf1bbd00f02"
+      }
+    },
+    "material_fingerprint": "a0059a959b028a064c78bc68d5e308451e5482e43f089dc62efd90b30ede6562",
+    "certificate_fingerprint": "5c237f69aa8827c0a0d357cba4e4ae29dcc952a0395ca26503477b62dff8de5f"
+  },
+  {
+    "profile_id": "equipment-static-included-v1",
+    "profile_version": 1,
+    "profile_fingerprint": "6dc628f5a73a244ad3bfe9d987fc08f91ecba2590abfa430eb3158fe64f5f39e",
+    "verification_scope": "materialized_consistency_no_source_authority",
+    "source_authority": "not_granted",
+    "requires_fresh_db_admission": true,
+    "status": "shape_ready",
+    "issues": [],
+    "declaration": {
+      "delivery": "already_in_given_panel",
+      "numeric_application": false,
+      "basis_authority": "caller_given_panel_policy",
+      "nonextra_authority": "not_inferred",
+      "provider": "engineering-actor",
+      "kind": "artifact_set",
+      "set_id": 15019,
+      "count": 4,
+      "required_count": 2,
+      "source_index": 0,
+      "affix_id": 2150190,
+      "affix_group_id": 215019,
+      "properties": [
+        {
+          "source_index": 0,
+          "prop_type": "FIGHT_PROP_ATTACK_PERCENT",
+          "stat": "atk",
+          "unit": "ratio",
+          "value": 0.18000000715255737,
+          "application": "base_fraction_already_in_panel"
+        }
+      ],
+      "panel_fingerprint": "22d5a8e2d871dee214a50078289f298044be1d8aaf3516aa0dbfab03d7c9f239",
+      "panel_policy": "static_included",
+      "provenance": {
+        "snapshot_id": "8c9106736d92b586d5c0258c2b96600e8b777a308655b7427da16d5b5d6e86d9",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "version_line": "release",
+        "parent": {
+          "source_path": "ExcelBinOutput/ReliquarySetExcelConfigData.json",
+          "json_pointer": "/36",
+          "source_sha256": "d915f4a2e353aefc19116b80bf127d578e5c0cdcd505bbe9da1c66c502163f7e"
+        },
+        "parent_node_sha256": "7743b033ff987504fb279f7c69598b62b80bca9bdbef0d9c4453c96923d1955f",
+        "affix": {
+          "source_path": "ExcelBinOutput/EquipAffixExcelConfigData.json",
+          "json_pointer": "/1337",
+          "source_sha256": "67cce4b66ecfae8ab20b4567005ff0e2efa76446af1fcc71d99e8a2383def4e6"
+        },
+        "affix_node_sha256": "4da1f3e44e7bc4cea95c96f45e4ef7b9511f9ee29062c82e7b76f2553954c253",
+        "parent_content_fingerprint": "16a7851126e59eb158f9ca25e7e92eddee583fdd29456e79268a4dc9e1712b39",
+        "source_content_fingerprint": "38eb26df3b4c51f1c241871e12797b8d473d47b17f87ebaa64ace6d5f0c58115",
+        "normalized_fingerprint": "8124148447f09cc8380e0c39a73edf13f5bec9f5a5bbd2fe6381aa16a6fec94d"
+      }
+    },
+    "material_fingerprint": "9fd7a869d3947be2a9324f4e7627a2ada8b2e52c2ab6f641d227ab462a67438b",
+    "certificate_fingerprint": "9a69aac21f4045673d1c5b1c9c00328d2cd3844a6243539d485791255d3d9c05"
+  },
+  {
+    "profile_id": "equipment-static-included-v1",
+    "profile_version": 1,
+    "profile_fingerprint": "6dc628f5a73a244ad3bfe9d987fc08f91ecba2590abfa430eb3158fe64f5f39e",
+    "verification_scope": "materialized_consistency_no_source_authority",
+    "source_authority": "not_granted",
+    "requires_fresh_db_admission": true,
+    "status": "shape_ready",
+    "issues": [],
+    "declaration": {
+      "delivery": "already_in_given_panel",
+      "numeric_application": false,
+      "basis_authority": "caller_given_panel_policy",
+      "nonextra_authority": "not_inferred",
+      "provider": "engineering-actor",
+      "kind": "artifact_set",
+      "set_id": 15020,
+      "count": 4,
+      "required_count": 2,
+      "source_index": 0,
+      "affix_id": 2150200,
+      "affix_group_id": 215020,
+      "properties": [
+        {
+          "source_index": 0,
+          "prop_type": "FIGHT_PROP_CHARGE_EFFICIENCY",
+          "stat": "energy_recharge",
+          "unit": "ratio",
+          "value": 0.20000000298023224,
+          "application": "already_in_panel"
+        }
+      ],
+      "panel_fingerprint": "22d5a8e2d871dee214a50078289f298044be1d8aaf3516aa0dbfab03d7c9f239",
+      "panel_policy": "static_included",
+      "provenance": {
+        "snapshot_id": "8c9106736d92b586d5c0258c2b96600e8b777a308655b7427da16d5b5d6e86d9",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "version_line": "release",
+        "parent": {
+          "source_path": "ExcelBinOutput/ReliquarySetExcelConfigData.json",
+          "json_pointer": "/37",
+          "source_sha256": "d915f4a2e353aefc19116b80bf127d578e5c0cdcd505bbe9da1c66c502163f7e"
+        },
+        "parent_node_sha256": "bd31652f0a254735d1c15d1c09982d71ae2fa458f9fe85a4598670b22a46e5a3",
+        "affix": {
+          "source_path": "ExcelBinOutput/EquipAffixExcelConfigData.json",
+          "json_pointer": "/1339",
+          "source_sha256": "67cce4b66ecfae8ab20b4567005ff0e2efa76446af1fcc71d99e8a2383def4e6"
+        },
+        "affix_node_sha256": "1b5976b4fcecf3103f9a8f44f002698fd3f345ed63f5eae814fc031ea9888138",
+        "parent_content_fingerprint": "55c4f30469ebdf75f63b644eb498b3cb64caed764ed4257592b928f758cdd959",
+        "source_content_fingerprint": "78449cb9bfb907af8833f0238de795873dbbbb28729877d64ae0fd4e6f5e097f",
+        "normalized_fingerprint": "c2be43f7bb01e869431528cdeae78c5950026f776eff5af9b667746ce8a9b1f8"
+      }
+    },
+    "material_fingerprint": "6298b167cea5368fc4a1184382bf7ccfced50225ba290fa4951dc37132599b71",
+    "certificate_fingerprint": "fb4e937698fab6f93ecdab6da7b1f10402143267198c6751cf671e725c51ebc2"
+  },
+  {
+    "profile_id": "equipment-static-included-v1",
+    "profile_version": 1,
+    "profile_fingerprint": "6dc628f5a73a244ad3bfe9d987fc08f91ecba2590abfa430eb3158fe64f5f39e",
+    "verification_scope": "materialized_consistency_no_source_authority",
+    "source_authority": "not_granted",
+    "requires_fresh_db_admission": true,
+    "status": "shape_ready",
+    "issues": [],
+    "declaration": {
+      "delivery": "already_in_given_panel",
+      "numeric_application": false,
+      "basis_authority": "caller_given_panel_policy",
+      "nonextra_authority": "not_inferred",
+      "provider": "engineering-actor",
+      "kind": "artifact_set",
+      "set_id": 15028,
+      "count": 4,
+      "required_count": 2,
+      "source_index": 0,
+      "affix_id": 2150280,
+      "affix_group_id": 215028,
+      "properties": [
+        {
+          "source_index": 0,
+          "prop_type": "FIGHT_PROP_ELEMENT_MASTERY",
+          "stat": "em",
+          "unit": "flat",
+          "value": 80,
+          "application": "already_in_panel"
+        }
+      ],
+      "panel_fingerprint": "22d5a8e2d871dee214a50078289f298044be1d8aaf3516aa0dbfab03d7c9f239",
+      "panel_policy": "static_included",
+      "provenance": {
+        "snapshot_id": "8c9106736d92b586d5c0258c2b96600e8b777a308655b7427da16d5b5d6e86d9",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "version_line": "release",
+        "parent": {
+          "source_path": "ExcelBinOutput/ReliquarySetExcelConfigData.json",
+          "json_pointer": "/45",
+          "source_sha256": "d915f4a2e353aefc19116b80bf127d578e5c0cdcd505bbe9da1c66c502163f7e"
+        },
+        "parent_node_sha256": "8296dc82efc1fca6db7dfb12477bf618112e6aa2b2b5adaf73d6eaaeb2e95f15",
+        "affix": {
+          "source_path": "ExcelBinOutput/EquipAffixExcelConfigData.json",
+          "json_pointer": "/1355",
+          "source_sha256": "67cce4b66ecfae8ab20b4567005ff0e2efa76446af1fcc71d99e8a2383def4e6"
+        },
+        "affix_node_sha256": "8400c249a1083028002ba2da74cf85b9d29154f64d9e5da8a7b708ccff2fc77c",
+        "parent_content_fingerprint": "3e83c41b32c41abc3290da4e6825414b3f2dfbe3780fb47259431187ca8cbdba",
+        "source_content_fingerprint": "cfa7e6175604c051fd1e946f0f13551bcd8d23735b6bf68035917a54795727b9",
+        "normalized_fingerprint": "b1ffdd38f6606dad92e324ab2fa3060295f5a4d063518402b2ba20d9be3eda1a"
+      }
+    },
+    "material_fingerprint": "a2fc5e6d4c8bda05605063854aec2e218ac0f75f5796d405c7852d67b62e32f1",
+    "certificate_fingerprint": "dfa5ea07c9de92232165e40151f6d22524fc43797f328ab013a138ec829c5213"
+  },
+  {
+    "profile_id": "equipment-static-included-v1",
+    "profile_version": 1,
+    "profile_fingerprint": "6dc628f5a73a244ad3bfe9d987fc08f91ecba2590abfa430eb3158fe64f5f39e",
+    "verification_scope": "materialized_consistency_no_source_authority",
+    "source_authority": "not_granted",
+    "requires_fresh_db_admission": true,
+    "status": "shape_ready",
+    "issues": [],
+    "declaration": {
+      "delivery": "already_in_given_panel",
+      "numeric_application": false,
+      "basis_authority": "caller_given_panel_policy",
+      "nonextra_authority": "not_inferred",
+      "provider": "engineering-actor",
+      "kind": "artifact_set",
+      "set_id": 15034,
+      "count": 4,
+      "required_count": 2,
+      "source_index": 0,
+      "affix_id": 2150340,
+      "affix_group_id": 215034,
+      "properties": [
+        {
+          "source_index": 0,
+          "prop_type": "FIGHT_PROP_ATTACK_PERCENT",
+          "stat": "atk",
+          "unit": "ratio",
+          "value": 0.18000000715255737,
+          "application": "base_fraction_already_in_panel"
+        }
+      ],
+      "panel_fingerprint": "22d5a8e2d871dee214a50078289f298044be1d8aaf3516aa0dbfab03d7c9f239",
+      "panel_policy": "static_included",
+      "provenance": {
+        "snapshot_id": "8c9106736d92b586d5c0258c2b96600e8b777a308655b7427da16d5b5d6e86d9",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "version_line": "release",
+        "parent": {
+          "source_path": "ExcelBinOutput/ReliquarySetExcelConfigData.json",
+          "json_pointer": "/51",
+          "source_sha256": "d915f4a2e353aefc19116b80bf127d578e5c0cdcd505bbe9da1c66c502163f7e"
+        },
+        "parent_node_sha256": "b5d9be4a59b4d152f9756dff091c18279d85b707e1bf5ce9a9b94ca4dcd2b189",
+        "affix": {
+          "source_path": "ExcelBinOutput/EquipAffixExcelConfigData.json",
+          "json_pointer": "/1367",
+          "source_sha256": "67cce4b66ecfae8ab20b4567005ff0e2efa76446af1fcc71d99e8a2383def4e6"
+        },
+        "affix_node_sha256": "73170109c5cd24e4e9a77c035d30bd4c0822908ff59359a51d56c27664399acc",
+        "parent_content_fingerprint": "acf806c25340c61b014b42bbf6157937ae445af5ea666b624ae220f968cf4587",
+        "source_content_fingerprint": "c0b5d6b39fac194b6857fd030c8f0e68e2643df7149fecdb6cf2095166ade0fa",
+        "normalized_fingerprint": "71153dd74ded8d684fe8409045663e3d9209a451c808e0ee9a6f75f326b36263"
+      }
+    },
+    "material_fingerprint": "4f1d4e546b789dfa704b132bb3774015ebdf9495ebdced6efcef035c699c2bd0",
+    "certificate_fingerprint": "97ade805ebd0270dda36d418727af6ea5c1117d4046f1cdb983c2074d899ce25"
+  },
+  {
+    "profile_id": "equipment-static-included-v1",
+    "profile_version": 1,
+    "profile_fingerprint": "6dc628f5a73a244ad3bfe9d987fc08f91ecba2590abfa430eb3158fe64f5f39e",
+    "verification_scope": "materialized_consistency_no_source_authority",
+    "source_authority": "not_granted",
+    "requires_fresh_db_admission": true,
+    "status": "shape_ready",
+    "issues": [],
+    "declaration": {
+      "delivery": "already_in_given_panel",
+      "numeric_application": false,
+      "basis_authority": "caller_given_panel_policy",
+      "nonextra_authority": "not_inferred",
+      "provider": "engineering-actor",
+      "kind": "artifact_set",
+      "set_id": 15035,
+      "count": 4,
+      "required_count": 2,
+      "source_index": 0,
+      "affix_id": 2150350,
+      "affix_group_id": 215035,
+      "properties": [
+        {
+          "source_index": 0,
+          "prop_type": "FIGHT_PROP_ATTACK_PERCENT",
+          "stat": "atk",
+          "unit": "ratio",
+          "value": 0.18000000715255737,
+          "application": "base_fraction_already_in_panel"
+        }
+      ],
+      "panel_fingerprint": "22d5a8e2d871dee214a50078289f298044be1d8aaf3516aa0dbfab03d7c9f239",
+      "panel_policy": "static_included",
+      "provenance": {
+        "snapshot_id": "8c9106736d92b586d5c0258c2b96600e8b777a308655b7427da16d5b5d6e86d9",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "version_line": "release",
+        "parent": {
+          "source_path": "ExcelBinOutput/ReliquarySetExcelConfigData.json",
+          "json_pointer": "/52",
+          "source_sha256": "d915f4a2e353aefc19116b80bf127d578e5c0cdcd505bbe9da1c66c502163f7e"
+        },
+        "parent_node_sha256": "16a393140d7759aa3183620f172a044129020830920c6d11f77483ca39296db2",
+        "affix": {
+          "source_path": "ExcelBinOutput/EquipAffixExcelConfigData.json",
+          "json_pointer": "/1369",
+          "source_sha256": "67cce4b66ecfae8ab20b4567005ff0e2efa76446af1fcc71d99e8a2383def4e6"
+        },
+        "affix_node_sha256": "2729ac862b23f75b64eecb4893b8ee5125f5a6816cde7cd706310382e559ed7f",
+        "parent_content_fingerprint": "213d53117561678f025b2c863916acb945080b12421b87784fe8c7056c9d4a1d",
+        "source_content_fingerprint": "95581eb9c407cbb6ca1496ce2c8fcaa3c7559faace10d5fe371acc4d32c5aaca",
+        "normalized_fingerprint": "3336033c9b411bdd3c833bebdbfbd245e0e5e41d59f83260f03ede1a5cf97466"
+      }
+    },
+    "material_fingerprint": "f59e6c7d03a7551934c9ede286893eab628a8a1e6596b5160e0f8fb410e63cb1",
+    "certificate_fingerprint": "61a1be4725b3a66d2fdd526c7fd27e5f924487df8445a5d233694bd1ee181450"
+  },
+  {
+    "profile_id": "equipment-static-included-v1",
+    "profile_version": 1,
+    "profile_fingerprint": "6dc628f5a73a244ad3bfe9d987fc08f91ecba2590abfa430eb3158fe64f5f39e",
+    "verification_scope": "materialized_consistency_no_source_authority",
+    "source_authority": "not_granted",
+    "requires_fresh_db_admission": true,
+    "status": "shape_ready",
+    "issues": [],
+    "declaration": {
+      "delivery": "already_in_given_panel",
+      "numeric_application": false,
+      "basis_authority": "caller_given_panel_policy",
+      "nonextra_authority": "not_inferred",
+      "provider": "engineering-actor",
+      "kind": "artifact_set",
+      "set_id": 15036,
+      "count": 4,
+      "required_count": 2,
+      "source_index": 0,
+      "affix_id": 2150360,
+      "affix_group_id": 215036,
+      "properties": [
+        {
+          "source_index": 0,
+          "prop_type": "FIGHT_PROP_ATTACK_PERCENT",
+          "stat": "atk",
+          "unit": "ratio",
+          "value": 0.18000000715255737,
+          "application": "base_fraction_already_in_panel"
+        }
+      ],
+      "panel_fingerprint": "22d5a8e2d871dee214a50078289f298044be1d8aaf3516aa0dbfab03d7c9f239",
+      "panel_policy": "static_included",
+      "provenance": {
+        "snapshot_id": "8c9106736d92b586d5c0258c2b96600e8b777a308655b7427da16d5b5d6e86d9",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "version_line": "release",
+        "parent": {
+          "source_path": "ExcelBinOutput/ReliquarySetExcelConfigData.json",
+          "json_pointer": "/53",
+          "source_sha256": "d915f4a2e353aefc19116b80bf127d578e5c0cdcd505bbe9da1c66c502163f7e"
+        },
+        "parent_node_sha256": "33d6995d26b7f44da65edeefec8af69022698f8aa5e536c7a97fe0c41e9ddba3",
+        "affix": {
+          "source_path": "ExcelBinOutput/EquipAffixExcelConfigData.json",
+          "json_pointer": "/1371",
+          "source_sha256": "67cce4b66ecfae8ab20b4567005ff0e2efa76446af1fcc71d99e8a2383def4e6"
+        },
+        "affix_node_sha256": "407e8bef400f1b3824bea3004bd00d85563b4d703ae002dabbb33907d6bbb651",
+        "parent_content_fingerprint": "555d079d340ecefa00e10e7927244bd35dae348e9959a2208a3543519a001ac9",
+        "source_content_fingerprint": "40320ce0a238f3863d696917bf181fc822e47a0b28480e3242225c421f1150b0",
+        "normalized_fingerprint": "bae60057e5b82679b5a0d2206110c4a526001b2264eed0a09113dc2abe8e9478"
+      }
+    },
+    "material_fingerprint": "9b79b6d8b16f4615cb748542842d5d5044c04931abb5c082d112f8c37035fb6e",
+    "certificate_fingerprint": "d324169dfa96fd376125e6f1051d6803c8ad30a21e2d7e39f5278e3771825e16"
+  },
+  {
+    "profile_id": "equipment-static-included-v1",
+    "profile_version": 1,
+    "profile_fingerprint": "6dc628f5a73a244ad3bfe9d987fc08f91ecba2590abfa430eb3158fe64f5f39e",
+    "verification_scope": "materialized_consistency_no_source_authority",
+    "source_authority": "not_granted",
+    "requires_fresh_db_admission": true,
+    "status": "shape_ready",
+    "issues": [],
+    "declaration": {
+      "delivery": "already_in_given_panel",
+      "numeric_application": false,
+      "basis_authority": "caller_given_panel_policy",
+      "nonextra_authority": "not_inferred",
+      "provider": "engineering-actor",
+      "kind": "artifact_set",
+      "set_id": 15040,
+      "count": 4,
+      "required_count": 2,
+      "source_index": 0,
+      "affix_id": 2150400,
+      "affix_group_id": 215040,
+      "properties": [
+        {
+          "source_index": 0,
+          "prop_type": "FIGHT_PROP_ICE_ADD_HURT",
+          "stat": "dmg_bonus:cryo",
+          "unit": "ratio",
+          "value": 0.15000000596046448,
+          "application": "already_in_panel"
+        }
+      ],
+      "panel_fingerprint": "22d5a8e2d871dee214a50078289f298044be1d8aaf3516aa0dbfab03d7c9f239",
+      "panel_policy": "static_included",
+      "provenance": {
+        "snapshot_id": "8c9106736d92b586d5c0258c2b96600e8b777a308655b7427da16d5b5d6e86d9",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "version_line": "release",
+        "parent": {
+          "source_path": "ExcelBinOutput/ReliquarySetExcelConfigData.json",
+          "json_pointer": "/57",
+          "source_sha256": "d915f4a2e353aefc19116b80bf127d578e5c0cdcd505bbe9da1c66c502163f7e"
+        },
+        "parent_node_sha256": "a218f223d4d0b05616e8fef5c849e853a4e0cf25de403c6f7f3719e291b0d26d",
+        "affix": {
+          "source_path": "ExcelBinOutput/EquipAffixExcelConfigData.json",
+          "json_pointer": "/1379",
+          "source_sha256": "67cce4b66ecfae8ab20b4567005ff0e2efa76446af1fcc71d99e8a2383def4e6"
+        },
+        "affix_node_sha256": "9b563a2e232dccfcb949b20abf1d02c2b6bb6b966c3fa82d2155fd90aa03c7bf",
+        "parent_content_fingerprint": "41e74b4a4dec4a12640435eebf98a7a198e8dfa4f66d6bfeb7267d15d345fd61",
+        "source_content_fingerprint": "f94845ad9259a7a40fad2428a977cede22063c741ff3e0a3198325dbad59a4d3",
+        "normalized_fingerprint": "0c55c0668d9fff3bab45652ecafee1df28773dff1811e9e62df34b6e837c0d2e"
+      }
+    },
+    "material_fingerprint": "f9c33874032ec43f6153f4a59146fd5edfd21da535eea698947072e365a308e6",
+    "certificate_fingerprint": "74a633c895355a42d224653eb2c3fc7b804b11fdd9ea0a35839348d7ea6c012a"
+  },
+  {
+    "profile_id": "equipment-static-included-v1",
+    "profile_version": 1,
+    "profile_fingerprint": "6dc628f5a73a244ad3bfe9d987fc08f91ecba2590abfa430eb3158fe64f5f39e",
+    "verification_scope": "materialized_consistency_no_source_authority",
+    "source_authority": "not_granted",
+    "requires_fresh_db_admission": true,
+    "status": "shape_ready",
+    "issues": [],
+    "declaration": {
+      "delivery": "already_in_given_panel",
+      "numeric_application": false,
+      "basis_authority": "caller_given_panel_policy",
+      "nonextra_authority": "not_inferred",
+      "provider": "engineering-actor",
+      "kind": "artifact_set",
+      "set_id": 15041,
+      "count": 4,
+      "required_count": 2,
+      "source_index": 0,
+      "affix_id": 2150410,
+      "affix_group_id": 215041,
+      "properties": [
+        {
+          "source_index": 0,
+          "prop_type": "FIGHT_PROP_ELEMENT_MASTERY",
+          "stat": "em",
+          "unit": "flat",
+          "value": 80,
+          "application": "already_in_panel"
+        }
+      ],
+      "panel_fingerprint": "22d5a8e2d871dee214a50078289f298044be1d8aaf3516aa0dbfab03d7c9f239",
+      "panel_policy": "static_included",
+      "provenance": {
+        "snapshot_id": "8c9106736d92b586d5c0258c2b96600e8b777a308655b7427da16d5b5d6e86d9",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "version_line": "release",
+        "parent": {
+          "source_path": "ExcelBinOutput/ReliquarySetExcelConfigData.json",
+          "json_pointer": "/58",
+          "source_sha256": "d915f4a2e353aefc19116b80bf127d578e5c0cdcd505bbe9da1c66c502163f7e"
+        },
+        "parent_node_sha256": "675a3a84ddc3839391ae3239db393d99948eedadbac1cf071bfbfe83d7994715",
+        "affix": {
+          "source_path": "ExcelBinOutput/EquipAffixExcelConfigData.json",
+          "json_pointer": "/1381",
+          "source_sha256": "67cce4b66ecfae8ab20b4567005ff0e2efa76446af1fcc71d99e8a2383def4e6"
+        },
+        "affix_node_sha256": "d364a8f4d15d8e76191392369e872bfdf5d4585d15e6e48722f284ab71579e3a",
+        "parent_content_fingerprint": "a2363ec6ecc9e5779c4401ed0e2bb9a9da4bc01b665af4969df28c67ee2d3bff",
+        "source_content_fingerprint": "309d8e90726b8396dd5cd87bdba65602ff15fb7e67335beec2b0e43c3300cdb3",
+        "normalized_fingerprint": "8f0c57a30820e14495ff1846a72ff6b754212db9b9c1e5d6aabf8e119cc08f83"
+      }
+    },
+    "material_fingerprint": "e59f262b948c8bbd73c1c2a9b2e5c99ee96accd0254c40ec2b5161786a0cea7c",
+    "certificate_fingerprint": "490f7955a9714edce3b4bde1865513dcb2d35d42aa44cd65102127374aea6f4c"
+  },
+  {
+    "profile_id": "equipment-static-included-v1",
+    "profile_version": 1,
+    "profile_fingerprint": "6dc628f5a73a244ad3bfe9d987fc08f91ecba2590abfa430eb3158fe64f5f39e",
+    "verification_scope": "materialized_consistency_no_source_authority",
+    "source_authority": "not_granted",
+    "requires_fresh_db_admission": true,
+    "status": "shape_ready",
+    "issues": [],
+    "declaration": {
+      "delivery": "already_in_given_panel",
+      "numeric_application": false,
+      "basis_authority": "caller_given_panel_policy",
+      "nonextra_authority": "not_inferred",
+      "provider": "engineering-actor",
+      "kind": "artifact_set",
+      "set_id": 15042,
+      "count": 4,
+      "required_count": 2,
+      "source_index": 0,
+      "affix_id": 2150420,
+      "affix_group_id": 215042,
+      "properties": [
+        {
+          "source_index": 0,
+          "prop_type": "FIGHT_PROP_CHARGE_EFFICIENCY",
+          "stat": "energy_recharge",
+          "unit": "ratio",
+          "value": 0.20000000298023224,
+          "application": "already_in_panel"
+        }
+      ],
+      "panel_fingerprint": "22d5a8e2d871dee214a50078289f298044be1d8aaf3516aa0dbfab03d7c9f239",
+      "panel_policy": "static_included",
+      "provenance": {
+        "snapshot_id": "8c9106736d92b586d5c0258c2b96600e8b777a308655b7427da16d5b5d6e86d9",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "version_line": "release",
+        "parent": {
+          "source_path": "ExcelBinOutput/ReliquarySetExcelConfigData.json",
+          "json_pointer": "/59",
+          "source_sha256": "d915f4a2e353aefc19116b80bf127d578e5c0cdcd505bbe9da1c66c502163f7e"
+        },
+        "parent_node_sha256": "4e381d97dbca6bbaf90f3c78d7a86593249b51eaab5d24dacbdba6ff266cce9e",
+        "affix": {
+          "source_path": "ExcelBinOutput/EquipAffixExcelConfigData.json",
+          "json_pointer": "/1383",
+          "source_sha256": "67cce4b66ecfae8ab20b4567005ff0e2efa76446af1fcc71d99e8a2383def4e6"
+        },
+        "affix_node_sha256": "ec36301702d56f2d043d75218275791625b379a361c9464cf9db5da65b28db6c",
+        "parent_content_fingerprint": "05013e8adc5082d9980f572f0cd789cd8fa8572454a7f5080803095b31d2e752",
+        "source_content_fingerprint": "90dc129f86da6199ea9c05b44218123cfaa1b3ad6fdc53caaa567c12c214653d",
+        "normalized_fingerprint": "bbf3ebae0967bfc2885dfe69ce34bf4cff60524f169190a5512fba5d1d5da417"
+      }
+    },
+    "material_fingerprint": "8f3bbe0a5c1a943fdbfd9d96bdbb243f054405d997b208fbc830855fc79935d4",
+    "certificate_fingerprint": "947c3082cfe62926813394174be63ab4cc1e0fe2f15ee253685806bf82fe90de"
+  },
+  {
+    "profile_id": "equipment-static-included-v1",
+    "profile_version": 1,
+    "profile_fingerprint": "6dc628f5a73a244ad3bfe9d987fc08f91ecba2590abfa430eb3158fe64f5f39e",
+    "verification_scope": "materialized_consistency_no_source_authority",
+    "source_authority": "not_granted",
+    "requires_fresh_db_admission": true,
+    "status": "shape_ready",
+    "issues": [],
+    "declaration": {
+      "delivery": "already_in_given_panel",
+      "numeric_application": false,
+      "basis_authority": "caller_given_panel_policy",
+      "nonextra_authority": "not_inferred",
+      "provider": "engineering-actor",
+      "kind": "artifact_set",
+      "set_id": 15043,
+      "count": 4,
+      "required_count": 2,
+      "source_index": 0,
+      "affix_id": 2150430,
+      "affix_group_id": 215043,
+      "properties": [
+        {
+          "source_index": 0,
+          "prop_type": "FIGHT_PROP_ELEMENT_MASTERY",
+          "stat": "em",
+          "unit": "flat",
+          "value": 80,
+          "application": "already_in_panel"
+        }
+      ],
+      "panel_fingerprint": "22d5a8e2d871dee214a50078289f298044be1d8aaf3516aa0dbfab03d7c9f239",
+      "panel_policy": "static_included",
+      "provenance": {
+        "snapshot_id": "8c9106736d92b586d5c0258c2b96600e8b777a308655b7427da16d5b5d6e86d9",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "version_line": "release",
+        "parent": {
+          "source_path": "ExcelBinOutput/ReliquarySetExcelConfigData.json",
+          "json_pointer": "/60",
+          "source_sha256": "d915f4a2e353aefc19116b80bf127d578e5c0cdcd505bbe9da1c66c502163f7e"
+        },
+        "parent_node_sha256": "04bee143586296303a4750b565b075b39ce33eb2f947542325fe866866a872b8",
+        "affix": {
+          "source_path": "ExcelBinOutput/EquipAffixExcelConfigData.json",
+          "json_pointer": "/1385",
+          "source_sha256": "67cce4b66ecfae8ab20b4567005ff0e2efa76446af1fcc71d99e8a2383def4e6"
+        },
+        "affix_node_sha256": "7d62523326eb09e301c34722f69a1f5da5f1c18b65ec1e39b9507ee136e48a6c",
+        "parent_content_fingerprint": "04e16bd6f2d1bb9ae6cd255a9977a264c3a6affb075fe3eb9d1741f4fbd514ed",
+        "source_content_fingerprint": "342bcde9e75568f0ec9f3c8205ae75c6909e637b5aed650da7a13b3386934e2c",
+        "normalized_fingerprint": "19d00133992cc7f4af19ad1332db34324ee5c740ee5571cb9c166a15347877f5"
+      }
+    },
+    "material_fingerprint": "df2cdd11f5bb51ac3404f135c914118d6859d8e5ee3c05ddb3306952ea23371d",
+    "certificate_fingerprint": "f5a5614e07ab1e2165aef98e4d531fa8c5f4d44282fa63c780ee353771cce5ae"
+  },
+  {
+    "profile_id": "equipment-static-included-v1",
+    "profile_version": 1,
+    "profile_fingerprint": "6dc628f5a73a244ad3bfe9d987fc08f91ecba2590abfa430eb3158fe64f5f39e",
+    "verification_scope": "materialized_consistency_no_source_authority",
+    "source_authority": "not_granted",
+    "requires_fresh_db_admission": true,
+    "status": "shape_ready",
+    "issues": [],
+    "declaration": {
+      "delivery": "already_in_given_panel",
+      "numeric_application": false,
+      "basis_authority": "caller_given_panel_policy",
+      "nonextra_authority": "not_inferred",
+      "provider": "engineering-actor",
+      "kind": "artifact_set",
+      "set_id": 15044,
+      "count": 4,
+      "required_count": 2,
+      "source_index": 0,
+      "affix_id": 2150440,
+      "affix_group_id": 215044,
+      "properties": [
+        {
+          "source_index": 0,
+          "prop_type": "FIGHT_PROP_ATTACK_PERCENT",
+          "stat": "atk",
+          "unit": "ratio",
+          "value": 0.18000000715255737,
+          "application": "base_fraction_already_in_panel"
+        }
+      ],
+      "panel_fingerprint": "22d5a8e2d871dee214a50078289f298044be1d8aaf3516aa0dbfab03d7c9f239",
+      "panel_policy": "static_included",
+      "provenance": {
+        "snapshot_id": "8c9106736d92b586d5c0258c2b96600e8b777a308655b7427da16d5b5d6e86d9",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "version_line": "release",
+        "parent": {
+          "source_path": "ExcelBinOutput/ReliquarySetExcelConfigData.json",
+          "json_pointer": "/61",
+          "source_sha256": "d915f4a2e353aefc19116b80bf127d578e5c0cdcd505bbe9da1c66c502163f7e"
+        },
+        "parent_node_sha256": "94099adca36aeca040537b3bf8eb34672567e31174acd87be9685a99c4aa9bf1",
+        "affix": {
+          "source_path": "ExcelBinOutput/EquipAffixExcelConfigData.json",
+          "json_pointer": "/1387",
+          "source_sha256": "67cce4b66ecfae8ab20b4567005ff0e2efa76446af1fcc71d99e8a2383def4e6"
+        },
+        "affix_node_sha256": "cdb14aadae3f56f5ad6bfe908b1966b142530f70954691b4b8ae151c2ea01e12",
+        "parent_content_fingerprint": "55a45d703235cbfb87e0ea8c5e0db22b17495dba44a9ddad04e8b95bf01e62a2",
+        "source_content_fingerprint": "fb6332f8b3aabc60056f74bb846b7df3ba7580ab7e48aa657bb1303e3a0a5401",
+        "normalized_fingerprint": "a4d8cda64d5255b0244f3c406c8104f505395c20688c604171d0abd5800ef9fa"
+      }
+    },
+    "material_fingerprint": "d4dc836efbe3f989756a1571a4f1f1bd2291293291c2aec86c01508e17911d7f",
+    "certificate_fingerprint": "d547379c842603d22da4e4cce965c8dd4fc87c6a424ce3dd0afbb69c686f98d3"
+  },
+  {
+    "profile_id": "equipment-static-included-v1",
+    "profile_version": 1,
+    "profile_fingerprint": "6dc628f5a73a244ad3bfe9d987fc08f91ecba2590abfa430eb3158fe64f5f39e",
+    "verification_scope": "materialized_consistency_no_source_authority",
+    "source_authority": "not_granted",
+    "requires_fresh_db_admission": true,
+    "status": "shape_ready",
+    "issues": [],
+    "declaration": {
+      "delivery": "already_in_given_panel",
+      "numeric_application": false,
+      "basis_authority": "caller_given_panel_policy",
+      "nonextra_authority": "not_inferred",
+      "provider": "engineering-actor",
+      "kind": "artifact_set",
+      "set_id": 15045,
+      "count": 4,
+      "required_count": 2,
+      "source_index": 0,
+      "affix_id": 2150450,
+      "affix_group_id": 215045,
+      "properties": [
+        {
+          "source_index": 0,
+          "prop_type": "FIGHT_PROP_CHARGE_EFFICIENCY",
+          "stat": "energy_recharge",
+          "unit": "ratio",
+          "value": 0.20000000298023224,
+          "application": "already_in_panel"
+        }
+      ],
+      "panel_fingerprint": "22d5a8e2d871dee214a50078289f298044be1d8aaf3516aa0dbfab03d7c9f239",
+      "panel_policy": "static_included",
+      "provenance": {
+        "snapshot_id": "8c9106736d92b586d5c0258c2b96600e8b777a308655b7427da16d5b5d6e86d9",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "version_line": "release",
+        "parent": {
+          "source_path": "ExcelBinOutput/ReliquarySetExcelConfigData.json",
+          "json_pointer": "/62",
+          "source_sha256": "d915f4a2e353aefc19116b80bf127d578e5c0cdcd505bbe9da1c66c502163f7e"
+        },
+        "parent_node_sha256": "c78b9b1eb6130f56e5e088d506bfe3e82b834b71ac372b6215d091bb05454171",
+        "affix": {
+          "source_path": "ExcelBinOutput/EquipAffixExcelConfigData.json",
+          "json_pointer": "/1389",
+          "source_sha256": "67cce4b66ecfae8ab20b4567005ff0e2efa76446af1fcc71d99e8a2383def4e6"
+        },
+        "affix_node_sha256": "44a255ad7542bd9715ae0ff44ee9e3dfb71da0a99491b8eaf5ea381dd7ca7ad2",
+        "parent_content_fingerprint": "0a9be24aa7059a8f9bb1ca6900a56262186d6dbe9e039089e5f74b15e6eb3419",
+        "source_content_fingerprint": "e97e6f42ee2e7188fde23a0cdd762731e790954e1449294fac81301a277ca885",
+        "normalized_fingerprint": "e4e3eee071e24608af677e630f718eb771acaa00f40ccd27e0ac4dc4809bbbcd"
+      }
+    },
+    "material_fingerprint": "46b2f48a6d44c4a954f9655d2541c97d268c3d89e83e626f9ccbad19fa1559f5",
+    "certificate_fingerprint": "595c1848c7a84d4f86ef869cf0e7f18bce0bf7ee3a9987b2aa02b2a440976dce"
+  },
+  {
+    "profile_id": "equipment-static-included-v1",
+    "profile_version": 1,
+    "profile_fingerprint": "6dc628f5a73a244ad3bfe9d987fc08f91ecba2590abfa430eb3158fe64f5f39e",
+    "verification_scope": "materialized_consistency_no_source_authority",
+    "source_authority": "not_granted",
+    "requires_fresh_db_admission": true,
+    "status": "shape_ready",
+    "issues": [],
+    "declaration": {
+      "delivery": "already_in_given_panel",
+      "numeric_application": false,
+      "basis_authority": "caller_given_panel_policy",
+      "nonextra_authority": "not_inferred",
+      "provider": "engineering-actor",
+      "kind": "artifact_set",
+      "set_id": 15046,
+      "count": 4,
+      "required_count": 2,
+      "source_index": 0,
+      "affix_id": 2150460,
+      "affix_group_id": 215046,
+      "properties": [
+        {
+          "source_index": 0,
+          "prop_type": "FIGHT_PROP_ATTACK_PERCENT",
+          "stat": "atk",
+          "unit": "ratio",
+          "value": 0.18000000715255737,
+          "application": "base_fraction_already_in_panel"
+        }
+      ],
+      "panel_fingerprint": "22d5a8e2d871dee214a50078289f298044be1d8aaf3516aa0dbfab03d7c9f239",
+      "panel_policy": "static_included",
+      "provenance": {
+        "snapshot_id": "8c9106736d92b586d5c0258c2b96600e8b777a308655b7427da16d5b5d6e86d9",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "version_line": "release",
+        "parent": {
+          "source_path": "ExcelBinOutput/ReliquarySetExcelConfigData.json",
+          "json_pointer": "/63",
+          "source_sha256": "d915f4a2e353aefc19116b80bf127d578e5c0cdcd505bbe9da1c66c502163f7e"
+        },
+        "parent_node_sha256": "5926db75daacdce0493884ea311b45cbad5caceb3914e0e687ace8ec53a2f106",
+        "affix": {
+          "source_path": "ExcelBinOutput/EquipAffixExcelConfigData.json",
+          "json_pointer": "/1391",
+          "source_sha256": "67cce4b66ecfae8ab20b4567005ff0e2efa76446af1fcc71d99e8a2383def4e6"
+        },
+        "affix_node_sha256": "bd66660e4e74f6800bdbd0c78bdea52656cc3c5c777538f59f2c55f12513622c",
+        "parent_content_fingerprint": "acc745ee612db13c2ac4de359292a2f826eea2121c07260d689d253ec94bb45b",
+        "source_content_fingerprint": "1f0987ed7f2bf110108fd59d1a0fd69a0faf7a3931234abebcfaaca9d952a555",
+        "normalized_fingerprint": "5a4bc8a6bf9cbdd085332803ed2f1637696c989f12dee4c60ae30f00edd3323c"
+      }
+    },
+    "material_fingerprint": "9eb9ee4a518fc0d1fd6c6a975fb62a518223455163533aa6f0a8fce92f4604f4",
+    "certificate_fingerprint": "4be80f7bc2489fc4b16d465af72101b1db14b31ee5a51e52e26a1fb986fb0438"
+  }
+]

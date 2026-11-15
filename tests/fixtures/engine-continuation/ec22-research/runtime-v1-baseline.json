@@ -1,0 +1,496 @@
+{
+  "files": {
+    "src/genshin_runtime/mechanism_qualification.py": "c17aee43acaed547dedb1f2830a1e344352609a522938c8809636e4f2cd2629c",
+    "src/genshin_runtime/mechanism_semantics.py": "5ccf3b3be4632e46f69439e6a8d37c0666a3e93bd58c39b822c71b6a42859772",
+    "src/genshin_runtime/mechanism_source_binding.py": "a9c75caba3aceec9943841f78613a94be62dc5343349eae3e69b136cbafea2ea",
+    "src/genshin_engine/mechanism_descriptor_compiler.py": "f4d564c4422a193ae213a08f682ffd7e0cc30b556dcec97f1418d76c1ec0deba"
+  },
+  "outputs": {
+    "flat": {
+      "compiler": "typed-mechanism-d20-v1",
+      "compiler_version": 1,
+      "status": "ready",
+      "source_status": "consistent",
+      "fact_status": "consistent",
+      "execution_status": "not_evaluated",
+      "verification_scope": "materialized_consistency_only",
+      "whole_source_status": "partial",
+      "evidence_tier": [
+        "experimental_reference"
+      ],
+      "mechanism_id": "engineering.flat",
+      "mechanism_revision": 1,
+      "execution_qualification": {
+        "schema_version": 1,
+        "parent": {
+          "profile_kind": "calibrated_single_contact_v1",
+          "selection": {
+            "slot": "skill",
+            "constellation": 0,
+            "talent_level": 10
+          },
+          "required_receipts": [
+            "action_event",
+            "hit_parameter"
+          ],
+          "parameter_binding": {
+            "node_id": "parent",
+            "pointer": "/paramList/1",
+            "param_index": 1
+          },
+          "hit": {
+            "damage_systems": [
+              "classic"
+            ],
+            "count": 1,
+            "scaling_stats": [
+              "atk"
+            ],
+            "elements": [
+              "cryo"
+            ],
+            "damage_type_ids": [
+              "damage.elemental_skill"
+            ]
+          }
+        },
+        "coverage": {
+          "action_filter": {
+            "damage_type_ids": [
+              "damage.elemental_skill"
+            ]
+          },
+          "application_elements": [],
+          "reject_unknown_application": true
+        },
+        "consumer": {
+          "damage_systems": [
+            "classic"
+          ],
+          "count": 1,
+          "damage_type_ids": [
+            "damage.normal_attack",
+            "damage.elemental_skill"
+          ]
+        },
+        "scenario_requirements": {
+          "target_kind": "ordinary_non_animal_monster",
+          "all_party_alive": true,
+          "no_external_source_changes": true
+        },
+        "duplicate_identity": {
+          "kind": "skill",
+          "source_id": 15,
+          "parts": [
+            "finite_add"
+          ]
+        }
+      },
+      "qualification_status": "consistent",
+      "source_fingerprint": "cbb4559c93950e0fe7c467edb5f1fbcc50daa4c86d712942432f559d5c39d5be",
+      "mechanism_fingerprint": "6c2879d2f6dda2161e94557aadc53d32dd1f3585bd98d95ba39b3e58ffcbcec9",
+      "parameter_resolutions": [
+        {
+          "ref": "duration",
+          "value_type": "seconds_exact_us",
+          "value": 15,
+          "unit": "seconds",
+          "status": "ready",
+          "origin_kind": "upstream_field",
+          "evidence_ref": {
+            "node_id": "source",
+            "pointer": "/duration"
+          },
+          "derivation": "identity"
+        },
+        {
+          "ref": "factor",
+          "value_type": "finite_number",
+          "value": 0.8218079805374146,
+          "unit": "ratio",
+          "status": "ready",
+          "origin_kind": "upstream_field",
+          "evidence_ref": {
+            "node_id": "source",
+            "pointer": "/factor"
+          },
+          "derivation": "identity"
+        },
+        {
+          "ref": "capacity",
+          "value_type": "positive_integer",
+          "value": 7,
+          "unit": "count",
+          "status": "ready",
+          "origin_kind": "upstream_field",
+          "evidence_ref": {
+            "node_id": "source",
+            "pointer": "/capacity"
+          },
+          "derivation": "identity"
+        }
+      ],
+      "fact_resolutions": [
+        {
+          "ref": "rule@1",
+          "fingerprint": "83db63d0035489843f16681b091d1065a404c6359ca7e0ea57d1d683da350958"
+        },
+        {
+          "ref": "duration@1",
+          "fingerprint": "5f6aed38470828a2aeeebecaf6a82827bd7082c7e17ca29767d494d931af4606"
+        },
+        {
+          "ref": "factor@1",
+          "fingerprint": "23de5e68a8f56d72630072f00e31c52f81f3202f6b629b7567c9db58fbf93dec"
+        },
+        {
+          "ref": "capacity@1",
+          "fingerprint": "b16b55e25d2ead77b29eeef255ff57d7e2732d7cabba9fa698fc38b7fd8aa375"
+        },
+        {
+          "ref": "qualification@1",
+          "fingerprint": "a3d8e053f5f22cd3fafd2aeb6cd36377831b4d1d4009453a39cf209f860d0013"
+        }
+      ],
+      "rule_templates": [
+        {
+          "key": "effect",
+          "rule": {
+            "name_zh": "有限加算",
+            "trigger": {
+              "event": "action_start",
+              "phase": "pre"
+            },
+            "beneficiaries": {
+              "mode": "team",
+              "scope": "locked"
+            },
+            "timing": {
+              "cooldown": 0,
+              "cooldown_anchor": "success",
+              "duration": 15
+            },
+            "stacking": {
+              "max": 1,
+              "add": 1,
+              "policy": "replace"
+            },
+            "effects": [
+              {
+                "id": "value",
+                "benefit_type_id": "benefit.base_add.all",
+                "domain": "provider",
+                "value": {
+                  "kind": "stat",
+                  "subject": "owner",
+                  "stat": "atk",
+                  "sample": "current",
+                  "factor": 0.8218079805374146
+                },
+                "filter": {
+                  "event": "hit",
+                  "phase": "pre",
+                  "elements": [
+                    "cryo"
+                  ],
+                  "damage_type_ids": [
+                    "damage.normal_attack",
+                    "damage.charged_attack",
+                    "damage.plunging_attack",
+                    "damage.elemental_skill",
+                    "damage.elemental_burst"
+                  ]
+                }
+              }
+            ],
+            "quota": {
+              "scope": "per_beneficiary",
+              "refresh": "reset",
+              "consume": {
+                "event": "hit",
+                "phase": "pre",
+                "elements": [
+                  "cryo"
+                ],
+                "damage_type_ids": [
+                  "damage.normal_attack",
+                  "damage.charged_attack",
+                  "damage.plunging_attack",
+                  "damage.elemental_skill",
+                  "damage.elemental_burst"
+                ]
+              },
+              "capacity": 7
+            }
+          }
+        }
+      ],
+      "initial_rule_templates": [
+        {
+          "key": "effect",
+          "cooldown_remaining": 0,
+          "instances": []
+        }
+      ],
+      "execution_ports": [
+        {
+          "rule_key": "effect",
+          "target": "owner",
+          "role": "provider"
+        },
+        {
+          "rule_key": "effect",
+          "target": "trigger.action_ids",
+          "role": "qualifying_actions"
+        },
+        {
+          "rule_key": "effect",
+          "target": "timing.delay",
+          "role": "activation_delay"
+        }
+      ],
+      "required_execution_checks": [
+        "activation_before_initial_hit",
+        "fixed_party",
+        "fresh_empty_instance",
+        "no_duplicate_source",
+        "no_unmodelled_cancel",
+        "ordinary_stat_read",
+        "qualified_action_origin",
+        "single_target"
+      ],
+      "unsupported_branches": [
+        "engineering fixture, not client validation"
+      ],
+      "issues": [],
+      "limits": {
+        "descriptor_bytes": 131072,
+        "input_bytes": 2097152,
+        "output_bytes": 2097152,
+        "rules": 8,
+        "effects": 8,
+        "facts": 64,
+        "parameters": 32,
+        "nodes": 32,
+        "depth": 64,
+        "json_nodes": 65536
+      }
+    },
+    "swirl": {
+      "compiler": "typed-mechanism-d20-v1",
+      "compiler_version": 1,
+      "status": "ready",
+      "source_status": "consistent",
+      "fact_status": "consistent",
+      "execution_status": "not_evaluated",
+      "verification_scope": "materialized_consistency_only",
+      "whole_source_status": "partial",
+      "evidence_tier": [
+        "experimental_reference"
+      ],
+      "mechanism_id": "engineering.swirl",
+      "mechanism_revision": 1,
+      "execution_qualification": {
+        "schema_version": 1,
+        "parent": {
+          "profile_kind": "calibrated_single_contact_v1",
+          "selection": {
+            "slot": "skill",
+            "constellation": 0,
+            "talent_level": 10
+          },
+          "required_receipts": [
+            "action_event",
+            "attack_metadata"
+          ],
+          "parameter_binding": null,
+          "hit": {
+            "damage_systems": [
+              "classic"
+            ],
+            "count": 1,
+            "scaling_stats": [
+              "atk"
+            ],
+            "elements": [
+              "anemo"
+            ],
+            "damage_type_ids": [
+              "damage.elemental_skill"
+            ]
+          }
+        },
+        "coverage": {
+          "action_filter": {
+            "damage_type_ids": [
+              "damage.elemental_skill"
+            ]
+          },
+          "application_elements": [
+            "anemo"
+          ],
+          "reject_unknown_application": true
+        },
+        "consumer": null,
+        "scenario_requirements": {
+          "target_kind": "ordinary_non_animal_monster",
+          "all_party_alive": true,
+          "no_external_source_changes": true
+        },
+        "duplicate_identity": {
+          "kind": "skill",
+          "source_id": 15,
+          "parts": [
+            "reaction_bonus"
+          ]
+        }
+      },
+      "qualification_status": "consistent",
+      "source_fingerprint": "866d55b20b31ea8764985759f852ce70c564f8d253e9c7c3a82032468acbf2d1",
+      "mechanism_fingerprint": "2a8e97ce2ed59a691d96ff6f8697046362745056f2a117f3ea60956044a5713e",
+      "parameter_resolutions": [
+        {
+          "ref": "duration",
+          "value_type": "seconds_exact_us",
+          "value": 8,
+          "unit": "seconds",
+          "status": "ready",
+          "origin_kind": "upstream_field",
+          "evidence_ref": {
+            "node_id": "source",
+            "pointer": "/duration"
+          },
+          "derivation": "identity"
+        },
+        {
+          "ref": "factor",
+          "value_type": "finite_number",
+          "value": 0.00039999998989515007,
+          "unit": "ratio",
+          "status": "ready",
+          "origin_kind": "upstream_field",
+          "evidence_ref": {
+            "node_id": "source",
+            "pointer": "/factor"
+          },
+          "derivation": "identity"
+        }
+      ],
+      "fact_resolutions": [
+        {
+          "ref": "rule@1",
+          "fingerprint": "4fd7f7f22fef1e157d9b14cf4dba724cd4a184fc19799797b3f6e3c471fe3f74"
+        },
+        {
+          "ref": "duration@1",
+          "fingerprint": "5f6aed38470828a2aeeebecaf6a82827bd7082c7e17ca29767d494d931af4606"
+        },
+        {
+          "ref": "factor@1",
+          "fingerprint": "23de5e68a8f56d72630072f00e31c52f81f3202f6b629b7567c9db58fbf93dec"
+        },
+        {
+          "ref": "qualification@1",
+          "fingerprint": "5ec9e2cf396ee0360186908b4d55fb3f8af36fea282a109e977a3d7bc3ee2c4d"
+        }
+      ],
+      "rule_templates": [
+        {
+          "key": "effect",
+          "rule": {
+            "name_zh": "反应增伤",
+            "trigger": {
+              "event": "elemental_reaction",
+              "phase": "post",
+              "reaction_types": [
+                "swirl"
+              ],
+              "reaction_elements": [
+                "cryo"
+              ],
+              "owner_presence": "any"
+            },
+            "beneficiaries": {
+              "mode": "team",
+              "scope": "locked"
+            },
+            "timing": {
+              "cooldown": 0,
+              "cooldown_anchor": "success",
+              "duration": 8
+            },
+            "stacking": {
+              "max": 1,
+              "add": 1,
+              "policy": "refresh"
+            },
+            "effects": [
+              {
+                "id": "value",
+                "benefit_type_id": "benefit.dmg_bonus.cryo",
+                "domain": "self",
+                "value": {
+                  "kind": "stat",
+                  "subject": "owner",
+                  "stat": "em",
+                  "sample": "trigger",
+                  "factor": 0.00039999998989515007
+                }
+              }
+            ]
+          }
+        }
+      ],
+      "initial_rule_templates": [
+        {
+          "key": "effect",
+          "cooldown_remaining": 0,
+          "instances": []
+        }
+      ],
+      "execution_ports": [
+        {
+          "rule_key": "effect",
+          "target": "owner",
+          "role": "provider"
+        },
+        {
+          "rule_key": "effect",
+          "target": "trigger.characters",
+          "role": "provider_characters"
+        },
+        {
+          "rule_key": "effect",
+          "target": "timing.delay",
+          "role": "activation_delay"
+        }
+      ],
+      "required_execution_checks": [
+        "fixed_nonextra_em_equality",
+        "fixed_party",
+        "fresh_empty_instance",
+        "no_duplicate_source",
+        "no_dynamic_em",
+        "ordinary_stat_read",
+        "qualified_reaction_origin",
+        "single_target"
+      ],
+      "unsupported_branches": [
+        "engineering fixture, not client validation"
+      ],
+      "issues": [],
+      "limits": {
+        "descriptor_bytes": 131072,
+        "input_bytes": 2097152,
+        "output_bytes": 2097152,
+        "rules": 8,
+        "effects": 8,
+        "facts": 64,
+        "parameters": 32,
+        "nodes": 32,
+        "depth": 64,
+        "json_nodes": 65536
+      }
+    }
+  }
+}

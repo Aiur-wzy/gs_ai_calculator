@@ -1,0 +1,3651 @@
+{
+  "projection_version": 1,
+  "graph_scope": "limited_hit_benefit_source_v1",
+  "snapshot": {
+    "version_line": "release",
+    "state": "ready",
+    "index_state": "ready",
+    "schema_version": 1,
+    "upstream_commit": "224708edc8056f27e9ffc4eacabe797d75274636",
+    "snapshot_id": "ef0cac22b5cc4ee887fa64d134b563ffc745ae365b0c6cdb03930f895ab413df",
+    "execution_support": "not_evaluated",
+    "built_at": "2026-10-16T00:06:03-03:00",
+    "profile_id": "upstream-combat-catalog-v1",
+    "profile_version": 1,
+    "indexer_version": "7",
+    "manifest_fingerprint": "183ebfb89a2dde8741e9aa3f3c80ebe5f393034f6cb63dd69176594ba9edc67c",
+    "counts": {
+      "runtime_definition": 193449,
+      "runtime_material_reference": 422,
+      "runtime_object_reference": 41710,
+      "runtime_parameter_binding": 6082,
+      "runtime_reference": 141660,
+      "runtime_source": 2003
+    },
+    "reference_states": {
+      "ambiguous": 156,
+      "external_asset": 10450,
+      "missing": 124,
+      "resolved": 125505,
+      "unsupported_reference_form": 5425
+    },
+    "normalization_state": "ready",
+    "source_capability_contract": "genshin-runtime-source-capabilities-v1",
+    "source_capability_state": "degraded",
+    "source_capabilities": {
+      "ability": {
+        "requirement": "required",
+        "state": "ready"
+      },
+      "ability_path": {
+        "requirement": "required",
+        "state": "ready"
+      },
+      "animation_pattern": {
+        "requirement": "optional",
+        "state": "unavailable"
+      },
+      "animator": {
+        "requirement": "optional",
+        "state": "unavailable"
+      },
+      "avatar": {
+        "requirement": "required",
+        "state": "ready"
+      },
+      "excel": {
+        "requirement": "required",
+        "state": "ready"
+      },
+      "gadget": {
+        "requirement": "optional",
+        "state": "unavailable"
+      },
+      "gadget_excel": {
+        "requirement": "required",
+        "state": "ready"
+      },
+      "global_combat": {
+        "requirement": "optional",
+        "state": "unavailable"
+      },
+      "material_excel": {
+        "requirement": "required",
+        "state": "ready"
+      },
+      "public_config": {
+        "requirement": "required",
+        "state": "ready"
+      },
+      "talent": {
+        "requirement": "required",
+        "state": "ready"
+      },
+      "text_map": {
+        "requirement": "required",
+        "state": "ready"
+      }
+    },
+    "normalization": {
+      "mapping_fingerprint": "506862bc6c0bf033d8272b75f193cd2a620fc513320b3223d07afcc6f04356e2",
+      "normalization_version": 2,
+      "profile_id": "upstream-224708ed-reviewed-schema-v1",
+      "upstream_commit": "224708edc8056f27e9ffc4eacabe797d75274636"
+    }
+  },
+  "selection": {
+    "character_id": 10000063,
+    "skill_depot_id": 6301,
+    "skill_id": 10632,
+    "slot": "skill",
+    "matching_slots": [
+      "skill"
+    ],
+    "constellation": 0,
+    "active_constellation_ids": []
+  },
+  "level": {
+    "base_level": null,
+    "effective_level": 10,
+    "source": "explicit_effective_level",
+    "constellation_applied": false,
+    "constellation_level_support": "not_applicable"
+  },
+  "param_index": 1,
+  "status": "ready",
+  "source_status": "ready",
+  "projection_status": "ready",
+  "whole_source_status": "partial",
+  "execution_support": "not_evaluated",
+  "parent_bridge": {
+    "status": "ready",
+    "kind": "scalar_target_unique_attack",
+    "variant": "hold",
+    "parameter": {
+      "param_index": 1,
+      "special": "Elemental_Art_H_Damage",
+      "writer_entry_id": "e8ace1e4204306ce68d46363988f489452547a0e2d2a68abfbfcebda51a09aaa",
+      "writer_pointer": "/Shenhe_SkillUpgrade_2/1",
+      "parameter_entry_id": "237a7317a9337e6209f1f21464e03ea8a3c22817d94d358bc357332a07d81637",
+      "parameter_pointer": "/4443/paramList/1",
+      "target_ability_entry_id": "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597"
+    },
+    "attack": {
+      "entry_id": "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597",
+      "operation_pointer": "/6/Default/ECFFDLHMCLK/8",
+      "attack_info_pointer": "/6/Default/ECFFDLHMCLK/8/IDCIIIFMDCM/LGHDGGJIJOK",
+      "attack_property_pointer": "/6/Default/ECFFDLHMCLK/8/IDCIIIFMDCM/LGHDGGJIJOK/EHKJIDFINEK",
+      "attack_tag": "Elemental_Art",
+      "attack_type": "Default",
+      "element": "cryo"
+    },
+    "identity_scope": "source_identity_only_not_full_damage_semantics"
+  },
+  "benefit_candidates": [
+    {
+      "candidate_id": "benefit.b7cbb3d854db7e4750352833cd5363c3b47b77c47f7d216da1b1f70fee582f52",
+      "family_id": "current-atk-limited-hit-hold-v1",
+      "variant": "hold",
+      "status": "ready"
+    }
+  ],
+  "projection": {
+    "coefficient": {
+      "status": "ready",
+      "value": 0.8218079805374146,
+      "origin": {
+        "param_index": 2,
+        "special": "Attack2ExtraRatio",
+        "writer_entry_id": "e8ace1e4204306ce68d46363988f489452547a0e2d2a68abfbfcebda51a09aaa",
+        "writer_pointer": "/Shenhe_SkillUpgrade_2/3",
+        "parameter_entry_id": "237a7317a9337e6209f1f21464e03ea8a3c22817d94d358bc357332a07d81637",
+        "parameter_pointer": "/4443/paramList/2",
+        "target_ability_entry_id": "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597"
+      }
+    },
+    "duration_seconds": {
+      "status": "ready",
+      "value": 15,
+      "origin": {
+        "param_index": 4,
+        "special": "ElementalArt_H_Buff_Time",
+        "writer_entry_id": "e8ace1e4204306ce68d46363988f489452547a0e2d2a68abfbfcebda51a09aaa",
+        "writer_pointer": "/Shenhe_SkillUpgrade_2/5",
+        "parameter_entry_id": "237a7317a9337e6209f1f21464e03ea8a3c22817d94d358bc357332a07d81637",
+        "parameter_pointer": "/4443/paramList/4",
+        "target_ability_entry_id": "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597"
+      }
+    },
+    "capacity": {
+      "status": "ready",
+      "value": 7,
+      "origin": {
+        "param_index": 6,
+        "special": "ElementalArt_H_Buff_Count",
+        "writer_entry_id": "e8ace1e4204306ce68d46363988f489452547a0e2d2a68abfbfcebda51a09aaa",
+        "writer_pointer": "/Shenhe_SkillUpgrade_2/7",
+        "parameter_entry_id": "237a7317a9337e6209f1f21464e03ea8a3c22817d94d358bc357332a07d81637",
+        "parameter_pointer": "/4443/paramList/6",
+        "target_ability_entry_id": "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597"
+      }
+    }
+  },
+  "source_bundle": {
+    "entries": [
+      {
+        "definition": {
+          "definition_id": "c806ce5a609f4113c04ded2e2849f22c439ad405e092b6feaf22e8feb999e447",
+          "definition_kind": "excel_record",
+          "owner_definition_id": null,
+          "source_path": "ExcelBinOutput/AvatarExcelConfigData.json",
+          "json_pointer": "/50",
+          "variant_key": null,
+          "namespace_key": "excel",
+          "node_sha256": "29c0ded55f56a400463b48c852659b099a22b8c60dc62473b2321c68c75ee7c2",
+          "exact_key": {
+            "id": 10000063
+          }
+        },
+        "source_path": "ExcelBinOutput/AvatarExcelConfigData.json",
+        "json_pointer": "/50",
+        "source_sha256": "bc9a4a11b7e0e40c6eadd75ca2c99752b17802521591a8df65f4995c5b0e4801",
+        "node_sha256": "29c0ded55f56a400463b48c852659b099a22b8c60dc62473b2321c68c75ee7c2",
+        "payload": {
+          "featureTagGroupID": 10000063,
+          "scriptDataPathHash": "3744219756526631032",
+          "qualityType": "QUALITY_ORANGE",
+          "prefabPathHash": "18306633649200384003",
+          "firstPropPriority": "FIGHT_PROP_CHARGE_EFFICIENCY",
+          "secondPropPriority": "FIGHT_PROP_ATTACK_PERCENT",
+          "CHCOOENOOJM": "17293845908373695380",
+          "controllerPathHash": "11438927723139524610",
+          "defenseBase": 64.61640167236328,
+          "coopPicNameHash": "5230390790852908273",
+          "initialWeapon": 13101,
+          "deformationMeshPathHash": "2132204517517738195",
+          "iconName": "UI_AvatarIcon_Shenhe",
+          "combatConfigHash": "15364837967956993371",
+          "FJDGJCDPMEM": 373064729,
+          "critical": 0.05000000074505806,
+          "imageName": "AvatarImage_Forward_Shenhe",
+          "bodyType": "BODY_LADY",
+          "avatarPromoteRewardIdList": [
+            900461,
+            900463,
+            900465
+          ],
+          "criticalHurt": 0.5,
+          "manekinJsonConfigHash": "15345224479718544217",
+          "avatarIdentityType": "AVATAR_IDENTITY_NORMAL",
+          "propGrowCurves": [
+            {
+              "growCurve": "GROW_CURVE_HP_S5",
+              "type": "FIGHT_PROP_BASE_HP"
+            },
+            {
+              "growCurve": "GROW_CURVE_ATTACK_S5",
+              "type": "FIGHT_PROP_BASE_ATTACK"
+            },
+            {
+              "growCurve": "GROW_CURVE_HP_S5",
+              "type": "FIGHT_PROP_BASE_DEFENSE"
+            }
+          ],
+          "prefabPathRagdollHash": "10393663125980178205",
+          "KADLDGKLEPC": "12146487876740279348",
+          "id": 10000063,
+          "skillDepotId": 6301,
+          "avatarPromoteId": 63,
+          "manekinMotionConfig": 103,
+          "gachaImageNameHash": "4592797104242092676",
+          "tags": [
+            "None"
+          ],
+          "avatarPromoteRewardLevelList": [
+            1,
+            3,
+            5
+          ],
+          "controllerPathRemoteHash": "932679866898810169",
+          "chargeEfficiency": 1,
+          "attackBase": 23.64739990234375,
+          "gachaCardNameHash": "12201318973846706835",
+          "prefabPathRemoteHash": "8179503891665583026",
+          "sideIconName": "UI_AvatarIcon_Side_Shenhe",
+          "nameTextMapHash": 334242122,
+          "useType": "AVATAR_FORMAL",
+          "descTextMapHash": 373064729,
+          "staminaRecoverSpeed": 25,
+          "hpBase": 1011.4725341796875,
+          "weaponType": "WEAPON_POLE",
+          "manekinPathHash": "6276796366205445844",
+          "animatorConfigPathHash": "15521519964846876947",
+          "POCCNIJNACM": "8739842748631856957"
+        }
+      },
+      {
+        "definition": {
+          "definition_id": "fe227129b2ce542830fdc58970fcd3d9f77f1435e101a6a37d061e0d58220702",
+          "definition_kind": "excel_record",
+          "owner_definition_id": null,
+          "source_path": "ExcelBinOutput/AvatarSkillDepotExcelConfigData.json",
+          "json_pointer": "/123",
+          "variant_key": null,
+          "namespace_key": "excel",
+          "node_sha256": "a7c2656240415fc6fe5e4acc77b01c3ec4cd27edfb6b8c9dcf72613c4cd1c223",
+          "exact_key": {
+            "id": 6301
+          }
+        },
+        "source_path": "ExcelBinOutput/AvatarSkillDepotExcelConfigData.json",
+        "json_pointer": "/123",
+        "source_sha256": "841ccf30a9dcb0f9851c1ca1a3f37bfd53d7e83a1bf5f38ea6f9b4dedb69e896",
+        "node_sha256": "a7c2656240415fc6fe5e4acc77b01c3ec4cd27edfb6b8c9dcf72613c4cd1c223",
+        "payload": {
+          "subSkills": [
+            10101,
+            10102,
+            10002,
+            5063010
+          ],
+          "talents": [
+            631,
+            632,
+            633,
+            634,
+            635,
+            636
+          ],
+          "skills": [
+            10631,
+            10632,
+            0,
+            0
+          ],
+          "inherentProudSkillOpens": [
+            {
+              "proudSkillGroupId": 6321,
+              "needAvatarPromoteLevel": 1
+            },
+            {
+              "proudSkillGroupId": 6322,
+              "needAvatarPromoteLevel": 4
+            },
+            {
+              "proudSkillGroupId": 6323
+            },
+            {},
+            {}
+          ],
+          "talentStarName": "Talent_Shenhe",
+          "energySkill": 10635,
+          "id": 6301,
+          "specialProudSkillOpens": [
+            {},
+            {}
+          ],
+          "extraAbilities": [
+            "",
+            "",
+            ""
+          ]
+        }
+      },
+      {
+        "definition": {
+          "definition_id": "78a311e3ea8d0d576e1a985029053cd73ffca31b88e554e7c4773fef0b7a234e",
+          "definition_kind": "excel_record",
+          "owner_definition_id": null,
+          "source_path": "ExcelBinOutput/AvatarSkillExcelConfigData.json",
+          "json_pointer": "/279",
+          "variant_key": null,
+          "namespace_key": "excel",
+          "node_sha256": "6f1d808d8cb23a192aa0ab16ad3a592fad3f6182a1c1500192ea0c2ba5d81692",
+          "exact_key": {
+            "id": 10632
+          }
+        },
+        "source_path": "ExcelBinOutput/AvatarSkillExcelConfigData.json",
+        "json_pointer": "/279",
+        "source_sha256": "d6c09879a0c162d7b1fdd5ad4c29e0ae457d1e41a7b853d209a6e272caad2e6e",
+        "node_sha256": "6f1d808d8cb23a192aa0ab16ad3a592fad3f6182a1c1500192ea0c2ba5d81692",
+        "payload": {
+          "lockWeightParams": [
+            1,
+            1,
+            0.30000001192092896,
+            0
+          ],
+          "lockShape": "CircleLockEnemyR8H6HC",
+          "proudSkillGroupId": 6332,
+          "skillIcon": "Skill_S_Shenhe_01",
+          "maxChargeNum": 1,
+          "isAttackCameraLock": true,
+          "id": 10632,
+          "extraDescTextMapHash": 112287855,
+          "triggerID": 2,
+          "uniqueDescTextMapHash": 363534619,
+          "cdTime": 10,
+          "nameTextMapHash": 3028595085,
+          "descTextMapHash": 917615616
+        }
+      },
+      {
+        "definition": {
+          "definition_id": "237a7317a9337e6209f1f21464e03ea8a3c22817d94d358bc357332a07d81637",
+          "definition_kind": "excel_record",
+          "owner_definition_id": null,
+          "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+          "json_pointer": "/4443",
+          "variant_key": null,
+          "namespace_key": "excel",
+          "node_sha256": "a6e181bbebf72b6b6647bb8cb9eeba16a2a730dde51d93474891b501990d29b2",
+          "exact_key": {
+            "proudSkillId": 633210
+          }
+        },
+        "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+        "json_pointer": "/4443",
+        "source_sha256": "852113c53187be005ba398d8afc787809a75853d6d2c29f8240897bc13102362",
+        "node_sha256": "a6e181bbebf72b6b6647bb8cb9eeba16a2a730dde51d93474891b501990d29b2",
+        "payload": {
+          "paramList": [
+            2.5055999755859375,
+            3.398400068283081,
+            0.8218079805374146,
+            10,
+            15,
+            5,
+            7,
+            10,
+            15,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "breakLevel": 6,
+          "proudSkillId": 633210,
+          "filterConds": [
+            "TALENT_FILTER_NONE",
+            "TALENT_FILTER_NONE"
+          ],
+          "proudSkillGroupId": 6332,
+          "coinCost": 700000,
+          "addProps": [
+            {},
+            {}
+          ],
+          "paramDescList": [
+            338598198,
+            3748551894,
+            2412562703,
+            3270216079,
+            2456011150,
+            1257001458,
+            3657772095,
+            2378985909,
+            2281396724,
+            1831074055,
+            2783431748,
+            4070236307,
+            2480586015,
+            755916851,
+            1685366094,
+            806778045,
+            3271405977,
+            2419331531,
+            370644415,
+            2975128941
+          ],
+          "openConfig": "Shenhe_SkillUpgrade_2",
+          "lifeEffectParams": [
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "unlockDescTextMapHash": 1290363914,
+          "costItems": [
+            {
+              "count": 16,
+              "id": 104312
+            },
+            {
+              "count": 12,
+              "id": 112040
+            },
+            {
+              "count": 2,
+              "id": 113026
+            },
+            {
+              "count": 1,
+              "id": 104319
+            }
+          ],
+          "icon": "Skill_A_01",
+          "level": 10,
+          "proudSkillType": 3,
+          "uniqueDescTextMapHash": 3017602084,
+          "additionalDescTextMapHash": 3126856028,
+          "nameTextMapHash": 3408260341,
+          "descTextMapHash": 3779407987
+        }
+      },
+      {
+        "definition": {
+          "definition_id": "e8ace1e4204306ce68d46363988f489452547a0e2d2a68abfbfcebda51a09aaa",
+          "definition_kind": "talent_config",
+          "owner_definition_id": null,
+          "source_path": "BinOutput/Talent/AvatarTalents/ConfigTalent_Shenhe.json",
+          "json_pointer": "/Shenhe_SkillUpgrade_2",
+          "variant_key": null,
+          "namespace_key": "talent",
+          "node_sha256": "da6348f8c14f6cd6e4330b421e11f32647b2a9581cb4261ae0b87b6891c53c5d",
+          "exact_key": "Shenhe_SkillUpgrade_2"
+        },
+        "source_path": "BinOutput/Talent/AvatarTalents/ConfigTalent_Shenhe.json",
+        "json_pointer": "/Shenhe_SkillUpgrade_2",
+        "source_sha256": "0ca0eb7e9131fdf8293e65ad8498b15cdf88d440f40a0b9ab928e8df98c415c8",
+        "node_sha256": "da6348f8c14f6cd6e4330b421e11f32647b2a9581cb4261ae0b87b6891c53c5d",
+        "payload": [
+          {
+            "$type": "BIAHEMMGABC",
+            "GBPFBNHLOFD": true,
+            "IIBMNPFLNMJ": "Avatar_Shenhe_ElementalArt_Bullet",
+            "PCABAADALND": "%1",
+            "PEOJKHKHAKL": "Elemental_Art_L_Damage"
+          },
+          {
+            "$type": "BIAHEMMGABC",
+            "GBPFBNHLOFD": true,
+            "IIBMNPFLNMJ": "Avatar_Shenhe_ElementalArt_Attack_H",
+            "PCABAADALND": "%2",
+            "PEOJKHKHAKL": "Elemental_Art_H_Damage"
+          },
+          {
+            "$type": "BIAHEMMGABC",
+            "GBPFBNHLOFD": true,
+            "IIBMNPFLNMJ": "Avatar_Shenhe_ElementalArt_Attack_L",
+            "PCABAADALND": "%3",
+            "PEOJKHKHAKL": "Attack2ExtraRatio"
+          },
+          {
+            "$type": "BIAHEMMGABC",
+            "GBPFBNHLOFD": true,
+            "IIBMNPFLNMJ": "Avatar_Shenhe_ElementalArt_Attack_H",
+            "PCABAADALND": "%3",
+            "PEOJKHKHAKL": "Attack2ExtraRatio"
+          },
+          {
+            "$type": "BIAHEMMGABC",
+            "GBPFBNHLOFD": true,
+            "IIBMNPFLNMJ": "Avatar_Shenhe_ElementalArt_Attack_L",
+            "PCABAADALND": "%4",
+            "PEOJKHKHAKL": "ElementalArt_L_Buff_Time"
+          },
+          {
+            "$type": "BIAHEMMGABC",
+            "GBPFBNHLOFD": true,
+            "IIBMNPFLNMJ": "Avatar_Shenhe_ElementalArt_Attack_H",
+            "PCABAADALND": "%5",
+            "PEOJKHKHAKL": "ElementalArt_H_Buff_Time"
+          },
+          {
+            "$type": "BIAHEMMGABC",
+            "GBPFBNHLOFD": true,
+            "IIBMNPFLNMJ": "Avatar_Shenhe_ElementalArt_Attack_L",
+            "PCABAADALND": "%6",
+            "PEOJKHKHAKL": "ElementalArt_L_Buff_Count"
+          },
+          {
+            "$type": "BIAHEMMGABC",
+            "GBPFBNHLOFD": true,
+            "IIBMNPFLNMJ": "Avatar_Shenhe_ElementalArt_Attack_H",
+            "PCABAADALND": "%7",
+            "PEOJKHKHAKL": "ElementalArt_H_Buff_Count"
+          }
+        ]
+      },
+      {
+        "definition": {
+          "definition_id": "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597",
+          "definition_kind": "ability",
+          "owner_definition_id": null,
+          "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Shenhe.json",
+          "json_pointer": "/6/Default",
+          "variant_key": "Default",
+          "namespace_key": "Temp",
+          "node_sha256": "3de611539675a3defc9f5239a8f3fd88a83c2e444ea6ee12b8e3bb8ba0f087d4",
+          "exact_key": "Avatar_Shenhe_ElementalArt_Attack_H"
+        },
+        "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Shenhe.json",
+        "json_pointer": "/6/Default",
+        "source_sha256": "9949f5c28fbaeddb2257f44eed8cadae2b8cd1c19514792fc7d2e7069ca284cc",
+        "node_sha256": "3de611539675a3defc9f5239a8f3fd88a83c2e444ea6ee12b8e3bb8ba0f087d4",
+        "payload": {
+          "ECFFDLHMCLK": [
+            {
+              "$type": "FLNAIHPCKOC",
+              "ACFKMLJKONM": 10632,
+              "AMOLMPHFPHJ": -1,
+              "ILELAOFJIKJ": true,
+              "IODFBPJBHOB": 1.5,
+              "LJFIEGHHLOB": false,
+              "NABFCPIKHEO": 1,
+              "NKOFINBNOOK": 1
+            },
+            {
+              "$type": "PBIOEEHFHFD",
+              "AMOLMPHFPHJ": -1,
+              "BDHBNCEEPPK": "Caster",
+              "ILELAOFJIKJ": true,
+              "LJFIEGHHLOB": false,
+              "MJKPCGCAPLK": [
+                {
+                  "$type": "DIOFPDKDAIG",
+                  "BDHBNCEEPPK": "Target",
+                  "JPCEGCMOHNI": "Shenhe_Constellation_4"
+                }
+              ],
+              "MLJNNELMEFL": [
+                {
+                  "$type": "OCEDAFPEKBM",
+                  "AMOLMPHFPHJ": -1,
+                  "ILELAOFJIKJ": true,
+                  "KDJEMONNHAM": "_ABILITY_Shenhe_ElementalArt_Buff_Talent_ExtraDMG_Ratio",
+                  "LJFIEGHHLOB": false,
+                  "MMIFLLENIBJ": "Buff_Talent_ExtraDMG_Ratio"
+                },
+                {
+                  "$type": "HGFNHPLICPI",
+                  "AMOLMPHFPHJ": -1,
+                  "ILELAOFJIKJ": true,
+                  "LJFIEGHHLOB": false,
+                  "PEELJBICEHE": "_ABILITY_Shenhe_ElementalArt_Buff_Talent_Level"
+                },
+                {
+                  "$type": "HGFNHPLICPI",
+                  "AMOLMPHFPHJ": -1,
+                  "ILELAOFJIKJ": true,
+                  "LJFIEGHHLOB": false,
+                  "PEELJBICEHE": "_ABILITY_Shenhe_ElementalArt_Buff_Talent_ExtraDMG_Ratio"
+                }
+              ]
+            },
+            {
+              "$type": "EFICNPHHFJA",
+              "AMOLMPHFPHJ": -1,
+              "BEIMGAKABJN": "Eff_Avatar_Lady_Pole_Shenhe_ElementalArt_Rune_Charge",
+              "ILELAOFJIKJ": true,
+              "KGEKINJPCFB": "Attack_H",
+              "LJFIEGHHLOB": false
+            },
+            {
+              "$type": "GCINLBBPONN",
+              "AMOLMPHFPHJ": -1,
+              "BDHBNCEEPPK": "AllPlayerAvatars",
+              "IJDGNIIOHLM": [
+                {
+                  "$type": "OLNGCABMCGI",
+                  "BDHBNCEEPPK": "Target",
+                  "DKCBCJCHEBF": "LesserOrEqual",
+                  "PDIFFCBMGMO": 40
+                }
+              ],
+              "ILELAOFJIKJ": true,
+              "LDFBDMNIADI": "UNIQUE_Shenhe_ElementalArt_L_Buff_Handler",
+              "LJFIEGHHLOB": true
+            },
+            {
+              "$type": "GCINLBBPONN",
+              "AMOLMPHFPHJ": -1,
+              "BDHBNCEEPPK": "AllPlayerAvatars",
+              "IJDGNIIOHLM": [
+                {
+                  "$type": "OLNGCABMCGI",
+                  "BDHBNCEEPPK": "Target",
+                  "DKCBCJCHEBF": "LesserOrEqual",
+                  "PDIFFCBMGMO": 40
+                }
+              ],
+              "ILELAOFJIKJ": true,
+              "LDFBDMNIADI": "UNIQUE_Shenhe_ElementalArt_H_Buff_Handler",
+              "LJFIEGHHLOB": true
+            },
+            {
+              "$type": "CDANEAFAFKM",
+              "AMOLMPHFPHJ": -1,
+              "BDHBNCEEPPK": "AllPlayerAvatars",
+              "IJDGNIIOHLM": [
+                {
+                  "$type": "OLNGCABMCGI",
+                  "BDHBNCEEPPK": "Target",
+                  "DKCBCJCHEBF": "LesserOrEqual",
+                  "PDIFFCBMGMO": 40
+                },
+                {
+                  "$type": "BHIEGOJLEBB",
+                  "BDHBNCEEPPK": "Target"
+                }
+              ],
+              "ILELAOFJIKJ": true,
+              "LDFBDMNIADI": "UNIQUE_Shenhe_ElementalArt_H_Buff_Handler",
+              "LJFIEGHHLOB": true
+            },
+            {
+              "$type": "CDANEAFAFKM",
+              "AMOLMPHFPHJ": -1,
+              "BDHBNCEEPPK": "AllPlayerAvatars",
+              "IJDGNIIOHLM": [
+                {
+                  "$type": "OLNGCABMCGI",
+                  "BDHBNCEEPPK": "Target",
+                  "DKCBCJCHEBF": "LesserOrEqual",
+                  "PDIFFCBMGMO": 40
+                },
+                {
+                  "$type": "DIOFPDKDAIG",
+                  "BDHBNCEEPPK": "Target",
+                  "JPCEGCMOHNI": "Shenhe_PermanentSkill_2"
+                },
+                {
+                  "$type": "BHIEGOJLEBB",
+                  "BDHBNCEEPPK": "Target"
+                }
+              ],
+              "ILELAOFJIKJ": true,
+              "LDFBDMNIADI": "UNIQUE_Shenhe_ElementalArt_H_Extra_Buff",
+              "LJFIEGHHLOB": true
+            },
+            {
+              "$type": "MOOAODKIBCM",
+              "AMOLMPHFPHJ": -1,
+              "BEIMGAKABJN": "Eff_Avatar_Lady_Pole_Shenhe_ElementalArt_H_Attack",
+              "HJIHBAANFLE": 1,
+              "ILELAOFJIKJ": true,
+              "JMMALEJDAEF": -1,
+              "LJFIEGHHLOB": false,
+              "MLFLDPAGADG": {
+                "$type": "PKAELLAMAGL",
+                "EEFLHEKBODJ": {
+                  "BNJLEBLGEKB": 180
+                },
+                "FDGFPGIDACF": {
+                  "LBLJIHBEDKH": 1.5
+                },
+                "GNFICELAKIB": 10,
+                "HECMDGIAGKM": 2,
+                "POPNBJAHNFK": {
+                  "ONEHKOHOCBH": 180
+                }
+              }
+            },
+            {
+              "$type": "MMHMEBEEKGK",
+              "AMOLMPHFPHJ": -1,
+              "IDCIIIFMDCM": {
+                "CEIJEFJBMBL": {
+                  "$type": "FKADOLEBLHD",
+                  "BKCIBHHMGEE": "ElementalArt_H_Radius",
+                  "COBJECNAEOG": 1,
+                  "EAJAHKDHNJM": {
+                    "GMEKLJBJADO": {
+                      "KJCBAFKFFMP": 1,
+                      "PGPNDGBABNI": true
+                    }
+                  },
+                  "EHFMPIOJOLN": "TriggerNoRepeat",
+                  "MLFLDPAGADG": {
+                    "$type": "PKAELLAMAGL",
+                    "EEFLHEKBODJ": {
+                      "BNJLEBLGEKB": 180
+                    },
+                    "FDGFPGIDACF": {
+                      "IOPIFIJFBHI": 0.800000011920929,
+                      "LBLJIHBEDKH": 1.5
+                    },
+                    "GNFICELAKIB": 10,
+                    "HECMDGIAGKM": 2,
+                    "POPNBJAHNFK": {
+                      "ONEHKOHOCBH": 180
+                    }
+                  },
+                  "PJIJHIAFGPD": "CenterToSide"
+                },
+                "LGHDGGJIJOK": {
+                  "BKLFAECNFOF": {
+                    "EIAGIEDFLHJ": {
+                      "KJCBAFKFFMP": 1,
+                      "PGPNDGBABNI": true
+                    },
+                    "IHBPFOBEJKN": "default"
+                  },
+                  "EHKJIDFINEK": {
+                    "DBGOKAKAHFP": 50,
+                    "EPPIDAILPBN": "Ice",
+                    "FBAEEIPKEHO": 200,
+                    "FDGDIBBILMD": "Slash",
+                    "JDOLIAEMINM": 1,
+                    "KALBHJILPDA": "Buff_Talent_ExtraDMG_Ratio",
+                    "KOLOHIDMHHE": "Elemental_Art_H_Damage",
+                    "PEPDKCDHNIM": "Default"
+                  },
+                  "HDIFFKOHDNL": {
+                    "OGGEIBICAHC": "Shake"
+                  },
+                  "HGLEEJNPBEB": "default",
+                  "IAFHAPFBBOB": "Elemental_Art",
+                  "IJFOFLPPGHK": {
+                    "EANBEIIKCIL": {
+                      "BGINHMBLECN": 0.11999999731779099,
+                      "HMANOMCGFLK": true,
+                      "KBAIICCLOEF": 0.5,
+                      "PJGAOELGLIF": 0.11999999731779099
+                    },
+                    "KDBKDJBCACN": 20
+                  },
+                  "NMMJKLAHOHH": {
+                    "EIAGIEDFLHJ": {
+                      "KJCBAFKFFMP": 1,
+                      "PGPNDGBABNI": true
+                    },
+                    "IHBPFOBEJKN": "default",
+                    "LHEILBMGANH": "ByHitDirection",
+                    "PAPNKKIKAOC": "LV2"
+                  }
+                }
+              },
+              "ILELAOFJIKJ": true,
+              "LJFIEGHHLOB": false,
+              "NMKBOEALDEF": "Enemy"
+            }
+          ],
+          "EMGBJJOIENB": [
+            {
+              "$type": "BINBHGLANKO",
+              "AMOLMPHFPHJ": -1,
+              "ILELAOFJIKJ": true,
+              "LDFBDMNIADI": "Shenhe_ElementalArt_ElemBall_Handler",
+              "LJFIEGHHLOB": false
+            }
+          ],
+          "GPPBBDEICKP": {
+            "ElementalArt_ElemBall": {
+              "DBGOKAKAHFP": 100,
+              "DOALDLPNGMF": -1,
+              "EMGBJJOIENB": [
+                {
+                  "$type": "EDAOLCMCEBI",
+                  "AMOLMPHFPHJ": -1,
+                  "AOCCEKAGBFB": 12,
+                  "HHENHNHHHDA": 1,
+                  "ILELAOFJIKJ": true,
+                  "KKMLMJNCLLG": 2022,
+                  "LJFIEGHHLOB": true,
+                  "MLFLDPAGADG": {
+                    "$type": "KCOKCEJLEMA",
+                    "CCNPIPFLFAL": {
+                      "$type": "AAKJDEPKNHH",
+                      "BFIKJDKPACL": 1.5,
+                      "EDBLANFLPBB": 0.5
+                    },
+                    "EEFLHEKBODJ": {
+                      "BNJLEBLGEKB": 180
+                    },
+                    "GNFICELAKIB": 10,
+                    "HECMDGIAGKM": 2,
+                    "POPNBJAHNFK": {
+                      "ONEHKOHOCBH": 180
+                    }
+                  }
+                }
+              ],
+              "GPPCPGHLDHL": "Unique",
+              "JPEAFDFPKAN": 0.5,
+              "KFOMCJGGPPC": -1,
+              "PPKOPMBNPJH": true
+            },
+            "Shenhe_ElementalArt_ElemBall_Handler": {
+              "DBGOKAKAHFP": 100,
+              "DOALDLPNGMF": -1,
+              "GPPCPGHLDHL": "Unique",
+              "KFOMCJGGPPC": -1,
+              "LPMFNGFGMCE": [
+                {
+                  "$type": "PBIOEEHFHFD",
+                  "AMOLMPHFPHJ": -1,
+                  "BDHBNCEEPPK": "Other",
+                  "ILELAOFJIKJ": true,
+                  "LJFIEGHHLOB": false,
+                  "MJKPCGCAPLK": [
+                    {
+                      "$type": "DPNJGLIMCHM",
+                      "BDHBNCEEPPK": "Target",
+                      "BFDEHDNLNJH": [
+                        "Elemental_Art"
+                      ]
+                    },
+                    {
+                      "$type": "BIMGEEAOLLH",
+                      "BDHBNCEEPPK": "Target",
+                      "PEPDKCDHNIM": "Default"
+                    },
+                    {
+                      "$type": "BKCJECHCDKG",
+                      "BDHBNCEEPPK": "Target",
+                      "FJGEDPNBGCG": -1,
+                      "LJBBKGIFJDB": [
+                        "Monster"
+                      ]
+                    },
+                    {
+                      "$type": "MMPLBPOHMGL",
+                      "BDHBNCEEPPK": "Target",
+                      "NJJFOACNFGL": "NoneOrEqual",
+                      "PEELJBICEHE": "_ANIMAL_ENTITY_TYPE"
+                    }
+                  ],
+                  "MLJNNELMEFL": [
+                    {
+                      "$type": "BINBHGLANKO",
+                      "AMOLMPHFPHJ": -1,
+                      "ILELAOFJIKJ": true,
+                      "LDFBDMNIADI": "ElementalArt_ElemBall",
+                      "LJFIEGHHLOB": false
+                    }
+                  ]
+                }
+              ],
+              "PPKOPMBNPJH": true
+            },
+            "UNIQUE_Shenhe_ElementalArt_H_Buff": {
+              "DBGOKAKAHFP": 100,
+              "DIELNIJPCJJ": true,
+              "DOALDLPNGMF": -1,
+              "GPPCPGHLDHL": "Unique",
+              "KFOMCJGGPPC": -1,
+              "LFIJIMIMBIH": [
+                {
+                  "$type": "DCFENNHBEMG",
+                  "AMOLMPHFPHJ": -1,
+                  "BFDEHDNLNJH": [
+                    "NormalAttack_01",
+                    "NormalAttack_02",
+                    "NormalAttack_03",
+                    "NormalAttack_04",
+                    "NormalAttack_05",
+                    "NormalAttack_06",
+                    "ExtraAttack",
+                    "FallingAttack",
+                    "Elemental_Art",
+                    "Elemental_Art_Hold",
+                    "Elemental_Art_Extra",
+                    "Elemental_Burst"
+                  ],
+                  "EMILGODPBIG": [
+                    "FIGHT_PROP_CUR_ATTACK",
+                    "Attack2ExtraRatio",
+                    "MUL"
+                  ],
+                  "IJDGNIIOHLM": [
+                    {
+                      "$type": "LEHABIJBEAO",
+                      "BDHBNCEEPPK": "Target",
+                      "JOFNJODFEDG": "Ice"
+                    },
+                    {
+                      "$type": "BKCJECHCDKG",
+                      "BDHBNCEEPPK": "Target",
+                      "FJGEDPNBGCG": -1,
+                      "LJBBKGIFJDB": [
+                        "Monster"
+                      ]
+                    },
+                    {
+                      "$type": "MMPLBPOHMGL",
+                      "BDHBNCEEPPK": "Target",
+                      "NJJFOACNFGL": "NoneOrEqual",
+                      "PEELJBICEHE": "_ANIMAL_ENTITY_TYPE"
+                    }
+                  ],
+                  "IMHIGCHNNCA": "ElementalArt_H_Buff_Count",
+                  "KFNJNNEOFCB": [
+                    {
+                      "$type": "GCINLBBPONN",
+                      "AMOLMPHFPHJ": -1,
+                      "ILELAOFJIKJ": true,
+                      "LDFBDMNIADI": "UNIQUE_Shenhe_ElementalArt_H_Buff_FX",
+                      "LJFIEGHHLOB": true
+                    }
+                  ],
+                  "MLJNNELMEFL": [
+                    {
+                      "$type": "AHICIAHHALJ",
+                      "AMOLMPHFPHJ": -1,
+                      "BDHBNCEEPPK": "Caster",
+                      "IIBMNPFLNMJ": "Avatar_Shenhe_Constellation_4",
+                      "IJDGNIIOHLM": [
+                        {
+                          "$type": "DIOFPDKDAIG",
+                          "BDHBNCEEPPK": "Target",
+                          "JPCEGCMOHNI": "Shenhe_Constellation_4"
+                        }
+                      ],
+                      "ILELAOFJIKJ": true,
+                      "LJFIEGHHLOB": true,
+                      "LPFPKHHKGIB": "Other"
+                    }
+                  ]
+                }
+              ],
+              "PPKOPMBNPJH": true
+            },
+            "UNIQUE_Shenhe_ElementalArt_H_Buff_FX": {
+              "DBGOKAKAHFP": 100,
+              "DIELNIJPCJJ": true,
+              "DOALDLPNGMF": -1,
+              "EMGBJJOIENB": [
+                {
+                  "$type": "PMNJOIIOFJI",
+                  "AMOLMPHFPHJ": -1,
+                  "BEIMGAKABJN": "Eff_Avatar_Lady_Pole_Shenhe_ElementalArt_Buff_Loop",
+                  "HJIHBAANFLE": 1,
+                  "ILELAOFJIKJ": true,
+                  "JMMALEJDAEF": -1,
+                  "LJFIEGHHLOB": true,
+                  "MLFLDPAGADG": {
+                    "EEFLHEKBODJ": {
+                      "BNJLEBLGEKB": 180
+                    },
+                    "GNFICELAKIB": 10,
+                    "HECMDGIAGKM": 2,
+                    "POPNBJAHNFK": {
+                      "ONEHKOHOCBH": 180
+                    }
+                  }
+                }
+              ],
+              "GPPCPGHLDHL": "Unique",
+              "KFOMCJGGPPC": -1,
+              "PPKOPMBNPJH": true
+            },
+            "UNIQUE_Shenhe_ElementalArt_H_Buff_Handler": {
+              "DBGOKAKAHFP": 100,
+              "DIELNIJPCJJ": true,
+              "DOALDLPNGMF": -1,
+              "EMGBJJOIENB": [
+                {
+                  "$type": "CDANEAFAFKM",
+                  "AMOLMPHFPHJ": -1,
+                  "ILELAOFJIKJ": true,
+                  "LDFBDMNIADI": "UNIQUE_Shenhe_ElementalArt_H_Buff_FX",
+                  "LJFIEGHHLOB": true
+                },
+                {
+                  "$type": "PBIOEEHFHFD",
+                  "AMOLMPHFPHJ": -1,
+                  "BDHBNCEEPPK": "Caster",
+                  "ILELAOFJIKJ": true,
+                  "LJFIEGHHLOB": true,
+                  "MJKPCGCAPLK": [
+                    {
+                      "$type": "DIOFPDKDAIG",
+                      "BDHBNCEEPPK": "Target",
+                      "JPCEGCMOHNI": "Shenhe_Constellation_6"
+                    }
+                  ],
+                  "MLJNNELMEFL": [
+                    {
+                      "$type": "CDANEAFAFKM",
+                      "AMOLMPHFPHJ": -1,
+                      "ILELAOFJIKJ": true,
+                      "LDFBDMNIADI": "UNIQUE_Shenhe_ElementalArt_H_Talent_Buff",
+                      "LJFIEGHHLOB": true
+                    }
+                  ],
+                  "PAPFFKOKPML": [
+                    {
+                      "$type": "CDANEAFAFKM",
+                      "AMOLMPHFPHJ": -1,
+                      "ILELAOFJIKJ": true,
+                      "LDFBDMNIADI": "UNIQUE_Shenhe_ElementalArt_H_Buff",
+                      "LJFIEGHHLOB": true
+                    }
+                  ]
+                }
+              ],
+              "FMBHOKCHKOH": [
+                {
+                  "$type": "PBIOEEHFHFD",
+                  "AMOLMPHFPHJ": -1,
+                  "ILELAOFJIKJ": true,
+                  "LJFIEGHHLOB": true,
+                  "MJKPCGCAPLK": [
+                    {
+                      "$type": "OLNGCABMCGI",
+                      "BDHBNCEEPPK": "Caster",
+                      "DKCBCJCHEBF": "LesserOrEqual",
+                      "NJJFOACNFGL": "XYZ",
+                      "PDIFFCBMGMO": 50
+                    }
+                  ],
+                  "PAPFFKOKPML": [
+                    {
+                      "$type": "GCINLBBPONN",
+                      "AMOLMPHFPHJ": -1,
+                      "ILELAOFJIKJ": true,
+                      "LDFBDMNIADI": "UNIQUE_Shenhe_ElementalArt_H_Buff_Handler",
+                      "LJFIEGHHLOB": true
+                    }
+                  ]
+                }
+              ],
+              "GPPCPGHLDHL": "Unique",
+              "JFLGPLCIOEC": 0.30000001192092896,
+              "JPEAFDFPKAN": "ElementalArt_H_Buff_Time",
+              "KFOMCJGGPPC": -1,
+              "PPKOPMBNPJH": true
+            },
+            "UNIQUE_Shenhe_ElementalArt_H_Extra_Buff": {
+              "BOCCNJLBFCJ": "AttackUp",
+              "DBGOKAKAHFP": 100,
+              "DIELNIJPCJJ": true,
+              "DOALDLPNGMF": -1,
+              "GPPCPGHLDHL": "RefreshUniqueDurability",
+              "JPEAFDFPKAN": "ElementalArt_H_Extra_Buff_Time",
+              "KFOMCJGGPPC": -1,
+              "LFIJIMIMBIH": [
+                {
+                  "$type": "GBFENLIGHEJ",
+                  "AMOLMPHFPHJ": -1,
+                  "BFDEHDNLNJH": [
+                    "NormalAttack_01",
+                    "NormalAttack_02",
+                    "NormalAttack_03",
+                    "NormalAttack_04",
+                    "NormalAttack_05",
+                    "NormalAttack_06",
+                    "ExtraAttack",
+                    "FallingAttack"
+                  ],
+                  "KALBHJILPDA": "ElementalArt_H_Extra_Buff_Ratio"
+                }
+              ],
+              "PPKOPMBNPJH": true
+            },
+            "UNIQUE_Shenhe_ElementalArt_H_Talent_Buff": {
+              "DBGOKAKAHFP": 100,
+              "DIELNIJPCJJ": true,
+              "DOALDLPNGMF": -1,
+              "GPPCPGHLDHL": "Unique",
+              "KFOMCJGGPPC": -1,
+              "LFIJIMIMBIH": [
+                {
+                  "$type": "DCFENNHBEMG",
+                  "AMOLMPHFPHJ": -1,
+                  "APGEFBAAIOD": [
+                    {
+                      "$type": "DPNJGLIMCHM",
+                      "BDHBNCEEPPK": "Target",
+                      "BFDEHDNLNJH": [
+                        "FallingAttack",
+                        "Elemental_Art",
+                        "Elemental_Art_Hold",
+                        "Elemental_Art_Extra",
+                        "Elemental_Burst"
+                      ]
+                    }
+                  ],
+                  "BFDEHDNLNJH": [
+                    "NormalAttack_01",
+                    "NormalAttack_02",
+                    "NormalAttack_03",
+                    "NormalAttack_04",
+                    "NormalAttack_05",
+                    "NormalAttack_06",
+                    "ExtraAttack",
+                    "FallingAttack",
+                    "Elemental_Art",
+                    "Elemental_Art_Hold",
+                    "Elemental_Art_Extra",
+                    "Elemental_Burst"
+                  ],
+                  "EMILGODPBIG": [
+                    "FIGHT_PROP_CUR_ATTACK",
+                    "Attack2ExtraRatio",
+                    "MUL"
+                  ],
+                  "IJDGNIIOHLM": [
+                    {
+                      "$type": "LEHABIJBEAO",
+                      "BDHBNCEEPPK": "Target",
+                      "JOFNJODFEDG": "Ice"
+                    },
+                    {
+                      "$type": "BKCJECHCDKG",
+                      "BDHBNCEEPPK": "Target",
+                      "FJGEDPNBGCG": -1,
+                      "LJBBKGIFJDB": [
+                        "Monster"
+                      ]
+                    },
+                    {
+                      "$type": "MMPLBPOHMGL",
+                      "BDHBNCEEPPK": "Target",
+                      "NJJFOACNFGL": "NoneOrEqual",
+                      "PEELJBICEHE": "_ANIMAL_ENTITY_TYPE"
+                    }
+                  ],
+                  "IMHIGCHNNCA": "ElementalArt_H_Buff_Count",
+                  "KFNJNNEOFCB": [
+                    {
+                      "$type": "GCINLBBPONN",
+                      "AMOLMPHFPHJ": -1,
+                      "ILELAOFJIKJ": true,
+                      "LDFBDMNIADI": "UNIQUE_Shenhe_ElementalArt_H_Buff_FX",
+                      "LJFIEGHHLOB": true
+                    }
+                  ],
+                  "MLJNNELMEFL": [
+                    {
+                      "$type": "AHICIAHHALJ",
+                      "AMOLMPHFPHJ": -1,
+                      "BDHBNCEEPPK": "Caster",
+                      "IIBMNPFLNMJ": "Avatar_Shenhe_Constellation_4",
+                      "IJDGNIIOHLM": [
+                        {
+                          "$type": "DIOFPDKDAIG",
+                          "BDHBNCEEPPK": "Target",
+                          "JPCEGCMOHNI": "Shenhe_Constellation_4"
+                        }
+                      ],
+                      "ILELAOFJIKJ": true,
+                      "LJFIEGHHLOB": true,
+                      "LPFPKHHKGIB": "Other"
+                    }
+                  ]
+                }
+              ],
+              "PPKOPMBNPJH": true
+            }
+          },
+          "IIBMNPFLNMJ": "Avatar_Shenhe_ElementalArt_Attack_H",
+          "LOEHLJGBGAC": {
+            "Attack2ExtraRatio": 0,
+            "ElementalArt_H_Buff_Count": 0,
+            "ElementalArt_H_Buff_Time": 0,
+            "ElementalArt_H_Extra_Buff_Ratio": 0,
+            "ElementalArt_H_Extra_Buff_Time": 0,
+            "ElementalArt_H_Radius": 4,
+            "Elemental_Art_H_Damage": 0
+          },
+          "OMAIGDMCJBO": {
+            "DBGOKAKAHFP": 100,
+            "DOALDLPNGMF": -1,
+            "KFOMCJGGPPC": -1,
+            "PPKOPMBNPJH": true
+          }
+        }
+      },
+      {
+        "definition": {
+          "definition_id": "dd9712bd2f2280965c2f339bc78eab9b8b8735956e7f87eb8bf09ab95e970fb9",
+          "definition_kind": "modifier",
+          "owner_definition_id": "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597",
+          "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Shenhe.json",
+          "json_pointer": "/6/Default/GPPBBDEICKP/ElementalArt_ElemBall",
+          "variant_key": "Default",
+          "namespace_key": "Temp",
+          "node_sha256": "678e75da3b7ed1e73b7c99549242086507e8ed2e331a0a92359bdafcb24cca1c",
+          "exact_key": "ElementalArt_ElemBall"
+        },
+        "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Shenhe.json",
+        "json_pointer": "/6/Default/GPPBBDEICKP/ElementalArt_ElemBall",
+        "source_sha256": "9949f5c28fbaeddb2257f44eed8cadae2b8cd1c19514792fc7d2e7069ca284cc",
+        "node_sha256": "678e75da3b7ed1e73b7c99549242086507e8ed2e331a0a92359bdafcb24cca1c",
+        "payload": {
+          "DBGOKAKAHFP": 100,
+          "DOALDLPNGMF": -1,
+          "EMGBJJOIENB": [
+            {
+              "$type": "EDAOLCMCEBI",
+              "AMOLMPHFPHJ": -1,
+              "AOCCEKAGBFB": 12,
+              "HHENHNHHHDA": 1,
+              "ILELAOFJIKJ": true,
+              "KKMLMJNCLLG": 2022,
+              "LJFIEGHHLOB": true,
+              "MLFLDPAGADG": {
+                "$type": "KCOKCEJLEMA",
+                "CCNPIPFLFAL": {
+                  "$type": "AAKJDEPKNHH",
+                  "BFIKJDKPACL": 1.5,
+                  "EDBLANFLPBB": 0.5
+                },
+                "EEFLHEKBODJ": {
+                  "BNJLEBLGEKB": 180
+                },
+                "GNFICELAKIB": 10,
+                "HECMDGIAGKM": 2,
+                "POPNBJAHNFK": {
+                  "ONEHKOHOCBH": 180
+                }
+              }
+            }
+          ],
+          "GPPCPGHLDHL": "Unique",
+          "JPEAFDFPKAN": 0.5,
+          "KFOMCJGGPPC": -1,
+          "PPKOPMBNPJH": true
+        }
+      },
+      {
+        "definition": {
+          "definition_id": "262543749bcad6f91bb1b92aef52df4dbb2298a506106f731c94f6a3af6b3be1",
+          "definition_kind": "modifier",
+          "owner_definition_id": "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597",
+          "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Shenhe.json",
+          "json_pointer": "/6/Default/GPPBBDEICKP/Shenhe_ElementalArt_ElemBall_Handler",
+          "variant_key": "Default",
+          "namespace_key": "Temp",
+          "node_sha256": "9a34007c12829f62fcb92fad4e416791f3f8bddd301f0637e413e75669c08cb0",
+          "exact_key": "Shenhe_ElementalArt_ElemBall_Handler"
+        },
+        "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Shenhe.json",
+        "json_pointer": "/6/Default/GPPBBDEICKP/Shenhe_ElementalArt_ElemBall_Handler",
+        "source_sha256": "9949f5c28fbaeddb2257f44eed8cadae2b8cd1c19514792fc7d2e7069ca284cc",
+        "node_sha256": "9a34007c12829f62fcb92fad4e416791f3f8bddd301f0637e413e75669c08cb0",
+        "payload": {
+          "DBGOKAKAHFP": 100,
+          "DOALDLPNGMF": -1,
+          "GPPCPGHLDHL": "Unique",
+          "KFOMCJGGPPC": -1,
+          "LPMFNGFGMCE": [
+            {
+              "$type": "PBIOEEHFHFD",
+              "AMOLMPHFPHJ": -1,
+              "BDHBNCEEPPK": "Other",
+              "ILELAOFJIKJ": true,
+              "LJFIEGHHLOB": false,
+              "MJKPCGCAPLK": [
+                {
+                  "$type": "DPNJGLIMCHM",
+                  "BDHBNCEEPPK": "Target",
+                  "BFDEHDNLNJH": [
+                    "Elemental_Art"
+                  ]
+                },
+                {
+                  "$type": "BIMGEEAOLLH",
+                  "BDHBNCEEPPK": "Target",
+                  "PEPDKCDHNIM": "Default"
+                },
+                {
+                  "$type": "BKCJECHCDKG",
+                  "BDHBNCEEPPK": "Target",
+                  "FJGEDPNBGCG": -1,
+                  "LJBBKGIFJDB": [
+                    "Monster"
+                  ]
+                },
+                {
+                  "$type": "MMPLBPOHMGL",
+                  "BDHBNCEEPPK": "Target",
+                  "NJJFOACNFGL": "NoneOrEqual",
+                  "PEELJBICEHE": "_ANIMAL_ENTITY_TYPE"
+                }
+              ],
+              "MLJNNELMEFL": [
+                {
+                  "$type": "BINBHGLANKO",
+                  "AMOLMPHFPHJ": -1,
+                  "ILELAOFJIKJ": true,
+                  "LDFBDMNIADI": "ElementalArt_ElemBall",
+                  "LJFIEGHHLOB": false
+                }
+              ]
+            }
+          ],
+          "PPKOPMBNPJH": true
+        }
+      },
+      {
+        "definition": {
+          "definition_id": "ce70c2dee00895c15f2ff43dda5fee4e63dc56805db26a563e9d6c843a3b9eb0",
+          "definition_kind": "modifier",
+          "owner_definition_id": "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597",
+          "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Shenhe.json",
+          "json_pointer": "/6/Default/GPPBBDEICKP/UNIQUE_Shenhe_ElementalArt_H_Buff",
+          "variant_key": "Default",
+          "namespace_key": "Temp",
+          "node_sha256": "64561acc37da8800776b29b2bb887dcb1aff5626af2c4f471e57d7a7dddbf911",
+          "exact_key": "UNIQUE_Shenhe_ElementalArt_H_Buff"
+        },
+        "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Shenhe.json",
+        "json_pointer": "/6/Default/GPPBBDEICKP/UNIQUE_Shenhe_ElementalArt_H_Buff",
+        "source_sha256": "9949f5c28fbaeddb2257f44eed8cadae2b8cd1c19514792fc7d2e7069ca284cc",
+        "node_sha256": "64561acc37da8800776b29b2bb887dcb1aff5626af2c4f471e57d7a7dddbf911",
+        "payload": {
+          "DBGOKAKAHFP": 100,
+          "DIELNIJPCJJ": true,
+          "DOALDLPNGMF": -1,
+          "GPPCPGHLDHL": "Unique",
+          "KFOMCJGGPPC": -1,
+          "LFIJIMIMBIH": [
+            {
+              "$type": "DCFENNHBEMG",
+              "AMOLMPHFPHJ": -1,
+              "BFDEHDNLNJH": [
+                "NormalAttack_01",
+                "NormalAttack_02",
+                "NormalAttack_03",
+                "NormalAttack_04",
+                "NormalAttack_05",
+                "NormalAttack_06",
+                "ExtraAttack",
+                "FallingAttack",
+                "Elemental_Art",
+                "Elemental_Art_Hold",
+                "Elemental_Art_Extra",
+                "Elemental_Burst"
+              ],
+              "EMILGODPBIG": [
+                "FIGHT_PROP_CUR_ATTACK",
+                "Attack2ExtraRatio",
+                "MUL"
+              ],
+              "IJDGNIIOHLM": [
+                {
+                  "$type": "LEHABIJBEAO",
+                  "BDHBNCEEPPK": "Target",
+                  "JOFNJODFEDG": "Ice"
+                },
+                {
+                  "$type": "BKCJECHCDKG",
+                  "BDHBNCEEPPK": "Target",
+                  "FJGEDPNBGCG": -1,
+                  "LJBBKGIFJDB": [
+                    "Monster"
+                  ]
+                },
+                {
+                  "$type": "MMPLBPOHMGL",
+                  "BDHBNCEEPPK": "Target",
+                  "NJJFOACNFGL": "NoneOrEqual",
+                  "PEELJBICEHE": "_ANIMAL_ENTITY_TYPE"
+                }
+              ],
+              "IMHIGCHNNCA": "ElementalArt_H_Buff_Count",
+              "KFNJNNEOFCB": [
+                {
+                  "$type": "GCINLBBPONN",
+                  "AMOLMPHFPHJ": -1,
+                  "ILELAOFJIKJ": true,
+                  "LDFBDMNIADI": "UNIQUE_Shenhe_ElementalArt_H_Buff_FX",
+                  "LJFIEGHHLOB": true
+                }
+              ],
+              "MLJNNELMEFL": [
+                {
+                  "$type": "AHICIAHHALJ",
+                  "AMOLMPHFPHJ": -1,
+                  "BDHBNCEEPPK": "Caster",
+                  "IIBMNPFLNMJ": "Avatar_Shenhe_Constellation_4",
+                  "IJDGNIIOHLM": [
+                    {
+                      "$type": "DIOFPDKDAIG",
+                      "BDHBNCEEPPK": "Target",
+                      "JPCEGCMOHNI": "Shenhe_Constellation_4"
+                    }
+                  ],
+                  "ILELAOFJIKJ": true,
+                  "LJFIEGHHLOB": true,
+                  "LPFPKHHKGIB": "Other"
+                }
+              ]
+            }
+          ],
+          "PPKOPMBNPJH": true
+        }
+      },
+      {
+        "definition": {
+          "definition_id": "b1d468b1c2fccecd0843c71e83500992baed18b4ee3c527b7743e4f4c5e33412",
+          "definition_kind": "modifier",
+          "owner_definition_id": "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597",
+          "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Shenhe.json",
+          "json_pointer": "/6/Default/GPPBBDEICKP/UNIQUE_Shenhe_ElementalArt_H_Buff_FX",
+          "variant_key": "Default",
+          "namespace_key": "Temp",
+          "node_sha256": "33bc24be1e5bbcb9366fa543c26c29534a6fead83bc0a8450c2ea4912e2fb591",
+          "exact_key": "UNIQUE_Shenhe_ElementalArt_H_Buff_FX"
+        },
+        "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Shenhe.json",
+        "json_pointer": "/6/Default/GPPBBDEICKP/UNIQUE_Shenhe_ElementalArt_H_Buff_FX",
+        "source_sha256": "9949f5c28fbaeddb2257f44eed8cadae2b8cd1c19514792fc7d2e7069ca284cc",
+        "node_sha256": "33bc24be1e5bbcb9366fa543c26c29534a6fead83bc0a8450c2ea4912e2fb591",
+        "payload": {
+          "DBGOKAKAHFP": 100,
+          "DIELNIJPCJJ": true,
+          "DOALDLPNGMF": -1,
+          "EMGBJJOIENB": [
+            {
+              "$type": "PMNJOIIOFJI",
+              "AMOLMPHFPHJ": -1,
+              "BEIMGAKABJN": "Eff_Avatar_Lady_Pole_Shenhe_ElementalArt_Buff_Loop",
+              "HJIHBAANFLE": 1,
+              "ILELAOFJIKJ": true,
+              "JMMALEJDAEF": -1,
+              "LJFIEGHHLOB": true,
+              "MLFLDPAGADG": {
+                "EEFLHEKBODJ": {
+                  "BNJLEBLGEKB": 180
+                },
+                "GNFICELAKIB": 10,
+                "HECMDGIAGKM": 2,
+                "POPNBJAHNFK": {
+                  "ONEHKOHOCBH": 180
+                }
+              }
+            }
+          ],
+          "GPPCPGHLDHL": "Unique",
+          "KFOMCJGGPPC": -1,
+          "PPKOPMBNPJH": true
+        }
+      },
+      {
+        "definition": {
+          "definition_id": "d52d173b61d420a85048b0f37c61d056eb13941b47e2c128b608f5233f9ebeae",
+          "definition_kind": "modifier",
+          "owner_definition_id": "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597",
+          "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Shenhe.json",
+          "json_pointer": "/6/Default/GPPBBDEICKP/UNIQUE_Shenhe_ElementalArt_H_Buff_Handler",
+          "variant_key": "Default",
+          "namespace_key": "Temp",
+          "node_sha256": "1be208fd166dfff5fb94c927650abdeb711a978e01c1304963bfea8ca2d367ab",
+          "exact_key": "UNIQUE_Shenhe_ElementalArt_H_Buff_Handler"
+        },
+        "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Shenhe.json",
+        "json_pointer": "/6/Default/GPPBBDEICKP/UNIQUE_Shenhe_ElementalArt_H_Buff_Handler",
+        "source_sha256": "9949f5c28fbaeddb2257f44eed8cadae2b8cd1c19514792fc7d2e7069ca284cc",
+        "node_sha256": "1be208fd166dfff5fb94c927650abdeb711a978e01c1304963bfea8ca2d367ab",
+        "payload": {
+          "DBGOKAKAHFP": 100,
+          "DIELNIJPCJJ": true,
+          "DOALDLPNGMF": -1,
+          "EMGBJJOIENB": [
+            {
+              "$type": "CDANEAFAFKM",
+              "AMOLMPHFPHJ": -1,
+              "ILELAOFJIKJ": true,
+              "LDFBDMNIADI": "UNIQUE_Shenhe_ElementalArt_H_Buff_FX",
+              "LJFIEGHHLOB": true
+            },
+            {
+              "$type": "PBIOEEHFHFD",
+              "AMOLMPHFPHJ": -1,
+              "BDHBNCEEPPK": "Caster",
+              "ILELAOFJIKJ": true,
+              "LJFIEGHHLOB": true,
+              "MJKPCGCAPLK": [
+                {
+                  "$type": "DIOFPDKDAIG",
+                  "BDHBNCEEPPK": "Target",
+                  "JPCEGCMOHNI": "Shenhe_Constellation_6"
+                }
+              ],
+              "MLJNNELMEFL": [
+                {
+                  "$type": "CDANEAFAFKM",
+                  "AMOLMPHFPHJ": -1,
+                  "ILELAOFJIKJ": true,
+                  "LDFBDMNIADI": "UNIQUE_Shenhe_ElementalArt_H_Talent_Buff",
+                  "LJFIEGHHLOB": true
+                }
+              ],
+              "PAPFFKOKPML": [
+                {
+                  "$type": "CDANEAFAFKM",
+                  "AMOLMPHFPHJ": -1,
+                  "ILELAOFJIKJ": true,
+                  "LDFBDMNIADI": "UNIQUE_Shenhe_ElementalArt_H_Buff",
+                  "LJFIEGHHLOB": true
+                }
+              ]
+            }
+          ],
+          "FMBHOKCHKOH": [
+            {
+              "$type": "PBIOEEHFHFD",
+              "AMOLMPHFPHJ": -1,
+              "ILELAOFJIKJ": true,
+              "LJFIEGHHLOB": true,
+              "MJKPCGCAPLK": [
+                {
+                  "$type": "OLNGCABMCGI",
+                  "BDHBNCEEPPK": "Caster",
+                  "DKCBCJCHEBF": "LesserOrEqual",
+                  "NJJFOACNFGL": "XYZ",
+                  "PDIFFCBMGMO": 50
+                }
+              ],
+              "PAPFFKOKPML": [
+                {
+                  "$type": "GCINLBBPONN",
+                  "AMOLMPHFPHJ": -1,
+                  "ILELAOFJIKJ": true,
+                  "LDFBDMNIADI": "UNIQUE_Shenhe_ElementalArt_H_Buff_Handler",
+                  "LJFIEGHHLOB": true
+                }
+              ]
+            }
+          ],
+          "GPPCPGHLDHL": "Unique",
+          "JFLGPLCIOEC": 0.30000001192092896,
+          "JPEAFDFPKAN": "ElementalArt_H_Buff_Time",
+          "KFOMCJGGPPC": -1,
+          "PPKOPMBNPJH": true
+        }
+      },
+      {
+        "definition": {
+          "definition_id": "4256e438d4c1e0d053fb79f6376e3860801dbf8cd2da76cc30cac2c17c152737",
+          "definition_kind": "modifier",
+          "owner_definition_id": "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597",
+          "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Shenhe.json",
+          "json_pointer": "/6/Default/GPPBBDEICKP/UNIQUE_Shenhe_ElementalArt_H_Extra_Buff",
+          "variant_key": "Default",
+          "namespace_key": "Temp",
+          "node_sha256": "65b916aa99fb1ad1c0f473133cca63ddad82961320d09c145360e73d1814aee1",
+          "exact_key": "UNIQUE_Shenhe_ElementalArt_H_Extra_Buff"
+        },
+        "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Shenhe.json",
+        "json_pointer": "/6/Default/GPPBBDEICKP/UNIQUE_Shenhe_ElementalArt_H_Extra_Buff",
+        "source_sha256": "9949f5c28fbaeddb2257f44eed8cadae2b8cd1c19514792fc7d2e7069ca284cc",
+        "node_sha256": "65b916aa99fb1ad1c0f473133cca63ddad82961320d09c145360e73d1814aee1",
+        "payload": {
+          "BOCCNJLBFCJ": "AttackUp",
+          "DBGOKAKAHFP": 100,
+          "DIELNIJPCJJ": true,
+          "DOALDLPNGMF": -1,
+          "GPPCPGHLDHL": "RefreshUniqueDurability",
+          "JPEAFDFPKAN": "ElementalArt_H_Extra_Buff_Time",
+          "KFOMCJGGPPC": -1,
+          "LFIJIMIMBIH": [
+            {
+              "$type": "GBFENLIGHEJ",
+              "AMOLMPHFPHJ": -1,
+              "BFDEHDNLNJH": [
+                "NormalAttack_01",
+                "NormalAttack_02",
+                "NormalAttack_03",
+                "NormalAttack_04",
+                "NormalAttack_05",
+                "NormalAttack_06",
+                "ExtraAttack",
+                "FallingAttack"
+              ],
+              "KALBHJILPDA": "ElementalArt_H_Extra_Buff_Ratio"
+            }
+          ],
+          "PPKOPMBNPJH": true
+        }
+      },
+      {
+        "definition": {
+          "definition_id": "198faa873faebd418d40ec0c9fc43cf87bb9dadd7c98dddc3b17771d56aebb33",
+          "definition_kind": "modifier",
+          "owner_definition_id": "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597",
+          "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Shenhe.json",
+          "json_pointer": "/6/Default/GPPBBDEICKP/UNIQUE_Shenhe_ElementalArt_H_Talent_Buff",
+          "variant_key": "Default",
+          "namespace_key": "Temp",
+          "node_sha256": "a7ba9248179ae1e688bc5e036015948bb204a3ee3a6823348135942fe7a6bd4b",
+          "exact_key": "UNIQUE_Shenhe_ElementalArt_H_Talent_Buff"
+        },
+        "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Shenhe.json",
+        "json_pointer": "/6/Default/GPPBBDEICKP/UNIQUE_Shenhe_ElementalArt_H_Talent_Buff",
+        "source_sha256": "9949f5c28fbaeddb2257f44eed8cadae2b8cd1c19514792fc7d2e7069ca284cc",
+        "node_sha256": "a7ba9248179ae1e688bc5e036015948bb204a3ee3a6823348135942fe7a6bd4b",
+        "payload": {
+          "DBGOKAKAHFP": 100,
+          "DIELNIJPCJJ": true,
+          "DOALDLPNGMF": -1,
+          "GPPCPGHLDHL": "Unique",
+          "KFOMCJGGPPC": -1,
+          "LFIJIMIMBIH": [
+            {
+              "$type": "DCFENNHBEMG",
+              "AMOLMPHFPHJ": -1,
+              "APGEFBAAIOD": [
+                {
+                  "$type": "DPNJGLIMCHM",
+                  "BDHBNCEEPPK": "Target",
+                  "BFDEHDNLNJH": [
+                    "FallingAttack",
+                    "Elemental_Art",
+                    "Elemental_Art_Hold",
+                    "Elemental_Art_Extra",
+                    "Elemental_Burst"
+                  ]
+                }
+              ],
+              "BFDEHDNLNJH": [
+                "NormalAttack_01",
+                "NormalAttack_02",
+                "NormalAttack_03",
+                "NormalAttack_04",
+                "NormalAttack_05",
+                "NormalAttack_06",
+                "ExtraAttack",
+                "FallingAttack",
+                "Elemental_Art",
+                "Elemental_Art_Hold",
+                "Elemental_Art_Extra",
+                "Elemental_Burst"
+              ],
+              "EMILGODPBIG": [
+                "FIGHT_PROP_CUR_ATTACK",
+                "Attack2ExtraRatio",
+                "MUL"
+              ],
+              "IJDGNIIOHLM": [
+                {
+                  "$type": "LEHABIJBEAO",
+                  "BDHBNCEEPPK": "Target",
+                  "JOFNJODFEDG": "Ice"
+                },
+                {
+                  "$type": "BKCJECHCDKG",
+                  "BDHBNCEEPPK": "Target",
+                  "FJGEDPNBGCG": -1,
+                  "LJBBKGIFJDB": [
+                    "Monster"
+                  ]
+                },
+                {
+                  "$type": "MMPLBPOHMGL",
+                  "BDHBNCEEPPK": "Target",
+                  "NJJFOACNFGL": "NoneOrEqual",
+                  "PEELJBICEHE": "_ANIMAL_ENTITY_TYPE"
+                }
+              ],
+              "IMHIGCHNNCA": "ElementalArt_H_Buff_Count",
+              "KFNJNNEOFCB": [
+                {
+                  "$type": "GCINLBBPONN",
+                  "AMOLMPHFPHJ": -1,
+                  "ILELAOFJIKJ": true,
+                  "LDFBDMNIADI": "UNIQUE_Shenhe_ElementalArt_H_Buff_FX",
+                  "LJFIEGHHLOB": true
+                }
+              ],
+              "MLJNNELMEFL": [
+                {
+                  "$type": "AHICIAHHALJ",
+                  "AMOLMPHFPHJ": -1,
+                  "BDHBNCEEPPK": "Caster",
+                  "IIBMNPFLNMJ": "Avatar_Shenhe_Constellation_4",
+                  "IJDGNIIOHLM": [
+                    {
+                      "$type": "DIOFPDKDAIG",
+                      "BDHBNCEEPPK": "Target",
+                      "JPCEGCMOHNI": "Shenhe_Constellation_4"
+                    }
+                  ],
+                  "ILELAOFJIKJ": true,
+                  "LJFIEGHHLOB": true,
+                  "LPFPKHHKGIB": "Other"
+                }
+              ]
+            }
+          ],
+          "PPKOPMBNPJH": true
+        }
+      }
+    ],
+    "entry_ids": {
+      "modifiers": [
+        "dd9712bd2f2280965c2f339bc78eab9b8b8735956e7f87eb8bf09ab95e970fb9",
+        "262543749bcad6f91bb1b92aef52df4dbb2298a506106f731c94f6a3af6b3be1",
+        "ce70c2dee00895c15f2ff43dda5fee4e63dc56805db26a563e9d6c843a3b9eb0",
+        "b1d468b1c2fccecd0843c71e83500992baed18b4ee3c527b7743e4f4c5e33412",
+        "d52d173b61d420a85048b0f37c61d056eb13941b47e2c128b608f5233f9ebeae",
+        "4256e438d4c1e0d053fb79f6376e3860801dbf8cd2da76cc30cac2c17c152737",
+        "198faa873faebd418d40ec0c9fc43cf87bb9dadd7c98dddc3b17771d56aebb33"
+      ],
+      "avatar": "c806ce5a609f4113c04ded2e2849f22c439ad405e092b6feaf22e8feb999e447",
+      "depot": "fe227129b2ce542830fdc58970fcd3d9f77f1435e101a6a37d061e0d58220702",
+      "skill": "78a311e3ea8d0d576e1a985029053cd73ffca31b88e554e7c4773fef0b7a234e",
+      "proud_skill": "237a7317a9337e6209f1f21464e03ea8a3c22817d94d358bc357332a07d81637",
+      "talent": "e8ace1e4204306ce68d46363988f489452547a0e2d2a68abfbfcebda51a09aaa",
+      "ability": "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597"
+    },
+    "references": [
+      {
+        "reference_id": "189062a3d61d0ea6c7d1741802b1e322b5c22a52782170e260fcb5d1a546c5c1",
+        "from_definition_id": "e8ace1e4204306ce68d46363988f489452547a0e2d2a68abfbfcebda51a09aaa",
+        "source_path": "BinOutput/Talent/AvatarTalents/ConfigTalent_Shenhe.json",
+        "json_pointer": "/Shenhe_SkillUpgrade_2/0/IIBMNPFLNMJ",
+        "field_name": "abilityName",
+        "relation_kind": "ability_operation",
+        "target_kind": "ability",
+        "source_order": 0,
+        "presence_status": "present",
+        "resolution_status": "resolved",
+        "resolved_definition_id": "86a95694e9fa4ef0598954ccb3be5fb13f45d2d0154459b5a9ba102bb2027ee3",
+        "extraction_rule_id": "7",
+        "version_line": "release",
+        "snapshot_id": "ef0cac22b5cc4ee887fa64d134b563ffc745ae365b0c6cdb03930f895ab413df",
+        "target_key": "Avatar_Shenhe_ElementalArt_Bullet",
+        "scope": {
+          "owner_definition_id": null
+        },
+        "candidate_ids": [
+          "86a95694e9fa4ef0598954ccb3be5fb13f45d2d0154459b5a9ba102bb2027ee3"
+        ]
+      },
+      {
+        "reference_id": "d3ac4010bf15f783ce9ac90f3285adec8d92e560d9aea74ac9437fa0983ebdbd",
+        "from_definition_id": "e8ace1e4204306ce68d46363988f489452547a0e2d2a68abfbfcebda51a09aaa",
+        "source_path": "BinOutput/Talent/AvatarTalents/ConfigTalent_Shenhe.json",
+        "json_pointer": "/Shenhe_SkillUpgrade_2/1/IIBMNPFLNMJ",
+        "field_name": "abilityName",
+        "relation_kind": "ability_operation",
+        "target_kind": "ability",
+        "source_order": 1,
+        "presence_status": "present",
+        "resolution_status": "resolved",
+        "resolved_definition_id": "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597",
+        "extraction_rule_id": "7",
+        "version_line": "release",
+        "snapshot_id": "ef0cac22b5cc4ee887fa64d134b563ffc745ae365b0c6cdb03930f895ab413df",
+        "target_key": "Avatar_Shenhe_ElementalArt_Attack_H",
+        "scope": {
+          "owner_definition_id": null
+        },
+        "candidate_ids": [
+          "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597"
+        ]
+      },
+      {
+        "reference_id": "87bbad9c03d0ccf777bd49363de2d6d7c813f3e0305abab7d6f472eafdf62503",
+        "from_definition_id": "e8ace1e4204306ce68d46363988f489452547a0e2d2a68abfbfcebda51a09aaa",
+        "source_path": "BinOutput/Talent/AvatarTalents/ConfigTalent_Shenhe.json",
+        "json_pointer": "/Shenhe_SkillUpgrade_2/2/IIBMNPFLNMJ",
+        "field_name": "abilityName",
+        "relation_kind": "ability_operation",
+        "target_kind": "ability",
+        "source_order": 2,
+        "presence_status": "present",
+        "resolution_status": "resolved",
+        "resolved_definition_id": "b7e02466b849934b0a6f3168b89519bc6a98dc776d879ee1ffad112dd39fd613",
+        "extraction_rule_id": "7",
+        "version_line": "release",
+        "snapshot_id": "ef0cac22b5cc4ee887fa64d134b563ffc745ae365b0c6cdb03930f895ab413df",
+        "target_key": "Avatar_Shenhe_ElementalArt_Attack_L",
+        "scope": {
+          "owner_definition_id": null
+        },
+        "candidate_ids": [
+          "b7e02466b849934b0a6f3168b89519bc6a98dc776d879ee1ffad112dd39fd613"
+        ]
+      },
+      {
+        "reference_id": "17bc451a9500db9449bbc9c9b186f601dc9af72aa59a5449ba7cd138b9e0dc93",
+        "from_definition_id": "e8ace1e4204306ce68d46363988f489452547a0e2d2a68abfbfcebda51a09aaa",
+        "source_path": "BinOutput/Talent/AvatarTalents/ConfigTalent_Shenhe.json",
+        "json_pointer": "/Shenhe_SkillUpgrade_2/3/IIBMNPFLNMJ",
+        "field_name": "abilityName",
+        "relation_kind": "ability_operation",
+        "target_kind": "ability",
+        "source_order": 3,
+        "presence_status": "present",
+        "resolution_status": "resolved",
+        "resolved_definition_id": "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597",
+        "extraction_rule_id": "7",
+        "version_line": "release",
+        "snapshot_id": "ef0cac22b5cc4ee887fa64d134b563ffc745ae365b0c6cdb03930f895ab413df",
+        "target_key": "Avatar_Shenhe_ElementalArt_Attack_H",
+        "scope": {
+          "owner_definition_id": null
+        },
+        "candidate_ids": [
+          "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597"
+        ]
+      },
+      {
+        "reference_id": "0550e6659d16ed7734d83c279f7e39ef246059b3c05c53aa1bef4fe60ec2a7fb",
+        "from_definition_id": "e8ace1e4204306ce68d46363988f489452547a0e2d2a68abfbfcebda51a09aaa",
+        "source_path": "BinOutput/Talent/AvatarTalents/ConfigTalent_Shenhe.json",
+        "json_pointer": "/Shenhe_SkillUpgrade_2/4/IIBMNPFLNMJ",
+        "field_name": "abilityName",
+        "relation_kind": "ability_operation",
+        "target_kind": "ability",
+        "source_order": 4,
+        "presence_status": "present",
+        "resolution_status": "resolved",
+        "resolved_definition_id": "b7e02466b849934b0a6f3168b89519bc6a98dc776d879ee1ffad112dd39fd613",
+        "extraction_rule_id": "7",
+        "version_line": "release",
+        "snapshot_id": "ef0cac22b5cc4ee887fa64d134b563ffc745ae365b0c6cdb03930f895ab413df",
+        "target_key": "Avatar_Shenhe_ElementalArt_Attack_L",
+        "scope": {
+          "owner_definition_id": null
+        },
+        "candidate_ids": [
+          "b7e02466b849934b0a6f3168b89519bc6a98dc776d879ee1ffad112dd39fd613"
+        ]
+      },
+      {
+        "reference_id": "654d76cfc37b40098b16914ed423c9f4cb3efafffe9bc6ec3af3bba97c4eca22",
+        "from_definition_id": "e8ace1e4204306ce68d46363988f489452547a0e2d2a68abfbfcebda51a09aaa",
+        "source_path": "BinOutput/Talent/AvatarTalents/ConfigTalent_Shenhe.json",
+        "json_pointer": "/Shenhe_SkillUpgrade_2/5/IIBMNPFLNMJ",
+        "field_name": "abilityName",
+        "relation_kind": "ability_operation",
+        "target_kind": "ability",
+        "source_order": 5,
+        "presence_status": "present",
+        "resolution_status": "resolved",
+        "resolved_definition_id": "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597",
+        "extraction_rule_id": "7",
+        "version_line": "release",
+        "snapshot_id": "ef0cac22b5cc4ee887fa64d134b563ffc745ae365b0c6cdb03930f895ab413df",
+        "target_key": "Avatar_Shenhe_ElementalArt_Attack_H",
+        "scope": {
+          "owner_definition_id": null
+        },
+        "candidate_ids": [
+          "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597"
+        ]
+      },
+      {
+        "reference_id": "abc7410b1b7cbfc38bd8f6da50e76cd101a36d032d22e0beabcfb13f7808081c",
+        "from_definition_id": "e8ace1e4204306ce68d46363988f489452547a0e2d2a68abfbfcebda51a09aaa",
+        "source_path": "BinOutput/Talent/AvatarTalents/ConfigTalent_Shenhe.json",
+        "json_pointer": "/Shenhe_SkillUpgrade_2/6/IIBMNPFLNMJ",
+        "field_name": "abilityName",
+        "relation_kind": "ability_operation",
+        "target_kind": "ability",
+        "source_order": 6,
+        "presence_status": "present",
+        "resolution_status": "resolved",
+        "resolved_definition_id": "b7e02466b849934b0a6f3168b89519bc6a98dc776d879ee1ffad112dd39fd613",
+        "extraction_rule_id": "7",
+        "version_line": "release",
+        "snapshot_id": "ef0cac22b5cc4ee887fa64d134b563ffc745ae365b0c6cdb03930f895ab413df",
+        "target_key": "Avatar_Shenhe_ElementalArt_Attack_L",
+        "scope": {
+          "owner_definition_id": null
+        },
+        "candidate_ids": [
+          "b7e02466b849934b0a6f3168b89519bc6a98dc776d879ee1ffad112dd39fd613"
+        ]
+      },
+      {
+        "reference_id": "e36a87b5d069a966a397a1b01b45e8eb3a29a1edd8ce95b179f61996584c5782",
+        "from_definition_id": "e8ace1e4204306ce68d46363988f489452547a0e2d2a68abfbfcebda51a09aaa",
+        "source_path": "BinOutput/Talent/AvatarTalents/ConfigTalent_Shenhe.json",
+        "json_pointer": "/Shenhe_SkillUpgrade_2/7/IIBMNPFLNMJ",
+        "field_name": "abilityName",
+        "relation_kind": "ability_operation",
+        "target_kind": "ability",
+        "source_order": 7,
+        "presence_status": "present",
+        "resolution_status": "resolved",
+        "resolved_definition_id": "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597",
+        "extraction_rule_id": "7",
+        "version_line": "release",
+        "snapshot_id": "ef0cac22b5cc4ee887fa64d134b563ffc745ae365b0c6cdb03930f895ab413df",
+        "target_key": "Avatar_Shenhe_ElementalArt_Attack_H",
+        "scope": {
+          "owner_definition_id": null
+        },
+        "candidate_ids": [
+          "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597"
+        ]
+      },
+      {
+        "reference_id": "e70a0ed7fb7fa0d9b99d3c9f26ec68aad0121e68baaa733ad2fc7b398dc38d36",
+        "from_definition_id": "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597",
+        "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Shenhe.json",
+        "json_pointer": "/6/Default/ECFFDLHMCLK/3/LDFBDMNIADI",
+        "field_name": "modifierName",
+        "relation_kind": "modifier_operation",
+        "target_kind": "modifier",
+        "source_order": 0,
+        "presence_status": "present",
+        "resolution_status": "resolved",
+        "resolved_definition_id": "9b68ab63d10c202d6b9d6bcb9101b4d86de12413a0a763dd344720bed06bc476",
+        "extraction_rule_id": "7",
+        "version_line": "release",
+        "snapshot_id": "ef0cac22b5cc4ee887fa64d134b563ffc745ae365b0c6cdb03930f895ab413df",
+        "target_key": "UNIQUE_Shenhe_ElementalArt_L_Buff_Handler",
+        "scope": {
+          "owner_definition_id": "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597"
+        },
+        "candidate_ids": [
+          "9b68ab63d10c202d6b9d6bcb9101b4d86de12413a0a763dd344720bed06bc476"
+        ]
+      },
+      {
+        "reference_id": "f4e2ab62595734d86e4f90be74014d2aaa478c44b7817f358c8256454d8e5e66",
+        "from_definition_id": "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597",
+        "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Shenhe.json",
+        "json_pointer": "/6/Default/ECFFDLHMCLK/4/LDFBDMNIADI",
+        "field_name": "modifierName",
+        "relation_kind": "modifier_operation",
+        "target_kind": "modifier",
+        "source_order": 1,
+        "presence_status": "present",
+        "resolution_status": "resolved",
+        "resolved_definition_id": "d52d173b61d420a85048b0f37c61d056eb13941b47e2c128b608f5233f9ebeae",
+        "extraction_rule_id": "7",
+        "version_line": "release",
+        "snapshot_id": "ef0cac22b5cc4ee887fa64d134b563ffc745ae365b0c6cdb03930f895ab413df",
+        "target_key": "UNIQUE_Shenhe_ElementalArt_H_Buff_Handler",
+        "scope": {
+          "owner_definition_id": "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597"
+        },
+        "candidate_ids": [
+          "d52d173b61d420a85048b0f37c61d056eb13941b47e2c128b608f5233f9ebeae"
+        ]
+      },
+      {
+        "reference_id": "7b46dfc45a72cf62d57b7ebae9ab429c92d2ed8daf9ae0af0a59c4c6354e8f51",
+        "from_definition_id": "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597",
+        "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Shenhe.json",
+        "json_pointer": "/6/Default/ECFFDLHMCLK/5/LDFBDMNIADI",
+        "field_name": "modifierName",
+        "relation_kind": "modifier_operation",
+        "target_kind": "modifier",
+        "source_order": 2,
+        "presence_status": "present",
+        "resolution_status": "resolved",
+        "resolved_definition_id": "d52d173b61d420a85048b0f37c61d056eb13941b47e2c128b608f5233f9ebeae",
+        "extraction_rule_id": "7",
+        "version_line": "release",
+        "snapshot_id": "ef0cac22b5cc4ee887fa64d134b563ffc745ae365b0c6cdb03930f895ab413df",
+        "target_key": "UNIQUE_Shenhe_ElementalArt_H_Buff_Handler",
+        "scope": {
+          "owner_definition_id": "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597"
+        },
+        "candidate_ids": [
+          "d52d173b61d420a85048b0f37c61d056eb13941b47e2c128b608f5233f9ebeae"
+        ]
+      },
+      {
+        "reference_id": "f9d05b29c715a7936545b4b0d9b2ff128f2f928816f2eb30cffc3af9252dc4df",
+        "from_definition_id": "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597",
+        "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Shenhe.json",
+        "json_pointer": "/6/Default/ECFFDLHMCLK/6/LDFBDMNIADI",
+        "field_name": "modifierName",
+        "relation_kind": "modifier_operation",
+        "target_kind": "modifier",
+        "source_order": 3,
+        "presence_status": "present",
+        "resolution_status": "resolved",
+        "resolved_definition_id": "4256e438d4c1e0d053fb79f6376e3860801dbf8cd2da76cc30cac2c17c152737",
+        "extraction_rule_id": "7",
+        "version_line": "release",
+        "snapshot_id": "ef0cac22b5cc4ee887fa64d134b563ffc745ae365b0c6cdb03930f895ab413df",
+        "target_key": "UNIQUE_Shenhe_ElementalArt_H_Extra_Buff",
+        "scope": {
+          "owner_definition_id": "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597"
+        },
+        "candidate_ids": [
+          "4256e438d4c1e0d053fb79f6376e3860801dbf8cd2da76cc30cac2c17c152737"
+        ]
+      },
+      {
+        "reference_id": "fa51f5a18db87fbc9271cbdc69b9e2744e8e7e7cdf224b5a9f8d0ce7c601984f",
+        "from_definition_id": "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597",
+        "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Shenhe.json",
+        "json_pointer": "/6/Default/EMGBJJOIENB/0/LDFBDMNIADI",
+        "field_name": "modifierName",
+        "relation_kind": "modifier_operation",
+        "target_kind": "modifier",
+        "source_order": 4,
+        "presence_status": "present",
+        "resolution_status": "resolved",
+        "resolved_definition_id": "262543749bcad6f91bb1b92aef52df4dbb2298a506106f731c94f6a3af6b3be1",
+        "extraction_rule_id": "7",
+        "version_line": "release",
+        "snapshot_id": "ef0cac22b5cc4ee887fa64d134b563ffc745ae365b0c6cdb03930f895ab413df",
+        "target_key": "Shenhe_ElementalArt_ElemBall_Handler",
+        "scope": {
+          "owner_definition_id": "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597"
+        },
+        "candidate_ids": [
+          "262543749bcad6f91bb1b92aef52df4dbb2298a506106f731c94f6a3af6b3be1"
+        ]
+      },
+      {
+        "reference_id": "7e50edfab8b214fd3d8518f39e30f67b2adddeaeb04295ad3e614e65a07bf02d",
+        "from_definition_id": "dd9712bd2f2280965c2f339bc78eab9b8b8735956e7f87eb8bf09ab95e970fb9",
+        "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Shenhe.json",
+        "json_pointer": "/6/Default/GPPBBDEICKP/ElementalArt_ElemBall/EMGBJJOIENB/0/KKMLMJNCLLG",
+        "field_name": "configID",
+        "relation_kind": "external_asset",
+        "target_kind": "gadget_config",
+        "source_order": 0,
+        "presence_status": "present",
+        "resolution_status": "external_asset",
+        "resolved_definition_id": null,
+        "extraction_rule_id": "7",
+        "version_line": "release",
+        "snapshot_id": "ef0cac22b5cc4ee887fa64d134b563ffc745ae365b0c6cdb03930f895ab413df",
+        "target_key": 2022,
+        "scope": {
+          "owner_definition_id": "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597"
+        },
+        "candidate_ids": []
+      },
+      {
+        "reference_id": "b904ab8024d3772fcb29bb912eb74d0ea09a022b846970c8b4d910f7baba3c63",
+        "from_definition_id": "262543749bcad6f91bb1b92aef52df4dbb2298a506106f731c94f6a3af6b3be1",
+        "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Shenhe.json",
+        "json_pointer": "/6/Default/GPPBBDEICKP/Shenhe_ElementalArt_ElemBall_Handler/LPMFNGFGMCE/0/MLJNNELMEFL/0/LDFBDMNIADI",
+        "field_name": "modifierName",
+        "relation_kind": "modifier_operation",
+        "target_kind": "modifier",
+        "source_order": 0,
+        "presence_status": "present",
+        "resolution_status": "resolved",
+        "resolved_definition_id": "dd9712bd2f2280965c2f339bc78eab9b8b8735956e7f87eb8bf09ab95e970fb9",
+        "extraction_rule_id": "7",
+        "version_line": "release",
+        "snapshot_id": "ef0cac22b5cc4ee887fa64d134b563ffc745ae365b0c6cdb03930f895ab413df",
+        "target_key": "ElementalArt_ElemBall",
+        "scope": {
+          "owner_definition_id": "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597"
+        },
+        "candidate_ids": [
+          "dd9712bd2f2280965c2f339bc78eab9b8b8735956e7f87eb8bf09ab95e970fb9"
+        ]
+      },
+      {
+        "reference_id": "a2718420b7fd9a519b9a320f75730d27eb948b6e254157f187f4dd28374239a6",
+        "from_definition_id": "ce70c2dee00895c15f2ff43dda5fee4e63dc56805db26a563e9d6c843a3b9eb0",
+        "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Shenhe.json",
+        "json_pointer": "/6/Default/GPPBBDEICKP/UNIQUE_Shenhe_ElementalArt_H_Buff/LFIJIMIMBIH/0/KFNJNNEOFCB/0/LDFBDMNIADI",
+        "field_name": "modifierName",
+        "relation_kind": "modifier_operation",
+        "target_kind": "modifier",
+        "source_order": 0,
+        "presence_status": "present",
+        "resolution_status": "resolved",
+        "resolved_definition_id": "b1d468b1c2fccecd0843c71e83500992baed18b4ee3c527b7743e4f4c5e33412",
+        "extraction_rule_id": "7",
+        "version_line": "release",
+        "snapshot_id": "ef0cac22b5cc4ee887fa64d134b563ffc745ae365b0c6cdb03930f895ab413df",
+        "target_key": "UNIQUE_Shenhe_ElementalArt_H_Buff_FX",
+        "scope": {
+          "owner_definition_id": "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597"
+        },
+        "candidate_ids": [
+          "b1d468b1c2fccecd0843c71e83500992baed18b4ee3c527b7743e4f4c5e33412"
+        ]
+      },
+      {
+        "reference_id": "835e708ab52de006470f8f570583893f88bb3fb5afec37c069825d00ffee3063",
+        "from_definition_id": "ce70c2dee00895c15f2ff43dda5fee4e63dc56805db26a563e9d6c843a3b9eb0",
+        "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Shenhe.json",
+        "json_pointer": "/6/Default/GPPBBDEICKP/UNIQUE_Shenhe_ElementalArt_H_Buff/LFIJIMIMBIH/0/MLJNNELMEFL/0/IIBMNPFLNMJ",
+        "field_name": "abilityName",
+        "relation_kind": "ability_operation",
+        "target_kind": "ability",
+        "source_order": 1,
+        "presence_status": "present",
+        "resolution_status": "resolved",
+        "resolved_definition_id": "1d3e9836af2425762857dbae94a3e9d4974c6c940bf457ef7413f8ea4334773e",
+        "extraction_rule_id": "7",
+        "version_line": "release",
+        "snapshot_id": "ef0cac22b5cc4ee887fa64d134b563ffc745ae365b0c6cdb03930f895ab413df",
+        "target_key": "Avatar_Shenhe_Constellation_4",
+        "scope": {
+          "owner_definition_id": "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597"
+        },
+        "candidate_ids": [
+          "1d3e9836af2425762857dbae94a3e9d4974c6c940bf457ef7413f8ea4334773e"
+        ]
+      },
+      {
+        "reference_id": "659a9c28091f228ebd310e9a1040132ce4443f1f6d03b6d76d11267fe0bc95c0",
+        "from_definition_id": "d52d173b61d420a85048b0f37c61d056eb13941b47e2c128b608f5233f9ebeae",
+        "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Shenhe.json",
+        "json_pointer": "/6/Default/GPPBBDEICKP/UNIQUE_Shenhe_ElementalArt_H_Buff_Handler/EMGBJJOIENB/0/LDFBDMNIADI",
+        "field_name": "modifierName",
+        "relation_kind": "modifier_operation",
+        "target_kind": "modifier",
+        "source_order": 0,
+        "presence_status": "present",
+        "resolution_status": "resolved",
+        "resolved_definition_id": "b1d468b1c2fccecd0843c71e83500992baed18b4ee3c527b7743e4f4c5e33412",
+        "extraction_rule_id": "7",
+        "version_line": "release",
+        "snapshot_id": "ef0cac22b5cc4ee887fa64d134b563ffc745ae365b0c6cdb03930f895ab413df",
+        "target_key": "UNIQUE_Shenhe_ElementalArt_H_Buff_FX",
+        "scope": {
+          "owner_definition_id": "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597"
+        },
+        "candidate_ids": [
+          "b1d468b1c2fccecd0843c71e83500992baed18b4ee3c527b7743e4f4c5e33412"
+        ]
+      },
+      {
+        "reference_id": "d4926833c346b3b5d66da65cd9d071329f75b320a0fb6f35a12e55a3c0dad9ea",
+        "from_definition_id": "d52d173b61d420a85048b0f37c61d056eb13941b47e2c128b608f5233f9ebeae",
+        "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Shenhe.json",
+        "json_pointer": "/6/Default/GPPBBDEICKP/UNIQUE_Shenhe_ElementalArt_H_Buff_Handler/EMGBJJOIENB/1/MLJNNELMEFL/0/LDFBDMNIADI",
+        "field_name": "modifierName",
+        "relation_kind": "modifier_operation",
+        "target_kind": "modifier",
+        "source_order": 1,
+        "presence_status": "present",
+        "resolution_status": "resolved",
+        "resolved_definition_id": "198faa873faebd418d40ec0c9fc43cf87bb9dadd7c98dddc3b17771d56aebb33",
+        "extraction_rule_id": "7",
+        "version_line": "release",
+        "snapshot_id": "ef0cac22b5cc4ee887fa64d134b563ffc745ae365b0c6cdb03930f895ab413df",
+        "target_key": "UNIQUE_Shenhe_ElementalArt_H_Talent_Buff",
+        "scope": {
+          "owner_definition_id": "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597"
+        },
+        "candidate_ids": [
+          "198faa873faebd418d40ec0c9fc43cf87bb9dadd7c98dddc3b17771d56aebb33"
+        ]
+      },
+      {
+        "reference_id": "46d8db35997e8e7ca4a00ee3d3631fb7cb453b330cd6c43c069cf05eda48f579",
+        "from_definition_id": "d52d173b61d420a85048b0f37c61d056eb13941b47e2c128b608f5233f9ebeae",
+        "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Shenhe.json",
+        "json_pointer": "/6/Default/GPPBBDEICKP/UNIQUE_Shenhe_ElementalArt_H_Buff_Handler/EMGBJJOIENB/1/PAPFFKOKPML/0/LDFBDMNIADI",
+        "field_name": "modifierName",
+        "relation_kind": "modifier_operation",
+        "target_kind": "modifier",
+        "source_order": 2,
+        "presence_status": "present",
+        "resolution_status": "resolved",
+        "resolved_definition_id": "ce70c2dee00895c15f2ff43dda5fee4e63dc56805db26a563e9d6c843a3b9eb0",
+        "extraction_rule_id": "7",
+        "version_line": "release",
+        "snapshot_id": "ef0cac22b5cc4ee887fa64d134b563ffc745ae365b0c6cdb03930f895ab413df",
+        "target_key": "UNIQUE_Shenhe_ElementalArt_H_Buff",
+        "scope": {
+          "owner_definition_id": "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597"
+        },
+        "candidate_ids": [
+          "ce70c2dee00895c15f2ff43dda5fee4e63dc56805db26a563e9d6c843a3b9eb0"
+        ]
+      },
+      {
+        "reference_id": "d9303a66393bed51412e254a1057a82568d3c0a179467a66ec2459a00d86e5b1",
+        "from_definition_id": "d52d173b61d420a85048b0f37c61d056eb13941b47e2c128b608f5233f9ebeae",
+        "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Shenhe.json",
+        "json_pointer": "/6/Default/GPPBBDEICKP/UNIQUE_Shenhe_ElementalArt_H_Buff_Handler/FMBHOKCHKOH/0/PAPFFKOKPML/0/LDFBDMNIADI",
+        "field_name": "modifierName",
+        "relation_kind": "modifier_operation",
+        "target_kind": "modifier",
+        "source_order": 3,
+        "presence_status": "present",
+        "resolution_status": "resolved",
+        "resolved_definition_id": "d52d173b61d420a85048b0f37c61d056eb13941b47e2c128b608f5233f9ebeae",
+        "extraction_rule_id": "7",
+        "version_line": "release",
+        "snapshot_id": "ef0cac22b5cc4ee887fa64d134b563ffc745ae365b0c6cdb03930f895ab413df",
+        "target_key": "UNIQUE_Shenhe_ElementalArt_H_Buff_Handler",
+        "scope": {
+          "owner_definition_id": "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597"
+        },
+        "candidate_ids": [
+          "d52d173b61d420a85048b0f37c61d056eb13941b47e2c128b608f5233f9ebeae"
+        ]
+      },
+      {
+        "reference_id": "d167e9293ffb4729a78c85dc474be70f1ee37e79e1044acf050657e303f7a494",
+        "from_definition_id": "198faa873faebd418d40ec0c9fc43cf87bb9dadd7c98dddc3b17771d56aebb33",
+        "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Shenhe.json",
+        "json_pointer": "/6/Default/GPPBBDEICKP/UNIQUE_Shenhe_ElementalArt_H_Talent_Buff/LFIJIMIMBIH/0/KFNJNNEOFCB/0/LDFBDMNIADI",
+        "field_name": "modifierName",
+        "relation_kind": "modifier_operation",
+        "target_kind": "modifier",
+        "source_order": 0,
+        "presence_status": "present",
+        "resolution_status": "resolved",
+        "resolved_definition_id": "b1d468b1c2fccecd0843c71e83500992baed18b4ee3c527b7743e4f4c5e33412",
+        "extraction_rule_id": "7",
+        "version_line": "release",
+        "snapshot_id": "ef0cac22b5cc4ee887fa64d134b563ffc745ae365b0c6cdb03930f895ab413df",
+        "target_key": "UNIQUE_Shenhe_ElementalArt_H_Buff_FX",
+        "scope": {
+          "owner_definition_id": "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597"
+        },
+        "candidate_ids": [
+          "b1d468b1c2fccecd0843c71e83500992baed18b4ee3c527b7743e4f4c5e33412"
+        ]
+      },
+      {
+        "reference_id": "369cf93fb3ff9ca90ad9533c467975c3aaa923394ae93575b71d1176b54e7be0",
+        "from_definition_id": "198faa873faebd418d40ec0c9fc43cf87bb9dadd7c98dddc3b17771d56aebb33",
+        "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Shenhe.json",
+        "json_pointer": "/6/Default/GPPBBDEICKP/UNIQUE_Shenhe_ElementalArt_H_Talent_Buff/LFIJIMIMBIH/0/MLJNNELMEFL/0/IIBMNPFLNMJ",
+        "field_name": "abilityName",
+        "relation_kind": "ability_operation",
+        "target_kind": "ability",
+        "source_order": 1,
+        "presence_status": "present",
+        "resolution_status": "resolved",
+        "resolved_definition_id": "1d3e9836af2425762857dbae94a3e9d4974c6c940bf457ef7413f8ea4334773e",
+        "extraction_rule_id": "7",
+        "version_line": "release",
+        "snapshot_id": "ef0cac22b5cc4ee887fa64d134b563ffc745ae365b0c6cdb03930f895ab413df",
+        "target_key": "Avatar_Shenhe_Constellation_4",
+        "scope": {
+          "owner_definition_id": "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597"
+        },
+        "candidate_ids": [
+          "1d3e9836af2425762857dbae94a3e9d4974c6c940bf457ef7413f8ea4334773e"
+        ]
+      }
+    ],
+    "boundaries": [
+      {
+        "scope": "other_variant_replacement",
+        "relative_pointer": "/ECFFDLHMCLK/3",
+        "status": "inactive_in_declared_hold_only_window"
+      },
+      {
+        "scope": "constellation_4",
+        "relative_pointer": "/ECFFDLHMCLK/1",
+        "status": "inactive_c0"
+      },
+      {
+        "scope": "constellation_6",
+        "relative_pointer": "/GPPBBDEICKP/UNIQUE_Shenhe_ElementalArt_H_Buff_Handler/EMGBJJOIENB/1",
+        "status": "fail_branch_only_c0"
+      },
+      {
+        "scope": "other_passive_benefit",
+        "relative_pointer": "/ECFFDLHMCLK/6",
+        "status": "not_compiled"
+      },
+      {
+        "scope": "energy_generation",
+        "relative_pointer": "/EMGBJJOIENB",
+        "status": "not_compiled"
+      },
+      {
+        "scope": "spatial_recheck",
+        "relative_pointer": "/GPPBBDEICKP/UNIQUE_Shenhe_ElementalArt_H_Buff_Handler/FMBHOKCHKOH",
+        "status": "scenario_condition_not_simulated"
+      },
+      {
+        "scope": "full_damage_formula",
+        "relative_pointer": "/ECFFDLHMCLK/8",
+        "status": "not_compiled"
+      }
+    ]
+  },
+  "descriptions": {
+    "records": [
+      {
+        "text_map_hash": 338598198,
+        "parameter_description_origin": {
+          "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+          "source_sha256": "852113c53187be005ba398d8afc787809a75853d6d2c29f8240897bc13102362",
+          "json_pointer": "/4443/paramDescList/0",
+          "node_sha256": "86e57c4f7a7b862f0ac801db2b26512c27b6545239ee01e705f72c89021cca21"
+        },
+        "text": "\u70b9\u6309\u6280\u80fd\u4f24\u5bb3|{param1:P}",
+        "param_indices": [
+          0
+        ],
+        "text_origin": {
+          "source_path": "TextMap/TextMap_MediumCHS.json",
+          "json_pointer": "/338598198",
+          "source_sha256": "9fea7bc1a74343e8f7747cb68a5ddd8bd752e79ba10f4146c53f70a5dedeb976",
+          "node_sha256": "a37479c445cba0f83de7380b8c9d458d0c34acffab10032bd64e7e7605074cf3"
+        }
+      },
+      {
+        "text_map_hash": 3748551894,
+        "parameter_description_origin": {
+          "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+          "source_sha256": "852113c53187be005ba398d8afc787809a75853d6d2c29f8240897bc13102362",
+          "json_pointer": "/4443/paramDescList/1",
+          "node_sha256": "4b71780d62d2cc0792389dd4137c70d56b02a96592a6f755b2e757fa1731b4bb"
+        },
+        "text": "\u957f\u6309\u6280\u80fd\u4f24\u5bb3|{param2:F1P}",
+        "param_indices": [
+          1
+        ],
+        "text_origin": {
+          "source_path": "TextMap/TextMap_MediumCHS.json",
+          "json_pointer": "/3748551894",
+          "source_sha256": "9fea7bc1a74343e8f7747cb68a5ddd8bd752e79ba10f4146c53f70a5dedeb976",
+          "node_sha256": "4dd36114857900884afb5fb6005cea8522020feb90693f25a206190c9ce2d12a"
+        }
+      },
+      {
+        "text_map_hash": 2412562703,
+        "parameter_description_origin": {
+          "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+          "source_sha256": "852113c53187be005ba398d8afc787809a75853d6d2c29f8240897bc13102362",
+          "json_pointer": "/4443/paramDescList/2",
+          "node_sha256": "f567d6041e8a650155bece7ee4d950820d5bc0339a5a64f578eade2d5ab7a393"
+        },
+        "text": "\u4f24\u5bb3\u503c\u63d0\u5347|{param3:F1P}\u653b\u51fb\u529b",
+        "param_indices": [
+          2
+        ],
+        "text_origin": {
+          "source_path": "TextMap/TextMap_MediumCHS.json",
+          "json_pointer": "/2412562703",
+          "source_sha256": "9fea7bc1a74343e8f7747cb68a5ddd8bd752e79ba10f4146c53f70a5dedeb976",
+          "node_sha256": "33abadfee0c9cb81aed098c5cd2a5515c849231cfedf0eb4267b88fbbf707112"
+        }
+      },
+      {
+        "text_map_hash": 3270216079,
+        "parameter_description_origin": {
+          "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+          "source_sha256": "852113c53187be005ba398d8afc787809a75853d6d2c29f8240897bc13102362",
+          "json_pointer": "/4443/paramDescList/3",
+          "node_sha256": "833066985b59916cb47c3d9d18cd3098307344e2104720fbd9fdb121c5f1917a"
+        },
+        "text": "\u70b9\u6309/\u957f\u6309\u6301\u7eed\u65f6\u95f4|{param4:F1}\u79d2/{param5:F1}\u79d2",
+        "param_indices": [
+          3,
+          4
+        ],
+        "text_origin": {
+          "source_path": "TextMap/TextMap_MediumCHS.json",
+          "json_pointer": "/3270216079",
+          "source_sha256": "9fea7bc1a74343e8f7747cb68a5ddd8bd752e79ba10f4146c53f70a5dedeb976",
+          "node_sha256": "469e3732b6d299eb52f408cea5dd0c557096b29788aad954bddb8a7d206eec56"
+        }
+      },
+      {
+        "text_map_hash": 2456011150,
+        "parameter_description_origin": {
+          "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+          "source_sha256": "852113c53187be005ba398d8afc787809a75853d6d2c29f8240897bc13102362",
+          "json_pointer": "/4443/paramDescList/4",
+          "node_sha256": "94ce0bb3b110f658bd6043ae8c9863ba185537652053fb3e2aaf2b9f54ece17f"
+        },
+        "text": "\u70b9\u6309/\u957f\u6309\u751f\u6548\u6b21\u6570|{param6:I}\u6b21/{param7:I}\u6b21",
+        "param_indices": [
+          5,
+          6
+        ],
+        "text_origin": {
+          "source_path": "TextMap/TextMap_MediumCHS.json",
+          "json_pointer": "/2456011150",
+          "source_sha256": "9fea7bc1a74343e8f7747cb68a5ddd8bd752e79ba10f4146c53f70a5dedeb976",
+          "node_sha256": "ec55aa659ad71f55f9b5d68108676d1c0ae74ab0594d80be685cb492fb19e877"
+        }
+      },
+      {
+        "text_map_hash": 1257001458,
+        "parameter_description_origin": {
+          "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+          "source_sha256": "852113c53187be005ba398d8afc787809a75853d6d2c29f8240897bc13102362",
+          "json_pointer": "/4443/paramDescList/5",
+          "node_sha256": "fe698a465b6f78069b19ee1eb70c58bd5d299d70a5313dc1e5e1dcaf2a34782a"
+        },
+        "text": "\u70b9\u6309\u51b7\u5374\u65f6\u95f4|{param8:F1}\u79d2",
+        "param_indices": [
+          7
+        ],
+        "text_origin": {
+          "source_path": "TextMap/TextMap_MediumCHS.json",
+          "json_pointer": "/1257001458",
+          "source_sha256": "9fea7bc1a74343e8f7747cb68a5ddd8bd752e79ba10f4146c53f70a5dedeb976",
+          "node_sha256": "708fe32028287262ccc8a25306b29074a0183484d5bcfe3e78630587f55f537a"
+        }
+      },
+      {
+        "text_map_hash": 3657772095,
+        "parameter_description_origin": {
+          "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+          "source_sha256": "852113c53187be005ba398d8afc787809a75853d6d2c29f8240897bc13102362",
+          "json_pointer": "/4443/paramDescList/6",
+          "node_sha256": "aa097af74a4d934aa4d90562471fe0fbb5444f9e7b120f477775b9dc95a8f973"
+        },
+        "text": "\u957f\u6309\u51b7\u5374\u65f6\u95f4|{param9:F1}\u79d2",
+        "param_indices": [
+          8
+        ],
+        "text_origin": {
+          "source_path": "TextMap/TextMap_MediumCHS.json",
+          "json_pointer": "/3657772095",
+          "source_sha256": "9fea7bc1a74343e8f7747cb68a5ddd8bd752e79ba10f4146c53f70a5dedeb976",
+          "node_sha256": "6d12cbac3a521db694b16a3e5397f53c07835c1e8ba74975b07a21c10a98fdf3"
+        }
+      }
+    ],
+    "unresolved": [
+      {
+        "text_map_hash": 2378985909,
+        "parameter_description_origin": {
+          "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+          "source_sha256": "852113c53187be005ba398d8afc787809a75853d6d2c29f8240897bc13102362",
+          "json_pointer": "/4443/paramDescList/7",
+          "node_sha256": "a05412d47c8ef1a4c38ec2481bf94cb5b0e3c12748d242054ffcf34d747f7fec"
+        },
+        "code": "missing_description_text"
+      },
+      {
+        "text_map_hash": 2281396724,
+        "parameter_description_origin": {
+          "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+          "source_sha256": "852113c53187be005ba398d8afc787809a75853d6d2c29f8240897bc13102362",
+          "json_pointer": "/4443/paramDescList/8",
+          "node_sha256": "17d05f0cca56c4a6f8ad7cff50f3d16ba7e48a4d229636e79f08d5f50f7f2387"
+        },
+        "code": "missing_description_text"
+      },
+      {
+        "text_map_hash": 1831074055,
+        "parameter_description_origin": {
+          "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+          "source_sha256": "852113c53187be005ba398d8afc787809a75853d6d2c29f8240897bc13102362",
+          "json_pointer": "/4443/paramDescList/9",
+          "node_sha256": "43783d988c0c8705d1efb14fa42c03570c09a142379daf5baf3318bf92cb6394"
+        },
+        "code": "missing_description_text"
+      },
+      {
+        "text_map_hash": 2783431748,
+        "parameter_description_origin": {
+          "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+          "source_sha256": "852113c53187be005ba398d8afc787809a75853d6d2c29f8240897bc13102362",
+          "json_pointer": "/4443/paramDescList/10",
+          "node_sha256": "0801b6d76ee0a18800085b6863fdd134a7345aaab94baa1b15ec2745c4b22833"
+        },
+        "code": "missing_description_text"
+      },
+      {
+        "text_map_hash": 4070236307,
+        "parameter_description_origin": {
+          "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+          "source_sha256": "852113c53187be005ba398d8afc787809a75853d6d2c29f8240897bc13102362",
+          "json_pointer": "/4443/paramDescList/11",
+          "node_sha256": "bcb15ec04db0bb09504c262a33e99ed81061d7ff621d9e19020580c63d989140"
+        },
+        "code": "missing_description_text"
+      },
+      {
+        "text_map_hash": 2480586015,
+        "parameter_description_origin": {
+          "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+          "source_sha256": "852113c53187be005ba398d8afc787809a75853d6d2c29f8240897bc13102362",
+          "json_pointer": "/4443/paramDescList/12",
+          "node_sha256": "1acef0612ce27a33bae3448508cc4047cf3aede69f652880095c1d3038b09802"
+        },
+        "code": "missing_description_text"
+      },
+      {
+        "text_map_hash": 755916851,
+        "parameter_description_origin": {
+          "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+          "source_sha256": "852113c53187be005ba398d8afc787809a75853d6d2c29f8240897bc13102362",
+          "json_pointer": "/4443/paramDescList/13",
+          "node_sha256": "a7e9d816c605bc9bc8ae7556a05b6de0dd68e979bf6b1056b42d61e0cc622c36"
+        },
+        "code": "missing_description_text"
+      },
+      {
+        "text_map_hash": 1685366094,
+        "parameter_description_origin": {
+          "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+          "source_sha256": "852113c53187be005ba398d8afc787809a75853d6d2c29f8240897bc13102362",
+          "json_pointer": "/4443/paramDescList/14",
+          "node_sha256": "3a63146cc7a406f3cbfc6e24e59a0cf38238012c897349f6d8f1be6a52724d1c"
+        },
+        "code": "missing_description_text"
+      },
+      {
+        "text_map_hash": 806778045,
+        "parameter_description_origin": {
+          "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+          "source_sha256": "852113c53187be005ba398d8afc787809a75853d6d2c29f8240897bc13102362",
+          "json_pointer": "/4443/paramDescList/15",
+          "node_sha256": "9cb7d10404361bb0a1f1361355cb54681da9a3e2f64a3bdbfd837d0f5b8ba047"
+        },
+        "code": "missing_description_text"
+      },
+      {
+        "text_map_hash": 3271405977,
+        "parameter_description_origin": {
+          "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+          "source_sha256": "852113c53187be005ba398d8afc787809a75853d6d2c29f8240897bc13102362",
+          "json_pointer": "/4443/paramDescList/16",
+          "node_sha256": "d3b05d0e18817488de7bc4d6f8ef9245f80f8750424fbdc1d5bdfce24c90b7a4"
+        },
+        "code": "missing_description_text"
+      },
+      {
+        "text_map_hash": 2419331531,
+        "parameter_description_origin": {
+          "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+          "source_sha256": "852113c53187be005ba398d8afc787809a75853d6d2c29f8240897bc13102362",
+          "json_pointer": "/4443/paramDescList/17",
+          "node_sha256": "775e7a96d0c9ee1f864b0557810d778239de503f78ddfbaf38a8e3206b45f332"
+        },
+        "code": "missing_description_text"
+      },
+      {
+        "text_map_hash": 370644415,
+        "parameter_description_origin": {
+          "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+          "source_sha256": "852113c53187be005ba398d8afc787809a75853d6d2c29f8240897bc13102362",
+          "json_pointer": "/4443/paramDescList/18",
+          "node_sha256": "af1225c8e6caf8193ce055e37738fdad3a28c13e332d0e764604c4bfed91c1b4"
+        },
+        "code": "missing_description_text"
+      },
+      {
+        "text_map_hash": 2975128941,
+        "parameter_description_origin": {
+          "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+          "source_sha256": "852113c53187be005ba398d8afc787809a75853d6d2c29f8240897bc13102362",
+          "json_pointer": "/4443/paramDescList/19",
+          "node_sha256": "b032015412e379f61ce447c81e9b2c383e0deb10d3cb73aa2d89aa5c6d1476ce"
+        },
+        "code": "missing_description_text"
+      }
+    ],
+    "issues": []
+  },
+  "reference_contract": {
+    "profile_id": "limited-hit-benefit-source-v1",
+    "profile_version": 2,
+    "commit": "224708edc8056f27e9ffc4eacabe797d75274636",
+    "old_commit": "9424e4e556bd80e5196be7d3c52723d3a35b30e7",
+    "evidence_tier": "reference_adapted_not_decoded",
+    "recipe_fingerprint": "d768d1c1a61cc78cdb8dc3b971ba019788d6ff0b94a72f0b2430096c74c3d0f8",
+    "primary_sources": [
+      {
+        "repository": "genshinsim/gcsim",
+        "commit": "8792c73d64439feb74fa139c3b745022952b3dc9",
+        "path": "internal/characters/shenhe/skill.go",
+        "url": "https://raw.githubusercontent.com/genshinsim/gcsim/8792c73d64439feb74fa139c3b745022952b3dc9/internal/characters/shenhe/skill.go",
+        "file": "gcsim-shenhe-skill.go",
+        "bytes": 6193,
+        "sha256": "644dd1a5ff5a13995ade85459b304a8361a8828e6de847dd3de5f12971ef80f6"
+      },
+      {
+        "repository": "KQM-git/TCL",
+        "commit": "6f0ab0c8641c7960b9cb1f0f3fca06120949e01f",
+        "path": "docs/evidence/characters/cryo/shenhe.md",
+        "url": "https://raw.githubusercontent.com/KQM-git/TCL/6f0ab0c8641c7960b9cb1f0f3fca06120949e01f/docs/evidence/characters/cryo/shenhe.md",
+        "file": "kqm-shenhe.md",
+        "bytes": 8229,
+        "sha256": "387cb517bb0e8feeac0d1df78e5809b9aa3f3fd07b199ab94b24b8482ebf0ebe"
+      }
+    ],
+    "reference_policy": {
+      "provider_stat": "atk",
+      "sampling": "current",
+      "application_range_raw": 40,
+      "retention_range_raw": 50,
+      "hitlag_policy": "zero_hitlag_reference",
+      "capacity_scope": "per_beneficiary",
+      "refresh": "reset",
+      "no_initial_source_effects": true,
+      "damage_semantics": "parent_identity_only_not_full_skill_execution"
+    }
+  },
+  "issues": [],
+  "limits": {
+    "max_bytes": 524288,
+    "max_nodes": 32,
+    "max_edges": 128,
+    "max_candidates": 8,
+    "max_issues": 64
+  },
+  "semantic_dependency": {
+    "projection_version": 1,
+    "graph_scope": "limited_hit_benefit_source_v1",
+    "snapshot": {
+      "version_line": "release",
+      "snapshot_id": "ef0cac22b5cc4ee887fa64d134b563ffc745ae365b0c6cdb03930f895ab413df",
+      "upstream_commit": "224708edc8056f27e9ffc4eacabe797d75274636",
+      "indexer_version": "7",
+      "normalization": {
+        "mapping_fingerprint": "506862bc6c0bf033d8272b75f193cd2a620fc513320b3223d07afcc6f04356e2",
+        "normalization_version": 2,
+        "profile_id": "upstream-224708ed-reviewed-schema-v1",
+        "upstream_commit": "224708edc8056f27e9ffc4eacabe797d75274636"
+      }
+    },
+    "selection": {
+      "character_id": 10000063,
+      "skill_depot_id": 6301,
+      "skill_id": 10632,
+      "slot": "skill",
+      "matching_slots": [
+        "skill"
+      ],
+      "constellation": 0,
+      "active_constellation_ids": []
+    },
+    "level": {
+      "base_level": null,
+      "effective_level": 10,
+      "source": "explicit_effective_level",
+      "constellation_applied": false,
+      "constellation_level_support": "not_applicable"
+    },
+    "param_index": 1,
+    "parent_bridge": {
+      "status": "ready",
+      "kind": "scalar_target_unique_attack",
+      "variant": "hold",
+      "parameter": {
+        "param_index": 1,
+        "special": "Elemental_Art_H_Damage",
+        "writer_entry_id": "e8ace1e4204306ce68d46363988f489452547a0e2d2a68abfbfcebda51a09aaa",
+        "writer_pointer": "/Shenhe_SkillUpgrade_2/1",
+        "parameter_entry_id": "237a7317a9337e6209f1f21464e03ea8a3c22817d94d358bc357332a07d81637",
+        "parameter_pointer": "/4443/paramList/1",
+        "target_ability_entry_id": "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597"
+      },
+      "attack": {
+        "entry_id": "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597",
+        "operation_pointer": "/6/Default/ECFFDLHMCLK/8",
+        "attack_info_pointer": "/6/Default/ECFFDLHMCLK/8/IDCIIIFMDCM/LGHDGGJIJOK",
+        "attack_property_pointer": "/6/Default/ECFFDLHMCLK/8/IDCIIIFMDCM/LGHDGGJIJOK/EHKJIDFINEK",
+        "attack_tag": "Elemental_Art",
+        "attack_type": "Default",
+        "element": "cryo"
+      },
+      "identity_scope": "source_identity_only_not_full_damage_semantics"
+    },
+    "benefit_candidates": [
+      {
+        "candidate_id": "benefit.b7cbb3d854db7e4750352833cd5363c3b47b77c47f7d216da1b1f70fee582f52",
+        "family_id": "current-atk-limited-hit-hold-v1",
+        "variant": "hold",
+        "status": "ready"
+      }
+    ],
+    "projection": {
+      "coefficient": {
+        "status": "ready",
+        "value": 0.8218079805374146,
+        "origin": {
+          "param_index": 2,
+          "special": "Attack2ExtraRatio",
+          "writer_entry_id": "e8ace1e4204306ce68d46363988f489452547a0e2d2a68abfbfcebda51a09aaa",
+          "writer_pointer": "/Shenhe_SkillUpgrade_2/3",
+          "parameter_entry_id": "237a7317a9337e6209f1f21464e03ea8a3c22817d94d358bc357332a07d81637",
+          "parameter_pointer": "/4443/paramList/2",
+          "target_ability_entry_id": "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597"
+        }
+      },
+      "duration_seconds": {
+        "status": "ready",
+        "value": 15,
+        "origin": {
+          "param_index": 4,
+          "special": "ElementalArt_H_Buff_Time",
+          "writer_entry_id": "e8ace1e4204306ce68d46363988f489452547a0e2d2a68abfbfcebda51a09aaa",
+          "writer_pointer": "/Shenhe_SkillUpgrade_2/5",
+          "parameter_entry_id": "237a7317a9337e6209f1f21464e03ea8a3c22817d94d358bc357332a07d81637",
+          "parameter_pointer": "/4443/paramList/4",
+          "target_ability_entry_id": "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597"
+        }
+      },
+      "capacity": {
+        "status": "ready",
+        "value": 7,
+        "origin": {
+          "param_index": 6,
+          "special": "ElementalArt_H_Buff_Count",
+          "writer_entry_id": "e8ace1e4204306ce68d46363988f489452547a0e2d2a68abfbfcebda51a09aaa",
+          "writer_pointer": "/Shenhe_SkillUpgrade_2/7",
+          "parameter_entry_id": "237a7317a9337e6209f1f21464e03ea8a3c22817d94d358bc357332a07d81637",
+          "parameter_pointer": "/4443/paramList/6",
+          "target_ability_entry_id": "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597"
+        }
+      }
+    },
+    "reference_contract": {
+      "profile_id": "limited-hit-benefit-source-v1",
+      "profile_version": 2,
+      "commit": "224708edc8056f27e9ffc4eacabe797d75274636",
+      "old_commit": "9424e4e556bd80e5196be7d3c52723d3a35b30e7",
+      "evidence_tier": "reference_adapted_not_decoded",
+      "recipe_fingerprint": "d768d1c1a61cc78cdb8dc3b971ba019788d6ff0b94a72f0b2430096c74c3d0f8",
+      "primary_sources": [
+        {
+          "repository": "genshinsim/gcsim",
+          "commit": "8792c73d64439feb74fa139c3b745022952b3dc9",
+          "path": "internal/characters/shenhe/skill.go",
+          "url": "https://raw.githubusercontent.com/genshinsim/gcsim/8792c73d64439feb74fa139c3b745022952b3dc9/internal/characters/shenhe/skill.go",
+          "file": "gcsim-shenhe-skill.go",
+          "bytes": 6193,
+          "sha256": "644dd1a5ff5a13995ade85459b304a8361a8828e6de847dd3de5f12971ef80f6"
+        },
+        {
+          "repository": "KQM-git/TCL",
+          "commit": "6f0ab0c8641c7960b9cb1f0f3fca06120949e01f",
+          "path": "docs/evidence/characters/cryo/shenhe.md",
+          "url": "https://raw.githubusercontent.com/KQM-git/TCL/6f0ab0c8641c7960b9cb1f0f3fca06120949e01f/docs/evidence/characters/cryo/shenhe.md",
+          "file": "kqm-shenhe.md",
+          "bytes": 8229,
+          "sha256": "387cb517bb0e8feeac0d1df78e5809b9aa3f3fd07b199ab94b24b8482ebf0ebe"
+        }
+      ],
+      "reference_policy": {
+        "provider_stat": "atk",
+        "sampling": "current",
+        "application_range_raw": 40,
+        "retention_range_raw": 50,
+        "hitlag_policy": "zero_hitlag_reference",
+        "capacity_scope": "per_beneficiary",
+        "refresh": "reset",
+        "no_initial_source_effects": true,
+        "damage_semantics": "parent_identity_only_not_full_skill_execution"
+      }
+    },
+    "source_bundle": {
+      "entries": [
+        {
+          "definition": {
+            "definition_id": "c806ce5a609f4113c04ded2e2849f22c439ad405e092b6feaf22e8feb999e447",
+            "definition_kind": "excel_record",
+            "owner_definition_id": null,
+            "source_path": "ExcelBinOutput/AvatarExcelConfigData.json",
+            "json_pointer": "/50",
+            "variant_key": null,
+            "namespace_key": "excel",
+            "node_sha256": "29c0ded55f56a400463b48c852659b099a22b8c60dc62473b2321c68c75ee7c2",
+            "exact_key": {
+              "id": 10000063
+            }
+          },
+          "source_path": "ExcelBinOutput/AvatarExcelConfigData.json",
+          "source_sha256": "bc9a4a11b7e0e40c6eadd75ca2c99752b17802521591a8df65f4995c5b0e4801",
+          "json_pointer": "/50",
+          "node_sha256": "29c0ded55f56a400463b48c852659b099a22b8c60dc62473b2321c68c75ee7c2"
+        },
+        {
+          "definition": {
+            "definition_id": "fe227129b2ce542830fdc58970fcd3d9f77f1435e101a6a37d061e0d58220702",
+            "definition_kind": "excel_record",
+            "owner_definition_id": null,
+            "source_path": "ExcelBinOutput/AvatarSkillDepotExcelConfigData.json",
+            "json_pointer": "/123",
+            "variant_key": null,
+            "namespace_key": "excel",
+            "node_sha256": "a7c2656240415fc6fe5e4acc77b01c3ec4cd27edfb6b8c9dcf72613c4cd1c223",
+            "exact_key": {
+              "id": 6301
+            }
+          },
+          "source_path": "ExcelBinOutput/AvatarSkillDepotExcelConfigData.json",
+          "source_sha256": "841ccf30a9dcb0f9851c1ca1a3f37bfd53d7e83a1bf5f38ea6f9b4dedb69e896",
+          "json_pointer": "/123",
+          "node_sha256": "a7c2656240415fc6fe5e4acc77b01c3ec4cd27edfb6b8c9dcf72613c4cd1c223"
+        },
+        {
+          "definition": {
+            "definition_id": "78a311e3ea8d0d576e1a985029053cd73ffca31b88e554e7c4773fef0b7a234e",
+            "definition_kind": "excel_record",
+            "owner_definition_id": null,
+            "source_path": "ExcelBinOutput/AvatarSkillExcelConfigData.json",
+            "json_pointer": "/279",
+            "variant_key": null,
+            "namespace_key": "excel",
+            "node_sha256": "6f1d808d8cb23a192aa0ab16ad3a592fad3f6182a1c1500192ea0c2ba5d81692",
+            "exact_key": {
+              "id": 10632
+            }
+          },
+          "source_path": "ExcelBinOutput/AvatarSkillExcelConfigData.json",
+          "source_sha256": "d6c09879a0c162d7b1fdd5ad4c29e0ae457d1e41a7b853d209a6e272caad2e6e",
+          "json_pointer": "/279",
+          "node_sha256": "6f1d808d8cb23a192aa0ab16ad3a592fad3f6182a1c1500192ea0c2ba5d81692"
+        },
+        {
+          "definition": {
+            "definition_id": "237a7317a9337e6209f1f21464e03ea8a3c22817d94d358bc357332a07d81637",
+            "definition_kind": "excel_record",
+            "owner_definition_id": null,
+            "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+            "json_pointer": "/4443",
+            "variant_key": null,
+            "namespace_key": "excel",
+            "node_sha256": "a6e181bbebf72b6b6647bb8cb9eeba16a2a730dde51d93474891b501990d29b2",
+            "exact_key": {
+              "proudSkillId": 633210
+            }
+          },
+          "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+          "source_sha256": "852113c53187be005ba398d8afc787809a75853d6d2c29f8240897bc13102362",
+          "json_pointer": "/4443",
+          "node_sha256": "a6e181bbebf72b6b6647bb8cb9eeba16a2a730dde51d93474891b501990d29b2"
+        },
+        {
+          "definition": {
+            "definition_id": "e8ace1e4204306ce68d46363988f489452547a0e2d2a68abfbfcebda51a09aaa",
+            "definition_kind": "talent_config",
+            "owner_definition_id": null,
+            "source_path": "BinOutput/Talent/AvatarTalents/ConfigTalent_Shenhe.json",
+            "json_pointer": "/Shenhe_SkillUpgrade_2",
+            "variant_key": null,
+            "namespace_key": "talent",
+            "node_sha256": "da6348f8c14f6cd6e4330b421e11f32647b2a9581cb4261ae0b87b6891c53c5d",
+            "exact_key": "Shenhe_SkillUpgrade_2"
+          },
+          "source_path": "BinOutput/Talent/AvatarTalents/ConfigTalent_Shenhe.json",
+          "source_sha256": "0ca0eb7e9131fdf8293e65ad8498b15cdf88d440f40a0b9ab928e8df98c415c8",
+          "json_pointer": "/Shenhe_SkillUpgrade_2",
+          "node_sha256": "da6348f8c14f6cd6e4330b421e11f32647b2a9581cb4261ae0b87b6891c53c5d"
+        },
+        {
+          "definition": {
+            "definition_id": "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597",
+            "definition_kind": "ability",
+            "owner_definition_id": null,
+            "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Shenhe.json",
+            "json_pointer": "/6/Default",
+            "variant_key": "Default",
+            "namespace_key": "Temp",
+            "node_sha256": "3de611539675a3defc9f5239a8f3fd88a83c2e444ea6ee12b8e3bb8ba0f087d4",
+            "exact_key": "Avatar_Shenhe_ElementalArt_Attack_H"
+          },
+          "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Shenhe.json",
+          "source_sha256": "9949f5c28fbaeddb2257f44eed8cadae2b8cd1c19514792fc7d2e7069ca284cc",
+          "json_pointer": "/6/Default",
+          "node_sha256": "3de611539675a3defc9f5239a8f3fd88a83c2e444ea6ee12b8e3bb8ba0f087d4"
+        },
+        {
+          "definition": {
+            "definition_id": "dd9712bd2f2280965c2f339bc78eab9b8b8735956e7f87eb8bf09ab95e970fb9",
+            "definition_kind": "modifier",
+            "owner_definition_id": "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597",
+            "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Shenhe.json",
+            "json_pointer": "/6/Default/GPPBBDEICKP/ElementalArt_ElemBall",
+            "variant_key": "Default",
+            "namespace_key": "Temp",
+            "node_sha256": "678e75da3b7ed1e73b7c99549242086507e8ed2e331a0a92359bdafcb24cca1c",
+            "exact_key": "ElementalArt_ElemBall"
+          },
+          "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Shenhe.json",
+          "source_sha256": "9949f5c28fbaeddb2257f44eed8cadae2b8cd1c19514792fc7d2e7069ca284cc",
+          "json_pointer": "/6/Default/GPPBBDEICKP/ElementalArt_ElemBall",
+          "node_sha256": "678e75da3b7ed1e73b7c99549242086507e8ed2e331a0a92359bdafcb24cca1c"
+        },
+        {
+          "definition": {
+            "definition_id": "262543749bcad6f91bb1b92aef52df4dbb2298a506106f731c94f6a3af6b3be1",
+            "definition_kind": "modifier",
+            "owner_definition_id": "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597",
+            "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Shenhe.json",
+            "json_pointer": "/6/Default/GPPBBDEICKP/Shenhe_ElementalArt_ElemBall_Handler",
+            "variant_key": "Default",
+            "namespace_key": "Temp",
+            "node_sha256": "9a34007c12829f62fcb92fad4e416791f3f8bddd301f0637e413e75669c08cb0",
+            "exact_key": "Shenhe_ElementalArt_ElemBall_Handler"
+          },
+          "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Shenhe.json",
+          "source_sha256": "9949f5c28fbaeddb2257f44eed8cadae2b8cd1c19514792fc7d2e7069ca284cc",
+          "json_pointer": "/6/Default/GPPBBDEICKP/Shenhe_ElementalArt_ElemBall_Handler",
+          "node_sha256": "9a34007c12829f62fcb92fad4e416791f3f8bddd301f0637e413e75669c08cb0"
+        },
+        {
+          "definition": {
+            "definition_id": "ce70c2dee00895c15f2ff43dda5fee4e63dc56805db26a563e9d6c843a3b9eb0",
+            "definition_kind": "modifier",
+            "owner_definition_id": "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597",
+            "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Shenhe.json",
+            "json_pointer": "/6/Default/GPPBBDEICKP/UNIQUE_Shenhe_ElementalArt_H_Buff",
+            "variant_key": "Default",
+            "namespace_key": "Temp",
+            "node_sha256": "64561acc37da8800776b29b2bb887dcb1aff5626af2c4f471e57d7a7dddbf911",
+            "exact_key": "UNIQUE_Shenhe_ElementalArt_H_Buff"
+          },
+          "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Shenhe.json",
+          "source_sha256": "9949f5c28fbaeddb2257f44eed8cadae2b8cd1c19514792fc7d2e7069ca284cc",
+          "json_pointer": "/6/Default/GPPBBDEICKP/UNIQUE_Shenhe_ElementalArt_H_Buff",
+          "node_sha256": "64561acc37da8800776b29b2bb887dcb1aff5626af2c4f471e57d7a7dddbf911"
+        },
+        {
+          "definition": {
+            "definition_id": "b1d468b1c2fccecd0843c71e83500992baed18b4ee3c527b7743e4f4c5e33412",
+            "definition_kind": "modifier",
+            "owner_definition_id": "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597",
+            "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Shenhe.json",
+            "json_pointer": "/6/Default/GPPBBDEICKP/UNIQUE_Shenhe_ElementalArt_H_Buff_FX",
+            "variant_key": "Default",
+            "namespace_key": "Temp",
+            "node_sha256": "33bc24be1e5bbcb9366fa543c26c29534a6fead83bc0a8450c2ea4912e2fb591",
+            "exact_key": "UNIQUE_Shenhe_ElementalArt_H_Buff_FX"
+          },
+          "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Shenhe.json",
+          "source_sha256": "9949f5c28fbaeddb2257f44eed8cadae2b8cd1c19514792fc7d2e7069ca284cc",
+          "json_pointer": "/6/Default/GPPBBDEICKP/UNIQUE_Shenhe_ElementalArt_H_Buff_FX",
+          "node_sha256": "33bc24be1e5bbcb9366fa543c26c29534a6fead83bc0a8450c2ea4912e2fb591"
+        },
+        {
+          "definition": {
+            "definition_id": "d52d173b61d420a85048b0f37c61d056eb13941b47e2c128b608f5233f9ebeae",
+            "definition_kind": "modifier",
+            "owner_definition_id": "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597",
+            "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Shenhe.json",
+            "json_pointer": "/6/Default/GPPBBDEICKP/UNIQUE_Shenhe_ElementalArt_H_Buff_Handler",
+            "variant_key": "Default",
+            "namespace_key": "Temp",
+            "node_sha256": "1be208fd166dfff5fb94c927650abdeb711a978e01c1304963bfea8ca2d367ab",
+            "exact_key": "UNIQUE_Shenhe_ElementalArt_H_Buff_Handler"
+          },
+          "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Shenhe.json",
+          "source_sha256": "9949f5c28fbaeddb2257f44eed8cadae2b8cd1c19514792fc7d2e7069ca284cc",
+          "json_pointer": "/6/Default/GPPBBDEICKP/UNIQUE_Shenhe_ElementalArt_H_Buff_Handler",
+          "node_sha256": "1be208fd166dfff5fb94c927650abdeb711a978e01c1304963bfea8ca2d367ab"
+        },
+        {
+          "definition": {
+            "definition_id": "4256e438d4c1e0d053fb79f6376e3860801dbf8cd2da76cc30cac2c17c152737",
+            "definition_kind": "modifier",
+            "owner_definition_id": "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597",
+            "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Shenhe.json",
+            "json_pointer": "/6/Default/GPPBBDEICKP/UNIQUE_Shenhe_ElementalArt_H_Extra_Buff",
+            "variant_key": "Default",
+            "namespace_key": "Temp",
+            "node_sha256": "65b916aa99fb1ad1c0f473133cca63ddad82961320d09c145360e73d1814aee1",
+            "exact_key": "UNIQUE_Shenhe_ElementalArt_H_Extra_Buff"
+          },
+          "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Shenhe.json",
+          "source_sha256": "9949f5c28fbaeddb2257f44eed8cadae2b8cd1c19514792fc7d2e7069ca284cc",
+          "json_pointer": "/6/Default/GPPBBDEICKP/UNIQUE_Shenhe_ElementalArt_H_Extra_Buff",
+          "node_sha256": "65b916aa99fb1ad1c0f473133cca63ddad82961320d09c145360e73d1814aee1"
+        },
+        {
+          "definition": {
+            "definition_id": "198faa873faebd418d40ec0c9fc43cf87bb9dadd7c98dddc3b17771d56aebb33",
+            "definition_kind": "modifier",
+            "owner_definition_id": "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597",
+            "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Shenhe.json",
+            "json_pointer": "/6/Default/GPPBBDEICKP/UNIQUE_Shenhe_ElementalArt_H_Talent_Buff",
+            "variant_key": "Default",
+            "namespace_key": "Temp",
+            "node_sha256": "a7ba9248179ae1e688bc5e036015948bb204a3ee3a6823348135942fe7a6bd4b",
+            "exact_key": "UNIQUE_Shenhe_ElementalArt_H_Talent_Buff"
+          },
+          "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Shenhe.json",
+          "source_sha256": "9949f5c28fbaeddb2257f44eed8cadae2b8cd1c19514792fc7d2e7069ca284cc",
+          "json_pointer": "/6/Default/GPPBBDEICKP/UNIQUE_Shenhe_ElementalArt_H_Talent_Buff",
+          "node_sha256": "a7ba9248179ae1e688bc5e036015948bb204a3ee3a6823348135942fe7a6bd4b"
+        }
+      ],
+      "entry_ids": {
+        "modifiers": [
+          "dd9712bd2f2280965c2f339bc78eab9b8b8735956e7f87eb8bf09ab95e970fb9",
+          "262543749bcad6f91bb1b92aef52df4dbb2298a506106f731c94f6a3af6b3be1",
+          "ce70c2dee00895c15f2ff43dda5fee4e63dc56805db26a563e9d6c843a3b9eb0",
+          "b1d468b1c2fccecd0843c71e83500992baed18b4ee3c527b7743e4f4c5e33412",
+          "d52d173b61d420a85048b0f37c61d056eb13941b47e2c128b608f5233f9ebeae",
+          "4256e438d4c1e0d053fb79f6376e3860801dbf8cd2da76cc30cac2c17c152737",
+          "198faa873faebd418d40ec0c9fc43cf87bb9dadd7c98dddc3b17771d56aebb33"
+        ],
+        "avatar": "c806ce5a609f4113c04ded2e2849f22c439ad405e092b6feaf22e8feb999e447",
+        "depot": "fe227129b2ce542830fdc58970fcd3d9f77f1435e101a6a37d061e0d58220702",
+        "skill": "78a311e3ea8d0d576e1a985029053cd73ffca31b88e554e7c4773fef0b7a234e",
+        "proud_skill": "237a7317a9337e6209f1f21464e03ea8a3c22817d94d358bc357332a07d81637",
+        "talent": "e8ace1e4204306ce68d46363988f489452547a0e2d2a68abfbfcebda51a09aaa",
+        "ability": "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597"
+      },
+      "references": [
+        {
+          "reference_id": "189062a3d61d0ea6c7d1741802b1e322b5c22a52782170e260fcb5d1a546c5c1",
+          "from_definition_id": "e8ace1e4204306ce68d46363988f489452547a0e2d2a68abfbfcebda51a09aaa",
+          "source_path": "BinOutput/Talent/AvatarTalents/ConfigTalent_Shenhe.json",
+          "json_pointer": "/Shenhe_SkillUpgrade_2/0/IIBMNPFLNMJ",
+          "field_name": "abilityName",
+          "relation_kind": "ability_operation",
+          "target_kind": "ability",
+          "source_order": 0,
+          "presence_status": "present",
+          "resolution_status": "resolved",
+          "resolved_definition_id": "86a95694e9fa4ef0598954ccb3be5fb13f45d2d0154459b5a9ba102bb2027ee3",
+          "extraction_rule_id": "7",
+          "version_line": "release",
+          "snapshot_id": "ef0cac22b5cc4ee887fa64d134b563ffc745ae365b0c6cdb03930f895ab413df",
+          "target_key": "Avatar_Shenhe_ElementalArt_Bullet",
+          "scope": {
+            "owner_definition_id": null
+          },
+          "candidate_ids": [
+            "86a95694e9fa4ef0598954ccb3be5fb13f45d2d0154459b5a9ba102bb2027ee3"
+          ]
+        },
+        {
+          "reference_id": "d3ac4010bf15f783ce9ac90f3285adec8d92e560d9aea74ac9437fa0983ebdbd",
+          "from_definition_id": "e8ace1e4204306ce68d46363988f489452547a0e2d2a68abfbfcebda51a09aaa",
+          "source_path": "BinOutput/Talent/AvatarTalents/ConfigTalent_Shenhe.json",
+          "json_pointer": "/Shenhe_SkillUpgrade_2/1/IIBMNPFLNMJ",
+          "field_name": "abilityName",
+          "relation_kind": "ability_operation",
+          "target_kind": "ability",
+          "source_order": 1,
+          "presence_status": "present",
+          "resolution_status": "resolved",
+          "resolved_definition_id": "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597",
+          "extraction_rule_id": "7",
+          "version_line": "release",
+          "snapshot_id": "ef0cac22b5cc4ee887fa64d134b563ffc745ae365b0c6cdb03930f895ab413df",
+          "target_key": "Avatar_Shenhe_ElementalArt_Attack_H",
+          "scope": {
+            "owner_definition_id": null
+          },
+          "candidate_ids": [
+            "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597"
+          ]
+        },
+        {
+          "reference_id": "87bbad9c03d0ccf777bd49363de2d6d7c813f3e0305abab7d6f472eafdf62503",
+          "from_definition_id": "e8ace1e4204306ce68d46363988f489452547a0e2d2a68abfbfcebda51a09aaa",
+          "source_path": "BinOutput/Talent/AvatarTalents/ConfigTalent_Shenhe.json",
+          "json_pointer": "/Shenhe_SkillUpgrade_2/2/IIBMNPFLNMJ",
+          "field_name": "abilityName",
+          "relation_kind": "ability_operation",
+          "target_kind": "ability",
+          "source_order": 2,
+          "presence_status": "present",
+          "resolution_status": "resolved",
+          "resolved_definition_id": "b7e02466b849934b0a6f3168b89519bc6a98dc776d879ee1ffad112dd39fd613",
+          "extraction_rule_id": "7",
+          "version_line": "release",
+          "snapshot_id": "ef0cac22b5cc4ee887fa64d134b563ffc745ae365b0c6cdb03930f895ab413df",
+          "target_key": "Avatar_Shenhe_ElementalArt_Attack_L",
+          "scope": {
+            "owner_definition_id": null
+          },
+          "candidate_ids": [
+            "b7e02466b849934b0a6f3168b89519bc6a98dc776d879ee1ffad112dd39fd613"
+          ]
+        },
+        {
+          "reference_id": "17bc451a9500db9449bbc9c9b186f601dc9af72aa59a5449ba7cd138b9e0dc93",
+          "from_definition_id": "e8ace1e4204306ce68d46363988f489452547a0e2d2a68abfbfcebda51a09aaa",
+          "source_path": "BinOutput/Talent/AvatarTalents/ConfigTalent_Shenhe.json",
+          "json_pointer": "/Shenhe_SkillUpgrade_2/3/IIBMNPFLNMJ",
+          "field_name": "abilityName",
+          "relation_kind": "ability_operation",
+          "target_kind": "ability",
+          "source_order": 3,
+          "presence_status": "present",
+          "resolution_status": "resolved",
+          "resolved_definition_id": "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597",
+          "extraction_rule_id": "7",
+          "version_line": "release",
+          "snapshot_id": "ef0cac22b5cc4ee887fa64d134b563ffc745ae365b0c6cdb03930f895ab413df",
+          "target_key": "Avatar_Shenhe_ElementalArt_Attack_H",
+          "scope": {
+            "owner_definition_id": null
+          },
+          "candidate_ids": [
+            "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597"
+          ]
+        },
+        {
+          "reference_id": "0550e6659d16ed7734d83c279f7e39ef246059b3c05c53aa1bef4fe60ec2a7fb",
+          "from_definition_id": "e8ace1e4204306ce68d46363988f489452547a0e2d2a68abfbfcebda51a09aaa",
+          "source_path": "BinOutput/Talent/AvatarTalents/ConfigTalent_Shenhe.json",
+          "json_pointer": "/Shenhe_SkillUpgrade_2/4/IIBMNPFLNMJ",
+          "field_name": "abilityName",
+          "relation_kind": "ability_operation",
+          "target_kind": "ability",
+          "source_order": 4,
+          "presence_status": "present",
+          "resolution_status": "resolved",
+          "resolved_definition_id": "b7e02466b849934b0a6f3168b89519bc6a98dc776d879ee1ffad112dd39fd613",
+          "extraction_rule_id": "7",
+          "version_line": "release",
+          "snapshot_id": "ef0cac22b5cc4ee887fa64d134b563ffc745ae365b0c6cdb03930f895ab413df",
+          "target_key": "Avatar_Shenhe_ElementalArt_Attack_L",
+          "scope": {
+            "owner_definition_id": null
+          },
+          "candidate_ids": [
+            "b7e02466b849934b0a6f3168b89519bc6a98dc776d879ee1ffad112dd39fd613"
+          ]
+        },
+        {
+          "reference_id": "654d76cfc37b40098b16914ed423c9f4cb3efafffe9bc6ec3af3bba97c4eca22",
+          "from_definition_id": "e8ace1e4204306ce68d46363988f489452547a0e2d2a68abfbfcebda51a09aaa",
+          "source_path": "BinOutput/Talent/AvatarTalents/ConfigTalent_Shenhe.json",
+          "json_pointer": "/Shenhe_SkillUpgrade_2/5/IIBMNPFLNMJ",
+          "field_name": "abilityName",
+          "relation_kind": "ability_operation",
+          "target_kind": "ability",
+          "source_order": 5,
+          "presence_status": "present",
+          "resolution_status": "resolved",
+          "resolved_definition_id": "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597",
+          "extraction_rule_id": "7",
+          "version_line": "release",
+          "snapshot_id": "ef0cac22b5cc4ee887fa64d134b563ffc745ae365b0c6cdb03930f895ab413df",
+          "target_key": "Avatar_Shenhe_ElementalArt_Attack_H",
+          "scope": {
+            "owner_definition_id": null
+          },
+          "candidate_ids": [
+            "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597"
+          ]
+        },
+        {
+          "reference_id": "abc7410b1b7cbfc38bd8f6da50e76cd101a36d032d22e0beabcfb13f7808081c",
+          "from_definition_id": "e8ace1e4204306ce68d46363988f489452547a0e2d2a68abfbfcebda51a09aaa",
+          "source_path": "BinOutput/Talent/AvatarTalents/ConfigTalent_Shenhe.json",
+          "json_pointer": "/Shenhe_SkillUpgrade_2/6/IIBMNPFLNMJ",
+          "field_name": "abilityName",
+          "relation_kind": "ability_operation",
+          "target_kind": "ability",
+          "source_order": 6,
+          "presence_status": "present",
+          "resolution_status": "resolved",
+          "resolved_definition_id": "b7e02466b849934b0a6f3168b89519bc6a98dc776d879ee1ffad112dd39fd613",
+          "extraction_rule_id": "7",
+          "version_line": "release",
+          "snapshot_id": "ef0cac22b5cc4ee887fa64d134b563ffc745ae365b0c6cdb03930f895ab413df",
+          "target_key": "Avatar_Shenhe_ElementalArt_Attack_L",
+          "scope": {
+            "owner_definition_id": null
+          },
+          "candidate_ids": [
+            "b7e02466b849934b0a6f3168b89519bc6a98dc776d879ee1ffad112dd39fd613"
+          ]
+        },
+        {
+          "reference_id": "e36a87b5d069a966a397a1b01b45e8eb3a29a1edd8ce95b179f61996584c5782",
+          "from_definition_id": "e8ace1e4204306ce68d46363988f489452547a0e2d2a68abfbfcebda51a09aaa",
+          "source_path": "BinOutput/Talent/AvatarTalents/ConfigTalent_Shenhe.json",
+          "json_pointer": "/Shenhe_SkillUpgrade_2/7/IIBMNPFLNMJ",
+          "field_name": "abilityName",
+          "relation_kind": "ability_operation",
+          "target_kind": "ability",
+          "source_order": 7,
+          "presence_status": "present",
+          "resolution_status": "resolved",
+          "resolved_definition_id": "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597",
+          "extraction_rule_id": "7",
+          "version_line": "release",
+          "snapshot_id": "ef0cac22b5cc4ee887fa64d134b563ffc745ae365b0c6cdb03930f895ab413df",
+          "target_key": "Avatar_Shenhe_ElementalArt_Attack_H",
+          "scope": {
+            "owner_definition_id": null
+          },
+          "candidate_ids": [
+            "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597"
+          ]
+        },
+        {
+          "reference_id": "e70a0ed7fb7fa0d9b99d3c9f26ec68aad0121e68baaa733ad2fc7b398dc38d36",
+          "from_definition_id": "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597",
+          "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Shenhe.json",
+          "json_pointer": "/6/Default/ECFFDLHMCLK/3/LDFBDMNIADI",
+          "field_name": "modifierName",
+          "relation_kind": "modifier_operation",
+          "target_kind": "modifier",
+          "source_order": 0,
+          "presence_status": "present",
+          "resolution_status": "resolved",
+          "resolved_definition_id": "9b68ab63d10c202d6b9d6bcb9101b4d86de12413a0a763dd344720bed06bc476",
+          "extraction_rule_id": "7",
+          "version_line": "release",
+          "snapshot_id": "ef0cac22b5cc4ee887fa64d134b563ffc745ae365b0c6cdb03930f895ab413df",
+          "target_key": "UNIQUE_Shenhe_ElementalArt_L_Buff_Handler",
+          "scope": {
+            "owner_definition_id": "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597"
+          },
+          "candidate_ids": [
+            "9b68ab63d10c202d6b9d6bcb9101b4d86de12413a0a763dd344720bed06bc476"
+          ]
+        },
+        {
+          "reference_id": "f4e2ab62595734d86e4f90be74014d2aaa478c44b7817f358c8256454d8e5e66",
+          "from_definition_id": "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597",
+          "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Shenhe.json",
+          "json_pointer": "/6/Default/ECFFDLHMCLK/4/LDFBDMNIADI",
+          "field_name": "modifierName",
+          "relation_kind": "modifier_operation",
+          "target_kind": "modifier",
+          "source_order": 1,
+          "presence_status": "present",
+          "resolution_status": "resolved",
+          "resolved_definition_id": "d52d173b61d420a85048b0f37c61d056eb13941b47e2c128b608f5233f9ebeae",
+          "extraction_rule_id": "7",
+          "version_line": "release",
+          "snapshot_id": "ef0cac22b5cc4ee887fa64d134b563ffc745ae365b0c6cdb03930f895ab413df",
+          "target_key": "UNIQUE_Shenhe_ElementalArt_H_Buff_Handler",
+          "scope": {
+            "owner_definition_id": "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597"
+          },
+          "candidate_ids": [
+            "d52d173b61d420a85048b0f37c61d056eb13941b47e2c128b608f5233f9ebeae"
+          ]
+        },
+        {
+          "reference_id": "7b46dfc45a72cf62d57b7ebae9ab429c92d2ed8daf9ae0af0a59c4c6354e8f51",
+          "from_definition_id": "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597",
+          "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Shenhe.json",
+          "json_pointer": "/6/Default/ECFFDLHMCLK/5/LDFBDMNIADI",
+          "field_name": "modifierName",
+          "relation_kind": "modifier_operation",
+          "target_kind": "modifier",
+          "source_order": 2,
+          "presence_status": "present",
+          "resolution_status": "resolved",
+          "resolved_definition_id": "d52d173b61d420a85048b0f37c61d056eb13941b47e2c128b608f5233f9ebeae",
+          "extraction_rule_id": "7",
+          "version_line": "release",
+          "snapshot_id": "ef0cac22b5cc4ee887fa64d134b563ffc745ae365b0c6cdb03930f895ab413df",
+          "target_key": "UNIQUE_Shenhe_ElementalArt_H_Buff_Handler",
+          "scope": {
+            "owner_definition_id": "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597"
+          },
+          "candidate_ids": [
+            "d52d173b61d420a85048b0f37c61d056eb13941b47e2c128b608f5233f9ebeae"
+          ]
+        },
+        {
+          "reference_id": "f9d05b29c715a7936545b4b0d9b2ff128f2f928816f2eb30cffc3af9252dc4df",
+          "from_definition_id": "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597",
+          "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Shenhe.json",
+          "json_pointer": "/6/Default/ECFFDLHMCLK/6/LDFBDMNIADI",
+          "field_name": "modifierName",
+          "relation_kind": "modifier_operation",
+          "target_kind": "modifier",
+          "source_order": 3,
+          "presence_status": "present",
+          "resolution_status": "resolved",
+          "resolved_definition_id": "4256e438d4c1e0d053fb79f6376e3860801dbf8cd2da76cc30cac2c17c152737",
+          "extraction_rule_id": "7",
+          "version_line": "release",
+          "snapshot_id": "ef0cac22b5cc4ee887fa64d134b563ffc745ae365b0c6cdb03930f895ab413df",
+          "target_key": "UNIQUE_Shenhe_ElementalArt_H_Extra_Buff",
+          "scope": {
+            "owner_definition_id": "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597"
+          },
+          "candidate_ids": [
+            "4256e438d4c1e0d053fb79f6376e3860801dbf8cd2da76cc30cac2c17c152737"
+          ]
+        },
+        {
+          "reference_id": "fa51f5a18db87fbc9271cbdc69b9e2744e8e7e7cdf224b5a9f8d0ce7c601984f",
+          "from_definition_id": "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597",
+          "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Shenhe.json",
+          "json_pointer": "/6/Default/EMGBJJOIENB/0/LDFBDMNIADI",
+          "field_name": "modifierName",
+          "relation_kind": "modifier_operation",
+          "target_kind": "modifier",
+          "source_order": 4,
+          "presence_status": "present",
+          "resolution_status": "resolved",
+          "resolved_definition_id": "262543749bcad6f91bb1b92aef52df4dbb2298a506106f731c94f6a3af6b3be1",
+          "extraction_rule_id": "7",
+          "version_line": "release",
+          "snapshot_id": "ef0cac22b5cc4ee887fa64d134b563ffc745ae365b0c6cdb03930f895ab413df",
+          "target_key": "Shenhe_ElementalArt_ElemBall_Handler",
+          "scope": {
+            "owner_definition_id": "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597"
+          },
+          "candidate_ids": [
+            "262543749bcad6f91bb1b92aef52df4dbb2298a506106f731c94f6a3af6b3be1"
+          ]
+        },
+        {
+          "reference_id": "7e50edfab8b214fd3d8518f39e30f67b2adddeaeb04295ad3e614e65a07bf02d",
+          "from_definition_id": "dd9712bd2f2280965c2f339bc78eab9b8b8735956e7f87eb8bf09ab95e970fb9",
+          "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Shenhe.json",
+          "json_pointer": "/6/Default/GPPBBDEICKP/ElementalArt_ElemBall/EMGBJJOIENB/0/KKMLMJNCLLG",
+          "field_name": "configID",
+          "relation_kind": "external_asset",
+          "target_kind": "gadget_config",
+          "source_order": 0,
+          "presence_status": "present",
+          "resolution_status": "external_asset",
+          "resolved_definition_id": null,
+          "extraction_rule_id": "7",
+          "version_line": "release",
+          "snapshot_id": "ef0cac22b5cc4ee887fa64d134b563ffc745ae365b0c6cdb03930f895ab413df",
+          "target_key": 2022,
+          "scope": {
+            "owner_definition_id": "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597"
+          },
+          "candidate_ids": []
+        },
+        {
+          "reference_id": "b904ab8024d3772fcb29bb912eb74d0ea09a022b846970c8b4d910f7baba3c63",
+          "from_definition_id": "262543749bcad6f91bb1b92aef52df4dbb2298a506106f731c94f6a3af6b3be1",
+          "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Shenhe.json",
+          "json_pointer": "/6/Default/GPPBBDEICKP/Shenhe_ElementalArt_ElemBall_Handler/LPMFNGFGMCE/0/MLJNNELMEFL/0/LDFBDMNIADI",
+          "field_name": "modifierName",
+          "relation_kind": "modifier_operation",
+          "target_kind": "modifier",
+          "source_order": 0,
+          "presence_status": "present",
+          "resolution_status": "resolved",
+          "resolved_definition_id": "dd9712bd2f2280965c2f339bc78eab9b8b8735956e7f87eb8bf09ab95e970fb9",
+          "extraction_rule_id": "7",
+          "version_line": "release",
+          "snapshot_id": "ef0cac22b5cc4ee887fa64d134b563ffc745ae365b0c6cdb03930f895ab413df",
+          "target_key": "ElementalArt_ElemBall",
+          "scope": {
+            "owner_definition_id": "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597"
+          },
+          "candidate_ids": [
+            "dd9712bd2f2280965c2f339bc78eab9b8b8735956e7f87eb8bf09ab95e970fb9"
+          ]
+        },
+        {
+          "reference_id": "a2718420b7fd9a519b9a320f75730d27eb948b6e254157f187f4dd28374239a6",
+          "from_definition_id": "ce70c2dee00895c15f2ff43dda5fee4e63dc56805db26a563e9d6c843a3b9eb0",
+          "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Shenhe.json",
+          "json_pointer": "/6/Default/GPPBBDEICKP/UNIQUE_Shenhe_ElementalArt_H_Buff/LFIJIMIMBIH/0/KFNJNNEOFCB/0/LDFBDMNIADI",
+          "field_name": "modifierName",
+          "relation_kind": "modifier_operation",
+          "target_kind": "modifier",
+          "source_order": 0,
+          "presence_status": "present",
+          "resolution_status": "resolved",
+          "resolved_definition_id": "b1d468b1c2fccecd0843c71e83500992baed18b4ee3c527b7743e4f4c5e33412",
+          "extraction_rule_id": "7",
+          "version_line": "release",
+          "snapshot_id": "ef0cac22b5cc4ee887fa64d134b563ffc745ae365b0c6cdb03930f895ab413df",
+          "target_key": "UNIQUE_Shenhe_ElementalArt_H_Buff_FX",
+          "scope": {
+            "owner_definition_id": "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597"
+          },
+          "candidate_ids": [
+            "b1d468b1c2fccecd0843c71e83500992baed18b4ee3c527b7743e4f4c5e33412"
+          ]
+        },
+        {
+          "reference_id": "835e708ab52de006470f8f570583893f88bb3fb5afec37c069825d00ffee3063",
+          "from_definition_id": "ce70c2dee00895c15f2ff43dda5fee4e63dc56805db26a563e9d6c843a3b9eb0",
+          "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Shenhe.json",
+          "json_pointer": "/6/Default/GPPBBDEICKP/UNIQUE_Shenhe_ElementalArt_H_Buff/LFIJIMIMBIH/0/MLJNNELMEFL/0/IIBMNPFLNMJ",
+          "field_name": "abilityName",
+          "relation_kind": "ability_operation",
+          "target_kind": "ability",
+          "source_order": 1,
+          "presence_status": "present",
+          "resolution_status": "resolved",
+          "resolved_definition_id": "1d3e9836af2425762857dbae94a3e9d4974c6c940bf457ef7413f8ea4334773e",
+          "extraction_rule_id": "7",
+          "version_line": "release",
+          "snapshot_id": "ef0cac22b5cc4ee887fa64d134b563ffc745ae365b0c6cdb03930f895ab413df",
+          "target_key": "Avatar_Shenhe_Constellation_4",
+          "scope": {
+            "owner_definition_id": "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597"
+          },
+          "candidate_ids": [
+            "1d3e9836af2425762857dbae94a3e9d4974c6c940bf457ef7413f8ea4334773e"
+          ]
+        },
+        {
+          "reference_id": "659a9c28091f228ebd310e9a1040132ce4443f1f6d03b6d76d11267fe0bc95c0",
+          "from_definition_id": "d52d173b61d420a85048b0f37c61d056eb13941b47e2c128b608f5233f9ebeae",
+          "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Shenhe.json",
+          "json_pointer": "/6/Default/GPPBBDEICKP/UNIQUE_Shenhe_ElementalArt_H_Buff_Handler/EMGBJJOIENB/0/LDFBDMNIADI",
+          "field_name": "modifierName",
+          "relation_kind": "modifier_operation",
+          "target_kind": "modifier",
+          "source_order": 0,
+          "presence_status": "present",
+          "resolution_status": "resolved",
+          "resolved_definition_id": "b1d468b1c2fccecd0843c71e83500992baed18b4ee3c527b7743e4f4c5e33412",
+          "extraction_rule_id": "7",
+          "version_line": "release",
+          "snapshot_id": "ef0cac22b5cc4ee887fa64d134b563ffc745ae365b0c6cdb03930f895ab413df",
+          "target_key": "UNIQUE_Shenhe_ElementalArt_H_Buff_FX",
+          "scope": {
+            "owner_definition_id": "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597"
+          },
+          "candidate_ids": [
+            "b1d468b1c2fccecd0843c71e83500992baed18b4ee3c527b7743e4f4c5e33412"
+          ]
+        },
+        {
+          "reference_id": "d4926833c346b3b5d66da65cd9d071329f75b320a0fb6f35a12e55a3c0dad9ea",
+          "from_definition_id": "d52d173b61d420a85048b0f37c61d056eb13941b47e2c128b608f5233f9ebeae",
+          "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Shenhe.json",
+          "json_pointer": "/6/Default/GPPBBDEICKP/UNIQUE_Shenhe_ElementalArt_H_Buff_Handler/EMGBJJOIENB/1/MLJNNELMEFL/0/LDFBDMNIADI",
+          "field_name": "modifierName",
+          "relation_kind": "modifier_operation",
+          "target_kind": "modifier",
+          "source_order": 1,
+          "presence_status": "present",
+          "resolution_status": "resolved",
+          "resolved_definition_id": "198faa873faebd418d40ec0c9fc43cf87bb9dadd7c98dddc3b17771d56aebb33",
+          "extraction_rule_id": "7",
+          "version_line": "release",
+          "snapshot_id": "ef0cac22b5cc4ee887fa64d134b563ffc745ae365b0c6cdb03930f895ab413df",
+          "target_key": "UNIQUE_Shenhe_ElementalArt_H_Talent_Buff",
+          "scope": {
+            "owner_definition_id": "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597"
+          },
+          "candidate_ids": [
+            "198faa873faebd418d40ec0c9fc43cf87bb9dadd7c98dddc3b17771d56aebb33"
+          ]
+        },
+        {
+          "reference_id": "46d8db35997e8e7ca4a00ee3d3631fb7cb453b330cd6c43c069cf05eda48f579",
+          "from_definition_id": "d52d173b61d420a85048b0f37c61d056eb13941b47e2c128b608f5233f9ebeae",
+          "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Shenhe.json",
+          "json_pointer": "/6/Default/GPPBBDEICKP/UNIQUE_Shenhe_ElementalArt_H_Buff_Handler/EMGBJJOIENB/1/PAPFFKOKPML/0/LDFBDMNIADI",
+          "field_name": "modifierName",
+          "relation_kind": "modifier_operation",
+          "target_kind": "modifier",
+          "source_order": 2,
+          "presence_status": "present",
+          "resolution_status": "resolved",
+          "resolved_definition_id": "ce70c2dee00895c15f2ff43dda5fee4e63dc56805db26a563e9d6c843a3b9eb0",
+          "extraction_rule_id": "7",
+          "version_line": "release",
+          "snapshot_id": "ef0cac22b5cc4ee887fa64d134b563ffc745ae365b0c6cdb03930f895ab413df",
+          "target_key": "UNIQUE_Shenhe_ElementalArt_H_Buff",
+          "scope": {
+            "owner_definition_id": "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597"
+          },
+          "candidate_ids": [
+            "ce70c2dee00895c15f2ff43dda5fee4e63dc56805db26a563e9d6c843a3b9eb0"
+          ]
+        },
+        {
+          "reference_id": "d9303a66393bed51412e254a1057a82568d3c0a179467a66ec2459a00d86e5b1",
+          "from_definition_id": "d52d173b61d420a85048b0f37c61d056eb13941b47e2c128b608f5233f9ebeae",
+          "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Shenhe.json",
+          "json_pointer": "/6/Default/GPPBBDEICKP/UNIQUE_Shenhe_ElementalArt_H_Buff_Handler/FMBHOKCHKOH/0/PAPFFKOKPML/0/LDFBDMNIADI",
+          "field_name": "modifierName",
+          "relation_kind": "modifier_operation",
+          "target_kind": "modifier",
+          "source_order": 3,
+          "presence_status": "present",
+          "resolution_status": "resolved",
+          "resolved_definition_id": "d52d173b61d420a85048b0f37c61d056eb13941b47e2c128b608f5233f9ebeae",
+          "extraction_rule_id": "7",
+          "version_line": "release",
+          "snapshot_id": "ef0cac22b5cc4ee887fa64d134b563ffc745ae365b0c6cdb03930f895ab413df",
+          "target_key": "UNIQUE_Shenhe_ElementalArt_H_Buff_Handler",
+          "scope": {
+            "owner_definition_id": "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597"
+          },
+          "candidate_ids": [
+            "d52d173b61d420a85048b0f37c61d056eb13941b47e2c128b608f5233f9ebeae"
+          ]
+        },
+        {
+          "reference_id": "d167e9293ffb4729a78c85dc474be70f1ee37e79e1044acf050657e303f7a494",
+          "from_definition_id": "198faa873faebd418d40ec0c9fc43cf87bb9dadd7c98dddc3b17771d56aebb33",
+          "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Shenhe.json",
+          "json_pointer": "/6/Default/GPPBBDEICKP/UNIQUE_Shenhe_ElementalArt_H_Talent_Buff/LFIJIMIMBIH/0/KFNJNNEOFCB/0/LDFBDMNIADI",
+          "field_name": "modifierName",
+          "relation_kind": "modifier_operation",
+          "target_kind": "modifier",
+          "source_order": 0,
+          "presence_status": "present",
+          "resolution_status": "resolved",
+          "resolved_definition_id": "b1d468b1c2fccecd0843c71e83500992baed18b4ee3c527b7743e4f4c5e33412",
+          "extraction_rule_id": "7",
+          "version_line": "release",
+          "snapshot_id": "ef0cac22b5cc4ee887fa64d134b563ffc745ae365b0c6cdb03930f895ab413df",
+          "target_key": "UNIQUE_Shenhe_ElementalArt_H_Buff_FX",
+          "scope": {
+            "owner_definition_id": "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597"
+          },
+          "candidate_ids": [
+            "b1d468b1c2fccecd0843c71e83500992baed18b4ee3c527b7743e4f4c5e33412"
+          ]
+        },
+        {
+          "reference_id": "369cf93fb3ff9ca90ad9533c467975c3aaa923394ae93575b71d1176b54e7be0",
+          "from_definition_id": "198faa873faebd418d40ec0c9fc43cf87bb9dadd7c98dddc3b17771d56aebb33",
+          "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Shenhe.json",
+          "json_pointer": "/6/Default/GPPBBDEICKP/UNIQUE_Shenhe_ElementalArt_H_Talent_Buff/LFIJIMIMBIH/0/MLJNNELMEFL/0/IIBMNPFLNMJ",
+          "field_name": "abilityName",
+          "relation_kind": "ability_operation",
+          "target_kind": "ability",
+          "source_order": 1,
+          "presence_status": "present",
+          "resolution_status": "resolved",
+          "resolved_definition_id": "1d3e9836af2425762857dbae94a3e9d4974c6c940bf457ef7413f8ea4334773e",
+          "extraction_rule_id": "7",
+          "version_line": "release",
+          "snapshot_id": "ef0cac22b5cc4ee887fa64d134b563ffc745ae365b0c6cdb03930f895ab413df",
+          "target_key": "Avatar_Shenhe_Constellation_4",
+          "scope": {
+            "owner_definition_id": "de8aa7b9d4e73e07e8211c8fdb18010140611832f24ed9966919a1bf5f495597"
+          },
+          "candidate_ids": [
+            "1d3e9836af2425762857dbae94a3e9d4974c6c940bf457ef7413f8ea4334773e"
+          ]
+        }
+      ],
+      "boundaries": [
+        {
+          "scope": "other_variant_replacement",
+          "relative_pointer": "/ECFFDLHMCLK/3",
+          "status": "inactive_in_declared_hold_only_window"
+        },
+        {
+          "scope": "constellation_4",
+          "relative_pointer": "/ECFFDLHMCLK/1",
+          "status": "inactive_c0"
+        },
+        {
+          "scope": "constellation_6",
+          "relative_pointer": "/GPPBBDEICKP/UNIQUE_Shenhe_ElementalArt_H_Buff_Handler/EMGBJJOIENB/1",
+          "status": "fail_branch_only_c0"
+        },
+        {
+          "scope": "other_passive_benefit",
+          "relative_pointer": "/ECFFDLHMCLK/6",
+          "status": "not_compiled"
+        },
+        {
+          "scope": "energy_generation",
+          "relative_pointer": "/EMGBJJOIENB",
+          "status": "not_compiled"
+        },
+        {
+          "scope": "spatial_recheck",
+          "relative_pointer": "/GPPBBDEICKP/UNIQUE_Shenhe_ElementalArt_H_Buff_Handler/FMBHOKCHKOH",
+          "status": "scenario_condition_not_simulated"
+        },
+        {
+          "scope": "full_damage_formula",
+          "relative_pointer": "/ECFFDLHMCLK/8",
+          "status": "not_compiled"
+        }
+      ]
+    }
+  },
+  "source_fingerprint": "2e44b6dd23bc7c33ff21aec9f3e0e8f35ea054105cc549ba00cf0d48a56df39b",
+  "content_fingerprint": "bc0c3e727cc07464ee6c287de3b704e3a9be98fba0580865ae73db7181683966"
+}

@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>原神拉表 · mock 预览</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>原神拉表</h1>
+  <span id="ping-status" class="badge">连接中…</span>
+</header>
+<div id="update-banner" class="hidden"></div>
+
+<nav>
+  <button class="tab active" data-tab="rotation">排轴编辑器</button>
+  <button class="tab" data-tab="result">计算结果</button>
+  <button class="tab" data-tab="data">数据浏览</button>
+</nav>
+
+<main>
+  <section id="tab-rotation" class="panel active">
+    <div class="toolbar">
+      <select id="plan-select"><option value="">— 方案库 —</option></select>
+      <input id="tpl-path" type="text" placeholder="模板路径（留空=未保存的新模板）">
+      <button id="btn-new">新建</button>
+      <button id="btn-new-plan">新装备方案</button>
+      <button id="btn-load">加载</button>
+      <button id="btn-save">保存</button>
+      <button id="btn-equipment">装备与效果</button>
+      <button id="btn-manual-copy">手工数值副本</button>
+      <span class="sep"></span>
+      <button id="btn-add-hit">+事件</button>
+      <button id="btn-add-buff">+增益</button>
+      <button id="btn-add-switch">+切人</button>
+    </div>
+    <div id="plan-status" class="hint" role="status"></div>
+    <div id="equipment-editor" class="hidden"></div>
+    <div id="rotation-main" class="rotation-layout team-collapsed">
+      <aside id="team-panel" class="side"></aside>
+      <div class="timeline-pane">
+        <div id="timeline-modes" class="timeline-modes" role="group" aria-label="选择时间轴视图"></div>
+        <div id="timeline-filters" class="timeline-filters" aria-label="显示内容筛选"></div>
+        <div class="timeline-tools" role="group" aria-label="时间轴视图">
+          <button id="timeline-team" aria-pressed="false">角色面板</button>
+          <button id="timeline-zoom-out" title="缩小时间轴">− 缩小</button>
+          <span id="timeline-scale" aria-live="polite">100%</span>
+          <button id="timeline-zoom-in" title="放大时间轴">＋ 放大</button>
+          <button id="timeline-fit">适应全轴</button>
+          <button id="timeline-pan" aria-pressed="false">平移视图</button>
+          <button id="timeline-calculate">计算并更新视图</button>
+        </div>
+        <div id="timeline-legend" class="timeline-legend" aria-label="事件颜色与图形图例"></div>
+        <div id="timeline-note" class="timeline-note" role="status"></div>
+        <p class="timeline-help">Ctrl＋滚轮缩放 · Shift＋滚轮横移 · 拖动空白或中键平移</p>
+        <div id="timeline-wrap" tabindex="0" aria-label="时间轴；方向键移动，加减键缩放，零键适应全轴"><svg id="timeline" xmlns="http://www.w3.org/2000/svg"></svg></div>
+        <div id="timeline-stats" class="timeline-stats" aria-live="polite"></div>
+      </div>
+      <aside class="timeline-inspector" aria-label="事件信息">
+        <div id="timeline-detail" class="timeline-detail" aria-label="选中事件详情">点击事件查看详情；密集事件可展开逐条查看。</div>
+        <div id="prop-panel" class="side hidden"></div>
+      </aside>
+    </div>
+  </section>
+
+  <section id="tab-result" class="panel">
+    <div class="toolbar">
+      <button id="btn-calc">计算</button>
+      <span class="sep"></span>
+      <button id="btn-exp-json">导出结构化数据</button>
+      <button id="btn-exp-xlsx">导出电子表格</button>
+      <button id="btn-exp-csv">导出文本表格</button>
+      <button id="btn-resolved">导出数值模板</button>
+    </div>
+    <div id="result-body"></div>
+  </section>
+
+  <section id="tab-data" class="panel">
+    <div class="toolbar">
+      <select id="data-category"><option value="character">角色</option><option value="weapon">武器</option><option value="set">圣遗物套装</option><option value="artifact">圣遗物单件</option></select>
+      <input id="data-q" type="text" placeholder="角色名称模糊搜索（回车确认）">
+      <select id="data-element">
+        <option value="">全部元素</option>
+        <option>火</option><option>水</option><option>雷</option><option>冰</option>
+        <option>风</option><option>岩</option><option>草</option>
+      </select>
+      <select id="data-rarity">
+        <option value="">全部星级</option>
+        <option value="5">五星</option>
+        <option value="4">四星</option>
+      </select>
+      <select id="data-version-line"></select>
+      <button id="data-search">搜索</button>
+      <button id="data-update">更新数据</button>
+      <button id="data-annotations">追加机制资料</button>
+      <span id="db-update-status" class="muted" role="status"></span>
+    </div>
+    <div id="equipment-filters" class="eq-toolbar hidden"></div>
+    <div class="data-layout">
+      <aside id="data-list" class="side"></aside>
+      <div id="data-detail" class="side"></div>
+    </div>
+  </section>
+</main>
+
+<footer><span id="status-bar">就绪</span></footer>
+<script src="dev_equipment_fixture.js"></script>
+<script src="dev_display_fixture.js"></script>
+<script>
+// mock 桥：浏览器内预览用，不经过 pywebview。
+// 用法：仓库根目录起 http.server，访问 /src/genshin_app/gui/web/dev_mock.html
+window.__mockChars = [
+  { id: 10000002, name: "神里绫华", element: "冰", rarity: 5,
+    weapon_type: "WEAPON_SWORD_ONE_HAND", hp_90: 12858, atk_90: 342, def_90: 784,
+    hp_100: 13972, atk_100: 372, def_100: 852,
+    ascension_prop: "暴击伤害", ascension_value: 0.384 },
+  { id: 10000032, name: "班尼特", element: "火", rarity: 4,
+    weapon_type: "WEAPON_SWORD_ONE_HAND", hp_90: 12397, atk_90: 191, def_90: 771,
+    hp_100: 13471, atk_100: 208, def_100: 838,
+    ascension_prop: "元素充能效率", ascension_value: 0.267 },
+];
+//  filler 角色补足 120 个，验证列表分页拉全（页上限 100，需翻页累加）
+const __fillerElements = ["火", "水", "雷", "冰", "风", "岩", "草"];
+for (let i = 0; i < 118; i++) {
+  window.__mockChars.push({ id: 99000000 + i, name: `测试角色${i + 1}`,
+    element: __fillerElements[i % 7], rarity: i % 3 === 0 ? 5 : 4,
+    weapon_type: "WEAPON_SWORD_ONE_HAND", hp_90: 10000, atk_90: 300, def_90: 600,
+    hp_100: null, atk_100: null, def_100: null,
+    ascension_prop: "攻击力", ascension_value: 0.24 });
+}
+// 字段与 queries 的角色聚合响应一致；文案带「预览」标识，不作游戏数据来源。
+const __mockSource = (table, id, hash) => ({table, record_id: id, text_map_hash: String(hash),
+  language: "CHS", upstream_commit: "mock00000000"});
+window.__mockSkills = [
+  { id: 10019, character_id: 10000002, version_line: "release", slot: "burst", name: "神里流·霜灭",
+    desc_template: "预览：唤出持续前进的霜见雪关扉。\\n·持续造成冰元素伤害。\\n·持续时间结束时绽放。\\n<i>完整描述应由数据库原文提供。</i>",
+    desc_source: __mockSource("AvatarSkillExcelConfigData", 10019, 123001), desc_status: "present",
+    cooldown: 20, energy_cost: 80, effect_type: "damage",
+    params: { "10": { param_list: [2.02, 3.03, 5, 0],
+      param_desc: ["切割伤害|{param1:F1P}", "绽放伤害|{param2:F1P}", "持续时间|{param3:F1}秒"], add_props: {}, buff_zone: null },
+      "13": { param_list: [2.39, 3.58, 5, 0],
+      param_desc: ["切割伤害|{param1:F1P}", "绽放伤害|{param2:F1P}", "持续时间|{param3:F1}秒"], add_props: {}, buff_zone: null } } },
+  { id: 10323, character_id: 10000032, version_line: "release", slot: "burst", name: "美妙旅程",
+    desc_template: "预览：跃起并造成火元素伤害，生成鼓舞领域。\\n领域提供治疗或攻击力加成。",
+    desc_source: __mockSource("AvatarSkillExcelConfigData", 10323, 123002), desc_status: "present",
+    cooldown: 15, energy_cost: 60, effect_type: "buff",
+    params: { "10": { param_list: [2.33, 1270.2417, 0],
+      param_desc: ["技能伤害|{param1:F1P}", "基础治疗量|{param2:I}", "保留零值|{param3:I}"],
+      add_props: {}, buff_zone: '["stat_add"]' } } },
+];
+window.__mockTalents = [
+  { id: 90001, character_id: 10000002, level: 1, name: "mock 一命",
+    desc_template: "预览：触发时有{param1:P}的概率缩短冷却时间。\\n效果每{param2:F1}秒至多触发一次。",
+    desc_source: __mockSource("AvatarTalentExcelConfigData", 90001, 123003), desc_status: "present",
+    param_list: [0.5, 0.1, 0], add_props: {} },
+];
+window.__mockExtra = [
+  { info_type: "sub_skill", name: "附属技能预览", source_id: 90011, proud_skill_group_id: 900,
+    desc_template: "预览：召唤物的独立攻击说明。", desc_status: "present",
+    desc_source: __mockSource("AvatarSkillExcelConfigData", 90011, 123004),
+    content: "附属技能「附属技能预览」\n描述：预览：召唤物的独立攻击说明。",
+    description_variants: [], params: {"10": {param_list: [0, 1.5],
+      param_desc: ["额外伤害|{param1:P}", "攻击间隔|{param2:F1}秒"], add_props: {}, buff_zone: null}} },
+  { info_type: "inherent_skill", name: "固有天赋预览", source_id: 901, proud_skill_group_id: 901,
+    desc_template: "预览：提升{param1:P}伤害。", desc_status: "present",
+    desc_source: __mockSource("ProudSkillExcelConfigData", 90101, 123005),
+    content: "固有天赋「固有天赋预览」\n描述：预览：提升{param1:P}伤害。",
+    description_variants: [{level: 1, desc_template: "预览：提升{param1:P}伤害。", desc_status: "present",
+      desc_source: __mockSource("ProudSkillExcelConfigData", 90101, 123005)}],
+    params: {"1": {param_list: [0.2, 0], param_desc: [], add_props: {}, buff_zone: null}} },
+];
+window.__mockAnns = [
+  { id: 1, target_type: "character", target_id: 10000002, version_line: null,
+    category: "快照", title: "绫华 Q 锁面板",
+    content: "神里流·霜灭施放时快照，后续切割继承施放时刻 Buff。",
+    status: "approved", created_at: "mock", updated_at: "mock" },
+  { id: 2, target_type: "skill", target_id: 10019, version_line: null,
+    category: "ICD", title: "切割附着 ICD",
+    content: "切割共享 2.5s/3hit 计数器。",
+    status: "draft", created_at: "mock", updated_at: "mock" },
+];
+window.pywebview = {
+  api: {
+    ping: async () => ({ code: 0, data: { app: "genshin_app", version: "mock" } }),
+    get_startup_file: async () => ({ code: 0, data: { path: null } }),
+    check_update: async () => ({ code: 0, data: {} }),
+    check_database_update: async () => ({ code: 0, data: { available: false, initialized: true } }),
+    update_database: async () => ({ code: 0, data: { updated: false } }),
+    get_display_catalog: async (line="release") => ({code:0,data:{...(window.DISPLAY_FIXTURE?.catalog||{characters:[]}),version_line:line}}),
+    get_enums: async () => ({ code: 0, data: {
+      display:window.DISPLAY_FIXTURE?.display,
+      damage_systems: ["classic", "transformative", "lunar", "stellar"],
+      buff_zones: ["stat_add", "stat_pct", "base_add", "dmg_bonus", "crit_rate", "crit_dmg", "em",
+        "reaction_bonus", "reaction_flat", "lunar_base", "lunar_elevate",
+        "stellar_base", "stellar_elevate", "def_reduction", "def_ignore",
+        "res_shred", "base_mult", "lunar_mult", "stellar_mult"],
+      additive_zones: [], multiplicative_zones: [],
+      enemy_zones: ["def_reduction", "def_ignore", "res_shred"],
+      buff_scopes: ["team", "frontline"],
+      reaction_types: {
+        classic: ["amplify", "aggravate", "spread"],
+        transformative: ["burning", "swirl", "superconduct", "electro_charged",
+          "bloom", "overload", "burgeon", "hyperbloom", "shatter"],
+        lunar: ["lunar_bloom", "lunar_electro", "lunar_crystallize"],
+        stellar: ["stellar_swirl", "stellar_swirl_anemo",
+          "stellar_swirl_cryo_lv2", "stellar_swirl_cryo_lv3", "stellar_superconduct"],
+      },
+      elements: ["physical", "pyro", "hydro", "electro", "cryo", "anemo", "geo", "dendro"],
+      scaling_stats: ["atk", "hp", "def", "em"],
+    } }),
+    list_plans: async () => ({ code: 0, data: { dir: "data/plans", plans: [] } }),
+    load_template: async (p) => {
+      const t = await (await fetch("/examples/freeze_team.json")).json();
+      return { code: 0, data: { path: p, template: t } };
+    },
+    save_template: async (p, t) => {
+      console.log("[mock] save_template", p, t);
+      window.__lastSaved = t;
+      return { code: 0, data: { path: p } };
+    },
+    new_template: async () => ({ code: 0, data: { template: {
+      version: 1, form: "resolved", meta: { name: "新方案", version_line: "release" },
+      enemy: { level: 90, resistance: { default: 0.1 } },
+      characters: [{ id: "char1", level: 90,
+        stats: { atk: 2000, em: 0, crit_rate: 0.05, crit_dmg: 0.5, dmg_bonus: {} } }],
+      switches: [{ t: 0, character: "char1" }], buffs: [],
+      hits: [{ t: 1, character: "char1", skill: "skill", hit_name: "一段",
+        multiplier: 1, damage_system: "classic", element: "physical" }],
+      loop_duration: 20,
+    } } }),
+    run_calc: async (t) => {
+      // mock：浏览器跑不了引擎，返回 freeze_team 的真实预算结果 fixture
+      const r = await (await fetch("/examples/freeze_team_result.json")).json();
+      return { code: 0, data: { result: r } };
+    },
+    export_result: async (res, fmt, name) => {
+      console.log("[mock] export_result", fmt, name, res);
+      return { code: 0, data: { path: `data/exports/${name || "result"}_mock.${fmt}` } };
+    },
+    // ---- G4 数据浏览 mock：内存假库 ----
+    db_overview: async () => ({ code: 0, data: {
+      db_path: "mock/genshin.db",
+      meta: { game_version: "7.0", upstream_commit: "mock00000000",
+              version_lines: ["release", "beta"] },
+    } }),
+    list_characters: async (name, element, rarity, vl, page, ps) => {
+      let items = window.__mockChars;
+      if (name) items = items.filter((c) => c.name.includes(name));
+      if (element) items = items.filter((c) => c.element === element);
+      if (rarity) items = items.filter((c) => c.rarity === rarity);
+      const total = items.length;
+      const start = (page - 1) * ps;
+      return { code: 0, data: { total, page, page_size: ps,
+                                items: items.slice(start, start + ps) } };
+    },
+    character_detail: async (id, vl) => {
+      const c = window.__mockChars.find((x) => x.id === id);
+      if (!c) return { code: 1, message: `角色不存在: ${id}` };
+      return { code: 0, data: {
+        character: { ...c, desc: "mock 角色描述" },
+        skills: window.__mockSkills.filter((s) => s.character_id === id),
+        talents: window.__mockTalents.filter((t) => t.character_id === id),
+        extra_info: window.__mockExtra,
+        annotations: [],
+      } };
+    },
+    list_annotations: async (tt, tid, status, vl, page, ps) => {
+      let items = window.__mockAnns.filter((a) =>
+        a.target_type === tt && a.target_id === tid);
+      if (status && status !== "all") items = items.filter((a) => a.status === status);
+      return { code: 0, data: { total: items.length, page, page_size: ps, items } };
+    },
+    create_annotation: async () => ({ code: 1, reason: "accepted_database_is_immutable",
+      message: "活动数据库只读；追加资料需经内容提案和完整新版本发布。" }),
+    update_annotation: async () => ({ code: 1, reason: "accepted_database_is_immutable",
+      message: "活动数据库只读；追加资料需经内容提案和完整新版本发布。" }),
+    delete_annotation: async () => ({ code: 1, reason: "accepted_database_is_immutable",
+      message: "活动数据库只读；删除需经内容提案和完整新版本发布。" }),
+  },
+};
+window.addEventListener("DOMContentLoaded", () => {
+  const f=window.__equipmentPreview;
+  if(f){
+    for(const [method,response] of Object.entries(f))window.pywebview.api[method]=async()=>JSON.parse(JSON.stringify(response));
+    window.pywebview.api.list_plan_details=async()=>({code:0,data:{dir:"mock/plans",items:[]}});
+    for(const method of ["compose_equipment_plan","run_plan_calc","export_plan_result","apply_data_update","save_plan","load_plan"])
+      window.pywebview.api[method]=async()=>({code:1,message:"浏览器 mock 只预览真实资料样例；请在原生 APP 使用共享组合、存取和计算服务。"});
+  }
+  window.dispatchEvent(new Event("pywebviewready"));
+});
+</script>
+<script src="display.js"></script>
+<script src="rotation.js"></script>
+<script src="panel.js"></script>
+<script src="chars.js"></script>
+<script src="timeline-data.js"></script>
+<script src="timeline-view.js"></script>
+<script src="timeline.js"></script>
+<script src="result.js"></script>
+<script src="format.js"></script>
+<script src="data.js"></script>
+<script src="ui.js"></script>
+<script src="plans.js"></script>
+<script src="equipment-data.js"></script>
+<script src="equipment.js"></script>
+<script src="effect-editor.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

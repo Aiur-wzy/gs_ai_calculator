@@ -1,0 +1,2830 @@
+[
+  {
+    "Default": {
+      "ECFFDLHMCLK": [
+        {
+          "$type": "KKKOBMBLEDP",
+          "AMOLMPHFPHJ": -1,
+          "BDHBNCEEPPK": "Target",
+          "IJDGNIIOHLM": [
+            {
+              "$type": "MMPLBPOHMGL",
+              "BDHBNCEEPPK": "Team",
+              "NJJFOACNFGL": "NoneOrEqual",
+              "PEELJBICEHE": "_IS_SWRIL_WATER_ALTER"
+            },
+            {
+              "$type": "GMLKPHCEPIJ",
+              "BDHBNCEEPPK": "Target",
+              "IJDGNIIOHLM": [
+                {
+                  "$type": "BKCJECHCDKG",
+                  "BDHBNCEEPPK": "Target",
+                  "FJGEDPNBGCG": -1,
+                  "LJBBKGIFJDB": [
+                    "Grass",
+                    "Water"
+                  ]
+                }
+              ]
+            }
+          ],
+          "ILELAOFJIKJ": true,
+          "LDFBDMNIADI": "Swirl_Water",
+          "LJFIEGHHLOB": false
+        },
+        {
+          "$type": "KKKOBMBLEDP",
+          "AMOLMPHFPHJ": -1,
+          "BDHBNCEEPPK": "Target",
+          "IJDGNIIOHLM": [
+            {
+              "$type": "MMPLBPOHMGL",
+              "BDHBNCEEPPK": "Team",
+              "PDIFFCBMGMO": 1,
+              "PEELJBICEHE": "_IS_SWRIL_WATER_ALTER"
+            },
+            {
+              "$type": "GMLKPHCEPIJ",
+              "BDHBNCEEPPK": "Target",
+              "IJDGNIIOHLM": [
+                {
+                  "$type": "BKCJECHCDKG",
+                  "BDHBNCEEPPK": "Target",
+                  "FJGEDPNBGCG": -1,
+                  "LJBBKGIFJDB": [
+                    "Grass",
+                    "Water"
+                  ]
+                }
+              ]
+            }
+          ],
+          "ILELAOFJIKJ": true,
+          "LDFBDMNIADI": "Swirl_Water_Alter",
+          "LJFIEGHHLOB": false
+        }
+      ],
+      "GPPBBDEICKP": {
+        "Swirl_Water": {
+          "DBGOKAKAHFP": 100,
+          "DOALDLPNGMF": -1,
+          "EMGBJJOIENB": [
+            {
+              "$type": "MOOAODKIBCM",
+              "AMOLMPHFPHJ": -1,
+              "BEIMGAKABJN": "Eff_Element_Swirl_Water",
+              "HJIHBAANFLE": 1,
+              "ILELAOFJIKJ": true,
+              "JMMALEJDAEF": -1,
+              "LJFIEGHHLOB": false,
+              "MLFLDPAGADG": {
+                "$type": "KLOKLNFANBP",
+                "EEFLHEKBODJ": {
+                  "BNJLEBLGEKB": 180
+                },
+                "GNFICELAKIB": 10,
+                "HECMDGIAGKM": 2,
+                "POPNBJAHNFK": {
+                  "ONEHKOHOCBH": 180
+                }
+              }
+            },
+            {
+              "$type": "MMHMEBEEKGK",
+              "AMOLMPHFPHJ": -1,
+              "BDHBNCEEPPK": "Applier",
+              "IDCIIIFMDCM": {
+                "CEIJEFJBMBL": {
+                  "$type": "FKADOLEBLHD",
+                  "BKCIBHHMGEE": 6,
+                  "COBJECNAEOG": 1,
+                  "EAJAHKDHNJM": {
+                    "GMEKLJBJADO": {
+                      "KJCBAFKFFMP": 1,
+                      "PGPNDGBABNI": true
+                    }
+                  },
+                  "EHFMPIOJOLN": "TriggerNoRepeat",
+                  "MLFLDPAGADG": {
+                    "$type": "KLOKLNFANBP",
+                    "EEFLHEKBODJ": {
+                      "BNJLEBLGEKB": 180
+                    },
+                    "GNFICELAKIB": 10,
+                    "HECMDGIAGKM": 2,
+                    "POPNBJAHNFK": {
+                      "ONEHKOHOCBH": 180
+                    }
+                  }
+                },
+                "LGHDGGJIJOK": {
+                  "BKLFAECNFOF": {
+                    "EIAGIEDFLHJ": {
+                      "KJCBAFKFFMP": 1,
+                      "PGPNDGBABNI": true
+                    },
+                    "IHBPFOBEJKN": "default"
+                  },
+                  "EHKJIDFINEK": {
+                    "DBGOKAKAHFP": [
+                      "Swirl_Durability",
+                      1.25,
+                      "MUL",
+                      25,
+                      "ADD"
+                    ],
+                    "EPPIDAILPBN": "Water",
+                    "FBAEEIPKEHO": 30,
+                    "JDOLIAEMINM": 1,
+                    "MKFHLNAHKDI": true,
+                    "PEPDKCDHNIM": "Default"
+                  },
+                  "FHNDLIJJDEA": "Swirl_WaterDamage",
+                  "HDIFFKOHDNL": {
+                    "OGGEIBICAHC": "Shake"
+                  },
+                  "HGLEEJNPBEB": "ElementReaction_Damage_Attenuation_1",
+                  "IAFHAPFBBOB": "Swirl_WaterDamage",
+                  "IJFOFLPPGHK": {
+                    "EANBEIIKCIL": {
+                      "BGINHMBLECN": 0.11999999731779099,
+                      "HMANOMCGFLK": true,
+                      "KBAIICCLOEF": 0.5,
+                      "PJGAOELGLIF": 0.11999999731779099
+                    },
+                    "KDBKDJBCACN": 20
+                  },
+                  "NMMJKLAHOHH": {
+                    "ANBHPFEONOL": 0.05000000074505806,
+                    "EIAGIEDFLHJ": {
+                      "KJCBAFKFFMP": 1,
+                      "PGPNDGBABNI": true
+                    },
+                    "IHBPFOBEJKN": "default",
+                    "PAPNKKIKAOC": "LV1"
+                  }
+                }
+              },
+              "ILELAOFJIKJ": true,
+              "LJFIEGHHLOB": false,
+              "NMKBOEALDEF": "Enemy"
+            },
+            {
+              "$type": "CODEHPJKBAM",
+              "AMOLMPHFPHJ": -1,
+              "GLBBADIPHFL": "Self",
+              "IJDGNIIOHLM": [
+                {
+                  "$type": "HBMAFPHCHDB",
+                  "BBGMLDFBFFH": "Enemy",
+                  "BDHBNCEEPPK": "Target",
+                  "HMKPLHNHDLB": "Applier"
+                }
+              ],
+              "ILELAOFJIKJ": true,
+              "LGHDGGJIJOK": {
+                "BKLFAECNFOF": {
+                  "EIAGIEDFLHJ": {
+                    "KJCBAFKFFMP": 1,
+                    "PGPNDGBABNI": true
+                  },
+                  "IHBPFOBEJKN": "default"
+                },
+                "EHKJIDFINEK": {
+                  "EMILGODPBIG": [
+                    "ElementAbility_Swirl_Water_BaseReactionDamage",
+                    "Swirl_Water_Damage_Factor",
+                    "MUL"
+                  ],
+                  "EPPIDAILPBN": "Water",
+                  "FBAEEIPKEHO": 130,
+                  "JDOLIAEMINM": 1,
+                  "MKFHLNAHKDI": true,
+                  "PEPDKCDHNIM": "Default"
+                },
+                "FHNDLIJJDEA": "Swirl_WaterDamage",
+                "HDIFFKOHDNL": {
+                  "OGGEIBICAHC": "Shake"
+                },
+                "HGLEEJNPBEB": "ElementReaction_Damage_Attenuation_1",
+                "IAFHAPFBBOB": "Self_Swirl_WaterDamage",
+                "IJFOFLPPGHK": {
+                  "EANBEIIKCIL": {
+                    "BGINHMBLECN": 0.11999999731779099,
+                    "HMANOMCGFLK": true,
+                    "KBAIICCLOEF": 0.5,
+                    "PJGAOELGLIF": 0.11999999731779099
+                  },
+                  "KDBKDJBCACN": 20
+                },
+                "NMMJKLAHOHH": {
+                  "ANBHPFEONOL": 0.05000000074505806,
+                  "EIAGIEDFLHJ": {
+                    "KJCBAFKFFMP": 1,
+                    "PGPNDGBABNI": true
+                  },
+                  "IHBPFOBEJKN": "default",
+                  "PAPNKKIKAOC": "LV1"
+                }
+              },
+              "LJFIEGHHLOB": false,
+              "MLFLDPAGADG": {
+                "$type": "LFADEGOIHMK",
+                "EEFLHEKBODJ": {
+                  "BNJLEBLGEKB": 180
+                },
+                "GMDPALPODJP": "RootNode",
+                "GNFICELAKIB": 10,
+                "HECMDGIAGKM": 2,
+                "POPNBJAHNFK": {
+                  "ONEHKOHOCBH": 180
+                }
+              }
+            }
+          ],
+          "JPEAFDFPKAN": 0.10000000149011612,
+          "KFOMCJGGPPC": -1,
+          "LFIJIMIMBIH": [
+            {
+              "$type": "FOPHOEOKIFI",
+              "AMOLMPHFPHJ": -1,
+              "IAFHAPFBBOB": "Swirl_WaterDamage",
+              "IELLPMKLAIO": "RejectAll",
+              "NNIMBKJLFNL": 0.009999999776482582
+            }
+          ],
+          "PPKOPMBNPJH": true
+        },
+        "Swirl_Water_Alter": {
+          "DBGOKAKAHFP": 100,
+          "DOALDLPNGMF": -1,
+          "EMGBJJOIENB": [
+            {
+              "$type": "MOOAODKIBCM",
+              "AMOLMPHFPHJ": -1,
+              "BEIMGAKABJN": "Eff_Element_Swirl_Water_Alter",
+              "HJIHBAANFLE": 1,
+              "ILELAOFJIKJ": true,
+              "JMMALEJDAEF": -1,
+              "LJFIEGHHLOB": false,
+              "MLFLDPAGADG": {
+                "$type": "KLOKLNFANBP",
+                "EEFLHEKBODJ": {
+                  "BNJLEBLGEKB": 180
+                },
+                "GNFICELAKIB": 10,
+                "HECMDGIAGKM": 2,
+                "POPNBJAHNFK": {
+                  "ONEHKOHOCBH": 180
+                }
+              }
+            },
+            {
+              "$type": "MMHMEBEEKGK",
+              "AMOLMPHFPHJ": -1,
+              "BDHBNCEEPPK": "Applier",
+              "IDCIIIFMDCM": {
+                "CEIJEFJBMBL": {
+                  "$type": "FKADOLEBLHD",
+                  "BKCIBHHMGEE": 12,
+                  "COBJECNAEOG": 1,
+                  "EAJAHKDHNJM": {
+                    "GMEKLJBJADO": {
+                      "KJCBAFKFFMP": 1,
+                      "PGPNDGBABNI": true
+                    }
+                  },
+                  "EHFMPIOJOLN": "TriggerNoRepeat",
+                  "MLFLDPAGADG": {
+                    "$type": "KLOKLNFANBP",
+                    "EEFLHEKBODJ": {
+                      "BNJLEBLGEKB": 180
+                    },
+                    "GNFICELAKIB": 10,
+                    "HECMDGIAGKM": 2,
+                    "POPNBJAHNFK": {
+                      "ONEHKOHOCBH": 180
+                    }
+                  }
+                },
+                "LGHDGGJIJOK": {
+                  "BKLFAECNFOF": {
+                    "EIAGIEDFLHJ": {
+                      "KJCBAFKFFMP": 1,
+                      "PGPNDGBABNI": true
+                    },
+                    "IHBPFOBEJKN": "default"
+                  },
+                  "EHKJIDFINEK": {
+                    "DBGOKAKAHFP": [
+                      "Swirl_Durability",
+                      1.25,
+                      "MUL",
+                      25,
+                      "ADD"
+                    ],
+                    "EPPIDAILPBN": "Water",
+                    "FBAEEIPKEHO": 30,
+                    "JDOLIAEMINM": 1,
+                    "MKFHLNAHKDI": true,
+                    "PEPDKCDHNIM": "Default"
+                  },
+                  "FHNDLIJJDEA": "Swirl_WaterDamage",
+                  "HDIFFKOHDNL": {
+                    "OGGEIBICAHC": "Shake"
+                  },
+                  "HGLEEJNPBEB": "ElementReaction_Damage_Attenuation_1",
+                  "IAFHAPFBBOB": "Swirl_WaterDamage",
+                  "IJFOFLPPGHK": {
+                    "EANBEIIKCIL": {
+                      "BGINHMBLECN": 0.11999999731779099,
+                      "HMANOMCGFLK": true,
+                      "KBAIICCLOEF": 0.5,
+                      "PJGAOELGLIF": 0.11999999731779099
+                    },
+                    "KDBKDJBCACN": 20
+                  },
+                  "NMMJKLAHOHH": {
+                    "ANBHPFEONOL": 0.05000000074505806,
+                    "EIAGIEDFLHJ": {
+                      "KJCBAFKFFMP": 1,
+                      "PGPNDGBABNI": true
+                    },
+                    "IHBPFOBEJKN": "default",
+                    "PAPNKKIKAOC": "LV1"
+                  }
+                }
+              },
+              "ILELAOFJIKJ": true,
+              "LJFIEGHHLOB": false,
+              "NMKBOEALDEF": "Enemy"
+            },
+            {
+              "$type": "CODEHPJKBAM",
+              "AMOLMPHFPHJ": -1,
+              "IJDGNIIOHLM": [
+                {
+                  "$type": "HBMAFPHCHDB",
+                  "BBGMLDFBFFH": "Enemy",
+                  "BDHBNCEEPPK": "Target",
+                  "HMKPLHNHDLB": "Applier"
+                }
+              ],
+              "ILELAOFJIKJ": true,
+              "LGHDGGJIJOK": {
+                "BKLFAECNFOF": {
+                  "EIAGIEDFLHJ": {
+                    "KJCBAFKFFMP": 1,
+                    "PGPNDGBABNI": true
+                  },
+                  "IHBPFOBEJKN": "default"
+                },
+                "EHKJIDFINEK": {
+                  "EMILGODPBIG": [
+                    "ElementAbility_Swirl_Water_BaseReactionDamage",
+                    "Swirl_Water_Alter_Damage_Factor",
+                    "MUL"
+                  ],
+                  "EPPIDAILPBN": "Water",
+                  "FBAEEIPKEHO": 130,
+                  "JDOLIAEMINM": 1,
+                  "MKFHLNAHKDI": true,
+                  "PEPDKCDHNIM": "Default"
+                },
+                "FHNDLIJJDEA": "Swirl_WaterDamage",
+                "HDIFFKOHDNL": {
+                  "OGGEIBICAHC": "Shake"
+                },
+                "HGLEEJNPBEB": "ElementReaction_Damage_Attenuation_1",
+                "IAFHAPFBBOB": "Self_Swirl_WaterDamage",
+                "IJFOFLPPGHK": {
+                  "EANBEIIKCIL": {
+                    "BGINHMBLECN": 0.11999999731779099,
+                    "HMANOMCGFLK": true,
+                    "KBAIICCLOEF": 0.5,
+                    "PJGAOELGLIF": 0.11999999731779099
+                  },
+                  "KDBKDJBCACN": 20
+                },
+                "NMMJKLAHOHH": {
+                  "ANBHPFEONOL": 0.05000000074505806,
+                  "EIAGIEDFLHJ": {
+                    "KJCBAFKFFMP": 1,
+                    "PGPNDGBABNI": true
+                  },
+                  "IHBPFOBEJKN": "default",
+                  "PAPNKKIKAOC": "LV1"
+                }
+              },
+              "LJFIEGHHLOB": false,
+              "MLFLDPAGADG": {
+                "$type": "LFADEGOIHMK",
+                "EEFLHEKBODJ": {
+                  "BNJLEBLGEKB": 180
+                },
+                "GMDPALPODJP": "RootNode",
+                "GNFICELAKIB": 10,
+                "HECMDGIAGKM": 2,
+                "POPNBJAHNFK": {
+                  "ONEHKOHOCBH": 180
+                }
+              }
+            }
+          ],
+          "JPEAFDFPKAN": 0.10000000149011612,
+          "KFOMCJGGPPC": -1,
+          "LFIJIMIMBIH": [
+            {
+              "$type": "FOPHOEOKIFI",
+              "AMOLMPHFPHJ": -1,
+              "IAFHAPFBBOB": "Swirl_WaterDamage",
+              "IELLPMKLAIO": "RejectAll",
+              "NNIMBKJLFNL": 0.009999999776482582
+            }
+          ],
+          "PPKOPMBNPJH": true
+        }
+      },
+      "IIBMNPFLNMJ": "ElementAbility_Swirl_Water",
+      "LOEHLJGBGAC": {
+        "ElementAbility_Swirl_Water_BaseReactionDamage": 0,
+        "Swirl_Durability": 1,
+        "Swirl_Water_Alter_Damage_Factor": 2.4000000953674316,
+        "Swirl_Water_Damage_Factor": 0.6000000238418579
+      },
+      "OMAIGDMCJBO": {
+        "DBGOKAKAHFP": 100,
+        "DOALDLPNGMF": -1,
+        "KFOMCJGGPPC": -1,
+        "PPKOPMBNPJH": true
+      },
+      "PODJJJHGAMO": true
+    }
+  },
+  {
+    "Default": {
+      "ECFFDLHMCLK": [
+        {
+          "$type": "KKKOBMBLEDP",
+          "AMOLMPHFPHJ": -1,
+          "BDHBNCEEPPK": "Target",
+          "IJDGNIIOHLM": [
+            {
+              "$type": "MMPLBPOHMGL",
+              "BDHBNCEEPPK": "Team",
+              "NJJFOACNFGL": "NoneOrEqual",
+              "PEELJBICEHE": "_IS_SWRIL_ICE_ALTER"
+            },
+            {
+              "$type": "GMLKPHCEPIJ",
+              "BDHBNCEEPPK": "Target",
+              "IJDGNIIOHLM": [
+                {
+                  "$type": "BKCJECHCDKG",
+                  "BDHBNCEEPPK": "Target",
+                  "FJGEDPNBGCG": -1,
+                  "LJBBKGIFJDB": [
+                    "Grass",
+                    "Water"
+                  ]
+                }
+              ]
+            }
+          ],
+          "ILELAOFJIKJ": true,
+          "LDFBDMNIADI": "Swirl_Ice",
+          "LJFIEGHHLOB": false
+        },
+        {
+          "$type": "KKKOBMBLEDP",
+          "AMOLMPHFPHJ": -1,
+          "BDHBNCEEPPK": "Target",
+          "IJDGNIIOHLM": [
+            {
+              "$type": "MMPLBPOHMGL",
+              "BDHBNCEEPPK": "Team",
+              "PDIFFCBMGMO": 1,
+              "PEELJBICEHE": "_IS_SWRIL_ICE_ALTER"
+            },
+            {
+              "$type": "GMLKPHCEPIJ",
+              "BDHBNCEEPPK": "Target",
+              "IJDGNIIOHLM": [
+                {
+                  "$type": "BKCJECHCDKG",
+                  "BDHBNCEEPPK": "Target",
+                  "FJGEDPNBGCG": -1,
+                  "LJBBKGIFJDB": [
+                    "Grass",
+                    "Water"
+                  ]
+                }
+              ]
+            }
+          ],
+          "ILELAOFJIKJ": true,
+          "LDFBDMNIADI": "Swirl_Ice_Alter",
+          "LJFIEGHHLOB": false
+        }
+      ],
+      "GPPBBDEICKP": {
+        "Swirl_Ice": {
+          "DBGOKAKAHFP": 100,
+          "DOALDLPNGMF": -1,
+          "EMGBJJOIENB": [
+            {
+              "$type": "MOOAODKIBCM",
+              "AMOLMPHFPHJ": -1,
+              "BEIMGAKABJN": "Eff_Element_Swirl_Ice",
+              "HJIHBAANFLE": 1,
+              "ILELAOFJIKJ": true,
+              "JMMALEJDAEF": -1,
+              "LJFIEGHHLOB": false,
+              "MLFLDPAGADG": {
+                "$type": "KLOKLNFANBP",
+                "EEFLHEKBODJ": {
+                  "BNJLEBLGEKB": 180
+                },
+                "GNFICELAKIB": 10,
+                "HECMDGIAGKM": 2,
+                "POPNBJAHNFK": {
+                  "ONEHKOHOCBH": 180
+                }
+              }
+            },
+            {
+              "$type": "MMHMEBEEKGK",
+              "AMOLMPHFPHJ": -1,
+              "BDHBNCEEPPK": "Applier",
+              "IDCIIIFMDCM": {
+                "CEIJEFJBMBL": {
+                  "$type": "FKADOLEBLHD",
+                  "BKCIBHHMGEE": 6,
+                  "COBJECNAEOG": 1,
+                  "EAJAHKDHNJM": {
+                    "GMEKLJBJADO": {
+                      "KJCBAFKFFMP": 1,
+                      "PGPNDGBABNI": true
+                    }
+                  },
+                  "EHFMPIOJOLN": "TriggerNoRepeat",
+                  "MLFLDPAGADG": {
+                    "$type": "KLOKLNFANBP",
+                    "EEFLHEKBODJ": {
+                      "BNJLEBLGEKB": 180
+                    },
+                    "GNFICELAKIB": 10,
+                    "HECMDGIAGKM": 2,
+                    "POPNBJAHNFK": {
+                      "ONEHKOHOCBH": 180
+                    }
+                  }
+                },
+                "LGHDGGJIJOK": {
+                  "BKLFAECNFOF": {
+                    "EIAGIEDFLHJ": {
+                      "KJCBAFKFFMP": 1,
+                      "PGPNDGBABNI": true
+                    },
+                    "IHBPFOBEJKN": "default"
+                  },
+                  "EHKJIDFINEK": {
+                    "DBGOKAKAHFP": [
+                      "Swirl_Durability",
+                      1.25,
+                      "MUL",
+                      25,
+                      "ADD"
+                    ],
+                    "EMILGODPBIG": [
+                      "ElementAbility_Swirl_Ice_BaseReactionDamage",
+                      "Swirl_Ice_Damage_Factor",
+                      "MUL"
+                    ],
+                    "EPPIDAILPBN": "Ice",
+                    "FBAEEIPKEHO": 30,
+                    "JDOLIAEMINM": 1,
+                    "MKFHLNAHKDI": true,
+                    "PEPDKCDHNIM": "Default"
+                  },
+                  "FHNDLIJJDEA": "Swirl_IceDamage",
+                  "HDIFFKOHDNL": {
+                    "OGGEIBICAHC": "Shake"
+                  },
+                  "HGLEEJNPBEB": "ElementReaction_Damage_Attenuation_1",
+                  "IAFHAPFBBOB": "Swirl_IceDamage",
+                  "IJFOFLPPGHK": {
+                    "EANBEIIKCIL": {
+                      "BGINHMBLECN": 0.11999999731779099,
+                      "HMANOMCGFLK": true,
+                      "KBAIICCLOEF": 0.5,
+                      "PJGAOELGLIF": 0.11999999731779099
+                    },
+                    "KDBKDJBCACN": 20
+                  },
+                  "NMMJKLAHOHH": {
+                    "ANBHPFEONOL": 0.05000000074505806,
+                    "EIAGIEDFLHJ": {
+                      "KJCBAFKFFMP": 1,
+                      "PGPNDGBABNI": true
+                    },
+                    "IHBPFOBEJKN": "default",
+                    "PAPNKKIKAOC": "LV1"
+                  }
+                }
+              },
+              "ILELAOFJIKJ": true,
+              "LJFIEGHHLOB": false,
+              "NMKBOEALDEF": "Enemy"
+            },
+            {
+              "$type": "CODEHPJKBAM",
+              "AMOLMPHFPHJ": -1,
+              "IJDGNIIOHLM": [
+                {
+                  "$type": "HBMAFPHCHDB",
+                  "BBGMLDFBFFH": "Enemy",
+                  "BDHBNCEEPPK": "Target",
+                  "HMKPLHNHDLB": "Applier"
+                }
+              ],
+              "ILELAOFJIKJ": true,
+              "LGHDGGJIJOK": {
+                "BKLFAECNFOF": {
+                  "EIAGIEDFLHJ": {
+                    "KJCBAFKFFMP": 1,
+                    "PGPNDGBABNI": true
+                  },
+                  "IHBPFOBEJKN": "default"
+                },
+                "EHKJIDFINEK": {
+                  "EMILGODPBIG": [
+                    "ElementAbility_Swirl_Ice_BaseReactionDamage",
+                    "Swirl_Ice_Damage_Factor",
+                    "MUL"
+                  ],
+                  "EPPIDAILPBN": "Ice",
+                  "FBAEEIPKEHO": 130,
+                  "JDOLIAEMINM": 1,
+                  "MKFHLNAHKDI": true,
+                  "PEPDKCDHNIM": "Default"
+                },
+                "FHNDLIJJDEA": "Swirl_IceDamage",
+                "HDIFFKOHDNL": {
+                  "OGGEIBICAHC": "Shake"
+                },
+                "HGLEEJNPBEB": "ElementReaction_Damage_Attenuation_1",
+                "IAFHAPFBBOB": "Self_Swirl_IceDamage",
+                "IJFOFLPPGHK": {
+                  "EANBEIIKCIL": {
+                    "BGINHMBLECN": 0.11999999731779099,
+                    "HMANOMCGFLK": true,
+                    "KBAIICCLOEF": 0.5,
+                    "PJGAOELGLIF": 0.11999999731779099
+                  },
+                  "KDBKDJBCACN": 20
+                },
+                "NMMJKLAHOHH": {
+                  "ANBHPFEONOL": 0.05000000074505806,
+                  "EIAGIEDFLHJ": {
+                    "KJCBAFKFFMP": 1,
+                    "PGPNDGBABNI": true
+                  },
+                  "IHBPFOBEJKN": "default",
+                  "PAPNKKIKAOC": "LV1"
+                }
+              },
+              "LJFIEGHHLOB": false,
+              "MLFLDPAGADG": {
+                "$type": "LFADEGOIHMK",
+                "EEFLHEKBODJ": {
+                  "BNJLEBLGEKB": 180
+                },
+                "GMDPALPODJP": "RootNode",
+                "GNFICELAKIB": 10,
+                "HECMDGIAGKM": 2,
+                "POPNBJAHNFK": {
+                  "ONEHKOHOCBH": 180
+                }
+              }
+            }
+          ],
+          "JPEAFDFPKAN": 0.10000000149011612,
+          "KFOMCJGGPPC": -1,
+          "LFIJIMIMBIH": [
+            {
+              "$type": "FOPHOEOKIFI",
+              "AMOLMPHFPHJ": -1,
+              "IAFHAPFBBOB": "Swirl_IceDamage",
+              "IELLPMKLAIO": "RejectAll",
+              "NNIMBKJLFNL": 0.009999999776482582
+            }
+          ],
+          "PPKOPMBNPJH": true
+        },
+        "Swirl_Ice_Alter": {
+          "DBGOKAKAHFP": 100,
+          "DOALDLPNGMF": -1,
+          "EMGBJJOIENB": [
+            {
+              "$type": "MOOAODKIBCM",
+              "AMOLMPHFPHJ": -1,
+              "BEIMGAKABJN": "Eff_Element_Swirl_Ice_Alter",
+              "HJIHBAANFLE": 1,
+              "ILELAOFJIKJ": true,
+              "JMMALEJDAEF": -1,
+              "LJFIEGHHLOB": false,
+              "MLFLDPAGADG": {
+                "$type": "KLOKLNFANBP",
+                "EEFLHEKBODJ": {
+                  "BNJLEBLGEKB": 180
+                },
+                "GNFICELAKIB": 10,
+                "HECMDGIAGKM": 2,
+                "POPNBJAHNFK": {
+                  "ONEHKOHOCBH": 180
+                }
+              }
+            },
+            {
+              "$type": "MMHMEBEEKGK",
+              "AMOLMPHFPHJ": -1,
+              "BDHBNCEEPPK": "Applier",
+              "IDCIIIFMDCM": {
+                "CEIJEFJBMBL": {
+                  "$type": "FKADOLEBLHD",
+                  "BKCIBHHMGEE": 12,
+                  "COBJECNAEOG": 1,
+                  "EAJAHKDHNJM": {
+                    "GMEKLJBJADO": {
+                      "KJCBAFKFFMP": 1,
+                      "PGPNDGBABNI": true
+                    }
+                  },
+                  "EHFMPIOJOLN": "TriggerNoRepeat",
+                  "MLFLDPAGADG": {
+                    "$type": "KLOKLNFANBP",
+                    "EEFLHEKBODJ": {
+                      "BNJLEBLGEKB": 180
+                    },
+                    "GNFICELAKIB": 10,
+                    "HECMDGIAGKM": 2,
+                    "POPNBJAHNFK": {
+                      "ONEHKOHOCBH": 180
+                    }
+                  }
+                },
+                "LGHDGGJIJOK": {
+                  "BKLFAECNFOF": {
+                    "EIAGIEDFLHJ": {
+                      "KJCBAFKFFMP": 1,
+                      "PGPNDGBABNI": true
+                    },
+                    "IHBPFOBEJKN": "default"
+                  },
+                  "EHKJIDFINEK": {
+                    "DBGOKAKAHFP": [
+                      "Swirl_Durability",
+                      1.25,
+                      "MUL",
+                      25,
+                      "ADD"
+                    ],
+                    "EMILGODPBIG": [
+                      "ElementAbility_Swirl_Ice_BaseReactionDamage",
+                      "Swirl_Ice_Alter_Damage_Factor",
+                      "MUL"
+                    ],
+                    "EPPIDAILPBN": "Ice",
+                    "FBAEEIPKEHO": 30,
+                    "JDOLIAEMINM": 1,
+                    "MKFHLNAHKDI": true,
+                    "PEPDKCDHNIM": "Default"
+                  },
+                  "FHNDLIJJDEA": "Swirl_IceDamage",
+                  "HDIFFKOHDNL": {
+                    "OGGEIBICAHC": "Shake"
+                  },
+                  "HGLEEJNPBEB": "ElementReaction_Damage_Attenuation_1",
+                  "IAFHAPFBBOB": "Swirl_IceDamage",
+                  "IJFOFLPPGHK": {
+                    "EANBEIIKCIL": {
+                      "BGINHMBLECN": 0.11999999731779099,
+                      "HMANOMCGFLK": true,
+                      "KBAIICCLOEF": 0.5,
+                      "PJGAOELGLIF": 0.11999999731779099
+                    },
+                    "KDBKDJBCACN": 20
+                  },
+                  "NMMJKLAHOHH": {
+                    "ANBHPFEONOL": 0.05000000074505806,
+                    "EIAGIEDFLHJ": {
+                      "KJCBAFKFFMP": 1,
+                      "PGPNDGBABNI": true
+                    },
+                    "IHBPFOBEJKN": "default",
+                    "PAPNKKIKAOC": "LV1"
+                  }
+                }
+              },
+              "ILELAOFJIKJ": true,
+              "LJFIEGHHLOB": false,
+              "NMKBOEALDEF": "Enemy"
+            },
+            {
+              "$type": "CODEHPJKBAM",
+              "AMOLMPHFPHJ": -1,
+              "IJDGNIIOHLM": [
+                {
+                  "$type": "HBMAFPHCHDB",
+                  "BBGMLDFBFFH": "Enemy",
+                  "BDHBNCEEPPK": "Target",
+                  "HMKPLHNHDLB": "Applier"
+                }
+              ],
+              "ILELAOFJIKJ": true,
+              "LGHDGGJIJOK": {
+                "BKLFAECNFOF": {
+                  "EIAGIEDFLHJ": {
+                    "KJCBAFKFFMP": 1,
+                    "PGPNDGBABNI": true
+                  },
+                  "IHBPFOBEJKN": "default"
+                },
+                "EHKJIDFINEK": {
+                  "EMILGODPBIG": [
+                    "ElementAbility_Swirl_Ice_BaseReactionDamage",
+                    "Swirl_Ice_Alter_Damage_Factor",
+                    "MUL"
+                  ],
+                  "EPPIDAILPBN": "Ice",
+                  "FBAEEIPKEHO": 130,
+                  "JDOLIAEMINM": 1,
+                  "MKFHLNAHKDI": true,
+                  "PEPDKCDHNIM": "Default"
+                },
+                "FHNDLIJJDEA": "Swirl_IceDamage",
+                "HDIFFKOHDNL": {
+                  "OGGEIBICAHC": "Shake"
+                },
+                "HGLEEJNPBEB": "ElementReaction_Damage_Attenuation_1",
+                "IAFHAPFBBOB": "Self_Swirl_IceDamage",
+                "IJFOFLPPGHK": {
+                  "EANBEIIKCIL": {
+                    "BGINHMBLECN": 0.11999999731779099,
+                    "HMANOMCGFLK": true,
+                    "KBAIICCLOEF": 0.5,
+                    "PJGAOELGLIF": 0.11999999731779099
+                  },
+                  "KDBKDJBCACN": 20
+                },
+                "NMMJKLAHOHH": {
+                  "ANBHPFEONOL": 0.05000000074505806,
+                  "EIAGIEDFLHJ": {
+                    "KJCBAFKFFMP": 1,
+                    "PGPNDGBABNI": true
+                  },
+                  "IHBPFOBEJKN": "default",
+                  "PAPNKKIKAOC": "LV1"
+                }
+              },
+              "LJFIEGHHLOB": false,
+              "MLFLDPAGADG": {
+                "$type": "LFADEGOIHMK",
+                "EEFLHEKBODJ": {
+                  "BNJLEBLGEKB": 180
+                },
+                "GMDPALPODJP": "RootNode",
+                "GNFICELAKIB": 10,
+                "HECMDGIAGKM": 2,
+                "POPNBJAHNFK": {
+                  "ONEHKOHOCBH": 180
+                }
+              }
+            }
+          ],
+          "JPEAFDFPKAN": 0.10000000149011612,
+          "KFOMCJGGPPC": -1,
+          "LFIJIMIMBIH": [
+            {
+              "$type": "FOPHOEOKIFI",
+              "AMOLMPHFPHJ": -1,
+              "IAFHAPFBBOB": "Swirl_IceDamage",
+              "IELLPMKLAIO": "RejectAll",
+              "NNIMBKJLFNL": 0.009999999776482582
+            }
+          ],
+          "PPKOPMBNPJH": true
+        }
+      },
+      "IIBMNPFLNMJ": "ElementAbility_Swirl_Ice",
+      "LOEHLJGBGAC": {
+        "ElementAbility_Swirl_Ice_BaseReactionDamage": 0,
+        "Swirl_Durability": 1,
+        "Swirl_Ice_Alter_Damage_Factor": 2.4000000953674316,
+        "Swirl_Ice_Damage_Factor": 0.6000000238418579
+      },
+      "OMAIGDMCJBO": {
+        "DBGOKAKAHFP": 100,
+        "DOALDLPNGMF": -1,
+        "KFOMCJGGPPC": -1,
+        "PPKOPMBNPJH": true
+      },
+      "PODJJJHGAMO": true
+    }
+  },
+  {
+    "Default": {
+      "ECFFDLHMCLK": [
+        {
+          "$type": "KKKOBMBLEDP",
+          "AMOLMPHFPHJ": -1,
+          "BDHBNCEEPPK": "AllTeams",
+          "ILELAOFJIKJ": true,
+          "LDFBDMNIADI": "StarSwirl_Ice_UpdateOwner",
+          "LJFIEGHHLOB": false
+        },
+        {
+          "$type": "CMMGFJNNJPI",
+          "AMOLMPHFPHJ": -1,
+          "IDHMFMFEFPH": true,
+          "ILELAOFJIKJ": true,
+          "LJFIEGHHLOB": true,
+          "PBODFIJOINN": 1056
+        },
+        {
+          "$type": "CMMGFJNNJPI",
+          "AMOLMPHFPHJ": -1,
+          "IDHMFMFEFPH": true,
+          "ILELAOFJIKJ": true,
+          "LJFIEGHHLOB": true,
+          "PBODFIJOINN": 5116009
+        },
+        {
+          "$type": "LHFBKCPKGFO",
+          "AMOLMPHFPHJ": -1,
+          "BDHBNCEEPPK": "Other",
+          "IJDGNIIOHLM": [
+            {
+              "$type": "KJKCGJGKADI",
+              "BBGMLDFBFFH": "Enemy",
+              "BDHBNCEEPPK": "Target",
+              "HMKPLHNHDLB": {
+                "$type": "BEHPLDJAJND"
+              }
+            }
+          ],
+          "ILELAOFJIKJ": true,
+          "KHJMNJNEADF": [
+            {
+              "$type": "MLFDCBOGJDP",
+              "AMOLMPHFPHJ": -1,
+              "BDHBNCEEPPK": "Other",
+              "ILELAOFJIKJ": true,
+              "LGHDGGJIJOK": {
+                "BKLFAECNFOF": {
+                  "EIAGIEDFLHJ": {
+                    "KJCBAFKFFMP": 1,
+                    "PGPNDGBABNI": true
+                  },
+                  "IHBPFOBEJKN": "default"
+                },
+                "EHKJIDFINEK": {
+                  "CHAFKOIAGKP": 1,
+                  "EPPIDAILPBN": "Wind",
+                  "FBAEEIPKEHO": 20,
+                  "JDOLIAEMINM": 1,
+                  "NBHOFKCIBLI": {
+                    "JBAICIBLADF": true
+                  },
+                  "PEPDKCDHNIM": "Range"
+                },
+                "HDIFFKOHDNL": {
+                  "OGGEIBICAHC": "Shake"
+                },
+                "HGLEEJNPBEB": "default",
+                "HOCNCCAJOIG": "OriginOwner",
+                "IAFHAPFBBOB": "StarSwirlWindDamage",
+                "IJFOFLPPGHK": {
+                  "EANBEIIKCIL": {
+                    "BGINHMBLECN": 0.11999999731779099,
+                    "HMANOMCGFLK": true,
+                    "KBAIICCLOEF": 0.5,
+                    "PJGAOELGLIF": 0.11999999731779099
+                  },
+                  "KDBKDJBCACN": 20
+                },
+                "KCDMMFINAFG": [
+                  "StarSwirlWindDamage_Reaction"
+                ],
+                "NMMJKLAHOHH": {
+                  "ANBHPFEONOL": 0.009999999776482582,
+                  "EIAGIEDFLHJ": {
+                    "KJCBAFKFFMP": 1,
+                    "PGPNDGBABNI": true
+                  },
+                  "IHBPFOBEJKN": "default",
+                  "LHEILBMGANH": "ByHitDirection",
+                  "PAPNKKIKAOC": "LV2"
+                }
+              },
+              "LJFIEGHHLOB": false,
+              "MLFLDPAGADG": {
+                "$type": "LFADEGOIHMK",
+                "ECPBNJFNBIJ": true,
+                "EEFLHEKBODJ": {
+                  "BNJLEBLGEKB": 180
+                },
+                "GMDPALPODJP": "RootNode",
+                "GNFICELAKIB": 10,
+                "HECMDGIAGKM": 2,
+                "POPNBJAHNFK": {
+                  "ONEHKOHOCBH": 180
+                }
+              }
+            }
+          ],
+          "LJFIEGHHLOB": false
+        },
+        {
+          "$type": "LHFBKCPKGFO",
+          "AMOLMPHFPHJ": -1,
+          "BDHBNCEEPPK": "Other",
+          "IJDGNIIOHLM": [
+            {
+              "$type": "BKCJECHCDKG",
+              "BDHBNCEEPPK": "Other",
+              "FJGEDPNBGCG": -1,
+              "GFDCCKDGGMO": true,
+              "LJBBKGIFJDB": [
+                "Equip",
+                "MonsterEquip"
+              ]
+            }
+          ],
+          "ILELAOFJIKJ": true,
+          "KHJMNJNEADF": [
+            {
+              "$type": "ECIDIEHOIME",
+              "AMOLMPHFPHJ": -1,
+              "EGBBAAMDMBN": "【星扩散】1-尝试创建风种子",
+              "ILELAOFJIKJ": true,
+              "LJFIEGHHLOB": false
+            },
+            {
+              "$type": "DDOGDECCJCG",
+              "AMOLMPHFPHJ": -1,
+              "BDHBNCEEPPK": "Other",
+              "DKOEMIMOBMM": true,
+              "ILELAOFJIKJ": true,
+              "LJFIEGHHLOB": false,
+              "MLFLDPAGADG": {
+                "$type": "KCOKCEJLEMA",
+                "CCNPIPFLFAL": {
+                  "$type": "AAKJDEPKNHH",
+                  "BFIKJDKPACL": "RandmoRadius_Max",
+                  "EDBLANFLPBB": "RandmoRadius_Min"
+                },
+                "EEFLHEKBODJ": {
+                  "BNJLEBLGEKB": 180
+                },
+                "GNFICELAKIB": 4,
+                "HECMDGIAGKM": 2,
+                "LMBGHPGJIAP": true,
+                "POPNBJAHNFK": {
+                  "ONEHKOHOCBH": 180
+                }
+              },
+              "PEELJBICEHE": "_STARSWIRL_ICE_CENTER_POS"
+            },
+            {
+              "$type": "KPKDAOHFJLL",
+              "AMOLMPHFPHJ": -1,
+              "DLHOAHEGNLO": 1,
+              "DNMILGKLNAH": "_STARSWIRL_ICE_GADGET_COUNT",
+              "DPDCABFCHNP": true,
+              "FBNAKEAAPFF": true,
+              "HJOPNBELEBG": 10,
+              "ILELAOFJIKJ": true,
+              "KEBCFKLHOCI": {
+                "$type": "OEEFEHIOJDM",
+                "DKFBPHOEKAO": "_STARSWIRL_ICE_CENTER_POS",
+                "ECPBNJFNBIJ": true,
+                "EEFLHEKBODJ": {
+                  "BNJLEBLGEKB": 180
+                },
+                "GNFICELAKIB": 10,
+                "HECMDGIAGKM": 2,
+                "POPNBJAHNFK": {
+                  "ONEHKOHOCBH": 180
+                }
+              },
+              "KHNBKLMBLPM": [
+                {
+                  "$type": "ECIDIEHOIME",
+                  "AMOLMPHFPHJ": -1,
+                  "EGBBAAMDMBN": "【星扩散】2-无风种子，创建",
+                  "ILELAOFJIKJ": true,
+                  "LJFIEGHHLOB": false
+                },
+                {
+                  "$type": "CCMGOLHOADE",
+                  "AMOLMPHFPHJ": -1,
+                  "BBGMLDFBFFH": "All",
+                  "BDHBNCEEPPK": "Other",
+                  "BMEPMJIOPDC": 70950237,
+                  "EBNIOBFDHEN": {
+                    "CBINIBBHIKE": 0.5,
+                    "CGDBBHHIINM": true,
+                    "HPMHFMDGBLM": 0.5,
+                    "JAILLBHLHNO": true
+                  },
+                  "ILELAOFJIKJ": true,
+                  "KGHIIEPKAAM": true,
+                  "LJFIEGHHLOB": false,
+                  "MFNOGAGFMKF": 1001,
+                  "MLFLDPAGADG": {
+                    "$type": "OEEFEHIOJDM",
+                    "DKFBPHOEKAO": "_STARSWIRL_ICE_CENTER_POS",
+                    "ECPBNJFNBIJ": true,
+                    "EEFLHEKBODJ": {
+                      "BNJLEBLGEKB": 180
+                    },
+                    "GNFICELAKIB": 10,
+                    "HECMDGIAGKM": 2,
+                    "POPNBJAHNFK": {
+                      "ONEHKOHOCBH": 180
+                    }
+                  },
+                  "MONEIOHPMKI": [
+                    {
+                      "$type": "IONNBDDOJLB",
+                      "AMOLMPHFPHJ": -1,
+                      "BDHBNCEEPPK": "OtherIgnoreValidCheck",
+                      "ILELAOFJIKJ": true,
+                      "LJFIEGHHLOB": false
+                    }
+                  ]
+                }
+              ],
+              "KKMLMJNCLLG": 70950237,
+              "LJFIEGHHLOB": true,
+              "NJKEMHEMLNA": "CircleR8H8",
+              "NKNBACPDMCN": [
+                {
+                  "$type": "IONNBDDOJLB",
+                  "AMOLMPHFPHJ": -1,
+                  "BDHBNCEEPPK": "OtherIgnoreValidCheck",
+                  "ILELAOFJIKJ": true,
+                  "LJFIEGHHLOB": false
+                },
+                {
+                  "$type": "IGPEHONBHCM",
+                  "AMOLMPHFPHJ": -1,
+                  "BDHBNCEEPPK": "OtherIgnoreValidCheck",
+                  "IIBMNPFLNMJ": "ElementAbility_StarSwirl_Ice_Gadget",
+                  "ILELAOFJIKJ": true,
+                  "LJFIEGHHLOB": false,
+                  "LPFPKHHKGIB": "Other"
+                },
+                {
+                  "$type": "ECIDIEHOIME",
+                  "AMOLMPHFPHJ": -1,
+                  "EGBBAAMDMBN": "【星扩散】2-有风种子，叠加层数",
+                  "ILELAOFJIKJ": true,
+                  "LJFIEGHHLOB": false
+                }
+              ],
+              "OAGJKIBFDCL": "Nearest"
+            }
+          ],
+          "LJFIEGHHLOB": false
+        },
+        {
+          "$type": "KKKOBMBLEDP",
+          "AMOLMPHFPHJ": -1,
+          "BDHBNCEEPPK": "Target",
+          "ILELAOFJIKJ": true,
+          "LDFBDMNIADI": "StarSwirl_Ice_Trigger",
+          "LJFIEGHHLOB": false
+        }
+      ],
+      "GPPBBDEICKP": {
+        "StarSwirl_Ice_Trigger": {
+          "DBGOKAKAHFP": 100,
+          "DOALDLPNGMF": -1,
+          "EMGBJJOIENB": [
+            {
+              "$type": "OOKFOCKLIPI",
+              "AMOLMPHFPHJ": -1,
+              "BKCIBHHMGEE": 15,
+              "ILELAOFJIKJ": true,
+              "JCMPGFNMDFC": "StarSwirl_Ice_StarMode",
+              "LJFIEGHHLOB": false
+            },
+            {
+              "$type": "BINBHGLANKO",
+              "AMOLMPHFPHJ": -1,
+              "FCKGPJDPNKN": {
+                "$type": "LPLEFGAFEEA",
+                "BBGMLDFBFFH": "All",
+                "DLHOAHEGNLO": 1,
+                "KEBCFKLHOCI": {
+                  "EEFLHEKBODJ": {
+                    "BNJLEBLGEKB": 180
+                  },
+                  "GNFICELAKIB": 10,
+                  "HECMDGIAGKM": 2,
+                  "POPNBJAHNFK": {
+                    "ONEHKOHOCBH": 180
+                  }
+                },
+                "NJKEMHEMLNA": "CircleR15H10"
+              },
+              "IJDGNIIOHLM": [
+                {
+                  "$type": "BKCJECHCDKG",
+                  "BDHBNCEEPPK": "Target",
+                  "FJGEDPNBGCG": -1,
+                  "LJBBKGIFJDB": [
+                    "Monster"
+                  ]
+                }
+              ],
+              "ILELAOFJIKJ": true,
+              "LDFBDMNIADI": "UNIQUE_StarSwirl_Ice_StarMode_Handler_OnMonster",
+              "LJFIEGHHLOB": true
+            }
+          ],
+          "GPPCPGHLDHL": "Multiple",
+          "JPEAFDFPKAN": 1,
+          "KFOMCJGGPPC": -1,
+          "PPKOPMBNPJH": true
+        },
+        "StarSwirl_Ice_UpdateOwner": {
+          "DBGOKAKAHFP": 100,
+          "DOALDLPNGMF": -1,
+          "EMGBJJOIENB": [
+            {
+              "$type": "HHCAKHMBOIA",
+              "AMOLMPHFPHJ": -1,
+              "ILELAOFJIKJ": true,
+              "KPLBJACOELA": "StarSwirlIce",
+              "LJFIEGHHLOB": false
+            },
+            {
+              "$type": "HHCAKHMBOIA",
+              "AMOLMPHFPHJ": -1,
+              "ILELAOFJIKJ": true,
+              "KPLBJACOELA": "StarSwirlWind",
+              "LJFIEGHHLOB": false
+            }
+          ],
+          "GPPCPGHLDHL": "Multiple",
+          "JPEAFDFPKAN": 0.10000000149011612,
+          "KFOMCJGGPPC": -1,
+          "PPKOPMBNPJH": true
+        },
+        "UNIQUE_StarSwirl_Ice_StarMode_Handler_OnMonster": {
+          "DBGOKAKAHFP": 100,
+          "DIELNIJPCJJ": true,
+          "DOALDLPNGMF": -1,
+          "EMGBJJOIENB": [
+            {
+              "$type": "HGFNHPLICPI",
+              "AMOLMPHFPHJ": -1,
+              "ILELAOFJIKJ": true,
+              "LJFIEGHHLOB": true,
+              "PEELJBICEHE": "_STARMODE_DO_NOT_RESET"
+            },
+            {
+              "$type": "HGFNHPLICPI",
+              "AMOLMPHFPHJ": -1,
+              "IJDGNIIOHLM": [
+                {
+                  "$type": "MMPLBPOHMGL",
+                  "NJJFOACNFGL": "NoneOrEqual",
+                  "PEELJBICEHE": "_IS_IN_STARMODE"
+                }
+              ],
+              "ILELAOFJIKJ": true,
+              "LJFIEGHHLOB": true,
+              "PDIFFCBMGMO": 2,
+              "PEELJBICEHE": "_IS_IN_STARMODE"
+            }
+          ],
+          "HHDOFNHCIAE": [
+            {
+              "$type": "HGFNHPLICPI",
+              "AMOLMPHFPHJ": -1,
+              "ILELAOFJIKJ": true,
+              "LJFIEGHHLOB": true,
+              "PDIFFCBMGMO": 1,
+              "PEELJBICEHE": "_STARMODE_DO_NOT_RESET"
+            },
+            {
+              "$type": "HGFNHPLICPI",
+              "AMOLMPHFPHJ": -1,
+              "IJDGNIIOHLM": [
+                {
+                  "$type": "MMPLBPOHMGL",
+                  "PDIFFCBMGMO": 2,
+                  "PEELJBICEHE": "_IS_IN_STARMODE"
+                }
+              ],
+              "ILELAOFJIKJ": true,
+              "LJFIEGHHLOB": true,
+              "PEELJBICEHE": "_IS_IN_STARMODE"
+            }
+          ],
+          "JPEAFDFPKAN": 8,
+          "KFOMCJGGPPC": -1,
+          "LFIJIMIMBIH": [
+            {
+              "$type": "KIIHPCDBLBP",
+              "AMOLMPHFPHJ": -1,
+              "DHKOKKHJMHC": true,
+              "KDJEMONNHAM": "_IS_IN_STARMODE",
+              "KHJMNJNEADF": [
+                {
+                  "$type": "HGFNHPLICPI",
+                  "AMOLMPHFPHJ": -1,
+                  "IJDGNIIOHLM": [
+                    {
+                      "$type": "MMPLBPOHMGL",
+                      "NJJFOACNFGL": "NoneOrEqual",
+                      "PEELJBICEHE": "_IS_IN_STARMODE"
+                    },
+                    {
+                      "$type": "MMPLBPOHMGL",
+                      "NJJFOACNFGL": "NoneOrEqual",
+                      "PEELJBICEHE": "_STARMODE_DO_NOT_RESET"
+                    }
+                  ],
+                  "ILELAOFJIKJ": true,
+                  "LJFIEGHHLOB": true,
+                  "PDIFFCBMGMO": 2,
+                  "PEELJBICEHE": "_IS_IN_STARMODE"
+                }
+              ]
+            }
+          ],
+          "PPKOPMBNPJH": true
+        }
+      },
+      "IIBMNPFLNMJ": "ElementAbility_StarSwirl_Ice",
+      "LOEHLJGBGAC": {
+        "RandmoRadius_Max": 1.5,
+        "RandmoRadius_Min": 1.2000000476837158
+      },
+      "OMAIGDMCJBO": {
+        "DBGOKAKAHFP": 100,
+        "DOALDLPNGMF": -1,
+        "KFOMCJGGPPC": -1,
+        "PPKOPMBNPJH": true
+      },
+      "PODJJJHGAMO": true
+    }
+  },
+  {
+    "Default": {
+      "ECFFDLHMCLK": [
+        {
+          "$type": "BINBHGLANKO",
+          "AMOLMPHFPHJ": -1,
+          "ILELAOFJIKJ": true,
+          "LDFBDMNIADI": "StarSwirl_Ice_Gadget_StackUp",
+          "LJFIEGHHLOB": false
+        }
+      ],
+      "EMGBJJOIENB": [
+        {
+          "$type": "HGFNHPLICPI",
+          "AMOLMPHFPHJ": -1,
+          "ILELAOFJIKJ": true,
+          "LJFIEGHHLOB": true,
+          "PDIFFCBMGMO": 1,
+          "PEELJBICEHE": "_IS_STARSWIRL_ICE_GADGET"
+        },
+        {
+          "$type": "HGFNHPLICPI",
+          "AMOLMPHFPHJ": -1,
+          "ILELAOFJIKJ": true,
+          "LJFIEGHHLOB": true,
+          "PDIFFCBMGMO": 1,
+          "PEELJBICEHE": "_STARSWIRL_ICE_GADGET_STACK_COUNT"
+        },
+        {
+          "$type": "CDANEAFAFKM",
+          "AMOLMPHFPHJ": -1,
+          "ILELAOFJIKJ": true,
+          "LDFBDMNIADI": "StarSwirl_Ice_Gadget_LifeTime",
+          "LJFIEGHHLOB": false
+        },
+        {
+          "$type": "CDANEAFAFKM",
+          "AMOLMPHFPHJ": -1,
+          "ILELAOFJIKJ": true,
+          "LDFBDMNIADI": "StarSwirl_Ice_Gadget_AlterHandler",
+          "LJFIEGHHLOB": false
+        },
+        {
+          "$type": "HGFNHPLICPI",
+          "AMOLMPHFPHJ": -1,
+          "ILELAOFJIKJ": true,
+          "LJFIEGHHLOB": true,
+          "PEELJBICEHE": "_STARSWIRL_ICE_GADGET_STACK_STATE"
+        }
+      ],
+      "GPPBBDEICKP": {
+        "StarSwirl_Ice_Gadget_AlterFX": {
+          "DBGOKAKAHFP": 100,
+          "DOALDLPNGMF": -1,
+          "EMGBJJOIENB": [
+            {
+              "$type": "PMNJOIIOFJI",
+              "AMOLMPHFPHJ": -1,
+              "BEIMGAKABJN": "Eff_Element_StarSwirl_Ice_Gadget_Vodyanitsa",
+              "HJIHBAANFLE": 1,
+              "ILELAOFJIKJ": true,
+              "JMMALEJDAEF": -1,
+              "LJFIEGHHLOB": false,
+              "MLFLDPAGADG": {
+                "EEFLHEKBODJ": {
+                  "BNJLEBLGEKB": 180
+                },
+                "GNFICELAKIB": 10,
+                "HECMDGIAGKM": 2,
+                "POPNBJAHNFK": {
+                  "ONEHKOHOCBH": 180
+                }
+              }
+            },
+            {
+              "$type": "PBIOEEHFHFD",
+              "AMOLMPHFPHJ": -1,
+              "ILELAOFJIKJ": true,
+              "LJFIEGHHLOB": false,
+              "MJKPCGCAPLK": [
+                {
+                  "$type": "MMPLBPOHMGL",
+                  "PDIFFCBMGMO": 1,
+                  "PEELJBICEHE": "_STARSWIRL_ICE_GADGET_STACK_STATE"
+                }
+              ],
+              "MLJNNELMEFL": [
+                {
+                  "$type": "EFICNPHHFJA",
+                  "AMOLMPHFPHJ": -1,
+                  "BEIMGAKABJN": "Eff_Element_StarSwirl_Ice_Gadget_Vodyanitsa",
+                  "ILELAOFJIKJ": true,
+                  "KGEKINJPCFB": "Big_BS",
+                  "LJFIEGHHLOB": false
+                }
+              ]
+            },
+            {
+              "$type": "GCINLBBPONN",
+              "AMOLMPHFPHJ": -1,
+              "FCKGPJDPNKN": {
+                "$type": "LPLEFGAFEEA",
+                "BBGMLDFBFFH": "All",
+                "DLHOAHEGNLO": 1,
+                "DPDCABFCHNP": true,
+                "HJOPNBELEBG": 20,
+                "KEBCFKLHOCI": {
+                  "$type": "PKAELLAMAGL",
+                  "ECPBNJFNBIJ": true,
+                  "EEFLHEKBODJ": {
+                    "BNJLEBLGEKB": 180
+                  },
+                  "GNFICELAKIB": 10,
+                  "HECMDGIAGKM": 2,
+                  "POPNBJAHNFK": {
+                    "ONEHKOHOCBH": 180
+                  }
+                },
+                "NJKEMHEMLNA": "CircleR6H4",
+                "OAGJKIBFDCL": "Nearest"
+              },
+              "IJDGNIIOHLM": [
+                {
+                  "$type": "BKCJECHCDKG",
+                  "BDHBNCEEPPK": "Target",
+                  "FJGEDPNBGCG": -1,
+                  "LJBBKGIFJDB": [
+                    "Monster"
+                  ]
+                },
+                {
+                  "$type": "MMPLBPOHMGL",
+                  "BDHBNCEEPPK": "Target",
+                  "NJJFOACNFGL": "NoneOrEqual",
+                  "PEELJBICEHE": "_ANIMAL_ENTITY_TYPE"
+                }
+              ],
+              "ILELAOFJIKJ": true,
+              "LDFBDMNIADI": "UNIQUE_StarSwirl_Ice_Gadget_Alter_SubHurt",
+              "LJFIEGHHLOB": false
+            },
+            {
+              "$type": "BINBHGLANKO",
+              "AMOLMPHFPHJ": -1,
+              "FCKGPJDPNKN": {
+                "$type": "LPLEFGAFEEA",
+                "BBGMLDFBFFH": "All",
+                "DLHOAHEGNLO": 1,
+                "DPDCABFCHNP": true,
+                "HJOPNBELEBG": 20,
+                "KEBCFKLHOCI": {
+                  "$type": "PKAELLAMAGL",
+                  "ECPBNJFNBIJ": true,
+                  "EEFLHEKBODJ": {
+                    "BNJLEBLGEKB": 180
+                  },
+                  "GNFICELAKIB": 10,
+                  "HECMDGIAGKM": 2,
+                  "POPNBJAHNFK": {
+                    "ONEHKOHOCBH": 180
+                  }
+                },
+                "NJKEMHEMLNA": "CircleR6H4",
+                "OAGJKIBFDCL": "Nearest"
+              },
+              "IJDGNIIOHLM": [
+                {
+                  "$type": "BKCJECHCDKG",
+                  "BDHBNCEEPPK": "Target",
+                  "FJGEDPNBGCG": -1,
+                  "LJBBKGIFJDB": [
+                    "Monster"
+                  ]
+                },
+                {
+                  "$type": "MMPLBPOHMGL",
+                  "BDHBNCEEPPK": "Target",
+                  "NJJFOACNFGL": "NoneOrEqual",
+                  "PEELJBICEHE": "_ANIMAL_ENTITY_TYPE"
+                }
+              ],
+              "ILELAOFJIKJ": true,
+              "LDFBDMNIADI": "UNIQUE_StarSwirl_Ice_Gadget_Alter_SubHurt",
+              "LJFIEGHHLOB": false
+            }
+          ],
+          "KFOMCJGGPPC": -1,
+          "PPKOPMBNPJH": true
+        },
+        "StarSwirl_Ice_Gadget_AlterHandler": {
+          "DBGOKAKAHFP": 100,
+          "DOALDLPNGMF": -1,
+          "EMGBJJOIENB": [
+            {
+              "$type": "KMCLEHBIMBF",
+              "AMOLMPHFPHJ": -1,
+              "ILELAOFJIKJ": true,
+              "LJFIEGHHLOB": true
+            }
+          ],
+          "FMBHOKCHKOH": [
+            {
+              "$type": "HGFNHPLICPI",
+              "AMOLMPHFPHJ": -1,
+              "ILELAOFJIKJ": true,
+              "LJFIEGHHLOB": true,
+              "PEELJBICEHE": "_ABILITY_Vodyanitsa_StarSwirl_TempMark"
+            },
+            {
+              "$type": "GGMBBAMLNNG",
+              "AMOLMPHFPHJ": -1,
+              "FIIJKOPNDHP": [
+                [
+                  {
+                    "$type": "PBIOEEHFHFD",
+                    "AMOLMPHFPHJ": -1,
+                    "BDHBNCEEPPK": "Target",
+                    "ILELAOFJIKJ": true,
+                    "LJFIEGHHLOB": false,
+                    "MJKPCGCAPLK": [
+                      {
+                        "$type": "MMPLBPOHMGL",
+                        "BDHBNCEEPPK": "Target",
+                        "NJJFOACNFGL": "MoreThanAndEqual",
+                        "PDIFFCBMGMO": 1,
+                        "PEELJBICEHE": "_ABILITY_Vodyanitsa_StarSwirl_Mark"
+                      }
+                    ],
+                    "MLJNNELMEFL": [
+                      {
+                        "$type": "NENBNMKHMBP",
+                        "AMOLMPHFPHJ": -1,
+                        "ILELAOFJIKJ": true,
+                        "LJFIEGHHLOB": true,
+                        "PDIFFCBMGMO": 1,
+                        "PEELJBICEHE": "_ABILITY_Vodyanitsa_StarSwirl_TempMark"
+                      }
+                    ]
+                  }
+                ],
+                [
+                  {
+                    "$type": "PBIOEEHFHFD",
+                    "AMOLMPHFPHJ": -1,
+                    "BDHBNCEEPPK": "Target",
+                    "ILELAOFJIKJ": true,
+                    "LJFIEGHHLOB": false,
+                    "MJKPCGCAPLK": [
+                      {
+                        "$type": "MMPLBPOHMGL",
+                        "BDHBNCEEPPK": "Target",
+                        "NJJFOACNFGL": "MoreThanAndEqual",
+                        "PDIFFCBMGMO": 1,
+                        "PEELJBICEHE": "_ABILITY_Vodyanitsa_StarSwirl_Mark"
+                      }
+                    ],
+                    "MLJNNELMEFL": [
+                      {
+                        "$type": "NENBNMKHMBP",
+                        "AMOLMPHFPHJ": -1,
+                        "ILELAOFJIKJ": true,
+                        "LJFIEGHHLOB": true,
+                        "PDIFFCBMGMO": 1,
+                        "PEELJBICEHE": "_ABILITY_Vodyanitsa_StarSwirl_TempMark"
+                      }
+                    ]
+                  }
+                ],
+                [
+                  {
+                    "$type": "PBIOEEHFHFD",
+                    "AMOLMPHFPHJ": -1,
+                    "BDHBNCEEPPK": "Target",
+                    "ILELAOFJIKJ": true,
+                    "LJFIEGHHLOB": false,
+                    "MJKPCGCAPLK": [
+                      {
+                        "$type": "MMPLBPOHMGL",
+                        "BDHBNCEEPPK": "Target",
+                        "NJJFOACNFGL": "MoreThanAndEqual",
+                        "PDIFFCBMGMO": 1,
+                        "PEELJBICEHE": "_ABILITY_Vodyanitsa_StarSwirl_Mark"
+                      }
+                    ],
+                    "MLJNNELMEFL": [
+                      {
+                        "$type": "NENBNMKHMBP",
+                        "AMOLMPHFPHJ": -1,
+                        "ILELAOFJIKJ": true,
+                        "LJFIEGHHLOB": true,
+                        "PDIFFCBMGMO": 1,
+                        "PEELJBICEHE": "_ABILITY_Vodyanitsa_StarSwirl_TempMark"
+                      }
+                    ]
+                  }
+                ],
+                [
+                  {
+                    "$type": "PBIOEEHFHFD",
+                    "AMOLMPHFPHJ": -1,
+                    "BDHBNCEEPPK": "Target",
+                    "ILELAOFJIKJ": true,
+                    "LJFIEGHHLOB": false,
+                    "MJKPCGCAPLK": [
+                      {
+                        "$type": "MMPLBPOHMGL",
+                        "BDHBNCEEPPK": "Target",
+                        "NJJFOACNFGL": "MoreThanAndEqual",
+                        "PDIFFCBMGMO": 1,
+                        "PEELJBICEHE": "_ABILITY_Vodyanitsa_StarSwirl_Mark"
+                      }
+                    ],
+                    "MLJNNELMEFL": [
+                      {
+                        "$type": "NENBNMKHMBP",
+                        "AMOLMPHFPHJ": -1,
+                        "ILELAOFJIKJ": true,
+                        "LJFIEGHHLOB": true,
+                        "PDIFFCBMGMO": 1,
+                        "PEELJBICEHE": "_ABILITY_Vodyanitsa_StarSwirl_TempMark"
+                      }
+                    ]
+                  }
+                ],
+                [
+                  {
+                    "$type": "PBIOEEHFHFD",
+                    "AMOLMPHFPHJ": -1,
+                    "BDHBNCEEPPK": "Target",
+                    "ILELAOFJIKJ": true,
+                    "LJFIEGHHLOB": false,
+                    "MJKPCGCAPLK": [
+                      {
+                        "$type": "MMPLBPOHMGL",
+                        "BDHBNCEEPPK": "Target",
+                        "NJJFOACNFGL": "MoreThanAndEqual",
+                        "PDIFFCBMGMO": 1,
+                        "PEELJBICEHE": "_ABILITY_Vodyanitsa_StarSwirl_Mark"
+                      }
+                    ],
+                    "MLJNNELMEFL": [
+                      {
+                        "$type": "NENBNMKHMBP",
+                        "AMOLMPHFPHJ": -1,
+                        "ILELAOFJIKJ": true,
+                        "LJFIEGHHLOB": true,
+                        "PDIFFCBMGMO": 1,
+                        "PEELJBICEHE": "_ABILITY_Vodyanitsa_StarSwirl_TempMark"
+                      }
+                    ]
+                  }
+                ]
+              ],
+              "HJFBHKMNPJP": {
+                "$type": "FNCDMNFBGFE",
+                "BDHBNCEEPPK": "AllPlayerAvatars",
+                "OAGJKIBFDCL": "Random"
+              },
+              "ILELAOFJIKJ": true,
+              "LJFIEGHHLOB": false,
+              "MJKPCGCAPLK": [
+                {
+                  "$type": "OLNGCABMCGI",
+                  "BDHBNCEEPPK": "Target",
+                  "DKCBCJCHEBF": "Lesser",
+                  "PDIFFCBMGMO": 40
+                }
+              ]
+            },
+            {
+              "$type": "PBIOEEHFHFD",
+              "AMOLMPHFPHJ": -1,
+              "ILELAOFJIKJ": true,
+              "LJFIEGHHLOB": false,
+              "MJKPCGCAPLK": [
+                {
+                  "$type": "MMPLBPOHMGL",
+                  "BDHBNCEEPPK": "Target",
+                  "NJJFOACNFGL": "MoreThanAndEqual",
+                  "PDIFFCBMGMO": 1,
+                  "PEELJBICEHE": "_ABILITY_Vodyanitsa_StarSwirl_TempMark"
+                }
+              ],
+              "MLJNNELMEFL": [
+                {
+                  "$type": "HGFNHPLICPI",
+                  "AMOLMPHFPHJ": -1,
+                  "ILELAOFJIKJ": true,
+                  "LJFIEGHHLOB": true,
+                  "PDIFFCBMGMO": 1,
+                  "PEELJBICEHE": "_ABILITY_Vodyanitsa_StarSwirl_Mark"
+                },
+                {
+                  "$type": "BINBHGLANKO",
+                  "AMOLMPHFPHJ": -1,
+                  "BDHBNCEEPPK": "AllPlayerAvatars",
+                  "IJDGNIIOHLM": [
+                    {
+                      "$type": "OLNGCABMCGI",
+                      "BDHBNCEEPPK": "Target",
+                      "DKCBCJCHEBF": "LesserOrEqual",
+                      "PDIFFCBMGMO": 40
+                    }
+                  ],
+                  "ILELAOFJIKJ": true,
+                  "LDFBDMNIADI": "UNIQUE_StarSwirl_Ice_Gadget_Alter_MarkHandler",
+                  "LJFIEGHHLOB": true
+                }
+              ]
+            }
+          ],
+          "JFLGPLCIOEC": 0.20000000298023224,
+          "KFOMCJGGPPC": -1,
+          "PPKOPMBNPJH": true
+        },
+        "StarSwirl_Ice_Gadget_Burst": {
+          "DBGOKAKAHFP": 100,
+          "DOALDLPNGMF": -1,
+          "EMGBJJOIENB": [
+            {
+              "$type": "ECIDIEHOIME",
+              "AMOLMPHFPHJ": -1,
+              "EGBBAAMDMBN": "【星扩散】准备爆炸",
+              "ILELAOFJIKJ": true,
+              "LJFIEGHHLOB": false
+            },
+            {
+              "$type": "PBIOEEHFHFD",
+              "AMOLMPHFPHJ": -1,
+              "ILELAOFJIKJ": true,
+              "LJFIEGHHLOB": false,
+              "MJKPCGCAPLK": [
+                {
+                  "$type": "MMPLBPOHMGL",
+                  "NJJFOACNFGL": "LessAndEqual",
+                  "PEELJBICEHE": "_STARSWIRL_ICE_GADGET_STACK_STATE"
+                }
+              ],
+              "MLJNNELMEFL": [
+                {
+                  "$type": "JPEGEBJKNKN",
+                  "AMOLMPHFPHJ": -1,
+                  "IDCIIIFMDCM": {
+                    "CEIJEFJBMBL": {
+                      "$type": "BOOONJENCDB",
+                      "BKCIBHHMGEE": 6,
+                      "CHKHGBFIPCB": 360,
+                      "COBJECNAEOG": 1,
+                      "EAJAHKDHNJM": {
+                        "GMEKLJBJADO": {
+                          "KJCBAFKFFMP": 1,
+                          "PGPNDGBABNI": true
+                        }
+                      },
+                      "EHFMPIOJOLN": "TriggerNoRepeat",
+                      "MLFLDPAGADG": {
+                        "$type": "OEEFEHIOJDM",
+                        "DKFBPHOEKAO": "_STARSWIRL_ICE_GADGET_POS",
+                        "ECPBNJFNBIJ": true,
+                        "EEFLHEKBODJ": {
+                          "BNJLEBLGEKB": 180
+                        },
+                        "FDGFPGIDACF": {
+                          "IOPIFIJFBHI": -1
+                        },
+                        "GNFICELAKIB": 10,
+                        "HECMDGIAGKM": 2,
+                        "KIJLDPMGMMG": "Caster",
+                        "POPNBJAHNFK": {
+                          "ONEHKOHOCBH": 180
+                        }
+                      },
+                      "NDGCJAKHDGH": 5
+                    },
+                    "LGHDGGJIJOK": {
+                      "BKLFAECNFOF": {
+                        "EIAGIEDFLHJ": {
+                          "KJCBAFKFFMP": 1,
+                          "PGPNDGBABNI": true
+                        },
+                        "IHBPFOBEJKN": "default"
+                      },
+                      "EHKJIDFINEK": {
+                        "CHAFKOIAGKP": 1,
+                        "DBGOKAKAHFP": 25,
+                        "EPPIDAILPBN": "Ice",
+                        "FBAEEIPKEHO": 60,
+                        "JDOLIAEMINM": 1,
+                        "NBHOFKCIBLI": {
+                          "JBAICIBLADF": true
+                        },
+                        "PEPDKCDHNIM": "Range"
+                      },
+                      "HDIFFKOHDNL": {
+                        "OGGEIBICAHC": "Shake"
+                      },
+                      "HGLEEJNPBEB": "default",
+                      "HOCNCCAJOIG": "OriginOwner",
+                      "IAFHAPFBBOB": "StarSwirlIceDamage",
+                      "IJFOFLPPGHK": {
+                        "EANBEIIKCIL": {
+                          "BGINHMBLECN": 0.11999999731779099,
+                          "HMANOMCGFLK": true,
+                          "KBAIICCLOEF": 0.5,
+                          "PJGAOELGLIF": 0.11999999731779099
+                        },
+                        "KDBKDJBCACN": 20
+                      },
+                      "KCDMMFINAFG": [
+                        "StarSwirl_Ice_Burst_01"
+                      ],
+                      "NMMJKLAHOHH": {
+                        "ANBHPFEONOL": 0.009999999776482582,
+                        "EIAGIEDFLHJ": {
+                          "KJCBAFKFFMP": 1,
+                          "PGPNDGBABNI": true
+                        },
+                        "IHBPFOBEJKN": "default",
+                        "LHEILBMGANH": "ByHitDirection",
+                        "NHEHLACIFKG": {
+                          "DLKJKJCJAFG": "Air",
+                          "JBODMBNBAII": {
+                            "AKMNPPGGKCL": [
+                              0,
+                              100,
+                              200,
+                              1000000000
+                            ],
+                            "HJNCDDEBLPB": [
+                              10,
+                              8,
+                              6
+                            ]
+                          },
+                          "KLHCPLKCLBB": 600,
+                          "MNPBFNAGNAF": 100
+                        },
+                        "PAPNKKIKAOC": "LV5"
+                      }
+                    }
+                  },
+                  "ILELAOFJIKJ": true,
+                  "LJFIEGHHLOB": false,
+                  "NMKBOEALDEF": "Enemy"
+                },
+                {
+                  "$type": "PBIOEEHFHFD",
+                  "AMOLMPHFPHJ": -1,
+                  "ILELAOFJIKJ": true,
+                  "LJFIEGHHLOB": false,
+                  "MJKPCGCAPLK": [
+                    {
+                      "$type": "MMPLBPOHMGL",
+                      "BDHBNCEEPPK": "Target",
+                      "PDIFFCBMGMO": 1,
+                      "PEELJBICEHE": "_ABILITY_Vodyanitsa_StarSwirl_Mark"
+                    }
+                  ],
+                  "MLJNNELMEFL": [
+                    {
+                      "$type": "MOOAODKIBCM",
+                      "AMOLMPHFPHJ": -1,
+                      "BEIMGAKABJN": "Eff_Element_StarSwirl_Ice_Burst_Vodyanitsa_01",
+                      "HJIHBAANFLE": 1,
+                      "ILELAOFJIKJ": true,
+                      "JMMALEJDAEF": -1,
+                      "LJFIEGHHLOB": false,
+                      "MLFLDPAGADG": {
+                        "EEFLHEKBODJ": {
+                          "BNJLEBLGEKB": 180
+                        },
+                        "GNFICELAKIB": 10,
+                        "HECMDGIAGKM": 2,
+                        "POPNBJAHNFK": {
+                          "ONEHKOHOCBH": 180
+                        }
+                      }
+                    },
+                    {
+                      "$type": "BINBHGLANKO",
+                      "AMOLMPHFPHJ": -1,
+                      "FCKGPJDPNKN": {
+                        "$type": "LPLEFGAFEEA",
+                        "BBGMLDFBFFH": "All",
+                        "DLHOAHEGNLO": 1,
+                        "DPDCABFCHNP": true,
+                        "HJOPNBELEBG": 20,
+                        "KEBCFKLHOCI": {
+                          "$type": "PKAELLAMAGL",
+                          "ECPBNJFNBIJ": true,
+                          "EEFLHEKBODJ": {
+                            "BNJLEBLGEKB": 180
+                          },
+                          "GNFICELAKIB": 10,
+                          "HECMDGIAGKM": 2,
+                          "POPNBJAHNFK": {
+                            "ONEHKOHOCBH": 180
+                          }
+                        },
+                        "NJKEMHEMLNA": "CircleR6H4",
+                        "OAGJKIBFDCL": "Nearest"
+                      },
+                      "IJDGNIIOHLM": [
+                        {
+                          "$type": "BKCJECHCDKG",
+                          "BDHBNCEEPPK": "Target",
+                          "FJGEDPNBGCG": -1,
+                          "LJBBKGIFJDB": [
+                            "Monster"
+                          ]
+                        },
+                        {
+                          "$type": "MMPLBPOHMGL",
+                          "BDHBNCEEPPK": "Target",
+                          "NJJFOACNFGL": "NoneOrEqual",
+                          "PEELJBICEHE": "_ANIMAL_ENTITY_TYPE"
+                        }
+                      ],
+                      "ILELAOFJIKJ": true,
+                      "LDFBDMNIADI": "UNIQUE_StarSwirl_Ice_Gadget_Alter_SubHurt",
+                      "LJFIEGHHLOB": false
+                    }
+                  ],
+                  "PAPFFKOKPML": [
+                    {
+                      "$type": "MOOAODKIBCM",
+                      "AMOLMPHFPHJ": -1,
+                      "BEIMGAKABJN": "Eff_Element_StarSwirl_Ice_Burst_02",
+                      "HJIHBAANFLE": 1,
+                      "ILELAOFJIKJ": true,
+                      "JMMALEJDAEF": -1,
+                      "LJFIEGHHLOB": false,
+                      "MLFLDPAGADG": {
+                        "EEFLHEKBODJ": {
+                          "BNJLEBLGEKB": 180
+                        },
+                        "GNFICELAKIB": 10,
+                        "HECMDGIAGKM": 2,
+                        "POPNBJAHNFK": {
+                          "ONEHKOHOCBH": 180
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "$type": "ECIDIEHOIME",
+                  "AMOLMPHFPHJ": -1,
+                  "EGBBAAMDMBN": "【星扩散】爆炸",
+                  "ILELAOFJIKJ": true,
+                  "LJFIEGHHLOB": false
+                }
+              ]
+            },
+            {
+              "$type": "PBIOEEHFHFD",
+              "AMOLMPHFPHJ": -1,
+              "ILELAOFJIKJ": true,
+              "LJFIEGHHLOB": false,
+              "MJKPCGCAPLK": [
+                {
+                  "$type": "MMPLBPOHMGL",
+                  "NJJFOACNFGL": "MoreThanAndEqual",
+                  "PDIFFCBMGMO": 1,
+                  "PEELJBICEHE": "_STARSWIRL_ICE_GADGET_STACK_STATE"
+                }
+              ],
+              "MLJNNELMEFL": [
+                {
+                  "$type": "ECIDIEHOIME",
+                  "AMOLMPHFPHJ": -1,
+                  "EGBBAAMDMBN": "【星扩散】升级爆炸",
+                  "ILELAOFJIKJ": true,
+                  "LJFIEGHHLOB": false
+                },
+                {
+                  "$type": "JPEGEBJKNKN",
+                  "AMOLMPHFPHJ": -1,
+                  "IDCIIIFMDCM": {
+                    "CEIJEFJBMBL": {
+                      "$type": "BOOONJENCDB",
+                      "BKCIBHHMGEE": 8,
+                      "CHKHGBFIPCB": 360,
+                      "COBJECNAEOG": 1,
+                      "EAJAHKDHNJM": {
+                        "GMEKLJBJADO": {
+                          "KJCBAFKFFMP": 1,
+                          "PGPNDGBABNI": true
+                        }
+                      },
+                      "EHFMPIOJOLN": "TriggerNoRepeat",
+                      "MLFLDPAGADG": {
+                        "$type": "OEEFEHIOJDM",
+                        "DKFBPHOEKAO": "_STARSWIRL_ICE_GADGET_POS",
+                        "ECPBNJFNBIJ": true,
+                        "EEFLHEKBODJ": {
+                          "BNJLEBLGEKB": 180
+                        },
+                        "FDGFPGIDACF": {
+                          "IOPIFIJFBHI": -1
+                        },
+                        "GNFICELAKIB": 10,
+                        "HECMDGIAGKM": 2,
+                        "KIJLDPMGMMG": "Caster",
+                        "POPNBJAHNFK": {
+                          "ONEHKOHOCBH": 180
+                        }
+                      },
+                      "NDGCJAKHDGH": 5
+                    },
+                    "LGHDGGJIJOK": {
+                      "BKLFAECNFOF": {
+                        "EIAGIEDFLHJ": {
+                          "KJCBAFKFFMP": 1,
+                          "PGPNDGBABNI": true
+                        },
+                        "IHBPFOBEJKN": "default"
+                      },
+                      "EHKJIDFINEK": {
+                        "CHAFKOIAGKP": 2,
+                        "DBGOKAKAHFP": 25,
+                        "EPPIDAILPBN": "Ice",
+                        "FBAEEIPKEHO": 120,
+                        "JDOLIAEMINM": 1,
+                        "NBHOFKCIBLI": {
+                          "JBAICIBLADF": true
+                        },
+                        "PEPDKCDHNIM": "Range"
+                      },
+                      "HDIFFKOHDNL": {
+                        "OGGEIBICAHC": "Shake"
+                      },
+                      "HGLEEJNPBEB": "default",
+                      "HOCNCCAJOIG": "OriginOwner",
+                      "IAFHAPFBBOB": "StarSwirlIceDamage",
+                      "IJFOFLPPGHK": {
+                        "EANBEIIKCIL": {
+                          "BGINHMBLECN": 0.11999999731779099,
+                          "HMANOMCGFLK": true,
+                          "KBAIICCLOEF": 0.5,
+                          "PJGAOELGLIF": 0.11999999731779099
+                        },
+                        "KDBKDJBCACN": 20
+                      },
+                      "KCDMMFINAFG": [
+                        "StarSwirl_Ice_Burst_02"
+                      ],
+                      "NMMJKLAHOHH": {
+                        "ANBHPFEONOL": 0.009999999776482582,
+                        "EIAGIEDFLHJ": {
+                          "KJCBAFKFFMP": 1,
+                          "PGPNDGBABNI": true
+                        },
+                        "IHBPFOBEJKN": "default",
+                        "LHEILBMGANH": "ByHitDirection",
+                        "NHEHLACIFKG": {
+                          "DLKJKJCJAFG": "Air",
+                          "JBODMBNBAII": {
+                            "AKMNPPGGKCL": [
+                              0,
+                              100,
+                              200,
+                              1000000000
+                            ],
+                            "HJNCDDEBLPB": [
+                              10,
+                              8,
+                              6
+                            ]
+                          },
+                          "KLHCPLKCLBB": 600,
+                          "MNPBFNAGNAF": 100
+                        },
+                        "PAPNKKIKAOC": "LV5"
+                      }
+                    }
+                  },
+                  "ILELAOFJIKJ": true,
+                  "LJFIEGHHLOB": false,
+                  "NMKBOEALDEF": "Enemy"
+                },
+                {
+                  "$type": "PBIOEEHFHFD",
+                  "AMOLMPHFPHJ": -1,
+                  "ILELAOFJIKJ": true,
+                  "LJFIEGHHLOB": false,
+                  "MJKPCGCAPLK": [
+                    {
+                      "$type": "MMPLBPOHMGL",
+                      "BDHBNCEEPPK": "Target",
+                      "PDIFFCBMGMO": 1,
+                      "PEELJBICEHE": "_ABILITY_Vodyanitsa_StarSwirl_Mark"
+                    }
+                  ],
+                  "MLJNNELMEFL": [
+                    {
+                      "$type": "MOOAODKIBCM",
+                      "AMOLMPHFPHJ": -1,
+                      "BEIMGAKABJN": "Eff_Element_StarSwirl_Ice_Burst_Vodyanitsa_02",
+                      "HJIHBAANFLE": 1,
+                      "ILELAOFJIKJ": true,
+                      "JMMALEJDAEF": -1,
+                      "LJFIEGHHLOB": false,
+                      "MLFLDPAGADG": {
+                        "EEFLHEKBODJ": {
+                          "BNJLEBLGEKB": 180
+                        },
+                        "GNFICELAKIB": 10,
+                        "HECMDGIAGKM": 2,
+                        "POPNBJAHNFK": {
+                          "ONEHKOHOCBH": 180
+                        }
+                      }
+                    },
+                    {
+                      "$type": "BINBHGLANKO",
+                      "AMOLMPHFPHJ": -1,
+                      "FCKGPJDPNKN": {
+                        "$type": "LPLEFGAFEEA",
+                        "BBGMLDFBFFH": "All",
+                        "DLHOAHEGNLO": 1,
+                        "DPDCABFCHNP": true,
+                        "HJOPNBELEBG": 20,
+                        "KEBCFKLHOCI": {
+                          "$type": "PKAELLAMAGL",
+                          "ECPBNJFNBIJ": true,
+                          "EEFLHEKBODJ": {
+                            "BNJLEBLGEKB": 180
+                          },
+                          "GNFICELAKIB": 10,
+                          "HECMDGIAGKM": 2,
+                          "POPNBJAHNFK": {
+                            "ONEHKOHOCBH": 180
+                          }
+                        },
+                        "NJKEMHEMLNA": "CircleR8H8",
+                        "OAGJKIBFDCL": "Nearest"
+                      },
+                      "IJDGNIIOHLM": [
+                        {
+                          "$type": "BKCJECHCDKG",
+                          "BDHBNCEEPPK": "Target",
+                          "FJGEDPNBGCG": -1,
+                          "LJBBKGIFJDB": [
+                            "Monster"
+                          ]
+                        },
+                        {
+                          "$type": "MMPLBPOHMGL",
+                          "BDHBNCEEPPK": "Target",
+                          "NJJFOACNFGL": "NoneOrEqual",
+                          "PEELJBICEHE": "_ANIMAL_ENTITY_TYPE"
+                        }
+                      ],
+                      "ILELAOFJIKJ": true,
+                      "LDFBDMNIADI": "UNIQUE_StarSwirl_Ice_Gadget_Alter_SubHurt",
+                      "LJFIEGHHLOB": false
+                    }
+                  ],
+                  "PAPFFKOKPML": [
+                    {
+                      "$type": "MOOAODKIBCM",
+                      "AMOLMPHFPHJ": -1,
+                      "BEIMGAKABJN": "Eff_Element_StarSwirl_Ice_Burst_01",
+                      "HJIHBAANFLE": 1,
+                      "ILELAOFJIKJ": true,
+                      "JMMALEJDAEF": -1,
+                      "LJFIEGHHLOB": false,
+                      "MLFLDPAGADG": {
+                        "EEFLHEKBODJ": {
+                          "BNJLEBLGEKB": 180
+                        },
+                        "GNFICELAKIB": 10,
+                        "HECMDGIAGKM": 2,
+                        "POPNBJAHNFK": {
+                          "ONEHKOHOCBH": 180
+                        }
+                      }
+                    }
+                  ]
+                },
+                {
+                  "$type": "ECIDIEHOIME",
+                  "AMOLMPHFPHJ": -1,
+                  "EGBBAAMDMBN": "【星扩散】爆炸",
+                  "ILELAOFJIKJ": true,
+                  "LJFIEGHHLOB": false
+                }
+              ]
+            },
+            {
+              "$type": "OOKFOCKLIPI",
+              "AMOLMPHFPHJ": -1,
+              "BKCIBHHMGEE": 8,
+              "ILELAOFJIKJ": true,
+              "JCMPGFNMDFC": "StarSwirl_Ice_Burst",
+              "LJFIEGHHLOB": false
+            },
+            {
+              "$type": "CCJFIHGEMBO",
+              "AMOLMPHFPHJ": -1,
+              "ILELAOFJIKJ": true,
+              "LDFBDMNIADI": "StarSwirl_Ice_Gadget_LifeTime",
+              "LJFIEGHHLOB": false
+            }
+          ],
+          "JPEAFDFPKAN": 0.10000000149011612,
+          "KFOMCJGGPPC": -1,
+          "NCCMJCNNPMB": [
+            {
+              "$type": "CCJFIHGEMBO",
+              "AMOLMPHFPHJ": -1,
+              "ILELAOFJIKJ": true,
+              "LDFBDMNIADI": "StarSwirl_Ice_Gadget_LifeTime",
+              "LJFIEGHHLOB": false
+            }
+          ],
+          "PPKOPMBNPJH": true
+        },
+        "StarSwirl_Ice_Gadget_FX": {
+          "DBGOKAKAHFP": 100,
+          "DOALDLPNGMF": -1,
+          "EMGBJJOIENB": [
+            {
+              "$type": "PMNJOIIOFJI",
+              "AMOLMPHFPHJ": -1,
+              "BEIMGAKABJN": "Eff_Element_StarSwirl_Ice_Gadget",
+              "HJIHBAANFLE": 1,
+              "ILELAOFJIKJ": true,
+              "JMMALEJDAEF": -1,
+              "LJFIEGHHLOB": false,
+              "MLFLDPAGADG": {
+                "EEFLHEKBODJ": {
+                  "BNJLEBLGEKB": 180
+                },
+                "GNFICELAKIB": 10,
+                "HECMDGIAGKM": 2,
+                "POPNBJAHNFK": {
+                  "ONEHKOHOCBH": 180
+                }
+              }
+            },
+            {
+              "$type": "PBIOEEHFHFD",
+              "AMOLMPHFPHJ": -1,
+              "ILELAOFJIKJ": true,
+              "LJFIEGHHLOB": false,
+              "MJKPCGCAPLK": [
+                {
+                  "$type": "MMPLBPOHMGL",
+                  "PDIFFCBMGMO": 1,
+                  "PEELJBICEHE": "_STARSWIRL_ICE_GADGET_STACK_STATE"
+                }
+              ],
+              "MLJNNELMEFL": [
+                {
+                  "$type": "EFICNPHHFJA",
+                  "AMOLMPHFPHJ": -1,
+                  "BEIMGAKABJN": "Eff_Element_StarSwirl_Ice_Gadget",
+                  "ILELAOFJIKJ": true,
+                  "KGEKINJPCFB": "Big_BS",
+                  "LJFIEGHHLOB": false
+                }
+              ]
+            }
+          ],
+          "KFOMCJGGPPC": -1,
+          "PPKOPMBNPJH": true
+        },
+        "StarSwirl_Ice_Gadget_LifeTime": {
+          "DBGOKAKAHFP": [
+            "LifeTime",
+            1.5,
+            "ADD"
+          ],
+          "DOALDLPNGMF": -1,
+          "EMGBJJOIENB": [
+            {
+              "$type": "HGFNHPLICPI",
+              "AMOLMPHFPHJ": -1,
+              "ILELAOFJIKJ": true,
+              "LJFIEGHHLOB": false,
+              "PDIFFCBMGMO": 1,
+              "PEELJBICEHE": "_STARSWIRL_ICE_GADGET_STACK_COUNT"
+            },
+            {
+              "$type": "DDOGDECCJCG",
+              "AMOLMPHFPHJ": -1,
+              "ILELAOFJIKJ": true,
+              "KCPIGJLELMH": true,
+              "LJFIEGHHLOB": true,
+              "MLFLDPAGADG": {
+                "$type": "PKAELLAMAGL",
+                "ECPBNJFNBIJ": true,
+                "EEFLHEKBODJ": {
+                  "BNJLEBLGEKB": 180
+                },
+                "GNFICELAKIB": 10,
+                "HECMDGIAGKM": 2,
+                "POPNBJAHNFK": {
+                  "ONEHKOHOCBH": 180
+                }
+              },
+              "PEELJBICEHE": "_STARSWIRL_ICE_GADGET_POS"
+            }
+          ],
+          "FMBHOKCHKOH": [
+            {
+              "$type": "BINBHGLANKO",
+              "AMOLMPHFPHJ": -1,
+              "ILELAOFJIKJ": true,
+              "LDFBDMNIADI": "StarSwirl_Ice_Gadget_Burst",
+              "LJFIEGHHLOB": false
+            }
+          ],
+          "HHDOFNHCIAE": [
+            {
+              "$type": "BCDPLMJAAJD",
+              "AMOLMPHFPHJ": -1,
+              "HHGOBDENFNJ": "Normal",
+              "ILELAOFJIKJ": true,
+              "KEJIJMFDNIG": [
+                70950237
+              ],
+              "LJFIEGHHLOB": false
+            }
+          ],
+          "JFLGPLCIOEC": "LifeTime",
+          "JPEAFDFPKAN": [
+            "LifeTime",
+            1.5,
+            "ADD"
+          ],
+          "KFOMCJGGPPC": -1,
+          "LFIJIMIMBIH": [
+            {
+              "$type": "HHOIELOBEHI",
+              "AMOLMPHFPHJ": -1,
+              "CEFBAEAODEG": true,
+              "EECIIMBIDGB": true,
+              "KDJEMONNHAM": "_STARSWIRL_ICE_GADGET_STACK_COUNT",
+              "LBLIPKGCBLK": [
+                -1,
+                [
+                  "StackCount_Threshold_01",
+                  0.5,
+                  "SUB"
+                ],
+                99
+              ],
+              "MAEJHFJIKDH": true,
+              "MIHMOMGJDOL": [
+                "StarSwirl_Ice_Gadget_Stack_01",
+                "StarSwirl_Ice_Gadget_Stack_02"
+              ],
+              "NGDIBMPMDDG": true
+            },
+            {
+              "$type": "HHOIELOBEHI",
+              "AMOLMPHFPHJ": -1,
+              "CEFBAEAODEG": true,
+              "EECIIMBIDGB": true,
+              "KDJEMONNHAM": "_STARSWIRL_ICE_GADGET_STACK_COUNT",
+              "LBLIPKGCBLK": [
+                [
+                  "StackCount_Threshold_02",
+                  0.5,
+                  "SUB"
+                ],
+                99
+              ],
+              "MAEJHFJIKDH": true,
+              "MIHMOMGJDOL": [
+                "StarSwirl_Ice_Gadget_Burst"
+              ],
+              "NGDIBMPMDDG": true
+            },
+            {
+              "$type": "NLHENENAPEM",
+              "AMOLMPHFPHJ": -1,
+              "GBAKBIEODON": "StarSwirlIce"
+            },
+            {
+              "$type": "HEFGCBLOFON",
+              "AMOLMPHFPHJ": -1,
+              "CEFBAEAODEG": true,
+              "EECIIMBIDGB": true,
+              "KDJEMONNHAM": "_ABILITY_Vodyanitsa_StarSwirl_Mark",
+              "LBLIPKGCBLK": [
+                -0.5,
+                0.5,
+                1.5
+              ],
+              "MIHMOMGJDOL": [
+                "StarSwirl_Ice_Gadget_FX",
+                "StarSwirl_Ice_Gadget_AlterFX"
+              ]
+            }
+          ],
+          "NCCMJCNNPMB": [
+            {
+              "$type": "BINBHGLANKO",
+              "AMOLMPHFPHJ": -1,
+              "ILELAOFJIKJ": true,
+              "LDFBDMNIADI": "StarSwirl_Ice_Gadget_StackEff_End",
+              "LJFIEGHHLOB": false
+            },
+            {
+              "$type": "CCJFIHGEMBO",
+              "AMOLMPHFPHJ": -1,
+              "ILELAOFJIKJ": true,
+              "LDFBDMNIADI": "StarSwirl_Ice_Gadget_LifeTime",
+              "LJFIEGHHLOB": false
+            }
+          ],
+          "PPKOPMBNPJH": true
+        },
+        "StarSwirl_Ice_Gadget_StackEff": {
+          "DBGOKAKAHFP": 100,
+          "DOALDLPNGMF": -1,
+          "EMGBJJOIENB": [
+            {
+              "$type": "PBIOEEHFHFD",
+              "AMOLMPHFPHJ": -1,
+              "ILELAOFJIKJ": true,
+              "LJFIEGHHLOB": false,
+              "MJKPCGCAPLK": [
+                {
+                  "$type": "MMPLBPOHMGL",
+                  "BDHBNCEEPPK": "Target",
+                  "PDIFFCBMGMO": 1,
+                  "PEELJBICEHE": "_ABILITY_Vodyanitsa_StarSwirl_Mark"
+                }
+              ],
+              "MLJNNELMEFL": [
+                {
+                  "$type": "PMNJOIIOFJI",
+                  "AMOLMPHFPHJ": -1,
+                  "BEIMGAKABJN": "Eff_Element_StarSwirl_Ice_Gadget_Vodyanitsa",
+                  "HJIHBAANFLE": 1,
+                  "ILELAOFJIKJ": true,
+                  "JMMALEJDAEF": -1,
+                  "LJFIEGHHLOB": false,
+                  "MLFLDPAGADG": {
+                    "EEFLHEKBODJ": {
+                      "BNJLEBLGEKB": 180
+                    },
+                    "GNFICELAKIB": 10,
+                    "HECMDGIAGKM": 2,
+                    "POPNBJAHNFK": {
+                      "ONEHKOHOCBH": 180
+                    }
+                  }
+                }
+              ],
+              "PAPFFKOKPML": [
+                {
+                  "$type": "PMNJOIIOFJI",
+                  "AMOLMPHFPHJ": -1,
+                  "BEIMGAKABJN": "Eff_Element_StarSwirl_Ice_Gadget",
+                  "HJIHBAANFLE": 1,
+                  "ILELAOFJIKJ": true,
+                  "JMMALEJDAEF": -1,
+                  "LJFIEGHHLOB": false,
+                  "MLFLDPAGADG": {
+                    "EEFLHEKBODJ": {
+                      "BNJLEBLGEKB": 180
+                    },
+                    "GNFICELAKIB": 10,
+                    "HECMDGIAGKM": 2,
+                    "POPNBJAHNFK": {
+                      "ONEHKOHOCBH": 180
+                    }
+                  }
+                }
+              ]
+            }
+          ],
+          "JPEAFDFPKAN": 0.10000000149011612,
+          "KFOMCJGGPPC": -1,
+          "PPKOPMBNPJH": true
+        },
+        "StarSwirl_Ice_Gadget_StackEff_01": {
+          "DBGOKAKAHFP": 100,
+          "DOALDLPNGMF": -1,
+          "KFOMCJGGPPC": -1,
+          "PPKOPMBNPJH": true
+        },
+        "StarSwirl_Ice_Gadget_StackEff_02": {
+          "DBGOKAKAHFP": 100,
+          "DOALDLPNGMF": -1,
+          "EMGBJJOIENB": [
+            {
+              "$type": "PBIOEEHFHFD",
+              "AMOLMPHFPHJ": -1,
+              "ILELAOFJIKJ": true,
+              "LJFIEGHHLOB": false,
+              "MJKPCGCAPLK": [
+                {
+                  "$type": "MMPLBPOHMGL",
+                  "BDHBNCEEPPK": "Target",
+                  "PDIFFCBMGMO": 1,
+                  "PEELJBICEHE": "_ABILITY_Vodyanitsa_StarSwirl_Mark"
+                }
+              ],
+              "MLJNNELMEFL": [
+                {
+                  "$type": "EFICNPHHFJA",
+                  "AMOLMPHFPHJ": -1,
+                  "BEIMGAKABJN": "Eff_Element_StarSwirl_Ice_Gadget_Vodyanitsa",
+                  "ILELAOFJIKJ": true,
+                  "KGEKINJPCFB": "Big_BS",
+                  "LJFIEGHHLOB": false
+                }
+              ],
+              "PAPFFKOKPML": [
+                {
+                  "$type": "EFICNPHHFJA",
+                  "AMOLMPHFPHJ": -1,
+                  "BEIMGAKABJN": "Eff_Element_StarSwirl_Ice_Gadget",
+                  "ILELAOFJIKJ": true,
+                  "KGEKINJPCFB": "Big_BS",
+                  "LJFIEGHHLOB": false
+                }
+              ]
+            }
+          ],
+          "KFOMCJGGPPC": -1,
+          "PPKOPMBNPJH": true
+        },
+        "StarSwirl_Ice_Gadget_StackEff_End": {
+          "DBGOKAKAHFP": 100,
+          "DOALDLPNGMF": -1,
+          "EMGBJJOIENB": [
+            {
+              "$type": "PBIOEEHFHFD",
+              "AMOLMPHFPHJ": -1,
+              "ILELAOFJIKJ": true,
+              "LJFIEGHHLOB": false,
+              "MJKPCGCAPLK": [
+                {
+                  "$type": "MMPLBPOHMGL",
+                  "BDHBNCEEPPK": "Target",
+                  "PDIFFCBMGMO": 1,
+                  "PEELJBICEHE": "_ABILITY_Vodyanitsa_StarSwirl_Mark"
+                }
+              ],
+              "MLJNNELMEFL": [
+                {
+                  "$type": "EFICNPHHFJA",
+                  "AMOLMPHFPHJ": -1,
+                  "BEIMGAKABJN": "Eff_Element_StarSwirl_Ice_Gadget_Vodyanitsa",
+                  "ILELAOFJIKJ": true,
+                  "KGEKINJPCFB": "Big_AS",
+                  "LJFIEGHHLOB": false
+                },
+                {
+                  "$type": "EFICNPHHFJA",
+                  "AMOLMPHFPHJ": -1,
+                  "BEIMGAKABJN": "Eff_Element_StarSwirl_Ice_Gadget_Vodyanitsa",
+                  "ILELAOFJIKJ": true,
+                  "KGEKINJPCFB": "Small_AS",
+                  "LJFIEGHHLOB": false
+                }
+              ],
+              "PAPFFKOKPML": [
+                {
+                  "$type": "EFICNPHHFJA",
+                  "AMOLMPHFPHJ": -1,
+                  "BEIMGAKABJN": "Eff_Element_StarSwirl_Ice_Gadget",
+                  "ILELAOFJIKJ": true,
+                  "KGEKINJPCFB": "Big_AS",
+                  "LJFIEGHHLOB": false
+                },
+                {
+                  "$type": "EFICNPHHFJA",
+                  "AMOLMPHFPHJ": -1,
+                  "BEIMGAKABJN": "Eff_Element_StarSwirl_Ice_Gadget",
+                  "ILELAOFJIKJ": true,
+                  "KGEKINJPCFB": "Small_AS",
+                  "LJFIEGHHLOB": false
+                }
+              ]
+            }
+          ],
+          "KFOMCJGGPPC": -1,
+          "PPKOPMBNPJH": true
+        },
+        "StarSwirl_Ice_Gadget_StackUp": {
+          "DBGOKAKAHFP": 100,
+          "DOALDLPNGMF": -1,
+          "EMGBJJOIENB": [
+            {
+              "$type": "NENBNMKHMBP",
+              "AMOLMPHFPHJ": -1,
+              "CPOPMBDLLOG": true,
+              "ILELAOFJIKJ": true,
+              "LJFIEGHHLOB": true,
+              "NPADJOJCCBG": "StackCount_Threshold_02",
+              "PDIFFCBMGMO": 1,
+              "PEELJBICEHE": "_STARSWIRL_ICE_GADGET_STACK_COUNT"
+            },
+            {
+              "$type": "BCDPLMJAAJD",
+              "AMOLMPHFPHJ": -1,
+              "HHGOBDENFNJ": "Normal",
+              "IJDGNIIOHLM": [
+                {
+                  "$type": "MMPLBPOHMGL",
+                  "NJJFOACNFGL": "MoreThanAndEqual",
+                  "PDIFFCBMGMO": "StackCount_Threshold_02",
+                  "PEELJBICEHE": "_STARSWIRL_ICE_GADGET_STACK_COUNT"
+                }
+              ],
+              "ILELAOFJIKJ": true,
+              "KEJIJMFDNIG": [
+                70950237
+              ],
+              "LJFIEGHHLOB": false
+            }
+          ],
+          "GPPCPGHLDHL": "Multiple",
+          "JPEAFDFPKAN": "StackUpCD",
+          "KFOMCJGGPPC": -1,
+          "NMPLPAKICCB": {
+            "EMDLCKBCKNA": "StackUpCount_PerCD"
+          },
+          "PPKOPMBNPJH": true
+        },
+        "StarSwirl_Ice_Gadget_Stack_01": {
+          "DBGOKAKAHFP": 100,
+          "DOALDLPNGMF": -1,
+          "EMGBJJOIENB": [
+            {
+              "$type": "CDANEAFAFKM",
+              "AMOLMPHFPHJ": -1,
+              "ILELAOFJIKJ": true,
+              "LDFBDMNIADI": "StarSwirl_Ice_Gadget_StackEff_01",
+              "LJFIEGHHLOB": false
+            },
+            {
+              "$type": "HGFNHPLICPI",
+              "AMOLMPHFPHJ": -1,
+              "ILELAOFJIKJ": true,
+              "LJFIEGHHLOB": true,
+              "PEELJBICEHE": "_STARSWIRL_ICE_GADGET_STACK_STATE"
+            }
+          ],
+          "KFOMCJGGPPC": -1,
+          "PPKOPMBNPJH": true
+        },
+        "StarSwirl_Ice_Gadget_Stack_02": {
+          "DBGOKAKAHFP": 100,
+          "DOALDLPNGMF": -1,
+          "EMGBJJOIENB": [
+            {
+              "$type": "CDANEAFAFKM",
+              "AMOLMPHFPHJ": -1,
+              "ILELAOFJIKJ": true,
+              "LDFBDMNIADI": "StarSwirl_Ice_Gadget_StackEff_02",
+              "LJFIEGHHLOB": false
+            },
+            {
+              "$type": "HGFNHPLICPI",
+              "AMOLMPHFPHJ": -1,
+              "ILELAOFJIKJ": true,
+              "LJFIEGHHLOB": true,
+              "PDIFFCBMGMO": 1,
+              "PEELJBICEHE": "_STARSWIRL_ICE_GADGET_STACK_STATE"
+            }
+          ],
+          "KFOMCJGGPPC": -1,
+          "PPKOPMBNPJH": true
+        },
+        "UNIQUE_StarSwirl_Ice_Gadget_Alter_MarkHandler": {
+          "DBGOKAKAHFP": 100,
+          "DIELNIJPCJJ": true,
+          "DOALDLPNGMF": -1,
+          "EMGBJJOIENB": [
+            {
+              "$type": "HGFNHPLICPI",
+              "AMOLMPHFPHJ": -1,
+              "ILELAOFJIKJ": true,
+              "LJFIEGHHLOB": true,
+              "PDIFFCBMGMO": 1,
+              "PEELJBICEHE": "_ABILITY_Vodyanitsa_StarSwirl_AlterMark"
+            }
+          ],
+          "GPPCPGHLDHL": "RefreshUniqueDurability",
+          "HHDOFNHCIAE": [
+            {
+              "$type": "HGFNHPLICPI",
+              "AMOLMPHFPHJ": -1,
+              "ILELAOFJIKJ": true,
+              "LJFIEGHHLOB": true,
+              "PEELJBICEHE": "_ABILITY_Vodyanitsa_StarSwirl_AlterMark"
+            }
+          ],
+          "JPEAFDFPKAN": 5,
+          "KFOMCJGGPPC": -1,
+          "PPKOPMBNPJH": true
+        },
+        "UNIQUE_StarSwirl_Ice_Gadget_Alter_SubHurt": {
+          "BNEJPEMIMEH": true,
+          "BOCCNJLBFCJ": "DefenseDown",
+          "DBGOKAKAHFP": 100,
+          "DIELNIJPCJJ": true,
+          "DOALDLPNGMF": -1,
+          "GPPCPGHLDHL": "RefreshUniqueDurability",
+          "ILKPFPGAIGI": {
+            "Actor_WindSubHurtDelta": [
+              0,
+              "Vodyanitsa_StarSwirlIceAlter_SubHurtDelta",
+              "SUB"
+            ]
+          },
+          "JPEAFDFPKAN": "Vodyanitsa_StarSwirlIceAlter_SubHurtTime",
+          "KFOMCJGGPPC": -1,
+          "PPKOPMBNPJH": true
+        }
+      },
+      "IIBMNPFLNMJ": "ElementAbility_StarSwirl_Ice_Gadget",
+      "LOEHLJGBGAC": {
+        "LifeTime": 3,
+        "StackCount_Threshold_01": 3,
+        "StackCount_Threshold_02": 6,
+        "StackUpCD": 0.10000000149011612,
+        "StackUpCount_PerCD": 3,
+        "Vodyanitsa_StarSwirlIceAlter_SubHurtDelta": 0.3499999940395355,
+        "Vodyanitsa_StarSwirlIceAlter_SubHurtTime": 6
+      },
+      "OMAIGDMCJBO": {
+        "DBGOKAKAHFP": 100,
+        "DOALDLPNGMF": -1,
+        "KFOMCJGGPPC": -1,
+        "PPKOPMBNPJH": true
+      },
+      "PODJJJHGAMO": true
+    }
+  }
+]

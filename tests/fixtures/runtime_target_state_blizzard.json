@@ -1,0 +1,404 @@
+{
+  "bundle_version": 1,
+  "status": "ready",
+  "issues": [],
+  "source": {
+    "kind": "equip_affix",
+    "affix_id": 2140011,
+    "affix_group_id": 214001,
+    "source_level": 1,
+    "version_line": "release",
+    "snapshot_id": "1b620db802a937506dc870cc25c08b5c7c336a01b193b945e9471d75c3bee172",
+    "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53"
+  },
+  "snapshot": {
+    "version_line": "release",
+    "state": "ready",
+    "index_state": "ready",
+    "schema_version": 1,
+    "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+    "snapshot_id": "1b620db802a937506dc870cc25c08b5c7c336a01b193b945e9471d75c3bee172",
+    "execution_support": "not_evaluated",
+    "built_at": "2026-10-01T19:46:55.591099+00:00",
+    "profile_id": "upstream-combat-catalog-v1",
+    "profile_version": 1,
+    "indexer_version": "4",
+    "manifest_fingerprint": "b14c57925636407203b679f5517dd51ec9a5249e42a792157cb72269f55b32e6",
+    "counts": {
+      "runtime_definition": 152351,
+      "runtime_parameter_binding": 6082,
+      "runtime_reference": 165747,
+      "runtime_source": 3356
+    },
+    "reference_states": {
+      "ambiguous": 157,
+      "external_asset": 10445,
+      "missing": 89,
+      "resolved": 145772,
+      "unsupported_reference_form": 9284
+    },
+    "normalization": {
+      "mapping_fingerprint": "506862bc6c0bf033d8272b75f193cd2a620fc513320b3223d07afcc6f04356e2",
+      "normalization_version": 2,
+      "profile_id": "upstream-34208429-reviewed-schema-v1",
+      "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53"
+    }
+  },
+  "param_list": [
+    0.20000000298023224,
+    0.20000000298023224,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "affix": {
+    "record": {
+      "paramList": [
+        0.20000000298023224,
+        0.20000000298023224,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "addProps": [
+        {},
+        {},
+        {}
+      ],
+      "openConfig": "Relic_CriticUpAgainstIceAndFrozen",
+      "affixId": 2140011,
+      "id": 214001,
+      "level": 1,
+      "nameTextMapHash": 933076115,
+      "descTextMapHash": 1080795585
+    },
+    "source_path": "ExcelBinOutput/EquipAffixExcelConfigData.json",
+    "json_pointer": "/1299",
+    "source_sha256": "67cce4b66ecfae8ab20b4567005ff0e2efa76446af1fcc71d99e8a2383def4e6"
+  },
+  "talent": {
+    "definition_id": "3b89a5179fef681bfc544475bd667f1a6ee11353663d889e85ac84e3c3ff0d33",
+    "source_path": "BinOutput/Talent/RelicTalents/ConfigAffix_Relic.json",
+    "json_pointer": "/Relic_CriticUpAgainstIceAndFrozen",
+    "source_sha256": "0937b29eb3f02b07aacdc02abdcf0af460ac7cb5cf951207ff626ba27b4052ba",
+    "operations": [
+      {
+        "$type": "JPCAAJGEELO",
+        "GBPFBNHLOFD": true,
+        "IIBMNPFLNMJ": "Relic_CriticUpAgainstIceAndFrozen"
+      },
+      {
+        "$type": "BIAHEMMGABC",
+        "GBPFBNHLOFD": true,
+        "IIBMNPFLNMJ": "Relic_CriticUpAgainstIceAndFrozen",
+        "PCABAADALND": "%1",
+        "PEOJKHKHAKL": "Rate1"
+      },
+      {
+        "$type": "BIAHEMMGABC",
+        "GBPFBNHLOFD": true,
+        "IIBMNPFLNMJ": "Relic_CriticUpAgainstIceAndFrozen",
+        "PCABAADALND": "%2",
+        "PEOJKHKHAKL": "Rate2"
+      }
+    ]
+  },
+  "talent_candidates": [],
+  "abilities": [
+    {
+      "definition_id": "95de29ab70d85bc2fa75ce6dcd1bcb061c5c003f4c974a188e0655a71644416a",
+      "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+      "json_pointer": "/20/Default",
+      "source_sha256": "96c506df3e2a2b12871b3a8b381c7851ea5aa7d5eb432b18553255e078ce3803",
+      "payload": {
+        "EMGBJJOIENB": [
+          {
+            "$type": "CDANEAFAFKM",
+            "AMOLMPHFPHJ": -1,
+            "ILELAOFJIKJ": true,
+            "LDFBDMNIADI": "UNIQUE_Relic_CriticUpAgainstIceAndFrozen_Handler",
+            "LJFIEGHHLOB": false
+          }
+        ],
+        "GPPBBDEICKP": {
+          "UNIQUE_Relic_CriticUpAgainstIceAndFrozen_Handler": {
+            "DBGOKAKAHFP": 100,
+            "DIELNIJPCJJ": true,
+            "DOALDLPNGMF": -1,
+            "KFOMCJGGPPC": -1,
+            "LFIJIMIMBIH": [
+              {
+                "$type": "GBFENLIGHEJ",
+                "AMOLMPHFPHJ": -1,
+                "GLIBANHDMCM": "Rate1",
+                "IJDGNIIOHLM": [
+                  {
+                    "$type": "BKCJECHCDKG",
+                    "BDHBNCEEPPK": "Target",
+                    "FJGEDPNBGCG": -1,
+                    "LJBBKGIFJDB": [
+                      "Monster"
+                    ]
+                  },
+                  {
+                    "$type": "KFIBKGLJJAD",
+                    "BDHBNCEEPPK": "Target",
+                    "IJDGNIIOHLM": [
+                      {
+                        "$type": "CEIIMCBGCCA",
+                        "BDHBNCEEPPK": "Target",
+                        "JOFNJODFEDG": "Ice"
+                      },
+                      {
+                        "$type": "CEIIMCBGCCA",
+                        "BDHBNCEEPPK": "Target",
+                        "JOFNJODFEDG": "Frozen"
+                      }
+                    ]
+                  }
+                ],
+                "PEAHHNAOMNK": true
+              },
+              {
+                "$type": "GBFENLIGHEJ",
+                "AMOLMPHFPHJ": -1,
+                "GLIBANHDMCM": "Rate2",
+                "IJDGNIIOHLM": [
+                  {
+                    "$type": "BKCJECHCDKG",
+                    "BDHBNCEEPPK": "Target",
+                    "FJGEDPNBGCG": -1,
+                    "LJBBKGIFJDB": [
+                      "Monster"
+                    ]
+                  },
+                  {
+                    "$type": "CBHJDCPKILO",
+                    "BDHBNCEEPPK": "Target",
+                    "BJAILJMJKMP": "ElementFreeze"
+                  }
+                ],
+                "PEAHHNAOMNK": true
+              },
+              {
+                "$type": "MDCFKDGKJOL",
+                "AMOLMPHFPHJ": -1,
+                "BFDEHDNLNJH": [
+                  "MoonOvergrowDamage",
+                  "MoonShockDamage",
+                  "MoonCrystallizeWaterDamage",
+                  "StarSuperconductorIceDamage",
+                  "StarSuperconductorElectricDamage",
+                  "StarSwirlIceDamage",
+                  "StarSwirlWindDamage"
+                ],
+                "GLIBANHDMCM": "Rate1",
+                "IJDGNIIOHLM": [
+                  {
+                    "$type": "BKCJECHCDKG",
+                    "BDHBNCEEPPK": "Target",
+                    "FJGEDPNBGCG": -1,
+                    "LJBBKGIFJDB": [
+                      "Monster"
+                    ]
+                  },
+                  {
+                    "$type": "KFIBKGLJJAD",
+                    "BDHBNCEEPPK": "Target",
+                    "IJDGNIIOHLM": [
+                      {
+                        "$type": "CEIIMCBGCCA",
+                        "BDHBNCEEPPK": "Target",
+                        "JOFNJODFEDG": "Ice"
+                      },
+                      {
+                        "$type": "CEIIMCBGCCA",
+                        "BDHBNCEEPPK": "Target",
+                        "JOFNJODFEDG": "Frozen"
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "$type": "MDCFKDGKJOL",
+                "AMOLMPHFPHJ": -1,
+                "BFDEHDNLNJH": [
+                  "MoonOvergrowDamage",
+                  "MoonShockDamage",
+                  "MoonCrystallizeWaterDamage",
+                  "StarSuperconductorIceDamage",
+                  "StarSuperconductorElectricDamage",
+                  "StarSwirlIceDamage",
+                  "StarSwirlWindDamage"
+                ],
+                "GLIBANHDMCM": "Rate2",
+                "IJDGNIIOHLM": [
+                  {
+                    "$type": "BKCJECHCDKG",
+                    "BDHBNCEEPPK": "Target",
+                    "FJGEDPNBGCG": -1,
+                    "LJBBKGIFJDB": [
+                      "Monster"
+                    ]
+                  },
+                  {
+                    "$type": "CBHJDCPKILO",
+                    "BDHBNCEEPPK": "Target",
+                    "BJAILJMJKMP": "ElementFreeze"
+                  }
+                ]
+              }
+            ],
+            "PPKOPMBNPJH": true
+          }
+        },
+        "IIBMNPFLNMJ": "Relic_CriticUpAgainstIceAndFrozen",
+        "LOEHLJGBGAC": {
+          "Rate1": 0,
+          "Rate2": 0
+        },
+        "OMAIGDMCJBO": {
+          "DBGOKAKAHFP": 100,
+          "DOALDLPNGMF": -1,
+          "KFOMCJGGPPC": -1,
+          "PPKOPMBNPJH": true
+        }
+      },
+      "variant_key": "Default"
+    }
+  ],
+  "references": [
+    {
+      "reference_id": "1ca720418eeb03e704a257f4cf82f20c28b0d747efc3e620057545a819b0506d",
+      "from_definition_id": "d6901821e3326c8a719fe6ff368cd7bd0909801aa6b9912ab597a54cef9bfc0f",
+      "source_path": "ExcelBinOutput/EquipAffixExcelConfigData.json",
+      "json_pointer": "/1299/openConfig",
+      "field_name": "openConfig",
+      "relation_kind": "open_config",
+      "target_kind": "talent_config",
+      "source_order": 0,
+      "presence_status": "present",
+      "resolution_status": "resolved",
+      "resolved_definition_id": "3b89a5179fef681bfc544475bd667f1a6ee11353663d889e85ac84e3c3ff0d33",
+      "extraction_rule_id": "4",
+      "version_line": "release",
+      "snapshot_id": "1b620db802a937506dc870cc25c08b5c7c336a01b193b945e9471d75c3bee172",
+      "target_key": "Relic_CriticUpAgainstIceAndFrozen",
+      "scope": {
+        "owner_definition_id": null
+      },
+      "candidate_ids": [
+        "3b89a5179fef681bfc544475bd667f1a6ee11353663d889e85ac84e3c3ff0d33"
+      ]
+    },
+    {
+      "reference_id": "3d3e095ad443f2afb94edfc26203d33959277ce2445d35dd9be3494de509a683",
+      "from_definition_id": "3b89a5179fef681bfc544475bd667f1a6ee11353663d889e85ac84e3c3ff0d33",
+      "source_path": "BinOutput/Talent/RelicTalents/ConfigAffix_Relic.json",
+      "json_pointer": "/Relic_CriticUpAgainstIceAndFrozen/0/IIBMNPFLNMJ",
+      "field_name": "abilityName",
+      "relation_kind": "ability_operation",
+      "target_kind": "ability",
+      "source_order": 0,
+      "presence_status": "present",
+      "resolution_status": "resolved",
+      "resolved_definition_id": "95de29ab70d85bc2fa75ce6dcd1bcb061c5c003f4c974a188e0655a71644416a",
+      "extraction_rule_id": "4",
+      "version_line": "release",
+      "snapshot_id": "1b620db802a937506dc870cc25c08b5c7c336a01b193b945e9471d75c3bee172",
+      "target_key": "Relic_CriticUpAgainstIceAndFrozen",
+      "scope": {
+        "owner_definition_id": null
+      },
+      "candidate_ids": [
+        "95de29ab70d85bc2fa75ce6dcd1bcb061c5c003f4c974a188e0655a71644416a"
+      ]
+    },
+    {
+      "reference_id": "61dde66aaeda95523885ba4306cd5c52554391cdc3c667fe1059e999d2bb66c7",
+      "from_definition_id": "3b89a5179fef681bfc544475bd667f1a6ee11353663d889e85ac84e3c3ff0d33",
+      "source_path": "BinOutput/Talent/RelicTalents/ConfigAffix_Relic.json",
+      "json_pointer": "/Relic_CriticUpAgainstIceAndFrozen/1/IIBMNPFLNMJ",
+      "field_name": "abilityName",
+      "relation_kind": "ability_operation",
+      "target_kind": "ability",
+      "source_order": 1,
+      "presence_status": "present",
+      "resolution_status": "resolved",
+      "resolved_definition_id": "95de29ab70d85bc2fa75ce6dcd1bcb061c5c003f4c974a188e0655a71644416a",
+      "extraction_rule_id": "4",
+      "version_line": "release",
+      "snapshot_id": "1b620db802a937506dc870cc25c08b5c7c336a01b193b945e9471d75c3bee172",
+      "target_key": "Relic_CriticUpAgainstIceAndFrozen",
+      "scope": {
+        "owner_definition_id": null
+      },
+      "candidate_ids": [
+        "95de29ab70d85bc2fa75ce6dcd1bcb061c5c003f4c974a188e0655a71644416a"
+      ]
+    },
+    {
+      "reference_id": "96a00bd0657b3c8f539149b1713194076ba852aa3cb6cc2c3f10494619fc03e5",
+      "from_definition_id": "3b89a5179fef681bfc544475bd667f1a6ee11353663d889e85ac84e3c3ff0d33",
+      "source_path": "BinOutput/Talent/RelicTalents/ConfigAffix_Relic.json",
+      "json_pointer": "/Relic_CriticUpAgainstIceAndFrozen/2/IIBMNPFLNMJ",
+      "field_name": "abilityName",
+      "relation_kind": "ability_operation",
+      "target_kind": "ability",
+      "source_order": 2,
+      "presence_status": "present",
+      "resolution_status": "resolved",
+      "resolved_definition_id": "95de29ab70d85bc2fa75ce6dcd1bcb061c5c003f4c974a188e0655a71644416a",
+      "extraction_rule_id": "4",
+      "version_line": "release",
+      "snapshot_id": "1b620db802a937506dc870cc25c08b5c7c336a01b193b945e9471d75c3bee172",
+      "target_key": "Relic_CriticUpAgainstIceAndFrozen",
+      "scope": {
+        "owner_definition_id": null
+      },
+      "candidate_ids": [
+        "95de29ab70d85bc2fa75ce6dcd1bcb061c5c003f4c974a188e0655a71644416a"
+      ]
+    },
+    {
+      "reference_id": "30d0cde6e0e13ac773ca800df469a62d496762867d3bf3a9a36caf02a93e100a",
+      "from_definition_id": "95de29ab70d85bc2fa75ce6dcd1bcb061c5c003f4c974a188e0655a71644416a",
+      "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+      "json_pointer": "/20/Default/EMGBJJOIENB/0/LDFBDMNIADI",
+      "field_name": "modifierName",
+      "relation_kind": "modifier_operation",
+      "target_kind": "modifier",
+      "source_order": 0,
+      "presence_status": "present",
+      "resolution_status": "resolved",
+      "resolved_definition_id": "9b573f2a5f0fc7bead98cd3b4a3ea4a5b55d3f6020f015e1da4df597d7d553d5",
+      "extraction_rule_id": "4",
+      "version_line": "release",
+      "snapshot_id": "1b620db802a937506dc870cc25c08b5c7c336a01b193b945e9471d75c3bee172",
+      "target_key": "UNIQUE_Relic_CriticUpAgainstIceAndFrozen_Handler",
+      "scope": {
+        "owner_definition_id": "95de29ab70d85bc2fa75ce6dcd1bcb061c5c003f4c974a188e0655a71644416a"
+      },
+      "candidate_ids": [
+        "9b573f2a5f0fc7bead98cd3b4a3ea4a5b55d3f6020f015e1da4df597d7d553d5"
+      ]
+    }
+  ],
+  "reference_closed": true,
+  "execution_support": "not_evaluated",
+  "closure_fingerprint": "733e52cc0196079dd59f1b6809e689adbd7155b9237b95f877b0c51657cf0cfb",
+  "normalization": {
+    "mapping_fingerprint": "506862bc6c0bf033d8272b75f193cd2a620fc513320b3223d07afcc6f04356e2",
+    "normalization_version": 2,
+    "profile_id": "upstream-34208429-reviewed-schema-v1",
+    "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53"
+  },
+  "content_fingerprint": "aed7e9136c5ec9cf6c81548a06221fc94049a40bcd153eb45b62cd7e3799584b"
+}

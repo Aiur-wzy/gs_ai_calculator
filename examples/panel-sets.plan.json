@@ -1,0 +1,884 @@
+{
+  "kind": "genshin-plan",
+  "plan_version": 2,
+  "plan_id": "e0f111b4-4364-4078-aa64-8035d08f1cff",
+  "revision": 0,
+  "manual_template": {
+    "version": 2,
+    "form": "resolved",
+    "meta": {
+      "name": "固定面板与套装示例",
+      "version_line": "release",
+      "assumptions": [
+        "虚构角色的接口与界面示例，不是游戏队伍轴或实战结论。",
+        "给定初始面板包含两件套常驻属性；套装更换采用固定面板比较，不按词条重算。",
+        "仅此示例明确假设目标在0到20秒已冻结；未执行元素附着或能量循环模拟。"
+      ]
+    },
+    "enemy": {
+      "level": 90,
+      "resistance": {
+        "cryo": 0.1
+      }
+    },
+    "characters": [
+      {
+        "id": "example",
+        "name": "示例角色",
+        "level": 90,
+        "stats": {
+          "atk": 1800,
+          "base_atk": 800,
+          "crit_rate": 0.1,
+          "crit_dmg": 1,
+          "energy_recharge": 1.6,
+          "dmg_bonus": {
+            "cryo": 0.15
+          }
+        }
+      }
+    ],
+    "switches": [
+      {
+        "t": 0,
+        "character": "example"
+      }
+    ],
+    "buffs": [],
+    "hits": [
+      {
+        "id": "example.e",
+        "damage_type_ids": [
+          "damage.elemental_skill"
+        ],
+        "t": 1,
+        "character": "example",
+        "skill": "elemental_skill",
+        "hit_name": "示例战技伤害",
+        "damage_system": "classic",
+        "element": "cryo",
+        "multiplier": 1
+      }
+    ],
+    "loop_duration": 20,
+    "id_registry_version": 1,
+    "type_definitions": {
+      "damage_types": []
+    }
+  },
+  "equipment_inputs": {
+    "example": {
+      "mode": "panel",
+      "panel_policy": "static_included",
+      "character_ref": null,
+      "weapon": null,
+      "artifact_sets": [
+        {
+          "set_id": 14001,
+          "count": 4
+        }
+      ],
+      "source_refs": [
+        {
+          "kind": "manual",
+          "note": "接口验收给定面板，已含两件套常驻属性；不分配主副词条"
+        }
+      ],
+      "data_version": {
+        "version_line": "release",
+        "upstream_commit": "9424e4e556bd80e5196be7d3c52723d3a35b30e7",
+        "equipment_schema_version": 1,
+        "built_at": "2026-09-12T16:22:07.787309+00:00"
+      }
+    }
+  },
+  "effect_bindings": [
+    {
+      "binding_id": "binding.f3a91ba187113436ea36c0eb",
+      "provider_character_id": "example",
+      "owner": {
+        "kind": "artifact_set",
+        "set_id": 14001,
+        "required_count": 2,
+        "affix_id": 2140010
+      },
+      "source_refs": [
+        {
+          "table": "EquipAffixExcelConfigData",
+          "key": {
+            "affixId": 2140010
+          },
+          "field": null,
+          "upstream_commit": "9424e4e556bd80e5196be7d3c52723d3a35b30e7"
+        }
+      ],
+      "source_fingerprint": "950034ece86dcd0fc5487b22f827ac975d62573982d0eec6dbaeb427eece3e6e",
+      "coverage": {
+        "state": "complete",
+        "reviewed_by": "integration_fixture",
+        "source_fingerprint": "950034ece86dcd0fc5487b22f827ac975d62573982d0eec6dbaeb427eece3e6e",
+        "note": "仅验证固定面板与套装表达，非真实队伍实验"
+      },
+      "parts": [
+        {
+          "part_id": "included_static",
+          "label": "两件套常驻属性已计入初始面板",
+          "state": "excluded",
+          "rule": null,
+          "delivery": null,
+          "reason": "本示例固定面板已经包含所选两件套常驻属性，禁止重复加算",
+          "conditions": [],
+          "dependencies": {
+            "mode": "source_only",
+            "context_fingerprint": null,
+            "note": "固定倍率原文；冻结条件由本示例明确声明"
+          }
+        }
+      ]
+    },
+    {
+      "binding_id": "binding.bd78c850eb990c6de5521317",
+      "provider_character_id": "example",
+      "owner": {
+        "kind": "artifact_set",
+        "set_id": 14001,
+        "required_count": 4,
+        "affix_id": 2140011
+      },
+      "source_refs": [
+        {
+          "table": "EquipAffixExcelConfigData",
+          "key": {
+            "affixId": 2140011
+          },
+          "field": null,
+          "upstream_commit": "9424e4e556bd80e5196be7d3c52723d3a35b30e7"
+        }
+      ],
+      "source_fingerprint": "8924f59d39f08983ff15316d9639e87be62c326b6f6a02f07b3c4df38c74a2f4",
+      "coverage": {
+        "state": "complete",
+        "reviewed_by": "integration_fixture",
+        "source_fingerprint": "8924f59d39f08983ff15316d9639e87be62c326b6f6a02f07b3c4df38c74a2f4",
+        "note": "仅验证固定面板与套装表达，非真实队伍实验"
+      },
+      "parts": [
+        {
+          "part_id": "frozen_target_crit",
+          "label": "冰套四件冻结目标暴击加成",
+          "state": "resolved",
+          "rule": {
+            "kind": "constant",
+            "value": 0.4
+          },
+          "delivery": {
+            "kind": "buff",
+            "start": 0,
+            "end": 20,
+            "scope": "team",
+            "target": "example",
+            "source": "冰套四件，显式假设目标已冻结",
+            "effect": {
+              "id": "crit",
+              "name": "冻结目标暴击率",
+              "benefit_type_id": "benefit.crit_rate.all",
+              "zone": "crit_rate",
+              "stat": "all",
+              "applies_to": {
+                "mode": "all"
+              }
+            }
+          },
+          "reason": null,
+          "conditions": [],
+          "dependencies": {
+            "mode": "source_only",
+            "context_fingerprint": null,
+            "note": "固定倍率原文；冻结条件由本示例明确声明"
+          }
+        }
+      ]
+    }
+  ],
+  "manual_effect_dependencies": [],
+  "rotation_tuning": {
+    "buff_hit_matches": []
+  },
+  "resolution": {
+    "state": "ready",
+    "composer_version": "1.1.0",
+    "input_fingerprint": "2c3eb068c53356409488ff6ef4f6c923bb77432f09be09409e547d61e37e3ba1",
+    "source_fingerprint": "15afbfba3f7a08399543ddf0a2bf8887dca543eafad470bf9de13be35a25cb20",
+    "output_fingerprint": "26d37c18c5f68ee59e6fd4cff3211846fe386310cb1efba24e0881e7e7f4b795",
+    "missing_inputs": [],
+    "warnings": [],
+    "contribution_report": {
+      "characters": {
+        "example": {
+          "base": {
+            "atk": 800
+          },
+          "static": {
+            "atk": 1800,
+            "base_atk": 800,
+            "crit_rate": 0.1,
+            "crit_dmg": 1,
+            "energy_recharge": 1.6,
+            "dmg_bonus": {
+              "cryo": 0.15
+            }
+          },
+          "final": {
+            "atk": 1800,
+            "base_atk": 800,
+            "crit_rate": 0.1,
+            "crit_dmg": 1,
+            "energy_recharge": 1.6,
+            "dmg_bonus": {
+              "cryo": 0.15
+            }
+          },
+          "contributions": []
+        }
+      },
+      "generated_outputs": [
+        {
+          "binding_id": "binding.bd78c850eb990c6de5521317",
+          "part_id": "frozen_target_crit",
+          "buff": {
+            "id": "generated.buff.cc16b3f675465b5566d08c74eedeccbd",
+            "source": "冰套四件，显式假设目标已冻结",
+            "start": 0,
+            "end": 20,
+            "scope": "team",
+            "target": "example",
+            "effects": [
+              {
+                "id": "crit",
+                "name": "冻结目标暴击率",
+                "benefit_type_id": "benefit.crit_rate.all",
+                "zone": "crit_rate",
+                "stat": "all",
+                "applies_to": {
+                  "mode": "all"
+                },
+                "value": 0.4
+              }
+            ]
+          }
+        }
+      ],
+      "equipment_sources": {
+        "example": {
+          "artifacts": {},
+          "main_stats": {},
+          "sets": {
+            "14001": {
+              "artifact_set": {
+                "id": 14001,
+                "affix_group_id": 214001,
+                "source_rank_level": 5,
+                "icon": "UI_RelicIcon_14001_4",
+                "disable_filter": null,
+                "bag_sort_value": 30,
+                "name": "冰风迷途的勇士",
+                "name_text_map_hash": "1959650699",
+                "name_source": {
+                  "table": "EquipAffixExcelConfigData",
+                  "record_id": 2140010,
+                  "text_map_hash": "1959650699",
+                  "language": "CHS",
+                  "upstream_commit": "9424e4e556bd80e5196be7d3c52723d3a35b30e7"
+                },
+                "name_status": "present",
+                "version_line": "release",
+                "required_counts": [
+                  2,
+                  4
+                ],
+                "contains_ids": [
+                  71340,
+                  71320,
+                  71350,
+                  71310,
+                  71330
+                ],
+                "source_missing_fields": [
+                  "disableFilter"
+                ],
+                "source_refs": [
+                  {
+                    "table": "ReliquarySetExcelConfigData",
+                    "key": {
+                      "setId": 14001
+                    },
+                    "field": null,
+                    "upstream_commit": "9424e4e556bd80e5196be7d3c52723d3a35b30e7"
+                  }
+                ],
+                "catalog_rarities": [
+                  4,
+                  5
+                ],
+                "configured_rarities": [
+                  3,
+                  4,
+                  5
+                ],
+                "in_codex": true
+              },
+              "effects": [
+                {
+                  "required_count": 2,
+                  "source_index": 0,
+                  "relation_status": "present",
+                  "effect": {
+                    "affix_id": 2140010,
+                    "affix_group_id": 214001,
+                    "source_level": 0,
+                    "name": "冰风迷途的勇士",
+                    "name_text_map_hash": "1959650699",
+                    "name_source": {
+                      "table": "EquipAffixExcelConfigData",
+                      "record_id": 2140010,
+                      "text_map_hash": "1959650699",
+                      "language": "CHS",
+                      "upstream_commit": "9424e4e556bd80e5196be7d3c52723d3a35b30e7"
+                    },
+                    "name_status": "present",
+                    "desc_template": "获得15%冰元素伤害加成。",
+                    "desc_source": {
+                      "table": "EquipAffixExcelConfigData",
+                      "record_id": 2140010,
+                      "text_map_hash": "2712405201",
+                      "language": "CHS",
+                      "upstream_commit": "9424e4e556bd80e5196be7d3c52723d3a35b30e7"
+                    },
+                    "desc_status": "present",
+                    "open_config": null,
+                    "version_line": "release",
+                    "param_list": [
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0
+                    ],
+                    "add_props": [
+                      {
+                        "value": 0.15000000596046448,
+                        "propType": "FIGHT_PROP_ICE_ADD_HURT"
+                      },
+                      {},
+                      {}
+                    ],
+                    "source_missing_fields": [
+                      "level",
+                      "openConfig"
+                    ],
+                    "source_refs": [
+                      {
+                        "table": "EquipAffixExcelConfigData",
+                        "key": {
+                          "affixId": 2140010
+                        },
+                        "field": null,
+                        "upstream_commit": "9424e4e556bd80e5196be7d3c52723d3a35b30e7"
+                      }
+                    ],
+                    "annotations": []
+                  }
+                },
+                {
+                  "required_count": 4,
+                  "source_index": 1,
+                  "relation_status": "present",
+                  "effect": {
+                    "affix_id": 2140011,
+                    "affix_group_id": 214001,
+                    "source_level": 1,
+                    "name": "冰风迷途的勇士",
+                    "name_text_map_hash": "933076115",
+                    "name_source": {
+                      "table": "EquipAffixExcelConfigData",
+                      "record_id": 2140011,
+                      "text_map_hash": "933076115",
+                      "language": "CHS",
+                      "upstream_commit": "9424e4e556bd80e5196be7d3c52723d3a35b30e7"
+                    },
+                    "name_status": "present",
+                    "desc_template": "攻击处于冰元素影响下的敌人时，暴击率提高20%；若敌人处于冻结状态下，则暴击率额外提高20%。",
+                    "desc_source": {
+                      "table": "EquipAffixExcelConfigData",
+                      "record_id": 2140011,
+                      "text_map_hash": "1080795585",
+                      "language": "CHS",
+                      "upstream_commit": "9424e4e556bd80e5196be7d3c52723d3a35b30e7"
+                    },
+                    "desc_status": "present",
+                    "open_config": "Relic_CriticUpAgainstIceAndFrozen",
+                    "version_line": "release",
+                    "param_list": [
+                      0.20000000298023224,
+                      0.20000000298023224,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0,
+                      0
+                    ],
+                    "add_props": [
+                      {},
+                      {},
+                      {}
+                    ],
+                    "source_missing_fields": [],
+                    "source_refs": [
+                      {
+                        "table": "EquipAffixExcelConfigData",
+                        "key": {
+                          "affixId": 2140011
+                        },
+                        "field": null,
+                        "upstream_commit": "9424e4e556bd80e5196be7d3c52723d3a35b30e7"
+                      }
+                    ],
+                    "annotations": []
+                  }
+                }
+              ],
+              "piece_refs": [
+                {
+                  "artifact_id": 71410,
+                  "equip_type": "EQUIP_RING",
+                  "rarity": 4,
+                  "codex_id": 30107104
+                },
+                {
+                  "artifact_id": 71420,
+                  "equip_type": "EQUIP_NECKLACE",
+                  "rarity": 4,
+                  "codex_id": 30107104
+                },
+                {
+                  "artifact_id": 71430,
+                  "equip_type": "EQUIP_DRESS",
+                  "rarity": 4,
+                  "codex_id": 30107104
+                },
+                {
+                  "artifact_id": 71440,
+                  "equip_type": "EQUIP_BRACER",
+                  "rarity": 4,
+                  "codex_id": 30107104
+                },
+                {
+                  "artifact_id": 71450,
+                  "equip_type": "EQUIP_SHOES",
+                  "rarity": 4,
+                  "codex_id": 30107104
+                },
+                {
+                  "artifact_id": 71510,
+                  "equip_type": "EQUIP_RING",
+                  "rarity": 5,
+                  "codex_id": 30107105
+                },
+                {
+                  "artifact_id": 71520,
+                  "equip_type": "EQUIP_NECKLACE",
+                  "rarity": 5,
+                  "codex_id": 30107105
+                },
+                {
+                  "artifact_id": 71530,
+                  "equip_type": "EQUIP_DRESS",
+                  "rarity": 5,
+                  "codex_id": 30107105
+                },
+                {
+                  "artifact_id": 71540,
+                  "equip_type": "EQUIP_BRACER",
+                  "rarity": 5,
+                  "codex_id": 30107105
+                },
+                {
+                  "artifact_id": 71550,
+                  "equip_type": "EQUIP_SHOES",
+                  "rarity": 5,
+                  "codex_id": 30107105
+                }
+              ],
+              "piece_refs_total": 10,
+              "piece_refs_truncated": false,
+              "annotations": [],
+              "warnings": [],
+              "data_version": {
+                "version_line": "release",
+                "upstream_commit": "9424e4e556bd80e5196be7d3c52723d3a35b30e7",
+                "equipment_schema_version": 1,
+                "built_at": "2026-09-12T16:22:07.787309+00:00"
+              }
+            }
+          },
+          "base_sources": [
+            {
+              "contribution_id": "manual_template.characters.example.stats.base_atk",
+              "stat": "atk",
+              "value": 800,
+              "source_refs": [
+                {
+                  "kind": "manual",
+                  "note": "接口验收给定面板，已含两件套常驻属性；不分配主副词条"
+                }
+              ],
+              "note": "初始面板显式给定的基础值，不从最终属性逆推"
+            }
+          ],
+          "mode": "panel",
+          "panel_policy": "static_included",
+          "source_refs": [
+            {
+              "kind": "manual",
+              "note": "接口验收给定面板，已含两件套常驻属性；不分配主副词条"
+            }
+          ]
+        }
+      }
+    },
+    "context_fingerprint": "1cd2c4370ca99cabc15fa05af2712508924522891038a2b64bcac08221f8a39e",
+    "effect_requirements": [
+      {
+        "binding_id": "binding.f3a91ba187113436ea36c0eb",
+        "provider_character_id": "example",
+        "owner": {
+          "kind": "artifact_set",
+          "set_id": 14001,
+          "required_count": 2,
+          "affix_id": 2140010
+        },
+        "source_refs": [
+          {
+            "table": "EquipAffixExcelConfigData",
+            "key": {
+              "affixId": 2140010
+            },
+            "field": null,
+            "upstream_commit": "9424e4e556bd80e5196be7d3c52723d3a35b30e7"
+          }
+        ],
+        "source_fingerprint": "950034ece86dcd0fc5487b22f827ac975d62573982d0eec6dbaeb427eece3e6e",
+        "effect": {
+          "affix_id": 2140010,
+          "affix_group_id": 214001,
+          "source_level": 0,
+          "name": "冰风迷途的勇士",
+          "name_text_map_hash": "1959650699",
+          "name_source": {
+            "table": "EquipAffixExcelConfigData",
+            "record_id": 2140010,
+            "text_map_hash": "1959650699",
+            "language": "CHS",
+            "upstream_commit": "9424e4e556bd80e5196be7d3c52723d3a35b30e7"
+          },
+          "name_status": "present",
+          "desc_template": "获得15%冰元素伤害加成。",
+          "desc_source": {
+            "table": "EquipAffixExcelConfigData",
+            "record_id": 2140010,
+            "text_map_hash": "2712405201",
+            "language": "CHS",
+            "upstream_commit": "9424e4e556bd80e5196be7d3c52723d3a35b30e7"
+          },
+          "desc_status": "present",
+          "open_config": null,
+          "version_line": "release",
+          "param_list": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "add_props": [
+            {
+              "value": 0.15000000596046448,
+              "propType": "FIGHT_PROP_ICE_ADD_HURT"
+            },
+            {},
+            {}
+          ],
+          "source_missing_fields": [
+            "level",
+            "openConfig"
+          ],
+          "source_refs": [
+            {
+              "table": "EquipAffixExcelConfigData",
+              "key": {
+                "affixId": 2140010
+              },
+              "field": null,
+              "upstream_commit": "9424e4e556bd80e5196be7d3c52723d3a35b30e7"
+            }
+          ],
+          "annotations": []
+        },
+        "proposed_binding": {
+          "binding_id": "binding.f3a91ba187113436ea36c0eb",
+          "provider_character_id": "example",
+          "owner": {
+            "kind": "artifact_set",
+            "set_id": 14001,
+            "required_count": 2,
+            "affix_id": 2140010
+          },
+          "source_refs": [
+            {
+              "table": "EquipAffixExcelConfigData",
+              "key": {
+                "affixId": 2140010
+              },
+              "field": null,
+              "upstream_commit": "9424e4e556bd80e5196be7d3c52723d3a35b30e7"
+            }
+          ],
+          "source_fingerprint": "950034ece86dcd0fc5487b22f827ac975d62573982d0eec6dbaeb427eece3e6e",
+          "coverage": {
+            "state": "unreviewed",
+            "reviewed_by": null,
+            "source_fingerprint": null,
+            "note": null
+          },
+          "parts": []
+        }
+      },
+      {
+        "binding_id": "binding.bd78c850eb990c6de5521317",
+        "provider_character_id": "example",
+        "owner": {
+          "kind": "artifact_set",
+          "set_id": 14001,
+          "required_count": 4,
+          "affix_id": 2140011
+        },
+        "source_refs": [
+          {
+            "table": "EquipAffixExcelConfigData",
+            "key": {
+              "affixId": 2140011
+            },
+            "field": null,
+            "upstream_commit": "9424e4e556bd80e5196be7d3c52723d3a35b30e7"
+          }
+        ],
+        "source_fingerprint": "8924f59d39f08983ff15316d9639e87be62c326b6f6a02f07b3c4df38c74a2f4",
+        "effect": {
+          "affix_id": 2140011,
+          "affix_group_id": 214001,
+          "source_level": 1,
+          "name": "冰风迷途的勇士",
+          "name_text_map_hash": "933076115",
+          "name_source": {
+            "table": "EquipAffixExcelConfigData",
+            "record_id": 2140011,
+            "text_map_hash": "933076115",
+            "language": "CHS",
+            "upstream_commit": "9424e4e556bd80e5196be7d3c52723d3a35b30e7"
+          },
+          "name_status": "present",
+          "desc_template": "攻击处于冰元素影响下的敌人时，暴击率提高20%；若敌人处于冻结状态下，则暴击率额外提高20%。",
+          "desc_source": {
+            "table": "EquipAffixExcelConfigData",
+            "record_id": 2140011,
+            "text_map_hash": "1080795585",
+            "language": "CHS",
+            "upstream_commit": "9424e4e556bd80e5196be7d3c52723d3a35b30e7"
+          },
+          "desc_status": "present",
+          "open_config": "Relic_CriticUpAgainstIceAndFrozen",
+          "version_line": "release",
+          "param_list": [
+            0.20000000298023224,
+            0.20000000298023224,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "add_props": [
+            {},
+            {},
+            {}
+          ],
+          "source_missing_fields": [],
+          "source_refs": [
+            {
+              "table": "EquipAffixExcelConfigData",
+              "key": {
+                "affixId": 2140011
+              },
+              "field": null,
+              "upstream_commit": "9424e4e556bd80e5196be7d3c52723d3a35b30e7"
+            }
+          ],
+          "annotations": []
+        },
+        "proposed_binding": {
+          "binding_id": "binding.bd78c850eb990c6de5521317",
+          "provider_character_id": "example",
+          "owner": {
+            "kind": "artifact_set",
+            "set_id": 14001,
+            "required_count": 4,
+            "affix_id": 2140011
+          },
+          "source_refs": [
+            {
+              "table": "EquipAffixExcelConfigData",
+              "key": {
+                "affixId": 2140011
+              },
+              "field": null,
+              "upstream_commit": "9424e4e556bd80e5196be7d3c52723d3a35b30e7"
+            }
+          ],
+          "source_fingerprint": "8924f59d39f08983ff15316d9639e87be62c326b6f6a02f07b3c4df38c74a2f4",
+          "coverage": {
+            "state": "unreviewed",
+            "reviewed_by": null,
+            "source_fingerprint": null,
+            "note": null
+          },
+          "parts": []
+        }
+      }
+    ],
+    "match_previews": [],
+    "manual_dependency_previews": [],
+    "data_versions": [
+      {
+        "version_line": "release",
+        "upstream_commit": "9424e4e556bd80e5196be7d3c52723d3a35b30e7",
+        "equipment_schema_version": 1,
+        "built_at": "2026-09-12T16:22:07.787309+00:00"
+      }
+    ],
+    "assumptions": [
+      "虚构角色的接口与界面示例，不是游戏队伍轴或实战结论。",
+      "给定初始面板包含两件套常驻属性；套装更换采用固定面板比较，不按词条重算。",
+      "仅此示例明确假设目标在0到20秒已冻结；未执行元素附着或能量循环模拟。",
+      "example 使用给定初始面板，已含两件套等常驻属性；武器成长及圣遗物词条不再加算",
+      "binding.f3a91ba187113436ea36c0eb/included_static 明确不计：本示例固定面板已经包含所选两件套常驻属性，禁止重复加算"
+    ]
+  },
+  "resolved_template": {
+    "version": 2,
+    "form": "resolved",
+    "meta": {
+      "name": "固定面板与套装示例",
+      "version_line": "release",
+      "assumptions": [
+        "虚构角色的接口与界面示例，不是游戏队伍轴或实战结论。",
+        "给定初始面板包含两件套常驻属性；套装更换采用固定面板比较，不按词条重算。",
+        "仅此示例明确假设目标在0到20秒已冻结；未执行元素附着或能量循环模拟。",
+        "example 使用给定初始面板，已含两件套等常驻属性；武器成长及圣遗物词条不再加算",
+        "binding.f3a91ba187113436ea36c0eb/included_static 明确不计：本示例固定面板已经包含所选两件套常驻属性，禁止重复加算"
+      ],
+      "equipment_resolution": {
+        "composer_version": "1.1.0",
+        "source_fingerprint": "15afbfba3f7a08399543ddf0a2bf8887dca543eafad470bf9de13be35a25cb20",
+        "data_versions": [
+          {
+            "version_line": "release",
+            "upstream_commit": "9424e4e556bd80e5196be7d3c52723d3a35b30e7",
+            "equipment_schema_version": 1,
+            "built_at": "2026-09-12T16:22:07.787309+00:00"
+          }
+        ]
+      }
+    },
+    "enemy": {
+      "level": 90,
+      "resistance": {
+        "cryo": 0.1
+      }
+    },
+    "characters": [
+      {
+        "id": "example",
+        "name": "示例角色",
+        "level": 90,
+        "stats": {
+          "atk": 1800,
+          "base_atk": 800,
+          "crit_rate": 0.1,
+          "crit_dmg": 1,
+          "energy_recharge": 1.6,
+          "dmg_bonus": {
+            "cryo": 0.15
+          }
+        }
+      }
+    ],
+    "switches": [
+      {
+        "t": 0,
+        "character": "example"
+      }
+    ],
+    "buffs": [
+      {
+        "id": "generated.buff.cc16b3f675465b5566d08c74eedeccbd",
+        "source": "冰套四件，显式假设目标已冻结",
+        "start": 0,
+        "end": 20,
+        "scope": "team",
+        "target": "example",
+        "effects": [
+          {
+            "id": "crit",
+            "name": "冻结目标暴击率",
+            "benefit_type_id": "benefit.crit_rate.all",
+            "zone": "crit_rate",
+            "stat": "all",
+            "applies_to": {
+              "mode": "all"
+            },
+            "value": 0.4
+          }
+        ]
+      }
+    ],
+    "hits": [
+      {
+        "id": "example.e",
+        "damage_type_ids": [
+          "damage.elemental_skill"
+        ],
+        "t": 1,
+        "character": "example",
+        "skill": "elemental_skill",
+        "hit_name": "示例战技伤害",
+        "damage_system": "classic",
+        "element": "cryo",
+        "multiplier": 1
+      }
+    ],
+    "loop_duration": 20,
+    "id_registry_version": 1,
+    "type_definitions": {
+      "damage_types": []
+    }
+  },
+  "rotation_model": null
+}

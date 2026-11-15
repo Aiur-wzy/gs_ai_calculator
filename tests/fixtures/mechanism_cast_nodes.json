@@ -1,0 +1,884 @@
+{
+  "evidence_scope": "fixed upstream raw; compiler tests assert consistency, not fresh DB approval or game timing",
+  "nodes": [
+    {
+      "id": "hold.ability",
+      "definition_id": "5873fc9da44b1b0b1c6e526874f950e8a0f8c802486c30f441e1b7887ba2f3e9",
+      "definition_kind": "ability",
+      "exact_key": "Avatar_Shenhe_ElementalArt_Attack_H",
+      "owner_definition_id": null,
+      "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Shenhe.json",
+      "json_pointer": "/6/Default",
+      "source_sha256": "9949f5c28fbaeddb2257f44eed8cadae2b8cd1c19514792fc7d2e7069ca284cc",
+      "source_bytes": 172091,
+      "node_sha256": "3de611539675a3defc9f5239a8f3fd88a83c2e444ea6ee12b8e3bb8ba0f087d4",
+      "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+      "snapshot_id": "8c9106736d92b586d5c0258c2b96600e8b777a308655b7427da16d5b5d6e86d9",
+      "raw": {
+        "ECFFDLHMCLK": [
+          {
+            "$type": "FLNAIHPCKOC",
+            "ACFKMLJKONM": 10632,
+            "AMOLMPHFPHJ": -1,
+            "ILELAOFJIKJ": true,
+            "IODFBPJBHOB": 1.5,
+            "LJFIEGHHLOB": false,
+            "NABFCPIKHEO": 1,
+            "NKOFINBNOOK": 1
+          },
+          {
+            "$type": "PBIOEEHFHFD",
+            "AMOLMPHFPHJ": -1,
+            "BDHBNCEEPPK": "Caster",
+            "ILELAOFJIKJ": true,
+            "LJFIEGHHLOB": false,
+            "MJKPCGCAPLK": [
+              {
+                "$type": "DIOFPDKDAIG",
+                "BDHBNCEEPPK": "Target",
+                "JPCEGCMOHNI": "Shenhe_Constellation_4"
+              }
+            ],
+            "MLJNNELMEFL": [
+              {
+                "$type": "OCEDAFPEKBM",
+                "AMOLMPHFPHJ": -1,
+                "ILELAOFJIKJ": true,
+                "KDJEMONNHAM": "_ABILITY_Shenhe_ElementalArt_Buff_Talent_ExtraDMG_Ratio",
+                "LJFIEGHHLOB": false,
+                "MMIFLLENIBJ": "Buff_Talent_ExtraDMG_Ratio"
+              },
+              {
+                "$type": "HGFNHPLICPI",
+                "AMOLMPHFPHJ": -1,
+                "ILELAOFJIKJ": true,
+                "LJFIEGHHLOB": false,
+                "PEELJBICEHE": "_ABILITY_Shenhe_ElementalArt_Buff_Talent_Level"
+              },
+              {
+                "$type": "HGFNHPLICPI",
+                "AMOLMPHFPHJ": -1,
+                "ILELAOFJIKJ": true,
+                "LJFIEGHHLOB": false,
+                "PEELJBICEHE": "_ABILITY_Shenhe_ElementalArt_Buff_Talent_ExtraDMG_Ratio"
+              }
+            ]
+          },
+          {
+            "$type": "EFICNPHHFJA",
+            "AMOLMPHFPHJ": -1,
+            "BEIMGAKABJN": "Eff_Avatar_Lady_Pole_Shenhe_ElementalArt_Rune_Charge",
+            "ILELAOFJIKJ": true,
+            "KGEKINJPCFB": "Attack_H",
+            "LJFIEGHHLOB": false
+          },
+          {
+            "$type": "GCINLBBPONN",
+            "AMOLMPHFPHJ": -1,
+            "BDHBNCEEPPK": "AllPlayerAvatars",
+            "IJDGNIIOHLM": [
+              {
+                "$type": "OLNGCABMCGI",
+                "BDHBNCEEPPK": "Target",
+                "DKCBCJCHEBF": "LesserOrEqual",
+                "PDIFFCBMGMO": 40
+              }
+            ],
+            "ILELAOFJIKJ": true,
+            "LDFBDMNIADI": "UNIQUE_Shenhe_ElementalArt_L_Buff_Handler",
+            "LJFIEGHHLOB": true
+          },
+          {
+            "$type": "GCINLBBPONN",
+            "AMOLMPHFPHJ": -1,
+            "BDHBNCEEPPK": "AllPlayerAvatars",
+            "IJDGNIIOHLM": [
+              {
+                "$type": "OLNGCABMCGI",
+                "BDHBNCEEPPK": "Target",
+                "DKCBCJCHEBF": "LesserOrEqual",
+                "PDIFFCBMGMO": 40
+              }
+            ],
+            "ILELAOFJIKJ": true,
+            "LDFBDMNIADI": "UNIQUE_Shenhe_ElementalArt_H_Buff_Handler",
+            "LJFIEGHHLOB": true
+          },
+          {
+            "$type": "CDANEAFAFKM",
+            "AMOLMPHFPHJ": -1,
+            "BDHBNCEEPPK": "AllPlayerAvatars",
+            "IJDGNIIOHLM": [
+              {
+                "$type": "OLNGCABMCGI",
+                "BDHBNCEEPPK": "Target",
+                "DKCBCJCHEBF": "LesserOrEqual",
+                "PDIFFCBMGMO": 40
+              },
+              {
+                "$type": "BHIEGOJLEBB",
+                "BDHBNCEEPPK": "Target"
+              }
+            ],
+            "ILELAOFJIKJ": true,
+            "LDFBDMNIADI": "UNIQUE_Shenhe_ElementalArt_H_Buff_Handler",
+            "LJFIEGHHLOB": true
+          },
+          {
+            "$type": "CDANEAFAFKM",
+            "AMOLMPHFPHJ": -1,
+            "BDHBNCEEPPK": "AllPlayerAvatars",
+            "IJDGNIIOHLM": [
+              {
+                "$type": "OLNGCABMCGI",
+                "BDHBNCEEPPK": "Target",
+                "DKCBCJCHEBF": "LesserOrEqual",
+                "PDIFFCBMGMO": 40
+              },
+              {
+                "$type": "DIOFPDKDAIG",
+                "BDHBNCEEPPK": "Target",
+                "JPCEGCMOHNI": "Shenhe_PermanentSkill_2"
+              },
+              {
+                "$type": "BHIEGOJLEBB",
+                "BDHBNCEEPPK": "Target"
+              }
+            ],
+            "ILELAOFJIKJ": true,
+            "LDFBDMNIADI": "UNIQUE_Shenhe_ElementalArt_H_Extra_Buff",
+            "LJFIEGHHLOB": true
+          },
+          {
+            "$type": "MOOAODKIBCM",
+            "AMOLMPHFPHJ": -1,
+            "BEIMGAKABJN": "Eff_Avatar_Lady_Pole_Shenhe_ElementalArt_H_Attack",
+            "HJIHBAANFLE": 1,
+            "ILELAOFJIKJ": true,
+            "JMMALEJDAEF": -1,
+            "LJFIEGHHLOB": false,
+            "MLFLDPAGADG": {
+              "$type": "PKAELLAMAGL",
+              "EEFLHEKBODJ": {
+                "BNJLEBLGEKB": 180
+              },
+              "FDGFPGIDACF": {
+                "LBLJIHBEDKH": 1.5
+              },
+              "GNFICELAKIB": 10,
+              "HECMDGIAGKM": 2,
+              "POPNBJAHNFK": {
+                "ONEHKOHOCBH": 180
+              }
+            }
+          },
+          {
+            "$type": "MMHMEBEEKGK",
+            "AMOLMPHFPHJ": -1,
+            "IDCIIIFMDCM": {
+              "CEIJEFJBMBL": {
+                "$type": "FKADOLEBLHD",
+                "BKCIBHHMGEE": "ElementalArt_H_Radius",
+                "COBJECNAEOG": 1,
+                "EAJAHKDHNJM": {
+                  "GMEKLJBJADO": {
+                    "KJCBAFKFFMP": 1,
+                    "PGPNDGBABNI": true
+                  }
+                },
+                "EHFMPIOJOLN": "TriggerNoRepeat",
+                "MLFLDPAGADG": {
+                  "$type": "PKAELLAMAGL",
+                  "EEFLHEKBODJ": {
+                    "BNJLEBLGEKB": 180
+                  },
+                  "FDGFPGIDACF": {
+                    "IOPIFIJFBHI": 0.800000011920929,
+                    "LBLJIHBEDKH": 1.5
+                  },
+                  "GNFICELAKIB": 10,
+                  "HECMDGIAGKM": 2,
+                  "POPNBJAHNFK": {
+                    "ONEHKOHOCBH": 180
+                  }
+                },
+                "PJIJHIAFGPD": "CenterToSide"
+              },
+              "LGHDGGJIJOK": {
+                "BKLFAECNFOF": {
+                  "EIAGIEDFLHJ": {
+                    "KJCBAFKFFMP": 1,
+                    "PGPNDGBABNI": true
+                  },
+                  "IHBPFOBEJKN": "default"
+                },
+                "EHKJIDFINEK": {
+                  "DBGOKAKAHFP": 50,
+                  "EPPIDAILPBN": "Ice",
+                  "FBAEEIPKEHO": 200,
+                  "FDGDIBBILMD": "Slash",
+                  "JDOLIAEMINM": 1,
+                  "KALBHJILPDA": "Buff_Talent_ExtraDMG_Ratio",
+                  "KOLOHIDMHHE": "Elemental_Art_H_Damage",
+                  "PEPDKCDHNIM": "Default"
+                },
+                "HDIFFKOHDNL": {
+                  "OGGEIBICAHC": "Shake"
+                },
+                "HGLEEJNPBEB": "default",
+                "IAFHAPFBBOB": "Elemental_Art",
+                "IJFOFLPPGHK": {
+                  "EANBEIIKCIL": {
+                    "BGINHMBLECN": 0.11999999731779099,
+                    "HMANOMCGFLK": true,
+                    "KBAIICCLOEF": 0.5,
+                    "PJGAOELGLIF": 0.11999999731779099
+                  },
+                  "KDBKDJBCACN": 20
+                },
+                "NMMJKLAHOHH": {
+                  "EIAGIEDFLHJ": {
+                    "KJCBAFKFFMP": 1,
+                    "PGPNDGBABNI": true
+                  },
+                  "IHBPFOBEJKN": "default",
+                  "LHEILBMGANH": "ByHitDirection",
+                  "PAPNKKIKAOC": "LV2"
+                }
+              }
+            },
+            "ILELAOFJIKJ": true,
+            "LJFIEGHHLOB": false,
+            "NMKBOEALDEF": "Enemy"
+          }
+        ],
+        "EMGBJJOIENB": [
+          {
+            "$type": "BINBHGLANKO",
+            "AMOLMPHFPHJ": -1,
+            "ILELAOFJIKJ": true,
+            "LDFBDMNIADI": "Shenhe_ElementalArt_ElemBall_Handler",
+            "LJFIEGHHLOB": false
+          }
+        ],
+        "GPPBBDEICKP": {
+          "ElementalArt_ElemBall": {
+            "DBGOKAKAHFP": 100,
+            "DOALDLPNGMF": -1,
+            "EMGBJJOIENB": [
+              {
+                "$type": "EDAOLCMCEBI",
+                "AMOLMPHFPHJ": -1,
+                "AOCCEKAGBFB": 12,
+                "HHENHNHHHDA": 1,
+                "ILELAOFJIKJ": true,
+                "KKMLMJNCLLG": 2022,
+                "LJFIEGHHLOB": true,
+                "MLFLDPAGADG": {
+                  "$type": "KCOKCEJLEMA",
+                  "CCNPIPFLFAL": {
+                    "$type": "AAKJDEPKNHH",
+                    "BFIKJDKPACL": 1.5,
+                    "EDBLANFLPBB": 0.5
+                  },
+                  "EEFLHEKBODJ": {
+                    "BNJLEBLGEKB": 180
+                  },
+                  "GNFICELAKIB": 10,
+                  "HECMDGIAGKM": 2,
+                  "POPNBJAHNFK": {
+                    "ONEHKOHOCBH": 180
+                  }
+                }
+              }
+            ],
+            "GPPCPGHLDHL": "Unique",
+            "JPEAFDFPKAN": 0.5,
+            "KFOMCJGGPPC": -1,
+            "PPKOPMBNPJH": true
+          },
+          "Shenhe_ElementalArt_ElemBall_Handler": {
+            "DBGOKAKAHFP": 100,
+            "DOALDLPNGMF": -1,
+            "GPPCPGHLDHL": "Unique",
+            "KFOMCJGGPPC": -1,
+            "LPMFNGFGMCE": [
+              {
+                "$type": "PBIOEEHFHFD",
+                "AMOLMPHFPHJ": -1,
+                "BDHBNCEEPPK": "Other",
+                "ILELAOFJIKJ": true,
+                "LJFIEGHHLOB": false,
+                "MJKPCGCAPLK": [
+                  {
+                    "$type": "DPNJGLIMCHM",
+                    "BDHBNCEEPPK": "Target",
+                    "BFDEHDNLNJH": [
+                      "Elemental_Art"
+                    ]
+                  },
+                  {
+                    "$type": "BIMGEEAOLLH",
+                    "BDHBNCEEPPK": "Target",
+                    "PEPDKCDHNIM": "Default"
+                  },
+                  {
+                    "$type": "BKCJECHCDKG",
+                    "BDHBNCEEPPK": "Target",
+                    "FJGEDPNBGCG": -1,
+                    "LJBBKGIFJDB": [
+                      "Monster"
+                    ]
+                  },
+                  {
+                    "$type": "MMPLBPOHMGL",
+                    "BDHBNCEEPPK": "Target",
+                    "NJJFOACNFGL": "NoneOrEqual",
+                    "PEELJBICEHE": "_ANIMAL_ENTITY_TYPE"
+                  }
+                ],
+                "MLJNNELMEFL": [
+                  {
+                    "$type": "BINBHGLANKO",
+                    "AMOLMPHFPHJ": -1,
+                    "ILELAOFJIKJ": true,
+                    "LDFBDMNIADI": "ElementalArt_ElemBall",
+                    "LJFIEGHHLOB": false
+                  }
+                ]
+              }
+            ],
+            "PPKOPMBNPJH": true
+          },
+          "UNIQUE_Shenhe_ElementalArt_H_Buff": {
+            "DBGOKAKAHFP": 100,
+            "DIELNIJPCJJ": true,
+            "DOALDLPNGMF": -1,
+            "GPPCPGHLDHL": "Unique",
+            "KFOMCJGGPPC": -1,
+            "LFIJIMIMBIH": [
+              {
+                "$type": "DCFENNHBEMG",
+                "AMOLMPHFPHJ": -1,
+                "BFDEHDNLNJH": [
+                  "NormalAttack_01",
+                  "NormalAttack_02",
+                  "NormalAttack_03",
+                  "NormalAttack_04",
+                  "NormalAttack_05",
+                  "NormalAttack_06",
+                  "ExtraAttack",
+                  "FallingAttack",
+                  "Elemental_Art",
+                  "Elemental_Art_Hold",
+                  "Elemental_Art_Extra",
+                  "Elemental_Burst"
+                ],
+                "EMILGODPBIG": [
+                  "FIGHT_PROP_CUR_ATTACK",
+                  "Attack2ExtraRatio",
+                  "MUL"
+                ],
+                "IJDGNIIOHLM": [
+                  {
+                    "$type": "LEHABIJBEAO",
+                    "BDHBNCEEPPK": "Target",
+                    "JOFNJODFEDG": "Ice"
+                  },
+                  {
+                    "$type": "BKCJECHCDKG",
+                    "BDHBNCEEPPK": "Target",
+                    "FJGEDPNBGCG": -1,
+                    "LJBBKGIFJDB": [
+                      "Monster"
+                    ]
+                  },
+                  {
+                    "$type": "MMPLBPOHMGL",
+                    "BDHBNCEEPPK": "Target",
+                    "NJJFOACNFGL": "NoneOrEqual",
+                    "PEELJBICEHE": "_ANIMAL_ENTITY_TYPE"
+                  }
+                ],
+                "IMHIGCHNNCA": "ElementalArt_H_Buff_Count",
+                "KFNJNNEOFCB": [
+                  {
+                    "$type": "GCINLBBPONN",
+                    "AMOLMPHFPHJ": -1,
+                    "ILELAOFJIKJ": true,
+                    "LDFBDMNIADI": "UNIQUE_Shenhe_ElementalArt_H_Buff_FX",
+                    "LJFIEGHHLOB": true
+                  }
+                ],
+                "MLJNNELMEFL": [
+                  {
+                    "$type": "AHICIAHHALJ",
+                    "AMOLMPHFPHJ": -1,
+                    "BDHBNCEEPPK": "Caster",
+                    "IIBMNPFLNMJ": "Avatar_Shenhe_Constellation_4",
+                    "IJDGNIIOHLM": [
+                      {
+                        "$type": "DIOFPDKDAIG",
+                        "BDHBNCEEPPK": "Target",
+                        "JPCEGCMOHNI": "Shenhe_Constellation_4"
+                      }
+                    ],
+                    "ILELAOFJIKJ": true,
+                    "LJFIEGHHLOB": true,
+                    "LPFPKHHKGIB": "Other"
+                  }
+                ]
+              }
+            ],
+            "PPKOPMBNPJH": true
+          },
+          "UNIQUE_Shenhe_ElementalArt_H_Buff_FX": {
+            "DBGOKAKAHFP": 100,
+            "DIELNIJPCJJ": true,
+            "DOALDLPNGMF": -1,
+            "EMGBJJOIENB": [
+              {
+                "$type": "PMNJOIIOFJI",
+                "AMOLMPHFPHJ": -1,
+                "BEIMGAKABJN": "Eff_Avatar_Lady_Pole_Shenhe_ElementalArt_Buff_Loop",
+                "HJIHBAANFLE": 1,
+                "ILELAOFJIKJ": true,
+                "JMMALEJDAEF": -1,
+                "LJFIEGHHLOB": true,
+                "MLFLDPAGADG": {
+                  "EEFLHEKBODJ": {
+                    "BNJLEBLGEKB": 180
+                  },
+                  "GNFICELAKIB": 10,
+                  "HECMDGIAGKM": 2,
+                  "POPNBJAHNFK": {
+                    "ONEHKOHOCBH": 180
+                  }
+                }
+              }
+            ],
+            "GPPCPGHLDHL": "Unique",
+            "KFOMCJGGPPC": -1,
+            "PPKOPMBNPJH": true
+          },
+          "UNIQUE_Shenhe_ElementalArt_H_Buff_Handler": {
+            "DBGOKAKAHFP": 100,
+            "DIELNIJPCJJ": true,
+            "DOALDLPNGMF": -1,
+            "EMGBJJOIENB": [
+              {
+                "$type": "CDANEAFAFKM",
+                "AMOLMPHFPHJ": -1,
+                "ILELAOFJIKJ": true,
+                "LDFBDMNIADI": "UNIQUE_Shenhe_ElementalArt_H_Buff_FX",
+                "LJFIEGHHLOB": true
+              },
+              {
+                "$type": "PBIOEEHFHFD",
+                "AMOLMPHFPHJ": -1,
+                "BDHBNCEEPPK": "Caster",
+                "ILELAOFJIKJ": true,
+                "LJFIEGHHLOB": true,
+                "MJKPCGCAPLK": [
+                  {
+                    "$type": "DIOFPDKDAIG",
+                    "BDHBNCEEPPK": "Target",
+                    "JPCEGCMOHNI": "Shenhe_Constellation_6"
+                  }
+                ],
+                "MLJNNELMEFL": [
+                  {
+                    "$type": "CDANEAFAFKM",
+                    "AMOLMPHFPHJ": -1,
+                    "ILELAOFJIKJ": true,
+                    "LDFBDMNIADI": "UNIQUE_Shenhe_ElementalArt_H_Talent_Buff",
+                    "LJFIEGHHLOB": true
+                  }
+                ],
+                "PAPFFKOKPML": [
+                  {
+                    "$type": "CDANEAFAFKM",
+                    "AMOLMPHFPHJ": -1,
+                    "ILELAOFJIKJ": true,
+                    "LDFBDMNIADI": "UNIQUE_Shenhe_ElementalArt_H_Buff",
+                    "LJFIEGHHLOB": true
+                  }
+                ]
+              }
+            ],
+            "FMBHOKCHKOH": [
+              {
+                "$type": "PBIOEEHFHFD",
+                "AMOLMPHFPHJ": -1,
+                "ILELAOFJIKJ": true,
+                "LJFIEGHHLOB": true,
+                "MJKPCGCAPLK": [
+                  {
+                    "$type": "OLNGCABMCGI",
+                    "BDHBNCEEPPK": "Caster",
+                    "DKCBCJCHEBF": "LesserOrEqual",
+                    "NJJFOACNFGL": "XYZ",
+                    "PDIFFCBMGMO": 50
+                  }
+                ],
+                "PAPFFKOKPML": [
+                  {
+                    "$type": "GCINLBBPONN",
+                    "AMOLMPHFPHJ": -1,
+                    "ILELAOFJIKJ": true,
+                    "LDFBDMNIADI": "UNIQUE_Shenhe_ElementalArt_H_Buff_Handler",
+                    "LJFIEGHHLOB": true
+                  }
+                ]
+              }
+            ],
+            "GPPCPGHLDHL": "Unique",
+            "JFLGPLCIOEC": 0.30000001192092896,
+            "JPEAFDFPKAN": "ElementalArt_H_Buff_Time",
+            "KFOMCJGGPPC": -1,
+            "PPKOPMBNPJH": true
+          },
+          "UNIQUE_Shenhe_ElementalArt_H_Extra_Buff": {
+            "BOCCNJLBFCJ": "AttackUp",
+            "DBGOKAKAHFP": 100,
+            "DIELNIJPCJJ": true,
+            "DOALDLPNGMF": -1,
+            "GPPCPGHLDHL": "RefreshUniqueDurability",
+            "JPEAFDFPKAN": "ElementalArt_H_Extra_Buff_Time",
+            "KFOMCJGGPPC": -1,
+            "LFIJIMIMBIH": [
+              {
+                "$type": "GBFENLIGHEJ",
+                "AMOLMPHFPHJ": -1,
+                "BFDEHDNLNJH": [
+                  "NormalAttack_01",
+                  "NormalAttack_02",
+                  "NormalAttack_03",
+                  "NormalAttack_04",
+                  "NormalAttack_05",
+                  "NormalAttack_06",
+                  "ExtraAttack",
+                  "FallingAttack"
+                ],
+                "KALBHJILPDA": "ElementalArt_H_Extra_Buff_Ratio"
+              }
+            ],
+            "PPKOPMBNPJH": true
+          },
+          "UNIQUE_Shenhe_ElementalArt_H_Talent_Buff": {
+            "DBGOKAKAHFP": 100,
+            "DIELNIJPCJJ": true,
+            "DOALDLPNGMF": -1,
+            "GPPCPGHLDHL": "Unique",
+            "KFOMCJGGPPC": -1,
+            "LFIJIMIMBIH": [
+              {
+                "$type": "DCFENNHBEMG",
+                "AMOLMPHFPHJ": -1,
+                "APGEFBAAIOD": [
+                  {
+                    "$type": "DPNJGLIMCHM",
+                    "BDHBNCEEPPK": "Target",
+                    "BFDEHDNLNJH": [
+                      "FallingAttack",
+                      "Elemental_Art",
+                      "Elemental_Art_Hold",
+                      "Elemental_Art_Extra",
+                      "Elemental_Burst"
+                    ]
+                  }
+                ],
+                "BFDEHDNLNJH": [
+                  "NormalAttack_01",
+                  "NormalAttack_02",
+                  "NormalAttack_03",
+                  "NormalAttack_04",
+                  "NormalAttack_05",
+                  "NormalAttack_06",
+                  "ExtraAttack",
+                  "FallingAttack",
+                  "Elemental_Art",
+                  "Elemental_Art_Hold",
+                  "Elemental_Art_Extra",
+                  "Elemental_Burst"
+                ],
+                "EMILGODPBIG": [
+                  "FIGHT_PROP_CUR_ATTACK",
+                  "Attack2ExtraRatio",
+                  "MUL"
+                ],
+                "IJDGNIIOHLM": [
+                  {
+                    "$type": "LEHABIJBEAO",
+                    "BDHBNCEEPPK": "Target",
+                    "JOFNJODFEDG": "Ice"
+                  },
+                  {
+                    "$type": "BKCJECHCDKG",
+                    "BDHBNCEEPPK": "Target",
+                    "FJGEDPNBGCG": -1,
+                    "LJBBKGIFJDB": [
+                      "Monster"
+                    ]
+                  },
+                  {
+                    "$type": "MMPLBPOHMGL",
+                    "BDHBNCEEPPK": "Target",
+                    "NJJFOACNFGL": "NoneOrEqual",
+                    "PEELJBICEHE": "_ANIMAL_ENTITY_TYPE"
+                  }
+                ],
+                "IMHIGCHNNCA": "ElementalArt_H_Buff_Count",
+                "KFNJNNEOFCB": [
+                  {
+                    "$type": "GCINLBBPONN",
+                    "AMOLMPHFPHJ": -1,
+                    "ILELAOFJIKJ": true,
+                    "LDFBDMNIADI": "UNIQUE_Shenhe_ElementalArt_H_Buff_FX",
+                    "LJFIEGHHLOB": true
+                  }
+                ],
+                "MLJNNELMEFL": [
+                  {
+                    "$type": "AHICIAHHALJ",
+                    "AMOLMPHFPHJ": -1,
+                    "BDHBNCEEPPK": "Caster",
+                    "IIBMNPFLNMJ": "Avatar_Shenhe_Constellation_4",
+                    "IJDGNIIOHLM": [
+                      {
+                        "$type": "DIOFPDKDAIG",
+                        "BDHBNCEEPPK": "Target",
+                        "JPCEGCMOHNI": "Shenhe_Constellation_4"
+                      }
+                    ],
+                    "ILELAOFJIKJ": true,
+                    "LJFIEGHHLOB": true,
+                    "LPFPKHHKGIB": "Other"
+                  }
+                ]
+              }
+            ],
+            "PPKOPMBNPJH": true
+          }
+        },
+        "IIBMNPFLNMJ": "Avatar_Shenhe_ElementalArt_Attack_H",
+        "LOEHLJGBGAC": {
+          "Attack2ExtraRatio": 0,
+          "ElementalArt_H_Buff_Count": 0,
+          "ElementalArt_H_Buff_Time": 0,
+          "ElementalArt_H_Extra_Buff_Ratio": 0,
+          "ElementalArt_H_Extra_Buff_Time": 0,
+          "ElementalArt_H_Radius": 4,
+          "Elemental_Art_H_Damage": 0
+        },
+        "OMAIGDMCJBO": {
+          "DBGOKAKAHFP": 100,
+          "DOALDLPNGMF": -1,
+          "KFOMCJGGPPC": -1,
+          "PPKOPMBNPJH": true
+        }
+      }
+    },
+    {
+      "id": "noblesse.ability",
+      "definition_id": "180cb199d72c30a5bd2424629e6fd30c00c3010788b661cc454d5d791c16f11b",
+      "definition_kind": "ability",
+      "exact_key": "Relic_TeamAtkupAfterElementalBurst",
+      "owner_definition_id": null,
+      "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+      "json_pointer": "/31/Default",
+      "source_sha256": "96c506df3e2a2b12871b3a8b381c7851ea5aa7d5eb432b18553255e078ce3803",
+      "source_bytes": 441316,
+      "node_sha256": "92e0edbed36f9b3db914e773e05a1580b03e45ca805a6fd2ca6935985579e1e1",
+      "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+      "snapshot_id": "8c9106736d92b586d5c0258c2b96600e8b777a308655b7427da16d5b5d6e86d9",
+      "raw": {
+        "FBHJJNMDIPC": [
+          {
+            "$type": "BOAAIJMKFMO",
+            "AMOLMPHFPHJ": -1,
+            "BODPAABHKGE": [
+              {
+                "$type": "GCINLBBPONN",
+                "AMOLMPHFPHJ": -1,
+                "BDHBNCEEPPK": "AllPlayerAvatars",
+                "IJDGNIIOHLM": [
+                  {
+                    "$type": "OLNGCABMCGI",
+                    "BDHBNCEEPPK": "Target",
+                    "DKCBCJCHEBF": "LesserOrEqual",
+                    "PDIFFCBMGMO": 40
+                  }
+                ],
+                "ILELAOFJIKJ": true,
+                "LDFBDMNIADI": "UNIQUE_Relic_TeamAtkupAfterElementalBurst",
+                "LJFIEGHHLOB": false
+              },
+              {
+                "$type": "BINBHGLANKO",
+                "AMOLMPHFPHJ": -1,
+                "BDHBNCEEPPK": "AllPlayerAvatars",
+                "IJDGNIIOHLM": [
+                  {
+                    "$type": "OLNGCABMCGI",
+                    "BDHBNCEEPPK": "Target",
+                    "DKCBCJCHEBF": "LesserOrEqual",
+                    "PDIFFCBMGMO": 40
+                  }
+                ],
+                "ILELAOFJIKJ": true,
+                "LDFBDMNIADI": "UNIQUE_Relic_TeamAtkupAfterElementalBurst",
+                "LJFIEGHHLOB": false
+              }
+            ],
+            "MPIIANGAANM": 0.20000000298023224
+          }
+        ],
+        "GPPBBDEICKP": {
+          "UNIQUE_Relic_TeamAtkupAfterElementalBurst": {
+            "BNEJPEMIMEH": true,
+            "BOCCNJLBFCJ": "AttackUp",
+            "DBGOKAKAHFP": 100,
+            "DIELNIJPCJJ": true,
+            "DOALDLPNGMF": -1,
+            "ILKPFPGAIGI": {
+              "Actor_AttackRatio": "Rate"
+            },
+            "JFBBDPFLCEF": 10001,
+            "JPEAFDFPKAN": "Time",
+            "KFOMCJGGPPC": -1,
+            "PPKOPMBNPJH": true
+          }
+        },
+        "IIBMNPFLNMJ": "Relic_TeamAtkupAfterElementalBurst",
+        "LOEHLJGBGAC": {
+          "Rate": 0,
+          "Time": 0
+        },
+        "OMAIGDMCJBO": {
+          "DBGOKAKAHFP": 100,
+          "DOALDLPNGMF": -1,
+          "KFOMCJGGPPC": -1,
+          "PPKOPMBNPJH": true
+        },
+        "PODJJJHGAMO": true
+      }
+    },
+    {
+      "id": "noblesse.affix",
+      "definition_id": "88fc264a6b7a390f0d2a4e8c92719b62c7c6c1083821294bb7c91b3c1ccca0b3",
+      "definition_kind": "excel_record",
+      "exact_key": {
+        "affixId": 2150071
+      },
+      "owner_definition_id": null,
+      "source_path": "ExcelBinOutput/EquipAffixExcelConfigData.json",
+      "json_pointer": "/1319",
+      "source_sha256": "67cce4b66ecfae8ab20b4567005ff0e2efa76446af1fcc71d99e8a2383def4e6",
+      "source_bytes": 566972,
+      "node_sha256": "88e42441041b7b426ed74e6475bac5eaf8b488e72478107b97d85866bfb0c6c8",
+      "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+      "snapshot_id": "8c9106736d92b586d5c0258c2b96600e8b777a308655b7427da16d5b5d6e86d9",
+      "raw": {
+        "paramList": [
+          0.20000000298023224,
+          12,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "addProps": [
+          {},
+          {},
+          {}
+        ],
+        "openConfig": "Relic_TeamAtkupAfterElementalBurst",
+        "affixId": 2150071,
+        "id": 215007,
+        "level": 1,
+        "nameTextMapHash": 1751039235,
+        "descTextMapHash": 2492204417
+      }
+    },
+    {
+      "id": "noblesse.set",
+      "definition_id": "2a816ad7a5971d1c24a306b3585dcff2789ff2e0a4e19ba3e810a67ac27aa074",
+      "definition_kind": "excel_record",
+      "exact_key": {
+        "setId": 15007
+      },
+      "owner_definition_id": null,
+      "source_path": "ExcelBinOutput/ReliquarySetExcelConfigData.json",
+      "json_pointer": "/24",
+      "source_sha256": "d915f4a2e353aefc19116b80bf127d578e5c0cdcd505bbe9da1c66c502163f7e",
+      "source_bytes": 25658,
+      "node_sha256": "ff0feaf9a61371529874825ebea8aa5728de54f99ddff738335aff9aac1bce55",
+      "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+      "snapshot_id": "8c9106736d92b586d5c0258c2b96600e8b777a308655b7427da16d5b5d6e86d9",
+      "raw": {
+        "textList": [
+          1950711590,
+          2003140467
+        ],
+        "EquipAffixId": 215007,
+        "rankLevel": 5,
+        "bagSortValue": 20,
+        "containsList": [
+          81340,
+          81320,
+          81350,
+          81310,
+          81330
+        ],
+        "setNeedNum": [
+          2,
+          4
+        ],
+        "setIcon": "UI_RelicIcon_15007_4",
+        "setId": 15007,
+        "dungeonGroup": [
+          5113,
+          5114
+        ]
+      }
+    },
+    {
+      "id": "noblesse.talent",
+      "definition_id": "425c3951fd2449bf2e2eeaee23d2f280c32579c6fda150d999ee85be5fab5d3d",
+      "definition_kind": "talent_config",
+      "exact_key": "Relic_TeamAtkupAfterElementalBurst",
+      "owner_definition_id": null,
+      "source_path": "BinOutput/Talent/RelicTalents/ConfigAffix_Relic.json",
+      "json_pointer": "/Relic_TeamAtkupAfterElementalBurst",
+      "source_sha256": "0937b29eb3f02b07aacdc02abdcf0af460ac7cb5cf951207ff626ba27b4052ba",
+      "source_bytes": 51344,
+      "node_sha256": "e635bdaeb065333e1a1bfd4b5a687beff6aa530db19120b53ae1f41db9099d68",
+      "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+      "snapshot_id": "8c9106736d92b586d5c0258c2b96600e8b777a308655b7427da16d5b5d6e86d9",
+      "raw": [
+        {
+          "$type": "JPCAAJGEELO",
+          "GBPFBNHLOFD": true,
+          "IIBMNPFLNMJ": "Relic_TeamAtkupAfterElementalBurst"
+        },
+        {
+          "$type": "BIAHEMMGABC",
+          "GBPFBNHLOFD": true,
+          "IIBMNPFLNMJ": "Relic_TeamAtkupAfterElementalBurst",
+          "PCABAADALND": "%1",
+          "PEOJKHKHAKL": "Rate"
+        },
+        {
+          "$type": "BIAHEMMGABC",
+          "GBPFBNHLOFD": true,
+          "IIBMNPFLNMJ": "Relic_TeamAtkupAfterElementalBurst",
+          "PCABAADALND": "%2",
+          "PEOJKHKHAKL": "Time"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "profile_version": 2,
+  "profiles": [
+    {
+      "id": "cast-sequence.diluc-searing-onslaught.v1",
+      "version_line": "release",
+      "upstream_commit": "224708edc8056f27e9ffc4eacabe797d75274636",
+      "normalization_profile_id": "upstream-224708ed-reviewed-schema-v1",
+      "character_id": 10000016,
+      "skill_depot_id": 1601,
+      "group": "Diluc_Fire_Blade",
+      "cooldown_start": "sequence_start",
+      "cooldown_charges": 1,
+      "cooldown_recovery": "sequential",
+      "max_stages": 3,
+      "skill_source": {
+        "source_path": "ExcelBinOutput/AvatarSkillExcelConfigData.json",
+        "source_sha256": "d6c09879a0c162d7b1fdd5ad4c29e0ae457d1e41a7b853d209a6e272caad2e6e"
+      },
+      "ability_source": {
+        "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Diluc.json",
+        "source_sha256": "d4f0de13132ac1378c6f4e3013d5260335f34b0e426fbc5380f5621c1de96945",
+        "duration_field": "JPEAFDFPKAN"
+      },
+      "stages": [
+        {
+          "stage": 1,
+          "skill_id": 10161,
+          "skill_pointer": "/94",
+          "ability_name": "Diluc_Fire_Blade",
+          "raw_cooldown_seconds": 10,
+          "continuation_window": 4,
+          "continuation_modifier_pointer": "/1/Default/GPPBBDEICKP/Switch1To2"
+        },
+        {
+          "stage": 2,
+          "skill_id": 10162,
+          "skill_pointer": "/95",
+          "ability_name": "Diluc_Fire_Blade",
+          "raw_cooldown_seconds": 2,
+          "continuation_window": 4,
+          "continuation_modifier_pointer": "/1/Default/GPPBBDEICKP/Switch2To3"
+        },
+        {
+          "stage": 3,
+          "skill_id": 10163,
+          "skill_pointer": "/96",
+          "ability_name": "Diluc_Fire_Blade",
+          "raw_cooldown_seconds": 2,
+          "continuation_window": null,
+          "terminal_modifier_pointer": "/1/Default/GPPBBDEICKP/Switch3To0"
+        }
+      ],
+      "review": {
+        "status": "reviewed",
+        "scope": "exact_three_stage_sequence_and_continuation_window",
+        "basis": "同一技能组的主技能及两个subSkill共享abilityName；两个阶段切换modifier各自有4秒duration，末段切回初态。4秒是允许下一段的最晚期限而非最短等待；后两段raw cdTime=2只作为原始字段保留，不能解释为独立冷却或段间至少等待2秒。基础10秒冷却从第一段立即开始，续段在该冷却运行中按窗口接纳。",
+        "fixed_implementation_reference": "https://github.com/genshinsim/gcsim/blob/8792c73d64439feb74fa139c3b745022952b3dc9/internal/characters/diluc/skill.go"
+      }
+    }
+  ]
+}

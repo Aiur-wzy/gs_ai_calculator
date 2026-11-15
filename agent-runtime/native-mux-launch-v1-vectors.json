@@ -1,0 +1,27 @@
+{
+  "contract": "genshin-native-mux-launch-v1-golden",
+  "python_input": {
+    "pipe_name": "\\\\.\\pipe\\genshin-native-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "nonce": "NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN",
+    "connection_generation": 7,
+    "connection_id": "connection-qualification-7",
+    "runtime_incarnation": "runtime-qualification-7"
+  },
+  "node_input": {
+    "pipeName": "\\\\.\\pipe\\genshin-native-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "nonce": "NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN",
+    "connectionGeneration": 7,
+    "connectionId": "connection-qualification-7",
+    "runtimeIncarnation": "runtime-qualification-7"
+  },
+  "node_output": {
+    "pipeName": "\\\\.\\pipe\\genshin-native-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+    "nonce": "NNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN",
+    "transportCodec": "genshin-native-pipe-mux-v1",
+    "connectionGeneration": 7,
+    "connectionId": "connection-qualification-7",
+    "runtimeIncarnation": "runtime-qualification-7"
+  },
+  "packet_base64": "AAABd3siY29ubmVjdGlvbl9nZW5lcmF0aW9uIjo3LCJjb25uZWN0aW9uX2lkIjoiY29ubmVjdGlvbi1xdWFsaWZpY2F0aW9uLTciLCJjb250cmFjdCI6ImdlbnNoaW4tbmF0aXZlLW11eC1sYXVuY2gtdjEiLCJub25jZSI6Ik5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTiIsInBpcGVfbmFtZSI6IlxcXFwuXFxwaXBlXFxnZW5zaGluLW5hdGl2ZS1hYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhIiwicnVudGltZV9pbmNhcm5hdGlvbiI6InJ1bnRpbWUtcXVhbGlmaWNhdGlvbi03IiwidHJhbnNwb3J0X2NvZGVjIjoiZ2Vuc2hpbi1uYXRpdmUtcGlwZS1tdXgtdjEifQ==",
+  "legacy_packet_base64": "AAAAzXsiY29udHJhY3QiOiJnZW5zaGluLW5hdGl2ZS1sYXVuY2gtdjEiLCJub25jZSI6Ik5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTk5OTiIsInBpcGVfbmFtZSI6IlxcXFwuXFxwaXBlXFxnZW5zaGluLW5hdGl2ZS1hYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhIn0="
+}

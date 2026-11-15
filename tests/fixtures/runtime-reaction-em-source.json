@@ -1,0 +1,415 @@
+{
+  "bundle_version": 1,
+  "status": "ready",
+  "issues": [],
+  "source": {
+    "kind": "equip_affix",
+    "affix_id": 2100071,
+    "affix_group_id": 210007,
+    "source_level": 1,
+    "version_line": "release",
+    "snapshot_id": "8c9106736d92b586d5c0258c2b96600e8b777a308655b7427da16d5b5d6e86d9",
+    "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53"
+  },
+  "snapshot": {
+    "version_line": "release",
+    "state": "ready",
+    "index_state": "ready",
+    "schema_version": 1,
+    "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+    "snapshot_id": "8c9106736d92b586d5c0258c2b96600e8b777a308655b7427da16d5b5d6e86d9",
+    "execution_support": "not_evaluated",
+    "built_at": "2026-10-02T10:58:50.803204+00:00",
+    "profile_id": "upstream-combat-catalog-v1",
+    "profile_version": 1,
+    "indexer_version": "6",
+    "manifest_fingerprint": "6a669a34c4e403d989f7bc4e9684a076cb8c04e70ebe70b7a7362392be8c22ab",
+    "counts": {
+      "runtime_definition": 210463,
+      "runtime_material_reference": 422,
+      "runtime_object_reference": 62036,
+      "runtime_parameter_binding": 6082,
+      "runtime_reference": 165747,
+      "runtime_source": 3358
+    },
+    "reference_states": {
+      "ambiguous": 157,
+      "external_asset": 10445,
+      "missing": 89,
+      "resolved": 145772,
+      "unsupported_reference_form": 9284
+    },
+    "normalization": {
+      "mapping_fingerprint": "506862bc6c0bf033d8272b75f193cd2a620fc513320b3223d07afcc6f04356e2",
+      "normalization_version": 2,
+      "profile_id": "upstream-34208429-reviewed-schema-v1",
+      "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53"
+    }
+  },
+  "param_list": [
+    8,
+    120,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "affix": {
+    "record": {
+      "paramList": [
+        8,
+        120,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "addProps": [
+        {},
+        {},
+        {}
+      ],
+      "openConfig": "Relic_ReactionGainExtraElemMasteryForTeam",
+      "affixId": 2100071,
+      "id": 210007,
+      "level": 1,
+      "nameTextMapHash": 3890291955,
+      "descTextMapHash": 2436815897
+    },
+    "source_path": "ExcelBinOutput/EquipAffixExcelConfigData.json",
+    "json_pointer": "/1285",
+    "source_sha256": "67cce4b66ecfae8ab20b4567005ff0e2efa76446af1fcc71d99e8a2383def4e6"
+  },
+  "talent": {
+    "definition_id": "8537b67282f2c4a863387c867a05a74169a59e204afc3bbd179e0fa207ade791",
+    "source_path": "BinOutput/Talent/RelicTalents/ConfigAffix_Relic.json",
+    "json_pointer": "/Relic_ReactionGainExtraElemMasteryForTeam",
+    "source_sha256": "0937b29eb3f02b07aacdc02abdcf0af460ac7cb5cf951207ff626ba27b4052ba",
+    "operations": [
+      {
+        "$type": "JPCAAJGEELO",
+        "GBPFBNHLOFD": true,
+        "IIBMNPFLNMJ": "Relic_ReactionGainExtraElemMasteryForTeam"
+      },
+      {
+        "$type": "BIAHEMMGABC",
+        "GBPFBNHLOFD": true,
+        "IIBMNPFLNMJ": "Relic_ReactionGainExtraElemMasteryForTeam",
+        "PCABAADALND": "%1",
+        "PEOJKHKHAKL": "duration"
+      },
+      {
+        "$type": "BIAHEMMGABC",
+        "GBPFBNHLOFD": true,
+        "IIBMNPFLNMJ": "Relic_ReactionGainExtraElemMasteryForTeam",
+        "PCABAADALND": "%2",
+        "PEOJKHKHAKL": "ElemMastery"
+      }
+    ]
+  },
+  "talent_candidates": [],
+  "abilities": [
+    {
+      "definition_id": "8e712256ccd3b515712c7389edf3187d5db8afdb4ad12291e24749b714640dcf",
+      "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+      "json_pointer": "/12/Default",
+      "source_sha256": "96c506df3e2a2b12871b3a8b381c7851ea5aa7d5eb432b18553255e078ce3803",
+      "payload": {
+        "EMGBJJOIENB": [
+          {
+            "$type": "CDANEAFAFKM",
+            "AMOLMPHFPHJ": -1,
+            "ILELAOFJIKJ": true,
+            "LDFBDMNIADI": "UNIQUE_Relic_ReactionGainExtraElemMasteryForTeam_Handler",
+            "LJFIEGHHLOB": false
+          }
+        ],
+        "GPPBBDEICKP": {
+          "UNIQUE_ReactionGainExtraElemMasteryForTeam": {
+            "BNEJPEMIMEH": true,
+            "BOCCNJLBFCJ": "AttackUp",
+            "DBGOKAKAHFP": 100,
+            "DIELNIJPCJJ": true,
+            "DOALDLPNGMF": -1,
+            "ILKPFPGAIGI": {
+              "Actor_ElemMasteryDelta": "ElemMastery"
+            },
+            "JPEAFDFPKAN": "duration",
+            "KFOMCJGGPPC": -1,
+            "PPKOPMBNPJH": true
+          },
+          "UNIQUE_Relic_ReactionGainExtraElemMasteryForTeam_Handler": {
+            "DBGOKAKAHFP": 100,
+            "DIELNIJPCJJ": true,
+            "DOALDLPNGMF": -1,
+            "KFOMCJGGPPC": -1,
+            "LFIJIMIMBIH": [
+              {
+                "$type": "ANDAIHHJDIB",
+                "AMOLMPHFPHJ": -1,
+                "HDOJNFJLKAP": [
+                  "Explode",
+                  "Stream",
+                  "Burning",
+                  "Melt",
+                  "Freeze",
+                  "FrozenBroken",
+                  "Shock",
+                  "Superconductor",
+                  "SwirlFire",
+                  "SwirlWater",
+                  "SwirlElectric",
+                  "SwirlIce",
+                  "CrystallizeFire",
+                  "CrystallizeWater",
+                  "CrystallizeElectric",
+                  "CrystallizeIce",
+                  "Overdose",
+                  "OverdoseElectric",
+                  "OverdoseGrass",
+                  "Overgrow",
+                  "OvergrowMushroomFire",
+                  "OvergrowMushroomElectric",
+                  "MoonShock",
+                  "MoonOvergrow",
+                  "MoonCrystallizeWater",
+                  "StarSuperconductor",
+                  "StarSwirlIce"
+                ],
+                "KHJMNJNEADF": [
+                  {
+                    "$type": "GCINLBBPONN",
+                    "AMOLMPHFPHJ": -1,
+                    "BDHBNCEEPPK": "AllPlayerAvatars",
+                    "IJDGNIIOHLM": [
+                      {
+                        "$type": "OLNGCABMCGI",
+                        "BDHBNCEEPPK": "Target",
+                        "DKCBCJCHEBF": "LesserOrEqual",
+                        "PDIFFCBMGMO": 40
+                      }
+                    ],
+                    "ILELAOFJIKJ": true,
+                    "LDFBDMNIADI": "UNIQUE_ReactionGainExtraElemMasteryForTeam",
+                    "LJFIEGHHLOB": false
+                  },
+                  {
+                    "$type": "CDANEAFAFKM",
+                    "AMOLMPHFPHJ": -1,
+                    "BDHBNCEEPPK": "AllPlayerAvatars",
+                    "IJDGNIIOHLM": [
+                      {
+                        "$type": "OLNGCABMCGI",
+                        "BDHBNCEEPPK": "Target",
+                        "DKCBCJCHEBF": "LesserOrEqual",
+                        "PDIFFCBMGMO": 40
+                      }
+                    ],
+                    "ILELAOFJIKJ": true,
+                    "LDFBDMNIADI": "UNIQUE_ReactionGainExtraElemMasteryForTeam",
+                    "LJFIEGHHLOB": false
+                  }
+                ],
+                "LJBBKGIFJDB": [
+                  "Monster"
+                ],
+                "OMALBHAAHHA": 20
+              }
+            ],
+            "PPKOPMBNPJH": true
+          }
+        },
+        "IIBMNPFLNMJ": "Relic_ReactionGainExtraElemMasteryForTeam",
+        "LOEHLJGBGAC": {
+          "ElemMastery": 0,
+          "duration": 0
+        },
+        "OMAIGDMCJBO": {
+          "DBGOKAKAHFP": 100,
+          "DOALDLPNGMF": -1,
+          "KFOMCJGGPPC": -1,
+          "PPKOPMBNPJH": true
+        },
+        "PODJJJHGAMO": true
+      },
+      "variant_key": "Default"
+    }
+  ],
+  "references": [
+    {
+      "reference_id": "6b84880ccc80ac2d31a62aadcf9616648a396eda10b81c091d5771f98a9cc75e",
+      "from_definition_id": "11717f9af0ba3887395bb6bfb13d011a600ca2656caf1917f006c00d0cba21d5",
+      "source_path": "ExcelBinOutput/EquipAffixExcelConfigData.json",
+      "json_pointer": "/1285/openConfig",
+      "field_name": "openConfig",
+      "relation_kind": "open_config",
+      "target_kind": "talent_config",
+      "source_order": 0,
+      "presence_status": "present",
+      "resolution_status": "resolved",
+      "resolved_definition_id": "8537b67282f2c4a863387c867a05a74169a59e204afc3bbd179e0fa207ade791",
+      "extraction_rule_id": "6",
+      "version_line": "release",
+      "snapshot_id": "8c9106736d92b586d5c0258c2b96600e8b777a308655b7427da16d5b5d6e86d9",
+      "target_key": "Relic_ReactionGainExtraElemMasteryForTeam",
+      "scope": {
+        "owner_definition_id": null
+      },
+      "candidate_ids": [
+        "8537b67282f2c4a863387c867a05a74169a59e204afc3bbd179e0fa207ade791"
+      ]
+    },
+    {
+      "reference_id": "b0eabb7a5ff901cebe0318ddea85044d389d7b3efd4d8f89a2dec99ea4dafdcc",
+      "from_definition_id": "8537b67282f2c4a863387c867a05a74169a59e204afc3bbd179e0fa207ade791",
+      "source_path": "BinOutput/Talent/RelicTalents/ConfigAffix_Relic.json",
+      "json_pointer": "/Relic_ReactionGainExtraElemMasteryForTeam/0/IIBMNPFLNMJ",
+      "field_name": "abilityName",
+      "relation_kind": "ability_operation",
+      "target_kind": "ability",
+      "source_order": 0,
+      "presence_status": "present",
+      "resolution_status": "resolved",
+      "resolved_definition_id": "8e712256ccd3b515712c7389edf3187d5db8afdb4ad12291e24749b714640dcf",
+      "extraction_rule_id": "6",
+      "version_line": "release",
+      "snapshot_id": "8c9106736d92b586d5c0258c2b96600e8b777a308655b7427da16d5b5d6e86d9",
+      "target_key": "Relic_ReactionGainExtraElemMasteryForTeam",
+      "scope": {
+        "owner_definition_id": null
+      },
+      "candidate_ids": [
+        "8e712256ccd3b515712c7389edf3187d5db8afdb4ad12291e24749b714640dcf"
+      ]
+    },
+    {
+      "reference_id": "5c9bf0787802094b5bcc2eaffb53cc8b3f69e023f984d054b42b25e1a90c7c62",
+      "from_definition_id": "8537b67282f2c4a863387c867a05a74169a59e204afc3bbd179e0fa207ade791",
+      "source_path": "BinOutput/Talent/RelicTalents/ConfigAffix_Relic.json",
+      "json_pointer": "/Relic_ReactionGainExtraElemMasteryForTeam/1/IIBMNPFLNMJ",
+      "field_name": "abilityName",
+      "relation_kind": "ability_operation",
+      "target_kind": "ability",
+      "source_order": 1,
+      "presence_status": "present",
+      "resolution_status": "resolved",
+      "resolved_definition_id": "8e712256ccd3b515712c7389edf3187d5db8afdb4ad12291e24749b714640dcf",
+      "extraction_rule_id": "6",
+      "version_line": "release",
+      "snapshot_id": "8c9106736d92b586d5c0258c2b96600e8b777a308655b7427da16d5b5d6e86d9",
+      "target_key": "Relic_ReactionGainExtraElemMasteryForTeam",
+      "scope": {
+        "owner_definition_id": null
+      },
+      "candidate_ids": [
+        "8e712256ccd3b515712c7389edf3187d5db8afdb4ad12291e24749b714640dcf"
+      ]
+    },
+    {
+      "reference_id": "af4905defa8d126537bfe526c36c76a78f33b7b0a62c25c23b19d4cfa94f3a99",
+      "from_definition_id": "8537b67282f2c4a863387c867a05a74169a59e204afc3bbd179e0fa207ade791",
+      "source_path": "BinOutput/Talent/RelicTalents/ConfigAffix_Relic.json",
+      "json_pointer": "/Relic_ReactionGainExtraElemMasteryForTeam/2/IIBMNPFLNMJ",
+      "field_name": "abilityName",
+      "relation_kind": "ability_operation",
+      "target_kind": "ability",
+      "source_order": 2,
+      "presence_status": "present",
+      "resolution_status": "resolved",
+      "resolved_definition_id": "8e712256ccd3b515712c7389edf3187d5db8afdb4ad12291e24749b714640dcf",
+      "extraction_rule_id": "6",
+      "version_line": "release",
+      "snapshot_id": "8c9106736d92b586d5c0258c2b96600e8b777a308655b7427da16d5b5d6e86d9",
+      "target_key": "Relic_ReactionGainExtraElemMasteryForTeam",
+      "scope": {
+        "owner_definition_id": null
+      },
+      "candidate_ids": [
+        "8e712256ccd3b515712c7389edf3187d5db8afdb4ad12291e24749b714640dcf"
+      ]
+    },
+    {
+      "reference_id": "5f7f267bc3d908d4881ca7a7ab831c5f1d3b85366c714011b4589db3d3e8664b",
+      "from_definition_id": "8e712256ccd3b515712c7389edf3187d5db8afdb4ad12291e24749b714640dcf",
+      "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+      "json_pointer": "/12/Default/EMGBJJOIENB/0/LDFBDMNIADI",
+      "field_name": "modifierName",
+      "relation_kind": "modifier_operation",
+      "target_kind": "modifier",
+      "source_order": 0,
+      "presence_status": "present",
+      "resolution_status": "resolved",
+      "resolved_definition_id": "6a092501acfb9a2bd63d377c260c2d57838b5d54f34c90c9655df2f3da63d3aa",
+      "extraction_rule_id": "6",
+      "version_line": "release",
+      "snapshot_id": "8c9106736d92b586d5c0258c2b96600e8b777a308655b7427da16d5b5d6e86d9",
+      "target_key": "UNIQUE_Relic_ReactionGainExtraElemMasteryForTeam_Handler",
+      "scope": {
+        "owner_definition_id": "8e712256ccd3b515712c7389edf3187d5db8afdb4ad12291e24749b714640dcf"
+      },
+      "candidate_ids": [
+        "6a092501acfb9a2bd63d377c260c2d57838b5d54f34c90c9655df2f3da63d3aa"
+      ]
+    },
+    {
+      "reference_id": "c42b30547355560248f02cef1f044458a3d6135ebfc06da23547a9791aa283d1",
+      "from_definition_id": "6a092501acfb9a2bd63d377c260c2d57838b5d54f34c90c9655df2f3da63d3aa",
+      "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+      "json_pointer": "/12/Default/GPPBBDEICKP/UNIQUE_Relic_ReactionGainExtraElemMasteryForTeam_Handler/LFIJIMIMBIH/0/KHJMNJNEADF/0/LDFBDMNIADI",
+      "field_name": "modifierName",
+      "relation_kind": "modifier_operation",
+      "target_kind": "modifier",
+      "source_order": 0,
+      "presence_status": "present",
+      "resolution_status": "resolved",
+      "resolved_definition_id": "3e5cfdc0b27a1a66b4097fe6a7983bbbabdaf82a98b774eaff3b9fff557fffa9",
+      "extraction_rule_id": "6",
+      "version_line": "release",
+      "snapshot_id": "8c9106736d92b586d5c0258c2b96600e8b777a308655b7427da16d5b5d6e86d9",
+      "target_key": "UNIQUE_ReactionGainExtraElemMasteryForTeam",
+      "scope": {
+        "owner_definition_id": "8e712256ccd3b515712c7389edf3187d5db8afdb4ad12291e24749b714640dcf"
+      },
+      "candidate_ids": [
+        "3e5cfdc0b27a1a66b4097fe6a7983bbbabdaf82a98b774eaff3b9fff557fffa9"
+      ]
+    },
+    {
+      "reference_id": "598f371eb414c73e0495d9bfa9013f8ce84330ffbe491927195de100f3c35d27",
+      "from_definition_id": "6a092501acfb9a2bd63d377c260c2d57838b5d54f34c90c9655df2f3da63d3aa",
+      "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+      "json_pointer": "/12/Default/GPPBBDEICKP/UNIQUE_Relic_ReactionGainExtraElemMasteryForTeam_Handler/LFIJIMIMBIH/0/KHJMNJNEADF/1/LDFBDMNIADI",
+      "field_name": "modifierName",
+      "relation_kind": "modifier_operation",
+      "target_kind": "modifier",
+      "source_order": 1,
+      "presence_status": "present",
+      "resolution_status": "resolved",
+      "resolved_definition_id": "3e5cfdc0b27a1a66b4097fe6a7983bbbabdaf82a98b774eaff3b9fff557fffa9",
+      "extraction_rule_id": "6",
+      "version_line": "release",
+      "snapshot_id": "8c9106736d92b586d5c0258c2b96600e8b777a308655b7427da16d5b5d6e86d9",
+      "target_key": "UNIQUE_ReactionGainExtraElemMasteryForTeam",
+      "scope": {
+        "owner_definition_id": "8e712256ccd3b515712c7389edf3187d5db8afdb4ad12291e24749b714640dcf"
+      },
+      "candidate_ids": [
+        "3e5cfdc0b27a1a66b4097fe6a7983bbbabdaf82a98b774eaff3b9fff557fffa9"
+      ]
+    }
+  ],
+  "reference_closed": true,
+  "execution_support": "not_evaluated",
+  "closure_fingerprint": "b1f670229a48826e853269a29b8b118f5ed1cd59640a82b73cb9ee6ed7085634",
+  "normalization": {
+    "mapping_fingerprint": "506862bc6c0bf033d8272b75f193cd2a620fc513320b3223d07afcc6f04356e2",
+    "normalization_version": 2,
+    "profile_id": "upstream-34208429-reviewed-schema-v1",
+    "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53"
+  },
+  "content_fingerprint": "9a56d241b4ccb8d161827d3b73b1b5237720b717fab7f3976edb4ba4d42263cb"
+}

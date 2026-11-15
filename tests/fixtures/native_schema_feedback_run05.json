@@ -1,0 +1,13 @@
+{
+  "record": {
+    "id": "lookup.report-effect-requirements",
+    "type": "lookup",
+    "description": "经CLI agent candidate read定向读取report的/effect_requirements，返回空数组（total=0）；compose状态ready、missing_inputs为空、warnings为空，仅presentation_issues含两条chinese_description_missing警告。",
+    "local_checked": [
+      "read-report-effect-requirements.json",
+      "read-report-root.json"
+    ],
+    "gap_type": "not_required",
+    "adopted_refs": []
+  }
+}

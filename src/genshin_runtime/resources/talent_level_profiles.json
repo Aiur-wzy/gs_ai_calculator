@@ -1,0 +1,704 @@
+{
+  "recipe_id": "constellation-static-level-v1",
+  "recipe_version": 2,
+  "commit": "224708edc8056f27e9ffc4eacabe797d75274636",
+  "fields": {
+    "EIKDIADKJBC": "talentType",
+    "FAKABDFJKNN": "extraLevel",
+    "JOAIKFKCEJH": "talentIndex",
+    "ACFKMLJKONM": "skillID",
+    "PDMDLPLJFPL": "pointDelta",
+    "BALDPHNDBMJ": "cdRatio"
+  },
+  "types": {
+    "NNNHMOCPDIP": "AddTalentExtraLevel",
+    "DDGBNNHIOJH": "ModifySkillPoint",
+    "FJOEMPPJLLE": "ModifySkillCD"
+  },
+  "talent_index_slots": {
+    "1": "normal",
+    "2": "skill",
+    "9": "burst"
+  },
+  "level_operation_fields": [
+    "$type",
+    "talentType",
+    "extraLevel",
+    "talentIndex",
+    "CLGIKOPIKBC"
+  ],
+  "required_control": {
+    "CLGIKOPIKBC": true
+  },
+  "non_level_operations": {
+    "AddAbility": [
+      "$type",
+      "abilityName",
+      "CLGIKOPIKBC"
+    ],
+    "ModifyAbility": [
+      "$type",
+      "abilityName",
+      "paramDelta",
+      "paramSpecial",
+      "CLGIKOPIKBC"
+    ],
+    "UnlockTalentParam": [
+      "$type",
+      "abilityName",
+      "talentParam",
+      "CLGIKOPIKBC"
+    ]
+  },
+  "evidence": {
+    "current_commit": "224708edc8056f27e9ffc4eacabe797d75274636",
+    "old_commit": "9424e4e556bd80e5196be7d3c52723d3a35b30e7",
+    "count_current": 263,
+    "count_old": 257,
+    "matched_equal": 257,
+    "pairs": [
+      {
+        "current": {
+          "source_path": "BinOutput/Talent/AvatarTalents/ConfigTalent_Arlecchino.json",
+          "source_sha256": "cba9b6e42962dd41512b4dd680d1b5b912ef57f01ff83175d324466955dd224d",
+          "json_pointer": "/Arlecchino_Constellation_3/0",
+          "normalized": {
+            "$type": "AddTalentExtraLevel",
+            "talentType": "AvatarSkill",
+            "extraLevel": 3,
+            "CLGIKOPIKBC": true,
+            "talentIndex": 1
+          },
+          "raw": {
+            "$type": "NNNHMOCPDIP",
+            "EIKDIADKJBC": "AvatarSkill",
+            "FAKABDFJKNN": 3,
+            "GBPFBNHLOFD": true,
+            "JOAIKFKCEJH": 1
+          },
+          "node_sha256": "8f024305ba7f006039a491d7e20405defe77536fb068399d46b76b4abc367522"
+        },
+        "old": {
+          "source_path": "BinOutput/Talent/AvatarTalents/ConfigTalent_Arlecchino.json",
+          "source_sha256": "34742d78f11c608fb666f9a110473cb7ca6d8fd6dc8e00bea7372b79b893aa68",
+          "json_pointer": "/Arlecchino_Constellation_3/0",
+          "normalized": {
+            "$type": "AddTalentExtraLevel",
+            "talentIndex": 1,
+            "CLGIKOPIKBC": true,
+            "extraLevel": 3,
+            "talentType": "AvatarSkill"
+          },
+          "raw": {
+            "$type": "AddTalentExtraLevel",
+            "talentIndex": 1,
+            "CLGIKOPIKBC": true,
+            "extraLevel": 3,
+            "talentType": "AvatarSkill"
+          },
+          "node_sha256": "1d03f875337c5fd9f5a48ed7960c1612482db248407ee3ff46a59b9fe7083d7f"
+        },
+        "equal": true
+      },
+      {
+        "current": {
+          "source_path": "BinOutput/Talent/AvatarTalents/ConfigTalent_Aino.json",
+          "source_sha256": "627986b3d5d9626e4dea0b1c0b878a1b18a7d3453889a476f47add3611284070",
+          "json_pointer": "/Aino_Constellation_5/0",
+          "normalized": {
+            "$type": "AddTalentExtraLevel",
+            "talentType": "AvatarSkill",
+            "extraLevel": 3,
+            "CLGIKOPIKBC": true,
+            "talentIndex": 2
+          },
+          "raw": {
+            "$type": "NNNHMOCPDIP",
+            "EIKDIADKJBC": "AvatarSkill",
+            "FAKABDFJKNN": 3,
+            "GBPFBNHLOFD": true,
+            "JOAIKFKCEJH": 2
+          },
+          "node_sha256": "99c3def55699eee9a45a5ffe6054dbce90537f6a61d899dd1a2970d9c2b20a0e"
+        },
+        "old": {
+          "source_path": "BinOutput/Talent/AvatarTalents/ConfigTalent_Aino.json",
+          "source_sha256": "c57cd92fbff0e58ea00b601c58e6f6c9fea6fb963067846dc6ff52e4df718388",
+          "json_pointer": "/Aino_Constellation_5/0",
+          "normalized": {
+            "$type": "AddTalentExtraLevel",
+            "talentIndex": 2,
+            "CLGIKOPIKBC": true,
+            "extraLevel": 3,
+            "talentType": "AvatarSkill"
+          },
+          "raw": {
+            "$type": "AddTalentExtraLevel",
+            "talentIndex": 2,
+            "CLGIKOPIKBC": true,
+            "extraLevel": 3,
+            "talentType": "AvatarSkill"
+          },
+          "node_sha256": "5199e00e00fa3dbf0e21a97e1ec16fbcfc32fe7034ccaf71b2b4893356a48501"
+        },
+        "equal": true
+      },
+      {
+        "current": {
+          "source_path": "BinOutput/Talent/AvatarTalents/ConfigTalent_Aino.json",
+          "source_sha256": "627986b3d5d9626e4dea0b1c0b878a1b18a7d3453889a476f47add3611284070",
+          "json_pointer": "/Aino_Constellation_3/0",
+          "normalized": {
+            "$type": "AddTalentExtraLevel",
+            "talentType": "AvatarSkill",
+            "extraLevel": 3,
+            "CLGIKOPIKBC": true,
+            "talentIndex": 9
+          },
+          "raw": {
+            "$type": "NNNHMOCPDIP",
+            "EIKDIADKJBC": "AvatarSkill",
+            "FAKABDFJKNN": 3,
+            "GBPFBNHLOFD": true,
+            "JOAIKFKCEJH": 9
+          },
+          "node_sha256": "9e94ab1afe24691dc20d2e4c93064dfd4d33672c9e3b826cde4c673b0a6cd813"
+        },
+        "old": {
+          "source_path": "BinOutput/Talent/AvatarTalents/ConfigTalent_Aino.json",
+          "source_sha256": "c57cd92fbff0e58ea00b601c58e6f6c9fea6fb963067846dc6ff52e4df718388",
+          "json_pointer": "/Aino_Constellation_3/0",
+          "normalized": {
+            "$type": "AddTalentExtraLevel",
+            "talentIndex": 9,
+            "CLGIKOPIKBC": true,
+            "extraLevel": 3,
+            "talentType": "AvatarSkill"
+          },
+          "raw": {
+            "$type": "AddTalentExtraLevel",
+            "talentIndex": 9,
+            "CLGIKOPIKBC": true,
+            "extraLevel": 3,
+            "talentType": "AvatarSkill"
+          },
+          "node_sha256": "c4f7a7994b4696eba029c0df394b6f29cb20ec128612c0168b1db0c6df234328"
+        },
+        "equal": true
+      }
+    ],
+    "slot_crosscheck": "https://raw.githubusercontent.com/Grasscutters/Grasscutter/development/src/main/java/emu/grasscutter/game/avatar/Avatar.java",
+    "non_level_pairs": [
+      {
+        "current": {
+          "role": "constellation",
+          "definition": {
+            "definition_id": "14af38a6b3c936b50d3cefa91be110f9838950652567a253bc3efdd94461599f",
+            "definition_kind": "talent_config",
+            "owner_definition_id": null,
+            "source_path": "BinOutput/Talent/AvatarTalents/ConfigTalent_Shenhe.json",
+            "json_pointer": "/Shenhe_Constellation_1",
+            "variant_key": null,
+            "namespace_key": "talent",
+            "node_sha256": "c9eba322f5fb48fcc433a2ae441a35f09ff797317cb2a7098a7bf2bcd43f22bb",
+            "exact_key": "Shenhe_Constellation_1"
+          },
+          "source_path": "BinOutput/Talent/AvatarTalents/ConfigTalent_Shenhe.json",
+          "json_pointer": "/Shenhe_Constellation_1",
+          "source_sha256": "0ca0eb7e9131fdf8293e65ad8498b15cdf88d440f40a0b9ab928e8df98c415c8",
+          "parameter_record_origin": {
+            "source_path": "ExcelBinOutput/AvatarTalentExcelConfigData.json",
+            "json_pointer": "/531",
+            "source_sha256": "95d7bd50e9c7e3bedc852a8dc28353babb49f7d0b214ec68483764678fcfe8a8"
+          },
+          "param_list": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "operations_raw": [
+            {
+              "$type": "DDGBNNHIOJH",
+              "ACFKMLJKONM": 10632,
+              "GBPFBNHLOFD": true,
+              "PDMDLPLJFPL": 1
+            }
+          ],
+          "operations_normalized": [
+            {
+              "$type": "ModifySkillPoint",
+              "skillID": 10632,
+              "CLGIKOPIKBC": true,
+              "pointDelta": 1
+            }
+          ],
+          "references": [],
+          "execution_support": "not_evaluated"
+        },
+        "old": {
+          "role": "constellation",
+          "definition": {
+            "definition_id": "58805fdab994c2d020c54dd3a0b888d6fc647a8f095a15cd544ca72b5001af84",
+            "definition_kind": "talent_config",
+            "owner_definition_id": null,
+            "source_path": "BinOutput/Talent/AvatarTalents/ConfigTalent_Shenhe.json",
+            "json_pointer": "/Shenhe_Constellation_1",
+            "variant_key": null,
+            "namespace_key": "talent",
+            "node_sha256": "4acd38e18f121a7a5f9c5bf28572cb1f805093c80af2370eca1316c0eebb28d3",
+            "exact_key": "Shenhe_Constellation_1"
+          },
+          "source_path": "BinOutput/Talent/AvatarTalents/ConfigTalent_Shenhe.json",
+          "json_pointer": "/Shenhe_Constellation_1",
+          "source_sha256": "76cd05c82018b57caa9d5fdb2b5f4431584533f3b25b36a35a000bb85ce6c054",
+          "parameter_record_origin": {
+            "source_path": "ExcelBinOutput/AvatarTalentExcelConfigData.json",
+            "json_pointer": "/519",
+            "source_sha256": "83f2a61d513b869778be9c32868592ba0d23d377176ea500b2671f2a06b7b36e"
+          },
+          "param_list": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "operations_raw": [
+            {
+              "$type": "ModifySkillPoint",
+              "CLGIKOPIKBC": true,
+              "skillID": 10632,
+              "pointDelta": 1
+            }
+          ],
+          "operations_normalized": [
+            {
+              "$type": "ModifySkillPoint",
+              "CLGIKOPIKBC": true,
+              "skillID": 10632,
+              "pointDelta": 1
+            }
+          ],
+          "references": [],
+          "execution_support": "not_evaluated"
+        },
+        "index": 0
+      },
+      {
+        "current": {
+          "role": "constellation",
+          "definition": {
+            "definition_id": "8dce12d074a314e2360e1cb558da9e96407c12287972357727d59eae42dfc96f",
+            "definition_kind": "talent_config",
+            "owner_definition_id": null,
+            "source_path": "BinOutput/Talent/AvatarTalents/ConfigTalent_Kazuha.json",
+            "json_pointer": "/Kazuha_Constellation_1",
+            "variant_key": null,
+            "namespace_key": "talent",
+            "node_sha256": "6d0e49144a55f7c70fea76513d0c8df7f72067154d69e19d2ea2f2c35862613b",
+            "exact_key": "Kazuha_Constellation_1"
+          },
+          "source_path": "BinOutput/Talent/AvatarTalents/ConfigTalent_Kazuha.json",
+          "json_pointer": "/Kazuha_Constellation_1",
+          "source_sha256": "0c8a948580d2a8806fef335fd9daaeaf674cffe7ebecca52b733b12c326faeb4",
+          "parameter_record_origin": {
+            "source_path": "ExcelBinOutput/AvatarTalentExcelConfigData.json",
+            "json_pointer": "/426",
+            "source_sha256": "95d7bd50e9c7e3bedc852a8dc28353babb49f7d0b214ec68483764678fcfe8a8"
+          },
+          "param_list": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "operations_raw": [
+            {
+              "$type": "JPCAAJGEELO",
+              "GBPFBNHLOFD": true,
+              "IIBMNPFLNMJ": "Avatar_Kazuha_Constellation_1"
+            },
+            {
+              "$type": "FJOEMPPJLLE",
+              "ACFKMLJKONM": 10472,
+              "BALDPHNDBMJ": -0.10000000149011612,
+              "GBPFBNHLOFD": true
+            },
+            {
+              "$type": "FJOEMPPJLLE",
+              "ACFKMLJKONM": 10473,
+              "BALDPHNDBMJ": -0.10000000149011612,
+              "GBPFBNHLOFD": true
+            }
+          ],
+          "operations_normalized": [
+            {
+              "$type": "AddAbility",
+              "CLGIKOPIKBC": true,
+              "abilityName": "Avatar_Kazuha_Constellation_1"
+            },
+            {
+              "$type": "ModifySkillCD",
+              "skillID": 10472,
+              "cdRatio": -0.10000000149011612,
+              "CLGIKOPIKBC": true
+            },
+            {
+              "$type": "ModifySkillCD",
+              "skillID": 10473,
+              "cdRatio": -0.10000000149011612,
+              "CLGIKOPIKBC": true
+            }
+          ],
+          "references": [
+            {
+              "reference_id": "d57542fe4919351622d77b6814e9678e9bfdb8e9f1a6050ada066ccc9b80cf8f",
+              "from_definition_id": "8dce12d074a314e2360e1cb558da9e96407c12287972357727d59eae42dfc96f",
+              "source_path": "BinOutput/Talent/AvatarTalents/ConfigTalent_Kazuha.json",
+              "json_pointer": "/Kazuha_Constellation_1/0/IIBMNPFLNMJ",
+              "field_name": "abilityName",
+              "relation_kind": "ability_operation",
+              "target_kind": "ability",
+              "source_order": 0,
+              "presence_status": "present",
+              "resolution_status": "resolved",
+              "resolved_definition_id": "58970d469f39f9f7138cf8498474871ac8ccea6c24a9d39ceeff3a7b6ba9a36a",
+              "extraction_rule_id": "7",
+              "version_line": "release",
+              "snapshot_id": "ef0cac22b5cc4ee887fa64d134b563ffc745ae365b0c6cdb03930f895ab413df",
+              "target_key": "Avatar_Kazuha_Constellation_1",
+              "scope": {
+                "owner_definition_id": null
+              },
+              "candidate_ids": [
+                "58970d469f39f9f7138cf8498474871ac8ccea6c24a9d39ceeff3a7b6ba9a36a"
+              ]
+            }
+          ],
+          "execution_support": "not_evaluated"
+        },
+        "old": {
+          "role": "constellation",
+          "definition": {
+            "definition_id": "f9e8dfc666ff2591dcc7d3d97f3443cace687e39e00c5f14f01edeffd9ed151c",
+            "definition_kind": "talent_config",
+            "owner_definition_id": null,
+            "source_path": "BinOutput/Talent/AvatarTalents/ConfigTalent_Kazuha.json",
+            "json_pointer": "/Kazuha_Constellation_1",
+            "variant_key": null,
+            "namespace_key": "talent",
+            "node_sha256": "68910192f9d9a5179af5c8f3280e7dbe1a0b4dfce8344109e40c50dce258eac2",
+            "exact_key": "Kazuha_Constellation_1"
+          },
+          "source_path": "BinOutput/Talent/AvatarTalents/ConfigTalent_Kazuha.json",
+          "json_pointer": "/Kazuha_Constellation_1",
+          "source_sha256": "d7f08c03c2bf46059950b2d62e089b75ea49faeaf61233f994138c317726c348",
+          "parameter_record_origin": {
+            "source_path": "ExcelBinOutput/AvatarTalentExcelConfigData.json",
+            "json_pointer": "/414",
+            "source_sha256": "83f2a61d513b869778be9c32868592ba0d23d377176ea500b2671f2a06b7b36e"
+          },
+          "param_list": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "operations_raw": [
+            {
+              "$type": "AddAbility",
+              "CLGIKOPIKBC": true,
+              "abilityName": "Avatar_Kazuha_Constellation_1"
+            },
+            {
+              "$type": "ModifySkillCD",
+              "CLGIKOPIKBC": true,
+              "skillID": 10472,
+              "cdRatio": -0.10000000149011612
+            },
+            {
+              "$type": "ModifySkillCD",
+              "CLGIKOPIKBC": true,
+              "skillID": 10473,
+              "cdRatio": -0.10000000149011612
+            }
+          ],
+          "operations_normalized": [
+            {
+              "$type": "AddAbility",
+              "CLGIKOPIKBC": true,
+              "abilityName": "Avatar_Kazuha_Constellation_1"
+            },
+            {
+              "$type": "ModifySkillCD",
+              "CLGIKOPIKBC": true,
+              "skillID": 10472,
+              "cdRatio": -0.10000000149011612
+            },
+            {
+              "$type": "ModifySkillCD",
+              "CLGIKOPIKBC": true,
+              "skillID": 10473,
+              "cdRatio": -0.10000000149011612
+            }
+          ],
+          "references": [
+            {
+              "reference_id": "f1b8f4715c0c8113206c13b0a486c78e99c797ecb49639f246583b848a62c75a",
+              "from_definition_id": "f9e8dfc666ff2591dcc7d3d97f3443cace687e39e00c5f14f01edeffd9ed151c",
+              "source_path": "BinOutput/Talent/AvatarTalents/ConfigTalent_Kazuha.json",
+              "json_pointer": "/Kazuha_Constellation_1/0/abilityName",
+              "field_name": "abilityName",
+              "relation_kind": "ability_operation",
+              "target_kind": "ability",
+              "source_order": 0,
+              "presence_status": "present",
+              "resolution_status": "resolved",
+              "resolved_definition_id": "50c2a0dd148273448b28d421b3de8a39c5b802c38a52cd0e3e53576861efd471",
+              "extraction_rule_id": "2",
+              "version_line": "release",
+              "snapshot_id": "9272526f6f5860cc5fd114c0a4cc089c66b7e244e8c1aadc9ae3826023da23d0",
+              "target_key": "Avatar_Kazuha_Constellation_1",
+              "scope": {
+                "owner_definition_id": null
+              },
+              "candidate_ids": [
+                "50c2a0dd148273448b28d421b3de8a39c5b802c38a52cd0e3e53576861efd471"
+              ]
+            }
+          ],
+          "execution_support": "not_evaluated"
+        },
+        "index": 1
+      },
+      {
+        "current": {
+          "role": "constellation",
+          "definition": {
+            "definition_id": "8dce12d074a314e2360e1cb558da9e96407c12287972357727d59eae42dfc96f",
+            "definition_kind": "talent_config",
+            "owner_definition_id": null,
+            "source_path": "BinOutput/Talent/AvatarTalents/ConfigTalent_Kazuha.json",
+            "json_pointer": "/Kazuha_Constellation_1",
+            "variant_key": null,
+            "namespace_key": "talent",
+            "node_sha256": "6d0e49144a55f7c70fea76513d0c8df7f72067154d69e19d2ea2f2c35862613b",
+            "exact_key": "Kazuha_Constellation_1"
+          },
+          "source_path": "BinOutput/Talent/AvatarTalents/ConfigTalent_Kazuha.json",
+          "json_pointer": "/Kazuha_Constellation_1",
+          "source_sha256": "0c8a948580d2a8806fef335fd9daaeaf674cffe7ebecca52b733b12c326faeb4",
+          "parameter_record_origin": {
+            "source_path": "ExcelBinOutput/AvatarTalentExcelConfigData.json",
+            "json_pointer": "/426",
+            "source_sha256": "95d7bd50e9c7e3bedc852a8dc28353babb49f7d0b214ec68483764678fcfe8a8"
+          },
+          "param_list": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "operations_raw": [
+            {
+              "$type": "JPCAAJGEELO",
+              "GBPFBNHLOFD": true,
+              "IIBMNPFLNMJ": "Avatar_Kazuha_Constellation_1"
+            },
+            {
+              "$type": "FJOEMPPJLLE",
+              "ACFKMLJKONM": 10472,
+              "BALDPHNDBMJ": -0.10000000149011612,
+              "GBPFBNHLOFD": true
+            },
+            {
+              "$type": "FJOEMPPJLLE",
+              "ACFKMLJKONM": 10473,
+              "BALDPHNDBMJ": -0.10000000149011612,
+              "GBPFBNHLOFD": true
+            }
+          ],
+          "operations_normalized": [
+            {
+              "$type": "AddAbility",
+              "CLGIKOPIKBC": true,
+              "abilityName": "Avatar_Kazuha_Constellation_1"
+            },
+            {
+              "$type": "ModifySkillCD",
+              "skillID": 10472,
+              "cdRatio": -0.10000000149011612,
+              "CLGIKOPIKBC": true
+            },
+            {
+              "$type": "ModifySkillCD",
+              "skillID": 10473,
+              "cdRatio": -0.10000000149011612,
+              "CLGIKOPIKBC": true
+            }
+          ],
+          "references": [
+            {
+              "reference_id": "d57542fe4919351622d77b6814e9678e9bfdb8e9f1a6050ada066ccc9b80cf8f",
+              "from_definition_id": "8dce12d074a314e2360e1cb558da9e96407c12287972357727d59eae42dfc96f",
+              "source_path": "BinOutput/Talent/AvatarTalents/ConfigTalent_Kazuha.json",
+              "json_pointer": "/Kazuha_Constellation_1/0/IIBMNPFLNMJ",
+              "field_name": "abilityName",
+              "relation_kind": "ability_operation",
+              "target_kind": "ability",
+              "source_order": 0,
+              "presence_status": "present",
+              "resolution_status": "resolved",
+              "resolved_definition_id": "58970d469f39f9f7138cf8498474871ac8ccea6c24a9d39ceeff3a7b6ba9a36a",
+              "extraction_rule_id": "7",
+              "version_line": "release",
+              "snapshot_id": "ef0cac22b5cc4ee887fa64d134b563ffc745ae365b0c6cdb03930f895ab413df",
+              "target_key": "Avatar_Kazuha_Constellation_1",
+              "scope": {
+                "owner_definition_id": null
+              },
+              "candidate_ids": [
+                "58970d469f39f9f7138cf8498474871ac8ccea6c24a9d39ceeff3a7b6ba9a36a"
+              ]
+            }
+          ],
+          "execution_support": "not_evaluated"
+        },
+        "old": {
+          "role": "constellation",
+          "definition": {
+            "definition_id": "f9e8dfc666ff2591dcc7d3d97f3443cace687e39e00c5f14f01edeffd9ed151c",
+            "definition_kind": "talent_config",
+            "owner_definition_id": null,
+            "source_path": "BinOutput/Talent/AvatarTalents/ConfigTalent_Kazuha.json",
+            "json_pointer": "/Kazuha_Constellation_1",
+            "variant_key": null,
+            "namespace_key": "talent",
+            "node_sha256": "68910192f9d9a5179af5c8f3280e7dbe1a0b4dfce8344109e40c50dce258eac2",
+            "exact_key": "Kazuha_Constellation_1"
+          },
+          "source_path": "BinOutput/Talent/AvatarTalents/ConfigTalent_Kazuha.json",
+          "json_pointer": "/Kazuha_Constellation_1",
+          "source_sha256": "d7f08c03c2bf46059950b2d62e089b75ea49faeaf61233f994138c317726c348",
+          "parameter_record_origin": {
+            "source_path": "ExcelBinOutput/AvatarTalentExcelConfigData.json",
+            "json_pointer": "/414",
+            "source_sha256": "83f2a61d513b869778be9c32868592ba0d23d377176ea500b2671f2a06b7b36e"
+          },
+          "param_list": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "operations_raw": [
+            {
+              "$type": "AddAbility",
+              "CLGIKOPIKBC": true,
+              "abilityName": "Avatar_Kazuha_Constellation_1"
+            },
+            {
+              "$type": "ModifySkillCD",
+              "CLGIKOPIKBC": true,
+              "skillID": 10472,
+              "cdRatio": -0.10000000149011612
+            },
+            {
+              "$type": "ModifySkillCD",
+              "CLGIKOPIKBC": true,
+              "skillID": 10473,
+              "cdRatio": -0.10000000149011612
+            }
+          ],
+          "operations_normalized": [
+            {
+              "$type": "AddAbility",
+              "CLGIKOPIKBC": true,
+              "abilityName": "Avatar_Kazuha_Constellation_1"
+            },
+            {
+              "$type": "ModifySkillCD",
+              "CLGIKOPIKBC": true,
+              "skillID": 10472,
+              "cdRatio": -0.10000000149011612
+            },
+            {
+              "$type": "ModifySkillCD",
+              "CLGIKOPIKBC": true,
+              "skillID": 10473,
+              "cdRatio": -0.10000000149011612
+            }
+          ],
+          "references": [
+            {
+              "reference_id": "f1b8f4715c0c8113206c13b0a486c78e99c797ecb49639f246583b848a62c75a",
+              "from_definition_id": "f9e8dfc666ff2591dcc7d3d97f3443cace687e39e00c5f14f01edeffd9ed151c",
+              "source_path": "BinOutput/Talent/AvatarTalents/ConfigTalent_Kazuha.json",
+              "json_pointer": "/Kazuha_Constellation_1/0/abilityName",
+              "field_name": "abilityName",
+              "relation_kind": "ability_operation",
+              "target_kind": "ability",
+              "source_order": 0,
+              "presence_status": "present",
+              "resolution_status": "resolved",
+              "resolved_definition_id": "50c2a0dd148273448b28d421b3de8a39c5b802c38a52cd0e3e53576861efd471",
+              "extraction_rule_id": "2",
+              "version_line": "release",
+              "snapshot_id": "9272526f6f5860cc5fd114c0a4cc089c66b7e244e8c1aadc9ae3826023da23d0",
+              "target_key": "Avatar_Kazuha_Constellation_1",
+              "scope": {
+                "owner_definition_id": null
+              },
+              "candidate_ids": [
+                "50c2a0dd148273448b28d421b3de8a39c5b802c38a52cd0e3e53576861efd471"
+              ]
+            }
+          ],
+          "execution_support": "not_evaluated"
+        },
+        "index": 2
+      }
+    ]
+  },
+  "scope": "仅所选depot已激活命座的静态加级操作；不执行其他命座、能力、伤害派发或队伍加级效果。",
+  "non_level_scalar_operations": {
+    "ModifySkillPoint": {
+      "skillID": "positive_integer",
+      "pointDelta": "integer"
+    },
+    "ModifySkillCD": {
+      "skillID": "positive_integer",
+      "cdRatio": "finite_number"
+    }
+  }
+}

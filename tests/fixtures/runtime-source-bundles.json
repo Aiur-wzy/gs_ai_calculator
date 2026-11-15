@@ -1,0 +1,1028 @@
+{
+  "fixture_note": "Full selected source objects from fixed upstream; bundle metadata is an independent unit fixture, not a production DB certificate.",
+  "sources": {
+    "2150070": {
+      "bundle_version": 1,
+      "status": "ready",
+      "issues": [],
+      "source": {
+        "kind": "equip_affix",
+        "affix_id": 2150070,
+        "affix_group_id": 215007,
+        "source_level": 0,
+        "version_line": "release",
+        "snapshot_id": "frozen-unit-source-snapshot",
+        "upstream_commit": "9424e4e556bd80e5196be7d3c52723d3a35b30e7"
+      },
+      "param_list": [
+        0.20000000298023224,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "talent": {
+        "definition_id": "BinOutput/Talent/RelicTalents/ConfigAffix_Relic.json:/Relic_ElementalBurstUp",
+        "source_path": "BinOutput/Talent/RelicTalents/ConfigAffix_Relic.json",
+        "json_pointer": "/Relic_ElementalBurstUp",
+        "source_sha256": "5f11748a02b7862d3de3d0d564e918d2df3fedd098191990b220c1d580d5ad97",
+        "operations": [
+          {
+            "$type": "AddAbility",
+            "CLGIKOPIKBC": true,
+            "abilityName": "Relic_ElementalBurstUp"
+          },
+          {
+            "$type": "ModifyAbility",
+            "CLGIKOPIKBC": true,
+            "abilityName": "Relic_ElementalBurstUp",
+            "paramDelta": "%1",
+            "paramSpecial": "Rate"
+          }
+        ]
+      },
+      "abilities": [
+        {
+          "definition_id": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json:/30/Default",
+          "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+          "json_pointer": "/30/Default",
+          "source_sha256": "e273a8e4fc5928829bbac96ae61b46003c7bfd95ffe3a24e8b6a080609a409f7",
+          "payload": {
+            "abilitySpecials": {
+              "Rate": 0
+            },
+            "isDynamicAbility": true,
+            "abilityName": "Relic_ElementalBurstUp",
+            "LKLPDIMKLKI": {
+              "elementDurability": 100,
+              "minus_one": -1,
+              "IAKPBCLBNKF": -1,
+              "isLimitedProperties": true
+            },
+            "abilityMixins": [
+              {
+                "$type": "ModifyDamageMixin",
+                "actorIceSubHurtDelta": -1,
+                "damagePercentageRatio": "Rate",
+                "predicates": [
+                  {
+                    "$type": "ByEntityTypes",
+                    "target": "Target",
+                    "value": -1,
+                    "entityTypes": [
+                      "Monster"
+                    ]
+                  }
+                ],
+                "attackTags": [
+                  "Elemental_Burst"
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "references": [],
+      "affix": {
+        "record": {
+          "paramList": [
+            0.20000000298023224,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "id": 215007,
+          "addProps": [
+            {},
+            {},
+            {}
+          ],
+          "affixId": 2150070,
+          "descTextMapHash": 4115763393,
+          "openConfig": "Relic_ElementalBurstUp",
+          "nameTextMapHash": 1750139131
+        },
+        "source_path": "ExcelBinOutput/EquipAffixExcelConfigData.json",
+        "json_pointer": "/1313",
+        "source_sha256": "a033acd70ac085421f2c0eb4eb06c0d74b7676b9a652bfe37881ed0680b089b2"
+      },
+      "snapshot": {
+        "schema_version": 1,
+        "profile_id": "unit-source-fixture",
+        "profile_version": 1,
+        "indexer_version": 1,
+        "manifest_fingerprint": "cb2bc826f1f98fa083edf5734df7f8c837bc3916b73b39952d24bb474c683f6a"
+      },
+      "content_fingerprint": "bc229dae39c3f85cb184d3152f1b9bda3d18095235e3342cfc9908f85d49756b"
+    },
+    "2150071": {
+      "bundle_version": 1,
+      "status": "ready",
+      "issues": [],
+      "source": {
+        "kind": "equip_affix",
+        "affix_id": 2150071,
+        "affix_group_id": 215007,
+        "source_level": 1,
+        "version_line": "release",
+        "snapshot_id": "frozen-unit-source-snapshot",
+        "upstream_commit": "9424e4e556bd80e5196be7d3c52723d3a35b30e7"
+      },
+      "param_list": [
+        0.20000000298023224,
+        12,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "talent": {
+        "definition_id": "BinOutput/Talent/RelicTalents/ConfigAffix_Relic.json:/Relic_TeamAtkupAfterElementalBurst",
+        "source_path": "BinOutput/Talent/RelicTalents/ConfigAffix_Relic.json",
+        "json_pointer": "/Relic_TeamAtkupAfterElementalBurst",
+        "source_sha256": "5f11748a02b7862d3de3d0d564e918d2df3fedd098191990b220c1d580d5ad97",
+        "operations": [
+          {
+            "$type": "AddAbility",
+            "CLGIKOPIKBC": true,
+            "abilityName": "Relic_TeamAtkupAfterElementalBurst"
+          },
+          {
+            "$type": "ModifyAbility",
+            "CLGIKOPIKBC": true,
+            "abilityName": "Relic_TeamAtkupAfterElementalBurst",
+            "paramDelta": "%1",
+            "paramSpecial": "Rate"
+          },
+          {
+            "$type": "ModifyAbility",
+            "CLGIKOPIKBC": true,
+            "abilityName": "Relic_TeamAtkupAfterElementalBurst",
+            "paramDelta": "%2",
+            "paramSpecial": "Time"
+          }
+        ]
+      },
+      "abilities": [
+        {
+          "definition_id": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json:/31/Default",
+          "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+          "json_pointer": "/31/Default",
+          "source_sha256": "e273a8e4fc5928829bbac96ae61b46003c7bfd95ffe3a24e8b6a080609a409f7",
+          "payload": {
+            "abilitySpecials": {
+              "Rate": 0,
+              "Time": 0
+            },
+            "isDynamicAbility": true,
+            "abilityName": "Relic_TeamAtkupAfterElementalBurst",
+            "modifiers": {
+              "UNIQUE_Relic_TeamAtkupAfterElementalBurst": {
+                "duration": "Time",
+                "elementDurability": 100,
+                "minus_one": -1,
+                "IAKPBCLBNKF": -1,
+                "reApplyModifierOnStateChange": true,
+                "isUnique": true,
+                "isLimitedProperties": true,
+                "properties": {
+                  "Actor_AttackRatio": "Rate"
+                },
+                "buffID": 10001,
+                "state": "AttackUp"
+              }
+            },
+            "LKLPDIMKLKI": {
+              "elementDurability": 100,
+              "minus_one": -1,
+              "IAKPBCLBNKF": -1,
+              "isLimitedProperties": true
+            },
+            "abilityMixins": [
+              {
+                "$type": "OnAvatarUseSkillMixin",
+                "actorIceSubHurtDelta": -1,
+                "onTriggerUltimateSkill": [
+                  {
+                    "$type": "RemoveUniqueModifier",
+                    "target": "AllPlayerAvatars",
+                    "actorIceSubHurtDelta": -1,
+                    "doOffStage": false,
+                    "modifierName": "UNIQUE_Relic_TeamAtkupAfterElementalBurst",
+                    "predicates": [
+                      {
+                        "$type": "ByTargetPositionToSelfPosition",
+                        "target": "Target",
+                        "value": 40,
+                        "logic": "LesserOrEqual"
+                      }
+                    ],
+                    "canBeHandledOnRecover": true
+                  },
+                  {
+                    "$type": "ApplyModifier",
+                    "target": "AllPlayerAvatars",
+                    "actorIceSubHurtDelta": -1,
+                    "doOffStage": false,
+                    "modifierName": "UNIQUE_Relic_TeamAtkupAfterElementalBurst",
+                    "predicates": [
+                      {
+                        "$type": "ByTargetPositionToSelfPosition",
+                        "target": "Target",
+                        "value": 40,
+                        "logic": "LesserOrEqual"
+                      }
+                    ],
+                    "canBeHandledOnRecover": true
+                  }
+                ],
+                "clearSkillIdDelay": 0.20000000298023224
+              }
+            ]
+          }
+        }
+      ],
+      "references": [],
+      "affix": {
+        "record": {
+          "paramList": [
+            0.20000000298023224,
+            12,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "id": 215007,
+          "addProps": [
+            {},
+            {},
+            {}
+          ],
+          "affixId": 2150071,
+          "descTextMapHash": 2492204417,
+          "openConfig": "Relic_TeamAtkupAfterElementalBurst",
+          "level": 1,
+          "nameTextMapHash": 1751039235
+        },
+        "source_path": "ExcelBinOutput/EquipAffixExcelConfigData.json",
+        "json_pointer": "/1314",
+        "source_sha256": "a033acd70ac085421f2c0eb4eb06c0d74b7676b9a652bfe37881ed0680b089b2"
+      },
+      "snapshot": {
+        "schema_version": 1,
+        "profile_id": "unit-source-fixture",
+        "profile_version": 1,
+        "indexer_version": 1,
+        "manifest_fingerprint": "cb2bc826f1f98fa083edf5734df7f8c837bc3916b73b39952d24bb474c683f6a"
+      },
+      "content_fingerprint": "116b183277e082f510714dc40630a2e4884a24f0215bcbe0c93327e2ee44c91d"
+    },
+    "2150320": {
+      "bundle_version": 1,
+      "status": "ready",
+      "issues": [],
+      "source": {
+        "kind": "equip_affix",
+        "affix_id": 2150320,
+        "affix_group_id": 215032,
+        "source_level": 0,
+        "version_line": "release",
+        "snapshot_id": "frozen-unit-source-snapshot",
+        "upstream_commit": "9424e4e556bd80e5196be7d3c52723d3a35b30e7"
+      },
+      "param_list": [
+        0.20000000298023224,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "talent": {
+        "definition_id": "BinOutput/Talent/RelicTalents/ConfigAffix_Relic.json:/Relic_ArtSkillDamageUp",
+        "source_path": "BinOutput/Talent/RelicTalents/ConfigAffix_Relic.json",
+        "json_pointer": "/Relic_ArtSkillDamageUp",
+        "source_sha256": "5f11748a02b7862d3de3d0d564e918d2df3fedd098191990b220c1d580d5ad97",
+        "operations": [
+          {
+            "$type": "AddAbility",
+            "CLGIKOPIKBC": true,
+            "abilityName": "Relic_ArtSkillDamageUp"
+          },
+          {
+            "$type": "ModifyAbility",
+            "CLGIKOPIKBC": true,
+            "abilityName": "Relic_ArtSkillDamageUp",
+            "paramDelta": "%1",
+            "paramSpecial": "DamagePer"
+          }
+        ]
+      },
+      "abilities": [
+        {
+          "definition_id": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json:/59/Default",
+          "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+          "json_pointer": "/59/Default",
+          "source_sha256": "e273a8e4fc5928829bbac96ae61b46003c7bfd95ffe3a24e8b6a080609a409f7",
+          "payload": {
+            "abilitySpecials": {
+              "DamagePer": 0
+            },
+            "isDynamicAbility": true,
+            "abilityName": "Relic_ArtSkillDamageUp",
+            "LKLPDIMKLKI": {
+              "elementDurability": 100,
+              "minus_one": -1,
+              "IAKPBCLBNKF": -1,
+              "isLimitedProperties": true
+            },
+            "abilityMixins": [
+              {
+                "$type": "ModifyDamageMixin",
+                "actorIceSubHurtDelta": -1,
+                "damagePercentageRatio": "DamagePer",
+                "attackTags": [
+                  "Elemental_Art",
+                  "Elemental_Art_Hold",
+                  "Elemental_Art_Extra"
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "references": [],
+      "affix": {
+        "record": {
+          "paramList": [
+            0.20000000298023224,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "id": 215032,
+          "addProps": [
+            {},
+            {},
+            {}
+          ],
+          "affixId": 2150320,
+          "descTextMapHash": 3600368921,
+          "openConfig": "Relic_ArtSkillDamageUp",
+          "nameTextMapHash": 3539134667
+        },
+        "source_path": "ExcelBinOutput/EquipAffixExcelConfigData.json",
+        "json_pointer": "/1358",
+        "source_sha256": "a033acd70ac085421f2c0eb4eb06c0d74b7676b9a652bfe37881ed0680b089b2"
+      },
+      "snapshot": {
+        "schema_version": 1,
+        "profile_id": "unit-source-fixture",
+        "profile_version": 1,
+        "indexer_version": 1,
+        "manifest_fingerprint": "cb2bc826f1f98fa083edf5734df7f8c837bc3916b73b39952d24bb474c683f6a"
+      },
+      "content_fingerprint": "cb48059a92b70f3f9832fd6cb29a5af9a64fe9313aa7860c91a6bcaacdfcdb95"
+    },
+    "2150390": {
+      "bundle_version": 1,
+      "status": "ready",
+      "issues": [],
+      "source": {
+        "kind": "equip_affix",
+        "affix_id": 2150390,
+        "affix_group_id": 215039,
+        "source_level": 0,
+        "version_line": "release",
+        "snapshot_id": "frozen-unit-source-snapshot",
+        "upstream_commit": "9424e4e556bd80e5196be7d3c52723d3a35b30e7"
+      },
+      "param_list": [
+        0.25,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "talent": {
+        "definition_id": "BinOutput/Talent/RelicTalents/ConfigAffix_Relic.json:/Relic_FallingAttack_2",
+        "source_path": "BinOutput/Talent/RelicTalents/ConfigAffix_Relic.json",
+        "json_pointer": "/Relic_FallingAttack_2",
+        "source_sha256": "5f11748a02b7862d3de3d0d564e918d2df3fedd098191990b220c1d580d5ad97",
+        "operations": [
+          {
+            "$type": "AddAbility",
+            "CLGIKOPIKBC": true,
+            "abilityName": "Relic_FallingAttack_2"
+          },
+          {
+            "$type": "ModifyAbility",
+            "CLGIKOPIKBC": true,
+            "abilityName": "Relic_FallingAttack_2",
+            "paramDelta": "%1",
+            "paramSpecial": "Ratio"
+          }
+        ]
+      },
+      "abilities": [
+        {
+          "definition_id": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json:/69/Default",
+          "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+          "json_pointer": "/69/Default",
+          "source_sha256": "e273a8e4fc5928829bbac96ae61b46003c7bfd95ffe3a24e8b6a080609a409f7",
+          "payload": {
+            "abilitySpecials": {
+              "Ratio": 0
+            },
+            "isDynamicAbility": true,
+            "abilityName": "Relic_FallingAttack_2",
+            "LKLPDIMKLKI": {
+              "elementDurability": 100,
+              "minus_one": -1,
+              "IAKPBCLBNKF": -1,
+              "isLimitedProperties": true
+            },
+            "abilityMixins": [
+              {
+                "$type": "ModifyDamageMixin",
+                "actorIceSubHurtDelta": -1,
+                "damagePercentageRatio": "Ratio",
+                "attackTags": [
+                  "FallingAttack"
+                ]
+              }
+            ]
+          }
+        }
+      ],
+      "references": [],
+      "affix": {
+        "record": {
+          "paramList": [
+            0.25,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "id": 215039,
+          "addProps": [
+            {},
+            {},
+            {}
+          ],
+          "affixId": 2150390,
+          "descTextMapHash": 2359653745,
+          "openConfig": "Relic_FallingAttack_2",
+          "nameTextMapHash": 2956779603
+        },
+        "source_path": "ExcelBinOutput/EquipAffixExcelConfigData.json",
+        "json_pointer": "/1372",
+        "source_sha256": "a033acd70ac085421f2c0eb4eb06c0d74b7676b9a652bfe37881ed0680b089b2"
+      },
+      "snapshot": {
+        "schema_version": 1,
+        "profile_id": "unit-source-fixture",
+        "profile_version": 1,
+        "indexer_version": 1,
+        "manifest_fingerprint": "cb2bc826f1f98fa083edf5734df7f8c837bc3916b73b39952d24bb474c683f6a"
+      },
+      "content_fingerprint": "7201e780a1f421f4c93439561897ae8e73cfad424bade26a83bd17f7d2d13aad"
+    },
+    "2150171": {
+      "bundle_version": 1,
+      "status": "ready",
+      "issues": [],
+      "source": {
+        "kind": "equip_affix",
+        "affix_id": 2150171,
+        "affix_group_id": 215017,
+        "source_level": 1,
+        "version_line": "release",
+        "snapshot_id": "frozen-unit-source-snapshot",
+        "upstream_commit": "9424e4e556bd80e5196be7d3c52723d3a35b30e7"
+      },
+      "param_list": [
+        0.20000000298023224,
+        0.30000001192092896,
+        3,
+        0.5,
+        0,
+        0,
+        0,
+        0
+      ],
+      "talent": {
+        "definition_id": "BinOutput/Talent/RelicTalents/ConfigAffix_Relic.json:/Relic_ShieldCostUpWhenElementalArtHit",
+        "source_path": "BinOutput/Talent/RelicTalents/ConfigAffix_Relic.json",
+        "json_pointer": "/Relic_ShieldCostUpWhenElementalArtHit",
+        "source_sha256": "5f11748a02b7862d3de3d0d564e918d2df3fedd098191990b220c1d580d5ad97",
+        "operations": [
+          {
+            "$type": "AddAbility",
+            "CLGIKOPIKBC": true,
+            "abilityName": "Relic_ShieldCostUpWhenElementalArtHit"
+          },
+          {
+            "$type": "ModifyAbility",
+            "CLGIKOPIKBC": true,
+            "abilityName": "Relic_ShieldCostUpWhenElementalArtHit",
+            "paramDelta": "%1",
+            "paramSpecial": "AttackRate"
+          },
+          {
+            "$type": "ModifyAbility",
+            "CLGIKOPIKBC": true,
+            "abilityName": "Relic_ShieldCostUpWhenElementalArtHit",
+            "paramDelta": "%2",
+            "paramSpecial": "ShieldCost"
+          },
+          {
+            "$type": "ModifyAbility",
+            "CLGIKOPIKBC": true,
+            "abilityName": "Relic_ShieldCostUpWhenElementalArtHit",
+            "paramDelta": "%3",
+            "paramSpecial": "Time"
+          },
+          {
+            "$type": "ModifyAbility",
+            "CLGIKOPIKBC": true,
+            "abilityName": "Relic_ShieldCostUpWhenElementalArtHit",
+            "paramDelta": "%4",
+            "paramSpecial": "CDTime"
+          }
+        ]
+      },
+      "abilities": [
+        {
+          "definition_id": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json:/41/Default",
+          "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+          "json_pointer": "/41/Default",
+          "source_sha256": "e273a8e4fc5928829bbac96ae61b46003c7bfd95ffe3a24e8b6a080609a409f7",
+          "payload": {
+            "onAdded": [
+              {
+                "$type": "AttachModifier",
+                "actorIceSubHurtDelta": -1,
+                "doOffStage": false,
+                "modifierName": "UNIQUE_Relic_ShieldCostUpWhenElementalArtHit_Handler",
+                "canBeHandledOnRecover": true
+              }
+            ],
+            "abilitySpecials": {
+              "AttackRate": 0,
+              "CDTime": 0,
+              "ShieldCost": 0,
+              "Time": 0
+            },
+            "isDynamicAbility": true,
+            "abilityName": "Relic_ShieldCostUpWhenElementalArtHit",
+            "modifiers": {
+              "UNIQUE_Relic_ShieldCostUpWhenElementalArtHit_ApplyBuff": {
+                "onAdded": [
+                  {
+                    "$type": "RemoveUniqueModifier",
+                    "target": "AllPlayerAvatars",
+                    "actorIceSubHurtDelta": -1,
+                    "doOffStage": true,
+                    "modifierName": "UNIQUE_Relic_ShieldCostUpWhenElementalArtHit_Buff",
+                    "predicates": [
+                      {
+                        "$type": "ByTargetPositionToSelfPosition",
+                        "target": "Target",
+                        "value": 40,
+                        "logic": "LesserOrEqual"
+                      }
+                    ],
+                    "canBeHandledOnRecover": true
+                  },
+                  {
+                    "$type": "ApplyModifier",
+                    "target": "AllPlayerAvatars",
+                    "actorIceSubHurtDelta": -1,
+                    "doOffStage": true,
+                    "modifierName": "UNIQUE_Relic_ShieldCostUpWhenElementalArtHit_Buff",
+                    "predicates": [
+                      {
+                        "$type": "ByTargetPositionToSelfPosition",
+                        "target": "Target",
+                        "value": 40,
+                        "logic": "LesserOrEqual"
+                      }
+                    ],
+                    "canBeHandledOnRecover": true
+                  }
+                ],
+                "stacking": "Unique",
+                "duration": "CDTime",
+                "elementDurability": 100,
+                "minus_one": -1,
+                "IAKPBCLBNKF": -1,
+                "isUnique": true,
+                "isLimitedProperties": true
+              },
+              "UNIQUE_Relic_ShieldCostUpWhenElementalArtHit_Buff": {
+                "duration": "Time",
+                "elementDurability": 100,
+                "minus_one": -1,
+                "IAKPBCLBNKF": -1,
+                "reApplyModifierOnStateChange": true,
+                "isUnique": true,
+                "isLimitedProperties": true,
+                "properties": {
+                  "Actor_AttackRatio": "AttackRate",
+                  "Actor_ShieldCostMinusRatio": "ShieldCost"
+                },
+                "state": "AttackUp"
+              },
+              "UNIQUE_Relic_ShieldCostUpWhenElementalArtHit_Handler": {
+                "onAttackLanded": [
+                  {
+                    "$type": "Predicated",
+                    "targetPredicates": [
+                      {
+                        "$type": "ByEntityTypes",
+                        "target": "Target",
+                        "value": -1,
+                        "entityTypes": [
+                          "Monster"
+                        ]
+                      },
+                      {
+                        "$type": "ByTargetGlobalValue",
+                        "key": "_ANIMAL_ENTITY_TYPE",
+                        "target": "Target",
+                        "compareType": "NoneOrEqual"
+                      },
+                      {
+                        "$type": "ByAttackTags",
+                        "target": "Target",
+                        "attackTags": [
+                          "Elemental_Art",
+                          "Elemental_Art_Hold",
+                          "Elemental_Art_Extra"
+                        ]
+                      }
+                    ],
+                    "target": "Target",
+                    "actorIceSubHurtDelta": -1,
+                    "doOffStage": true,
+                    "successActions": [
+                      {
+                        "$type": "AttachModifier",
+                        "actorIceSubHurtDelta": -1,
+                        "doOffStage": true,
+                        "modifierName": "UNIQUE_Relic_ShieldCostUpWhenElementalArtHit_ApplyBuff",
+                        "canBeHandledOnRecover": true
+                      }
+                    ],
+                    "canBeHandledOnRecover": true
+                  }
+                ],
+                "elementDurability": 100,
+                "minus_one": -1,
+                "IAKPBCLBNKF": -1,
+                "isUnique": true,
+                "isLimitedProperties": true
+              }
+            },
+            "LKLPDIMKLKI": {
+              "elementDurability": 100,
+              "minus_one": -1,
+              "IAKPBCLBNKF": -1,
+              "isLimitedProperties": true
+            }
+          }
+        }
+      ],
+      "references": [],
+      "affix": {
+        "record": {
+          "paramList": [
+            0.20000000298023224,
+            0.30000001192092896,
+            3,
+            0.5,
+            0,
+            0,
+            0,
+            0
+          ],
+          "id": 215017,
+          "addProps": [
+            {},
+            {},
+            {}
+          ],
+          "affixId": 2150171,
+          "descTextMapHash": 2524947961,
+          "openConfig": "Relic_ShieldCostUpWhenElementalArtHit",
+          "level": 1,
+          "nameTextMapHash": 1337665995
+        },
+        "source_path": "ExcelBinOutput/EquipAffixExcelConfigData.json",
+        "json_pointer": "/1329",
+        "source_sha256": "a033acd70ac085421f2c0eb4eb06c0d74b7676b9a652bfe37881ed0680b089b2"
+      },
+      "snapshot": {
+        "schema_version": 1,
+        "profile_id": "unit-source-fixture",
+        "profile_version": 1,
+        "indexer_version": 1,
+        "manifest_fingerprint": "cb2bc826f1f98fa083edf5734df7f8c837bc3916b73b39952d24bb474c683f6a"
+      },
+      "content_fingerprint": "89e2f88ca6223645f24859257f474147ae8fa278889bd22b899e1e639f4f5815"
+    },
+    "1143024": {
+      "bundle_version": 1,
+      "status": "ready",
+      "issues": [],
+      "source": {
+        "kind": "equip_affix",
+        "affix_id": 1143024,
+        "affix_group_id": 114302,
+        "source_level": 4,
+        "version_line": "release",
+        "snapshot_id": "frozen-unit-source-snapshot",
+        "upstream_commit": "9424e4e556bd80e5196be7d3c52723d3a35b30e7"
+      },
+      "param_list": [
+        0.47999998927116394,
+        10,
+        20,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "talent": {
+        "definition_id": "BinOutput/Talent/EquipTalents/ConfigAffix_Catalyst.json:/Weapon_Catalyst_OnChangeAttackUp",
+        "source_path": "BinOutput/Talent/EquipTalents/ConfigAffix_Catalyst.json",
+        "json_pointer": "/Weapon_Catalyst_OnChangeAttackUp",
+        "source_sha256": "d38288d52ba8ed7d9af89098902f6f3915813baa834a9138e4a512074b6f3b72",
+        "operations": [
+          {
+            "$type": "AddAbility",
+            "CLGIKOPIKBC": true,
+            "abilityName": "Weapon_Catalyst_OnChangeAttackUp"
+          },
+          {
+            "$type": "ModifyAbility",
+            "CLGIKOPIKBC": true,
+            "abilityName": "Weapon_Catalyst_OnChangeAttackUp",
+            "paramDelta": "%1",
+            "paramSpecial": "AttackUp"
+          },
+          {
+            "$type": "ModifyAbility",
+            "CLGIKOPIKBC": true,
+            "abilityName": "Weapon_Catalyst_OnChangeAttackUp",
+            "paramDelta": "%2",
+            "paramSpecial": "Time"
+          },
+          {
+            "$type": "ModifyAbility",
+            "CLGIKOPIKBC": true,
+            "abilityName": "Weapon_Catalyst_OnChangeAttackUp",
+            "paramDelta": "%3",
+            "paramSpecial": "CDTime"
+          }
+        ]
+      },
+      "abilities": [
+        {
+          "definition_id": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Catalyst.json:/1/Default",
+          "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Catalyst.json",
+          "json_pointer": "/1/Default",
+          "source_sha256": "ed48b7ef7a44017707ca07346e285cbf932bfff387e0230cedf465da6827adca",
+          "payload": {
+            "abilitySpecials": {
+              "AttackUp": 0,
+              "CDTime": 0,
+              "Time": 0
+            },
+            "isDynamicAbility": true,
+            "abilityName": "Weapon_Catalyst_OnChangeAttackUp",
+            "modifiers": {
+              "Catalyst_OnChangeAttackUpCheckIn": {
+                "stacking": "Unique",
+                "elementDurability": 100,
+                "minus_one": -1,
+                "IAKPBCLBNKF": -1,
+                "onAvatarIn": [
+                  {
+                    "$type": "ApplyModifier",
+                    "actorIceSubHurtDelta": -1,
+                    "doOffStage": false,
+                    "modifierName": "UNIQUE_Catalyst_OnChangeAttackUp",
+                    "canBeHandledOnRecover": true
+                  },
+                  {
+                    "$type": "AddGlobalValue",
+                    "key": "_ABILITY_Catalyst_OnChangeAttackUp",
+                    "useLimitRange": true,
+                    "target": "Applier",
+                    "value": -1,
+                    "actorIceSubHurtDelta": -1,
+                    "doOffStage": true,
+                    "minValue": -1,
+                    "canBeHandledOnRecover": true,
+                    "maxValue": -1
+                  }
+                ],
+                "isLimitedProperties": true
+              },
+              "UNIQUE_Catalyst_OnChangeAttackUp": {
+                "stacking": "Unique",
+                "duration": "Time",
+                "elementDurability": 100,
+                "minus_one": -1,
+                "IAKPBCLBNKF": -1,
+                "reApplyModifierOnStateChange": true,
+                "isUnique": true,
+                "isLimitedProperties": true,
+                "properties": {
+                  "Actor_AttackRatio": "AttackUp"
+                },
+                "state": "AttackUp"
+              },
+              "UNIQUE_Catalyst_OnChangeAttackUp_CD": {
+                "duration": "CDTime",
+                "elementDurability": 100,
+                "minus_one": -1,
+                "onRemoved": [
+                  {
+                    "$type": "AddGlobalValue",
+                    "key": "_ABILITY_Catalyst_OnChangeAttackUp",
+                    "useLimitRange": true,
+                    "value": 1,
+                    "actorIceSubHurtDelta": -1,
+                    "doOffStage": true,
+                    "canBeHandledOnRecover": true
+                  }
+                ],
+                "IAKPBCLBNKF": -1,
+                "isUnique": true,
+                "isLimitedProperties": true
+              },
+              "UNIQUE_Catalyst_OnChangeAttackUp_Handler": {
+                "stacking": "Unique",
+                "thinkInterval": 1,
+                "elementDurability": 100,
+                "minus_one": -1,
+                "onRemoved": [
+                  {
+                    "$type": "RemoveModifier",
+                    "target": "CurTeamAvatars",
+                    "actorIceSubHurtDelta": -1,
+                    "doOffStage": true,
+                    "modifierName": "Catalyst_OnChangeAttackUpCheckIn",
+                    "canBeHandledOnRecover": true
+                  }
+                ],
+                "IAKPBCLBNKF": -1,
+                "onThinkInterval": [
+                  {
+                    "$type": "AttachModifier",
+                    "target": "CurTeamAvatars",
+                    "actorIceSubHurtDelta": -1,
+                    "doOffStage": false,
+                    "modifierName": "Catalyst_OnChangeAttackUpCheckIn",
+                    "predicates": [
+                      {
+                        "$type": "ByTargetType",
+                        "target": "Target"
+                      }
+                    ],
+                    "canBeHandledOnRecover": true
+                  }
+                ],
+                "isUnique": true,
+                "onAvatarIn": [
+                  {
+                    "$type": "AttachModifier",
+                    "target": "CurTeamAvatars",
+                    "actorIceSubHurtDelta": -1,
+                    "doOffStage": false,
+                    "modifierName": "Catalyst_OnChangeAttackUpCheckIn",
+                    "predicates": [
+                      {
+                        "$type": "ByTargetType",
+                        "target": "Target"
+                      }
+                    ],
+                    "canBeHandledOnRecover": true
+                  }
+                ],
+                "isLimitedProperties": true
+              }
+            },
+            "onRemoved": [
+              {
+                "$type": "RemoveModifier",
+                "target": "CurTeamAvatars",
+                "actorIceSubHurtDelta": -1,
+                "doOffStage": true,
+                "modifierName": "Catalyst_OnChangeAttackUpCheckIn",
+                "canBeHandledOnRecover": true
+              },
+              {
+                "$type": "RemoveUniqueModifier",
+                "target": "CurTeamAvatars",
+                "actorIceSubHurtDelta": -1,
+                "doOffStage": true,
+                "modifierName": "UNIQUE_Catalyst_OnChangeAttackUp",
+                "canBeHandledOnRecover": true
+              }
+            ],
+            "LKLPDIMKLKI": {
+              "elementDurability": 100,
+              "minus_one": -1,
+              "IAKPBCLBNKF": -1,
+              "isLimitedProperties": true
+            },
+            "abilityMixins": [
+              {
+                "$type": "AttachModifierToSelfGlobalValueMixin",
+                "valueSteps": [
+                  -1.5,
+                  -0.5,
+                  0.5
+                ],
+                "actorIceSubHurtDelta": -1,
+                "modifierNameSteps": [
+                  "UNIQUE_Catalyst_OnChangeAttackUp_CD",
+                  "UNIQUE_Catalyst_OnChangeAttackUp_Handler"
+                ],
+                "removeAppliedModifier": true,
+                "globalValueKey": "_ABILITY_Catalyst_OnChangeAttackUp"
+              }
+            ]
+          }
+        }
+      ],
+      "references": [],
+      "affix": {
+        "record": {
+          "paramList": [
+            0.47999998927116394,
+            10,
+            20,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "id": 114302,
+          "addProps": [
+            {},
+            {},
+            {}
+          ],
+          "affixId": 1143024,
+          "descTextMapHash": 4025167113,
+          "openConfig": "Weapon_Catalyst_OnChangeAttackUp",
+          "level": 4,
+          "nameTextMapHash": 1610242403
+        },
+        "source_path": "ExcelBinOutput/EquipAffixExcelConfigData.json",
+        "json_pointer": "/745",
+        "source_sha256": "a033acd70ac085421f2c0eb4eb06c0d74b7676b9a652bfe37881ed0680b089b2"
+      },
+      "snapshot": {
+        "schema_version": 1,
+        "profile_id": "unit-source-fixture",
+        "profile_version": 1,
+        "indexer_version": 1,
+        "manifest_fingerprint": "d07a858aa13b7ad37982894b96d007ed5cd34019adc42ffd398dd61527c6954c"
+      },
+      "content_fingerprint": "24b59f58d7692f2801f40147f5e8df88f92abdbff76b42db0402bf14a4b51c85"
+    }
+  }
+}

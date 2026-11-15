@@ -1,0 +1,67 @@
+<!doctype html><html lang="zh-CN"><meta charset="utf-8"><title>容量账本离线 DOM 验证</title>
+<body><div id="host"></div><pre id="evidence">running</pre>
+<script src="../src/genshin_app/gui/web/json-transport.js"></script>
+<script src="../src/genshin_app/gui/web/display.js"></script>
+<script src="../src/genshin_app/gui/web/ui.js"></script>
+<script src="../src/genshin_app/gui/web/action-capacities.js"></script>
+<script>
+"use strict";
+const evidence=document.getElementById("evidence");
+const assert=(condition,message)=>{if(!condition)throw new Error(message);};
+try{
+  window.PL={state:{plan:null}};window.RC={owner:()=>{throw new Error("Historical result must use its own template");}};
+  const host=document.getElementById("host"),template={characters:[{id:"a",name:"工程角色甲"},{id:"b",name:"工程角色乙"}],meta:{version_line:"release"}},count=40000;
+  const receipts=Array.from({length:count},(_,index)=>({id:`receipt.${index}`,run_id:`run.${index}`,t:index/10,character:index%2?"b":"a",action_id:`action.${index}`,ability_id:"e",capacity:2,
+    before:index%2?0:2,after:index%2?0:1,ready_at:index%2?null:index/10+10,next_ready_at:index/10+10,queue_before:[],queue_after:[index/10+10],
+    status:index%2?"rejected":"committed",reason:index%2?"cooldown_unavailable":null,binding_id:"capacity.fixture"}));
+  const parents=["not_checked","not_committed","not_verified","future_unknown_state"].map((status,index)=>({type:"action",time:4000+index,id:`unspent.${index}`,character:index%2?"b":"a",capacity_admission:{status,binding_id:"capacity.fixture",reason:"upstream_pending"}}));
+  const audit={planned_actions:40004,max_cycles_planned_actions:40004,unreported_actions:0,committed_actions:20000,rejected_actions:20000,not_checked_actions:1,not_committed_actions:1,not_verified_actions:1,receipts};
+  const result={rotation_check:{action_capacity_consumption:audit,event_log:parents,issues:[{code:"upstream_pending",message:"工程前置条件尚未完成"}]}};
+  const frozen=JSON.stringify(result),freeze=value=>{if(value&&typeof value==="object"){Object.freeze(value);Object.values(value).forEach(freeze);}};freeze(result);
+  const start=performance.now();CAP.renderResult(host,result,template);const initialMs=performance.now()-start;
+  const entries=()=>[...host.querySelectorAll("[data-capacity-row]")],range=()=>host.querySelector(".capacity-ledger-range").textContent;
+  const button=label=>[...host.querySelectorAll("button")].find(node=>node.textContent===label);
+  const select=(label,value)=>{const node=host.querySelector(`[aria-label="${label}"]`);assert(node,"missing filter "+label);node.value=value;node.dispatchEvent(new Event("change",{bubbles:true}));};
+  assert(entries().length===50,"initial page not bounded to 50");assert(range().includes("原始记录共 40004 条")&&range().includes("当前显示 1–50 条"),"missing exact total/range");
+  assert(entries()[0].getAttribute("data-capacity-row")==="receipt:0","first receipt unreachable");
+  entries()[0].open=true;entries()[0].querySelector(".display-raw").open=true;
+  assert(entries()[0].querySelector("pre").textContent===JSON.stringify(receipts[0],null,2),"raw receipt changed in detail");
+  assert(!host.querySelector("input,textarea,[contenteditable=true]"),"ledger exposed editable values");
+  assert([...host.querySelectorAll("button")].every(node=>["上一页","下一页"].includes(node.textContent)),"ledger exposed mutation control");
+  const firstNode=entries()[0],seen=new Set();let pages=0,maxRows=0,maxDomNodes=0;
+  while(true){const current=entries();maxRows=Math.max(maxRows,current.length);maxDomNodes=Math.max(maxDomNodes,host.querySelectorAll("*").length);pages++;
+    current.forEach(node=>{const key=node.getAttribute("data-capacity-row");assert(!seen.has(key),"duplicate record across pages "+key);seen.add(key);});
+    assert(current.length<=50,"page leaked more than 50 rows");assert(host.querySelectorAll("*").length<550,"DOM count grew with total records");
+    const next=button("下一页");if(next.disabled)break;next.click();}
+  assert(!firstNode.isConnected&&!host.contains(firstNode),"previous page nodes retained in current DOM");
+  assert(seen.size===40004&&seen.has("receipt:39999")&&seen.has("parent:3"),"last records or unknown-status record inaccessible");
+  assert(range().includes("40001–40004"),"last-page range incorrect");
+  button("上一页").click();assert(range().includes("39951–40000"),"reverse paging wrong");
+  select("次数账本角色筛选",JSON.stringify("a"));assert(range().includes("筛选后 20002 条")&&range().includes("当前显示 1–50 条"),"actor filter or page reset incorrect");
+  select("次数账本状态筛选",JSON.stringify("rejected"));assert(entries().length===0&&range().includes("当前显示 0–0 条"),"zero-result filter incorrect");
+  assert(button("上一页").disabled&&button("下一页").disabled,"empty page navigation enabled");
+  select("次数账本角色筛选","");assert(range().includes("筛选后 20000 条"),"status-only filter wrong");
+  assert(entries().every(node=>JSON.parse(node.querySelector("pre").textContent).status==="rejected"),"wrong status in filtered page");
+  for(const status of ["not_checked","not_committed","not_verified","future_unknown_state"]){select("次数账本状态筛选",JSON.stringify(status));assert(entries().length===1,"status omitted "+status);assert(JSON.parse(entries()[0].querySelector("pre").textContent).capacity_admission.status===status,"parent raw record lost");}
+  select("次数账本状态筛选","");select("次数账本角色筛选",JSON.stringify("b"));button("下一页").click();
+  const oldNext=button("下一页"),oldSection=host.firstElementChild;
+  const fresh={rotation_check:{action_capacity_consumption:{receipts:[{...receipts[0],id:"new",action_id:"new",t:123}]},event_log:[]}};
+  CAP.renderResult(host,fresh,template);assert(!oldSection.isConnected,"old result still mounted");assert(entries().length===1&&range().includes("当前显示 1–1 条"),"new result retained old page/filter");
+  assert(host.querySelector('[aria-label="次数账本角色筛选"]').value===""&&host.querySelector('[aria-label="次数账本状态筛选"]').value==="","filters did not reset for new result");
+  oldNext.click();assert(entries().length===1&&JSON.parse(entries()[0].querySelector("pre").textContent).id==="new","old detached handler changed new result");
+  CAP.renderResult(host,{},template);assert(!host.children.length,"empty result retained old content");
+  CAP.renderResult(host,{rotation_check:{action_capacity_consumption:{receipts:[]},event_log:[]}},template);assert(range().includes("原始记录共 0 条")&&entries().length===0,"empty audit incorrect");
+  assert(JSON.stringify(result)===frozen,"display mutated frozen source result");
+  const context={mode:"ordinary_open_world",external_capacity_effects:"none",window_changes:"none"},selection={character_level:90,ascension:6,constellation:1,base_level:10,variant:"tap",weapon:{id:11,level:1,refinement:1},artifacts:"all_empty",team:"self_only"};
+  const delta=(id,status,disposition,amount,rank)=>({id,revision:1,status,disposition,projection:{amount},record:{payload:{claim:{activation:{rank},source_claim:{source_path:"fixture/source.json",operation_pointer:"/operation"}}}}});
+  const record={id:"capacity.fixture",status:"ready",projection:{capacity:2,actual:{selection,context},pool:{actor:"a",group:"e",initial:{ready_in:[5]},members:[{cooldown:{duration:10,start:"action_start",recovery:"sequential"}}]},profile:{model_record:{id:"fixture.model",revision:1,payload:{claim:{target:{skill_id:3},base:{node_id:"skill",pointer:"/maxChargeNum",value:1},domain:{...selection,constellations:[0,1],context},delta_refs:[{id:"active",revision:1},{id:"inactive",revision:1},{id:"unproved",revision:1}]}}},competitor_inventory:{entries:[delta("active","ready","model_dependency_active",1,1),delta("inactive","ready","model_dependency_inactive",0,2),delta("unproved","pending","model_dependency_active",99,3)]}}}};
+  const preview=document.createElement("div");CAP.preview(preview,record,template);const text=preview.textContent;
+  assert(text.includes("基础次数 1")&&text.includes("激活增量 1")&&text.includes("开场可用 1 次"),"source summary wrong");
+  assert(text.includes("active · 修订 1：已激活；本次增加 1 次")&&text.includes("inactive · 修订 1：本次未激活；本次增加 0 次")&&text.includes("unproved · 修订 1：尚未证明激活状态；本次增加 待核实 次"),"delta eligibility misrepresented");
+  assert(text.includes("90 级、突破 6、1 命")&&text.includes("允许 0／1 命")&&text.includes("精炼 1 阶")&&text.includes("五槽均未装备")&&text.includes("技能基级 10"),"human conditions omitted");
+  assert(text.includes("容量模型不证明这些冷却参数")&&text.includes("不会自动证明开场全满"),"scope overclaim");
+  const unknown=document.createElement("div");CAP.preview(unknown,{id:"pending",status:"pending",projection:{actual:{},profile:{},pool:{}}},template);assert(unknown.textContent.includes("待核实")&&!unknown.textContent.includes("五槽均未装备"),"unknown conditions invented");
+  evidence.textContent=JSON.stringify({status:"passed",browser:navigator.userAgent,receipts:count,parent_records:4,visited:seen.size,pages,max_record_dom:maxRows,max_total_dom:maxDomNodes,initial_render_ms:initialMs,total_ms:performance.now()-start,
+    checks:["all_first_last_and_unknown_records_reachable","all_801_pages_unique","actor_status_intersection_and_empty_state","page_nodes_removed","new_empty_result_resets_and_disposes","raw_receipts_exact","read_only_source_frozen","chinese_source_actual_and_domain","active_inactive_and_unproved_deltas_distinct","no_cd_or_initial_state_authority"]},null,2);
+}catch(error){evidence.textContent=JSON.stringify({status:"failed",message:error.message,stack:error.stack},null,2);}
+</script></body></html>

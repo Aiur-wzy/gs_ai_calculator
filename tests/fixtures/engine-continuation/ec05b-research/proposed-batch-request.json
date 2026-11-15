@@ -1,0 +1,78 @@
+{
+  "action": "batch",
+  "version_line": "release",
+  "snapshot_id": "1b620db802a937506dc870cc25c08b5c7c336a01b193b945e9471d75c3bee172",
+  "max_bytes": 4194304,
+  "items": [
+    {
+      "id": "ayaka-e",
+      "request": {
+        "action": "action_facts",
+        "character_id": 10000002,
+        "slot": "skill",
+        "talent_level": 10,
+        "constellation": 0
+      }
+    },
+    {
+      "id": "kazuha-e",
+      "request": {
+        "action": "action_facts",
+        "character_id": 10000047,
+        "slot": "skill",
+        "talent_level": 10,
+        "constellation": 0
+      }
+    },
+    {
+      "id": "ayaka-e-p0",
+      "request": {
+        "action": "action_parameter",
+        "character_id": 10000002,
+        "slot": "skill",
+        "talent_level": 10,
+        "constellation": 0,
+        "param_index": 0
+      }
+    },
+    {
+      "id": "kazuha-e-p0",
+      "request": {
+        "action": "action_parameter",
+        "character_id": 10000047,
+        "slot": "skill",
+        "talent_level": 10,
+        "constellation": 0,
+        "param_index": 0
+      }
+    },
+    {
+      "id": "default-icd",
+      "request": {
+        "action": "attenuation_profile",
+        "group": "default"
+      }
+    },
+    {
+      "id": "swirl-water",
+      "request": {
+        "action": "reaction_damage_profile",
+        "element": "hydro"
+      }
+    },
+    {
+      "id": "swirl-ice",
+      "request": {
+        "action": "reaction_damage_profile",
+        "element": "cryo"
+      }
+    },
+    {
+      "id": "explicit-affix",
+      "request": {
+        "action": "assemble",
+        "affix_id": 1113010
+      }
+    }
+  ]
+}

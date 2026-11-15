@@ -1,0 +1,233 @@
+{
+  "profile_id": "equipment-target-state-classic-v1",
+  "profile_version": 2,
+  "commit": "224708edc8056f27e9ffc4eacabe797d75274636",
+  "old_commit": "9424e4e556bd80e5196be7d3c52723d3a35b30e7",
+  "mapping_scope": "exact_admitted_equipment_nodes_only",
+  "fields": {
+    "LFIJIMIMBIH": "modifierMixins",
+    "GLIBANHDMCM": "bonusCritical",
+    "PEAHHNAOMNK": "ignoreEventInfo",
+    "JOFNJODFEDG": "element",
+    "BJAILJMJKMP": "abilityState",
+    "EMGBJJOIENB": "onAdded"
+  },
+  "types": {
+    "KFIBKGLJJAD": "ByAny",
+    "CEIIMCBGCCA": "ByHasElement",
+    "CBHJDCPKILO": "ByHasAbilityState"
+  },
+  "files": [
+    {
+      "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+      "old_source_sha256": "e273a8e4fc5928829bbac96ae61b46003c7bfd95ffe3a24e8b6a080609a409f7",
+      "old_bytes": 456724,
+      "workspace_source_sha256": "75fb6e13556ce18d5855a20eb2f5ab944091c0bf300a39e1b461dbbac0824c2a",
+      "workspace_bytes": 441348,
+      "git_blob_sha256": "7f5151cdc23e85ca9ba5e6a003601710f49030daf94298dd49eb9eb5b429ed77",
+      "git_blob_bytes": 427579,
+      "workspace_git_raw_equal": false,
+      "workspace_git_crlf_normalized_equal": true
+    },
+    {
+      "source_path": "BinOutput/Ability/Temp/TeamAbilities/ConfigAbility_TeamResonance.json",
+      "old_source_sha256": "3678c7bcb17f8c8fee3b8d57650e764cca44f2bfb6371d1861bc70ffb6c04df4",
+      "old_bytes": 42709,
+      "workspace_source_sha256": "2dfceec4e719c38a7ca890346d9e423af43ff6599164fa51e552d4e767e7f75b",
+      "workspace_bytes": 40918,
+      "git_blob_sha256": "4a03b4130a8a433a4f06f66ce1abdeabeba409843177d3e3a8a45a71d38c806e",
+      "git_blob_bytes": 39642,
+      "workspace_git_raw_equal": false,
+      "workspace_git_crlf_normalized_equal": true
+    },
+    {
+      "source_path": "BinOutput/Talent/RelicTalents/ConfigAffix_Relic.json",
+      "old_source_sha256": "5f11748a02b7862d3de3d0d564e918d2df3fedd098191990b220c1d580d5ad97",
+      "old_bytes": 51682,
+      "workspace_source_sha256": "0937b29eb3f02b07aacdc02abdcf0af460ac7cb5cf951207ff626ba27b4052ba",
+      "workspace_bytes": 51344,
+      "git_blob_sha256": "84bf25a63d5c35e00eb829c93946e130099408382560ad4878e31d69afcc822e",
+      "git_blob_bytes": 49341,
+      "workspace_git_raw_equal": false,
+      "workspace_git_crlf_normalized_equal": true
+    },
+    {
+      "source_path": "ExcelBinOutput/EquipAffixExcelConfigData.json",
+      "old_source_sha256": "a033acd70ac085421f2c0eb4eb06c0d74b7676b9a652bfe37881ed0680b089b2",
+      "old_bytes": 561111,
+      "workspace_source_sha256": "67cce4b66ecfae8ab20b4567005ff0e2efa76446af1fcc71d99e8a2383def4e6",
+      "workspace_bytes": 566972,
+      "git_blob_sha256": "1ab75da49770dc042c2cabc5e7603798de7ef82800ce5519fd02e190362586cf",
+      "git_blob_bytes": 533764,
+      "workspace_git_raw_equal": false,
+      "workspace_git_crlf_normalized_equal": true
+    }
+  ],
+  "target": {
+    "ability_source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+    "ability_pointer": "/20/Default",
+    "ability_node_sha256": "eed5593d873eac74b6948ad033bb03ffc4a7010e75cac9a3208a08e0a40c7bf5",
+    "ability_old_node_sha256": "986b810676b3a51babc3be2d223b8d1f2289fc8c696672943128f194614e5dce",
+    "talent_source_path": "BinOutput/Talent/RelicTalents/ConfigAffix_Relic.json",
+    "talent_pointer": "/Relic_CriticUpAgainstIceAndFrozen",
+    "talent_node_sha256": "b0cafb50a14654775ab0fd1e1b390cccbf226a3dfa68a887f3c86c4b81902024",
+    "talent_old_node_sha256": "5c32e09ae396733f1e713e2177c63b26e4b4940f7151b81975b7def2ec109e69",
+    "affix_source_path": "ExcelBinOutput/EquipAffixExcelConfigData.json",
+    "affixes": [
+      {
+        "pointer": "/1299",
+        "node_sha256": "875f11b1ac667d6a0157a7c48697b52f09bd9f5cb5b2bcbffee281d189ffcf03",
+        "record": {
+          "paramList": [
+            0.20000000298023224,
+            0.20000000298023224,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "addProps": [
+            {},
+            {},
+            {}
+          ],
+          "openConfig": "Relic_CriticUpAgainstIceAndFrozen",
+          "affixId": 2140011,
+          "id": 214001,
+          "level": 1,
+          "nameTextMapHash": 933076115,
+          "descTextMapHash": 1080795585
+        }
+      }
+    ]
+  },
+  "admission": {
+    "status": "locally_verified",
+    "collisions": [],
+    "summary": {
+      "LFIJIMIMBIH": {
+        "paired": 11,
+        "holdout_abilities": [
+          "Relci_RangerAttackUp",
+          "Relic_AtkAndExtraAtkUp",
+          "Relic_DamageUpAgainstElectric",
+          "Relic_DamageUpAgainstFireAndBurning",
+          "Relic_ExtraAtkCritUp",
+          "Relic_ExtraAttackCauseSpeedAndDamage",
+          "Relic_MeleeAttackUp",
+          "Relic_NorAndExtraAtkUp",
+          "Relic_SkillDamageUp",
+          "Relic_SpiralAbyss",
+          "Relic_UltHealSelf"
+        ],
+        "unpaired": 38
+      },
+      "GLIBANHDMCM": {
+        "paired": 5,
+        "holdout_abilities": [
+          "Relic_ExtraAtkCritUp",
+          "TeamResonance_Ice_Lv2",
+          "TeamResonance_WhiteBox_All"
+        ],
+        "unpaired": 3
+      },
+      "PEAHHNAOMNK": {
+        "paired": 6,
+        "holdout_abilities": [
+          "Relic_DamageUpAgainstElectric",
+          "Relic_DamageUpAgainstFireAndBurning",
+          "TeamResonance_Ice_Lv2",
+          "TeamResonance_Rock_Lv2"
+        ],
+        "unpaired": 3
+      },
+      "JOFNJODFEDG": {
+        "paired": 11,
+        "holdout_abilities": [
+          "Relic_DamageUpAgainstElectric",
+          "Relic_DamageUpAgainstFireAndBurning",
+          "TeamResonance_Ice_Lv2",
+          "TeamResonance_WhiteBox_All"
+        ],
+        "unpaired": 0
+      },
+      "BJAILJMJKMP": {
+        "paired": 6,
+        "holdout_abilities": [
+          "Relic_DamageUpAgainstFireAndBurning",
+          "Relic_InNyxState_2",
+          "TeamResonance_WhiteBox_All"
+        ],
+        "unpaired": 0
+      },
+      "EMGBJJOIENB": {
+        "paired": 10,
+        "holdout_abilities": [
+          "Relic_AtkAndExtraAtkUp",
+          "Relic_DamageUpAgainstElectric",
+          "Relic_DamageUpAgainstFireAndBurning",
+          "Relic_ExtraAtkCritUp",
+          "Relic_NorAndExtraAtkUp",
+          "Relic_ReactionIceEnhance",
+          "Relic_ShieldEnhanceAtk",
+          "Relic_SkillDamageUp",
+          "TeamResonance_AllDifferent",
+          "TeamResonance_Wind_Lv2"
+        ],
+        "unpaired": 121
+      },
+      "KFIBKGLJJAD": {
+        "paired": 7,
+        "holdout_abilities": [
+          "Relic_DamageUpAgainstElectric",
+          "Relic_DamageUpAgainstFireAndBurning",
+          "TeamResonance_Ice_Lv2",
+          "TeamResonance_WhiteBox_All"
+        ],
+        "unpaired": 2
+      },
+      "CEIIMCBGCCA": {
+        "paired": 11,
+        "holdout_abilities": [
+          "Relic_DamageUpAgainstElectric",
+          "Relic_DamageUpAgainstFireAndBurning",
+          "TeamResonance_Ice_Lv2",
+          "TeamResonance_WhiteBox_All"
+        ],
+        "unpaired": 0
+      },
+      "CBHJDCPKILO": {
+        "paired": 6,
+        "holdout_abilities": [
+          "Relic_DamageUpAgainstFireAndBurning",
+          "Relic_InNyxState_2",
+          "TeamResonance_WhiteBox_All"
+        ],
+        "unpaired": 0
+      }
+    },
+    "evidence_sha256": "1ece396d621505cd27864af6e5875fa33cd85f942ecbbdfcaa75e4144f936e67",
+    "evidence_path": "benchmarks/followup/engine-continuation/ec08-research/condition-mapping-pairs.json"
+  },
+  "unknown_branch_types": [
+    "MDCFKDGKJOL"
+  ],
+  "semantics": {
+    "target_sampling": "event_target_before_application",
+    "evidence_tier": "experimental_reference",
+    "sources": [
+      "https://library.keqingmains.com/evidence/equipment/artifacts#blizzard-strayer",
+      "https://library.keqingmains.com/evidence/equipment/artifacts#4-piece-blizzard-strayer-on-frozen-aura"
+    ],
+    "assumptions": [
+      "固定装备、单人普通Monster单目标，无死亡恢复或外部装备改变",
+      "旧新节点局部结构映射只证明字段身份，不证明整能力执行",
+      "原始-1与默认容器仅按固定场景隔离，不将elementDurability换算GU",
+      "ignoreEventInfo=true与缺省AttachModifier target仅在本装备持久来源投影中采用，不推断一般默认",
+      "Moon/Star未知类型完整保留但隔离；只向owner普通classic命中贡献条件暴率",
+      "目标样本来自已接受的实验冻结参考层，非游戏真值；首击/消耗前条件采用历史KQM证据"
+    ]
+  }
+}

@@ -1,0 +1,120 @@
+{
+  "kind": "genshin-plan",
+  "plan_version": 1,
+  "plan_id": "871f4105-127a-4b55-a869-930a39c69b15",
+  "revision": 0,
+  "manual_template": {
+    "version": 2,
+    "form": "resolved",
+    "meta": {
+      "name": "新装备方案",
+      "version_line": "release"
+    },
+    "enemy": {
+      "level": 90,
+      "resistance": {
+        "default": 0.1
+      }
+    },
+    "characters": [
+      {
+        "id": "char1",
+        "level": 90,
+        "stats": {
+          "atk": 100
+        }
+      }
+    ],
+    "switches": [],
+    "buffs": [],
+    "hits": [
+      {
+        "id": "hit.example",
+        "damage_type_ids": [
+          "damage.other"
+        ],
+        "t": 1,
+        "character": "char1",
+        "skill": "字段示例",
+        "multiplier": 1,
+        "damage_system": "classic",
+        "element": "physical"
+      }
+    ],
+    "loop_duration": 20,
+    "id_registry_version": 1,
+    "type_definitions": {
+      "damage_types": []
+    }
+  },
+  "equipment_inputs": {
+    "char1": {
+      "character_ref": null,
+      "level": 90,
+      "basis": {
+        "mode": "manual",
+        "character_base_atk": 100,
+        "character_base_hp": 10000,
+        "character_base_def": 500,
+        "crit_rate": 0.05,
+        "crit_dmg": 0.5,
+        "energy_recharge": 1,
+        "em": 0,
+        "dmg_bonus": {},
+        "ascension_contributions": [],
+        "source_refs": [
+          {
+            "kind": "manual",
+            "note": "字段与算术示例，不代表真实角色"
+          }
+        ]
+      },
+      "weapon": {
+        "weapon_id": 13501,
+        "level": 90,
+        "ascension": 6,
+        "refinements": [
+          {
+            "source_index": 0,
+            "affix_group_id": 113501,
+            "refinement": 1
+          }
+        ],
+        "selected_by": "agent"
+      },
+      "artifacts": {
+        "EQUIP_BRACER": {
+          "state": "empty",
+          "reason": "示例明确未计入"
+        },
+        "EQUIP_NECKLACE": {
+          "state": "empty",
+          "reason": "示例明确未计入"
+        },
+        "EQUIP_SHOES": {
+          "state": "empty",
+          "reason": "示例明确未计入"
+        },
+        "EQUIP_RING": {
+          "state": "empty",
+          "reason": "示例明确未计入"
+        },
+        "EQUIP_DRESS": {
+          "state": "empty",
+          "reason": "示例明确未计入"
+        }
+      },
+      "manual_contributions": [],
+      "data_version": null
+    }
+  },
+  "effect_bindings": [],
+  "manual_effect_dependencies": [],
+  "rotation_tuning": {
+    "buff_hit_matches": []
+  },
+  "resolution": {
+    "state": "pending"
+  },
+  "resolved_template": null
+}

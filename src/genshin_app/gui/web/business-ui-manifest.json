@@ -1,0 +1,15 @@
+{
+  "contract": "genshin-business-ui-assets-v1",
+  "assets": [
+    {
+      "name": "business-ui.js",
+      "bytes": 289111,
+      "sha256": "2213cfc82e3710b4d693c2efe56e2a7dc4e6b0005d1ec9dd10104747f76783fc"
+    },
+    {
+      "name": "business-ui.js.map",
+      "bytes": 711525,
+      "sha256": "4589aaebf57f5582796b33131b7d0dd63afb23165413b97a3820ba0a86a423a2"
+    }
+  ]
+}

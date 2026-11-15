@@ -1,0 +1,169 @@
+[
+  {
+    "source_path": "BinOutput/Ability/Beyond/AvatarAbilities/ConfigAbility_UGCAvatar_Beyd.json",
+    "old_pointer": "/0/Default/GPPBBDEICKP/UGC_Beyond_MasterSkillManager",
+    "target_pointer": "/0/Default/PGMKHCKJIKM/UGC_Beyond_MasterSkillManager",
+    "old": {
+      "DBGOKAKAHFP": 100,
+      "DOALDLPNGMF": -1,
+      "KFOMCJGGPPC": -1,
+      "LFIJIMIMBIH": [
+        {
+          "$type": "PHMFKABDBNF",
+          "AMOLMPHFPHJ": -1,
+          "OEINJDCKLAN": "defaultLayer"
+        }
+      ],
+      "PPKOPMBNPJH": true
+    },
+    "target": {
+      "BGPBLBIFCEG": [
+        {
+          "$type": "EFNCPPNFPOM",
+          "IBEFFFOLEEA": "defaultLayer",
+          "JFAFOJFANOI": -1
+        }
+      ],
+      "BHCGKKFIPLM": true,
+      "EPNEOIAINHO": 100,
+      "MHPFGBGLFBP": -1,
+      "NMELJIBAKNA": -1
+    },
+    "old_source_sha256": "bbcde04894ca91ff45b773c64529d07a7ce4f3847075f35e3769fa7064604c1f",
+    "target_source_sha256": "8551b459114bf86a206367d9a6739a4f77884b379c19432731662310b1c1c65a"
+  },
+  {
+    "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Common.json",
+    "old_pointer": "/20/Default/FBHJJNMDIPC/0",
+    "target_pointer": "/20/Default/HBNCGKIFKJH/0",
+    "old": {
+      "$type": "AKJIGEAHDCJ",
+      "AMOLMPHFPHJ": -1,
+      "IPFAFECPFAE": [
+        "ElementAbility_MoonShock"
+      ]
+    },
+    "target": {
+      "$type": "FAGBKHDMOHD",
+      "BCDDFEHKKCI": [
+        "ElementAbility_MoonShock"
+      ],
+      "JFAFOJFANOI": -1
+    },
+    "old_source_sha256": "04bc468b160b09cb0a1ddb074e51b2916e4db67379db179136601cefe7519f24",
+    "target_source_sha256": "9ea456f1f70cb62f5e4a12d2ebdea7b27a0b1b8471d811fd0ed60fac4f828e81"
+  },
+  {
+    "source_path": "BinOutput/Ability/Beyond/MonsterAbilities/ConfigAbility_Monster_Slime_Grass_Beyd.json",
+    "old_pointer": "/0/Default/ECFFDLHMCLK/0",
+    "target_pointer": "/0/Default/LALLGDIJKDE/0",
+    "old": {
+      "$type": "DKLODEPOLDC",
+      "AMOLMPHFPHJ": -1,
+      "BDKJJCBBECN": "SelfAttackTarget",
+      "DFLNJNIGJLL": 42001041,
+      "IJDGNIIOHLM": [
+        {
+          "$type": "ECABKBGJOHD",
+          "BDHBNCEEPPK": "Target",
+          "DKCBCJCHEBF": "Lesser",
+          "NPPBCNHJFDK": 30002009,
+          "PDIFFCBMGMO": 6
+        }
+      ],
+      "ILELAOFJIKJ": true,
+      "KGHIIEPKAAM": true,
+      "LJFIEGHHLOB": false,
+      "MLDOBLJCKCK": true,
+      "MLFLDPAGADG": {
+        "$type": "LFADEGOIHMK",
+        "ECPBNJFNBIJ": true,
+        "EEFLHEKBODJ": {
+          "BNJLEBLGEKB": 180
+        },
+        "GMDPALPODJP": "FlowerBud",
+        "GNFICELAKIB": 10,
+        "HECMDGIAGKM": 2,
+        "POPNBJAHNFK": {
+          "ONEHKOHOCBH": 180
+        }
+      }
+    },
+    "target": {
+      "$type": "CDGOFKHGJCN",
+      "BOJOEDHDDDE": true,
+      "CKMMOALFKJD": true,
+      "DHEEJDCOKNK": 42001041,
+      "GKOJAOJDONG": {
+        "$type": "ENPEGKABJIO",
+        "EDNFDDJEAHD": {
+          "OAKAMDIOBJB": 180
+        },
+        "FEHKLGKPJDH": 10,
+        "GOAMCCGFNKC": {
+          "DGLBBHCHJCI": 180
+        },
+        "IPFMGLMOFDN": true,
+        "LCJGNOBKFMD": 2,
+        "LHNNNJJNBHD": "FlowerBud"
+      },
+      "HOGIKPJBLLD": true,
+      "JFAFOJFANOI": -1,
+      "KGFNBEEFDPC": "SelfAttackTarget",
+      "LGHJGALAIPG": false,
+      "LJFDPHDMOBJ": [
+        {
+          "$type": "JHFKCJDICDL",
+          "CKGFMOFGKDL": 30002009,
+          "IFLMIMGJFDC": "Target",
+          "IMGAIGFCEGP": "Lesser",
+          "ONACPNFMBFG": 6
+        }
+      ]
+    },
+    "old_source_sha256": "20b6034732decff98793dc63a16b772a4e12d358caeebd32faf9082d427ba743",
+    "target_source_sha256": "7fa22dd69b9dc97a07ce7f9001cc0528a76c091582ca819d8abe49b13eb0808a"
+  },
+  {
+    "source_path": "BinOutput/Talent/AvatarTalents/ConfigTalent_Aino.json",
+    "old_pointer": "/Aino_Constellation_1/1",
+    "target_pointer": "/Aino_Constellation_1/1",
+    "old": {
+      "$type": "BIAHEMMGABC",
+      "GBPFBNHLOFD": true,
+      "IIBMNPFLNMJ": "Avatar_Aino_Constellation_1",
+      "PCABAADALND": "%1",
+      "PEOJKHKHAKL": "ElemMasteryDelta"
+    },
+    "target": {
+      "$type": "OAHFONDNPOE",
+      "AMFPGNAGNGD": "ElemMasteryDelta",
+      "DKCGFJGMIJG": "%1",
+      "FPHCIKGGOAC": true,
+      "MMMADNCKFLA": "Avatar_Aino_Constellation_1"
+    },
+    "old_source_sha256": "627986b3d5d9626e4dea0b1c0b878a1b18a7d3453889a476f47add3611284070",
+    "target_source_sha256": "f998b46076a789e39411e61a946b8656a69b81210e92b563d20606ba496a094a"
+  },
+  {
+    "source_path": "BinOutput/Ability/Temp/GadgetAbilities/ConfigAbility_Activity_V5_5_CH.json",
+    "old_pointer": "/46/Default/GPPBBDEICKP/UNIQUE_ActivityAbility_Party_Team_LevelEntity/LFIJIMIMBIH/2",
+    "target_pointer": "/46/Default/PGMKHCKJIKM/UNIQUE_ActivityAbility_Party_Team_LevelEntity/BGPBLBIFCEG/2",
+    "old": {
+      "$type": "AKJIGEAHDCJ",
+      "AMOLMPHFPHJ": -1,
+      "IPFAFECPFAE": [
+        "ActivityAbility_Party_Team_PropsPreLoad"
+      ]
+    },
+    "target": {
+      "$type": "FAGBKHDMOHD",
+      "BCDDFEHKKCI": [
+        "ActivityAbility_Party_Team_PropsPreLoad"
+      ],
+      "JFAFOJFANOI": -1
+    },
+    "old_source_sha256": "26586ebe08399c715ba8d28781bc642870b8f0f081142075c14a7b9dfe724d1b",
+    "target_source_sha256": "a028145b2647fc377447402c9b111eab053a113ca40c3aaa701dd1936bf66992"
+  }
+]

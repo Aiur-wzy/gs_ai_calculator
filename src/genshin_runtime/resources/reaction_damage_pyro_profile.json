@@ -1,0 +1,26 @@
+{
+  "recipe_id": "ordinary-swirl-pyro-origin-source-224708ed-v2",
+  "recipe_version": 2,
+  "base_recipe_id": "ordinary-swirl-origin-source-224708ed-v2",
+  "commit": "224708edc8056f27e9ffc4eacabe797d75274636",
+  "element": {
+    "ability_name": "ElementAbility_Swirl_Fire",
+    "modifier_name": "Swirl_Fire",
+    "expected_node_sha256": "72be132c1b06615b7066934620f6eceed84899b402800968196715613533d41e",
+    "old_ability_pointer": "/29/Default"
+  },
+  "evidence": {
+    "method": "independent_exact_unique_fire_ability_old_new_pointer_and_leaf_shape_comparison",
+    "new_ability_pointer": "/29/Default",
+    "old_ability_pointer": "/29/Default",
+    "new_origin_attack_pointer": "/29/Default/GPPBBDEICKP/Swirl_Fire/EMGBJJOIENB/2",
+    "old_origin_attack_pointer": "/29/Default/modifiers/Swirl_Fire/onAdded/2",
+    "origin_type": "DamageByAttackValue",
+    "origin_element": "Fire",
+    "origin_attack_tag": "Self_Swirl_FireDamage",
+    "origin_attenuation_group": "ElementReaction_Damage_Attenuation_1",
+    "checked_field_occurrences": 126,
+    "checked_type_occurrences": 18,
+    "scope": "Only ordinary Fire origin-target damage sequence relation; opaque nodes, native attacker/defaults, Alter, Star and propagation are not execution evidence."
+  }
+}

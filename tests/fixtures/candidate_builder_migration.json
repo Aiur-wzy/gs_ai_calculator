@@ -1,0 +1,193 @@
+{
+  "contract_id": "candidate-builder-test-migration-v2",
+  "retired_entrypoint": "genshin_db.pipeline.run_update",
+  "production_entrypoint": "genshin_db.pipeline.build_candidate_database",
+  "fixture_adapter": "tests.fixture_candidate_builder.build_database",
+  "classes": {
+    "shared_component_fixture": "Builds isolated marker-free synthetic fixtures with the exact production component/verification/publication stages; no second backup/import-log/concurrent-merge transaction."
+  },
+  "entries": [
+    {
+      "path": "tests/test_action_events.py",
+      "class": "shared_component_fixture"
+    },
+    {
+      "path": "tests/test_action_events_review.py",
+      "class": "shared_component_fixture"
+    },
+    {
+      "path": "tests/test_attack_metadata_review.py",
+      "class": "shared_component_fixture"
+    },
+    {
+      "path": "tests/test_calc_snapshot_review.py",
+      "class": "shared_component_fixture"
+    },
+    {
+      "path": "tests/test_candidate_build_stages.py",
+      "class": "shared_component_fixture"
+    },
+    {
+      "path": "tests/test_equipment.py",
+      "class": "shared_component_fixture"
+    },
+    {
+      "path": "tests/test_hit_parameters_review.py",
+      "class": "shared_component_fixture"
+    },
+    {
+      "path": "tests/test_passive_source_review.py",
+      "class": "shared_component_fixture"
+    },
+    {
+      "path": "tests/test_periodic_actions_review.py",
+      "class": "shared_component_fixture"
+    },
+    {
+      "path": "tests/test_periodic_source_review.py",
+      "class": "shared_component_fixture"
+    },
+    {
+      "path": "tests/test_pipeline.py",
+      "class": "shared_component_fixture"
+    },
+    {
+      "path": "tests/test_runtime_action_facts.py",
+      "class": "shared_component_fixture"
+    },
+    {
+      "path": "tests/test_runtime_action_facts_review.py",
+      "class": "shared_component_fixture"
+    },
+    {
+      "path": "tests/test_runtime_action_level_context.py",
+      "class": "shared_component_fixture"
+    },
+    {
+      "path": "tests/test_runtime_action_level_public_review.py",
+      "class": "shared_component_fixture"
+    },
+    {
+      "path": "tests/test_runtime_action_parameter.py",
+      "class": "shared_component_fixture"
+    },
+    {
+      "path": "tests/test_runtime_action_resource.py",
+      "class": "shared_component_fixture"
+    },
+    {
+      "path": "tests/test_runtime_action_resource_review.py",
+      "class": "shared_component_fixture"
+    },
+    {
+      "path": "tests/test_runtime_attack_metadata.py",
+      "class": "shared_component_fixture"
+    },
+    {
+      "path": "tests/test_runtime_attenuation.py",
+      "class": "shared_component_fixture"
+    },
+    {
+      "path": "tests/test_runtime_batch_review.py",
+      "class": "shared_component_fixture"
+    },
+    {
+      "path": "tests/test_runtime_indexer4.py",
+      "class": "shared_component_fixture"
+    },
+    {
+      "path": "tests/test_runtime_indexer4_review.py",
+      "class": "shared_component_fixture"
+    },
+    {
+      "path": "tests/test_runtime_material_index.py",
+      "class": "shared_component_fixture"
+    },
+    {
+      "path": "tests/test_runtime_normalization_store.py",
+      "class": "shared_component_fixture"
+    },
+    {
+      "path": "tests/test_runtime_object_index.py",
+      "class": "shared_component_fixture"
+    },
+    {
+      "path": "tests/test_runtime_passive_source.py",
+      "class": "shared_component_fixture"
+    },
+    {
+      "path": "tests/test_runtime_periodic_attack.py",
+      "class": "shared_component_fixture"
+    },
+    {
+      "path": "tests/test_runtime_physical_index.py",
+      "class": "shared_component_fixture"
+    },
+    {
+      "path": "tests/test_runtime_physical_index_review.py",
+      "class": "shared_component_fixture"
+    },
+    {
+      "path": "tests/test_runtime_reaction_damage.py",
+      "class": "shared_component_fixture"
+    },
+    {
+      "path": "tests/test_runtime_reaction_f11cf545.py",
+      "class": "shared_component_fixture"
+    },
+    {
+      "path": "tests/test_runtime_store.py",
+      "class": "shared_component_fixture"
+    },
+    {
+      "path": "tests/test_runtime_talent_level.py",
+      "class": "shared_component_fixture"
+    },
+    {
+      "path": "tests/test_runtime_talent_level_review.py",
+      "class": "shared_component_fixture"
+    },
+    {
+      "path": "tests/test_semantic_cli.py",
+      "class": "shared_component_fixture"
+    },
+    {
+      "path": "tests/test_semantic_pipeline.py",
+      "class": "shared_component_fixture"
+    },
+    {
+      "path": "tests/test_semantic_public_metadata.py",
+      "class": "shared_component_fixture"
+    },
+    {
+      "path": "tests/test_talent_level_app.py",
+      "class": "shared_component_fixture"
+    }
+  ],
+  "formal_contract_tests": [
+    "tests/test_incremental_candidate.py",
+    "tests/test_candidate_build_stages.py",
+    "tests/test_database_release_migration.py"
+  ],
+  "retirement_guards": [
+    "tests/test_live_mutation_policy.py",
+    "tests/test_core_data_runtime_architecture.py"
+  ],
+  "retired_cases": [
+    {
+      "path": "tests/test_pipeline.py",
+      "test": "test_process_writes_after_migration_use_new_database",
+      "reason": "Obsolete B-path streaming writes into a database while replacing it. Current accepted database is immutable; actual release installer writer-fence and immutable-content tests cover the preserved safety requirements."
+    },
+    {
+      "path": "tests/test_runtime_physical_index.py",
+      "test": "test_candidate_wal_after_success_log_is_not_published",
+      "reason": "Removed the obsolete import-log-success hook. New production candidate WAL admission is covered by test_review_active_candidate_wal_is_retained_and_never_replaces_live; source base remains unchanged."
+    },
+    {
+      "path": "tests/test_runtime_physical_index_review.py",
+      "test": "test_review_late_cross_process_writes_wait_then_use_published_or_original_db",
+      "reason": "Obsolete mutable B-path writer/backup transaction. New accepted DB is immutable. Actual release installation lock contention/rollback and base-drift rejection tests retain the safety boundary."
+    }
+  ]
+}

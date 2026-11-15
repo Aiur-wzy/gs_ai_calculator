@@ -1,0 +1,722 @@
+{
+  "contract": "genshin-dsh-client-accepted-manifest-v1",
+  "contractVersion": 1,
+  "dshRelease": "0.2.1-rc.5",
+  "dshCommit": "d4db512",
+  "bootstrapScriptSha256": "1fe3756411cfa8bd9c93e5d4adfa77ac8f956770fdad4243b688386eabc40e49",
+  "platformModules": [
+    "react",
+    "react/jsx-runtime",
+    "react-dom",
+    "react-dom/client",
+    "@deepseek-ai/cordis",
+    "zod",
+    "@tanstack/react-virtual",
+    "@deepseek-ai/dsh-client-store",
+    "@deepseek-ai/dsh-client-ui-slots",
+    "@deepseek-ai/dsh-client-ui-primitives",
+    "@deepseek-ai/dsh-client-ui-dockkit"
+  ],
+  "entryOrder": [
+    "@deepseek-ai/dsh-client-connection",
+    "@deepseek-ai/dsh-typert-registry",
+    "@deepseek-ai/dsh-api-gateway",
+    "@deepseek-ai/dsh-api-remote-access",
+    "@deepseek-ai/dsh-api-remotes",
+    "@deepseek-ai/dsh-api-session-controller",
+    "@deepseek-ai/dsh-api-workspace-controller",
+    "@deepseek-ai/dsh-client-file-upload",
+    "@deepseek-ai/dsh-client-locale",
+    "@deepseek-ai/dsh-client-shortcuts",
+    "@deepseek-ai/dsh-client-resources",
+    "@deepseek-ai/dsh-client-ui-renderer",
+    "@deepseek-ai/dsh-client-ui-settings",
+    "@deepseek-ai/dsh-client-ui-session",
+    "@deepseek-ai/dsh-client-ui-theme",
+    "@deepseek-ai/dsh-client-ui-layout",
+    "@deepseek-ai/dsh-client-ui-sidebar",
+    "@deepseek-ai/dsh-client-ui-sidebar-right",
+    "@deepseek-ai/dsh-client-ui-workspace",
+    "@deepseek-ai/dsh-client-ui-input-trigger",
+    "@deepseek-ai/dsh-client-ui-conversation",
+    "@deepseek-ai/dsh-client-ui-chat",
+    "@deepseek-ai/dsh-client-ui-tool",
+    "@deepseek-ai/dsh-client-ui-trajectory",
+    "@deepseek-ai/dsh-client-ui-user-questions",
+    "@deepseek-ai/dsh-client-ui-approval",
+    "@deepseek-ai/dsh-client-ui-message-feedback",
+    "@deepseek-ai/dsh-client-ui-commands",
+    "@deepseek-ai/dsh-client-ui-settings-general",
+    "@deepseek-ai/dsh-client-ui-model-selection",
+    "@deepseek-ai/dsh-client-modules",
+    "@deepseek-ai/dsh-api-job-controller",
+    "@deepseek-ai/dsh-cordis-client-runner",
+    "@deepseek-ai/dsh-client-ui-jobs",
+    "@deepseek-ai/dsh-client-ui-permission-presets",
+    "@deepseek-ai/dsh-client-ui-subagent",
+    "@deepseek-ai/dsh-client-ui-cordis",
+    "@deepseek-ai/dsh-client-ui-plugin-manager",
+    "@deepseek-ai/dsh-client-ui-settings-agent-loop",
+    "@deepseek-ai/dsh-client-ui-settings-shell",
+    "@deepseek-ai/dsh-client-ui-settings-subagent",
+    "@deepseek-ai/dsh-client-ui-settings-web-search",
+    "@deepseek-ai/dsh-client-ui-settings-models",
+    "@deepseek-ai/dsh-client-ui-settings-plugins",
+    "@deepseek-ai/dsh-client-ui-settings-plugin-inventory",
+    "@deepseek-ai/dsh-client-ui-settings-session-log",
+    "@deepseek-ai/dsh-client-ui-agent-preset",
+    "@genshin-calc/dsh-client-domain"
+  ],
+  "runtimeGraph": {
+    "batchPolicy": "single-entry-canonical-v1",
+    "bootstrapEntry": "@deepseek-ai/dsh-client-modules",
+    "bundleUrlShape": "plugins/??{entry-id}/client.js&rev={12-lower-hex}",
+    "exactTerminalTrailer": "//# sourceMappingURL=??{entry-id}/client.js.map&rev={12-lower-hex}\\n"
+  },
+  "entries": [
+    {
+      "id": "@deepseek-ai/dsh-client-connection",
+      "inject": [],
+      "external": [],
+      "immediately": true,
+      "executableSha256": "285f63824225a3c1758707c85c8808f9ab8a1281c274788eaa6a0e00cf0eda14",
+      "executableBytes": 60560
+    },
+    {
+      "id": "@deepseek-ai/dsh-typert-registry",
+      "inject": [],
+      "external": [],
+      "immediately": true,
+      "executableSha256": "b790986d2b3cfbd6776d62018a0d0d2c6a65d4595cc2ee1fd81200d98d34c1d4",
+      "executableBytes": 26091
+    },
+    {
+      "id": "@deepseek-ai/dsh-api-gateway",
+      "inject": [
+        "@deepseek-ai/dsh-typert-registry",
+        "@deepseek-ai/dsh-client-connection"
+      ],
+      "external": [],
+      "immediately": true,
+      "executableSha256": "bbe0e734395e94261ada2b080d626d00a331c774a7efaf2b5beafaf38f699865",
+      "executableBytes": 84086
+    },
+    {
+      "id": "@deepseek-ai/dsh-api-remote-access",
+      "inject": [
+        "@deepseek-ai/dsh-api-gateway",
+        "@deepseek-ai/dsh-client-ui-renderer"
+      ],
+      "external": [
+        "@deepseek-ai/dsh-api-gateway/client"
+      ],
+      "immediately": false,
+      "executableSha256": "67265a56c9c5f9a8d598c2dfa45d09ac38e4ffd5ecad75270481230575abda01",
+      "executableBytes": 25142
+    },
+    {
+      "id": "@deepseek-ai/dsh-api-remotes",
+      "inject": [
+        "@deepseek-ai/dsh-api-gateway"
+      ],
+      "external": [],
+      "immediately": true,
+      "executableSha256": "f611b7160caf321ff5cacf27c24ed38aebf0dbfaf16255a8620f9ef8ab523884",
+      "executableBytes": 1087449
+    },
+    {
+      "id": "@deepseek-ai/dsh-api-session-controller",
+      "inject": [
+        "@deepseek-ai/dsh-api-gateway",
+        "@deepseek-ai/dsh-client-file-upload"
+      ],
+      "external": [
+        "@deepseek-ai/dsh-api-gateway/client"
+      ],
+      "immediately": false,
+      "executableSha256": "42ac705ec4cdf68a45eb24f669c815832c3b09b6a337faa8f7254348680b3d4f",
+      "executableBytes": 166535
+    },
+    {
+      "id": "@deepseek-ai/dsh-api-workspace-controller",
+      "inject": [
+        "@deepseek-ai/dsh-api-gateway",
+        "@deepseek-ai/dsh-client-connection"
+      ],
+      "external": [
+        "@deepseek-ai/dsh-api-gateway/client"
+      ],
+      "immediately": false,
+      "executableSha256": "8c40c76676af7caa1acf1e4797c70fbdcecbf032e18562bf8e97ef68bf8997d5",
+      "executableBytes": 20581
+    },
+    {
+      "id": "@deepseek-ai/dsh-client-file-upload",
+      "inject": [
+        "@deepseek-ai/dsh-api-remotes"
+      ],
+      "external": [],
+      "immediately": true,
+      "executableSha256": "c698754fac86b389bf328b02b0f22d594218670697fcc15895dc4859f9860074",
+      "executableBytes": 11669
+    },
+    {
+      "id": "@deepseek-ai/dsh-client-locale",
+      "inject": [
+        "@deepseek-ai/dsh-client-connection",
+        "@deepseek-ai/dsh-client-ui-renderer",
+        "@deepseek-ai/dsh-client-ui-settings",
+        "@deepseek-ai/dsh-api-remotes"
+      ],
+      "external": [],
+      "immediately": true,
+      "executableSha256": "9a31e20e620a237e698719a8aea43130bc6da956fad3b7441a92eb9ac9996a1f",
+      "executableBytes": 62920
+    },
+    {
+      "id": "@deepseek-ai/dsh-client-shortcuts",
+      "inject": [
+        "@deepseek-ai/dsh-client-locale"
+      ],
+      "external": [],
+      "immediately": false,
+      "executableSha256": "e09317261b4538ab274e0f57a5fa9c5c4932b73b80e55298d69d4091a9f0eeb2",
+      "executableBytes": 100608
+    },
+    {
+      "id": "@deepseek-ai/dsh-client-resources",
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-renderer"
+      ],
+      "external": [],
+      "immediately": false,
+      "executableSha256": "9e787946e73d4643c0e27027e1f9f93ba6df4363864af98c678729e5b7706610",
+      "executableBytes": 5779
+    },
+    {
+      "id": "@deepseek-ai/dsh-client-ui-renderer",
+      "inject": [],
+      "external": [],
+      "immediately": true,
+      "executableSha256": "482a09ddbcef87ea9bc092dea039339178fc63f9ed894d78d8b1d99fa96824a4",
+      "executableBytes": 78266
+    },
+    {
+      "id": "@deepseek-ai/dsh-client-ui-settings",
+      "inject": [
+        "@deepseek-ai/dsh-api-remotes"
+      ],
+      "external": [],
+      "immediately": false,
+      "executableSha256": "b7a7dd01233bcee2295f235ac6330f90721446e7226fa579591b14b31a13e81b",
+      "executableBytes": 57723
+    },
+    {
+      "id": "@deepseek-ai/dsh-client-ui-session",
+      "inject": [
+        "@deepseek-ai/dsh-api-remote-access",
+        "@deepseek-ai/dsh-api-remotes",
+        "@deepseek-ai/dsh-api-session-controller",
+        "@deepseek-ai/dsh-client-ui-renderer"
+      ],
+      "external": [],
+      "immediately": false,
+      "executableSha256": "0a4fb138f235bbc8f100ea52db8fc77d23eaefeff577d3d78df261f026d80f3c",
+      "executableBytes": 39955
+    },
+    {
+      "id": "@deepseek-ai/dsh-client-ui-theme",
+      "inject": [
+        "@deepseek-ai/dsh-client-connection",
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-client-shortcuts",
+        "@deepseek-ai/dsh-client-ui-renderer",
+        "@deepseek-ai/dsh-client-ui-settings",
+        "@deepseek-ai/dsh-api-remotes"
+      ],
+      "external": [],
+      "immediately": true,
+      "executableSha256": "7ba0b81e6a975819c4578963ec3efc8ef76b12081761dc98198b2350ff7fe3a5",
+      "executableBytes": 120581
+    },
+    {
+      "id": "@deepseek-ai/dsh-client-ui-layout",
+      "inject": [
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-client-ui-renderer",
+        "@deepseek-ai/dsh-client-ui-session",
+        "@deepseek-ai/dsh-client-ui-theme",
+        "@deepseek-ai/dsh-client-shortcuts"
+      ],
+      "external": [],
+      "immediately": false,
+      "executableSha256": "70e964e2bd736eae0b114a0f6dcda849c562063658b8e834d19a45d03bd1459d",
+      "executableBytes": 32792
+    },
+    {
+      "id": "@deepseek-ai/dsh-client-ui-sidebar",
+      "inject": [
+        "@deepseek-ai/dsh-api-workspace-controller",
+        "@deepseek-ai/dsh-client-ui-renderer",
+        "@deepseek-ai/dsh-client-ui-layout",
+        "@deepseek-ai/dsh-client-ui-session",
+        "@deepseek-ai/dsh-client-ui-workspace",
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-client-shortcuts"
+      ],
+      "external": [],
+      "immediately": false,
+      "executableSha256": "8d953da4735e210508be5504f648a17d33705da867c27a1ebf42f3dbaf96fd89",
+      "executableBytes": 36844
+    },
+    {
+      "id": "@deepseek-ai/dsh-client-ui-sidebar-right",
+      "inject": [
+        "@deepseek-ai/dsh-api-session-controller",
+        "@deepseek-ai/dsh-client-resources",
+        "@deepseek-ai/dsh-client-ui-conversation",
+        "@deepseek-ai/dsh-client-ui-layout",
+        "@deepseek-ai/dsh-client-ui-session",
+        "@deepseek-ai/dsh-client-shortcuts"
+      ],
+      "external": [],
+      "immediately": false,
+      "executableSha256": "c04f65f4a6ab3b440527301d8db6ae2a251f0633aaf43ab905548f6b86f96983",
+      "executableBytes": 195959
+    },
+    {
+      "id": "@deepseek-ai/dsh-client-ui-workspace",
+      "inject": [
+        "@deepseek-ai/dsh-api-remote-access",
+        "@deepseek-ai/dsh-api-remotes",
+        "@deepseek-ai/dsh-api-session-controller",
+        "@deepseek-ai/dsh-api-workspace-controller",
+        "@deepseek-ai/dsh-client-connection",
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-client-shortcuts",
+        "@deepseek-ai/dsh-client-ui-conversation",
+        "@deepseek-ai/dsh-client-ui-layout",
+        "@deepseek-ai/dsh-client-ui-renderer",
+        "@deepseek-ai/dsh-client-ui-session",
+        "@deepseek-ai/dsh-client-ui-sidebar"
+      ],
+      "external": [],
+      "immediately": false,
+      "executableSha256": "1cde214691d2bfa746492df28b7426ce9bb6a92f3e410f751745d93d95c8b308",
+      "executableBytes": 232791
+    },
+    {
+      "id": "@deepseek-ai/dsh-client-ui-input-trigger",
+      "inject": [
+        "@deepseek-ai/dsh-api-session-controller",
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-client-ui-conversation",
+        "@deepseek-ai/dsh-client-ui-renderer"
+      ],
+      "external": [],
+      "immediately": false,
+      "executableSha256": "9058d89c1b3437a7834859c9000a0b7c50dbc84f36b739749177eaba7dc03d18",
+      "executableBytes": 77088
+    },
+    {
+      "id": "@deepseek-ai/dsh-client-ui-conversation",
+      "inject": [
+        "@deepseek-ai/dsh-api-session-controller",
+        "@deepseek-ai/dsh-client-file-upload",
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-client-ui-layout",
+        "@deepseek-ai/dsh-client-ui-renderer",
+        "@deepseek-ai/dsh-client-ui-session",
+        "@deepseek-ai/dsh-client-ui-settings",
+        "@deepseek-ai/dsh-client-ui-workspace"
+      ],
+      "external": [],
+      "immediately": false,
+      "executableSha256": "a61a641b4c37b15e5c3a85f5d7794dc56eaca5fef3ae9e24f41725f57ea253d5",
+      "executableBytes": 782910
+    },
+    {
+      "id": "@deepseek-ai/dsh-client-ui-chat",
+      "inject": [
+        "@deepseek-ai/dsh-api-session-controller",
+        "@deepseek-ai/dsh-api-workspace-controller",
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-client-ui-conversation",
+        "@deepseek-ai/dsh-client-ui-input-trigger",
+        "@deepseek-ai/dsh-client-ui-layout",
+        "@deepseek-ai/dsh-client-ui-renderer",
+        "@deepseek-ai/dsh-client-ui-session",
+        "@deepseek-ai/dsh-client-ui-settings",
+        "@deepseek-ai/dsh-client-ui-sidebar-right",
+        "@deepseek-ai/dsh-client-ui-workspace"
+      ],
+      "external": [],
+      "immediately": false,
+      "executableSha256": "6e180f00f1233661d9a630062e3c491349be44636a716839f930dfe862cc7a49",
+      "executableBytes": 595491
+    },
+    {
+      "id": "@deepseek-ai/dsh-client-ui-tool",
+      "inject": [
+        "@deepseek-ai/dsh-api-workspace-controller",
+        "@deepseek-ai/dsh-client-connection",
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-client-ui-conversation"
+      ],
+      "external": [],
+      "immediately": false,
+      "executableSha256": "10f76f6924ae81103f0a54f3f51f2178be1a029bee6235c8aa3ca5f29d7f10d2",
+      "executableBytes": 198264
+    },
+    {
+      "id": "@deepseek-ai/dsh-client-ui-trajectory",
+      "inject": [
+        "@deepseek-ai/dsh-api-session-controller",
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-client-ui-conversation",
+        "@deepseek-ai/dsh-client-ui-renderer",
+        "@deepseek-ai/dsh-client-ui-session"
+      ],
+      "external": [],
+      "immediately": false,
+      "executableSha256": "1fd0b6100bd51822da6c6616523f47ac63c485ca4dae97b81c46a9ed18d6e5f1",
+      "executableBytes": 398733
+    },
+    {
+      "id": "@deepseek-ai/dsh-client-ui-user-questions",
+      "inject": [
+        "@deepseek-ai/dsh-api-remotes",
+        "@deepseek-ai/dsh-api-session-controller",
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-client-ui-conversation",
+        "@deepseek-ai/dsh-client-ui-renderer",
+        "@deepseek-ai/dsh-client-ui-session",
+        "@deepseek-ai/dsh-client-ui-chat"
+      ],
+      "external": [],
+      "immediately": false,
+      "executableSha256": "d74dc20135a3bb9307f1c78f80bc1c96784abe0417c6495f7b01ddfcca4bcef0",
+      "executableBytes": 89488
+    },
+    {
+      "id": "@deepseek-ai/dsh-client-ui-approval",
+      "inject": [
+        "@deepseek-ai/dsh-api-remotes",
+        "@deepseek-ai/dsh-api-session-controller",
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-client-ui-conversation",
+        "@deepseek-ai/dsh-client-ui-renderer",
+        "@deepseek-ai/dsh-client-ui-session"
+      ],
+      "external": [],
+      "immediately": false,
+      "executableSha256": "6e9db75187e9531bb184237c187239b2c170ea518a7c69d7ef0a7bae61ffc4ae",
+      "executableBytes": 14356
+    },
+    {
+      "id": "@deepseek-ai/dsh-client-ui-message-feedback",
+      "inject": [
+        "@deepseek-ai/dsh-api-remotes",
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-client-ui-conversation",
+        "@deepseek-ai/dsh-client-ui-renderer",
+        "@deepseek-ai/dsh-client-ui-commands"
+      ],
+      "external": [],
+      "immediately": false,
+      "executableSha256": "d59d052017a1ef20838eea41b459015e8e6f23c491ecb5cdc928f7088175caa4",
+      "executableBytes": 34379
+    },
+    {
+      "id": "@deepseek-ai/dsh-client-ui-commands",
+      "inject": [
+        "@deepseek-ai/dsh-api-remotes",
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-client-ui-input-trigger",
+        "@deepseek-ai/dsh-client-ui-conversation"
+      ],
+      "external": [],
+      "immediately": false,
+      "executableSha256": "8ec6e6de24641d3ebcb6a9575831129f09312a0ae8da984bde811ee5f312e41a",
+      "executableBytes": 80912
+    },
+    {
+      "id": "@deepseek-ai/dsh-client-ui-settings-general",
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-settings",
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-client-connection",
+        "@deepseek-ai/dsh-api-remotes",
+        "@deepseek-ai/dsh-client-ui-sidebar",
+        "@deepseek-ai/dsh-client-shortcuts",
+        "@deepseek-ai/dsh-client-modules",
+        "@deepseek-ai/dsh-client-ui-layout"
+      ],
+      "external": [],
+      "immediately": false,
+      "executableSha256": "2528014e9d4177cdb0fb7a9371d195ca0bb89873564dd1f448e010e911216e43",
+      "executableBytes": 59747
+    },
+    {
+      "id": "@deepseek-ai/dsh-client-ui-model-selection",
+      "inject": [
+        "@deepseek-ai/dsh-api-session-controller",
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-client-ui-commands",
+        "@deepseek-ai/dsh-api-remotes"
+      ],
+      "external": [],
+      "immediately": false,
+      "executableSha256": "632edb693f286c475cf709c2bcba7e0ae00df862712c892e95a59f2bb1fa27a0",
+      "executableBytes": 79552
+    },
+    {
+      "id": "@deepseek-ai/dsh-client-modules",
+      "inject": [],
+      "external": [],
+      "immediately": true,
+      "executableSha256": "edd5b08f5a4982e5282fceac29d17cad41ce443b90d2f7d5d8cdc193a6cb8048",
+      "executableBytes": 46259
+    },
+    {
+      "id": "@deepseek-ai/dsh-api-job-controller",
+      "inject": [
+        "@deepseek-ai/dsh-api-gateway",
+        "@deepseek-ai/dsh-client-connection"
+      ],
+      "external": [
+        "@deepseek-ai/dsh-api-gateway/client"
+      ],
+      "immediately": false,
+      "executableSha256": "c4e828ba43eaeef039e18e9e10c3e63d43fee283f4e51f0ab501198afb9f26b3",
+      "executableBytes": 11997
+    },
+    {
+      "id": "@deepseek-ai/dsh-cordis-client-runner",
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-renderer",
+        "@deepseek-ai/dsh-api-remotes",
+        "@deepseek-ai/dsh-client-modules",
+        "@deepseek-ai/dsh-client-ui-theme"
+      ],
+      "external": [],
+      "immediately": false,
+      "executableSha256": "410fe3a166ef86eaeaf1d338f82e2d161a4039db3309798a554b7b8a43611200",
+      "executableBytes": 411753
+    },
+    {
+      "id": "@deepseek-ai/dsh-client-ui-jobs",
+      "inject": [
+        "@deepseek-ai/dsh-api-job-controller",
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-client-ui-conversation",
+        "@deepseek-ai/dsh-client-ui-primitives"
+      ],
+      "external": [],
+      "immediately": false,
+      "executableSha256": "c9f226163a8c1e720d6dcb1b3c871a91093329c0fc8573e2fe0942781e66807c",
+      "executableBytes": 32573
+    },
+    {
+      "id": "@deepseek-ai/dsh-client-ui-permission-presets",
+      "inject": [
+        "@deepseek-ai/dsh-api-session-controller",
+        "@deepseek-ai/dsh-client-connection",
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-client-ui-commands",
+        "@deepseek-ai/dsh-client-ui-conversation",
+        "@deepseek-ai/dsh-api-remotes",
+        "@deepseek-ai/dsh-client-ui-settings"
+      ],
+      "external": [],
+      "immediately": false,
+      "executableSha256": "86a77fafc772af342f632f5edf1ea6f8ddc7c01f242af1e43faa7e5841503a8d",
+      "executableBytes": 37052
+    },
+    {
+      "id": "@deepseek-ai/dsh-client-ui-subagent",
+      "inject": [
+        "@deepseek-ai/dsh-api-session-controller",
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-client-resources",
+        "@deepseek-ai/dsh-client-ui-chat",
+        "@deepseek-ai/dsh-client-ui-conversation",
+        "@deepseek-ai/dsh-client-ui-primitives",
+        "@deepseek-ai/dsh-client-ui-sidebar-right",
+        "@deepseek-ai/dsh-client-ui-input-trigger",
+        "@deepseek-ai/dsh-client-ui-workspace"
+      ],
+      "external": [],
+      "immediately": false,
+      "executableSha256": "9975b0e9d09058f156bd2625a3708e2819d1b030a5faf3357b6a4ea249ac30f7",
+      "executableBytes": 49716
+    },
+    {
+      "id": "@deepseek-ai/dsh-client-ui-cordis",
+      "inject": [
+        "@deepseek-ai/dsh-client-connection",
+        "@deepseek-ai/dsh-cordis-client-runner",
+        "@deepseek-ai/dsh-api-remotes",
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-client-ui-renderer",
+        "@deepseek-ai/dsh-client-ui-session",
+        "@deepseek-ai/dsh-client-ui-tool",
+        "@deepseek-ai/dsh-client-ui-sidebar"
+      ],
+      "external": [],
+      "immediately": false,
+      "executableSha256": "4bf34dfaa6d6fb25673d38780b94cdcf09179cdda75e866939f7ec7e47920b52",
+      "executableBytes": 75452
+    },
+    {
+      "id": "@deepseek-ai/dsh-client-ui-plugin-manager",
+      "inject": [
+        "@deepseek-ai/dsh-api-remotes",
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-client-ui-layout",
+        "@deepseek-ai/dsh-client-ui-sidebar"
+      ],
+      "external": [],
+      "immediately": false,
+      "executableSha256": "9ad7b38836d1bc196629751f2e11577608abf7f381023e9034263a3873f421d2",
+      "executableBytes": 626604
+    },
+    {
+      "id": "@deepseek-ai/dsh-client-ui-settings-agent-loop",
+      "inject": [
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-client-ui-settings",
+        "@deepseek-ai/dsh-client-ui-plugin-manager"
+      ],
+      "external": [],
+      "immediately": false,
+      "executableSha256": "3d5161ffe1198722fbd38dbfd3f0ee313d1b43adbd54b95adec58716752649ff",
+      "executableBytes": 6207
+    },
+    {
+      "id": "@deepseek-ai/dsh-client-ui-settings-shell",
+      "inject": [
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-client-ui-settings",
+        "@deepseek-ai/dsh-client-ui-plugin-manager"
+      ],
+      "external": [],
+      "immediately": false,
+      "executableSha256": "25462a37e143d1ee6353d5c6073484163b51fa01cf83d629818c0bbbfff6ea88",
+      "executableBytes": 7271
+    },
+    {
+      "id": "@deepseek-ai/dsh-client-ui-settings-subagent",
+      "inject": [
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-client-ui-settings",
+        "@deepseek-ai/dsh-client-ui-plugin-manager",
+        "@deepseek-ai/dsh-api-remotes"
+      ],
+      "external": [],
+      "immediately": false,
+      "executableSha256": "843a91187720deb2ac75bc9b3d4ec3b52e364ce43ec7801358600bd3dfa35a59",
+      "executableBytes": 38444
+    },
+    {
+      "id": "@deepseek-ai/dsh-client-ui-settings-web-search",
+      "inject": [
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-client-ui-settings",
+        "@deepseek-ai/dsh-client-ui-plugin-manager",
+        "@deepseek-ai/dsh-api-remotes"
+      ],
+      "external": [],
+      "immediately": false,
+      "executableSha256": "2435944495645606921257b5fbc9c667b4c25744f76aa6fe467e2be9db458a86",
+      "executableBytes": 21975
+    },
+    {
+      "id": "@deepseek-ai/dsh-client-ui-settings-models",
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-settings",
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-api-remotes"
+      ],
+      "external": [],
+      "immediately": false,
+      "executableSha256": "57242f2e1a57986ea2386b65e53b76e99fd66e672fec9c5302c0bc10524a7097",
+      "executableBytes": 211225
+    },
+    {
+      "id": "@deepseek-ai/dsh-client-ui-settings-plugins",
+      "inject": [
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-client-ui-settings"
+      ],
+      "external": [],
+      "immediately": false,
+      "executableSha256": "04edda530de4f09b2fbcefd87bcca98be15c458b74db2fa33654ab24322389c7",
+      "executableBytes": 9706
+    },
+    {
+      "id": "@deepseek-ai/dsh-client-ui-settings-plugin-inventory",
+      "inject": [
+        "@deepseek-ai/dsh-api-remotes",
+        "@deepseek-ai/dsh-client-ui-settings",
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-client-ui-agent-preset",
+        "@deepseek-ai/dsh-client-modules"
+      ],
+      "external": [],
+      "immediately": false,
+      "executableSha256": "1901e6d4aa35c53b3e0e944a544cb0dc623de41832eae6f3d43abb8708166729",
+      "executableBytes": 41681
+    },
+    {
+      "id": "@deepseek-ai/dsh-client-ui-settings-session-log",
+      "inject": [
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-client-ui-settings",
+        "@deepseek-ai/dsh-client-ui-layout"
+      ],
+      "external": [],
+      "immediately": false,
+      "executableSha256": "cb4be4eba39f8c436d93efd6804341ed77da1035a90e71b8793f6e3170c9b17b",
+      "executableBytes": 6442
+    },
+    {
+      "id": "@deepseek-ai/dsh-client-ui-agent-preset",
+      "inject": [
+        "@deepseek-ai/dsh-api-session-controller",
+        "@deepseek-ai/dsh-client-connection",
+        "@deepseek-ai/dsh-client-locale",
+        "@deepseek-ai/dsh-client-ui-conversation",
+        "@deepseek-ai/dsh-client-ui-session",
+        "@deepseek-ai/dsh-client-ui-settings",
+        "@deepseek-ai/dsh-client-ui-workspace",
+        "@deepseek-ai/dsh-api-remotes"
+      ],
+      "external": [],
+      "immediately": false,
+      "executableSha256": "60241dca7aaa21f23f95a2aa0bdd0a95aebf1ec6e37c8dee1d9d88a775ad1acb",
+      "executableBytes": 113439
+    },
+    {
+      "id": "@genshin-calc/dsh-client-domain",
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-renderer",
+        "@deepseek-ai/dsh-client-ui-layout",
+        "@deepseek-ai/dsh-client-ui-sidebar",
+        "@deepseek-ai/dsh-client-ui-sidebar-right",
+        "@deepseek-ai/dsh-client-ui-session",
+        "@deepseek-ai/dsh-client-ui-theme",
+        "@deepseek-ai/dsh-client-ui-settings-general",
+        "@deepseek-ai/dsh-client-ui-conversation",
+        "@deepseek-ai/dsh-client-ui-workspace"
+      ],
+      "external": [
+        "@deepseek-ai/dsh-client-ui-conversation/client"
+      ],
+      "immediately": false,
+      "executableSha256": "27af839fabfe232c5118a396f866c606a7e6d8c55261d045febd33195b8b4d9b",
+      "executableBytes": 218795
+    }
+  ],
+  "semanticSha256": "13b387ce5a26955ee5fd1512368b26d753c92f53a70bcf74f5d0ee700c36b4d4"
+}

@@ -1,0 +1,25 @@
+{
+  "contract": "genshin-gui-api-additive-contract-v1",
+  "baseline_contract": "genshin-gui-api-public-signatures-v1",
+  "baseline_semantic_sha256": "02f229dea0b9e21d08a473c73f97a14ca097dd24f2a65628a5f1815e11772ba0",
+  "source": "2026-11-07 r9 reviewed additive methods; immutable pre-refactor v1 remains historical",
+  "added_methods": {
+    "equipment_reference_panel": {
+      "arguments": "self, request: dict, version_line: str='release'",
+      "returns": "dict"
+    }
+  },
+  "extended_methods": {
+    "save_template": {
+      "kind": "trailing_optional_parameters",
+      "before": {
+        "arguments": "self, path: str, template: dict",
+        "returns": "dict"
+      },
+      "after": {
+        "arguments": "self, path: str, template: dict, expected_file_sha=None",
+        "returns": "dict"
+      }
+    }
+  }
+}

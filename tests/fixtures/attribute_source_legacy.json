@@ -1,0 +1,736 @@
+{
+  "attribute-ledger-v1/plain": [
+    {
+      "contract": "attribute-ledger-v1",
+      "initial_basis": [
+        {
+          "actor": "a",
+          "included_components": [],
+          "nonextra": {
+            "mode": "panel_total",
+            "status": "assumed",
+            "source": "Synthetic ordinary initial EM"
+          }
+        }
+      ],
+      "effect_classifications": [
+        {
+          "effect_ref": {
+            "kind": "rule",
+            "rule_id": "boost",
+            "effect_id": "value"
+          },
+          "component": {
+            "provider": "a",
+            "part_id": "binding:part",
+            "effect_id": "value",
+            "source_fingerprint": "042693df72726d280063a2db81d644d54ec27754e4fea3f192e0ae33b857a32c"
+          },
+          "nonextra_inclusion": "unknown",
+          "status": "pending",
+          "source": "App自动识别来源身份；NONEXTRA归属尚无明确依据"
+        }
+      ]
+    },
+    {
+      "contract": "attribute-source-adoption-v1",
+      "context_fingerprint": "97816932d8fae95694d5a9cbfb1fb973e53df8c53e002466ba16e7fbdb88abad",
+      "review_status": "pending",
+      "components": [],
+      "automatic_unknown": [
+        {
+          "effect_ref": {
+            "kind": "rule",
+            "rule_id": "boost",
+            "effect_id": "value"
+          },
+          "component": {
+            "provider": "a",
+            "part_id": "binding:part",
+            "effect_id": "value",
+            "source_fingerprint": "042693df72726d280063a2db81d644d54ec27754e4fea3f192e0ae33b857a32c"
+          },
+          "nonextra_inclusion": "unknown",
+          "status": "pending",
+          "source": "App自动识别来源身份；NONEXTRA归属尚无明确依据"
+        }
+      ]
+    },
+    [
+      [
+        "attribute_scope_unreviewed",
+        "attribute_review",
+        "请核对当前基底、已含组件与NONEXTRA分类并确认整份上下文",
+        "review_attributes"
+      ]
+    ]
+  ],
+  "attribute-ledger-v1/classified": [
+    {
+      "contract": "attribute-ledger-v1",
+      "initial_basis": [
+        {
+          "actor": "a",
+          "included_components": [],
+          "nonextra": {
+            "mode": "panel_total",
+            "status": "assumed",
+            "source": "Synthetic ordinary initial EM"
+          }
+        }
+      ],
+      "effect_classifications": [
+        {
+          "effect_ref": {
+            "kind": "rule",
+            "rule_id": "boost",
+            "effect_id": "value"
+          },
+          "component": {
+            "provider": "a",
+            "part_id": "binding:part",
+            "effect_id": "value",
+            "source_fingerprint": "stale"
+          },
+          "nonextra_inclusion": "included",
+          "status": "assumed",
+          "source": "Synthetic ordinary EM gain, reviewed explicitly"
+        }
+      ]
+    },
+    {
+      "contract": "attribute-source-adoption-v1",
+      "context_fingerprint": "2fa99079e6ad6841301c5fec71c3ecea298567f4c2af3e21a89266e7f42c3443",
+      "review_status": "pending",
+      "components": [
+        {
+          "path": "mechanics_model.attribute_model.effect_classifications[0].component",
+          "expected_component": {
+            "provider": "a",
+            "part_id": "binding:part",
+            "effect_id": "value",
+            "source_fingerprint": "7450483e20373304a3560271c8fd89f69c062bfb45e3ee2233f9dd1b71bab42f"
+          },
+          "status": "active"
+        }
+      ],
+      "automatic_unknown": []
+    },
+    [
+      [
+        "attribute_source_stale",
+        "mechanics_model.attribute_model.effect_classifications[0].component",
+        "属性来源指纹已变化，须核对当前预览",
+        "review_attributes"
+      ],
+      [
+        "attribute_scope_unreviewed",
+        "attribute_review",
+        "请核对当前基底、已含组件与NONEXTRA分类并确认整份上下文",
+        "review_attributes"
+      ]
+    ]
+  ],
+  "attribute-ledger-v1/seed": [
+    {
+      "contract": "attribute-ledger-v1",
+      "initial_basis": [
+        {
+          "actor": "a",
+          "included_components": [
+            {
+              "component": {
+                "provider": "a",
+                "part_id": "binding:part",
+                "effect_id": "value",
+                "source_fingerprint": "stale"
+              },
+              "value": 50,
+              "nonextra_inclusion": "included"
+            }
+          ],
+          "nonextra": {
+            "mode": "panel_total",
+            "status": "assumed",
+            "source": "Synthetic ordinary initial EM"
+          }
+        }
+      ],
+      "effect_classifications": [
+        {
+          "effect_ref": {
+            "kind": "rule",
+            "rule_id": "boost",
+            "effect_id": "value"
+          },
+          "component": {
+            "provider": "a",
+            "part_id": "binding:part",
+            "effect_id": "value",
+            "source_fingerprint": "f64565d40fa9aa405bf4886b23615dd1b4464127ba9a522a81e456e01e87f39f"
+          },
+          "nonextra_inclusion": "unknown",
+          "status": "pending",
+          "source": "App自动识别来源身份；NONEXTRA归属尚无明确依据"
+        }
+      ]
+    },
+    {
+      "contract": "attribute-source-adoption-v1",
+      "context_fingerprint": "76adeb89735d0dea510b7c7a01a397f28144390fca27799dc35c13698155f5b1",
+      "review_status": "pending",
+      "components": [
+        {
+          "path": "mechanics_model.attribute_model.initial_basis[0].included_components[0].component",
+          "expected_component": {
+            "provider": "a",
+            "part_id": "binding:part",
+            "effect_id": "value",
+            "source_fingerprint": "f64565d40fa9aa405bf4886b23615dd1b4464127ba9a522a81e456e01e87f39f"
+          },
+          "status": "included_in_panel"
+        }
+      ],
+      "automatic_unknown": [
+        {
+          "effect_ref": {
+            "kind": "rule",
+            "rule_id": "boost",
+            "effect_id": "value"
+          },
+          "component": {
+            "provider": "a",
+            "part_id": "binding:part",
+            "effect_id": "value",
+            "source_fingerprint": "f64565d40fa9aa405bf4886b23615dd1b4464127ba9a522a81e456e01e87f39f"
+          },
+          "nonextra_inclusion": "unknown",
+          "status": "pending",
+          "source": "App自动识别来源身份；NONEXTRA归属尚无明确依据"
+        }
+      ]
+    },
+    [
+      [
+        "attribute_source_stale",
+        "mechanics_model.attribute_model.initial_basis[0].included_components[0].component",
+        "已含属性组件来源须对齐当前实际来源",
+        "review_attributes"
+      ],
+      [
+        "attribute_scope_unreviewed",
+        "attribute_review",
+        "请核对当前基底、已含组件与NONEXTRA分类并确认整份上下文",
+        "review_attributes"
+      ]
+    ]
+  ],
+  "attribute-ledger-v1/excluded": [
+    {
+      "contract": "attribute-ledger-v1",
+      "initial_basis": [
+        {
+          "actor": "a",
+          "included_components": [],
+          "nonextra": {
+            "mode": "panel_total",
+            "status": "assumed",
+            "source": "Synthetic ordinary initial EM"
+          }
+        }
+      ],
+      "effect_classifications": []
+    },
+    {
+      "contract": "attribute-source-adoption-v1",
+      "context_fingerprint": "bc38ceb5921f8b64a1c88996731cbc87783c18cf1ad13f8895d50d7eb16e1d28",
+      "review_status": "pending",
+      "components": [
+        {
+          "path": "mechanics_model.attribute_model.effect_classifications[0].component",
+          "expected_component": {
+            "provider": "a",
+            "part_id": "binding:part",
+            "effect_id": "value",
+            "source_fingerprint": "449ba516ba7583e8dcaae2d8717f7e6895458673aaf87f62cfa817f5ad7e1d46"
+          },
+          "status": "excluded"
+        }
+      ],
+      "automatic_unknown": []
+    },
+    [
+      [
+        "attribute_scope_unreviewed",
+        "attribute_review",
+        "请核对当前基底、已含组件与NONEXTRA分类并确认整份上下文",
+        "review_attributes"
+      ]
+    ]
+  ],
+  "attribute-ledger-v1/manual": [
+    {
+      "contract": "attribute-ledger-v1",
+      "initial_basis": [
+        {
+          "actor": "a",
+          "included_components": [],
+          "nonextra": {
+            "mode": "panel_total",
+            "status": "assumed",
+            "source": "Synthetic ordinary initial EM"
+          }
+        }
+      ],
+      "effect_classifications": [
+        {
+          "effect_ref": {
+            "kind": "rule",
+            "rule_id": "boost",
+            "effect_id": "value"
+          },
+          "component": {
+            "provider": "a",
+            "part_id": "binding:part",
+            "effect_id": "value",
+            "source_fingerprint": "0e62b5262bc4a4148b7de14473f99240f6dc15be6fd959add8811c777cbfb6df"
+          },
+          "nonextra_inclusion": "unknown",
+          "status": "pending",
+          "source": "App自动识别来源身份；NONEXTRA归属尚无明确依据"
+        },
+        {
+          "effect_ref": {
+            "kind": "manual_buff",
+            "buff_id": "manual-em",
+            "effect_id": "manual-value"
+          },
+          "component": {
+            "provider": "a",
+            "part_id": "manual:em",
+            "effect_id": "manual-value",
+            "source_fingerprint": "59737eaa21bf4e3ad4c77dcc7b56caf0c59cc2a79eb1431ba0dc71d0ece9ab00"
+          },
+          "nonextra_inclusion": "unknown",
+          "status": "pending",
+          "source": "App自动识别来源身份；NONEXTRA归属尚无明确依据"
+        }
+      ]
+    },
+    {
+      "contract": "attribute-source-adoption-v1",
+      "context_fingerprint": "396701e811f6a255a056950dc54c4bb82cd6e9bec4722a88843d2c2b70587d40",
+      "review_status": "pending",
+      "components": [],
+      "automatic_unknown": [
+        {
+          "effect_ref": {
+            "kind": "rule",
+            "rule_id": "boost",
+            "effect_id": "value"
+          },
+          "component": {
+            "provider": "a",
+            "part_id": "binding:part",
+            "effect_id": "value",
+            "source_fingerprint": "0e62b5262bc4a4148b7de14473f99240f6dc15be6fd959add8811c777cbfb6df"
+          },
+          "nonextra_inclusion": "unknown",
+          "status": "pending",
+          "source": "App自动识别来源身份；NONEXTRA归属尚无明确依据"
+        },
+        {
+          "effect_ref": {
+            "kind": "manual_buff",
+            "buff_id": "manual-em",
+            "effect_id": "manual-value"
+          },
+          "component": {
+            "provider": "a",
+            "part_id": "manual:em",
+            "effect_id": "manual-value",
+            "source_fingerprint": "59737eaa21bf4e3ad4c77dcc7b56caf0c59cc2a79eb1431ba0dc71d0ece9ab00"
+          },
+          "nonextra_inclusion": "unknown",
+          "status": "pending",
+          "source": "App自动识别来源身份；NONEXTRA归属尚无明确依据"
+        }
+      ]
+    },
+    [
+      [
+        "attribute_scope_unreviewed",
+        "attribute_review",
+        "请核对当前基底、已含组件与NONEXTRA分类并确认整份上下文",
+        "review_attributes"
+      ]
+    ]
+  ],
+  "attribute-ledger-v2/plain": [
+    {
+      "contract": "attribute-ledger-v2",
+      "initial_basis": [
+        {
+          "actor": "a",
+          "included_components": [],
+          "nonextra": {
+            "mode": "panel_total",
+            "status": "assumed",
+            "source": "Synthetic ordinary initial EM"
+          }
+        }
+      ],
+      "effect_classifications": [
+        {
+          "effect_ref": {
+            "kind": "rule",
+            "rule_id": "boost",
+            "effect_id": "value"
+          },
+          "component": {
+            "provider": "a",
+            "part_id": "binding:part",
+            "effect_id": "value",
+            "source_fingerprint": "fe7f8c7990210c89a7b90a2aed8fb867a1d2181a83c04b4a0129403bd2736725"
+          },
+          "nonextra_inclusion": "unknown",
+          "status": "pending",
+          "source": "App自动识别来源身份；NONEXTRA归属尚无明确依据"
+        }
+      ]
+    },
+    {
+      "contract": "attribute-source-adoption-v1",
+      "context_fingerprint": "b77026d754139ee3c6b4e76dc754141898a9e531a9665b628f7090fcf193b4ca",
+      "review_status": "pending",
+      "components": [],
+      "automatic_unknown": [
+        {
+          "effect_ref": {
+            "kind": "rule",
+            "rule_id": "boost",
+            "effect_id": "value"
+          },
+          "component": {
+            "provider": "a",
+            "part_id": "binding:part",
+            "effect_id": "value",
+            "source_fingerprint": "fe7f8c7990210c89a7b90a2aed8fb867a1d2181a83c04b4a0129403bd2736725"
+          },
+          "nonextra_inclusion": "unknown",
+          "status": "pending",
+          "source": "App自动识别来源身份；NONEXTRA归属尚无明确依据"
+        }
+      ]
+    },
+    [
+      [
+        "attribute_scope_unreviewed",
+        "attribute_review",
+        "请核对当前基底、已含组件与NONEXTRA分类并确认整份上下文",
+        "review_attributes"
+      ]
+    ]
+  ],
+  "attribute-ledger-v2/classified": [
+    {
+      "contract": "attribute-ledger-v2",
+      "initial_basis": [
+        {
+          "actor": "a",
+          "included_components": [],
+          "nonextra": {
+            "mode": "panel_total",
+            "status": "assumed",
+            "source": "Synthetic ordinary initial EM"
+          }
+        }
+      ],
+      "effect_classifications": [
+        {
+          "effect_ref": {
+            "kind": "rule",
+            "rule_id": "boost",
+            "effect_id": "value"
+          },
+          "component": {
+            "provider": "a",
+            "part_id": "binding:part",
+            "effect_id": "value",
+            "source_fingerprint": "stale"
+          },
+          "nonextra_inclusion": "included",
+          "status": "assumed",
+          "source": "Synthetic ordinary EM gain, reviewed explicitly"
+        }
+      ]
+    },
+    {
+      "contract": "attribute-source-adoption-v1",
+      "context_fingerprint": "68204f6a14c949d8a04b9b0e89086f44a05b6e493db2cc50f248026579c92378",
+      "review_status": "pending",
+      "components": [
+        {
+          "path": "mechanics_model.attribute_model.effect_classifications[0].component",
+          "expected_component": {
+            "provider": "a",
+            "part_id": "binding:part",
+            "effect_id": "value",
+            "source_fingerprint": "d5c6409962baee8e506db5ecf1db81c3ec9a7debb8bf322ccaff2599c3f64304"
+          },
+          "status": "active"
+        }
+      ],
+      "automatic_unknown": []
+    },
+    [
+      [
+        "attribute_source_stale",
+        "mechanics_model.attribute_model.effect_classifications[0].component",
+        "属性来源指纹已变化，须核对当前预览",
+        "review_attributes"
+      ],
+      [
+        "attribute_scope_unreviewed",
+        "attribute_review",
+        "请核对当前基底、已含组件与NONEXTRA分类并确认整份上下文",
+        "review_attributes"
+      ]
+    ]
+  ],
+  "attribute-ledger-v2/seed": [
+    {
+      "contract": "attribute-ledger-v2",
+      "initial_basis": [
+        {
+          "actor": "a",
+          "included_components": [
+            {
+              "component": {
+                "provider": "a",
+                "part_id": "binding:part",
+                "effect_id": "value",
+                "source_fingerprint": "stale"
+              },
+              "value": 50,
+              "nonextra_inclusion": "included"
+            }
+          ],
+          "nonextra": {
+            "mode": "panel_total",
+            "status": "assumed",
+            "source": "Synthetic ordinary initial EM"
+          }
+        }
+      ],
+      "effect_classifications": [
+        {
+          "effect_ref": {
+            "kind": "rule",
+            "rule_id": "boost",
+            "effect_id": "value"
+          },
+          "component": {
+            "provider": "a",
+            "part_id": "binding:part",
+            "effect_id": "value",
+            "source_fingerprint": "60f0818276548b9aacaabea688f5488164410e48ececf6f3d985209f73539195"
+          },
+          "nonextra_inclusion": "unknown",
+          "status": "pending",
+          "source": "App自动识别来源身份；NONEXTRA归属尚无明确依据"
+        }
+      ]
+    },
+    {
+      "contract": "attribute-source-adoption-v1",
+      "context_fingerprint": "0edd23511dd405c03ee2b4ba6047046a61fbb0ab54402ab8a0037e10e6d2f062",
+      "review_status": "pending",
+      "components": [
+        {
+          "path": "mechanics_model.attribute_model.initial_basis[0].included_components[0].component",
+          "expected_component": {
+            "provider": "a",
+            "part_id": "binding:part",
+            "effect_id": "value",
+            "source_fingerprint": "60f0818276548b9aacaabea688f5488164410e48ececf6f3d985209f73539195"
+          },
+          "status": "included_in_panel"
+        }
+      ],
+      "automatic_unknown": [
+        {
+          "effect_ref": {
+            "kind": "rule",
+            "rule_id": "boost",
+            "effect_id": "value"
+          },
+          "component": {
+            "provider": "a",
+            "part_id": "binding:part",
+            "effect_id": "value",
+            "source_fingerprint": "60f0818276548b9aacaabea688f5488164410e48ececf6f3d985209f73539195"
+          },
+          "nonextra_inclusion": "unknown",
+          "status": "pending",
+          "source": "App自动识别来源身份；NONEXTRA归属尚无明确依据"
+        }
+      ]
+    },
+    [
+      [
+        "attribute_source_stale",
+        "mechanics_model.attribute_model.initial_basis[0].included_components[0].component",
+        "已含属性组件来源须对齐当前实际来源",
+        "review_attributes"
+      ],
+      [
+        "attribute_scope_unreviewed",
+        "attribute_review",
+        "请核对当前基底、已含组件与NONEXTRA分类并确认整份上下文",
+        "review_attributes"
+      ]
+    ]
+  ],
+  "attribute-ledger-v2/excluded": [
+    {
+      "contract": "attribute-ledger-v2",
+      "initial_basis": [
+        {
+          "actor": "a",
+          "included_components": [],
+          "nonextra": {
+            "mode": "panel_total",
+            "status": "assumed",
+            "source": "Synthetic ordinary initial EM"
+          }
+        }
+      ],
+      "effect_classifications": []
+    },
+    {
+      "contract": "attribute-source-adoption-v1",
+      "context_fingerprint": "bb4b291a03931488276797a28d0de61c87e18a003614294db68fdad400927355",
+      "review_status": "pending",
+      "components": [
+        {
+          "path": "mechanics_model.attribute_model.effect_classifications[0].component",
+          "expected_component": {
+            "provider": "a",
+            "part_id": "binding:part",
+            "effect_id": "value",
+            "source_fingerprint": "f96903a455396c22ead64abd3ca5f22c492e185fb0433384d3cbe8349cb3be9a"
+          },
+          "status": "excluded"
+        }
+      ],
+      "automatic_unknown": []
+    },
+    [
+      [
+        "attribute_scope_unreviewed",
+        "attribute_review",
+        "请核对当前基底、已含组件与NONEXTRA分类并确认整份上下文",
+        "review_attributes"
+      ]
+    ]
+  ],
+  "attribute-ledger-v2/manual": [
+    {
+      "contract": "attribute-ledger-v2",
+      "initial_basis": [
+        {
+          "actor": "a",
+          "included_components": [],
+          "nonextra": {
+            "mode": "panel_total",
+            "status": "assumed",
+            "source": "Synthetic ordinary initial EM"
+          }
+        }
+      ],
+      "effect_classifications": [
+        {
+          "effect_ref": {
+            "kind": "rule",
+            "rule_id": "boost",
+            "effect_id": "value"
+          },
+          "component": {
+            "provider": "a",
+            "part_id": "binding:part",
+            "effect_id": "value",
+            "source_fingerprint": "83d22fdb2d933e0f03eec3ab5961b4ad9d83d0d9e0a6913f655dad638b44daf9"
+          },
+          "nonextra_inclusion": "unknown",
+          "status": "pending",
+          "source": "App自动识别来源身份；NONEXTRA归属尚无明确依据"
+        },
+        {
+          "effect_ref": {
+            "kind": "manual_buff",
+            "buff_id": "manual-em",
+            "effect_id": "manual-value"
+          },
+          "component": {
+            "provider": "a",
+            "part_id": "manual:em",
+            "effect_id": "manual-value",
+            "source_fingerprint": "7293a5cf9b88bf46923b26b54b6235d01cce3b3d81dfaf243ef0c62ccf1f00c3"
+          },
+          "nonextra_inclusion": "unknown",
+          "status": "pending",
+          "source": "App自动识别来源身份；NONEXTRA归属尚无明确依据"
+        }
+      ]
+    },
+    {
+      "contract": "attribute-source-adoption-v1",
+      "context_fingerprint": "61a1cb24ae7a33afb6305bf2165818e5055feaa94c46a09354f4c4c16c382323",
+      "review_status": "pending",
+      "components": [],
+      "automatic_unknown": [
+        {
+          "effect_ref": {
+            "kind": "rule",
+            "rule_id": "boost",
+            "effect_id": "value"
+          },
+          "component": {
+            "provider": "a",
+            "part_id": "binding:part",
+            "effect_id": "value",
+            "source_fingerprint": "83d22fdb2d933e0f03eec3ab5961b4ad9d83d0d9e0a6913f655dad638b44daf9"
+          },
+          "nonextra_inclusion": "unknown",
+          "status": "pending",
+          "source": "App自动识别来源身份；NONEXTRA归属尚无明确依据"
+        },
+        {
+          "effect_ref": {
+            "kind": "manual_buff",
+            "buff_id": "manual-em",
+            "effect_id": "manual-value"
+          },
+          "component": {
+            "provider": "a",
+            "part_id": "manual:em",
+            "effect_id": "manual-value",
+            "source_fingerprint": "7293a5cf9b88bf46923b26b54b6235d01cce3b3d81dfaf243ef0c62ccf1f00c3"
+          },
+          "nonextra_inclusion": "unknown",
+          "status": "pending",
+          "source": "App自动识别来源身份；NONEXTRA归属尚无明确依据"
+        }
+      ]
+    },
+    [
+      [
+        "attribute_scope_unreviewed",
+        "attribute_review",
+        "请核对当前基底、已含组件与NONEXTRA分类并确认整份上下文",
+        "review_attributes"
+      ]
+    ]
+  ]
+}

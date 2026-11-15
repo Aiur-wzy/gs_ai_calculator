@@ -1,0 +1,75 @@
+/* Component compatibility and accessibility rules. Theme values are generated
+   from frontend/src/design-system/tokens/registry.json. */
+html,
+body {
+  background: var(--color-canvas);
+  color: var(--color-text-primary);
+}
+
+/* The legacy GUI predates semantic tokens. These rules keep every major work
+   surface readable while individual components migrate away from literals. */
+:root[data-theme-resolved="light"] :where(.desktop-header,.workspace-page-chrome,footer) {
+  background: var(--color-sidebar);
+  border-color: var(--color-border-subtle);
+  color: var(--color-text-primary);
+}
+:root[data-theme-resolved="light"] :where(.desktop-header h1,.workspace-page-identity h2,.workspace-notice,.workspace-help-list dt) { color:var(--color-text-primary); }
+:root[data-theme-resolved="light"] :where(.desktop-caption,.workspace-page-kicker,#workspace-notice-count,.workspace-help-list dd) { color:var(--color-text-secondary); }
+:root[data-theme-resolved="light"] :where(.workspace-menu-popup,.workspace-notice-list,.workspace-plan-state>#plan-status,.axis-help-panel,.data-tools-popover,.database-version-details,.app-dialog,.eq-dialog) {
+  background:var(--color-overlay); border-color:var(--color-border-strong); color:var(--color-text-primary); box-shadow:var(--shadow-elevated);
+}
+:root[data-theme-resolved="light"] :where(.workspace-menu-button:hover,.workspace-menu-button[aria-expanded="true"],.workspace-menu-item:hover:not(:disabled),.workspace-menu-item:focus-visible) { background:var(--color-control-hover); border-color:var(--color-border-strong); }
+:root[data-theme-resolved="light"] :where(.workspace-status-hub>summary,.workspace-plan-state>summary,.workspace-pane-toggle[aria-pressed="true"],.timeline-tools button[aria-pressed="true"],.timeline-modes button[aria-pressed="true"],.timeline-filters button[aria-pressed="true"]) {
+  background:var(--color-control-selected); border-color:var(--color-border-strong); color:var(--color-text-primary);
+}
+:root[data-theme-resolved="light"] :where(.workspace-attention-shelf,.ew-confirmation,.ew-agent-report) { background:var(--color-warning-surface); border-color:var(--color-warning); color:var(--color-warning); }
+:root[data-theme-resolved="light"] :where(.ws-left-pane,.ws-right-pane,.timeline-pane,.axis-commandbar,.axis-statusbar,.timeline-inspector>#prop-panel,#timeline-wrap,.side,.eq-card,.eq-part,.wb-team,.wb-inspector,.wb-track,.wb-empty,.wb-summary,.capacity-catalog,.capacity-catalog-card,.ew-search-panel) {
+  background:var(--color-surface); border-color:var(--color-border-subtle); color:var(--color-text-primary);
+}
+:root[data-theme-resolved="light"] :where(.axis-commandbar,.axis-statusbar,.wb-summary,.capacity-catalog-card) { background:var(--color-surface-elevated); }
+:root[data-theme-resolved="light"] :where(input,select,textarea) { background:var(--color-input); border-color:var(--color-border-subtle); color:var(--color-text-primary); }
+:root[data-theme-resolved="light"] :where(button) { background:var(--color-surface); border-color:var(--color-border-subtle); color:var(--color-text-primary); }
+:root[data-theme-resolved="light"] :where(button:hover:not(:disabled)) { border-color:var(--color-accent); }
+:root[data-theme-resolved="light"] :where(button.primary,.ew-actions .primary,.wb-toolbar button.active,.wb-order-row .active) { background:var(--color-accent); border-color:var(--color-accent-strong); color:var(--color-on-accent); }
+:root[data-theme-resolved="light"] :where(.eq-error,.eq-issue,.wb-danger) { color:var(--color-danger); }
+:root[data-theme-resolved="light"] :where(.wb-warning,.ew-basis-diff,.ew-feedback,.data-notice) { color:var(--color-warning); }
+:root[data-theme-resolved="light"] :where(.mc-section-card>summary,.ew-identity-section>summary,.ew-extra>summary,.ew-native-advanced>summary,.ew-native-binding>summary,.capacity-catalog-group>summary,.wb-fold>summary,.wb-raw>summary,.timeline-detail h3,.timeline-note) { color:var(--color-text-primary); }
+
+/* Agent workbench: conversation remains the visual centre; operational panes
+   use quieter semantic surfaces in both full-page and docked modes. */
+:root[data-theme-resolved="light"] :where(.agent-chat,.ac-drawer,.ac-inspector-pane,.ac-details-pane,.ac-settings-drawer,.ac-composer,.ac-history-window,.ac-conversation-search-panel,.ac-turn-rail,.ac-status-hub-panel,.app-context-menu) {
+  background:var(--color-surface); border-color:var(--color-border-subtle); color:var(--color-text-primary); box-shadow:none;
+}
+:root[data-theme-resolved="light"] :where(.ac-status-dock,.ac-conversation-tools,.ac-workbench-views,.ac-session-row,.ac-history-node,.ac-question-card,.ac-inbox-item,.ac-metric-card,.ac-trajectory-span,.ac-trajectory-lane,.ac-trajectory-row,.ac-question-option,.ac-host-search-results) {
+  background:var(--color-surface-elevated); border-color:var(--color-border-subtle); color:var(--color-text-primary);
+}
+:root[data-theme-resolved="light"] :where(.ac-heading-chip,.ac-state-chip,.ac-model-picker-chip,.ac-turn-button,.ac-workbench-tab,.ac-pane-toggle) { background:var(--color-canvas); border-color:var(--color-border-subtle); color:var(--color-text-secondary); }
+:root[data-theme-resolved="light"] :where(.ac-workbench-tab[aria-selected="true"],.ac-turn-button[aria-pressed="true"],.ac-pane-toggle[aria-pressed="true"],.ac-session-row[data-viewed="true"]) { background:var(--color-control-selected); border-color:var(--color-accent); color:var(--color-text-primary); }
+:root[data-theme-resolved="light"] :where(.ac-status,.ac-history-node,.ac-trajectory-detail,.app-context-menu-item,.ac-session-open,.ac-metric-card span) { color:var(--color-text-primary); }
+:root[data-theme-resolved="light"] :where(.ac-activity-facts,.ac-trajectory-head>span,.ac-session-open small,.ac-conversation-status,.ac-turn-button,.ac-inspector-tab) { color:var(--color-text-secondary); }
+:root[data-theme-resolved="light"] :where(.ac-activity-feedback,.ac-agent-toast) { background:var(--color-control-selected); border-color:var(--color-border-strong); color:var(--color-text-primary); box-shadow:none; }
+:root[data-theme-resolved="light"] :where(.ac-status-dock[data-state="failure"],.ac-agent-toast-failed) { background:var(--color-danger-surface); border-color:var(--color-danger); }
+:root[data-theme-resolved="light"] :where(.ac-status-dock[data-state="attention"],.ac-agent-toast-waiting,.ac-session-compatibility) { background:var(--color-warning-surface); border-color:var(--color-warning); color:var(--color-warning); }
+
+::selection { background: var(--color-selection); }
+
+a { color: var(--color-text-link); }
+
+input,
+select,
+textarea,
+button {
+  accent-color: var(--color-accent);
+}
+
+:where(button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 2px;
+}
+
+@media (forced-colors: active) {
+  :root { forced-color-adjust: auto; }
+  :where(button, input, select, textarea, summary, [tabindex]):focus-visible {
+    outline-color: Highlight;
+  }
+}

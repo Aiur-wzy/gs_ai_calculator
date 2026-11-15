@@ -1,0 +1,288 @@
+{
+  "bundle_version": 1,
+  "status": "ready",
+  "issues": [],
+  "source": {
+    "kind": "equip_affix",
+    "affix_id": 1113010,
+    "affix_group_id": 111301,
+    "source_level": 0,
+    "version_line": "release",
+    "snapshot_id": "1b620db802a937506dc870cc25c08b5c7c336a01b193b945e9471d75c3bee172",
+    "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53"
+  },
+  "snapshot": {
+    "version_line": "release",
+    "state": "ready",
+    "index_state": "ready",
+    "schema_version": 1,
+    "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+    "snapshot_id": "1b620db802a937506dc870cc25c08b5c7c336a01b193b945e9471d75c3bee172",
+    "execution_support": "not_evaluated",
+    "built_at": "2026-10-01T19:46:55.591099+00:00",
+    "profile_id": "upstream-combat-catalog-v1",
+    "profile_version": 1,
+    "indexer_version": "4",
+    "manifest_fingerprint": "b14c57925636407203b679f5517dd51ec9a5249e42a792157cb72269f55b32e6",
+    "counts": {
+      "runtime_definition": 152351,
+      "runtime_parameter_binding": 6082,
+      "runtime_reference": 165747,
+      "runtime_source": 3356
+    },
+    "reference_states": {
+      "ambiguous": 157,
+      "external_asset": 10445,
+      "missing": 89,
+      "resolved": 145772,
+      "unsupported_reference_form": 9284
+    },
+    "normalization": {
+      "mapping_fingerprint": "506862bc6c0bf033d8272b75f193cd2a620fc513320b3223d07afcc6f04356e2",
+      "normalization_version": 2,
+      "profile_id": "upstream-34208429-reviewed-schema-v1",
+      "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53"
+    }
+  },
+  "param_list": [
+    0.11999999731779099,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "affix": {
+    "record": {
+      "paramList": [
+        0.11999999731779099,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "addProps": [
+        {},
+        {},
+        {}
+      ],
+      "openConfig": "Weapon_Sword_DamageUpToEnemy",
+      "affixId": 1113010,
+      "id": 111301,
+      "nameTextMapHash": 523615731,
+      "descTextMapHash": 4047258793
+    },
+    "source_path": "ExcelBinOutput/EquipAffixExcelConfigData.json",
+    "json_pointer": "/0",
+    "source_sha256": "67cce4b66ecfae8ab20b4567005ff0e2efa76446af1fcc71d99e8a2383def4e6"
+  },
+  "talent": {
+    "definition_id": "0e431ad58fa3697ef946ba6be9aa6f8a2625b2e7fa3cea3280fff766da6f1e1f",
+    "source_path": "BinOutput/Talent/EquipTalents/ConfigAffix_Sword.json",
+    "json_pointer": "/Weapon_Sword_DamageUpToEnemy",
+    "source_sha256": "aef6ee7beec2385f78e77e280861ff2e2c774dbfd5f2134567e99310d92195e5",
+    "operations": [
+      {
+        "$type": "JPCAAJGEELO",
+        "GBPFBNHLOFD": true,
+        "IIBMNPFLNMJ": "Weapon_Sword_DamageUpToEnemy"
+      },
+      {
+        "$type": "BIAHEMMGABC",
+        "GBPFBNHLOFD": true,
+        "IIBMNPFLNMJ": "Weapon_Sword_DamageUpToEnemy",
+        "PCABAADALND": "%1",
+        "PEOJKHKHAKL": "Rate"
+      }
+    ]
+  },
+  "talent_candidates": [],
+  "abilities": [
+    {
+      "definition_id": "81273b905385a194f4e40c74cb376e7ea3ca7d0092d2b9199d653c940541d438",
+      "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Sword.json",
+      "json_pointer": "/0/Default",
+      "source_sha256": "721efa01e8043a06d239316038406305f2417afabdc6ecacf962881dd1a9a689",
+      "payload": {
+        "EMGBJJOIENB": [
+          {
+            "$type": "CDANEAFAFKM",
+            "AMOLMPHFPHJ": -1,
+            "ILELAOFJIKJ": true,
+            "LDFBDMNIADI": "UNIQUE_Sword_DamageUpToEnemy_Handler",
+            "LJFIEGHHLOB": false
+          }
+        ],
+        "GPPBBDEICKP": {
+          "UNIQUE_Sword_DamageUpToEnemy_Handler": {
+            "DBGOKAKAHFP": 100,
+            "DIELNIJPCJJ": true,
+            "DOALDLPNGMF": -1,
+            "KFOMCJGGPPC": -1,
+            "LFIJIMIMBIH": [
+              {
+                "$type": "GBFENLIGHEJ",
+                "AMOLMPHFPHJ": -1,
+                "IJDGNIIOHLM": [
+                  {
+                    "$type": "BKCJECHCDKG",
+                    "BDHBNCEEPPK": "Target",
+                    "FJGEDPNBGCG": -1,
+                    "LJBBKGIFJDB": [
+                      "Monster"
+                    ]
+                  },
+                  {
+                    "$type": "KFIBKGLJJAD",
+                    "BDHBNCEEPPK": "Target",
+                    "IJDGNIIOHLM": [
+                      {
+                        "$type": "CEIIMCBGCCA",
+                        "BDHBNCEEPPK": "Target",
+                        "JOFNJODFEDG": "Water"
+                      },
+                      {
+                        "$type": "CEIIMCBGCCA",
+                        "BDHBNCEEPPK": "Target",
+                        "JOFNJODFEDG": "Ice"
+                      },
+                      {
+                        "$type": "CEIIMCBGCCA",
+                        "BDHBNCEEPPK": "Target",
+                        "JOFNJODFEDG": "Frozen"
+                      }
+                    ]
+                  }
+                ],
+                "KALBHJILPDA": "Rate",
+                "PEAHHNAOMNK": true
+              }
+            ],
+            "PPKOPMBNPJH": true
+          }
+        },
+        "IIBMNPFLNMJ": "Weapon_Sword_DamageUpToEnemy",
+        "LOEHLJGBGAC": {
+          "Rate": 0
+        },
+        "OMAIGDMCJBO": {
+          "DBGOKAKAHFP": 100,
+          "DOALDLPNGMF": -1,
+          "KFOMCJGGPPC": -1,
+          "PPKOPMBNPJH": true
+        },
+        "PODJJJHGAMO": true
+      },
+      "variant_key": "Default"
+    }
+  ],
+  "references": [
+    {
+      "reference_id": "58e27fe094d1e973ac4fd10fe584a8daaa99240d9ec1f56257cb4cadcba07c0f",
+      "from_definition_id": "7d7259d98cf2d1ece69377d4f486350349ce261b917cf9bac72502da56e62421",
+      "source_path": "ExcelBinOutput/EquipAffixExcelConfigData.json",
+      "json_pointer": "/0/openConfig",
+      "field_name": "openConfig",
+      "relation_kind": "open_config",
+      "target_kind": "talent_config",
+      "source_order": 0,
+      "presence_status": "present",
+      "resolution_status": "resolved",
+      "resolved_definition_id": "0e431ad58fa3697ef946ba6be9aa6f8a2625b2e7fa3cea3280fff766da6f1e1f",
+      "extraction_rule_id": "4",
+      "version_line": "release",
+      "snapshot_id": "1b620db802a937506dc870cc25c08b5c7c336a01b193b945e9471d75c3bee172",
+      "target_key": "Weapon_Sword_DamageUpToEnemy",
+      "scope": {
+        "owner_definition_id": null
+      },
+      "candidate_ids": [
+        "0e431ad58fa3697ef946ba6be9aa6f8a2625b2e7fa3cea3280fff766da6f1e1f"
+      ]
+    },
+    {
+      "reference_id": "bf1fca64761b5882273edb5bc30db5846f7ae25d7f46795d0b7e275da901cce1",
+      "from_definition_id": "0e431ad58fa3697ef946ba6be9aa6f8a2625b2e7fa3cea3280fff766da6f1e1f",
+      "source_path": "BinOutput/Talent/EquipTalents/ConfigAffix_Sword.json",
+      "json_pointer": "/Weapon_Sword_DamageUpToEnemy/0/IIBMNPFLNMJ",
+      "field_name": "abilityName",
+      "relation_kind": "ability_operation",
+      "target_kind": "ability",
+      "source_order": 0,
+      "presence_status": "present",
+      "resolution_status": "resolved",
+      "resolved_definition_id": "81273b905385a194f4e40c74cb376e7ea3ca7d0092d2b9199d653c940541d438",
+      "extraction_rule_id": "4",
+      "version_line": "release",
+      "snapshot_id": "1b620db802a937506dc870cc25c08b5c7c336a01b193b945e9471d75c3bee172",
+      "target_key": "Weapon_Sword_DamageUpToEnemy",
+      "scope": {
+        "owner_definition_id": null
+      },
+      "candidate_ids": [
+        "81273b905385a194f4e40c74cb376e7ea3ca7d0092d2b9199d653c940541d438"
+      ]
+    },
+    {
+      "reference_id": "70f6010fbedfcf22a1c4d8614f2e56d722218528fe71f7423fbd131691cb1925",
+      "from_definition_id": "0e431ad58fa3697ef946ba6be9aa6f8a2625b2e7fa3cea3280fff766da6f1e1f",
+      "source_path": "BinOutput/Talent/EquipTalents/ConfigAffix_Sword.json",
+      "json_pointer": "/Weapon_Sword_DamageUpToEnemy/1/IIBMNPFLNMJ",
+      "field_name": "abilityName",
+      "relation_kind": "ability_operation",
+      "target_kind": "ability",
+      "source_order": 1,
+      "presence_status": "present",
+      "resolution_status": "resolved",
+      "resolved_definition_id": "81273b905385a194f4e40c74cb376e7ea3ca7d0092d2b9199d653c940541d438",
+      "extraction_rule_id": "4",
+      "version_line": "release",
+      "snapshot_id": "1b620db802a937506dc870cc25c08b5c7c336a01b193b945e9471d75c3bee172",
+      "target_key": "Weapon_Sword_DamageUpToEnemy",
+      "scope": {
+        "owner_definition_id": null
+      },
+      "candidate_ids": [
+        "81273b905385a194f4e40c74cb376e7ea3ca7d0092d2b9199d653c940541d438"
+      ]
+    },
+    {
+      "reference_id": "06d4943d66cf4b79b4e6f4e5c27693d4c3f71734e186b7007e671403fb06face",
+      "from_definition_id": "81273b905385a194f4e40c74cb376e7ea3ca7d0092d2b9199d653c940541d438",
+      "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Sword.json",
+      "json_pointer": "/0/Default/EMGBJJOIENB/0/LDFBDMNIADI",
+      "field_name": "modifierName",
+      "relation_kind": "modifier_operation",
+      "target_kind": "modifier",
+      "source_order": 0,
+      "presence_status": "present",
+      "resolution_status": "resolved",
+      "resolved_definition_id": "36656601367fb1059a56ab52776d08f1cabf8ee4189d237114d1a98050a31368",
+      "extraction_rule_id": "4",
+      "version_line": "release",
+      "snapshot_id": "1b620db802a937506dc870cc25c08b5c7c336a01b193b945e9471d75c3bee172",
+      "target_key": "UNIQUE_Sword_DamageUpToEnemy_Handler",
+      "scope": {
+        "owner_definition_id": "81273b905385a194f4e40c74cb376e7ea3ca7d0092d2b9199d653c940541d438"
+      },
+      "candidate_ids": [
+        "36656601367fb1059a56ab52776d08f1cabf8ee4189d237114d1a98050a31368"
+      ]
+    }
+  ],
+  "reference_closed": true,
+  "execution_support": "not_evaluated",
+  "closure_fingerprint": "98d1777110c750fb7738d5352178316162536d5fc631fefaf7e2456213d7670b",
+  "normalization": {
+    "mapping_fingerprint": "506862bc6c0bf033d8272b75f193cd2a620fc513320b3223d07afcc6f04356e2",
+    "normalization_version": 2,
+    "profile_id": "upstream-34208429-reviewed-schema-v1",
+    "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53"
+  },
+  "content_fingerprint": "3087b6c9db4763390d6110111356949f724acc1e37e1c76beea92bb1575759a8"
+}

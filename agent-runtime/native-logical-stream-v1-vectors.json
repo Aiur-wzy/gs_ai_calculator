@@ -1,0 +1,58 @@
+{
+  "contract": "genshin-native-logical-byte-stream-v1",
+  "productionOwner": false,
+  "policy": {
+    "maximum_bytes": 32,
+    "chunk_bytes": 4,
+    "credit_window_bytes": 8,
+    "minimum_chunk_bytes": 1,
+    "maximum_chunk_bytes": 16
+  },
+  "open": {
+    "contract": "genshin-native-logical-byte-stream-v1",
+    "transfer_id": "fixture-transfer-1",
+    "purpose": "dsh_fetch_request",
+    "media_type": "application/json; charset=utf-8",
+    "content_encoding": "identity",
+    "maximum_bytes": 32,
+    "declared_length": 10,
+    "declared_sha256": "72399361da6a7754fec986dca5b7cbaf1c810a28ded4abaf56b2106d06cb78b0",
+    "chunk_bytes": 4,
+    "metadata": {
+      "method": "POST",
+      "route": "/api/probe"
+    }
+  },
+  "chunks": [
+    {"stream_seq": 2, "payload_hex": "61626364"},
+    {"stream_seq": 3, "payload_hex": "65666768"},
+    {"stream_seq": 4, "payload_hex": "696a"}
+  ],
+  "commit": {
+    "stream_seq": 5,
+    "payload": {
+      "transfer_id": "fixture-transfer-1",
+      "chunk_count": 3,
+      "total_length": 10,
+      "sha256": "72399361da6a7754fec986dca5b7cbaf1c810a28ded4abaf56b2106d06cb78b0",
+      "terminal": true
+    }
+  },
+  "rejections": [
+    {
+      "code": "logical_stream_metadata_invalid",
+      "metadata": {
+        "method": "POST",
+        "route": {
+          "0": "ECMAScript would reorder this key"
+        }
+      }
+    }
+  ],
+  "expected": {
+    "payload_hex": "6162636465666768696a",
+    "metadata_json": "{\"method\":\"POST\",\"route\":\"/api/probe\"}",
+    "initial_credit": 8,
+    "chunk_credits": [4, 4, 2]
+  }
+}

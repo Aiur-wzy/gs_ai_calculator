@@ -1,0 +1,10 @@
+{
+  "name": "@deepseek-ai/dsh-experimental-inspector",
+  "version": "0.2.1-rc.5",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/deepseek-ai/deepseek-harness.git",
+    "directory": "packages/experimental/inspector"
+  }
+}

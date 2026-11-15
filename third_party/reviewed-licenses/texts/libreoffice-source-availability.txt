@@ -1,0 +1,8 @@
+LibreOffice engine 26.8.0.3, source commit bce0998afefdbc355585ca324285661a2170ba77:
+https://github.com/LibreOffice/core/tree/bce0998afefdbc355585ca324285661a2170ba77
+Original engine modifications, recipe and source identity are shipped in this exact npm archive:
+https://registry.npmjs.org/@deepseek-ai/libreoffice-kit-win32-x64/-/libreoffice-kit-win32-x64-0.1.5.tgz
+Within it: package/sources/core-changes.patch, core-source.json, core.json, engine/ and scripts/.
+They remain present in the App bundled node_modules/@deepseek-ai/libreoffice-kit-win32-x64/sources/.
+Use the pinned LibreOffice source plus these patches; applicable engine files remain MPL-2.0.
+Original program/license.txt, program/NOTICE and both licenses/ texts are reproduced here; no component is relicensed under the App MIT.

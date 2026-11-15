@@ -1,0 +1,5280 @@
+{
+  "plan": {
+    "kind": "genshin-plan",
+    "plan_version": 3,
+    "plan_id": "86d01ff1-a5cb-41ad-8b84-a02b7124c24d",
+    "revision": 0,
+    "manual_template": {
+      "version": 2,
+      "form": "resolved",
+      "id_registry_version": 1,
+      "type_definitions": {
+        "damage_types": []
+      },
+      "enemy": {
+        "level": 90,
+        "resistance": {
+          "default": 0.1
+        }
+      },
+      "characters": [
+        {
+          "id": "a",
+          "level": 90,
+          "stats": {
+            "atk": 100,
+            "base_atk": 50,
+            "em": 0,
+            "crit_rate": 0,
+            "crit_dmg": 0.5,
+            "energy_recharge": 1
+          }
+        }
+      ],
+      "hits": [
+        {
+          "id": "h0",
+          "t": 0.2,
+          "character": "a",
+          "skill": "工程技能",
+          "hit_name": "h0",
+          "damage_type_ids": [
+            "damage.elemental_skill"
+          ],
+          "damage_system": "classic",
+          "element": "anemo",
+          "multiplier": 1
+        },
+        {
+          "id": "h1",
+          "t": 0.3,
+          "character": "a",
+          "skill": "工程技能",
+          "hit_name": "h1",
+          "damage_type_ids": [
+            "damage.elemental_skill"
+          ],
+          "damage_system": "classic",
+          "element": "anemo",
+          "multiplier": 1
+        },
+        {
+          "id": "h2",
+          "t": 0.4,
+          "character": "a",
+          "skill": "工程技能",
+          "hit_name": "h2",
+          "damage_type_ids": [
+            "damage.elemental_skill"
+          ],
+          "damage_system": "classic",
+          "element": "anemo",
+          "multiplier": 1
+        }
+      ],
+      "buffs": [],
+      "switches": [],
+      "loop_duration": 10
+    },
+    "equipment_inputs": {},
+    "effect_bindings": [
+      {
+        "binding_id": "binding",
+        "provider_character_id": "a",
+        "owner": {
+          "kind": "manual",
+          "note": "独立工程机制"
+        },
+        "source_refs": [
+          {
+            "kind": "manual",
+            "note": "确定性虚构案例，无游戏队伍答案"
+          }
+        ],
+        "source_fingerprint": "d8d99d28b8579a7861093b12e15e0dd1c946bd7ea7bfbd9d98bc8eb6ac7dd708",
+        "coverage": {
+          "state": "complete",
+          "reviewed_by": "工程测试",
+          "note": "已核对虚构输入范围",
+          "source_fingerprint": "d8d99d28b8579a7861093b12e15e0dd1c946bd7ea7bfbd9d98bc8eb6ac7dd708"
+        },
+        "parts": [
+          {
+            "part_id": "benefit",
+            "label": "独立工程收益",
+            "state": "resolved",
+            "rule": {
+              "kind": "mechanics",
+              "rule_id": "benefit"
+            },
+            "delivery": {
+              "kind": "mechanics"
+            },
+            "conditions": [],
+            "dependencies": {
+              "mode": "manual_context",
+              "context_fingerprint": "56643d339ccba81f0d5255391397e3dec57e678ce36c356fe30b888cb4fa2faa",
+              "note": "Reviewed the whole synthetic resource graph and its gate"
+            },
+            "reason": null
+          },
+          {
+            "part_id": "pool",
+            "label": "独立工程收益",
+            "state": "resolved",
+            "rule": {
+              "kind": "mechanics",
+              "rule_id": "pool-authority"
+            },
+            "delivery": {
+              "kind": "mechanics"
+            },
+            "conditions": [],
+            "dependencies": {
+              "mode": "manual_context",
+              "context_fingerprint": "56643d339ccba81f0d5255391397e3dec57e678ce36c356fe30b888cb4fa2faa",
+              "note": "Reviewed the whole synthetic resource graph and its gate"
+            },
+            "reason": null
+          },
+          {
+            "part_id": "refill",
+            "label": "独立工程收益",
+            "state": "resolved",
+            "rule": {
+              "kind": "mechanics",
+              "rule_id": "grant-authority"
+            },
+            "delivery": {
+              "kind": "mechanics"
+            },
+            "conditions": [],
+            "dependencies": {
+              "mode": "manual_context",
+              "context_fingerprint": "56643d339ccba81f0d5255391397e3dec57e678ce36c356fe30b888cb4fa2faa",
+              "note": "Reviewed the whole synthetic resource graph and its gate"
+            },
+            "reason": null
+          }
+        ]
+      }
+    ],
+    "manual_effect_dependencies": [],
+    "rotation_tuning": {
+      "buff_hit_matches": []
+    },
+    "resolution": {
+      "state": "ready",
+      "composer_version": "1.31.0",
+      "input_fingerprint": "0dd747209ad530aa7e859f94163e8c32df70059d513b94609f572331d340044c",
+      "source_fingerprint": "9bf616f1d606030fa31381fb1a6ecf988744fcf0dc77086e211ad9e5579a473b",
+      "output_fingerprint": "023e4c74838e65b85a475190d1a048c396899ba488a7aa08a9be912a77b9b473",
+      "missing_inputs": [],
+      "warnings": [],
+      "contribution_report": {
+        "characters": {},
+        "generated_outputs": [
+          {
+            "binding_id": "binding",
+            "part_id": "benefit",
+            "mechanics_rule_id": "benefit"
+          },
+          {
+            "binding_id": "binding",
+            "part_id": "pool",
+            "mechanics_rule_id": "pool-authority"
+          },
+          {
+            "binding_id": "binding",
+            "part_id": "refill",
+            "mechanics_rule_id": "grant-authority"
+          }
+        ],
+        "equipment_sources": {}
+      },
+      "context_fingerprint": "56643d339ccba81f0d5255391397e3dec57e678ce36c356fe30b888cb4fa2faa",
+      "effect_requirements": [
+        {
+          "binding_id": "binding",
+          "provider_character_id": "a",
+          "owner": {
+            "kind": "manual",
+            "note": "独立工程机制"
+          },
+          "source_refs": [
+            {
+              "kind": "manual",
+              "note": "确定性虚构案例，无游戏队伍答案"
+            }
+          ],
+          "source_fingerprint": "d8d99d28b8579a7861093b12e15e0dd1c946bd7ea7bfbd9d98bc8eb6ac7dd708",
+          "effect": {
+            "owner": {
+              "kind": "manual",
+              "note": "独立工程机制"
+            },
+            "source_refs": [
+              {
+                "kind": "manual",
+                "note": "确定性虚构案例，无游戏队伍答案"
+              }
+            ]
+          },
+          "proposed_binding": {
+            "binding_id": "binding",
+            "provider_character_id": "a",
+            "owner": {
+              "kind": "manual",
+              "note": "独立工程机制"
+            },
+            "source_refs": [
+              {
+                "kind": "manual",
+                "note": "确定性虚构案例，无游戏队伍答案"
+              }
+            ],
+            "source_fingerprint": "d8d99d28b8579a7861093b12e15e0dd1c946bd7ea7bfbd9d98bc8eb6ac7dd708",
+            "coverage": {
+              "state": "complete",
+              "reviewed_by": "工程测试",
+              "note": "已核对虚构输入范围",
+              "source_fingerprint": "d8d99d28b8579a7861093b12e15e0dd1c946bd7ea7bfbd9d98bc8eb6ac7dd708"
+            },
+            "parts": [
+              {
+                "part_id": "benefit",
+                "label": "独立工程收益",
+                "state": "resolved",
+                "rule": {
+                  "kind": "mechanics",
+                  "rule_id": "benefit"
+                },
+                "delivery": {
+                  "kind": "mechanics"
+                },
+                "conditions": [],
+                "dependencies": {
+                  "mode": "manual_context",
+                  "context_fingerprint": "56643d339ccba81f0d5255391397e3dec57e678ce36c356fe30b888cb4fa2faa",
+                  "note": "Reviewed the whole synthetic resource graph and its gate"
+                },
+                "reason": null
+              },
+              {
+                "part_id": "pool",
+                "label": "独立工程收益",
+                "state": "resolved",
+                "rule": {
+                  "kind": "mechanics",
+                  "rule_id": "pool-authority"
+                },
+                "delivery": {
+                  "kind": "mechanics"
+                },
+                "conditions": [],
+                "dependencies": {
+                  "mode": "manual_context",
+                  "context_fingerprint": "56643d339ccba81f0d5255391397e3dec57e678ce36c356fe30b888cb4fa2faa",
+                  "note": "Reviewed the whole synthetic resource graph and its gate"
+                },
+                "reason": null
+              },
+              {
+                "part_id": "refill",
+                "label": "独立工程收益",
+                "state": "resolved",
+                "rule": {
+                  "kind": "mechanics",
+                  "rule_id": "grant-authority"
+                },
+                "delivery": {
+                  "kind": "mechanics"
+                },
+                "conditions": [],
+                "dependencies": {
+                  "mode": "manual_context",
+                  "context_fingerprint": "56643d339ccba81f0d5255391397e3dec57e678ce36c356fe30b888cb4fa2faa",
+                  "note": "Reviewed the whole synthetic resource graph and its gate"
+                },
+                "reason": null
+              }
+            ]
+          }
+        }
+      ],
+      "match_previews": [],
+      "manual_dependency_previews": [],
+      "data_versions": [],
+      "assumptions": [],
+      "resource_reaction_source_adoption": {
+        "contract": "ordinary-reaction-resource-adoption-v1",
+        "source_authority": "caller_assumed",
+        "context_fingerprint": "56643d339ccba81f0d5255391397e3dec57e678ce36c356fe30b888cb4fa2faa",
+        "declaration_fingerprint": "c66151a719467792b1f5390ff3eaff0dc3940e5aa96f8a9df65ba295a198cdf4",
+        "declared_operation_ids": [
+          "refill"
+        ],
+        "active_operation_ids": [
+          "refill"
+        ],
+        "status": "ready",
+        "operations": [
+          {
+            "operation_id": "refill",
+            "source_id": "binding:refill",
+            "pool_id": "pool",
+            "source_owner": "a",
+            "status": "ready",
+            "authority_rule_id": "grant-authority",
+            "review_mode": "manual_context"
+          }
+        ],
+        "validation_issues": [],
+        "source_fingerprint": "9bf616f1d606030fa31381fb1a6ecf988744fcf0dc77086e211ad9e5579a473b",
+        "final_model_fingerprint": "38e47479b38e02571451006c5612470b9fcd009bc278bb0d36dc462ecb1345ed",
+        "program": {
+          "contract": "ordinary-reaction-resource-v1",
+          "characters": [
+            "a"
+          ],
+          "operations": [
+            {
+              "id": "refill",
+              "pool_id": "pool",
+              "source_id": "binding:refill",
+              "source_owner": "a",
+              "keys": [
+                "team"
+              ],
+              "operation": {
+                "id": "refill",
+                "pool_id": "pool",
+                "source_id": "binding:refill",
+                "trigger": {
+                  "event": "elemental_reaction",
+                  "phase": "post",
+                  "reaction_types": [
+                    "swirl"
+                  ]
+                },
+                "order": 0,
+                "operation": "grant",
+                "amount": 3,
+                "targets": {
+                  "mode": "all_pool_keys"
+                },
+                "cooldown": {
+                  "seconds": 0,
+                  "anchor": "success"
+                },
+                "status": "assumed",
+                "source": "合成工程资料"
+              },
+              "pool": {
+                "id": "pool",
+                "name_zh": "共享池",
+                "owner": "a",
+                "source_id": "binding:pool",
+                "scope": "team",
+                "capacity": 20,
+                "initial": {
+                  "team": 0
+                },
+                "status": "assumed",
+                "source": "合成工程资料"
+              },
+              "selector": {
+                "event": "elemental_reaction",
+                "phase": "post",
+                "reaction_types": [
+                  "swirl"
+                ],
+                "owner_presence": "any"
+              }
+            }
+          ],
+          "source_authority": "not_evaluated",
+          "execution": "not_connected",
+          "verification_scope": "declared_configuration_consistency_only",
+          "program_fingerprint": "ba71f87ccf621bebeb28960d314753e400decbd4ea2b7abf876db8f01298b579"
+        },
+        "program_fingerprint": "ba71f87ccf621bebeb28960d314753e400decbd4ea2b7abf876db8f01298b579"
+      },
+      "action_automation_audit": {
+        "contract": "action-automation-audit-v3",
+        "categories": {
+          "automatic_generated": "由受审来源和动作档案自动派生",
+          "scenario_calibration": "已有档案，但仍缺场景时序、命中或来源确认",
+          "manual_input_required": "仍依赖手填命中或尚无动作档案",
+          "not_applicable": "明确不产生伤害的动作类别",
+          "unclassified": "动作类别语义未知，不能假定零命中"
+        },
+        "actions": [
+          {
+            "action_id": "cast",
+            "ability_id": "e",
+            "action_type_id": "action.elemental_skill",
+            "category": "manual_input_required",
+            "automation_origin": null,
+            "profile_ids": [],
+            "automatic_hit_ids": [],
+            "manual_hit_ids": [],
+            "issues": [
+              {
+                "code": "action_dispatch_profile_missing",
+                "path": "rotation_model.actions.cast",
+                "message": "攻击动作没有可执行的来源动作档案；仍需建立资料绑定或显式命中。"
+              }
+            ]
+          }
+        ],
+        "summary": {
+          "total_actions": 1,
+          "attack_actions": 1,
+          "automatic_actions": 0,
+          "reviewed_dispatch_actions": 0,
+          "reusable_profile_actions": 0,
+          "scenario_calibration_actions": 0,
+          "manual_actions": 1,
+          "unclassified_actions": 0,
+          "automatic_generated_hits": 0,
+          "manual_hit_rows": 3,
+          "reusable_prototype_hit_rows": 0,
+          "manual_per_instance_hit_rows": 3,
+          "manual_action_hit_links": 0,
+          "manual_reaction_answers": 0,
+          "reusable_prototype_reaction_answers": 0,
+          "manual_per_instance_reaction_answers": 0,
+          "automatic_elemental_attempts": 0,
+          "known_pending_contacts": 0,
+          "unknown_contact_cardinality_actions": 1,
+          "unknown_work_orders": 1,
+          "unique_dispatch_profile_decisions": 0,
+          "unique_reusable_profile_decisions": 0,
+          "automatic_action_ratio": 0.0,
+          "reviewed_dispatch_action_ratio": 0.0
+        },
+        "dispatch_manifest": {
+          "status": "absent",
+          "records": 0,
+          "complete_records": 0,
+          "pending_records": 0,
+          "expected_components": 0,
+          "materialized_components": 0
+        },
+        "elemental": {
+          "status": "enabled_without_automatic_actions",
+          "ruleset": "gauge-swirl-dynamic-v3",
+          "manual_reaction_hit_ids": [],
+          "policy": "受支持链路由元素运行时输出；未知资料保持待处理，不以手填反应答案冒充自动证明。"
+        }
+      }
+    },
+    "resolved_template": {
+      "version": 2,
+      "form": "resolved",
+      "id_registry_version": 1,
+      "type_definitions": {
+        "damage_types": []
+      },
+      "enemy": {
+        "level": 90,
+        "resistance": {
+          "default": 0.1
+        }
+      },
+      "characters": [
+        {
+          "id": "a",
+          "level": 90,
+          "stats": {
+            "atk": 100,
+            "base_atk": 50,
+            "em": 0,
+            "crit_rate": 0,
+            "crit_dmg": 0.5,
+            "energy_recharge": 1
+          }
+        }
+      ],
+      "hits": [
+        {
+          "id": "h0",
+          "t": 0.2,
+          "character": "a",
+          "skill": "工程技能",
+          "hit_name": "h0",
+          "damage_type_ids": [
+            "damage.elemental_skill"
+          ],
+          "damage_system": "classic",
+          "element": "anemo",
+          "multiplier": 1,
+          "extensions": {
+            "elemental": {
+              "mode": "simulated",
+              "ruleset": "gauge-swirl-dynamic-v3",
+              "target_id": "enemy",
+              "application_event_id": "0:h0",
+              "reaction": null
+            }
+          },
+          "snapshot": false
+        },
+        {
+          "id": "h1",
+          "t": 0.3,
+          "character": "a",
+          "skill": "工程技能",
+          "hit_name": "h1",
+          "damage_type_ids": [
+            "damage.elemental_skill"
+          ],
+          "damage_system": "classic",
+          "element": "anemo",
+          "multiplier": 1,
+          "extensions": {
+            "elemental": {
+              "mode": "simulated",
+              "ruleset": "gauge-swirl-dynamic-v3",
+              "target_id": "enemy",
+              "application_event_id": "0:h1",
+              "reaction": null
+            }
+          },
+          "snapshot": false
+        },
+        {
+          "id": "h2",
+          "t": 0.4,
+          "character": "a",
+          "skill": "工程技能",
+          "hit_name": "h2",
+          "damage_type_ids": [
+            "damage.elemental_skill"
+          ],
+          "damage_system": "classic",
+          "element": "anemo",
+          "multiplier": 1,
+          "extensions": {
+            "elemental": {
+              "mode": "simulated",
+              "ruleset": "gauge-swirl-dynamic-v3",
+              "target_id": "enemy",
+              "application_event_id": "0:h2",
+              "reaction": null
+            }
+          },
+          "snapshot": false
+        }
+      ],
+      "buffs": [
+        {
+          "id": "mechanics:h0",
+          "name": "机制派生收益·h0",
+          "source": "声明式机制逐命中投影",
+          "start": 0.2,
+          "end": 0.200001,
+          "scope": "team",
+          "target": "a",
+          "effects": [
+            {
+              "id": "pool-authority:value:0",
+              "benefit_type_id": "benefit.dmg_bonus.all",
+              "zone": "dmg_bonus",
+              "stat": "all",
+              "value": 0,
+              "applies_to": {
+                "mode": "hits",
+                "hit_ids": [
+                  "h0"
+                ]
+              }
+            },
+            {
+              "id": "grant-authority:value:0",
+              "benefit_type_id": "benefit.dmg_bonus.all",
+              "zone": "dmg_bonus",
+              "stat": "all",
+              "value": 0,
+              "applies_to": {
+                "mode": "hits",
+                "hit_ids": [
+                  "h0"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "mechanics:h1",
+          "name": "机制派生收益·h1",
+          "source": "声明式机制逐命中投影",
+          "start": 0.3,
+          "end": 0.300001,
+          "scope": "team",
+          "target": "a",
+          "effects": [
+            {
+              "id": "pool-authority:value:0",
+              "benefit_type_id": "benefit.dmg_bonus.all",
+              "zone": "dmg_bonus",
+              "stat": "all",
+              "value": 0,
+              "applies_to": {
+                "mode": "hits",
+                "hit_ids": [
+                  "h1"
+                ]
+              }
+            },
+            {
+              "id": "grant-authority:value:0",
+              "benefit_type_id": "benefit.dmg_bonus.all",
+              "zone": "dmg_bonus",
+              "stat": "all",
+              "value": 0,
+              "applies_to": {
+                "mode": "hits",
+                "hit_ids": [
+                  "h1"
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "id": "mechanics:h2",
+          "name": "机制派生收益·h2",
+          "source": "声明式机制逐命中投影",
+          "start": 0.4,
+          "end": 0.400001,
+          "scope": "team",
+          "target": "a",
+          "effects": [
+            {
+              "id": "pool-authority:value:0",
+              "benefit_type_id": "benefit.dmg_bonus.all",
+              "zone": "dmg_bonus",
+              "stat": "all",
+              "value": 0,
+              "applies_to": {
+                "mode": "hits",
+                "hit_ids": [
+                  "h2"
+                ]
+              }
+            },
+            {
+              "id": "grant-authority:value:0",
+              "benefit_type_id": "benefit.dmg_bonus.all",
+              "zone": "dmg_bonus",
+              "stat": "all",
+              "value": 0,
+              "applies_to": {
+                "mode": "hits",
+                "hit_ids": [
+                  "h2"
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "switches": [
+        {
+          "t": 0,
+          "character": "a"
+        }
+      ],
+      "loop_duration": 10,
+      "meta": {
+        "assumptions": [],
+        "equipment_resolution": {
+          "composer_version": "1.31.0",
+          "source_fingerprint": "9bf616f1d606030fa31381fb1a6ecf988744fcf0dc77086e211ad9e5579a473b",
+          "data_versions": []
+        }
+      }
+    },
+    "rotation_model": {
+      "schema_version": 1,
+      "period": 10,
+      "max_cycles": 3,
+      "initial_frontline": "a",
+      "characters": [
+        {
+          "id": "a",
+          "element": "anemo",
+          "energy_recharge": 1,
+          "energy_capacity": 10,
+          "initial_energy": 10,
+          "status": "assumed",
+          "source": "虚构确定性工程情景"
+        }
+      ],
+      "abilities": [
+        {
+          "id": "e",
+          "character": "a",
+          "action_type_id": "action.elemental_skill",
+          "cooldown": null,
+          "energy": null,
+          "status": "assumed",
+          "source": "虚构确定性工程情景"
+        }
+      ],
+      "actions": [
+        {
+          "id": "cast",
+          "ability_id": "e",
+          "start": 0,
+          "occupation_end": 0.1,
+          "order": 0,
+          "repeat": {
+            "mode": "once"
+          },
+          "status": "assumed",
+          "source": "虚构确定性工程情景"
+        }
+      ],
+      "events": [],
+      "initial_cooldowns": []
+    },
+    "mechanics_model": {
+      "schema_version": 1,
+      "rules": [
+        {
+          "id": "benefit",
+          "name_zh": "工程收益",
+          "owner": "a",
+          "source_id": "binding:benefit",
+          "trigger": {
+            "event": "action_start",
+            "phase": "pre",
+            "action_ids": [
+              "cast"
+            ]
+          },
+          "beneficiaries": {
+            "mode": "team",
+            "scope": "locked"
+          },
+          "timing": {
+            "delay": 0,
+            "duration": 2,
+            "cooldown": 0,
+            "cooldown_anchor": "success"
+          },
+          "stacking": {
+            "max": 1,
+            "add": 1,
+            "policy": "refresh"
+          },
+          "effects": [
+            {
+              "id": "value",
+              "benefit_type_id": "benefit.base_add.all",
+              "value": 100,
+              "domain": "self"
+            }
+          ],
+          "status": "assumed",
+          "source": "虚构确定性工程情景",
+          "resource_gate": {
+            "consumer_id": "consumer"
+          }
+        },
+        {
+          "id": "pool-authority",
+          "name_zh": "工程收益",
+          "owner": "a",
+          "source_id": "binding:pool",
+          "trigger": {
+            "event": "action_start",
+            "phase": "pre",
+            "action_ids": [
+              "cast"
+            ]
+          },
+          "beneficiaries": {
+            "mode": "team",
+            "scope": "locked"
+          },
+          "timing": {
+            "delay": 0,
+            "duration": 2,
+            "cooldown": 0,
+            "cooldown_anchor": "success"
+          },
+          "stacking": {
+            "max": 1,
+            "add": 1,
+            "policy": "refresh"
+          },
+          "effects": [
+            {
+              "id": "value",
+              "benefit_type_id": "benefit.dmg_bonus.all",
+              "value": 0,
+              "domain": "self"
+            }
+          ],
+          "status": "assumed",
+          "source": "虚构确定性工程情景"
+        },
+        {
+          "id": "grant-authority",
+          "name_zh": "工程收益",
+          "owner": "a",
+          "source_id": "binding:refill",
+          "trigger": {
+            "event": "action_start",
+            "phase": "pre",
+            "action_ids": [
+              "cast"
+            ]
+          },
+          "beneficiaries": {
+            "mode": "team",
+            "scope": "locked"
+          },
+          "timing": {
+            "delay": 0,
+            "duration": 2,
+            "cooldown": 0,
+            "cooldown_anchor": "success"
+          },
+          "stacking": {
+            "max": 1,
+            "add": 1,
+            "policy": "refresh"
+          },
+          "effects": [
+            {
+              "id": "value",
+              "benefit_type_id": "benefit.dmg_bonus.all",
+              "value": 0,
+              "domain": "self"
+            }
+          ],
+          "status": "assumed",
+          "source": "虚构确定性工程情景"
+        }
+      ],
+      "hit_events": [
+        {
+          "hit_id": "h0",
+          "action_id": "cast",
+          "order": 10,
+          "application": {
+            "profile_id": "anemo",
+            "target_id": "enemy",
+            "landed": true
+          }
+        },
+        {
+          "hit_id": "h1",
+          "action_id": "cast",
+          "order": 11,
+          "application": {
+            "profile_id": "anemo",
+            "target_id": "enemy",
+            "landed": true
+          }
+        },
+        {
+          "hit_id": "h2",
+          "action_id": "cast",
+          "order": 12,
+          "application": {
+            "profile_id": "anemo",
+            "target_id": "enemy",
+            "landed": true
+          }
+        }
+      ],
+      "hit_patterns": [],
+      "condition_events": [],
+      "initial_state": {
+        "rules": [
+          {
+            "rule_id": "benefit",
+            "cooldown_remaining": 0,
+            "instances": []
+          },
+          {
+            "rule_id": "pool-authority",
+            "cooldown_remaining": 0,
+            "instances": []
+          },
+          {
+            "rule_id": "grant-authority",
+            "cooldown_remaining": 0,
+            "instances": []
+          }
+        ]
+      },
+      "elemental_model": {
+        "schema_version": 1,
+        "ruleset": "gauge-swirl-dynamic-v3",
+        "target": {
+          "id": "enemy",
+          "kind": "ordinary",
+          "knowledge": "known",
+          "initial_aura": null,
+          "status": "assumed",
+          "source": "虚构确定性工程情景"
+        },
+        "profiles": [
+          {
+            "id": "pyro",
+            "element": "pyro",
+            "application": "apply",
+            "gauge_units": 1,
+            "icd": {
+              "kind": "none"
+            },
+            "status": "assumed",
+            "source": "虚构确定性工程情景"
+          },
+          {
+            "id": "hydro",
+            "element": "hydro",
+            "application": "apply",
+            "gauge_units": 1,
+            "icd": {
+              "kind": "none"
+            },
+            "status": "assumed",
+            "source": "虚构确定性工程情景"
+          },
+          {
+            "id": "cryo",
+            "element": "cryo",
+            "application": "apply",
+            "gauge_units": 1,
+            "icd": {
+              "kind": "none"
+            },
+            "status": "assumed",
+            "source": "虚构确定性工程情景"
+          },
+          {
+            "id": "anemo",
+            "element": "anemo",
+            "application": "apply",
+            "gauge_units": 1,
+            "icd": {
+              "kind": "none"
+            },
+            "status": "assumed",
+            "source": "虚构确定性工程情景"
+          }
+        ],
+        "swirl_damage": {
+          "icd": {
+            "kind": "sequence",
+            "reset_seconds": 0.5,
+            "sequence": [
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "status": "assumed",
+          "source": "普通冰水原目标扩散，AttackAttenuation组1的damageSequence"
+        }
+      },
+      "shared_pools": {
+        "schema_version": 1,
+        "pools": [
+          {
+            "id": "pool",
+            "name_zh": "共享池",
+            "owner": "a",
+            "source_id": "binding:pool",
+            "scope": "team",
+            "capacity": 20,
+            "initial": {
+              "team": 0
+            },
+            "status": "assumed",
+            "source": "合成工程资料"
+          }
+        ],
+        "operations": [
+          {
+            "id": "refill",
+            "pool_id": "pool",
+            "source_id": "binding:refill",
+            "trigger": {
+              "event": "elemental_reaction",
+              "phase": "post",
+              "reaction_types": [
+                "swirl"
+              ]
+            },
+            "order": 0,
+            "operation": "grant",
+            "amount": 3,
+            "targets": {
+              "mode": "all_pool_keys"
+            },
+            "cooldown": {
+              "seconds": 0,
+              "anchor": "success"
+            },
+            "status": "assumed",
+            "source": "合成工程资料"
+          }
+        ],
+        "consumers": [
+          {
+            "id": "consumer",
+            "pool_id": "pool",
+            "source_id": "binding:benefit",
+            "filter": {
+              "event": "hit",
+              "phase": "pre"
+            },
+            "actor_relation": "party_member",
+            "damage_system": "classic",
+            "amount": 1,
+            "eligibility_rule_id": "benefit",
+            "status": "assumed",
+            "source": "合成工程资料"
+          }
+        ]
+      },
+      "resource_reaction_contract": {
+        "schema_version": 1,
+        "operation_ids": [
+          "refill"
+        ]
+      }
+    }
+  },
+  "result": {
+    "summary": {
+      "total_damage": 135.0,
+      "dps": 13.5,
+      "by_skill": {
+        "工程技能": 135.0
+      },
+      "by_character": {
+        "a": 135.0
+      }
+    },
+    "hits": [
+      {
+        "t": 0.2,
+        "skill": "工程技能",
+        "hit_name": "h0",
+        "character": "a",
+        "count": 1,
+        "result_weight": 1.0,
+        "damage_system": "classic",
+        "expected": 45.0,
+        "crit": 67.5,
+        "buffs": [
+          "mechanics:h0"
+        ],
+        "zones": {
+          "base": 100.0,
+          "base_mult": 1.0,
+          "aggravate_flat": 0.0,
+          "dmg_bonus": 1.0,
+          "resistance": 0.9,
+          "defense": 0.5,
+          "amplify": 1.0,
+          "crit_expected": 1.0
+        },
+        "snapshot_at": null,
+        "id": "h0",
+        "damage_type_ids": [
+          "damage.elemental_skill"
+        ],
+        "matched_effect_refs": [
+          {
+            "buff_id": "mechanics:h0",
+            "effect_id": "pool-authority:value:0",
+            "benefit_type_id": "benefit.dmg_bonus.all"
+          },
+          {
+            "buff_id": "mechanics:h0",
+            "effect_id": "grant-authority:value:0",
+            "benefit_type_id": "benefit.dmg_bonus.all"
+          }
+        ]
+      },
+      {
+        "t": 0.3,
+        "skill": "工程技能",
+        "hit_name": "h1",
+        "character": "a",
+        "count": 1,
+        "result_weight": 1.0,
+        "damage_system": "classic",
+        "expected": 45.0,
+        "crit": 67.5,
+        "buffs": [
+          "mechanics:h1"
+        ],
+        "zones": {
+          "base": 100.0,
+          "base_mult": 1.0,
+          "aggravate_flat": 0.0,
+          "dmg_bonus": 1.0,
+          "resistance": 0.9,
+          "defense": 0.5,
+          "amplify": 1.0,
+          "crit_expected": 1.0
+        },
+        "snapshot_at": null,
+        "id": "h1",
+        "damage_type_ids": [
+          "damage.elemental_skill"
+        ],
+        "matched_effect_refs": [
+          {
+            "buff_id": "mechanics:h1",
+            "effect_id": "pool-authority:value:0",
+            "benefit_type_id": "benefit.dmg_bonus.all"
+          },
+          {
+            "buff_id": "mechanics:h1",
+            "effect_id": "grant-authority:value:0",
+            "benefit_type_id": "benefit.dmg_bonus.all"
+          }
+        ]
+      },
+      {
+        "t": 0.4,
+        "skill": "工程技能",
+        "hit_name": "h2",
+        "character": "a",
+        "count": 1,
+        "result_weight": 1.0,
+        "damage_system": "classic",
+        "expected": 45.0,
+        "crit": 67.5,
+        "buffs": [
+          "mechanics:h2"
+        ],
+        "zones": {
+          "base": 100.0,
+          "base_mult": 1.0,
+          "aggravate_flat": 0.0,
+          "dmg_bonus": 1.0,
+          "resistance": 0.9,
+          "defense": 0.5,
+          "amplify": 1.0,
+          "crit_expected": 1.0
+        },
+        "snapshot_at": null,
+        "id": "h2",
+        "damage_type_ids": [
+          "damage.elemental_skill"
+        ],
+        "matched_effect_refs": [
+          {
+            "buff_id": "mechanics:h2",
+            "effect_id": "pool-authority:value:0",
+            "benefit_type_id": "benefit.dmg_bonus.all"
+          },
+          {
+            "buff_id": "mechanics:h2",
+            "effect_id": "grant-authority:value:0",
+            "benefit_type_id": "benefit.dmg_bonus.all"
+          }
+        ]
+      }
+    ],
+    "buffs_coverage": [
+      {
+        "id": "mechanics:h0",
+        "source": "声明式机制逐命中投影",
+        "uptime": 1.0000000000010001e-07
+      },
+      {
+        "id": "mechanics:h1",
+        "source": "声明式机制逐命中投影",
+        "uptime": 1.0000000000287557e-07
+      },
+      {
+        "id": "mechanics:h2",
+        "source": "声明式机制逐命中投影",
+        "uptime": 9.999999999732446e-08
+      }
+    ],
+    "patches_applied": [],
+    "assumptions": [
+      "期望口径（暴击按期望值合并，暴击大数字另列）",
+      "帧率未纳入（rotation.md 附录精神，默认原生系统）",
+      "社区共识公式，粗粒度不追游戏内舍入"
+    ],
+    "template_version": 2,
+    "id_registry_version": 1,
+    "mechanics": {
+      "schema_version": 1,
+      "scope": "verified_first_cycle_prefix",
+      "complete_first_cycle": true,
+      "execution_status": "unproven"
+    },
+    "elemental": {
+      "ruleset": "gauge-swirl-dynamic-v3",
+      "mode": "simulated",
+      "input_window_state": {
+        "target_id": "enemy",
+        "t": 10.0,
+        "knowledge": "known",
+        "aura": null,
+        "icd": [],
+        "reaction_damage_icd": []
+      },
+      "final_checked_state": {
+        "target_id": "enemy",
+        "t": 30.0,
+        "knowledge": "known",
+        "aura": null,
+        "icd": [],
+        "reaction_damage_icd": []
+      },
+      "trace": [
+        {
+          "type": "elemental_application",
+          "event_id": "0:h0",
+          "action_id": "cast",
+          "character": "a",
+          "target_id": "enemy",
+          "t": 0.2,
+          "profile_id": "anemo",
+          "profile_status": "assumed",
+          "source": "虚构确定性工程情景",
+          "ruleset": "gauge-swirl-dynamic-v3",
+          "element": "anemo",
+          "before": {
+            "target_id": "enemy",
+            "t": 0.2,
+            "knowledge": "known",
+            "aura": null,
+            "icd": [],
+            "reaction_damage_icd": []
+          },
+          "reaction": null,
+          "area_id": "battlefield.primary",
+          "atomic_parent_id": "h0",
+          "application_packet_size": 1,
+          "direct_hit": true,
+          "counts_toward_stellar_superconduct": true,
+          "application_attempted": true,
+          "application_allowed": true,
+          "reaction_occurred": false,
+          "icd_audit": {
+            "mode": "none",
+            "consumed": false,
+            "counter_tag": null,
+            "rule_group": null,
+            "shared_key": null,
+            "sequence_index": null,
+            "attempt_number": null,
+            "coefficient": 1
+          },
+          "stable_event_id": "h0",
+          "run_id": "0:h0",
+          "allowed": true,
+          "reason": "no_icd",
+          "application_gu": 1,
+          "outcome": "anemo_without_aura",
+          "after": {
+            "target_id": "enemy",
+            "t": 0.2,
+            "knowledge": "known",
+            "aura": null,
+            "icd": [],
+            "reaction_damage_icd": []
+          },
+          "status": "executed",
+          "cycle": 0
+        },
+        {
+          "type": "elemental_application",
+          "event_id": "0:h1",
+          "action_id": "cast",
+          "character": "a",
+          "target_id": "enemy",
+          "t": 0.3,
+          "profile_id": "anemo",
+          "profile_status": "assumed",
+          "source": "虚构确定性工程情景",
+          "ruleset": "gauge-swirl-dynamic-v3",
+          "element": "anemo",
+          "before": {
+            "target_id": "enemy",
+            "t": 0.3,
+            "knowledge": "known",
+            "aura": null,
+            "icd": [],
+            "reaction_damage_icd": []
+          },
+          "reaction": null,
+          "area_id": "battlefield.primary",
+          "atomic_parent_id": "h1",
+          "application_packet_size": 1,
+          "direct_hit": true,
+          "counts_toward_stellar_superconduct": true,
+          "application_attempted": true,
+          "application_allowed": true,
+          "reaction_occurred": false,
+          "icd_audit": {
+            "mode": "none",
+            "consumed": false,
+            "counter_tag": null,
+            "rule_group": null,
+            "shared_key": null,
+            "sequence_index": null,
+            "attempt_number": null,
+            "coefficient": 1
+          },
+          "stable_event_id": "h1",
+          "run_id": "0:h1",
+          "allowed": true,
+          "reason": "no_icd",
+          "application_gu": 1,
+          "outcome": "anemo_without_aura",
+          "after": {
+            "target_id": "enemy",
+            "t": 0.3,
+            "knowledge": "known",
+            "aura": null,
+            "icd": [],
+            "reaction_damage_icd": []
+          },
+          "status": "executed",
+          "cycle": 0
+        },
+        {
+          "type": "elemental_application",
+          "event_id": "0:h2",
+          "action_id": "cast",
+          "character": "a",
+          "target_id": "enemy",
+          "t": 0.4,
+          "profile_id": "anemo",
+          "profile_status": "assumed",
+          "source": "虚构确定性工程情景",
+          "ruleset": "gauge-swirl-dynamic-v3",
+          "element": "anemo",
+          "before": {
+            "target_id": "enemy",
+            "t": 0.4,
+            "knowledge": "known",
+            "aura": null,
+            "icd": [],
+            "reaction_damage_icd": []
+          },
+          "reaction": null,
+          "area_id": "battlefield.primary",
+          "atomic_parent_id": "h2",
+          "application_packet_size": 1,
+          "direct_hit": true,
+          "counts_toward_stellar_superconduct": true,
+          "application_attempted": true,
+          "application_allowed": true,
+          "reaction_occurred": false,
+          "icd_audit": {
+            "mode": "none",
+            "consumed": false,
+            "counter_tag": null,
+            "rule_group": null,
+            "shared_key": null,
+            "sequence_index": null,
+            "attempt_number": null,
+            "coefficient": 1
+          },
+          "stable_event_id": "h2",
+          "run_id": "0:h2",
+          "allowed": true,
+          "reason": "no_icd",
+          "application_gu": 1,
+          "outcome": "anemo_without_aura",
+          "after": {
+            "target_id": "enemy",
+            "t": 0.4,
+            "knowledge": "known",
+            "aura": null,
+            "icd": [],
+            "reaction_damage_icd": []
+          },
+          "status": "executed",
+          "cycle": 0
+        }
+      ],
+      "event_counts": {
+        "total_scheduled_including_synchronous": 8,
+        "synchronous": {
+          "elemental_reaction": 0,
+          "reaction_damage": 0
+        },
+        "limit": 40000
+      }
+    },
+    "shared_pools": {
+      "schema_version": 1,
+      "scope": "declared_shared_integer_pools",
+      "state": {
+        "balances": {
+          "pool": {
+            "team": 0
+          }
+        },
+        "cooldown_remaining_us": {
+          "refill": 0
+        }
+      },
+      "trace": [
+        {
+          "id": "pool:df0def21434b33a50d93ec46ada2c09f51ee7765f7c51c8ae8a97fb7a8cbcc6d",
+          "type": "consume",
+          "pool_id": "pool",
+          "source_id": "binding:benefit",
+          "consumer_id": "consumer",
+          "event_id": "h0",
+          "run_id": "0:h0",
+          "t_us": 200000,
+          "phase": "pre",
+          "key": "team",
+          "before": 0,
+          "requested": 1,
+          "accepted": 0,
+          "after": 0,
+          "delta": 0,
+          "reason": "insufficient",
+          "qualification_scope": "engine_declared_event",
+          "actor": "a",
+          "qualified": true,
+          "gate_open": false,
+          "cycle": 0,
+          "t": 0.2,
+          "eligible_instance_ids": [
+            "benefit:0:cast"
+          ],
+          "eligibility_reason": "eligible"
+        },
+        {
+          "id": "pool:65eb83c270d0eb9eacf47fa827dd5df7656c5634067f6e93c6395297cb4b6689",
+          "type": "consume",
+          "pool_id": "pool",
+          "source_id": "binding:benefit",
+          "consumer_id": "consumer",
+          "event_id": "h1",
+          "run_id": "0:h1",
+          "t_us": 300000,
+          "phase": "pre",
+          "key": "team",
+          "before": 0,
+          "requested": 1,
+          "accepted": 0,
+          "after": 0,
+          "delta": 0,
+          "reason": "insufficient",
+          "qualification_scope": "engine_declared_event",
+          "actor": "a",
+          "qualified": true,
+          "gate_open": false,
+          "cycle": 0,
+          "t": 0.3,
+          "eligible_instance_ids": [
+            "benefit:0:cast"
+          ],
+          "eligibility_reason": "eligible"
+        },
+        {
+          "id": "pool:cbd9d7f4802a7592e9d3694f8bbdde5c906a64f8863e0c16b7b048985a51a939",
+          "type": "consume",
+          "pool_id": "pool",
+          "source_id": "binding:benefit",
+          "consumer_id": "consumer",
+          "event_id": "h2",
+          "run_id": "0:h2",
+          "t_us": 400000,
+          "phase": "pre",
+          "key": "team",
+          "before": 0,
+          "requested": 1,
+          "accepted": 0,
+          "after": 0,
+          "delta": 0,
+          "reason": "insufficient",
+          "qualification_scope": "engine_declared_event",
+          "actor": "a",
+          "qualified": true,
+          "gate_open": false,
+          "cycle": 0,
+          "t": 0.4,
+          "eligible_instance_ids": [
+            "benefit:0:cast"
+          ],
+          "eligibility_reason": "eligible"
+        }
+      ],
+      "database_source_approval": "not_evaluated_by_engine",
+      "event_counts": {
+        "total": 8,
+        "limit": 40000
+      }
+    },
+    "buff_state_timeline": {
+      "contract": "buff-state-timeline-v1",
+      "version": 1,
+      "duration": 10,
+      "execution_limit": 10,
+      "execution_status": "unproven",
+      "states": [
+        {
+          "rule_id": "benefit",
+          "source_id": "binding:benefit",
+          "owner": "a",
+          "name_zh": "工程收益",
+          "source": "虚构确定性工程情景",
+          "evidence_status": "assumed",
+          "id": "[\"mechanics_rule\",\"benefit:0:cast\",\"a\"]",
+          "origin": "mechanics_rule",
+          "instance_id": "benefit:0:cast",
+          "beneficiary": "a",
+          "beneficiaries": [
+            "a"
+          ],
+          "beneficiaries_scope": {
+            "mode": "team",
+            "scope": "locked"
+          },
+          "trigger": {
+            "event": "action_start",
+            "phase": "pre",
+            "action_ids": [
+              "cast"
+            ]
+          },
+          "resource_gate": {
+            "consumer_id": "consumer",
+            "pool_id": "pool",
+            "actor_relation": "party_member",
+            "amount": 1,
+            "filter": {
+              "event": "hit",
+              "phase": "pre"
+            },
+            "status": "assumed",
+            "source_id": "binding:benefit",
+            "pool": {
+              "id": "pool",
+              "name_zh": "共享池",
+              "owner": "a",
+              "source_id": "binding:pool",
+              "scope": "team",
+              "capacity": 20,
+              "initial": {
+                "team": 0
+              },
+              "status": "assumed",
+              "source": "合成工程资料"
+            },
+            "receipt_field": "shared_pools.trace"
+          },
+          "effects": [
+            {
+              "id": "value",
+              "benefit_type_id": "benefit.base_add.all",
+              "value": 100,
+              "domain": "self"
+            }
+          ],
+          "effect_applicability": [
+            {
+              "effect_id": "value",
+              "domain": "self",
+              "recipient_mode": "instance_beneficiaries",
+              "possible_characters": [
+                "a"
+              ],
+              "requires_quota_receipt": true,
+              "frontline_required": false,
+              "message": "角色收益受声明角色范围约束；实际命中还须通过收益筛选和取样。"
+            }
+          ],
+          "filters": [],
+          "start": 0.0,
+          "end": 2.0,
+          "end_reason": "natural_expiry",
+          "slices": [
+            {
+              "start": 0.0,
+              "end": 2.0,
+              "status": "exhausted",
+              "layers": 1,
+              "remaining_quota": null,
+              "quota_pool": null,
+              "resource_balance": {
+                "pool_id": "pool",
+                "pool_key": "team",
+                "required": 1,
+                "unit_scale": 1,
+                "quantity_unit": "count",
+                "receipt_field": "shared_pools.trace",
+                "remaining": 0,
+                "status": "exhausted"
+              },
+              "activation_time": 0.0,
+              "activation_trace_index": 0,
+              "activation_event_id": "cast",
+              "origin": "activation",
+              "rule_expires_at": 2.0,
+              "end_reason": "natural_expiry",
+              "quota_changed_at_end": false,
+              "resource_changed_at_end": false
+            }
+          ]
+        },
+        {
+          "rule_id": "grant-authority",
+          "source_id": "binding:refill",
+          "owner": "a",
+          "name_zh": "工程收益",
+          "source": "虚构确定性工程情景",
+          "evidence_status": "assumed",
+          "id": "[\"mechanics_rule\",\"grant-authority:0:cast\",\"a\"]",
+          "origin": "mechanics_rule",
+          "instance_id": "grant-authority:0:cast",
+          "beneficiary": "a",
+          "beneficiaries": [
+            "a"
+          ],
+          "beneficiaries_scope": {
+            "mode": "team",
+            "scope": "locked"
+          },
+          "trigger": {
+            "event": "action_start",
+            "phase": "pre",
+            "action_ids": [
+              "cast"
+            ]
+          },
+          "effects": [
+            {
+              "id": "value",
+              "benefit_type_id": "benefit.dmg_bonus.all",
+              "value": 0,
+              "domain": "self"
+            }
+          ],
+          "effect_applicability": [
+            {
+              "effect_id": "value",
+              "domain": "self",
+              "recipient_mode": "instance_beneficiaries",
+              "possible_characters": [
+                "a"
+              ],
+              "requires_quota_receipt": false,
+              "frontline_required": false,
+              "message": "角色收益受声明角色范围约束；实际命中还须通过收益筛选和取样。"
+            }
+          ],
+          "filters": [],
+          "start": 0.0,
+          "end": 2.0,
+          "end_reason": "natural_expiry",
+          "slices": [
+            {
+              "start": 0.0,
+              "end": 2.0,
+              "status": "active",
+              "layers": 1,
+              "remaining_quota": null,
+              "quota_pool": null,
+              "activation_time": 0.0,
+              "activation_trace_index": 1,
+              "activation_event_id": "cast",
+              "origin": "activation",
+              "rule_expires_at": 2.0,
+              "end_reason": "natural_expiry",
+              "quota_changed_at_end": false
+            }
+          ]
+        },
+        {
+          "rule_id": "pool-authority",
+          "source_id": "binding:pool",
+          "owner": "a",
+          "name_zh": "工程收益",
+          "source": "虚构确定性工程情景",
+          "evidence_status": "assumed",
+          "id": "[\"mechanics_rule\",\"pool-authority:0:cast\",\"a\"]",
+          "origin": "mechanics_rule",
+          "instance_id": "pool-authority:0:cast",
+          "beneficiary": "a",
+          "beneficiaries": [
+            "a"
+          ],
+          "beneficiaries_scope": {
+            "mode": "team",
+            "scope": "locked"
+          },
+          "trigger": {
+            "event": "action_start",
+            "phase": "pre",
+            "action_ids": [
+              "cast"
+            ]
+          },
+          "effects": [
+            {
+              "id": "value",
+              "benefit_type_id": "benefit.dmg_bonus.all",
+              "value": 0,
+              "domain": "self"
+            }
+          ],
+          "effect_applicability": [
+            {
+              "effect_id": "value",
+              "domain": "self",
+              "recipient_mode": "instance_beneficiaries",
+              "possible_characters": [
+                "a"
+              ],
+              "requires_quota_receipt": false,
+              "frontline_required": false,
+              "message": "角色收益受声明角色范围约束；实际命中还须通过收益筛选和取样。"
+            }
+          ],
+          "filters": [],
+          "start": 0.0,
+          "end": 2.0,
+          "end_reason": "natural_expiry",
+          "slices": [
+            {
+              "start": 0.0,
+              "end": 2.0,
+              "status": "active",
+              "layers": 1,
+              "remaining_quota": null,
+              "quota_pool": null,
+              "activation_time": 0.0,
+              "activation_trace_index": 2,
+              "activation_event_id": "cast",
+              "origin": "activation",
+              "rule_expires_at": 2.0,
+              "end_reason": "natural_expiry",
+              "quota_changed_at_end": false
+            }
+          ]
+        }
+      ],
+      "excluded": [],
+      "notes": [
+        "持续条表示声明规则或明确输入区间的状态；筛选、前台限制、目标条件和快照取样仍以逐击计算为准。",
+        "区间右端不包含；同刻事件的先后与该次命中收益请查看计算流水。",
+        "受共享资源门控的持续条仍保留规则期限；active/exhausted仅表示事件后余额是否足够下一次消费，同刻命中是否实际受益以共享资源消费回执为准。"
+      ]
+    },
+    "resource_reactions": {
+      "contract": "ordinary-reaction-resource-v1",
+      "program_fingerprint": "ba71f87ccf621bebeb28960d314753e400decbd4ea2b7abf876db8f01298b579",
+      "execution": "mechanics_event_queue",
+      "source_authority": "caller_assumed",
+      "verification_scope": "actual_runtime_occurrence_consistency_no_new_source_authority",
+      "occurrences": [],
+      "operations": [],
+      "termination": null,
+      "usage": {
+        "work_consumed": 5935,
+        "verification_work_reserved": 0,
+        "catalog_bytes_reserved": 17388,
+        "slots": 0
+      },
+      "program": {
+        "contract": "ordinary-reaction-resource-v1",
+        "characters": [
+          "a"
+        ],
+        "operations": [
+          {
+            "id": "refill",
+            "pool_id": "pool",
+            "source_id": "binding:refill",
+            "source_owner": "a",
+            "keys": [
+              "team"
+            ],
+            "operation": {
+              "id": "refill",
+              "pool_id": "pool",
+              "source_id": "binding:refill",
+              "trigger": {
+                "event": "elemental_reaction",
+                "phase": "post",
+                "reaction_types": [
+                  "swirl"
+                ]
+              },
+              "order": 0,
+              "operation": "grant",
+              "amount": 3,
+              "targets": {
+                "mode": "all_pool_keys"
+              },
+              "cooldown": {
+                "seconds": 0,
+                "anchor": "success"
+              },
+              "status": "assumed",
+              "source": "合成工程资料"
+            },
+            "pool": {
+              "id": "pool",
+              "name_zh": "共享池",
+              "owner": "a",
+              "source_id": "binding:pool",
+              "scope": "team",
+              "capacity": 20,
+              "initial": {
+                "team": 0
+              },
+              "status": "assumed",
+              "source": "合成工程资料"
+            },
+            "selector": {
+              "event": "elemental_reaction",
+              "phase": "post",
+              "reaction_types": [
+                "swirl"
+              ],
+              "owner_presence": "any"
+            }
+          }
+        ],
+        "source_authority": "not_evaluated",
+        "execution": "not_connected",
+        "verification_scope": "declared_configuration_consistency_only",
+        "program_fingerprint": "ba71f87ccf621bebeb28960d314753e400decbd4ea2b7abf876db8f01298b579"
+      },
+      "verification_status": "verified",
+      "verification": {
+        "status": "verified",
+        "scope": "stored_occurrence_consistency_no_source_authority",
+        "actual_reactions": 0,
+        "audit_occurrences": 0,
+        "audited_operations": 0,
+        "committed_resource_receipts": 0
+      },
+      "verification_issue": null,
+      "execution_status": "unproven",
+      "verified_window": "complete_reported_input"
+    },
+    "resource_reaction_source_adoption": {
+      "contract": "ordinary-reaction-resource-adoption-v1",
+      "source_authority": "caller_assumed",
+      "context_fingerprint": "56643d339ccba81f0d5255391397e3dec57e678ce36c356fe30b888cb4fa2faa",
+      "declaration_fingerprint": "c66151a719467792b1f5390ff3eaff0dc3940e5aa96f8a9df65ba295a198cdf4",
+      "declared_operation_ids": [
+        "refill"
+      ],
+      "active_operation_ids": [
+        "refill"
+      ],
+      "status": "ready",
+      "operations": [
+        {
+          "operation_id": "refill",
+          "source_id": "binding:refill",
+          "pool_id": "pool",
+          "source_owner": "a",
+          "status": "ready",
+          "authority_rule_id": "grant-authority",
+          "review_mode": "manual_context"
+        }
+      ],
+      "validation_issues": [],
+      "source_fingerprint": "9bf616f1d606030fa31381fb1a6ecf988744fcf0dc77086e211ad9e5579a473b",
+      "final_model_fingerprint": "38e47479b38e02571451006c5612470b9fcd009bc278bb0d36dc462ecb1345ed",
+      "program": {
+        "contract": "ordinary-reaction-resource-v1",
+        "characters": [
+          "a"
+        ],
+        "operations": [
+          {
+            "id": "refill",
+            "pool_id": "pool",
+            "source_id": "binding:refill",
+            "source_owner": "a",
+            "keys": [
+              "team"
+            ],
+            "operation": {
+              "id": "refill",
+              "pool_id": "pool",
+              "source_id": "binding:refill",
+              "trigger": {
+                "event": "elemental_reaction",
+                "phase": "post",
+                "reaction_types": [
+                  "swirl"
+                ]
+              },
+              "order": 0,
+              "operation": "grant",
+              "amount": 3,
+              "targets": {
+                "mode": "all_pool_keys"
+              },
+              "cooldown": {
+                "seconds": 0,
+                "anchor": "success"
+              },
+              "status": "assumed",
+              "source": "合成工程资料"
+            },
+            "pool": {
+              "id": "pool",
+              "name_zh": "共享池",
+              "owner": "a",
+              "source_id": "binding:pool",
+              "scope": "team",
+              "capacity": 20,
+              "initial": {
+                "team": 0
+              },
+              "status": "assumed",
+              "source": "合成工程资料"
+            },
+            "selector": {
+              "event": "elemental_reaction",
+              "phase": "post",
+              "reaction_types": [
+                "swirl"
+              ],
+              "owner_presence": "any"
+            }
+          }
+        ],
+        "source_authority": "not_evaluated",
+        "execution": "not_connected",
+        "verification_scope": "declared_configuration_consistency_only",
+        "program_fingerprint": "ba71f87ccf621bebeb28960d314753e400decbd4ea2b7abf876db8f01298b579"
+      },
+      "program_fingerprint": "ba71f87ccf621bebeb28960d314753e400decbd4ea2b7abf876db8f01298b579"
+    },
+    "rotation_check": {
+      "schema_version": 1,
+      "status": "unproven",
+      "issues": [],
+      "assumptions": [
+        "a：虚构确定性工程情景",
+        "benefit：虚构确定性工程情景",
+        "cast：虚构确定性工程情景",
+        "e：虚构确定性工程情景",
+        "grant-authority：虚构确定性工程情景",
+        "pool-authority：虚构确定性工程情景",
+        "普通扩散伤害：普通冰水原目标扩散，AttackAttenuation组1的damageSequence",
+        "附着 anemo：虚构确定性工程情景",
+        "附着 cryo：虚构确定性工程情景",
+        "附着 enemy：虚构确定性工程情景",
+        "附着 hydro：虚构确定性工程情景",
+        "附着 pyro：虚构确定性工程情景"
+      ],
+      "determinacy": "conditional",
+      "unchecked_constraints": [
+        "体力消耗",
+        "元素附着与反应",
+        "攻击是否命中",
+        "距离与位置",
+        "未声明的机制完整性",
+        "后续轮次伤害汇总与实战 DPS"
+      ],
+      "action_check": {
+        "status": "passed",
+        "checked_constraints": [
+          "前台",
+          "动作占用",
+          "冷却与技能次数"
+        ]
+      },
+      "energy_check": {
+        "status": "unproven",
+        "opening_status": "passed",
+        "cycle_status": "unproven",
+        "checked_cycles": 3,
+        "completed_cycles": 3,
+        "failed_cycle": null,
+        "proven_cycle": null,
+        "proof_scope": {
+          "kind": "checked_windows",
+          "period_seconds": 10,
+          "periodic_action_ids": [],
+          "finite_action_ids": [
+            "cast"
+          ],
+          "damage_verified": false
+        }
+      },
+      "event_log": [
+        {
+          "id": "cast",
+          "run_id": "0:cast",
+          "cycle": 0,
+          "source_cycle": 0,
+          "type": "action",
+          "t": 0.0,
+          "order": 0,
+          "frontline": "a",
+          "status": "passed",
+          "source": "虚构确定性工程情景",
+          "action_id": "cast",
+          "character": "a",
+          "action_type_id": "action.elemental_skill",
+          "occupation_end": 0.1,
+          "frontline_after": "a"
+        },
+        {
+          "id": "cast:end",
+          "run_id": "0:cast:end",
+          "cycle": 0,
+          "source_cycle": 0,
+          "type": "mechanics_end",
+          "t": 0.1,
+          "order": 0,
+          "frontline": "a",
+          "status": "passed",
+          "source": "虚构确定性工程情景",
+          "action_id": "cast"
+        },
+        {
+          "id": "h0",
+          "run_id": "0:h0",
+          "cycle": 0,
+          "source_cycle": 0,
+          "type": "mechanics_hit",
+          "t": 0.2,
+          "order": 10,
+          "frontline": "a",
+          "status": "passed",
+          "source": null,
+          "action_id": "cast"
+        },
+        {
+          "id": "h1",
+          "run_id": "0:h1",
+          "cycle": 0,
+          "source_cycle": 0,
+          "type": "mechanics_hit",
+          "t": 0.3,
+          "order": 11,
+          "frontline": "a",
+          "status": "passed",
+          "source": null,
+          "action_id": "cast"
+        },
+        {
+          "id": "h2",
+          "run_id": "0:h2",
+          "cycle": 0,
+          "source_cycle": 0,
+          "type": "mechanics_hit",
+          "t": 0.4,
+          "order": 12,
+          "frontline": "a",
+          "status": "passed",
+          "source": null,
+          "action_id": "cast"
+        }
+      ],
+      "cycles": [
+        {
+          "cycle": 0,
+          "status": "passed",
+          "start_energy": {
+            "a": 10
+          },
+          "end_energy": {
+            "a": 10
+          },
+          "boundary_state": {
+            "energy": {
+              "a": 10
+            },
+            "frontline": "a",
+            "cooldown_ready_in": {},
+            "occupation_remaining": 0,
+            "switch_block_remaining": 0,
+            "in_flight": [],
+            "pending_events": [],
+            "temporary_er": [],
+            "time_unit": "microseconds",
+            "mechanics": {
+              "elemental": {
+                "target_id": "enemy",
+                "knowledge": "known",
+                "aura": null,
+                "icd": [],
+                "reaction_damage_icd": []
+              },
+              "shared_pools": {
+                "balances": {
+                  "pool": {
+                    "team": 0
+                  }
+                },
+                "cooldown_remaining_us": {
+                  "refill": 0
+                }
+              },
+              "rules": {
+                "benefit": {
+                  "cooldown_in": 0,
+                  "instances": [],
+                  "awaiting_switch": []
+                },
+                "pool-authority": {
+                  "cooldown_in": 0,
+                  "instances": [],
+                  "awaiting_switch": []
+                },
+                "grant-authority": {
+                  "cooldown_in": 0,
+                  "instances": [],
+                  "awaiting_switch": []
+                }
+              },
+              "conditions": {},
+              "pending_samples": [],
+              "manual_buffs": [],
+              "cancelled_ends": []
+            },
+            "mechanics_cooldown_anchor": null
+          },
+          "scheduled_action_count": 1,
+          "executed_action_count": 1,
+          "burst_action_count": 0,
+          "energy_spend_count": 0,
+          "burst_energy_spend_count": 0,
+          "periodic_action_coverage": false
+        },
+        {
+          "cycle": 1,
+          "status": "passed",
+          "start_energy": {
+            "a": 10
+          },
+          "end_energy": {
+            "a": 10
+          },
+          "boundary_state": {
+            "energy": {
+              "a": 10
+            },
+            "frontline": "a",
+            "cooldown_ready_in": {},
+            "occupation_remaining": 0,
+            "switch_block_remaining": 0,
+            "in_flight": [],
+            "pending_events": [],
+            "temporary_er": [],
+            "time_unit": "microseconds",
+            "mechanics": {
+              "elemental": {
+                "target_id": "enemy",
+                "knowledge": "known",
+                "aura": null,
+                "icd": [],
+                "reaction_damage_icd": []
+              },
+              "shared_pools": {
+                "balances": {
+                  "pool": {
+                    "team": 0
+                  }
+                },
+                "cooldown_remaining_us": {
+                  "refill": 0
+                }
+              },
+              "rules": {
+                "benefit": {
+                  "cooldown_in": 0,
+                  "instances": [],
+                  "awaiting_switch": []
+                },
+                "pool-authority": {
+                  "cooldown_in": 0,
+                  "instances": [],
+                  "awaiting_switch": []
+                },
+                "grant-authority": {
+                  "cooldown_in": 0,
+                  "instances": [],
+                  "awaiting_switch": []
+                }
+              },
+              "conditions": {},
+              "pending_samples": [],
+              "manual_buffs": [],
+              "cancelled_ends": []
+            },
+            "mechanics_cooldown_anchor": null
+          },
+          "scheduled_action_count": 0,
+          "executed_action_count": 0,
+          "burst_action_count": 0,
+          "energy_spend_count": 0,
+          "burst_energy_spend_count": 0,
+          "periodic_action_coverage": false
+        },
+        {
+          "cycle": 2,
+          "status": "passed",
+          "start_energy": {
+            "a": 10
+          },
+          "end_energy": {
+            "a": 10
+          },
+          "boundary_state": {
+            "energy": {
+              "a": 10
+            },
+            "frontline": "a",
+            "cooldown_ready_in": {},
+            "occupation_remaining": 0,
+            "switch_block_remaining": 0,
+            "in_flight": [],
+            "pending_events": [],
+            "temporary_er": [],
+            "time_unit": "microseconds",
+            "mechanics": {
+              "elemental": {
+                "target_id": "enemy",
+                "knowledge": "known",
+                "aura": null,
+                "icd": [],
+                "reaction_damage_icd": []
+              },
+              "shared_pools": {
+                "balances": {
+                  "pool": {
+                    "team": 0
+                  }
+                },
+                "cooldown_remaining_us": {
+                  "refill": 0
+                }
+              },
+              "rules": {
+                "benefit": {
+                  "cooldown_in": 0,
+                  "instances": [],
+                  "awaiting_switch": []
+                },
+                "pool-authority": {
+                  "cooldown_in": 0,
+                  "instances": [],
+                  "awaiting_switch": []
+                },
+                "grant-authority": {
+                  "cooldown_in": 0,
+                  "instances": [],
+                  "awaiting_switch": []
+                }
+              },
+              "conditions": {},
+              "pending_samples": [],
+              "manual_buffs": [],
+              "cancelled_ends": []
+            },
+            "mechanics_cooldown_anchor": null
+          },
+          "scheduled_action_count": 0,
+          "executed_action_count": 0,
+          "burst_action_count": 0,
+          "energy_spend_count": 0,
+          "burst_energy_spend_count": 0,
+          "periodic_action_coverage": false
+        }
+      ],
+      "characters": [
+        {
+          "id": "a",
+          "element": "anemo",
+          "energy_recharge": 1,
+          "energy_capacity": 10,
+          "initial_energy": 10,
+          "final_energy": 10
+        }
+      ],
+      "gaps": [
+        {
+          "start": 0.1,
+          "end": 10.0,
+          "duration": 9.9,
+          "cycle": 0,
+          "reason": null,
+          "status": "needs_explanation"
+        },
+        {
+          "start": 10.0,
+          "end": 20.0,
+          "duration": 10.0,
+          "cycle": 1,
+          "reason": null,
+          "status": "needs_explanation"
+        },
+        {
+          "start": 20.0,
+          "end": 30.0,
+          "duration": 10.0,
+          "cycle": 2,
+          "reason": null,
+          "status": "needs_explanation"
+        }
+      ],
+      "damage_interpretation": {
+        "kind": "planned_damage",
+        "executable_dps": null,
+        "message": "伤害来自完整输入窗口内的已执行命中；已按声明档案模拟普通单目标附着与受支持反应，未模拟体力、真实碰撞或未声明机制。",
+        "complete_first_cycle": true,
+        "reported_hit_count": 3
+      },
+      "input_fingerprint": "2ea8d2bee946dd1c96bec0da8df4590411307cad450793e6a9b2a481de5313a8",
+      "panel_bindings": [
+        {
+          "character": "a",
+          "field": "energy_recharge",
+          "value": 1,
+          "declared_value": 1,
+          "source": "resolved_template.characters.stats.energy_recharge"
+        }
+      ],
+      "resolved_rotation_model": {
+        "schema_version": 1,
+        "period": 10,
+        "max_cycles": 3,
+        "initial_frontline": "a",
+        "characters": [
+          {
+            "id": "a",
+            "element": "anemo",
+            "energy_recharge": 1,
+            "energy_capacity": 10,
+            "initial_energy": 10,
+            "status": "assumed",
+            "source": "虚构确定性工程情景"
+          }
+        ],
+        "abilities": [
+          {
+            "id": "e",
+            "character": "a",
+            "action_type_id": "action.elemental_skill",
+            "cooldown": null,
+            "energy": null,
+            "status": "assumed",
+            "source": "虚构确定性工程情景"
+          }
+        ],
+        "actions": [
+          {
+            "id": "cast",
+            "ability_id": "e",
+            "start": 0,
+            "occupation_end": 0.1,
+            "order": 0,
+            "repeat": {
+              "mode": "once"
+            },
+            "status": "assumed",
+            "source": "虚构确定性工程情景"
+          }
+        ],
+        "events": [],
+        "initial_cooldowns": []
+      }
+    },
+    "mechanics_trace": [
+      {
+        "type": "activation",
+        "t": 0.0,
+        "rule_id": "benefit",
+        "name_zh": "工程收益",
+        "instance_id": "benefit:0:cast",
+        "event_id": "cast",
+        "cycle": 0,
+        "beneficiaries": [
+          "a"
+        ],
+        "expires_at": [
+          2.0
+        ],
+        "layers": 1,
+        "quota": {},
+        "cooldown_until": 0.0
+      },
+      {
+        "type": "activation",
+        "t": 0.0,
+        "rule_id": "grant-authority",
+        "name_zh": "工程收益",
+        "instance_id": "grant-authority:0:cast",
+        "event_id": "cast",
+        "cycle": 0,
+        "beneficiaries": [
+          "a"
+        ],
+        "expires_at": [
+          2.0
+        ],
+        "layers": 1,
+        "quota": {},
+        "cooldown_until": 0.0
+      },
+      {
+        "type": "activation",
+        "t": 0.0,
+        "rule_id": "pool-authority",
+        "name_zh": "工程收益",
+        "instance_id": "pool-authority:0:cast",
+        "event_id": "cast",
+        "cycle": 0,
+        "beneficiaries": [
+          "a"
+        ],
+        "expires_at": [
+          2.0
+        ],
+        "layers": 1,
+        "quota": {},
+        "cooldown_until": 0.0
+      },
+      {
+        "type": "elemental_application",
+        "event_id": "0:h0",
+        "action_id": "cast",
+        "character": "a",
+        "target_id": "enemy",
+        "t": 0.2,
+        "profile_id": "anemo",
+        "profile_status": "assumed",
+        "source": "虚构确定性工程情景",
+        "ruleset": "gauge-swirl-dynamic-v3",
+        "element": "anemo",
+        "before": {
+          "target_id": "enemy",
+          "t": 0.2,
+          "knowledge": "known",
+          "aura": null,
+          "icd": [],
+          "reaction_damage_icd": []
+        },
+        "reaction": null,
+        "area_id": "battlefield.primary",
+        "atomic_parent_id": "h0",
+        "application_packet_size": 1,
+        "direct_hit": true,
+        "counts_toward_stellar_superconduct": true,
+        "application_attempted": true,
+        "application_allowed": true,
+        "reaction_occurred": false,
+        "icd_audit": {
+          "mode": "none",
+          "consumed": false,
+          "counter_tag": null,
+          "rule_group": null,
+          "shared_key": null,
+          "sequence_index": null,
+          "attempt_number": null,
+          "coefficient": 1
+        },
+        "stable_event_id": "h0",
+        "run_id": "0:h0",
+        "allowed": true,
+        "reason": "no_icd",
+        "application_gu": 1,
+        "outcome": "anemo_without_aura",
+        "after": {
+          "target_id": "enemy",
+          "t": 0.2,
+          "knowledge": "known",
+          "aura": null,
+          "icd": [],
+          "reaction_damage_icd": []
+        },
+        "status": "executed",
+        "cycle": 0
+      },
+      {
+        "type": "effect_rejected",
+        "t": 0.2,
+        "event_id": "h0",
+        "rule_id": "benefit",
+        "effect_id": "value",
+        "reason": "no_shared_pool_consumption_receipt"
+      },
+      {
+        "type": "effect_applied",
+        "t": 0.2,
+        "cycle": 0,
+        "event_id": "h0",
+        "rule_id": "pool-authority",
+        "effect_id": "value",
+        "source_id": "binding:pool",
+        "instance_id": "pool-authority:0:cast",
+        "projected_effect_id": "pool-authority:value:0",
+        "value": 0,
+        "layers": 1,
+        "domain": "self",
+        "sample_t": 0.2
+      },
+      {
+        "type": "effect_applied",
+        "t": 0.2,
+        "cycle": 0,
+        "event_id": "h0",
+        "rule_id": "grant-authority",
+        "effect_id": "value",
+        "source_id": "binding:refill",
+        "instance_id": "grant-authority:0:cast",
+        "projected_effect_id": "grant-authority:value:0",
+        "value": 0,
+        "layers": 1,
+        "domain": "self",
+        "sample_t": 0.2
+      },
+      {
+        "type": "hit",
+        "event_id": "h0",
+        "cycle": 0,
+        "t": 0.2,
+        "reported_damage": true,
+        "status": "executed",
+        "effect_count": 2
+      },
+      {
+        "type": "elemental_application",
+        "event_id": "0:h1",
+        "action_id": "cast",
+        "character": "a",
+        "target_id": "enemy",
+        "t": 0.3,
+        "profile_id": "anemo",
+        "profile_status": "assumed",
+        "source": "虚构确定性工程情景",
+        "ruleset": "gauge-swirl-dynamic-v3",
+        "element": "anemo",
+        "before": {
+          "target_id": "enemy",
+          "t": 0.3,
+          "knowledge": "known",
+          "aura": null,
+          "icd": [],
+          "reaction_damage_icd": []
+        },
+        "reaction": null,
+        "area_id": "battlefield.primary",
+        "atomic_parent_id": "h1",
+        "application_packet_size": 1,
+        "direct_hit": true,
+        "counts_toward_stellar_superconduct": true,
+        "application_attempted": true,
+        "application_allowed": true,
+        "reaction_occurred": false,
+        "icd_audit": {
+          "mode": "none",
+          "consumed": false,
+          "counter_tag": null,
+          "rule_group": null,
+          "shared_key": null,
+          "sequence_index": null,
+          "attempt_number": null,
+          "coefficient": 1
+        },
+        "stable_event_id": "h1",
+        "run_id": "0:h1",
+        "allowed": true,
+        "reason": "no_icd",
+        "application_gu": 1,
+        "outcome": "anemo_without_aura",
+        "after": {
+          "target_id": "enemy",
+          "t": 0.3,
+          "knowledge": "known",
+          "aura": null,
+          "icd": [],
+          "reaction_damage_icd": []
+        },
+        "status": "executed",
+        "cycle": 0
+      },
+      {
+        "type": "effect_rejected",
+        "t": 0.3,
+        "event_id": "h1",
+        "rule_id": "benefit",
+        "effect_id": "value",
+        "reason": "no_shared_pool_consumption_receipt"
+      },
+      {
+        "type": "effect_applied",
+        "t": 0.3,
+        "cycle": 0,
+        "event_id": "h1",
+        "rule_id": "pool-authority",
+        "effect_id": "value",
+        "source_id": "binding:pool",
+        "instance_id": "pool-authority:0:cast",
+        "projected_effect_id": "pool-authority:value:0",
+        "value": 0,
+        "layers": 1,
+        "domain": "self",
+        "sample_t": 0.3
+      },
+      {
+        "type": "effect_applied",
+        "t": 0.3,
+        "cycle": 0,
+        "event_id": "h1",
+        "rule_id": "grant-authority",
+        "effect_id": "value",
+        "source_id": "binding:refill",
+        "instance_id": "grant-authority:0:cast",
+        "projected_effect_id": "grant-authority:value:0",
+        "value": 0,
+        "layers": 1,
+        "domain": "self",
+        "sample_t": 0.3
+      },
+      {
+        "type": "hit",
+        "event_id": "h1",
+        "cycle": 0,
+        "t": 0.3,
+        "reported_damage": true,
+        "status": "executed",
+        "effect_count": 2
+      },
+      {
+        "type": "elemental_application",
+        "event_id": "0:h2",
+        "action_id": "cast",
+        "character": "a",
+        "target_id": "enemy",
+        "t": 0.4,
+        "profile_id": "anemo",
+        "profile_status": "assumed",
+        "source": "虚构确定性工程情景",
+        "ruleset": "gauge-swirl-dynamic-v3",
+        "element": "anemo",
+        "before": {
+          "target_id": "enemy",
+          "t": 0.4,
+          "knowledge": "known",
+          "aura": null,
+          "icd": [],
+          "reaction_damage_icd": []
+        },
+        "reaction": null,
+        "area_id": "battlefield.primary",
+        "atomic_parent_id": "h2",
+        "application_packet_size": 1,
+        "direct_hit": true,
+        "counts_toward_stellar_superconduct": true,
+        "application_attempted": true,
+        "application_allowed": true,
+        "reaction_occurred": false,
+        "icd_audit": {
+          "mode": "none",
+          "consumed": false,
+          "counter_tag": null,
+          "rule_group": null,
+          "shared_key": null,
+          "sequence_index": null,
+          "attempt_number": null,
+          "coefficient": 1
+        },
+        "stable_event_id": "h2",
+        "run_id": "0:h2",
+        "allowed": true,
+        "reason": "no_icd",
+        "application_gu": 1,
+        "outcome": "anemo_without_aura",
+        "after": {
+          "target_id": "enemy",
+          "t": 0.4,
+          "knowledge": "known",
+          "aura": null,
+          "icd": [],
+          "reaction_damage_icd": []
+        },
+        "status": "executed",
+        "cycle": 0
+      },
+      {
+        "type": "effect_rejected",
+        "t": 0.4,
+        "event_id": "h2",
+        "rule_id": "benefit",
+        "effect_id": "value",
+        "reason": "no_shared_pool_consumption_receipt"
+      },
+      {
+        "type": "effect_applied",
+        "t": 0.4,
+        "cycle": 0,
+        "event_id": "h2",
+        "rule_id": "pool-authority",
+        "effect_id": "value",
+        "source_id": "binding:pool",
+        "instance_id": "pool-authority:0:cast",
+        "projected_effect_id": "pool-authority:value:0",
+        "value": 0,
+        "layers": 1,
+        "domain": "self",
+        "sample_t": 0.4
+      },
+      {
+        "type": "effect_applied",
+        "t": 0.4,
+        "cycle": 0,
+        "event_id": "h2",
+        "rule_id": "grant-authority",
+        "effect_id": "value",
+        "source_id": "binding:refill",
+        "instance_id": "grant-authority:0:cast",
+        "projected_effect_id": "grant-authority:value:0",
+        "value": 0,
+        "layers": 1,
+        "domain": "self",
+        "sample_t": 0.4
+      },
+      {
+        "type": "hit",
+        "event_id": "h2",
+        "cycle": 0,
+        "t": 0.4,
+        "reported_damage": true,
+        "status": "executed",
+        "effect_count": 2
+      },
+      {
+        "t": 2.0,
+        "checked_at": 10.0,
+        "rule_id": "benefit",
+        "type": "expiry",
+        "instance_id": "benefit:0:cast",
+        "layers_before": 1,
+        "layers_after": 0,
+        "beneficiaries": [
+          "a"
+        ]
+      },
+      {
+        "t": 2.0,
+        "checked_at": 10.0,
+        "rule_id": "pool-authority",
+        "type": "expiry",
+        "instance_id": "pool-authority:0:cast",
+        "layers_before": 1,
+        "layers_after": 0,
+        "beneficiaries": [
+          "a"
+        ]
+      },
+      {
+        "t": 2.0,
+        "checked_at": 10.0,
+        "rule_id": "grant-authority",
+        "type": "expiry",
+        "instance_id": "grant-authority:0:cast",
+        "layers_before": 1,
+        "layers_after": 0,
+        "beneficiaries": [
+          "a"
+        ]
+      }
+    ],
+    "sampling_trace": [],
+    "mechanics_status": "unproven",
+    "mechanics_issues": [],
+    "coverage_interpretation": {
+      "kind": "hit_projection",
+      "actual_uptime": null,
+      "state_timeline": "buff_state_timeline",
+      "message": "逐击数值投影不代表持续覆盖；有限时增益见持续 Buff 状态，具体命中是否受益仍以逐击计算为准。"
+    },
+    "resource_reaction_execution": {
+      "template": {
+        "version": 2,
+        "form": "resolved",
+        "id_registry_version": 1,
+        "type_definitions": {
+          "damage_types": []
+        },
+        "enemy": {
+          "level": 90,
+          "resistance": {
+            "default": 0.1
+          }
+        },
+        "characters": [
+          {
+            "id": "a",
+            "level": 90,
+            "stats": {
+              "atk": 100,
+              "base_atk": 50,
+              "em": 0,
+              "crit_rate": 0,
+              "crit_dmg": 0.5,
+              "energy_recharge": 1
+            }
+          }
+        ],
+        "hits": [
+          {
+            "id": "h0",
+            "t": 0.2,
+            "character": "a",
+            "skill": "工程技能",
+            "hit_name": "h0",
+            "damage_type_ids": [
+              "damage.elemental_skill"
+            ],
+            "damage_system": "classic",
+            "element": "anemo",
+            "multiplier": 1
+          },
+          {
+            "id": "h1",
+            "t": 0.3,
+            "character": "a",
+            "skill": "工程技能",
+            "hit_name": "h1",
+            "damage_type_ids": [
+              "damage.elemental_skill"
+            ],
+            "damage_system": "classic",
+            "element": "anemo",
+            "multiplier": 1
+          },
+          {
+            "id": "h2",
+            "t": 0.4,
+            "character": "a",
+            "skill": "工程技能",
+            "hit_name": "h2",
+            "damage_type_ids": [
+              "damage.elemental_skill"
+            ],
+            "damage_system": "classic",
+            "element": "anemo",
+            "multiplier": 1
+          }
+        ],
+        "buffs": [],
+        "switches": [],
+        "loop_duration": 10,
+        "meta": {
+          "assumptions": [],
+          "equipment_resolution": {
+            "composer_version": "1.31.0",
+            "source_fingerprint": "9bf616f1d606030fa31381fb1a6ecf988744fcf0dc77086e211ad9e5579a473b",
+            "data_versions": []
+          }
+        }
+      },
+      "rotation_model": {
+        "schema_version": 1,
+        "period": 10,
+        "max_cycles": 3,
+        "initial_frontline": "a",
+        "characters": [
+          {
+            "id": "a",
+            "element": "anemo",
+            "energy_recharge": 1,
+            "energy_capacity": 10,
+            "initial_energy": 10,
+            "status": "assumed",
+            "source": "虚构确定性工程情景"
+          }
+        ],
+        "abilities": [
+          {
+            "id": "e",
+            "character": "a",
+            "action_type_id": "action.elemental_skill",
+            "cooldown": null,
+            "energy": null,
+            "status": "assumed",
+            "source": "虚构确定性工程情景"
+          }
+        ],
+        "actions": [
+          {
+            "id": "cast",
+            "ability_id": "e",
+            "start": 0,
+            "occupation_end": 0.1,
+            "order": 0,
+            "repeat": {
+              "mode": "once"
+            },
+            "status": "assumed",
+            "source": "虚构确定性工程情景"
+          }
+        ],
+        "events": [],
+        "initial_cooldowns": []
+      },
+      "mechanics_model": {
+        "schema_version": 1,
+        "rules": [
+          {
+            "id": "benefit",
+            "name_zh": "工程收益",
+            "owner": "a",
+            "source_id": "binding:benefit",
+            "trigger": {
+              "event": "action_start",
+              "phase": "pre",
+              "action_ids": [
+                "cast"
+              ]
+            },
+            "beneficiaries": {
+              "mode": "team",
+              "scope": "locked"
+            },
+            "timing": {
+              "delay": 0,
+              "duration": 2,
+              "cooldown": 0,
+              "cooldown_anchor": "success"
+            },
+            "stacking": {
+              "max": 1,
+              "add": 1,
+              "policy": "refresh"
+            },
+            "effects": [
+              {
+                "id": "value",
+                "benefit_type_id": "benefit.base_add.all",
+                "value": 100,
+                "domain": "self"
+              }
+            ],
+            "status": "assumed",
+            "source": "虚构确定性工程情景",
+            "resource_gate": {
+              "consumer_id": "consumer"
+            }
+          },
+          {
+            "id": "pool-authority",
+            "name_zh": "工程收益",
+            "owner": "a",
+            "source_id": "binding:pool",
+            "trigger": {
+              "event": "action_start",
+              "phase": "pre",
+              "action_ids": [
+                "cast"
+              ]
+            },
+            "beneficiaries": {
+              "mode": "team",
+              "scope": "locked"
+            },
+            "timing": {
+              "delay": 0,
+              "duration": 2,
+              "cooldown": 0,
+              "cooldown_anchor": "success"
+            },
+            "stacking": {
+              "max": 1,
+              "add": 1,
+              "policy": "refresh"
+            },
+            "effects": [
+              {
+                "id": "value",
+                "benefit_type_id": "benefit.dmg_bonus.all",
+                "value": 0,
+                "domain": "self"
+              }
+            ],
+            "status": "assumed",
+            "source": "虚构确定性工程情景"
+          },
+          {
+            "id": "grant-authority",
+            "name_zh": "工程收益",
+            "owner": "a",
+            "source_id": "binding:refill",
+            "trigger": {
+              "event": "action_start",
+              "phase": "pre",
+              "action_ids": [
+                "cast"
+              ]
+            },
+            "beneficiaries": {
+              "mode": "team",
+              "scope": "locked"
+            },
+            "timing": {
+              "delay": 0,
+              "duration": 2,
+              "cooldown": 0,
+              "cooldown_anchor": "success"
+            },
+            "stacking": {
+              "max": 1,
+              "add": 1,
+              "policy": "refresh"
+            },
+            "effects": [
+              {
+                "id": "value",
+                "benefit_type_id": "benefit.dmg_bonus.all",
+                "value": 0,
+                "domain": "self"
+              }
+            ],
+            "status": "assumed",
+            "source": "虚构确定性工程情景"
+          }
+        ],
+        "hit_events": [
+          {
+            "hit_id": "h0",
+            "action_id": "cast",
+            "order": 10,
+            "application": {
+              "profile_id": "anemo",
+              "target_id": "enemy",
+              "landed": true
+            }
+          },
+          {
+            "hit_id": "h1",
+            "action_id": "cast",
+            "order": 11,
+            "application": {
+              "profile_id": "anemo",
+              "target_id": "enemy",
+              "landed": true
+            }
+          },
+          {
+            "hit_id": "h2",
+            "action_id": "cast",
+            "order": 12,
+            "application": {
+              "profile_id": "anemo",
+              "target_id": "enemy",
+              "landed": true
+            }
+          }
+        ],
+        "hit_patterns": [],
+        "condition_events": [],
+        "initial_state": {
+          "rules": [
+            {
+              "rule_id": "benefit",
+              "cooldown_remaining": 0,
+              "instances": []
+            },
+            {
+              "rule_id": "pool-authority",
+              "cooldown_remaining": 0,
+              "instances": []
+            },
+            {
+              "rule_id": "grant-authority",
+              "cooldown_remaining": 0,
+              "instances": []
+            }
+          ]
+        },
+        "elemental_model": {
+          "schema_version": 1,
+          "ruleset": "gauge-swirl-dynamic-v3",
+          "target": {
+            "id": "enemy",
+            "kind": "ordinary",
+            "knowledge": "known",
+            "initial_aura": null,
+            "status": "assumed",
+            "source": "虚构确定性工程情景"
+          },
+          "profiles": [
+            {
+              "id": "pyro",
+              "element": "pyro",
+              "application": "apply",
+              "gauge_units": 1,
+              "icd": {
+                "kind": "none"
+              },
+              "status": "assumed",
+              "source": "虚构确定性工程情景"
+            },
+            {
+              "id": "hydro",
+              "element": "hydro",
+              "application": "apply",
+              "gauge_units": 1,
+              "icd": {
+                "kind": "none"
+              },
+              "status": "assumed",
+              "source": "虚构确定性工程情景"
+            },
+            {
+              "id": "cryo",
+              "element": "cryo",
+              "application": "apply",
+              "gauge_units": 1,
+              "icd": {
+                "kind": "none"
+              },
+              "status": "assumed",
+              "source": "虚构确定性工程情景"
+            },
+            {
+              "id": "anemo",
+              "element": "anemo",
+              "application": "apply",
+              "gauge_units": 1,
+              "icd": {
+                "kind": "none"
+              },
+              "status": "assumed",
+              "source": "虚构确定性工程情景"
+            }
+          ],
+          "swirl_damage": {
+            "icd": {
+              "kind": "sequence",
+              "reset_seconds": 0.5,
+              "sequence": [
+                1,
+                1,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "status": "assumed",
+            "source": "普通冰水原目标扩散，AttackAttenuation组1的damageSequence"
+          }
+        },
+        "shared_pools": {
+          "schema_version": 1,
+          "pools": [
+            {
+              "id": "pool",
+              "name_zh": "共享池",
+              "owner": "a",
+              "source_id": "binding:pool",
+              "scope": "team",
+              "capacity": 20,
+              "initial": {
+                "team": 0
+              },
+              "status": "assumed",
+              "source": "合成工程资料"
+            }
+          ],
+          "operations": [
+            {
+              "id": "refill",
+              "pool_id": "pool",
+              "source_id": "binding:refill",
+              "trigger": {
+                "event": "elemental_reaction",
+                "phase": "post",
+                "reaction_types": [
+                  "swirl"
+                ]
+              },
+              "order": 0,
+              "operation": "grant",
+              "amount": 3,
+              "targets": {
+                "mode": "all_pool_keys"
+              },
+              "cooldown": {
+                "seconds": 0,
+                "anchor": "success"
+              },
+              "status": "assumed",
+              "source": "合成工程资料"
+            }
+          ],
+          "consumers": [
+            {
+              "id": "consumer",
+              "pool_id": "pool",
+              "source_id": "binding:benefit",
+              "filter": {
+                "event": "hit",
+                "phase": "pre"
+              },
+              "actor_relation": "party_member",
+              "damage_system": "classic",
+              "amount": 1,
+              "eligibility_rule_id": "benefit",
+              "status": "assumed",
+              "source": "合成工程资料"
+            }
+          ]
+        },
+        "resource_reaction_contract": {
+          "schema_version": 1,
+          "operation_ids": [
+            "refill"
+          ]
+        }
+      },
+      "matches": []
+    }
+  },
+  "result_receipt": {
+    "plan_id": "86d01ff1-a5cb-41ad-8b84-a02b7124c24d",
+    "revision": 0,
+    "input_fingerprint": "0dd747209ad530aa7e859f94163e8c32df70059d513b94609f572331d340044c",
+    "output_fingerprint": "023e4c74838e65b85a475190d1a048c396899ba488a7aa08a9be912a77b9b473",
+    "source_fingerprint": "9bf616f1d606030fa31381fb1a6ecf988744fcf0dc77086e211ad9e5579a473b",
+    "template_version": 2,
+    "engine_version": "0.44.0",
+    "calculated_at": "2026-10-20T12:46:16.965066+00:00",
+    "result_fingerprint": "7bfeacaba4adcfb8849bf5a2d3ed74cdfdb353f9182b96fd05ad46c2dc060633",
+    "data_versions": [],
+    "assumptions": [],
+    "resource_reactions": {
+      "contract": "ordinary-reaction-resource-receipt-v1",
+      "verification_scope": "saved_input_replay_not_current_database_approval",
+      "input_fingerprint": "0dd747209ad530aa7e859f94163e8c32df70059d513b94609f572331d340044c",
+      "output_fingerprint": "023e4c74838e65b85a475190d1a048c396899ba488a7aa08a9be912a77b9b473",
+      "source_fingerprint": "9bf616f1d606030fa31381fb1a6ecf988744fcf0dc77086e211ad9e5579a473b",
+      "execution_fingerprint": "2ea8d2bee946dd1c96bec0da8df4590411307cad450793e6a9b2a481de5313a8",
+      "adoption_fingerprint": "59b063e76b88351af400c6dacd5d5605669861713f82dc189797d25c02508c40",
+      "ledger_fingerprint": "410737c3e233a97bfb95e6acf9cef1b7a51c8d5b101716bf6e13188308357e74"
+    }
+  },
+  "report": {
+    "plan": {
+      "kind": "genshin-plan",
+      "plan_version": 3,
+      "plan_id": "86d01ff1-a5cb-41ad-8b84-a02b7124c24d",
+      "revision": 0,
+      "manual_template": {
+        "version": 2,
+        "form": "resolved",
+        "id_registry_version": 1,
+        "type_definitions": {
+          "damage_types": []
+        },
+        "enemy": {
+          "level": 90,
+          "resistance": {
+            "default": 0.1
+          }
+        },
+        "characters": [
+          {
+            "id": "a",
+            "level": 90,
+            "stats": {
+              "atk": 100,
+              "base_atk": 50,
+              "em": 0,
+              "crit_rate": 0,
+              "crit_dmg": 0.5,
+              "energy_recharge": 1
+            }
+          }
+        ],
+        "hits": [
+          {
+            "id": "h0",
+            "t": 0.2,
+            "character": "a",
+            "skill": "工程技能",
+            "hit_name": "h0",
+            "damage_type_ids": [
+              "damage.elemental_skill"
+            ],
+            "damage_system": "classic",
+            "element": "anemo",
+            "multiplier": 1
+          },
+          {
+            "id": "h1",
+            "t": 0.3,
+            "character": "a",
+            "skill": "工程技能",
+            "hit_name": "h1",
+            "damage_type_ids": [
+              "damage.elemental_skill"
+            ],
+            "damage_system": "classic",
+            "element": "anemo",
+            "multiplier": 1
+          },
+          {
+            "id": "h2",
+            "t": 0.4,
+            "character": "a",
+            "skill": "工程技能",
+            "hit_name": "h2",
+            "damage_type_ids": [
+              "damage.elemental_skill"
+            ],
+            "damage_system": "classic",
+            "element": "anemo",
+            "multiplier": 1
+          }
+        ],
+        "buffs": [],
+        "switches": [],
+        "loop_duration": 10
+      },
+      "equipment_inputs": {},
+      "effect_bindings": [
+        {
+          "binding_id": "binding",
+          "provider_character_id": "a",
+          "owner": {
+            "kind": "manual",
+            "note": "独立工程机制"
+          },
+          "source_refs": [
+            {
+              "kind": "manual",
+              "note": "确定性虚构案例，无游戏队伍答案"
+            }
+          ],
+          "source_fingerprint": "d8d99d28b8579a7861093b12e15e0dd1c946bd7ea7bfbd9d98bc8eb6ac7dd708",
+          "coverage": {
+            "state": "complete",
+            "reviewed_by": "工程测试",
+            "note": "已核对虚构输入范围",
+            "source_fingerprint": "d8d99d28b8579a7861093b12e15e0dd1c946bd7ea7bfbd9d98bc8eb6ac7dd708"
+          },
+          "parts": [
+            {
+              "part_id": "benefit",
+              "label": "独立工程收益",
+              "state": "resolved",
+              "rule": {
+                "kind": "mechanics",
+                "rule_id": "benefit"
+              },
+              "delivery": {
+                "kind": "mechanics"
+              },
+              "conditions": [],
+              "dependencies": {
+                "mode": "manual_context",
+                "context_fingerprint": "56643d339ccba81f0d5255391397e3dec57e678ce36c356fe30b888cb4fa2faa",
+                "note": "Reviewed the whole synthetic resource graph and its gate"
+              },
+              "reason": null
+            },
+            {
+              "part_id": "pool",
+              "label": "独立工程收益",
+              "state": "resolved",
+              "rule": {
+                "kind": "mechanics",
+                "rule_id": "pool-authority"
+              },
+              "delivery": {
+                "kind": "mechanics"
+              },
+              "conditions": [],
+              "dependencies": {
+                "mode": "manual_context",
+                "context_fingerprint": "56643d339ccba81f0d5255391397e3dec57e678ce36c356fe30b888cb4fa2faa",
+                "note": "Reviewed the whole synthetic resource graph and its gate"
+              },
+              "reason": null
+            },
+            {
+              "part_id": "refill",
+              "label": "独立工程收益",
+              "state": "resolved",
+              "rule": {
+                "kind": "mechanics",
+                "rule_id": "grant-authority"
+              },
+              "delivery": {
+                "kind": "mechanics"
+              },
+              "conditions": [],
+              "dependencies": {
+                "mode": "manual_context",
+                "context_fingerprint": "56643d339ccba81f0d5255391397e3dec57e678ce36c356fe30b888cb4fa2faa",
+                "note": "Reviewed the whole synthetic resource graph and its gate"
+              },
+              "reason": null
+            }
+          ]
+        }
+      ],
+      "manual_effect_dependencies": [],
+      "rotation_tuning": {
+        "buff_hit_matches": []
+      },
+      "resolution": {
+        "state": "ready",
+        "composer_version": "1.31.0",
+        "input_fingerprint": "0dd747209ad530aa7e859f94163e8c32df70059d513b94609f572331d340044c",
+        "source_fingerprint": "9bf616f1d606030fa31381fb1a6ecf988744fcf0dc77086e211ad9e5579a473b",
+        "output_fingerprint": "023e4c74838e65b85a475190d1a048c396899ba488a7aa08a9be912a77b9b473",
+        "missing_inputs": [],
+        "warnings": [],
+        "contribution_report": {
+          "characters": {},
+          "generated_outputs": [
+            {
+              "binding_id": "binding",
+              "part_id": "benefit",
+              "mechanics_rule_id": "benefit"
+            },
+            {
+              "binding_id": "binding",
+              "part_id": "pool",
+              "mechanics_rule_id": "pool-authority"
+            },
+            {
+              "binding_id": "binding",
+              "part_id": "refill",
+              "mechanics_rule_id": "grant-authority"
+            }
+          ],
+          "equipment_sources": {}
+        },
+        "context_fingerprint": "56643d339ccba81f0d5255391397e3dec57e678ce36c356fe30b888cb4fa2faa",
+        "effect_requirements": [
+          {
+            "binding_id": "binding",
+            "provider_character_id": "a",
+            "owner": {
+              "kind": "manual",
+              "note": "独立工程机制"
+            },
+            "source_refs": [
+              {
+                "kind": "manual",
+                "note": "确定性虚构案例，无游戏队伍答案"
+              }
+            ],
+            "source_fingerprint": "d8d99d28b8579a7861093b12e15e0dd1c946bd7ea7bfbd9d98bc8eb6ac7dd708",
+            "effect": {
+              "owner": {
+                "kind": "manual",
+                "note": "独立工程机制"
+              },
+              "source_refs": [
+                {
+                  "kind": "manual",
+                  "note": "确定性虚构案例，无游戏队伍答案"
+                }
+              ]
+            },
+            "proposed_binding": {
+              "binding_id": "binding",
+              "provider_character_id": "a",
+              "owner": {
+                "kind": "manual",
+                "note": "独立工程机制"
+              },
+              "source_refs": [
+                {
+                  "kind": "manual",
+                  "note": "确定性虚构案例，无游戏队伍答案"
+                }
+              ],
+              "source_fingerprint": "d8d99d28b8579a7861093b12e15e0dd1c946bd7ea7bfbd9d98bc8eb6ac7dd708",
+              "coverage": {
+                "state": "complete",
+                "reviewed_by": "工程测试",
+                "note": "已核对虚构输入范围",
+                "source_fingerprint": "d8d99d28b8579a7861093b12e15e0dd1c946bd7ea7bfbd9d98bc8eb6ac7dd708"
+              },
+              "parts": [
+                {
+                  "part_id": "benefit",
+                  "label": "独立工程收益",
+                  "state": "resolved",
+                  "rule": {
+                    "kind": "mechanics",
+                    "rule_id": "benefit"
+                  },
+                  "delivery": {
+                    "kind": "mechanics"
+                  },
+                  "conditions": [],
+                  "dependencies": {
+                    "mode": "manual_context",
+                    "context_fingerprint": "56643d339ccba81f0d5255391397e3dec57e678ce36c356fe30b888cb4fa2faa",
+                    "note": "Reviewed the whole synthetic resource graph and its gate"
+                  },
+                  "reason": null
+                },
+                {
+                  "part_id": "pool",
+                  "label": "独立工程收益",
+                  "state": "resolved",
+                  "rule": {
+                    "kind": "mechanics",
+                    "rule_id": "pool-authority"
+                  },
+                  "delivery": {
+                    "kind": "mechanics"
+                  },
+                  "conditions": [],
+                  "dependencies": {
+                    "mode": "manual_context",
+                    "context_fingerprint": "56643d339ccba81f0d5255391397e3dec57e678ce36c356fe30b888cb4fa2faa",
+                    "note": "Reviewed the whole synthetic resource graph and its gate"
+                  },
+                  "reason": null
+                },
+                {
+                  "part_id": "refill",
+                  "label": "独立工程收益",
+                  "state": "resolved",
+                  "rule": {
+                    "kind": "mechanics",
+                    "rule_id": "grant-authority"
+                  },
+                  "delivery": {
+                    "kind": "mechanics"
+                  },
+                  "conditions": [],
+                  "dependencies": {
+                    "mode": "manual_context",
+                    "context_fingerprint": "56643d339ccba81f0d5255391397e3dec57e678ce36c356fe30b888cb4fa2faa",
+                    "note": "Reviewed the whole synthetic resource graph and its gate"
+                  },
+                  "reason": null
+                }
+              ]
+            }
+          }
+        ],
+        "match_previews": [],
+        "manual_dependency_previews": [],
+        "data_versions": [],
+        "assumptions": [],
+        "resource_reaction_source_adoption": {
+          "contract": "ordinary-reaction-resource-adoption-v1",
+          "source_authority": "caller_assumed",
+          "context_fingerprint": "56643d339ccba81f0d5255391397e3dec57e678ce36c356fe30b888cb4fa2faa",
+          "declaration_fingerprint": "c66151a719467792b1f5390ff3eaff0dc3940e5aa96f8a9df65ba295a198cdf4",
+          "declared_operation_ids": [
+            "refill"
+          ],
+          "active_operation_ids": [
+            "refill"
+          ],
+          "status": "ready",
+          "operations": [
+            {
+              "operation_id": "refill",
+              "source_id": "binding:refill",
+              "pool_id": "pool",
+              "source_owner": "a",
+              "status": "ready",
+              "authority_rule_id": "grant-authority",
+              "review_mode": "manual_context"
+            }
+          ],
+          "validation_issues": [],
+          "source_fingerprint": "9bf616f1d606030fa31381fb1a6ecf988744fcf0dc77086e211ad9e5579a473b",
+          "final_model_fingerprint": "38e47479b38e02571451006c5612470b9fcd009bc278bb0d36dc462ecb1345ed",
+          "program": {
+            "contract": "ordinary-reaction-resource-v1",
+            "characters": [
+              "a"
+            ],
+            "operations": [
+              {
+                "id": "refill",
+                "pool_id": "pool",
+                "source_id": "binding:refill",
+                "source_owner": "a",
+                "keys": [
+                  "team"
+                ],
+                "operation": {
+                  "id": "refill",
+                  "pool_id": "pool",
+                  "source_id": "binding:refill",
+                  "trigger": {
+                    "event": "elemental_reaction",
+                    "phase": "post",
+                    "reaction_types": [
+                      "swirl"
+                    ]
+                  },
+                  "order": 0,
+                  "operation": "grant",
+                  "amount": 3,
+                  "targets": {
+                    "mode": "all_pool_keys"
+                  },
+                  "cooldown": {
+                    "seconds": 0,
+                    "anchor": "success"
+                  },
+                  "status": "assumed",
+                  "source": "合成工程资料"
+                },
+                "pool": {
+                  "id": "pool",
+                  "name_zh": "共享池",
+                  "owner": "a",
+                  "source_id": "binding:pool",
+                  "scope": "team",
+                  "capacity": 20,
+                  "initial": {
+                    "team": 0
+                  },
+                  "status": "assumed",
+                  "source": "合成工程资料"
+                },
+                "selector": {
+                  "event": "elemental_reaction",
+                  "phase": "post",
+                  "reaction_types": [
+                    "swirl"
+                  ],
+                  "owner_presence": "any"
+                }
+              }
+            ],
+            "source_authority": "not_evaluated",
+            "execution": "not_connected",
+            "verification_scope": "declared_configuration_consistency_only",
+            "program_fingerprint": "ba71f87ccf621bebeb28960d314753e400decbd4ea2b7abf876db8f01298b579"
+          },
+          "program_fingerprint": "ba71f87ccf621bebeb28960d314753e400decbd4ea2b7abf876db8f01298b579"
+        },
+        "action_automation_audit": {
+          "contract": "action-automation-audit-v3",
+          "categories": {
+            "automatic_generated": "由受审来源和动作档案自动派生",
+            "scenario_calibration": "已有档案，但仍缺场景时序、命中或来源确认",
+            "manual_input_required": "仍依赖手填命中或尚无动作档案",
+            "not_applicable": "明确不产生伤害的动作类别",
+            "unclassified": "动作类别语义未知，不能假定零命中"
+          },
+          "actions": [
+            {
+              "action_id": "cast",
+              "ability_id": "e",
+              "action_type_id": "action.elemental_skill",
+              "category": "manual_input_required",
+              "automation_origin": null,
+              "profile_ids": [],
+              "automatic_hit_ids": [],
+              "manual_hit_ids": [],
+              "issues": [
+                {
+                  "code": "action_dispatch_profile_missing",
+                  "path": "rotation_model.actions.cast",
+                  "message": "攻击动作没有可执行的来源动作档案；仍需建立资料绑定或显式命中。"
+                }
+              ]
+            }
+          ],
+          "summary": {
+            "total_actions": 1,
+            "attack_actions": 1,
+            "automatic_actions": 0,
+            "reviewed_dispatch_actions": 0,
+            "reusable_profile_actions": 0,
+            "scenario_calibration_actions": 0,
+            "manual_actions": 1,
+            "unclassified_actions": 0,
+            "automatic_generated_hits": 0,
+            "manual_hit_rows": 3,
+            "reusable_prototype_hit_rows": 0,
+            "manual_per_instance_hit_rows": 3,
+            "manual_action_hit_links": 0,
+            "manual_reaction_answers": 0,
+            "reusable_prototype_reaction_answers": 0,
+            "manual_per_instance_reaction_answers": 0,
+            "automatic_elemental_attempts": 0,
+            "known_pending_contacts": 0,
+            "unknown_contact_cardinality_actions": 1,
+            "unknown_work_orders": 1,
+            "unique_dispatch_profile_decisions": 0,
+            "unique_reusable_profile_decisions": 0,
+            "automatic_action_ratio": 0.0,
+            "reviewed_dispatch_action_ratio": 0.0
+          },
+          "dispatch_manifest": {
+            "status": "absent",
+            "records": 0,
+            "complete_records": 0,
+            "pending_records": 0,
+            "expected_components": 0,
+            "materialized_components": 0
+          },
+          "elemental": {
+            "status": "enabled_without_automatic_actions",
+            "ruleset": "gauge-swirl-dynamic-v3",
+            "manual_reaction_hit_ids": [],
+            "policy": "受支持链路由元素运行时输出；未知资料保持待处理，不以手填反应答案冒充自动证明。"
+          }
+        }
+      },
+      "resolved_template": {
+        "version": 2,
+        "form": "resolved",
+        "id_registry_version": 1,
+        "type_definitions": {
+          "damage_types": []
+        },
+        "enemy": {
+          "level": 90,
+          "resistance": {
+            "default": 0.1
+          }
+        },
+        "characters": [
+          {
+            "id": "a",
+            "level": 90,
+            "stats": {
+              "atk": 100,
+              "base_atk": 50,
+              "em": 0,
+              "crit_rate": 0,
+              "crit_dmg": 0.5,
+              "energy_recharge": 1
+            }
+          }
+        ],
+        "hits": [
+          {
+            "id": "h0",
+            "t": 0.2,
+            "character": "a",
+            "skill": "工程技能",
+            "hit_name": "h0",
+            "damage_type_ids": [
+              "damage.elemental_skill"
+            ],
+            "damage_system": "classic",
+            "element": "anemo",
+            "multiplier": 1,
+            "extensions": {
+              "elemental": {
+                "mode": "simulated",
+                "ruleset": "gauge-swirl-dynamic-v3",
+                "target_id": "enemy",
+                "application_event_id": "0:h0",
+                "reaction": null
+              }
+            },
+            "snapshot": false
+          },
+          {
+            "id": "h1",
+            "t": 0.3,
+            "character": "a",
+            "skill": "工程技能",
+            "hit_name": "h1",
+            "damage_type_ids": [
+              "damage.elemental_skill"
+            ],
+            "damage_system": "classic",
+            "element": "anemo",
+            "multiplier": 1,
+            "extensions": {
+              "elemental": {
+                "mode": "simulated",
+                "ruleset": "gauge-swirl-dynamic-v3",
+                "target_id": "enemy",
+                "application_event_id": "0:h1",
+                "reaction": null
+              }
+            },
+            "snapshot": false
+          },
+          {
+            "id": "h2",
+            "t": 0.4,
+            "character": "a",
+            "skill": "工程技能",
+            "hit_name": "h2",
+            "damage_type_ids": [
+              "damage.elemental_skill"
+            ],
+            "damage_system": "classic",
+            "element": "anemo",
+            "multiplier": 1,
+            "extensions": {
+              "elemental": {
+                "mode": "simulated",
+                "ruleset": "gauge-swirl-dynamic-v3",
+                "target_id": "enemy",
+                "application_event_id": "0:h2",
+                "reaction": null
+              }
+            },
+            "snapshot": false
+          }
+        ],
+        "buffs": [
+          {
+            "id": "mechanics:h0",
+            "name": "机制派生收益·h0",
+            "source": "声明式机制逐命中投影",
+            "start": 0.2,
+            "end": 0.200001,
+            "scope": "team",
+            "target": "a",
+            "effects": [
+              {
+                "id": "pool-authority:value:0",
+                "benefit_type_id": "benefit.dmg_bonus.all",
+                "zone": "dmg_bonus",
+                "stat": "all",
+                "value": 0,
+                "applies_to": {
+                  "mode": "hits",
+                  "hit_ids": [
+                    "h0"
+                  ]
+                }
+              },
+              {
+                "id": "grant-authority:value:0",
+                "benefit_type_id": "benefit.dmg_bonus.all",
+                "zone": "dmg_bonus",
+                "stat": "all",
+                "value": 0,
+                "applies_to": {
+                  "mode": "hits",
+                  "hit_ids": [
+                    "h0"
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "id": "mechanics:h1",
+            "name": "机制派生收益·h1",
+            "source": "声明式机制逐命中投影",
+            "start": 0.3,
+            "end": 0.300001,
+            "scope": "team",
+            "target": "a",
+            "effects": [
+              {
+                "id": "pool-authority:value:0",
+                "benefit_type_id": "benefit.dmg_bonus.all",
+                "zone": "dmg_bonus",
+                "stat": "all",
+                "value": 0,
+                "applies_to": {
+                  "mode": "hits",
+                  "hit_ids": [
+                    "h1"
+                  ]
+                }
+              },
+              {
+                "id": "grant-authority:value:0",
+                "benefit_type_id": "benefit.dmg_bonus.all",
+                "zone": "dmg_bonus",
+                "stat": "all",
+                "value": 0,
+                "applies_to": {
+                  "mode": "hits",
+                  "hit_ids": [
+                    "h1"
+                  ]
+                }
+              }
+            ]
+          },
+          {
+            "id": "mechanics:h2",
+            "name": "机制派生收益·h2",
+            "source": "声明式机制逐命中投影",
+            "start": 0.4,
+            "end": 0.400001,
+            "scope": "team",
+            "target": "a",
+            "effects": [
+              {
+                "id": "pool-authority:value:0",
+                "benefit_type_id": "benefit.dmg_bonus.all",
+                "zone": "dmg_bonus",
+                "stat": "all",
+                "value": 0,
+                "applies_to": {
+                  "mode": "hits",
+                  "hit_ids": [
+                    "h2"
+                  ]
+                }
+              },
+              {
+                "id": "grant-authority:value:0",
+                "benefit_type_id": "benefit.dmg_bonus.all",
+                "zone": "dmg_bonus",
+                "stat": "all",
+                "value": 0,
+                "applies_to": {
+                  "mode": "hits",
+                  "hit_ids": [
+                    "h2"
+                  ]
+                }
+              }
+            ]
+          }
+        ],
+        "switches": [
+          {
+            "t": 0,
+            "character": "a"
+          }
+        ],
+        "loop_duration": 10,
+        "meta": {
+          "assumptions": [],
+          "equipment_resolution": {
+            "composer_version": "1.31.0",
+            "source_fingerprint": "9bf616f1d606030fa31381fb1a6ecf988744fcf0dc77086e211ad9e5579a473b",
+            "data_versions": []
+          }
+        }
+      },
+      "rotation_model": {
+        "schema_version": 1,
+        "period": 10,
+        "max_cycles": 3,
+        "initial_frontline": "a",
+        "characters": [
+          {
+            "id": "a",
+            "element": "anemo",
+            "energy_recharge": 1,
+            "energy_capacity": 10,
+            "initial_energy": 10,
+            "status": "assumed",
+            "source": "虚构确定性工程情景"
+          }
+        ],
+        "abilities": [
+          {
+            "id": "e",
+            "character": "a",
+            "action_type_id": "action.elemental_skill",
+            "cooldown": null,
+            "energy": null,
+            "status": "assumed",
+            "source": "虚构确定性工程情景"
+          }
+        ],
+        "actions": [
+          {
+            "id": "cast",
+            "ability_id": "e",
+            "start": 0,
+            "occupation_end": 0.1,
+            "order": 0,
+            "repeat": {
+              "mode": "once"
+            },
+            "status": "assumed",
+            "source": "虚构确定性工程情景"
+          }
+        ],
+        "events": [],
+        "initial_cooldowns": []
+      },
+      "mechanics_model": {
+        "schema_version": 1,
+        "rules": [
+          {
+            "id": "benefit",
+            "name_zh": "工程收益",
+            "owner": "a",
+            "source_id": "binding:benefit",
+            "trigger": {
+              "event": "action_start",
+              "phase": "pre",
+              "action_ids": [
+                "cast"
+              ]
+            },
+            "beneficiaries": {
+              "mode": "team",
+              "scope": "locked"
+            },
+            "timing": {
+              "delay": 0,
+              "duration": 2,
+              "cooldown": 0,
+              "cooldown_anchor": "success"
+            },
+            "stacking": {
+              "max": 1,
+              "add": 1,
+              "policy": "refresh"
+            },
+            "effects": [
+              {
+                "id": "value",
+                "benefit_type_id": "benefit.base_add.all",
+                "value": 100,
+                "domain": "self"
+              }
+            ],
+            "status": "assumed",
+            "source": "虚构确定性工程情景",
+            "resource_gate": {
+              "consumer_id": "consumer"
+            }
+          },
+          {
+            "id": "pool-authority",
+            "name_zh": "工程收益",
+            "owner": "a",
+            "source_id": "binding:pool",
+            "trigger": {
+              "event": "action_start",
+              "phase": "pre",
+              "action_ids": [
+                "cast"
+              ]
+            },
+            "beneficiaries": {
+              "mode": "team",
+              "scope": "locked"
+            },
+            "timing": {
+              "delay": 0,
+              "duration": 2,
+              "cooldown": 0,
+              "cooldown_anchor": "success"
+            },
+            "stacking": {
+              "max": 1,
+              "add": 1,
+              "policy": "refresh"
+            },
+            "effects": [
+              {
+                "id": "value",
+                "benefit_type_id": "benefit.dmg_bonus.all",
+                "value": 0,
+                "domain": "self"
+              }
+            ],
+            "status": "assumed",
+            "source": "虚构确定性工程情景"
+          },
+          {
+            "id": "grant-authority",
+            "name_zh": "工程收益",
+            "owner": "a",
+            "source_id": "binding:refill",
+            "trigger": {
+              "event": "action_start",
+              "phase": "pre",
+              "action_ids": [
+                "cast"
+              ]
+            },
+            "beneficiaries": {
+              "mode": "team",
+              "scope": "locked"
+            },
+            "timing": {
+              "delay": 0,
+              "duration": 2,
+              "cooldown": 0,
+              "cooldown_anchor": "success"
+            },
+            "stacking": {
+              "max": 1,
+              "add": 1,
+              "policy": "refresh"
+            },
+            "effects": [
+              {
+                "id": "value",
+                "benefit_type_id": "benefit.dmg_bonus.all",
+                "value": 0,
+                "domain": "self"
+              }
+            ],
+            "status": "assumed",
+            "source": "虚构确定性工程情景"
+          }
+        ],
+        "hit_events": [
+          {
+            "hit_id": "h0",
+            "action_id": "cast",
+            "order": 10,
+            "application": {
+              "profile_id": "anemo",
+              "target_id": "enemy",
+              "landed": true
+            }
+          },
+          {
+            "hit_id": "h1",
+            "action_id": "cast",
+            "order": 11,
+            "application": {
+              "profile_id": "anemo",
+              "target_id": "enemy",
+              "landed": true
+            }
+          },
+          {
+            "hit_id": "h2",
+            "action_id": "cast",
+            "order": 12,
+            "application": {
+              "profile_id": "anemo",
+              "target_id": "enemy",
+              "landed": true
+            }
+          }
+        ],
+        "hit_patterns": [],
+        "condition_events": [],
+        "initial_state": {
+          "rules": [
+            {
+              "rule_id": "benefit",
+              "cooldown_remaining": 0,
+              "instances": []
+            },
+            {
+              "rule_id": "pool-authority",
+              "cooldown_remaining": 0,
+              "instances": []
+            },
+            {
+              "rule_id": "grant-authority",
+              "cooldown_remaining": 0,
+              "instances": []
+            }
+          ]
+        },
+        "elemental_model": {
+          "schema_version": 1,
+          "ruleset": "gauge-swirl-dynamic-v3",
+          "target": {
+            "id": "enemy",
+            "kind": "ordinary",
+            "knowledge": "known",
+            "initial_aura": null,
+            "status": "assumed",
+            "source": "虚构确定性工程情景"
+          },
+          "profiles": [
+            {
+              "id": "pyro",
+              "element": "pyro",
+              "application": "apply",
+              "gauge_units": 1,
+              "icd": {
+                "kind": "none"
+              },
+              "status": "assumed",
+              "source": "虚构确定性工程情景"
+            },
+            {
+              "id": "hydro",
+              "element": "hydro",
+              "application": "apply",
+              "gauge_units": 1,
+              "icd": {
+                "kind": "none"
+              },
+              "status": "assumed",
+              "source": "虚构确定性工程情景"
+            },
+            {
+              "id": "cryo",
+              "element": "cryo",
+              "application": "apply",
+              "gauge_units": 1,
+              "icd": {
+                "kind": "none"
+              },
+              "status": "assumed",
+              "source": "虚构确定性工程情景"
+            },
+            {
+              "id": "anemo",
+              "element": "anemo",
+              "application": "apply",
+              "gauge_units": 1,
+              "icd": {
+                "kind": "none"
+              },
+              "status": "assumed",
+              "source": "虚构确定性工程情景"
+            }
+          ],
+          "swirl_damage": {
+            "icd": {
+              "kind": "sequence",
+              "reset_seconds": 0.5,
+              "sequence": [
+                1,
+                1,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            "status": "assumed",
+            "source": "普通冰水原目标扩散，AttackAttenuation组1的damageSequence"
+          }
+        },
+        "shared_pools": {
+          "schema_version": 1,
+          "pools": [
+            {
+              "id": "pool",
+              "name_zh": "共享池",
+              "owner": "a",
+              "source_id": "binding:pool",
+              "scope": "team",
+              "capacity": 20,
+              "initial": {
+                "team": 0
+              },
+              "status": "assumed",
+              "source": "合成工程资料"
+            }
+          ],
+          "operations": [
+            {
+              "id": "refill",
+              "pool_id": "pool",
+              "source_id": "binding:refill",
+              "trigger": {
+                "event": "elemental_reaction",
+                "phase": "post",
+                "reaction_types": [
+                  "swirl"
+                ]
+              },
+              "order": 0,
+              "operation": "grant",
+              "amount": 3,
+              "targets": {
+                "mode": "all_pool_keys"
+              },
+              "cooldown": {
+                "seconds": 0,
+                "anchor": "success"
+              },
+              "status": "assumed",
+              "source": "合成工程资料"
+            }
+          ],
+          "consumers": [
+            {
+              "id": "consumer",
+              "pool_id": "pool",
+              "source_id": "binding:benefit",
+              "filter": {
+                "event": "hit",
+                "phase": "pre"
+              },
+              "actor_relation": "party_member",
+              "damage_system": "classic",
+              "amount": 1,
+              "eligibility_rule_id": "benefit",
+              "status": "assumed",
+              "source": "合成工程资料"
+            }
+          ]
+        },
+        "resource_reaction_contract": {
+          "schema_version": 1,
+          "operation_ids": [
+            "refill"
+          ]
+        }
+      }
+    },
+    "state": "ready",
+    "composer_version": "1.31.0",
+    "input_fingerprint": "0dd747209ad530aa7e859f94163e8c32df70059d513b94609f572331d340044c",
+    "source_fingerprint": "9bf616f1d606030fa31381fb1a6ecf988744fcf0dc77086e211ad9e5579a473b",
+    "output_fingerprint": "023e4c74838e65b85a475190d1a048c396899ba488a7aa08a9be912a77b9b473",
+    "missing_inputs": [],
+    "warnings": [],
+    "contribution_report": {
+      "characters": {},
+      "generated_outputs": [
+        {
+          "binding_id": "binding",
+          "part_id": "benefit",
+          "mechanics_rule_id": "benefit"
+        },
+        {
+          "binding_id": "binding",
+          "part_id": "pool",
+          "mechanics_rule_id": "pool-authority"
+        },
+        {
+          "binding_id": "binding",
+          "part_id": "refill",
+          "mechanics_rule_id": "grant-authority"
+        }
+      ],
+      "equipment_sources": {}
+    },
+    "context_fingerprint": "56643d339ccba81f0d5255391397e3dec57e678ce36c356fe30b888cb4fa2faa",
+    "effect_requirements": [
+      {
+        "binding_id": "binding",
+        "provider_character_id": "a",
+        "owner": {
+          "kind": "manual",
+          "note": "独立工程机制"
+        },
+        "source_refs": [
+          {
+            "kind": "manual",
+            "note": "确定性虚构案例，无游戏队伍答案"
+          }
+        ],
+        "source_fingerprint": "d8d99d28b8579a7861093b12e15e0dd1c946bd7ea7bfbd9d98bc8eb6ac7dd708",
+        "effect": {
+          "owner": {
+            "kind": "manual",
+            "note": "独立工程机制"
+          },
+          "source_refs": [
+            {
+              "kind": "manual",
+              "note": "确定性虚构案例，无游戏队伍答案"
+            }
+          ]
+        },
+        "proposed_binding": {
+          "binding_id": "binding",
+          "provider_character_id": "a",
+          "owner": {
+            "kind": "manual",
+            "note": "独立工程机制"
+          },
+          "source_refs": [
+            {
+              "kind": "manual",
+              "note": "确定性虚构案例，无游戏队伍答案"
+            }
+          ],
+          "source_fingerprint": "d8d99d28b8579a7861093b12e15e0dd1c946bd7ea7bfbd9d98bc8eb6ac7dd708",
+          "coverage": {
+            "state": "complete",
+            "reviewed_by": "工程测试",
+            "note": "已核对虚构输入范围",
+            "source_fingerprint": "d8d99d28b8579a7861093b12e15e0dd1c946bd7ea7bfbd9d98bc8eb6ac7dd708"
+          },
+          "parts": [
+            {
+              "part_id": "benefit",
+              "label": "独立工程收益",
+              "state": "resolved",
+              "rule": {
+                "kind": "mechanics",
+                "rule_id": "benefit"
+              },
+              "delivery": {
+                "kind": "mechanics"
+              },
+              "conditions": [],
+              "dependencies": {
+                "mode": "manual_context",
+                "context_fingerprint": "56643d339ccba81f0d5255391397e3dec57e678ce36c356fe30b888cb4fa2faa",
+                "note": "Reviewed the whole synthetic resource graph and its gate"
+              },
+              "reason": null
+            },
+            {
+              "part_id": "pool",
+              "label": "独立工程收益",
+              "state": "resolved",
+              "rule": {
+                "kind": "mechanics",
+                "rule_id": "pool-authority"
+              },
+              "delivery": {
+                "kind": "mechanics"
+              },
+              "conditions": [],
+              "dependencies": {
+                "mode": "manual_context",
+                "context_fingerprint": "56643d339ccba81f0d5255391397e3dec57e678ce36c356fe30b888cb4fa2faa",
+                "note": "Reviewed the whole synthetic resource graph and its gate"
+              },
+              "reason": null
+            },
+            {
+              "part_id": "refill",
+              "label": "独立工程收益",
+              "state": "resolved",
+              "rule": {
+                "kind": "mechanics",
+                "rule_id": "grant-authority"
+              },
+              "delivery": {
+                "kind": "mechanics"
+              },
+              "conditions": [],
+              "dependencies": {
+                "mode": "manual_context",
+                "context_fingerprint": "56643d339ccba81f0d5255391397e3dec57e678ce36c356fe30b888cb4fa2faa",
+                "note": "Reviewed the whole synthetic resource graph and its gate"
+              },
+              "reason": null
+            }
+          ]
+        }
+      }
+    ],
+    "match_previews": [],
+    "manual_dependency_previews": [],
+    "data_versions": [],
+    "assumptions": [],
+    "resource_reaction_source_adoption": {
+      "contract": "ordinary-reaction-resource-adoption-v1",
+      "source_authority": "caller_assumed",
+      "context_fingerprint": "56643d339ccba81f0d5255391397e3dec57e678ce36c356fe30b888cb4fa2faa",
+      "declaration_fingerprint": "c66151a719467792b1f5390ff3eaff0dc3940e5aa96f8a9df65ba295a198cdf4",
+      "declared_operation_ids": [
+        "refill"
+      ],
+      "active_operation_ids": [
+        "refill"
+      ],
+      "status": "ready",
+      "operations": [
+        {
+          "operation_id": "refill",
+          "source_id": "binding:refill",
+          "pool_id": "pool",
+          "source_owner": "a",
+          "status": "ready",
+          "authority_rule_id": "grant-authority",
+          "review_mode": "manual_context"
+        }
+      ],
+      "validation_issues": [],
+      "source_fingerprint": "9bf616f1d606030fa31381fb1a6ecf988744fcf0dc77086e211ad9e5579a473b",
+      "final_model_fingerprint": "38e47479b38e02571451006c5612470b9fcd009bc278bb0d36dc462ecb1345ed",
+      "program": {
+        "contract": "ordinary-reaction-resource-v1",
+        "characters": [
+          "a"
+        ],
+        "operations": [
+          {
+            "id": "refill",
+            "pool_id": "pool",
+            "source_id": "binding:refill",
+            "source_owner": "a",
+            "keys": [
+              "team"
+            ],
+            "operation": {
+              "id": "refill",
+              "pool_id": "pool",
+              "source_id": "binding:refill",
+              "trigger": {
+                "event": "elemental_reaction",
+                "phase": "post",
+                "reaction_types": [
+                  "swirl"
+                ]
+              },
+              "order": 0,
+              "operation": "grant",
+              "amount": 3,
+              "targets": {
+                "mode": "all_pool_keys"
+              },
+              "cooldown": {
+                "seconds": 0,
+                "anchor": "success"
+              },
+              "status": "assumed",
+              "source": "合成工程资料"
+            },
+            "pool": {
+              "id": "pool",
+              "name_zh": "共享池",
+              "owner": "a",
+              "source_id": "binding:pool",
+              "scope": "team",
+              "capacity": 20,
+              "initial": {
+                "team": 0
+              },
+              "status": "assumed",
+              "source": "合成工程资料"
+            },
+            "selector": {
+              "event": "elemental_reaction",
+              "phase": "post",
+              "reaction_types": [
+                "swirl"
+              ],
+              "owner_presence": "any"
+            }
+          }
+        ],
+        "source_authority": "not_evaluated",
+        "execution": "not_connected",
+        "verification_scope": "declared_configuration_consistency_only",
+        "program_fingerprint": "ba71f87ccf621bebeb28960d314753e400decbd4ea2b7abf876db8f01298b579"
+      },
+      "program_fingerprint": "ba71f87ccf621bebeb28960d314753e400decbd4ea2b7abf876db8f01298b579"
+    },
+    "action_automation_audit": {
+      "contract": "action-automation-audit-v3",
+      "categories": {
+        "automatic_generated": "由受审来源和动作档案自动派生",
+        "scenario_calibration": "已有档案，但仍缺场景时序、命中或来源确认",
+        "manual_input_required": "仍依赖手填命中或尚无动作档案",
+        "not_applicable": "明确不产生伤害的动作类别",
+        "unclassified": "动作类别语义未知，不能假定零命中"
+      },
+      "actions": [
+        {
+          "action_id": "cast",
+          "ability_id": "e",
+          "action_type_id": "action.elemental_skill",
+          "category": "manual_input_required",
+          "automation_origin": null,
+          "profile_ids": [],
+          "automatic_hit_ids": [],
+          "manual_hit_ids": [],
+          "issues": [
+            {
+              "code": "action_dispatch_profile_missing",
+              "path": "rotation_model.actions.cast",
+              "message": "攻击动作没有可执行的来源动作档案；仍需建立资料绑定或显式命中。"
+            }
+          ]
+        }
+      ],
+      "summary": {
+        "total_actions": 1,
+        "attack_actions": 1,
+        "automatic_actions": 0,
+        "reviewed_dispatch_actions": 0,
+        "reusable_profile_actions": 0,
+        "scenario_calibration_actions": 0,
+        "manual_actions": 1,
+        "unclassified_actions": 0,
+        "automatic_generated_hits": 0,
+        "manual_hit_rows": 3,
+        "reusable_prototype_hit_rows": 0,
+        "manual_per_instance_hit_rows": 3,
+        "manual_action_hit_links": 0,
+        "manual_reaction_answers": 0,
+        "reusable_prototype_reaction_answers": 0,
+        "manual_per_instance_reaction_answers": 0,
+        "automatic_elemental_attempts": 0,
+        "known_pending_contacts": 0,
+        "unknown_contact_cardinality_actions": 1,
+        "unknown_work_orders": 1,
+        "unique_dispatch_profile_decisions": 0,
+        "unique_reusable_profile_decisions": 0,
+        "automatic_action_ratio": 0.0,
+        "reviewed_dispatch_action_ratio": 0.0
+      },
+      "dispatch_manifest": {
+        "status": "absent",
+        "records": 0,
+        "complete_records": 0,
+        "pending_records": 0,
+        "expected_components": 0,
+        "materialized_components": 0
+      },
+      "elemental": {
+        "status": "enabled_without_automatic_actions",
+        "ruleset": "gauge-swirl-dynamic-v3",
+        "manual_reaction_hit_ids": [],
+        "policy": "受支持链路由元素运行时输出；未知资料保持待处理，不以手填反应答案冒充自动证明。"
+      }
+    },
+    "shared_pool_source_adoptions": [
+      {
+        "kind": "pools",
+        "id": "pool",
+        "source_id": "binding:pool",
+        "pool_id": "pool",
+        "status": "ready",
+        "path": "mechanics_model.shared_pools.pools.pool",
+        "authority_rule_id": "pool-authority"
+      },
+      {
+        "kind": "operations",
+        "id": "refill",
+        "source_id": "binding:refill",
+        "pool_id": "pool",
+        "status": "ready",
+        "path": "mechanics_model.shared_pools.operations.refill",
+        "authority_rule_id": "grant-authority"
+      },
+      {
+        "kind": "consumers",
+        "id": "consumer",
+        "source_id": "binding:benefit",
+        "pool_id": "pool",
+        "status": "ready",
+        "path": "mechanics_model.shared_pools.consumers.consumer",
+        "authority_rule_id": "benefit"
+      }
+    ],
+    "presentation_issues": [
+      {
+        "code": "chinese_description_missing",
+        "severity": "warning",
+        "path": "manual_template.meta.name",
+        "message": "方案名称缺少明确中文描述；请补充显示文本，保留机器标识"
+      },
+      {
+        "code": "chinese_description_missing",
+        "severity": "warning",
+        "path": "manual_template.hits[0].hit_name",
+        "message": "伤害名称缺少明确中文描述；请补充显示文本，保留机器标识"
+      },
+      {
+        "code": "chinese_description_missing",
+        "severity": "warning",
+        "path": "manual_template.hits[1].hit_name",
+        "message": "伤害名称缺少明确中文描述；请补充显示文本，保留机器标识"
+      },
+      {
+        "code": "chinese_description_missing",
+        "severity": "warning",
+        "path": "manual_template.hits[2].hit_name",
+        "message": "伤害名称缺少明确中文描述；请补充显示文本，保留机器标识"
+      }
+    ],
+    "mechanics_model": {
+      "schema_version": 1,
+      "rules": [
+        {
+          "id": "benefit",
+          "name_zh": "工程收益",
+          "owner": "a",
+          "source_id": "binding:benefit",
+          "trigger": {
+            "event": "action_start",
+            "phase": "pre",
+            "action_ids": [
+              "cast"
+            ]
+          },
+          "beneficiaries": {
+            "mode": "team",
+            "scope": "locked"
+          },
+          "timing": {
+            "delay": 0,
+            "duration": 2,
+            "cooldown": 0,
+            "cooldown_anchor": "success"
+          },
+          "stacking": {
+            "max": 1,
+            "add": 1,
+            "policy": "refresh"
+          },
+          "effects": [
+            {
+              "id": "value",
+              "benefit_type_id": "benefit.base_add.all",
+              "value": 100,
+              "domain": "self"
+            }
+          ],
+          "status": "assumed",
+          "source": "虚构确定性工程情景",
+          "resource_gate": {
+            "consumer_id": "consumer"
+          }
+        },
+        {
+          "id": "pool-authority",
+          "name_zh": "工程收益",
+          "owner": "a",
+          "source_id": "binding:pool",
+          "trigger": {
+            "event": "action_start",
+            "phase": "pre",
+            "action_ids": [
+              "cast"
+            ]
+          },
+          "beneficiaries": {
+            "mode": "team",
+            "scope": "locked"
+          },
+          "timing": {
+            "delay": 0,
+            "duration": 2,
+            "cooldown": 0,
+            "cooldown_anchor": "success"
+          },
+          "stacking": {
+            "max": 1,
+            "add": 1,
+            "policy": "refresh"
+          },
+          "effects": [
+            {
+              "id": "value",
+              "benefit_type_id": "benefit.dmg_bonus.all",
+              "value": 0,
+              "domain": "self"
+            }
+          ],
+          "status": "assumed",
+          "source": "虚构确定性工程情景"
+        },
+        {
+          "id": "grant-authority",
+          "name_zh": "工程收益",
+          "owner": "a",
+          "source_id": "binding:refill",
+          "trigger": {
+            "event": "action_start",
+            "phase": "pre",
+            "action_ids": [
+              "cast"
+            ]
+          },
+          "beneficiaries": {
+            "mode": "team",
+            "scope": "locked"
+          },
+          "timing": {
+            "delay": 0,
+            "duration": 2,
+            "cooldown": 0,
+            "cooldown_anchor": "success"
+          },
+          "stacking": {
+            "max": 1,
+            "add": 1,
+            "policy": "refresh"
+          },
+          "effects": [
+            {
+              "id": "value",
+              "benefit_type_id": "benefit.dmg_bonus.all",
+              "value": 0,
+              "domain": "self"
+            }
+          ],
+          "status": "assumed",
+          "source": "虚构确定性工程情景"
+        }
+      ],
+      "hit_events": [
+        {
+          "hit_id": "h0",
+          "action_id": "cast",
+          "order": 10,
+          "application": {
+            "profile_id": "anemo",
+            "target_id": "enemy",
+            "landed": true
+          }
+        },
+        {
+          "hit_id": "h1",
+          "action_id": "cast",
+          "order": 11,
+          "application": {
+            "profile_id": "anemo",
+            "target_id": "enemy",
+            "landed": true
+          }
+        },
+        {
+          "hit_id": "h2",
+          "action_id": "cast",
+          "order": 12,
+          "application": {
+            "profile_id": "anemo",
+            "target_id": "enemy",
+            "landed": true
+          }
+        }
+      ],
+      "hit_patterns": [],
+      "condition_events": [],
+      "initial_state": {
+        "rules": [
+          {
+            "rule_id": "benefit",
+            "cooldown_remaining": 0,
+            "instances": []
+          },
+          {
+            "rule_id": "pool-authority",
+            "cooldown_remaining": 0,
+            "instances": []
+          },
+          {
+            "rule_id": "grant-authority",
+            "cooldown_remaining": 0,
+            "instances": []
+          }
+        ]
+      },
+      "elemental_model": {
+        "schema_version": 1,
+        "ruleset": "gauge-swirl-dynamic-v3",
+        "target": {
+          "id": "enemy",
+          "kind": "ordinary",
+          "knowledge": "known",
+          "initial_aura": null,
+          "status": "assumed",
+          "source": "虚构确定性工程情景"
+        },
+        "profiles": [
+          {
+            "id": "pyro",
+            "element": "pyro",
+            "application": "apply",
+            "gauge_units": 1,
+            "icd": {
+              "kind": "none"
+            },
+            "status": "assumed",
+            "source": "虚构确定性工程情景"
+          },
+          {
+            "id": "hydro",
+            "element": "hydro",
+            "application": "apply",
+            "gauge_units": 1,
+            "icd": {
+              "kind": "none"
+            },
+            "status": "assumed",
+            "source": "虚构确定性工程情景"
+          },
+          {
+            "id": "cryo",
+            "element": "cryo",
+            "application": "apply",
+            "gauge_units": 1,
+            "icd": {
+              "kind": "none"
+            },
+            "status": "assumed",
+            "source": "虚构确定性工程情景"
+          },
+          {
+            "id": "anemo",
+            "element": "anemo",
+            "application": "apply",
+            "gauge_units": 1,
+            "icd": {
+              "kind": "none"
+            },
+            "status": "assumed",
+            "source": "虚构确定性工程情景"
+          }
+        ],
+        "swirl_damage": {
+          "icd": {
+            "kind": "sequence",
+            "reset_seconds": 0.5,
+            "sequence": [
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          "status": "assumed",
+          "source": "普通冰水原目标扩散，AttackAttenuation组1的damageSequence"
+        }
+      },
+      "shared_pools": {
+        "schema_version": 1,
+        "pools": [
+          {
+            "id": "pool",
+            "name_zh": "共享池",
+            "owner": "a",
+            "source_id": "binding:pool",
+            "scope": "team",
+            "capacity": 20,
+            "initial": {
+              "team": 0
+            },
+            "status": "assumed",
+            "source": "合成工程资料"
+          }
+        ],
+        "operations": [
+          {
+            "id": "refill",
+            "pool_id": "pool",
+            "source_id": "binding:refill",
+            "trigger": {
+              "event": "elemental_reaction",
+              "phase": "post",
+              "reaction_types": [
+                "swirl"
+              ]
+            },
+            "order": 0,
+            "operation": "grant",
+            "amount": 3,
+            "targets": {
+              "mode": "all_pool_keys"
+            },
+            "cooldown": {
+              "seconds": 0,
+              "anchor": "success"
+            },
+            "status": "assumed",
+            "source": "合成工程资料"
+          }
+        ],
+        "consumers": [
+          {
+            "id": "consumer",
+            "pool_id": "pool",
+            "source_id": "binding:benefit",
+            "filter": {
+              "event": "hit",
+              "phase": "pre"
+            },
+            "actor_relation": "party_member",
+            "damage_system": "classic",
+            "amount": 1,
+            "eligibility_rule_id": "benefit",
+            "status": "assumed",
+            "source": "合成工程资料"
+          }
+        ]
+      },
+      "resource_reaction_contract": {
+        "schema_version": 1,
+        "operation_ids": [
+          "refill"
+        ]
+      }
+    },
+    "mechanics_matches": [],
+    "equipment_summary": {
+      "summary_version": 1,
+      "context": {
+        "kind": "calculation_snapshot",
+        "plan_id": "86d01ff1-a5cb-41ad-8b84-a02b7124c24d",
+        "revision": 0,
+        "state": "ready",
+        "input_fingerprint": "0dd747209ad530aa7e859f94163e8c32df70059d513b94609f572331d340044c",
+        "source_fingerprint": "9bf616f1d606030fa31381fb1a6ecf988744fcf0dc77086e211ad9e5579a473b",
+        "output_fingerprint": "023e4c74838e65b85a475190d1a048c396899ba488a7aa08a9be912a77b9b473",
+        "calculated_at": "2026-10-20T12:46:16.965066+00:00"
+      },
+      "characters": [
+        {
+          "actor_id": "a",
+          "display_name": "角色1（中文名待补）",
+          "level": 90,
+          "input_mode": "manual_resolved",
+          "weapon": {
+            "state": "not_provided"
+          },
+          "artifact_slots": [
+            {
+              "slot": "EQUIP_BRACER",
+              "slot_label": "生之花",
+              "state": "not_provided"
+            },
+            {
+              "slot": "EQUIP_NECKLACE",
+              "slot_label": "死之羽",
+              "state": "not_provided"
+            },
+            {
+              "slot": "EQUIP_SHOES",
+              "slot_label": "时之沙",
+              "state": "not_provided"
+            },
+            {
+              "slot": "EQUIP_RING",
+              "slot_label": "空之杯",
+              "state": "not_provided"
+            },
+            {
+              "slot": "EQUIP_DRESS",
+              "slot_label": "理之冠",
+              "state": "not_provided"
+            }
+          ],
+          "artifact_sets": [],
+          "panel_stages": {
+            "final": {
+              "atk": 100,
+              "base_atk": 50,
+              "em": 0,
+              "crit_rate": 0,
+              "crit_dmg": 0.5,
+              "energy_recharge": 1
+            }
+          },
+          "contributions": [],
+          "base_sources": [],
+          "effect_statuses": [],
+          "source_status": "unverified",
+          "missing_inputs": []
+        }
+      ]
+    },
+    "mechanics_input_template": {
+      "version": 2,
+      "form": "resolved",
+      "id_registry_version": 1,
+      "type_definitions": {
+        "damage_types": []
+      },
+      "enemy": {
+        "level": 90,
+        "resistance": {
+          "default": 0.1
+        }
+      },
+      "characters": [
+        {
+          "id": "a",
+          "level": 90,
+          "stats": {
+            "atk": 100,
+            "base_atk": 50,
+            "em": 0,
+            "crit_rate": 0,
+            "crit_dmg": 0.5,
+            "energy_recharge": 1
+          }
+        }
+      ],
+      "hits": [
+        {
+          "id": "h0",
+          "t": 0.2,
+          "character": "a",
+          "skill": "工程技能",
+          "hit_name": "h0",
+          "damage_type_ids": [
+            "damage.elemental_skill"
+          ],
+          "damage_system": "classic",
+          "element": "anemo",
+          "multiplier": 1
+        },
+        {
+          "id": "h1",
+          "t": 0.3,
+          "character": "a",
+          "skill": "工程技能",
+          "hit_name": "h1",
+          "damage_type_ids": [
+            "damage.elemental_skill"
+          ],
+          "damage_system": "classic",
+          "element": "anemo",
+          "multiplier": 1
+        },
+        {
+          "id": "h2",
+          "t": 0.4,
+          "character": "a",
+          "skill": "工程技能",
+          "hit_name": "h2",
+          "damage_type_ids": [
+            "damage.elemental_skill"
+          ],
+          "damage_system": "classic",
+          "element": "anemo",
+          "multiplier": 1
+        }
+      ],
+      "buffs": [],
+      "switches": [],
+      "loop_duration": 10,
+      "meta": {
+        "assumptions": [],
+        "equipment_resolution": {
+          "composer_version": "1.31.0",
+          "source_fingerprint": "9bf616f1d606030fa31381fb1a6ecf988744fcf0dc77086e211ad9e5579a473b",
+          "data_versions": []
+        }
+      }
+    }
+  },
+  "equipment_summary": {
+    "summary_version": 1,
+    "context": {
+      "kind": "calculation_snapshot",
+      "plan_id": "86d01ff1-a5cb-41ad-8b84-a02b7124c24d",
+      "revision": 0,
+      "state": "ready",
+      "input_fingerprint": "0dd747209ad530aa7e859f94163e8c32df70059d513b94609f572331d340044c",
+      "source_fingerprint": "9bf616f1d606030fa31381fb1a6ecf988744fcf0dc77086e211ad9e5579a473b",
+      "output_fingerprint": "023e4c74838e65b85a475190d1a048c396899ba488a7aa08a9be912a77b9b473",
+      "calculated_at": "2026-10-20T12:46:16.965066+00:00"
+    },
+    "characters": [
+      {
+        "actor_id": "a",
+        "display_name": "角色1（中文名待补）",
+        "level": 90,
+        "input_mode": "manual_resolved",
+        "weapon": {
+          "state": "not_provided"
+        },
+        "artifact_slots": [
+          {
+            "slot": "EQUIP_BRACER",
+            "slot_label": "生之花",
+            "state": "not_provided"
+          },
+          {
+            "slot": "EQUIP_NECKLACE",
+            "slot_label": "死之羽",
+            "state": "not_provided"
+          },
+          {
+            "slot": "EQUIP_SHOES",
+            "slot_label": "时之沙",
+            "state": "not_provided"
+          },
+          {
+            "slot": "EQUIP_RING",
+            "slot_label": "空之杯",
+            "state": "not_provided"
+          },
+          {
+            "slot": "EQUIP_DRESS",
+            "slot_label": "理之冠",
+            "state": "not_provided"
+          }
+        ],
+        "artifact_sets": [],
+        "panel_stages": {
+          "final": {
+            "atk": 100,
+            "base_atk": 50,
+            "em": 0,
+            "crit_rate": 0,
+            "crit_dmg": 0.5,
+            "energy_recharge": 1
+          }
+        },
+        "contributions": [],
+        "base_sources": [],
+        "effect_statuses": [],
+        "source_status": "unverified",
+        "missing_inputs": []
+      }
+    ]
+  },
+  "presentation_issues": [
+    {
+      "code": "chinese_description_missing",
+      "severity": "warning",
+      "path": "manual_template.meta.name",
+      "message": "方案名称缺少明确中文描述；请补充显示文本，保留机器标识"
+    },
+    {
+      "code": "chinese_description_missing",
+      "severity": "warning",
+      "path": "manual_template.hits[0].hit_name",
+      "message": "伤害名称缺少明确中文描述；请补充显示文本，保留机器标识"
+    },
+    {
+      "code": "chinese_description_missing",
+      "severity": "warning",
+      "path": "manual_template.hits[1].hit_name",
+      "message": "伤害名称缺少明确中文描述；请补充显示文本，保留机器标识"
+    },
+    {
+      "code": "chinese_description_missing",
+      "severity": "warning",
+      "path": "manual_template.hits[2].hit_name",
+      "message": "伤害名称缺少明确中文描述；请补充显示文本，保留机器标识"
+    }
+  ]
+}

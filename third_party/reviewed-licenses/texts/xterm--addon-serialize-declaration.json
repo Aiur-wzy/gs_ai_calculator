@@ -1,0 +1,10 @@
+{
+  "name": "@xterm/addon-serialize",
+  "version": "0.14.0",
+  "license": "MIT",
+  "author": {
+    "name": "The xterm.js authors",
+    "url": "https://xtermjs.org/"
+  },
+  "repository": "https://github.com/xtermjs/xterm.js/tree/master/addons/addon-serialize"
+}

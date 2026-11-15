@@ -1,0 +1,198 @@
+{
+  "schema_version": 1,
+  "profile_id": "inherent-ordinary-swirl-attribute-v2",
+  "profile_version": 2,
+  "legacy_mapping_fingerprint": "6684ace80dab16d6e1d91e311d32d046cfc999d97ae6859c3b36dfe10824d1bf",
+  "facts": [
+    {
+      "id": "passive-swirl-cryo-attribute-read",
+      "revision": 1,
+      "kind": "attribute_read",
+      "claim": {
+        "schema_version": 1,
+        "rule_key": "cryo",
+        "effect_id": "value",
+        "node_id": "ability",
+        "pointer": "/GPPBBDEICKP/UNIQUE_Avatar_Kazuha_PermanentSkill_2_Ice/ILKPFPGAIGI/Actor_IceAddHurtExtraDelta",
+        "expression_sha256": "05222d4f1367483d19353985b6ceb255b19b197983634f683573634e84806b6c",
+        "grammar": "rpn-parameter-stat-mul-v1",
+        "parameter_ref": "passive.factor",
+        "parameter_symbol": "Kazuha_PermanentSkill_2_Factor",
+        "raw_stat": "FIGHT_PROP_NONEXTRA_ELEMENT_MASTERY",
+        "stat": "em",
+        "basis": "nonextra",
+        "subject": "owner",
+        "unit": "flat"
+      },
+      "evidence_tier": "upstream_structural",
+      "evidence_refs": [
+        "ability"
+      ]
+    },
+    {
+      "id": "passive-swirl-cryo-attribute-output",
+      "revision": 1,
+      "kind": "attribute_output",
+      "claim": {
+        "schema_version": 1,
+        "rule_key": "cryo",
+        "effect_id": "value",
+        "node_id": "ability",
+        "pointer": "/GPPBBDEICKP/UNIQUE_Avatar_Kazuha_PermanentSkill_2_Ice/ILKPFPGAIGI/Actor_IceAddHurtExtraDelta",
+        "raw_property": "Actor_IceAddHurtExtraDelta",
+        "benefit_type_id": "benefit.dmg_bonus.cryo",
+        "domain": "self",
+        "unit": "ratio",
+        "nonextra_inclusion": "not_applicable"
+      },
+      "evidence_tier": "upstream_structural",
+      "evidence_refs": [
+        "ability"
+      ]
+    },
+    {
+      "id": "passive-swirl-cryo-attribute-sample",
+      "revision": 1,
+      "kind": "attribute_sample",
+      "claim": {
+        "schema_version": 1,
+        "rule_key": "cryo",
+        "effect_id": "value",
+        "event": "elemental_reaction",
+        "phase": "post",
+        "sample": "trigger",
+        "subject": "owner",
+        "output_domain": "self",
+        "freeze_scope": "instance",
+        "causal_scope": "qualified_ability_reaction_callback"
+      },
+      "evidence_tier": "primary_test",
+      "evidence_refs": [
+        "ability",
+        "dynamic-sampling"
+      ]
+    },
+    {
+      "id": "passive-swirl-hydro-attribute-read",
+      "revision": 1,
+      "kind": "attribute_read",
+      "claim": {
+        "schema_version": 1,
+        "rule_key": "hydro",
+        "effect_id": "value",
+        "node_id": "ability",
+        "pointer": "/GPPBBDEICKP/UNIQUE_Avatar_Kazuha_PermanentSkill_2_Water/ILKPFPGAIGI/Actor_WaterAddHurtExtraDelta",
+        "expression_sha256": "05222d4f1367483d19353985b6ceb255b19b197983634f683573634e84806b6c",
+        "grammar": "rpn-parameter-stat-mul-v1",
+        "parameter_ref": "passive.factor",
+        "parameter_symbol": "Kazuha_PermanentSkill_2_Factor",
+        "raw_stat": "FIGHT_PROP_NONEXTRA_ELEMENT_MASTERY",
+        "stat": "em",
+        "basis": "nonextra",
+        "subject": "owner",
+        "unit": "flat"
+      },
+      "evidence_tier": "upstream_structural",
+      "evidence_refs": [
+        "ability"
+      ]
+    },
+    {
+      "id": "passive-swirl-hydro-attribute-output",
+      "revision": 1,
+      "kind": "attribute_output",
+      "claim": {
+        "schema_version": 1,
+        "rule_key": "hydro",
+        "effect_id": "value",
+        "node_id": "ability",
+        "pointer": "/GPPBBDEICKP/UNIQUE_Avatar_Kazuha_PermanentSkill_2_Water/ILKPFPGAIGI/Actor_WaterAddHurtExtraDelta",
+        "raw_property": "Actor_WaterAddHurtExtraDelta",
+        "benefit_type_id": "benefit.dmg_bonus.hydro",
+        "domain": "self",
+        "unit": "ratio",
+        "nonextra_inclusion": "not_applicable"
+      },
+      "evidence_tier": "upstream_structural",
+      "evidence_refs": [
+        "ability"
+      ]
+    },
+    {
+      "id": "passive-swirl-hydro-attribute-sample",
+      "revision": 1,
+      "kind": "attribute_sample",
+      "claim": {
+        "schema_version": 1,
+        "rule_key": "hydro",
+        "effect_id": "value",
+        "event": "elemental_reaction",
+        "phase": "post",
+        "sample": "trigger",
+        "subject": "owner",
+        "output_domain": "self",
+        "freeze_scope": "instance",
+        "causal_scope": "qualified_ability_reaction_callback"
+      },
+      "evidence_tier": "primary_test",
+      "evidence_refs": [
+        "ability",
+        "dynamic-sampling"
+      ]
+    }
+  ],
+  "reviews": {
+    "passive-swirl-cryo-attribute-read@1": {
+      "status": "approved",
+      "reviewer": "D-A/B semantic design review 2026-10-06",
+      "reviewed_at": "2026-10-06T00:00:00+08:00"
+    },
+    "passive-swirl-cryo-attribute-output@1": {
+      "status": "approved",
+      "reviewer": "D-A/B semantic design review 2026-10-06",
+      "reviewed_at": "2026-10-06T00:00:00+08:00"
+    },
+    "passive-swirl-cryo-attribute-sample@1": {
+      "status": "approved",
+      "reviewer": "D-A/B semantic design review 2026-10-06",
+      "reviewed_at": "2026-10-06T00:00:00+08:00"
+    },
+    "passive-swirl-hydro-attribute-read@1": {
+      "status": "approved",
+      "reviewer": "D-A/B semantic design review 2026-10-06",
+      "reviewed_at": "2026-10-06T00:00:00+08:00"
+    },
+    "passive-swirl-hydro-attribute-output@1": {
+      "status": "approved",
+      "reviewer": "D-A/B semantic design review 2026-10-06",
+      "reviewed_at": "2026-10-06T00:00:00+08:00"
+    },
+    "passive-swirl-hydro-attribute-sample@1": {
+      "status": "approved",
+      "reviewer": "D-A/B semantic design review 2026-10-06",
+      "reviewed_at": "2026-10-06T00:00:00+08:00"
+    }
+  },
+  "evidence": [
+    {
+      "id": "ability",
+      "kind": "runtime_node",
+      "locator": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Kazuha.json#/23/Default",
+      "sha256": "192a940a2d326f54c0e62a0fcaf46f3010c05ada65bc02add3293d13a925072b"
+    },
+    {
+      "id": "dynamic-sampling",
+      "kind": "primary_test",
+      "locator": "https://raw.githubusercontent.com/KQM-git/TCL/106c0f3f1b349df0d76297243c72cd0dc043aa01/docs/evidence/characters/anemo/kaedehara-kazuha.md#kazuhas-dynamically-changing-buff",
+      "sha256": "033df047f1761741c65171aa7889817c91658a78ac3e8de3513fbc274847d059"
+    }
+  ],
+  "semantics": {
+    "evidence_tier": "archived_primary_test_and_raw_control_graph_not_current_client_measurement",
+    "sampling": "The archived 2022-04-09 test supports refresh on each new ordinary Swirl and retention afterwards.",
+    "callback_mapping": "Raw reaction listener maps to reaction/post only with no same-proc provider EM changes; exact competing callback ordering is not certified.",
+    "attribute_basis": "Read the raw NONEXTRA token through explicit attribute-ledger-v2; initial basis and dynamic classifications require separate proof.",
+    "beneficiary_domain": "Freeze converted value per refreshed instance; self domain still obeys each recipient direct damage snapshot.",
+    "partial_scope": "Only ordinary hydro/cryo original-target branches; fire/electro/star and EM-sharing causal order remain excluded."
+  }
+}

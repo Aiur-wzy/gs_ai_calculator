@@ -1,0 +1,303 @@
+{
+  "profile_id": "ordinary-reaction-flat-team-em-reference-v1",
+  "profile_version": 2,
+  "commit": "224708edc8056f27e9ffc4eacabe797d75274636",
+  "review_status": "reviewed",
+  "review_scope": "candidate_profile_not_published",
+  "fields": {
+    "EMGBJJOIENB": "onAdded",
+    "LBABCICJBKE": "onAttackLanded",
+    "MJKPCGCAPLK": "targetPredicates",
+    "MLJNNELMEFL": "successActions",
+    "LFIJIMIMBIH": "modifierMixins",
+    "HDOJNFJLKAP": "reactionTypes",
+    "KHJMNJNEADF": "actions",
+    "OMALBHAAHHA": "range",
+    "GPPCPGHLDHL": "stacking",
+    "JOFNJODFEDG": "element"
+  },
+  "types": {
+    "PBIOEEHFHFD": "Predicated",
+    "DPNJGLIMCHM": "ByAttackTags",
+    "LEHABIJBEAO": "ByHitElement",
+    "ANDAIHHJDIB": "DoActionByElementReactionMixin"
+  },
+  "normalization_mapping_fingerprint": "e8ee19271e3d56f5d859ded3e317e9efca783de982dcf0e1468845e78ab0641a",
+  "admission": {
+    "ability": {
+      "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+      "source_sha256": "75fb6e13556ce18d5855a20eb2f5ab944091c0bf300a39e1b461dbbac0824c2a",
+      "json_pointer": "/12/Default",
+      "node_sha256": "d7696a6e8c96fbaabfe14f554163d45e6fbdb8c913a3ca9707ed2a2031d32dcd"
+    },
+    "talent": {
+      "source_path": "BinOutput/Talent/RelicTalents/ConfigAffix_Relic.json",
+      "source_sha256": "0937b29eb3f02b07aacdc02abdcf0af460ac7cb5cf951207ff626ba27b4052ba",
+      "json_pointer": "/Relic_ReactionGainExtraElemMasteryForTeam",
+      "node_sha256": "ccc35ad280f170065aa59bf2aa326bd0ca4b4c4c80b5f7b752ddd60f8ce61769"
+    },
+    "affix": {
+      "source_path": "ExcelBinOutput/EquipAffixExcelConfigData.json",
+      "source_sha256": "67cce4b66ecfae8ab20b4567005ff0e2efa76446af1fcc71d99e8a2383def4e6",
+      "json_pointer": "/1285",
+      "node_sha256": "d6c0a4808a355f843409048d92c586bce27b510abcdec29d4a318be85480e727"
+    }
+  },
+  "normalized_body_sha256": "4a838d2a8ea7f32add8277ecfb4774c0c11ea876988df518783ca7106bdd675d",
+  "normalized_operations_sha256": "dd2fd28f3522d1d200403875324b981660d7eb9f2ab685377362f1d3e08a579d",
+  "facts": {
+    "output": {
+      "status": "reviewed",
+      "value": "em_flat",
+      "scope": "this_admitted_complete_source",
+      "evidence_fingerprint": "f61805bf0938a6dbbc1ebf9792e51ca5415adab29db298fb20a77737514b1f08",
+      "raw_witnesses": [
+        {
+          "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+          "source_sha256": "75fb6e13556ce18d5855a20eb2f5ab944091c0bf300a39e1b461dbbac0824c2a",
+          "json_pointer": "/12/Default/GPPBBDEICKP/UNIQUE_ReactionGainExtraElemMasteryForTeam/ILKPFPGAIGI/Actor_ElemMasteryDelta",
+          "node_sha256": "ff972b747bf525b4d24198a7fe310523099769dd7bb9949fd6200980e6d506bd",
+          "raw": "ElemMastery"
+        }
+      ],
+      "raw_witnesses_fingerprint": "d69ea7542d6db55adcd588be8a3a786d1511f6b118ac8726e14d23dfd3c096d0"
+    },
+    "nonextra_inclusion": {
+      "status": "reviewed",
+      "value": "included",
+      "scope": "this_admitted_complete_source",
+      "evidence_fingerprint": "f61805bf0938a6dbbc1ebf9792e51ca5415adab29db298fb20a77737514b1f08",
+      "raw_witnesses": [
+        {
+          "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+          "source_sha256": "75fb6e13556ce18d5855a20eb2f5ab944091c0bf300a39e1b461dbbac0824c2a",
+          "json_pointer": "/12/Default/GPPBBDEICKP/UNIQUE_ReactionGainExtraElemMasteryForTeam/ILKPFPGAIGI/Actor_ElemMasteryDelta",
+          "node_sha256": "ff972b747bf525b4d24198a7fe310523099769dd7bb9949fd6200980e6d506bd",
+          "raw": "ElemMastery"
+        },
+        {
+          "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Sucrose.json",
+          "source_sha256": "9390909709a875f1cf8b53208468cbcb3ff6d6b59e8feec5ac7084e76132f696",
+          "json_pointer": "/18/Default/GPPBBDEICKP/UNIQUE_Avatar_Sucrose_PermanentSkill_NetherWind_Buff/ILKPFPGAIGI/Actor_ElemMasteryExtraDelta/1",
+          "node_sha256": "246e375ceafd2b9bffa8fc6078ccb76b87ae8f8734effe04c911ff767f20afdb",
+          "raw": "FIGHT_PROP_NONEXTRA_ELEMENT_MASTERY",
+          "scope": "read_token_only_not_complete_reader_execution"
+        }
+      ],
+      "raw_witnesses_fingerprint": "864cfc5a881bd525fa35a57c05536179a2df01bd3ff5de8c2fb7305e60e3a49e"
+    },
+    "trigger": {
+      "status": "reviewed",
+      "value": "frontline_original_target_reaction_provider",
+      "scope": "this_admitted_complete_source",
+      "evidence_fingerprint": "f61805bf0938a6dbbc1ebf9792e51ca5415adab29db298fb20a77737514b1f08",
+      "raw_witnesses": [
+        {
+          "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+          "source_sha256": "75fb6e13556ce18d5855a20eb2f5ab944091c0bf300a39e1b461dbbac0824c2a",
+          "json_pointer": "/12/Default/GPPBBDEICKP/UNIQUE_Relic_ReactionGainExtraElemMasteryForTeam_Handler/LFIJIMIMBIH/0/$type",
+          "node_sha256": "4d298a048fb4343351a672067d129b18ebf78770164a4acc7db65fdedbb0f6a9",
+          "raw": "ANDAIHHJDIB"
+        },
+        {
+          "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+          "source_sha256": "75fb6e13556ce18d5855a20eb2f5ab944091c0bf300a39e1b461dbbac0824c2a",
+          "json_pointer": "/12/Default/GPPBBDEICKP/UNIQUE_Relic_ReactionGainExtraElemMasteryForTeam_Handler/LFIJIMIMBIH/0/LJBBKGIFJDB",
+          "node_sha256": "aa051b52d78a07fa848ac2f801b5555111003cd61f8a542ec698be39b8de3ed2",
+          "raw": [
+            "Monster"
+          ]
+        },
+        {
+          "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+          "source_sha256": "75fb6e13556ce18d5855a20eb2f5ab944091c0bf300a39e1b461dbbac0824c2a",
+          "json_pointer": "/12/Default/GPPBBDEICKP/UNIQUE_Relic_ReactionGainExtraElemMasteryForTeam_Handler/LFIJIMIMBIH/0/KHJMNJNEADF/1/LJFIEGHHLOB",
+          "node_sha256": "fcbcf165908dd18a9e49f7ff27810176db8e9f63b4352213741664245224f8aa",
+          "raw": false
+        }
+      ],
+      "raw_witnesses_fingerprint": "f0018d3ea6944bb2f3d8d2ad8b9c803a5d6130f92f1c28b4a40005486628adda"
+    },
+    "recipients": {
+      "status": "reviewed",
+      "value": "fixed_living_party_within_source_predicate",
+      "scope": "this_admitted_complete_source",
+      "evidence_fingerprint": "f61805bf0938a6dbbc1ebf9792e51ca5415adab29db298fb20a77737514b1f08",
+      "raw_witnesses": [
+        {
+          "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+          "source_sha256": "75fb6e13556ce18d5855a20eb2f5ab944091c0bf300a39e1b461dbbac0824c2a",
+          "json_pointer": "/12/Default/GPPBBDEICKP/UNIQUE_Relic_ReactionGainExtraElemMasteryForTeam_Handler/LFIJIMIMBIH/0/KHJMNJNEADF/1/BDHBNCEEPPK",
+          "node_sha256": "7f559f44e9b70b7076818e02def5eea6c883f43a2918fab0b55b094bceb930ee",
+          "raw": "AllPlayerAvatars"
+        },
+        {
+          "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+          "source_sha256": "75fb6e13556ce18d5855a20eb2f5ab944091c0bf300a39e1b461dbbac0824c2a",
+          "json_pointer": "/12/Default/GPPBBDEICKP/UNIQUE_Relic_ReactionGainExtraElemMasteryForTeam_Handler/LFIJIMIMBIH/0/KHJMNJNEADF/1/IJDGNIIOHLM",
+          "node_sha256": "a94da0768973af6c644f1d56eff065fec553b9d3bead0d050fc1ad69a235e67a",
+          "raw": [
+            {
+              "$type": "OLNGCABMCGI",
+              "BDHBNCEEPPK": "Target",
+              "DKCBCJCHEBF": "LesserOrEqual",
+              "PDIFFCBMGMO": 40
+            }
+          ]
+        }
+      ],
+      "raw_witnesses_fingerprint": "6a32f10b243a97f21ea4c51e756906d8fe4a52f6036e18ec85ce07f1594e88e7"
+    },
+    "timing": {
+      "status": "reviewed",
+      "value": "post_parent_no_retroactive",
+      "scope": "this_admitted_complete_source",
+      "evidence_fingerprint": "f61805bf0938a6dbbc1ebf9792e51ca5415adab29db298fb20a77737514b1f08",
+      "raw_witnesses": [
+        {
+          "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+          "source_sha256": "75fb6e13556ce18d5855a20eb2f5ab944091c0bf300a39e1b461dbbac0824c2a",
+          "json_pointer": "/12/Default/GPPBBDEICKP/UNIQUE_Relic_ReactionGainExtraElemMasteryForTeam_Handler/LFIJIMIMBIH/0/$type",
+          "node_sha256": "4d298a048fb4343351a672067d129b18ebf78770164a4acc7db65fdedbb0f6a9",
+          "raw": "ANDAIHHJDIB"
+        }
+      ],
+      "raw_witnesses_fingerprint": "710135dc668c997278a6850554ecb286ec5f2c5a4c3e3a5be5b8618e5a571040"
+    },
+    "lifetime": {
+      "status": "reviewed",
+      "value": "fixed_duration_unique_refresh_after_source_leaves_field",
+      "scope": "this_admitted_complete_source",
+      "evidence_fingerprint": "f61805bf0938a6dbbc1ebf9792e51ca5415adab29db298fb20a77737514b1f08",
+      "raw_witnesses": [
+        {
+          "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+          "source_sha256": "75fb6e13556ce18d5855a20eb2f5ab944091c0bf300a39e1b461dbbac0824c2a",
+          "json_pointer": "/12/Default/GPPBBDEICKP/UNIQUE_ReactionGainExtraElemMasteryForTeam/JPEAFDFPKAN",
+          "node_sha256": "ae7dede1aff756bbfebd1da3d146eb98374042dbbb62d92f80fbb7518062278e",
+          "raw": "duration"
+        },
+        {
+          "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+          "source_sha256": "75fb6e13556ce18d5855a20eb2f5ab944091c0bf300a39e1b461dbbac0824c2a",
+          "json_pointer": "/12/Default/GPPBBDEICKP/UNIQUE_ReactionGainExtraElemMasteryForTeam/DIELNIJPCJJ",
+          "node_sha256": "b5bea41b6c623f7c09f1bf24dcae58ebab3c0cdd90ad966bc43a45b44867e12b",
+          "raw": true
+        },
+        {
+          "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+          "source_sha256": "75fb6e13556ce18d5855a20eb2f5ab944091c0bf300a39e1b461dbbac0824c2a",
+          "json_pointer": "/12/Default/GPPBBDEICKP/UNIQUE_Relic_ReactionGainExtraElemMasteryForTeam_Handler/LFIJIMIMBIH/0/KHJMNJNEADF/0",
+          "node_sha256": "095d25b637b2ad0eef798fd04237f8e718e156e611830f818228a334afbc50e8",
+          "raw": {
+            "$type": "GCINLBBPONN",
+            "AMOLMPHFPHJ": -1,
+            "BDHBNCEEPPK": "AllPlayerAvatars",
+            "IJDGNIIOHLM": [
+              {
+                "$type": "OLNGCABMCGI",
+                "BDHBNCEEPPK": "Target",
+                "DKCBCJCHEBF": "LesserOrEqual",
+                "PDIFFCBMGMO": 40
+              }
+            ],
+            "ILELAOFJIKJ": true,
+            "LDFBDMNIADI": "UNIQUE_ReactionGainExtraElemMasteryForTeam",
+            "LJFIEGHHLOB": false
+          }
+        }
+      ],
+      "raw_witnesses_fingerprint": "568adacdcc3ca63e478898af44a101b37e251e576c0ec4e46c45d847ddd8defe"
+    },
+    "attachment": {
+      "status": "reviewed",
+      "value": "RemoveUniqueModifier_then_AttachModifier",
+      "scope": "this_admitted_complete_source",
+      "evidence_fingerprint": "f61805bf0938a6dbbc1ebf9792e51ca5415adab29db298fb20a77737514b1f08",
+      "raw_witnesses": [
+        {
+          "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+          "source_sha256": "75fb6e13556ce18d5855a20eb2f5ab944091c0bf300a39e1b461dbbac0824c2a",
+          "json_pointer": "/12/Default/GPPBBDEICKP/UNIQUE_Relic_ReactionGainExtraElemMasteryForTeam_Handler/LFIJIMIMBIH/0/KHJMNJNEADF/0",
+          "node_sha256": "095d25b637b2ad0eef798fd04237f8e718e156e611830f818228a334afbc50e8",
+          "raw": {
+            "$type": "GCINLBBPONN",
+            "AMOLMPHFPHJ": -1,
+            "BDHBNCEEPPK": "AllPlayerAvatars",
+            "IJDGNIIOHLM": [
+              {
+                "$type": "OLNGCABMCGI",
+                "BDHBNCEEPPK": "Target",
+                "DKCBCJCHEBF": "LesserOrEqual",
+                "PDIFFCBMGMO": 40
+              }
+            ],
+            "ILELAOFJIKJ": true,
+            "LDFBDMNIADI": "UNIQUE_ReactionGainExtraElemMasteryForTeam",
+            "LJFIEGHHLOB": false
+          }
+        },
+        {
+          "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+          "source_sha256": "75fb6e13556ce18d5855a20eb2f5ab944091c0bf300a39e1b461dbbac0824c2a",
+          "json_pointer": "/12/Default/GPPBBDEICKP/UNIQUE_Relic_ReactionGainExtraElemMasteryForTeam_Handler/LFIJIMIMBIH/0/KHJMNJNEADF/1",
+          "node_sha256": "922abc468dc4f678b2b39b41fa08461a7f417b1fd2860f4fe939f98f075ca43d",
+          "raw": {
+            "$type": "CDANEAFAFKM",
+            "AMOLMPHFPHJ": -1,
+            "BDHBNCEEPPK": "AllPlayerAvatars",
+            "IJDGNIIOHLM": [
+              {
+                "$type": "OLNGCABMCGI",
+                "BDHBNCEEPPK": "Target",
+                "DKCBCJCHEBF": "LesserOrEqual",
+                "PDIFFCBMGMO": 40
+              }
+            ],
+            "ILELAOFJIKJ": true,
+            "LDFBDMNIADI": "UNIQUE_ReactionGainExtraElemMasteryForTeam",
+            "LJFIEGHHLOB": false
+          }
+        }
+      ],
+      "raw_witnesses_fingerprint": "0c0b64bbba0faa52ecbe15e6caf717027c00e4e5617c6e214a37e4417f4080bf"
+    }
+  },
+  "evidence": {
+    "c3-kqm-artifacts-pinned.md": {
+      "sha256": "d9358cf7d4540578c9ecb0801d3c8cc652e06f991be1d815122884efebb40e4b"
+    },
+    "c3-kqm-sucrose-pinned.md": {
+      "sha256": "424353f94cda488aa94ecc00f1c95ac7d03e31e58887b338b6fc022f5a8a3116"
+    },
+    "c3-cross-commit-check.json": {
+      "sha256": "8ec37e745436e5cd281896a416af1d114baaef9247cf11bfaf319d741ac7a68a"
+    }
+  },
+  "parent_evidence": [
+    {
+      "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+      "source_sha256": "75fb6e13556ce18d5855a20eb2f5ab944091c0bf300a39e1b461dbbac0824c2a",
+      "json_pointer": "/12",
+      "node_sha256": "d228d3490b7269b87b1bf801a515597440185884c34111689ffaa62b6cc1069a",
+      "snapshot_id": "ef0cac22b5cc4ee887fa64d134b563ffc745ae365b0c6cdb03930f895ab413df",
+      "upstream_commit": "224708edc8056f27e9ffc4eacabe797d75274636"
+    },
+    {
+      "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Sucrose.json",
+      "source_sha256": "9390909709a875f1cf8b53208468cbcb3ff6d6b59e8feec5ac7084e76132f696",
+      "json_pointer": "/18",
+      "node_sha256": "eda1b646bd2849873e23f47f2fd616ecdb911472366d43c8ec950b6fdbc17681",
+      "snapshot_id": "ef0cac22b5cc4ee887fa64d134b563ffc745ae365b0c6cdb03930f895ab413df",
+      "upstream_commit": "224708edc8056f27e9ffc4eacabe797d75274636"
+    },
+    {
+      "source_path": "ExcelBinOutput/ReliquarySetExcelConfigData.json",
+      "source_sha256": "36a1ff1362ecbf2603adcd406787d1863d55c784e181c7905ddeaf5aefe6a02b",
+      "json_pointer": "/6",
+      "node_sha256": "b6b45942949217259dfec0f17c3a8d09f7077f9113ebceea05e7c22a95c40bb1",
+      "snapshot_id": "ef0cac22b5cc4ee887fa64d134b563ffc745ae365b0c6cdb03930f895ab413df",
+      "upstream_commit": "224708edc8056f27e9ffc4eacabe797d75274636"
+    }
+  ]
+}

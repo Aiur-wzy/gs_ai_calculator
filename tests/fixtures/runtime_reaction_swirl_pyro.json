@@ -1,0 +1,474 @@
+{
+  "Default": {
+    "ECFFDLHMCLK": [
+      {
+        "$type": "KKKOBMBLEDP",
+        "AMOLMPHFPHJ": -1,
+        "BDHBNCEEPPK": "Target",
+        "IJDGNIIOHLM": [
+          {
+            "$type": "MMPLBPOHMGL",
+            "BDHBNCEEPPK": "Team",
+            "NJJFOACNFGL": "NoneOrEqual",
+            "PEELJBICEHE": "_IS_SWRIL_FIRE_ALTER"
+          },
+          {
+            "$type": "GMLKPHCEPIJ",
+            "BDHBNCEEPPK": "Target",
+            "IJDGNIIOHLM": [
+              {
+                "$type": "BKCJECHCDKG",
+                "BDHBNCEEPPK": "Target",
+                "FJGEDPNBGCG": -1,
+                "LJBBKGIFJDB": [
+                  "Grass",
+                  "Water"
+                ]
+              }
+            ]
+          }
+        ],
+        "ILELAOFJIKJ": true,
+        "LDFBDMNIADI": "Swirl_Fire",
+        "LJFIEGHHLOB": false
+      },
+      {
+        "$type": "KKKOBMBLEDP",
+        "AMOLMPHFPHJ": -1,
+        "BDHBNCEEPPK": "Target",
+        "IJDGNIIOHLM": [
+          {
+            "$type": "MMPLBPOHMGL",
+            "BDHBNCEEPPK": "Team",
+            "PDIFFCBMGMO": 1,
+            "PEELJBICEHE": "_IS_SWRIL_FIRE_ALTER"
+          },
+          {
+            "$type": "GMLKPHCEPIJ",
+            "BDHBNCEEPPK": "Target",
+            "IJDGNIIOHLM": [
+              {
+                "$type": "BKCJECHCDKG",
+                "BDHBNCEEPPK": "Target",
+                "FJGEDPNBGCG": -1,
+                "LJBBKGIFJDB": [
+                  "Grass",
+                  "Water"
+                ]
+              }
+            ]
+          }
+        ],
+        "ILELAOFJIKJ": true,
+        "LDFBDMNIADI": "Swirl_Fire_Alter",
+        "LJFIEGHHLOB": false
+      }
+    ],
+    "GPPBBDEICKP": {
+      "Swirl_Fire": {
+        "DBGOKAKAHFP": 100,
+        "DOALDLPNGMF": -1,
+        "EMGBJJOIENB": [
+          {
+            "$type": "MOOAODKIBCM",
+            "AMOLMPHFPHJ": -1,
+            "BEIMGAKABJN": "Eff_Element_Swirl_Fire",
+            "HJIHBAANFLE": 1,
+            "ILELAOFJIKJ": true,
+            "JMMALEJDAEF": -1,
+            "LJFIEGHHLOB": false,
+            "MLFLDPAGADG": {
+              "$type": "KLOKLNFANBP",
+              "EEFLHEKBODJ": {
+                "BNJLEBLGEKB": 180
+              },
+              "GNFICELAKIB": 10,
+              "HECMDGIAGKM": 2,
+              "POPNBJAHNFK": {
+                "ONEHKOHOCBH": 180
+              }
+            }
+          },
+          {
+            "$type": "MMHMEBEEKGK",
+            "AMOLMPHFPHJ": -1,
+            "BDHBNCEEPPK": "Applier",
+            "IDCIIIFMDCM": {
+              "CEIJEFJBMBL": {
+                "$type": "FKADOLEBLHD",
+                "BKCIBHHMGEE": 6,
+                "COBJECNAEOG": 1,
+                "EAJAHKDHNJM": {
+                  "GMEKLJBJADO": {
+                    "KJCBAFKFFMP": 1,
+                    "PGPNDGBABNI": true
+                  }
+                },
+                "EHFMPIOJOLN": "TriggerNoRepeat",
+                "MKJEILCMLBH": true,
+                "MLFLDPAGADG": {
+                  "$type": "KLOKLNFANBP",
+                  "EEFLHEKBODJ": {
+                    "BNJLEBLGEKB": 180
+                  },
+                  "GNFICELAKIB": 10,
+                  "HECMDGIAGKM": 2,
+                  "POPNBJAHNFK": {
+                    "ONEHKOHOCBH": 180
+                  }
+                }
+              },
+              "LGHDGGJIJOK": {
+                "BKLFAECNFOF": {
+                  "EIAGIEDFLHJ": {
+                    "KJCBAFKFFMP": 1,
+                    "PGPNDGBABNI": true
+                  },
+                  "IHBPFOBEJKN": "default"
+                },
+                "EHKJIDFINEK": {
+                  "DBGOKAKAHFP": [
+                    "Swirl_Durability",
+                    1.25,
+                    "MUL",
+                    25,
+                    "ADD"
+                  ],
+                  "EMILGODPBIG": [
+                    "ElementAbility_Swirl_Fire_BaseReactionDamage",
+                    "Swirl_Fire_Damage_Factor",
+                    "MUL"
+                  ],
+                  "EPPIDAILPBN": "Fire",
+                  "FBAEEIPKEHO": 30,
+                  "JDOLIAEMINM": 1,
+                  "MKFHLNAHKDI": true,
+                  "PEPDKCDHNIM": "Default"
+                },
+                "FHNDLIJJDEA": "Swirl_FireDamage",
+                "HDIFFKOHDNL": {
+                  "OGGEIBICAHC": "Shake"
+                },
+                "HGLEEJNPBEB": "ElementReaction_Damage_Attenuation_1",
+                "IAFHAPFBBOB": "Swirl_FireDamage",
+                "IJFOFLPPGHK": {
+                  "EANBEIIKCIL": {
+                    "BGINHMBLECN": 0.11999999731779099,
+                    "HMANOMCGFLK": true,
+                    "KBAIICCLOEF": 0.5,
+                    "PJGAOELGLIF": 0.11999999731779099
+                  },
+                  "KDBKDJBCACN": 20
+                },
+                "NMMJKLAHOHH": {
+                  "ANBHPFEONOL": 0.05000000074505806,
+                  "EIAGIEDFLHJ": {
+                    "KJCBAFKFFMP": 1,
+                    "PGPNDGBABNI": true
+                  },
+                  "IHBPFOBEJKN": "default",
+                  "PAPNKKIKAOC": "LV1"
+                }
+              }
+            },
+            "ILELAOFJIKJ": true,
+            "LJFIEGHHLOB": false,
+            "NMKBOEALDEF": "Enemy"
+          },
+          {
+            "$type": "CODEHPJKBAM",
+            "AMOLMPHFPHJ": -1,
+            "IJDGNIIOHLM": [
+              {
+                "$type": "HBMAFPHCHDB",
+                "BBGMLDFBFFH": "Enemy",
+                "BDHBNCEEPPK": "Target",
+                "HMKPLHNHDLB": "Applier"
+              }
+            ],
+            "ILELAOFJIKJ": true,
+            "LGHDGGJIJOK": {
+              "BKLFAECNFOF": {
+                "EIAGIEDFLHJ": {
+                  "KJCBAFKFFMP": 1,
+                  "PGPNDGBABNI": true
+                },
+                "IHBPFOBEJKN": "default"
+              },
+              "EHKJIDFINEK": {
+                "EMILGODPBIG": [
+                  "ElementAbility_Swirl_Fire_BaseReactionDamage",
+                  "Swirl_Fire_Damage_Factor",
+                  "MUL"
+                ],
+                "EPPIDAILPBN": "Fire",
+                "FBAEEIPKEHO": 130,
+                "JDOLIAEMINM": 1,
+                "MKFHLNAHKDI": true,
+                "PEPDKCDHNIM": "Default"
+              },
+              "FHNDLIJJDEA": "Swirl_FireDamage",
+              "HDIFFKOHDNL": {
+                "OGGEIBICAHC": "Shake"
+              },
+              "HGLEEJNPBEB": "ElementReaction_Damage_Attenuation_1",
+              "IAFHAPFBBOB": "Self_Swirl_FireDamage",
+              "IJFOFLPPGHK": {
+                "EANBEIIKCIL": {
+                  "BGINHMBLECN": 0.11999999731779099,
+                  "HMANOMCGFLK": true,
+                  "KBAIICCLOEF": 0.5,
+                  "PJGAOELGLIF": 0.11999999731779099
+                },
+                "KDBKDJBCACN": 20
+              },
+              "NMMJKLAHOHH": {
+                "ANBHPFEONOL": 0.05000000074505806,
+                "EIAGIEDFLHJ": {
+                  "KJCBAFKFFMP": 1,
+                  "PGPNDGBABNI": true
+                },
+                "IHBPFOBEJKN": "default",
+                "PAPNKKIKAOC": "LV1"
+              }
+            },
+            "LJFIEGHHLOB": false,
+            "MLFLDPAGADG": {
+              "$type": "LFADEGOIHMK",
+              "EEFLHEKBODJ": {
+                "BNJLEBLGEKB": 180
+              },
+              "GMDPALPODJP": "RootNode",
+              "GNFICELAKIB": 10,
+              "HECMDGIAGKM": 2,
+              "POPNBJAHNFK": {
+                "ONEHKOHOCBH": 180
+              }
+            }
+          }
+        ],
+        "JPEAFDFPKAN": 0.10000000149011612,
+        "KFOMCJGGPPC": -1,
+        "LFIJIMIMBIH": [
+          {
+            "$type": "FOPHOEOKIFI",
+            "AMOLMPHFPHJ": -1,
+            "IAFHAPFBBOB": "Swirl_FireDamage",
+            "IELLPMKLAIO": "RejectAll",
+            "NNIMBKJLFNL": 0.009999999776482582
+          }
+        ],
+        "PPKOPMBNPJH": true
+      },
+      "Swirl_Fire_Alter": {
+        "DBGOKAKAHFP": 100,
+        "DOALDLPNGMF": -1,
+        "EMGBJJOIENB": [
+          {
+            "$type": "MOOAODKIBCM",
+            "AMOLMPHFPHJ": -1,
+            "BEIMGAKABJN": "Eff_Element_Swirl_Fire_Alter",
+            "HJIHBAANFLE": 1,
+            "ILELAOFJIKJ": true,
+            "JMMALEJDAEF": -1,
+            "LJFIEGHHLOB": false,
+            "MLFLDPAGADG": {
+              "$type": "KLOKLNFANBP",
+              "EEFLHEKBODJ": {
+                "BNJLEBLGEKB": 180
+              },
+              "GNFICELAKIB": 10,
+              "HECMDGIAGKM": 2,
+              "POPNBJAHNFK": {
+                "ONEHKOHOCBH": 180
+              }
+            }
+          },
+          {
+            "$type": "MMHMEBEEKGK",
+            "AMOLMPHFPHJ": -1,
+            "BDHBNCEEPPK": "Applier",
+            "IDCIIIFMDCM": {
+              "CEIJEFJBMBL": {
+                "$type": "FKADOLEBLHD",
+                "BKCIBHHMGEE": 12,
+                "COBJECNAEOG": 1,
+                "EAJAHKDHNJM": {
+                  "GMEKLJBJADO": {
+                    "KJCBAFKFFMP": 1,
+                    "PGPNDGBABNI": true
+                  }
+                },
+                "EHFMPIOJOLN": "TriggerNoRepeat",
+                "MKJEILCMLBH": true,
+                "MLFLDPAGADG": {
+                  "$type": "KLOKLNFANBP",
+                  "EEFLHEKBODJ": {
+                    "BNJLEBLGEKB": 180
+                  },
+                  "GNFICELAKIB": 10,
+                  "HECMDGIAGKM": 2,
+                  "POPNBJAHNFK": {
+                    "ONEHKOHOCBH": 180
+                  }
+                }
+              },
+              "LGHDGGJIJOK": {
+                "BKLFAECNFOF": {
+                  "EIAGIEDFLHJ": {
+                    "KJCBAFKFFMP": 1,
+                    "PGPNDGBABNI": true
+                  },
+                  "IHBPFOBEJKN": "default"
+                },
+                "EHKJIDFINEK": {
+                  "DBGOKAKAHFP": [
+                    "Swirl_Durability",
+                    1.25,
+                    "MUL",
+                    25,
+                    "ADD"
+                  ],
+                  "EMILGODPBIG": [
+                    "ElementAbility_Swirl_Fire_BaseReactionDamage",
+                    "Swirl_Fire_Alter_Damage_Factor",
+                    "MUL"
+                  ],
+                  "EPPIDAILPBN": "Fire",
+                  "FBAEEIPKEHO": 30,
+                  "JDOLIAEMINM": 1,
+                  "MKFHLNAHKDI": true,
+                  "PEPDKCDHNIM": "Default"
+                },
+                "FHNDLIJJDEA": "Swirl_FireDamage",
+                "HDIFFKOHDNL": {
+                  "OGGEIBICAHC": "Shake"
+                },
+                "HGLEEJNPBEB": "ElementReaction_Damage_Attenuation_1",
+                "IAFHAPFBBOB": "Swirl_FireDamage",
+                "IJFOFLPPGHK": {
+                  "EANBEIIKCIL": {
+                    "BGINHMBLECN": 0.11999999731779099,
+                    "HMANOMCGFLK": true,
+                    "KBAIICCLOEF": 0.5,
+                    "PJGAOELGLIF": 0.11999999731779099
+                  },
+                  "KDBKDJBCACN": 20
+                },
+                "NMMJKLAHOHH": {
+                  "ANBHPFEONOL": 0.05000000074505806,
+                  "EIAGIEDFLHJ": {
+                    "KJCBAFKFFMP": 1,
+                    "PGPNDGBABNI": true
+                  },
+                  "IHBPFOBEJKN": "default",
+                  "PAPNKKIKAOC": "LV1"
+                }
+              }
+            },
+            "ILELAOFJIKJ": true,
+            "LJFIEGHHLOB": false,
+            "NMKBOEALDEF": "Enemy"
+          },
+          {
+            "$type": "CODEHPJKBAM",
+            "AMOLMPHFPHJ": -1,
+            "IJDGNIIOHLM": [
+              {
+                "$type": "HBMAFPHCHDB",
+                "BBGMLDFBFFH": "Enemy",
+                "BDHBNCEEPPK": "Target",
+                "HMKPLHNHDLB": "Applier"
+              }
+            ],
+            "ILELAOFJIKJ": true,
+            "LGHDGGJIJOK": {
+              "BKLFAECNFOF": {
+                "EIAGIEDFLHJ": {
+                  "KJCBAFKFFMP": 1,
+                  "PGPNDGBABNI": true
+                },
+                "IHBPFOBEJKN": "default"
+              },
+              "EHKJIDFINEK": {
+                "EMILGODPBIG": [
+                  "ElementAbility_Swirl_Fire_BaseReactionDamage",
+                  "Swirl_Fire_Alter_Damage_Factor",
+                  "MUL"
+                ],
+                "EPPIDAILPBN": "Fire",
+                "FBAEEIPKEHO": 130,
+                "JDOLIAEMINM": 1,
+                "MKFHLNAHKDI": true,
+                "PEPDKCDHNIM": "Default"
+              },
+              "FHNDLIJJDEA": "Swirl_FireDamage",
+              "HDIFFKOHDNL": {
+                "OGGEIBICAHC": "Shake"
+              },
+              "HGLEEJNPBEB": "ElementReaction_Damage_Attenuation_1",
+              "IAFHAPFBBOB": "Self_Swirl_FireDamage",
+              "IJFOFLPPGHK": {
+                "EANBEIIKCIL": {
+                  "BGINHMBLECN": 0.11999999731779099,
+                  "HMANOMCGFLK": true,
+                  "KBAIICCLOEF": 0.5,
+                  "PJGAOELGLIF": 0.11999999731779099
+                },
+                "KDBKDJBCACN": 20
+              },
+              "NMMJKLAHOHH": {
+                "ANBHPFEONOL": 0.05000000074505806,
+                "EIAGIEDFLHJ": {
+                  "KJCBAFKFFMP": 1,
+                  "PGPNDGBABNI": true
+                },
+                "IHBPFOBEJKN": "default",
+                "PAPNKKIKAOC": "LV1"
+              }
+            },
+            "LJFIEGHHLOB": false,
+            "MLFLDPAGADG": {
+              "$type": "LFADEGOIHMK",
+              "EEFLHEKBODJ": {
+                "BNJLEBLGEKB": 180
+              },
+              "GMDPALPODJP": "RootNode",
+              "GNFICELAKIB": 10,
+              "HECMDGIAGKM": 2,
+              "POPNBJAHNFK": {
+                "ONEHKOHOCBH": 180
+              }
+            }
+          }
+        ],
+        "JPEAFDFPKAN": 0.10000000149011612,
+        "KFOMCJGGPPC": -1,
+        "LFIJIMIMBIH": [
+          {
+            "$type": "FOPHOEOKIFI",
+            "AMOLMPHFPHJ": -1,
+            "IAFHAPFBBOB": "Swirl_FireDamage",
+            "IELLPMKLAIO": "RejectAll",
+            "NNIMBKJLFNL": 0.009999999776482582
+          }
+        ],
+        "PPKOPMBNPJH": true
+      }
+    },
+    "IIBMNPFLNMJ": "ElementAbility_Swirl_Fire",
+    "LOEHLJGBGAC": {
+      "ElementAbility_Swirl_Fire_BaseReactionDamage": 0,
+      "Swirl_Durability": 1,
+      "Swirl_Fire_Alter_Damage_Factor": 2.4000000953674316,
+      "Swirl_Fire_Damage_Factor": 0.6000000238418579
+    },
+    "OMAIGDMCJBO": {
+      "DBGOKAKAHFP": 100,
+      "DOALDLPNGMF": -1,
+      "KFOMCJGGPPC": -1,
+      "PPKOPMBNPJH": true
+    },
+    "PODJJJHGAMO": true
+  }
+}

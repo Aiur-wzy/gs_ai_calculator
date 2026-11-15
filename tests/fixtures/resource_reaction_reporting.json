@@ -1,0 +1,978 @@
+{
+  "sources": {
+    "ordinary-swirl-income": {
+      "path": "outputs\\engine-automation-20261006\\elemental-design\\reaction-resource-design\\queue-candidate\\actual-verification-r2\\ordinary-swirl-income.output.json",
+      "sha256": "a554cde811c4148b40e6f42e9209b8424a8941b579f5ff99989d4d99eb1a080d",
+      "scope": "readonly selected result sections; no recomputation or new game evidence"
+    },
+    "actual-selector-no-match": {
+      "path": "outputs\\engine-automation-20261006\\elemental-design\\reaction-resource-design\\queue-candidate\\actual-verification-r2\\actual-selector-no-match.output.json",
+      "sha256": "e6c2653ce7ae0472baf139f34ce5c3560f19a01ceb3e14e8fa004ca9167f45bb",
+      "scope": "readonly selected result sections; no recomputation or new game evidence"
+    },
+    "complete-zero-reaction": {
+      "path": "outputs\\engine-automation-20261006\\elemental-design\\reaction-resource-design\\queue-candidate\\actual-verification-r2\\complete-zero-reaction.output.json",
+      "sha256": "11ba9f4b561e484de934401a558428097ecc61bfd224a17d6e4af85931de398d",
+      "scope": "readonly selected result sections; no recomputation or new game evidence"
+    }
+  },
+  "cases": {
+    "ordinary-swirl-income": {
+      "resource_reactions": {
+        "contract": "ordinary-reaction-resource-v1",
+        "program_fingerprint": "0a950fab6e5a9d89df860fd3c26de701ee109d3168fff4a7c180cdb2afa4455f",
+        "execution": "mechanics_event_queue",
+        "source_authority": "caller_assumed",
+        "verification_scope": "actual_runtime_occurrence_consistency_no_new_source_authority",
+        "occurrences": [
+          {
+            "parent_event_id": "h0",
+            "parent_run_id": "0:h0",
+            "reaction_event_id": "h0:reaction:0",
+            "reaction_run_id": "0:h0:reaction:0",
+            "origin": 0,
+            "time_us": 200000,
+            "target_id": "enemy",
+            "owner": "a",
+            "frontline": "a",
+            "reaction_type": "swirl",
+            "trigger_element": "anemo",
+            "aura_element": "pyro",
+            "application_fingerprint": "933847cdb3109020da68a46f3f279b84947755b2557bf08c46d3ee60e7d443be",
+            "reaction_fingerprint": "1c7f4b59efaa362dddb6e0b7470aea1038755c6accbc8f76074639f5f6d96fa0",
+            "parent_fingerprint": "0f7dcd624ddf13556d7d2d15434f845ad4abb4758bcc6360def4e4e68fffa6ab",
+            "id": 0,
+            "resource_scan_complete": true,
+            "callback_complete": true
+          },
+          {
+            "parent_event_id": "h1",
+            "parent_run_id": "0:h1",
+            "reaction_event_id": "h1:reaction:0",
+            "reaction_run_id": "0:h1:reaction:0",
+            "origin": 0,
+            "time_us": 300000,
+            "target_id": "enemy",
+            "owner": "a",
+            "frontline": "a",
+            "reaction_type": "swirl",
+            "trigger_element": "anemo",
+            "aura_element": "pyro",
+            "application_fingerprint": "d1d1bdfd22e04bc1b94796e9fcf2a7cde06f94b58fcba88830bf40fa050fb3e0",
+            "reaction_fingerprint": "13ae5fb05e301db1de95d88c42a8a4096173cdb5259bb5413430bef2a5a6b373",
+            "parent_fingerprint": "d4ac7501dd04560b876a6f4e7af04ba7589642b176def5673576b7d3c6a59c7b",
+            "id": 1,
+            "resource_scan_complete": true,
+            "callback_complete": true
+          },
+          {
+            "parent_event_id": "h2",
+            "parent_run_id": "0:h2",
+            "reaction_event_id": "h2:reaction:0",
+            "reaction_run_id": "0:h2:reaction:0",
+            "origin": 0,
+            "time_us": 400000,
+            "target_id": "enemy",
+            "owner": "a",
+            "frontline": "a",
+            "reaction_type": "swirl",
+            "trigger_element": "anemo",
+            "aura_element": "pyro",
+            "application_fingerprint": "6a544d12e43b443ee8ff431d3058555d6c121422b223aa66bbb0ecc2ba8a4f16",
+            "reaction_fingerprint": "d2c4a43b7de3c3cb0f19d2e7ea639d4a131a739efdae2cf87b30e8fd351127f8",
+            "parent_fingerprint": "0449cf35a30a9dc53dc162c18196ca6c433d0fda47eee13fef2b77a8674c4921",
+            "id": 2,
+            "resource_scan_complete": true,
+            "callback_complete": true
+          }
+        ],
+        "operations": [
+          {
+            "id": 0,
+            "occurrence_id": 0,
+            "operation_id": "refill",
+            "pool_id": "pool",
+            "source_id": "binding:refill",
+            "source_owner": "a",
+            "keys": [
+              "team"
+            ],
+            "decision": "match",
+            "state": "committed",
+            "ledger_begin": 1,
+            "actual_end": 2,
+            "expected_count": 1,
+            "failure_class": null
+          },
+          {
+            "id": 1,
+            "occurrence_id": 1,
+            "operation_id": "refill",
+            "pool_id": "pool",
+            "source_id": "binding:refill",
+            "source_owner": "a",
+            "keys": [
+              "team"
+            ],
+            "decision": "match",
+            "state": "committed",
+            "ledger_begin": 3,
+            "actual_end": 4,
+            "expected_count": 1,
+            "failure_class": null
+          },
+          {
+            "id": 2,
+            "occurrence_id": 2,
+            "operation_id": "refill",
+            "pool_id": "pool",
+            "source_id": "binding:refill",
+            "source_owner": "a",
+            "keys": [
+              "team"
+            ],
+            "decision": "match",
+            "state": "committed",
+            "ledger_begin": 5,
+            "actual_end": 6,
+            "expected_count": 1,
+            "failure_class": null
+          }
+        ],
+        "termination": null,
+        "usage": {
+          "work_consumed": 10003,
+          "verification_work_reserved": 0,
+          "catalog_bytes_reserved": 20196,
+          "slots": 6
+        },
+        "program": {
+          "contract": "ordinary-reaction-resource-v1",
+          "characters": [
+            "a"
+          ],
+          "operations": [
+            {
+              "id": "refill",
+              "pool_id": "pool",
+              "source_id": "binding:refill",
+              "source_owner": "a",
+              "keys": [
+                "team"
+              ],
+              "operation": {
+                "id": "refill",
+                "pool_id": "pool",
+                "source_id": "binding:refill",
+                "trigger": {
+                  "event": "elemental_reaction",
+                  "phase": "post",
+                  "reaction_types": [
+                    "swirl"
+                  ]
+                },
+                "order": 0,
+                "operation": "grant",
+                "amount": 3,
+                "targets": {
+                  "mode": "all_pool_keys"
+                },
+                "cooldown": {
+                  "seconds": 0,
+                  "anchor": "success"
+                },
+                "status": "assumed",
+                "source": "合成工程资料"
+              },
+              "pool": {
+                "id": "pool",
+                "name_zh": "共享池",
+                "owner": "a",
+                "source_id": "binding:pool",
+                "scope": "team",
+                "capacity": 20,
+                "initial": {
+                  "team": 0
+                },
+                "status": "assumed",
+                "source": "合成工程资料"
+              },
+              "selector": {
+                "event": "elemental_reaction",
+                "phase": "post",
+                "reaction_types": [
+                  "swirl"
+                ],
+                "owner_presence": "any"
+              }
+            }
+          ],
+          "source_authority": "not_evaluated",
+          "execution": "not_connected",
+          "verification_scope": "declared_configuration_consistency_only",
+          "program_fingerprint": "0a950fab6e5a9d89df860fd3c26de701ee109d3168fff4a7c180cdb2afa4455f"
+        },
+        "verification_status": "verified",
+        "verification": {
+          "status": "verified",
+          "scope": "stored_occurrence_consistency_no_source_authority",
+          "actual_reactions": 3,
+          "audit_occurrences": 3,
+          "audited_operations": 3,
+          "committed_resource_receipts": 3
+        },
+        "verification_issue": null,
+        "execution_status": "unproven",
+        "verified_window": "complete_reported_input"
+      },
+      "shared_pools": {
+        "schema_version": 1,
+        "scope": "declared_shared_integer_pools",
+        "state": {
+          "balances": {
+            "pool": {
+              "team": 7
+            }
+          },
+          "cooldown_remaining_us": {
+            "refill": 0
+          }
+        },
+        "trace": [
+          {
+            "id": "pool:df0def21434b33a50d93ec46ada2c09f51ee7765f7c51c8ae8a97fb7a8cbcc6d",
+            "type": "consume",
+            "pool_id": "pool",
+            "source_id": "binding:benefit",
+            "consumer_id": "consumer",
+            "event_id": "h0",
+            "run_id": "0:h0",
+            "t_us": 200000,
+            "phase": "pre",
+            "key": "team",
+            "before": 0,
+            "requested": 1,
+            "accepted": 0,
+            "after": 0,
+            "delta": 0,
+            "reason": "insufficient",
+            "qualification_scope": "engine_declared_event",
+            "actor": "a",
+            "qualified": true,
+            "gate_open": false,
+            "cycle": 0,
+            "t": 0.2,
+            "eligible_instance_ids": [
+              "benefit:0:cast"
+            ],
+            "eligibility_reason": "eligible"
+          },
+          {
+            "id": "pool:b485be64333508a486b0c5fb846e01fea4e82280018a7c4304226dd07284661b",
+            "type": "operation",
+            "pool_id": "pool",
+            "source_id": "binding:refill",
+            "operation_id": "refill",
+            "event_id": "h0:reaction:0",
+            "run_id": "0:h0:reaction:0",
+            "t_us": 200000,
+            "phase": "post",
+            "key": "team",
+            "before": 0,
+            "requested": 3,
+            "accepted": 3,
+            "after": 3,
+            "delta": 3,
+            "reason": "granted",
+            "qualification_scope": "engine_declared_event",
+            "wasted": 0,
+            "qualified": true,
+            "succeeded": true,
+            "operation": "grant",
+            "cooldown_until_us": 200000,
+            "cycle": 0,
+            "t": 0.2
+          },
+          {
+            "id": "pool:65eb83c270d0eb9eacf47fa827dd5df7656c5634067f6e93c6395297cb4b6689",
+            "type": "consume",
+            "pool_id": "pool",
+            "source_id": "binding:benefit",
+            "consumer_id": "consumer",
+            "event_id": "h1",
+            "run_id": "0:h1",
+            "t_us": 300000,
+            "phase": "pre",
+            "key": "team",
+            "before": 3,
+            "requested": 1,
+            "accepted": 1,
+            "after": 2,
+            "delta": -1,
+            "reason": "consumed",
+            "qualification_scope": "engine_declared_event",
+            "actor": "a",
+            "qualified": true,
+            "gate_open": true,
+            "cycle": 0,
+            "t": 0.3,
+            "eligible_instance_ids": [
+              "benefit:0:cast"
+            ],
+            "eligibility_reason": "eligible"
+          },
+          {
+            "id": "pool:fd1f775a68770625cf3809a8e6a6f1bc51706238886a5a29408c634e10838ce3",
+            "type": "operation",
+            "pool_id": "pool",
+            "source_id": "binding:refill",
+            "operation_id": "refill",
+            "event_id": "h1:reaction:0",
+            "run_id": "0:h1:reaction:0",
+            "t_us": 300000,
+            "phase": "post",
+            "key": "team",
+            "before": 2,
+            "requested": 3,
+            "accepted": 3,
+            "after": 5,
+            "delta": 3,
+            "reason": "granted",
+            "qualification_scope": "engine_declared_event",
+            "wasted": 0,
+            "qualified": true,
+            "succeeded": true,
+            "operation": "grant",
+            "cooldown_until_us": 300000,
+            "cycle": 0,
+            "t": 0.3
+          },
+          {
+            "id": "pool:cbd9d7f4802a7592e9d3694f8bbdde5c906a64f8863e0c16b7b048985a51a939",
+            "type": "consume",
+            "pool_id": "pool",
+            "source_id": "binding:benefit",
+            "consumer_id": "consumer",
+            "event_id": "h2",
+            "run_id": "0:h2",
+            "t_us": 400000,
+            "phase": "pre",
+            "key": "team",
+            "before": 5,
+            "requested": 1,
+            "accepted": 1,
+            "after": 4,
+            "delta": -1,
+            "reason": "consumed",
+            "qualification_scope": "engine_declared_event",
+            "actor": "a",
+            "qualified": true,
+            "gate_open": true,
+            "cycle": 0,
+            "t": 0.4,
+            "eligible_instance_ids": [
+              "benefit:0:cast"
+            ],
+            "eligibility_reason": "eligible"
+          },
+          {
+            "id": "pool:dee36810b93a153e60efa05266e9b6fac7cd5f2cf7d969cc8c1612d08fea6eb9",
+            "type": "operation",
+            "pool_id": "pool",
+            "source_id": "binding:refill",
+            "operation_id": "refill",
+            "event_id": "h2:reaction:0",
+            "run_id": "0:h2:reaction:0",
+            "t_us": 400000,
+            "phase": "post",
+            "key": "team",
+            "before": 4,
+            "requested": 3,
+            "accepted": 3,
+            "after": 7,
+            "delta": 3,
+            "reason": "granted",
+            "qualification_scope": "engine_declared_event",
+            "wasted": 0,
+            "qualified": true,
+            "succeeded": true,
+            "operation": "grant",
+            "cooldown_until_us": 400000,
+            "cycle": 0,
+            "t": 0.4
+          }
+        ],
+        "database_source_approval": "not_evaluated_by_engine",
+        "event_counts": {
+          "total": 22,
+          "limit": 40000
+        }
+      },
+      "mechanics": {
+        "schema_version": 1,
+        "scope": "verified_first_cycle_prefix",
+        "complete_first_cycle": true,
+        "execution_status": "unproven"
+      },
+      "summary": {
+        "total_damage": 1787.598,
+        "dps": 178.75979999999998,
+        "by_skill": {
+          "工程技能": 225.0,
+          "扩散": 1562.598
+        },
+        "by_character": {
+          "a": 1787.598
+        }
+      }
+    },
+    "actual-selector-no-match": {
+      "resource_reactions": {
+        "contract": "ordinary-reaction-resource-v1",
+        "program_fingerprint": "c764dbeccefda767f7d81dd793581f6946249b08a6b9cdd2d5b90c16e3631e95",
+        "execution": "mechanics_event_queue",
+        "source_authority": "caller_assumed",
+        "verification_scope": "actual_runtime_occurrence_consistency_no_new_source_authority",
+        "occurrences": [
+          {
+            "parent_event_id": "h0",
+            "parent_run_id": "0:h0",
+            "reaction_event_id": "h0:reaction:0",
+            "reaction_run_id": "0:h0:reaction:0",
+            "origin": 0,
+            "time_us": 200000,
+            "target_id": "enemy",
+            "owner": "a",
+            "frontline": "a",
+            "reaction_type": "swirl",
+            "trigger_element": "anemo",
+            "aura_element": "pyro",
+            "application_fingerprint": "933847cdb3109020da68a46f3f279b84947755b2557bf08c46d3ee60e7d443be",
+            "reaction_fingerprint": "1c7f4b59efaa362dddb6e0b7470aea1038755c6accbc8f76074639f5f6d96fa0",
+            "parent_fingerprint": "0f7dcd624ddf13556d7d2d15434f845ad4abb4758bcc6360def4e4e68fffa6ab",
+            "id": 0,
+            "resource_scan_complete": true,
+            "callback_complete": true
+          },
+          {
+            "parent_event_id": "h1",
+            "parent_run_id": "0:h1",
+            "reaction_event_id": "h1:reaction:0",
+            "reaction_run_id": "0:h1:reaction:0",
+            "origin": 0,
+            "time_us": 300000,
+            "target_id": "enemy",
+            "owner": "a",
+            "frontline": "a",
+            "reaction_type": "swirl",
+            "trigger_element": "anemo",
+            "aura_element": "pyro",
+            "application_fingerprint": "d1d1bdfd22e04bc1b94796e9fcf2a7cde06f94b58fcba88830bf40fa050fb3e0",
+            "reaction_fingerprint": "13ae5fb05e301db1de95d88c42a8a4096173cdb5259bb5413430bef2a5a6b373",
+            "parent_fingerprint": "d4ac7501dd04560b876a6f4e7af04ba7589642b176def5673576b7d3c6a59c7b",
+            "id": 1,
+            "resource_scan_complete": true,
+            "callback_complete": true
+          },
+          {
+            "parent_event_id": "h2",
+            "parent_run_id": "0:h2",
+            "reaction_event_id": "h2:reaction:0",
+            "reaction_run_id": "0:h2:reaction:0",
+            "origin": 0,
+            "time_us": 400000,
+            "target_id": "enemy",
+            "owner": "a",
+            "frontline": "a",
+            "reaction_type": "swirl",
+            "trigger_element": "anemo",
+            "aura_element": "pyro",
+            "application_fingerprint": "6a544d12e43b443ee8ff431d3058555d6c121422b223aa66bbb0ecc2ba8a4f16",
+            "reaction_fingerprint": "d2c4a43b7de3c3cb0f19d2e7ea639d4a131a739efdae2cf87b30e8fd351127f8",
+            "parent_fingerprint": "0449cf35a30a9dc53dc162c18196ca6c433d0fda47eee13fef2b77a8674c4921",
+            "id": 2,
+            "resource_scan_complete": true,
+            "callback_complete": true
+          }
+        ],
+        "operations": [
+          {
+            "id": 0,
+            "occurrence_id": 0,
+            "operation_id": "refill",
+            "pool_id": "pool",
+            "source_id": "binding:refill",
+            "source_owner": "a",
+            "keys": [
+              "team"
+            ],
+            "decision": "no_match",
+            "state": "no_match",
+            "ledger_begin": null,
+            "actual_end": null,
+            "expected_count": 0,
+            "failure_class": null
+          },
+          {
+            "id": 1,
+            "occurrence_id": 1,
+            "operation_id": "refill",
+            "pool_id": "pool",
+            "source_id": "binding:refill",
+            "source_owner": "a",
+            "keys": [
+              "team"
+            ],
+            "decision": "no_match",
+            "state": "no_match",
+            "ledger_begin": null,
+            "actual_end": null,
+            "expected_count": 0,
+            "failure_class": null
+          },
+          {
+            "id": 2,
+            "occurrence_id": 2,
+            "operation_id": "refill",
+            "pool_id": "pool",
+            "source_id": "binding:refill",
+            "source_owner": "a",
+            "keys": [
+              "team"
+            ],
+            "decision": "no_match",
+            "state": "no_match",
+            "ledger_begin": null,
+            "actual_end": null,
+            "expected_count": 0,
+            "failure_class": null
+          }
+        ],
+        "termination": null,
+        "usage": {
+          "work_consumed": 9358,
+          "verification_work_reserved": 0,
+          "catalog_bytes_reserved": 20212,
+          "slots": 6
+        },
+        "program": {
+          "contract": "ordinary-reaction-resource-v1",
+          "characters": [
+            "a"
+          ],
+          "operations": [
+            {
+              "id": "refill",
+              "pool_id": "pool",
+              "source_id": "binding:refill",
+              "source_owner": "a",
+              "keys": [
+                "team"
+              ],
+              "operation": {
+                "id": "refill",
+                "pool_id": "pool",
+                "source_id": "binding:refill",
+                "trigger": {
+                  "event": "elemental_reaction",
+                  "phase": "post",
+                  "reaction_types": [
+                    "melt"
+                  ]
+                },
+                "order": 0,
+                "operation": "grant",
+                "amount": 3,
+                "targets": {
+                  "mode": "all_pool_keys"
+                },
+                "cooldown": {
+                  "seconds": 0,
+                  "anchor": "success"
+                },
+                "status": "assumed",
+                "source": "合成工程资料"
+              },
+              "pool": {
+                "id": "pool",
+                "name_zh": "共享池",
+                "owner": "a",
+                "source_id": "binding:pool",
+                "scope": "team",
+                "capacity": 20,
+                "initial": {
+                  "team": 0
+                },
+                "status": "assumed",
+                "source": "合成工程资料"
+              },
+              "selector": {
+                "event": "elemental_reaction",
+                "phase": "post",
+                "reaction_types": [
+                  "melt"
+                ],
+                "owner_presence": "any"
+              }
+            }
+          ],
+          "source_authority": "not_evaluated",
+          "execution": "not_connected",
+          "verification_scope": "declared_configuration_consistency_only",
+          "program_fingerprint": "c764dbeccefda767f7d81dd793581f6946249b08a6b9cdd2d5b90c16e3631e95"
+        },
+        "verification_status": "verified",
+        "verification": {
+          "status": "verified",
+          "scope": "stored_occurrence_consistency_no_source_authority",
+          "actual_reactions": 3,
+          "audit_occurrences": 3,
+          "audited_operations": 3,
+          "committed_resource_receipts": 0
+        },
+        "verification_issue": null,
+        "execution_status": "unproven",
+        "verified_window": "complete_reported_input"
+      },
+      "shared_pools": {
+        "schema_version": 1,
+        "scope": "declared_shared_integer_pools",
+        "state": {
+          "balances": {
+            "pool": {
+              "team": 0
+            }
+          },
+          "cooldown_remaining_us": {
+            "refill": 0
+          }
+        },
+        "trace": [
+          {
+            "id": "pool:df0def21434b33a50d93ec46ada2c09f51ee7765f7c51c8ae8a97fb7a8cbcc6d",
+            "type": "consume",
+            "pool_id": "pool",
+            "source_id": "binding:benefit",
+            "consumer_id": "consumer",
+            "event_id": "h0",
+            "run_id": "0:h0",
+            "t_us": 200000,
+            "phase": "pre",
+            "key": "team",
+            "before": 0,
+            "requested": 1,
+            "accepted": 0,
+            "after": 0,
+            "delta": 0,
+            "reason": "insufficient",
+            "qualification_scope": "engine_declared_event",
+            "actor": "a",
+            "qualified": true,
+            "gate_open": false,
+            "cycle": 0,
+            "t": 0.2,
+            "eligible_instance_ids": [
+              "benefit:0:cast"
+            ],
+            "eligibility_reason": "eligible"
+          },
+          {
+            "id": "pool:65eb83c270d0eb9eacf47fa827dd5df7656c5634067f6e93c6395297cb4b6689",
+            "type": "consume",
+            "pool_id": "pool",
+            "source_id": "binding:benefit",
+            "consumer_id": "consumer",
+            "event_id": "h1",
+            "run_id": "0:h1",
+            "t_us": 300000,
+            "phase": "pre",
+            "key": "team",
+            "before": 0,
+            "requested": 1,
+            "accepted": 0,
+            "after": 0,
+            "delta": 0,
+            "reason": "insufficient",
+            "qualification_scope": "engine_declared_event",
+            "actor": "a",
+            "qualified": true,
+            "gate_open": false,
+            "cycle": 0,
+            "t": 0.3,
+            "eligible_instance_ids": [
+              "benefit:0:cast"
+            ],
+            "eligibility_reason": "eligible"
+          },
+          {
+            "id": "pool:cbd9d7f4802a7592e9d3694f8bbdde5c906a64f8863e0c16b7b048985a51a939",
+            "type": "consume",
+            "pool_id": "pool",
+            "source_id": "binding:benefit",
+            "consumer_id": "consumer",
+            "event_id": "h2",
+            "run_id": "0:h2",
+            "t_us": 400000,
+            "phase": "pre",
+            "key": "team",
+            "before": 0,
+            "requested": 1,
+            "accepted": 0,
+            "after": 0,
+            "delta": 0,
+            "reason": "insufficient",
+            "qualification_scope": "engine_declared_event",
+            "actor": "a",
+            "qualified": true,
+            "gate_open": false,
+            "cycle": 0,
+            "t": 0.4,
+            "eligible_instance_ids": [
+              "benefit:0:cast"
+            ],
+            "eligibility_reason": "eligible"
+          }
+        ],
+        "database_source_approval": "not_evaluated_by_engine",
+        "event_counts": {
+          "total": 19,
+          "limit": 40000
+        }
+      },
+      "mechanics": {
+        "schema_version": 1,
+        "scope": "verified_first_cycle_prefix",
+        "complete_first_cycle": true,
+        "execution_status": "unproven"
+      },
+      "summary": {
+        "total_damage": 1697.598,
+        "dps": 169.75979999999998,
+        "by_skill": {
+          "工程技能": 135.0,
+          "扩散": 1562.598
+        },
+        "by_character": {
+          "a": 1697.598
+        }
+      }
+    },
+    "complete-zero-reaction": {
+      "resource_reactions": {
+        "contract": "ordinary-reaction-resource-v1",
+        "program_fingerprint": "2cb3daeb6f27293c3c1275a7f1b0c93413b14c006d15e404f8e761bc8f66691c",
+        "execution": "mechanics_event_queue",
+        "source_authority": "caller_assumed",
+        "verification_scope": "actual_runtime_occurrence_consistency_no_new_source_authority",
+        "occurrences": [],
+        "operations": [],
+        "termination": null,
+        "usage": {
+          "work_consumed": 4130,
+          "verification_work_reserved": 0,
+          "catalog_bytes_reserved": 17388,
+          "slots": 0
+        },
+        "program": {
+          "contract": "ordinary-reaction-resource-v1",
+          "characters": [
+            "a"
+          ],
+          "operations": [
+            {
+              "id": "refill",
+              "pool_id": "pool",
+              "source_id": "binding:refill",
+              "source_owner": "a",
+              "keys": [
+                "team"
+              ],
+              "operation": {
+                "id": "refill",
+                "pool_id": "pool",
+                "source_id": "binding:refill",
+                "trigger": {
+                  "event": "elemental_reaction",
+                  "phase": "post",
+                  "reaction_types": [
+                    "swirl"
+                  ]
+                },
+                "order": 0,
+                "operation": "grant",
+                "amount": 3,
+                "targets": {
+                  "mode": "all_pool_keys"
+                },
+                "cooldown": {
+                  "seconds": 0,
+                  "anchor": "success"
+                },
+                "status": "assumed",
+                "source": "合成工程资料"
+              },
+              "pool": {
+                "id": "pool",
+                "name_zh": "共享池",
+                "owner": "a",
+                "source_id": "binding:pool",
+                "scope": "team",
+                "capacity": 20,
+                "initial": {
+                  "team": 0
+                },
+                "status": "assumed",
+                "source": "合成工程资料"
+              },
+              "selector": {
+                "event": "elemental_reaction",
+                "phase": "post",
+                "reaction_types": [
+                  "swirl"
+                ],
+                "owner_presence": "any"
+              }
+            }
+          ],
+          "source_authority": "not_evaluated",
+          "execution": "not_connected",
+          "verification_scope": "declared_configuration_consistency_only",
+          "program_fingerprint": "2cb3daeb6f27293c3c1275a7f1b0c93413b14c006d15e404f8e761bc8f66691c"
+        },
+        "verification_status": "verified",
+        "verification": {
+          "status": "verified",
+          "scope": "stored_occurrence_consistency_no_source_authority",
+          "actual_reactions": 0,
+          "audit_occurrences": 0,
+          "audited_operations": 0,
+          "committed_resource_receipts": 0
+        },
+        "verification_issue": null,
+        "execution_status": "unproven",
+        "verified_window": "complete_reported_input"
+      },
+      "shared_pools": {
+        "schema_version": 1,
+        "scope": "declared_shared_integer_pools",
+        "state": {
+          "balances": {
+            "pool": {
+              "team": 0
+            }
+          },
+          "cooldown_remaining_us": {
+            "refill": 0
+          }
+        },
+        "trace": [
+          {
+            "id": "pool:df0def21434b33a50d93ec46ada2c09f51ee7765f7c51c8ae8a97fb7a8cbcc6d",
+            "type": "consume",
+            "pool_id": "pool",
+            "source_id": "binding:benefit",
+            "consumer_id": "consumer",
+            "event_id": "h0",
+            "run_id": "0:h0",
+            "t_us": 200000,
+            "phase": "pre",
+            "key": "team",
+            "before": 0,
+            "requested": 1,
+            "accepted": 0,
+            "after": 0,
+            "delta": 0,
+            "reason": "insufficient",
+            "qualification_scope": "engine_declared_event",
+            "actor": "a",
+            "qualified": true,
+            "gate_open": false,
+            "cycle": 0,
+            "t": 0.2,
+            "eligible_instance_ids": [
+              "benefit:0:cast"
+            ],
+            "eligibility_reason": "eligible"
+          },
+          {
+            "id": "pool:65eb83c270d0eb9eacf47fa827dd5df7656c5634067f6e93c6395297cb4b6689",
+            "type": "consume",
+            "pool_id": "pool",
+            "source_id": "binding:benefit",
+            "consumer_id": "consumer",
+            "event_id": "h1",
+            "run_id": "0:h1",
+            "t_us": 300000,
+            "phase": "pre",
+            "key": "team",
+            "before": 0,
+            "requested": 1,
+            "accepted": 0,
+            "after": 0,
+            "delta": 0,
+            "reason": "insufficient",
+            "qualification_scope": "engine_declared_event",
+            "actor": "a",
+            "qualified": true,
+            "gate_open": false,
+            "cycle": 0,
+            "t": 0.3,
+            "eligible_instance_ids": [
+              "benefit:0:cast"
+            ],
+            "eligibility_reason": "eligible"
+          },
+          {
+            "id": "pool:cbd9d7f4802a7592e9d3694f8bbdde5c906a64f8863e0c16b7b048985a51a939",
+            "type": "consume",
+            "pool_id": "pool",
+            "source_id": "binding:benefit",
+            "consumer_id": "consumer",
+            "event_id": "h2",
+            "run_id": "0:h2",
+            "t_us": 400000,
+            "phase": "pre",
+            "key": "team",
+            "before": 0,
+            "requested": 1,
+            "accepted": 0,
+            "after": 0,
+            "delta": 0,
+            "reason": "insufficient",
+            "qualification_scope": "engine_declared_event",
+            "actor": "a",
+            "qualified": true,
+            "gate_open": false,
+            "cycle": 0,
+            "t": 0.4,
+            "eligible_instance_ids": [
+              "benefit:0:cast"
+            ],
+            "eligibility_reason": "eligible"
+          }
+        ],
+        "database_source_approval": "not_evaluated_by_engine",
+        "event_counts": {
+          "total": 8,
+          "limit": 40000
+        }
+      },
+      "mechanics": {
+        "schema_version": 1,
+        "scope": "verified_first_cycle_prefix",
+        "complete_first_cycle": true,
+        "execution_status": "unproven"
+      },
+      "summary": {
+        "total_damage": 135.0,
+        "dps": 13.5,
+        "by_skill": {
+          "工程技能": 135.0
+        },
+        "by_character": {
+          "a": 135.0
+        }
+      }
+    }
+  }
+}

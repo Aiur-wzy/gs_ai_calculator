@@ -1,0 +1,3366 @@
+{
+  "recipe_id": "parameter-linked-periodic-attack-v1",
+  "recipe_version": 1,
+  "commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+  "fields": {
+    "DBGOKAKAHFP": "elementDurability",
+    "EPPIDAILPBN": "elementType",
+    "FBAEEIPKEHO": "enBreak",
+    "JDOLIAEMINM": "elementRank",
+    "KOLOHIDMHHE": "damagePercentage",
+    "PEPDKCDHNIM": "attackType",
+    "FDGDIBBILMD": "strikeType",
+    "KALBHJILPDA": "damagePercentageRatio",
+    "EMILGODPBIG": "damageExtra",
+    "EMGBJJOIENB": "onAdded",
+    "HHDOFNHCIAE": "onRemoved",
+    "ECFFDLHMCLK": "onAbilityStart",
+    "IDCIIIFMDCM": "attackEvent",
+    "LGHDGGJIJOK": "attackInfo",
+    "EHKJIDFINEK": "attackProperty",
+    "HGLEEJNPBEB": "attenuationGroup",
+    "IAFHAPFBBOB": "attackTag",
+    "FHNDLIJJDEA": "attenuationTag",
+    "CEIJEFJBMBL": "attackPattern",
+    "NMKBOEALDEF": "targetType",
+    "HOCNCCAJOIG": "canBeModifiedBy",
+    "MJKPCGCAPLK": "targetPredicates",
+    "MLJNNELMEFL": "successActions",
+    "PAPFFKOKPML": "failActions",
+    "GGGLOMBDHBB": "TargetAltitudeType",
+    "EHFMPIOJOLN": "triggerType",
+    "JFLGPLCIOEC": "thinkInterval",
+    "FMBHOKCHKOH": "onThinkInterval"
+  },
+  "types": {
+    "MMHMEBEEKGK": "TriggerAttackEvent",
+    "PBIOEEHFHFD": "Predicated",
+    "LAHNIAGGAID": "ByTargetAltitude"
+  },
+  "unit_contract": {
+    "id": "durability-per-gauge-unit-v1",
+    "divisor": 25,
+    "tax_applied": false,
+    "evidence": {
+      "read_date": "2026-10-02",
+      "page_publication_date": null,
+      "publication_date_note": "The rendered page does not display a publication date; repository last change is separate metadata.",
+      "page_url": "https://library.keqingmains.com/combat-mechanics/elemental-effects/elemental-gauge-theory",
+      "section": "Decay Rate",
+      "exact_excerpt": "Durability is another way of measuring units, with each unit being the equivalent of 25 durability.",
+      "excerpt_word_count": 16,
+      "source_repository": "https://github.com/KQM-git/TCL",
+      "commit": "6f0ab0c8641c7960b9cb1f0f3fca06120949e01f",
+      "file_last_commit_date": "2023-01-15T13:24:25Z",
+      "source_path": "docs/combat-mechanics/elemental-effects/elemental-gauge-theory.md",
+      "source_sha256": "2cda41004a7483fed57ee9e39b86ccefd26c77a74c1307816efba8aae9a79088",
+      "line_number": 75,
+      "pinned_source_url": "https://github.com/KQM-git/TCL/blob/6f0ab0c8641c7960b9cb1f0f3fca06120949e01f/docs/combat-mechanics/elemental-effects/elemental-gauge-theory.md#L75",
+      "raw_source_url": "https://raw.githubusercontent.com/KQM-git/TCL/6f0ab0c8641c7960b9cb1f0f3fca06120949e01f/docs/combat-mechanics/elemental-effects/elemental-gauge-theory.md",
+      "evidence_tier": "community_mechanism_reference",
+      "not_current_client_measurement": true,
+      "conversion": {
+        "raw_application_gu": "attackProperty.elementDurability / 25",
+        "applies_aura_tax": false
+      }
+    }
+  },
+  "classification": {
+    "Elemental_Burst": "damage.elemental_burst"
+  },
+  "evidence": {
+    "current_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+    "old_commit": "9424e4e556bd80e5196be7d3c52723d3a35b30e7",
+    "files": [
+      {
+        "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Ayaka.json",
+        "workspace_sha256": "2beea7e6200734562905688c9c4c92390822ef85eb58e34b80e5127a9a97ca3b",
+        "git_blob_sha256": "5885eabc9a59bcecea1517c99dac67ab5e470adce69396d9faa00e0ec01cc324",
+        "old_git_blob_sha256": "7c3617f4d8a04738a117a437dd876923a038af0a8486a949241eca25b0a6376f",
+        "bytes": 189871,
+        "raw_equals_git": false
+      },
+      {
+        "source_path": "BinOutput/Gadget/ConfigGadget_SkillObj.json",
+        "workspace_sha256": "bb77d5566511bcd9dceeca26de267ddce2854a2853cc7bc31a48d7b200adfa1f",
+        "git_blob_sha256": "e73657cb92660cc1a5bf21cb4e65b5c982a518ffd9eabff2540983b7743e2b54",
+        "old_git_blob_sha256": "ca0669ad6de0260c6aa33b1cbd3f724a3f398b1bf205e91d7b9ee708a6ddf467",
+        "bytes": 1244375,
+        "raw_equals_git": false
+      },
+      {
+        "source_path": "ExcelBinOutput/GadgetExcelConfigData.json",
+        "workspace_sha256": "92e8ad82e658eb40729e022dab5fd9f68bca271a1a066b6ecc41f4b0704c4d81",
+        "git_blob_sha256": "420fa8847c717f526f7e091ae12ed061e29a3f6b0aeb474dddbfb8e548cc0b81",
+        "old_git_blob_sha256": "bfa381f28d072b9aadd910524da3fdd25c9e186a458859584327aada9c03a14f",
+        "bytes": 10847901,
+        "raw_equals_git": false
+      },
+      {
+        "source_path": "BinOutput/Talent/AvatarTalents/ConfigTalent_Ayaka.json",
+        "workspace_sha256": "c667b504dcc857e67eef83468d5f7e32a62b707e3771e00b08c48f2abb47ae32",
+        "git_blob_sha256": "d44458f069f4791fbdd300274e5e56e593b84194f828d3f623b1ebe83db2c68c",
+        "old_git_blob_sha256": "a1b1c721982fd3410e99ed9ada124076e28d699114719a5075b563ce358528a2",
+        "bytes": 9681,
+        "raw_equals_git": false
+      },
+      {
+        "source_path": "ExcelBinOutput/AttackAttenuationExcelConfigData.json",
+        "workspace_sha256": "07cd969d728431de86df463344ecda18c3883a681dc5dc830bfa6f5917a9a512",
+        "git_blob_sha256": "7f3f405f8fa3b2f2e494f258d66bc826bbd8dccd7e55e660b9c26c56e6e39f3e",
+        "old_git_blob_sha256": "b69ee6bc082ad875e8c404335d0dd6b22aed918f16fcdcfde556f560bf690ef3",
+        "bytes": 181162,
+        "raw_equals_git": false
+      }
+    ],
+    "contexts": [
+      {
+        "name": "Avatar_Ayaka_FrozenWindmill_SkillStart",
+        "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Ayaka.json",
+        "pointer": "/13/Default",
+        "node_sha256": "a0e14d5a02587abfed15064511053e0e74a84a19322bae5c9df6ce7025657ddb",
+        "raw": {
+          "ECFFDLHMCLK": [
+            {
+              "$type": "FLNAIHPCKOC",
+              "ACFKMLJKONM": 10019,
+              "AMOLMPHFPHJ": -1,
+              "ILELAOFJIKJ": true,
+              "IODFBPJBHOB": 1,
+              "LJFIEGHHLOB": false,
+              "NABFCPIKHEO": 1,
+              "NKOFINBNOOK": 1
+            },
+            {
+              "$type": "FLNAIHPCKOC",
+              "ACFKMLJKONM": 10021,
+              "AMOLMPHFPHJ": -1,
+              "ILELAOFJIKJ": true,
+              "IODFBPJBHOB": 1,
+              "LJFIEGHHLOB": false,
+              "NABFCPIKHEO": 1,
+              "NKOFINBNOOK": 1
+            }
+          ],
+          "IIBMNPFLNMJ": "Avatar_Ayaka_FrozenWindmill_SkillStart",
+          "OMAIGDMCJBO": {
+            "DBGOKAKAHFP": 100,
+            "DOALDLPNGMF": -1,
+            "KFOMCJGGPPC": -1,
+            "PPKOPMBNPJH": true
+          }
+        },
+        "old_pointer": "/13/Default",
+        "old_node_sha256": "42619d733fd7bd7142c49e690465f88f6b090e08cd03dd76662910f8895d4dbb",
+        "old_raw": {
+          "abilityName": "Avatar_Ayaka_FrozenWindmill_SkillStart",
+          "onAbilityStart": [
+            {
+              "$type": "AvatarSkillStart",
+              "cdRatio": 1,
+              "costStaminaRatio": 1,
+              "actorIceSubHurtDelta": -1,
+              "doOffStage": false,
+              "skillID": 10019,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "AvatarSkillStart",
+              "cdRatio": 1,
+              "costStaminaRatio": 1,
+              "actorIceSubHurtDelta": -1,
+              "doOffStage": false,
+              "skillID": 10021,
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "LKLPDIMKLKI": {
+            "elementDurability": 100,
+            "minus_one": -1,
+            "IAKPBCLBNKF": -1,
+            "isLimitedProperties": true
+          }
+        },
+        "coverage": "complete selected parent; reference fields may still be unknown; not executable admission"
+      },
+      {
+        "name": "Avatar_Ayaka_FrozenWindmill",
+        "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Ayaka.json",
+        "pointer": "/14/Default",
+        "node_sha256": "34a307fabd2bee9be5a74b16041efde7fc653f5f4061f377a9302642d3a04d6e",
+        "raw": {
+          "ECFFDLHMCLK": [
+            {
+              "$type": "DKLODEPOLDC",
+              "AMOLMPHFPHJ": -1,
+              "BDKJJCBBECN": "SelfAttackTarget",
+              "DFLNJNIGJLL": 41002001,
+              "ILELAOFJIKJ": true,
+              "KGHIIEPKAAM": true,
+              "LJFIEGHHLOB": false,
+              "MLDOBLJCKCK": true,
+              "MLFLDPAGADG": {
+                "$type": "KCOKCEJLEMA",
+                "EEFLHEKBODJ": {
+                  "BNJLEBLGEKB": 180
+                },
+                "FDGFPGIDACF": {
+                  "IOPIFIJFBHI": 1.7999999523162842,
+                  "LBLJIHBEDKH": 0.800000011920929
+                },
+                "GNFICELAKIB": 10,
+                "HECMDGIAGKM": 2,
+                "LMBGHPGJIAP": true,
+                "POPNBJAHNFK": {
+                  "ONEHKOHOCBH": 180
+                }
+              }
+            },
+            {
+              "$type": "DKLODEPOLDC",
+              "AMOLMPHFPHJ": -1,
+              "BDKJJCBBECN": "SelfAttackTarget",
+              "DFLNJNIGJLL": 41002005,
+              "IJDGNIIOHLM": [
+                {
+                  "$type": "DIOFPDKDAIG",
+                  "BDHBNCEEPPK": "Target",
+                  "JPCEGCMOHNI": "Avatar_Ayaka_Oboro"
+                }
+              ],
+              "ILELAOFJIKJ": true,
+              "KGHIIEPKAAM": true,
+              "LJFIEGHHLOB": false,
+              "MLDOBLJCKCK": true,
+              "MLFLDPAGADG": {
+                "$type": "KCOKCEJLEMA",
+                "EEFLHEKBODJ": {
+                  "BNJLEBLGEKB": 180
+                },
+                "FDGFPGIDACF": {
+                  "FEENKFAKHJI": 2,
+                  "IOPIFIJFBHI": 1,
+                  "LBLJIHBEDKH": 1.2000000476837158
+                },
+                "GNFICELAKIB": 10,
+                "HECMDGIAGKM": 2,
+                "POPNBJAHNFK": {
+                  "$type": "LAHGIEMEMGI",
+                  "BDAIFIAOMBE": {
+                    "IOPIFIJFBHI": 30
+                  },
+                  "ONEHKOHOCBH": 180
+                }
+              }
+            },
+            {
+              "$type": "DKLODEPOLDC",
+              "AMOLMPHFPHJ": -1,
+              "BDKJJCBBECN": "SelfAttackTarget",
+              "DFLNJNIGJLL": 41002005,
+              "IJDGNIIOHLM": [
+                {
+                  "$type": "DIOFPDKDAIG",
+                  "BDHBNCEEPPK": "Target",
+                  "JPCEGCMOHNI": "Avatar_Ayaka_Oboro"
+                }
+              ],
+              "ILELAOFJIKJ": true,
+              "KGHIIEPKAAM": true,
+              "LJFIEGHHLOB": false,
+              "MLDOBLJCKCK": true,
+              "MLFLDPAGADG": {
+                "$type": "KCOKCEJLEMA",
+                "EEFLHEKBODJ": {
+                  "BNJLEBLGEKB": 180
+                },
+                "FDGFPGIDACF": {
+                  "FEENKFAKHJI": -2,
+                  "IOPIFIJFBHI": 1,
+                  "LBLJIHBEDKH": 1.2000000476837158
+                },
+                "GNFICELAKIB": 10,
+                "HECMDGIAGKM": 2,
+                "POPNBJAHNFK": {
+                  "$type": "LAHGIEMEMGI",
+                  "BDAIFIAOMBE": {
+                    "IOPIFIJFBHI": -30
+                  },
+                  "ONEHKOHOCBH": 180
+                }
+              }
+            },
+            {
+              "$type": "FOMGJHMPMAJ",
+              "AMOLMPHFPHJ": -1,
+              "IJFOFLPPGHK": {
+                "EANBEIIKCIL": {
+                  "BGINHMBLECN": 0.11999999731779099,
+                  "HMANOMCGFLK": true,
+                  "KBAIICCLOEF": 0.5,
+                  "PJGAOELGLIF": 0.11999999731779099
+                },
+                "IKAFKIJNDOO": 0.30000001192092896,
+                "KDBKDJBCACN": 5,
+                "MABMBBAJLAC": 0.11999999731779099
+              },
+              "ILELAOFJIKJ": true,
+              "LJFIEGHHLOB": false,
+              "MLFLDPAGADG": {
+                "EEFLHEKBODJ": {
+                  "BNJLEBLGEKB": 180
+                },
+                "GNFICELAKIB": 10,
+                "HECMDGIAGKM": 2,
+                "POPNBJAHNFK": {
+                  "ONEHKOHOCBH": 180
+                }
+              }
+            }
+          ],
+          "IIBMNPFLNMJ": "Avatar_Ayaka_FrozenWindmill",
+          "OMAIGDMCJBO": {
+            "DBGOKAKAHFP": 100,
+            "DOALDLPNGMF": -1,
+            "KFOMCJGGPPC": -1,
+            "PPKOPMBNPJH": true
+          }
+        },
+        "old_pointer": "/14/Default",
+        "old_node_sha256": "038cc18969c04a23dabeb1153287da834e993e0667139b9971e3020fe119d88b",
+        "old_raw": {
+          "abilityName": "Avatar_Ayaka_FrozenWindmill",
+          "onAbilityStart": [
+            {
+              "$type": "TriggerBullet",
+              "actorIceSubHurtDelta": -1,
+              "doOffStage": false,
+              "born": {
+                "$type": "ConfigBornByTarget",
+                "offset": {
+                  "x": 1.7999999523162842,
+                  "z": 0.800000011920929
+                },
+                "APKLAIJMEIL": {
+                  "HHNLJKNBKPP": 180
+                },
+                "value": 10,
+                "direction": {
+                  "maxAngle": 180
+                },
+                "onGroundRaycastUpDist": 2,
+                "onGround": true
+              },
+              "trackTarget": "SelfAttackTarget",
+              "bulletID": 41002001,
+              "value": true,
+              "canBeHandledOnRecover": true,
+              "lifeByOwnerV2": true
+            },
+            {
+              "$type": "TriggerBullet",
+              "actorIceSubHurtDelta": -1,
+              "doOffStage": false,
+              "born": {
+                "$type": "ConfigBornByTarget",
+                "offset": {
+                  "x": 1,
+                  "z": 1.2000000476837158,
+                  "y": 2
+                },
+                "APKLAIJMEIL": {
+                  "HHNLJKNBKPP": 180
+                },
+                "value": 10,
+                "direction": {
+                  "$type": "ConfigDirectionByEntity",
+                  "maxAngle": 180,
+                  "angleOffset": {
+                    "x": 30
+                  }
+                },
+                "onGroundRaycastUpDist": 2
+              },
+              "trackTarget": "SelfAttackTarget",
+              "predicates": [
+                {
+                  "$type": "ByUnlockTalentParam",
+                  "talentParam": "Avatar_Ayaka_Oboro",
+                  "target": "Target"
+                }
+              ],
+              "bulletID": 41002005,
+              "value": true,
+              "canBeHandledOnRecover": true,
+              "lifeByOwnerV2": true
+            },
+            {
+              "$type": "TriggerBullet",
+              "actorIceSubHurtDelta": -1,
+              "doOffStage": false,
+              "born": {
+                "$type": "ConfigBornByTarget",
+                "offset": {
+                  "x": 1,
+                  "z": 1.2000000476837158,
+                  "y": -2
+                },
+                "APKLAIJMEIL": {
+                  "HHNLJKNBKPP": 180
+                },
+                "value": 10,
+                "direction": {
+                  "$type": "ConfigDirectionByEntity",
+                  "maxAngle": 180,
+                  "angleOffset": {
+                    "x": -30
+                  }
+                },
+                "onGroundRaycastUpDist": 2
+              },
+              "trackTarget": "SelfAttackTarget",
+              "predicates": [
+                {
+                  "$type": "ByUnlockTalentParam",
+                  "talentParam": "Avatar_Ayaka_Oboro",
+                  "target": "Target"
+                }
+              ],
+              "bulletID": 41002005,
+              "value": true,
+              "canBeHandledOnRecover": true,
+              "lifeByOwnerV2": true
+            },
+            {
+              "$type": "ActCameraShake",
+              "actorIceSubHurtDelta": -1,
+              "doOffStage": false,
+              "born": {
+                "APKLAIJMEIL": {
+                  "HHNLJKNBKPP": 180
+                },
+                "value": 10,
+                "direction": {
+                  "maxAngle": 180
+                },
+                "onGroundRaycastUpDist": 2
+              },
+              "cameraShake": {
+                "shakeDistance": 5,
+                "extension": {
+                  "rangeAttenuation": 0.5,
+                  "baseOnCamera": true,
+                  "baseCycle": 0.11999999731779099,
+                  "cycleDamping": 0.11999999731779099
+                },
+                "shakeTime": 0.30000001192092896,
+                "shakeRange": 0.11999999731779099
+              },
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "LKLPDIMKLKI": {
+            "elementDurability": 100,
+            "minus_one": -1,
+            "IAKPBCLBNKF": -1,
+            "isLimitedProperties": true
+          }
+        },
+        "coverage": "complete selected parent; reference fields may still be unknown; not executable admission"
+      },
+      {
+        "name": "Avatar_Ayaka_FrozenWindmillDamage",
+        "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Ayaka.json",
+        "pointer": "/18/Default",
+        "node_sha256": "8b6194fb67ce5ffc72aea4145b09fdce44b017daab84ab3ddd9998679c12fe03",
+        "raw": {
+          "EMGBJJOIENB": [
+            {
+              "$type": "BINBHGLANKO",
+              "AMOLMPHFPHJ": -1,
+              "ILELAOFJIKJ": true,
+              "LDFBDMNIADI": "FrozenWindmill_Damage",
+              "LJFIEGHHLOB": false
+            }
+          ],
+          "GPPBBDEICKP": {
+            "FrozenWindmill_Damage": {
+              "DBGOKAKAHFP": 100,
+              "DOALDLPNGMF": -1,
+              "FMBHOKCHKOH": [
+                {
+                  "$type": "MMHMEBEEKGK",
+                  "AMOLMPHFPHJ": -1,
+                  "IDCIIIFMDCM": {
+                    "CEIJEFJBMBL": {
+                      "$type": "FKADOLEBLHD",
+                      "BKCIBHHMGEE": 3,
+                      "COBJECNAEOG": 1,
+                      "EAJAHKDHNJM": {
+                        "GMEKLJBJADO": {
+                          "KJCBAFKFFMP": 1,
+                          "PGPNDGBABNI": true
+                        }
+                      },
+                      "EHFMPIOJOLN": "TriggerNoRepeat",
+                      "MLFLDPAGADG": {
+                        "$type": "PKAELLAMAGL",
+                        "EEFLHEKBODJ": {
+                          "BNJLEBLGEKB": 180
+                        },
+                        "FDGFPGIDACF": {
+                          "IOPIFIJFBHI": 0.30000001192092896,
+                          "LBLJIHBEDKH": 0.30000001192092896
+                        },
+                        "GNFICELAKIB": 10,
+                        "HECMDGIAGKM": 2,
+                        "POPNBJAHNFK": {
+                          "ONEHKOHOCBH": 180
+                        }
+                      }
+                    },
+                    "LGHDGGJIJOK": {
+                      "BKLFAECNFOF": {
+                        "EIAGIEDFLHJ": {
+                          "KJCBAFKFFMP": 1,
+                          "PGPNDGBABNI": true
+                        },
+                        "IHBPFOBEJKN": "default"
+                      },
+                      "EHKJIDFINEK": {
+                        "DBGOKAKAHFP": 25,
+                        "EPPIDAILPBN": "Ice",
+                        "FBAEEIPKEHO": 30,
+                        "FDGDIBBILMD": "Slash",
+                        "JDOLIAEMINM": 1.5,
+                        "KOLOHIDMHHE": "FrozenWindmill_SliceDamage",
+                        "PEPDKCDHNIM": "Default"
+                      },
+                      "FHNDLIJJDEA": "Elemental_Burst",
+                      "HDIFFKOHDNL": {
+                        "OGGEIBICAHC": "Shake"
+                      },
+                      "HGLEEJNPBEB": "default",
+                      "HOCNCCAJOIG": "OriginOwner",
+                      "IAFHAPFBBOB": "Elemental_Burst",
+                      "IJFOFLPPGHK": {
+                        "EANBEIIKCIL": {
+                          "BGINHMBLECN": 0.11999999731779099,
+                          "HMANOMCGFLK": true,
+                          "KBAIICCLOEF": 0.5,
+                          "PJGAOELGLIF": 0.11999999731779099
+                        },
+                        "KDBKDJBCACN": 20
+                      },
+                      "NMMJKLAHOHH": {
+                        "ANBHPFEONOL": 0.05000000074505806,
+                        "EIAGIEDFLHJ": {
+                          "KJCBAFKFFMP": 1,
+                          "PGPNDGBABNI": true
+                        },
+                        "IHBPFOBEJKN": "default",
+                        "PAPNKKIKAOC": "LV4"
+                      }
+                    }
+                  },
+                  "ILELAOFJIKJ": true,
+                  "LJFIEGHHLOB": false,
+                  "NMKBOEALDEF": "Enemy"
+                }
+              ],
+              "JFLGPLCIOEC": 0.25,
+              "KFOMCJGGPPC": -1,
+              "PPKOPMBNPJH": true
+            }
+          },
+          "IIBMNPFLNMJ": "Avatar_Ayaka_FrozenWindmillDamage",
+          "LOEHLJGBGAC": {
+            "FrozenWindmill_SliceDamage": 0
+          },
+          "OMAIGDMCJBO": {
+            "DBGOKAKAHFP": 100,
+            "DOALDLPNGMF": -1,
+            "KFOMCJGGPPC": -1,
+            "PPKOPMBNPJH": true
+          }
+        },
+        "old_pointer": "/18/Default",
+        "old_node_sha256": "f2d3ea9f0002cb7f07fc84d2c06b6f67312ff2ecb52669b8a271b96291b1b3fd",
+        "old_raw": {
+          "onAdded": [
+            {
+              "$type": "ApplyModifier",
+              "actorIceSubHurtDelta": -1,
+              "doOffStage": false,
+              "modifierName": "FrozenWindmill_Damage",
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "abilitySpecials": {
+            "FrozenWindmill_SliceDamage": 0
+          },
+          "abilityName": "Avatar_Ayaka_FrozenWindmillDamage",
+          "modifiers": {
+            "FrozenWindmill_Damage": {
+              "thinkInterval": 0.25,
+              "elementDurability": 100,
+              "minus_one": -1,
+              "IAKPBCLBNKF": -1,
+              "onThinkInterval": [
+                {
+                  "$type": "TriggerAttackEvent",
+                  "targetType": "Enemy",
+                  "actorIceSubHurtDelta": -1,
+                  "doOffStage": false,
+                  "attackEvent": {
+                    "attackInfo": {
+                      "attackTag": "Elemental_Burst",
+                      "attenuationTag": "Elemental_Burst",
+                      "HBOOKFMCODC": {
+                        "BPIJOAMNKIH": {
+                          "GGOHGMFHHEC": true,
+                          "value": 1
+                        },
+                        "onHitEffectName": "default"
+                      },
+                      "hitPattern": {
+                        "hitImpulseType": "LV4",
+                        "hitHaltTimeScale": 0.05000000074505806,
+                        "BPIJOAMNKIH": {
+                          "GGOHGMFHHEC": true,
+                          "value": 1
+                        },
+                        "onHitEffectName": "default"
+                      },
+                      "INKGMIHAPMA": {
+                        "NDIBGPPKGJP": "Shake"
+                      },
+                      "canBeModifiedBy": "OriginOwner",
+                      "cameraShake": {
+                        "shakeDistance": 20,
+                        "extension": {
+                          "rangeAttenuation": 0.5,
+                          "baseOnCamera": true,
+                          "baseCycle": 0.11999999731779099,
+                          "cycleDamping": 0.11999999731779099
+                        }
+                      },
+                      "attenuationGroup": "default",
+                      "attackProperty": {
+                        "elementType": "Ice",
+                        "elementDurability": 25,
+                        "enBreak": 30,
+                        "elementRank": 1.5,
+                        "attackType": "Default",
+                        "strikeType": "Slash",
+                        "damagePercentage": "FrozenWindmill_SliceDamage"
+                      }
+                    },
+                    "attackPattern": {
+                      "$type": "ConfigAttackSphere",
+                      "born": {
+                        "$type": "ConfigBornBySelf",
+                        "offset": {
+                          "x": 0.30000001192092896,
+                          "z": 0.30000001192092896
+                        },
+                        "APKLAIJMEIL": {
+                          "HHNLJKNBKPP": 180
+                        },
+                        "value": 10,
+                        "direction": {
+                          "maxAngle": 180
+                        },
+                        "onGroundRaycastUpDist": 2
+                      },
+                      "MPNIJNGFBIH": {
+                        "INOCAOHPEBB": {
+                          "GGOHGMFHHEC": true,
+                          "value": 1
+                        }
+                      },
+                      "triggerType": "TriggerNoRepeat",
+                      "radius": 3,
+                      "massiveAttackRatio": 1
+                    }
+                  },
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "isLimitedProperties": true
+            }
+          },
+          "LKLPDIMKLKI": {
+            "elementDurability": 100,
+            "minus_one": -1,
+            "IAKPBCLBNKF": -1,
+            "isLimitedProperties": true
+          }
+        },
+        "coverage": "complete selected parent; reference fields may still be unknown; not executable admission"
+      },
+      {
+        "name": "Avatar_Ayaka_FrozenWindmillDissipate",
+        "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Ayaka.json",
+        "pointer": "/19/Default",
+        "node_sha256": "835f106edb3f8c798d273420162ba127b4abbf59381f46d1db055d6df1230094",
+        "raw": {
+          "ECFFDLHMCLK": [
+            {
+              "$type": "MOOAODKIBCM",
+              "AMOLMPHFPHJ": -1,
+              "BEIMGAKABJN": "Eff_Avatar_Girl_Sword_Ayaka_IceButterfly_Bullet_AS",
+              "HJIHBAANFLE": 1,
+              "ILELAOFJIKJ": true,
+              "JMMALEJDAEF": -1,
+              "LJFIEGHHLOB": false,
+              "MLFLDPAGADG": {
+                "EEFLHEKBODJ": {
+                  "BNJLEBLGEKB": 180
+                },
+                "GNFICELAKIB": 10,
+                "HECMDGIAGKM": 2,
+                "POPNBJAHNFK": {
+                  "ONEHKOHOCBH": 180
+                }
+              }
+            },
+            {
+              "$type": "MMHMEBEEKGK",
+              "AMOLMPHFPHJ": -1,
+              "IDCIIIFMDCM": {
+                "CEIJEFJBMBL": {
+                  "$type": "FKADOLEBLHD",
+                  "BKCIBHHMGEE": 5,
+                  "COBJECNAEOG": 1,
+                  "EAJAHKDHNJM": {
+                    "GMEKLJBJADO": {
+                      "KJCBAFKFFMP": 1,
+                      "PGPNDGBABNI": true
+                    }
+                  },
+                  "EHFMPIOJOLN": "TriggerNoRepeat",
+                  "MKJEILCMLBH": true,
+                  "MLFLDPAGADG": {
+                    "$type": "PKAELLAMAGL",
+                    "EEFLHEKBODJ": {
+                      "BNJLEBLGEKB": 180
+                    },
+                    "FDGFPGIDACF": {
+                      "IOPIFIJFBHI": -1
+                    },
+                    "GNFICELAKIB": 10,
+                    "HECMDGIAGKM": 2,
+                    "POPNBJAHNFK": {
+                      "ONEHKOHOCBH": 180
+                    }
+                  }
+                },
+                "LGHDGGJIJOK": {
+                  "BKLFAECNFOF": {
+                    "EIAGIEDFLHJ": {
+                      "KJCBAFKFFMP": 1,
+                      "PGPNDGBABNI": true
+                    },
+                    "IHBPFOBEJKN": "default"
+                  },
+                  "EHKJIDFINEK": {
+                    "DBGOKAKAHFP": 25,
+                    "EPPIDAILPBN": "Ice",
+                    "FBAEEIPKEHO": 30,
+                    "FDGDIBBILMD": "None",
+                    "JDOLIAEMINM": 1.5,
+                    "KOLOHIDMHHE": "FrozenWindmill_BlastDamage",
+                    "PEPDKCDHNIM": "Default"
+                  },
+                  "FHNDLIJJDEA": "Elemental_Burst",
+                  "HDIFFKOHDNL": {
+                    "OGGEIBICAHC": "Shake"
+                  },
+                  "HGLEEJNPBEB": "default",
+                  "HOCNCCAJOIG": "OriginOwner",
+                  "IAFHAPFBBOB": "Elemental_Burst",
+                  "IJFOFLPPGHK": {
+                    "EANBEIIKCIL": {
+                      "BGINHMBLECN": 0.11999999731779099,
+                      "HMANOMCGFLK": true,
+                      "KBAIICCLOEF": 0.5,
+                      "PJGAOELGLIF": 0.11999999731779099
+                    },
+                    "IKAFKIJNDOO": 0.10000000149011612,
+                    "KDBKDJBCACN": 30,
+                    "MABMBBAJLAC": 0.15000000596046448
+                  },
+                  "NMMJKLAHOHH": {
+                    "ANBHPFEONOL": 0.05000000074505806,
+                    "EIAGIEDFLHJ": {
+                      "KJCBAFKFFMP": 1,
+                      "PGPNDGBABNI": true
+                    },
+                    "IHBPFOBEJKN": "default",
+                    "PAPNKKIKAOC": "LV5"
+                  }
+                }
+              },
+              "ILELAOFJIKJ": true,
+              "LJFIEGHHLOB": false,
+              "NMKBOEALDEF": "Enemy"
+            }
+          ],
+          "IIBMNPFLNMJ": "Avatar_Ayaka_FrozenWindmillDissipate",
+          "LOEHLJGBGAC": {
+            "FrozenWindmill_BlastDamage": 0
+          },
+          "OMAIGDMCJBO": {
+            "DBGOKAKAHFP": 100,
+            "DOALDLPNGMF": -1,
+            "KFOMCJGGPPC": -1,
+            "PPKOPMBNPJH": true
+          }
+        },
+        "old_pointer": "/19/Default",
+        "old_node_sha256": "f67825ac76fab21bc5cf4e6470f01929701f249f8893c9fcaa47176a57cacc0b",
+        "old_raw": {
+          "abilitySpecials": {
+            "FrozenWindmill_BlastDamage": 0
+          },
+          "abilityName": "Avatar_Ayaka_FrozenWindmillDissipate",
+          "onAbilityStart": [
+            {
+              "$type": "FireEffect",
+              "actorIceSubHurtDelta": -1,
+              "scale": 1,
+              "doOffStage": false,
+              "born": {
+                "APKLAIJMEIL": {
+                  "HHNLJKNBKPP": 180
+                },
+                "value": 10,
+                "direction": {
+                  "maxAngle": 180
+                },
+                "onGroundRaycastUpDist": 2
+              },
+              "effectPattern": "Eff_Avatar_Girl_Sword_Ayaka_IceButterfly_Bullet_AS",
+              "effectTempleteID": -1,
+              "canBeHandledOnRecover": true
+            },
+            {
+              "$type": "TriggerAttackEvent",
+              "targetType": "Enemy",
+              "actorIceSubHurtDelta": -1,
+              "doOffStage": false,
+              "attackEvent": {
+                "attackInfo": {
+                  "attackTag": "Elemental_Burst",
+                  "attenuationTag": "Elemental_Burst",
+                  "HBOOKFMCODC": {
+                    "BPIJOAMNKIH": {
+                      "GGOHGMFHHEC": true,
+                      "value": 1
+                    },
+                    "onHitEffectName": "default"
+                  },
+                  "hitPattern": {
+                    "hitImpulseType": "LV5",
+                    "hitHaltTimeScale": 0.05000000074505806,
+                    "BPIJOAMNKIH": {
+                      "GGOHGMFHHEC": true,
+                      "value": 1
+                    },
+                    "onHitEffectName": "default"
+                  },
+                  "INKGMIHAPMA": {
+                    "NDIBGPPKGJP": "Shake"
+                  },
+                  "canBeModifiedBy": "OriginOwner",
+                  "cameraShake": {
+                    "shakeDistance": 30,
+                    "extension": {
+                      "rangeAttenuation": 0.5,
+                      "baseOnCamera": true,
+                      "baseCycle": 0.11999999731779099,
+                      "cycleDamping": 0.11999999731779099
+                    },
+                    "shakeTime": 0.10000000149011612,
+                    "shakeRange": 0.15000000596046448
+                  },
+                  "attenuationGroup": "default",
+                  "attackProperty": {
+                    "elementType": "Ice",
+                    "elementDurability": 25,
+                    "enBreak": 30,
+                    "elementRank": 1.5,
+                    "attackType": "Default",
+                    "strikeType": "None",
+                    "damagePercentage": "FrozenWindmill_BlastDamage"
+                  }
+                },
+                "attackPattern": {
+                  "$type": "ConfigAttackSphere",
+                  "ignoreMassive": true,
+                  "born": {
+                    "$type": "ConfigBornBySelf",
+                    "offset": {
+                      "x": -1
+                    },
+                    "APKLAIJMEIL": {
+                      "HHNLJKNBKPP": 180
+                    },
+                    "value": 10,
+                    "direction": {
+                      "maxAngle": 180
+                    },
+                    "onGroundRaycastUpDist": 2
+                  },
+                  "MPNIJNGFBIH": {
+                    "INOCAOHPEBB": {
+                      "GGOHGMFHHEC": true,
+                      "value": 1
+                    }
+                  },
+                  "triggerType": "TriggerNoRepeat",
+                  "radius": 5,
+                  "massiveAttackRatio": 1
+                }
+              },
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "LKLPDIMKLKI": {
+            "elementDurability": 100,
+            "minus_one": -1,
+            "IAKPBCLBNKF": -1,
+            "isLimitedProperties": true
+          }
+        },
+        "coverage": "complete selected parent; reference fields may still be unknown; not executable admission"
+      },
+      {
+        "name": "Ayaka_SkillUpgrade_3",
+        "source_path": "BinOutput/Talent/AvatarTalents/ConfigTalent_Ayaka.json",
+        "pointer": "/Ayaka_SkillUpgrade_3",
+        "node_sha256": "38a82253dedcb000b1527bc807f63afd79c3388e746e86c5e121b4fac699ae80",
+        "raw": [
+          {
+            "$type": "BIAHEMMGABC",
+            "GBPFBNHLOFD": true,
+            "IIBMNPFLNMJ": "Avatar_Ayaka_FrozenWindmillDamage",
+            "PCABAADALND": "%1",
+            "PEOJKHKHAKL": "FrozenWindmill_SliceDamage"
+          },
+          {
+            "$type": "BIAHEMMGABC",
+            "GBPFBNHLOFD": true,
+            "IIBMNPFLNMJ": "Avatar_Ayaka_FrozenWindmill_Sub_Damage",
+            "PCABAADALND": "%1",
+            "PEOJKHKHAKL": "FrozenWindmill_SliceDamage"
+          },
+          {
+            "$type": "BIAHEMMGABC",
+            "GBPFBNHLOFD": true,
+            "IIBMNPFLNMJ": "Avatar_Ayaka_FrozenWindmillDissipate",
+            "PCABAADALND": "%2",
+            "PEOJKHKHAKL": "FrozenWindmill_BlastDamage"
+          },
+          {
+            "$type": "BIAHEMMGABC",
+            "GBPFBNHLOFD": true,
+            "IIBMNPFLNMJ": "Avatar_Ayaka_FrozenWindmill_Sub_Dissipate",
+            "PCABAADALND": "%2",
+            "PEOJKHKHAKL": "FrozenWindmill_BlastDamage"
+          }
+        ],
+        "old_pointer": "/Ayaka_SkillUpgrade_3",
+        "old_node_sha256": "1ed95bfc61b1fa2fd939163996afb5f6a2b476039bdc2852289cfb8e17a78e75",
+        "old_raw": [
+          {
+            "$type": "ModifyAbility",
+            "CLGIKOPIKBC": true,
+            "abilityName": "Avatar_Ayaka_FrozenWindmillDamage",
+            "paramDelta": "%1",
+            "paramSpecial": "FrozenWindmill_SliceDamage"
+          },
+          {
+            "$type": "ModifyAbility",
+            "CLGIKOPIKBC": true,
+            "abilityName": "Avatar_Ayaka_FrozenWindmill_Sub_Damage",
+            "paramDelta": "%1",
+            "paramSpecial": "FrozenWindmill_SliceDamage"
+          },
+          {
+            "$type": "ModifyAbility",
+            "CLGIKOPIKBC": true,
+            "abilityName": "Avatar_Ayaka_FrozenWindmillDissipate",
+            "paramDelta": "%2",
+            "paramSpecial": "FrozenWindmill_BlastDamage"
+          },
+          {
+            "$type": "ModifyAbility",
+            "CLGIKOPIKBC": true,
+            "abilityName": "Avatar_Ayaka_FrozenWindmill_Sub_Dissipate",
+            "paramDelta": "%2",
+            "paramSpecial": "FrozenWindmill_BlastDamage"
+          }
+        ],
+        "coverage": "complete selected parent; reference fields may still be unknown; not executable admission"
+      }
+    ],
+    "gadgets": [
+      {
+        "name": "gadget:FrozenWindmill_Sub",
+        "source_path": "BinOutput/Gadget/ConfigGadget_SkillObj.json",
+        "pointer": "/FrozenWindmill_Sub",
+        "node_sha256": "993f09946ebfa2912a3f9f2a9c85226cb1a4f7643244ba07dd55a65d0c5f1324",
+        "raw": {
+          "AEKILEKKKLC": {
+            "BKDFOEAADDC": 5,
+            "LHIJNGJEBEM": true,
+            "NOHCOMGOBPK": 4,
+            "PMHJMFLKMEA": -1
+          },
+          "AIDEKMLPLPC": {
+            "MCLHHGAOBII": {
+              "GOIHBNHNKEI": "SquadManager"
+            }
+          },
+          "AMNNFHLAEMM": {
+            "FIOGGNFNKDG": "RootNode",
+            "JHAMABFHDGO": "RootNode",
+            "KDKBHPCIJOF": "RootNode"
+          },
+          "BCJBHDPIFHG": true,
+          "BFIKFGAIIGF": {
+            "$type": "NFKJPMIEAHI",
+            "BFDJAGGIHKA": {
+              "BDKBMJJCCNB": 1,
+              "CHBOHAHLGEE": 60,
+              "DIKHJINCLOI": 0.10000000149011612,
+              "FPIMDLBBLIA": true,
+              "GBNNAHEBKIB": 2,
+              "HPCDPCIGIIN": "Keep"
+            },
+            "COHOPPNLOGC": {
+              "OFIILANLONO": true
+            },
+            "ECLBOIGJOHL": 3.5,
+            "FLGIGKGKJGE": 3600,
+            "GIAFBCFPCNJ": true,
+            "LHOMIOEAMFI": 1.5,
+            "OKLEHJIICDN": 1000,
+            "PEFLKICPKBN": {
+              "CMOGOCFBGJK": 0.25,
+              "NBGJGEGKHOM": 3
+            }
+          },
+          "BHJOELLAHIH": 1,
+          "BLEEDPFMHAP": {
+            "CKJLBCJNCKC": {
+              "BDCEIHCJDCE": 0.009999999776482582,
+              "CHIIANPIGDJ": -1,
+              "EBAKMOONCFJ": true,
+              "HBDNHNGIMLD": -1,
+              "HFIHLPGPDEH": true,
+              "JIOGACAKBBA": true
+            },
+            "NDKKNGBAECN": {
+              "BHFIOHALGAG": -1,
+              "BKBIFNJHKPG": "CircleLockEnemy",
+              "DMDBEDMHLEM": -1,
+              "FJKIJPELHKF": "Default",
+              "GMKBLBIDNGB": -1,
+              "IOEFLNDJHPM": 1,
+              "JJILCFONNMM": true,
+              "NNDBJKGIIAB": 3
+            },
+            "NEEEKLAINMJ": {
+              "AICMOGDCJCE": true,
+              "BDDMGKJJKKO": true,
+              "BEHGCPKMLNN": 10,
+              "ENFCLNAMGFE": 999999,
+              "GCOKCICMHFH": "Default",
+              "HDKNFAPIKHJ": 30,
+              "IDGCGJAHPOF": 999999,
+              "LNKOFKCFPGC": true,
+              "OJLNFCKHDHF": true,
+              "OMIMIMLDGLI": true,
+              "POAAJKMIAED": true
+            },
+            "NLGIANBKOCK": {
+              "AGAGFNLADMA": true,
+              "ECKHGLOFGDE": -45,
+              "EPOAFLGBGKJ": true,
+              "FKNMLNIJKOE": true,
+              "HEKHBLGLCBJ": true,
+              "IGBPOCPELHC": 15,
+              "KOOKEANEOAG": 45
+            }
+          },
+          "BLNNKFNBPOG": {
+            "BCJHOJLAACK": 2,
+            "OOGPEGKKNNP": 0.10000000149011612
+          },
+          "CFCPAPGPOEE": {
+            "ABAPOEDNFDI": true,
+            "CNEJJHGCPHJ": "Stay",
+            "EKNEGCLAKGF": true,
+            "FHOGEJIBCDJ": true
+          },
+          "DBNGPMJALAI": {
+            "GGKPCKIDFNO": -1,
+            "OCDKIHLNBHJ": true
+          },
+          "DCKNNBBKKCK": {
+            "AECILKOHJIP": true,
+            "BOHNMDEMKCP": {
+              "DHPBDMCLFII": "Center"
+            },
+            "IFFPJFGJCGO": true
+          },
+          "DGEPCHBHDFI": {
+            "NAINJMOHNIG": 25,
+            "NNFHPKJJJNI": 20
+          },
+          "DMCJINLDJKH": {
+            "OOGPEGKKNNP": 0.10000000149011612
+          },
+          "DMKPBIBCGNF": {
+            "ADEEAPBDDFE": 15,
+            "EEAOBJJDPIM": 35,
+            "FLEJOMHHDAP": 1,
+            "KFGBHHKELLI": "BillboardAttach",
+            "NPLHLMNNCIN": 24
+          },
+          "EGDBKMODNKJ": {
+            "BDHBNCEEPPK": {
+              "CMFDAIABDLD": {
+                "LLABBNCBFLG": 2
+              }
+            },
+            "BDHDIBGNANL": {
+              "AKNPGFKBNAP": true,
+              "BAELDKECJFK": 1,
+              "DGMOEPNJMAG": 100,
+              "DKJGEALEOAD": 3,
+              "EAFLMONFICO": 0.5,
+              "EJBKIGGGCBM": 10,
+              "FDKDGDIHPLF": 500,
+              "GKJHPJKDANC": true,
+              "HAIANDMNGJP": 4.75,
+              "IEINLFLOJEI": 50,
+              "JMDAKBPFMKN": 12,
+              "LEKLBHFLMHH": 40,
+              "MCCKNALLKPM": 30,
+              "MIFIHNKLPJD": 5,
+              "MLJBLDADCEA": 4.75,
+              "NDEDMIJMDKK": 5,
+              "OMMCMLMBPAN": "Monster_TauntLevel_1",
+              "OPDENFMPFIK": 500
+            },
+            "BMBMHCPCDOF": {
+              "AELOACIFJCM": true,
+              "FEPCGPPPFIF": "SelfCamp"
+            },
+            "CONIEOBPGHE": {
+              "ADFGKNNGOHF": {
+                "BHGFBFBKKOB": 8,
+                "BNGAPHEFFDC": 5,
+                "FEIKDMLBGEF": 1,
+                "GALMLAABAAG": 0.6000000238418579,
+                "HOBDNINAKLK": 4
+              },
+              "BIMIHNMILFJ": 1,
+              "COELDJHANJK": true,
+              "EKKCLEEDHPB": true,
+              "ELJMGDBJMAK": "Undead01",
+              "GKJHPJKDANC": true,
+              "OJIGBBHMGOC": 1
+            },
+            "DFJJMNBBBIH": {
+              "CMILAIBBAEB": 0.5,
+              "DHEDIMHABPC": 5,
+              "FLAIFDNJBGI": 23
+            },
+            "EBOHOFPCNAN": {
+              "CIBDOBDFGJB": {
+                "LLCBEMFMBND": 5,
+                "PNOLOEJENFA": 10
+              }
+            },
+            "EGKMNGKLECK": {
+              "CDOKMFBOJOM": {
+                "DAKALCNBNFJ": "CombatExcludeGWGO",
+                "DCOOLBBOMJH": 0.5,
+                "FGNODFJBKJB": "SelfCamp",
+                "JNOJLMIKPPN": "Enemy",
+                "OAKONNOFCCE": "CombatExcludeGWGO",
+                "PFAFDODCNGP": 20
+              },
+              "EJLFIIACFPI": {
+                "DAKALCNBNFJ": "CombatExcludeGWGO",
+                "DCOOLBBOMJH": 0.5,
+                "FGNODFJBKJB": "SelfCamp",
+                "JNOJLMIKPPN": "Enemy",
+                "OAKONNOFCCE": "CombatExcludeGWGO",
+                "PFAFDODCNGP": 20
+              }
+            },
+            "ELPJILKPKFC": {
+              "GKJHPJKDANC": true,
+              "NNFENPCDPLB": {
+                "DefaultTemplate": {
+                  "DefaultPoses": {
+                    "BHACEANOFHI": 20,
+                    "DEOHGJJPAGC": 1,
+                    "DJFNMHBCKBK": 30,
+                    "HJJGKEEILHA": true,
+                    "IIGFGIOMIKA": 120,
+                    "OHCBAPECKCI": 60,
+                    "PFAFDODCNGP": 5
+                  }
+                }
+              }
+            },
+            "GBLACJKILGN": {
+              "BHBJIMFAIHK": true,
+              "HLLLLEKLGEJ": true
+            },
+            "HFMGIIMDEFD": {
+              "CEEGKAMJFCD": "Monster"
+            },
+            "IDDKICPIKLD": "EscenarioControl",
+            "JIANFIIJJLM": {
+              "AACPDDOEMJM": true
+            },
+            "KPMGENLEMAL": 1,
+            "OBOOFCFDGCF": {
+              "GKJHPJKDANC": true,
+              "MGPABGOKFCP": 40
+            },
+            "PBBNCDGHNBI": {
+              "DPPFINAJOIA": true
+            }
+          },
+          "ELHJCKNDKFA": {
+            "OOMAJEGIIFD": 5
+          },
+          "FHLNMEDEJPM": {
+            "FMCMDOLJAHL": true,
+            "PBIKDOCCLOI": true
+          },
+          "FMGOGJPEPGP": {
+            "ANLEINNIAPD": 3,
+            "CHNDBIBDNDO": true,
+            "DEEKGHJBDHM": 3,
+            "DHMHOKFMHIH": 2,
+            "DICAIFOMHJL": 5,
+            "FEABGMALMDK": 2.5,
+            "HMENCCHOFHP": 3.5,
+            "JICMMFDONJJ": true
+          },
+          "HCACMEMCGHA": {
+            "AIMPCMJNBJN": -1,
+            "AOHJBDAKIJP": 135,
+            "BACGGJEDDLD": 0.5,
+            "EHPKFFFLDMG": 90,
+            "GCAMABGBOME": true,
+            "GGLGMLJGOAM": 0.5,
+            "IFMNOELBJOJ": -1,
+            "MANAACFOEAF": 10,
+            "NGOLEMMCFCG": 30,
+            "PLAKKNAOEFO": 15
+          },
+          "HDLJHICONJI": {
+            "DPGECKCJFFJ": -1
+          },
+          "IAEHHELGOLF": {
+            "BGDCGKOJFOF": 50,
+            "DEJFJDKONPG": 2,
+            "ECLBOIGJOHL": 6,
+            "FBONLLKHLKB": 15,
+            "FHOGEJIBCDJ": true,
+            "GDEBOPFMJAH": "Body",
+            "IGINLJPKIEG": "Neck",
+            "JAIHOPOKCIM": "Head"
+          },
+          "IFIEOADMOIA": {
+            "KOBDADFAFNC": "TEST/TEST_Chest_Btn",
+            "MHDGGPGNEJO": true
+          },
+          "IPFAFECPFAE": [
+            {
+              "IIBMNPFLNMJ": "Avatar_Ayaka_FrozenWindmill_Sub_Material",
+              "NOLOIJJMMDG": "Material"
+            },
+            {
+              "IIBMNPFLNMJ": "Avatar_Ayaka_FrozenWindmill_Sub_Damage",
+              "NOLOIJJMMDG": "Damage"
+            },
+            {
+              "IIBMNPFLNMJ": "Avatar_Ayaka_FrozenWindmill_Sub_Dissipate",
+              "NOLOIJJMMDG": "Dissipate"
+            }
+          ],
+          "JOJCMCAHLOB": {
+            "$type": "KNIBDDGAAGI",
+            "COPEIMKCLKI": [
+              {
+                "$type": "CAMEBPIACEC",
+                "IIBMNPFLNMJ": "Avatar_Ayaka_FrozenWindmill_Sub_Dissipate"
+              }
+            ],
+            "FOCDCKFCMEL": true,
+            "GEOLOMKFKBH": {
+              "EHFMPIOJOLN": "TriggerAlways",
+              "MDLHJPENOJD": true,
+              "NMCKHJBFIPF": 10,
+              "NMKBOEALDEF": "Enemy"
+            },
+            "JCHKKHDNBJI": 5
+          },
+          "KMEJNINOGNA": {
+            "APPJONCJIPN": 4,
+            "FBDCJDBGICJ": 3,
+            "HCPMEGJNMCK": 11,
+            "IKPEJGPMNDG": 3
+          },
+          "LAFCMGFKEPK": {
+            "CDALJGIBABC": 5
+          },
+          "LCNKCLNHBIG": {
+            "CEAFAEAPJBE": -1,
+            "DAINOEPPCAK": 1,
+            "DHMNIAMNFCI": true,
+            "EPDJPMNJDBN": {
+              "$type": "DPJJONFEJEB",
+              "DMFGGLDIPDF": 0.4000000059604645,
+              "HGGKCJBIPGH": 1,
+              "OPADLILFNOF": 1
+            },
+            "GKBOGNEOHKP": 1.350000023841858,
+            "KJCBAFKFFMP": 1,
+            "LGOBNKEPPAC": 1,
+            "LICLOFMHGMB": -1,
+            "MNHMDNANMED": 1,
+            "MPALFICHICI": true,
+            "NDGCJAKHDGH": 1.350000023841858,
+            "OMEMFFPBCMK": 1
+          },
+          "LMIFHEHPLNM": {
+            "OPDKMMMNGLO": {
+              "AHNIDOBJADI": {
+                "KJCBAFKFFMP": 1
+              },
+              "DBDLAOMCDOA": {
+                "CAIDILOFJKG": true,
+                "FCHKLAJFANA": 20
+              },
+              "DNKFPECGBGG": {
+                "KKCBGDANNNH": {
+                  "CAIDILOFJKG": true,
+                  "EGOIPBNAOED": 4,
+                  "NPLHLMNNCIN": 20
+                }
+              },
+              "GIDEOEGBLDL": {
+                "GMDPALPODJP": "BillboardAttach",
+                "NPLHLMNNCIN": 20,
+                "OGEKCLFBDAP": true
+              },
+              "KMOFMDKMAGO": {
+                "CAIDILOFJKG": true,
+                "LGOHIGNFGPI": {
+                  "EGOIPBNAOED": 4
+                },
+                "OMGIJMNIAIE": 1
+              },
+              "LAJAHPEPKLN": {
+                "HIBMLKJNFKO": "FirmamentCarBoard",
+                "KJCBAFKFFMP": 1
+              },
+              "PFCAENLPIHF": {
+                "CAIDILOFJKG": true,
+                "KEEINOMPOAO": 20
+              }
+            }
+          },
+          "MOIDMEBEGAO": {
+            "HCEMKGBFCJE": 0.5,
+            "IANAFEEEEFI": 90
+          },
+          "NCKGNONEMGK": {
+            "OLJOCHDEBAL": {
+              "PINAGOFNNHB": "G_LevelDefault"
+            }
+          },
+          "NIABHMLIFCB": {
+            "KMHENJKEEBP": {
+              "KFGNDILPIAB": 3
+            }
+          },
+          "NIGJPPGAEEP": true,
+          "NLGIGAIPAJC": {
+            "BCKOMHEEHEO": 1,
+            "HKHLMILLJNC": 1,
+            "MHDGGPGNEJO": true,
+            "OMLCLKCAFCI": 1,
+            "ONKMKPBNNCF": 0.10000000149011612
+          },
+          "OAFJMGDINFB": {
+            "BPPGEPKKJEG": {
+              "FOECJMLJBBK": 1
+            },
+            "PHHMFAGKLAO": {
+              "CCLMGILPGCC": 1,
+              "GJAINPECJBG": 1,
+              "NKONIBPCOAJ": 1
+            },
+            "PHOLKEJNEPA": {
+              "EFMLFCPOJJP": 1
+            }
+          },
+          "OCNMAMFFCGN": {
+            "AIIBKKGHEKN": {
+              "EFFEAMECIDC": 1,
+              "MNNADJAMEMN": 1,
+              "NBJMOCMLKCH": 100
+            },
+            "CNKGLCFMGPP": {
+              "BGFCCFLGDGK": 2
+            },
+            "ENKDLNFPHNM": {
+              "EFFEAMECIDC": 1,
+              "EJODENOHHFE": 0.20000000298023224,
+              "GCOPGEFBPEK": 10,
+              "HMFGPGDFBOM": 2,
+              "MNNADJAMEMN": 1,
+              "NBJMOCMLKCH": 100,
+              "NPLNJFHMJOE": 0.20000000298023224,
+              "PFKGGPPMMKG": 5
+            },
+            "GMELLNGBBAM": {
+              "ADHBDCHCEAN": -1,
+              "AJEEFFJHCEA": 6,
+              "APDJMKPDLNG": 6,
+              "CDEMECCEMIG": true,
+              "CMCHAHJCKAM": 20,
+              "CPGACBIHOFB": 1,
+              "EANCDJGPLHE": 140,
+              "EKLBPBMNAJC": 0.5,
+              "FKKOCNDLDPG": 30,
+              "FLBHHGMHOGL": {
+                "ACFHPFIHAPL": true,
+                "DFMIPKEEGPN": 15,
+                "KNDEDONNIPI": true
+              },
+              "GGHADOJNDKL": 16,
+              "GPHPKEEENAH": 8,
+              "HMPMNDCPPJA": 1,
+              "HPAJCNGNABE": 30,
+              "IIBKPGGKOMB": 160,
+              "INBACPNHOHD": 5,
+              "KKMDOLLBKKC": 0.20000000298023224,
+              "LCLJCMJJCKD": 0.5,
+              "LKCJHEDKKMP": 1.5,
+              "LNPCFBAECFH": 50,
+              "ODACGCMLHIK": 32,
+              "OEICHJJDHCH": 0.5
+            },
+            "HBCHIIGBPCO": true,
+            "HPPOLNNKDLC": {
+              "PFIMAGAEGDJ": 25
+            },
+            "IAINCHBPKJO": {
+              "GGPDICBBLDL": 3,
+              "HBIKJBDDFDB": 1,
+              "IEAJNFBLMMJ": 2,
+              "JJECIPMPFEE": 1
+            },
+            "IGBCFFBIHLG": {
+              "CMCIEPFPJDM": 0.05000000074505806,
+              "EADKAKABDMJ": 3
+            },
+            "JOIHBONBJIH": {
+              "DOBEPGEBHBK": 3
+            },
+            "LOANEIDBOHF": true,
+            "MLLPEFHGFGL": {
+              "NKHIEDKNFDE": {
+                "LGGIFPCBKNE": 0.5,
+                "LHDAMANIJFD": 1
+              }
+            }
+          },
+          "PAFPCHJDLCD": true,
+          "PILKOGJKCEM": true
+        },
+        "old_pointer": "/FrozenWindmill_Sub",
+        "old_node_sha256": "8e4af54ecec369d94eeb9dcc7890f4d5d98d422270ee28ea16740d732a7a4ab6",
+        "old_raw": {
+          "dither": {
+            "AOKIINGPPPO": -1
+          },
+          "AHPNGGHNMLH": {
+            "CLHMFPBKKLI": "Head",
+            "maxPitchDegree": 15,
+            "FEIHMAEHIML": 6,
+            "affectedByWorld": true,
+            "maxYawDegree": 50,
+            "LPLPBBCHJFO": "Body",
+            "MABIBPCMNHF": "Neck",
+            "NIFJPDLMDNN": 2
+          },
+          "headControl": {
+            "DPMMJNDONLO": "Stay",
+            "useHeadControl": true,
+            "affectedByWorld": true,
+            "checkInSurface": true
+          },
+          "BDCBPBCONAE": {
+            "enable": true,
+            "GGBEPMDFMKO": -1
+          },
+          "CJGOOIEHGAK": {
+            "AJMMHIHAHCD": {
+              "HFJOKLDEKFC": 25
+            },
+            "BIPOKNMBPOG": {
+              "CGDPFBNLPFI": 1.5,
+              "COAEGKGLCMG": 0.20000000298023224,
+              "DJGIMBMPFFA": 32,
+              "DJGPFFEGOIF": 1,
+              "DPJHLHHEBBD": 50,
+              "ECMEHPDNOCF": 160,
+              "HALPEJAEGLK": 1,
+              "HANGGOKPJCP": {
+                "CGEGMKDJFHD": true,
+                "EOOFJGCAKPF": 15,
+                "KFAINKKFBDM": true
+              },
+              "HDBIKHDOGMG": -1,
+              "JHALKMNNILO": 30,
+              "LGALGDEOHFE": 20,
+              "LHPGCFFEKMF": 16,
+              "enable": true,
+              "LPDECNKPLJC": 30,
+              "NCMFOFGKOJJ": 6,
+              "NOPOCNEFFEK": 5,
+              "OGFEGBCOGBD": 140,
+              "OLDCNKIDGHN": 0.5,
+              "OLPNKJDHNIO": 0.5,
+              "PAGFDFFBBAL": 8,
+              "PIMAMGCCHKA": 6,
+              "PPCENNLNLKF": 0.5
+            },
+            "BLEPDNCCEGL": {
+              "BABKMAAEDIA": 1,
+              "CHENNCLDGDF": 0.20000000298023224,
+              "COAOHBJHPJJ": 2,
+              "EGAKMFGPHOP": 0.20000000298023224,
+              "GANMBIKEJKJ": 5,
+              "HCJNBILLPIP": 10,
+              "MBILMDAEMAG": 100,
+              "POIDNBJALBF": 1
+            },
+            "DEMMMPHACIP": {
+              "OCCHFPPAIBE": 3
+            },
+            "enable": true,
+            "DMBLEKPBFKE": {
+              "DKFBACMGJBC": 1,
+              "EEHAPPPKODC": 2,
+              "KJGKAAFPAOO": 3,
+              "MKLKKPEBIFI": 1
+            },
+            "HJNIKOCIGIO": {
+              "triggerDistance": 3,
+              "checkInterval": 0.05000000074505806
+            },
+            "target": {
+              "ICLHNMCHCII": {
+                "KBMFBBOFACI": 1,
+                "PDGHLEFOCPB": 0.5
+              }
+            },
+            "MMGDMNPMDAI": {
+              "ECPFMLKBAAF": 2
+            },
+            "NEPMMNENLFK": {
+              "BABKMAAEDIA": 1,
+              "MBILMDAEMAG": 100,
+              "POIDNBJALBF": 1
+            }
+          },
+          "field": {
+            "triggerInfinite": true,
+            "lifeInfinite": true,
+            "LOMBMPIICIJ": {
+              "centerType": "Center"
+            }
+          },
+          "DACCCBPBNLP": true,
+          "EAPABGHPPFJ": {
+            "GBBCEMKAOHK": 90,
+            "sceneID": 0.5
+          },
+          "combat": {
+            "combatLock": {
+              "DHBLMAABPFN": -1,
+              "overrideRange": -1,
+              "FOGGAKNNNIA": true,
+              "lockShape": "CircleLockEnemy",
+              "KMCJPLNFCOD": 1,
+              "LNGMNOFCBII": 3,
+              "lockType": "Default",
+              "MPNEFIAAKHC": -1
+            },
+            "box": {
+              "enable": true,
+              "IJLHLOBHEAB": true,
+              "IOEOJHPCMIB": 15,
+              "JJEHFDBLODM": true,
+              "JPBCDEINDEL": true,
+              "NJOENJEENGG": -45,
+              "PALMCGDLKCD": 45
+            },
+            "die": {
+              "dieForceDisappearTime": 0.009999999776482582,
+              "dieShaderDisableDurationTime": -1,
+              "dieIsGhostToEnemy": true,
+              "dieIgnoreTriggerBullet": true,
+              "dieShaderEnableDurationTime": -1,
+              "NINELBLOAHG": true
+            },
+            "property": {
+              "ABIBLHPFIDN": true,
+              "isInvincible": true,
+              "bonusRange": 10,
+              "JELFJDLJEEF": true,
+              "endureType": "Default",
+              "useCreatorProperty": true,
+              "defense": 999999,
+              "HP": 999999,
+              "attack": 30,
+              "NPIKICDOCEA": true,
+              "isLockHP": true
+            }
+          },
+          "EFMJCOLDMBD": {
+            "AEABLBEMJDL": 4,
+            "CBLKDAOEOAC": 5,
+            "ILAFNDEPCGO": -1,
+            "PFJOLNOBCOE": true
+          },
+          "aibeta": {
+            "BCDNFEINLKI": {
+              "CMKCOEHEIMF": 23,
+              "GAEAJPGPEGF": 0.5,
+              "HAHJEOHBMMF": 5
+            },
+            "network": {
+              "syncSkill": true,
+              "enable": true
+            },
+            "target": {
+              "AOMEDOALGBM": {
+                "JLGEEAMFBCJ": 5,
+                "LDDAJDFGDIJ": 10
+              }
+            },
+            "skillGCD": 1,
+            "FLGOPECJKEJ": {
+              "enable": true
+            },
+            "ui": {
+              "LJNGLFEEEID": true,
+              "PFLIGLJNOHC": "SelfCamp"
+            },
+            "ICACLAIGNBF": {
+              "enable": true,
+              "LANLMPGACEG": {
+                "DefaultTemplate": {
+                  "DefaultPoses": {
+                    "DDCAPLJDBEE": true,
+                    "DLMKPNKICOH": 120,
+                    "DMFNFNMMJJL": 60,
+                    "FNBEIKNEDKL": 30,
+                    "JFGMCICLGMM": 1,
+                    "MHJCBEPGOJM": 20,
+                    "PIJKDKMIPIB": 5
+                  }
+                }
+              }
+            },
+            "MAEEEKALMJA": {
+              "OKGOGMNNLCI": "Monster"
+            },
+            "NNIFBEFNCLN": {
+              "enable": true
+            },
+            "sensing": {
+              "JJPHFHLBBFH": {
+                "CALAMCGAJAM": "Enemy",
+                "EALGEADNHOF": "SelfCamp",
+                "GBGFIEBBIMP": "CombatExcludeGWGO",
+                "HMKKKAAPLBB": "CombatExcludeGWGO",
+                "JPFNBOIHOKG": 0.5,
+                "PIJKDKMIPIB": 20
+              },
+              "PLIOAGPJACP": {
+                "CALAMCGAJAM": "Enemy",
+                "EALGEADNHOF": "SelfCamp",
+                "GBGFIEBBIMP": "CombatExcludeGWGO",
+                "HMKKKAAPLBB": "CombatExcludeGWGO",
+                "JPFNBOIHOKG": 0.5,
+                "PIJKDKMIPIB": 20
+              }
+            },
+            "PGMCNABMJNN": "EscenarioControl",
+            "PHGOAMIEIGJ": {
+              "enable": true,
+              "DHKBMMOGBDB": 5,
+              "FDHIBKDANDA": 30,
+              "GIODDDBKKFI": "Monster_TauntLevel_1",
+              "GKIACFBAFCG": 100,
+              "GOFNLAJNIPJ": 3,
+              "HHKNFPHCIBM": 4.75,
+              "IEHMGFMJENA": 500,
+              "JMGNBBGHENM": 5,
+              "JOHKGMJLJFJ": 4.75,
+              "LADHCNJLFLF": 12,
+              "MPFCBDBJAHB": 50,
+              "NBMBLEHKGFO": 1,
+              "ODGOKDIEHLL": 0.5,
+              "OGJNOKICJBM": 10,
+              "OKALEALDCHM": 40,
+              "OOOHEJCBEGF": 500
+            },
+            "moveSetting": {
+              "enable": true,
+              "almostReachedDistanceWalk": 1,
+              "snakelikeMoveSetting": {
+                "segmentCount": 8,
+                "maxCurvatrue": 1,
+                "minCurvature": 0.6000000238418579,
+                "minSegmentDistance": 4,
+                "segmentDistance": 5
+              },
+              "almostReachedDistanceRun": 1,
+              "navMeshAgentName": "Undead01"
+            },
+            "PPPMANGLJLC": {
+              "enable": true,
+              "JEMFLCGABGK": 40
+            }
+          },
+          "FDPMBOCKKAB": {
+            "enable": true,
+            "PNIENODMMIE": "TEST/TEST_Chest_Btn"
+          },
+          "FIBFHHPAOAI": {
+            "HJELLFAMNKA": 5
+          },
+          "GBCOBKGCNDH": 1,
+          "isInteractive": true,
+          "HKDMOCHKJIO": {
+            "exitRadius": 25,
+            "enterRadius": 20
+          },
+          "IIGKEIIEJOH": {
+            "enable": true,
+            "CPOOFHOHIKK": 0.10000000149011612,
+            "EKIFALJHGFF": 1,
+            "ELKNEPCABPD": 1,
+            "GIIJLOONDNL": 1
+          },
+          "model": {
+            "bulletAim": "RootNode",
+            "elementDrop": "RootNode",
+            "elementPendant": "RootNode"
+          },
+          "JIIHJHELHDL": {
+            "enable": true,
+            "NADMPJGGGMG": true
+          },
+          "JJKIKHJHJBG": {
+            "$type": "HMKJALMPKKD",
+            "DAKFKBMBEGG": {
+              "targetType": "Enemy",
+              "GACMOLAFDAO": true,
+              "triggerCD": 10,
+              "triggerType": "TriggerAlways"
+            },
+            "DCNEFKKGMNC": 5,
+            "enable": true,
+            "HAPCKPPOHMI": [
+              {
+                "$type": "JLGOLOPKGOM",
+                "abilityName": "Avatar_Ayaka_FrozenWindmill_Sub_Dissipate"
+              }
+            ]
+          },
+          "stateLayers": {
+            "normalBetweenCamera": {
+              "detectDitherRange": 3
+            }
+          },
+          "move": {
+            "$type": "INMBHJOGELD",
+            "BMFDOLCFGMA": 3600,
+            "FEIHMAEHIML": 3.5,
+            "velocityForce": {
+              "ANMNIHBPDIE": true
+            },
+            "LMFOHCLPFIJ": {
+              "CKOLDIMPKOL": 2,
+              "COLHNOCOPAD": 1,
+              "GBGBFAOBLOC": "Keep",
+              "IMEBFNCNACI": 60,
+              "JEEPPOLJDAH": true,
+              "MDELHGKOJIM": 0.10000000149011612
+            },
+            "maxSpeed": 1000,
+            "NAEPFCNMFLJ": {
+              "BHLPGAHMJHN": 3,
+              "HJOHEPAOLFN": 0.25
+            },
+            "OICKODAIFCA": true,
+            "PEPFHPFKODP": 1.5
+          },
+          "KNNOAAJKDML": {
+            "GFACNGAMACJ": 0.10000000149011612,
+            "LPCDBJHFBNL": 2
+          },
+          "KOEIAIJJHLH": {
+            "AHFLLAPPMCP": true,
+            "BOIDFHNAKKA": 3.5,
+            "DDOFEOFNLPJ": 5,
+            "DLFINGGFIOA": true,
+            "EDDAEHEHCHJ": 2.5,
+            "EDIOCJDANGH": 3,
+            "FIFOMDKIGLH": 3,
+            "JBBMEBGAALC": 2
+          },
+          "captureGroup": {
+            "FMEEEHPMHDB": {
+              "DGBLGBHELLG": {
+                "GPJBCHKCIJO": true,
+                "KOKGCKKGGDN": {
+                  "OGBIDMEDGGD": 4
+                },
+                "LJEDMJFCHMK": 1
+              },
+              "IBKFOAEFCHJ": {
+                "value": 1
+              },
+              "INJHBCKFHJP": {
+                "showDistance": 20,
+                "FCNBOCKFDBG": true,
+                "attachPointName": "BillboardAttach"
+              },
+              "IPFABCFDBGG": {
+                "CHBMKLMPFNC": {
+                  "showDistance": 20,
+                  "GPJBCHKCIJO": true,
+                  "OGBIDMEDGGD": 4
+                }
+              },
+              "JEJAGCKKJAA": {
+                "CPLHKIEMGAD": 20,
+                "GPJBCHKCIJO": true
+              },
+              "KNNCEDMKCOK": {
+                "prefabName": "FirmamentCarBoard",
+                "value": 1
+              },
+              "LGBAPCGFFAK": {
+                "ECBEEKENBCN": 20,
+                "GPJBCHKCIJO": true
+              }
+            }
+          },
+          "MINKNMECGDB": {
+            "GFACNGAMACJ": 0.10000000149011612
+          },
+          "abilities": [
+            {
+              "abilityName": "Avatar_Ayaka_FrozenWindmill_Sub_Material",
+              "abilityID": "Material"
+            },
+            {
+              "abilityName": "Avatar_Ayaka_FrozenWindmill_Sub_Damage",
+              "abilityID": "Damage"
+            },
+            {
+              "abilityName": "Avatar_Ayaka_FrozenWindmill_Sub_Dissipate",
+              "abilityID": "Dissipate"
+            }
+          ],
+          "NDMMMKDOHKK": {
+            "ICLPAEMLAMB": 5
+          },
+          "NEGIFCMEBDM": {
+            "beHit": {
+              "CIHCLMOPEND": 1,
+              "KNGCHEJFDMA": 1,
+              "KPCCNMBFEBA": 1
+            },
+            "Default": {
+              "initialPoseID": 1
+            },
+            "MHPPACBNCHA": {
+              "KGKDPPFINBG": 1
+            }
+          },
+          "NGAKKPGOAAC": {
+            "squad": {
+              "EAGNPIKDHND": "G_LevelDefault"
+            }
+          },
+          "NMGHGFLFPOC": {
+            "NDNACDMLJFK": {
+              "OHPFEKIEFCD": "SquadManager"
+            }
+          },
+          "NOKJJJBMPHF": {
+            "value": 0.5,
+            "blendDuration": 0.5,
+            "FELFCKNGHHC": 10,
+            "autoTurnStartMax": 15,
+            "autoTurnEndMin": 90,
+            "shouldPauseAnimatorBeforeReady": true,
+            "LBGGHBPMCBC": -1,
+            "sphericalYUp": 30,
+            "NAOIPIIJHAJ": -1,
+            "autoTurnEndMax": 135
+          },
+          "billboard": {
+            "forceShowDistance": 15,
+            "showDistance": 24,
+            "attachPoint": "BillboardAttach",
+            "value": 1,
+            "PMNMLIPNKIG": 35
+          },
+          "OHNNLAAHMDH": {
+            "CMMCFABCELI": 3,
+            "ELOJMBFJKKK": 4,
+            "GFBFEKFKKLK": 11,
+            "NKOEFPIDECB": 3
+          },
+          "common": {
+            "shadowViewSizeRatio": 1,
+            "effectAttachShape": {
+              "$type": "PGLHJAJDPDB",
+              "AKMEGMJHMKN": 0.4000000059604645,
+              "DHNEEIBKOMB": 1,
+              "LEMMFBEPEDI": 1
+            },
+            "modelHeight": 1.350000023841858,
+            "height": 1.350000023841858,
+            "FNFEHOCHIEP": -1,
+            "value": 1,
+            "mass": 1,
+            "clearAIOnSetLightDeactive": true,
+            "reconnectSupport": true,
+            "viewSize": 1,
+            "PHFGIMJPLOC": -1
+          }
+        }
+      },
+      {
+        "name": "gadget:FrozenWindmill",
+        "source_path": "BinOutput/Gadget/ConfigGadget_SkillObj.json",
+        "pointer": "/FrozenWindmill",
+        "node_sha256": "ca834929fcbd93dd67ad2b08d386ab811e67282e62ea062ae8e1ad5aed7b074d",
+        "raw": {
+          "AEKILEKKKLC": {
+            "BKDFOEAADDC": 5,
+            "LHIJNGJEBEM": true,
+            "NOHCOMGOBPK": 4,
+            "PMHJMFLKMEA": -1
+          },
+          "AIDEKMLPLPC": {
+            "MCLHHGAOBII": {
+              "GOIHBNHNKEI": "SquadManager"
+            }
+          },
+          "AMNNFHLAEMM": {
+            "FIOGGNFNKDG": "RootNode",
+            "JHAMABFHDGO": "RootNode",
+            "KDKBHPCIJOF": "RootNode"
+          },
+          "BCJBHDPIFHG": true,
+          "BFIKFGAIIGF": {
+            "$type": "NFKJPMIEAHI",
+            "BFDJAGGIHKA": {
+              "BDKBMJJCCNB": 1,
+              "CHBOHAHLGEE": 60,
+              "DIKHJINCLOI": 0.10000000149011612,
+              "FPIMDLBBLIA": true,
+              "GBNNAHEBKIB": 2,
+              "HPCDPCIGIIN": "Keep"
+            },
+            "COHOPPNLOGC": {
+              "OFIILANLONO": true
+            },
+            "ECLBOIGJOHL": 3.5,
+            "FLGIGKGKJGE": 3600,
+            "GIAFBCFPCNJ": true,
+            "LHOMIOEAMFI": 3,
+            "OKLEHJIICDN": 1000,
+            "PEFLKICPKBN": {
+              "CMOGOCFBGJK": 0.25,
+              "NBGJGEGKHOM": 3
+            }
+          },
+          "BHJOELLAHIH": 1,
+          "BLEEDPFMHAP": {
+            "CKJLBCJNCKC": {
+              "BDCEIHCJDCE": 0.009999999776482582,
+              "CHIIANPIGDJ": -1,
+              "EBAKMOONCFJ": true,
+              "HBDNHNGIMLD": -1,
+              "HFIHLPGPDEH": true,
+              "JIOGACAKBBA": true
+            },
+            "NDKKNGBAECN": {
+              "BHFIOHALGAG": -1,
+              "BKBIFNJHKPG": "CircleLockEnemy",
+              "DMDBEDMHLEM": -1,
+              "FJKIJPELHKF": "Default",
+              "GMKBLBIDNGB": -1,
+              "IOEFLNDJHPM": 1,
+              "JJILCFONNMM": true,
+              "NNDBJKGIIAB": 3
+            },
+            "NEEEKLAINMJ": {
+              "AICMOGDCJCE": true,
+              "BDDMGKJJKKO": true,
+              "BEHGCPKMLNN": 10,
+              "ENFCLNAMGFE": 999999,
+              "GCOKCICMHFH": "Default",
+              "HDKNFAPIKHJ": 30,
+              "IDGCGJAHPOF": 999999,
+              "LNKOFKCFPGC": true,
+              "OJLNFCKHDHF": true,
+              "OMIMIMLDGLI": true,
+              "POAAJKMIAED": true
+            },
+            "NLGIANBKOCK": {
+              "AGAGFNLADMA": true,
+              "ECKHGLOFGDE": -45,
+              "EPOAFLGBGKJ": true,
+              "FKNMLNIJKOE": true,
+              "HEKHBLGLCBJ": true,
+              "IGBPOCPELHC": 15,
+              "KOOKEANEOAG": 45
+            }
+          },
+          "BLNNKFNBPOG": {
+            "BCJHOJLAACK": 2,
+            "OOGPEGKKNNP": 0.10000000149011612
+          },
+          "CFCPAPGPOEE": {
+            "ABAPOEDNFDI": true,
+            "CNEJJHGCPHJ": "Stay",
+            "EKNEGCLAKGF": true,
+            "FHOGEJIBCDJ": true
+          },
+          "DBNGPMJALAI": {
+            "GGKPCKIDFNO": -1,
+            "OCDKIHLNBHJ": true
+          },
+          "DCKNNBBKKCK": {
+            "AECILKOHJIP": true,
+            "BOHNMDEMKCP": {
+              "DHPBDMCLFII": "Center"
+            },
+            "IFFPJFGJCGO": true
+          },
+          "DGEPCHBHDFI": {
+            "NAINJMOHNIG": 25,
+            "NNFHPKJJJNI": 20
+          },
+          "DMCJINLDJKH": {
+            "OOGPEGKKNNP": 0.10000000149011612
+          },
+          "DMKPBIBCGNF": {
+            "ADEEAPBDDFE": 15,
+            "EEAOBJJDPIM": 35,
+            "FLEJOMHHDAP": 1,
+            "KFGBHHKELLI": "BillboardAttach",
+            "NPLHLMNNCIN": 24
+          },
+          "EGDBKMODNKJ": {
+            "BDHBNCEEPPK": {
+              "CMFDAIABDLD": {
+                "LLABBNCBFLG": 2
+              }
+            },
+            "BDHDIBGNANL": {
+              "AKNPGFKBNAP": true,
+              "BAELDKECJFK": 1,
+              "DGMOEPNJMAG": 100,
+              "DKJGEALEOAD": 3,
+              "EAFLMONFICO": 0.5,
+              "EJBKIGGGCBM": 10,
+              "FDKDGDIHPLF": 500,
+              "GKJHPJKDANC": true,
+              "HAIANDMNGJP": 4.75,
+              "IEINLFLOJEI": 50,
+              "JMDAKBPFMKN": 12,
+              "LEKLBHFLMHH": 40,
+              "MCCKNALLKPM": 30,
+              "MIFIHNKLPJD": 5,
+              "MLJBLDADCEA": 4.75,
+              "NDEDMIJMDKK": 5,
+              "OMMCMLMBPAN": "Monster_TauntLevel_1",
+              "OPDENFMPFIK": 500
+            },
+            "BMBMHCPCDOF": {
+              "AELOACIFJCM": true,
+              "FEPCGPPPFIF": "SelfCamp"
+            },
+            "CONIEOBPGHE": {
+              "ADFGKNNGOHF": {
+                "BHGFBFBKKOB": 8,
+                "BNGAPHEFFDC": 5,
+                "FEIKDMLBGEF": 1,
+                "GALMLAABAAG": 0.6000000238418579,
+                "HOBDNINAKLK": 4
+              },
+              "BIMIHNMILFJ": 1,
+              "COELDJHANJK": true,
+              "EKKCLEEDHPB": true,
+              "ELJMGDBJMAK": "Undead01",
+              "GKJHPJKDANC": true,
+              "OJIGBBHMGOC": 1
+            },
+            "DFJJMNBBBIH": {
+              "CMILAIBBAEB": 0.5,
+              "DHEDIMHABPC": 5,
+              "FLAIFDNJBGI": 23
+            },
+            "EBOHOFPCNAN": {
+              "CIBDOBDFGJB": {
+                "LLCBEMFMBND": 5,
+                "PNOLOEJENFA": 10
+              }
+            },
+            "EGKMNGKLECK": {
+              "CDOKMFBOJOM": {
+                "DAKALCNBNFJ": "CombatExcludeGWGO",
+                "DCOOLBBOMJH": 0.5,
+                "FGNODFJBKJB": "SelfCamp",
+                "JNOJLMIKPPN": "Enemy",
+                "OAKONNOFCCE": "CombatExcludeGWGO",
+                "PFAFDODCNGP": 20
+              },
+              "EJLFIIACFPI": {
+                "DAKALCNBNFJ": "CombatExcludeGWGO",
+                "DCOOLBBOMJH": 0.5,
+                "FGNODFJBKJB": "SelfCamp",
+                "JNOJLMIKPPN": "Enemy",
+                "OAKONNOFCCE": "CombatExcludeGWGO",
+                "PFAFDODCNGP": 20
+              }
+            },
+            "ELPJILKPKFC": {
+              "GKJHPJKDANC": true,
+              "NNFENPCDPLB": {
+                "DefaultTemplate": {
+                  "DefaultPoses": {
+                    "BHACEANOFHI": 20,
+                    "DEOHGJJPAGC": 1,
+                    "DJFNMHBCKBK": 30,
+                    "HJJGKEEILHA": true,
+                    "IIGFGIOMIKA": 120,
+                    "OHCBAPECKCI": 60,
+                    "PFAFDODCNGP": 5
+                  }
+                }
+              }
+            },
+            "GBLACJKILGN": {
+              "BHBJIMFAIHK": true,
+              "HLLLLEKLGEJ": true
+            },
+            "HFMGIIMDEFD": {
+              "CEEGKAMJFCD": "Monster"
+            },
+            "IDDKICPIKLD": "EscenarioControl",
+            "JIANFIIJJLM": {
+              "AACPDDOEMJM": true
+            },
+            "KPMGENLEMAL": 1,
+            "OBOOFCFDGCF": {
+              "GKJHPJKDANC": true,
+              "MGPABGOKFCP": 40
+            },
+            "PBBNCDGHNBI": {
+              "DPPFINAJOIA": true
+            }
+          },
+          "ELHJCKNDKFA": {
+            "OOMAJEGIIFD": 5
+          },
+          "FHLNMEDEJPM": {
+            "FMCMDOLJAHL": true,
+            "PBIKDOCCLOI": true
+          },
+          "FMGOGJPEPGP": {
+            "ANLEINNIAPD": 3,
+            "CHNDBIBDNDO": true,
+            "DEEKGHJBDHM": 3,
+            "DHMHOKFMHIH": 2,
+            "DICAIFOMHJL": 5,
+            "FEABGMALMDK": 2.5,
+            "HMENCCHOFHP": 3.5,
+            "JICMMFDONJJ": true
+          },
+          "HCACMEMCGHA": {
+            "AIMPCMJNBJN": -1,
+            "AOHJBDAKIJP": 135,
+            "BACGGJEDDLD": 0.5,
+            "EHPKFFFLDMG": 90,
+            "GCAMABGBOME": true,
+            "GGLGMLJGOAM": 0.5,
+            "IFMNOELBJOJ": -1,
+            "MANAACFOEAF": 10,
+            "NGOLEMMCFCG": 30,
+            "PLAKKNAOEFO": 15
+          },
+          "HDLJHICONJI": {
+            "DPGECKCJFFJ": -1
+          },
+          "IAEHHELGOLF": {
+            "BGDCGKOJFOF": 50,
+            "DEJFJDKONPG": 2,
+            "ECLBOIGJOHL": 6,
+            "FBONLLKHLKB": 15,
+            "FHOGEJIBCDJ": true,
+            "GDEBOPFMJAH": "Body",
+            "IGINLJPKIEG": "Neck",
+            "JAIHOPOKCIM": "Head"
+          },
+          "IFIEOADMOIA": {
+            "KOBDADFAFNC": "TEST/TEST_Chest_Btn",
+            "MHDGGPGNEJO": true
+          },
+          "IPFAFECPFAE": [
+            {
+              "IIBMNPFLNMJ": "Avatar_Ayaka_FrozenWindmill_Material",
+              "NOLOIJJMMDG": "Material"
+            },
+            {
+              "IIBMNPFLNMJ": "Avatar_Ayaka_FrozenWindmillDamage",
+              "NOLOIJJMMDG": "Damage"
+            },
+            {
+              "IIBMNPFLNMJ": "Avatar_Ayaka_FrozenWindmillDissipate",
+              "NOLOIJJMMDG": "Dissipate"
+            }
+          ],
+          "JOJCMCAHLOB": {
+            "$type": "KNIBDDGAAGI",
+            "COPEIMKCLKI": [
+              {
+                "$type": "CAMEBPIACEC",
+                "IIBMNPFLNMJ": "Avatar_Ayaka_FrozenWindmillDissipate"
+              }
+            ],
+            "FOCDCKFCMEL": true,
+            "GEOLOMKFKBH": {
+              "EHFMPIOJOLN": "TriggerAlways",
+              "MDLHJPENOJD": true,
+              "NMCKHJBFIPF": 10,
+              "NMKBOEALDEF": "Enemy"
+            },
+            "JCHKKHDNBJI": 5
+          },
+          "KMEJNINOGNA": {
+            "APPJONCJIPN": 4,
+            "FBDCJDBGICJ": 3,
+            "HCPMEGJNMCK": 11,
+            "IKPEJGPMNDG": 3
+          },
+          "LAFCMGFKEPK": {
+            "CDALJGIBABC": 5
+          },
+          "LCNKCLNHBIG": {
+            "CEAFAEAPJBE": -1,
+            "DAINOEPPCAK": 1,
+            "DHMNIAMNFCI": true,
+            "EPDJPMNJDBN": {
+              "$type": "DPJJONFEJEB",
+              "DMFGGLDIPDF": 0.4000000059604645,
+              "HGGKCJBIPGH": 1,
+              "OPADLILFNOF": 1
+            },
+            "GKBOGNEOHKP": 1.350000023841858,
+            "KJCBAFKFFMP": 1,
+            "LGOBNKEPPAC": 1,
+            "LICLOFMHGMB": -1,
+            "MNHMDNANMED": 1,
+            "MPALFICHICI": true,
+            "NDGCJAKHDGH": 1.350000023841858,
+            "OMEMFFPBCMK": 1
+          },
+          "LMIFHEHPLNM": {
+            "OPDKMMMNGLO": {
+              "AHNIDOBJADI": {
+                "KJCBAFKFFMP": 1
+              },
+              "DBDLAOMCDOA": {
+                "CAIDILOFJKG": true,
+                "FCHKLAJFANA": 20
+              },
+              "DNKFPECGBGG": {
+                "KKCBGDANNNH": {
+                  "CAIDILOFJKG": true,
+                  "EGOIPBNAOED": 4,
+                  "NPLHLMNNCIN": 20
+                }
+              },
+              "GIDEOEGBLDL": {
+                "GMDPALPODJP": "BillboardAttach",
+                "NPLHLMNNCIN": 20,
+                "OGEKCLFBDAP": true
+              },
+              "KMOFMDKMAGO": {
+                "CAIDILOFJKG": true,
+                "LGOHIGNFGPI": {
+                  "EGOIPBNAOED": 4
+                },
+                "OMGIJMNIAIE": 1
+              },
+              "LAJAHPEPKLN": {
+                "HIBMLKJNFKO": "FirmamentCarBoard",
+                "KJCBAFKFFMP": 1
+              },
+              "PFCAENLPIHF": {
+                "CAIDILOFJKG": true,
+                "KEEINOMPOAO": 20
+              }
+            }
+          },
+          "MOIDMEBEGAO": {
+            "HCEMKGBFCJE": 0.5,
+            "IANAFEEEEFI": 90
+          },
+          "NCKGNONEMGK": {
+            "OLJOCHDEBAL": {
+              "PINAGOFNNHB": "G_LevelDefault"
+            }
+          },
+          "NIABHMLIFCB": {
+            "KMHENJKEEBP": {
+              "KFGNDILPIAB": 3
+            }
+          },
+          "NIGJPPGAEEP": true,
+          "NLGIGAIPAJC": {
+            "BCKOMHEEHEO": 1,
+            "HKHLMILLJNC": 1,
+            "MHDGGPGNEJO": true,
+            "OMLCLKCAFCI": 1,
+            "ONKMKPBNNCF": 0.10000000149011612
+          },
+          "OAFJMGDINFB": {
+            "BPPGEPKKJEG": {
+              "FOECJMLJBBK": 1
+            },
+            "PHHMFAGKLAO": {
+              "CCLMGILPGCC": 1,
+              "GJAINPECJBG": 1,
+              "NKONIBPCOAJ": 1
+            },
+            "PHOLKEJNEPA": {
+              "EFMLFCPOJJP": 1
+            }
+          },
+          "OCNMAMFFCGN": {
+            "AIIBKKGHEKN": {
+              "EFFEAMECIDC": 1,
+              "MNNADJAMEMN": 1,
+              "NBJMOCMLKCH": 100
+            },
+            "CNKGLCFMGPP": {
+              "BGFCCFLGDGK": 2
+            },
+            "ENKDLNFPHNM": {
+              "EFFEAMECIDC": 1,
+              "EJODENOHHFE": 0.20000000298023224,
+              "GCOPGEFBPEK": 10,
+              "HMFGPGDFBOM": 2,
+              "MNNADJAMEMN": 1,
+              "NBJMOCMLKCH": 100,
+              "NPLNJFHMJOE": 0.20000000298023224,
+              "PFKGGPPMMKG": 5
+            },
+            "GMELLNGBBAM": {
+              "ADHBDCHCEAN": -1,
+              "AJEEFFJHCEA": 6,
+              "APDJMKPDLNG": 6,
+              "CDEMECCEMIG": true,
+              "CMCHAHJCKAM": 20,
+              "CPGACBIHOFB": 1,
+              "EANCDJGPLHE": 140,
+              "EKLBPBMNAJC": 0.5,
+              "FKKOCNDLDPG": 30,
+              "FLBHHGMHOGL": {
+                "ACFHPFIHAPL": true,
+                "DFMIPKEEGPN": 15,
+                "KNDEDONNIPI": true
+              },
+              "GGHADOJNDKL": 16,
+              "GPHPKEEENAH": 8,
+              "HMPMNDCPPJA": 1,
+              "HPAJCNGNABE": 30,
+              "IIBKPGGKOMB": 160,
+              "INBACPNHOHD": 5,
+              "KKMDOLLBKKC": 0.20000000298023224,
+              "LCLJCMJJCKD": 0.5,
+              "LKCJHEDKKMP": 1.5,
+              "LNPCFBAECFH": 50,
+              "ODACGCMLHIK": 32,
+              "OEICHJJDHCH": 0.5
+            },
+            "HBCHIIGBPCO": true,
+            "HPPOLNNKDLC": {
+              "PFIMAGAEGDJ": 25
+            },
+            "IAINCHBPKJO": {
+              "GGPDICBBLDL": 3,
+              "HBIKJBDDFDB": 1,
+              "IEAJNFBLMMJ": 2,
+              "JJECIPMPFEE": 1
+            },
+            "IGBCFFBIHLG": {
+              "CMCIEPFPJDM": 0.05000000074505806,
+              "EADKAKABDMJ": 3
+            },
+            "JOIHBONBJIH": {
+              "DOBEPGEBHBK": 3
+            },
+            "LOANEIDBOHF": true,
+            "MLLPEFHGFGL": {
+              "NKHIEDKNFDE": {
+                "LGGIFPCBKNE": 0.5,
+                "LHDAMANIJFD": 1
+              }
+            }
+          },
+          "PAFPCHJDLCD": true,
+          "PILKOGJKCEM": true
+        },
+        "old_pointer": "/FrozenWindmill",
+        "old_node_sha256": "d2d310af8f20424a7f84291f4931fbf2057014b45d27be069a6a4404ff9e84ce",
+        "old_raw": {
+          "dither": {
+            "AOKIINGPPPO": -1
+          },
+          "AHPNGGHNMLH": {
+            "CLHMFPBKKLI": "Head",
+            "maxPitchDegree": 15,
+            "FEIHMAEHIML": 6,
+            "affectedByWorld": true,
+            "maxYawDegree": 50,
+            "LPLPBBCHJFO": "Body",
+            "MABIBPCMNHF": "Neck",
+            "NIFJPDLMDNN": 2
+          },
+          "headControl": {
+            "DPMMJNDONLO": "Stay",
+            "useHeadControl": true,
+            "affectedByWorld": true,
+            "checkInSurface": true
+          },
+          "BDCBPBCONAE": {
+            "enable": true,
+            "GGBEPMDFMKO": -1
+          },
+          "CJGOOIEHGAK": {
+            "AJMMHIHAHCD": {
+              "HFJOKLDEKFC": 25
+            },
+            "BIPOKNMBPOG": {
+              "CGDPFBNLPFI": 1.5,
+              "COAEGKGLCMG": 0.20000000298023224,
+              "DJGIMBMPFFA": 32,
+              "DJGPFFEGOIF": 1,
+              "DPJHLHHEBBD": 50,
+              "ECMEHPDNOCF": 160,
+              "HALPEJAEGLK": 1,
+              "HANGGOKPJCP": {
+                "CGEGMKDJFHD": true,
+                "EOOFJGCAKPF": 15,
+                "KFAINKKFBDM": true
+              },
+              "HDBIKHDOGMG": -1,
+              "JHALKMNNILO": 30,
+              "LGALGDEOHFE": 20,
+              "LHPGCFFEKMF": 16,
+              "enable": true,
+              "LPDECNKPLJC": 30,
+              "NCMFOFGKOJJ": 6,
+              "NOPOCNEFFEK": 5,
+              "OGFEGBCOGBD": 140,
+              "OLDCNKIDGHN": 0.5,
+              "OLPNKJDHNIO": 0.5,
+              "PAGFDFFBBAL": 8,
+              "PIMAMGCCHKA": 6,
+              "PPCENNLNLKF": 0.5
+            },
+            "BLEPDNCCEGL": {
+              "BABKMAAEDIA": 1,
+              "CHENNCLDGDF": 0.20000000298023224,
+              "COAOHBJHPJJ": 2,
+              "EGAKMFGPHOP": 0.20000000298023224,
+              "GANMBIKEJKJ": 5,
+              "HCJNBILLPIP": 10,
+              "MBILMDAEMAG": 100,
+              "POIDNBJALBF": 1
+            },
+            "DEMMMPHACIP": {
+              "OCCHFPPAIBE": 3
+            },
+            "enable": true,
+            "DMBLEKPBFKE": {
+              "DKFBACMGJBC": 1,
+              "EEHAPPPKODC": 2,
+              "KJGKAAFPAOO": 3,
+              "MKLKKPEBIFI": 1
+            },
+            "HJNIKOCIGIO": {
+              "triggerDistance": 3,
+              "checkInterval": 0.05000000074505806
+            },
+            "target": {
+              "ICLHNMCHCII": {
+                "KBMFBBOFACI": 1,
+                "PDGHLEFOCPB": 0.5
+              }
+            },
+            "MMGDMNPMDAI": {
+              "ECPFMLKBAAF": 2
+            },
+            "NEPMMNENLFK": {
+              "BABKMAAEDIA": 1,
+              "MBILMDAEMAG": 100,
+              "POIDNBJALBF": 1
+            }
+          },
+          "field": {
+            "triggerInfinite": true,
+            "lifeInfinite": true,
+            "LOMBMPIICIJ": {
+              "centerType": "Center"
+            }
+          },
+          "DACCCBPBNLP": true,
+          "EAPABGHPPFJ": {
+            "GBBCEMKAOHK": 90,
+            "sceneID": 0.5
+          },
+          "combat": {
+            "combatLock": {
+              "DHBLMAABPFN": -1,
+              "overrideRange": -1,
+              "FOGGAKNNNIA": true,
+              "lockShape": "CircleLockEnemy",
+              "KMCJPLNFCOD": 1,
+              "LNGMNOFCBII": 3,
+              "lockType": "Default",
+              "MPNEFIAAKHC": -1
+            },
+            "box": {
+              "enable": true,
+              "IJLHLOBHEAB": true,
+              "IOEOJHPCMIB": 15,
+              "JJEHFDBLODM": true,
+              "JPBCDEINDEL": true,
+              "NJOENJEENGG": -45,
+              "PALMCGDLKCD": 45
+            },
+            "die": {
+              "dieForceDisappearTime": 0.009999999776482582,
+              "dieShaderDisableDurationTime": -1,
+              "dieIsGhostToEnemy": true,
+              "dieIgnoreTriggerBullet": true,
+              "dieShaderEnableDurationTime": -1,
+              "NINELBLOAHG": true
+            },
+            "property": {
+              "ABIBLHPFIDN": true,
+              "isInvincible": true,
+              "bonusRange": 10,
+              "JELFJDLJEEF": true,
+              "endureType": "Default",
+              "useCreatorProperty": true,
+              "defense": 999999,
+              "HP": 999999,
+              "attack": 30,
+              "NPIKICDOCEA": true,
+              "isLockHP": true
+            }
+          },
+          "EFMJCOLDMBD": {
+            "AEABLBEMJDL": 4,
+            "CBLKDAOEOAC": 5,
+            "ILAFNDEPCGO": -1,
+            "PFJOLNOBCOE": true
+          },
+          "aibeta": {
+            "BCDNFEINLKI": {
+              "CMKCOEHEIMF": 23,
+              "GAEAJPGPEGF": 0.5,
+              "HAHJEOHBMMF": 5
+            },
+            "network": {
+              "syncSkill": true,
+              "enable": true
+            },
+            "target": {
+              "AOMEDOALGBM": {
+                "JLGEEAMFBCJ": 5,
+                "LDDAJDFGDIJ": 10
+              }
+            },
+            "skillGCD": 1,
+            "FLGOPECJKEJ": {
+              "enable": true
+            },
+            "ui": {
+              "LJNGLFEEEID": true,
+              "PFLIGLJNOHC": "SelfCamp"
+            },
+            "ICACLAIGNBF": {
+              "enable": true,
+              "LANLMPGACEG": {
+                "DefaultTemplate": {
+                  "DefaultPoses": {
+                    "DDCAPLJDBEE": true,
+                    "DLMKPNKICOH": 120,
+                    "DMFNFNMMJJL": 60,
+                    "FNBEIKNEDKL": 30,
+                    "JFGMCICLGMM": 1,
+                    "MHJCBEPGOJM": 20,
+                    "PIJKDKMIPIB": 5
+                  }
+                }
+              }
+            },
+            "MAEEEKALMJA": {
+              "OKGOGMNNLCI": "Monster"
+            },
+            "NNIFBEFNCLN": {
+              "enable": true
+            },
+            "sensing": {
+              "JJPHFHLBBFH": {
+                "CALAMCGAJAM": "Enemy",
+                "EALGEADNHOF": "SelfCamp",
+                "GBGFIEBBIMP": "CombatExcludeGWGO",
+                "HMKKKAAPLBB": "CombatExcludeGWGO",
+                "JPFNBOIHOKG": 0.5,
+                "PIJKDKMIPIB": 20
+              },
+              "PLIOAGPJACP": {
+                "CALAMCGAJAM": "Enemy",
+                "EALGEADNHOF": "SelfCamp",
+                "GBGFIEBBIMP": "CombatExcludeGWGO",
+                "HMKKKAAPLBB": "CombatExcludeGWGO",
+                "JPFNBOIHOKG": 0.5,
+                "PIJKDKMIPIB": 20
+              }
+            },
+            "PGMCNABMJNN": "EscenarioControl",
+            "PHGOAMIEIGJ": {
+              "enable": true,
+              "DHKBMMOGBDB": 5,
+              "FDHIBKDANDA": 30,
+              "GIODDDBKKFI": "Monster_TauntLevel_1",
+              "GKIACFBAFCG": 100,
+              "GOFNLAJNIPJ": 3,
+              "HHKNFPHCIBM": 4.75,
+              "IEHMGFMJENA": 500,
+              "JMGNBBGHENM": 5,
+              "JOHKGMJLJFJ": 4.75,
+              "LADHCNJLFLF": 12,
+              "MPFCBDBJAHB": 50,
+              "NBMBLEHKGFO": 1,
+              "ODGOKDIEHLL": 0.5,
+              "OGJNOKICJBM": 10,
+              "OKALEALDCHM": 40,
+              "OOOHEJCBEGF": 500
+            },
+            "moveSetting": {
+              "enable": true,
+              "almostReachedDistanceWalk": 1,
+              "snakelikeMoveSetting": {
+                "segmentCount": 8,
+                "maxCurvatrue": 1,
+                "minCurvature": 0.6000000238418579,
+                "minSegmentDistance": 4,
+                "segmentDistance": 5
+              },
+              "almostReachedDistanceRun": 1,
+              "navMeshAgentName": "Undead01"
+            },
+            "PPPMANGLJLC": {
+              "enable": true,
+              "JEMFLCGABGK": 40
+            }
+          },
+          "FDPMBOCKKAB": {
+            "enable": true,
+            "PNIENODMMIE": "TEST/TEST_Chest_Btn"
+          },
+          "FIBFHHPAOAI": {
+            "HJELLFAMNKA": 5
+          },
+          "GBCOBKGCNDH": 1,
+          "isInteractive": true,
+          "HKDMOCHKJIO": {
+            "exitRadius": 25,
+            "enterRadius": 20
+          },
+          "IIGKEIIEJOH": {
+            "enable": true,
+            "CPOOFHOHIKK": 0.10000000149011612,
+            "EKIFALJHGFF": 1,
+            "ELKNEPCABPD": 1,
+            "GIIJLOONDNL": 1
+          },
+          "model": {
+            "bulletAim": "RootNode",
+            "elementDrop": "RootNode",
+            "elementPendant": "RootNode"
+          },
+          "JIIHJHELHDL": {
+            "enable": true,
+            "NADMPJGGGMG": true
+          },
+          "JJKIKHJHJBG": {
+            "$type": "HMKJALMPKKD",
+            "DAKFKBMBEGG": {
+              "targetType": "Enemy",
+              "GACMOLAFDAO": true,
+              "triggerCD": 10,
+              "triggerType": "TriggerAlways"
+            },
+            "DCNEFKKGMNC": 5,
+            "enable": true,
+            "HAPCKPPOHMI": [
+              {
+                "$type": "JLGOLOPKGOM",
+                "abilityName": "Avatar_Ayaka_FrozenWindmillDissipate"
+              }
+            ]
+          },
+          "stateLayers": {
+            "normalBetweenCamera": {
+              "detectDitherRange": 3
+            }
+          },
+          "move": {
+            "$type": "INMBHJOGELD",
+            "BMFDOLCFGMA": 3600,
+            "FEIHMAEHIML": 3.5,
+            "velocityForce": {
+              "ANMNIHBPDIE": true
+            },
+            "LMFOHCLPFIJ": {
+              "CKOLDIMPKOL": 2,
+              "COLHNOCOPAD": 1,
+              "GBGBFAOBLOC": "Keep",
+              "IMEBFNCNACI": 60,
+              "JEEPPOLJDAH": true,
+              "MDELHGKOJIM": 0.10000000149011612
+            },
+            "maxSpeed": 1000,
+            "NAEPFCNMFLJ": {
+              "BHLPGAHMJHN": 3,
+              "HJOHEPAOLFN": 0.25
+            },
+            "OICKODAIFCA": true,
+            "PEPFHPFKODP": 3
+          },
+          "KNNOAAJKDML": {
+            "GFACNGAMACJ": 0.10000000149011612,
+            "LPCDBJHFBNL": 2
+          },
+          "KOEIAIJJHLH": {
+            "AHFLLAPPMCP": true,
+            "BOIDFHNAKKA": 3.5,
+            "DDOFEOFNLPJ": 5,
+            "DLFINGGFIOA": true,
+            "EDDAEHEHCHJ": 2.5,
+            "EDIOCJDANGH": 3,
+            "FIFOMDKIGLH": 3,
+            "JBBMEBGAALC": 2
+          },
+          "captureGroup": {
+            "FMEEEHPMHDB": {
+              "DGBLGBHELLG": {
+                "GPJBCHKCIJO": true,
+                "KOKGCKKGGDN": {
+                  "OGBIDMEDGGD": 4
+                },
+                "LJEDMJFCHMK": 1
+              },
+              "IBKFOAEFCHJ": {
+                "value": 1
+              },
+              "INJHBCKFHJP": {
+                "showDistance": 20,
+                "FCNBOCKFDBG": true,
+                "attachPointName": "BillboardAttach"
+              },
+              "IPFABCFDBGG": {
+                "CHBMKLMPFNC": {
+                  "showDistance": 20,
+                  "GPJBCHKCIJO": true,
+                  "OGBIDMEDGGD": 4
+                }
+              },
+              "JEJAGCKKJAA": {
+                "CPLHKIEMGAD": 20,
+                "GPJBCHKCIJO": true
+              },
+              "KNNCEDMKCOK": {
+                "prefabName": "FirmamentCarBoard",
+                "value": 1
+              },
+              "LGBAPCGFFAK": {
+                "ECBEEKENBCN": 20,
+                "GPJBCHKCIJO": true
+              }
+            }
+          },
+          "MINKNMECGDB": {
+            "GFACNGAMACJ": 0.10000000149011612
+          },
+          "abilities": [
+            {
+              "abilityName": "Avatar_Ayaka_FrozenWindmill_Material",
+              "abilityID": "Material"
+            },
+            {
+              "abilityName": "Avatar_Ayaka_FrozenWindmillDamage",
+              "abilityID": "Damage"
+            },
+            {
+              "abilityName": "Avatar_Ayaka_FrozenWindmillDissipate",
+              "abilityID": "Dissipate"
+            }
+          ],
+          "NDMMMKDOHKK": {
+            "ICLPAEMLAMB": 5
+          },
+          "NEGIFCMEBDM": {
+            "beHit": {
+              "CIHCLMOPEND": 1,
+              "KNGCHEJFDMA": 1,
+              "KPCCNMBFEBA": 1
+            },
+            "Default": {
+              "initialPoseID": 1
+            },
+            "MHPPACBNCHA": {
+              "KGKDPPFINBG": 1
+            }
+          },
+          "NGAKKPGOAAC": {
+            "squad": {
+              "EAGNPIKDHND": "G_LevelDefault"
+            }
+          },
+          "NMGHGFLFPOC": {
+            "NDNACDMLJFK": {
+              "OHPFEKIEFCD": "SquadManager"
+            }
+          },
+          "NOKJJJBMPHF": {
+            "value": 0.5,
+            "blendDuration": 0.5,
+            "FELFCKNGHHC": 10,
+            "autoTurnStartMax": 15,
+            "autoTurnEndMin": 90,
+            "shouldPauseAnimatorBeforeReady": true,
+            "LBGGHBPMCBC": -1,
+            "sphericalYUp": 30,
+            "NAOIPIIJHAJ": -1,
+            "autoTurnEndMax": 135
+          },
+          "billboard": {
+            "forceShowDistance": 15,
+            "showDistance": 24,
+            "attachPoint": "BillboardAttach",
+            "value": 1,
+            "PMNMLIPNKIG": 35
+          },
+          "OHNNLAAHMDH": {
+            "CMMCFABCELI": 3,
+            "ELOJMBFJKKK": 4,
+            "GFBFEKFKKLK": 11,
+            "NKOEFPIDECB": 3
+          },
+          "common": {
+            "shadowViewSizeRatio": 1,
+            "effectAttachShape": {
+              "$type": "PGLHJAJDPDB",
+              "AKMEGMJHMKN": 0.4000000059604645,
+              "DHNEEIBKOMB": 1,
+              "LEMMFBEPEDI": 1
+            },
+            "modelHeight": 1.350000023841858,
+            "height": 1.350000023841858,
+            "FNFEHOCHIEP": -1,
+            "value": 1,
+            "mass": 1,
+            "clearAIOnSetLightDeactive": true,
+            "reconnectSupport": true,
+            "viewSize": 1,
+            "PHFGIMJPLOC": -1
+          }
+        }
+      }
+    ],
+    "creation_links": [
+      {
+        "ability": "Avatar_Ayaka_FrozenWindmill",
+        "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Ayaka.json",
+        "old_operation_pointer": "/14/Default/onAbilityStart/0",
+        "operation_node_sha256_old": "62459b74b5049ad55b4bb1c420035fc75179f9fdc1b2ddf3887fd9e53f377c23",
+        "operation": {
+          "$type": "TriggerBullet",
+          "actorIceSubHurtDelta": -1,
+          "doOffStage": false,
+          "born": {
+            "$type": "ConfigBornByTarget",
+            "offset": {
+              "x": 1.7999999523162842,
+              "z": 0.800000011920929
+            },
+            "APKLAIJMEIL": {
+              "HHNLJKNBKPP": 180
+            },
+            "value": 10,
+            "direction": {
+              "maxAngle": 180
+            },
+            "onGroundRaycastUpDist": 2,
+            "onGround": true
+          },
+          "trackTarget": "SelfAttackTarget",
+          "bulletID": 41002001,
+          "value": true,
+          "canBeHandledOnRecover": true,
+          "lifeByOwnerV2": true
+        },
+        "current_operation_pointer": "/14/Default/ECFFDLHMCLK/0",
+        "operation_node_sha256_current": "633ed0ea1302e65555f739f7e1c311f5ca927f9bb67fc4efc60fc00ac0e12014",
+        "current_operation": {
+          "$type": "DKLODEPOLDC",
+          "AMOLMPHFPHJ": -1,
+          "BDKJJCBBECN": "SelfAttackTarget",
+          "DFLNJNIGJLL": 41002001,
+          "ILELAOFJIKJ": true,
+          "KGHIIEPKAAM": true,
+          "LJFIEGHHLOB": false,
+          "MLDOBLJCKCK": true,
+          "MLFLDPAGADG": {
+            "$type": "KCOKCEJLEMA",
+            "EEFLHEKBODJ": {
+              "BNJLEBLGEKB": 180
+            },
+            "FDGFPGIDACF": {
+              "IOPIFIJFBHI": 1.7999999523162842,
+              "LBLJIHBEDKH": 0.800000011920929
+            },
+            "GNFICELAKIB": 10,
+            "HECMDGIAGKM": 2,
+            "LMBGHPGJIAP": true,
+            "POPNBJAHNFK": {
+              "ONEHKOHOCBH": 180
+            }
+          }
+        },
+        "id_field_pointer": "/14/Default/ECFFDLHMCLK/0/DFLNJNIGJLL",
+        "gadget_id": 41002001,
+        "excel_pointer": "/174",
+        "excel_record": {
+          "prefabPathHash": "1896777614282822613",
+          "itemJsonName": "Default_Item",
+          "interactNameTextMapHash": 3353995288,
+          "type": "Bullet",
+          "jsonName": "FrozenWindmill",
+          "id": 41002001,
+          "hasAudio": true,
+          "isInteractive": true,
+          "tags": [
+            "item"
+          ],
+          "campID": 1001,
+          "nameTextMapHash": 4221019413
+        },
+        "excel_node_sha256": "3d1559c601ab6b6f9fec4bc31c9e6da8c7355e6287c6902ffa187f6e308611e3",
+        "gadget_source_path": "BinOutput/Gadget/ConfigGadget_SkillObj.json",
+        "gadget_pointer": "/FrozenWindmill",
+        "gadget_node_sha256": "ca834929fcbd93dd67ad2b08d386ab811e67282e62ea062ae8e1ad5aed7b074d",
+        "mounted_abilities": [
+          {
+            "abilityName": "Avatar_Ayaka_FrozenWindmill_Material",
+            "NOLOIJJMMDG": "Material"
+          },
+          {
+            "abilityName": "Avatar_Ayaka_FrozenWindmillDamage",
+            "NOLOIJJMMDG": "Damage"
+          },
+          {
+            "abilityName": "Avatar_Ayaka_FrozenWindmillDissipate",
+            "NOLOIJJMMDG": "Dissipate"
+          }
+        ],
+        "mount_list_pointer": "/FrozenWindmill/IPFAFECPFAE",
+        "mount_list_node_sha256": "11cdd398628c2661d30b5de47a4fb709866851fd7389f2dfdc0e0e34a57e4e42",
+        "mounts_are_not_dispatch": true
+      },
+      {
+        "ability": "Avatar_Ayaka_FrozenWindmill",
+        "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Ayaka.json",
+        "old_operation_pointer": "/14/Default/onAbilityStart/1",
+        "operation_node_sha256_old": "c1c3d2966cb0419b7430e08ab1737343c6f108823daeef3f8211aab022329235",
+        "operation": {
+          "$type": "TriggerBullet",
+          "actorIceSubHurtDelta": -1,
+          "doOffStage": false,
+          "born": {
+            "$type": "ConfigBornByTarget",
+            "offset": {
+              "x": 1,
+              "z": 1.2000000476837158,
+              "y": 2
+            },
+            "APKLAIJMEIL": {
+              "HHNLJKNBKPP": 180
+            },
+            "value": 10,
+            "direction": {
+              "$type": "ConfigDirectionByEntity",
+              "maxAngle": 180,
+              "angleOffset": {
+                "x": 30
+              }
+            },
+            "onGroundRaycastUpDist": 2
+          },
+          "trackTarget": "SelfAttackTarget",
+          "predicates": [
+            {
+              "$type": "ByUnlockTalentParam",
+              "talentParam": "Avatar_Ayaka_Oboro",
+              "target": "Target"
+            }
+          ],
+          "bulletID": 41002005,
+          "value": true,
+          "canBeHandledOnRecover": true,
+          "lifeByOwnerV2": true
+        },
+        "current_operation_pointer": "/14/Default/ECFFDLHMCLK/1",
+        "operation_node_sha256_current": "102e64b29f36f4484ec8a45ee9224d19d50439a1b5f567eb3183f1583e552f2d",
+        "current_operation": {
+          "$type": "DKLODEPOLDC",
+          "AMOLMPHFPHJ": -1,
+          "BDKJJCBBECN": "SelfAttackTarget",
+          "DFLNJNIGJLL": 41002005,
+          "IJDGNIIOHLM": [
+            {
+              "$type": "DIOFPDKDAIG",
+              "BDHBNCEEPPK": "Target",
+              "JPCEGCMOHNI": "Avatar_Ayaka_Oboro"
+            }
+          ],
+          "ILELAOFJIKJ": true,
+          "KGHIIEPKAAM": true,
+          "LJFIEGHHLOB": false,
+          "MLDOBLJCKCK": true,
+          "MLFLDPAGADG": {
+            "$type": "KCOKCEJLEMA",
+            "EEFLHEKBODJ": {
+              "BNJLEBLGEKB": 180
+            },
+            "FDGFPGIDACF": {
+              "FEENKFAKHJI": 2,
+              "IOPIFIJFBHI": 1,
+              "LBLJIHBEDKH": 1.2000000476837158
+            },
+            "GNFICELAKIB": 10,
+            "HECMDGIAGKM": 2,
+            "POPNBJAHNFK": {
+              "$type": "LAHGIEMEMGI",
+              "BDAIFIAOMBE": {
+                "IOPIFIJFBHI": 30
+              },
+              "ONEHKOHOCBH": 180
+            }
+          }
+        },
+        "id_field_pointer": "/14/Default/ECFFDLHMCLK/1/DFLNJNIGJLL",
+        "gadget_id": 41002005,
+        "excel_pointer": "/178",
+        "excel_record": {
+          "prefabPathHash": "1896777614282822613",
+          "itemJsonName": "Default_Item",
+          "interactNameTextMapHash": 759437688,
+          "type": "Bullet",
+          "jsonName": "FrozenWindmill_Sub",
+          "id": 41002005,
+          "hasAudio": true,
+          "isInteractive": true,
+          "tags": [
+            "item"
+          ],
+          "campID": 1001,
+          "nameTextMapHash": 1229315237
+        },
+        "excel_node_sha256": "f6e3a631d7d2b84211909389134377a98c8a8877fda63339f8bc44dd7d6e699e",
+        "gadget_source_path": "BinOutput/Gadget/ConfigGadget_SkillObj.json",
+        "gadget_pointer": "/FrozenWindmill_Sub",
+        "gadget_node_sha256": "993f09946ebfa2912a3f9f2a9c85226cb1a4f7643244ba07dd55a65d0c5f1324",
+        "mounted_abilities": [
+          {
+            "abilityName": "Avatar_Ayaka_FrozenWindmill_Sub_Material",
+            "NOLOIJJMMDG": "Material"
+          },
+          {
+            "abilityName": "Avatar_Ayaka_FrozenWindmill_Sub_Damage",
+            "NOLOIJJMMDG": "Damage"
+          },
+          {
+            "abilityName": "Avatar_Ayaka_FrozenWindmill_Sub_Dissipate",
+            "NOLOIJJMMDG": "Dissipate"
+          }
+        ],
+        "mount_list_pointer": "/FrozenWindmill_Sub/IPFAFECPFAE",
+        "mount_list_node_sha256": "6cae7d008098d55b03ab46cbe9c56531a8b030677fd05cf28e50ca848e31dd1d",
+        "mounts_are_not_dispatch": true
+      },
+      {
+        "ability": "Avatar_Ayaka_FrozenWindmill",
+        "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Ayaka.json",
+        "old_operation_pointer": "/14/Default/onAbilityStart/2",
+        "operation_node_sha256_old": "d29d3cca5dda9ce05e5fc8eb02971ab3e2c32cda016520f8d542b128da67a3f9",
+        "operation": {
+          "$type": "TriggerBullet",
+          "actorIceSubHurtDelta": -1,
+          "doOffStage": false,
+          "born": {
+            "$type": "ConfigBornByTarget",
+            "offset": {
+              "x": 1,
+              "z": 1.2000000476837158,
+              "y": -2
+            },
+            "APKLAIJMEIL": {
+              "HHNLJKNBKPP": 180
+            },
+            "value": 10,
+            "direction": {
+              "$type": "ConfigDirectionByEntity",
+              "maxAngle": 180,
+              "angleOffset": {
+                "x": -30
+              }
+            },
+            "onGroundRaycastUpDist": 2
+          },
+          "trackTarget": "SelfAttackTarget",
+          "predicates": [
+            {
+              "$type": "ByUnlockTalentParam",
+              "talentParam": "Avatar_Ayaka_Oboro",
+              "target": "Target"
+            }
+          ],
+          "bulletID": 41002005,
+          "value": true,
+          "canBeHandledOnRecover": true,
+          "lifeByOwnerV2": true
+        },
+        "current_operation_pointer": "/14/Default/ECFFDLHMCLK/2",
+        "operation_node_sha256_current": "e59b0ff38cb8b75f5e4fbf9c695e3b8187d5464df4c24151075264413c06dc0b",
+        "current_operation": {
+          "$type": "DKLODEPOLDC",
+          "AMOLMPHFPHJ": -1,
+          "BDKJJCBBECN": "SelfAttackTarget",
+          "DFLNJNIGJLL": 41002005,
+          "IJDGNIIOHLM": [
+            {
+              "$type": "DIOFPDKDAIG",
+              "BDHBNCEEPPK": "Target",
+              "JPCEGCMOHNI": "Avatar_Ayaka_Oboro"
+            }
+          ],
+          "ILELAOFJIKJ": true,
+          "KGHIIEPKAAM": true,
+          "LJFIEGHHLOB": false,
+          "MLDOBLJCKCK": true,
+          "MLFLDPAGADG": {
+            "$type": "KCOKCEJLEMA",
+            "EEFLHEKBODJ": {
+              "BNJLEBLGEKB": 180
+            },
+            "FDGFPGIDACF": {
+              "FEENKFAKHJI": -2,
+              "IOPIFIJFBHI": 1,
+              "LBLJIHBEDKH": 1.2000000476837158
+            },
+            "GNFICELAKIB": 10,
+            "HECMDGIAGKM": 2,
+            "POPNBJAHNFK": {
+              "$type": "LAHGIEMEMGI",
+              "BDAIFIAOMBE": {
+                "IOPIFIJFBHI": -30
+              },
+              "ONEHKOHOCBH": 180
+            }
+          }
+        },
+        "id_field_pointer": "/14/Default/ECFFDLHMCLK/2/DFLNJNIGJLL",
+        "gadget_id": 41002005,
+        "excel_pointer": "/178",
+        "excel_record": {
+          "prefabPathHash": "1896777614282822613",
+          "itemJsonName": "Default_Item",
+          "interactNameTextMapHash": 759437688,
+          "type": "Bullet",
+          "jsonName": "FrozenWindmill_Sub",
+          "id": 41002005,
+          "hasAudio": true,
+          "isInteractive": true,
+          "tags": [
+            "item"
+          ],
+          "campID": 1001,
+          "nameTextMapHash": 1229315237
+        },
+        "excel_node_sha256": "f6e3a631d7d2b84211909389134377a98c8a8877fda63339f8bc44dd7d6e699e",
+        "gadget_source_path": "BinOutput/Gadget/ConfigGadget_SkillObj.json",
+        "gadget_pointer": "/FrozenWindmill_Sub",
+        "gadget_node_sha256": "993f09946ebfa2912a3f9f2a9c85226cb1a4f7643244ba07dd55a65d0c5f1324",
+        "mounted_abilities": [
+          {
+            "abilityName": "Avatar_Ayaka_FrozenWindmill_Sub_Material",
+            "NOLOIJJMMDG": "Material"
+          },
+          {
+            "abilityName": "Avatar_Ayaka_FrozenWindmill_Sub_Damage",
+            "NOLOIJJMMDG": "Damage"
+          },
+          {
+            "abilityName": "Avatar_Ayaka_FrozenWindmill_Sub_Dissipate",
+            "NOLOIJJMMDG": "Dissipate"
+          }
+        ],
+        "mount_list_pointer": "/FrozenWindmill_Sub/IPFAFECPFAE",
+        "mount_list_node_sha256": "6cae7d008098d55b03ab46cbe9c56531a8b030677fd05cf28e50ca848e31dd1d",
+        "mounts_are_not_dispatch": true
+      }
+    ],
+    "attenuation": {
+      "pointer": "/391",
+      "record": {
+        "group": "default",
+        "durabilitySequence": [
+          1,
+          0,
+          0,
+          1,
+          0,
+          0,
+          1,
+          0,
+          0,
+          1,
+          0,
+          0,
+          1,
+          0,
+          0,
+          1,
+          0,
+          0,
+          1,
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        "enbreakSequence": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "resetCycle": 2.5,
+        "damageSequence": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "node_sha256": "cb979be74d026cd1af0a01958680952c085781890b08bdcecdc52cf844fa11cd",
+      "shared_identity": "not_inferred",
+      "application_channel": "durabilitySequence",
+      "damage_not_application": "damageSequence"
+    },
+    "timer_pairs": [
+      {
+        "context": "Avatar_Ayaka_FrozenWindmillDamage",
+        "current_pointer": "/18/Default/GPPBBDEICKP/FrozenWindmill_Damage/JFLGPLCIOEC",
+        "old_pointer": "/18/Default/modifiers/FrozenWindmill_Damage/thinkInterval",
+        "value": 0.25,
+        "interval_alias": {
+          "JFLGPLCIOEC": "thinkInterval"
+        },
+        "callback_alias": {
+          "FMBHOKCHKOH": "onThinkInterval"
+        },
+        "callback_count": 1,
+        "does_not_prove_initial_or_terminal_tick_order": true
+      }
+    ]
+  },
+  "notes": [
+    "Complete local shape admission, no character-ID dispatch or native Gadget VM.",
+    "Unknown fields are retained and fixed-shape guarded, not translated by guessed semantics.",
+    "Source periods do not prove first/count/end or association with the selected Q action."
+  ]
+}

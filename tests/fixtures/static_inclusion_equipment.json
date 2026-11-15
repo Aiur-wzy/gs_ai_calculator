@@ -1,0 +1,904 @@
+{
+  "details": {
+    "10007": {
+      "artifact_set": {
+        "id": 10007,
+        "affix_group_id": 210007,
+        "source_rank_level": 4,
+        "icon": "UI_RelicIcon_10007_4",
+        "disable_filter": null,
+        "bag_sort_value": 7,
+        "name": "教官",
+        "name_text_map_hash": "2662294963",
+        "name_source": {
+          "table": "EquipAffixExcelConfigData",
+          "record_id": 2100070,
+          "text_map_hash": "2662294963",
+          "language": "CHS",
+          "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53"
+        },
+        "name_status": "present",
+        "version_line": "release",
+        "required_counts": [
+          2,
+          4
+        ],
+        "contains_ids": [
+          57140,
+          57120,
+          57150,
+          57110,
+          57130
+        ],
+        "source_missing_fields": [
+          "disableFilter"
+        ],
+        "source_refs": [
+          {
+            "table": "ReliquarySetExcelConfigData",
+            "key": {
+              "setId": 10007
+            },
+            "field": null,
+            "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53"
+          }
+        ],
+        "catalog_rarities": [
+          3,
+          4
+        ],
+        "configured_rarities": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "in_codex": true
+      },
+      "effects": [
+        {
+          "required_count": 2,
+          "source_index": 0,
+          "relation_status": "present",
+          "effect": {
+            "affix_id": 2100070,
+            "affix_group_id": 210007,
+            "source_level": 0,
+            "name": "教官",
+            "name_text_map_hash": "2662294963",
+            "name_source": {
+              "table": "EquipAffixExcelConfigData",
+              "record_id": 2100070,
+              "text_map_hash": "2662294963",
+              "language": "CHS",
+              "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53"
+            },
+            "name_status": "present",
+            "desc_template": "元素精通提高80点。",
+            "desc_source": {
+              "table": "EquipAffixExcelConfigData",
+              "record_id": 2100070,
+              "text_map_hash": "3817263353",
+              "language": "CHS",
+              "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53"
+            },
+            "desc_status": "present",
+            "open_config": null,
+            "version_line": "release",
+            "param_list": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "add_props": [
+              {
+                "propType": "FIGHT_PROP_ELEMENT_MASTERY",
+                "value": 80
+              },
+              {},
+              {}
+            ],
+            "source_missing_fields": [
+              "level",
+              "openConfig"
+            ],
+            "source_refs": [
+              {
+                "table": "EquipAffixExcelConfigData",
+                "key": {
+                  "affixId": 2100070
+                },
+                "field": null,
+                "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53"
+              }
+            ],
+            "annotations": []
+          }
+        },
+        {
+          "required_count": 4,
+          "source_index": 1,
+          "relation_status": "present",
+          "effect": {
+            "affix_id": 2100071,
+            "affix_group_id": 210007,
+            "source_level": 1,
+            "name": "教官",
+            "name_text_map_hash": "3890291955",
+            "name_source": {
+              "table": "EquipAffixExcelConfigData",
+              "record_id": 2100071,
+              "text_map_hash": "3890291955",
+              "language": "CHS",
+              "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53"
+            },
+            "name_status": "present",
+            "desc_template": "触发元素反应后，队伍中所有角色的元素精通提高120点，持续8秒。",
+            "desc_source": {
+              "table": "EquipAffixExcelConfigData",
+              "record_id": 2100071,
+              "text_map_hash": "2436815897",
+              "language": "CHS",
+              "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53"
+            },
+            "desc_status": "present",
+            "open_config": "Relic_ReactionGainExtraElemMasteryForTeam",
+            "version_line": "release",
+            "param_list": [
+              8,
+              120,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "add_props": [
+              {},
+              {},
+              {}
+            ],
+            "source_missing_fields": [],
+            "source_refs": [
+              {
+                "table": "EquipAffixExcelConfigData",
+                "key": {
+                  "affixId": 2100071
+                },
+                "field": null,
+                "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53"
+              }
+            ],
+            "annotations": []
+          }
+        }
+      ],
+      "piece_refs": [
+        {
+          "artifact_id": 57310,
+          "equip_type": "EQUIP_RING",
+          "rarity": 3,
+          "codex_id": 30105703
+        },
+        {
+          "artifact_id": 57320,
+          "equip_type": "EQUIP_NECKLACE",
+          "rarity": 3,
+          "codex_id": 30105703
+        },
+        {
+          "artifact_id": 57330,
+          "equip_type": "EQUIP_DRESS",
+          "rarity": 3,
+          "codex_id": 30105703
+        },
+        {
+          "artifact_id": 57340,
+          "equip_type": "EQUIP_BRACER",
+          "rarity": 3,
+          "codex_id": 30105703
+        },
+        {
+          "artifact_id": 57350,
+          "equip_type": "EQUIP_SHOES",
+          "rarity": 3,
+          "codex_id": 30105703
+        },
+        {
+          "artifact_id": 57410,
+          "equip_type": "EQUIP_RING",
+          "rarity": 4,
+          "codex_id": 30105704
+        },
+        {
+          "artifact_id": 57420,
+          "equip_type": "EQUIP_NECKLACE",
+          "rarity": 4,
+          "codex_id": 30105704
+        },
+        {
+          "artifact_id": 57430,
+          "equip_type": "EQUIP_DRESS",
+          "rarity": 4,
+          "codex_id": 30105704
+        },
+        {
+          "artifact_id": 57440,
+          "equip_type": "EQUIP_BRACER",
+          "rarity": 4,
+          "codex_id": 30105704
+        },
+        {
+          "artifact_id": 57450,
+          "equip_type": "EQUIP_SHOES",
+          "rarity": 4,
+          "codex_id": 30105704
+        }
+      ],
+      "piece_refs_total": 10,
+      "piece_refs_truncated": false,
+      "annotations": [],
+      "warnings": [],
+      "data_version": {
+        "version_line": "release",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "equipment_schema_version": 1,
+        "built_at": "2026-10-02T10:58:48.867732+00:00"
+      }
+    },
+    "10001": {
+      "artifact_set": {
+        "id": 10001,
+        "affix_group_id": 210001,
+        "source_rank_level": 4,
+        "icon": "UI_RelicIcon_10001_4",
+        "disable_filter": null,
+        "bag_sort_value": 4,
+        "name": "行者之心",
+        "name_text_map_hash": "35587211",
+        "name_source": {
+          "table": "EquipAffixExcelConfigData",
+          "record_id": 2100010,
+          "text_map_hash": "35587211",
+          "language": "CHS",
+          "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53"
+        },
+        "name_status": "present",
+        "version_line": "release",
+        "required_counts": [
+          2,
+          4
+        ],
+        "contains_ids": [
+          51140,
+          51120,
+          51150,
+          51110,
+          51130
+        ],
+        "source_missing_fields": [
+          "disableFilter"
+        ],
+        "source_refs": [
+          {
+            "table": "ReliquarySetExcelConfigData",
+            "key": {
+              "setId": 10001
+            },
+            "field": null,
+            "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53"
+          }
+        ],
+        "catalog_rarities": [
+          3,
+          4
+        ],
+        "configured_rarities": [
+          1,
+          2,
+          3,
+          4,
+          5
+        ],
+        "in_codex": true
+      },
+      "effects": [
+        {
+          "required_count": 2,
+          "source_index": 0,
+          "relation_status": "present",
+          "effect": {
+            "affix_id": 2100010,
+            "affix_group_id": 210001,
+            "source_level": 0,
+            "name": "行者之心",
+            "name_text_map_hash": "35587211",
+            "name_source": {
+              "table": "EquipAffixExcelConfigData",
+              "record_id": 2100010,
+              "text_map_hash": "35587211",
+              "language": "CHS",
+              "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53"
+            },
+            "name_status": "present",
+            "desc_template": "攻击力提高18%。",
+            "desc_source": {
+              "table": "EquipAffixExcelConfigData",
+              "record_id": 2100010,
+              "text_map_hash": "853519409",
+              "language": "CHS",
+              "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53"
+            },
+            "desc_status": "present",
+            "open_config": null,
+            "version_line": "release",
+            "param_list": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "add_props": [
+              {
+                "propType": "FIGHT_PROP_ATTACK_PERCENT",
+                "value": 0.18000000715255737
+              },
+              {},
+              {}
+            ],
+            "source_missing_fields": [
+              "level",
+              "openConfig"
+            ],
+            "source_refs": [
+              {
+                "table": "EquipAffixExcelConfigData",
+                "key": {
+                  "affixId": 2100010
+                },
+                "field": null,
+                "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53"
+              }
+            ],
+            "annotations": []
+          }
+        },
+        {
+          "required_count": 4,
+          "source_index": 1,
+          "relation_status": "present",
+          "effect": {
+            "affix_id": 2100011,
+            "affix_group_id": 210001,
+            "source_level": 1,
+            "name": "行者之心",
+            "name_text_map_hash": "2364208339",
+            "name_source": {
+              "table": "EquipAffixExcelConfigData",
+              "record_id": 2100011,
+              "text_map_hash": "2364208339",
+              "language": "CHS",
+              "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53"
+            },
+            "name_status": "present",
+            "desc_template": "重击的暴击率提升30%。",
+            "desc_source": {
+              "table": "EquipAffixExcelConfigData",
+              "record_id": 2100011,
+              "text_map_hash": "1219449233",
+              "language": "CHS",
+              "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53"
+            },
+            "desc_status": "present",
+            "open_config": "Relic_ExtraAtkCritUp",
+            "version_line": "release",
+            "param_list": [
+              0.30000001192092896,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "add_props": [
+              {},
+              {},
+              {}
+            ],
+            "source_missing_fields": [],
+            "source_refs": [
+              {
+                "table": "EquipAffixExcelConfigData",
+                "key": {
+                  "affixId": 2100011
+                },
+                "field": null,
+                "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53"
+              }
+            ],
+            "annotations": []
+          }
+        }
+      ],
+      "piece_refs": [
+        {
+          "artifact_id": 51310,
+          "equip_type": "EQUIP_RING",
+          "rarity": 3,
+          "codex_id": 30105103
+        },
+        {
+          "artifact_id": 51320,
+          "equip_type": "EQUIP_NECKLACE",
+          "rarity": 3,
+          "codex_id": 30105103
+        },
+        {
+          "artifact_id": 51330,
+          "equip_type": "EQUIP_DRESS",
+          "rarity": 3,
+          "codex_id": 30105103
+        },
+        {
+          "artifact_id": 51340,
+          "equip_type": "EQUIP_BRACER",
+          "rarity": 3,
+          "codex_id": 30105103
+        },
+        {
+          "artifact_id": 51350,
+          "equip_type": "EQUIP_SHOES",
+          "rarity": 3,
+          "codex_id": 30105103
+        },
+        {
+          "artifact_id": 51410,
+          "equip_type": "EQUIP_RING",
+          "rarity": 4,
+          "codex_id": 30105104
+        },
+        {
+          "artifact_id": 51420,
+          "equip_type": "EQUIP_NECKLACE",
+          "rarity": 4,
+          "codex_id": 30105104
+        },
+        {
+          "artifact_id": 51430,
+          "equip_type": "EQUIP_DRESS",
+          "rarity": 4,
+          "codex_id": 30105104
+        },
+        {
+          "artifact_id": 51440,
+          "equip_type": "EQUIP_BRACER",
+          "rarity": 4,
+          "codex_id": 30105104
+        },
+        {
+          "artifact_id": 51450,
+          "equip_type": "EQUIP_SHOES",
+          "rarity": 4,
+          "codex_id": 30105104
+        }
+      ],
+      "piece_refs_total": 10,
+      "piece_refs_truncated": false,
+      "annotations": [],
+      "warnings": [],
+      "data_version": {
+        "version_line": "release",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "equipment_schema_version": 1,
+        "built_at": "2026-10-02T10:58:48.867732+00:00"
+      }
+    },
+    "15001": {
+      "artifact_set": {
+        "id": 15001,
+        "affix_group_id": 215001,
+        "source_rank_level": 5,
+        "icon": "UI_RelicIcon_15001_4",
+        "disable_filter": null,
+        "bag_sort_value": 18,
+        "name": "角斗士的终幕礼",
+        "name_text_map_hash": "1312582827",
+        "name_source": {
+          "table": "EquipAffixExcelConfigData",
+          "record_id": 2150010,
+          "text_map_hash": "1312582827",
+          "language": "CHS",
+          "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53"
+        },
+        "name_status": "present",
+        "version_line": "release",
+        "required_counts": [
+          2,
+          4
+        ],
+        "contains_ids": [
+          75340,
+          75320,
+          75350,
+          75310,
+          75330
+        ],
+        "source_missing_fields": [
+          "disableFilter"
+        ],
+        "source_refs": [
+          {
+            "table": "ReliquarySetExcelConfigData",
+            "key": {
+              "setId": 15001
+            },
+            "field": null,
+            "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53"
+          }
+        ],
+        "catalog_rarities": [
+          4,
+          5
+        ],
+        "configured_rarities": [
+          3,
+          4,
+          5
+        ],
+        "in_codex": true
+      },
+      "effects": [
+        {
+          "required_count": 2,
+          "source_index": 0,
+          "relation_status": "present",
+          "effect": {
+            "affix_id": 2150010,
+            "affix_group_id": 215001,
+            "source_level": 0,
+            "name": "角斗士的终幕礼",
+            "name_text_map_hash": "1312582827",
+            "name_source": {
+              "table": "EquipAffixExcelConfigData",
+              "record_id": 2150010,
+              "text_map_hash": "1312582827",
+              "language": "CHS",
+              "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53"
+            },
+            "name_status": "present",
+            "desc_template": "攻击力提高18%。",
+            "desc_source": {
+              "table": "EquipAffixExcelConfigData",
+              "record_id": 2150010,
+              "text_map_hash": "3552809081",
+              "language": "CHS",
+              "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53"
+            },
+            "desc_status": "present",
+            "open_config": null,
+            "version_line": "release",
+            "param_list": [
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "add_props": [
+              {
+                "propType": "FIGHT_PROP_ATTACK_PERCENT",
+                "value": 0.18000000715255737
+              },
+              {},
+              {}
+            ],
+            "source_missing_fields": [
+              "level",
+              "openConfig"
+            ],
+            "source_refs": [
+              {
+                "table": "EquipAffixExcelConfigData",
+                "key": {
+                  "affixId": 2150010
+                },
+                "field": null,
+                "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53"
+              }
+            ],
+            "annotations": []
+          }
+        },
+        {
+          "required_count": 4,
+          "source_index": 1,
+          "relation_status": "present",
+          "effect": {
+            "affix_id": 2150011,
+            "affix_group_id": 215001,
+            "source_level": 1,
+            "name": "角斗士的终幕礼",
+            "name_text_map_hash": "1212345779",
+            "name_source": {
+              "table": "EquipAffixExcelConfigData",
+              "record_id": 2150011,
+              "text_map_hash": "1212345779",
+              "language": "CHS",
+              "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53"
+            },
+            "name_status": "present",
+            "desc_template": "装备该圣遗物套装的角色为单手剑、双手剑、长柄武器角色时，角色普通攻击造成的伤害提高35%。",
+            "desc_source": {
+              "table": "EquipAffixExcelConfigData",
+              "record_id": 2150011,
+              "text_map_hash": "3135183041",
+              "language": "CHS",
+              "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53"
+            },
+            "desc_status": "present",
+            "open_config": "Relic_MeleeAttackUp",
+            "version_line": "release",
+            "param_list": [
+              0.3499999940395355,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "add_props": [
+              {},
+              {},
+              {}
+            ],
+            "source_missing_fields": [],
+            "source_refs": [
+              {
+                "table": "EquipAffixExcelConfigData",
+                "key": {
+                  "affixId": 2150011
+                },
+                "field": null,
+                "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53"
+              }
+            ],
+            "annotations": []
+          }
+        }
+      ],
+      "piece_refs": [
+        {
+          "artifact_id": 75410,
+          "equip_type": "EQUIP_RING",
+          "rarity": 4,
+          "codex_id": 30107504
+        },
+        {
+          "artifact_id": 75420,
+          "equip_type": "EQUIP_NECKLACE",
+          "rarity": 4,
+          "codex_id": 30107504
+        },
+        {
+          "artifact_id": 75430,
+          "equip_type": "EQUIP_DRESS",
+          "rarity": 4,
+          "codex_id": 30107504
+        },
+        {
+          "artifact_id": 75440,
+          "equip_type": "EQUIP_BRACER",
+          "rarity": 4,
+          "codex_id": 30107504
+        },
+        {
+          "artifact_id": 75450,
+          "equip_type": "EQUIP_SHOES",
+          "rarity": 4,
+          "codex_id": 30107504
+        },
+        {
+          "artifact_id": 75510,
+          "equip_type": "EQUIP_RING",
+          "rarity": 5,
+          "codex_id": 30107505
+        },
+        {
+          "artifact_id": 75520,
+          "equip_type": "EQUIP_NECKLACE",
+          "rarity": 5,
+          "codex_id": 30107505
+        },
+        {
+          "artifact_id": 75530,
+          "equip_type": "EQUIP_DRESS",
+          "rarity": 5,
+          "codex_id": 30107505
+        },
+        {
+          "artifact_id": 75540,
+          "equip_type": "EQUIP_BRACER",
+          "rarity": 5,
+          "codex_id": 30107505
+        },
+        {
+          "artifact_id": 75550,
+          "equip_type": "EQUIP_SHOES",
+          "rarity": 5,
+          "codex_id": 30107505
+        }
+      ],
+      "piece_refs_total": 10,
+      "piece_refs_truncated": false,
+      "annotations": [],
+      "warnings": [],
+      "data_version": {
+        "version_line": "release",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "equipment_schema_version": 1,
+        "built_at": "2026-10-02T10:58:48.867732+00:00"
+      }
+    }
+  },
+  "meta": {
+    "display_schema_version": "1",
+    "display_generator:release": "zh-display-1",
+    "display_alias_count:release": "661",
+    "game_version:release": "unknown",
+    "built_at:release": "2026-10-02T10:58:48.465914+00:00",
+    "raw_version_line": "release",
+    "raw_upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+    "description_schema_version": "1",
+    "game_version": "unknown",
+    "built_at": "2026-10-02T10:58:48.465914+00:00",
+    "equipment_schema_version": "1",
+    "runtime_schema_version": "1",
+    "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+    "upstream_commit:release": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+    "version_lines": [
+      "release"
+    ],
+    "datasets": {
+      "equipment": {
+        "supported_schema_versions": [
+          1
+        ],
+        "lines": {
+          "release": {
+            "state": "ready",
+            "schema_version": 1,
+            "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+            "built_at": "2026-10-02T10:58:48.867732+00:00",
+            "counts": {
+              "weapons": 288,
+              "artifact_sets": 66,
+              "artifacts": 4352,
+              "equip_affixes": 1427,
+              "codex_weapons": 256,
+              "codex_artifact_sets": 63,
+              "codex_artifacts": 613
+            },
+            "quality_summary": {
+              "missing_names": 47,
+              "missing_descriptions": 128,
+              "missing_effect_relations": 2,
+              "missing_value_configs": 700,
+              "unmapped_prop_types": 5
+            }
+          },
+          "beta": {
+            "state": "missing",
+            "schema_version": null,
+            "upstream_commit": null,
+            "built_at": null,
+            "counts": null,
+            "quality_summary": null
+          }
+        }
+      },
+      "runtime_config": {
+        "supported_schema_versions": [
+          1
+        ],
+        "profile_id": "upstream-combat-catalog-v1",
+        "profile_version": 1,
+        "indexer_version": "6",
+        "supported_indexer_versions": [
+          "2",
+          "3",
+          "4",
+          "5",
+          "6"
+        ],
+        "lines": {
+          "release": {
+            "state": "ready",
+            "index_state": "ready",
+            "schema_version": 1,
+            "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+            "snapshot_id": "8c9106736d92b586d5c0258c2b96600e8b777a308655b7427da16d5b5d6e86d9",
+            "execution_support": "not_evaluated",
+            "built_at": "2026-10-02T10:58:50.803204+00:00",
+            "profile_id": "upstream-combat-catalog-v1",
+            "profile_version": 1,
+            "indexer_version": "6",
+            "manifest_fingerprint": "6a669a34c4e403d989f7bc4e9684a076cb8c04e70ebe70b7a7362392be8c22ab",
+            "counts": {
+              "runtime_definition": 210463,
+              "runtime_material_reference": 422,
+              "runtime_object_reference": 62036,
+              "runtime_parameter_binding": 6082,
+              "runtime_reference": 165747,
+              "runtime_source": 3358
+            },
+            "reference_states": {
+              "ambiguous": 157,
+              "external_asset": 10445,
+              "missing": 89,
+              "resolved": 145772,
+              "unsupported_reference_form": 9284
+            },
+            "normalization": {
+              "mapping_fingerprint": "506862bc6c0bf033d8272b75f193cd2a620fc513320b3223d07afcc6f04356e2",
+              "normalization_version": 2,
+              "profile_id": "upstream-34208429-reviewed-schema-v1",
+              "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53"
+            }
+          },
+          "beta": {
+            "state": "missing",
+            "index_state": "missing",
+            "schema_version": null,
+            "upstream_commit": null,
+            "snapshot_id": null,
+            "execution_support": "not_evaluated"
+          }
+        }
+      },
+      "mechanic_semantics": {
+        "schema_version": 1,
+        "lines": {
+          "release": {
+            "state": "ready",
+            "schema_version": 1,
+            "counts": {
+              "facts": 45,
+              "descriptors": 12,
+              "heads": 52
+            },
+            "execution_support": "not_evaluated"
+          },
+          "beta": {
+            "state": "missing",
+            "schema_version": null,
+            "counts": {
+              "facts": 0,
+              "descriptors": 0,
+              "heads": 0
+            },
+            "execution_support": "not_evaluated"
+          }
+        }
+      }
+    },
+    "manual_content_fingerprint": "f6b3978d97cfb45ba5b2aa0a6798bc31781a60dfac8376c4f045eb72f02b0fab"
+  }
+}

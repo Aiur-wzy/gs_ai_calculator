@@ -1,0 +1,470 @@
+{
+  "projection_version": 1,
+  "status": "ready",
+  "snapshot": {
+    "version_line": "release",
+    "state": "ready",
+    "index_state": "ready",
+    "schema_version": 1,
+    "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+    "snapshot_id": "1b620db802a937506dc870cc25c08b5c7c336a01b193b945e9471d75c3bee172",
+    "execution_support": "not_evaluated",
+    "built_at": "2026-10-01T19:46:55.591099+00:00",
+    "profile_id": "upstream-combat-catalog-v1",
+    "profile_version": 1,
+    "indexer_version": "4",
+    "manifest_fingerprint": "b14c57925636407203b679f5517dd51ec9a5249e42a792157cb72269f55b32e6",
+    "counts": {
+      "runtime_definition": 152351,
+      "runtime_parameter_binding": 6082,
+      "runtime_reference": 165747,
+      "runtime_source": 3356
+    },
+    "reference_states": {
+      "ambiguous": 157,
+      "external_asset": 10445,
+      "missing": 89,
+      "resolved": 145772,
+      "unsupported_reference_form": 9284
+    },
+    "normalization": {
+      "mapping_fingerprint": "506862bc6c0bf033d8272b75f193cd2a620fc513320b3223d07afcc6f04356e2",
+      "normalization_version": 2,
+      "profile_id": "upstream-34208429-reviewed-schema-v1",
+      "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53"
+    }
+  },
+  "selection": {
+    "character_id": 10000002,
+    "skill_depot_id": 201,
+    "skill_id": 10018,
+    "slot": "skill",
+    "matching_slots": [
+      "skill"
+    ],
+    "constellation": 0,
+    "active_constellation_ids": []
+  },
+  "level": {
+    "base_level": null,
+    "effective_level": 10,
+    "source": "explicit_effective_level",
+    "constellation_applied": false,
+    "constellation_level_support": "not_applicable"
+  },
+  "param_index": 0,
+  "scalar_projection": {
+    "status": "ready",
+    "value": 4.305600166320801,
+    "semantics": "proud-skill-input-scalar-v1",
+    "issues": []
+  },
+  "source": {
+    "definition": {
+      "definition_id": "9ff642de424486c76734876c7714b6f88db9339301ad34debb981808efded552",
+      "definition_kind": "excel_record",
+      "owner_definition_id": null,
+      "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+      "json_pointer": "/2349",
+      "variant_key": null,
+      "namespace_key": "excel",
+      "node_sha256": "9e9d46446dc8d36dc84d6c8f72f983b1424fc629485ee164ff7a509c647428d4",
+      "exact_key": {
+        "proudSkillId": 23210
+      }
+    },
+    "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+    "json_pointer": "/2349",
+    "source_sha256": "4897a68ebc6772e7b553a58a548a3756a1cf9b6e9ca22250bb0da987a3fa4d70",
+    "node_sha256": "9e9d46446dc8d36dc84d6c8f72f983b1424fc629485ee164ff7a509c647428d4",
+    "parameter_pointer": "/2349/paramList/0"
+  },
+  "parameter_descriptions_raw": [
+    3661881678,
+    3416857774,
+    2019429567,
+    396845527,
+    1926361390,
+    1427445954,
+    518918559,
+    1817442693,
+    3923929340,
+    2606499255,
+    2231138420,
+    3467381835,
+    2852795863,
+    2445608363,
+    2281251894,
+    4197558653,
+    1785625969,
+    2507590715,
+    4115891231,
+    3274265973
+  ],
+  "parameter_descriptions": {
+    "status": "partial",
+    "matched": [
+      {
+        "text_map_hash": 3661881678,
+        "parameter_description_origin": {
+          "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+          "source_sha256": "4897a68ebc6772e7b553a58a548a3756a1cf9b6e9ca22250bb0da987a3fa4d70",
+          "json_pointer": "/2349/paramDescList/0",
+          "node_sha256": "0177e6f76f1c80d6ed14704da3666ec460a3d53c9d422cfaa5e8841b18199201"
+        },
+        "text": "技能伤害|{param1:P}",
+        "param_indices": [
+          0
+        ],
+        "text_origin": {
+          "source_path": "TextMap/TextMap_MediumCHS.json",
+          "json_pointer": "/3661881678",
+          "source_sha256": "dfce0d08e4c6eb85c71de097e0690efc0cd04235000c075ce2dd3e2f5e667a22",
+          "node_sha256": "72c0c1441d4e3a3449b13e0882f3207f8251b5a0d9308a0cd60462f1678cdaf8"
+        }
+      }
+    ],
+    "unresolved": [
+      {
+        "text_map_hash": 2019429567,
+        "parameter_description_origin": {
+          "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+          "source_sha256": "4897a68ebc6772e7b553a58a548a3756a1cf9b6e9ca22250bb0da987a3fa4d70",
+          "json_pointer": "/2349/paramDescList/2",
+          "node_sha256": "fe9feb8f2cdafe3e3cf8b191c8ffe8533c7f663f4ba461d1b85f3b16a69e8f66"
+        },
+        "code": "missing_description_text"
+      },
+      {
+        "text_map_hash": 396845527,
+        "parameter_description_origin": {
+          "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+          "source_sha256": "4897a68ebc6772e7b553a58a548a3756a1cf9b6e9ca22250bb0da987a3fa4d70",
+          "json_pointer": "/2349/paramDescList/3",
+          "node_sha256": "b8c9eec00ea89b5e78233a1ec15ac9e473954926b5e0e9a3959b2c16d190c21d"
+        },
+        "code": "missing_description_text"
+      },
+      {
+        "text_map_hash": 1926361390,
+        "parameter_description_origin": {
+          "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+          "source_sha256": "4897a68ebc6772e7b553a58a548a3756a1cf9b6e9ca22250bb0da987a3fa4d70",
+          "json_pointer": "/2349/paramDescList/4",
+          "node_sha256": "764a70feeabbb90f7b0886dc067b54b0bdf83c58ff8d9fff80364748380cc76b"
+        },
+        "code": "missing_description_text"
+      },
+      {
+        "text_map_hash": 1427445954,
+        "parameter_description_origin": {
+          "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+          "source_sha256": "4897a68ebc6772e7b553a58a548a3756a1cf9b6e9ca22250bb0da987a3fa4d70",
+          "json_pointer": "/2349/paramDescList/5",
+          "node_sha256": "7949a58eb43e4d38f70162742599d81d86366754510d288395e18d0bd7ae4705"
+        },
+        "code": "missing_description_text"
+      },
+      {
+        "text_map_hash": 518918559,
+        "parameter_description_origin": {
+          "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+          "source_sha256": "4897a68ebc6772e7b553a58a548a3756a1cf9b6e9ca22250bb0da987a3fa4d70",
+          "json_pointer": "/2349/paramDescList/6",
+          "node_sha256": "d631d3f2797fcadece4f62e20604576ca6340787d111e6a2015e6e0745a17894"
+        },
+        "code": "missing_description_text"
+      },
+      {
+        "text_map_hash": 1817442693,
+        "parameter_description_origin": {
+          "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+          "source_sha256": "4897a68ebc6772e7b553a58a548a3756a1cf9b6e9ca22250bb0da987a3fa4d70",
+          "json_pointer": "/2349/paramDescList/7",
+          "node_sha256": "3bc9fd5d86da30bcb85c417d82fcc4563f39ed0b4fcc434004b7528c38b8a9cf"
+        },
+        "code": "missing_description_text"
+      },
+      {
+        "text_map_hash": 3923929340,
+        "parameter_description_origin": {
+          "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+          "source_sha256": "4897a68ebc6772e7b553a58a548a3756a1cf9b6e9ca22250bb0da987a3fa4d70",
+          "json_pointer": "/2349/paramDescList/8",
+          "node_sha256": "20de4a60fa142d8e35b1eaf886aea954c2c037bda737338906e189ed2234274d"
+        },
+        "code": "missing_description_text"
+      },
+      {
+        "text_map_hash": 2606499255,
+        "parameter_description_origin": {
+          "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+          "source_sha256": "4897a68ebc6772e7b553a58a548a3756a1cf9b6e9ca22250bb0da987a3fa4d70",
+          "json_pointer": "/2349/paramDescList/9",
+          "node_sha256": "6c3c13e89a82707bb3f5e18f18eab2c0acafde720b7bef1cbbc85d4ca4f92172"
+        },
+        "code": "missing_description_text"
+      },
+      {
+        "text_map_hash": 2231138420,
+        "parameter_description_origin": {
+          "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+          "source_sha256": "4897a68ebc6772e7b553a58a548a3756a1cf9b6e9ca22250bb0da987a3fa4d70",
+          "json_pointer": "/2349/paramDescList/10",
+          "node_sha256": "e639ee8e7049fd1c3c187cb0f5e09dcd5b4919603bbe1dfbe5ec93a8c80418a5"
+        },
+        "code": "missing_description_text"
+      },
+      {
+        "text_map_hash": 3467381835,
+        "parameter_description_origin": {
+          "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+          "source_sha256": "4897a68ebc6772e7b553a58a548a3756a1cf9b6e9ca22250bb0da987a3fa4d70",
+          "json_pointer": "/2349/paramDescList/11",
+          "node_sha256": "e58a448596eae2ff3365b5374210ea3b4b70f710ef0e3d783fee0f33bcfb5523"
+        },
+        "code": "missing_description_text"
+      },
+      {
+        "text_map_hash": 2852795863,
+        "parameter_description_origin": {
+          "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+          "source_sha256": "4897a68ebc6772e7b553a58a548a3756a1cf9b6e9ca22250bb0da987a3fa4d70",
+          "json_pointer": "/2349/paramDescList/12",
+          "node_sha256": "ad4358f50962f8108b8af3d2581788bb884f599bac76adbd34ece5f575ea42ff"
+        },
+        "code": "missing_description_text"
+      },
+      {
+        "text_map_hash": 2445608363,
+        "parameter_description_origin": {
+          "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+          "source_sha256": "4897a68ebc6772e7b553a58a548a3756a1cf9b6e9ca22250bb0da987a3fa4d70",
+          "json_pointer": "/2349/paramDescList/13",
+          "node_sha256": "1313346e95deda87370c90d71abad3cd83e9e2609bb600b05324f34d6548756e"
+        },
+        "code": "missing_description_text"
+      },
+      {
+        "text_map_hash": 2281251894,
+        "parameter_description_origin": {
+          "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+          "source_sha256": "4897a68ebc6772e7b553a58a548a3756a1cf9b6e9ca22250bb0da987a3fa4d70",
+          "json_pointer": "/2349/paramDescList/14",
+          "node_sha256": "ccc09499f608b60aa49b2ff787d62b9f10fb75634c4945104493af1203cb32e0"
+        },
+        "code": "missing_description_text"
+      },
+      {
+        "text_map_hash": 4197558653,
+        "parameter_description_origin": {
+          "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+          "source_sha256": "4897a68ebc6772e7b553a58a548a3756a1cf9b6e9ca22250bb0da987a3fa4d70",
+          "json_pointer": "/2349/paramDescList/15",
+          "node_sha256": "18a1297f18d31b4d12de8a637938a2fa5eef389d0b1ce01b299d7f28a638a0ef"
+        },
+        "code": "missing_description_text"
+      },
+      {
+        "text_map_hash": 1785625969,
+        "parameter_description_origin": {
+          "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+          "source_sha256": "4897a68ebc6772e7b553a58a548a3756a1cf9b6e9ca22250bb0da987a3fa4d70",
+          "json_pointer": "/2349/paramDescList/16",
+          "node_sha256": "6015cc22282972285740708e6691475319073b22335f85d1470752737115e097"
+        },
+        "code": "missing_description_text"
+      },
+      {
+        "text_map_hash": 2507590715,
+        "parameter_description_origin": {
+          "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+          "source_sha256": "4897a68ebc6772e7b553a58a548a3756a1cf9b6e9ca22250bb0da987a3fa4d70",
+          "json_pointer": "/2349/paramDescList/17",
+          "node_sha256": "fced5dea0d4dc45af7d31fc878aa841d40d0735af0e50461215c0a8cde01a059"
+        },
+        "code": "missing_description_text"
+      },
+      {
+        "text_map_hash": 4115891231,
+        "parameter_description_origin": {
+          "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+          "source_sha256": "4897a68ebc6772e7b553a58a548a3756a1cf9b6e9ca22250bb0da987a3fa4d70",
+          "json_pointer": "/2349/paramDescList/18",
+          "node_sha256": "c9c570c2ccba3a58d54133affb95e168a16c813c9b8bb796c24526f2cbbbcc37"
+        },
+        "code": "missing_description_text"
+      },
+      {
+        "text_map_hash": 3274265973,
+        "parameter_description_origin": {
+          "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+          "source_sha256": "4897a68ebc6772e7b553a58a548a3756a1cf9b6e9ca22250bb0da987a3fa4d70",
+          "json_pointer": "/2349/paramDescList/19",
+          "node_sha256": "7037db372bef96f8bb4f6a38a2a1db758c2a6ceee7b96c85f1c03c7da09c1e17"
+        },
+        "code": "missing_description_text"
+      }
+    ],
+    "issues": []
+  },
+  "entry_sources": {
+    "avatar": {
+      "definition": {
+        "definition_id": "4fe8ebc978de6f62ee5a7d2428877734d3c84272191c29d2a75b23c2bd455151",
+        "definition_kind": "excel_record",
+        "owner_definition_id": null,
+        "source_path": "ExcelBinOutput/AvatarExcelConfigData.json",
+        "json_pointer": "/1",
+        "variant_key": null,
+        "namespace_key": "excel",
+        "node_sha256": "dae54239630afddd4a369f89e7cfb7fc894b2b1e03a71fd97fffc00429e94953",
+        "exact_key": {
+          "id": 10000002
+        }
+      },
+      "source_path": "ExcelBinOutput/AvatarExcelConfigData.json",
+      "json_pointer": "/1",
+      "source_sha256": "d3b4ce3253e6c4a11ffca5bfad200f53c00b86dabeb9a14eb505556954e87aee",
+      "fields": {
+        "id": 10000002,
+        "skillDepotId": 201,
+        "combatConfigHash": "15882421641119660365",
+        "animatorConfigPathHash": "2055198892552039615"
+      },
+      "field_pointers": {
+        "id": "/1/id",
+        "skillDepotId": "/1/skillDepotId",
+        "combatConfigHash": "/1/combatConfigHash",
+        "animatorConfigPathHash": "/1/animatorConfigPathHash"
+      }
+    },
+    "depot": {
+      "definition": {
+        "definition_id": "f8ad9e0724cb42ffdd48be5f0e87977d9a9b12d4803f4516152bba7270d4a076",
+        "definition_kind": "excel_record",
+        "owner_definition_id": null,
+        "source_path": "ExcelBinOutput/AvatarSkillDepotExcelConfigData.json",
+        "json_pointer": "/62",
+        "variant_key": null,
+        "namespace_key": "excel",
+        "node_sha256": "7531e8cd4328dd655dbd9d1d9c5843a3abf9aedce64c1b41636f152acd09cb8e",
+        "exact_key": {
+          "id": 201
+        }
+      },
+      "source_path": "ExcelBinOutput/AvatarSkillDepotExcelConfigData.json",
+      "json_pointer": "/62",
+      "source_sha256": "76058ddd01946435248d158ef4cc659ba995643c5635e9948161ce47a7ed814b",
+      "fields": {
+        "id": 201,
+        "skills": [
+          10024,
+          10018,
+          10013,
+          0
+        ],
+        "subSkills": [
+          10020,
+          10021,
+          10052,
+          10053,
+          10111,
+          10001,
+          5002010
+        ],
+        "energySkill": 10019,
+        "talents": [
+          21,
+          22,
+          23,
+          24,
+          25,
+          26
+        ],
+        "inherentProudSkillOpens": [
+          {
+            "proudSkillGroupId": 221,
+            "needAvatarPromoteLevel": 1
+          },
+          {
+            "proudSkillGroupId": 222,
+            "needAvatarPromoteLevel": 4
+          },
+          {
+            "proudSkillGroupId": 223
+          },
+          {},
+          {}
+        ],
+        "extraAbilities": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "field_pointers": {
+        "id": "/62/id",
+        "skills": "/62/skills",
+        "subSkills": "/62/subSkills",
+        "energySkill": "/62/energySkill",
+        "talents": "/62/talents",
+        "inherentProudSkillOpens": "/62/inherentProudSkillOpens",
+        "extraAbilities": "/62/extraAbilities"
+      }
+    },
+    "skill": {
+      "definition": {
+        "definition_id": "ad704019e3fd5c4a29c3bc155aff9e7f6a3dabe6223998b7328d8b2887805c88",
+        "definition_kind": "excel_record",
+        "owner_definition_id": null,
+        "source_path": "ExcelBinOutput/AvatarSkillExcelConfigData.json",
+        "json_pointer": "/12",
+        "variant_key": null,
+        "namespace_key": "excel",
+        "node_sha256": "d50815e160fde2272c5ad34652baec9de6849160f99127544acf51a2be9f3113",
+        "exact_key": {
+          "id": 10018
+        }
+      },
+      "source_path": "ExcelBinOutput/AvatarSkillExcelConfigData.json",
+      "json_pointer": "/12",
+      "source_sha256": "f86481ed705468ba3e7a4b05e05eade9c89cf3add291308c3469859728ae96db",
+      "fields": {
+        "id": 10018,
+        "proudSkillGroupId": 232,
+        "triggerID": 2,
+        "cdTime": 10,
+        "maxChargeNum": 1,
+        "nameTextMapHash": 682887613,
+        "descTextMapHash": 4048562608
+      },
+      "field_pointers": {
+        "id": "/12/id",
+        "proudSkillGroupId": "/12/proudSkillGroupId",
+        "triggerID": "/12/triggerID",
+        "cdTime": "/12/cdTime",
+        "maxChargeNum": "/12/maxChargeNum",
+        "nameTextMapHash": "/12/nameTextMapHash",
+        "descTextMapHash": "/12/descTextMapHash"
+      }
+    }
+  },
+  "action_facts_status": "ready",
+  "action_facts_issues": [],
+  "action_dispatch": {
+    "status": "pending",
+    "reasons": [
+      "avatar_resource_identity_unresolved",
+      "action_trigger_semantics_not_compiled"
+    ]
+  },
+  "operation_execution": "not_evaluated",
+  "gameplay_interpretation": "not_evaluated",
+  "limits": {
+    "max_bytes": 65536,
+    "max_param_index": 63,
+    "max_descriptions": 64
+  },
+  "content_fingerprint": "1412cf6430db9572fe7895795eb7fd471e8e4ecb09a7b1c8f3d83c4bc6d94c07"
+}

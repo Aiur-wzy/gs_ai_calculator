@@ -1,0 +1,27 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "genshin_db"
+dynamic = ["version"]
+requires-python = ">=3.12"
+dependencies = ["pywebview==6.2.1"]
+
+[tool.setuptools.dynamic]
+version = {attr = "genshin_app.version.APP_VERSION"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+genshin_app = ["gui/web/*.html", "gui/web/*.js", "gui/web/*.css", "gui/web/*.json"]
+genshin_db = ["display_alias_reference.json", "resources/mechanics/*.json", "resources/mechanisms/*.json"]
+genshin_runtime = ["resources/*.json"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+markers = [
+    "release_inventory: full installed-runtime inventory checks; included by default and only explicitly excluded during development when dependencies and integrity logic are unchanged",
+]

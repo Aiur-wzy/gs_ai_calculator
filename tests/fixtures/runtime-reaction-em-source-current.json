@@ -1,0 +1,472 @@
+{
+  "bundle_version": 1,
+  "status": "ready",
+  "issues": [],
+  "source": {
+    "kind": "equip_affix",
+    "affix_id": 2100071,
+    "affix_group_id": 210007,
+    "source_level": 1,
+    "version_line": "release",
+    "snapshot_id": "ef0cac22b5cc4ee887fa64d134b563ffc745ae365b0c6cdb03930f895ab413df",
+    "upstream_commit": "224708edc8056f27e9ffc4eacabe797d75274636"
+  },
+  "snapshot": {
+    "version_line": "release",
+    "state": "ready",
+    "index_state": "ready",
+    "schema_version": 1,
+    "upstream_commit": "224708edc8056f27e9ffc4eacabe797d75274636",
+    "snapshot_id": "ef0cac22b5cc4ee887fa64d134b563ffc745ae365b0c6cdb03930f895ab413df",
+    "execution_support": "not_evaluated",
+    "built_at": "2026-10-16T00:06:03-03:00",
+    "profile_id": "upstream-combat-catalog-v1",
+    "profile_version": 1,
+    "indexer_version": "7",
+    "manifest_fingerprint": "183ebfb89a2dde8741e9aa3f3c80ebe5f393034f6cb63dd69176594ba9edc67c",
+    "counts": {
+      "runtime_definition": 193449,
+      "runtime_material_reference": 422,
+      "runtime_object_reference": 41710,
+      "runtime_parameter_binding": 6082,
+      "runtime_reference": 141660,
+      "runtime_source": 2003
+    },
+    "reference_states": {
+      "ambiguous": 156,
+      "external_asset": 10450,
+      "missing": 124,
+      "resolved": 125505,
+      "unsupported_reference_form": 5425
+    },
+    "normalization_state": "ready",
+    "source_capability_contract": "genshin-runtime-source-capabilities-v1",
+    "source_capability_state": "degraded",
+    "source_capabilities": {
+      "ability": {
+        "requirement": "required",
+        "state": "ready"
+      },
+      "ability_path": {
+        "requirement": "required",
+        "state": "ready"
+      },
+      "animation_pattern": {
+        "requirement": "optional",
+        "state": "unavailable"
+      },
+      "animator": {
+        "requirement": "optional",
+        "state": "unavailable"
+      },
+      "avatar": {
+        "requirement": "required",
+        "state": "ready"
+      },
+      "excel": {
+        "requirement": "required",
+        "state": "ready"
+      },
+      "gadget": {
+        "requirement": "optional",
+        "state": "unavailable"
+      },
+      "gadget_excel": {
+        "requirement": "required",
+        "state": "ready"
+      },
+      "global_combat": {
+        "requirement": "optional",
+        "state": "unavailable"
+      },
+      "material_excel": {
+        "requirement": "required",
+        "state": "ready"
+      },
+      "public_config": {
+        "requirement": "required",
+        "state": "ready"
+      },
+      "talent": {
+        "requirement": "required",
+        "state": "ready"
+      },
+      "text_map": {
+        "requirement": "required",
+        "state": "ready"
+      }
+    },
+    "normalization": {
+      "mapping_fingerprint": "506862bc6c0bf033d8272b75f193cd2a620fc513320b3223d07afcc6f04356e2",
+      "normalization_version": 2,
+      "profile_id": "upstream-224708ed-reviewed-schema-v1",
+      "upstream_commit": "224708edc8056f27e9ffc4eacabe797d75274636"
+    }
+  },
+  "param_list": [
+    8,
+    120,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "affix": {
+    "record": {
+      "paramList": [
+        8,
+        120,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "addProps": [
+        {},
+        {},
+        {}
+      ],
+      "openConfig": "Relic_ReactionGainExtraElemMasteryForTeam",
+      "affixId": 2100071,
+      "id": 210007,
+      "level": 1,
+      "nameTextMapHash": 3890291955,
+      "descTextMapHash": 2436815897
+    },
+    "source_path": "ExcelBinOutput/EquipAffixExcelConfigData.json",
+    "json_pointer": "/1285",
+    "source_sha256": "67cce4b66ecfae8ab20b4567005ff0e2efa76446af1fcc71d99e8a2383def4e6"
+  },
+  "talent": {
+    "definition_id": "014d1829062bf47379581b6d1e0c03858dc4b813184ee211a5ef83a7eae81371",
+    "source_path": "BinOutput/Talent/RelicTalents/ConfigAffix_Relic.json",
+    "json_pointer": "/Relic_ReactionGainExtraElemMasteryForTeam",
+    "source_sha256": "0937b29eb3f02b07aacdc02abdcf0af460ac7cb5cf951207ff626ba27b4052ba",
+    "operations": [
+      {
+        "$type": "JPCAAJGEELO",
+        "GBPFBNHLOFD": true,
+        "IIBMNPFLNMJ": "Relic_ReactionGainExtraElemMasteryForTeam"
+      },
+      {
+        "$type": "BIAHEMMGABC",
+        "GBPFBNHLOFD": true,
+        "IIBMNPFLNMJ": "Relic_ReactionGainExtraElemMasteryForTeam",
+        "PCABAADALND": "%1",
+        "PEOJKHKHAKL": "duration"
+      },
+      {
+        "$type": "BIAHEMMGABC",
+        "GBPFBNHLOFD": true,
+        "IIBMNPFLNMJ": "Relic_ReactionGainExtraElemMasteryForTeam",
+        "PCABAADALND": "%2",
+        "PEOJKHKHAKL": "ElemMastery"
+      }
+    ]
+  },
+  "talent_candidates": [],
+  "abilities": [
+    {
+      "definition_id": "d3f0c8096afe563cd8e0d98f3cb47e2cf37ea2c2e0786bab136327e081951b73",
+      "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+      "json_pointer": "/12/Default",
+      "source_sha256": "75fb6e13556ce18d5855a20eb2f5ab944091c0bf300a39e1b461dbbac0824c2a",
+      "payload": {
+        "EMGBJJOIENB": [
+          {
+            "$type": "CDANEAFAFKM",
+            "AMOLMPHFPHJ": -1,
+            "ILELAOFJIKJ": true,
+            "LDFBDMNIADI": "UNIQUE_Relic_ReactionGainExtraElemMasteryForTeam_Handler",
+            "LJFIEGHHLOB": false
+          }
+        ],
+        "GPPBBDEICKP": {
+          "UNIQUE_ReactionGainExtraElemMasteryForTeam": {
+            "BNEJPEMIMEH": true,
+            "BOCCNJLBFCJ": "AttackUp",
+            "DBGOKAKAHFP": 100,
+            "DIELNIJPCJJ": true,
+            "DOALDLPNGMF": -1,
+            "ILKPFPGAIGI": {
+              "Actor_ElemMasteryDelta": "ElemMastery"
+            },
+            "JPEAFDFPKAN": "duration",
+            "KFOMCJGGPPC": -1,
+            "PPKOPMBNPJH": true
+          },
+          "UNIQUE_Relic_ReactionGainExtraElemMasteryForTeam_Handler": {
+            "DBGOKAKAHFP": 100,
+            "DIELNIJPCJJ": true,
+            "DOALDLPNGMF": -1,
+            "KFOMCJGGPPC": -1,
+            "LFIJIMIMBIH": [
+              {
+                "$type": "ANDAIHHJDIB",
+                "AMOLMPHFPHJ": -1,
+                "HDOJNFJLKAP": [
+                  "Explode",
+                  "Stream",
+                  "Burning",
+                  "Melt",
+                  "Freeze",
+                  "FrozenBroken",
+                  "Shock",
+                  "Superconductor",
+                  "SwirlFire",
+                  "SwirlWater",
+                  "SwirlElectric",
+                  "SwirlIce",
+                  "CrystallizeFire",
+                  "CrystallizeWater",
+                  "CrystallizeElectric",
+                  "CrystallizeIce",
+                  "Overdose",
+                  "OverdoseElectric",
+                  "OverdoseGrass",
+                  "Overgrow",
+                  "OvergrowMushroomFire",
+                  "OvergrowMushroomElectric",
+                  "MoonShock",
+                  "MoonOvergrow",
+                  "MoonCrystallizeWater",
+                  "StarSuperconductor",
+                  "StarSwirlIce"
+                ],
+                "KHJMNJNEADF": [
+                  {
+                    "$type": "GCINLBBPONN",
+                    "AMOLMPHFPHJ": -1,
+                    "BDHBNCEEPPK": "AllPlayerAvatars",
+                    "IJDGNIIOHLM": [
+                      {
+                        "$type": "OLNGCABMCGI",
+                        "BDHBNCEEPPK": "Target",
+                        "DKCBCJCHEBF": "LesserOrEqual",
+                        "PDIFFCBMGMO": 40
+                      }
+                    ],
+                    "ILELAOFJIKJ": true,
+                    "LDFBDMNIADI": "UNIQUE_ReactionGainExtraElemMasteryForTeam",
+                    "LJFIEGHHLOB": false
+                  },
+                  {
+                    "$type": "CDANEAFAFKM",
+                    "AMOLMPHFPHJ": -1,
+                    "BDHBNCEEPPK": "AllPlayerAvatars",
+                    "IJDGNIIOHLM": [
+                      {
+                        "$type": "OLNGCABMCGI",
+                        "BDHBNCEEPPK": "Target",
+                        "DKCBCJCHEBF": "LesserOrEqual",
+                        "PDIFFCBMGMO": 40
+                      }
+                    ],
+                    "ILELAOFJIKJ": true,
+                    "LDFBDMNIADI": "UNIQUE_ReactionGainExtraElemMasteryForTeam",
+                    "LJFIEGHHLOB": false
+                  }
+                ],
+                "LJBBKGIFJDB": [
+                  "Monster"
+                ],
+                "OMALBHAAHHA": 20
+              }
+            ],
+            "PPKOPMBNPJH": true
+          }
+        },
+        "IIBMNPFLNMJ": "Relic_ReactionGainExtraElemMasteryForTeam",
+        "LOEHLJGBGAC": {
+          "ElemMastery": 0,
+          "duration": 0
+        },
+        "OMAIGDMCJBO": {
+          "DBGOKAKAHFP": 100,
+          "DOALDLPNGMF": -1,
+          "KFOMCJGGPPC": -1,
+          "PPKOPMBNPJH": true
+        },
+        "PODJJJHGAMO": true
+      },
+      "variant_key": "Default"
+    }
+  ],
+  "references": [
+    {
+      "reference_id": "1daee404e22232726eee95919b57f18ac6b6670ba2a6c6f4a7d4dc0338a3ca7e",
+      "from_definition_id": "33531cc3c7fec0c4b12321b921ffda7ab7b911686646e9129b67f7e3b3582c79",
+      "source_path": "ExcelBinOutput/EquipAffixExcelConfigData.json",
+      "json_pointer": "/1285/openConfig",
+      "field_name": "openConfig",
+      "relation_kind": "open_config",
+      "target_kind": "talent_config",
+      "source_order": 0,
+      "presence_status": "present",
+      "resolution_status": "resolved",
+      "resolved_definition_id": "014d1829062bf47379581b6d1e0c03858dc4b813184ee211a5ef83a7eae81371",
+      "extraction_rule_id": "7",
+      "version_line": "release",
+      "snapshot_id": "ef0cac22b5cc4ee887fa64d134b563ffc745ae365b0c6cdb03930f895ab413df",
+      "target_key": "Relic_ReactionGainExtraElemMasteryForTeam",
+      "scope": {
+        "owner_definition_id": null
+      },
+      "candidate_ids": [
+        "014d1829062bf47379581b6d1e0c03858dc4b813184ee211a5ef83a7eae81371"
+      ]
+    },
+    {
+      "reference_id": "9ce700bdd60a7cc1356fcff5f8a7d862069666295766b2fbbd03b307270609a9",
+      "from_definition_id": "014d1829062bf47379581b6d1e0c03858dc4b813184ee211a5ef83a7eae81371",
+      "source_path": "BinOutput/Talent/RelicTalents/ConfigAffix_Relic.json",
+      "json_pointer": "/Relic_ReactionGainExtraElemMasteryForTeam/0/IIBMNPFLNMJ",
+      "field_name": "abilityName",
+      "relation_kind": "ability_operation",
+      "target_kind": "ability",
+      "source_order": 0,
+      "presence_status": "present",
+      "resolution_status": "resolved",
+      "resolved_definition_id": "d3f0c8096afe563cd8e0d98f3cb47e2cf37ea2c2e0786bab136327e081951b73",
+      "extraction_rule_id": "7",
+      "version_line": "release",
+      "snapshot_id": "ef0cac22b5cc4ee887fa64d134b563ffc745ae365b0c6cdb03930f895ab413df",
+      "target_key": "Relic_ReactionGainExtraElemMasteryForTeam",
+      "scope": {
+        "owner_definition_id": null
+      },
+      "candidate_ids": [
+        "d3f0c8096afe563cd8e0d98f3cb47e2cf37ea2c2e0786bab136327e081951b73"
+      ]
+    },
+    {
+      "reference_id": "fb3e94cdeaa6387b34042b33ac1f154db362d887a68bbec2a3da66356ad51220",
+      "from_definition_id": "014d1829062bf47379581b6d1e0c03858dc4b813184ee211a5ef83a7eae81371",
+      "source_path": "BinOutput/Talent/RelicTalents/ConfigAffix_Relic.json",
+      "json_pointer": "/Relic_ReactionGainExtraElemMasteryForTeam/1/IIBMNPFLNMJ",
+      "field_name": "abilityName",
+      "relation_kind": "ability_operation",
+      "target_kind": "ability",
+      "source_order": 1,
+      "presence_status": "present",
+      "resolution_status": "resolved",
+      "resolved_definition_id": "d3f0c8096afe563cd8e0d98f3cb47e2cf37ea2c2e0786bab136327e081951b73",
+      "extraction_rule_id": "7",
+      "version_line": "release",
+      "snapshot_id": "ef0cac22b5cc4ee887fa64d134b563ffc745ae365b0c6cdb03930f895ab413df",
+      "target_key": "Relic_ReactionGainExtraElemMasteryForTeam",
+      "scope": {
+        "owner_definition_id": null
+      },
+      "candidate_ids": [
+        "d3f0c8096afe563cd8e0d98f3cb47e2cf37ea2c2e0786bab136327e081951b73"
+      ]
+    },
+    {
+      "reference_id": "5048576109a198c93872708b803d3b4fbf3b2976dc583b06e3c40be145148548",
+      "from_definition_id": "014d1829062bf47379581b6d1e0c03858dc4b813184ee211a5ef83a7eae81371",
+      "source_path": "BinOutput/Talent/RelicTalents/ConfigAffix_Relic.json",
+      "json_pointer": "/Relic_ReactionGainExtraElemMasteryForTeam/2/IIBMNPFLNMJ",
+      "field_name": "abilityName",
+      "relation_kind": "ability_operation",
+      "target_kind": "ability",
+      "source_order": 2,
+      "presence_status": "present",
+      "resolution_status": "resolved",
+      "resolved_definition_id": "d3f0c8096afe563cd8e0d98f3cb47e2cf37ea2c2e0786bab136327e081951b73",
+      "extraction_rule_id": "7",
+      "version_line": "release",
+      "snapshot_id": "ef0cac22b5cc4ee887fa64d134b563ffc745ae365b0c6cdb03930f895ab413df",
+      "target_key": "Relic_ReactionGainExtraElemMasteryForTeam",
+      "scope": {
+        "owner_definition_id": null
+      },
+      "candidate_ids": [
+        "d3f0c8096afe563cd8e0d98f3cb47e2cf37ea2c2e0786bab136327e081951b73"
+      ]
+    },
+    {
+      "reference_id": "027e8d1f72b9bf3b1e52482f8b0dae00c32944f0c9eeb1e372083fa0e186d416",
+      "from_definition_id": "d3f0c8096afe563cd8e0d98f3cb47e2cf37ea2c2e0786bab136327e081951b73",
+      "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+      "json_pointer": "/12/Default/EMGBJJOIENB/0/LDFBDMNIADI",
+      "field_name": "modifierName",
+      "relation_kind": "modifier_operation",
+      "target_kind": "modifier",
+      "source_order": 0,
+      "presence_status": "present",
+      "resolution_status": "resolved",
+      "resolved_definition_id": "19653d7020db08e4c2a8029a085957f8196afbf72e57b1d616c3a6b2dedab28c",
+      "extraction_rule_id": "7",
+      "version_line": "release",
+      "snapshot_id": "ef0cac22b5cc4ee887fa64d134b563ffc745ae365b0c6cdb03930f895ab413df",
+      "target_key": "UNIQUE_Relic_ReactionGainExtraElemMasteryForTeam_Handler",
+      "scope": {
+        "owner_definition_id": "d3f0c8096afe563cd8e0d98f3cb47e2cf37ea2c2e0786bab136327e081951b73"
+      },
+      "candidate_ids": [
+        "19653d7020db08e4c2a8029a085957f8196afbf72e57b1d616c3a6b2dedab28c"
+      ]
+    },
+    {
+      "reference_id": "5b76b47574ba2ab24ca22f92c25a29200aaebc807bfcd70809044488b94fcd55",
+      "from_definition_id": "19653d7020db08e4c2a8029a085957f8196afbf72e57b1d616c3a6b2dedab28c",
+      "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+      "json_pointer": "/12/Default/GPPBBDEICKP/UNIQUE_Relic_ReactionGainExtraElemMasteryForTeam_Handler/LFIJIMIMBIH/0/KHJMNJNEADF/0/LDFBDMNIADI",
+      "field_name": "modifierName",
+      "relation_kind": "modifier_operation",
+      "target_kind": "modifier",
+      "source_order": 0,
+      "presence_status": "present",
+      "resolution_status": "resolved",
+      "resolved_definition_id": "fffb5616f7b20cd407b38bda88b13cc64c7e991ad92cc3a9d387ecaf882c56cd",
+      "extraction_rule_id": "7",
+      "version_line": "release",
+      "snapshot_id": "ef0cac22b5cc4ee887fa64d134b563ffc745ae365b0c6cdb03930f895ab413df",
+      "target_key": "UNIQUE_ReactionGainExtraElemMasteryForTeam",
+      "scope": {
+        "owner_definition_id": "d3f0c8096afe563cd8e0d98f3cb47e2cf37ea2c2e0786bab136327e081951b73"
+      },
+      "candidate_ids": [
+        "fffb5616f7b20cd407b38bda88b13cc64c7e991ad92cc3a9d387ecaf882c56cd"
+      ]
+    },
+    {
+      "reference_id": "f7cf5b032e7625bd9767761f081eda1016996322e3190180a06bf6920aaeb148",
+      "from_definition_id": "19653d7020db08e4c2a8029a085957f8196afbf72e57b1d616c3a6b2dedab28c",
+      "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+      "json_pointer": "/12/Default/GPPBBDEICKP/UNIQUE_Relic_ReactionGainExtraElemMasteryForTeam_Handler/LFIJIMIMBIH/0/KHJMNJNEADF/1/LDFBDMNIADI",
+      "field_name": "modifierName",
+      "relation_kind": "modifier_operation",
+      "target_kind": "modifier",
+      "source_order": 1,
+      "presence_status": "present",
+      "resolution_status": "resolved",
+      "resolved_definition_id": "fffb5616f7b20cd407b38bda88b13cc64c7e991ad92cc3a9d387ecaf882c56cd",
+      "extraction_rule_id": "7",
+      "version_line": "release",
+      "snapshot_id": "ef0cac22b5cc4ee887fa64d134b563ffc745ae365b0c6cdb03930f895ab413df",
+      "target_key": "UNIQUE_ReactionGainExtraElemMasteryForTeam",
+      "scope": {
+        "owner_definition_id": "d3f0c8096afe563cd8e0d98f3cb47e2cf37ea2c2e0786bab136327e081951b73"
+      },
+      "candidate_ids": [
+        "fffb5616f7b20cd407b38bda88b13cc64c7e991ad92cc3a9d387ecaf882c56cd"
+      ]
+    }
+  ],
+  "reference_closed": true,
+  "execution_support": "not_evaluated",
+  "closure_fingerprint": "c5a24e8d58565f9794b62d2ad5743074362b17efd9cfd987d1a54323c3cda3a4",
+  "normalization": {
+    "mapping_fingerprint": "506862bc6c0bf033d8272b75f193cd2a620fc513320b3223d07afcc6f04356e2",
+    "normalization_version": 2,
+    "profile_id": "upstream-224708ed-reviewed-schema-v1",
+    "upstream_commit": "224708edc8056f27e9ffc4eacabe797d75274636"
+  },
+  "content_fingerprint": "3c818328d42e8537f86f671ca0888b8d0608acc26c28f5bd2a594b3eaead2328"
+}

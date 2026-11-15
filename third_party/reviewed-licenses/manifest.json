@@ -1,0 +1,972 @@
+{
+  "contract": "genshin-reviewed-license-evidence-v1",
+  "reviewed_on": "2026-11-15",
+  "scope": "r18 fixed software dependency materials. No game-data licence inference; no general legal warranty.",
+  "components": [
+    {
+      "purl": "pkg:generic/node.js@24.19.0",
+      "binding": {
+        "binary_sha256": "3602f2bb1a10f2cbab4c36886218a33c1ab3db87290e73b033c46c77147d0237"
+      },
+      "concluded_license": "MIT AND bundled third-party terms",
+      "resolved_codes": [
+        "license_text_missing"
+      ],
+      "resolution": "exact_official_archive_binary_match",
+      "review_note": "Official node-v24.19.0-win-x64.zip SHA-256 verified against Node SHASUMS256.txt. Its node.exe is byte-identical to the bundled executable. Include the entire original LICENSE, including all embedded third-party notices.",
+      "archive_sha256": "57f71ab3652e797d84acddc79c81cc9ff1c6ddb2a1974cdb83f00fee9bff4c73",
+      "documents": [
+        {
+          "path": "texts/node-v24.19.0-LICENSE.txt",
+          "sha256": "d9c4eeda951d6d08f4aa1316b61aafcf67e6da5f79b18f8edeb56fa6abdc038c",
+          "source_url": "https://nodejs.org/dist/v24.19.0/node-v24.19.0-win-x64.zip",
+          "kind": "upstream_original"
+        }
+      ]
+    },
+    {
+      "purl": "pkg:npm/%40aws-sdk/credential-provider-http@3.972.77",
+      "binding": {
+        "package_metadata_sha256": "cf05cb644449b4edb703913fefa152a7ab9c65eb1715d2ac9b7e7db342b3d388"
+      },
+      "concluded_license": "Apache-2.0",
+      "resolved_codes": [
+        "license_text_missing"
+      ],
+      "resolution": "verified_upstream_materials",
+      "review_note": "The exact tarball declares Apache-2.0. Supply the unchanged Apache terms from the publisher repository at pinned commit 2b5baaedefad259a64e4aa263034a9ff7474863e. This commit is a licence-text source, not asserted to be the package build commit. No root NOTICE exists at that commit.",
+      "publisher_artifact": {
+        "url": "https://registry.npmjs.org/@aws-sdk/credential-provider-http/-/credential-provider-http-3.972.77.tgz",
+        "sha256": "6c54f777e7212f9743c211bedfcf6b372d928667d5da8310496e43204e9f9277",
+        "integrity": "sha512-KkYFdIQwuw9IOHfEzK78slxmVWuhcm1w6YgE3V3WVxAeRRj9q5J9jlwzpY/oszWxd4SD96FTFkDdRGBdMFF2Mw==",
+        "registry_url": "https://registry.npmjs.org/@aws-sdk/credential-provider-http/3.972.77"
+      },
+      "documents": [
+        {
+          "path": "texts/aws-sdk--credential-provider-http-declaration.json",
+          "sha256": "f12f546e53234f5f145258c809ea4d9bd856276e843f801fb2494a2ab07224b4",
+          "source_url": "https://registry.npmjs.org/@aws-sdk/credential-provider-http/-/credential-provider-http-3.972.77.tgz",
+          "kind": "publisher_metadata_excerpt"
+        },
+        {
+          "path": "texts/aws-LICENSE.txt",
+          "sha256": "edea91454b811f127fbdea3d86f378f6719bd372ed440abf82b232f6fca06c3d",
+          "source_url": "https://raw.githubusercontent.com/aws/aws-sdk-js-v3/2b5baaedefad259a64e4aa263034a9ff7474863e/LICENSE",
+          "kind": "upstream_original"
+        }
+      ]
+    },
+    {
+      "purl": "pkg:npm/%40aws-sdk/credential-provider-login@3.972.82",
+      "binding": {
+        "package_metadata_sha256": "403ac987663edaec95b199851b9d1010e8bb461657234b169acb2728a9b26fc5"
+      },
+      "concluded_license": "Apache-2.0",
+      "resolved_codes": [
+        "license_text_missing"
+      ],
+      "resolution": "verified_upstream_materials",
+      "review_note": "The exact tarball declares Apache-2.0. Supply the unchanged Apache terms from the publisher repository at pinned commit 2b5baaedefad259a64e4aa263034a9ff7474863e. This commit is a licence-text source, not asserted to be the package build commit. No root NOTICE exists at that commit.",
+      "publisher_artifact": {
+        "url": "https://registry.npmjs.org/@aws-sdk/credential-provider-login/-/credential-provider-login-3.972.82.tgz",
+        "sha256": "3e017991c8d138e3f0c48e71a8432e7dbecef1c8abb41075dfb9cf0717fa901a",
+        "integrity": "sha512-8jyDPtf1WPxeQ/5xlNpyxAD6P7YKwkYeNk8B2vFEDwkPWDvb7c3tQJG5/jbNWbF2yTMIH9tDTueBkdfovYIAPw==",
+        "registry_url": "https://registry.npmjs.org/@aws-sdk/credential-provider-login/3.972.82"
+      },
+      "documents": [
+        {
+          "path": "texts/aws-sdk--credential-provider-login-declaration.json",
+          "sha256": "5b6dc415ca20ffd1f45e318c52fd628133cf4fd3b6fa2f387f45924b0512faa2",
+          "source_url": "https://registry.npmjs.org/@aws-sdk/credential-provider-login/-/credential-provider-login-3.972.82.tgz",
+          "kind": "publisher_metadata_excerpt"
+        },
+        {
+          "path": "texts/aws-LICENSE.txt",
+          "sha256": "edea91454b811f127fbdea3d86f378f6719bd372ed440abf82b232f6fca06c3d",
+          "source_url": "https://raw.githubusercontent.com/aws/aws-sdk-js-v3/2b5baaedefad259a64e4aa263034a9ff7474863e/LICENSE",
+          "kind": "upstream_original"
+        }
+      ]
+    },
+    {
+      "purl": "pkg:npm/%40aws-sdk/nested-clients@3.997.49",
+      "binding": {
+        "package_metadata_sha256": "093e9f50c3c94a54fcfbcc4b4a11c00ed2627e08118ceb4d12e34edbd2fd1269"
+      },
+      "concluded_license": "Apache-2.0",
+      "resolved_codes": [
+        "license_text_missing"
+      ],
+      "resolution": "verified_upstream_materials",
+      "review_note": "The exact tarball declares Apache-2.0. Supply the unchanged Apache terms from the publisher repository at pinned commit 2b5baaedefad259a64e4aa263034a9ff7474863e. This commit is a licence-text source, not asserted to be the package build commit. No root NOTICE exists at that commit.",
+      "publisher_artifact": {
+        "url": "https://registry.npmjs.org/@aws-sdk/nested-clients/-/nested-clients-3.997.49.tgz",
+        "sha256": "2fd3e1e6f43aedef164cde08a6d9d85eff13cec47b08ff0a6dcee36bbeeb09fa",
+        "integrity": "sha512-zjqIqzTYLRKhT7TPJDUreK9vG9PjhmnfLCaTaqArkRT7j+Ogl0tuXB7MpSd8rlRfRT+xTOeyNFWaOfyNcf51hg==",
+        "registry_url": "https://registry.npmjs.org/@aws-sdk/nested-clients/3.997.49"
+      },
+      "documents": [
+        {
+          "path": "texts/aws-sdk--nested-clients-declaration.json",
+          "sha256": "39cea6fab0c64c886451855506685858e9ba1768ea444b75b98a6b7ef82cff32",
+          "source_url": "https://registry.npmjs.org/@aws-sdk/nested-clients/-/nested-clients-3.997.49.tgz",
+          "kind": "publisher_metadata_excerpt"
+        },
+        {
+          "path": "texts/aws-LICENSE.txt",
+          "sha256": "edea91454b811f127fbdea3d86f378f6719bd372ed440abf82b232f6fca06c3d",
+          "source_url": "https://raw.githubusercontent.com/aws/aws-sdk-js-v3/2b5baaedefad259a64e4aa263034a9ff7474863e/LICENSE",
+          "kind": "upstream_original"
+        }
+      ]
+    },
+    {
+      "purl": "pkg:npm/%40deepseek-ai/dsh-experimental-inspector@0.2.1-rc.5",
+      "binding": {
+        "package_metadata_sha256": "9912a7bc3c366d3cb4fe5fcb3c2bbdf61f3973b7f35d395f5107884db9ce9242"
+      },
+      "concluded_license": "MIT",
+      "resolved_codes": [
+        "license_text_missing"
+      ],
+      "resolution": "verified_upstream_materials",
+      "review_note": "DSH release tag dsh-v0.2.1-rc.5 matches package version. Include its MIT text plus all 29 nested DevTools licence files, including MPL, BSD, ISC and Apache notices, without reclassifying them as MIT.",
+      "publisher_artifact": {
+        "url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.1-rc.5.tgz",
+        "sha256": "fbcc10c87e8e13046cc1f846b154b3ca89ea32bbeca6301b0cb4ecd282bf9a5c",
+        "integrity": "sha512-Dds795N/Y6qZ9bgPNobmofGSlHMobvRz2ORE14xu6q9TxN3bO6uGdan0p59JH/fx4RGEiHv/LGQFa/Mt4wK96g==",
+        "registry_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/0.2.1-rc.5"
+      },
+      "documents": [
+        {
+          "path": "texts/deepseek-ai--dsh-experimental-inspector-declaration.json",
+          "sha256": "193b13b571b75dae6c12b69c6cd282a9e8e9d0bb3a4c8ff17afa867ebf6aae9b",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.1-rc.5.tgz",
+          "kind": "publisher_metadata_excerpt"
+        },
+        {
+          "path": "texts/dsh-LICENSE.txt",
+          "sha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+          "source_url": "https://raw.githubusercontent.com/deepseek-ai/deepseek-harness/b830ec950faba0a46dda564be3e2d854afed94f1/LICENSE",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/inspector/lib/devtools/LICENSE",
+          "sha256": "ff11d445fb41a1087c7630e120ab15f1a2cb67c1b707173cb494141805fca35e",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.1-rc.5.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/inspector/lib/devtools/third_party/acorn/package/LICENSE",
+          "sha256": "76a876cf886ff9be2a8b5e2e86514fed06223c8c9f0c1e9ee9606e93841e00b7",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.1-rc.5.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/inspector/lib/devtools/third_party/axe-core/LICENSE",
+          "sha256": "af175b9d96ee93c21a036152e1b905b0b95304d4ae8c2c921c7609100ba8df7e",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.1-rc.5.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/inspector/lib/devtools/third_party/chromium/LICENSE",
+          "sha256": "ff11d445fb41a1087c7630e120ab15f1a2cb67c1b707173cb494141805fca35e",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.1-rc.5.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/inspector/lib/devtools/third_party/codemirror.next/LICENSE",
+          "sha256": "aa8f65819a471c1a25fb3c0816c5a75e45f009b7899d292ee3cc70d9dbdd8f7e",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.1-rc.5.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/inspector/lib/devtools/third_party/codemirror/package/LICENSE",
+          "sha256": "a3f2fe2ac6b471aa80c737c5d283dd049bdc903a73835ee6d4d2cac02fdd53bf",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.1-rc.5.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/inspector/lib/devtools/third_party/csp_evaluator/package/LICENSE",
+          "sha256": "58d1e17ffe5109a7ae296caafcadfdbe6a7d176f0bc4ab01e12a689b0499d8bd",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.1-rc.5.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/inspector/lib/devtools/third_party/diff/LICENSE",
+          "sha256": "58d1e17ffe5109a7ae296caafcadfdbe6a7d176f0bc4ab01e12a689b0499d8bd",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.1-rc.5.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/inspector/lib/devtools/third_party/i18n/LICENSE",
+          "sha256": "7ec9661a8afafab1eee3523d6f1a193eff76314a5ab10b4ce96aefd87621b0c3",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.1-rc.5.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/inspector/lib/devtools/third_party/intl-messageformat/LICENSE",
+          "sha256": "0212e9ffd60f4c2e05426ac172b91266256b9ff4c0f0156e85b761a1d6f5e17f",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.1-rc.5.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/inspector/lib/devtools/third_party/json5/LICENSE",
+          "sha256": "53e59feb13058722d977c699eb0407c7bce2f93c949b681bbd2ff31698535927",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.1-rc.5.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/inspector/lib/devtools/third_party/legacy-javascript/LICENSE",
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.1-rc.5.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/inspector/lib/devtools/third_party/lighthouse/LICENSE",
+          "sha256": "7ec9661a8afafab1eee3523d6f1a193eff76314a5ab10b4ce96aefd87621b0c3",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.1-rc.5.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/inspector/lib/devtools/third_party/lit/LICENSE",
+          "sha256": "45d31799d0db956cc3eb5469346abbd9b7025babc5ff29fab10d7095da992ef1",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.1-rc.5.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/inspector/lib/devtools/third_party/marked/LICENSE",
+          "sha256": "91968bf678e8c3d94ebf8596e98ca9cb5fca1c6555b53f721a940cb50f1b3d66",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.1-rc.5.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/inspector/lib/devtools/third_party/puppeteer-replay/package/LICENSE",
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.1-rc.5.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/inspector/lib/devtools/third_party/puppeteer/LICENSE",
+          "sha256": "a27ca07269b3518550b2e83aed13eadd7d14d924b5864e14889b40cf227530ca",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.1-rc.5.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/inspector/lib/devtools/third_party/puppeteer/third_party/mitt/LICENSE",
+          "sha256": "4687b3b5b6eb3af13be50891dd67dab9e85bdca3f41c63d3e33b3364d6a717b5",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.1-rc.5.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/inspector/lib/devtools/third_party/puppeteer/third_party/parsel/LICENSE",
+          "sha256": "eb0fa16c7452341017d97ac695c737cd19a8a47e8a87edd66db9493017c0d077",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.1-rc.5.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/inspector/lib/devtools/third_party/puppeteer/third_party/rxjs/LICENSE",
+          "sha256": "a8d80f63116de4ec1abd3800ec98f68e0acba524f12db62518868649a722f631",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.1-rc.5.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/inspector/lib/devtools/third_party/source-map-scopes-codec/LICENSE",
+          "sha256": "53b4475d1cda8c46465bbaff85432631f0830cc2c0a4b28234b7e4d12d862e7b",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.1-rc.5.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/inspector/lib/devtools/third_party/source-map-scopes-codec/package/LICENSE",
+          "sha256": "53b4475d1cda8c46465bbaff85432631f0830cc2c0a4b28234b7e4d12d862e7b",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.1-rc.5.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/inspector/lib/devtools/third_party/third-party-web/LICENSE",
+          "sha256": "e1f2a92813d0a7160c8bb0e27da66ec2f6599f2832ae5b4d9f95c108e60af5e6",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.1-rc.5.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/inspector/lib/devtools/third_party/third-party-web/package/LICENSE",
+          "sha256": "e1f2a92813d0a7160c8bb0e27da66ec2f6599f2832ae5b4d9f95c108e60af5e6",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.1-rc.5.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/inspector/lib/devtools/third_party/wasmparser/package/LICENSE",
+          "sha256": "0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.1-rc.5.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/inspector/lib/devtools/third_party/web-vitals/package/LICENSE",
+          "sha256": "bfdeded4040e05da31ca9b6239dc83bd23fa26ac8db87342a7ca4363f68916ff",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.1-rc.5.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/inspector/lib/devtools/third_party/intl-messageformat/package/LICENSE.md",
+          "sha256": "ef3882f3b2cf9e1c07172adbf49b7c72a5c75d8a01f3b3ed4777117364ca43fa",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.1-rc.5.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/inspector/lib/devtools/third_party/marked/package/LICENSE.md",
+          "sha256": "8e3a3f82f59a60958f56ca08f445647c32a4733dc7ca6c2c46f6eb898471ab9c",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.1-rc.5.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/inspector/lib/devtools/third_party/vscode.web-custom-data/package/LICENSE.md",
+          "sha256": "c2cfccb812fe482101a8f04597dfc5a9991a6b2748266c47ac91b6a5aae15383",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.1-rc.5.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/inspector-source-availability.txt",
+          "sha256": "a180972a6811e38924e19522dbd93de4d6141dd37a6e4c642098ad4539d91eb3",
+          "source_url": "https://github.com/ChromeDevTools/devtools-frontend/tree/0e1186138ed519d9659c1874bf6375eca4483c72",
+          "kind": "source_availability_notice"
+        }
+      ]
+    },
+    {
+      "purl": "pkg:npm/%40deepseek-ai/libreoffice-kit-win32-x64@0.1.5",
+      "binding": {
+        "package_metadata_sha256": "ee4d605b69a60d35f8d0bd449d92dc3d5cc39938841d2fefc885f4f4174bfe31"
+      },
+      "concluded_license": "MPL-2.0",
+      "resolved_codes": [
+        "license_text_missing"
+      ],
+      "resolution": "verified_upstream_materials",
+      "review_note": "False missing-file flag caused by root-only scanning. Verified exact archive already contains complete nested licence/NOTICE files and source patches. Preserve them and add explicit source access instructions.",
+      "publisher_artifact": {
+        "url": "https://registry.npmjs.org/@deepseek-ai/libreoffice-kit-win32-x64/-/libreoffice-kit-win32-x64-0.1.5.tgz",
+        "sha256": "5cc9051e7d29a6dfe409bb3dbfcb931cbb1591709d83b84b404faf319a64d0ae",
+        "integrity": "sha512-uKuDGZdofxuW4iRmUh8b3+XWU28JeOCYMTAONzo7tEHIq00DV2cARcgUYiTP7gUH49tH4A/RyPMOVEBzK7qjjw==",
+        "registry_url": "https://registry.npmjs.org/@deepseek-ai/libreoffice-kit-win32-x64/0.1.5"
+      },
+      "documents": [
+        {
+          "path": "texts/deepseek-ai--libreoffice-kit-win32-x64-declaration.json",
+          "sha256": "defc8a7a8022d4f51d091c688c2398c326ee0d546543b90d698e2a640ccfc59e",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/libreoffice-kit-win32-x64/-/libreoffice-kit-win32-x64-0.1.5.tgz",
+          "kind": "publisher_metadata_excerpt"
+        },
+        {
+          "path": "texts/libreoffice/program/NOTICE",
+          "sha256": "8d34210ebbfaee4ba258ef7b30c3044170f356ab82c8259c81b53860bcdeef7b",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/libreoffice-kit-win32-x64/-/libreoffice-kit-win32-x64-0.1.5.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/libreoffice/licenses/LibreOffice-third-party.html",
+          "sha256": "6ef5eb44a3b8127960c27cb9c038fe89c221e139431ef33057c70811d91026ea",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/libreoffice-kit-win32-x64/-/libreoffice-kit-win32-x64-0.1.5.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/libreoffice/licenses/DeepSeek-Harness-MIT.txt",
+          "sha256": "69393380a3ec85c465dd4b22497a5de04c3408435126d8f50930d46de3886034",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/libreoffice-kit-win32-x64/-/libreoffice-kit-win32-x64-0.1.5.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/libreoffice/licenses/LibreOffice-MPL-2.0.txt",
+          "sha256": "1f256ecad192880510e84ad60474eab7589218784b9a50bc7ceee34c2b91f1d5",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/libreoffice-kit-win32-x64/-/libreoffice-kit-win32-x64-0.1.5.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/libreoffice/program/license.txt",
+          "sha256": "9a7e34fbf3903507665e3ec7ca8b3d0c11f73bf2d5a0d754a079ab9f505bafef",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/libreoffice-kit-win32-x64/-/libreoffice-kit-win32-x64-0.1.5.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/libreoffice-source-availability.txt",
+          "sha256": "f12b15f0f776fc68df2cd9dc3ef4532bc737b3f04fae95629b07ca11472ce1cb",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/libreoffice-kit-win32-x64/-/libreoffice-kit-win32-x64-0.1.5.tgz",
+          "kind": "source_availability_notice"
+        }
+      ]
+    },
+    {
+      "purl": "pkg:npm/%40earendil-works/pi-ai@1.3.0",
+      "binding": {
+        "package_metadata_sha256": "4e9ed07b06a91d844485874c251f312b610d015a4a4fd32c78cde58a7862a3f1"
+      },
+      "concluded_license": "MIT",
+      "resolved_codes": [
+        "license_text_missing"
+      ],
+      "resolution": "verified_upstream_materials",
+      "review_note": "Exact installed package metadata is pinned. Retain original notices and source references; project MIT does not replace upstream terms.",
+      "publisher_artifact": {
+        "url": "https://registry.npmjs.org/@earendil-works/pi-ai/-/pi-ai-1.3.0.tgz",
+        "sha256": "5343e1639bf343bdc3344df3ad6c31c05a50b68bad07ac6bce10890d4b6b8a61",
+        "integrity": "sha512-KaBI8x7q7sPoFUXICNGD9efHzDG+oRNwVvkA9jdIsSQWH1RjFssOlEGsbLtewUPPgCrvmz0l2KTgSLXTyj3acw==",
+        "registry_url": "https://registry.npmjs.org/@earendil-works/pi-ai/1.3.0"
+      },
+      "documents": [
+        {
+          "path": "texts/earendil-works--pi-ai-declaration.json",
+          "sha256": "8c68f6206e1edf6df88952f782800ecda4e0759dcff55151cea1ae2ec69daa80",
+          "source_url": "https://registry.npmjs.org/@earendil-works/pi-ai/-/pi-ai-1.3.0.tgz",
+          "kind": "publisher_metadata_excerpt"
+        },
+        {
+          "path": "texts/pi-pinned-LICENSE.txt",
+          "sha256": "0457f5bcec3b3b211605dfb5d1a49042fd638f3686a410fe099c24a25af13c48",
+          "source_url": "https://raw.githubusercontent.com/earendil-works/pi/71023aec1546d6d677a65669c5665c0927ce0dd0/LICENSE",
+          "kind": "upstream_original"
+        }
+      ]
+    },
+    {
+      "purl": "pkg:npm/%40earendil-works/pi-telemetry@1.3.0",
+      "binding": {
+        "package_metadata_sha256": "386479e7767a2aff572fea6339558405b1b23e9e7951504731515fc71b7db6ae"
+      },
+      "concluded_license": "MIT",
+      "resolved_codes": [
+        "license_text_missing"
+      ],
+      "resolution": "verified_upstream_materials",
+      "review_note": "Exact installed package metadata is pinned. Retain original notices and source references; project MIT does not replace upstream terms.",
+      "publisher_artifact": {
+        "url": "https://registry.npmjs.org/@earendil-works/pi-telemetry/-/pi-telemetry-1.3.0.tgz",
+        "sha256": "e90ea04e17e491ad8cbe5fd609909322fb251cf01abc5770e6bb93d3fc2453de",
+        "integrity": "sha512-ERGZr+aXjNJzoUbB7ZzHVH3g5otzMHjHLs2Fyizm12By5X+gBEhod9cJXFOk13S7M8a29Am+Mq21zm73mRJFLg==",
+        "registry_url": "https://registry.npmjs.org/@earendil-works/pi-telemetry/1.3.0"
+      },
+      "documents": [
+        {
+          "path": "texts/earendil-works--pi-telemetry-declaration.json",
+          "sha256": "9f24e90973b3456450b43c04217919025e212138e5fa4f6f066170ad723c2684",
+          "source_url": "https://registry.npmjs.org/@earendil-works/pi-telemetry/-/pi-telemetry-1.3.0.tgz",
+          "kind": "publisher_metadata_excerpt"
+        },
+        {
+          "path": "texts/pi-pinned-LICENSE.txt",
+          "sha256": "0457f5bcec3b3b211605dfb5d1a49042fd638f3686a410fe099c24a25af13c48",
+          "source_url": "https://raw.githubusercontent.com/earendil-works/pi/71023aec1546d6d677a65669c5665c0927ce0dd0/LICENSE",
+          "kind": "upstream_original"
+        }
+      ]
+    },
+    {
+      "purl": "pkg:npm/%40koromix/koffi-win32-x64@3.1.1",
+      "binding": {
+        "package_metadata_sha256": "b38fcff8641d493656ef4153a37fd7389806ae621bb916aca536fd3bbc158690"
+      },
+      "concluded_license": "MIT",
+      "resolved_codes": [
+        "license_text_missing"
+      ],
+      "resolution": "verified_upstream_materials",
+      "review_note": "Platform binary metadata declares MIT. Full original licence and Node-API vendor notices obtained from the official companion koffi@3.1.1 tarball; its SHA-512 was verified against npm. This is a companion-package source, not a fabricated platform-package file.",
+      "publisher_artifact": {
+        "url": "https://registry.npmjs.org/@koromix/koffi-win32-x64/-/koffi-win32-x64-3.1.1.tgz",
+        "sha256": "b0be9b6a916b9f5de5b97fb5de844efe1121f7ed44cafb481a1479c7c90aec9b",
+        "integrity": "sha512-KqHPmvj6QILhNyI/To8QSihHsijeVGIYYPBOUnXEpcnH2LuLbargY4Hd6dDeTN3Z90uUUxN+1FWz1UnhVzFOiA==",
+        "registry_url": "https://registry.npmjs.org/@koromix/koffi-win32-x64/3.1.1"
+      },
+      "documents": [
+        {
+          "path": "texts/koromix--koffi-win32-x64-declaration.json",
+          "sha256": "da00a7948d346ac7984179466a72b8a6fc6ecec435d8825fe15abc88a9df2787",
+          "source_url": "https://registry.npmjs.org/@koromix/koffi-win32-x64/-/koffi-win32-x64-3.1.1.tgz",
+          "kind": "publisher_metadata_excerpt"
+        },
+        {
+          "path": "texts/koffi-package--LICENSE.txt.txt",
+          "sha256": "22bcbbbacd739b026a8dc484f62a31484ce4c4e31f3408b60b29b4e41d62b290",
+          "source_url": "https://registry.npmjs.org/koffi/-/koffi-3.1.1.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/koffi-package--vendor--node-addon-api--LICENSE.md.txt",
+          "sha256": "89024017b88a9f2b763f79b941a4f2db3b4428edfcacdc0b23866b2da633ad0c",
+          "source_url": "https://registry.npmjs.org/koffi/-/koffi-3.1.1.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/koffi-package--vendor--node-api-headers--LICENSE.txt",
+          "sha256": "a553508f516031c91f3af1148d44970cb81bbae6c4f091be6835d39cc252238c",
+          "source_url": "https://registry.npmjs.org/koffi/-/koffi-3.1.1.tgz",
+          "kind": "upstream_original"
+        }
+      ]
+    },
+    {
+      "purl": "pkg:npm/%40xterm/addon-serialize@0.14.0",
+      "binding": {
+        "package_metadata_sha256": "48b1c275c67f141828765fbf188457c430827c333dba069fe4520cbedb729763"
+      },
+      "concluded_license": "MIT",
+      "resolved_codes": [
+        "license_text_missing"
+      ],
+      "resolution": "verified_upstream_materials",
+      "review_note": "Exact installed package metadata is pinned. Retain original notices and source references; project MIT does not replace upstream terms.",
+      "publisher_artifact": {
+        "url": "https://registry.npmjs.org/@xterm/addon-serialize/-/addon-serialize-0.14.0.tgz",
+        "sha256": "f9a290923dc9c6178446e3fc082c29812a7096a1664fd7bf904022c141c5bbfb",
+        "integrity": "sha512-uteyTU1EkrQa2Ux6P/uFl2fzmXI46jy5uoQMKEOM0fKTyiW7cSn0WrFenHm5vO5uEXX/GpwW/FgILvv3r0WbkA==",
+        "registry_url": "https://registry.npmjs.org/@xterm/addon-serialize/0.14.0"
+      },
+      "documents": [
+        {
+          "path": "texts/xterm--addon-serialize-declaration.json",
+          "sha256": "77f294618f011e69d7fceaa68d4df928c9b35aefbaf5233e090b8bb4fd64a387",
+          "source_url": "https://registry.npmjs.org/@xterm/addon-serialize/-/addon-serialize-0.14.0.tgz",
+          "kind": "publisher_metadata_excerpt"
+        },
+        {
+          "path": "texts/xterm-LICENSE.txt",
+          "sha256": "b569f629d00f2626a8100df2a1798210535621e42164dfd426a6fe5aac7b0ccd",
+          "source_url": "https://raw.githubusercontent.com/xtermjs/xterm.js/f447274f430fd22513f6adbf9862d19524471c04/LICENSE",
+          "kind": "upstream_original"
+        }
+      ]
+    },
+    {
+      "purl": "pkg:npm/%40xterm/headless@6.0.0",
+      "binding": {
+        "package_metadata_sha256": "6c39530ee759998113bd8bcc306d1b725c0b1d5b0cdc04e071f6945a5f5edf1a"
+      },
+      "concluded_license": "MIT",
+      "resolved_codes": [
+        "license_text_missing"
+      ],
+      "resolution": "verified_upstream_materials",
+      "review_note": "Exact installed package metadata is pinned. Retain original notices and source references; project MIT does not replace upstream terms.",
+      "publisher_artifact": {
+        "url": "https://registry.npmjs.org/@xterm/headless/-/headless-6.0.0.tgz",
+        "sha256": "07e4970b1674e7ef6cbd57c8c17746eaadcd41aa7df5b33695fd649e6ec4d78a",
+        "integrity": "sha512-5Yj1QINYCyzrZtf8OFIHi47iQtI+0qYFPHmouEfG8dHNxbZ9Tb9YGSuLcsEwj9Z+OL75GJqPyJbyoFer80a2Hw==",
+        "registry_url": "https://registry.npmjs.org/@xterm/headless/6.0.0"
+      },
+      "documents": [
+        {
+          "path": "texts/xterm--headless-declaration.json",
+          "sha256": "6334065f094fd2e7ad46bef12a6a5a3d2404568ff0b0192f55bc99de2420ec2f",
+          "source_url": "https://registry.npmjs.org/@xterm/headless/-/headless-6.0.0.tgz",
+          "kind": "publisher_metadata_excerpt"
+        },
+        {
+          "path": "texts/xterm-LICENSE.txt",
+          "sha256": "b569f629d00f2626a8100df2a1798210535621e42164dfd426a6fe5aac7b0ccd",
+          "source_url": "https://raw.githubusercontent.com/xtermjs/xterm.js/f447274f430fd22513f6adbf9862d19524471c04/LICENSE",
+          "kind": "upstream_original"
+        }
+      ]
+    },
+    {
+      "purl": "pkg:npm/brotli@1.3.3",
+      "binding": {
+        "package_metadata_sha256": "387b47d00ea96cab9b4c521629fbcdc7621053ac061812526f3c69700924cef5"
+      },
+      "concluded_license": "MIT AND Apache-2.0",
+      "resolved_codes": [
+        "license_text_missing"
+      ],
+      "resolution": "reviewed_publisher_declaration_and_standard_terms",
+      "review_note": "Publisher explicitly declares MIT in this verified release. No project-specific full MIT text is present in its release/source. Preserve the publisher declaration and author as published, and include standard permission/condition/disclaimer text separately. No copyright year or copyright-holder notice has been invented. Decoder source also carries the original Google Apache-2.0 notice; both terms are retained.",
+      "publisher_artifact": {
+        "url": "https://registry.npmjs.org/brotli/-/brotli-1.3.3.tgz",
+        "sha256": "3c7c260f6263df95fee49a9119e9fd21227d628b6c9d99080a75edfd9e2bdb24",
+        "integrity": "sha512-oTKjJdShmDuGW94SyyaoQvAjf30dZaHnjJ8uAF+u2/vGJkJbJPJAT1gDiOJP5v1Zb6f9KEyW/1HpuaWIXtGHPg==",
+        "registry_url": "https://registry.npmjs.org/brotli/1.3.3"
+      },
+      "documents": [
+        {
+          "path": "texts/brotli-declaration.json",
+          "sha256": "1c979d8bee350b82f4758f52f2365d22b49fc04588d98bfc1650cad701303cea",
+          "source_url": "https://registry.npmjs.org/brotli/-/brotli-1.3.3.tgz",
+          "kind": "publisher_metadata_excerpt"
+        },
+        {
+          "path": "texts/MIT-standard-terms.txt",
+          "sha256": "83330a27667f812efa9c7cdaefd4c83f95b57a7454323a61ee29291312640468",
+          "source_url": "https://raw.githubusercontent.com/spdx/license-list-data/v3.27.0/text/MIT.txt",
+          "kind": "standard_terms_excerpt_without_template_copyright"
+        },
+        {
+          "path": "texts/brotli-README.txt",
+          "sha256": "8a8bac543fccf52a64708ff3315ca2be90e3e4c270634df1e4e4b51f0ee9c5d7",
+          "source_url": "https://raw.githubusercontent.com/devongovett/brotli.js/e36051345f6d27a56e5f39ea70d2f789b8574046/readme.md",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/Apache-standard.txt",
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "source_url": "https://www.apache.org/licenses/LICENSE-2.0.txt",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/brotli-google-notice.txt",
+          "sha256": "bc670957aaf188b069c48d4afe455bf0c276ec0f37994bdf435e3ad89e22a8a8",
+          "source_url": "https://registry.npmjs.org/brotli/-/brotli-1.3.3.tgz",
+          "kind": "original_source_header"
+        }
+      ]
+    },
+    {
+      "purl": "pkg:npm/data-uri-to-buffer@4.0.1",
+      "binding": {
+        "package_metadata_sha256": "ad4f90a737ab5d8af4dad265e9218456e3779ca5beb70df38dd5feecf80121dd"
+      },
+      "concluded_license": "MIT",
+      "resolved_codes": [
+        "license_text_missing"
+      ],
+      "resolution": "verified_upstream_materials",
+      "review_note": "Exact installed package metadata is pinned. Retain original notices and source references; project MIT does not replace upstream terms.",
+      "publisher_artifact": {
+        "url": "https://registry.npmjs.org/data-uri-to-buffer/-/data-uri-to-buffer-4.0.1.tgz",
+        "sha256": "a5742b1b775d0b29fb562ff7e12f7ca19874e1c47322087b47a79230791642a1",
+        "integrity": "sha512-0R9ikRb668HB7QDxT1vkpuUBtqc53YyAwMwGeUFKRojY/NWKvdZ+9UYtRfGmhqNbRkTSVpMbmyhXipFFv2cb/A==",
+        "registry_url": "https://registry.npmjs.org/data-uri-to-buffer/4.0.1"
+      },
+      "documents": [
+        {
+          "path": "texts/data-uri-to-buffer-declaration.json",
+          "sha256": "68b8cf0e4dbcb469b08d34ddd74ae566f8f7cb635bacb6cae6ed0e7f8bfcd0ab",
+          "source_url": "https://registry.npmjs.org/data-uri-to-buffer/-/data-uri-to-buffer-4.0.1.tgz",
+          "kind": "publisher_metadata_excerpt"
+        },
+        {
+          "path": "texts/data-uri-README.txt",
+          "sha256": "a7cc4332acfa1f9b6530e01aac77fefe74f2efa32579215fddaa473013f9a25c",
+          "source_url": "https://raw.githubusercontent.com/TooTallNate/node-data-uri-to-buffer/85cd8c854aefbf1bb636789d80364cfac8ea1583/README.md",
+          "kind": "upstream_original"
+        }
+      ]
+    },
+    {
+      "purl": "pkg:npm/dfa@1.2.0",
+      "binding": {
+        "package_metadata_sha256": "96c0ce3cc17b34aabd58fd442157766d9e244cba735e54ee4fe10d7841f0460c"
+      },
+      "concluded_license": "MIT",
+      "resolved_codes": [
+        "license_text_missing"
+      ],
+      "resolution": "reviewed_publisher_declaration_and_standard_terms",
+      "review_note": "Publisher explicitly declares MIT in this verified release. No project-specific full MIT text is present in its release/source. Preserve the publisher declaration and author as published, and include standard permission/condition/disclaimer text separately. No copyright year or copyright-holder notice has been invented.",
+      "publisher_artifact": {
+        "url": "https://registry.npmjs.org/dfa/-/dfa-1.2.0.tgz",
+        "sha256": "d781eb3a307ab6aa2d97028f695b17dbeadf6fd27788c333b1fb96d18d2a23ad",
+        "integrity": "sha512-ED3jP8saaweFTjeGX8HQPjeC1YYyZs98jGNZx6IiBvxW7JG5v492kamAQB3m2wop07CvU/RQmzcKr6bgcC5D/Q==",
+        "registry_url": "https://registry.npmjs.org/dfa/1.2.0"
+      },
+      "documents": [
+        {
+          "path": "texts/dfa-declaration.json",
+          "sha256": "ed65561ceba58d7fa81aa0fb04a96f8b5c30ba84da959486415e13be1de93516",
+          "source_url": "https://registry.npmjs.org/dfa/-/dfa-1.2.0.tgz",
+          "kind": "publisher_metadata_excerpt"
+        },
+        {
+          "path": "texts/MIT-standard-terms.txt",
+          "sha256": "83330a27667f812efa9c7cdaefd4c83f95b57a7454323a61ee29291312640468",
+          "source_url": "https://raw.githubusercontent.com/spdx/license-list-data/v3.27.0/text/MIT.txt",
+          "kind": "standard_terms_excerpt_without_template_copyright"
+        },
+        {
+          "path": "texts/dfa-README.txt",
+          "sha256": "30bd445925aa53205ff7f9afa6a43e21358fab656e471df6e028431aefc426c7",
+          "source_url": "https://raw.githubusercontent.com/devongovett/dfa/3f5e603e5082caedabefefdf53e8a6ca3111e966/README.md",
+          "kind": "upstream_original"
+        }
+      ]
+    },
+    {
+      "purl": "pkg:npm/fontkit@2.0.4",
+      "binding": {
+        "package_metadata_sha256": "49c60605b92316a5d5fe57b9a3bca8950ad9a8beab1cb633d6f29862d1bd163d"
+      },
+      "concluded_license": "MIT",
+      "resolved_codes": [
+        "license_text_missing"
+      ],
+      "resolution": "reviewed_publisher_declaration_and_standard_terms",
+      "review_note": "Publisher explicitly declares MIT in this verified release. No project-specific full MIT text is present in its release/source. Preserve the publisher declaration and author as published, and include standard permission/condition/disclaimer text separately. No copyright year or copyright-holder notice has been invented.",
+      "publisher_artifact": {
+        "url": "https://registry.npmjs.org/fontkit/-/fontkit-2.0.4.tgz",
+        "sha256": "f686a9515af33fce16ab4bffe50570728197e53165068548c6f75a1793797a08",
+        "integrity": "sha512-syetQadaUEDNdxdugga9CpEYVaQIxOwk7GlwZWWZ19//qW4zE5bknOKeMBDYAASwnpaSHKJITRLMF9m1fp3s6g==",
+        "registry_url": "https://registry.npmjs.org/fontkit/2.0.4"
+      },
+      "documents": [
+        {
+          "path": "texts/fontkit-declaration.json",
+          "sha256": "12233e2ed0ead70c2fa59541276f8fde374e0e45f1ca806a799ab049b3c52e0e",
+          "source_url": "https://registry.npmjs.org/fontkit/-/fontkit-2.0.4.tgz",
+          "kind": "publisher_metadata_excerpt"
+        },
+        {
+          "path": "texts/MIT-standard-terms.txt",
+          "sha256": "83330a27667f812efa9c7cdaefd4c83f95b57a7454323a61ee29291312640468",
+          "source_url": "https://raw.githubusercontent.com/spdx/license-list-data/v3.27.0/text/MIT.txt",
+          "kind": "standard_terms_excerpt_without_template_copyright"
+        },
+        {
+          "path": "texts/fontkit-README.txt",
+          "sha256": "8a1cf12d8ae7277f047c3000af7677927f2da9243627223ba5715d40df4979d6",
+          "source_url": "https://raw.githubusercontent.com/foliojs/fontkit/fbf3b9ef21eebd219eb73e666faed573af0fba09/README.md",
+          "kind": "upstream_original"
+        }
+      ]
+    },
+    {
+      "purl": "pkg:npm/proxy-agent-negotiate@1.1.0",
+      "binding": {
+        "package_metadata_sha256": "7b7c2579ea138d20d4f7699ca78ef16c526f35168dbf694f1d47cc861b0954d4"
+      },
+      "concluded_license": "MIT",
+      "resolved_codes": [
+        "license_text_missing"
+      ],
+      "resolution": "reviewed_publisher_declaration_and_standard_terms",
+      "review_note": "Publisher explicitly declares MIT in this verified release. No project-specific full MIT text is present in its release/source. Preserve the publisher declaration and author as published, and include standard permission/condition/disclaimer text separately. No copyright year or copyright-holder notice has been invented.",
+      "publisher_artifact": {
+        "url": "https://registry.npmjs.org/proxy-agent-negotiate/-/proxy-agent-negotiate-1.1.0.tgz",
+        "sha256": "6eec23d5d381a8b0ffafe91c19876d3a052e463618695981a7529f3a8bca1997",
+        "integrity": "sha512-N8IBcM3UgCVzz2L2Lqv8DVntDnnC8/hiV4nEDUPkqq72TPUgYWjQc+bdZlBPZK9LzPAvOY//gAt0S0DApoOXWQ==",
+        "registry_url": "https://registry.npmjs.org/proxy-agent-negotiate/1.1.0"
+      },
+      "documents": [
+        {
+          "path": "texts/proxy-agent-negotiate-declaration.json",
+          "sha256": "c76af557ada55f0d818b6f5a56b90d739a26e94837cc1fe05ec1c538a379128d",
+          "source_url": "https://registry.npmjs.org/proxy-agent-negotiate/-/proxy-agent-negotiate-1.1.0.tgz",
+          "kind": "publisher_metadata_excerpt"
+        },
+        {
+          "path": "texts/MIT-standard-terms.txt",
+          "sha256": "83330a27667f812efa9c7cdaefd4c83f95b57a7454323a61ee29291312640468",
+          "source_url": "https://raw.githubusercontent.com/spdx/license-list-data/v3.27.0/text/MIT.txt",
+          "kind": "standard_terms_excerpt_without_template_copyright"
+        }
+      ]
+    },
+    {
+      "purl": "pkg:npm/saxes@6.0.0",
+      "binding": {
+        "package_metadata_sha256": "32052572b41c2a890ed0854798c48454cc5991dcaafe5fb1718a4253046acfd3"
+      },
+      "concluded_license": "ISC",
+      "resolved_codes": [
+        "license_text_missing"
+      ],
+      "resolution": "verified_upstream_materials",
+      "review_note": "Exact installed package metadata is pinned. Retain original notices and source references; project MIT does not replace upstream terms.",
+      "publisher_artifact": {
+        "url": "https://registry.npmjs.org/saxes/-/saxes-6.0.0.tgz",
+        "sha256": "1cdf52fbbe1ccbd175c365d2b8e63f46e590e74aff23fa6a44a6ec51522e96db",
+        "integrity": "sha512-xAg7SOnEhrm5zI3puOOKyy1OMcMlIJZYNJY7xLBwSze0UjhPLnWfj2GF2EpT0jmzaJKIWKHLsaSSajf35bcYnA==",
+        "registry_url": "https://registry.npmjs.org/saxes/6.0.0"
+      },
+      "documents": [
+        {
+          "path": "texts/saxes-declaration.json",
+          "sha256": "b8630e854e4bc80d0c3383ac7a80965966561346cddeea1a09f68f473ffdb013",
+          "source_url": "https://registry.npmjs.org/saxes/-/saxes-6.0.0.tgz",
+          "kind": "publisher_metadata_excerpt"
+        },
+        {
+          "path": "texts/saxes-LICENSE.txt",
+          "sha256": "0fac2374380621b22e6b50451057721a9c52935b02d16d106a9f04897f061d0e",
+          "source_url": "https://raw.githubusercontent.com/lddubeau/saxes/211fa0ebec9b628affc09219199639887174bfc3/LICENSE",
+          "kind": "upstream_original"
+        }
+      ]
+    },
+    {
+      "purl": "pkg:npm/sherpa-onnx-node@1.13.8",
+      "binding": {
+        "package_metadata_sha256": "e93e192e89e06d62e45ba583600af3c2f87b01a58f1dff121906714f06d703aa"
+      },
+      "concluded_license": "Apache-2.0",
+      "resolved_codes": [
+        "license_text_missing"
+      ],
+      "resolution": "verified_upstream_materials",
+      "review_note": "Exact installed package metadata is pinned. Retain original notices and source references; project MIT does not replace upstream terms.",
+      "publisher_artifact": {
+        "url": "https://registry.npmjs.org/sherpa-onnx-node/-/sherpa-onnx-node-1.13.8.tgz",
+        "sha256": "db2a7b8b18d950b6e9ca5c1c919afec33fd3dd2bfef1aade0bea5a9fe7a1f0f1",
+        "integrity": "sha512-MsDMBdhLFTZ1GwvcGSSQhnS7g/EA8OMH6IYysCVUOM7j8Icty9KRc0E6YT1A5fWBsZwRfKOeh88QC95aRvS8ag==",
+        "registry_url": "https://registry.npmjs.org/sherpa-onnx-node/1.13.8"
+      },
+      "documents": [
+        {
+          "path": "texts/sherpa-onnx-node-declaration.json",
+          "sha256": "6602528f5f4f120772f74d3e52c3e2585f74b29eb40b9c47fc44a3b703d2c639",
+          "source_url": "https://registry.npmjs.org/sherpa-onnx-node/-/sherpa-onnx-node-1.13.8.tgz",
+          "kind": "publisher_metadata_excerpt"
+        },
+        {
+          "path": "texts/sherpa-LICENSE.txt",
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "source_url": "https://raw.githubusercontent.com/csukuangfj/sherpa-onnx/11afbd009a7f8c08f4bcf2fc1b265d0df4670fbf/LICENSE",
+          "kind": "upstream_original"
+        }
+      ]
+    },
+    {
+      "purl": "pkg:npm/sherpa-onnx-win-x64@1.13.8",
+      "binding": {
+        "package_metadata_sha256": "c9350c0a65f5ea616ce2ae9233a7f405e9a68766a4d4b941a380b6b3dba451d8"
+      },
+      "concluded_license": "Apache-2.0 AND MIT",
+      "resolved_codes": [
+        "license_text_missing"
+      ],
+      "resolution": "verified_upstream_materials",
+      "review_note": "Sherpa source commit matches npm gitHead. Native package also includes Microsoft ONNX Runtime DLL version 1.28.2; include that version's MIT and full ThirdPartyNotices. Keep their nested terms rather than treating the whole binary payload as Apache-only.",
+      "publisher_artifact": {
+        "url": "https://registry.npmjs.org/sherpa-onnx-win-x64/-/sherpa-onnx-win-x64-1.13.8.tgz",
+        "sha256": "fe522f02a5c113c2567a43982107ef41ae517f9a431931e90731e7e4d4341073",
+        "integrity": "sha512-oZF1c9VPOKtMwn83Bboc5XSWL+76BRoyB3eUuVnCknBKxwSULZU2Foia9VHWzU+n4I12rPsP6z6H9Rp1hD9o8g==",
+        "registry_url": "https://registry.npmjs.org/sherpa-onnx-win-x64/1.13.8"
+      },
+      "documents": [
+        {
+          "path": "texts/sherpa-onnx-win-x64-declaration.json",
+          "sha256": "985cf26a5eb2a2f6aecec9f0bdd6c85137a734881eb36195bfe2d916b5606e50",
+          "source_url": "https://registry.npmjs.org/sherpa-onnx-win-x64/-/sherpa-onnx-win-x64-1.13.8.tgz",
+          "kind": "publisher_metadata_excerpt"
+        },
+        {
+          "path": "texts/sherpa-LICENSE.txt",
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "source_url": "https://raw.githubusercontent.com/csukuangfj/sherpa-onnx/11afbd009a7f8c08f4bcf2fc1b265d0df4670fbf/LICENSE",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/onnx-LICENSE.txt",
+          "sha256": "2f07c72751aed99790b8a4869cf2311df85a860b22ded05fa22803587a48922c",
+          "source_url": "https://raw.githubusercontent.com/microsoft/onnxruntime/v1.28.2/LICENSE",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/onnx-NOTICES.txt",
+          "sha256": "0e07b95f3a8d6230037707c5c4a2b554d12c4cb67369669ac255635528ffcee2",
+          "source_url": "https://raw.githubusercontent.com/microsoft/onnxruntime/v1.28.2/ThirdPartyNotices.txt",
+          "kind": "upstream_original"
+        }
+      ]
+    },
+    {
+      "purl": "pkg:npm/standardwebhooks@1.1.1",
+      "binding": {
+        "package_metadata_sha256": "686397f0f0202e0b693cfd3f6241d7a8da3df326f9642867a484fbbd295690b6"
+      },
+      "concluded_license": "MIT",
+      "resolved_codes": [
+        "license_text_missing"
+      ],
+      "resolution": "verified_upstream_materials",
+      "review_note": "Repository root specification uses Apache-2.0; the libraries/LICENSE at the exact npm gitHead is MIT and governs the JavaScript library. Preserve its Svix copyright. Do not mislabel the package using the specification licence.",
+      "publisher_artifact": {
+        "url": "https://registry.npmjs.org/standardwebhooks/-/standardwebhooks-1.1.1.tgz",
+        "sha256": "d0bc8fec280c9e30ea3cbc876f44fe71d56f443aeca2bd2bdf745718308d4aed",
+        "integrity": "sha512-bCbX9ZEyFkWPsRz7Bl3NuQUJohmwGSev/yhr7vhaGPlc4AfIrspIRa6cPTBuI1ItmrTDJ4d/S2hCsfe4+vQGnQ==",
+        "registry_url": "https://registry.npmjs.org/standardwebhooks/1.1.1"
+      },
+      "documents": [
+        {
+          "path": "texts/standardwebhooks-declaration.json",
+          "sha256": "5118337007b6af9c2bc74f6dcee1a0fce5fe3ca3c2c53902ba9c21563b9b0c7a",
+          "source_url": "https://registry.npmjs.org/standardwebhooks/-/standardwebhooks-1.1.1.tgz",
+          "kind": "publisher_metadata_excerpt"
+        },
+        {
+          "path": "texts/standardwebhooks-libraries-LICENSE.txt",
+          "sha256": "5ec8c7b26b64d881a6706617bed25c049f97f2f35de034c756de8546fd6dbe27",
+          "source_url": "https://raw.githubusercontent.com/standard-webhooks/standard-webhooks/b4d2c14fc5b4ccff3ff271e3b087dff812254c59/libraries/LICENSE",
+          "kind": "upstream_original"
+        }
+      ]
+    },
+    {
+      "purl": "pkg:pypi/clr-loader@0.3.1",
+      "binding": {
+        "package_metadata_sha256": "278f2f45f1ddb3f80edb7fe9cdbe09ddefb9d5dbd10bee32698fe1d43d00a722"
+      },
+      "concluded_license": "MIT",
+      "resolved_codes": [
+        "declared_license_missing"
+      ],
+      "resolution": "verified_upstream_materials",
+      "review_note": "Original licence text exists in the installed distribution and matches the SHA-256-verified official same-version sdist. Explicit review supplies the name absent from single-line metadata; the original missing declaration is preserved.",
+      "documents": [
+        {
+          "path": "texts/clr-loader-LICENSE.txt",
+          "sha256": "dd6bdca10cdc3b24c6b0b6cef5fd611b7feb6917f127833283ddcdb310d3b453",
+          "source_url": "https://files.pythonhosted.org/packages/e4/46/7eea92b6aa2d68af78e049cbecec5f757f1aad44ecdecdc16bbad7eead51/clr_loader-0.3.1.tar.gz",
+          "kind": "upstream_original"
+        }
+      ]
+    },
+    {
+      "purl": "pkg:pypi/proxy-tools@0.1.0",
+      "binding": {
+        "package_metadata_sha256": "cc06dbef348cd2749517a10cac0787b288e783ca5a11c0a873cac75df9f1c9e4"
+      },
+      "concluded_license": "BSD-2-Clause",
+      "resolved_codes": [
+        "license_text_missing"
+      ],
+      "resolution": "verified_upstream_materials",
+      "review_note": "Metadata says MIT, but the 0.1.0 source explicitly says BSD. The sdist proxy_tools/__init__.py is byte-identical to upstream db43f1e35d4f90a65c5a4d56d9e9af88212ec6e6, whose LICENSE.txt is BSD-2-Clause with Ronacher/Tushman attribution. Preserve that original text, the MIT declaration and standard MIT terms; do not silently rewrite the upstream metadata.",
+      "documents": [
+        {
+          "path": "texts/proxy-tools-LICENSE.txt",
+          "sha256": "a428fb8a2e762af3eb0a6edbbb88e9b42ccfee80fd9b423958bcacf9b9abbfe4",
+          "source_url": "https://raw.githubusercontent.com/jtushman/proxy_tools/db43f1e35d4f90a65c5a4d56d9e9af88212ec6e6/LICENSE.txt",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/MIT-standard-terms.txt",
+          "sha256": "83330a27667f812efa9c7cdaefd4c83f95b57a7454323a61ee29291312640468",
+          "source_url": "https://raw.githubusercontent.com/spdx/license-list-data/v3.27.0/text/MIT.txt",
+          "kind": "standard_terms_excerpt_without_template_copyright"
+        },
+        {
+          "path": "texts/proxy-tools-source.txt",
+          "sha256": "d1539d95e1a713c068ca81d42e047b2c76568964cf277596d4e19efb22f476be",
+          "source_url": "https://raw.githubusercontent.com/jtushman/proxy_tools/db43f1e35d4f90a65c5a4d56d9e9af88212ec6e6/proxy_tools/__init__.py",
+          "kind": "upstream_original"
+        }
+      ]
+    },
+    {
+      "purl": "pkg:pypi/pywebview@6.2.1",
+      "binding": {
+        "package_metadata_sha256": "872f75587066fdc39f47f4e7eb52fe0ca3feee9053db0cd39ce3f77c981138e0"
+      },
+      "concluded_license": "BSD-3-Clause",
+      "resolved_codes": [
+        "declared_license_missing"
+      ],
+      "resolution": "verified_upstream_materials",
+      "review_note": "Original licence text exists in the installed distribution and matches the SHA-256-verified official same-version sdist. Explicit review supplies the name absent from single-line metadata; the original missing declaration is preserved.",
+      "documents": [
+        {
+          "path": "texts/pywebview-LICENSE.txt",
+          "sha256": "4a988dd3598832cd3653de20dc33cb677d0fb53ab5551c879ca31280ae653675",
+          "source_url": "https://files.pythonhosted.org/packages/59/4a/05307135dafba67778669d194bd1a3822a7685ec9ee8a6d7e70856c1a551/pywebview-6.2.1.tar.gz",
+          "kind": "upstream_original"
+        }
+      ]
+    }
+  ]
+}

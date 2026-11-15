@@ -1,0 +1,87 @@
+{
+  "contract": "genshin-native-pipe-mux-v1-golden",
+  "wire": "uint32be body_length + uint32be header_length + canonical_utf8_header + opaque_payload",
+  "limits": {
+    "header_bytes": 65536,
+    "body_bytes": 134217728,
+    "payload_bytes": 134152188,
+    "wire_bytes": 134217732
+  },
+  "vectors": [
+    {
+      "name": "python_legacy_frame",
+      "producer": "python",
+      "header": {
+        "protocol": "genshin-native-pipe-mux",
+        "version": 1,
+        "lane": "legacy_turn",
+        "sender_role": "host",
+        "connection_generation": 1,
+        "connection_id": "connection-1",
+        "runtime_incarnation": "runtime-1",
+        "global_seq": 1,
+        "lane_seq": 1,
+        "message_id": "message-legacy-1",
+        "correlation_id": "turn-1",
+        "stream_id": null,
+        "stream_seq": null,
+        "payload_kind": "legacy_frame",
+        "payload_length": 23,
+        "payload_sha256": "cfe4a1c564ba1c91371832fb1121d979f1a303feda6a32f5dfdb4df31816fd04",
+        "priority": "normal"
+      },
+      "payload_base64": "AAAAEHsibGVnYWN5Ijp0cnVlfQD/gH8=",
+      "packet_base64": "AAAB5QAAAcp7ImNvbm5lY3Rpb25fZ2VuZXJhdGlvbiI6MSwiY29ubmVjdGlvbl9pZCI6ImNvbm5lY3Rpb24tMSIsImNvcnJlbGF0aW9uX2lkIjoidHVybi0xIiwiZ2xvYmFsX3NlcSI6MSwibGFuZSI6ImxlZ2FjeV90dXJuIiwibGFuZV9zZXEiOjEsIm1lc3NhZ2VfaWQiOiJtZXNzYWdlLWxlZ2FjeS0xIiwicGF5bG9hZF9raW5kIjoibGVnYWN5X2ZyYW1lIiwicGF5bG9hZF9sZW5ndGgiOjIzLCJwYXlsb2FkX3NoYTI1NiI6ImNmZTRhMWM1NjRiYTFjOTEzNzE4MzJmYjExMjFkOTc5ZjFhMzAzZmVkYTZhMzJmNWRmZGI0ZGYzMTgxNmZkMDQiLCJwcmlvcml0eSI6Im5vcm1hbCIsInByb3RvY29sIjoiZ2Vuc2hpbi1uYXRpdmUtcGlwZS1tdXgiLCJydW50aW1lX2luY2FybmF0aW9uIjoicnVudGltZS0xIiwic2VuZGVyX3JvbGUiOiJob3N0Iiwic3RyZWFtX2lkIjpudWxsLCJzdHJlYW1fc2VxIjpudWxsLCJ2ZXJzaW9uIjoxfQAAABB7ImxlZ2FjeSI6dHJ1ZX0A/4B/"
+    },
+    {
+      "name": "node_remote_stream",
+      "producer": "node",
+      "header": {
+        "protocol": "genshin-native-pipe-mux",
+        "version": 1,
+        "lane": "remote_stream",
+        "sender_role": "runtime",
+        "connection_generation": 3,
+        "connection_id": "connection-3",
+        "runtime_incarnation": "runtime-7",
+        "global_seq": 41,
+        "lane_seq": 9,
+        "message_id": "message-stream-9",
+        "correlation_id": "request-4",
+        "stream_id": "stream-4",
+        "stream_seq": 17,
+        "payload_kind": "stream_data",
+        "payload_length": 13,
+        "payload_sha256": "a3be8f59fe63a2c1da73bb190fbf767e74d5b620c01678238a8655df3c048591",
+        "priority": "urgent"
+      },
+      "payload_base64": "AP9jaHVuazrkuK0ACg==",
+      "packet_base64": "AAAB5wAAAdZ7ImNvbm5lY3Rpb25fZ2VuZXJhdGlvbiI6MywiY29ubmVjdGlvbl9pZCI6ImNvbm5lY3Rpb24tMyIsImNvcnJlbGF0aW9uX2lkIjoicmVxdWVzdC00IiwiZ2xvYmFsX3NlcSI6NDEsImxhbmUiOiJyZW1vdGVfc3RyZWFtIiwibGFuZV9zZXEiOjksIm1lc3NhZ2VfaWQiOiJtZXNzYWdlLXN0cmVhbS05IiwicGF5bG9hZF9raW5kIjoic3RyZWFtX2RhdGEiLCJwYXlsb2FkX2xlbmd0aCI6MTMsInBheWxvYWRfc2hhMjU2IjoiYTNiZThmNTlmZTYzYTJjMWRhNzNiYjE5MGZiZjc2N2U3NGQ1YjYyMGMwMTY3ODIzOGE4NjU1ZGYzYzA0ODU5MSIsInByaW9yaXR5IjoidXJnZW50IiwicHJvdG9jb2wiOiJnZW5zaGluLW5hdGl2ZS1waXBlLW11eCIsInJ1bnRpbWVfaW5jYXJuYXRpb24iOiJydW50aW1lLTciLCJzZW5kZXJfcm9sZSI6InJ1bnRpbWUiLCJzdHJlYW1faWQiOiJzdHJlYW0tNCIsInN0cmVhbV9zZXEiOjE3LCJ2ZXJzaW9uIjoxfQD/Y2h1bms65LitAAo="
+    },
+    {
+      "name": "python_control_empty",
+      "producer": "python",
+      "header": {
+        "protocol": "genshin-native-pipe-mux",
+        "version": 1,
+        "lane": "control",
+        "sender_role": "host",
+        "connection_generation": 2,
+        "connection_id": "connection-2",
+        "runtime_incarnation": "runtime-2",
+        "global_seq": 7,
+        "lane_seq": 3,
+        "message_id": "message-control-3",
+        "correlation_id": null,
+        "stream_id": null,
+        "stream_seq": null,
+        "payload_kind": "control",
+        "payload_length": 0,
+        "payload_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "priority": "control"
+      },
+      "payload_base64": "",
+      "packet_base64": "AAABwgAAAb57ImNvbm5lY3Rpb25fZ2VuZXJhdGlvbiI6MiwiY29ubmVjdGlvbl9pZCI6ImNvbm5lY3Rpb24tMiIsImNvcnJlbGF0aW9uX2lkIjpudWxsLCJnbG9iYWxfc2VxIjo3LCJsYW5lIjoiY29udHJvbCIsImxhbmVfc2VxIjozLCJtZXNzYWdlX2lkIjoibWVzc2FnZS1jb250cm9sLTMiLCJwYXlsb2FkX2tpbmQiOiJjb250cm9sIiwicGF5bG9hZF9sZW5ndGgiOjAsInBheWxvYWRfc2hhMjU2IjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsInByaW9yaXR5IjoiY29udHJvbCIsInByb3RvY29sIjoiZ2Vuc2hpbi1uYXRpdmUtcGlwZS1tdXgiLCJydW50aW1lX2luY2FybmF0aW9uIjoicnVudGltZS0yIiwic2VuZGVyX3JvbGUiOiJob3N0Iiwic3RyZWFtX2lkIjpudWxsLCJzdHJlYW1fc2VxIjpudWxsLCJ2ZXJzaW9uIjoxfQ=="
+    }
+  ]
+}

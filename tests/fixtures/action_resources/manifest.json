@@ -1,0 +1,42 @@
+{
+  "schema_version": 1,
+  "archive_sha256": "987b8d1bbc6c4d850cbbbe548e89a311a422ed9e874a689da56b22824c92f4c4",
+  "members": {
+    "action-base-binding__pending-proposals.json": {
+      "bytes": 1526611,
+      "sha256": "d448769469f5beb107c19f43b0a7c338b62d1b4d40f0df909ec27dc08ec5a8cf"
+    },
+    "action-base-independent__facts__review.md": {
+      "bytes": 7972,
+      "sha256": "ac6492f2b180b9da97442a19ca80fb7e549fafe5a1f2c1c7bb6b80992bc83bb2"
+    },
+    "action-capacity__real-source-inventory.json": {
+      "bytes": 245912,
+      "sha256": "488c3d62fb23128e010cefebdb7ed040d706b49ef034b8f7000e7fe7325f6336"
+    },
+    "capacity-fact-review__fresh-source-proposals.json": {
+      "bytes": 88472,
+      "sha256": "d220d541b03eb28c29f5623ca92fdf388019e3c2dee588ad16a979f6cf892654"
+    },
+    "capacity-fact-review__independent__review.md": {
+      "bytes": 7260,
+      "sha256": "1a332a3a7fb946e5f48473a03b51c2dec737697bc06212ebcd3b86b7320165c4"
+    },
+    "capacity-fact-review__independent__source-evidence.json": {
+      "bytes": 21976,
+      "sha256": "0dbded256e69515852844acfe790bbbeb0c963ae0caf07f75109d6fe6e2ff68b"
+    },
+    "pending-record-bundle.json": {
+      "bytes": 349178,
+      "sha256": "ea5d2b322e3fc19d81c063db80adf4bcbf54ead0654001b69ba25d92288109c5"
+    },
+    "record-conversions.json": {
+      "bytes": 7557,
+      "sha256": "7bdfb7ad0acfed3c50a4a89781cee456176c3638b1946ef67397b4befdcbe6f4"
+    },
+    "related-root-r1-expected.json": {
+      "bytes": 7856,
+      "sha256": "6d0a4b18e489b17a38919148a7b6b2e239d014b2702bc70c3af8cae3f296e4ba"
+    }
+  }
+}

@@ -1,0 +1,630 @@
+{
+  "schema_version": 1,
+  "id": "stable-mechanics-01",
+  "items": [
+    {
+      "id": "ayaka-skill-particles",
+      "target_type": "skill",
+      "target_id": 10018,
+      "version_line": "release",
+      "title": "神里流·冰华的产球数量",
+      "category": "energy",
+      "conclusion": "战技命中后的产球为4或5个冰元素微粒。",
+      "conditions": "战技实际命中；产球不等于到账。",
+      "numeric_pattern": "4:5个对应次数比例1:1。",
+      "exceptions": "不能把4.5个期望值当作一次实际产球；引擎的情景事件应显式选定数量。",
+      "unconfirmed": "精确生成时点与旅行时间未确认；本条审核确认来源陈述，不代表在当前游戏版本重新实测。",
+      "sources": [
+        {
+          "title": "Kamisato Ayaka | KQM TCL",
+          "url": "https://library.keqingmains.com/characters/cryo/kamisato-ayaka",
+          "locator": "Elemental Skill / Particles",
+          "source_version": null,
+          "source_date": null,
+          "retrieved_at": "2026-09-13T08:47:55.194289+00:00",
+          "evidence_sha256": "37bf86429f5473b0a8cf2bae33c5a8d688936ddbee1d5beefbb6e75089d6cde9",
+          "evidence_range": "Unicode [0,22)，对应归档原始摘录"
+        }
+      ],
+      "status": "approved",
+      "reviewer": "RF-03 资料核对：原始机制摘录与来源位置",
+      "reviewed_at": "2026-09-13"
+    },
+    {
+      "id": "ayaka-burst-hit-pattern",
+      "target_type": "skill",
+      "target_id": 10019,
+      "version_line": "release",
+      "title": "神里流·霜灭的伤害段数",
+      "category": "hit_pattern",
+      "conclusion": "爆发包含19次切割和最终1次绽放。",
+      "conditions": "完整持续命中目标的模式；实际命中数取决于场景。",
+      "numeric_pattern": "19次切割＋1次绽放；二者应分别使用各自倍率。",
+      "exceptions": "不是把20次都按切割倍率计算。",
+      "unconfirmed": "精确首跳、每跳时间及中断/漏段未由该摘录确认；本条审核确认来源陈述，不代表在当前游戏版本重新实测。",
+      "sources": [
+        {
+          "title": "Kamisato Ayaka | KQM TCL",
+          "url": "https://library.keqingmains.com/characters/cryo/kamisato-ayaka",
+          "locator": "Elemental Burst / tick count",
+          "source_version": null,
+          "source_date": null,
+          "retrieved_at": "2026-09-13T08:47:55.194289+00:00",
+          "evidence_sha256": "81a5e762f328442ed6950b38378857111a9ea875014c4e778554ee2c334cde3c",
+          "evidence_range": "Unicode [0,53)，对应归档原始摘录"
+        }
+      ],
+      "status": "approved",
+      "reviewer": "RF-03 资料核对：原始机制摘录与来源位置",
+      "reviewed_at": "2026-09-13"
+    },
+    {
+      "id": "ayaka-burst-snapshot",
+      "target_type": "skill",
+      "target_id": 10019,
+      "version_line": "release",
+      "title": "神里流·霜灭的快照",
+      "category": "snapshot",
+      "conclusion": "神里绫华元素爆发采用输出角色属性快照。",
+      "conditions": "一般快照属性以施放时角色状态取值；特殊动态增益单列。",
+      "numeric_pattern": "需要把输出者快照、增益提供者动态值和敌方当前状态分别声明。",
+      "exceptions": "不得把快照解释为敌方抗性也冻结，或据此冻结申鹤提供的冰翎数值。",
+      "unconfirmed": "具体动画帧上的快照时点及全部特殊例外未确认；本条审核确认来源陈述，不代表在当前游戏版本重新实测。",
+      "sources": [
+        {
+          "title": "KQM TCL 原始机制证据：神里绫华 Burst Mechanics",
+          "url": "https://library.keqingmains.com/evidence/characters/cryo/kamisato-ayaka",
+          "locator": "Burst Mechanics；Snapshot & Dynamic / definition",
+          "source_version": null,
+          "source_date": null,
+          "retrieved_at": "2026-09-13T08:58:37.119606+00:00",
+          "evidence_sha256": "b5ddddb075dc838696a4559b5335b024e5cdda79ad1dc113bfd0608745eca0ee",
+          "evidence_range": "Unicode [0,24)，对应归档原始摘录"
+        },
+        {
+          "title": "KQM TCL：Snapshot & Dynamic 的通用定义",
+          "url": "https://library.keqingmains.com/combat-mechanics/snapshot-and-dynamic",
+          "locator": "Burst Mechanics；Snapshot & Dynamic / definition",
+          "source_version": null,
+          "source_date": null,
+          "retrieved_at": "2026-09-13T08:58:37.119606+00:00",
+          "evidence_sha256": "527258302c65b973446399ae07c849b024825cd2961bdb0cb5ab1580153d8846",
+          "evidence_range": "Unicode [0,57)，对应归档原始摘录"
+        }
+      ],
+      "status": "approved",
+      "reviewer": "RF-03 资料核对：原始机制摘录与来源位置",
+      "reviewed_at": "2026-09-13"
+    },
+    {
+      "id": "shenhe-skill-particles",
+      "target_type": "skill",
+      "target_id": 10632,
+      "version_line": "release",
+      "title": "仰灵威召将役咒的产球数量",
+      "category": "energy",
+      "conclusion": "申鹤战技点按产生3个、长按产生4个冰元素微粒。",
+      "conditions": "战技命中，区分点按与长按动作。",
+      "numeric_pattern": "点按3；长按4。",
+      "exceptions": "不包含西风武器额外产球。",
+      "unconfirmed": "精确产球与到账时点未确认；本条审核确认来源陈述，不代表在当前游戏版本重新实测。",
+      "sources": [
+        {
+          "title": "Shenhe | KQM TCL",
+          "url": "https://library.keqingmains.com/characters/cryo/shenhe",
+          "locator": "Elemental Skill / Press-Hold / Particles",
+          "source_version": null,
+          "source_date": null,
+          "retrieved_at": "2026-09-13T08:47:55.194289+00:00",
+          "evidence_sha256": "d5fee305005f998b89cece5456214a4cc0ae24ee8679596a8d5138832b472230",
+          "evidence_range": "Unicode [0,26)，对应归档原始摘录"
+        },
+        {
+          "title": "Shenhe | KQM TCL",
+          "url": "https://library.keqingmains.com/characters/cryo/shenhe",
+          "locator": "Elemental Skill / Press-Hold / Particles",
+          "source_version": null,
+          "source_date": null,
+          "retrieved_at": "2026-09-13T08:47:55.194289+00:00",
+          "evidence_sha256": "d5fee305005f998b89cece5456214a4cc0ae24ee8679596a8d5138832b472230",
+          "evidence_range": "Unicode [143,170)，对应归档原始摘录"
+        }
+      ],
+      "status": "approved",
+      "reviewer": "RF-03 资料核对：原始机制摘录与来源位置",
+      "reviewed_at": "2026-09-13"
+    },
+    {
+      "id": "shenhe-burst-hit-pattern",
+      "target_type": "skill",
+      "target_id": 10635,
+      "version_line": "release",
+      "title": "神女遣灵真诀的持续伤害模式",
+      "category": "hit_pattern",
+      "conclusion": "申鹤爆发的持续部分为12次伤害，资料记为每2秒两次。",
+      "conditions": "完整持续命中；初始伤害独立于持续部分。",
+      "numeric_pattern": "持续伤害12次；每2秒两次。",
+      "exceptions": "“每2秒两次”不能直接解释为两次伤害在同一时间戳；不能用微小数值伪造首跳精确时间。",
+      "unconfirmed": "初始命中至首跳及每组内部两次的精确间隔未确认；本条审核确认来源陈述，不代表在当前游戏版本重新实测。",
+      "sources": [
+        {
+          "title": "Shenhe | KQM TCL",
+          "url": "https://library.keqingmains.com/characters/cryo/shenhe",
+          "locator": "Elemental Burst / damage count and ticks",
+          "source_version": null,
+          "source_date": null,
+          "retrieved_at": "2026-09-13T08:47:55.194289+00:00",
+          "evidence_sha256": "b4960234f0fc218ce3636224c81e6ded28d6c30f8dce788da9c5a2c492c81904",
+          "evidence_range": "Unicode [48,88)，对应归档原始摘录"
+        },
+        {
+          "title": "Shenhe | KQM TCL",
+          "url": "https://library.keqingmains.com/characters/cryo/shenhe",
+          "locator": "Elemental Burst / damage count and ticks",
+          "source_version": null,
+          "source_date": null,
+          "retrieved_at": "2026-09-13T08:47:55.194289+00:00",
+          "evidence_sha256": "6c71752f43333ef8b6579acf1b99f987f8b02c4030f378e7f2750de41830b91f",
+          "evidence_range": "Unicode [0,34)，对应归档原始摘录"
+        }
+      ],
+      "status": "approved",
+      "reviewer": "RF-03 资料核对：原始机制摘录与来源位置",
+      "reviewed_at": "2026-09-13"
+    },
+    {
+      "id": "shenhe-quill-dynamic",
+      "target_type": "skill",
+      "target_id": 10632,
+      "version_line": "release",
+      "title": "冰翎的提供者动态取值与受益者快照",
+      "category": "snapshot",
+      "conclusion": "冰翎为动态增益，随其缩放属性更新；由快照技能触发时，受益角色按该技能已快照的属性计算。",
+      "conditions": "冰翎触发条件、持续时间及次数以技能原文和参数为准。",
+      "numeric_pattern": "提供者申鹤的当前攻击力用于冰翎加算基础值；受益者相应快照乘区保持。",
+      "exceptions": "不能将申鹤施放战技时攻击力永久折成固定加算值，也不能用受益者快照冻结提供者属性。",
+      "unconfirmed": "具体取值帧与全部特殊动态乘区例外未确认；本条审核确认来源陈述，不代表在当前游戏版本重新实测。",
+      "sources": [
+        {
+          "title": "KQM TCL 原始机制证据：申鹤 Skill Mechanics",
+          "url": "https://library.keqingmains.com/evidence/characters/cryo/shenhe",
+          "locator": "Skill Mechanics / Icy Quill snapshots；Snapshot & Dynamic / Dynamic Buffs",
+          "source_version": null,
+          "source_date": null,
+          "retrieved_at": "2026-09-13T08:58:37.119606+00:00",
+          "evidence_sha256": "86d78369178a4b5e85a3476fd0e6e245de281171e966ae1b4fccea9714931b2b",
+          "evidence_range": "Unicode [0,22)，对应归档原始摘录"
+        },
+        {
+          "title": "KQM TCL 原始机制证据：申鹤 Skill Mechanics",
+          "url": "https://library.keqingmains.com/evidence/characters/cryo/shenhe",
+          "locator": "Skill Mechanics / Icy Quill snapshots；Snapshot & Dynamic / Dynamic Buffs",
+          "source_version": null,
+          "source_date": null,
+          "retrieved_at": "2026-09-13T08:58:37.119606+00:00",
+          "evidence_sha256": "86d78369178a4b5e85a3476fd0e6e245de281171e966ae1b4fccea9714931b2b",
+          "evidence_range": "Unicode [23,105)，对应归档原始摘录"
+        },
+        {
+          "title": "KQM TCL：Snapshot & Dynamic 的通用定义",
+          "url": "https://library.keqingmains.com/combat-mechanics/snapshot-and-dynamic",
+          "locator": "Skill Mechanics / Icy Quill snapshots；Snapshot & Dynamic / Dynamic Buffs",
+          "source_version": null,
+          "source_date": null,
+          "retrieved_at": "2026-09-13T08:58:37.119606+00:00",
+          "evidence_sha256": "527258302c65b973446399ae07c849b024825cd2961bdb0cb5ab1580153d8846",
+          "evidence_range": "Unicode [58,126)，对应归档原始摘录"
+        }
+      ],
+      "status": "approved",
+      "reviewer": "RF-03 资料核对：原始机制摘录与来源位置",
+      "reviewed_at": "2026-09-13"
+    },
+    {
+      "id": "shenhe-a4-dynamic",
+      "target_type": "inherent_skill",
+      "target_id": 6322,
+      "version_line": "release",
+      "title": "缚灵通真法印的动态增伤",
+      "category": "snapshot",
+      "conclusion": "申鹤该固有天赋的增伤不能被快照，会在有效期间动态作用于快照技能。",
+      "conditions": "先按战技点按/长按分支和伤害类型匹配；采用数值与持续时间读取当前原文。",
+      "numeric_pattern": "持续期间动态增伤；结束后不因输出技能快照继续保留。",
+      "exceptions": "不是给所有伤害类型统一增伤。",
+      "unconfirmed": "来源指南版本3.5；未对当前版本逐项实测；本条审核确认来源陈述，不代表在当前游戏版本重新实测。",
+      "sources": [
+        {
+          "title": "KQM Shenhe Guide：Ascension 4 Passive — Spirit Communion Seal",
+          "url": "https://keqingmains.com/shenhe/",
+          "locator": "Ascension 4 Passive — Spirit Communion Seal",
+          "source_version": "Guide updated for Version 3.5",
+          "source_date": null,
+          "retrieved_at": "2026-09-13T08:58:37.119606+00:00",
+          "evidence_sha256": "f2c1c0af772faed2054ffeb5f727fbd0c9dfa2f4cb1dd64ffc8f908d7b55893d",
+          "evidence_range": "Unicode [0,110)，对应归档原始摘录"
+        }
+      ],
+      "status": "approved",
+      "reviewer": "RF-03 资料核对：原始机制摘录与来源位置",
+      "reviewed_at": "2026-09-13"
+    },
+    {
+      "id": "kazuha-skill-particles",
+      "target_type": "skill",
+      "target_id": 10472,
+      "version_line": "release",
+      "title": "千早振的产球条件与数量",
+      "category": "energy",
+      "conclusion": "千早振点按产生3个、长按产生4个风元素微粒，仅初始吸引命中时产球。",
+      "conditions": "初始吸引命中敌人；点按与长按是不同动作。",
+      "numeric_pattern": "点按3；长按4。",
+      "exceptions": "后续下落攻击命中不能替代初始吸引命中的产球前提。",
+      "unconfirmed": "精确生成/旅行时点未确认；本条审核确认来源陈述，不代表在当前游戏版本重新实测。",
+      "sources": [
+        {
+          "title": "Kaedehara Kazuha | KQM TCL",
+          "url": "https://library.keqingmains.com/characters/anemo/kaedehara-kazuha",
+          "locator": "Elemental Skill / Particles / initial vacuum",
+          "source_version": null,
+          "source_date": null,
+          "retrieved_at": "2026-09-13T08:46:33Z",
+          "evidence_sha256": "a3868ef5aa454aaf4bb14a653d16548e4300680e2a926e2153377ca3532066c2",
+          "evidence_range": "Unicode [0,24)，对应归档原始摘录"
+        },
+        {
+          "title": "Kaedehara Kazuha | KQM TCL",
+          "url": "https://library.keqingmains.com/characters/anemo/kaedehara-kazuha",
+          "locator": "Elemental Skill / Particles / initial vacuum",
+          "source_version": null,
+          "source_date": null,
+          "retrieved_at": "2026-09-13T08:46:33Z",
+          "evidence_sha256": "a3868ef5aa454aaf4bb14a653d16548e4300680e2a926e2153377ca3532066c2",
+          "evidence_range": "Unicode [78,97)，对应归档原始摘录"
+        },
+        {
+          "title": "Kazuha | KQM TCL — Skill Mechanics",
+          "url": "https://library.keqingmains.com/evidence/characters/anemo/kaedehara-kazuha",
+          "locator": "Elemental Skill / Particles / initial vacuum",
+          "source_version": null,
+          "source_date": null,
+          "retrieved_at": "2026-09-13T08:46:33Z",
+          "evidence_sha256": "17da2f6d7b44e42ef5d9a869710fe1972f08602539ea847b8678beeffe8d2c22",
+          "evidence_range": "Unicode [0,78)，对应归档原始摘录"
+        }
+      ],
+      "status": "approved",
+      "reviewer": "RF-03 资料核对：原始机制摘录与来源位置",
+      "reviewed_at": "2026-09-13"
+    },
+    {
+      "id": "kazuha-burst-hit-pattern",
+      "target_type": "skill",
+      "target_id": 10475,
+      "version_line": "release",
+      "title": "万叶之一刀的持续伤害次数",
+      "category": "hit_pattern",
+      "conclusion": "元素爆发持续伤害部分可发生5次。",
+      "conditions": "完整持续命中；初始斩击与持续伤害分别处理。",
+      "numeric_pattern": "持续伤害5次。",
+      "exceptions": "此结论不是当前版本实测；不能由总时长除以5反推精确间隔。",
+      "unconfirmed": "测试日期2024-04-03、版本4.5；首跳与精确间隔未确认；本条审核确认来源陈述，不代表在当前游戏版本重新实测。",
+      "sources": [
+        {
+          "title": "Kazuha | KQM TCL — Kazuha Burst Tick Count",
+          "url": "https://library.keqingmains.com/evidence/characters/anemo/kaedehara-kazuha",
+          "locator": "Burst Mechanics / Kazuha burst DoT ticks 5 times",
+          "source_version": "4.5",
+          "source_date": "2024-04-03",
+          "retrieved_at": "2026-09-13T08:46:33Z",
+          "evidence_sha256": "b1afe215ccc6508a050336506d9d921ce714d6e7a4197f889e7854480f98b9fb",
+          "evidence_range": "Unicode [0,30)，对应归档原始摘录"
+        }
+      ],
+      "status": "approved",
+      "reviewer": "RF-03 资料核对：原始机制摘录与来源位置",
+      "reviewed_at": "2026-09-13"
+    },
+    {
+      "id": "kokomi-skill-particle-conditions",
+      "target_type": "skill",
+      "target_id": 10542,
+      "version_line": "release",
+      "title": "化海月产球检查及内部冷却",
+      "category": "energy",
+      "conclusion": "化海月每次伤害检查0或1个水元素微粒，0:1的比例为1:2，同一化海月产球检查有2秒内部冷却。",
+      "conditions": "实际伤害触发；若化海月在末跳命中敌人前已经消失，该跳不进行产球检查。",
+      "numeric_pattern": "每次0或1；比例1:2；同化海月内部冷却2秒。",
+      "exceptions": "不能把期望值当一次实际产球；取零球只是指定下界情景。",
+      "unconfirmed": "不实现随机概率模拟；精确首跳产球时点及旅行时间未确认；本条审核确认来源陈述，不代表在当前游戏版本重新实测。",
+      "sources": [
+        {
+          "title": "Elemental Skill Particles Database | KQM TCL — Sangonomiya Kokomi",
+          "url": "https://library.keqingmains.com/resources/compendiums/elemental-skill-particles",
+          "locator": "Elemental Skill Particles / Sangonomiya Kokomi；Skill Mechanics / last tick",
+          "source_version": null,
+          "source_date": null,
+          "retrieved_at": "2026-09-13T08:46:33Z",
+          "evidence_sha256": "aafa1e0196c45c124ae9953fd62b20ed0eafe30ae62039e72d20eb2660a543c0",
+          "evidence_range": "Unicode [7,72)，对应归档原始摘录"
+        },
+        {
+          "title": "Elemental Skill Particles Database | KQM TCL — Sangonomiya Kokomi",
+          "url": "https://library.keqingmains.com/resources/compendiums/elemental-skill-particles",
+          "locator": "Elemental Skill Particles / Sangonomiya Kokomi；Skill Mechanics / last tick",
+          "source_version": null,
+          "source_date": null,
+          "retrieved_at": "2026-09-13T08:46:33Z",
+          "evidence_sha256": "aafa1e0196c45c124ae9953fd62b20ed0eafe30ae62039e72d20eb2660a543c0",
+          "evidence_range": "Unicode [107,137)，对应归档原始摘录"
+        },
+        {
+          "title": "Kokomi | KQM TCL — Skill Mechanics",
+          "url": "https://library.keqingmains.com/evidence/characters/hydro/sangonomiya-kokomi",
+          "locator": "Elemental Skill Particles / Sangonomiya Kokomi；Skill Mechanics / last tick",
+          "source_version": null,
+          "source_date": null,
+          "retrieved_at": "2026-09-13T08:46:33Z",
+          "evidence_sha256": "922b3e79b211f77001168b4bf420c085157933c0133308b3814862c049cfa77f",
+          "evidence_range": "Unicode [0,123)，对应归档原始摘录"
+        }
+      ],
+      "status": "approved",
+      "reviewer": "RF-03 资料核对：原始机制摘录与来源位置",
+      "reviewed_at": "2026-09-13"
+    },
+    {
+      "id": "kokomi-skill-tick-pattern",
+      "target_type": "skill",
+      "target_id": 10542,
+      "version_line": "release",
+      "title": "化海月的持续伤害间隔",
+      "category": "hit_pattern",
+      "conclusion": "资料列出化海月12秒持续、持续跳间隔2秒。",
+      "conditions": "化海月完整持续存在并命中目标。",
+      "numeric_pattern": "持续段参考间隔2秒；初始与第二跳的帧记录分别为24f和150f，不能据此称全部跳严格等距。",
+      "exceptions": "不得仅用12除以2断言完整命中数。",
+      "unconfirmed": "摘录未确认总命中次数；精确动作时间需要场景证据；本条审核确认来源陈述，不代表在当前游戏版本重新实测。",
+      "sources": [
+        {
+          "title": "Sangonomiya Kokomi | KQM TCL — Kurage's Oath",
+          "url": "https://library.keqingmains.com/characters/hydro/sangonomiya-kokomi",
+          "locator": "Kurage's Oath / Tick Rate；Skill Mechanics / hitmark",
+          "source_version": null,
+          "source_date": null,
+          "retrieved_at": "2026-09-13T08:46:33Z",
+          "evidence_sha256": "45c934ada622cca8e20d09afca5e79057512b3306c96756563f76e998b656780",
+          "evidence_range": "Unicode [0,31)，对应归档原始摘录"
+        },
+        {
+          "title": "Sangonomiya Kokomi | KQM TCL — Skill Frames",
+          "url": "https://library.keqingmains.com/characters/hydro/sangonomiya-kokomi",
+          "locator": "Kurage's Oath / Tick Rate；Skill Mechanics / hitmark",
+          "source_version": null,
+          "source_date": null,
+          "retrieved_at": "2026-09-13T08:46:33Z",
+          "evidence_sha256": "ce41b9e08a519ea6cb627b639b2b2b70c5d60ede217e366378d5b015dff2a44f",
+          "evidence_range": "Unicode [0,57)，对应归档原始摘录"
+        }
+      ],
+      "status": "approved",
+      "reviewer": "RF-03 资料核对：原始机制摘录与来源位置",
+      "reviewed_at": "2026-09-13"
+    },
+    {
+      "id": "kokomi-skill-snapshot",
+      "target_type": "skill",
+      "target_id": 10542,
+      "version_line": "release",
+      "title": "化海月快照与爆发刷新例外",
+      "category": "snapshot",
+      "conclusion": "化海月一般采用快照；心海爆发刷新持续时间时不会重新快照，爆发期间另加的伤害收益通常动态变化。",
+      "conditions": "区分战技已快照属性与爆发附加收益；离场或爆发结束按其条件处理动态收益。",
+      "numeric_pattern": "刷新持续时间不等于重新施放战技或重新采样面板。",
+      "exceptions": "旧版本证据存在通过首次跳前切人等时序保留爆发加成的特殊交互；本条不将其当作通用规则。",
+      "unconfirmed": "特殊交互是否仍适用于当前版本、精确快照帧均未复验；本条审核确认来源陈述，不代表在当前游戏版本重新实测。",
+      "sources": [
+        {
+          "title": "KQM TCL — Kokomi Skill Mechanics / Q Does Not Resnapshot",
+          "url": "https://library.keqingmains.com/evidence/characters/hydro/sangonomiya-kokomi",
+          "locator": "Skill Mechanics，条目Kokomi's E snapshots；Kokomi Q Does Not Resnapshot；Infinite Jellyfish Extension",
+          "source_version": "2.6（Q不重快照条目）；2.4（特殊延长交互）",
+          "source_date": "2022-04-08",
+          "retrieved_at": "2026-09-13"
+        }
+      ],
+      "status": "approved",
+      "reviewer": "RF-03 资料核对：原始机制摘录与来源位置",
+      "reviewed_at": "2026-09-13"
+    },
+    {
+      "id": "favonius-11401-particles",
+      "target_type": "weapon",
+      "target_id": 11401,
+      "version_line": "release",
+      "title": "西风剑被动的能量事件表示",
+      "category": "energy",
+      "conclusion": "西风系列被动触发生成3个无色元素微粒，因此实际获得能量受接球角色元素充能效率影响。",
+      "conditions": "先核对当前精炼的暴击触发概率、冷却与触发条件，再显式声明本情景是否触发。",
+      "numeric_pattern": "3个无色微粒；不是固定直接恢复6点能量的事件。",
+      "exceptions": "武器原文中的6点能量不应再作为额外直接回能与这3粒重复相加。",
+      "unconfirmed": "本来源摘录未单独核实前后台触发限定；触发旅行时点依场景给出；本条审核确认来源陈述，不代表在当前游戏版本重新实测。",
+      "sources": [
+        {
+          "title": "Energy | KQM TCL — Favonius Series",
+          "url": "https://library.keqingmains.com/combat-mechanics/energy",
+          "locator": "Energy / Favonius Series",
+          "source_version": null,
+          "source_date": null,
+          "retrieved_at": "2026-09-13T08:46:33Z",
+          "evidence_sha256": "3171feee191e4b711d3584b4571d13a5704d5a65aa33cbecf3016a0918e57f88",
+          "evidence_range": "Unicode [0,65)，对应归档原始摘录"
+        },
+        {
+          "title": "Energy | KQM TCL — Favonius Series",
+          "url": "https://library.keqingmains.com/combat-mechanics/energy",
+          "locator": "Energy / Favonius Series",
+          "source_version": null,
+          "source_date": null,
+          "retrieved_at": "2026-09-13T08:46:33Z",
+          "evidence_sha256": "3171feee191e4b711d3584b4571d13a5704d5a65aa33cbecf3016a0918e57f88",
+          "evidence_range": "Unicode [137,165)，对应归档原始摘录"
+        }
+      ],
+      "status": "approved",
+      "reviewer": "RF-03 资料核对：原始机制摘录与来源位置",
+      "reviewed_at": "2026-09-13"
+    },
+    {
+      "id": "favonius-12401-particles",
+      "target_type": "weapon",
+      "target_id": 12401,
+      "version_line": "release",
+      "title": "西风大剑被动的能量事件表示",
+      "category": "energy",
+      "conclusion": "西风系列被动触发生成3个无色元素微粒，因此实际获得能量受接球角色元素充能效率影响。",
+      "conditions": "先核对当前精炼的暴击触发概率、冷却与触发条件，再显式声明本情景是否触发。",
+      "numeric_pattern": "3个无色微粒；不是固定直接恢复6点能量的事件。",
+      "exceptions": "武器原文中的6点能量不应再作为额外直接回能与这3粒重复相加。",
+      "unconfirmed": "本来源摘录未单独核实前后台触发限定；触发旅行时点依场景给出；本条审核确认来源陈述，不代表在当前游戏版本重新实测。",
+      "sources": [
+        {
+          "title": "Energy | KQM TCL — Favonius Series",
+          "url": "https://library.keqingmains.com/combat-mechanics/energy",
+          "locator": "Energy / Favonius Series",
+          "source_version": null,
+          "source_date": null,
+          "retrieved_at": "2026-09-13T08:46:33Z",
+          "evidence_sha256": "3171feee191e4b711d3584b4571d13a5704d5a65aa33cbecf3016a0918e57f88",
+          "evidence_range": "Unicode [0,65)，对应归档原始摘录"
+        },
+        {
+          "title": "Energy | KQM TCL — Favonius Series",
+          "url": "https://library.keqingmains.com/combat-mechanics/energy",
+          "locator": "Energy / Favonius Series",
+          "source_version": null,
+          "source_date": null,
+          "retrieved_at": "2026-09-13T08:46:33Z",
+          "evidence_sha256": "3171feee191e4b711d3584b4571d13a5704d5a65aa33cbecf3016a0918e57f88",
+          "evidence_range": "Unicode [137,165)，对应归档原始摘录"
+        }
+      ],
+      "status": "approved",
+      "reviewer": "RF-03 资料核对：原始机制摘录与来源位置",
+      "reviewed_at": "2026-09-13"
+    },
+    {
+      "id": "favonius-13407-particles",
+      "target_type": "weapon",
+      "target_id": 13407,
+      "version_line": "release",
+      "title": "西风长枪被动的能量事件表示",
+      "category": "energy",
+      "conclusion": "西风系列被动触发生成3个无色元素微粒，因此实际获得能量受接球角色元素充能效率影响。",
+      "conditions": "先核对当前精炼的暴击触发概率、冷却与触发条件，再显式声明本情景是否触发。",
+      "numeric_pattern": "3个无色微粒；不是固定直接恢复6点能量的事件。",
+      "exceptions": "武器原文中的6点能量不应再作为额外直接回能与这3粒重复相加。",
+      "unconfirmed": "本来源摘录未单独核实前后台触发限定；触发旅行时点依场景给出；本条审核确认来源陈述，不代表在当前游戏版本重新实测。",
+      "sources": [
+        {
+          "title": "Energy | KQM TCL — Favonius Series",
+          "url": "https://library.keqingmains.com/combat-mechanics/energy",
+          "locator": "Energy / Favonius Series",
+          "source_version": null,
+          "source_date": null,
+          "retrieved_at": "2026-09-13T08:46:33Z",
+          "evidence_sha256": "3171feee191e4b711d3584b4571d13a5704d5a65aa33cbecf3016a0918e57f88",
+          "evidence_range": "Unicode [0,65)，对应归档原始摘录"
+        },
+        {
+          "title": "Energy | KQM TCL — Favonius Series",
+          "url": "https://library.keqingmains.com/combat-mechanics/energy",
+          "locator": "Energy / Favonius Series",
+          "source_version": null,
+          "source_date": null,
+          "retrieved_at": "2026-09-13T08:46:33Z",
+          "evidence_sha256": "3171feee191e4b711d3584b4571d13a5704d5a65aa33cbecf3016a0918e57f88",
+          "evidence_range": "Unicode [137,165)，对应归档原始摘录"
+        }
+      ],
+      "status": "approved",
+      "reviewer": "RF-03 资料核对：原始机制摘录与来源位置",
+      "reviewed_at": "2026-09-13"
+    },
+    {
+      "id": "favonius-14401-particles",
+      "target_type": "weapon",
+      "target_id": 14401,
+      "version_line": "release",
+      "title": "西风秘典被动的能量事件表示",
+      "category": "energy",
+      "conclusion": "西风系列被动触发生成3个无色元素微粒，因此实际获得能量受接球角色元素充能效率影响。",
+      "conditions": "先核对当前精炼的暴击触发概率、冷却与触发条件，再显式声明本情景是否触发。",
+      "numeric_pattern": "3个无色微粒；不是固定直接恢复6点能量的事件。",
+      "exceptions": "武器原文中的6点能量不应再作为额外直接回能与这3粒重复相加。",
+      "unconfirmed": "本来源摘录未单独核实前后台触发限定；触发旅行时点依场景给出；本条审核确认来源陈述，不代表在当前游戏版本重新实测。",
+      "sources": [
+        {
+          "title": "Energy | KQM TCL — Favonius Series",
+          "url": "https://library.keqingmains.com/combat-mechanics/energy",
+          "locator": "Energy / Favonius Series",
+          "source_version": null,
+          "source_date": null,
+          "retrieved_at": "2026-09-13T08:46:33Z",
+          "evidence_sha256": "3171feee191e4b711d3584b4571d13a5704d5a65aa33cbecf3016a0918e57f88",
+          "evidence_range": "Unicode [0,65)，对应归档原始摘录"
+        },
+        {
+          "title": "Energy | KQM TCL — Favonius Series",
+          "url": "https://library.keqingmains.com/combat-mechanics/energy",
+          "locator": "Energy / Favonius Series",
+          "source_version": null,
+          "source_date": null,
+          "retrieved_at": "2026-09-13T08:46:33Z",
+          "evidence_sha256": "3171feee191e4b711d3584b4571d13a5704d5a65aa33cbecf3016a0918e57f88",
+          "evidence_range": "Unicode [137,165)，对应归档原始摘录"
+        }
+      ],
+      "status": "approved",
+      "reviewer": "RF-03 资料核对：原始机制摘录与来源位置",
+      "reviewed_at": "2026-09-13"
+    },
+    {
+      "id": "favonius-15401-particles",
+      "target_type": "weapon",
+      "target_id": 15401,
+      "version_line": "release",
+      "title": "西风猎弓被动的能量事件表示",
+      "category": "energy",
+      "conclusion": "西风系列被动触发生成3个无色元素微粒，因此实际获得能量受接球角色元素充能效率影响。",
+      "conditions": "先核对当前精炼的暴击触发概率、冷却与触发条件，再显式声明本情景是否触发。",
+      "numeric_pattern": "3个无色微粒；不是固定直接恢复6点能量的事件。",
+      "exceptions": "武器原文中的6点能量不应再作为额外直接回能与这3粒重复相加。",
+      "unconfirmed": "本来源摘录未单独核实前后台触发限定；触发旅行时点依场景给出；本条审核确认来源陈述，不代表在当前游戏版本重新实测。",
+      "sources": [
+        {
+          "title": "Energy | KQM TCL — Favonius Series",
+          "url": "https://library.keqingmains.com/combat-mechanics/energy",
+          "locator": "Energy / Favonius Series",
+          "source_version": null,
+          "source_date": null,
+          "retrieved_at": "2026-09-13T08:46:33Z",
+          "evidence_sha256": "3171feee191e4b711d3584b4571d13a5704d5a65aa33cbecf3016a0918e57f88",
+          "evidence_range": "Unicode [0,65)，对应归档原始摘录"
+        },
+        {
+          "title": "Energy | KQM TCL — Favonius Series",
+          "url": "https://library.keqingmains.com/combat-mechanics/energy",
+          "locator": "Energy / Favonius Series",
+          "source_version": null,
+          "source_date": null,
+          "retrieved_at": "2026-09-13T08:46:33Z",
+          "evidence_sha256": "3171feee191e4b711d3584b4571d13a5704d5a65aa33cbecf3016a0918e57f88",
+          "evidence_range": "Unicode [137,165)，对应归档原始摘录"
+        }
+      ],
+      "status": "approved",
+      "reviewer": "RF-03 资料核对：原始机制摘录与来源位置",
+      "reviewed_at": "2026-09-13"
+    }
+  ]
+}

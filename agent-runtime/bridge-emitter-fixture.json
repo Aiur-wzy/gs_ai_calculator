@@ -1,0 +1,214 @@
+{
+  "contract": "genshin-native-agent-bridge-emitter-fixture-v1",
+  "frames": [
+    {
+      "protocol": "genshin-native-bridge",
+      "version": 2,
+      "message_id": "00000000-0000-4000-8000-000000000001",
+      "kind": "event",
+      "runtime_incarnation": "runtime-fixture",
+      "conversation_id": "conversation-fixture",
+      "turn_id": "turn-fixture",
+      "step_id": "step-1-0",
+      "epoch_id": "epoch-fixture",
+      "event_seq": 1,
+      "type": "turn.started",
+      "payload": {},
+      "payload_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "protocol": "genshin-native-bridge",
+      "version": 2,
+      "message_id": "00000000-0000-4000-8000-000000000002",
+      "kind": "event",
+      "runtime_incarnation": "runtime-fixture",
+      "conversation_id": "conversation-fixture",
+      "turn_id": "turn-fixture",
+      "step_id": "step-1-1",
+      "epoch_id": "epoch-fixture",
+      "event_seq": 2,
+      "type": "step.started",
+      "payload": {},
+      "payload_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "protocol": "genshin-native-bridge",
+      "version": 2,
+      "message_id": "00000000-0000-4000-8000-000000000003",
+      "kind": "event",
+      "runtime_incarnation": "runtime-fixture",
+      "conversation_id": "conversation-fixture",
+      "turn_id": "turn-fixture",
+      "step_id": "step-1-1",
+      "epoch_id": "epoch-fixture",
+      "event_seq": 3,
+      "type": "step.status",
+      "payload": {
+        "status": "assistant_stream_started"
+      },
+      "payload_hash": "123b4c9b7aba35e647e551472ca1bfc21a17e5eba824f72f1481471213e7da61"
+    },
+    {
+      "protocol": "genshin-native-bridge",
+      "version": 2,
+      "message_id": "00000000-0000-4000-8000-000000000004",
+      "kind": "event",
+      "runtime_incarnation": "runtime-fixture",
+      "conversation_id": "conversation-fixture",
+      "turn_id": "turn-fixture",
+      "step_id": "step-1-1",
+      "epoch_id": "epoch-fixture",
+      "event_seq": 4,
+      "type": "tool.arguments.delta",
+      "payload": {
+        "delta": "{\"query\":\"角色资料\"}"
+      },
+      "payload_hash": "a57b841c5cde401a11cf5072dbc53e5320310be8dfba375130bc88808575e947",
+      "call_id": "call-6bfa0266f2a1a26a67ef3a6c3ab7a660b80986d696d3cb28812e3e98e640502b"
+    },
+    {
+      "protocol": "genshin-native-bridge",
+      "version": 2,
+      "message_id": "00000000-0000-4000-8000-000000000005",
+      "kind": "event",
+      "runtime_incarnation": "runtime-fixture",
+      "conversation_id": "conversation-fixture",
+      "turn_id": "turn-fixture",
+      "step_id": "step-1-1",
+      "epoch_id": "epoch-fixture",
+      "event_seq": 5,
+      "type": "tool.arguments.completed",
+      "payload": {
+        "arguments_json": "{\"query\":\"角色资料\"}"
+      },
+      "payload_hash": "20e8610e635a052339e8a735179cb417cb326f0d3a0fc7c030435be124f0ed9e",
+      "call_id": "call-6bfa0266f2a1a26a67ef3a6c3ab7a660b80986d696d3cb28812e3e98e640502b",
+      "canonical_args_hash": "c2a0253799b3e76041ad0a7014b3e49ea5ad0f08f562609c060be074804ba150"
+    },
+    {
+      "protocol": "genshin-native-bridge",
+      "version": 2,
+      "message_id": "00000000-0000-4000-8000-000000000006",
+      "kind": "event",
+      "runtime_incarnation": "runtime-fixture",
+      "conversation_id": "conversation-fixture",
+      "turn_id": "turn-fixture",
+      "step_id": "step-1-1",
+      "epoch_id": "epoch-fixture",
+      "event_seq": 6,
+      "type": "usage",
+      "payload": {
+        "input_tokens": 8,
+        "output_tokens": 3,
+        "total_tokens": 11,
+        "provider_attempt_id": "attempt-fixture",
+        "provider_purpose": "agent"
+      },
+      "payload_hash": "f3f86f1ec992b4c9eb912bc03383f5041c5b9e493ec4e3245ff050d12b7047fb"
+    },
+    {
+      "protocol": "genshin-native-bridge",
+      "version": 2,
+      "message_id": "00000000-0000-4000-8000-000000000007",
+      "kind": "event",
+      "runtime_incarnation": "runtime-fixture",
+      "conversation_id": "conversation-fixture",
+      "turn_id": "turn-fixture",
+      "step_id": "step-1-1",
+      "epoch_id": "epoch-fixture",
+      "event_seq": 7,
+      "type": "step.status",
+      "payload": {
+        "status": "finish_tool_calls"
+      },
+      "payload_hash": "6c1be80bc2d2d31984acbb01c07558642f8881acdcc79b7eefa0450d21d67819"
+    },
+    {
+      "protocol": "genshin-native-bridge",
+      "version": 2,
+      "message_id": "00000000-0000-4000-8000-000000000008",
+      "kind": "event",
+      "runtime_incarnation": "runtime-fixture",
+      "conversation_id": "conversation-fixture",
+      "turn_id": "turn-fixture",
+      "step_id": "step-1-1",
+      "epoch_id": "epoch-fixture",
+      "event_seq": 8,
+      "type": "step.status",
+      "payload": {
+        "status": "assistant_stream_committed"
+      },
+      "payload_hash": "a530a78808accd639722ff68a51890723aec8f1cd7fc3ed0c58cc60f33b226dd"
+    },
+    {
+      "protocol": "genshin-native-bridge",
+      "version": 2,
+      "message_id": "00000000-0000-4000-8000-000000000009",
+      "kind": "event",
+      "runtime_incarnation": "runtime-fixture",
+      "conversation_id": "conversation-fixture",
+      "turn_id": "turn-fixture",
+      "step_id": "step-1-1",
+      "epoch_id": "epoch-fixture",
+      "event_seq": 9,
+      "type": "tool.call.ready",
+      "payload": {
+        "tool": "gs_query"
+      },
+      "payload_hash": "eba1d4fa229a8be630cdf1b9f92ac431f8a0f08e37bae97e21e6c560fbed052c",
+      "call_id": "call-6bfa0266f2a1a26a67ef3a6c3ab7a660b80986d696d3cb28812e3e98e640502b",
+      "canonical_args_hash": "c2a0253799b3e76041ad0a7014b3e49ea5ad0f08f562609c060be074804ba150"
+    },
+    {
+      "protocol": "genshin-native-bridge",
+      "version": 2,
+      "message_id": "00000000-0000-4000-8000-000000000010",
+      "kind": "event",
+      "runtime_incarnation": "runtime-fixture",
+      "conversation_id": "conversation-fixture",
+      "turn_id": "turn-fixture",
+      "step_id": "step-1-1",
+      "epoch_id": "epoch-fixture",
+      "event_seq": 10,
+      "type": "tool.result",
+      "payload": {
+        "status": "settled_success",
+        "code": 0
+      },
+      "payload_hash": "0e6482b79fc8508d330d69e2dd328b9c391b5d3d729330f81ef6d573dcdc393b",
+      "call_id": "call-6bfa0266f2a1a26a67ef3a6c3ab7a660b80986d696d3cb28812e3e98e640502b"
+    },
+    {
+      "protocol": "genshin-native-bridge",
+      "version": 2,
+      "message_id": "00000000-0000-4000-8000-000000000011",
+      "kind": "event",
+      "runtime_incarnation": "runtime-fixture",
+      "conversation_id": "conversation-fixture",
+      "turn_id": "turn-fixture",
+      "step_id": "step-1-1",
+      "epoch_id": "epoch-fixture",
+      "event_seq": 11,
+      "type": "step.completed",
+      "payload": {},
+      "payload_hash": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+    },
+    {
+      "protocol": "genshin-native-bridge",
+      "version": 2,
+      "message_id": "00000000-0000-4000-8000-000000000012",
+      "kind": "event",
+      "runtime_incarnation": "runtime-fixture",
+      "conversation_id": "conversation-fixture",
+      "turn_id": "turn-fixture",
+      "step_id": "step-1-1",
+      "epoch_id": "epoch-fixture",
+      "event_seq": 12,
+      "type": "turn.completed",
+      "payload": {
+        "status": "completed"
+      },
+      "payload_hash": "d0765f73cd5d1df39be353d538ea7c47a017d66a8bd001dc4707240dbb71e58c"
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "form": "resolved",
+  "meta": {"name": "示例：绫华冻结队快照爆发", "version_line": "release",
+           "assumptions": ["面板、基础攻击与Buff数值仅演示计算和快照语义，未经真实配装校准；输入面板未包含下列Buff"]},
+  "enemy": {"level": 90, "resistance": {"default": 0.10}},
+  "characters": [
+    {"id": "ayaka", "level": 90,
+     "stats": {"atk": 2000, "base_atk": 900, "em": 0, "crit_rate": 0.40, "crit_dmg": 2.00,
+               "dmg_bonus": {"cryo": 0.466}}},
+    {"id": "bennett", "level": 90,
+     "stats": {"atk": 800, "base_atk": 600, "em": 0, "crit_rate": 0.05, "crit_dmg": 0.50,
+               "dmg_bonus": {"pyro": 0.0}}}
+  ],
+  "switches": [
+    {"t": 0.0, "character": "bennett"},
+    {"t": 1.5, "character": "ayaka"}
+  ],
+  "buffs": [
+    {"id": "bennett_q", "source": "班尼特", "scope": "frontline",
+     "start": 1.0, "end": 13.0,
+     "effects": [{"zone": "stat_add", "stat": "atk", "value": 800}]},
+    {"id": "noblesse", "source": "宗室四件", "scope": "team",
+     "start": 1.0, "end": 13.0,
+     "effects": [{"zone": "stat_pct", "stat": "atk", "value": 0.2}]},
+    {"id": "targeted_atk", "source": "示例单体加攻（20%，演示参数）", "scope": "team", "target": "ayaka",
+     "start": 1.5, "end": 11.5,
+     "effects": [{"zone": "stat_pct", "stat": "atk", "value": 0.20}]},
+    {"id": "short_window", "source": "短促增益", "scope": "team",
+     "start": 1.5, "end": 3.0,
+     "effects": [{"zone": "dmg_bonus", "stat": "cryo", "value": 0.20}]}
+  ],
+  "hits": [
+    {"t": 1.0, "character": "bennett", "skill": "burst", "hit_name": "美妙旅程",
+     "multiplier": 2.33, "damage_system": "classic", "element": "pyro"},
+    {"t": 2.0, "character": "ayaka", "skill": "burst", "hit_name": "霜见雪关扉·切割",
+     "multiplier": 2.02, "damage_system": "classic", "element": "cryo",
+     "count": 19, "snapshot": true, "cast_t": 2.0},
+    {"t": 6.0, "character": "ayaka", "skill": "burst", "hit_name": "霜见雪关扉·绽放",
+     "multiplier": 3.03, "damage_system": "classic", "element": "cryo",
+     "snapshot": true, "cast_t": 2.0},
+    {"t": 8.0, "character": "ayaka", "skill": "skill", "hit_name": "神里流·冰华",
+     "multiplier": 3.79, "damage_system": "classic", "element": "cryo"}
+  ],
+  "loop_duration": 20.0
+}

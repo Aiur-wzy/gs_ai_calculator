@@ -1,0 +1,4453 @@
+{
+  "ADKDPELCKCA": {
+    "BurningDamage": "Burning",
+    "ExplodeDamage": "Explode",
+    "FrozenBrokenDamage": "FrozenBroken",
+    "MoonCrystallizeWaterDamage": "MoonCrystallizeWater",
+    "MoonOvergrowDamage": "MoonOvergrow",
+    "MoonShockDamage": "MoonShock",
+    "OverGrowDamage": "Overgrow",
+    "OverGrow_Alter_Damage": "Overgrow",
+    "OverGrow_Electric_Damage": "OvergrowMushroomElectric",
+    "OverGrow_Fire_Damage": "OvergrowMushroomFire",
+    "Self_Swirl_ElectricDamage": "SwirlElectric",
+    "Self_Swirl_FireDamage": "SwirlFire",
+    "Self_Swirl_IceDamage": "SwirlIce",
+    "Self_Swirl_WaterDamage": "SwirlWater",
+    "ShockDamage": "Shock",
+    "StarSuperconductorDamage": "StarSuperconductor",
+    "StarSuperconductorElectricDamage": "StarSuperconductorElectric",
+    "StarSuperconductorIceDamage": "StarSuperconductorIce",
+    "StarSwirlIceDamage": "StarSwirlIce",
+    "StarSwirlWindDamage": "StarSwirlWind",
+    "SuperconductorDamage": "Superconductor",
+    "Swirl_ElectricDamage": "SwirlElectric",
+    "Swirl_FireDamage": "SwirlFire",
+    "Swirl_IceDamage": "SwirlIce",
+    "Swirl_WaterDamage": "SwirlWater"
+  },
+  "AGHECEIFIIJ": {
+    "JFPDPLLGAJI": 2,
+    "NFGNFELLAFD": 4
+  },
+  "ALKHACCOAKF": {
+    "AACNOABGCGA": {
+      "BJBGNBPJBHC": true,
+      "FKNKGCJAODC": true
+    },
+    "BMKCKKGAACF": {
+      "BJBGNBPJBHC": true,
+      "FKNKGCJAODC": true
+    }
+  },
+  "AMAEALEIBKD": {
+    "BICCAEPCAPE": 3,
+    "HDOBEDLJBGH": 2,
+    "JEGBDGDBLLA": 1.2000000476837158
+  },
+  "AMDOPLLJBFI": {
+    "BEAGGEPHBPG": 24,
+    "ENJPMGNBKNC": {
+      "Burning": "ART/UI/Menus/Widget/InLevel/Billboard/EffElemReaction/Eff_KeepBurning",
+      "Frozen": "ART/UI/Menus/Widget/InLevel/Billboard/EffElemReaction/Eff_KeepFrozen",
+      "Overdose": "ART/UI/Menus/Widget/InLevel/Billboard/EffElemReaction/Eff_KeepOverdose"
+    },
+    "INEEEAHIPBI": 0.5,
+    "JNAACBBPALM": 2,
+    "LKJKCHMBLDN": 2,
+    "MFBHNMCKGAN": [
+      "Monster",
+      "Gadget",
+      "Partner"
+    ],
+    "NMKOPMKODAO": [
+      "Avatar",
+      "Monster",
+      "Partner",
+      "Vehicle"
+    ],
+    "OCMOPMKFIED": {
+      "Burning": "ART/UI/Menus/Widget/InLevel/Billboard/EffElemReaction/Burning",
+      "CrystallizeElectric": "ART/UI/Menus/Widget/InLevel/Billboard/EffElemReaction/CrystallizeElectric",
+      "CrystallizeFire": "ART/UI/Menus/Widget/InLevel/Billboard/EffElemReaction/CrystallizeFire",
+      "CrystallizeIce": "ART/UI/Menus/Widget/InLevel/Billboard/EffElemReaction/CrystallizeIce",
+      "CrystallizeWater": "ART/UI/Menus/Widget/InLevel/Billboard/EffElemReaction/CrystallizeWater",
+      "Explode": "ART/UI/Menus/Widget/InLevel/Billboard/EffElemReaction/Explode",
+      "Freeze": "ART/UI/Menus/Widget/InLevel/Billboard/EffElemReaction/Freeze",
+      "Melt": "ART/UI/Menus/Widget/InLevel/Billboard/EffElemReaction/Melt",
+      "Overdose": "ART/UI/Menus/Widget/InLevel/Billboard/EffElemReaction/Overdose",
+      "Overgrow": "ART/UI/Menus/Widget/InLevel/Billboard/EffElemReaction/Overgrow",
+      "Shock": "ART/UI/Menus/Widget/InLevel/Billboard/EffElemReaction/Shock",
+      "Stream": "ART/UI/Menus/Widget/InLevel/Billboard/EffElemReaction/Stream",
+      "Superconductor": "ART/UI/Menus/Widget/InLevel/Billboard/EffElemReaction/Superconductor",
+      "SwirlElectric": "ART/UI/Menus/Widget/InLevel/Billboard/EffElemReaction/SwirlElectric",
+      "SwirlFire": "ART/UI/Menus/Widget/InLevel/Billboard/EffElemReaction/SwirlFire",
+      "SwirlIce": "ART/UI/Menus/Widget/InLevel/Billboard/EffElemReaction/SwirlIce",
+      "SwirlWater": "ART/UI/Menus/Widget/InLevel/Billboard/EffElemReaction/SwirlWater"
+    }
+  },
+  "ANMALABLPCI": {
+    "DMFBIFDCIGG": 0.10000000149011612,
+    "GHCOEBGKHJH": {
+      "Electric": {
+        "BFKHEDOOJHG": 100,
+        "DBIJHEIECDI": 1.5,
+        "FPCJLBKOBHI": 0.4000000059604645,
+        "GMIMNCBMNEK": 0.699999988079071,
+        "ILHIKFGOPHJ": "Electric",
+        "KBFONLFKCJH": 0.5,
+        "KDCKKJAPIED": 0.10000000149011612,
+        "LBIODAOEPIA": 50,
+        "PEMKBBCFNPJ": 0.25
+      },
+      "Fire": {
+        "BFKHEDOOJHG": 100,
+        "DBIJHEIECDI": 1.5,
+        "FPCJLBKOBHI": 0.25,
+        "GMIMNCBMNEK": 0.5,
+        "ILHIKFGOPHJ": "Fire",
+        "KBFONLFKCJH": 0.5,
+        "KDCKKJAPIED": 0.10000000149011612,
+        "LBIODAOEPIA": 50,
+        "PEMKBBCFNPJ": 0.25
+      },
+      "Ice": {
+        "BFKHEDOOJHG": 100,
+        "DBIJHEIECDI": 1.5,
+        "FPCJLBKOBHI": 0.4000000059604645,
+        "GMIMNCBMNEK": 0.699999988079071,
+        "ILHIKFGOPHJ": "Ice",
+        "KBFONLFKCJH": 0.75,
+        "KDCKKJAPIED": 0.10000000149011612,
+        "LBIODAOEPIA": 50,
+        "PEMKBBCFNPJ": 0.25
+      },
+      "Mine": {
+        "ILHIKFGOPHJ": "Mine",
+        "LBIODAOEPIA": 50
+      },
+      "Simple": {
+        "DBIJHEIECDI": 1.5,
+        "FPCJLBKOBHI": 0.4000000059604645,
+        "GMIMNCBMNEK": 0.699999988079071,
+        "ILHIKFGOPHJ": "Simple",
+        "KBFONLFKCJH": 0.5,
+        "KDCKKJAPIED": 0.10000000149011612,
+        "LBIODAOEPIA": 50,
+        "PEMKBBCFNPJ": 0.25
+      },
+      "Water": {
+        "BFKHEDOOJHG": 100,
+        "DBIJHEIECDI": 1.5,
+        "ILHIKFGOPHJ": "Water",
+        "KBFONLFKCJH": 0.75,
+        "KDCKKJAPIED": 0.10000000149011612,
+        "LBIODAOEPIA": 50,
+        "PEMKBBCFNPJ": 0.25
+      },
+      "Wind": {
+        "BFKHEDOOJHG": 100,
+        "DBIJHEIECDI": 1.5,
+        "ILHIKFGOPHJ": "Wind",
+        "KBFONLFKCJH": 0.75,
+        "KDCKKJAPIED": 0.10000000149011612,
+        "LBIODAOEPIA": 50,
+        "PEMKBBCFNPJ": 0.25
+      }
+    }
+  },
+  "APILJOPJLDL": {
+    "BAKMPGIFJGH": 2,
+    "ENEGDDNDFKC": 2,
+    "GOAHIPECCDP": 2,
+    "ONPGDBFIJGH": 2
+  },
+  "BDOMCIICKPM": [
+    70900397,
+    70900443,
+    70950230
+  ],
+  "BMDFKPPACHN": {
+    "IEJGNHAOLKH": "Eff_AvatarCommon_Heal",
+    "LKLDPMEPDGP": {
+      "BJBGNBPJBHC": {
+        "BHNABDMCLBH": 30,
+        "EFBOIJGCDBK": 0.8999999761581421,
+        "HDOAJLMJEKD": 2.5,
+        "HDPKNDDJBDM": 0.6000000238418579,
+        "LDEOFBDNJLO": 1.5,
+        "MPKMDALLMFM": 0.5,
+        "OLGKDIFGFMC": 30
+      },
+      "BOOGGICJOGE": {
+        "BHNABDMCLBH": 30,
+        "EFBOIJGCDBK": 1.7999999523162842,
+        "HDOAJLMJEKD": 2.5,
+        "HDPKNDDJBDM": 0.5,
+        "LDEOFBDNJLO": 4.5,
+        "MPKMDALLMFM": 0.4000000059604645,
+        "OLGKDIFGFMC": 30
+      },
+      "GPFEHKCCEEK": {
+        "BHNABDMCLBH": 30,
+        "EFBOIJGCDBK": 1.7999999523162842,
+        "HDOAJLMJEKD": 2.5,
+        "HDPKNDDJBDM": 0.5,
+        "LDEOFBDNJLO": 4.5,
+        "MPKMDALLMFM": 0.4000000059604645,
+        "OLGKDIFGFMC": 30
+      },
+      "JPDGCFHCLII": {
+        "BHNABDMCLBH": 30,
+        "EFBOIJGCDBK": 1.600000023841858,
+        "HDOAJLMJEKD": 2.5,
+        "HDPKNDDJBDM": 0.6000000238418579,
+        "LDEOFBDNJLO": 4,
+        "MPKMDALLMFM": 0.5,
+        "OLGKDIFGFMC": 30
+      },
+      "MKKDLCGGINH": {
+        "BHNABDMCLBH": 30,
+        "EFBOIJGCDBK": 1.7999999523162842,
+        "HDOAJLMJEKD": 2.5,
+        "HDPKNDDJBDM": 0.5,
+        "LDEOFBDNJLO": 4.5,
+        "MPKMDALLMFM": 0.4000000059604645,
+        "OLGKDIFGFMC": 30
+      }
+    },
+    "MBIPAGNGCHE": -1.7999999523162842,
+    "MNADFOHDLBA": "TEST/TEST_Chest_CutSence",
+    "NECPBHMFMLP": "TEST/TEST_Chest_CutSence",
+    "NIMIMCKFKAM": 90000003,
+    "OEOFILMPKAC": {
+      "BJBGNBPJBHC": {
+        "JJNJGCFPALH": {
+          "CHNCIMFKHCF": [
+            0.029999999329447746,
+            0.03999999910593033,
+            0.05000000074505806,
+            0.07000000029802322,
+            0.10000000149011612
+          ],
+          "EKANJALCOHN": [
+            0.029999999329447746,
+            0.03999999910593033,
+            0.05000000074505806,
+            0.07000000029802322,
+            0.10000000149011612
+          ],
+          "FDLJMKMJDBD": [
+            0.10000000149011612,
+            0.10000000149011612,
+            0.10000000149011612,
+            0.10000000149011612,
+            0.10000000149011612
+          ],
+          "GDMANFMMCKG": [
+            0.4332999885082245,
+            0.699999988079071,
+            0.8833000063896179,
+            1.600000023841858,
+            2.200000047683716
+          ],
+          "GMFNNKAPJKM": 1,
+          "JLDNPIEGFFJ": 1,
+          "NLPPEGGHPBO": [
+            0.20000000298023224,
+            0.30000001192092896,
+            0.49000000953674316,
+            0.699999988079071,
+            0.949999988079071
+          ],
+          "PBDMMADACOD": [
+            0.10000000149011612,
+            0.10000000149011612,
+            0.10000000149011612,
+            0.10000000149011612,
+            0.10000000149011612
+          ]
+        },
+        "JNNJILPFOOB": {
+          "CHNCIMFKHCF": [
+            0.029999999329447746,
+            0.03999999910593033,
+            0.05000000074505806,
+            0.07000000029802322,
+            0.10000000149011612
+          ],
+          "EKANJALCOHN": [
+            0.029999999329447746,
+            0.03999999910593033,
+            0.05000000074505806,
+            0.07000000029802322,
+            0.10000000149011612
+          ],
+          "FDLJMKMJDBD": [
+            0.10000000149011612,
+            0.10000000149011612,
+            0.10000000149011612,
+            0.10000000149011612,
+            0.10000000149011612
+          ],
+          "GDMANFMMCKG": [
+            0.4332999885082245,
+            0.699999988079071,
+            0.8833000063896179,
+            1.600000023841858,
+            2.200000047683716
+          ],
+          "GMFNNKAPJKM": 1,
+          "JLDNPIEGFFJ": 1,
+          "NLPPEGGHPBO": [
+            0.20000000298023224,
+            0.30000001192092896,
+            0.49000000953674316,
+            0.699999988079071,
+            0.949999988079071
+          ],
+          "PBDMMADACOD": [
+            0.10000000149011612,
+            0.10000000149011612,
+            0.10000000149011612,
+            0.10000000149011612,
+            0.10000000149011612
+          ]
+        },
+        "NIKJFJGHGIL": {
+          "CHNCIMFKHCF": [
+            0.029999999329447746,
+            0.03999999910593033,
+            0.05000000074505806,
+            0.07000000029802322,
+            0.10000000149011612
+          ],
+          "EKANJALCOHN": [
+            0.029999999329447746,
+            0.03999999910593033,
+            0.05000000074505806,
+            0.07000000029802322,
+            0.10000000149011612
+          ],
+          "FDLJMKMJDBD": [
+            0.10000000149011612,
+            0.10000000149011612,
+            0.10000000149011612,
+            0.10000000149011612,
+            0.10000000149011612
+          ],
+          "GDMANFMMCKG": [
+            0.4332999885082245,
+            0.699999988079071,
+            0.8833000063896179,
+            1.600000023841858,
+            2.200000047683716
+          ],
+          "GMFNNKAPJKM": 1,
+          "JLDNPIEGFFJ": 1,
+          "NLPPEGGHPBO": [
+            0.20000000298023224,
+            0.30000001192092896,
+            0.49000000953674316,
+            0.699999988079071,
+            0.949999988079071
+          ],
+          "PBDMMADACOD": [
+            0.10000000149011612,
+            0.10000000149011612,
+            0.10000000149011612,
+            0.10000000149011612,
+            0.10000000149011612
+          ]
+        }
+      },
+      "BOOGGICJOGE": {
+        "JJNJGCFPALH": {
+          "CHNCIMFKHCF": [
+            0.029999999329447746,
+            0.03999999910593033,
+            0.05000000074505806,
+            0.07000000029802322,
+            0.10000000149011612
+          ],
+          "EKANJALCOHN": [
+            0.029999999329447746,
+            0.03999999910593033,
+            0.05000000074505806,
+            0.07000000029802322,
+            0.10000000149011612
+          ],
+          "FDLJMKMJDBD": [
+            0.10000000149011612,
+            0.10000000149011612,
+            0.10000000149011612,
+            0.10000000149011612,
+            0.10000000149011612
+          ],
+          "GDMANFMMCKG": [
+            0.4332999885082245,
+            0.699999988079071,
+            0.8833000063896179,
+            1.600000023841858,
+            2.200000047683716
+          ],
+          "GMFNNKAPJKM": 1,
+          "JLDNPIEGFFJ": 1,
+          "NLPPEGGHPBO": [
+            0.20000000298023224,
+            0.30000001192092896,
+            0.49000000953674316,
+            0.699999988079071,
+            0.949999988079071
+          ],
+          "PBDMMADACOD": [
+            0.10000000149011612,
+            0.10000000149011612,
+            0.10000000149011612,
+            0.10000000149011612,
+            0.10000000149011612
+          ]
+        },
+        "JNNJILPFOOB": {
+          "CHNCIMFKHCF": [
+            0.029999999329447746,
+            0.03999999910593033,
+            0.05000000074505806,
+            0.07000000029802322,
+            0.10000000149011612
+          ],
+          "EKANJALCOHN": [
+            0.029999999329447746,
+            0.03999999910593033,
+            0.05000000074505806,
+            0.07000000029802322,
+            0.10000000149011612
+          ],
+          "FDLJMKMJDBD": [
+            0.10000000149011612,
+            0.10000000149011612,
+            0.10000000149011612,
+            0.10000000149011612,
+            0.10000000149011612
+          ],
+          "GDMANFMMCKG": [
+            0.4332999885082245,
+            0.699999988079071,
+            0.8833000063896179,
+            1.600000023841858,
+            2.200000047683716
+          ],
+          "GMFNNKAPJKM": 1,
+          "JLDNPIEGFFJ": 1,
+          "NLPPEGGHPBO": [
+            0.20000000298023224,
+            0.30000001192092896,
+            0.49000000953674316,
+            0.699999988079071,
+            0.949999988079071
+          ],
+          "PBDMMADACOD": [
+            0.10000000149011612,
+            0.10000000149011612,
+            0.10000000149011612,
+            0.10000000149011612,
+            0.10000000149011612
+          ]
+        },
+        "NIKJFJGHGIL": {
+          "CHNCIMFKHCF": [
+            0.029999999329447746,
+            0.03999999910593033,
+            0.05000000074505806,
+            0.07000000029802322,
+            0.10000000149011612
+          ],
+          "EKANJALCOHN": [
+            0.029999999329447746,
+            0.03999999910593033,
+            0.05000000074505806,
+            0.07000000029802322,
+            0.10000000149011612
+          ],
+          "FDLJMKMJDBD": [
+            0.10000000149011612,
+            0.10000000149011612,
+            0.10000000149011612,
+            0.10000000149011612,
+            0.10000000149011612
+          ],
+          "GDMANFMMCKG": [
+            0.4332999885082245,
+            0.699999988079071,
+            0.8833000063896179,
+            1.600000023841858,
+            2.200000047683716
+          ],
+          "GMFNNKAPJKM": 1,
+          "JLDNPIEGFFJ": 1,
+          "NLPPEGGHPBO": [
+            0.20000000298023224,
+            0.30000001192092896,
+            0.49000000953674316,
+            0.699999988079071,
+            0.949999988079071
+          ],
+          "PBDMMADACOD": [
+            0.10000000149011612,
+            0.10000000149011612,
+            0.10000000149011612,
+            0.10000000149011612,
+            0.10000000149011612
+          ]
+        }
+      },
+      "GPFEHKCCEEK": {
+        "JJNJGCFPALH": {
+          "CHNCIMFKHCF": [
+            0.029999999329447746,
+            0.03999999910593033,
+            0.05000000074505806,
+            0.07000000029802322,
+            0.10000000149011612
+          ],
+          "EKANJALCOHN": [
+            0.029999999329447746,
+            0.03999999910593033,
+            0.05000000074505806,
+            0.07000000029802322,
+            0.10000000149011612
+          ],
+          "FDLJMKMJDBD": [
+            0.10000000149011612,
+            0.10000000149011612,
+            0.10000000149011612,
+            0.10000000149011612,
+            0.10000000149011612
+          ],
+          "GDMANFMMCKG": [
+            0.4332999885082245,
+            0.699999988079071,
+            0.8833000063896179,
+            1.600000023841858,
+            2.200000047683716
+          ],
+          "GMFNNKAPJKM": 1,
+          "JLDNPIEGFFJ": 1,
+          "NLPPEGGHPBO": [
+            0.20000000298023224,
+            0.30000001192092896,
+            0.49000000953674316,
+            0.699999988079071,
+            0.949999988079071
+          ],
+          "PBDMMADACOD": [
+            0.10000000149011612,
+            0.10000000149011612,
+            0.10000000149011612,
+            0.10000000149011612,
+            0.10000000149011612
+          ]
+        },
+        "JNNJILPFOOB": {
+          "CHNCIMFKHCF": [
+            0.029999999329447746,
+            0.03999999910593033,
+            0.05000000074505806,
+            0.07000000029802322,
+            0.10000000149011612
+          ],
+          "EKANJALCOHN": [
+            0.029999999329447746,
+            0.03999999910593033,
+            0.05000000074505806,
+            0.07000000029802322,
+            0.10000000149011612
+          ],
+          "FDLJMKMJDBD": [
+            0.10000000149011612,
+            0.10000000149011612,
+            0.10000000149011612,
+            0.10000000149011612,
+            0.10000000149011612
+          ],
+          "GDMANFMMCKG": [
+            0.4332999885082245,
+            0.699999988079071,
+            0.8833000063896179,
+            1.600000023841858,
+            2.200000047683716
+          ],
+          "GMFNNKAPJKM": 1,
+          "JLDNPIEGFFJ": 1,
+          "NLPPEGGHPBO": [
+            0.20000000298023224,
+            0.30000001192092896,
+            0.49000000953674316,
+            0.699999988079071,
+            0.949999988079071
+          ],
+          "PBDMMADACOD": [
+            0.10000000149011612,
+            0.10000000149011612,
+            0.10000000149011612,
+            0.10000000149011612,
+            0.10000000149011612
+          ]
+        },
+        "NIKJFJGHGIL": {
+          "CHNCIMFKHCF": [
+            0.029999999329447746,
+            0.03999999910593033,
+            0.05000000074505806,
+            0.07000000029802322,
+            0.10000000149011612
+          ],
+          "EKANJALCOHN": [
+            0.029999999329447746,
+            0.03999999910593033,
+            0.05000000074505806,
+            0.07000000029802322,
+            0.10000000149011612
+          ],
+          "FDLJMKMJDBD": [
+            0.10000000149011612,
+            0.10000000149011612,
+            0.10000000149011612,
+            0.10000000149011612,
+            0.10000000149011612
+          ],
+          "GDMANFMMCKG": [
+            0.4332999885082245,
+            0.699999988079071,
+            0.8833000063896179,
+            1.600000023841858,
+            2.200000047683716
+          ],
+          "GMFNNKAPJKM": 1,
+          "JLDNPIEGFFJ": 1,
+          "NLPPEGGHPBO": [
+            0.20000000298023224,
+            0.30000001192092896,
+            0.49000000953674316,
+            0.699999988079071,
+            0.949999988079071
+          ],
+          "PBDMMADACOD": [
+            0.10000000149011612,
+            0.10000000149011612,
+            0.10000000149011612,
+            0.10000000149011612,
+            0.10000000149011612
+          ]
+        }
+      },
+      "JPDGCFHCLII": {
+        "JJNJGCFPALH": {
+          "CHNCIMFKHCF": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "EKANJALCOHN": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "FDLJMKMJDBD": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "GDMANFMMCKG": [
+            10,
+            13,
+            16,
+            25,
+            40
+          ],
+          "GMFNNKAPJKM": 1,
+          "JLDNPIEGFFJ": 1,
+          "NLPPEGGHPBO": [
+            0.20000000298023224,
+            0.25,
+            0.30000001192092896,
+            0.44999998807907104,
+            0.75
+          ],
+          "PBDMMADACOD": [
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        "JNNJILPFOOB": {
+          "CHNCIMFKHCF": [
+            0.029999999329447746,
+            0.03999999910593033,
+            0.05000000074505806,
+            0.07000000029802322,
+            0.10000000149011612
+          ],
+          "EKANJALCOHN": [
+            0.029999999329447746,
+            0.03999999910593033,
+            0.05000000074505806,
+            0.07000000029802322,
+            0.10000000149011612
+          ],
+          "FDLJMKMJDBD": [
+            0.10000000149011612,
+            0.10000000149011612,
+            0.10000000149011612,
+            0.10000000149011612,
+            0.10000000149011612
+          ],
+          "GDMANFMMCKG": [
+            0.4332999885082245,
+            0.699999988079071,
+            0.8833000063896179,
+            1.600000023841858,
+            2.200000047683716
+          ],
+          "GMFNNKAPJKM": 1,
+          "JLDNPIEGFFJ": 1,
+          "NLPPEGGHPBO": [
+            0.20000000298023224,
+            0.30000001192092896,
+            0.49000000953674316,
+            0.699999988079071,
+            0.949999988079071
+          ],
+          "PBDMMADACOD": [
+            0.10000000149011612,
+            0.10000000149011612,
+            0.10000000149011612,
+            0.10000000149011612,
+            0.10000000149011612
+          ]
+        },
+        "NIKJFJGHGIL": {
+          "CHNCIMFKHCF": [
+            0.029999999329447746,
+            0.03999999910593033,
+            0.05000000074505806,
+            0.07000000029802322,
+            0.10000000149011612
+          ],
+          "EKANJALCOHN": [
+            0.029999999329447746,
+            0.03999999910593033,
+            0.05000000074505806,
+            0.07000000029802322,
+            0.10000000149011612
+          ],
+          "FDLJMKMJDBD": [
+            0.10000000149011612,
+            0.10000000149011612,
+            0.10000000149011612,
+            0.10000000149011612,
+            0.10000000149011612
+          ],
+          "GDMANFMMCKG": [
+            0.4332999885082245,
+            0.699999988079071,
+            0.8833000063896179,
+            1.600000023841858,
+            2.200000047683716
+          ],
+          "GMFNNKAPJKM": 1,
+          "JLDNPIEGFFJ": 1,
+          "NLPPEGGHPBO": [
+            0.20000000298023224,
+            0.30000001192092896,
+            0.49000000953674316,
+            0.699999988079071,
+            0.949999988079071
+          ],
+          "PBDMMADACOD": [
+            0.10000000149011612,
+            0.10000000149011612,
+            0.10000000149011612,
+            0.10000000149011612,
+            0.10000000149011612
+          ]
+        }
+      }
+    },
+    "OHLKMAFBAII": "Data/ScriptData/Gadget/WeaponAnim",
+    "PCPNFBHPFDK": 80011001,
+    "PKDEJHOOIJD": 90000006
+  },
+  "CADEPCMKNOO": "_CHARGEBAR_VALUE",
+  "CCOKHLENEAK": {
+    "BDPLLNKPJLE": true,
+    "BFEDADIFBNC": true,
+    "BMNCHEMCGBH": true,
+    "CPILCHFCBMG": 5,
+    "EKMHAFHCHIM": true,
+    "FADGCPIFDAO": true,
+    "FGIBKDBBNFO": true,
+    "FLAJIEFOPGO": true,
+    "FPIPPAGEDPN": true,
+    "JBJEBJNBINJ": true,
+    "LMIKNIOABOG": true,
+    "OEKCPBEONLF": 1000
+  },
+  "CHOFCENHPOO": {
+    "ElementFreeze": [
+      "Stream",
+      "Wet",
+      "Shock",
+      "SwirlWater",
+      "Fire",
+      "MoonShock"
+    ],
+    "ElementFrozen": [
+      "Stream",
+      "Wet",
+      "Shock",
+      "SwirlWater",
+      "Fire",
+      "MoonShock"
+    ]
+  },
+  "CIHGGFLNBGE": "_HP_CORROSION_VALUE",
+  "CMGKIIMFOAP": [
+    "Data/_BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Bow",
+    "Data/_BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Catalyst",
+    "Data/_BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Claymore",
+    "Data/_BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Common",
+    "Data/_BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Pole",
+    "Data/_BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Sword",
+    "Data/_BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Bow2",
+    "Data/_BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Catalyst2",
+    "Data/_BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Claymore2",
+    "Data/_BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Common2",
+    "Data/_BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Pole2",
+    "Data/_BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Sword2",
+    "Data/_BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Test"
+  ],
+  "CMLMDMOBOGP": {
+    "AGGPPJJNOIB": 1,
+    "BCDPECBPBPO": 1,
+    "BCGCFGLNPMK": 1,
+    "DBLJACMKNKD": 4,
+    "DMBOJGHBFMH": 0.20000000298023224,
+    "EHMGHAJLNKK": true,
+    "EJHKBNADOOC": 2,
+    "FDMKAGEBPAA": 2,
+    "GIMCKKMKHGH": 1,
+    "KBNKGMEOOJB": 2,
+    "KDHBCMAKNEF": 3,
+    "LCEFBPNFEOO": 1,
+    "MJPGIAIDABL": 1,
+    "NJJIEPEGNHM": 1,
+    "OFDJHEOAGBC": 1,
+    "OGFBBIABKGM": 2,
+    "ONFECCJOJFA": 0.5
+  },
+  "DEHOHFMJODJ": {
+    "bullet": {
+      "CKJLBCJNCKC": {
+        "BDCEIHCJDCE": 0.009999999776482582,
+        "CHIIANPIGDJ": -1,
+        "EBAKMOONCFJ": true,
+        "HBDNHNGIMLD": -1,
+        "HFIHLPGPDEH": true,
+        "JIOGACAKBBA": true
+      },
+      "NDKKNGBAECN": {
+        "BHFIOHALGAG": -1,
+        "BKBIFNJHKPG": "CircleLockEnemy",
+        "DMDBEDMHLEM": -1,
+        "FJKIJPELHKF": "Default",
+        "GMKBLBIDNGB": -1,
+        "IOEFLNDJHPM": 1,
+        "JJILCFONNMM": true,
+        "NNDBJKGIIAB": 3
+      },
+      "NEEEKLAINMJ": {
+        "BDDMGKJJKKO": true,
+        "BEHGCPKMLNN": 1,
+        "GCOKCICMHFH": "Default",
+        "HDKNFAPIKHJ": 10,
+        "IDGCGJAHPOF": 100,
+        "LNKOFKCFPGC": true,
+        "MALPGANNLFP": true,
+        "OMIMIMLDGLI": true,
+        "POAAJKMIAED": true
+      },
+      "NLGIANBKOCK": {
+        "AGAGFNLADMA": true,
+        "ECKHGLOFGDE": -45,
+        "EPOAFLGBGKJ": true,
+        "FKNMLNIJKOE": true,
+        "HEKHBLGLCBJ": true,
+        "IGBPOCPELHC": 15,
+        "KOOKEANEOAG": 45
+      }
+    },
+    "canBeAttacked": {
+      "CKJLBCJNCKC": {
+        "BDCEIHCJDCE": 0.009999999776482582,
+        "BKHDMEOIFDC": 0.009999999776482582,
+        "CHIIANPIGDJ": -1,
+        "EBAKMOONCFJ": true,
+        "HBDNHNGIMLD": -1,
+        "HFIHLPGPDEH": true,
+        "JIOGACAKBBA": true
+      },
+      "NDKKNGBAECN": {
+        "BHFIOHALGAG": -1,
+        "BKBIFNJHKPG": "CircleLockEnemy",
+        "DMDBEDMHLEM": -1,
+        "FJKIJPELHKF": "Gadget_Lv1",
+        "GMKBLBIDNGB": -1,
+        "IOEFLNDJHPM": 1,
+        "JJILCFONNMM": true,
+        "NNDBJKGIIAB": 3
+      },
+      "NEEEKLAINMJ": {
+        "BDDMGKJJKKO": true,
+        "BEHGCPKMLNN": 10,
+        "GCOKCICMHFH": "Default",
+        "IDGCGJAHPOF": 100,
+        "LNKOFKCFPGC": true,
+        "MALPGANNLFP": true,
+        "NKPJBBLELGE": true,
+        "OJLNFCKHDHF": true
+      },
+      "NLGIANBKOCK": {
+        "ECKHGLOFGDE": -45,
+        "HEKHBLGLCBJ": true,
+        "IGBPOCPELHC": 15,
+        "KOOKEANEOAG": 45
+      }
+    },
+    "canBeAttackedByAny": {
+      "CKJLBCJNCKC": {
+        "BDCEIHCJDCE": 0.009999999776482582,
+        "CHIIANPIGDJ": -1,
+        "EBAKMOONCFJ": true,
+        "HBDNHNGIMLD": -1,
+        "HFIHLPGPDEH": true,
+        "JIOGACAKBBA": true
+      },
+      "NDKKNGBAECN": {
+        "BHFIOHALGAG": -1,
+        "BKBIFNJHKPG": "CircleLockEnemy",
+        "DMDBEDMHLEM": -1,
+        "FJKIJPELHKF": "Gadget_Lv1",
+        "GMKBLBIDNGB": -1,
+        "IOEFLNDJHPM": 1,
+        "JJILCFONNMM": true,
+        "NNDBJKGIIAB": 3
+      },
+      "NEEEKLAINMJ": {
+        "BDDMGKJJKKO": true,
+        "BEHGCPKMLNN": 10,
+        "GCOKCICMHFH": "Default",
+        "IDGCGJAHPOF": 100,
+        "LNKOFKCFPGC": true,
+        "NKPJBBLELGE": true,
+        "OJLNFCKHDHF": true
+      },
+      "NLGIANBKOCK": {
+        "ECKHGLOFGDE": -45,
+        "HEKHBLGLCBJ": true,
+        "IGBPOCPELHC": 15,
+        "KOOKEANEOAG": 45
+      }
+    },
+    "canBeLockOn": {
+      "CKJLBCJNCKC": {
+        "BDCEIHCJDCE": 0.009999999776482582,
+        "CHIIANPIGDJ": -1,
+        "EBAKMOONCFJ": true,
+        "HBDNHNGIMLD": -1,
+        "HFIHLPGPDEH": true,
+        "JIOGACAKBBA": true
+      },
+      "NDKKNGBAECN": {
+        "BHFIOHALGAG": -1,
+        "BKBIFNJHKPG": "CircleLockEnemy",
+        "DMDBEDMHLEM": -1,
+        "FJKIJPELHKF": "Gadget_Lv1",
+        "GMKBLBIDNGB": -1,
+        "IOEFLNDJHPM": 1,
+        "NNDBJKGIIAB": 3
+      },
+      "NEEEKLAINMJ": {
+        "BDDMGKJJKKO": true,
+        "BEHGCPKMLNN": 10,
+        "GCOKCICMHFH": "Default",
+        "IDGCGJAHPOF": 100,
+        "LNKOFKCFPGC": true,
+        "MALPGANNLFP": true,
+        "NKPJBBLELGE": true,
+        "OJLNFCKHDHF": true
+      },
+      "NLGIANBKOCK": {
+        "ECKHGLOFGDE": -45,
+        "HEKHBLGLCBJ": true,
+        "IGBPOCPELHC": 15,
+        "KOOKEANEOAG": 45
+      }
+    },
+    "canBeSelect": {
+      "CKJLBCJNCKC": {
+        "BDCEIHCJDCE": 0.009999999776482582,
+        "CHIIANPIGDJ": -1,
+        "EBAKMOONCFJ": true,
+        "HBDNHNGIMLD": -1,
+        "HFIHLPGPDEH": true,
+        "JIOGACAKBBA": true
+      },
+      "NDKKNGBAECN": {
+        "BHFIOHALGAG": -1,
+        "BKBIFNJHKPG": "CircleLockEnemy",
+        "DMDBEDMHLEM": -1,
+        "FJKIJPELHKF": "Default",
+        "GMKBLBIDNGB": -1,
+        "IOEFLNDJHPM": 1,
+        "JJILCFONNMM": true,
+        "NNDBJKGIIAB": 3
+      },
+      "NEEEKLAINMJ": {
+        "BDDMGKJJKKO": true,
+        "BEHGCPKMLNN": 10,
+        "GCOKCICMHFH": "Default",
+        "IDGCGJAHPOF": 100,
+        "LNKOFKCFPGC": true,
+        "MALPGANNLFP": true,
+        "NKPJBBLELGE": true
+      },
+      "NLGIANBKOCK": {
+        "ECKHGLOFGDE": -45,
+        "HEKHBLGLCBJ": true,
+        "IGBPOCPELHC": 15,
+        "KOOKEANEOAG": 45
+      }
+    },
+    "canBeSelectByAllied": {
+      "CKJLBCJNCKC": {
+        "BDCEIHCJDCE": 0.009999999776482582,
+        "CHIIANPIGDJ": -1,
+        "EBAKMOONCFJ": true,
+        "HBDNHNGIMLD": -1,
+        "HFIHLPGPDEH": true,
+        "JIOGACAKBBA": true
+      },
+      "NDKKNGBAECN": {
+        "BHFIOHALGAG": -1,
+        "BKBIFNJHKPG": "CircleLockEnemy",
+        "DMDBEDMHLEM": -1,
+        "FJKIJPELHKF": "Default",
+        "GMKBLBIDNGB": -1,
+        "IOEFLNDJHPM": 1,
+        "JJILCFONNMM": true,
+        "NNDBJKGIIAB": 3
+      },
+      "NEEEKLAINMJ": {
+        "BDDMGKJJKKO": true,
+        "BEHGCPKMLNN": 10,
+        "GCOKCICMHFH": "Default",
+        "IDGCGJAHPOF": 100,
+        "LNKOFKCFPGC": true,
+        "NKPJBBLELGE": true,
+        "POAAJKMIAED": true
+      },
+      "NLGIANBKOCK": {
+        "ECKHGLOFGDE": -45,
+        "HEKHBLGLCBJ": true,
+        "IGBPOCPELHC": 15,
+        "KOOKEANEOAG": 45
+      }
+    },
+    "default": {
+      "CKJLBCJNCKC": {
+        "BDCEIHCJDCE": 0.009999999776482582,
+        "CHIIANPIGDJ": -1,
+        "EBAKMOONCFJ": true,
+        "HBDNHNGIMLD": -1,
+        "HFIHLPGPDEH": true,
+        "JIOGACAKBBA": true
+      },
+      "NDKKNGBAECN": {
+        "BHFIOHALGAG": -1,
+        "BKBIFNJHKPG": "CircleLockEnemy",
+        "DMDBEDMHLEM": -1,
+        "FJKIJPELHKF": "Default",
+        "GMKBLBIDNGB": -1,
+        "IOEFLNDJHPM": 1,
+        "JJILCFONNMM": true,
+        "NNDBJKGIIAB": 3
+      },
+      "NEEEKLAINMJ": {
+        "BDDMGKJJKKO": true,
+        "BEHGCPKMLNN": 10,
+        "GCOKCICMHFH": "Default",
+        "IDGCGJAHPOF": 100,
+        "LNKOFKCFPGC": true,
+        "MALPGANNLFP": true,
+        "NKPJBBLELGE": true,
+        "OJLNFCKHDHF": true,
+        "POAAJKMIAED": true
+      },
+      "NLGIANBKOCK": {
+        "ECKHGLOFGDE": -45,
+        "HEKHBLGLCBJ": true,
+        "IGBPOCPELHC": 15,
+        "KOOKEANEOAG": 45
+      }
+    },
+    "monsterDummyGadget": {
+      "CKJLBCJNCKC": {
+        "BDCEIHCJDCE": 0.009999999776482582,
+        "CHIIANPIGDJ": -1,
+        "EBAKMOONCFJ": true,
+        "HBDNHNGIMLD": -1,
+        "HFIHLPGPDEH": true,
+        "JIOGACAKBBA": true
+      },
+      "NDKKNGBAECN": {
+        "BHFIOHALGAG": -1,
+        "BKBIFNJHKPG": "CircleLockEnemy",
+        "DMDBEDMHLEM": -1,
+        "FJKIJPELHKF": "Default",
+        "GMKBLBIDNGB": -1,
+        "IOEFLNDJHPM": 1,
+        "JJILCFONNMM": true,
+        "NNDBJKGIIAB": 3
+      },
+      "NEEEKLAINMJ": {
+        "AICMOGDCJCE": true,
+        "BDDMGKJJKKO": true,
+        "BEHGCPKMLNN": 10,
+        "GCOKCICMHFH": "Default",
+        "LNKOFKCFPGC": true,
+        "OMIMIMLDGLI": true,
+        "POAAJKMIAED": true
+      },
+      "NLGIANBKOCK": {
+        "AGAGFNLADMA": true,
+        "ECKHGLOFGDE": -45,
+        "EPOAFLGBGKJ": true,
+        "FKNMLNIJKOE": true,
+        "HEKHBLGLCBJ": true,
+        "IGBPOCPELHC": 15,
+        "KOOKEANEOAG": 45
+      }
+    }
+  },
+  "DJMACJJKBBO": {
+    "CCDNADHLPKO": 300000,
+    "EDKAJNPKADC": true,
+    "GCBJOIOLDFL": true
+  },
+  "DNAKKNAKBDC": {
+    "BKNAGAOIHML": 50,
+    "BLHAMJKPAKI": [
+      5003,
+      5005
+    ],
+    "FMPEPBFAHJC": 50,
+    "GIFMBHPADKG": {
+      "23080101": {
+        "CMEFIMIJMPM": "ByPositionPriority",
+        "KHJMCDOHANG": [
+          {
+            "PAONKFEJIGH": [
+              "_SQUAD_Fatuimecha_SquadAI_Tank1_",
+              "_SQUAD_Fatuimecha_SquadAI_Tank2_",
+              "_SQUAD_Fatuimecha_SquadAI_Tank3_",
+              "_SQUAD_Fatuimecha_SquadAI_Tank4_"
+            ]
+          },
+          {
+            "FDGFPGIDACF": {
+              "_x": -7
+            },
+            "PAONKFEJIGH": [
+              "_SQUAD_Fatuimecha_SquadAI_Tank1_",
+              "_SQUAD_Fatuimecha_SquadAI_Tank2_",
+              "_SQUAD_Fatuimecha_SquadAI_Tank3_",
+              "_SQUAD_Fatuimecha_SquadAI_Tank4_"
+            ]
+          },
+          {
+            "FDGFPGIDACF": {
+              "_x": 7
+            },
+            "PAONKFEJIGH": [
+              "_SQUAD_Fatuimecha_SquadAI_Tank1_",
+              "_SQUAD_Fatuimecha_SquadAI_Tank2_",
+              "_SQUAD_Fatuimecha_SquadAI_Tank3_",
+              "_SQUAD_Fatuimecha_SquadAI_Tank4_"
+            ]
+          },
+          {
+            "FDGFPGIDACF": {
+              "_x": 3.5,
+              "_z": -8
+            },
+            "PAONKFEJIGH": [
+              "_SQUAD_Fatuimecha_SquadAI_Range_",
+              "_SQUAD_Fatuimecha_SquadAI_Support_"
+            ]
+          },
+          {
+            "FDGFPGIDACF": {
+              "_x": -3.5,
+              "_z": -8
+            },
+            "PAONKFEJIGH": [
+              "_SQUAD_Fatuimecha_SquadAI_Range_",
+              "_SQUAD_Fatuimecha_SquadAI_Support_"
+            ]
+          },
+          {
+            "FDGFPGIDACF": {
+              "_x": 6,
+              "_z": -8
+            },
+            "PAONKFEJIGH": [
+              "_SQUAD_Fatuimecha_SquadAI_Range_",
+              "_SQUAD_Fatuimecha_SquadAI_Support_"
+            ]
+          },
+          {
+            "FDGFPGIDACF": {
+              "_x": -6,
+              "_z": -8
+            },
+            "PAONKFEJIGH": [
+              "_SQUAD_Fatuimecha_SquadAI_Range_",
+              "_SQUAD_Fatuimecha_SquadAI_Support_"
+            ]
+          },
+          {
+            "FDGFPGIDACF": {
+              "_y": 2.5,
+              "_z": -8
+            },
+            "PAONKFEJIGH": [
+              "_SQUAD_Fatuimecha_SquadAI_RangeAir_"
+            ]
+          },
+          {
+            "FDGFPGIDACF": {
+              "_x": -7,
+              "_y": 2.5,
+              "_z": -8
+            },
+            "PAONKFEJIGH": [
+              "_SQUAD_Fatuimecha_SquadAI_RangeAir_"
+            ]
+          },
+          {
+            "FDGFPGIDACF": {
+              "_x": 7,
+              "_y": 2.5,
+              "_z": -8
+            },
+            "PAONKFEJIGH": [
+              "_SQUAD_Fatuimecha_SquadAI_RangeAir_"
+            ]
+          }
+        ]
+      },
+      "24100101": {
+        "KHJMCDOHANG": [
+          {},
+          {
+            "FDGFPGIDACF": {
+              "_x": -3
+            }
+          },
+          {
+            "FDGFPGIDACF": {
+              "_x": 3
+            }
+          },
+          {
+            "FDGFPGIDACF": {
+              "_x": -1.5,
+              "_y": 1.7999999523162842,
+              "_z": -1.5
+            }
+          },
+          {
+            "FDGFPGIDACF": {
+              "_x": 1.5,
+              "_y": 1.7999999523162842,
+              "_z": -1.5
+            }
+          }
+        ]
+      },
+      "24100102": {
+        "KHJMCDOHANG": [
+          {},
+          {
+            "FDGFPGIDACF": {
+              "_x": -3.5,
+              "_z": -2
+            }
+          },
+          {
+            "FDGFPGIDACF": {
+              "_x": 3.5,
+              "_z": -2
+            }
+          },
+          {
+            "FDGFPGIDACF": {
+              "_x": -2.5,
+              "_y": 1.2000000476837158,
+              "_z": 0.30000001192092896
+            }
+          },
+          {
+            "FDGFPGIDACF": {
+              "_x": 2.5,
+              "_y": 1.2000000476837158,
+              "_z": 0.30000001192092896
+            }
+          }
+        ]
+      }
+    },
+    "HNDPLEPIEND": {
+      "Animal_Capybara_Grab": {
+        "AGEMDEALFOH": 2
+      },
+      "Animal_Capybara_Scratch": {
+        "AGEMDEALFOH": 5
+      },
+      "Beaver_Performance": {
+        "AGEMDEALFOH": 1.7999999523162842
+      },
+      "Brute_MeleeAtk": {
+        "AGEMDEALFOH": 10
+      },
+      "Brute_RangeAtk": {
+        "AGEMDEALFOH": 15
+      },
+      "Drake_CrushAtk": {
+        "AGEMDEALFOH": 15
+      },
+      "Drake_JumpAtk": {
+        "AGEMDEALFOH": 15
+      },
+      "Drake_SlapGround": {
+        "AGEMDEALFOH": 10
+      },
+      "Eremite_ComboAttack": {
+        "AGEMDEALFOH": 5
+      },
+      "ForlornVessel_Skill": {
+        "AGEMDEALFOH": 6
+      },
+      "Fungus_MeleeAttack": {
+        "AGEMDEALFOH": 5
+      },
+      "Fungus_RangedAttack": {
+        "AGEMDEALFOH": 3
+      },
+      "Gecko_Summon_Laser": {
+        "AGEMDEALFOH": 7
+      },
+      "Golem_Legion_Common": {
+        "AGEMDEALFOH": 5.5
+      },
+      "Golem_Legion_MagicField": {
+        "AGEMDEALFOH": 18
+      },
+      "Golem_Legion_MeleeAtk": {
+        "AGEMDEALFOH": 7
+      },
+      "Golem_Legion_RangeAtk": {
+        "AGEMDEALFOH": 10
+      },
+      "Hermit_MeleeAttack": {
+        "AGEMDEALFOH": 3
+      },
+      "Hermit_RangeAttack": {
+        "AGEMDEALFOH": 3
+      },
+      "Hilistray_Water_SpecialAtk": {
+        "AGEMDEALFOH": 3
+      },
+      "Hilistray_Wind_SpecialAtk": {
+        "AGEMDEALFOH": 3
+      },
+      "Hound_Kanis_Rock_WQ_MeleeAtk": {
+        "AGEMDEALFOH": 1.5
+      },
+      "Invoker_ChargeAtk": {
+        "AGEMDEALFOH": 10
+      },
+      "Invoker_RangeAtk": {
+        "AGEMDEALFOH": 5
+      },
+      "LenthShifter_Attack": {
+        "AGEMDEALFOH": 6
+      },
+      "Leshy_Mature_AbsorbTarget": {
+        "AGEMDEALFOH": 7
+      },
+      "Leshy_Mature_JumpAtk": {
+        "AGEMDEALFOH": 2.5
+      },
+      "Leshy_Normal_ChargeHeavyAtk": {
+        "AGEMDEALFOH": 2
+      },
+      "Lloigor_Primo_SubLaser": {
+        "AGEMDEALFOH": 3
+      },
+      "Lloigor_Sub_RangeAttack": {
+        "AGEMDEALFOH": 8
+      },
+      "Lloigor_Sub_RushAttack": {
+        "AGEMDEALFOH": 7.5
+      },
+      "Lloigor_Sub_Taunt": {
+        "AGEMDEALFOH": 3
+      },
+      "Lloigor_Sub_WeakAttack": {
+        "AGEMDEALFOH": 1.5
+      },
+      "MachinaIustitia_Assimilator_MeleeAttack01": {
+        "AGEMDEALFOH": 3
+      },
+      "MachinaIustitia_Assimilator_RangeAttack01": {
+        "AGEMDEALFOH": 3
+      },
+      "MachinaIustitia_Elite_MeleeAtk": {
+        "AGEMDEALFOH": 5
+      },
+      "MachinaIustitia_Elite_RangeAtk": {
+        "AGEMDEALFOH": 8
+      },
+      "MachinaIustitia_Excavator_MeleeAttack01": {
+        "AGEMDEALFOH": 10
+      },
+      "MachinaIustitia_Excavator_RangeAttack01": {
+        "AGEMDEALFOH": 10
+      },
+      "MachinaIustitia_HighDangerSkill": {
+        "AGEMDEALFOH": 9.5
+      },
+      "MachinaIustitia_Probe_MeleeAttack01": {
+        "AGEMDEALFOH": 5
+      },
+      "MachinaIustitia_Probe_RangeAttack01": {
+        "AGEMDEALFOH": 5
+      },
+      "MachinaIustitia_Sentry_EMP": {
+        "AGEMDEALFOH": 5
+      },
+      "Mandragora_Elite_Rolling": {
+        "AGEMDEALFOH": 0.20000000298023224
+      },
+      "Mandragora_Elite_TinyMelee": {
+        "AGEMDEALFOH": 0.44999998807907104
+      },
+      "Mimik_FruitSkill": {
+        "AGEMDEALFOH": 10
+      },
+      "Monitor_LaserAttack": {
+        "AGEMDEALFOH": 1
+      },
+      "Moonbeast_MajorMeleeAtk": {
+        "AGEMDEALFOH": 15
+      },
+      "Moonbeast_MajorRangedAtk": {
+        "AGEMDEALFOH": 6
+      },
+      "NodRhino_FollowPersonality": {
+        "AGEMDEALFOH": 2.5
+      },
+      "Oceanid_meleeAttack": {
+        "AGEMDEALFOH": 3
+      },
+      "Oceanid_meleeAttack_long": {
+        "AGEMDEALFOH": 10
+      },
+      "Oceanid_rangedAttack": {
+        "AGEMDEALFOH": 4.5
+      },
+      "Ovacua_Growth": {
+        "AGEMDEALFOH": 15
+      },
+      "Perpetual_Enigma_MeleeAttack": {
+        "AGEMDEALFOH": 8
+      },
+      "Perpetual_Enigma_RangeAttack": {
+        "AGEMDEALFOH": 5
+      },
+      "RandomAction": {
+        "AGEMDEALFOH": 1.5
+      },
+      "Reindeer_Heal": {
+        "AGEMDEALFOH": 15
+      },
+      "Rhizome_HighDangerSkill": {
+        "AGEMDEALFOH": 8.5
+      },
+      "Rhizome_LowDangerSkill": {
+        "AGEMDEALFOH": 3.5
+      },
+      "Sacred_MortalAttack": {
+        "AGEMDEALFOH": 15
+      },
+      "Samurai_Kairagi_PowerAttack": {
+        "AGEMDEALFOH": 5
+      },
+      "Samurai_Ningyo_ChargeAtk": {
+        "AGEMDEALFOH": 15
+      },
+      "Samurai_Ningyo_MeleeAtk": {
+        "AGEMDEALFOH": 10
+      },
+      "Samurai_Ningyo_RangeAtk": {
+        "AGEMDEALFOH": 10
+      },
+      "Samurai_Samurai_Provoke": {
+        "AGEMDEALFOH": 15
+      },
+      "Shaman_CreatePillar": {
+        "AGEMDEALFOH": 5
+      },
+      "Shaman_Electric_ActivateTotem": {
+        "AGEMDEALFOH": 10
+      },
+      "Shamansaurus_WindField": {
+        "AGEMDEALFOH": 12.5
+      },
+      "Snegurochka_ChargeShoot": {
+        "AGEMDEALFOH": 2
+      },
+      "SubMarine_Attack": {
+        "AGEMDEALFOH": 9
+      },
+      "ToothTrap_Blink": {
+        "AGEMDEALFOH": 7
+      },
+      "ToothTrap_LaserAtk": {
+        "AGEMDEALFOH": 6
+      },
+      "ToothTrap_MagicField": {
+        "AGEMDEALFOH": 8
+      },
+      "TribalWarrior_TribeUlt": {
+        "AGEMDEALFOH": 2.5
+      },
+      "Udugan_Shadow_Attack": {
+        "AGEMDEALFOH": 2.0999999046325684
+      },
+      "Udugan_Shadow_Float": {
+        "AGEMDEALFOH": 0.75
+      },
+      "Udugan_Shadow_FloatBack": {
+        "AGEMDEALFOH": 0.5
+      },
+      "VolcanoWeasel_Attack01": {
+        "AGEMDEALFOH": 3.5
+      },
+      "VolcanoWeasel_Attack02": {
+        "AGEMDEALFOH": 3.5
+      },
+      "Volkodlak_Elite_BerserkAttack": {
+        "AGEMDEALFOH": 2.5
+      },
+      "Volkodlak_Normal_BerserkAttack": {
+        "AGEMDEALFOH": 2.5
+      },
+      "WildHunt_Human_AttackRush": {
+        "AGEMDEALFOH": 2.5
+      },
+      "WildHunt_Human_Blink": {
+        "AGEMDEALFOH": 4
+      },
+      "Wolf_Alert": {
+        "AGEMDEALFOH": 5
+      },
+      "Wolf_Bite": {
+        "AGEMDEALFOH": 4
+      },
+      "Wolverine_Dig": {
+        "AGEMDEALFOH": 120
+      },
+      "Wolverine_Perform02_Rest": {
+        "AGEMDEALFOH": 5
+      },
+      "meleeAttack_long": {
+        "AGEMDEALFOH": 15
+      },
+      "rangedAttack_long": {
+        "AGEMDEALFOH": 5
+      }
+    },
+    "IDMPPDGLEHE": 30,
+    "IPPODJGAFOI": 2,
+    "JFILIBKMMJB": {
+      "Rain": [
+        "WEATHER_BAD"
+      ],
+      "Storm": [
+        "WEATHER_BAD"
+      ]
+    },
+    "KKLFHEFEKFN": {
+      "JLHAFMNAEIP": {
+        "LJLFEFAKDDE": {
+          "4037": [
+            {
+              "HNNLHCDHPHL": "MachinaIustitia_Pylon_Charge",
+              "LFNJLABCCFL": 1
+            }
+          ]
+        }
+      },
+      "PBEDFLEAAJK": [
+        {
+          "HNNLHCDHPHL": "Cast_In_Water",
+          "LFNJLABCCFL": 1
+        },
+        {
+          "HNNLHCDHPHL": "Natsaurus_Aware",
+          "LFNJLABCCFL": 1
+        },
+        {
+          "HNNLHCDHPHL": "TribalWarrior_TribeUlt",
+          "LFNJLABCCFL": 1
+        },
+        {
+          "HNNLHCDHPHL": "ShamanSaurus_Lock",
+          "LFNJLABCCFL": 1
+        },
+        {
+          "HNNLHCDHPHL": "WildHunt_Human",
+          "LFNJLABCCFL": 1
+        },
+        {
+          "HNNLHCDHPHL": "Monster_MixMagnetSkill",
+          "LFNJLABCCFL": 1
+        },
+        {
+          "HNNLHCDHPHL": "Monster_SingleMagnetSkill",
+          "LFNJLABCCFL": 1
+        },
+        {
+          "HNNLHCDHPHL": "Monster_ChargeAtk",
+          "LFNJLABCCFL": 2
+        },
+        {
+          "HNNLHCDHPHL": "Moonbeast_MajorAtk",
+          "LFNJLABCCFL": 1
+        },
+        {
+          "HNNLHCDHPHL": "Volkodlak_Normal_BerserkAttack",
+          "LFNJLABCCFL": 2
+        },
+        {
+          "HNNLHCDHPHL": "Volkodlak_Elite_BerserkAttack",
+          "LFNJLABCCFL": 1
+        },
+        {
+          "HNNLHCDHPHL": "Snegurochka_ChargeShoot",
+          "LFNJLABCCFL": 2
+        },
+        {
+          "HNNLHCDHPHL": "TPS_Attack_TotallyShoot",
+          "LFNJLABCCFL": 3
+        }
+      ]
+    },
+    "KOJGBLCCOLB": 2,
+    "PGOMEPFMDFO": true,
+    "PKIMACGDAMD": {
+      "LLDPPLFBOGN": [
+        [
+          {
+            "_x": 1,
+            "_z": -2.0999999046325684
+          },
+          {
+            "_x": -1.5299999713897705,
+            "_z": 2.0999999046325684
+          },
+          {
+            "_x": -0.699999988079071,
+            "_z": -2.0999999046325684
+          }
+        ],
+        [
+          {
+            "_x": -1,
+            "_z": -2.0999999046325684
+          },
+          {
+            "_x": 1.5299999713897705,
+            "_z": 2.0999999046325684
+          },
+          {
+            "_x": 0.699999988079071,
+            "_z": -2.0999999046325684
+          }
+        ]
+      ]
+    }
+  },
+  "EGDDHOPBGLK": {
+    "CBHGECEIAHM": {
+      "GreyLarge": "ART/Others/Gadget/SceneObject/Prop/SceneObj_Area_Zd_Property_Ani_Prop_UnitVoxelRock_Large_01",
+      "GreyMedium": "ART/Others/Gadget/SceneObject/Prop/SceneObj_Area_Zd_Property_Ani_Prop_UnitVoxelRock_Medium_01",
+      "GreySmall": "ART/Others/Gadget/SceneObject/Prop/SceneObj_Area_Zd_Property_Ani_Prop_UnitVoxelRock_Small_01",
+      "GreySpecial01": "ART/Others/Gadget/SceneObject/Prop/SceneObj_Area_Zd_Property_Ani_Prop_UnitVoxelRock_Special_01",
+      "GreySpecial02": "ART/Others/Gadget/SceneObject/Prop/SceneObj_Area_Zd_Property_Ani_Prop_UnitVoxelRock_Special_02",
+      "GreySpecial03": "ART/Others/Gadget/SceneObject/Prop/SceneObj_Area_Zd_Property_Ani_Prop_UnitVoxelRock_Special_03",
+      "WhiteLarge": "ART/Others/Gadget/SceneObject/Prop/SceneObj_Area_Zd_Property_Ani_Prop_UnitVoxelRock_Large_02",
+      "WhiteMedium": "ART/Others/Gadget/SceneObject/Prop/SceneObj_Area_Zd_Property_Ani_Prop_UnitVoxelRock_Medium_02",
+      "WhiteSmall": "ART/Others/Gadget/SceneObject/Prop/SceneObj_Area_Zd_Property_Ani_Prop_UnitVoxelRock_Small_02",
+      "WhiteSpecial01": "ART/Others/Gadget/SceneObject/Prop/SceneObj_Area_Zd_Property_Ani_Prop_UnitVoxelRock_Special_04",
+      "WhiteSpecial02": "ART/Others/Gadget/SceneObject/Prop/SceneObj_Area_Zd_Property_Ani_Prop_UnitVoxelRock_Special_05",
+      "WhiteSpecial03": "ART/Others/Gadget/SceneObject/Prop/SceneObj_Area_Zd_Property_Ani_Prop_UnitVoxelRock_Special_06"
+    },
+    "KFCFMFPIAPD": {
+      "GreyLarge": "Eff_SceneObj_Stages_CrystalVoxelRock_Fracture_03",
+      "GreyMedium": "Eff_SceneObj_Stages_CrystalVoxelRock_Fracture_02",
+      "GreySmall": "Eff_SceneObj_Stages_CrystalVoxelRock_Fracture_01",
+      "GreySpecial01": "Eff_SceneObj_Stages_CrystalVoxelRock_Fracture_04",
+      "GreySpecial02": "Eff_SceneObj_Stages_CrystalVoxelRock_Fracture_05",
+      "GreySpecial03": "Eff_SceneObj_Stages_CrystalVoxelRock_Fracture_06",
+      "WhiteLarge": "Eff_SceneObj_Stages_CrystalVoxelRock_Fracture_09",
+      "WhiteMedium": "Eff_SceneObj_Stages_CrystalVoxelRock_Fracture_08",
+      "WhiteSmall": "Eff_SceneObj_Stages_CrystalVoxelRock_Fracture_07",
+      "WhiteSpecial01": "Eff_SceneObj_Stages_CrystalVoxelRock_Fracture_10",
+      "WhiteSpecial02": "Eff_SceneObj_Stages_CrystalVoxelRock_Fracture_11",
+      "WhiteSpecial03": "Eff_SceneObj_Stages_CrystalVoxelRock_Fracture_12"
+    },
+    "LEHAAHAOPLG": {
+      "GreyLarge": "Eff_SceneObj_CrystalVoxelRock_01_Disappear_03",
+      "GreyMedium": "Eff_SceneObj_CrystalVoxelRock_01_Disappear_02",
+      "GreySmall": "Eff_SceneObj_CrystalVoxelRock_01_Disappear",
+      "GreySpecial01": "Eff_SceneObj_CrystalVoxelRock_01_Disappear",
+      "GreySpecial02": "Eff_SceneObj_CrystalVoxelRock_01_Disappear",
+      "GreySpecial03": "Eff_SceneObj_CrystalVoxelRock_01_Disappear",
+      "WhiteLarge": "Eff_SceneObj_CrystalVoxelRock_01_Disappear_03",
+      "WhiteMedium": "Eff_SceneObj_CrystalVoxelRock_01_Disappear_02",
+      "WhiteSmall": "Eff_SceneObj_CrystalVoxelRock_01_Disappear",
+      "WhiteSpecial01": "Eff_SceneObj_CrystalVoxelRock_01_Disappear",
+      "WhiteSpecial02": "Eff_SceneObj_CrystalVoxelRock_01_Disappear",
+      "WhiteSpecial03": "Eff_SceneObj_CrystalVoxelRock_01_Disappear"
+    }
+  },
+  "EGLJCGHKOLE": {
+    "BKNMGEJMBHI": {
+      "3100": 0,
+      "3102": 2,
+      "3103": 3,
+      "3111": 11,
+      "3112": 12,
+      "3113": 13,
+      "3114": 14,
+      "3121": 21,
+      "3122": 22,
+      "3123": 23,
+      "3124": 24,
+      "3125": 25,
+      "3126": 26,
+      "3127": 27,
+      "3128": 28,
+      "3129": 29,
+      "3130": 30,
+      "3131": 31,
+      "3132": 32,
+      "3133": 33,
+      "3134": 34,
+      "3135": 35
+    },
+    "EINGHBGMNDP": {
+      "1": 1001,
+      "2": 4001,
+      "3": 5001,
+      "4": 5002,
+      "5": 5004,
+      "6": 5005
+    },
+    "FLALJDMEGCF": {
+      "ADHBDCHCEAN": 1,
+      "CMCHAHJCKAM": 20,
+      "EKLBPBMNAJC": 0.5,
+      "GGHADOJNDKL": 16,
+      "INFNAFPEBDO": 9.800000190734863,
+      "LNPCFBAECFH": 50,
+      "MKAEKMJPPHL": "RootNode",
+      "ODACGCMLHIK": 16
+    }
+  },
+  "EKFPMBNOFIG": {
+    "EFACNPCNHEG": 1.149999976158142,
+    "IDOFKODNFCG": 1.25
+  },
+  "FBGLKFJEOHO": {
+    "ACPODHOAENM": [
+      "UNIQUE_SuperJump_Conroller"
+    ],
+    "PCAJDNBPONF": [
+      "SceneObj_Area_Common_Property_Prop_BlowingStone_01",
+      "SceneObj_Area_Hd_Property_Ani_Prop_DreamPlatform_01",
+      "SceneObj_LostParadise_Common_Property_Ani_Prop_CloudPlatform_02",
+      "SceneObj_Area_Hd_Property_Ani_Prop_DreamPlatform_02",
+      "SceneObj_Area_Hd_Property_Ani_Prop_DreamPlatform_DownHill_01",
+      "SceneObj_Area_Hd_Property_Ani_Prop_DreamPlatform_DownHill_02",
+      "SceneObj_Area_Common_Property_Ani_Prop_Boat_Part_SuperJump"
+    ]
+  },
+  "FHEJGMCFCKK": {
+    "502": "PlayerFire",
+    "503": "PlayerWater",
+    "504": "PlayerWind",
+    "506": "PlayerRock",
+    "507": "PlayerElectric",
+    "508": "PlayerGrass",
+    "702": "PlayerFire",
+    "703": "PlayerWater",
+    "704": "PlayerWind",
+    "706": "PlayerRock",
+    "707": "PlayerElectric",
+    "708": "PlayerGrass"
+  },
+  "FILNBJAIFAC": {
+    "BFMGDPHILIJ": [
+      "None",
+      "Fire",
+      "Water",
+      "Grass",
+      "Ice",
+      "Electric",
+      "Wind",
+      "Rock"
+    ],
+    "EKEOLKFCFKH": {
+      "Avatar_Electric": {
+        "GAPMFCMPNCP": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          0.4000000059604645,
+          1,
+          1
+        ],
+        "IELLPMKLAIO": "default"
+      },
+      "Avatar_Fire": {
+        "GAPMFCMPNCP": [
+          1,
+          0.4000000059604645,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "IELLPMKLAIO": "default"
+      },
+      "Avatar_Frozen": {
+        "GAPMFCMPNCP": [
+          1,
+          1,
+          1,
+          1,
+          0.4000000059604645,
+          1,
+          1,
+          1
+        ],
+        "IELLPMKLAIO": "default"
+      },
+      "Avatar_Grass": {
+        "GAPMFCMPNCP": [
+          1,
+          1,
+          1,
+          0.4000000059604645,
+          1,
+          1,
+          1,
+          1
+        ],
+        "IELLPMKLAIO": "default"
+      },
+      "Avatar_Ice": {
+        "GAPMFCMPNCP": [
+          1,
+          1,
+          1,
+          1,
+          0.4000000059604645,
+          1,
+          1,
+          1
+        ],
+        "IELLPMKLAIO": "default"
+      },
+      "Avatar_Rock": {
+        "GAPMFCMPNCP": [
+          0.6669999957084656,
+          0.6669999957084656,
+          0.6669999957084656,
+          0.6669999957084656,
+          0.6669999957084656,
+          0.6669999957084656,
+          0.6669999957084656,
+          0.6669999957084656
+        ],
+        "IELLPMKLAIO": "default"
+      },
+      "Avatar_Water": {
+        "GAPMFCMPNCP": [
+          1,
+          1,
+          0.4000000059604645,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "IELLPMKLAIO": "default"
+      },
+      "Avatar_Wind": {
+        "GAPMFCMPNCP": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0.4000000059604645,
+          1
+        ],
+        "IELLPMKLAIO": "default"
+      },
+      "Element_Electric": {
+        "GAPMFCMPNCP": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          0.4000000059604645,
+          1,
+          1
+        ],
+        "IELLPMKLAIO": "default"
+      },
+      "Element_Fire": {
+        "GAPMFCMPNCP": [
+          1,
+          0.4000000059604645,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "IELLPMKLAIO": "default"
+      },
+      "Element_Ice": {
+        "GAPMFCMPNCP": [
+          1,
+          1,
+          1,
+          1,
+          0.4000000059604645,
+          1,
+          1,
+          1
+        ],
+        "IELLPMKLAIO": "default"
+      },
+      "Element_Rock": {
+        "GAPMFCMPNCP": [
+          0.6669999957084656,
+          0.6669999957084656,
+          0.6669999957084656,
+          0.6669999957084656,
+          0.6669999957084656,
+          0.6669999957084656,
+          0.6669999957084656,
+          0.6669999957084656
+        ],
+        "IELLPMKLAIO": "default"
+      },
+      "Element_Water": {
+        "GAPMFCMPNCP": [
+          1,
+          1,
+          0.4000000059604645,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "IELLPMKLAIO": "default"
+      },
+      "Shield_Half": {
+        "GAPMFCMPNCP": [
+          0.5,
+          0.5,
+          0.5,
+          0.5,
+          0.5,
+          0.5,
+          0.5,
+          0.5
+        ],
+        "IELLPMKLAIO": "default"
+      },
+      "default": {
+        "GAPMFCMPNCP": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "IELLPMKLAIO": "default"
+      },
+      "xingqiu": {
+        "GAPMFCMPNCP": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "IELLPMKLAIO": "default",
+        "MLFMPKEINFN": [
+          0.5,
+          0.5,
+          0.5,
+          0.5,
+          0.5,
+          0.5,
+          0.5,
+          0.5
+        ]
+      }
+    }
+  },
+  "FLFMHOMNLDA": [
+    {
+      "_y": 0.30000001192092896,
+      "_z": 1.5
+    },
+    {
+      "_x": 1.2000000476837158,
+      "_y": 0.10000000149011612,
+      "_z": 1.2999999523162842
+    },
+    {
+      "_x": -1.2000000476837158,
+      "_z": 1.2999999523162842
+    },
+    {
+      "_x": 0.800000011920929,
+      "_y": 0.20000000298023224,
+      "_z": 2.4000000953674316
+    },
+    {
+      "_x": -0.800000011920929,
+      "_z": 2.4000000953674316
+    },
+    {
+      "_x": 1.899999976158142,
+      "_y": 0.10000000149011612,
+      "_z": 2
+    },
+    {
+      "_x": -1.899999976158142,
+      "_z": 2
+    },
+    {
+      "_y": 0.30000001192092896,
+      "_z": 3
+    },
+    {
+      "_x": 0.8999999761581421,
+      "_z": 3.5999999046325684
+    },
+    {
+      "_x": -0.8999999761581421,
+      "_y": 0.4000000059604645,
+      "_z": 3.5999999046325684
+    },
+    {
+      "_x": 1.7999999523162842,
+      "_y": 0.20000000298023224,
+      "_z": 3
+    },
+    {
+      "_x": -1.7999999523162842,
+      "_y": 0.10000000149011612,
+      "_z": 3
+    }
+  ],
+  "FPBOFOPCFIH": {
+    "AMIADLBKKEN": 0.30000001192092896,
+    "BMBAGOKGABA": 100,
+    "DMKBOKEBAEC": 0.5,
+    "PNPGEAIDOFC": [
+      {
+        "BEHGCPKMLNN": 1,
+        "NKKIDLACOPB": [
+          {
+            "$type": "DHNDFACBOHP",
+            "OAGJIEDJPLE": 60,
+            "PAJKMCBEJLC": [
+              {
+                "$type": "FGOENBKKKJL",
+                "IJDGNIIOHLM": [
+                  {
+                    "$type": "GODGACPAPHF",
+                    "GJOPJFANMJN": 10
+                  }
+                ],
+                "LHBKOLLKLFB": -1
+              },
+              {
+                "$type": "FGOENBKKKJL",
+                "IJDGNIIOHLM": [
+                  {
+                    "$type": "GODGACPAPHF",
+                    "GJOPJFANMJN": 35,
+                    "LBMOPNAKDIM": 10
+                  }
+                ],
+                "LHBKOLLKLFB": -2.5
+              },
+              {
+                "$type": "FGOENBKKKJL",
+                "IJDGNIIOHLM": [
+                  {
+                    "$type": "GODGACPAPHF",
+                    "GJOPJFANMJN": 60,
+                    "LBMOPNAKDIM": 35
+                  }
+                ],
+                "LHBKOLLKLFB": -5
+              },
+              {
+                "$type": "OIPGOOFIOAM",
+                "BFDEHDNLNJH": [
+                  "NormalAttack_01",
+                  "NormalAttack_02",
+                  "NormalAttack_03",
+                  "NormalAttack_04",
+                  "NormalAttack_05",
+                  "NormalAttack_06"
+                ],
+                "CIAJDMHGJFG": 0.5,
+                "IJDGNIIOHLM": [
+                  {
+                    "$type": "BIPPMFBGMJO",
+                    "DFJGAGFEPCJ": true
+                  }
+                ],
+                "LHBKOLLKLFB": 1
+              },
+              {
+                "$type": "OIPGOOFIOAM",
+                "BFDEHDNLNJH": [
+                  "ExtraAttack"
+                ],
+                "CIAJDMHGJFG": 0.5,
+                "IJDGNIIOHLM": [
+                  {
+                    "$type": "BIPPMFBGMJO",
+                    "DFJGAGFEPCJ": true
+                  }
+                ],
+                "LHBKOLLKLFB": 1.5
+              },
+              {
+                "$type": "OIPGOOFIOAM",
+                "BFDEHDNLNJH": [
+                  "FallingAttack"
+                ],
+                "CIAJDMHGJFG": 1,
+                "IJDGNIIOHLM": [
+                  {
+                    "$type": "BIPPMFBGMJO",
+                    "DFJGAGFEPCJ": true
+                  }
+                ],
+                "LHBKOLLKLFB": 3
+              },
+              {
+                "$type": "OGHLMFJPMJG",
+                "CIAJDMHGJFG": 3,
+                "IJDGNIIOHLM": [
+                  {
+                    "$type": "BIPPMFBGMJO",
+                    "DFJGAGFEPCJ": true
+                  }
+                ],
+                "LHBKOLLKLFB": 5
+              },
+              {
+                "$type": "DJNLPLBLCFO",
+                "CIAJDMHGJFG": 5,
+                "IJDGNIIOHLM": [
+                  {
+                    "$type": "BIPPMFBGMJO",
+                    "DFJGAGFEPCJ": true
+                  }
+                ],
+                "LHBKOLLKLFB": 15
+              }
+            ]
+          },
+          {
+            "$type": "ADGDLJBENKH",
+            "OAGJIEDJPLE": 40,
+            "PAJKMCBEJLC": [
+              {
+                "DAJHBCKNFAE": 1,
+                "IJDGNIIOHLM": [
+                  {
+                    "$type": "BIPPMFBGMJO",
+                    "DFJGAGFEPCJ": true
+                  }
+                ],
+                "LHBKOLLKLFB": 2
+              },
+              {
+                "DAJHBCKNFAE": 2,
+                "IJDGNIIOHLM": [
+                  {
+                    "$type": "BIPPMFBGMJO",
+                    "DFJGAGFEPCJ": true
+                  }
+                ],
+                "LHBKOLLKLFB": 6
+              },
+              {
+                "DAJHBCKNFAE": 3,
+                "IJDGNIIOHLM": [
+                  {
+                    "$type": "BIPPMFBGMJO",
+                    "DFJGAGFEPCJ": true
+                  }
+                ],
+                "LHBKOLLKLFB": 8
+              },
+              {
+                "DAJHBCKNFAE": 4,
+                "IJDGNIIOHLM": [
+                  {
+                    "$type": "BIPPMFBGMJO",
+                    "DFJGAGFEPCJ": true
+                  }
+                ],
+                "LHBKOLLKLFB": 10
+              },
+              {
+                "DAJHBCKNFAE": 5,
+                "IJDGNIIOHLM": [
+                  {
+                    "$type": "BIPPMFBGMJO",
+                    "DFJGAGFEPCJ": true
+                  }
+                ],
+                "LHBKOLLKLFB": 12
+              },
+              {
+                "DAJHBCKNFAE": 6,
+                "IJDGNIIOHLM": [
+                  {
+                    "$type": "BIPPMFBGMJO",
+                    "DFJGAGFEPCJ": true
+                  }
+                ],
+                "LHBKOLLKLFB": 15
+              },
+              {
+                "DAJHBCKNFAE": 7,
+                "IJDGNIIOHLM": [
+                  {
+                    "$type": "BIPPMFBGMJO",
+                    "DFJGAGFEPCJ": true
+                  }
+                ],
+                "LHBKOLLKLFB": 25
+              },
+              {
+                "DAJHBCKNFAE": 8,
+                "IJDGNIIOHLM": [
+                  {
+                    "$type": "BIPPMFBGMJO",
+                    "DFJGAGFEPCJ": true
+                  }
+                ],
+                "LHBKOLLKLFB": 40
+              },
+              {
+                "DAJHBCKNFAE": 9,
+                "IJDGNIIOHLM": [
+                  {
+                    "$type": "BIPPMFBGMJO",
+                    "DFJGAGFEPCJ": true
+                  }
+                ],
+                "LHBKOLLKLFB": 40
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "GDAKFAOCKBB": {
+    "ElementDeadTime": "ElementAbility_DeadTime",
+    "ElementPetrifaction": "ElementAbility_Petrifaction"
+  },
+  "GHPBKDEAPKP": {
+    "BFMGDPHILIJ": [
+      "None",
+      "Fire",
+      "Water",
+      "Grass",
+      "Ice",
+      "Electric",
+      "Wind",
+      "Rock"
+    ],
+    "EKEOLKFCFKH": {
+      "AntiFire": {
+        "ANIGLNOLEAB": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "EPPIDAILPBN": "AntiFire",
+        "GAPMFCMPNCP": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      "Electric": {
+        "ANIGLNOLEAB": [
+          1,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "EPPIDAILPBN": "Electric",
+        "GAPMFCMPNCP": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1
+        ]
+      },
+      "Fire": {
+        "ANIGLNOLEAB": [
+          1,
+          1,
+          0,
+          1,
+          0,
+          0,
+          1,
+          1
+        ],
+        "EPPIDAILPBN": "Fire",
+        "GAPMFCMPNCP": [
+          1,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "Frozen": {
+        "ANIGLNOLEAB": [
+          1,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "EPPIDAILPBN": "Frozen",
+        "GAPMFCMPNCP": [
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1
+        ]
+      },
+      "Grass": {
+        "ANIGLNOLEAB": [
+          1,
+          0,
+          0,
+          1,
+          1,
+          0,
+          1,
+          1
+        ],
+        "EPPIDAILPBN": "Grass",
+        "GAPMFCMPNCP": [
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "Ice": {
+        "ANIGLNOLEAB": [
+          1,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "EPPIDAILPBN": "Ice",
+        "GAPMFCMPNCP": [
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1
+        ]
+      },
+      "None": {
+        "ANIGLNOLEAB": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "GAPMFCMPNCP": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "Rock": {
+        "ANIGLNOLEAB": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "EPPIDAILPBN": "Rock",
+        "GAPMFCMPNCP": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0
+        ]
+      },
+      "Water": {
+        "ANIGLNOLEAB": [
+          1,
+          0,
+          1,
+          1,
+          0,
+          0,
+          1,
+          1
+        ],
+        "EPPIDAILPBN": "Water",
+        "GAPMFCMPNCP": [
+          1,
+          1,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      "Wind": {
+        "ANIGLNOLEAB": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        "EPPIDAILPBN": "Wind",
+        "GAPMFCMPNCP": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          1
+        ]
+      }
+    }
+  },
+  "HAMHOOIDFAD": [
+    {
+      "EKLPLKFMAIN": [
+        41005004,
+        41027000,
+        41030002,
+        41038001,
+        41057003
+      ],
+      "NEMPAIFCHKC": 3,
+      "PCPEDDOABOM": "Rock"
+    },
+    {
+      "EKLPLKFMAIN": [
+        41029007
+      ],
+      "NEMPAIFCHKC": 8,
+      "PCPEDDOABOM": "Klee_Mine"
+    },
+    {
+      "EKLPLKFMAIN": [
+        41062021
+      ],
+      "NEMPAIFCHKC": 6,
+      "PCPEDDOABOM": "Aloy_Mine"
+    },
+    {
+      "EKLPLKFMAIN": [
+        41058008
+      ],
+      "NEMPAIFCHKC": 3,
+      "PCPEDDOABOM": "Yae_FoxTower"
+    },
+    {
+      "EKLPLKFMAIN": [
+        41068001
+      ],
+      "NEMPAIFCHKC": 1,
+      "PCPEDDOABOM": "Dori_ElementalBurst"
+    },
+    {
+      "EKLPLKFMAIN": [
+        41061003
+      ],
+      "NEMPAIFCHKC": 6,
+      "PCPEDDOABOM": "Momoka_Mine"
+    },
+    {
+      "EKLPLKFMAIN": [
+        70900344,
+        70900345,
+        70900346,
+        70900347
+      ],
+      "NEMPAIFCHKC": 3,
+      "PCPEDDOABOM": "CrystalSeed"
+    },
+    {
+      "EKLPLKFMAIN": [
+        44000106
+      ],
+      "NEMPAIFCHKC": 9,
+      "PCPEDDOABOM": "HideSeek_GuideGadget"
+    },
+    {
+      "EKLPLKFMAIN": [
+        70900396,
+        70900442,
+        70950229
+      ],
+      "NEMPAIFCHKC": 5,
+      "PCPEDDOABOM": "OvergrowMushRoomSeed"
+    },
+    {
+      "EKLPLKFMAIN": [
+        70900397,
+        70900443,
+        70950230
+      ],
+      "NEMPAIFCHKC": 5,
+      "PCPEDDOABOM": "OvergrowSeed"
+    },
+    {
+      "EKLPLKFMAIN": [
+        42605019,
+        42605020,
+        42605021,
+        42605022
+      ],
+      "NEMPAIFCHKC": 15,
+      "PCPEDDOABOM": "Monster_Drake_Primo_Rock_ScaleGadget"
+    },
+    {
+      "EKLPLKFMAIN": [
+        41077007
+      ],
+      "NEMPAIFCHKC": 3,
+      "PCPEDDOABOM": "Yaoyao_ElementalBurst_Rabbit"
+    },
+    {
+      "EKLPLKFMAIN": [
+        41077002
+      ],
+      "NEMPAIFCHKC": 2,
+      "PCPEDDOABOM": "Yaoyao_ElementalArt_Rabbit"
+    },
+    {
+      "EKLPLKFMAIN": [
+        41077004
+      ],
+      "NEMPAIFCHKC": 5,
+      "PCPEDDOABOM": "Yaoyao_ElementalArt_Turnip"
+    },
+    {
+      "EKLPLKFMAIN": [
+        41008004
+      ],
+      "NEMPAIFCHKC": 12,
+      "PCPEDDOABOM": "Player_Water_Core"
+    },
+    {
+      "EKLPLKFMAIN": [
+        41089010
+      ],
+      "NEMPAIFCHKC": 1,
+      "PCPEDDOABOM": "Furina_ElementalArt_OrderController"
+    },
+    {
+      "EKLPLKFMAIN": [
+        41095006
+      ],
+      "NEMPAIFCHKC": 12,
+      "PCPEDDOABOM": "Sigewinne_ElementalArt_Core"
+    },
+    {
+      "EKLPLKFMAIN": [
+        44000625
+      ],
+      "NEMPAIFCHKC": 1,
+      "PCPEDDOABOM": "RoleCombat_Blessing_OverdoseGrassArea"
+    },
+    {
+      "EKLPLKFMAIN": [
+        44000640,
+        44000641,
+        44000642
+      ],
+      "NEMPAIFCHKC": 2,
+      "PCPEDDOABOM": "RoleCombat_Blessing_IceGrassThorns"
+    },
+    {
+      "EKLPLKFMAIN": [
+        73078063
+      ],
+      "NEMPAIFCHKC": 2,
+      "PCPEDDOABOM": "6_0_Quest_PlayerCombo_RecoverBall"
+    },
+    {
+      "EKLPLKFMAIN": [
+        41038004
+      ],
+      "NEMPAIFCHKC": 2,
+      "PCPEDDOABOM": "Albedo_Hexenzirkel_Gadget"
+    },
+    {
+      "EKLPLKFMAIN": [
+        41130001
+      ],
+      "NEMPAIFCHKC": 1,
+      "PCPEDDOABOM": "Linnea_ElementalArt_OrderController"
+    },
+    {
+      "EKLPLKFMAIN": [
+        41130017
+      ],
+      "NEMPAIFCHKC": 1,
+      "PCPEDDOABOM": "Linnea_Mine_Mark"
+    },
+    {
+      "EKLPLKFMAIN": [
+        70950236,
+        70950239
+      ],
+      "NEMPAIFCHKC": 1,
+      "PCPEDDOABOM": "StarSuperconductor_StarIce"
+    },
+    {
+      "EKLPLKFMAIN": [
+        70950240
+      ],
+      "NEMPAIFCHKC": 1,
+      "PCPEDDOABOM": "StarSuperconductor_StarIce_Shadow"
+    },
+    {
+      "EKLPLKFMAIN": [
+        73094112
+      ],
+      "NEMPAIFCHKC": 99999,
+      "PCPEDDOABOM": "StarSuperconductor_StarIce_World"
+    },
+    {
+      "EKLPLKFMAIN": [
+        73094098
+      ],
+      "NEMPAIFCHKC": 6,
+      "PCPEDDOABOM": "Snezhnaya_FrozenThunder"
+    },
+    {
+      "EKLPLKFMAIN": [
+        40040026
+      ],
+      "NEMPAIFCHKC": 2,
+      "PCPEDDOABOM": "Ice_HandGrenade_Create_Domain"
+    },
+    {
+      "EKLPLKFMAIN": [
+        73151003
+      ],
+      "NEMPAIFCHKC": 3,
+      "PCPEDDOABOM": "IceCraftedPickaxe"
+    },
+    {
+      "EKLPLKFMAIN": [
+        73154003
+      ],
+      "NEMPAIFCHKC": 5,
+      "PCPEDDOABOM": "FairyLamp"
+    }
+  ],
+  "HMOEIAABIIB": {
+    "BFOJMCKBLLI": {
+      "Vesna": 10
+    },
+    "OCNKBGNHNDK": 10
+  },
+  "IBCDPLBIHLH": {
+    "ACGGHPJKOEO": 1,
+    "AMKBBMMGPED": 3,
+    "AODMOGJOAFC": 1000,
+    "BOPODINGIPK": 1000,
+    "DNNBOIIIKMH": 1.399999976158142,
+    "EGMDJODLDMD": 2.5,
+    "EMEOMGBJFOK": 8,
+    "GNNONFKHLHL": 1.2000000476837158,
+    "HNBOPDEHBIB": 2,
+    "KEBEKHLCKMK": 3,
+    "KHCPJKCJFEH": 5,
+    "LHNCAFGJNLJ": 2,
+    "LMKNHJFCIKC": 1.100000023841858,
+    "NDJNHMKCEFC": 1.100000023841858,
+    "OBLLBJONMFI": 0.5,
+    "PEGHGKLDHAI": 2
+  },
+  "IBEBOPMCJGH": {
+    "106496": 0.4000000059604645,
+    "131072": 0.10000000149011612,
+    "16785408": 0.10000000149011612,
+    "16797698": 0.10000000149011612,
+    "16801792": 1.5,
+    "16805888": 0.6000000238418579,
+    "16818176": 0.6000000238418579,
+    "16826370": 0.20000000298023224,
+    "16826371": 0.20000000298023224,
+    "16826374": 0.20000000298023224,
+    "16826376": 0.10000000149011612,
+    "16830466": 0.10000000149011612,
+    "16834561": 0.20000000298023224,
+    "16838657": 0.10000000149011612,
+    "16859137": 0.10000000149011612,
+    "16859141": 0.10000000149011612,
+    "16871425": 0.10000000149011612,
+    "16875520": 0.10000000149011612,
+    "16904192": 0.10000000149011612,
+    "16928768": 0.5,
+    "16945152": 0.10000000149011612,
+    "16957440": 0.10000000149011612,
+    "200704": 0.10000000149011612,
+    "20480": 0.30000001192092896,
+    "229376": 0.10000000149011612,
+    "268443649": 0.30000001192092896,
+    "268451840": 0.10000000149011612,
+    "268455944": 0.10000000149011612,
+    "268455945": 0.10000000149011612,
+    "268455949": 0.20000000298023224,
+    "268455951": 0.20000000298023224,
+    "268455957": 0.10000000149011612,
+    "268455958": 0.10000000149011612,
+    "268455961": 0.10000000149011612,
+    "268472321": 0.20000000298023224,
+    "268476417": 0.10000000149011612,
+    "268476418": 0.10000000149011612,
+    "268484608": 0.10000000149011612,
+    "268496896": 4.5,
+    "268517376": 0.6000000238418579,
+    "268550144": 0.20000000298023224,
+    "268554240": 0.6000000238418579,
+    "268562432": 0.10000000149011612,
+    "268582912": 0.30000001192092896,
+    "268599297": 0.10000000149011612,
+    "268599299": 0.30000001192092896,
+    "268599301": 0.699999988079071,
+    "268623872": 0.20000000298023224,
+    "268681216": 0.10000000149011612,
+    "268685312": 0.10000000149011612,
+    "268705793": 0.20000000298023224,
+    "40964": 0.10000000149011612,
+    "40966": 0.10000000149011612,
+    "45056": 0.10000000149011612,
+    "49153": 0.30000001192092896,
+    "49154": 0.10000000149011612,
+    "53252": 0.30000001192092896,
+    "53255": 0.20000000298023224,
+    "53256": 0.10000000149011612,
+    "57346": 0.10000000149011612,
+    "57347": 0.10000000149011612,
+    "65537": 0.20000000298023224,
+    "65542": 0.30000001192092896,
+    "69634": 0.10000000149011612,
+    "69635": 0.5,
+    "69654": 1.2000000476837158,
+    "69661": 0.10000000149011612,
+    "73729": 0.30000001192092896,
+    "77826": 0.10000000149011612,
+    "77827": 0.10000000149011612,
+    "77829": 0.10000000149011612,
+    "8192": 0.699999988079071,
+    "81920": 0.10000000149011612,
+    "81923": 0.10000000149011612,
+    "81925": 0.10000000149011612,
+    "86016": 0.20000000298023224,
+    "94208": 0.800000011920929
+  },
+  "IGDFCIACJIF": {
+    "ElectricDigger": [
+      {
+        "EPPIDAILPBN": "Electric",
+        "KLEGDMPJLOG": 10
+      }
+    ],
+    "Monster_Fatuimecha_AMP_Efficiency1": [
+      {
+        "EPPIDAILPBN": "Fire",
+        "KLEGDMPJLOG": 0.20000000298023224
+      }
+    ],
+    "Monster_Fatuimecha_AMP_Efficiency2": [
+      {
+        "EPPIDAILPBN": "Fire"
+      }
+    ],
+    "Monster_Hound_Planelurker_DarkHoundGadget": [
+      {
+        "EPPIDAILPBN": "Rock",
+        "KLEGDMPJLOG": 1
+      }
+    ],
+    "Monster_LavaTitan_Efficiency1": [
+      {
+        "EPPIDAILPBN": "Fire",
+        "KLEGDMPJLOG": 0.949999988079071
+      }
+    ],
+    "Monster_LavaTitan_Efficiency1_LeyLineChallenge": [
+      {
+        "EPPIDAILPBN": "Fire",
+        "KLEGDMPJLOG": 0.44999998807907104
+      }
+    ],
+    "Monster_LavaTitan_Efficiency2": [
+      {
+        "EPPIDAILPBN": "Fire",
+        "KLEGDMPJLOG": 0.7599999904632568
+      }
+    ],
+    "Monster_LavaTitan_Efficiency2_LeyLineChallenge": [
+      {
+        "EPPIDAILPBN": "Fire",
+        "KLEGDMPJLOG": 0.36000001430511475
+      }
+    ],
+    "Monster_LavaTitan_Efficiency3": [
+      {
+        "EPPIDAILPBN": "Fire",
+        "KLEGDMPJLOG": 0.6785699725151062
+      }
+    ],
+    "Monster_LavaTitan_Efficiency3_LeyLineChallenge": [
+      {
+        "EPPIDAILPBN": "Fire",
+        "KLEGDMPJLOG": 0.32100000977516174
+      }
+    ],
+    "Monster_LavaTitan_Efficiency4": [
+      {
+        "EPPIDAILPBN": "Fire",
+        "KLEGDMPJLOG": 0.6333299875259399
+      }
+    ],
+    "Monster_LavaTitan_Efficiency4_LeyLineChallenge": [
+      {
+        "EPPIDAILPBN": "Fire",
+        "KLEGDMPJLOG": 0.30000001192092896
+      }
+    ],
+    "Monster_Lava_Solid_02_StateChange": [
+      {
+        "EPPIDAILPBN": "Fire",
+        "KLEGDMPJLOG": 0.800000011920929
+      }
+    ],
+    "Monster_Lava_Solid_StateChange": [
+      {
+        "EPPIDAILPBN": "Fire",
+        "KLEGDMPJLOG": 0.6000000238418579
+      }
+    ],
+    "Monster_Moonbeast_Electric_LatentState": [
+      {
+        "EPPIDAILPBN": "Electric",
+        "KLEGDMPJLOG": 0.800000011920929
+      }
+    ],
+    "Monster_Moonbeast_Fire_LatentState": [
+      {
+        "EPPIDAILPBN": "Fire",
+        "KLEGDMPJLOG": 0.800000011920929
+      }
+    ],
+    "Monster_Moonbeast_Grass_LatentState": [
+      {
+        "EPPIDAILPBN": "Grass",
+        "KLEGDMPJLOG": 0.800000011920929
+      }
+    ],
+    "Monster_Moonbeast_Ice_LatentState": [
+      {
+        "EPPIDAILPBN": "Ice",
+        "KLEGDMPJLOG": 0.800000011920929
+      }
+    ],
+    "Monster_Moonbeast_Rock_LatentState": [
+      {
+        "EPPIDAILPBN": "Rock",
+        "KLEGDMPJLOG": 0.800000011920929
+      }
+    ],
+    "Monster_Moonbeast_Water_LatentState": [
+      {
+        "EPPIDAILPBN": "Water",
+        "KLEGDMPJLOG": 0.800000011920929
+      }
+    ],
+    "Monster_Moonbeast_Wind_LatentState": [
+      {
+        "EPPIDAILPBN": "Wind",
+        "KLEGDMPJLOG": 0.800000011920929
+      }
+    ],
+    "Monster_Shougun_Mitakenarukami_SakuraBall": [
+      {
+        "EPPIDAILPBN": "Electric",
+        "KLEGDMPJLOG": 1
+      }
+    ],
+    "Monster_Volkodlak_Whale_ElectricHit": [
+      {
+        "EPPIDAILPBN": "Electric",
+        "KLEGDMPJLOG": -0.4000000059604645
+      }
+    ],
+    "Monster_Volkodlak_Whale_ElectricHit_LeyLineChallengeStage1": [
+      {
+        "EPPIDAILPBN": "Electric",
+        "KLEGDMPJLOG": -0.05999999865889549
+      }
+    ],
+    "Monster_Volkodlak_Whale_ElectricHit_LeyLineChallengeStage2": [
+      {
+        "EPPIDAILPBN": "Electric",
+        "KLEGDMPJLOG": -0.47999998927116394
+      }
+    ],
+    "RoleElectricBomb": [
+      {
+        "EPPIDAILPBN": "Electric",
+        "KLEGDMPJLOG": 0.4000000059604645
+      }
+    ],
+    "default": [
+      {
+        "KLEGDMPJLOG": 1
+      }
+    ]
+  },
+  "IKKOADBIJLN": {
+    "Melt": {
+      "Fire": 1,
+      "Ice": 0.5
+    },
+    "Stream": {
+      "Fire": 0.5,
+      "Water": 1
+    }
+  },
+  "JBAICIBLADF": {
+    "ANEELEEKLDC": {
+      "MoonCrystallizeWater": [
+        2103
+      ],
+      "MoonOvergrow": [
+        2102
+      ],
+      "MoonShock": [
+        2101
+      ],
+      "StarSuperconductor": [
+        2104
+      ],
+      "StarSwirlIce": [
+        2105
+      ]
+    },
+    "DHCJHEAHJIG": {
+      "StarSuperconductorElectric": [
+        1,
+        1.4500000476837158,
+        1.5,
+        1.5499999523162842,
+        1.600000023841858,
+        1.649999976158142,
+        1.7000000476837158,
+        1.75,
+        1.7999999523162842,
+        1.850000023841858,
+        1.899999976158142,
+        1.9500000476837158,
+        2
+      ],
+      "StarSuperconductorIce": [
+        1,
+        1.4500000476837158,
+        1.5,
+        1.5499999523162842,
+        1.600000023841858,
+        1.649999976158142,
+        1.7000000476837158,
+        1.75,
+        1.7999999523162842,
+        1.850000023841858,
+        1.899999976158142,
+        1.9500000476837158,
+        2
+      ],
+      "StarSwirlIce": [
+        1,
+        2,
+        3
+      ],
+      "StarSwirlWind": [
+        1,
+        0.75
+      ]
+    },
+    "DMADIBPAIID": {
+      "StarSuperconductor": "STARSUPERCONDUCTOR_TRANSFER"
+    },
+    "DPJOEHJJNHD": {
+      "MoonCrystallizeWater": [
+        0.6000000238418579,
+        0.30000001192092896,
+        0.05000000074505806,
+        0.05000000074505806,
+        0.05000000074505806
+      ],
+      "MoonShock": [
+        0.6000000238418579,
+        0.30000001192092896,
+        0.05000000074505806,
+        0.05000000074505806,
+        0.05000000074505806
+      ],
+      "StarSwirlIce": [
+        0.6000000238418579,
+        0.30000001192092896,
+        0.05000000074505806,
+        0.05000000074505806,
+        0.05000000074505806
+      ],
+      "StarSwirlWind": [
+        0.6000000238418579,
+        0.30000001192092896,
+        0.05000000074505806,
+        0.05000000074505806,
+        0.05000000074505806
+      ]
+    },
+    "EHBIAGJDDNC": {
+      "MoonCrystallizeWater": 1.600000023841858,
+      "MoonOvergrow": 1,
+      "MoonShock": 3,
+      "StarSuperconductor": 1,
+      "StarSuperconductorElectric": 1,
+      "StarSuperconductorIce": 1,
+      "StarSwirlIce": 1,
+      "StarSwirlWind": 1
+    },
+    "JBDOJBKMGDJ": {
+      "Actor_ElecAddHurtDelta": [
+        0.20000000298023224,
+        0.28999999165534973,
+        0.30000001192092896,
+        0.3100000023841858,
+        0.3199999928474426,
+        0.33000001311302185,
+        0.3400000035762787,
+        0.3499999940395355,
+        0.36000001430511475,
+        0.3700000047683716,
+        0.3799999952316284,
+        0.38999998569488525,
+        0.4000000059604645
+      ],
+      "Actor_IceAddHurtDelta": [
+        0.20000000298023224,
+        0.28999999165534973,
+        0.30000001192092896,
+        0.3100000023841858,
+        0.3199999928474426,
+        0.33000001311302185,
+        0.3400000035762787,
+        0.3499999940395355,
+        0.36000001430511475,
+        0.3700000047683716,
+        0.3799999952316284,
+        0.38999998569488525,
+        0.4000000059604645
+      ]
+    },
+    "ONGLGHFAPPB": {
+      "JJBJFANAEGG": {
+        "FHAMIHJMHHC": [
+          "SCENE_WORLD"
+        ],
+        "IPGKEPAHPOC": [
+          "DUNGEON_SUB_RELIQUARY",
+          "DUNGEON_SUB_TALENT",
+          "DUNGEON_SUB_WEAPON",
+          "DUNGEON_SUB_BOSS"
+        ]
+      }
+    }
+  },
+  "JNBAOPKJKFM": [
+    {
+      "MADJCLEKNOE": true,
+      "PEELJBICEHE": "_COLLISION_POINT_SYNC_KEY"
+    },
+    {
+      "PEELJBICEHE": "COLLISION_POINT_TRIGGER_ID_1"
+    },
+    {
+      "PEELJBICEHE": "COLLISION_POINT_TRIGGER_ID_2"
+    },
+    {
+      "PEELJBICEHE": "COLLISION_POINT_OTHER_ID_1"
+    },
+    {
+      "PEELJBICEHE": "COLLISION_POINT_OTHER_ID_2"
+    },
+    {
+      "PEELJBICEHE": "TRIGGER_ATTACK_EVENT_CUSTOM_ID_1"
+    },
+    {
+      "PEELJBICEHE": "TRIGGER_ATTACK_EVENT_CUSTOM_ID_2"
+    },
+    {
+      "PEELJBICEHE": "_ONIKABUTOBATTLE_ENEMY_BATTLESTATE"
+    },
+    {
+      "PEELJBICEHE": "DamageLoanPerInterval"
+    },
+    {
+      "PEELJBICEHE": "DamageLoanTotal"
+    },
+    {
+      "PEELJBICEHE": "gv_Show_Windball"
+    },
+    {
+      "PEELJBICEHE": "arkheGradeKey"
+    },
+    {
+      "PEELJBICEHE": "_FrequencyShieldLabel_"
+    },
+    {
+      "PEELJBICEHE": "GV_EnvironmentType"
+    },
+    {
+      "MADJCLEKNOE": true,
+      "PEELJBICEHE": "_COLLISION_NORMAL_SYNC_KEY"
+    },
+    {
+      "PEELJBICEHE": "GV_MonsterImitationOnStage"
+    },
+    {
+      "PEELJBICEHE": "RoutePointPos_0"
+    },
+    {
+      "PEELJBICEHE": "RoutePointPos_1"
+    },
+    {
+      "PEELJBICEHE": "RoutePointPos_2"
+    },
+    {
+      "PEELJBICEHE": "RoutePointRot_0"
+    },
+    {
+      "PEELJBICEHE": "RoutePointRot_1"
+    },
+    {
+      "PEELJBICEHE": "RoutePointRot_2"
+    },
+    {
+      "PEELJBICEHE": "RoutePointType"
+    },
+    {
+      "PEELJBICEHE": "_GlobalConfigMultiBorn_0"
+    },
+    {
+      "PEELJBICEHE": "_GlobalConfigMultiBorn_1"
+    },
+    {
+      "PEELJBICEHE": "_GlobalConfigMultiBorn_2"
+    },
+    {
+      "PEELJBICEHE": "ScanSingleMagnetID"
+    },
+    {
+      "PEELJBICEHE": "_AITargetChangeMixin_FromTarget"
+    },
+    {
+      "PEELJBICEHE": "_AITargetChangeMixin_ToTarget"
+    },
+    {
+      "PEELJBICEHE": "_MultiTargetGlobalValueCount"
+    }
+  ],
+  "JOJPADEGOFE": {
+    "EJLDMNBBIEA": 0.20000000298023224,
+    "JADLHFENJMG": 8,
+    "MBKLMCIHKJG": 0.11999999731779099,
+    "NCGHLOAHKAD": 0.029999999329447746
+  },
+  "KBONNNKIBDH": {
+    "BOEHLFMHNBC": 40200008,
+    "EALOGKNMNDL": 3,
+    "FALDNNONDDF": 10,
+    "ILFAOECEILI": "Eff_Windfield_Enter",
+    "KJCBAFKFFMP": 1,
+    "NDGCJAKHDGH": 10,
+    "OHCMFHCIILK": -1,
+    "PHGANKCAIFA": "Eff_Windfield_Stay"
+  },
+  "LHLFDDFGPNF": [
+    "BurningDamage",
+    "ShockDamage",
+    "Self_Swirl_WaterDamage",
+    "Self_Swirl_IceDamage",
+    "Self_Swirl_ElectricDamage",
+    "Self_Swirl_FireDamage",
+    "OverGrowDamage",
+    "OverGrow_Alter_Damage",
+    "OverGrow_Fire_Damage",
+    "OverGrow_Electric_Damage"
+  ],
+  "LKHMDHPPBOF": {
+    "INJGHJNJDDE": [
+      {
+        "HFEHCNIEJOH": 30,
+        "IIBJJGKKAFJ": [
+          {
+            "$type": "LCKFCHMGGFC",
+            "CJFNKDFEPNH": {
+              "CALKILOBDNJ": [
+                {
+                  "ANHJJEHGIDE": 3,
+                  "NAPJBIPPDGL": [
+                    55,
+                    56,
+                    57,
+                    59
+                  ]
+                }
+              ],
+              "JKCGCHBIFFJ": "SnowField"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "LNDMEBBKDHD": {
+    "JMKGOODBKGC": {
+      "DCGMAOHAMGK": {
+        "JJBJFANAEGG": {
+          "FHAMIHJMHHC": [
+            "SCENE_WORLD"
+          ],
+          "IPGKEPAHPOC": [
+            "DUNGEON_SUB_RELIQUARY",
+            "DUNGEON_SUB_TALENT",
+            "DUNGEON_SUB_WEAPON",
+            "DUNGEON_SUB_BOSS"
+          ]
+        }
+      }
+    },
+    "MFKEHIPNJNK": {
+      "RGV_TempMoonOvergrowPoint": {}
+    }
+  },
+  "MAPNAFIKMPM": {
+    "ACPODHOAENM": [
+      "WaterAreaWaterModifier",
+      "LightRainModifier",
+      "HeavyRainModifier"
+    ],
+    "CIAJDMHGJFG": 1
+  },
+  "MDAEFHHFMMF": {
+    "CCLMIIJPANF": [
+      "Item_Food_RecoverHP",
+      "Item_Food_RecoverInstantHP",
+      "Item_Food_MoveSpeed"
+    ],
+    "DGMMHCBBEJK": [
+      "ElementAbility_OverGrow_Mushroom",
+      "ElementAbility_OverGrow_Alter_Mushroom",
+      "Element_OverGrow_Electric_Bullet_Material",
+      "Element_OverGrow_Electric_Bullet_LifeOver",
+      "ActivityAbility_QuikTimeCombat_Common_Wave_Lv1",
+      "ActivityAbility_QuikTimeCombat_Common_Wave_Lv2",
+      "ActivityAbility_QuikTimeCombat_Common_Wave_Lv3",
+      "ActivityAbility_QuikTimeCombat_Common_Wave_Lv4",
+      "SceneObj_Area_Common_Property_Ani_Prop_RogueBall_Ball_10",
+      "SceneObj_Area_Common_Property_Ani_Prop_RogueBall_Ball_120",
+      "SceneObj_Area_Common_Property_Ani_Prop_RogueBall_Ball_130",
+      "SceneObj_Area_Common_Property_Ani_Prop_RogueBall_Ball_140"
+    ],
+    "ECKEKIALKKH": [
+      "Unique_AbilityCrash"
+    ],
+    "EOJNBJEJEEI": [
+      "Item_Food_Attack",
+      "Item_Food_Defence",
+      "Item_Food_MaxHP",
+      "ReHP_Ins&Con",
+      "ReHP_SpecialEffects",
+      "SpecialEffects",
+      "KillMonster_Team",
+      "OpenTreasure_Team",
+      "Atk_Team",
+      "Def_Team",
+      "Elec_Team",
+      "Fire_Team",
+      "Water_Team",
+      "revive_buff",
+      "Critical_Team",
+      "Stamina_Fly_Team",
+      "Stamina_Climb_Team",
+      "Stamina_Sprint_Team",
+      "Stamina_Swim_Team",
+      "Stamina_Fly_lv3_1",
+      "Stamina_Fly_lv3_2",
+      "Stamina_Fly_lv3_3",
+      "Stamina_Climb_lv3_1",
+      "Stamina_Climb_lv3_2",
+      "Stamina_Climb_lv3_3",
+      "MoveSpeed_lv2_1",
+      "Def_Element_lv2_1",
+      "Element_Def_Team",
+      "Element_Atk_Team",
+      "Atk_Dungeon",
+      "Atk_FeatureTag_Dungeon",
+      "Atk_WeaponType_Dungeon",
+      "Def_Dungeon",
+      "Support_Dungeon",
+      "Stamina_Sprint_Dungeon",
+      "MoveSpeed_Dungeon",
+      "ReHP_Ins&Con_Dungeon",
+      "Suport_ResetCDWhenSkillHit_Dungeon",
+      "Atk_HitHeadBox_Dungeon",
+      "ClimateAbility_Cold",
+      "ClimateAbility_TatariRegion",
+      "Dulins_Blood_Buff",
+      "Anti_Cold_Food_Buff",
+      "SceneObj_Gear_ElemForce_SuccessBuff",
+      "SceneObj_Toys_SeekerSeelie",
+      "Vehicle_Skiff_Normal_ServerBuff_Handler",
+      "Vehicle_Sorush_Normal_ServerBuff_Handler",
+      "Vehicle_Natsaurus_Normal_ServerBuff_Handler",
+      "Electric_Fairy_Skill_Team_Part_1",
+      "Electric_Fairy_Skill_Team_Part_2",
+      "ClimateAbility_HotMonster",
+      "ClimateAbility_ColdMonster",
+      "ClimateAbility_SeiraiStorm",
+      "ClimateAbility_TsurumiMist",
+      "SceneObj_MichiaeMatsuri_SBuff_Energy",
+      "Escoffier_SpecialItem_Buff",
+      "Fragrance_01_Team"
+    ],
+    "FDFFBLKCILB": [
+      "AI_LeaveCombat_Reset",
+      "LevelAbility_Combat_Watcher",
+      "LevelAbility_Combat_Watcher_1",
+      "LevelAbility_Combat_Achievement_Watcher_1",
+      "LevelAbility_Combat_Achievement_Watcher_2",
+      "LevelAbility_Combat_Achievement_Watcher_3",
+      "LevelAbility_Combat_Achievement_Watcher_4",
+      "LevelAbility_Combat_Achievement_Watcher_5",
+      "LevelAbility_Combat_Achievement_Watcher_6",
+      "LevelAbility_Combat_Activity_Watcher_1"
+    ],
+    "GANPNFBBIBI": "MonsterEliteAbility",
+    "IJAKKGBINDD": [
+      "TeamAbility_Reset_Crystal_Mark",
+      "TeamAbility_Reset_MoonOvergrow",
+      "TeamAbility_MoonPhase",
+      "TeamAbility_MoonCrystal_Water",
+      "TeamAbility_StarSuperconductor",
+      "TeamAbility_StarSwirl_Ice"
+    ],
+    "IMFCNDGGLHM": [
+      "SceneAbility_LiquidPhlogistonArea",
+      "SceneAbility_ElectricWaterArea",
+      "SceneAbility_ElectricWaterArea_Clear",
+      "SceneAbility_WaterArea",
+      "SceneAbility_Rain",
+      "SceneAbility_BlackMudArea",
+      "SceneAbility_AbyssErodedSoil",
+      "SceneAbility_FoulCarpet",
+      "SceneAbility_DiveVolume",
+      "ElementAbility_Burning",
+      "ElementAbility_Wet",
+      "ElementAbility_Ice",
+      "ElementAbility_Steam",
+      "ElementAbility_Explode",
+      "ElementAbility_Melt",
+      "ElementAbility_Freeze",
+      "ElementAbility_Frozen",
+      "ElementAbility_Electric",
+      "ElementAbility_MoonShock",
+      "ElementAbility_Electric_Trigger",
+      "ElementAbility_Rock",
+      "ElementAbility_Wind",
+      "ElementAbility_StickElectric",
+      "ElementAbility_Fire",
+      "ElementAbility_Superconductor",
+      "ElementAbility_Swirl_Fire",
+      "ElementAbility_Swirl_Electric",
+      "ElementAbility_Swirl_Water",
+      "ElementAbility_Swirl_Ice",
+      "ElementAbility_StickWater",
+      "ElementAbility_Crystallize_Water",
+      "ElementAbility_Crystallize_Ice",
+      "ElementAbility_Crystallize_Fire",
+      "ElementAbility_Crystallize_Electric",
+      "ElementAbility_Petrifaction",
+      "ElementAbility_DeadTime",
+      "ElementAbility_Frozen_Broken",
+      "ElementAbility_StickGrass",
+      "ElementAbility_Burning_Fuel",
+      "ElementAbility_Overdose_DropBall",
+      "ElementAbility_Overdose_ApplyModifier",
+      "ElementAbility_OverGrow",
+      "ElementAbility_OverGrow_Mushroom_Fire",
+      "ElementAbility_OverGrow_Mushroom_Electric",
+      "ArkheAbility_Annihilate",
+      "ElementAbility_MoonOvergrow",
+      "ElementAbility_MoonCrystallize_Water",
+      "ElementAbility_StarSuperconductor",
+      "ElementAbility_StarSwirl_Ice"
+    ],
+    "KBKDLJLDMJA": [
+      "Avatar_DefaultAbility_VisionReplaceDieInvincible",
+      "Avatar_DefaultAbility_AvartarInShaderChange",
+      "Avatar_DefaultAbility_ManualClearSurfaceTypeInSpecificState",
+      "Avatar_SprintBS_Invincible",
+      "Avatar_Freeze_Duration_Reducer",
+      "Avatar_Attack_ReviveEnergy",
+      "Avatar_Component_Initializer",
+      "Avatar_HDMesh_Controller",
+      "Avatar_Trampoline_Jump_Controller",
+      "Avatar_ArkheGrade_CD_Controller",
+      "Avatar_TriggerNyxInstant",
+      "Avatar_StarSuperconductor_Field_Checker",
+      "Avatar_DefaultAbility_HideWeaponInDiveStream"
+    ],
+    "LGMCCIDAKCI": [
+      "ElementAbility_BurningTileAttackManager",
+      "SceneAbility_Thunder",
+      "SceneAbility_Thunder_New"
+    ]
+  },
+  "MDJGKFLNCIP": {
+    "Animal_Boar_03_OnlyFireUseful": [
+      {
+        "IDLOGAHHOAB": "Ice",
+        "IKLFAHIBDAD": "Electric",
+        "KLEGDMPJLOG": 999
+      },
+      {
+        "IDLOGAHHOAB": "Ice",
+        "IKLFAHIBDAD": "Rock",
+        "KLEGDMPJLOG": 999
+      },
+      {
+        "IDLOGAHHOAB": "Ice",
+        "IKLFAHIBDAD": "Grass",
+        "KLEGDMPJLOG": 999
+      },
+      {
+        "IDLOGAHHOAB": "Ice",
+        "IKLFAHIBDAD": "Water",
+        "KLEGDMPJLOG": 999
+      },
+      {
+        "IDLOGAHHOAB": "Ice",
+        "IKLFAHIBDAD": "Wind",
+        "KLEGDMPJLOG": 999
+      },
+      {
+        "IDLOGAHHOAB": "Ice",
+        "IKLFAHIBDAD": "Frozen",
+        "KLEGDMPJLOG": 999
+      }
+    ],
+    "Monster_SingleElement_Method_Electric": [
+      {
+        "IDLOGAHHOAB": "Electric",
+        "IKLFAHIBDAD": "Rock",
+        "KLEGDMPJLOG": 10
+      },
+      {
+        "IDLOGAHHOAB": "Electric",
+        "IKLFAHIBDAD": "Ice",
+        "KLEGDMPJLOG": 0.5
+      },
+      {
+        "IDLOGAHHOAB": "Electric",
+        "IKLFAHIBDAD": "Water",
+        "KLEGDMPJLOG": 10
+      },
+      {
+        "IDLOGAHHOAB": "Electric",
+        "IKLFAHIBDAD": "Wind",
+        "KLEGDMPJLOG": 10
+      },
+      {
+        "IDLOGAHHOAB": "Electric",
+        "IKLFAHIBDAD": "Frozen",
+        "KLEGDMPJLOG": 0.5
+      },
+      {
+        "IDLOGAHHOAB": "Electric",
+        "IKLFAHIBDAD": "Grass",
+        "KLEGDMPJLOG": 10
+      },
+      {
+        "IDLOGAHHOAB": "Electric",
+        "IKLFAHIBDAD": "Fire",
+        "KLEGDMPJLOG": 10
+      }
+    ],
+    "Monster_SingleElement_Method_Fire": [
+      {
+        "IDLOGAHHOAB": "Fire",
+        "IKLFAHIBDAD": "Rock",
+        "KLEGDMPJLOG": 10
+      },
+      {
+        "IDLOGAHHOAB": "Fire",
+        "IKLFAHIBDAD": "Ice",
+        "KLEGDMPJLOG": 10
+      },
+      {
+        "IDLOGAHHOAB": "Fire",
+        "IKLFAHIBDAD": "Electric",
+        "KLEGDMPJLOG": 10
+      },
+      {
+        "IDLOGAHHOAB": "Fire",
+        "IKLFAHIBDAD": "Wind",
+        "KLEGDMPJLOG": 10
+      },
+      {
+        "IDLOGAHHOAB": "Fire",
+        "IKLFAHIBDAD": "Frozen",
+        "KLEGDMPJLOG": 10
+      },
+      {
+        "IDLOGAHHOAB": "Fire",
+        "IKLFAHIBDAD": "Grass",
+        "KLEGDMPJLOG": 10
+      },
+      {
+        "IDLOGAHHOAB": "Fire",
+        "IKLFAHIBDAD": "Water",
+        "KLEGDMPJLOG": 0.5
+      }
+    ],
+    "Monster_SingleElement_Method_Frozen": [
+      {
+        "IDLOGAHHOAB": "Frozen",
+        "IKLFAHIBDAD": "Rock",
+        "KLEGDMPJLOG": 10
+      },
+      {
+        "IDLOGAHHOAB": "Frozen",
+        "IKLFAHIBDAD": "Fire",
+        "KLEGDMPJLOG": 0.5
+      },
+      {
+        "IDLOGAHHOAB": "Frozen",
+        "IKLFAHIBDAD": "Wind",
+        "KLEGDMPJLOG": 10
+      },
+      {
+        "IDLOGAHHOAB": "Frozen",
+        "IKLFAHIBDAD": "Grass",
+        "KLEGDMPJLOG": 10
+      },
+      {
+        "IDLOGAHHOAB": "Frozen",
+        "IKLFAHIBDAD": "Electric",
+        "KLEGDMPJLOG": 10
+      }
+    ],
+    "Monster_SingleElement_Method_Ice": [
+      {
+        "IDLOGAHHOAB": "Ice",
+        "IKLFAHIBDAD": "Rock",
+        "KLEGDMPJLOG": 10
+      },
+      {
+        "IDLOGAHHOAB": "Ice",
+        "IKLFAHIBDAD": "Fire",
+        "KLEGDMPJLOG": 0.5
+      },
+      {
+        "IDLOGAHHOAB": "Ice",
+        "IKLFAHIBDAD": "Water",
+        "KLEGDMPJLOG": 10
+      },
+      {
+        "IDLOGAHHOAB": "Ice",
+        "IKLFAHIBDAD": "Wind",
+        "KLEGDMPJLOG": 10
+      },
+      {
+        "IDLOGAHHOAB": "Ice",
+        "IKLFAHIBDAD": "Grass",
+        "KLEGDMPJLOG": 10
+      },
+      {
+        "IDLOGAHHOAB": "Ice",
+        "IKLFAHIBDAD": "Electric",
+        "KLEGDMPJLOG": 10
+      }
+    ],
+    "Monster_SingleElement_Method_Water": [
+      {
+        "IDLOGAHHOAB": "Water",
+        "IKLFAHIBDAD": "Rock",
+        "KLEGDMPJLOG": 20
+      },
+      {
+        "IDLOGAHHOAB": "Water",
+        "IKLFAHIBDAD": "Fire",
+        "KLEGDMPJLOG": 20
+      },
+      {
+        "IDLOGAHHOAB": "Water",
+        "IKLFAHIBDAD": "Electric",
+        "KLEGDMPJLOG": 0.5
+      },
+      {
+        "IDLOGAHHOAB": "Water",
+        "IKLFAHIBDAD": "Wind",
+        "KLEGDMPJLOG": 20
+      },
+      {
+        "IDLOGAHHOAB": "Water",
+        "IKLFAHIBDAD": "Grass",
+        "KLEGDMPJLOG": 20
+      },
+      {
+        "IDLOGAHHOAB": "Water",
+        "IKLFAHIBDAD": "Ice",
+        "KLEGDMPJLOG": 20
+      },
+      {
+        "IDLOGAHHOAB": "Water",
+        "IKLFAHIBDAD": "Frozen",
+        "KLEGDMPJLOG": 20
+      }
+    ],
+    "Monster_Snegurochka_StarMode_IceShield": [
+      {
+        "IDLOGAHHOAB": "Frozen",
+        "IKLFAHIBDAD": "Fire",
+        "KLEGDMPJLOG": 0.5
+      },
+      {
+        "IDLOGAHHOAB": "Rock",
+        "IKLFAHIBDAD": "Frozen",
+        "KLEGDMPJLOG": 0.5
+      },
+      {
+        "IDLOGAHHOAB": "Frozen",
+        "IKLFAHIBDAD": "Wind",
+        "KLEGDMPJLOG": 0.25
+      },
+      {
+        "IDLOGAHHOAB": "Frozen",
+        "IKLFAHIBDAD": "Electric",
+        "KLEGDMPJLOG": 0.25
+      }
+    ],
+    "Monster_Volkodlak_Normal_02_StarMode_WaterShield": [
+      {
+        "IDLOGAHHOAB": "Water",
+        "IKLFAHIBDAD": "Wind",
+        "KLEGDMPJLOG": 0.25
+      },
+      {
+        "IDLOGAHHOAB": "Water",
+        "IKLFAHIBDAD": "Ice",
+        "KLEGDMPJLOG": 0.25
+      },
+      {
+        "IDLOGAHHOAB": "Water",
+        "IKLFAHIBDAD": "Fire",
+        "KLEGDMPJLOG": 2
+      },
+      {
+        "IDLOGAHHOAB": "Rock",
+        "IKLFAHIBDAD": "Water",
+        "KLEGDMPJLOG": 0.5
+      },
+      {
+        "IDLOGAHHOAB": "Grass",
+        "IKLFAHIBDAD": "Water",
+        "KLEGDMPJLOG": 2
+      },
+      {
+        "IDLOGAHHOAB": "Overdose",
+        "IKLFAHIBDAD": "Water",
+        "KLEGDMPJLOG": 2
+      }
+    ],
+    "ThreeStateGrass": [
+      {
+        "IDLOGAHHOAB": "Electric",
+        "IKLFAHIBDAD": "Grass",
+        "KLEGDMPJLOG": 0.009999999776482582
+      }
+    ],
+    "default": [
+      {
+        "IDLOGAHHOAB": "Water",
+        "IKLFAHIBDAD": "Fire",
+        "KLEGDMPJLOG": 2
+      },
+      {
+        "IDLOGAHHOAB": "Ice",
+        "IKLFAHIBDAD": "Fire",
+        "KLEGDMPJLOG": 0.5
+      },
+      {
+        "IDLOGAHHOAB": "Frozen",
+        "IKLFAHIBDAD": "Fire",
+        "KLEGDMPJLOG": 0.5
+      },
+      {
+        "IDLOGAHHOAB": "Wind",
+        "IKLFAHIBDAD": "Fire",
+        "KLEGDMPJLOG": 0.5
+      },
+      {
+        "IDLOGAHHOAB": "Wind",
+        "IKLFAHIBDAD": "Water",
+        "KLEGDMPJLOG": 0.5
+      },
+      {
+        "IDLOGAHHOAB": "Wind",
+        "IKLFAHIBDAD": "Electric",
+        "KLEGDMPJLOG": 0.5
+      },
+      {
+        "IDLOGAHHOAB": "Wind",
+        "IKLFAHIBDAD": "Ice",
+        "KLEGDMPJLOG": 0.5
+      },
+      {
+        "IDLOGAHHOAB": "Wind",
+        "IKLFAHIBDAD": "Frozen",
+        "KLEGDMPJLOG": 0.5
+      },
+      {
+        "IDLOGAHHOAB": "Rock",
+        "IKLFAHIBDAD": "Fire",
+        "KLEGDMPJLOG": 0.5
+      },
+      {
+        "IDLOGAHHOAB": "Rock",
+        "IKLFAHIBDAD": "Water",
+        "KLEGDMPJLOG": 0.5
+      },
+      {
+        "IDLOGAHHOAB": "Rock",
+        "IKLFAHIBDAD": "Electric",
+        "KLEGDMPJLOG": 0.5
+      },
+      {
+        "IDLOGAHHOAB": "Rock",
+        "IKLFAHIBDAD": "Ice",
+        "KLEGDMPJLOG": 0.5
+      },
+      {
+        "IDLOGAHHOAB": "Rock",
+        "IKLFAHIBDAD": "Frozen",
+        "KLEGDMPJLOG": 0.5
+      },
+      {
+        "IDLOGAHHOAB": "Grass",
+        "IKLFAHIBDAD": "Water",
+        "KLEGDMPJLOG": 2
+      },
+      {
+        "IDLOGAHHOAB": "Overdose",
+        "IKLFAHIBDAD": "Water",
+        "KLEGDMPJLOG": 2
+      },
+      {
+        "IDLOGAHHOAB": "Fire",
+        "IKLFAHIBDAD": "BrokenIce",
+        "KLEGDMPJLOG": 5
+      }
+    ]
+  },
+  "MEKBPEJCHIP": {
+    "GCIEFGNMFGN": true
+  },
+  "MHNFMONOENN": {
+    "KDCFNKAOKNC": 35
+  },
+  "MJFNGMCJANJ": [
+    "Electric",
+    "Fire",
+    "Wind",
+    "Ice",
+    "Frozen",
+    "Water",
+    "Wood",
+    "Overdose",
+    "Grass",
+    "Rock",
+    "None"
+  ],
+  "NEKBNIMFHJD": {
+    "BCHCHOLBKIN": 180,
+    "BIGCLKCHLGD": 135,
+    "PIIGEGGBPOH": 95
+  },
+  "NIABHMLIFCB": {
+    "DHEMEDOOBDA": 0.6000000238418579,
+    "EEPPCNNKFIC": 1.350000023841858,
+    "FDAONMKDEIP": 3,
+    "MNFDKDKAGHO": 0.4000000059604645
+  },
+  "NKFJFOLDJCE": [
+    {
+      "ANHJJEHGIDE": 3,
+      "NAPJBIPPDGL": [
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        42
+      ]
+    },
+    {
+      "ANHJJEHGIDE": 11,
+      "NAPJBIPPDGL": [
+        600
+      ]
+    }
+  ],
+  "NLAJGHLGDNK": {
+    "Avatar_Aloy": [
+      41062001,
+      41062002,
+      41062006
+    ],
+    "Avatar_Ambor": [
+      41021009,
+      40000160
+    ],
+    "Avatar_Chasca": [
+      41104001,
+      41104005
+    ],
+    "Avatar_Collei": [
+      41067001,
+      41067006
+    ],
+    "Avatar_Diona": [
+      41039001,
+      41022017
+    ],
+    "Avatar_Faruzan": [
+      41076001,
+      41076008
+    ],
+    "Avatar_Fischl": [
+      41031001,
+      41031006
+    ],
+    "Avatar_Ganyu": [
+      41037001,
+      41037007
+    ],
+    "Avatar_Gorou": [
+      41055001,
+      41055010
+    ],
+    "Avatar_Liney": [
+      41084001,
+      41084006
+    ],
+    "Avatar_Olorun": [
+      41105001,
+      41105004
+    ],
+    "Avatar_Sara": [
+      41056001,
+      41056006
+    ],
+    "Avatar_Sethos": [
+      41097001,
+      41097005,
+      41097008
+    ],
+    "Avatar_Sigewinne": [
+      41095007,
+      41095010
+    ],
+    "Avatar_Tartaglia": [
+      41033001,
+      41033008
+    ],
+    "Avatar_Tighnari": [
+      41069001,
+      41069011
+    ],
+    "Avatar_Venti": [
+      41022005,
+      41022008
+    ],
+    "Avatar_Yelan": [
+      41060001,
+      41060007
+    ],
+    "Avatar_Yoimiya": [
+      41049001,
+      41049007,
+      41049021,
+      41049026
+    ]
+  },
+  "NLMEBODAKKD": {
+    "Electric": {
+      "JHGIODDLLDA": "F9EBFF00",
+      "PCKFFJLHPHG": "3714FB00"
+    },
+    "Fire": {
+      "JHGIODDLLDA": "FFE6A500",
+      "PCKFFJLHPHG": "FF790000"
+    },
+    "Grass": {
+      "JHGIODDLLDA": "DAFF7400",
+      "PCKFFJLHPHG": "2B775400 "
+    },
+    "Ice": {
+      "JHGIODDLLDA": "EBF1FF00",
+      "PCKFFJLHPHG": "6599FF00"
+    },
+    "Rock": {
+      "JHGIODDLLDA": "FFE9B000",
+      "PCKFFJLHPHG": "75500600"
+    },
+    "Water": {
+      "JHGIODDLLDA": "D0EFFF00",
+      "PCKFFJLHPHG": "297BFF00"
+    },
+    "Wind": {
+      "JHGIODDLLDA": "87FBDE00",
+      "PCKFFJLHPHG": "39877400"
+    }
+  },
+  "NMFIKABCPEG": [
+    {
+      "ICCBKFFCBKL": {
+        "Box": {
+          "BEIMGAKABJN": "Eff_Element_Melted_Snow_Square",
+          "DIDBBLIKKNA": {
+            "_x": 1,
+            "_y": 1,
+            "_z": 1
+          }
+        },
+        "Circle": {
+          "$type": "LOIHAJENMPM",
+          "BEIMGAKABJN": "Eff_Element_Melted_Snow_Round",
+          "CEIHBBNCENK": {
+            "270": "Eff_Element_Melted_Snow_Sector_03",
+            "360": "Eff_Element_Melted_Snow_Round",
+            "60": "Eff_Element_Melted_Snow_Sector_01",
+            "90": "Eff_Element_Melted_Snow_Sector_02"
+          },
+          "DIDBBLIKKNA": {
+            "_x": 1,
+            "_y": 1,
+            "_z": 1
+          }
+        },
+        "Sphere": {
+          "BEIMGAKABJN": "Eff_Element_Melted_Snow_Round",
+          "DIDBBLIKKNA": {
+            "_x": 1,
+            "_y": 1,
+            "_z": 1
+          }
+        }
+      },
+      "LJLJKNAIBIG": [
+        {
+          "$type": "NDOJFICNACC"
+        },
+        {
+          "$type": "JEKIENPLKKA",
+          "EPPIDAILPBN": "Fire"
+        },
+        {
+          "$type": "NANBDOJMDIJ",
+          "PHOCFHIINBM": "SnowField"
+        }
+      ]
+    }
+  ],
+  "OBKMIHOMPPL": {
+    "ADHIBMFGGJG": 20
+  },
+  "OBLCIDLDCGC": {
+    "1": [
+      {
+        "BKIFJBCJFFG": "SwordOneHand",
+        "LFEGPJFDHJN": 1.149999976158142,
+        "PJNFCFNCGKH": 1
+      },
+      {
+        "BKIFJBCJFFG": "Claymore",
+        "LFEGPJFDHJN": 0.949999988079071,
+        "PJNFCFNCGKH": 1
+      },
+      {
+        "BKIFJBCJFFG": "Pole",
+        "LFEGPJFDHJN": 1,
+        "PJNFCFNCGKH": 1
+      },
+      {
+        "BKIFJBCJFFG": "Bow",
+        "LFEGPJFDHJN": 1,
+        "PJNFCFNCGKH": 1
+      },
+      {
+        "BKIFJBCJFFG": "Catalyst",
+        "LFEGPJFDHJN": 0.6000000238418579,
+        "PJNFCFNCGKH": 0.550000011920929
+      }
+    ],
+    "2": [
+      {
+        "BKIFJBCJFFG": "SwordOneHand",
+        "LFEGPJFDHJN": 1.149999976158142,
+        "PJNFCFNCGKH": 1.149999976158142
+      },
+      {
+        "BKIFJBCJFFG": "Catalyst",
+        "LFEGPJFDHJN": 0.6000000238418579,
+        "PJNFCFNCGKH": 0.6000000238418579
+      },
+      {
+        "BKIFJBCJFFG": "Bow",
+        "LFEGPJFDHJN": 1,
+        "PJNFCFNCGKH": 1
+      },
+      {
+        "BKIFJBCJFFG": "Pole",
+        "LFEGPJFDHJN": 1,
+        "PJNFCFNCGKH": 0.8999999761581421
+      },
+      {
+        "BKIFJBCJFFG": "Claymore",
+        "LFEGPJFDHJN": 0.8999999761581421,
+        "PJNFCFNCGKH": 0.8999999761581421
+      }
+    ],
+    "3": [
+      {
+        "BKIFJBCJFFG": "SwordOneHand",
+        "LFEGPJFDHJN": 1.149999976158142,
+        "PJNFCFNCGKH": 1.149999976158142
+      },
+      {
+        "BKIFJBCJFFG": "Catalyst",
+        "LFEGPJFDHJN": 0.75,
+        "PJNFCFNCGKH": 0.6000000238418579
+      },
+      {
+        "BKIFJBCJFFG": "Claymore",
+        "LFEGPJFDHJN": 1,
+        "PJNFCFNCGKH": 1
+      },
+      {
+        "BKIFJBCJFFG": "Pole",
+        "LFEGPJFDHJN": 1,
+        "PJNFCFNCGKH": 1
+      },
+      {
+        "BKIFJBCJFFG": "Bow",
+        "LFEGPJFDHJN": 1.100000023841858,
+        "PJNFCFNCGKH": 1.100000023841858
+      }
+    ],
+    "4": [
+      {
+        "BKIFJBCJFFG": "SwordOneHand",
+        "LFEGPJFDHJN": 1.25,
+        "PJNFCFNCGKH": 1.25
+      },
+      {
+        "BKIFJBCJFFG": "Claymore",
+        "LFEGPJFDHJN": 1,
+        "PJNFCFNCGKH": 1
+      },
+      {
+        "BKIFJBCJFFG": "Pole",
+        "LFEGPJFDHJN": 1.2000000476837158,
+        "PJNFCFNCGKH": 1.2000000476837158
+      },
+      {
+        "BKIFJBCJFFG": "Bow",
+        "LFEGPJFDHJN": 1.100000023841858,
+        "PJNFCFNCGKH": 1.100000023841858
+      },
+      {
+        "BKIFJBCJFFG": "Catalyst",
+        "LFEGPJFDHJN": 0.75,
+        "PJNFCFNCGKH": 0.6000000238418579
+      }
+    ],
+    "5": [
+      {
+        "BKIFJBCJFFG": "Catalyst",
+        "LFEGPJFDHJN": 0.550000011920929,
+        "PJNFCFNCGKH": 0.6499999761581421
+      },
+      {
+        "BKIFJBCJFFG": "SwordOneHand",
+        "LFEGPJFDHJN": 0.949999988079071,
+        "PJNFCFNCGKH": 0.800000011920929
+      },
+      {
+        "BKIFJBCJFFG": "Bow",
+        "LFEGPJFDHJN": 0.8999999761581421,
+        "PJNFCFNCGKH": 0.800000011920929
+      },
+      {
+        "BKIFJBCJFFG": "Claymore",
+        "LFEGPJFDHJN": 0.8999999761581421,
+        "PJNFCFNCGKH": 0.8999999761581421
+      },
+      {
+        "BKIFJBCJFFG": "Pole",
+        "LFEGPJFDHJN": 0.800000011920929,
+        "PJNFCFNCGKH": 0.800000011920929
+      }
+    ]
+  },
+  "OEOIJKFDHKB": {
+    "Burning": {},
+    "Explode": {},
+    "Freeze": {},
+    "GrassGrowing": {},
+    "Melt": {},
+    "Shock": {},
+    "Stream": {}
+  },
+  "PBKPELJEPGN": {
+    "1": [
+      {
+        "BKIFJBCJFFG": "SwordOneHand",
+        "LFEGPJFDHJN": 1.100000023841858,
+        "PJNFCFNCGKH": 1
+      },
+      {
+        "BKIFJBCJFFG": "Claymore",
+        "LFEGPJFDHJN": 1,
+        "PJNFCFNCGKH": 1
+      },
+      {
+        "BKIFJBCJFFG": "Pole",
+        "LFEGPJFDHJN": 1,
+        "PJNFCFNCGKH": 1
+      },
+      {
+        "BKIFJBCJFFG": "Bow",
+        "LFEGPJFDHJN": 1,
+        "PJNFCFNCGKH": 1
+      },
+      {
+        "BKIFJBCJFFG": "Catalyst",
+        "LFEGPJFDHJN": 0.6499999761581421,
+        "PJNFCFNCGKH": 0.6000000238418579
+      }
+    ],
+    "2": [
+      {
+        "BKIFJBCJFFG": "SwordOneHand",
+        "LFEGPJFDHJN": 1.0499999523162842,
+        "PJNFCFNCGKH": 1
+      },
+      {
+        "BKIFJBCJFFG": "Catalyst",
+        "LFEGPJFDHJN": 0.6000000238418579,
+        "PJNFCFNCGKH": 0.550000011920929
+      },
+      {
+        "BKIFJBCJFFG": "Bow",
+        "LFEGPJFDHJN": 1,
+        "PJNFCFNCGKH": 1
+      },
+      {
+        "BKIFJBCJFFG": "Pole",
+        "LFEGPJFDHJN": 0.8999999761581421,
+        "PJNFCFNCGKH": 0.8999999761581421
+      },
+      {
+        "BKIFJBCJFFG": "Claymore",
+        "LFEGPJFDHJN": 0.9599999785423279,
+        "PJNFCFNCGKH": 0.9599999785423279
+      }
+    ],
+    "3": [
+      {
+        "BKIFJBCJFFG": "SwordOneHand",
+        "LFEGPJFDHJN": 1.149999976158142,
+        "PJNFCFNCGKH": 1.149999976158142
+      },
+      {
+        "BKIFJBCJFFG": "Catalyst",
+        "LFEGPJFDHJN": 0.75,
+        "PJNFCFNCGKH": 0.6000000238418579
+      },
+      {
+        "BKIFJBCJFFG": "Claymore",
+        "LFEGPJFDHJN": 1,
+        "PJNFCFNCGKH": 1
+      },
+      {
+        "BKIFJBCJFFG": "Pole",
+        "LFEGPJFDHJN": 0.949999988079071,
+        "PJNFCFNCGKH": 0.949999988079071
+      },
+      {
+        "BKIFJBCJFFG": "Bow",
+        "LFEGPJFDHJN": 1.100000023841858,
+        "PJNFCFNCGKH": 1
+      }
+    ],
+    "4": [
+      {
+        "BKIFJBCJFFG": "SwordOneHand",
+        "LFEGPJFDHJN": 1.25,
+        "PJNFCFNCGKH": 1.25
+      },
+      {
+        "BKIFJBCJFFG": "Claymore",
+        "LFEGPJFDHJN": 1.100000023841858,
+        "PJNFCFNCGKH": 1
+      },
+      {
+        "BKIFJBCJFFG": "Pole",
+        "LFEGPJFDHJN": 1.2000000476837158,
+        "PJNFCFNCGKH": 1.2000000476837158
+      },
+      {
+        "BKIFJBCJFFG": "Bow",
+        "LFEGPJFDHJN": 1.100000023841858,
+        "PJNFCFNCGKH": 1
+      },
+      {
+        "BKIFJBCJFFG": "Catalyst",
+        "LFEGPJFDHJN": 0.75,
+        "PJNFCFNCGKH": 0.6000000238418579
+      }
+    ],
+    "5": [
+      {
+        "BKIFJBCJFFG": "Catalyst",
+        "LFEGPJFDHJN": 0.550000011920929,
+        "PJNFCFNCGKH": 0.5
+      },
+      {
+        "BKIFJBCJFFG": "SwordOneHand",
+        "LFEGPJFDHJN": 0.949999988079071,
+        "PJNFCFNCGKH": 0.800000011920929
+      },
+      {
+        "BKIFJBCJFFG": "Bow",
+        "LFEGPJFDHJN": 0.8999999761581421,
+        "PJNFCFNCGKH": 0.800000011920929
+      },
+      {
+        "BKIFJBCJFFG": "Claymore",
+        "LFEGPJFDHJN": 0.800000011920929,
+        "PJNFCFNCGKH": 0.800000011920929
+      },
+      {
+        "BKIFJBCJFFG": "Pole",
+        "LFEGPJFDHJN": 0.800000011920929,
+        "PJNFCFNCGKH": 0.75
+      }
+    ]
+  },
+  "PDBMAGOENJG": {
+    "IDHCBPPOMIH": {
+      "DOICHILEDON": {
+        "FHFCOFOBDKL": -1
+      },
+      "ECPMAIOODJD": {
+        "FHFCOFOBDKL": 0.10000000149011612,
+        "JEJEGEHELOC": {
+          "EnvAnimal": 0.5
+        }
+      },
+      "PIAOPPGABMG": {
+        "FHFCOFOBDKL": 0.20000000298023224,
+        "JEJEGEHELOC": {
+          "EnvAnimal": 1
+        }
+      }
+    }
+  },
+  "PHFJFMFKHLL": {
+    "GGFMNEOGPDF": 50
+  }
+}

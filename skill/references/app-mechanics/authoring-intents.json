@@ -1,0 +1,209 @@
+{
+  "contract": "genshin-skill-authoring-navigation-v1",
+  "scope": "navigation_only_not_permissions_or_game_rules",
+  "intents": [
+    {
+      "id": "actions",
+      "task": "安排动作、占用与切人",
+      "distinction": "先明确施放占用；后台结束不自动变成下一动作的开始。",
+      "schema": {
+        "resource": "capabilities",
+        "pointer": "/schema/properties/rotation_model/anyOf/0/properties/actions/items",
+        "cli_section": "plan_contract"
+      },
+      "guide": {
+        "resource": "references/app-mechanics/actions/rotation-energy.md"
+      },
+      "fragment": {
+        "resource": "references/app-mechanics/native-causal-example.md",
+        "json_block": 0,
+        "pointer": "/rotation_model/actions"
+      },
+      "example": {
+        "resource": "references/app-mechanics/native-causal-example.md"
+      },
+      "observe": {
+        "command": "equipment review",
+        "native_tool": "gs_review_result",
+        "request": {
+          "view": "actions",
+          "limit": 20
+        }
+      }
+    },
+    {
+      "id": "finite_hits",
+      "task": "一个动作产生多段命中",
+      "distinction": "多个时点用序列或周期输入，count只合并同条件数值。",
+      "schema": {
+        "resource": "capabilities",
+        "pointer": "/schema/properties/mechanics_model/anyOf/0/properties/hit_patterns/items",
+        "cli_section": "plan_contract"
+      },
+      "guide": {
+        "resource": "references/app-mechanics/execution/resources-and-lifecycle.md"
+      },
+      "fragment": {
+        "resource": "references/app-mechanics/native-causal-example.md",
+        "json_block": 0,
+        "pointer": "/mechanics_model/hit_patterns"
+      },
+      "example": {
+        "resource": "references/app-mechanics/native-causal-example.md"
+      },
+      "observe": {
+        "command": "equipment review",
+        "native_tool": "gs_review_result",
+        "request": {
+          "view": "mechanics",
+          "limit": 20
+        }
+      }
+    },
+    {
+      "id": "elements",
+      "task": "让实际附着与元素底决定反应",
+      "distinction": "先绑定每段附着器与初态，不预填反应倍率或领域层数。",
+      "schema": {
+        "resource": "capabilities",
+        "pointer": "/schema/properties/mechanics_model/anyOf/0/properties/elemental_model",
+        "cli_section": "plan_contract"
+      },
+      "guide": {
+        "resource": "references/app-mechanics/elements/runtime.md"
+      },
+      "fragment": {
+        "resource": "references/app-mechanics/native-causal-example.md",
+        "json_block": 0,
+        "pointer": "/mechanics_model/elemental_model"
+      },
+      "example": {
+        "resource": "references/app-mechanics/native-causal-example.md"
+      },
+      "observe": {
+        "command": "equipment review",
+        "native_tool": "gs_review_result",
+        "request": {
+          "view": "mechanics",
+          "limit": 20
+        }
+      }
+    },
+    {
+      "id": "effects",
+      "task": "命中后触发增益与刷新",
+      "distinction": "触发者、受益者、有效时点和取值对象分别说明。",
+      "schema": {
+        "resource": "capabilities",
+        "pointer": "/schema/properties/mechanics_model/anyOf/0/properties/rules/items",
+        "cli_section": "plan_contract"
+      },
+      "guide": {
+        "resource": "references/app-mechanics/execution/rules.md"
+      },
+      "fragment": {
+        "resource": "references/app-mechanics/native-causal-example.md",
+        "json_block": 0,
+        "pointer": "/mechanics_model/rules"
+      },
+      "example": {
+        "resource": "references/app-mechanics/native-causal-example.md"
+      },
+      "observe": {
+        "command": "equipment review",
+        "native_tool": "gs_review_result",
+        "request": {
+          "view": "damage_explanations",
+          "limit": 20
+        }
+      }
+    },
+    {
+      "id": "resources",
+      "task": "生成微粒、到账并扣除爆发能量",
+      "distinction": "产生与到账分别计时；先核资源完整性，再比较充能投入。",
+      "schema": {
+        "resource": "capabilities",
+        "pointer": "/schema/properties/rotation_model/anyOf/0/properties/events/items",
+        "cli_section": "plan_contract"
+      },
+      "guide": {
+        "resource": "references/app-mechanics/actions/admission.md"
+      },
+      "fragment": {
+        "resource": "references/app-mechanics/native-causal-example.md",
+        "json_block": 0,
+        "pointer": "/rotation_model/events"
+      },
+      "example": {
+        "resource": "references/app-mechanics/native-causal-example.md"
+      },
+      "observe": {
+        "command": "equipment review",
+        "native_tool": "gs_review_result",
+        "request": {
+          "view": "actions",
+          "limit": 20
+        }
+      }
+    },
+    {
+      "id": "binding",
+      "task": "把一条已核实来源接到执行规则",
+      "distinction": "组合得到当前来源指纹；只确认核实过的具体部件。",
+      "schema": {
+        "resource": "capabilities",
+        "pointer": "/schema/properties/effect_bindings/items",
+        "cli_section": "plan_contract"
+      },
+      "guide": {
+        "resource": "references/app-mechanics/loadouts.md"
+      },
+      "fragment": {
+        "resource": "references/app-mechanics/native-causal-example.md",
+        "json_block": 0,
+        "pointer": "/effect_bindings"
+      },
+      "example": {
+        "resource": "references/app-mechanics/native-causal-example.md"
+      },
+      "observe": {
+        "command": "equipment review",
+        "native_tool": "gs_review_result",
+        "request": {
+          "view": "mechanics",
+          "limit": 20
+        }
+      }
+    },
+    {
+      "id": "window",
+      "task": "按任务范围统计并解释是否完成",
+      "distinction": "显式截止优先；接纳只证明声明的输入，不等于全角色资料完整。",
+      "schema": {
+        "resource": "capabilities",
+        "pointer": "/schema/properties/rotation_model/anyOf/0/properties/damage_report",
+        "cli_section": "plan_contract"
+      },
+      "guide": {
+        "resource": "references/app-mechanics/review/report-window.md"
+      },
+      "fragment": {
+        "resource": "references/app-mechanics/native-causal-example.md",
+        "json_block": 0,
+        "pointer": "/rotation_model/damage_report"
+      },
+      "example": {
+        "resource": "references/app-mechanics/native-causal-example.md"
+      },
+      "observe": {
+        "command": "equipment review",
+        "native_tool": "gs_review_result",
+        "request": {
+          "view": "summary",
+          "limit": 20
+        }
+      }
+    }
+  ]
+}

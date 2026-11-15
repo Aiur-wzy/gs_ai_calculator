@@ -1,0 +1,8 @@
+packages:
+  - .
+
+overrides:
+  '@types/react': 18.3.12
+
+patchedDependencies:
+  '@deepseek-ai/cordis@4.0.5': ../agent-runtime/patches/@deepseek-ai__cordis@4.0.5.patch

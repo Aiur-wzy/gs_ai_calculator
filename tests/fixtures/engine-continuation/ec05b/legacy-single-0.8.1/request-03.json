@@ -1,0 +1,10 @@
+{
+  "action": "action_parameter",
+  "character_id": 10000047,
+  "slot": "skill",
+  "talent_level": 10,
+  "constellation": 0,
+  "param_index": 0,
+  "version_line": "release",
+  "snapshot_id": "1b620db802a937506dc870cc25c08b5c7c336a01b193b945e9471d75c3bee172"
+}

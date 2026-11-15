@@ -1,0 +1,2393 @@
+{
+  "projection_version": 1,
+  "bundle_version": 1,
+  "status": "ready",
+  "source_status": "ready",
+  "mode": "selected",
+  "snapshot": {
+    "version_line": "release",
+    "state": "ready",
+    "index_state": "ready",
+    "schema_version": 1,
+    "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+    "snapshot_id": "1dedf7ada0e1962ad271e58f8e8341cd7185b63b384dba4dab08409e7224df12",
+    "execution_support": "not_evaluated",
+    "built_at": "2026-10-02T04:19:58.433055+00:00",
+    "profile_id": "upstream-combat-catalog-v1",
+    "profile_version": 1,
+    "indexer_version": "4",
+    "manifest_fingerprint": "f66da49a27346fccd9ba2f087e2afcfe20b98b792a4419b72d1b0091c8541f05",
+    "counts": {
+      "runtime_definition": 7767,
+      "runtime_parameter_binding": 28,
+      "runtime_reference": 6534,
+      "runtime_source": 33
+    },
+    "reference_states": {
+      "external_asset": 10,
+      "missing": 6263,
+      "resolved": 260,
+      "unsupported_reference_form": 1
+    },
+    "normalization": {
+      "mapping_fingerprint": "506862bc6c0bf033d8272b75f193cd2a620fc513320b3223d07afcc6f04356e2",
+      "normalization_version": 2,
+      "profile_id": "upstream-34208429-reviewed-schema-v1",
+      "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53"
+    }
+  },
+  "selection": {
+    "character_id": 10000047,
+    "skill_depot_id": 4701,
+    "proud_skill_id": 472201,
+    "proud_skill_group_id": 4722,
+    "proud_level": 1,
+    "opening_index": 1
+  },
+  "candidates": [
+    {
+      "proud_skill_id": 472101,
+      "proud_skill_group_id": 4721,
+      "proud_level": 1,
+      "opening_index": 0,
+      "relation_status": "ready",
+      "opening_origin": {
+        "source_path": "ExcelBinOutput/AvatarSkillDepotExcelConfigData.json",
+        "source_sha256": "76058ddd01946435248d158ef4cc659ba995643c5635e9948161ce47a7ed814b",
+        "json_pointer": "/97/inherentProudSkillOpens/0",
+        "node_sha256": "13e7ba0f92c2c6cbd455605c951b762ccd83d6ef32a562c0aef8dbb2fb5a6629"
+      },
+      "proud_origin": {
+        "definition": {
+          "definition_id": "e7979d0bf62df6411877f6dd7b73fff1b833928503335b3e31c0022d45479596",
+          "definition_kind": "excel_record",
+          "owner_definition_id": null,
+          "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+          "json_pointer": "/3533",
+          "variant_key": null,
+          "namespace_key": "excel",
+          "node_sha256": "18593c71cbac4032ef718f28f9a9e3d40c6a1d7b7d87db5624d4d538c2872cbc",
+          "exact_key": {
+            "proudSkillId": 472101
+          }
+        },
+        "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+        "source_sha256": "4897a68ebc6772e7b553a58a548a3756a1cf9b6e9ca22250bb0da987a3fa4d70",
+        "json_pointer": "/3533",
+        "node_sha256": "18593c71cbac4032ef718f28f9a9e3d40c6a1d7b7d87db5624d4d538c2872cbc"
+      },
+      "threshold": {
+        "status": "ready",
+        "required_ascension": 1,
+        "need_avatar_promote_level": {
+          "present": true,
+          "raw_value": 1,
+          "origin": {
+            "source_path": "ExcelBinOutput/AvatarSkillDepotExcelConfigData.json",
+            "source_sha256": "76058ddd01946435248d158ef4cc659ba995643c5635e9948161ce47a7ed814b",
+            "json_pointer": "/97/inherentProudSkillOpens/0",
+            "node_sha256": "13e7ba0f92c2c6cbd455605c951b762ccd83d6ef32a562c0aef8dbb2fb5a6629",
+            "present": true,
+            "raw_pointer": "/97/inherentProudSkillOpens/0/needAvatarPromoteLevel",
+            "requested_pointer": "/97/inherentProudSkillOpens/0/needAvatarPromoteLevel",
+            "field_node_sha256": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b"
+          }
+        },
+        "proud_break_level": {
+          "present": true,
+          "raw_value": 1,
+          "origin": {
+            "definition": {
+              "definition_id": "e7979d0bf62df6411877f6dd7b73fff1b833928503335b3e31c0022d45479596",
+              "definition_kind": "excel_record",
+              "owner_definition_id": null,
+              "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+              "json_pointer": "/3533",
+              "variant_key": null,
+              "namespace_key": "excel",
+              "node_sha256": "18593c71cbac4032ef718f28f9a9e3d40c6a1d7b7d87db5624d4d538c2872cbc",
+              "exact_key": {
+                "proudSkillId": 472101
+              }
+            },
+            "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+            "source_sha256": "4897a68ebc6772e7b553a58a548a3756a1cf9b6e9ca22250bb0da987a3fa4d70",
+            "json_pointer": "/3533",
+            "node_sha256": "18593c71cbac4032ef718f28f9a9e3d40c6a1d7b7d87db5624d4d538c2872cbc",
+            "present": true,
+            "raw_pointer": "/3533/breakLevel",
+            "requested_pointer": "/3533/breakLevel",
+            "field_node_sha256": "6b86b273ff34fce19d6b804eff5a3f5747ada4eaa22f1d49c01e52ddb7875b4b"
+          }
+        }
+      },
+      "name": {
+        "status": "ready",
+        "text": "相闻之剑法",
+        "text_map_hash": 1573553381,
+        "hash_origin": {
+          "definition": {
+            "definition_id": "e7979d0bf62df6411877f6dd7b73fff1b833928503335b3e31c0022d45479596",
+            "definition_kind": "excel_record",
+            "owner_definition_id": null,
+            "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+            "json_pointer": "/3533",
+            "variant_key": null,
+            "namespace_key": "excel",
+            "node_sha256": "18593c71cbac4032ef718f28f9a9e3d40c6a1d7b7d87db5624d4d538c2872cbc",
+            "exact_key": {
+              "proudSkillId": 472101
+            }
+          },
+          "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+          "source_sha256": "4897a68ebc6772e7b553a58a548a3756a1cf9b6e9ca22250bb0da987a3fa4d70",
+          "json_pointer": "/3533",
+          "node_sha256": "18593c71cbac4032ef718f28f9a9e3d40c6a1d7b7d87db5624d4d538c2872cbc",
+          "present": true,
+          "raw_pointer": "/3533/nameTextMapHash",
+          "requested_pointer": "/3533/nameTextMapHash",
+          "field_node_sha256": "44e4c9ad5a2102082337fd191abd196090cfa354ff41a0afd186db1be2e85202"
+        },
+        "text_origin": {
+          "source_path": "TextMap/TextMap_MediumCHS.json",
+          "json_pointer": "/1573553381",
+          "source_sha256": "dfce0d08e4c6eb85c71de097e0690efc0cd04235000c075ce2dd3e2f5e667a22",
+          "node_sha256": "14744fa64ae752796e7c798d515fda0426208d081c20727139e0cec5ac9cdd91"
+        },
+        "requested_pointer": "/1573553381",
+        "issues": []
+      },
+      "issues": []
+    },
+    {
+      "proud_skill_id": 472201,
+      "proud_skill_group_id": 4722,
+      "proud_level": 1,
+      "opening_index": 1,
+      "relation_status": "ready",
+      "opening_origin": {
+        "source_path": "ExcelBinOutput/AvatarSkillDepotExcelConfigData.json",
+        "source_sha256": "76058ddd01946435248d158ef4cc659ba995643c5635e9948161ce47a7ed814b",
+        "json_pointer": "/97/inherentProudSkillOpens/1",
+        "node_sha256": "9e930ed8e9c157110bcd98ff8f663d6d08d8db40f9046c53c970d8ab47992ecc"
+      },
+      "proud_origin": {
+        "definition": {
+          "definition_id": "a7869af3266d2da2fce2d72498ef73b030c1de8ef03e42b772706df1793c114b",
+          "definition_kind": "excel_record",
+          "owner_definition_id": null,
+          "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+          "json_pointer": "/3534",
+          "variant_key": null,
+          "namespace_key": "excel",
+          "node_sha256": "a4f87c40d2a0adbd30d57e3ca4e59f916964a0f019264b4648f8be523dabd017",
+          "exact_key": {
+            "proudSkillId": 472201
+          }
+        },
+        "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+        "source_sha256": "4897a68ebc6772e7b553a58a548a3756a1cf9b6e9ca22250bb0da987a3fa4d70",
+        "json_pointer": "/3534",
+        "node_sha256": "a4f87c40d2a0adbd30d57e3ca4e59f916964a0f019264b4648f8be523dabd017"
+      },
+      "threshold": {
+        "status": "ready",
+        "required_ascension": 4,
+        "need_avatar_promote_level": {
+          "present": true,
+          "raw_value": 4,
+          "origin": {
+            "source_path": "ExcelBinOutput/AvatarSkillDepotExcelConfigData.json",
+            "source_sha256": "76058ddd01946435248d158ef4cc659ba995643c5635e9948161ce47a7ed814b",
+            "json_pointer": "/97/inherentProudSkillOpens/1",
+            "node_sha256": "9e930ed8e9c157110bcd98ff8f663d6d08d8db40f9046c53c970d8ab47992ecc",
+            "present": true,
+            "raw_pointer": "/97/inherentProudSkillOpens/1/needAvatarPromoteLevel",
+            "requested_pointer": "/97/inherentProudSkillOpens/1/needAvatarPromoteLevel",
+            "field_node_sha256": "4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a"
+          }
+        },
+        "proud_break_level": {
+          "present": true,
+          "raw_value": 4,
+          "origin": {
+            "definition": {
+              "definition_id": "a7869af3266d2da2fce2d72498ef73b030c1de8ef03e42b772706df1793c114b",
+              "definition_kind": "excel_record",
+              "owner_definition_id": null,
+              "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+              "json_pointer": "/3534",
+              "variant_key": null,
+              "namespace_key": "excel",
+              "node_sha256": "a4f87c40d2a0adbd30d57e3ca4e59f916964a0f019264b4648f8be523dabd017",
+              "exact_key": {
+                "proudSkillId": 472201
+              }
+            },
+            "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+            "source_sha256": "4897a68ebc6772e7b553a58a548a3756a1cf9b6e9ca22250bb0da987a3fa4d70",
+            "json_pointer": "/3534",
+            "node_sha256": "a4f87c40d2a0adbd30d57e3ca4e59f916964a0f019264b4648f8be523dabd017",
+            "present": true,
+            "raw_pointer": "/3534/breakLevel",
+            "requested_pointer": "/3534/breakLevel",
+            "field_node_sha256": "4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a"
+          }
+        }
+      },
+      "name": {
+        "status": "ready",
+        "text": "风物之诗咏",
+        "text_map_hash": 138639421,
+        "hash_origin": {
+          "definition": {
+            "definition_id": "a7869af3266d2da2fce2d72498ef73b030c1de8ef03e42b772706df1793c114b",
+            "definition_kind": "excel_record",
+            "owner_definition_id": null,
+            "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+            "json_pointer": "/3534",
+            "variant_key": null,
+            "namespace_key": "excel",
+            "node_sha256": "a4f87c40d2a0adbd30d57e3ca4e59f916964a0f019264b4648f8be523dabd017",
+            "exact_key": {
+              "proudSkillId": 472201
+            }
+          },
+          "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+          "source_sha256": "4897a68ebc6772e7b553a58a548a3756a1cf9b6e9ca22250bb0da987a3fa4d70",
+          "json_pointer": "/3534",
+          "node_sha256": "a4f87c40d2a0adbd30d57e3ca4e59f916964a0f019264b4648f8be523dabd017",
+          "present": true,
+          "raw_pointer": "/3534/nameTextMapHash",
+          "requested_pointer": "/3534/nameTextMapHash",
+          "field_node_sha256": "8cee541d2837f4cec8aae3ecfc9918504bc4a609c24b2d8596ea9b1a6cef8225"
+        },
+        "text_origin": {
+          "source_path": "TextMap/TextMap_MediumCHS.json",
+          "json_pointer": "/138639421",
+          "source_sha256": "dfce0d08e4c6eb85c71de097e0690efc0cd04235000c075ce2dd3e2f5e667a22",
+          "node_sha256": "8080c052d7f78eb9d4d53a96d0f4e88cb38cf294f1e6b62678b27ab7c9eba276"
+        },
+        "requested_pointer": "/138639421",
+        "issues": []
+      },
+      "issues": []
+    },
+    {
+      "proud_skill_id": 472301,
+      "proud_skill_group_id": 4723,
+      "proud_level": 1,
+      "opening_index": 2,
+      "relation_status": "ready",
+      "opening_origin": {
+        "source_path": "ExcelBinOutput/AvatarSkillDepotExcelConfigData.json",
+        "source_sha256": "76058ddd01946435248d158ef4cc659ba995643c5635e9948161ce47a7ed814b",
+        "json_pointer": "/97/inherentProudSkillOpens/2",
+        "node_sha256": "0bccad0d12a5e63b71b4d121f289b23f46e6d7d255af2e65a4205162d8a4f76c"
+      },
+      "proud_origin": {
+        "definition": {
+          "definition_id": "268ed932d447187e36af0a867cd58ece408df3b3f6ed953963d9f0acc4f256a1",
+          "definition_kind": "excel_record",
+          "owner_definition_id": null,
+          "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+          "json_pointer": "/3535",
+          "variant_key": null,
+          "namespace_key": "excel",
+          "node_sha256": "d336bff15a99eb2d59aef2db4065ec43d5aedb7ab0f8f31ac7e6f73c4faf2732",
+          "exact_key": {
+            "proudSkillId": 472301
+          }
+        },
+        "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+        "source_sha256": "4897a68ebc6772e7b553a58a548a3756a1cf9b6e9ca22250bb0da987a3fa4d70",
+        "json_pointer": "/3535",
+        "node_sha256": "d336bff15a99eb2d59aef2db4065ec43d5aedb7ab0f8f31ac7e6f73c4faf2732"
+      },
+      "threshold": {
+        "status": "pending",
+        "required_ascension": null,
+        "need_avatar_promote_level": {
+          "present": false,
+          "raw_value": null,
+          "origin": {
+            "source_path": "ExcelBinOutput/AvatarSkillDepotExcelConfigData.json",
+            "source_sha256": "76058ddd01946435248d158ef4cc659ba995643c5635e9948161ce47a7ed814b",
+            "json_pointer": "/97/inherentProudSkillOpens/2",
+            "node_sha256": "0bccad0d12a5e63b71b4d121f289b23f46e6d7d255af2e65a4205162d8a4f76c",
+            "present": false,
+            "raw_pointer": null,
+            "requested_pointer": "/97/inherentProudSkillOpens/2/needAvatarPromoteLevel",
+            "field_node_sha256": null
+          }
+        },
+        "proud_break_level": {
+          "present": false,
+          "raw_value": null,
+          "origin": {
+            "definition": {
+              "definition_id": "268ed932d447187e36af0a867cd58ece408df3b3f6ed953963d9f0acc4f256a1",
+              "definition_kind": "excel_record",
+              "owner_definition_id": null,
+              "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+              "json_pointer": "/3535",
+              "variant_key": null,
+              "namespace_key": "excel",
+              "node_sha256": "d336bff15a99eb2d59aef2db4065ec43d5aedb7ab0f8f31ac7e6f73c4faf2732",
+              "exact_key": {
+                "proudSkillId": 472301
+              }
+            },
+            "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+            "source_sha256": "4897a68ebc6772e7b553a58a548a3756a1cf9b6e9ca22250bb0da987a3fa4d70",
+            "json_pointer": "/3535",
+            "node_sha256": "d336bff15a99eb2d59aef2db4065ec43d5aedb7ab0f8f31ac7e6f73c4faf2732",
+            "present": false,
+            "raw_pointer": null,
+            "requested_pointer": "/3535/breakLevel",
+            "field_node_sha256": null
+          }
+        }
+      },
+      "name": {
+        "status": "ready",
+        "text": "松风霞立",
+        "text_map_hash": 2537361669,
+        "hash_origin": {
+          "definition": {
+            "definition_id": "268ed932d447187e36af0a867cd58ece408df3b3f6ed953963d9f0acc4f256a1",
+            "definition_kind": "excel_record",
+            "owner_definition_id": null,
+            "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+            "json_pointer": "/3535",
+            "variant_key": null,
+            "namespace_key": "excel",
+            "node_sha256": "d336bff15a99eb2d59aef2db4065ec43d5aedb7ab0f8f31ac7e6f73c4faf2732",
+            "exact_key": {
+              "proudSkillId": 472301
+            }
+          },
+          "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+          "source_sha256": "4897a68ebc6772e7b553a58a548a3756a1cf9b6e9ca22250bb0da987a3fa4d70",
+          "json_pointer": "/3535",
+          "node_sha256": "d336bff15a99eb2d59aef2db4065ec43d5aedb7ab0f8f31ac7e6f73c4faf2732",
+          "present": true,
+          "raw_pointer": "/3535/nameTextMapHash",
+          "requested_pointer": "/3535/nameTextMapHash",
+          "field_node_sha256": "a1539cdd84e8e91259a54aba89ed9ece31ac00db9e7dd0d3dc6a19fe277a4278"
+        },
+        "text_origin": {
+          "source_path": "TextMap/TextMap_MediumCHS.json",
+          "json_pointer": "/2537361669",
+          "source_sha256": "dfce0d08e4c6eb85c71de097e0690efc0cd04235000c075ce2dd3e2f5e667a22",
+          "node_sha256": "6f88ad3a5c2114da23a29b2565d072bcd6ab74539cc762cd361d3b2890abf065"
+        },
+        "requested_pointer": "/2537361669",
+        "issues": []
+      },
+      "issues": []
+    }
+  ],
+  "opening_inventory": [
+    {
+      "index": 0,
+      "raw": {
+        "proudSkillGroupId": 4721,
+        "needAvatarPromoteLevel": 1
+      },
+      "origin": {
+        "source_path": "ExcelBinOutput/AvatarSkillDepotExcelConfigData.json",
+        "source_sha256": "76058ddd01946435248d158ef4cc659ba995643c5635e9948161ce47a7ed814b",
+        "json_pointer": "/97/inherentProudSkillOpens/0",
+        "node_sha256": "13e7ba0f92c2c6cbd455605c951b762ccd83d6ef32a562c0aef8dbb2fb5a6629"
+      },
+      "state": "candidate"
+    },
+    {
+      "index": 1,
+      "raw": {
+        "proudSkillGroupId": 4722,
+        "needAvatarPromoteLevel": 4
+      },
+      "origin": {
+        "source_path": "ExcelBinOutput/AvatarSkillDepotExcelConfigData.json",
+        "source_sha256": "76058ddd01946435248d158ef4cc659ba995643c5635e9948161ce47a7ed814b",
+        "json_pointer": "/97/inherentProudSkillOpens/1",
+        "node_sha256": "9e930ed8e9c157110bcd98ff8f663d6d08d8db40f9046c53c970d8ab47992ecc"
+      },
+      "state": "candidate"
+    },
+    {
+      "index": 2,
+      "raw": {
+        "proudSkillGroupId": 4723
+      },
+      "origin": {
+        "source_path": "ExcelBinOutput/AvatarSkillDepotExcelConfigData.json",
+        "source_sha256": "76058ddd01946435248d158ef4cc659ba995643c5635e9948161ce47a7ed814b",
+        "json_pointer": "/97/inherentProudSkillOpens/2",
+        "node_sha256": "0bccad0d12a5e63b71b4d121f289b23f46e6d7d255af2e65a4205162d8a4f76c"
+      },
+      "state": "candidate"
+    },
+    {
+      "index": 3,
+      "raw": {},
+      "origin": {
+        "source_path": "ExcelBinOutput/AvatarSkillDepotExcelConfigData.json",
+        "source_sha256": "76058ddd01946435248d158ef4cc659ba995643c5635e9948161ce47a7ed814b",
+        "json_pointer": "/97/inherentProudSkillOpens/3",
+        "node_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+      },
+      "state": "empty"
+    },
+    {
+      "index": 4,
+      "raw": {},
+      "origin": {
+        "source_path": "ExcelBinOutput/AvatarSkillDepotExcelConfigData.json",
+        "source_sha256": "76058ddd01946435248d158ef4cc659ba995643c5635e9948161ce47a7ed814b",
+        "json_pointer": "/97/inherentProudSkillOpens/4",
+        "node_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a"
+      },
+      "state": "empty"
+    }
+  ],
+  "entry_records": {
+    "avatar": {
+      "definition": {
+        "definition_id": "cc0419bcb28b8d296a415dcbe9d85fd6c99de5acc301c0e771205c78d6f230fa",
+        "definition_kind": "excel_record",
+        "owner_definition_id": null,
+        "source_path": "ExcelBinOutput/AvatarExcelConfigData.json",
+        "json_pointer": "/34",
+        "variant_key": null,
+        "namespace_key": "excel",
+        "node_sha256": "4aa7772affeacd541e7fb529415b030bd6c7d6efe87cfdf83ac77a0557f301ed",
+        "exact_key": {
+          "id": 10000047
+        }
+      },
+      "source_path": "ExcelBinOutput/AvatarExcelConfigData.json",
+      "json_pointer": "/34",
+      "source_sha256": "d3b4ce3253e6c4a11ffca5bfad200f53c00b86dabeb9a14eb505556954e87aee",
+      "node_sha256": "4aa7772affeacd541e7fb529415b030bd6c7d6efe87cfdf83ac77a0557f301ed",
+      "record": {
+        "featureTagGroupID": 10000047,
+        "scriptDataPathHash": "7535910857308706620",
+        "qualityType": "QUALITY_ORANGE",
+        "prefabPathHash": "13729919875118868783",
+        "firstPropPriority": "FIGHT_PROP_CHARGE_EFFICIENCY",
+        "secondPropPriority": "FIGHT_PROP_ELEMENT_MASTERY",
+        "CHCOOENOOJM": "4975904732025136974",
+        "controllerPathHash": "8594492037099145806",
+        "defenseBase": 62.82149887084961,
+        "coopPicNameHash": "5156196381719149781",
+        "initialWeapon": 11101,
+        "deformationMeshPathHash": "856195021060268183",
+        "iconName": "UI_AvatarIcon_Kazuha",
+        "combatConfigHash": "9919316577460724427",
+        "FJDGJCDPMEM": 174508081,
+        "critical": 0.05000000074505806,
+        "imageName": "AvatarImage_Forward_Kazuha",
+        "bodyType": "BODY_BOY",
+        "avatarPromoteRewardIdList": [
+          900341,
+          900343,
+          900345
+        ],
+        "criticalHurt": 0.5,
+        "manekinJsonConfigHash": "16299747622145493304",
+        "avatarIdentityType": "AVATAR_IDENTITY_NORMAL",
+        "propGrowCurves": [
+          {
+            "growCurve": "GROW_CURVE_HP_S5",
+            "type": "FIGHT_PROP_BASE_HP"
+          },
+          {
+            "growCurve": "GROW_CURVE_ATTACK_S5",
+            "type": "FIGHT_PROP_BASE_ATTACK"
+          },
+          {
+            "growCurve": "GROW_CURVE_HP_S5",
+            "type": "FIGHT_PROP_BASE_DEFENSE"
+          }
+        ],
+        "prefabPathRagdollHash": "12044930433670696283",
+        "KADLDGKLEPC": "3577882297361955787",
+        "id": 10000047,
+        "skillDepotId": 4701,
+        "avatarPromoteId": 47,
+        "manekinMotionConfig": 103,
+        "gachaImageNameHash": "6703640860938636082",
+        "tags": [
+          "None"
+        ],
+        "avatarPromoteRewardLevelList": [
+          1,
+          3,
+          5
+        ],
+        "controllerPathRemoteHash": "8724502986145879757",
+        "chargeEfficiency": 1,
+        "attackBase": 23.08880043029785,
+        "gachaCardNameHash": "1460850770816805667",
+        "prefabPathRemoteHash": "1068836673489435371",
+        "sideIconName": "UI_AvatarIcon_Side_Kazuha",
+        "nameTextMapHash": 88505754,
+        "useType": "AVATAR_FORMAL",
+        "descTextMapHash": 174508081,
+        "staminaRecoverSpeed": 25,
+        "hpBase": 1039.1187744140625,
+        "weaponType": "WEAPON_SWORD_ONE_HAND",
+        "manekinPathHash": "17888060824724456623",
+        "animatorConfigPathHash": "14167135086670867959",
+        "POCCNIJNACM": "13630099632347331557"
+      }
+    },
+    "depot": {
+      "definition": {
+        "definition_id": "6093be029ebacdbd467404a506915a169747b1f1f4451de181914c63e30816c6",
+        "definition_kind": "excel_record",
+        "owner_definition_id": null,
+        "source_path": "ExcelBinOutput/AvatarSkillDepotExcelConfigData.json",
+        "json_pointer": "/97",
+        "variant_key": null,
+        "namespace_key": "excel",
+        "node_sha256": "504dda55d61a261ed581f9f10fcd39858ba3ea8fbc2d0d4175d9429923ddc7e5",
+        "exact_key": {
+          "id": 4701
+        }
+      },
+      "source_path": "ExcelBinOutput/AvatarSkillDepotExcelConfigData.json",
+      "json_pointer": "/97",
+      "source_sha256": "76058ddd01946435248d158ef4cc659ba995643c5635e9948161ce47a7ed814b",
+      "node_sha256": "504dda55d61a261ed581f9f10fcd39858ba3ea8fbc2d0d4175d9429923ddc7e5",
+      "record": {
+        "subSkills": [
+          10101,
+          10102,
+          10001,
+          10473,
+          10474,
+          5047010
+        ],
+        "talents": [
+          471,
+          472,
+          473,
+          474,
+          475,
+          476
+        ],
+        "skills": [
+          10471,
+          10472,
+          0,
+          0
+        ],
+        "inherentProudSkillOpens": [
+          {
+            "proudSkillGroupId": 4721,
+            "needAvatarPromoteLevel": 1
+          },
+          {
+            "proudSkillGroupId": 4722,
+            "needAvatarPromoteLevel": 4
+          },
+          {
+            "proudSkillGroupId": 4723
+          },
+          {},
+          {}
+        ],
+        "talentStarName": "Talent_Kazuha",
+        "energySkill": 10475,
+        "id": 4701,
+        "specialProudSkillOpens": [
+          {},
+          {}
+        ],
+        "extraAbilities": [
+          "",
+          "",
+          ""
+        ]
+      }
+    },
+    "selected_opening": {
+      "source_path": "ExcelBinOutput/AvatarSkillDepotExcelConfigData.json",
+      "source_sha256": "76058ddd01946435248d158ef4cc659ba995643c5635e9948161ce47a7ed814b",
+      "json_pointer": "/97/inherentProudSkillOpens/1",
+      "node_sha256": "9e930ed8e9c157110bcd98ff8f663d6d08d8db40f9046c53c970d8ab47992ecc",
+      "record": {
+        "proudSkillGroupId": 4722,
+        "needAvatarPromoteLevel": 4
+      }
+    },
+    "promote_records": [
+      {
+        "definition": {
+          "definition_id": "f7cee84f975b3aae0bba4944953da1b6a331acbb7a4fe51292285fa30341ee94",
+          "definition_kind": "excel_record",
+          "owner_definition_id": null,
+          "source_path": "ExcelBinOutput/AvatarPromoteExcelConfigData.json",
+          "json_pointer": "/224",
+          "variant_key": null,
+          "namespace_key": "excel",
+          "node_sha256": "4c5b90297baae790921429824d4e8156433b45341ed013e739d4fce6c04a20a3",
+          "exact_key": {
+            "source_index": 224
+          }
+        },
+        "source_path": "ExcelBinOutput/AvatarPromoteExcelConfigData.json",
+        "json_pointer": "/224",
+        "source_sha256": "d998c67261ab4fd7479e264813adfa039548f9d8f3223c34f45df4c911ee2b8b",
+        "node_sha256": "4c5b90297baae790921429824d4e8156433b45341ed013e739d4fce6c04a20a3",
+        "record": {
+          "addProps": [
+            {
+              "propType": "FIGHT_PROP_BASE_HP"
+            },
+            {
+              "propType": "FIGHT_PROP_BASE_DEFENSE"
+            },
+            {
+              "propType": "FIGHT_PROP_BASE_ATTACK"
+            },
+            {
+              "propType": "FIGHT_PROP_ELEMENT_MASTERY"
+            }
+          ],
+          "unlockMaxLevel": 20,
+          "costItems": [
+            {},
+            {},
+            {},
+            {}
+          ],
+          "avatarPromoteId": 47
+        }
+      },
+      {
+        "definition": {
+          "definition_id": "4d5c90e467b7eb972bf9f130e6910965fd82fa94cf0a3db5966f182a2e1af637",
+          "definition_kind": "excel_record",
+          "owner_definition_id": null,
+          "source_path": "ExcelBinOutput/AvatarPromoteExcelConfigData.json",
+          "json_pointer": "/225",
+          "variant_key": null,
+          "namespace_key": "excel",
+          "node_sha256": "ef246f85b29cba25a09843f345ac69e4a2fc0ae866d8d0a8fbb89006dc2cff68",
+          "exact_key": {
+            "source_index": 225
+          }
+        },
+        "source_path": "ExcelBinOutput/AvatarPromoteExcelConfigData.json",
+        "json_pointer": "/225",
+        "source_sha256": "d998c67261ab4fd7479e264813adfa039548f9d8f3223c34f45df4c911ee2b8b",
+        "node_sha256": "ef246f85b29cba25a09843f345ac69e4a2fc0ae866d8d0a8fbb89006dc2cff68",
+        "record": {
+          "requiredPlayerLevel": 15,
+          "scoinCost": 20000,
+          "addProps": [
+            {
+              "propType": "FIGHT_PROP_BASE_HP",
+              "value": 890.950439453125
+            },
+            {
+              "propType": "FIGHT_PROP_BASE_DEFENSE",
+              "value": 53.8650016784668
+            },
+            {
+              "propType": "FIGHT_PROP_BASE_ATTACK",
+              "value": 19.79511260986328
+            },
+            {
+              "propType": "FIGHT_PROP_ELEMENT_MASTERY"
+            }
+          ],
+          "unlockMaxLevel": 40,
+          "costItems": [
+            {
+              "count": 1,
+              "id": 104151
+            },
+            {},
+            {
+              "count": 3,
+              "id": 101206
+            },
+            {
+              "count": 3,
+              "id": 112035
+            }
+          ],
+          "avatarPromoteId": 47,
+          "promoteLevel": 1
+        }
+      },
+      {
+        "definition": {
+          "definition_id": "f3a52b71bb18ff470890bc826c5e5950a967c529b9e0c013fd532b1b8fbd1687",
+          "definition_kind": "excel_record",
+          "owner_definition_id": null,
+          "source_path": "ExcelBinOutput/AvatarPromoteExcelConfigData.json",
+          "json_pointer": "/226",
+          "variant_key": null,
+          "namespace_key": "excel",
+          "node_sha256": "a070b77f6905cab24922799c64f3f7bc854e68eb5202c07941d1d47752035b32",
+          "exact_key": {
+            "source_index": 226
+          }
+        },
+        "source_path": "ExcelBinOutput/AvatarPromoteExcelConfigData.json",
+        "json_pointer": "/226",
+        "source_sha256": "d998c67261ab4fd7479e264813adfa039548f9d8f3223c34f45df4c911ee2b8b",
+        "node_sha256": "a070b77f6905cab24922799c64f3f7bc854e68eb5202c07941d1d47752035b32",
+        "record": {
+          "requiredPlayerLevel": 25,
+          "scoinCost": 40000,
+          "addProps": [
+            {
+              "propType": "FIGHT_PROP_BASE_HP",
+              "value": 1523.994140625
+            },
+            {
+              "propType": "FIGHT_PROP_BASE_DEFENSE",
+              "value": 92.13749694824219
+            },
+            {
+              "propType": "FIGHT_PROP_BASE_ATTACK",
+              "value": 33.86006164550781
+            },
+            {
+              "propType": "FIGHT_PROP_ELEMENT_MASTERY",
+              "value": 28.799999237060547
+            }
+          ],
+          "unlockMaxLevel": 50,
+          "costItems": [
+            {
+              "count": 3,
+              "id": 104152
+            },
+            {
+              "count": 2,
+              "id": 113022
+            },
+            {
+              "count": 10,
+              "id": 101206
+            },
+            {
+              "count": 15,
+              "id": 112035
+            }
+          ],
+          "avatarPromoteId": 47,
+          "promoteLevel": 2
+        }
+      },
+      {
+        "definition": {
+          "definition_id": "f085dff09a5f560db92d766e1b1e16206161a4902f7681e8209fd4c418ced885",
+          "definition_kind": "excel_record",
+          "owner_definition_id": null,
+          "source_path": "ExcelBinOutput/AvatarPromoteExcelConfigData.json",
+          "json_pointer": "/227",
+          "variant_key": null,
+          "namespace_key": "excel",
+          "node_sha256": "db31cfbb58518088b50b5bcb2c9fda25c25f136f1e8cde39c4a18bd202b887ed",
+          "exact_key": {
+            "source_index": 227
+          }
+        },
+        "source_path": "ExcelBinOutput/AvatarPromoteExcelConfigData.json",
+        "json_pointer": "/227",
+        "source_sha256": "d998c67261ab4fd7479e264813adfa039548f9d8f3223c34f45df4c911ee2b8b",
+        "node_sha256": "db31cfbb58518088b50b5bcb2c9fda25c25f136f1e8cde39c4a18bd202b887ed",
+        "record": {
+          "requiredPlayerLevel": 30,
+          "scoinCost": 60000,
+          "addProps": [
+            {
+              "propType": "FIGHT_PROP_BASE_HP",
+              "value": 2368.052490234375
+            },
+            {
+              "propType": "FIGHT_PROP_BASE_DEFENSE",
+              "value": 143.16749572753906
+            },
+            {
+              "propType": "FIGHT_PROP_BASE_ATTACK",
+              "value": 52.61332321166992
+            },
+            {
+              "propType": "FIGHT_PROP_ELEMENT_MASTERY",
+              "value": 57.599998474121094
+            }
+          ],
+          "unlockMaxLevel": 60,
+          "costItems": [
+            {
+              "count": 6,
+              "id": 104152
+            },
+            {
+              "count": 4,
+              "id": 113022
+            },
+            {
+              "count": 20,
+              "id": 101206
+            },
+            {
+              "count": 12,
+              "id": 112036
+            }
+          ],
+          "avatarPromoteId": 47,
+          "promoteLevel": 3
+        }
+      },
+      {
+        "definition": {
+          "definition_id": "6e642a4fb8f063471a7f92e1713f80ade3150508e81b14dac07de726c34fc81d",
+          "definition_kind": "excel_record",
+          "owner_definition_id": null,
+          "source_path": "ExcelBinOutput/AvatarPromoteExcelConfigData.json",
+          "json_pointer": "/228",
+          "variant_key": null,
+          "namespace_key": "excel",
+          "node_sha256": "bc62b8d4c0c9c2f9d742d60cabe5f81a52b7ebbf79a2adbcc5b66f10a65d80ab",
+          "exact_key": {
+            "source_index": 228
+          }
+        },
+        "source_path": "ExcelBinOutput/AvatarPromoteExcelConfigData.json",
+        "json_pointer": "/228",
+        "source_sha256": "d998c67261ab4fd7479e264813adfa039548f9d8f3223c34f45df4c911ee2b8b",
+        "node_sha256": "bc62b8d4c0c9c2f9d742d60cabe5f81a52b7ebbf79a2adbcc5b66f10a65d80ab",
+        "record": {
+          "requiredPlayerLevel": 35,
+          "scoinCost": 80000,
+          "addProps": [
+            {
+              "propType": "FIGHT_PROP_BASE_HP",
+              "value": 3001.09619140625
+            },
+            {
+              "propType": "FIGHT_PROP_BASE_DEFENSE",
+              "value": 181.44000244140625
+            },
+            {
+              "propType": "FIGHT_PROP_BASE_ATTACK",
+              "value": 66.67826843261719
+            },
+            {
+              "propType": "FIGHT_PROP_ELEMENT_MASTERY",
+              "value": 57.599998474121094
+            }
+          ],
+          "unlockMaxLevel": 70,
+          "costItems": [
+            {
+              "count": 3,
+              "id": 104153
+            },
+            {
+              "count": 8,
+              "id": 113022
+            },
+            {
+              "count": 30,
+              "id": 101206
+            },
+            {
+              "count": 18,
+              "id": 112036
+            }
+          ],
+          "avatarPromoteId": 47,
+          "promoteLevel": 4
+        }
+      },
+      {
+        "definition": {
+          "definition_id": "251ec8f81d7c1a10a417e533710c489bf019224a44fcb2633fd4f3b5652503af",
+          "definition_kind": "excel_record",
+          "owner_definition_id": null,
+          "source_path": "ExcelBinOutput/AvatarPromoteExcelConfigData.json",
+          "json_pointer": "/229",
+          "variant_key": null,
+          "namespace_key": "excel",
+          "node_sha256": "07aed444ba2ef6593275db5d6f9f668764d4c1c9ca824428dd9d35c12aab6acc",
+          "exact_key": {
+            "source_index": 229
+          }
+        },
+        "source_path": "ExcelBinOutput/AvatarPromoteExcelConfigData.json",
+        "json_pointer": "/229",
+        "source_sha256": "d998c67261ab4fd7479e264813adfa039548f9d8f3223c34f45df4c911ee2b8b",
+        "node_sha256": "07aed444ba2ef6593275db5d6f9f668764d4c1c9ca824428dd9d35c12aab6acc",
+        "record": {
+          "requiredPlayerLevel": 40,
+          "scoinCost": 100000,
+          "addProps": [
+            {
+              "propType": "FIGHT_PROP_BASE_HP",
+              "value": 3634.139892578125
+            },
+            {
+              "propType": "FIGHT_PROP_BASE_DEFENSE",
+              "value": 219.71249389648438
+            },
+            {
+              "propType": "FIGHT_PROP_BASE_ATTACK",
+              "value": 80.74321746826172
+            },
+            {
+              "propType": "FIGHT_PROP_ELEMENT_MASTERY",
+              "value": 86.4000015258789
+            }
+          ],
+          "unlockMaxLevel": 80,
+          "costItems": [
+            {
+              "count": 6,
+              "id": 104153
+            },
+            {
+              "count": 12,
+              "id": 113022
+            },
+            {
+              "count": 45,
+              "id": 101206
+            },
+            {
+              "count": 12,
+              "id": 112037
+            }
+          ],
+          "avatarPromoteId": 47,
+          "promoteLevel": 5
+        }
+      },
+      {
+        "definition": {
+          "definition_id": "800cf4dbaac89ad7dc7a8b1a5d23e09eeb3413f52b90fe0585c6a7efde58a2ce",
+          "definition_kind": "excel_record",
+          "owner_definition_id": null,
+          "source_path": "ExcelBinOutput/AvatarPromoteExcelConfigData.json",
+          "json_pointer": "/230",
+          "variant_key": null,
+          "namespace_key": "excel",
+          "node_sha256": "0b53b614dcde8be5149a3a8f3a398b54746e428ccad4fad1869abcb533b535cb",
+          "exact_key": {
+            "source_index": 230
+          }
+        },
+        "source_path": "ExcelBinOutput/AvatarPromoteExcelConfigData.json",
+        "json_pointer": "/230",
+        "source_sha256": "d998c67261ab4fd7479e264813adfa039548f9d8f3223c34f45df4c911ee2b8b",
+        "node_sha256": "0b53b614dcde8be5149a3a8f3a398b54746e428ccad4fad1869abcb533b535cb",
+        "record": {
+          "requiredPlayerLevel": 50,
+          "scoinCost": 120000,
+          "addProps": [
+            {
+              "propType": "FIGHT_PROP_BASE_HP",
+              "value": 4267.18359375
+            },
+            {
+              "propType": "FIGHT_PROP_BASE_DEFENSE",
+              "value": 257.9849853515625
+            },
+            {
+              "propType": "FIGHT_PROP_BASE_ATTACK",
+              "value": 94.80816650390625
+            },
+            {
+              "propType": "FIGHT_PROP_ELEMENT_MASTERY",
+              "value": 115.19999694824219
+            }
+          ],
+          "unlockMaxLevel": 90,
+          "costItems": [
+            {
+              "count": 6,
+              "id": 104154
+            },
+            {
+              "count": 20,
+              "id": 113022
+            },
+            {
+              "count": 60,
+              "id": 101206
+            },
+            {
+              "count": 24,
+              "id": 112037
+            }
+          ],
+          "avatarPromoteId": 47,
+          "promoteLevel": 6
+        }
+      }
+    ],
+    "proud_skill": {
+      "definition": {
+        "definition_id": "a7869af3266d2da2fce2d72498ef73b030c1de8ef03e42b772706df1793c114b",
+        "definition_kind": "excel_record",
+        "owner_definition_id": null,
+        "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+        "json_pointer": "/3534",
+        "variant_key": null,
+        "namespace_key": "excel",
+        "node_sha256": "a4f87c40d2a0adbd30d57e3ca4e59f916964a0f019264b4648f8be523dabd017",
+        "exact_key": {
+          "proudSkillId": 472201
+        }
+      },
+      "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+      "json_pointer": "/3534",
+      "source_sha256": "4897a68ebc6772e7b553a58a548a3756a1cf9b6e9ca22250bb0da987a3fa4d70",
+      "node_sha256": "a4f87c40d2a0adbd30d57e3ca4e59f916964a0f019264b4648f8be523dabd017",
+      "record": {
+        "paramList": [
+          0.00039999998989515007,
+          8,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "breakLevel": 4,
+        "proudSkillId": 472201,
+        "filterConds": [
+          "TALENT_FILTER_NONE",
+          "TALENT_FILTER_NONE"
+        ],
+        "proudSkillGroupId": 4722,
+        "addProps": [
+          {},
+          {}
+        ],
+        "paramDescList": [
+          2594384006,
+          3119538614,
+          1930022367,
+          2615074119,
+          2049532110,
+          2681571370,
+          4122201103,
+          134503485,
+          2679894420,
+          1694944599,
+          93706644,
+          3120810347,
+          561069335,
+          3393080323,
+          1625368966,
+          1905574397,
+          1346909681,
+          1085718955,
+          3928889799,
+          2303569389
+        ],
+        "openConfig": "Kazuha_PermanentSkill_2",
+        "lifeEffectParams": [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        "unlockDescTextMapHash": 409536634,
+        "costItems": [
+          {},
+          {},
+          {},
+          {}
+        ],
+        "icon": "UI_Talent_S_Kazuha_06",
+        "level": 1,
+        "proudSkillType": 2,
+        "uniqueDescTextMapHash": 2250417292,
+        "additionalDescTextMapHash": 1846223020,
+        "nameTextMapHash": 138639421,
+        "descTextMapHash": 1440992683,
+        "unlockProudSkillParam": "PROUD_SKILL_DISPLAY_BREAK"
+      }
+    }
+  },
+  "source_bundle": {
+    "bundle_version": 1,
+    "source_kind": "inherent_proud_skill",
+    "snapshot": {
+      "version_line": "release",
+      "state": "ready",
+      "index_state": "ready",
+      "schema_version": 1,
+      "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+      "snapshot_id": "1dedf7ada0e1962ad271e58f8e8341cd7185b63b384dba4dab08409e7224df12",
+      "execution_support": "not_evaluated",
+      "built_at": "2026-10-02T04:19:58.433055+00:00",
+      "profile_id": "upstream-combat-catalog-v1",
+      "profile_version": 1,
+      "indexer_version": "4",
+      "manifest_fingerprint": "f66da49a27346fccd9ba2f087e2afcfe20b98b792a4419b72d1b0091c8541f05",
+      "counts": {
+        "runtime_definition": 7767,
+        "runtime_parameter_binding": 28,
+        "runtime_reference": 6534,
+        "runtime_source": 33
+      },
+      "reference_states": {
+        "external_asset": 10,
+        "missing": 6263,
+        "resolved": 260,
+        "unsupported_reference_form": 1
+      },
+      "normalization": {
+        "mapping_fingerprint": "506862bc6c0bf033d8272b75f193cd2a620fc513320b3223d07afcc6f04356e2",
+        "normalization_version": 2,
+        "profile_id": "upstream-34208429-reviewed-schema-v1",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53"
+      }
+    },
+    "normalization": {
+      "mapping_fingerprint": "506862bc6c0bf033d8272b75f193cd2a620fc513320b3223d07afcc6f04356e2",
+      "normalization_version": 2,
+      "profile_id": "upstream-34208429-reviewed-schema-v1",
+      "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53"
+    },
+    "source_identity": {
+      "kind": "inherent_proud_skill",
+      "character_id": 10000047,
+      "skill_depot_id": 4701,
+      "proud_skill_id": 472201,
+      "proud_skill_group_id": 4722,
+      "proud_level": 1,
+      "opening_index": 1,
+      "version_line": "release",
+      "snapshot_id": "1dedf7ada0e1962ad271e58f8e8341cd7185b63b384dba4dab08409e7224df12",
+      "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53"
+    },
+    "parameter_record": {
+      "definition": {
+        "definition_id": "a7869af3266d2da2fce2d72498ef73b030c1de8ef03e42b772706df1793c114b",
+        "definition_kind": "excel_record",
+        "owner_definition_id": null,
+        "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+        "json_pointer": "/3534",
+        "variant_key": null,
+        "namespace_key": "excel",
+        "node_sha256": "a4f87c40d2a0adbd30d57e3ca4e59f916964a0f019264b4648f8be523dabd017",
+        "exact_key": {
+          "proudSkillId": 472201
+        }
+      },
+      "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+      "json_pointer": "/3534",
+      "source_sha256": "4897a68ebc6772e7b553a58a548a3756a1cf9b6e9ca22250bb0da987a3fa4d70",
+      "node_sha256": "a4f87c40d2a0adbd30d57e3ca4e59f916964a0f019264b4648f8be523dabd017",
+      "record": {
+        "paramList": [
+          0.00039999998989515007,
+          8,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "breakLevel": 4,
+        "proudSkillId": 472201,
+        "filterConds": [
+          "TALENT_FILTER_NONE",
+          "TALENT_FILTER_NONE"
+        ],
+        "proudSkillGroupId": 4722,
+        "addProps": [
+          {},
+          {}
+        ],
+        "paramDescList": [
+          2594384006,
+          3119538614,
+          1930022367,
+          2615074119,
+          2049532110,
+          2681571370,
+          4122201103,
+          134503485,
+          2679894420,
+          1694944599,
+          93706644,
+          3120810347,
+          561069335,
+          3393080323,
+          1625368966,
+          1905574397,
+          1346909681,
+          1085718955,
+          3928889799,
+          2303569389
+        ],
+        "openConfig": "Kazuha_PermanentSkill_2",
+        "lifeEffectParams": [
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        "unlockDescTextMapHash": 409536634,
+        "costItems": [
+          {},
+          {},
+          {},
+          {}
+        ],
+        "icon": "UI_Talent_S_Kazuha_06",
+        "level": 1,
+        "proudSkillType": 2,
+        "uniqueDescTextMapHash": 2250417292,
+        "additionalDescTextMapHash": 1846223020,
+        "nameTextMapHash": 138639421,
+        "descTextMapHash": 1440992683,
+        "unlockProudSkillParam": "PROUD_SKILL_DISPLAY_BREAK"
+      }
+    },
+    "param_list": [
+      0.00039999998989515007,
+      8,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "talent": {
+      "definition_id": "82e4d91110e30294f46a0a474666529e7f83e44d6b0220cfff501ceee8e68349",
+      "node_sha256": "a8e2c9ba9338997876456b42d189745d9335e6128240ad39c1e302dae095729c",
+      "source_path": "BinOutput/Talent/AvatarTalents/ConfigTalent_Kazuha.json",
+      "json_pointer": "/Kazuha_PermanentSkill_2",
+      "source_sha256": "0c8a948580d2a8806fef335fd9daaeaf674cffe7ebecca52b733b12c326faeb4",
+      "operations": [
+        {
+          "$type": "JPCAAJGEELO",
+          "GBPFBNHLOFD": true,
+          "IIBMNPFLNMJ": "Avatar_Kazuha_PermanentSkill_2"
+        },
+        {
+          "$type": "BIAHEMMGABC",
+          "GBPFBNHLOFD": true,
+          "IIBMNPFLNMJ": "Avatar_Kazuha_PermanentSkill_2",
+          "PCABAADALND": "%1",
+          "PEOJKHKHAKL": "Kazuha_PermanentSkill_2_Factor"
+        },
+        {
+          "$type": "BIAHEMMGABC",
+          "GBPFBNHLOFD": true,
+          "IIBMNPFLNMJ": "Avatar_Kazuha_PermanentSkill_2",
+          "PCABAADALND": "%2",
+          "PEOJKHKHAKL": "Kazuha_PermanentSkill_2_Duration"
+        }
+      ]
+    },
+    "talent_candidates": [],
+    "abilities": [
+      {
+        "definition_id": "e42627d48842b6973e7b18c3adda90909b916134efdc2b2dae0faed236d04e1a",
+        "node_sha256": "192a940a2d326f54c0e62a0fcaf46f3010c05ada65bc02add3293d13a925072b",
+        "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Kazuha.json",
+        "json_pointer": "/23/Default",
+        "source_sha256": "70a81465b8049a76ad6f3c18e1ef2eff82ea5b1fcaef9d9db7b10e009553426f",
+        "payload": {
+          "EMGBJJOIENB": [
+            {
+              "$type": "CDANEAFAFKM",
+              "AMOLMPHFPHJ": -1,
+              "ILELAOFJIKJ": true,
+              "LDFBDMNIADI": "Avatar_Kazuha_PermanentSkill_2_Handler",
+              "LJFIEGHHLOB": false
+            }
+          ],
+          "GPPBBDEICKP": {
+            "Avatar_Kazuha_PermanentSkill_2_Handler": {
+              "DBGOKAKAHFP": 100,
+              "DOALDLPNGMF": -1,
+              "KFOMCJGGPPC": -1,
+              "LFIJIMIMBIH": [
+                {
+                  "$type": "ANDAIHHJDIB",
+                  "AMOLMPHFPHJ": -1,
+                  "HDOJNFJLKAP": [
+                    "SwirlFire"
+                  ],
+                  "KHJMNJNEADF": [
+                    {
+                      "$type": "GCINLBBPONN",
+                      "AMOLMPHFPHJ": -1,
+                      "BDHBNCEEPPK": "AllPlayerAvatars",
+                      "IJDGNIIOHLM": [
+                        {
+                          "$type": "OLNGCABMCGI",
+                          "BDHBNCEEPPK": "Target",
+                          "DKCBCJCHEBF": "LesserOrEqual",
+                          "PDIFFCBMGMO": 40
+                        }
+                      ],
+                      "ILELAOFJIKJ": true,
+                      "LDFBDMNIADI": "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Fire",
+                      "LJFIEGHHLOB": true
+                    },
+                    {
+                      "$type": "BINBHGLANKO",
+                      "AMOLMPHFPHJ": -1,
+                      "BDHBNCEEPPK": "AllPlayerAvatars",
+                      "IJDGNIIOHLM": [
+                        {
+                          "$type": "OLNGCABMCGI",
+                          "BDHBNCEEPPK": "Target",
+                          "DKCBCJCHEBF": "LesserOrEqual",
+                          "PDIFFCBMGMO": 40
+                        }
+                      ],
+                      "ILELAOFJIKJ": true,
+                      "LDFBDMNIADI": "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Fire",
+                      "LJFIEGHHLOB": true
+                    }
+                  ],
+                  "LJBBKGIFJDB": [
+                    "Monster"
+                  ],
+                  "OMALBHAAHHA": 20
+                },
+                {
+                  "$type": "ANDAIHHJDIB",
+                  "AMOLMPHFPHJ": -1,
+                  "HDOJNFJLKAP": [
+                    "SwirlWater"
+                  ],
+                  "KHJMNJNEADF": [
+                    {
+                      "$type": "GCINLBBPONN",
+                      "AMOLMPHFPHJ": -1,
+                      "BDHBNCEEPPK": "AllPlayerAvatars",
+                      "IJDGNIIOHLM": [
+                        {
+                          "$type": "OLNGCABMCGI",
+                          "BDHBNCEEPPK": "Target",
+                          "DKCBCJCHEBF": "LesserOrEqual",
+                          "PDIFFCBMGMO": 40
+                        }
+                      ],
+                      "ILELAOFJIKJ": true,
+                      "LDFBDMNIADI": "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Water",
+                      "LJFIEGHHLOB": true
+                    },
+                    {
+                      "$type": "BINBHGLANKO",
+                      "AMOLMPHFPHJ": -1,
+                      "BDHBNCEEPPK": "AllPlayerAvatars",
+                      "IJDGNIIOHLM": [
+                        {
+                          "$type": "OLNGCABMCGI",
+                          "BDHBNCEEPPK": "Target",
+                          "DKCBCJCHEBF": "LesserOrEqual",
+                          "PDIFFCBMGMO": 40
+                        }
+                      ],
+                      "ILELAOFJIKJ": true,
+                      "LDFBDMNIADI": "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Water",
+                      "LJFIEGHHLOB": true
+                    }
+                  ],
+                  "LJBBKGIFJDB": [
+                    "Monster"
+                  ],
+                  "OMALBHAAHHA": 20
+                },
+                {
+                  "$type": "ANDAIHHJDIB",
+                  "AMOLMPHFPHJ": -1,
+                  "HDOJNFJLKAP": [
+                    "SwirlElectric"
+                  ],
+                  "KHJMNJNEADF": [
+                    {
+                      "$type": "GCINLBBPONN",
+                      "AMOLMPHFPHJ": -1,
+                      "BDHBNCEEPPK": "AllPlayerAvatars",
+                      "IJDGNIIOHLM": [
+                        {
+                          "$type": "OLNGCABMCGI",
+                          "BDHBNCEEPPK": "Target",
+                          "DKCBCJCHEBF": "LesserOrEqual",
+                          "PDIFFCBMGMO": 40
+                        }
+                      ],
+                      "ILELAOFJIKJ": true,
+                      "LDFBDMNIADI": "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Electric",
+                      "LJFIEGHHLOB": true
+                    },
+                    {
+                      "$type": "BINBHGLANKO",
+                      "AMOLMPHFPHJ": -1,
+                      "BDHBNCEEPPK": "AllPlayerAvatars",
+                      "IJDGNIIOHLM": [
+                        {
+                          "$type": "OLNGCABMCGI",
+                          "BDHBNCEEPPK": "Target",
+                          "DKCBCJCHEBF": "LesserOrEqual",
+                          "PDIFFCBMGMO": 40
+                        }
+                      ],
+                      "ILELAOFJIKJ": true,
+                      "LDFBDMNIADI": "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Electric",
+                      "LJFIEGHHLOB": true
+                    }
+                  ],
+                  "LJBBKGIFJDB": [
+                    "Monster"
+                  ],
+                  "OMALBHAAHHA": 20
+                },
+                {
+                  "$type": "ANDAIHHJDIB",
+                  "AMOLMPHFPHJ": -1,
+                  "HDOJNFJLKAP": [
+                    "SwirlIce",
+                    "StarSwirlIce"
+                  ],
+                  "KHJMNJNEADF": [
+                    {
+                      "$type": "GCINLBBPONN",
+                      "AMOLMPHFPHJ": -1,
+                      "BDHBNCEEPPK": "AllPlayerAvatars",
+                      "IJDGNIIOHLM": [
+                        {
+                          "$type": "OLNGCABMCGI",
+                          "BDHBNCEEPPK": "Target",
+                          "DKCBCJCHEBF": "LesserOrEqual",
+                          "PDIFFCBMGMO": 40
+                        }
+                      ],
+                      "ILELAOFJIKJ": true,
+                      "LDFBDMNIADI": "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Ice",
+                      "LJFIEGHHLOB": true
+                    },
+                    {
+                      "$type": "BINBHGLANKO",
+                      "AMOLMPHFPHJ": -1,
+                      "BDHBNCEEPPK": "AllPlayerAvatars",
+                      "IJDGNIIOHLM": [
+                        {
+                          "$type": "OLNGCABMCGI",
+                          "BDHBNCEEPPK": "Target",
+                          "DKCBCJCHEBF": "LesserOrEqual",
+                          "PDIFFCBMGMO": 40
+                        }
+                      ],
+                      "ILELAOFJIKJ": true,
+                      "LDFBDMNIADI": "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Ice",
+                      "LJFIEGHHLOB": true
+                    }
+                  ],
+                  "LJBBKGIFJDB": [
+                    "Monster"
+                  ],
+                  "OMALBHAAHHA": 20
+                }
+              ],
+              "PPKOPMBNPJH": true
+            },
+            "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Electric": {
+              "BNEJPEMIMEH": true,
+              "BOCCNJLBFCJ": "AttackUp",
+              "DBGOKAKAHFP": 100,
+              "DIELNIJPCJJ": true,
+              "DOALDLPNGMF": -1,
+              "GPPCPGHLDHL": "Unique",
+              "ILKPFPGAIGI": {
+                "Actor_ElecAddHurtExtraDelta": [
+                  "Kazuha_PermanentSkill_2_Factor",
+                  "FIGHT_PROP_NONEXTRA_ELEMENT_MASTERY",
+                  "MUL"
+                ]
+              },
+              "JFBBDPFLCEF": 10001,
+              "JPEAFDFPKAN": "Kazuha_PermanentSkill_2_Duration",
+              "KFOMCJGGPPC": -1,
+              "PPKOPMBNPJH": true
+            },
+            "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Fire": {
+              "BNEJPEMIMEH": true,
+              "BOCCNJLBFCJ": "AttackUp",
+              "DBGOKAKAHFP": 100,
+              "DIELNIJPCJJ": true,
+              "DOALDLPNGMF": -1,
+              "GPPCPGHLDHL": "Unique",
+              "ILKPFPGAIGI": {
+                "Actor_FireAddHurtExtraDelta": [
+                  "Kazuha_PermanentSkill_2_Factor",
+                  "FIGHT_PROP_NONEXTRA_ELEMENT_MASTERY",
+                  "MUL"
+                ]
+              },
+              "JFBBDPFLCEF": 10001,
+              "JPEAFDFPKAN": "Kazuha_PermanentSkill_2_Duration",
+              "KFOMCJGGPPC": -1,
+              "PPKOPMBNPJH": true
+            },
+            "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Ice": {
+              "BNEJPEMIMEH": true,
+              "BOCCNJLBFCJ": "AttackUp",
+              "DBGOKAKAHFP": 100,
+              "DIELNIJPCJJ": true,
+              "DOALDLPNGMF": -1,
+              "GPPCPGHLDHL": "Unique",
+              "ILKPFPGAIGI": {
+                "Actor_IceAddHurtExtraDelta": [
+                  "Kazuha_PermanentSkill_2_Factor",
+                  "FIGHT_PROP_NONEXTRA_ELEMENT_MASTERY",
+                  "MUL"
+                ]
+              },
+              "JFBBDPFLCEF": 10001,
+              "JPEAFDFPKAN": "Kazuha_PermanentSkill_2_Duration",
+              "KFOMCJGGPPC": -1,
+              "PPKOPMBNPJH": true
+            },
+            "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Water": {
+              "BNEJPEMIMEH": true,
+              "BOCCNJLBFCJ": "AttackUp",
+              "DBGOKAKAHFP": 100,
+              "DIELNIJPCJJ": true,
+              "DOALDLPNGMF": -1,
+              "GPPCPGHLDHL": "Unique",
+              "ILKPFPGAIGI": {
+                "Actor_WaterAddHurtExtraDelta": [
+                  "Kazuha_PermanentSkill_2_Factor",
+                  "FIGHT_PROP_NONEXTRA_ELEMENT_MASTERY",
+                  "MUL"
+                ]
+              },
+              "JFBBDPFLCEF": 10001,
+              "JPEAFDFPKAN": "Kazuha_PermanentSkill_2_Duration",
+              "KFOMCJGGPPC": -1,
+              "PPKOPMBNPJH": true
+            }
+          },
+          "IIBMNPFLNMJ": "Avatar_Kazuha_PermanentSkill_2",
+          "LOEHLJGBGAC": {
+            "Kazuha_PermanentSkill_2_Duration": 0,
+            "Kazuha_PermanentSkill_2_Factor": 0
+          },
+          "OMAIGDMCJBO": {
+            "DBGOKAKAHFP": 100,
+            "DOALDLPNGMF": -1,
+            "KFOMCJGGPPC": -1,
+            "PPKOPMBNPJH": true
+          },
+          "PODJJJHGAMO": true
+        },
+        "variant_key": "Default"
+      }
+    ],
+    "definitions": [
+      {
+        "definition_id": "a7869af3266d2da2fce2d72498ef73b030c1de8ef03e42b772706df1793c114b",
+        "definition_kind": "excel_record",
+        "owner_definition_id": null,
+        "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+        "json_pointer": "/3534",
+        "variant_key": null,
+        "namespace_key": "excel",
+        "node_sha256": "a4f87c40d2a0adbd30d57e3ca4e59f916964a0f019264b4648f8be523dabd017",
+        "exact_key": {
+          "proudSkillId": 472201
+        }
+      },
+      {
+        "definition_id": "82e4d91110e30294f46a0a474666529e7f83e44d6b0220cfff501ceee8e68349",
+        "definition_kind": "talent_config",
+        "owner_definition_id": null,
+        "source_path": "BinOutput/Talent/AvatarTalents/ConfigTalent_Kazuha.json",
+        "json_pointer": "/Kazuha_PermanentSkill_2",
+        "variant_key": null,
+        "namespace_key": "talent",
+        "node_sha256": "a8e2c9ba9338997876456b42d189745d9335e6128240ad39c1e302dae095729c",
+        "exact_key": "Kazuha_PermanentSkill_2"
+      },
+      {
+        "definition_id": "e42627d48842b6973e7b18c3adda90909b916134efdc2b2dae0faed236d04e1a",
+        "definition_kind": "ability",
+        "owner_definition_id": null,
+        "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Kazuha.json",
+        "json_pointer": "/23/Default",
+        "variant_key": "Default",
+        "namespace_key": "Temp",
+        "node_sha256": "192a940a2d326f54c0e62a0fcaf46f3010c05ada65bc02add3293d13a925072b",
+        "exact_key": "Avatar_Kazuha_PermanentSkill_2"
+      },
+      {
+        "definition_id": "243e8ee4fffe27775953ab54ce248ee0da65ae46477f31dc4cc321e085823189",
+        "definition_kind": "modifier",
+        "owner_definition_id": "e42627d48842b6973e7b18c3adda90909b916134efdc2b2dae0faed236d04e1a",
+        "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Kazuha.json",
+        "json_pointer": "/23/Default/GPPBBDEICKP/Avatar_Kazuha_PermanentSkill_2_Handler",
+        "variant_key": "Default",
+        "namespace_key": "Temp",
+        "node_sha256": "867d2799e8bb18c2e7a9f79e8e1b596108ad3a20e99ccd95c798fd26dbc67b2d",
+        "exact_key": "Avatar_Kazuha_PermanentSkill_2_Handler"
+      },
+      {
+        "definition_id": "831ac9efd06336242b677fb26beca0618a0c58d1469e488fc75e8c19f95b7f0f",
+        "definition_kind": "modifier",
+        "owner_definition_id": "e42627d48842b6973e7b18c3adda90909b916134efdc2b2dae0faed236d04e1a",
+        "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Kazuha.json",
+        "json_pointer": "/23/Default/GPPBBDEICKP/UNIQUE_Avatar_Kazuha_PermanentSkill_2_Electric",
+        "variant_key": "Default",
+        "namespace_key": "Temp",
+        "node_sha256": "1a534b6126497732bc33b614b4b036df25209c425840ce1cb87d0926f5c8f433",
+        "exact_key": "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Electric"
+      },
+      {
+        "definition_id": "710f54012d79e7147697b7533778163741e24ee647326f0c0b7abcec8c1ad47f",
+        "definition_kind": "modifier",
+        "owner_definition_id": "e42627d48842b6973e7b18c3adda90909b916134efdc2b2dae0faed236d04e1a",
+        "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Kazuha.json",
+        "json_pointer": "/23/Default/GPPBBDEICKP/UNIQUE_Avatar_Kazuha_PermanentSkill_2_Fire",
+        "variant_key": "Default",
+        "namespace_key": "Temp",
+        "node_sha256": "a629527c75801a5bf98c5df7015cc55c7a3db68526ef7a160e599c015126eda8",
+        "exact_key": "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Fire"
+      },
+      {
+        "definition_id": "73972e3cd3d0275294ce89df6545adaa2c9dcde20e267fd194adc962339b1e0c",
+        "definition_kind": "modifier",
+        "owner_definition_id": "e42627d48842b6973e7b18c3adda90909b916134efdc2b2dae0faed236d04e1a",
+        "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Kazuha.json",
+        "json_pointer": "/23/Default/GPPBBDEICKP/UNIQUE_Avatar_Kazuha_PermanentSkill_2_Ice",
+        "variant_key": "Default",
+        "namespace_key": "Temp",
+        "node_sha256": "901a662de127e1defc4656e400af9985136dcdb6c392442f24632c5777165d24",
+        "exact_key": "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Ice"
+      },
+      {
+        "definition_id": "d87d871bcfa8acdf499920a972a55f07b55229cd0986a0ce6dce846f4e7977ed",
+        "definition_kind": "modifier",
+        "owner_definition_id": "e42627d48842b6973e7b18c3adda90909b916134efdc2b2dae0faed236d04e1a",
+        "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Kazuha.json",
+        "json_pointer": "/23/Default/GPPBBDEICKP/UNIQUE_Avatar_Kazuha_PermanentSkill_2_Water",
+        "variant_key": "Default",
+        "namespace_key": "Temp",
+        "node_sha256": "bd66c07322caeecb74bdcc497646bcb56ace75b5c121a7d6d118ea95b7704082",
+        "exact_key": "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Water"
+      }
+    ],
+    "references": [
+      {
+        "reference_id": "450107f92af2d7d2dbd76e45e6f93fedb745f72c3fa3a366715bc28a64da98bf",
+        "from_definition_id": "a7869af3266d2da2fce2d72498ef73b030c1de8ef03e42b772706df1793c114b",
+        "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+        "json_pointer": "/3534/openConfig",
+        "field_name": "openConfig",
+        "relation_kind": "open_config",
+        "target_kind": "talent_config",
+        "source_order": 0,
+        "presence_status": "present",
+        "resolution_status": "resolved",
+        "resolved_definition_id": "82e4d91110e30294f46a0a474666529e7f83e44d6b0220cfff501ceee8e68349",
+        "extraction_rule_id": "4",
+        "version_line": "release",
+        "snapshot_id": "1dedf7ada0e1962ad271e58f8e8341cd7185b63b384dba4dab08409e7224df12",
+        "target_key": "Kazuha_PermanentSkill_2",
+        "scope": {
+          "owner_definition_id": null
+        },
+        "candidate_ids": [
+          "82e4d91110e30294f46a0a474666529e7f83e44d6b0220cfff501ceee8e68349"
+        ]
+      },
+      {
+        "reference_id": "c45e35827c6aadba0d8d465bbc3a417fb15f8da5226dbbeba8f3d54ebb37230d",
+        "from_definition_id": "82e4d91110e30294f46a0a474666529e7f83e44d6b0220cfff501ceee8e68349",
+        "source_path": "BinOutput/Talent/AvatarTalents/ConfigTalent_Kazuha.json",
+        "json_pointer": "/Kazuha_PermanentSkill_2/0/IIBMNPFLNMJ",
+        "field_name": "abilityName",
+        "relation_kind": "ability_operation",
+        "target_kind": "ability",
+        "source_order": 0,
+        "presence_status": "present",
+        "resolution_status": "resolved",
+        "resolved_definition_id": "e42627d48842b6973e7b18c3adda90909b916134efdc2b2dae0faed236d04e1a",
+        "extraction_rule_id": "4",
+        "version_line": "release",
+        "snapshot_id": "1dedf7ada0e1962ad271e58f8e8341cd7185b63b384dba4dab08409e7224df12",
+        "target_key": "Avatar_Kazuha_PermanentSkill_2",
+        "scope": {
+          "owner_definition_id": null
+        },
+        "candidate_ids": [
+          "e42627d48842b6973e7b18c3adda90909b916134efdc2b2dae0faed236d04e1a"
+        ]
+      },
+      {
+        "reference_id": "766510a7e19569e5addff300ddcbcc4760210bc7feae870a49a39a02d61e68bd",
+        "from_definition_id": "82e4d91110e30294f46a0a474666529e7f83e44d6b0220cfff501ceee8e68349",
+        "source_path": "BinOutput/Talent/AvatarTalents/ConfigTalent_Kazuha.json",
+        "json_pointer": "/Kazuha_PermanentSkill_2/1/IIBMNPFLNMJ",
+        "field_name": "abilityName",
+        "relation_kind": "ability_operation",
+        "target_kind": "ability",
+        "source_order": 1,
+        "presence_status": "present",
+        "resolution_status": "resolved",
+        "resolved_definition_id": "e42627d48842b6973e7b18c3adda90909b916134efdc2b2dae0faed236d04e1a",
+        "extraction_rule_id": "4",
+        "version_line": "release",
+        "snapshot_id": "1dedf7ada0e1962ad271e58f8e8341cd7185b63b384dba4dab08409e7224df12",
+        "target_key": "Avatar_Kazuha_PermanentSkill_2",
+        "scope": {
+          "owner_definition_id": null
+        },
+        "candidate_ids": [
+          "e42627d48842b6973e7b18c3adda90909b916134efdc2b2dae0faed236d04e1a"
+        ]
+      },
+      {
+        "reference_id": "ce1fc457db5341c65045000372fea282d8748bf9dd997ed4f9ce8bcff2de0391",
+        "from_definition_id": "82e4d91110e30294f46a0a474666529e7f83e44d6b0220cfff501ceee8e68349",
+        "source_path": "BinOutput/Talent/AvatarTalents/ConfigTalent_Kazuha.json",
+        "json_pointer": "/Kazuha_PermanentSkill_2/2/IIBMNPFLNMJ",
+        "field_name": "abilityName",
+        "relation_kind": "ability_operation",
+        "target_kind": "ability",
+        "source_order": 2,
+        "presence_status": "present",
+        "resolution_status": "resolved",
+        "resolved_definition_id": "e42627d48842b6973e7b18c3adda90909b916134efdc2b2dae0faed236d04e1a",
+        "extraction_rule_id": "4",
+        "version_line": "release",
+        "snapshot_id": "1dedf7ada0e1962ad271e58f8e8341cd7185b63b384dba4dab08409e7224df12",
+        "target_key": "Avatar_Kazuha_PermanentSkill_2",
+        "scope": {
+          "owner_definition_id": null
+        },
+        "candidate_ids": [
+          "e42627d48842b6973e7b18c3adda90909b916134efdc2b2dae0faed236d04e1a"
+        ]
+      },
+      {
+        "reference_id": "c6e5c97632e7118d1ca71b6c0922d504ee3b05ad9e85a54876734d3ef8365b36",
+        "from_definition_id": "e42627d48842b6973e7b18c3adda90909b916134efdc2b2dae0faed236d04e1a",
+        "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Kazuha.json",
+        "json_pointer": "/23/Default/EMGBJJOIENB/0/LDFBDMNIADI",
+        "field_name": "modifierName",
+        "relation_kind": "modifier_operation",
+        "target_kind": "modifier",
+        "source_order": 0,
+        "presence_status": "present",
+        "resolution_status": "resolved",
+        "resolved_definition_id": "243e8ee4fffe27775953ab54ce248ee0da65ae46477f31dc4cc321e085823189",
+        "extraction_rule_id": "4",
+        "version_line": "release",
+        "snapshot_id": "1dedf7ada0e1962ad271e58f8e8341cd7185b63b384dba4dab08409e7224df12",
+        "target_key": "Avatar_Kazuha_PermanentSkill_2_Handler",
+        "scope": {
+          "owner_definition_id": "e42627d48842b6973e7b18c3adda90909b916134efdc2b2dae0faed236d04e1a"
+        },
+        "candidate_ids": [
+          "243e8ee4fffe27775953ab54ce248ee0da65ae46477f31dc4cc321e085823189"
+        ]
+      },
+      {
+        "reference_id": "69b4fe4c46d06afaefb9ac7aabdc5f703700635c74e304deac5d1921963ddd0b",
+        "from_definition_id": "243e8ee4fffe27775953ab54ce248ee0da65ae46477f31dc4cc321e085823189",
+        "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Kazuha.json",
+        "json_pointer": "/23/Default/GPPBBDEICKP/Avatar_Kazuha_PermanentSkill_2_Handler/LFIJIMIMBIH/0/KHJMNJNEADF/0/LDFBDMNIADI",
+        "field_name": "modifierName",
+        "relation_kind": "modifier_operation",
+        "target_kind": "modifier",
+        "source_order": 0,
+        "presence_status": "present",
+        "resolution_status": "resolved",
+        "resolved_definition_id": "710f54012d79e7147697b7533778163741e24ee647326f0c0b7abcec8c1ad47f",
+        "extraction_rule_id": "4",
+        "version_line": "release",
+        "snapshot_id": "1dedf7ada0e1962ad271e58f8e8341cd7185b63b384dba4dab08409e7224df12",
+        "target_key": "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Fire",
+        "scope": {
+          "owner_definition_id": "e42627d48842b6973e7b18c3adda90909b916134efdc2b2dae0faed236d04e1a"
+        },
+        "candidate_ids": [
+          "710f54012d79e7147697b7533778163741e24ee647326f0c0b7abcec8c1ad47f"
+        ]
+      },
+      {
+        "reference_id": "b79a68d39066f4ec1b243e8cded1a5dd7507fa51bdbc90be9fadd66c594229cd",
+        "from_definition_id": "243e8ee4fffe27775953ab54ce248ee0da65ae46477f31dc4cc321e085823189",
+        "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Kazuha.json",
+        "json_pointer": "/23/Default/GPPBBDEICKP/Avatar_Kazuha_PermanentSkill_2_Handler/LFIJIMIMBIH/0/KHJMNJNEADF/1/LDFBDMNIADI",
+        "field_name": "modifierName",
+        "relation_kind": "modifier_operation",
+        "target_kind": "modifier",
+        "source_order": 1,
+        "presence_status": "present",
+        "resolution_status": "resolved",
+        "resolved_definition_id": "710f54012d79e7147697b7533778163741e24ee647326f0c0b7abcec8c1ad47f",
+        "extraction_rule_id": "4",
+        "version_line": "release",
+        "snapshot_id": "1dedf7ada0e1962ad271e58f8e8341cd7185b63b384dba4dab08409e7224df12",
+        "target_key": "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Fire",
+        "scope": {
+          "owner_definition_id": "e42627d48842b6973e7b18c3adda90909b916134efdc2b2dae0faed236d04e1a"
+        },
+        "candidate_ids": [
+          "710f54012d79e7147697b7533778163741e24ee647326f0c0b7abcec8c1ad47f"
+        ]
+      },
+      {
+        "reference_id": "b56863f07ef916c1100032f0a7f826ccc90dcc06f2bd56db98bbfc20e82986eb",
+        "from_definition_id": "243e8ee4fffe27775953ab54ce248ee0da65ae46477f31dc4cc321e085823189",
+        "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Kazuha.json",
+        "json_pointer": "/23/Default/GPPBBDEICKP/Avatar_Kazuha_PermanentSkill_2_Handler/LFIJIMIMBIH/1/KHJMNJNEADF/0/LDFBDMNIADI",
+        "field_name": "modifierName",
+        "relation_kind": "modifier_operation",
+        "target_kind": "modifier",
+        "source_order": 2,
+        "presence_status": "present",
+        "resolution_status": "resolved",
+        "resolved_definition_id": "d87d871bcfa8acdf499920a972a55f07b55229cd0986a0ce6dce846f4e7977ed",
+        "extraction_rule_id": "4",
+        "version_line": "release",
+        "snapshot_id": "1dedf7ada0e1962ad271e58f8e8341cd7185b63b384dba4dab08409e7224df12",
+        "target_key": "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Water",
+        "scope": {
+          "owner_definition_id": "e42627d48842b6973e7b18c3adda90909b916134efdc2b2dae0faed236d04e1a"
+        },
+        "candidate_ids": [
+          "d87d871bcfa8acdf499920a972a55f07b55229cd0986a0ce6dce846f4e7977ed"
+        ]
+      },
+      {
+        "reference_id": "d5e69ea2bc3a534e4bc66fae1d7305e0767ea9ef21ad2ebf7cce676f22e96435",
+        "from_definition_id": "243e8ee4fffe27775953ab54ce248ee0da65ae46477f31dc4cc321e085823189",
+        "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Kazuha.json",
+        "json_pointer": "/23/Default/GPPBBDEICKP/Avatar_Kazuha_PermanentSkill_2_Handler/LFIJIMIMBIH/1/KHJMNJNEADF/1/LDFBDMNIADI",
+        "field_name": "modifierName",
+        "relation_kind": "modifier_operation",
+        "target_kind": "modifier",
+        "source_order": 3,
+        "presence_status": "present",
+        "resolution_status": "resolved",
+        "resolved_definition_id": "d87d871bcfa8acdf499920a972a55f07b55229cd0986a0ce6dce846f4e7977ed",
+        "extraction_rule_id": "4",
+        "version_line": "release",
+        "snapshot_id": "1dedf7ada0e1962ad271e58f8e8341cd7185b63b384dba4dab08409e7224df12",
+        "target_key": "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Water",
+        "scope": {
+          "owner_definition_id": "e42627d48842b6973e7b18c3adda90909b916134efdc2b2dae0faed236d04e1a"
+        },
+        "candidate_ids": [
+          "d87d871bcfa8acdf499920a972a55f07b55229cd0986a0ce6dce846f4e7977ed"
+        ]
+      },
+      {
+        "reference_id": "59c1ce1bdf0e7ed983bf9caa9a4b63ebf6451386d235f2fad18708c9649c0515",
+        "from_definition_id": "243e8ee4fffe27775953ab54ce248ee0da65ae46477f31dc4cc321e085823189",
+        "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Kazuha.json",
+        "json_pointer": "/23/Default/GPPBBDEICKP/Avatar_Kazuha_PermanentSkill_2_Handler/LFIJIMIMBIH/2/KHJMNJNEADF/0/LDFBDMNIADI",
+        "field_name": "modifierName",
+        "relation_kind": "modifier_operation",
+        "target_kind": "modifier",
+        "source_order": 4,
+        "presence_status": "present",
+        "resolution_status": "resolved",
+        "resolved_definition_id": "831ac9efd06336242b677fb26beca0618a0c58d1469e488fc75e8c19f95b7f0f",
+        "extraction_rule_id": "4",
+        "version_line": "release",
+        "snapshot_id": "1dedf7ada0e1962ad271e58f8e8341cd7185b63b384dba4dab08409e7224df12",
+        "target_key": "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Electric",
+        "scope": {
+          "owner_definition_id": "e42627d48842b6973e7b18c3adda90909b916134efdc2b2dae0faed236d04e1a"
+        },
+        "candidate_ids": [
+          "831ac9efd06336242b677fb26beca0618a0c58d1469e488fc75e8c19f95b7f0f"
+        ]
+      },
+      {
+        "reference_id": "ce4bb58ad44a328ee3f343ca4e79053f1a9dc8030db7e406a64814cad1ee7f15",
+        "from_definition_id": "243e8ee4fffe27775953ab54ce248ee0da65ae46477f31dc4cc321e085823189",
+        "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Kazuha.json",
+        "json_pointer": "/23/Default/GPPBBDEICKP/Avatar_Kazuha_PermanentSkill_2_Handler/LFIJIMIMBIH/2/KHJMNJNEADF/1/LDFBDMNIADI",
+        "field_name": "modifierName",
+        "relation_kind": "modifier_operation",
+        "target_kind": "modifier",
+        "source_order": 5,
+        "presence_status": "present",
+        "resolution_status": "resolved",
+        "resolved_definition_id": "831ac9efd06336242b677fb26beca0618a0c58d1469e488fc75e8c19f95b7f0f",
+        "extraction_rule_id": "4",
+        "version_line": "release",
+        "snapshot_id": "1dedf7ada0e1962ad271e58f8e8341cd7185b63b384dba4dab08409e7224df12",
+        "target_key": "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Electric",
+        "scope": {
+          "owner_definition_id": "e42627d48842b6973e7b18c3adda90909b916134efdc2b2dae0faed236d04e1a"
+        },
+        "candidate_ids": [
+          "831ac9efd06336242b677fb26beca0618a0c58d1469e488fc75e8c19f95b7f0f"
+        ]
+      },
+      {
+        "reference_id": "ade260b3310748c61bb596486c500a325ce5751cb645d64aeb42bd9be71e5422",
+        "from_definition_id": "243e8ee4fffe27775953ab54ce248ee0da65ae46477f31dc4cc321e085823189",
+        "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Kazuha.json",
+        "json_pointer": "/23/Default/GPPBBDEICKP/Avatar_Kazuha_PermanentSkill_2_Handler/LFIJIMIMBIH/3/KHJMNJNEADF/0/LDFBDMNIADI",
+        "field_name": "modifierName",
+        "relation_kind": "modifier_operation",
+        "target_kind": "modifier",
+        "source_order": 6,
+        "presence_status": "present",
+        "resolution_status": "resolved",
+        "resolved_definition_id": "73972e3cd3d0275294ce89df6545adaa2c9dcde20e267fd194adc962339b1e0c",
+        "extraction_rule_id": "4",
+        "version_line": "release",
+        "snapshot_id": "1dedf7ada0e1962ad271e58f8e8341cd7185b63b384dba4dab08409e7224df12",
+        "target_key": "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Ice",
+        "scope": {
+          "owner_definition_id": "e42627d48842b6973e7b18c3adda90909b916134efdc2b2dae0faed236d04e1a"
+        },
+        "candidate_ids": [
+          "73972e3cd3d0275294ce89df6545adaa2c9dcde20e267fd194adc962339b1e0c"
+        ]
+      },
+      {
+        "reference_id": "125e9183c8b0fd40fddf7707aa849294a309e2d643d2e4b0d3a5731ca39ae337",
+        "from_definition_id": "243e8ee4fffe27775953ab54ce248ee0da65ae46477f31dc4cc321e085823189",
+        "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Kazuha.json",
+        "json_pointer": "/23/Default/GPPBBDEICKP/Avatar_Kazuha_PermanentSkill_2_Handler/LFIJIMIMBIH/3/KHJMNJNEADF/1/LDFBDMNIADI",
+        "field_name": "modifierName",
+        "relation_kind": "modifier_operation",
+        "target_kind": "modifier",
+        "source_order": 7,
+        "presence_status": "present",
+        "resolution_status": "resolved",
+        "resolved_definition_id": "73972e3cd3d0275294ce89df6545adaa2c9dcde20e267fd194adc962339b1e0c",
+        "extraction_rule_id": "4",
+        "version_line": "release",
+        "snapshot_id": "1dedf7ada0e1962ad271e58f8e8341cd7185b63b384dba4dab08409e7224df12",
+        "target_key": "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Ice",
+        "scope": {
+          "owner_definition_id": "e42627d48842b6973e7b18c3adda90909b916134efdc2b2dae0faed236d04e1a"
+        },
+        "candidate_ids": [
+          "73972e3cd3d0275294ce89df6545adaa2c9dcde20e267fd194adc962339b1e0c"
+        ]
+      }
+    ],
+    "reference_closed": true,
+    "truncated": false,
+    "frontier": [],
+    "closure_fingerprint": "4fceb93eec11e8fc8fd3417239123427c6c334adfc744099789d424305528a6e",
+    "execution_support": "not_evaluated"
+  },
+  "descriptions": {
+    "name": {
+      "status": "ready",
+      "text": "风物之诗咏",
+      "text_map_hash": 138639421,
+      "hash_origin": {
+        "definition": {
+          "definition_id": "a7869af3266d2da2fce2d72498ef73b030c1de8ef03e42b772706df1793c114b",
+          "definition_kind": "excel_record",
+          "owner_definition_id": null,
+          "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+          "json_pointer": "/3534",
+          "variant_key": null,
+          "namespace_key": "excel",
+          "node_sha256": "a4f87c40d2a0adbd30d57e3ca4e59f916964a0f019264b4648f8be523dabd017",
+          "exact_key": {
+            "proudSkillId": 472201
+          }
+        },
+        "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+        "source_sha256": "4897a68ebc6772e7b553a58a548a3756a1cf9b6e9ca22250bb0da987a3fa4d70",
+        "json_pointer": "/3534",
+        "node_sha256": "a4f87c40d2a0adbd30d57e3ca4e59f916964a0f019264b4648f8be523dabd017",
+        "present": true,
+        "raw_pointer": "/3534/nameTextMapHash",
+        "requested_pointer": "/3534/nameTextMapHash",
+        "field_node_sha256": "8cee541d2837f4cec8aae3ecfc9918504bc4a609c24b2d8596ea9b1a6cef8225"
+      },
+      "text_origin": {
+        "source_path": "TextMap/TextMap_MediumCHS.json",
+        "json_pointer": "/138639421",
+        "source_sha256": "dfce0d08e4c6eb85c71de097e0690efc0cd04235000c075ce2dd3e2f5e667a22",
+        "node_sha256": "8080c052d7f78eb9d4d53a96d0f4e88cb38cf294f1e6b62678b27ab7c9eba276"
+      },
+      "requested_pointer": "/138639421",
+      "issues": []
+    },
+    "description": {
+      "status": "ready",
+      "text": "枫原万叶触发扩散或星扩散反应后，枫原万叶的每点元素精通，会为队伍中所有角色提供0.04%对应元素伤害加成，持续8秒。通过这种方式获得的不同元素伤害加成可以共存。",
+      "text_map_hash": 1440992683,
+      "hash_origin": {
+        "definition": {
+          "definition_id": "a7869af3266d2da2fce2d72498ef73b030c1de8ef03e42b772706df1793c114b",
+          "definition_kind": "excel_record",
+          "owner_definition_id": null,
+          "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+          "json_pointer": "/3534",
+          "variant_key": null,
+          "namespace_key": "excel",
+          "node_sha256": "a4f87c40d2a0adbd30d57e3ca4e59f916964a0f019264b4648f8be523dabd017",
+          "exact_key": {
+            "proudSkillId": 472201
+          }
+        },
+        "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+        "source_sha256": "4897a68ebc6772e7b553a58a548a3756a1cf9b6e9ca22250bb0da987a3fa4d70",
+        "json_pointer": "/3534",
+        "node_sha256": "a4f87c40d2a0adbd30d57e3ca4e59f916964a0f019264b4648f8be523dabd017",
+        "present": true,
+        "raw_pointer": "/3534/descTextMapHash",
+        "requested_pointer": "/3534/descTextMapHash",
+        "field_node_sha256": "13a94bcb6a8b051b25a932bfb64048308084e39686066397131b99bb858d3a38"
+      },
+      "text_origin": {
+        "source_path": "TextMap/TextMap_MediumCHS.json",
+        "json_pointer": "/1440992683",
+        "source_sha256": "dfce0d08e4c6eb85c71de097e0690efc0cd04235000c075ce2dd3e2f5e667a22",
+        "node_sha256": "81e8c2c2a9109a01d0d991b4565ab63dd6c0f2cc68c661406914441b3369e14f"
+      },
+      "requested_pointer": "/1440992683",
+      "issues": []
+    },
+    "unlock_description": {
+      "status": "pending",
+      "text": null,
+      "text_map_hash": 409536634,
+      "hash_origin": {
+        "definition": {
+          "definition_id": "a7869af3266d2da2fce2d72498ef73b030c1de8ef03e42b772706df1793c114b",
+          "definition_kind": "excel_record",
+          "owner_definition_id": null,
+          "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+          "json_pointer": "/3534",
+          "variant_key": null,
+          "namespace_key": "excel",
+          "node_sha256": "a4f87c40d2a0adbd30d57e3ca4e59f916964a0f019264b4648f8be523dabd017",
+          "exact_key": {
+            "proudSkillId": 472201
+          }
+        },
+        "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+        "source_sha256": "4897a68ebc6772e7b553a58a548a3756a1cf9b6e9ca22250bb0da987a3fa4d70",
+        "json_pointer": "/3534",
+        "node_sha256": "a4f87c40d2a0adbd30d57e3ca4e59f916964a0f019264b4648f8be523dabd017",
+        "present": true,
+        "raw_pointer": "/3534/unlockDescTextMapHash",
+        "requested_pointer": "/3534/unlockDescTextMapHash",
+        "field_node_sha256": "07bfa11ed0a2f5933dda93155f9308bd570b7d4c9574289607b26dc0ac217ad5"
+      },
+      "text_origin": null,
+      "requested_pointer": "/409536634",
+      "issues": [
+        {
+          "code": "missing_description_text"
+        }
+      ]
+    },
+    "status": "partial"
+  },
+  "execution_support": "not_evaluated",
+  "gameplay_semantics": "not_evaluated",
+  "issues": [
+    {
+      "code": "missing_description_text",
+      "scope": "description",
+      "blocks_source": false,
+      "description_field": "unlock_description"
+    }
+  ],
+  "limits": {
+    "max_bytes": 2097152,
+    "max_openings": 16,
+    "max_candidates": 64,
+    "max_promote_records": 32,
+    "max_operations": 128,
+    "max_abilities": 64,
+    "max_description_bytes": 32768,
+    "max_issues": 256,
+    "max_nodes": 2000,
+    "max_edges": 10000,
+    "max_depth": 64
+  },
+  "source_fingerprint": "b59016291ab9c23faedde3ac51497108a1c2f2b4c5346947a8527986d5b4a958",
+  "unlock": {
+    "status": "eligible_under_declared_progression",
+    "supplied": {
+      "character_level": 90,
+      "ascension": 6
+    },
+    "requirement": {
+      "status": "ready",
+      "required_ascension": 4,
+      "need_avatar_promote_level": {
+        "present": true,
+        "raw_value": 4,
+        "origin": {
+          "source_path": "ExcelBinOutput/AvatarSkillDepotExcelConfigData.json",
+          "source_sha256": "76058ddd01946435248d158ef4cc659ba995643c5635e9948161ce47a7ed814b",
+          "json_pointer": "/97/inherentProudSkillOpens/1",
+          "node_sha256": "9e930ed8e9c157110bcd98ff8f663d6d08d8db40f9046c53c970d8ab47992ecc",
+          "present": true,
+          "raw_pointer": "/97/inherentProudSkillOpens/1/needAvatarPromoteLevel",
+          "requested_pointer": "/97/inherentProudSkillOpens/1/needAvatarPromoteLevel",
+          "field_node_sha256": "4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a"
+        }
+      },
+      "proud_break_level": {
+        "present": true,
+        "raw_value": 4,
+        "origin": {
+          "definition": {
+            "definition_id": "a7869af3266d2da2fce2d72498ef73b030c1de8ef03e42b772706df1793c114b",
+            "definition_kind": "excel_record",
+            "owner_definition_id": null,
+            "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+            "json_pointer": "/3534",
+            "variant_key": null,
+            "namespace_key": "excel",
+            "node_sha256": "a4f87c40d2a0adbd30d57e3ca4e59f916964a0f019264b4648f8be523dabd017",
+            "exact_key": {
+              "proudSkillId": 472201
+            }
+          },
+          "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+          "source_sha256": "4897a68ebc6772e7b553a58a548a3756a1cf9b6e9ca22250bb0da987a3fa4d70",
+          "json_pointer": "/3534",
+          "node_sha256": "a4f87c40d2a0adbd30d57e3ca4e59f916964a0f019264b4648f8be523dabd017",
+          "present": true,
+          "raw_pointer": "/3534/breakLevel",
+          "requested_pointer": "/3534/breakLevel",
+          "field_node_sha256": "4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a"
+        }
+      }
+    },
+    "selected_promote_record": {
+      "definition": {
+        "definition_id": "800cf4dbaac89ad7dc7a8b1a5d23e09eeb3413f52b90fe0585c6a7efde58a2ce",
+        "definition_kind": "excel_record",
+        "owner_definition_id": null,
+        "source_path": "ExcelBinOutput/AvatarPromoteExcelConfigData.json",
+        "json_pointer": "/230",
+        "variant_key": null,
+        "namespace_key": "excel",
+        "node_sha256": "0b53b614dcde8be5149a3a8f3a398b54746e428ccad4fad1869abcb533b535cb",
+        "exact_key": {
+          "source_index": 230
+        }
+      },
+      "source_path": "ExcelBinOutput/AvatarPromoteExcelConfigData.json",
+      "json_pointer": "/230",
+      "source_sha256": "d998c67261ab4fd7479e264813adfa039548f9d8f3223c34f45df4c911ee2b8b",
+      "node_sha256": "0b53b614dcde8be5149a3a8f3a398b54746e428ccad4fad1869abcb533b535cb",
+      "record": {
+        "requiredPlayerLevel": 50,
+        "scoinCost": 120000,
+        "addProps": [
+          {
+            "propType": "FIGHT_PROP_BASE_HP",
+            "value": 4267.18359375
+          },
+          {
+            "propType": "FIGHT_PROP_BASE_DEFENSE",
+            "value": 257.9849853515625
+          },
+          {
+            "propType": "FIGHT_PROP_BASE_ATTACK",
+            "value": 94.80816650390625
+          },
+          {
+            "propType": "FIGHT_PROP_ELEMENT_MASTERY",
+            "value": 115.19999694824219
+          }
+        ],
+        "unlockMaxLevel": 90,
+        "costItems": [
+          {
+            "count": 6,
+            "id": 104154
+          },
+          {
+            "count": 20,
+            "id": 113022
+          },
+          {
+            "count": 60,
+            "id": 101206
+          },
+          {
+            "count": 24,
+            "id": 112037
+          }
+        ],
+        "avatarPromoteId": 47,
+        "promoteLevel": 6
+      }
+    },
+    "checks": [
+      {
+        "id": "current_stage_max_level",
+        "status": "pass",
+        "actual": 90,
+        "expected": {
+          "maximum": 90
+        },
+        "origin": {
+          "definition": {
+            "definition_id": "800cf4dbaac89ad7dc7a8b1a5d23e09eeb3413f52b90fe0585c6a7efde58a2ce",
+            "definition_kind": "excel_record",
+            "owner_definition_id": null,
+            "source_path": "ExcelBinOutput/AvatarPromoteExcelConfigData.json",
+            "json_pointer": "/230",
+            "variant_key": null,
+            "namespace_key": "excel",
+            "node_sha256": "0b53b614dcde8be5149a3a8f3a398b54746e428ccad4fad1869abcb533b535cb",
+            "exact_key": {
+              "source_index": 230
+            }
+          },
+          "source_path": "ExcelBinOutput/AvatarPromoteExcelConfigData.json",
+          "source_sha256": "d998c67261ab4fd7479e264813adfa039548f9d8f3223c34f45df4c911ee2b8b",
+          "json_pointer": "/230",
+          "node_sha256": "0b53b614dcde8be5149a3a8f3a398b54746e428ccad4fad1869abcb533b535cb",
+          "present": true,
+          "raw_pointer": "/230/unlockMaxLevel",
+          "requested_pointer": "/230/unlockMaxLevel",
+          "field_node_sha256": "69f59c273b6e669ac32a6dd5e1b2cb63333d8b004f9696447aee2d422ce63763"
+        }
+      },
+      {
+        "id": "explicit_ascension_threshold",
+        "status": "pass",
+        "actual": 6,
+        "expected": {
+          "minimum": 4
+        },
+        "origin": {
+          "need_avatar_promote_level": {
+            "source_path": "ExcelBinOutput/AvatarSkillDepotExcelConfigData.json",
+            "source_sha256": "76058ddd01946435248d158ef4cc659ba995643c5635e9948161ce47a7ed814b",
+            "json_pointer": "/97/inherentProudSkillOpens/1",
+            "node_sha256": "9e930ed8e9c157110bcd98ff8f663d6d08d8db40f9046c53c970d8ab47992ecc",
+            "present": true,
+            "raw_pointer": "/97/inherentProudSkillOpens/1/needAvatarPromoteLevel",
+            "requested_pointer": "/97/inherentProudSkillOpens/1/needAvatarPromoteLevel",
+            "field_node_sha256": "4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a"
+          },
+          "proud_break_level": {
+            "definition": {
+              "definition_id": "a7869af3266d2da2fce2d72498ef73b030c1de8ef03e42b772706df1793c114b",
+              "definition_kind": "excel_record",
+              "owner_definition_id": null,
+              "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+              "json_pointer": "/3534",
+              "variant_key": null,
+              "namespace_key": "excel",
+              "node_sha256": "a4f87c40d2a0adbd30d57e3ca4e59f916964a0f019264b4648f8be523dabd017",
+              "exact_key": {
+                "proudSkillId": 472201
+              }
+            },
+            "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+            "source_sha256": "4897a68ebc6772e7b553a58a548a3756a1cf9b6e9ca22250bb0da987a3fa4d70",
+            "json_pointer": "/3534",
+            "node_sha256": "a4f87c40d2a0adbd30d57e3ca4e59f916964a0f019264b4648f8be523dabd017",
+            "present": true,
+            "raw_pointer": "/3534/breakLevel",
+            "requested_pointer": "/3534/breakLevel",
+            "field_node_sha256": "4b227777d4dd1fc61c6f884f48641d02b4d121d3fd328cb08b5531fcacdabf8a"
+          }
+        }
+      }
+    ],
+    "eligibility_scope": "explicit_ascension_threshold_and_current_stage_max_level",
+    "complete_character_validity": "not_evaluated",
+    "unchecked": [
+      "minimum_character_level",
+      "promotion_flow",
+      "account_player_level",
+      "current_client_unlock_state"
+    ],
+    "issues": []
+  },
+  "unlock_fingerprint": "30684aee4dd000ad46b28cbcc619aa789ab0b09a2bbb0e652d9451b72ec377e5",
+  "content_fingerprint": "b1ad1870041a892634b3e9824655e3121566baa3583c318f403fd73b2e73b396"
+}

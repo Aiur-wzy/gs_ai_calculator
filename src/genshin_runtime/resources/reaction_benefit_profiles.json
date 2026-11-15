@@ -1,0 +1,2326 @@
+{
+  "schema_version": 1,
+  "profile_id": "equipment-ordinary-swirl-benefits-v1",
+  "profile_version": 2,
+  "commit": "224708edc8056f27e9ffc4eacabe797d75274636",
+  "old_commit": "9424e4e556bd80e5196be7d3c52723d3a35b30e7",
+  "fields": {
+    "EMGBJJOIENB": "onAdded",
+    "LBABCICJBKE": "onAttackLanded",
+    "MJKPCGCAPLK": "targetPredicates",
+    "MLJNNELMEFL": "successActions",
+    "LFIJIMIMBIH": "modifierMixins",
+    "HDOJNFJLKAP": "reactionTypes",
+    "KHJMNJNEADF": "actions",
+    "OMALBHAAHHA": "range",
+    "GPPCPGHLDHL": "stacking",
+    "JOFNJODFEDG": "element"
+  },
+  "types": {
+    "PBIOEEHFHFD": "Predicated",
+    "DPNJGLIMCHM": "ByAttackTags",
+    "LEHABIJBEAO": "ByHitElement",
+    "ANDAIHHJDIB": "DoActionByElementReactionMixin"
+  },
+  "admission": {
+    "ability": {
+      "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+      "json_pointer": "/25/Default",
+      "node_sha256": "242533b98294ee9314e7d7dafe8fb38d710914fe7874824b1e4822371310e372"
+    },
+    "talent": {
+      "source_path": "BinOutput/Talent/RelicTalents/ConfigAffix_Relic.json",
+      "json_pointer": "/Relic_ReactionWindEnhance",
+      "node_sha256": "2c3f2258deaab0fc0e4a2de5ecc4a43e4a2497451b2a867bcc217207da50f7bc"
+    },
+    "affix": {
+      "source_path": "ExcelBinOutput/EquipAffixExcelConfigData.json",
+      "json_pointer": "/1309",
+      "node_sha256": "f3bc6dcb4b4f775da82eafc0f70a3794d5645b8ffa200b2c8fb3623e839db650"
+    }
+  },
+  "files": [
+    {
+      "path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+      "old_source_sha256": "e273a8e4fc5928829bbac96ae61b46003c7bfd95ffe3a24e8b6a080609a409f7",
+      "workspace_source_sha256": "75fb6e13556ce18d5855a20eb2f5ab944091c0bf300a39e1b461dbbac0824c2a",
+      "git_blob_sha256": "7f5151cdc23e85ca9ba5e6a003601710f49030daf94298dd49eb9eb5b429ed77",
+      "raw_equal": false,
+      "crlf_only_equal": true
+    },
+    {
+      "path": "BinOutput/Talent/RelicTalents/ConfigAffix_Relic.json",
+      "old_source_sha256": "5f11748a02b7862d3de3d0d564e918d2df3fedd098191990b220c1d580d5ad97",
+      "workspace_source_sha256": "0937b29eb3f02b07aacdc02abdcf0af460ac7cb5cf951207ff626ba27b4052ba",
+      "git_blob_sha256": "84bf25a63d5c35e00eb829c93946e130099408382560ad4878e31d69afcc822e",
+      "raw_equal": false,
+      "crlf_only_equal": true
+    },
+    {
+      "path": "ExcelBinOutput/EquipAffixExcelConfigData.json",
+      "old_source_sha256": "a033acd70ac085421f2c0eb4eb06c0d74b7676b9a652bfe37881ed0680b089b2",
+      "workspace_source_sha256": "67cce4b66ecfae8ab20b4567005ff0e2efa76446af1fcc71d99e8a2383def4e6",
+      "git_blob_sha256": "1ab75da49770dc042c2cabc5e7603798de7ef82800ce5519fd02e190362586cf",
+      "raw_equal": false,
+      "crlf_only_equal": true
+    }
+  ],
+  "mapping_evidence": {
+    "scope": "project-local cross-snapshot mapping, not an official map; no gameplay semantics implied",
+    "parent_checks": [
+      {
+        "path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+        "identity": "Relic_ReactionWindEnhance",
+        "category": "field",
+        "token": "EMGBJJOIENB",
+        "semantic": "onAdded",
+        "pointer": "/25/Default",
+        "old_pointer": "/25/Default",
+        "node_sha256": "242533b98294ee9314e7d7dafe8fb38d710914fe7874824b1e4822371310e372",
+        "old_node_sha256": "1b560b474cc6bf467220673a53a1b94ce09f1320ff7b3bdf92914f0d400a3e3c",
+        "whole_parent_equals_old": true
+      },
+      {
+        "path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+        "identity": "Relic_ReactionWindEnhance",
+        "category": "field",
+        "token": "LBABCICJBKE",
+        "semantic": "onAttackLanded",
+        "pointer": "/25/Default/GPPBBDEICKP/UNIQUE_Relic_ReactionWindEnhance_Handler",
+        "old_pointer": "/25/Default/modifiers/UNIQUE_Relic_ReactionWindEnhance_Handler",
+        "node_sha256": "6d8819a5592669d7f6c8bc001e1e8abea22fbd5befdaababe78bfc903525cb03",
+        "old_node_sha256": "dbd68df9e6e6613c2a692e579baa6db6b51f6d220b78375d146700d1c50a9513",
+        "whole_parent_equals_old": true
+      },
+      {
+        "path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+        "identity": "Relic_ReactionWindEnhance",
+        "category": "field",
+        "token": "LFIJIMIMBIH",
+        "semantic": "modifierMixins",
+        "pointer": "/25/Default/GPPBBDEICKP/UNIQUE_Relic_ReactionWindEnhance_Handler",
+        "old_pointer": "/25/Default/modifiers/UNIQUE_Relic_ReactionWindEnhance_Handler",
+        "node_sha256": "6d8819a5592669d7f6c8bc001e1e8abea22fbd5befdaababe78bfc903525cb03",
+        "old_node_sha256": "dbd68df9e6e6613c2a692e579baa6db6b51f6d220b78375d146700d1c50a9513",
+        "whole_parent_equals_old": true
+      },
+      {
+        "path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+        "identity": "Relic_ReactionWindEnhance",
+        "category": "field",
+        "token": "MJKPCGCAPLK",
+        "semantic": "targetPredicates",
+        "pointer": "/25/Default/GPPBBDEICKP/UNIQUE_Relic_ReactionWindEnhance_Handler/LBABCICJBKE/0",
+        "old_pointer": "/25/Default/modifiers/UNIQUE_Relic_ReactionWindEnhance_Handler/onAttackLanded/0",
+        "node_sha256": "b280fbdab7070f81b59e7f8475e2eaa70e321a83f59236bcb3bf22d3bd18561d",
+        "old_node_sha256": "f5bed52ad65b6c8e608e509790ce82590d0d6a4c24eaeaef2d34c664ac90e5d7",
+        "whole_parent_equals_old": true
+      },
+      {
+        "path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+        "identity": "Relic_ReactionWindEnhance",
+        "category": "field",
+        "token": "MLJNNELMEFL",
+        "semantic": "successActions",
+        "pointer": "/25/Default/GPPBBDEICKP/UNIQUE_Relic_ReactionWindEnhance_Handler/LBABCICJBKE/0",
+        "old_pointer": "/25/Default/modifiers/UNIQUE_Relic_ReactionWindEnhance_Handler/onAttackLanded/0",
+        "node_sha256": "b280fbdab7070f81b59e7f8475e2eaa70e321a83f59236bcb3bf22d3bd18561d",
+        "old_node_sha256": "f5bed52ad65b6c8e608e509790ce82590d0d6a4c24eaeaef2d34c664ac90e5d7",
+        "whole_parent_equals_old": true
+      },
+      {
+        "path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+        "identity": "Relic_ReactionWindEnhance",
+        "category": "type",
+        "token": "PBIOEEHFHFD",
+        "semantic": "Predicated",
+        "pointer": "/25/Default/GPPBBDEICKP/UNIQUE_Relic_ReactionWindEnhance_Handler/LBABCICJBKE/0",
+        "old_pointer": "/25/Default/modifiers/UNIQUE_Relic_ReactionWindEnhance_Handler/onAttackLanded/0",
+        "node_sha256": "b280fbdab7070f81b59e7f8475e2eaa70e321a83f59236bcb3bf22d3bd18561d",
+        "old_node_sha256": "f5bed52ad65b6c8e608e509790ce82590d0d6a4c24eaeaef2d34c664ac90e5d7",
+        "whole_parent_equals_old": true
+      },
+      {
+        "path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+        "identity": "Relic_ReactionWindEnhance",
+        "category": "type",
+        "token": "DPNJGLIMCHM",
+        "semantic": "ByAttackTags",
+        "pointer": "/25/Default/GPPBBDEICKP/UNIQUE_Relic_ReactionWindEnhance_Handler/LBABCICJBKE/0/MJKPCGCAPLK/0",
+        "old_pointer": "/25/Default/modifiers/UNIQUE_Relic_ReactionWindEnhance_Handler/onAttackLanded/0/targetPredicates/0",
+        "node_sha256": "02ef22c9d1caaffc26fd29bed627a158830d20bb597869a4e3e96636446882c9",
+        "old_node_sha256": "fe0c1907b4392e3e20489534f86e127e8e763a9e3c030ba9b616afbb23843eb3",
+        "whole_parent_equals_old": true
+      },
+      {
+        "path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+        "identity": "Relic_ReactionWindEnhance",
+        "category": "field",
+        "token": "JOFNJODFEDG",
+        "semantic": "element",
+        "pointer": "/25/Default/GPPBBDEICKP/UNIQUE_Relic_ReactionWindEnhance_Handler/LBABCICJBKE/0/MLJNNELMEFL/0/IJDGNIIOHLM/0",
+        "old_pointer": "/25/Default/modifiers/UNIQUE_Relic_ReactionWindEnhance_Handler/onAttackLanded/0/successActions/0/predicates/0",
+        "node_sha256": "7cde243c6577716cf7343071831c3694452f5bd7727c742965ec660c9bf86198",
+        "old_node_sha256": "5e144f42ab35557ecfbde4b01722af8eb8f250a85d6757105eecb56538a37317",
+        "whole_parent_equals_old": true
+      },
+      {
+        "path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+        "identity": "Relic_ReactionWindEnhance",
+        "category": "type",
+        "token": "LEHABIJBEAO",
+        "semantic": "ByHitElement",
+        "pointer": "/25/Default/GPPBBDEICKP/UNIQUE_Relic_ReactionWindEnhance_Handler/LBABCICJBKE/0/MLJNNELMEFL/0/IJDGNIIOHLM/0",
+        "old_pointer": "/25/Default/modifiers/UNIQUE_Relic_ReactionWindEnhance_Handler/onAttackLanded/0/successActions/0/predicates/0",
+        "node_sha256": "7cde243c6577716cf7343071831c3694452f5bd7727c742965ec660c9bf86198",
+        "old_node_sha256": "5e144f42ab35557ecfbde4b01722af8eb8f250a85d6757105eecb56538a37317",
+        "whole_parent_equals_old": true
+      },
+      {
+        "path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+        "identity": "Relic_ReactionWindEnhance",
+        "category": "field",
+        "token": "JOFNJODFEDG",
+        "semantic": "element",
+        "pointer": "/25/Default/GPPBBDEICKP/UNIQUE_Relic_ReactionWindEnhance_Handler/LBABCICJBKE/0/MLJNNELMEFL/1/IJDGNIIOHLM/0",
+        "old_pointer": "/25/Default/modifiers/UNIQUE_Relic_ReactionWindEnhance_Handler/onAttackLanded/0/successActions/1/predicates/0",
+        "node_sha256": "0ac8d0bb08379a5ae6f27d90170568c6fda2e8490445c2c7fc9c9fe4a2bb556b",
+        "old_node_sha256": "cc1132653594b09df2242149e8971bd95c4987cdc88425299c053354215b4485",
+        "whole_parent_equals_old": true
+      },
+      {
+        "path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+        "identity": "Relic_ReactionWindEnhance",
+        "category": "type",
+        "token": "LEHABIJBEAO",
+        "semantic": "ByHitElement",
+        "pointer": "/25/Default/GPPBBDEICKP/UNIQUE_Relic_ReactionWindEnhance_Handler/LBABCICJBKE/0/MLJNNELMEFL/1/IJDGNIIOHLM/0",
+        "old_pointer": "/25/Default/modifiers/UNIQUE_Relic_ReactionWindEnhance_Handler/onAttackLanded/0/successActions/1/predicates/0",
+        "node_sha256": "0ac8d0bb08379a5ae6f27d90170568c6fda2e8490445c2c7fc9c9fe4a2bb556b",
+        "old_node_sha256": "cc1132653594b09df2242149e8971bd95c4987cdc88425299c053354215b4485",
+        "whole_parent_equals_old": true
+      },
+      {
+        "path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+        "identity": "Relic_ReactionWindEnhance",
+        "category": "field",
+        "token": "JOFNJODFEDG",
+        "semantic": "element",
+        "pointer": "/25/Default/GPPBBDEICKP/UNIQUE_Relic_ReactionWindEnhance_Handler/LBABCICJBKE/0/MLJNNELMEFL/2/IJDGNIIOHLM/0",
+        "old_pointer": "/25/Default/modifiers/UNIQUE_Relic_ReactionWindEnhance_Handler/onAttackLanded/0/successActions/2/predicates/0",
+        "node_sha256": "f3f53f624c56f431746d4cb6f03bc1c59a8e4e7f8c1ca72c1f90a86952b0526f",
+        "old_node_sha256": "fa7e2b91a85f6ca24408ee331e12e1212705602566c660bf1189878aa6645d02",
+        "whole_parent_equals_old": true
+      },
+      {
+        "path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+        "identity": "Relic_ReactionWindEnhance",
+        "category": "type",
+        "token": "LEHABIJBEAO",
+        "semantic": "ByHitElement",
+        "pointer": "/25/Default/GPPBBDEICKP/UNIQUE_Relic_ReactionWindEnhance_Handler/LBABCICJBKE/0/MLJNNELMEFL/2/IJDGNIIOHLM/0",
+        "old_pointer": "/25/Default/modifiers/UNIQUE_Relic_ReactionWindEnhance_Handler/onAttackLanded/0/successActions/2/predicates/0",
+        "node_sha256": "f3f53f624c56f431746d4cb6f03bc1c59a8e4e7f8c1ca72c1f90a86952b0526f",
+        "old_node_sha256": "fa7e2b91a85f6ca24408ee331e12e1212705602566c660bf1189878aa6645d02",
+        "whole_parent_equals_old": true
+      },
+      {
+        "path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+        "identity": "Relic_ReactionWindEnhance",
+        "category": "field",
+        "token": "JOFNJODFEDG",
+        "semantic": "element",
+        "pointer": "/25/Default/GPPBBDEICKP/UNIQUE_Relic_ReactionWindEnhance_Handler/LBABCICJBKE/0/MLJNNELMEFL/3/IJDGNIIOHLM/0",
+        "old_pointer": "/25/Default/modifiers/UNIQUE_Relic_ReactionWindEnhance_Handler/onAttackLanded/0/successActions/3/predicates/0",
+        "node_sha256": "05ede632eec3a20c929e8a0468941b486d443b6a604777644e0e1fcd9edcc06a",
+        "old_node_sha256": "ed5c5d8ace7c55a88d64b8bf3c060b1fb7bedbbf1f63ff717f2f237696ebee04",
+        "whole_parent_equals_old": true
+      },
+      {
+        "path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+        "identity": "Relic_ReactionWindEnhance",
+        "category": "type",
+        "token": "LEHABIJBEAO",
+        "semantic": "ByHitElement",
+        "pointer": "/25/Default/GPPBBDEICKP/UNIQUE_Relic_ReactionWindEnhance_Handler/LBABCICJBKE/0/MLJNNELMEFL/3/IJDGNIIOHLM/0",
+        "old_pointer": "/25/Default/modifiers/UNIQUE_Relic_ReactionWindEnhance_Handler/onAttackLanded/0/successActions/3/predicates/0",
+        "node_sha256": "05ede632eec3a20c929e8a0468941b486d443b6a604777644e0e1fcd9edcc06a",
+        "old_node_sha256": "ed5c5d8ace7c55a88d64b8bf3c060b1fb7bedbbf1f63ff717f2f237696ebee04",
+        "whole_parent_equals_old": true
+      },
+      {
+        "path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+        "identity": "Relic_ReactionWindEnhance",
+        "category": "field",
+        "token": "HDOJNFJLKAP",
+        "semantic": "reactionTypes",
+        "pointer": "/25/Default/GPPBBDEICKP/UNIQUE_Relic_ReactionWindEnhance_Handler/LFIJIMIMBIH/0",
+        "old_pointer": "/25/Default/modifiers/UNIQUE_Relic_ReactionWindEnhance_Handler/modifierMixins/0",
+        "node_sha256": "d0c941809d0a74c3179f26426b2d2f597b3892e257d06e86cc4b212fcfaad8bc",
+        "old_node_sha256": "842954cd74c2fa5228327a800b19937e47a092da17ebc317046d8ad7747e187f",
+        "whole_parent_equals_old": true
+      },
+      {
+        "path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+        "identity": "Relic_ReactionWindEnhance",
+        "category": "field",
+        "token": "KHJMNJNEADF",
+        "semantic": "actions",
+        "pointer": "/25/Default/GPPBBDEICKP/UNIQUE_Relic_ReactionWindEnhance_Handler/LFIJIMIMBIH/0",
+        "old_pointer": "/25/Default/modifiers/UNIQUE_Relic_ReactionWindEnhance_Handler/modifierMixins/0",
+        "node_sha256": "d0c941809d0a74c3179f26426b2d2f597b3892e257d06e86cc4b212fcfaad8bc",
+        "old_node_sha256": "842954cd74c2fa5228327a800b19937e47a092da17ebc317046d8ad7747e187f",
+        "whole_parent_equals_old": true
+      },
+      {
+        "path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+        "identity": "Relic_ReactionWindEnhance",
+        "category": "field",
+        "token": "OMALBHAAHHA",
+        "semantic": "range",
+        "pointer": "/25/Default/GPPBBDEICKP/UNIQUE_Relic_ReactionWindEnhance_Handler/LFIJIMIMBIH/0",
+        "old_pointer": "/25/Default/modifiers/UNIQUE_Relic_ReactionWindEnhance_Handler/modifierMixins/0",
+        "node_sha256": "d0c941809d0a74c3179f26426b2d2f597b3892e257d06e86cc4b212fcfaad8bc",
+        "old_node_sha256": "842954cd74c2fa5228327a800b19937e47a092da17ebc317046d8ad7747e187f",
+        "whole_parent_equals_old": true
+      },
+      {
+        "path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+        "identity": "Relic_ReactionWindEnhance",
+        "category": "type",
+        "token": "ANDAIHHJDIB",
+        "semantic": "DoActionByElementReactionMixin",
+        "pointer": "/25/Default/GPPBBDEICKP/UNIQUE_Relic_ReactionWindEnhance_Handler/LFIJIMIMBIH/0",
+        "old_pointer": "/25/Default/modifiers/UNIQUE_Relic_ReactionWindEnhance_Handler/modifierMixins/0",
+        "node_sha256": "d0c941809d0a74c3179f26426b2d2f597b3892e257d06e86cc4b212fcfaad8bc",
+        "old_node_sha256": "842954cd74c2fa5228327a800b19937e47a092da17ebc317046d8ad7747e187f",
+        "whole_parent_equals_old": true
+      },
+      {
+        "path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+        "identity": "Relic_ReactionWindEnhance",
+        "category": "field",
+        "token": "HDOJNFJLKAP",
+        "semantic": "reactionTypes",
+        "pointer": "/25/Default/GPPBBDEICKP/UNIQUE_Relic_ReactionWindEnhance_Handler/LFIJIMIMBIH/1",
+        "old_pointer": "/25/Default/modifiers/UNIQUE_Relic_ReactionWindEnhance_Handler/modifierMixins/1",
+        "node_sha256": "245118b53bd9e4ba287ee4780c6cf617702fb7f1a1f68aa98847a61a93fc058a",
+        "old_node_sha256": "3361923b63c2df43a402775dc7741cb3e11214772b18adda8ca11b5c89e008fa",
+        "whole_parent_equals_old": true
+      },
+      {
+        "path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+        "identity": "Relic_ReactionWindEnhance",
+        "category": "field",
+        "token": "KHJMNJNEADF",
+        "semantic": "actions",
+        "pointer": "/25/Default/GPPBBDEICKP/UNIQUE_Relic_ReactionWindEnhance_Handler/LFIJIMIMBIH/1",
+        "old_pointer": "/25/Default/modifiers/UNIQUE_Relic_ReactionWindEnhance_Handler/modifierMixins/1",
+        "node_sha256": "245118b53bd9e4ba287ee4780c6cf617702fb7f1a1f68aa98847a61a93fc058a",
+        "old_node_sha256": "3361923b63c2df43a402775dc7741cb3e11214772b18adda8ca11b5c89e008fa",
+        "whole_parent_equals_old": true
+      },
+      {
+        "path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+        "identity": "Relic_ReactionWindEnhance",
+        "category": "field",
+        "token": "OMALBHAAHHA",
+        "semantic": "range",
+        "pointer": "/25/Default/GPPBBDEICKP/UNIQUE_Relic_ReactionWindEnhance_Handler/LFIJIMIMBIH/1",
+        "old_pointer": "/25/Default/modifiers/UNIQUE_Relic_ReactionWindEnhance_Handler/modifierMixins/1",
+        "node_sha256": "245118b53bd9e4ba287ee4780c6cf617702fb7f1a1f68aa98847a61a93fc058a",
+        "old_node_sha256": "3361923b63c2df43a402775dc7741cb3e11214772b18adda8ca11b5c89e008fa",
+        "whole_parent_equals_old": true
+      },
+      {
+        "path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+        "identity": "Relic_ReactionWindEnhance",
+        "category": "type",
+        "token": "ANDAIHHJDIB",
+        "semantic": "DoActionByElementReactionMixin",
+        "pointer": "/25/Default/GPPBBDEICKP/UNIQUE_Relic_ReactionWindEnhance_Handler/LFIJIMIMBIH/1",
+        "old_pointer": "/25/Default/modifiers/UNIQUE_Relic_ReactionWindEnhance_Handler/modifierMixins/1",
+        "node_sha256": "245118b53bd9e4ba287ee4780c6cf617702fb7f1a1f68aa98847a61a93fc058a",
+        "old_node_sha256": "3361923b63c2df43a402775dc7741cb3e11214772b18adda8ca11b5c89e008fa",
+        "whole_parent_equals_old": true
+      },
+      {
+        "path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+        "identity": "Relic_ReactionWindEnhance",
+        "category": "field",
+        "token": "HDOJNFJLKAP",
+        "semantic": "reactionTypes",
+        "pointer": "/25/Default/GPPBBDEICKP/UNIQUE_Relic_ReactionWindEnhance_Handler/LFIJIMIMBIH/2",
+        "old_pointer": "/25/Default/modifiers/UNIQUE_Relic_ReactionWindEnhance_Handler/modifierMixins/2",
+        "node_sha256": "e30dfc1833599c0cc77d3beeb31bc0ed0bcd3807d4f25d448aafd86f0896ef8f",
+        "old_node_sha256": "1205dbf350664ac58bc16631a0b9e0337a1bce12a130655ec1bf5512f54bfe0e",
+        "whole_parent_equals_old": true
+      },
+      {
+        "path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+        "identity": "Relic_ReactionWindEnhance",
+        "category": "field",
+        "token": "KHJMNJNEADF",
+        "semantic": "actions",
+        "pointer": "/25/Default/GPPBBDEICKP/UNIQUE_Relic_ReactionWindEnhance_Handler/LFIJIMIMBIH/2",
+        "old_pointer": "/25/Default/modifiers/UNIQUE_Relic_ReactionWindEnhance_Handler/modifierMixins/2",
+        "node_sha256": "e30dfc1833599c0cc77d3beeb31bc0ed0bcd3807d4f25d448aafd86f0896ef8f",
+        "old_node_sha256": "1205dbf350664ac58bc16631a0b9e0337a1bce12a130655ec1bf5512f54bfe0e",
+        "whole_parent_equals_old": true
+      },
+      {
+        "path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+        "identity": "Relic_ReactionWindEnhance",
+        "category": "field",
+        "token": "OMALBHAAHHA",
+        "semantic": "range",
+        "pointer": "/25/Default/GPPBBDEICKP/UNIQUE_Relic_ReactionWindEnhance_Handler/LFIJIMIMBIH/2",
+        "old_pointer": "/25/Default/modifiers/UNIQUE_Relic_ReactionWindEnhance_Handler/modifierMixins/2",
+        "node_sha256": "e30dfc1833599c0cc77d3beeb31bc0ed0bcd3807d4f25d448aafd86f0896ef8f",
+        "old_node_sha256": "1205dbf350664ac58bc16631a0b9e0337a1bce12a130655ec1bf5512f54bfe0e",
+        "whole_parent_equals_old": true
+      },
+      {
+        "path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+        "identity": "Relic_ReactionWindEnhance",
+        "category": "type",
+        "token": "ANDAIHHJDIB",
+        "semantic": "DoActionByElementReactionMixin",
+        "pointer": "/25/Default/GPPBBDEICKP/UNIQUE_Relic_ReactionWindEnhance_Handler/LFIJIMIMBIH/2",
+        "old_pointer": "/25/Default/modifiers/UNIQUE_Relic_ReactionWindEnhance_Handler/modifierMixins/2",
+        "node_sha256": "e30dfc1833599c0cc77d3beeb31bc0ed0bcd3807d4f25d448aafd86f0896ef8f",
+        "old_node_sha256": "1205dbf350664ac58bc16631a0b9e0337a1bce12a130655ec1bf5512f54bfe0e",
+        "whole_parent_equals_old": true
+      },
+      {
+        "path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+        "identity": "Relic_ReactionWindEnhance",
+        "category": "field",
+        "token": "HDOJNFJLKAP",
+        "semantic": "reactionTypes",
+        "pointer": "/25/Default/GPPBBDEICKP/UNIQUE_Relic_ReactionWindEnhance_Handler/LFIJIMIMBIH/3",
+        "old_pointer": "/25/Default/modifiers/UNIQUE_Relic_ReactionWindEnhance_Handler/modifierMixins/3",
+        "node_sha256": "21d1879f5344cae180089239b0249b8121c933060d5b56bdbee391ebf0fe6200",
+        "old_node_sha256": "830b06697442c859cac63f0c14925627347ae2e815de50ad219c58d47f161bf7",
+        "whole_parent_equals_old": true
+      },
+      {
+        "path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+        "identity": "Relic_ReactionWindEnhance",
+        "category": "field",
+        "token": "KHJMNJNEADF",
+        "semantic": "actions",
+        "pointer": "/25/Default/GPPBBDEICKP/UNIQUE_Relic_ReactionWindEnhance_Handler/LFIJIMIMBIH/3",
+        "old_pointer": "/25/Default/modifiers/UNIQUE_Relic_ReactionWindEnhance_Handler/modifierMixins/3",
+        "node_sha256": "21d1879f5344cae180089239b0249b8121c933060d5b56bdbee391ebf0fe6200",
+        "old_node_sha256": "830b06697442c859cac63f0c14925627347ae2e815de50ad219c58d47f161bf7",
+        "whole_parent_equals_old": true
+      },
+      {
+        "path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+        "identity": "Relic_ReactionWindEnhance",
+        "category": "field",
+        "token": "OMALBHAAHHA",
+        "semantic": "range",
+        "pointer": "/25/Default/GPPBBDEICKP/UNIQUE_Relic_ReactionWindEnhance_Handler/LFIJIMIMBIH/3",
+        "old_pointer": "/25/Default/modifiers/UNIQUE_Relic_ReactionWindEnhance_Handler/modifierMixins/3",
+        "node_sha256": "21d1879f5344cae180089239b0249b8121c933060d5b56bdbee391ebf0fe6200",
+        "old_node_sha256": "830b06697442c859cac63f0c14925627347ae2e815de50ad219c58d47f161bf7",
+        "whole_parent_equals_old": true
+      },
+      {
+        "path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+        "identity": "Relic_ReactionWindEnhance",
+        "category": "type",
+        "token": "ANDAIHHJDIB",
+        "semantic": "DoActionByElementReactionMixin",
+        "pointer": "/25/Default/GPPBBDEICKP/UNIQUE_Relic_ReactionWindEnhance_Handler/LFIJIMIMBIH/3",
+        "old_pointer": "/25/Default/modifiers/UNIQUE_Relic_ReactionWindEnhance_Handler/modifierMixins/3",
+        "node_sha256": "21d1879f5344cae180089239b0249b8121c933060d5b56bdbee391ebf0fe6200",
+        "old_node_sha256": "830b06697442c859cac63f0c14925627347ae2e815de50ad219c58d47f161bf7",
+        "whole_parent_equals_old": true
+      },
+      {
+        "path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Kazuha.json",
+        "identity": "Avatar_Kazuha_PermanentSkill_2",
+        "category": "field",
+        "token": "EMGBJJOIENB",
+        "semantic": "onAdded",
+        "pointer": "/23/Default",
+        "old_pointer": "/23/Default",
+        "node_sha256": "192a940a2d326f54c0e62a0fcaf46f3010c05ada65bc02add3293d13a925072b",
+        "old_node_sha256": "4f72e592d6c371f37d4ae4b5e2d9334e57d459ac7448ffb53466e5cf55f9980e",
+        "whole_parent_equals_old": true
+      },
+      {
+        "path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Kazuha.json",
+        "identity": "Avatar_Kazuha_PermanentSkill_2",
+        "category": "field",
+        "token": "LFIJIMIMBIH",
+        "semantic": "modifierMixins",
+        "pointer": "/23/Default/GPPBBDEICKP/Avatar_Kazuha_PermanentSkill_2_Handler",
+        "old_pointer": "/23/Default/modifiers/Avatar_Kazuha_PermanentSkill_2_Handler",
+        "node_sha256": "867d2799e8bb18c2e7a9f79e8e1b596108ad3a20e99ccd95c798fd26dbc67b2d",
+        "old_node_sha256": "f36bbf078f3ce57aef3eb847fc1bff0fad9d5122294c44f80f7f525d31ed3027",
+        "whole_parent_equals_old": true
+      },
+      {
+        "path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Kazuha.json",
+        "identity": "Avatar_Kazuha_PermanentSkill_2",
+        "category": "field",
+        "token": "HDOJNFJLKAP",
+        "semantic": "reactionTypes",
+        "pointer": "/23/Default/GPPBBDEICKP/Avatar_Kazuha_PermanentSkill_2_Handler/LFIJIMIMBIH/0",
+        "old_pointer": "/23/Default/modifiers/Avatar_Kazuha_PermanentSkill_2_Handler/modifierMixins/0",
+        "node_sha256": "8273967157cae3c990c1490b05e92b736102ec7c0ca54c6c7dfbb1cd1d52721e",
+        "old_node_sha256": "d1c41b4ccf5125d5a1634976b80f880c8a188bd5007e0fa8fe542b91a59617c3",
+        "whole_parent_equals_old": true
+      },
+      {
+        "path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Kazuha.json",
+        "identity": "Avatar_Kazuha_PermanentSkill_2",
+        "category": "field",
+        "token": "KHJMNJNEADF",
+        "semantic": "actions",
+        "pointer": "/23/Default/GPPBBDEICKP/Avatar_Kazuha_PermanentSkill_2_Handler/LFIJIMIMBIH/0",
+        "old_pointer": "/23/Default/modifiers/Avatar_Kazuha_PermanentSkill_2_Handler/modifierMixins/0",
+        "node_sha256": "8273967157cae3c990c1490b05e92b736102ec7c0ca54c6c7dfbb1cd1d52721e",
+        "old_node_sha256": "d1c41b4ccf5125d5a1634976b80f880c8a188bd5007e0fa8fe542b91a59617c3",
+        "whole_parent_equals_old": true
+      },
+      {
+        "path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Kazuha.json",
+        "identity": "Avatar_Kazuha_PermanentSkill_2",
+        "category": "field",
+        "token": "OMALBHAAHHA",
+        "semantic": "range",
+        "pointer": "/23/Default/GPPBBDEICKP/Avatar_Kazuha_PermanentSkill_2_Handler/LFIJIMIMBIH/0",
+        "old_pointer": "/23/Default/modifiers/Avatar_Kazuha_PermanentSkill_2_Handler/modifierMixins/0",
+        "node_sha256": "8273967157cae3c990c1490b05e92b736102ec7c0ca54c6c7dfbb1cd1d52721e",
+        "old_node_sha256": "d1c41b4ccf5125d5a1634976b80f880c8a188bd5007e0fa8fe542b91a59617c3",
+        "whole_parent_equals_old": true
+      },
+      {
+        "path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Kazuha.json",
+        "identity": "Avatar_Kazuha_PermanentSkill_2",
+        "category": "type",
+        "token": "ANDAIHHJDIB",
+        "semantic": "DoActionByElementReactionMixin",
+        "pointer": "/23/Default/GPPBBDEICKP/Avatar_Kazuha_PermanentSkill_2_Handler/LFIJIMIMBIH/0",
+        "old_pointer": "/23/Default/modifiers/Avatar_Kazuha_PermanentSkill_2_Handler/modifierMixins/0",
+        "node_sha256": "8273967157cae3c990c1490b05e92b736102ec7c0ca54c6c7dfbb1cd1d52721e",
+        "old_node_sha256": "d1c41b4ccf5125d5a1634976b80f880c8a188bd5007e0fa8fe542b91a59617c3",
+        "whole_parent_equals_old": true
+      },
+      {
+        "path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Kazuha.json",
+        "identity": "Avatar_Kazuha_PermanentSkill_2",
+        "category": "field",
+        "token": "HDOJNFJLKAP",
+        "semantic": "reactionTypes",
+        "pointer": "/23/Default/GPPBBDEICKP/Avatar_Kazuha_PermanentSkill_2_Handler/LFIJIMIMBIH/1",
+        "old_pointer": "/23/Default/modifiers/Avatar_Kazuha_PermanentSkill_2_Handler/modifierMixins/1",
+        "node_sha256": "3a000581c362bcf59928ce285ac234295166b528e71cb5d0f4be3c0748e15f7e",
+        "old_node_sha256": "ae6e3f23dfbbc807c8360f323e2c4c038a1552992a5e85247540533b823fc69d",
+        "whole_parent_equals_old": true
+      },
+      {
+        "path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Kazuha.json",
+        "identity": "Avatar_Kazuha_PermanentSkill_2",
+        "category": "field",
+        "token": "KHJMNJNEADF",
+        "semantic": "actions",
+        "pointer": "/23/Default/GPPBBDEICKP/Avatar_Kazuha_PermanentSkill_2_Handler/LFIJIMIMBIH/1",
+        "old_pointer": "/23/Default/modifiers/Avatar_Kazuha_PermanentSkill_2_Handler/modifierMixins/1",
+        "node_sha256": "3a000581c362bcf59928ce285ac234295166b528e71cb5d0f4be3c0748e15f7e",
+        "old_node_sha256": "ae6e3f23dfbbc807c8360f323e2c4c038a1552992a5e85247540533b823fc69d",
+        "whole_parent_equals_old": true
+      },
+      {
+        "path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Kazuha.json",
+        "identity": "Avatar_Kazuha_PermanentSkill_2",
+        "category": "field",
+        "token": "OMALBHAAHHA",
+        "semantic": "range",
+        "pointer": "/23/Default/GPPBBDEICKP/Avatar_Kazuha_PermanentSkill_2_Handler/LFIJIMIMBIH/1",
+        "old_pointer": "/23/Default/modifiers/Avatar_Kazuha_PermanentSkill_2_Handler/modifierMixins/1",
+        "node_sha256": "3a000581c362bcf59928ce285ac234295166b528e71cb5d0f4be3c0748e15f7e",
+        "old_node_sha256": "ae6e3f23dfbbc807c8360f323e2c4c038a1552992a5e85247540533b823fc69d",
+        "whole_parent_equals_old": true
+      },
+      {
+        "path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Kazuha.json",
+        "identity": "Avatar_Kazuha_PermanentSkill_2",
+        "category": "type",
+        "token": "ANDAIHHJDIB",
+        "semantic": "DoActionByElementReactionMixin",
+        "pointer": "/23/Default/GPPBBDEICKP/Avatar_Kazuha_PermanentSkill_2_Handler/LFIJIMIMBIH/1",
+        "old_pointer": "/23/Default/modifiers/Avatar_Kazuha_PermanentSkill_2_Handler/modifierMixins/1",
+        "node_sha256": "3a000581c362bcf59928ce285ac234295166b528e71cb5d0f4be3c0748e15f7e",
+        "old_node_sha256": "ae6e3f23dfbbc807c8360f323e2c4c038a1552992a5e85247540533b823fc69d",
+        "whole_parent_equals_old": true
+      },
+      {
+        "path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Kazuha.json",
+        "identity": "Avatar_Kazuha_PermanentSkill_2",
+        "category": "field",
+        "token": "HDOJNFJLKAP",
+        "semantic": "reactionTypes",
+        "pointer": "/23/Default/GPPBBDEICKP/Avatar_Kazuha_PermanentSkill_2_Handler/LFIJIMIMBIH/2",
+        "old_pointer": "/23/Default/modifiers/Avatar_Kazuha_PermanentSkill_2_Handler/modifierMixins/2",
+        "node_sha256": "ef2e66584bc0a19806bcb700b4ac47882a8ada1286803ab04a2bbb9b427b0dd4",
+        "old_node_sha256": "2203e0e98c1ddcd5e0a8a3dc535d3ee30fa10559e2ffaefe3c20a824dfcccb8a",
+        "whole_parent_equals_old": true
+      },
+      {
+        "path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Kazuha.json",
+        "identity": "Avatar_Kazuha_PermanentSkill_2",
+        "category": "field",
+        "token": "KHJMNJNEADF",
+        "semantic": "actions",
+        "pointer": "/23/Default/GPPBBDEICKP/Avatar_Kazuha_PermanentSkill_2_Handler/LFIJIMIMBIH/2",
+        "old_pointer": "/23/Default/modifiers/Avatar_Kazuha_PermanentSkill_2_Handler/modifierMixins/2",
+        "node_sha256": "ef2e66584bc0a19806bcb700b4ac47882a8ada1286803ab04a2bbb9b427b0dd4",
+        "old_node_sha256": "2203e0e98c1ddcd5e0a8a3dc535d3ee30fa10559e2ffaefe3c20a824dfcccb8a",
+        "whole_parent_equals_old": true
+      },
+      {
+        "path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Kazuha.json",
+        "identity": "Avatar_Kazuha_PermanentSkill_2",
+        "category": "field",
+        "token": "OMALBHAAHHA",
+        "semantic": "range",
+        "pointer": "/23/Default/GPPBBDEICKP/Avatar_Kazuha_PermanentSkill_2_Handler/LFIJIMIMBIH/2",
+        "old_pointer": "/23/Default/modifiers/Avatar_Kazuha_PermanentSkill_2_Handler/modifierMixins/2",
+        "node_sha256": "ef2e66584bc0a19806bcb700b4ac47882a8ada1286803ab04a2bbb9b427b0dd4",
+        "old_node_sha256": "2203e0e98c1ddcd5e0a8a3dc535d3ee30fa10559e2ffaefe3c20a824dfcccb8a",
+        "whole_parent_equals_old": true
+      },
+      {
+        "path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Kazuha.json",
+        "identity": "Avatar_Kazuha_PermanentSkill_2",
+        "category": "type",
+        "token": "ANDAIHHJDIB",
+        "semantic": "DoActionByElementReactionMixin",
+        "pointer": "/23/Default/GPPBBDEICKP/Avatar_Kazuha_PermanentSkill_2_Handler/LFIJIMIMBIH/2",
+        "old_pointer": "/23/Default/modifiers/Avatar_Kazuha_PermanentSkill_2_Handler/modifierMixins/2",
+        "node_sha256": "ef2e66584bc0a19806bcb700b4ac47882a8ada1286803ab04a2bbb9b427b0dd4",
+        "old_node_sha256": "2203e0e98c1ddcd5e0a8a3dc535d3ee30fa10559e2ffaefe3c20a824dfcccb8a",
+        "whole_parent_equals_old": true
+      },
+      {
+        "path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Kazuha.json",
+        "identity": "Avatar_Kazuha_PermanentSkill_2",
+        "category": "field",
+        "token": "HDOJNFJLKAP",
+        "semantic": "reactionTypes",
+        "pointer": "/23/Default/GPPBBDEICKP/Avatar_Kazuha_PermanentSkill_2_Handler/LFIJIMIMBIH/3",
+        "old_pointer": "/23/Default/modifiers/Avatar_Kazuha_PermanentSkill_2_Handler/modifierMixins/3",
+        "node_sha256": "0a0024930c0fcdb43719008b5e35ab0e2f80f93c37286542827bcf7f61936ec4",
+        "old_node_sha256": "010c2afe8d62b42b00fc266b71071d8d86e351bb4bb1d3463c92af5701c64acb",
+        "whole_parent_equals_old": true
+      },
+      {
+        "path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Kazuha.json",
+        "identity": "Avatar_Kazuha_PermanentSkill_2",
+        "category": "field",
+        "token": "KHJMNJNEADF",
+        "semantic": "actions",
+        "pointer": "/23/Default/GPPBBDEICKP/Avatar_Kazuha_PermanentSkill_2_Handler/LFIJIMIMBIH/3",
+        "old_pointer": "/23/Default/modifiers/Avatar_Kazuha_PermanentSkill_2_Handler/modifierMixins/3",
+        "node_sha256": "0a0024930c0fcdb43719008b5e35ab0e2f80f93c37286542827bcf7f61936ec4",
+        "old_node_sha256": "010c2afe8d62b42b00fc266b71071d8d86e351bb4bb1d3463c92af5701c64acb",
+        "whole_parent_equals_old": true
+      },
+      {
+        "path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Kazuha.json",
+        "identity": "Avatar_Kazuha_PermanentSkill_2",
+        "category": "field",
+        "token": "OMALBHAAHHA",
+        "semantic": "range",
+        "pointer": "/23/Default/GPPBBDEICKP/Avatar_Kazuha_PermanentSkill_2_Handler/LFIJIMIMBIH/3",
+        "old_pointer": "/23/Default/modifiers/Avatar_Kazuha_PermanentSkill_2_Handler/modifierMixins/3",
+        "node_sha256": "0a0024930c0fcdb43719008b5e35ab0e2f80f93c37286542827bcf7f61936ec4",
+        "old_node_sha256": "010c2afe8d62b42b00fc266b71071d8d86e351bb4bb1d3463c92af5701c64acb",
+        "whole_parent_equals_old": true
+      },
+      {
+        "path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Kazuha.json",
+        "identity": "Avatar_Kazuha_PermanentSkill_2",
+        "category": "type",
+        "token": "ANDAIHHJDIB",
+        "semantic": "DoActionByElementReactionMixin",
+        "pointer": "/23/Default/GPPBBDEICKP/Avatar_Kazuha_PermanentSkill_2_Handler/LFIJIMIMBIH/3",
+        "old_pointer": "/23/Default/modifiers/Avatar_Kazuha_PermanentSkill_2_Handler/modifierMixins/3",
+        "node_sha256": "0a0024930c0fcdb43719008b5e35ab0e2f80f93c37286542827bcf7f61936ec4",
+        "old_node_sha256": "010c2afe8d62b42b00fc266b71071d8d86e351bb4bb1d3463c92af5701c64acb",
+        "whole_parent_equals_old": true
+      },
+      {
+        "path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Kazuha.json",
+        "identity": "Avatar_Kazuha_PermanentSkill_2",
+        "category": "field",
+        "token": "GPPCPGHLDHL",
+        "semantic": "stacking",
+        "pointer": "/23/Default/GPPBBDEICKP/UNIQUE_Avatar_Kazuha_PermanentSkill_2_Electric",
+        "old_pointer": "/23/Default/modifiers/UNIQUE_Avatar_Kazuha_PermanentSkill_2_Electric",
+        "node_sha256": "1a534b6126497732bc33b614b4b036df25209c425840ce1cb87d0926f5c8f433",
+        "old_node_sha256": "4afda7d9584eff8a1ad332e3370be95afc626f398bd34a65a60f79611b480d04",
+        "whole_parent_equals_old": true
+      },
+      {
+        "path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Kazuha.json",
+        "identity": "Avatar_Kazuha_PermanentSkill_2",
+        "category": "field",
+        "token": "GPPCPGHLDHL",
+        "semantic": "stacking",
+        "pointer": "/23/Default/GPPBBDEICKP/UNIQUE_Avatar_Kazuha_PermanentSkill_2_Fire",
+        "old_pointer": "/23/Default/modifiers/UNIQUE_Avatar_Kazuha_PermanentSkill_2_Fire",
+        "node_sha256": "a629527c75801a5bf98c5df7015cc55c7a3db68526ef7a160e599c015126eda8",
+        "old_node_sha256": "0484ebeb81d6674267ed3a3da4318894e2db3331e8c3684ec37b1de42e2eb4a9",
+        "whole_parent_equals_old": true
+      },
+      {
+        "path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Kazuha.json",
+        "identity": "Avatar_Kazuha_PermanentSkill_2",
+        "category": "field",
+        "token": "GPPCPGHLDHL",
+        "semantic": "stacking",
+        "pointer": "/23/Default/GPPBBDEICKP/UNIQUE_Avatar_Kazuha_PermanentSkill_2_Ice",
+        "old_pointer": "/23/Default/modifiers/UNIQUE_Avatar_Kazuha_PermanentSkill_2_Ice",
+        "node_sha256": "901a662de127e1defc4656e400af9985136dcdb6c392442f24632c5777165d24",
+        "old_node_sha256": "68e296912833620f8d60e3c124bb884ce1ed1a0e702c175cfcd3a8ad2d439d8b",
+        "whole_parent_equals_old": true
+      },
+      {
+        "path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Kazuha.json",
+        "identity": "Avatar_Kazuha_PermanentSkill_2",
+        "category": "field",
+        "token": "GPPCPGHLDHL",
+        "semantic": "stacking",
+        "pointer": "/23/Default/GPPBBDEICKP/UNIQUE_Avatar_Kazuha_PermanentSkill_2_Water",
+        "old_pointer": "/23/Default/modifiers/UNIQUE_Avatar_Kazuha_PermanentSkill_2_Water",
+        "node_sha256": "bd66c07322caeecb74bdcc497646bcb56ace75b5c121a7d6d118ea95b7704082",
+        "old_node_sha256": "938f9ae0d76a0667012af8d1e2c5d871fd908a220927910695a1a514876fa1b4",
+        "whole_parent_equals_old": true
+      }
+    ],
+    "paired_nodes": [
+      {
+        "path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+        "identity": "Relic_ReactionWindEnhance",
+        "pointer": "/25/Default",
+        "old_pointer": "/25/Default",
+        "node_sha256": "242533b98294ee9314e7d7dafe8fb38d710914fe7874824b1e4822371310e372",
+        "old_node_sha256": "1b560b474cc6bf467220673a53a1b94ce09f1320ff7b3bdf92914f0d400a3e3c",
+        "raw": {
+          "EMGBJJOIENB": [
+            {
+              "$type": "CDANEAFAFKM",
+              "AMOLMPHFPHJ": -1,
+              "ILELAOFJIKJ": true,
+              "LDFBDMNIADI": "UNIQUE_Relic_ReactionWindEnhance_Handler",
+              "LJFIEGHHLOB": false
+            }
+          ],
+          "GPPBBDEICKP": {
+            "UNIQUE_Relic_ElementElecDefDown": {
+              "BNEJPEMIMEH": true,
+              "BOCCNJLBFCJ": "DefenseDown",
+              "DBGOKAKAHFP": 100,
+              "DIELNIJPCJJ": true,
+              "DOALDLPNGMF": -1,
+              "ILKPFPGAIGI": {
+                "Actor_ElecSubHurtDelta": [
+                  "ResistDown",
+                  "Minus",
+                  "MUL"
+                ]
+              },
+              "JPEAFDFPKAN": "Dura",
+              "KFOMCJGGPPC": -1,
+              "PPKOPMBNPJH": true
+            },
+            "UNIQUE_Relic_ElementFireDefDown": {
+              "BNEJPEMIMEH": true,
+              "BOCCNJLBFCJ": "DefenseDown",
+              "DBGOKAKAHFP": 100,
+              "DIELNIJPCJJ": true,
+              "DOALDLPNGMF": -1,
+              "ILKPFPGAIGI": {
+                "Actor_FireSubHurtDelta": [
+                  "ResistDown",
+                  "Minus",
+                  "MUL"
+                ]
+              },
+              "JPEAFDFPKAN": "Dura",
+              "KFOMCJGGPPC": -1,
+              "PPKOPMBNPJH": true
+            },
+            "UNIQUE_Relic_ElementIceDefDown": {
+              "BNEJPEMIMEH": true,
+              "BOCCNJLBFCJ": "DefenseDown",
+              "DBGOKAKAHFP": 100,
+              "DIELNIJPCJJ": true,
+              "DOALDLPNGMF": -1,
+              "ILKPFPGAIGI": {
+                "Actor_IceSubHurtDelta": [
+                  "ResistDown",
+                  "Minus",
+                  "MUL"
+                ]
+              },
+              "JPEAFDFPKAN": "Dura",
+              "KFOMCJGGPPC": -1,
+              "PPKOPMBNPJH": true
+            },
+            "UNIQUE_Relic_ElementWaterDefDown": {
+              "BNEJPEMIMEH": true,
+              "BOCCNJLBFCJ": "DefenseDown",
+              "DBGOKAKAHFP": 100,
+              "DIELNIJPCJJ": true,
+              "DOALDLPNGMF": -1,
+              "ILKPFPGAIGI": {
+                "Actor_WaterSubHurtDelta": [
+                  "ResistDown",
+                  "Minus",
+                  "MUL"
+                ]
+              },
+              "JPEAFDFPKAN": "Dura",
+              "KFOMCJGGPPC": -1,
+              "PPKOPMBNPJH": true
+            },
+            "UNIQUE_Relic_ReactionWindEnhance_Handler": {
+              "BNEJPEMIMEH": true,
+              "DBGOKAKAHFP": 100,
+              "DIELNIJPCJJ": true,
+              "DOALDLPNGMF": -1,
+              "ILKPFPGAIGI": {
+                "Actor_ElemReactStarSwirlIceDelta": "ReactionUp_Star",
+                "Actor_ElemReactStarSwirlWindDelta": "ReactionUp_Star",
+                "Actor_ElemReactSwirlElectricDelta": "ReactionUp",
+                "Actor_ElemReactSwirlFireDelta": "ReactionUp",
+                "Actor_ElemReactSwirlIceDelta": "ReactionUp",
+                "Actor_ElemReactSwirlWaterDelta": "ReactionUp"
+              },
+              "KFOMCJGGPPC": -1,
+              "LBABCICJBKE": [
+                {
+                  "$type": "PBIOEEHFHFD",
+                  "AMOLMPHFPHJ": -1,
+                  "BDHBNCEEPPK": "Target",
+                  "ILELAOFJIKJ": true,
+                  "LJFIEGHHLOB": false,
+                  "MJKPCGCAPLK": [
+                    {
+                      "$type": "DPNJGLIMCHM",
+                      "BDHBNCEEPPK": "Target",
+                      "BFDEHDNLNJH": [
+                        "Swirl_FireDamage",
+                        "Swirl_WaterDamage",
+                        "Swirl_ElectricDamage",
+                        "Swirl_IceDamage",
+                        "Self_Swirl_FireDamage",
+                        "Self_Swirl_WaterDamage",
+                        "Self_Swirl_ElectricDamage",
+                        "Self_Swirl_IceDamage"
+                      ]
+                    }
+                  ],
+                  "MLJNNELMEFL": [
+                    {
+                      "$type": "BINBHGLANKO",
+                      "AMOLMPHFPHJ": -1,
+                      "BDHBNCEEPPK": "Target",
+                      "IJDGNIIOHLM": [
+                        {
+                          "$type": "LEHABIJBEAO",
+                          "BDHBNCEEPPK": "Target",
+                          "JOFNJODFEDG": "Fire"
+                        },
+                        {
+                          "$type": "BKCJECHCDKG",
+                          "BDHBNCEEPPK": "Target",
+                          "FJGEDPNBGCG": -1,
+                          "LJBBKGIFJDB": [
+                            "Monster"
+                          ]
+                        }
+                      ],
+                      "ILELAOFJIKJ": true,
+                      "LDFBDMNIADI": "UNIQUE_Relic_ElementFireDefDown",
+                      "LJFIEGHHLOB": false
+                    },
+                    {
+                      "$type": "BINBHGLANKO",
+                      "AMOLMPHFPHJ": -1,
+                      "BDHBNCEEPPK": "Target",
+                      "IJDGNIIOHLM": [
+                        {
+                          "$type": "LEHABIJBEAO",
+                          "BDHBNCEEPPK": "Target",
+                          "JOFNJODFEDG": "Water"
+                        },
+                        {
+                          "$type": "BKCJECHCDKG",
+                          "BDHBNCEEPPK": "Target",
+                          "FJGEDPNBGCG": -1,
+                          "LJBBKGIFJDB": [
+                            "Monster"
+                          ]
+                        }
+                      ],
+                      "ILELAOFJIKJ": true,
+                      "LDFBDMNIADI": "UNIQUE_Relic_ElementWaterDefDown",
+                      "LJFIEGHHLOB": false
+                    },
+                    {
+                      "$type": "BINBHGLANKO",
+                      "AMOLMPHFPHJ": -1,
+                      "BDHBNCEEPPK": "Target",
+                      "IJDGNIIOHLM": [
+                        {
+                          "$type": "LEHABIJBEAO",
+                          "BDHBNCEEPPK": "Target",
+                          "JOFNJODFEDG": "Electric"
+                        },
+                        {
+                          "$type": "BKCJECHCDKG",
+                          "BDHBNCEEPPK": "Target",
+                          "FJGEDPNBGCG": -1,
+                          "LJBBKGIFJDB": [
+                            "Monster"
+                          ]
+                        }
+                      ],
+                      "ILELAOFJIKJ": true,
+                      "LDFBDMNIADI": "UNIQUE_Relic_ElementElecDefDown",
+                      "LJFIEGHHLOB": false
+                    },
+                    {
+                      "$type": "BINBHGLANKO",
+                      "AMOLMPHFPHJ": -1,
+                      "BDHBNCEEPPK": "Target",
+                      "IJDGNIIOHLM": [
+                        {
+                          "$type": "LEHABIJBEAO",
+                          "BDHBNCEEPPK": "Target",
+                          "JOFNJODFEDG": "Ice"
+                        },
+                        {
+                          "$type": "BKCJECHCDKG",
+                          "BDHBNCEEPPK": "Target",
+                          "FJGEDPNBGCG": -1,
+                          "LJBBKGIFJDB": [
+                            "Monster"
+                          ]
+                        }
+                      ],
+                      "ILELAOFJIKJ": true,
+                      "LDFBDMNIADI": "UNIQUE_Relic_ElementIceDefDown",
+                      "LJFIEGHHLOB": false
+                    }
+                  ]
+                }
+              ],
+              "LFIJIMIMBIH": [
+                {
+                  "$type": "ANDAIHHJDIB",
+                  "AMOLMPHFPHJ": -1,
+                  "HDOJNFJLKAP": [
+                    "SwirlFire"
+                  ],
+                  "KHJMNJNEADF": [
+                    {
+                      "$type": "BINBHGLANKO",
+                      "AMOLMPHFPHJ": -1,
+                      "BDHBNCEEPPK": "Other",
+                      "ILELAOFJIKJ": true,
+                      "LDFBDMNIADI": "UNIQUE_Relic_ElementFireDefDown",
+                      "LJFIEGHHLOB": false
+                    }
+                  ],
+                  "LJBBKGIFJDB": [
+                    "Monster"
+                  ],
+                  "OMALBHAAHHA": 20
+                },
+                {
+                  "$type": "ANDAIHHJDIB",
+                  "AMOLMPHFPHJ": -1,
+                  "HDOJNFJLKAP": [
+                    "SwirlWater"
+                  ],
+                  "KHJMNJNEADF": [
+                    {
+                      "$type": "BINBHGLANKO",
+                      "AMOLMPHFPHJ": -1,
+                      "BDHBNCEEPPK": "Other",
+                      "ILELAOFJIKJ": true,
+                      "LDFBDMNIADI": "UNIQUE_Relic_ElementWaterDefDown",
+                      "LJFIEGHHLOB": false
+                    }
+                  ],
+                  "LJBBKGIFJDB": [
+                    "Monster"
+                  ],
+                  "OMALBHAAHHA": 20
+                },
+                {
+                  "$type": "ANDAIHHJDIB",
+                  "AMOLMPHFPHJ": -1,
+                  "HDOJNFJLKAP": [
+                    "SwirlElectric"
+                  ],
+                  "KHJMNJNEADF": [
+                    {
+                      "$type": "BINBHGLANKO",
+                      "AMOLMPHFPHJ": -1,
+                      "BDHBNCEEPPK": "Other",
+                      "ILELAOFJIKJ": true,
+                      "LDFBDMNIADI": "UNIQUE_Relic_ElementElecDefDown",
+                      "LJFIEGHHLOB": false
+                    }
+                  ],
+                  "LJBBKGIFJDB": [
+                    "Monster"
+                  ],
+                  "OMALBHAAHHA": 20
+                },
+                {
+                  "$type": "ANDAIHHJDIB",
+                  "AMOLMPHFPHJ": -1,
+                  "HDOJNFJLKAP": [
+                    "SwirlIce",
+                    "StarSwirlIce"
+                  ],
+                  "KHJMNJNEADF": [
+                    {
+                      "$type": "BINBHGLANKO",
+                      "AMOLMPHFPHJ": -1,
+                      "BDHBNCEEPPK": "Other",
+                      "ILELAOFJIKJ": true,
+                      "LDFBDMNIADI": "UNIQUE_Relic_ElementIceDefDown",
+                      "LJFIEGHHLOB": false
+                    }
+                  ],
+                  "LJBBKGIFJDB": [
+                    "Monster"
+                  ],
+                  "OMALBHAAHHA": 20
+                }
+              ],
+              "PPKOPMBNPJH": true
+            }
+          },
+          "IIBMNPFLNMJ": "Relic_ReactionWindEnhance",
+          "LOEHLJGBGAC": {
+            "Dura": 0,
+            "Minus": -1,
+            "ReactionUp": 0,
+            "ReactionUp_Star": 0,
+            "ResistDown": 0
+          },
+          "OMAIGDMCJBO": {
+            "DBGOKAKAHFP": 100,
+            "DOALDLPNGMF": -1,
+            "KFOMCJGGPPC": -1,
+            "PPKOPMBNPJH": true
+          },
+          "PODJJJHGAMO": true
+        },
+        "old_raw": {
+          "onAdded": [
+            {
+              "$type": "AttachModifier",
+              "actorIceSubHurtDelta": -1,
+              "doOffStage": false,
+              "modifierName": "UNIQUE_Relic_ReactionWindEnhance_Handler",
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "abilitySpecials": {
+            "Dura": 0,
+            "Minus": -1,
+            "ReactionUp": 0,
+            "ReactionUp_Star": 0,
+            "ResistDown": 0
+          },
+          "isDynamicAbility": true,
+          "abilityName": "Relic_ReactionWindEnhance",
+          "modifiers": {
+            "UNIQUE_Relic_ElementElecDefDown": {
+              "duration": "Dura",
+              "elementDurability": 100,
+              "minus_one": -1,
+              "IAKPBCLBNKF": -1,
+              "reApplyModifierOnStateChange": true,
+              "isUnique": true,
+              "isLimitedProperties": true,
+              "properties": {
+                "Actor_ElecSubHurtDelta": [
+                  "ResistDown",
+                  "Minus",
+                  "MUL"
+                ]
+              },
+              "state": "DefenseDown"
+            },
+            "UNIQUE_Relic_ElementFireDefDown": {
+              "duration": "Dura",
+              "elementDurability": 100,
+              "minus_one": -1,
+              "IAKPBCLBNKF": -1,
+              "reApplyModifierOnStateChange": true,
+              "isUnique": true,
+              "isLimitedProperties": true,
+              "properties": {
+                "Actor_FireSubHurtDelta": [
+                  "ResistDown",
+                  "Minus",
+                  "MUL"
+                ]
+              },
+              "state": "DefenseDown"
+            },
+            "UNIQUE_Relic_ElementIceDefDown": {
+              "duration": "Dura",
+              "elementDurability": 100,
+              "minus_one": -1,
+              "IAKPBCLBNKF": -1,
+              "reApplyModifierOnStateChange": true,
+              "isUnique": true,
+              "isLimitedProperties": true,
+              "properties": {
+                "Actor_IceSubHurtDelta": [
+                  "ResistDown",
+                  "Minus",
+                  "MUL"
+                ]
+              },
+              "state": "DefenseDown"
+            },
+            "UNIQUE_Relic_ElementWaterDefDown": {
+              "duration": "Dura",
+              "elementDurability": 100,
+              "minus_one": -1,
+              "IAKPBCLBNKF": -1,
+              "reApplyModifierOnStateChange": true,
+              "isUnique": true,
+              "isLimitedProperties": true,
+              "properties": {
+                "Actor_WaterSubHurtDelta": [
+                  "ResistDown",
+                  "Minus",
+                  "MUL"
+                ]
+              },
+              "state": "DefenseDown"
+            },
+            "UNIQUE_Relic_ReactionWindEnhance_Handler": {
+              "onAttackLanded": [
+                {
+                  "$type": "Predicated",
+                  "targetPredicates": [
+                    {
+                      "$type": "ByAttackTags",
+                      "target": "Target",
+                      "attackTags": [
+                        "Swirl_FireDamage",
+                        "Swirl_WaterDamage",
+                        "Swirl_ElectricDamage",
+                        "Swirl_IceDamage",
+                        "Self_Swirl_FireDamage",
+                        "Self_Swirl_WaterDamage",
+                        "Self_Swirl_ElectricDamage",
+                        "Self_Swirl_IceDamage"
+                      ]
+                    }
+                  ],
+                  "target": "Target",
+                  "actorIceSubHurtDelta": -1,
+                  "doOffStage": false,
+                  "successActions": [
+                    {
+                      "$type": "ApplyModifier",
+                      "target": "Target",
+                      "actorIceSubHurtDelta": -1,
+                      "doOffStage": false,
+                      "modifierName": "UNIQUE_Relic_ElementFireDefDown",
+                      "predicates": [
+                        {
+                          "$type": "ByHitElement",
+                          "target": "Target",
+                          "element": "Fire"
+                        },
+                        {
+                          "$type": "ByEntityTypes",
+                          "target": "Target",
+                          "value": -1,
+                          "entityTypes": [
+                            "Monster"
+                          ]
+                        }
+                      ],
+                      "canBeHandledOnRecover": true
+                    },
+                    {
+                      "$type": "ApplyModifier",
+                      "target": "Target",
+                      "actorIceSubHurtDelta": -1,
+                      "doOffStage": false,
+                      "modifierName": "UNIQUE_Relic_ElementWaterDefDown",
+                      "predicates": [
+                        {
+                          "$type": "ByHitElement",
+                          "target": "Target",
+                          "element": "Water"
+                        },
+                        {
+                          "$type": "ByEntityTypes",
+                          "target": "Target",
+                          "value": -1,
+                          "entityTypes": [
+                            "Monster"
+                          ]
+                        }
+                      ],
+                      "canBeHandledOnRecover": true
+                    },
+                    {
+                      "$type": "ApplyModifier",
+                      "target": "Target",
+                      "actorIceSubHurtDelta": -1,
+                      "doOffStage": false,
+                      "modifierName": "UNIQUE_Relic_ElementElecDefDown",
+                      "predicates": [
+                        {
+                          "$type": "ByHitElement",
+                          "target": "Target",
+                          "element": "Electric"
+                        },
+                        {
+                          "$type": "ByEntityTypes",
+                          "target": "Target",
+                          "value": -1,
+                          "entityTypes": [
+                            "Monster"
+                          ]
+                        }
+                      ],
+                      "canBeHandledOnRecover": true
+                    },
+                    {
+                      "$type": "ApplyModifier",
+                      "target": "Target",
+                      "actorIceSubHurtDelta": -1,
+                      "doOffStage": false,
+                      "modifierName": "UNIQUE_Relic_ElementIceDefDown",
+                      "predicates": [
+                        {
+                          "$type": "ByHitElement",
+                          "target": "Target",
+                          "element": "Ice"
+                        },
+                        {
+                          "$type": "ByEntityTypes",
+                          "target": "Target",
+                          "value": -1,
+                          "entityTypes": [
+                            "Monster"
+                          ]
+                        }
+                      ],
+                      "canBeHandledOnRecover": true
+                    }
+                  ],
+                  "canBeHandledOnRecover": true
+                }
+              ],
+              "elementDurability": 100,
+              "minus_one": -1,
+              "modifierMixins": [
+                {
+                  "$type": "DoActionByElementReactionMixin",
+                  "actorIceSubHurtDelta": -1,
+                  "actions": [
+                    {
+                      "$type": "ApplyModifier",
+                      "target": "Other",
+                      "actorIceSubHurtDelta": -1,
+                      "doOffStage": false,
+                      "modifierName": "UNIQUE_Relic_ElementFireDefDown",
+                      "canBeHandledOnRecover": true
+                    }
+                  ],
+                  "reactionTypes": [
+                    "SwirlFire"
+                  ],
+                  "entityTypes": [
+                    "Monster"
+                  ],
+                  "range": 20
+                },
+                {
+                  "$type": "DoActionByElementReactionMixin",
+                  "actorIceSubHurtDelta": -1,
+                  "actions": [
+                    {
+                      "$type": "ApplyModifier",
+                      "target": "Other",
+                      "actorIceSubHurtDelta": -1,
+                      "doOffStage": false,
+                      "modifierName": "UNIQUE_Relic_ElementWaterDefDown",
+                      "canBeHandledOnRecover": true
+                    }
+                  ],
+                  "reactionTypes": [
+                    "SwirlWater"
+                  ],
+                  "entityTypes": [
+                    "Monster"
+                  ],
+                  "range": 20
+                },
+                {
+                  "$type": "DoActionByElementReactionMixin",
+                  "actorIceSubHurtDelta": -1,
+                  "actions": [
+                    {
+                      "$type": "ApplyModifier",
+                      "target": "Other",
+                      "actorIceSubHurtDelta": -1,
+                      "doOffStage": false,
+                      "modifierName": "UNIQUE_Relic_ElementElecDefDown",
+                      "canBeHandledOnRecover": true
+                    }
+                  ],
+                  "reactionTypes": [
+                    "SwirlElectric"
+                  ],
+                  "entityTypes": [
+                    "Monster"
+                  ],
+                  "range": 20
+                },
+                {
+                  "$type": "DoActionByElementReactionMixin",
+                  "actorIceSubHurtDelta": -1,
+                  "actions": [
+                    {
+                      "$type": "ApplyModifier",
+                      "target": "Other",
+                      "actorIceSubHurtDelta": -1,
+                      "doOffStage": false,
+                      "modifierName": "UNIQUE_Relic_ElementIceDefDown",
+                      "canBeHandledOnRecover": true
+                    }
+                  ],
+                  "reactionTypes": [
+                    "SwirlIce",
+                    "StarSwirlIce"
+                  ],
+                  "entityTypes": [
+                    "Monster"
+                  ],
+                  "range": 20
+                }
+              ],
+              "IAKPBCLBNKF": -1,
+              "reApplyModifierOnStateChange": true,
+              "isUnique": true,
+              "isLimitedProperties": true,
+              "properties": {
+                "Actor_ElemReactStarSwirlIceDelta": "ReactionUp_Star",
+                "Actor_ElemReactStarSwirlWindDelta": "ReactionUp_Star",
+                "Actor_ElemReactSwirlElectricDelta": "ReactionUp",
+                "Actor_ElemReactSwirlFireDelta": "ReactionUp",
+                "Actor_ElemReactSwirlIceDelta": "ReactionUp",
+                "Actor_ElemReactSwirlWaterDelta": "ReactionUp"
+              }
+            }
+          },
+          "LKLPDIMKLKI": {
+            "elementDurability": 100,
+            "minus_one": -1,
+            "IAKPBCLBNKF": -1,
+            "isLimitedProperties": true
+          }
+        }
+      },
+      {
+        "path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Kazuha.json",
+        "identity": "Avatar_Kazuha_PermanentSkill_2",
+        "pointer": "/23/Default",
+        "old_pointer": "/23/Default",
+        "node_sha256": "192a940a2d326f54c0e62a0fcaf46f3010c05ada65bc02add3293d13a925072b",
+        "old_node_sha256": "4f72e592d6c371f37d4ae4b5e2d9334e57d459ac7448ffb53466e5cf55f9980e",
+        "raw": {
+          "EMGBJJOIENB": [
+            {
+              "$type": "CDANEAFAFKM",
+              "AMOLMPHFPHJ": -1,
+              "ILELAOFJIKJ": true,
+              "LDFBDMNIADI": "Avatar_Kazuha_PermanentSkill_2_Handler",
+              "LJFIEGHHLOB": false
+            }
+          ],
+          "GPPBBDEICKP": {
+            "Avatar_Kazuha_PermanentSkill_2_Handler": {
+              "DBGOKAKAHFP": 100,
+              "DOALDLPNGMF": -1,
+              "KFOMCJGGPPC": -1,
+              "LFIJIMIMBIH": [
+                {
+                  "$type": "ANDAIHHJDIB",
+                  "AMOLMPHFPHJ": -1,
+                  "HDOJNFJLKAP": [
+                    "SwirlFire"
+                  ],
+                  "KHJMNJNEADF": [
+                    {
+                      "$type": "GCINLBBPONN",
+                      "AMOLMPHFPHJ": -1,
+                      "BDHBNCEEPPK": "AllPlayerAvatars",
+                      "IJDGNIIOHLM": [
+                        {
+                          "$type": "OLNGCABMCGI",
+                          "BDHBNCEEPPK": "Target",
+                          "DKCBCJCHEBF": "LesserOrEqual",
+                          "PDIFFCBMGMO": 40
+                        }
+                      ],
+                      "ILELAOFJIKJ": true,
+                      "LDFBDMNIADI": "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Fire",
+                      "LJFIEGHHLOB": true
+                    },
+                    {
+                      "$type": "BINBHGLANKO",
+                      "AMOLMPHFPHJ": -1,
+                      "BDHBNCEEPPK": "AllPlayerAvatars",
+                      "IJDGNIIOHLM": [
+                        {
+                          "$type": "OLNGCABMCGI",
+                          "BDHBNCEEPPK": "Target",
+                          "DKCBCJCHEBF": "LesserOrEqual",
+                          "PDIFFCBMGMO": 40
+                        }
+                      ],
+                      "ILELAOFJIKJ": true,
+                      "LDFBDMNIADI": "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Fire",
+                      "LJFIEGHHLOB": true
+                    }
+                  ],
+                  "LJBBKGIFJDB": [
+                    "Monster"
+                  ],
+                  "OMALBHAAHHA": 20
+                },
+                {
+                  "$type": "ANDAIHHJDIB",
+                  "AMOLMPHFPHJ": -1,
+                  "HDOJNFJLKAP": [
+                    "SwirlWater"
+                  ],
+                  "KHJMNJNEADF": [
+                    {
+                      "$type": "GCINLBBPONN",
+                      "AMOLMPHFPHJ": -1,
+                      "BDHBNCEEPPK": "AllPlayerAvatars",
+                      "IJDGNIIOHLM": [
+                        {
+                          "$type": "OLNGCABMCGI",
+                          "BDHBNCEEPPK": "Target",
+                          "DKCBCJCHEBF": "LesserOrEqual",
+                          "PDIFFCBMGMO": 40
+                        }
+                      ],
+                      "ILELAOFJIKJ": true,
+                      "LDFBDMNIADI": "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Water",
+                      "LJFIEGHHLOB": true
+                    },
+                    {
+                      "$type": "BINBHGLANKO",
+                      "AMOLMPHFPHJ": -1,
+                      "BDHBNCEEPPK": "AllPlayerAvatars",
+                      "IJDGNIIOHLM": [
+                        {
+                          "$type": "OLNGCABMCGI",
+                          "BDHBNCEEPPK": "Target",
+                          "DKCBCJCHEBF": "LesserOrEqual",
+                          "PDIFFCBMGMO": 40
+                        }
+                      ],
+                      "ILELAOFJIKJ": true,
+                      "LDFBDMNIADI": "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Water",
+                      "LJFIEGHHLOB": true
+                    }
+                  ],
+                  "LJBBKGIFJDB": [
+                    "Monster"
+                  ],
+                  "OMALBHAAHHA": 20
+                },
+                {
+                  "$type": "ANDAIHHJDIB",
+                  "AMOLMPHFPHJ": -1,
+                  "HDOJNFJLKAP": [
+                    "SwirlElectric"
+                  ],
+                  "KHJMNJNEADF": [
+                    {
+                      "$type": "GCINLBBPONN",
+                      "AMOLMPHFPHJ": -1,
+                      "BDHBNCEEPPK": "AllPlayerAvatars",
+                      "IJDGNIIOHLM": [
+                        {
+                          "$type": "OLNGCABMCGI",
+                          "BDHBNCEEPPK": "Target",
+                          "DKCBCJCHEBF": "LesserOrEqual",
+                          "PDIFFCBMGMO": 40
+                        }
+                      ],
+                      "ILELAOFJIKJ": true,
+                      "LDFBDMNIADI": "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Electric",
+                      "LJFIEGHHLOB": true
+                    },
+                    {
+                      "$type": "BINBHGLANKO",
+                      "AMOLMPHFPHJ": -1,
+                      "BDHBNCEEPPK": "AllPlayerAvatars",
+                      "IJDGNIIOHLM": [
+                        {
+                          "$type": "OLNGCABMCGI",
+                          "BDHBNCEEPPK": "Target",
+                          "DKCBCJCHEBF": "LesserOrEqual",
+                          "PDIFFCBMGMO": 40
+                        }
+                      ],
+                      "ILELAOFJIKJ": true,
+                      "LDFBDMNIADI": "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Electric",
+                      "LJFIEGHHLOB": true
+                    }
+                  ],
+                  "LJBBKGIFJDB": [
+                    "Monster"
+                  ],
+                  "OMALBHAAHHA": 20
+                },
+                {
+                  "$type": "ANDAIHHJDIB",
+                  "AMOLMPHFPHJ": -1,
+                  "HDOJNFJLKAP": [
+                    "SwirlIce",
+                    "StarSwirlIce"
+                  ],
+                  "KHJMNJNEADF": [
+                    {
+                      "$type": "GCINLBBPONN",
+                      "AMOLMPHFPHJ": -1,
+                      "BDHBNCEEPPK": "AllPlayerAvatars",
+                      "IJDGNIIOHLM": [
+                        {
+                          "$type": "OLNGCABMCGI",
+                          "BDHBNCEEPPK": "Target",
+                          "DKCBCJCHEBF": "LesserOrEqual",
+                          "PDIFFCBMGMO": 40
+                        }
+                      ],
+                      "ILELAOFJIKJ": true,
+                      "LDFBDMNIADI": "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Ice",
+                      "LJFIEGHHLOB": true
+                    },
+                    {
+                      "$type": "BINBHGLANKO",
+                      "AMOLMPHFPHJ": -1,
+                      "BDHBNCEEPPK": "AllPlayerAvatars",
+                      "IJDGNIIOHLM": [
+                        {
+                          "$type": "OLNGCABMCGI",
+                          "BDHBNCEEPPK": "Target",
+                          "DKCBCJCHEBF": "LesserOrEqual",
+                          "PDIFFCBMGMO": 40
+                        }
+                      ],
+                      "ILELAOFJIKJ": true,
+                      "LDFBDMNIADI": "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Ice",
+                      "LJFIEGHHLOB": true
+                    }
+                  ],
+                  "LJBBKGIFJDB": [
+                    "Monster"
+                  ],
+                  "OMALBHAAHHA": 20
+                }
+              ],
+              "PPKOPMBNPJH": true
+            },
+            "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Electric": {
+              "BNEJPEMIMEH": true,
+              "BOCCNJLBFCJ": "AttackUp",
+              "DBGOKAKAHFP": 100,
+              "DIELNIJPCJJ": true,
+              "DOALDLPNGMF": -1,
+              "GPPCPGHLDHL": "Unique",
+              "ILKPFPGAIGI": {
+                "Actor_ElecAddHurtExtraDelta": [
+                  "Kazuha_PermanentSkill_2_Factor",
+                  "FIGHT_PROP_NONEXTRA_ELEMENT_MASTERY",
+                  "MUL"
+                ]
+              },
+              "JFBBDPFLCEF": 10001,
+              "JPEAFDFPKAN": "Kazuha_PermanentSkill_2_Duration",
+              "KFOMCJGGPPC": -1,
+              "PPKOPMBNPJH": true
+            },
+            "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Fire": {
+              "BNEJPEMIMEH": true,
+              "BOCCNJLBFCJ": "AttackUp",
+              "DBGOKAKAHFP": 100,
+              "DIELNIJPCJJ": true,
+              "DOALDLPNGMF": -1,
+              "GPPCPGHLDHL": "Unique",
+              "ILKPFPGAIGI": {
+                "Actor_FireAddHurtExtraDelta": [
+                  "Kazuha_PermanentSkill_2_Factor",
+                  "FIGHT_PROP_NONEXTRA_ELEMENT_MASTERY",
+                  "MUL"
+                ]
+              },
+              "JFBBDPFLCEF": 10001,
+              "JPEAFDFPKAN": "Kazuha_PermanentSkill_2_Duration",
+              "KFOMCJGGPPC": -1,
+              "PPKOPMBNPJH": true
+            },
+            "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Ice": {
+              "BNEJPEMIMEH": true,
+              "BOCCNJLBFCJ": "AttackUp",
+              "DBGOKAKAHFP": 100,
+              "DIELNIJPCJJ": true,
+              "DOALDLPNGMF": -1,
+              "GPPCPGHLDHL": "Unique",
+              "ILKPFPGAIGI": {
+                "Actor_IceAddHurtExtraDelta": [
+                  "Kazuha_PermanentSkill_2_Factor",
+                  "FIGHT_PROP_NONEXTRA_ELEMENT_MASTERY",
+                  "MUL"
+                ]
+              },
+              "JFBBDPFLCEF": 10001,
+              "JPEAFDFPKAN": "Kazuha_PermanentSkill_2_Duration",
+              "KFOMCJGGPPC": -1,
+              "PPKOPMBNPJH": true
+            },
+            "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Water": {
+              "BNEJPEMIMEH": true,
+              "BOCCNJLBFCJ": "AttackUp",
+              "DBGOKAKAHFP": 100,
+              "DIELNIJPCJJ": true,
+              "DOALDLPNGMF": -1,
+              "GPPCPGHLDHL": "Unique",
+              "ILKPFPGAIGI": {
+                "Actor_WaterAddHurtExtraDelta": [
+                  "Kazuha_PermanentSkill_2_Factor",
+                  "FIGHT_PROP_NONEXTRA_ELEMENT_MASTERY",
+                  "MUL"
+                ]
+              },
+              "JFBBDPFLCEF": 10001,
+              "JPEAFDFPKAN": "Kazuha_PermanentSkill_2_Duration",
+              "KFOMCJGGPPC": -1,
+              "PPKOPMBNPJH": true
+            }
+          },
+          "IIBMNPFLNMJ": "Avatar_Kazuha_PermanentSkill_2",
+          "LOEHLJGBGAC": {
+            "Kazuha_PermanentSkill_2_Duration": 0,
+            "Kazuha_PermanentSkill_2_Factor": 0
+          },
+          "OMAIGDMCJBO": {
+            "DBGOKAKAHFP": 100,
+            "DOALDLPNGMF": -1,
+            "KFOMCJGGPPC": -1,
+            "PPKOPMBNPJH": true
+          },
+          "PODJJJHGAMO": true
+        },
+        "old_raw": {
+          "onAdded": [
+            {
+              "$type": "AttachModifier",
+              "actorIceSubHurtDelta": -1,
+              "doOffStage": false,
+              "modifierName": "Avatar_Kazuha_PermanentSkill_2_Handler",
+              "canBeHandledOnRecover": true
+            }
+          ],
+          "abilitySpecials": {
+            "Kazuha_PermanentSkill_2_Duration": 0,
+            "Kazuha_PermanentSkill_2_Factor": 0
+          },
+          "isDynamicAbility": true,
+          "abilityName": "Avatar_Kazuha_PermanentSkill_2",
+          "modifiers": {
+            "Avatar_Kazuha_PermanentSkill_2_Handler": {
+              "elementDurability": 100,
+              "minus_one": -1,
+              "modifierMixins": [
+                {
+                  "$type": "DoActionByElementReactionMixin",
+                  "actorIceSubHurtDelta": -1,
+                  "actions": [
+                    {
+                      "$type": "RemoveUniqueModifier",
+                      "target": "AllPlayerAvatars",
+                      "actorIceSubHurtDelta": -1,
+                      "doOffStage": true,
+                      "modifierName": "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Fire",
+                      "predicates": [
+                        {
+                          "$type": "ByTargetPositionToSelfPosition",
+                          "target": "Target",
+                          "value": 40,
+                          "logic": "LesserOrEqual"
+                        }
+                      ],
+                      "canBeHandledOnRecover": true
+                    },
+                    {
+                      "$type": "ApplyModifier",
+                      "target": "AllPlayerAvatars",
+                      "actorIceSubHurtDelta": -1,
+                      "doOffStage": true,
+                      "modifierName": "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Fire",
+                      "predicates": [
+                        {
+                          "$type": "ByTargetPositionToSelfPosition",
+                          "target": "Target",
+                          "value": 40,
+                          "logic": "LesserOrEqual"
+                        }
+                      ],
+                      "canBeHandledOnRecover": true
+                    }
+                  ],
+                  "reactionTypes": [
+                    "SwirlFire"
+                  ],
+                  "entityTypes": [
+                    "Monster"
+                  ],
+                  "range": 20
+                },
+                {
+                  "$type": "DoActionByElementReactionMixin",
+                  "actorIceSubHurtDelta": -1,
+                  "actions": [
+                    {
+                      "$type": "RemoveUniqueModifier",
+                      "target": "AllPlayerAvatars",
+                      "actorIceSubHurtDelta": -1,
+                      "doOffStage": true,
+                      "modifierName": "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Water",
+                      "predicates": [
+                        {
+                          "$type": "ByTargetPositionToSelfPosition",
+                          "target": "Target",
+                          "value": 40,
+                          "logic": "LesserOrEqual"
+                        }
+                      ],
+                      "canBeHandledOnRecover": true
+                    },
+                    {
+                      "$type": "ApplyModifier",
+                      "target": "AllPlayerAvatars",
+                      "actorIceSubHurtDelta": -1,
+                      "doOffStage": true,
+                      "modifierName": "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Water",
+                      "predicates": [
+                        {
+                          "$type": "ByTargetPositionToSelfPosition",
+                          "target": "Target",
+                          "value": 40,
+                          "logic": "LesserOrEqual"
+                        }
+                      ],
+                      "canBeHandledOnRecover": true
+                    }
+                  ],
+                  "reactionTypes": [
+                    "SwirlWater"
+                  ],
+                  "entityTypes": [
+                    "Monster"
+                  ],
+                  "range": 20
+                },
+                {
+                  "$type": "DoActionByElementReactionMixin",
+                  "actorIceSubHurtDelta": -1,
+                  "actions": [
+                    {
+                      "$type": "RemoveUniqueModifier",
+                      "target": "AllPlayerAvatars",
+                      "actorIceSubHurtDelta": -1,
+                      "doOffStage": true,
+                      "modifierName": "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Electric",
+                      "predicates": [
+                        {
+                          "$type": "ByTargetPositionToSelfPosition",
+                          "target": "Target",
+                          "value": 40,
+                          "logic": "LesserOrEqual"
+                        }
+                      ],
+                      "canBeHandledOnRecover": true
+                    },
+                    {
+                      "$type": "ApplyModifier",
+                      "target": "AllPlayerAvatars",
+                      "actorIceSubHurtDelta": -1,
+                      "doOffStage": true,
+                      "modifierName": "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Electric",
+                      "predicates": [
+                        {
+                          "$type": "ByTargetPositionToSelfPosition",
+                          "target": "Target",
+                          "value": 40,
+                          "logic": "LesserOrEqual"
+                        }
+                      ],
+                      "canBeHandledOnRecover": true
+                    }
+                  ],
+                  "reactionTypes": [
+                    "SwirlElectric"
+                  ],
+                  "entityTypes": [
+                    "Monster"
+                  ],
+                  "range": 20
+                },
+                {
+                  "$type": "DoActionByElementReactionMixin",
+                  "actorIceSubHurtDelta": -1,
+                  "actions": [
+                    {
+                      "$type": "RemoveUniqueModifier",
+                      "target": "AllPlayerAvatars",
+                      "actorIceSubHurtDelta": -1,
+                      "doOffStage": true,
+                      "modifierName": "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Ice",
+                      "predicates": [
+                        {
+                          "$type": "ByTargetPositionToSelfPosition",
+                          "target": "Target",
+                          "value": 40,
+                          "logic": "LesserOrEqual"
+                        }
+                      ],
+                      "canBeHandledOnRecover": true
+                    },
+                    {
+                      "$type": "ApplyModifier",
+                      "target": "AllPlayerAvatars",
+                      "actorIceSubHurtDelta": -1,
+                      "doOffStage": true,
+                      "modifierName": "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Ice",
+                      "predicates": [
+                        {
+                          "$type": "ByTargetPositionToSelfPosition",
+                          "target": "Target",
+                          "value": 40,
+                          "logic": "LesserOrEqual"
+                        }
+                      ],
+                      "canBeHandledOnRecover": true
+                    }
+                  ],
+                  "reactionTypes": [
+                    "SwirlIce",
+                    "StarSwirlIce"
+                  ],
+                  "entityTypes": [
+                    "Monster"
+                  ],
+                  "range": 20
+                }
+              ],
+              "IAKPBCLBNKF": -1,
+              "isLimitedProperties": true
+            },
+            "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Electric": {
+              "stacking": "Unique",
+              "duration": "Kazuha_PermanentSkill_2_Duration",
+              "elementDurability": 100,
+              "minus_one": -1,
+              "IAKPBCLBNKF": -1,
+              "reApplyModifierOnStateChange": true,
+              "isUnique": true,
+              "isLimitedProperties": true,
+              "properties": {
+                "Actor_ElecAddHurtExtraDelta": [
+                  "Kazuha_PermanentSkill_2_Factor",
+                  "FIGHT_PROP_NONEXTRA_ELEMENT_MASTERY",
+                  "MUL"
+                ]
+              },
+              "buffID": 10001,
+              "state": "AttackUp"
+            },
+            "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Fire": {
+              "stacking": "Unique",
+              "duration": "Kazuha_PermanentSkill_2_Duration",
+              "elementDurability": 100,
+              "minus_one": -1,
+              "IAKPBCLBNKF": -1,
+              "reApplyModifierOnStateChange": true,
+              "isUnique": true,
+              "isLimitedProperties": true,
+              "properties": {
+                "Actor_FireAddHurtExtraDelta": [
+                  "Kazuha_PermanentSkill_2_Factor",
+                  "FIGHT_PROP_NONEXTRA_ELEMENT_MASTERY",
+                  "MUL"
+                ]
+              },
+              "buffID": 10001,
+              "state": "AttackUp"
+            },
+            "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Ice": {
+              "stacking": "Unique",
+              "duration": "Kazuha_PermanentSkill_2_Duration",
+              "elementDurability": 100,
+              "minus_one": -1,
+              "IAKPBCLBNKF": -1,
+              "reApplyModifierOnStateChange": true,
+              "isUnique": true,
+              "isLimitedProperties": true,
+              "properties": {
+                "Actor_IceAddHurtExtraDelta": [
+                  "Kazuha_PermanentSkill_2_Factor",
+                  "FIGHT_PROP_NONEXTRA_ELEMENT_MASTERY",
+                  "MUL"
+                ]
+              },
+              "buffID": 10001,
+              "state": "AttackUp"
+            },
+            "UNIQUE_Avatar_Kazuha_PermanentSkill_2_Water": {
+              "stacking": "Unique",
+              "duration": "Kazuha_PermanentSkill_2_Duration",
+              "elementDurability": 100,
+              "minus_one": -1,
+              "IAKPBCLBNKF": -1,
+              "reApplyModifierOnStateChange": true,
+              "isUnique": true,
+              "isLimitedProperties": true,
+              "properties": {
+                "Actor_WaterAddHurtExtraDelta": [
+                  "Kazuha_PermanentSkill_2_Factor",
+                  "FIGHT_PROP_NONEXTRA_ELEMENT_MASTERY",
+                  "MUL"
+                ]
+              },
+              "buffID": 10001,
+              "state": "AttackUp"
+            }
+          },
+          "LKLPDIMKLKI": {
+            "elementDurability": 100,
+            "minus_one": -1,
+            "IAKPBCLBNKF": -1,
+            "isLimitedProperties": true
+          }
+        }
+      },
+      {
+        "path": "BinOutput/Talent/RelicTalents/ConfigAffix_Relic.json",
+        "identity": "Relic_ReactionWindEnhance",
+        "pointer": "/Relic_ReactionWindEnhance",
+        "old_pointer": "/Relic_ReactionWindEnhance",
+        "node_sha256": "2c3f2258deaab0fc0e4a2de5ecc4a43e4a2497451b2a867bcc217207da50f7bc",
+        "old_node_sha256": "24f1470759633155f596f2183542bc5a1c2e78effa711d8909799ed65269e9e4",
+        "raw": [
+          {
+            "$type": "JPCAAJGEELO",
+            "GBPFBNHLOFD": true,
+            "IIBMNPFLNMJ": "Relic_ReactionWindEnhance"
+          },
+          {
+            "$type": "BIAHEMMGABC",
+            "GBPFBNHLOFD": true,
+            "IIBMNPFLNMJ": "Relic_ReactionWindEnhance",
+            "PCABAADALND": "%1",
+            "PEOJKHKHAKL": "ReactionUp"
+          },
+          {
+            "$type": "BIAHEMMGABC",
+            "GBPFBNHLOFD": true,
+            "IIBMNPFLNMJ": "Relic_ReactionWindEnhance",
+            "PCABAADALND": "%2",
+            "PEOJKHKHAKL": "ResistDown"
+          },
+          {
+            "$type": "BIAHEMMGABC",
+            "GBPFBNHLOFD": true,
+            "IIBMNPFLNMJ": "Relic_ReactionWindEnhance",
+            "PCABAADALND": "%3",
+            "PEOJKHKHAKL": "Dura"
+          },
+          {
+            "$type": "BIAHEMMGABC",
+            "GBPFBNHLOFD": true,
+            "IIBMNPFLNMJ": "Relic_ReactionWindEnhance",
+            "PCABAADALND": "%4",
+            "PEOJKHKHAKL": "ReactionUp_Star"
+          }
+        ],
+        "old_raw": [
+          {
+            "$type": "AddAbility",
+            "CLGIKOPIKBC": true,
+            "abilityName": "Relic_ReactionWindEnhance"
+          },
+          {
+            "$type": "ModifyAbility",
+            "CLGIKOPIKBC": true,
+            "abilityName": "Relic_ReactionWindEnhance",
+            "paramDelta": "%1",
+            "paramSpecial": "ReactionUp"
+          },
+          {
+            "$type": "ModifyAbility",
+            "CLGIKOPIKBC": true,
+            "abilityName": "Relic_ReactionWindEnhance",
+            "paramDelta": "%2",
+            "paramSpecial": "ResistDown"
+          },
+          {
+            "$type": "ModifyAbility",
+            "CLGIKOPIKBC": true,
+            "abilityName": "Relic_ReactionWindEnhance",
+            "paramDelta": "%3",
+            "paramSpecial": "Dura"
+          },
+          {
+            "$type": "ModifyAbility",
+            "CLGIKOPIKBC": true,
+            "abilityName": "Relic_ReactionWindEnhance",
+            "paramDelta": "%4",
+            "paramSpecial": "ReactionUp_Star"
+          }
+        ]
+      },
+      {
+        "path": "BinOutput/Talent/AvatarTalents/ConfigTalent_Kazuha.json",
+        "identity": "Kazuha_PermanentSkill_2",
+        "pointer": "/Kazuha_PermanentSkill_2",
+        "old_pointer": "/Kazuha_PermanentSkill_2",
+        "node_sha256": "a8e2c9ba9338997876456b42d189745d9335e6128240ad39c1e302dae095729c",
+        "old_node_sha256": "c6680995f289e77a5993f336d01c4f2ccd445fce3867cfc74a84a1a1f606fb26",
+        "raw": [
+          {
+            "$type": "JPCAAJGEELO",
+            "GBPFBNHLOFD": true,
+            "IIBMNPFLNMJ": "Avatar_Kazuha_PermanentSkill_2"
+          },
+          {
+            "$type": "BIAHEMMGABC",
+            "GBPFBNHLOFD": true,
+            "IIBMNPFLNMJ": "Avatar_Kazuha_PermanentSkill_2",
+            "PCABAADALND": "%1",
+            "PEOJKHKHAKL": "Kazuha_PermanentSkill_2_Factor"
+          },
+          {
+            "$type": "BIAHEMMGABC",
+            "GBPFBNHLOFD": true,
+            "IIBMNPFLNMJ": "Avatar_Kazuha_PermanentSkill_2",
+            "PCABAADALND": "%2",
+            "PEOJKHKHAKL": "Kazuha_PermanentSkill_2_Duration"
+          }
+        ],
+        "old_raw": [
+          {
+            "$type": "AddAbility",
+            "CLGIKOPIKBC": true,
+            "abilityName": "Avatar_Kazuha_PermanentSkill_2"
+          },
+          {
+            "$type": "ModifyAbility",
+            "CLGIKOPIKBC": true,
+            "abilityName": "Avatar_Kazuha_PermanentSkill_2",
+            "paramDelta": "%1",
+            "paramSpecial": "Kazuha_PermanentSkill_2_Factor"
+          },
+          {
+            "$type": "ModifyAbility",
+            "CLGIKOPIKBC": true,
+            "abilityName": "Avatar_Kazuha_PermanentSkill_2",
+            "paramDelta": "%2",
+            "paramSpecial": "Kazuha_PermanentSkill_2_Duration"
+          }
+        ]
+      },
+      {
+        "path": "ExcelBinOutput/EquipAffixExcelConfigData.json",
+        "identity": "Relic_ReactionWindEnhance",
+        "pointer": "/1309",
+        "old_pointer": "/1304",
+        "node_sha256": "f3bc6dcb4b4f775da82eafc0f70a3794d5645b8ffa200b2c8fb3623e839db650",
+        "old_node_sha256": "f3bc6dcb4b4f775da82eafc0f70a3794d5645b8ffa200b2c8fb3623e839db650",
+        "raw": {
+          "paramList": [
+            0.6000000238418579,
+            0.4000000059604645,
+            10,
+            0.20000000298023224,
+            0,
+            0,
+            0,
+            0
+          ],
+          "addProps": [
+            {},
+            {},
+            {}
+          ],
+          "openConfig": "Relic_ReactionWindEnhance",
+          "affixId": 2150021,
+          "id": 215002,
+          "level": 1,
+          "nameTextMapHash": 1562600667,
+          "descTextMapHash": 2340004313
+        },
+        "old_raw": {
+          "paramList": [
+            0.6000000238418579,
+            0.4000000059604645,
+            10,
+            0.20000000298023224,
+            0,
+            0,
+            0,
+            0
+          ],
+          "id": 215002,
+          "addProps": [
+            {},
+            {},
+            {}
+          ],
+          "affixId": 2150021,
+          "descTextMapHash": 2340004313,
+          "openConfig": "Relic_ReactionWindEnhance",
+          "level": 1,
+          "nameTextMapHash": 1562600667
+        }
+      },
+      {
+        "path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+        "identity": "Kazuha_PermanentSkill_2",
+        "pointer": "/3534",
+        "old_pointer": "/3437",
+        "node_sha256": "a4f87c40d2a0adbd30d57e3ca4e59f916964a0f019264b4648f8be523dabd017",
+        "old_node_sha256": "a4f87c40d2a0adbd30d57e3ca4e59f916964a0f019264b4648f8be523dabd017",
+        "raw": {
+          "paramList": [
+            0.00039999998989515007,
+            8,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "breakLevel": 4,
+          "proudSkillId": 472201,
+          "filterConds": [
+            "TALENT_FILTER_NONE",
+            "TALENT_FILTER_NONE"
+          ],
+          "proudSkillGroupId": 4722,
+          "addProps": [
+            {},
+            {}
+          ],
+          "paramDescList": [
+            2594384006,
+            3119538614,
+            1930022367,
+            2615074119,
+            2049532110,
+            2681571370,
+            4122201103,
+            134503485,
+            2679894420,
+            1694944599,
+            93706644,
+            3120810347,
+            561069335,
+            3393080323,
+            1625368966,
+            1905574397,
+            1346909681,
+            1085718955,
+            3928889799,
+            2303569389
+          ],
+          "openConfig": "Kazuha_PermanentSkill_2",
+          "lifeEffectParams": [
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "unlockDescTextMapHash": 409536634,
+          "costItems": [
+            {},
+            {},
+            {},
+            {}
+          ],
+          "icon": "UI_Talent_S_Kazuha_06",
+          "level": 1,
+          "proudSkillType": 2,
+          "uniqueDescTextMapHash": 2250417292,
+          "additionalDescTextMapHash": 1846223020,
+          "nameTextMapHash": 138639421,
+          "descTextMapHash": 1440992683,
+          "unlockProudSkillParam": "PROUD_SKILL_DISPLAY_BREAK"
+        },
+        "old_raw": {
+          "paramList": [
+            0.00039999998989515007,
+            8,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "proudSkillGroupId": 4722,
+          "uniqueDescTextMapHash": 2250417292,
+          "unlockProudSkillParam": "PROUD_SKILL_DISPLAY_BREAK",
+          "addProps": [
+            {},
+            {}
+          ],
+          "proudSkillType": 2,
+          "icon": "UI_Talent_S_Kazuha_06",
+          "breakLevel": 4,
+          "filterConds": [
+            "TALENT_FILTER_NONE",
+            "TALENT_FILTER_NONE"
+          ],
+          "proudSkillId": 472201,
+          "descTextMapHash": 1440992683,
+          "unlockDescTextMapHash": 409536634,
+          "lifeEffectParams": [
+            "",
+            "",
+            "",
+            "",
+            ""
+          ],
+          "paramDescList": [
+            2594384006,
+            3119538614,
+            1930022367,
+            2615074119,
+            2049532110,
+            2681571370,
+            4122201103,
+            134503485,
+            2679894420,
+            1694944599,
+            93706644,
+            3120810347,
+            561069335,
+            3393080323,
+            1625368966,
+            1905574397,
+            1346909681,
+            1085718955,
+            3928889799,
+            2303569389
+          ],
+          "additionalDescTextMapHash": 1846223020,
+          "openConfig": "Kazuha_PermanentSkill_2",
+          "costItems": [
+            {},
+            {},
+            {},
+            {}
+          ],
+          "level": 1,
+          "nameTextMapHash": 138639421
+        }
+      }
+    ]
+  },
+  "semantics": {
+    "version": 1,
+    "scope": "ordinary hydro/cryo origin target; experimental freeze reference; calibrated atomic hit order",
+    "static_bonus_presence": "owner on-field and off-field",
+    "dynamic_shred_presence": "owner on-field at reaction",
+    "time": "source duration in no-hitlag microsecond simulation; no initial source debuffs",
+    "other_target": "reaction original Monster only; caller declares source range satisfied",
+    "duplicate_path": "original-target onAttackLanded same-time same-value unique refresh is collapsed; AoE excluded",
+    "unsupported": [
+      "StarSwirlIce",
+      "pyro",
+      "electro",
+      "AoE propagation",
+      "multi-provider unique arbitration",
+      "native multi-damage packets"
+    ],
+    "sources": [
+      "https://library.keqingmains.com/equipment/artifacts#viridescent-venerer",
+      "https://library.keqingmains.com/evidence/equipment/artifacts#vv-res-shred-applies-after-talent-damage"
+    ],
+    "read_date": "2026-10-02",
+    "gameplay_verified": false
+  }
+}

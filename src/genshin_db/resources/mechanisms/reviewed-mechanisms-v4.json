@@ -1,0 +1,4763 @@
+{
+  "schema_version": 1,
+  "id": "mechanisms.v4.actual-contact",
+  "facts": [
+    {
+      "id": "artifact.skill-burst-contact-dendro-res-shred.rule",
+      "revision": 1,
+      "subject": {
+        "target_type": "artifact_set",
+        "target_id": 15025
+      },
+      "evidence": [
+        {
+          "id": "set",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/ReliquarySetExcelConfigData.json#/42",
+          "sha256": "647cc41c86654011efe65cef82315a9ecb093e10b7f8107a2f38cfe8aaa18ef6"
+        },
+        {
+          "id": "affix",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/EquipAffixExcelConfigData.json#/1350",
+          "sha256": "6a3a051b35dabc10d0a691fbf0a78ba25730e4ffa88b9176657a2abb4bf60a03"
+        },
+        {
+          "id": "talent",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Talent/RelicTalents/ConfigAffix_Relic.json#/Relic_ReactionGrassEnhance",
+          "sha256": "00630b4a16994d5da0f334615c3ad5c834d911c1c21b241353ba445dcba889df"
+        },
+        {
+          "id": "ability",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json#/51/Default",
+          "sha256": "898a4b08204b533415770c041f6baf98b9b58b00a8aa15c2d29040559c7e19a0"
+        },
+        {
+          "id": "reference",
+          "kind": "reference_implementation",
+          "locator": "https://raw.githubusercontent.com/genshinsim/gcsim/8792c73d64439feb74fa139c3b745022952b3dc9/internal/artifacts/deepwood/deepwood.go",
+          "sha256": "84b775e2d75897b32d3db389e4862849c1c5c3fbb1af5732e6d03cf465c7dfb9"
+        }
+      ],
+      "applicability": {
+        "version_line": "release",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "normalization_fingerprint": "4b792020b8fbfffd4103b4e019065602f205f42d46a8f6bcb995c6f76d278cb1"
+      },
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      },
+      "payload": {
+        "id": "artifact.skill-burst-contact-dendro-res-shred.rule",
+        "revision": 1,
+        "kind": "rule_template",
+        "claim": {
+          "key": "contact",
+          "rule": {
+            "name_zh": "战技或爆发命中降低草抗",
+            "trigger": {
+              "event": "hit",
+              "phase": "post",
+              "owner_presence": "any",
+              "damage_type_ids": [
+                "damage.elemental_skill",
+                "damage.elemental_burst"
+              ]
+            },
+            "beneficiaries": {
+              "mode": "self",
+              "scope": "locked"
+            },
+            "timing": {
+              "delay": 0,
+              "cooldown_anchor": "success",
+              "cooldown": 0
+            },
+            "stacking": {
+              "max": 1,
+              "add": 1,
+              "policy": "refresh"
+            },
+            "effects": [
+              {
+                "id": "bonus",
+                "benefit_type_id": "benefit.res_shred.dendro",
+                "domain": "enemy"
+              }
+            ]
+          },
+          "value_bindings": [
+            {
+              "target": "effects.bonus.value",
+              "parameter_ref": "factor"
+            },
+            {
+              "target": "timing.duration",
+              "parameter_ref": "duration"
+            }
+          ],
+          "execution_ports": [
+            {
+              "target": "owner",
+              "role": "provider"
+            },
+            {
+              "target": "trigger.event_ids",
+              "role": "qualifying_hits"
+            }
+          ],
+          "requirements": [
+            "single_target",
+            "fresh_empty_instance",
+            "fixed_party",
+            "no_hitlag",
+            "no_duplicate_source",
+            "qualified_contact_origin"
+          ]
+        },
+        "evidence_tier": "experimental_reference",
+        "evidence_refs": [
+          "set",
+          "affix",
+          "talent",
+          "ability",
+          "reference"
+        ]
+      }
+    },
+    {
+      "id": "artifact.skill-burst-contact-dendro-res-shred.parameter.factor",
+      "revision": 1,
+      "subject": {
+        "target_type": "artifact_set",
+        "target_id": 15025
+      },
+      "evidence": [
+        {
+          "id": "set",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/ReliquarySetExcelConfigData.json#/42",
+          "sha256": "647cc41c86654011efe65cef82315a9ecb093e10b7f8107a2f38cfe8aaa18ef6"
+        },
+        {
+          "id": "affix",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/EquipAffixExcelConfigData.json#/1350",
+          "sha256": "6a3a051b35dabc10d0a691fbf0a78ba25730e4ffa88b9176657a2abb4bf60a03"
+        },
+        {
+          "id": "talent",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Talent/RelicTalents/ConfigAffix_Relic.json#/Relic_ReactionGrassEnhance",
+          "sha256": "00630b4a16994d5da0f334615c3ad5c834d911c1c21b241353ba445dcba889df"
+        },
+        {
+          "id": "ability",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json#/51/Default",
+          "sha256": "898a4b08204b533415770c041f6baf98b9b58b00a8aa15c2d29040559c7e19a0"
+        },
+        {
+          "id": "reference",
+          "kind": "reference_implementation",
+          "locator": "https://raw.githubusercontent.com/genshinsim/gcsim/8792c73d64439feb74fa139c3b745022952b3dc9/internal/artifacts/deepwood/deepwood.go",
+          "sha256": "84b775e2d75897b32d3db389e4862849c1c5c3fbb1af5732e6d03cf465c7dfb9"
+        }
+      ],
+      "applicability": {
+        "version_line": "release",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "normalization_fingerprint": "4b792020b8fbfffd4103b4e019065602f205f42d46a8f6bcb995c6f76d278cb1"
+      },
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      },
+      "payload": {
+        "id": "artifact.skill-burst-contact-dendro-res-shred.parameter.factor",
+        "revision": 1,
+        "kind": "parameter_role",
+        "claim": {
+          "ref": "factor",
+          "value_type": "finite_number",
+          "unit": "ratio",
+          "targets": [
+            {
+              "rule_key": "contact",
+              "target": "effects.bonus.value"
+            }
+          ]
+        },
+        "evidence_tier": "experimental_reference",
+        "evidence_refs": [
+          "set",
+          "affix",
+          "talent",
+          "ability",
+          "reference"
+        ]
+      }
+    },
+    {
+      "id": "artifact.skill-burst-contact-dendro-res-shred.parameter.duration",
+      "revision": 1,
+      "subject": {
+        "target_type": "artifact_set",
+        "target_id": 15025
+      },
+      "evidence": [
+        {
+          "id": "set",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/ReliquarySetExcelConfigData.json#/42",
+          "sha256": "647cc41c86654011efe65cef82315a9ecb093e10b7f8107a2f38cfe8aaa18ef6"
+        },
+        {
+          "id": "affix",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/EquipAffixExcelConfigData.json#/1350",
+          "sha256": "6a3a051b35dabc10d0a691fbf0a78ba25730e4ffa88b9176657a2abb4bf60a03"
+        },
+        {
+          "id": "talent",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Talent/RelicTalents/ConfigAffix_Relic.json#/Relic_ReactionGrassEnhance",
+          "sha256": "00630b4a16994d5da0f334615c3ad5c834d911c1c21b241353ba445dcba889df"
+        },
+        {
+          "id": "ability",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json#/51/Default",
+          "sha256": "898a4b08204b533415770c041f6baf98b9b58b00a8aa15c2d29040559c7e19a0"
+        },
+        {
+          "id": "reference",
+          "kind": "reference_implementation",
+          "locator": "https://raw.githubusercontent.com/genshinsim/gcsim/8792c73d64439feb74fa139c3b745022952b3dc9/internal/artifacts/deepwood/deepwood.go",
+          "sha256": "84b775e2d75897b32d3db389e4862849c1c5c3fbb1af5732e6d03cf465c7dfb9"
+        }
+      ],
+      "applicability": {
+        "version_line": "release",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "normalization_fingerprint": "4b792020b8fbfffd4103b4e019065602f205f42d46a8f6bcb995c6f76d278cb1"
+      },
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      },
+      "payload": {
+        "id": "artifact.skill-burst-contact-dendro-res-shred.parameter.duration",
+        "revision": 1,
+        "kind": "parameter_role",
+        "claim": {
+          "ref": "duration",
+          "value_type": "seconds_exact_us",
+          "unit": "seconds",
+          "targets": [
+            {
+              "rule_key": "contact",
+              "target": "timing.duration"
+            }
+          ]
+        },
+        "evidence_tier": "experimental_reference",
+        "evidence_refs": [
+          "set",
+          "affix",
+          "talent",
+          "ability",
+          "reference"
+        ]
+      }
+    },
+    {
+      "id": "artifact.skill-burst-contact-dendro-res-shred.qualification",
+      "revision": 1,
+      "subject": {
+        "target_type": "artifact_set",
+        "target_id": 15025
+      },
+      "evidence": [
+        {
+          "id": "set",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/ReliquarySetExcelConfigData.json#/42",
+          "sha256": "647cc41c86654011efe65cef82315a9ecb093e10b7f8107a2f38cfe8aaa18ef6"
+        },
+        {
+          "id": "affix",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/EquipAffixExcelConfigData.json#/1350",
+          "sha256": "6a3a051b35dabc10d0a691fbf0a78ba25730e4ffa88b9176657a2abb4bf60a03"
+        },
+        {
+          "id": "talent",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Talent/RelicTalents/ConfigAffix_Relic.json#/Relic_ReactionGrassEnhance",
+          "sha256": "00630b4a16994d5da0f334615c3ad5c834d911c1c21b241353ba445dcba889df"
+        },
+        {
+          "id": "ability",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json#/51/Default",
+          "sha256": "898a4b08204b533415770c041f6baf98b9b58b00a8aa15c2d29040559c7e19a0"
+        },
+        {
+          "id": "reference",
+          "kind": "reference_implementation",
+          "locator": "https://raw.githubusercontent.com/genshinsim/gcsim/8792c73d64439feb74fa139c3b745022952b3dc9/internal/artifacts/deepwood/deepwood.go",
+          "sha256": "84b775e2d75897b32d3db389e4862849c1c5c3fbb1af5732e6d03cf465c7dfb9"
+        }
+      ],
+      "applicability": {
+        "version_line": "release",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "normalization_fingerprint": "4b792020b8fbfffd4103b4e019065602f205f42d46a8f6bcb995c6f76d278cb1"
+      },
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      },
+      "payload": {
+        "id": "artifact.skill-burst-contact-dendro-res-shred.qualification",
+        "revision": 1,
+        "kind": "execution_qualification",
+        "claim": {
+          "schema_version": 3,
+          "target_dependency": {
+            "mode": "ordinary_single_target_reference",
+            "ruleset": "gauge-freeze-reference-v1"
+          },
+          "coverage": {
+            "mode": "all_provider_contacts",
+            "scope": "callback_hit_filter",
+            "reject_unknown_contact": true
+          },
+          "consumer": null,
+          "scenario_requirements": {
+            "target_kind": "ordinary_non_animal_monster",
+            "party_mode": "single_player_fixed",
+            "all_party_alive": true,
+            "initial_effect": "none",
+            "no_external_source_changes": true,
+            "no_source_state_changes": true,
+            "hitlag_policy": "zero_hitlag_reference",
+            "event_order_policy": "declared_atomic_hit_order"
+          },
+          "parent": {
+            "profile_kind": "actual_contact_v1",
+            "allowed_profile_kinds": [
+              "calibrated_single_contact_v1",
+              "calibrated_multi_contact_v1"
+            ],
+            "selection": {
+              "constellation": 0,
+              "talent_level": 10
+            },
+            "required_receipts": [
+              "contact_identity"
+            ],
+            "hit": {
+              "damage_systems": [
+                "classic"
+              ],
+              "count": 1,
+              "scaling_stats": [
+                "atk"
+              ],
+              "elements": [
+                "physical",
+                "hydro",
+                "cryo",
+                "anemo"
+              ],
+              "damage_type_ids": [
+                "damage.elemental_skill",
+                "damage.elemental_burst"
+              ]
+            },
+            "callback_bridge": {
+              "kind": "owner_attack_landed",
+              "node_id": "ability",
+              "mount_pointer": "/EMGBJJOIENB/0",
+              "handler_pointer": "/GPPBBDEICKP/UNIQUE_Relic_ReactionGrassEnhance_Handler",
+              "callback_pointer": "/GPPBBDEICKP/UNIQUE_Relic_ReactionGrassEnhance_Handler/LBABCICJBKE",
+              "predicate_pointers": [
+                "/GPPBBDEICKP/UNIQUE_Relic_ReactionGrassEnhance_Handler/LBABCICJBKE/0/MJKPCGCAPLK/0",
+                "/GPPBBDEICKP/UNIQUE_Relic_ReactionGrassEnhance_Handler/LBABCICJBKE/0/MJKPCGCAPLK/1",
+                "/GPPBBDEICKP/UNIQUE_Relic_ReactionGrassEnhance_Handler/LBABCICJBKE/0/MJKPCGCAPLK/2"
+              ],
+              "apply_pointers": [
+                "/GPPBBDEICKP/UNIQUE_Relic_ReactionGrassEnhance_Handler/LBABCICJBKE/0/MLJNNELMEFL/0"
+              ],
+              "hit_filter": {
+                "damage_type_ids": [
+                  "damage.elemental_skill",
+                  "damage.elemental_burst"
+                ]
+              }
+            },
+            "activation": {
+              "phase": "post",
+              "offset_policy": "fixed_zero"
+            }
+          },
+          "provider": {
+            "relation": "equipped_artifact_set",
+            "set_node_id": "set",
+            "affix_node_id": "affix",
+            "required_count": 4,
+            "affix_id": 2150251,
+            "source_level": 1,
+            "requirement_coverage": "complete_selected_effect_reference"
+          },
+          "duplicate_identity": {
+            "kind": "artifact_set",
+            "source_id": 15025,
+            "parts": [
+              "four_piece"
+            ]
+          }
+        },
+        "evidence_tier": "experimental_reference",
+        "evidence_refs": [
+          "set",
+          "affix",
+          "talent",
+          "ability",
+          "reference"
+        ]
+      }
+    },
+    {
+      "id": "weapon.elemental-contact-dmg.r1.rule",
+      "revision": 1,
+      "subject": {
+        "target_type": "weapon",
+        "target_id": 11407
+      },
+      "evidence": [
+        {
+          "id": "weapon",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/WeaponExcelConfigData.json#/24",
+          "sha256": "93a794d0352d5773097ee3a6b7469e7208f496cffeda4e5eecb4a58a52c591d2"
+        },
+        {
+          "id": "affix",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/EquipAffixExcelConfigData.json#/60",
+          "sha256": "d3c4d0a9b25950f5e3be918df9ac4c8b7f34306c96953cf3b02217f428f6d39d"
+        },
+        {
+          "id": "talent",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Talent/EquipTalents/ConfigAffix_Sword.json#/Weapon_Sword_AttackGainFullDamgeUpBuff",
+          "sha256": "2be347f74c882b3155308705a059991c92520aabbe6db38542e6c2b3e1dc30be"
+        },
+        {
+          "id": "ability",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Sword.json#/13/Default",
+          "sha256": "120d407537d65742cb7297b9a11ca751270d458bb3e8d31c5c731c3f38d90950"
+        },
+        {
+          "id": "reference",
+          "kind": "reference_implementation",
+          "locator": "https://raw.githubusercontent.com/genshinsim/gcsim/8792c73d64439feb74fa139c3b745022952b3dc9/internal/weapons/sword/ironsting/ironsting.go",
+          "sha256": "e5f103259e4b5bfe06e1966ab14a8675df6cf16ecc102d9fdcc7861864985e0c"
+        }
+      ],
+      "applicability": {
+        "version_line": "release",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "normalization_fingerprint": "4b792020b8fbfffd4103b4e019065602f205f42d46a8f6bcb995c6f76d278cb1"
+      },
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      },
+      "payload": {
+        "id": "weapon.elemental-contact-dmg.r1.rule",
+        "revision": 1,
+        "kind": "rule_template",
+        "claim": {
+          "key": "contact",
+          "rule": {
+            "name_zh": "元素命中共同续期增伤·精炼1",
+            "trigger": {
+              "event": "hit",
+              "phase": "post",
+              "owner_presence": "frontline",
+              "elements": [
+                "pyro",
+                "hydro",
+                "electro",
+                "cryo",
+                "anemo",
+                "geo",
+                "dendro"
+              ]
+            },
+            "beneficiaries": {
+              "mode": "self",
+              "scope": "locked"
+            },
+            "timing": {
+              "delay": 0,
+              "cooldown_anchor": "success"
+            },
+            "stacking": {
+              "max": 2,
+              "add": 1,
+              "policy": "add_and_refresh"
+            },
+            "effects": [
+              {
+                "id": "bonus",
+                "benefit_type_id": "benefit.dmg_bonus.all",
+                "domain": "self"
+              }
+            ]
+          },
+          "value_bindings": [
+            {
+              "target": "effects.bonus.value",
+              "parameter_ref": "factor"
+            },
+            {
+              "target": "timing.duration",
+              "parameter_ref": "duration"
+            },
+            {
+              "target": "timing.cooldown",
+              "parameter_ref": "cooldown"
+            }
+          ],
+          "execution_ports": [
+            {
+              "target": "owner",
+              "role": "provider"
+            },
+            {
+              "target": "trigger.event_ids",
+              "role": "qualifying_hits"
+            }
+          ],
+          "requirements": [
+            "single_target",
+            "fresh_empty_instance",
+            "fixed_party",
+            "no_hitlag",
+            "no_duplicate_source",
+            "qualified_contact_origin",
+            "no_provider_transformative_damage"
+          ]
+        },
+        "evidence_tier": "experimental_reference",
+        "evidence_refs": [
+          "weapon",
+          "affix",
+          "talent",
+          "ability",
+          "reference"
+        ]
+      }
+    },
+    {
+      "id": "weapon.elemental-contact-dmg.r1.parameter.factor",
+      "revision": 1,
+      "subject": {
+        "target_type": "weapon",
+        "target_id": 11407
+      },
+      "evidence": [
+        {
+          "id": "weapon",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/WeaponExcelConfigData.json#/24",
+          "sha256": "93a794d0352d5773097ee3a6b7469e7208f496cffeda4e5eecb4a58a52c591d2"
+        },
+        {
+          "id": "affix",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/EquipAffixExcelConfigData.json#/60",
+          "sha256": "d3c4d0a9b25950f5e3be918df9ac4c8b7f34306c96953cf3b02217f428f6d39d"
+        },
+        {
+          "id": "talent",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Talent/EquipTalents/ConfigAffix_Sword.json#/Weapon_Sword_AttackGainFullDamgeUpBuff",
+          "sha256": "2be347f74c882b3155308705a059991c92520aabbe6db38542e6c2b3e1dc30be"
+        },
+        {
+          "id": "ability",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Sword.json#/13/Default",
+          "sha256": "120d407537d65742cb7297b9a11ca751270d458bb3e8d31c5c731c3f38d90950"
+        },
+        {
+          "id": "reference",
+          "kind": "reference_implementation",
+          "locator": "https://raw.githubusercontent.com/genshinsim/gcsim/8792c73d64439feb74fa139c3b745022952b3dc9/internal/weapons/sword/ironsting/ironsting.go",
+          "sha256": "e5f103259e4b5bfe06e1966ab14a8675df6cf16ecc102d9fdcc7861864985e0c"
+        }
+      ],
+      "applicability": {
+        "version_line": "release",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "normalization_fingerprint": "4b792020b8fbfffd4103b4e019065602f205f42d46a8f6bcb995c6f76d278cb1"
+      },
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      },
+      "payload": {
+        "id": "weapon.elemental-contact-dmg.r1.parameter.factor",
+        "revision": 1,
+        "kind": "parameter_role",
+        "claim": {
+          "ref": "factor",
+          "value_type": "finite_number",
+          "unit": "ratio",
+          "targets": [
+            {
+              "rule_key": "contact",
+              "target": "effects.bonus.value"
+            }
+          ]
+        },
+        "evidence_tier": "experimental_reference",
+        "evidence_refs": [
+          "weapon",
+          "affix",
+          "talent",
+          "ability",
+          "reference"
+        ]
+      }
+    },
+    {
+      "id": "weapon.elemental-contact-dmg.r1.parameter.duration",
+      "revision": 1,
+      "subject": {
+        "target_type": "weapon",
+        "target_id": 11407
+      },
+      "evidence": [
+        {
+          "id": "weapon",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/WeaponExcelConfigData.json#/24",
+          "sha256": "93a794d0352d5773097ee3a6b7469e7208f496cffeda4e5eecb4a58a52c591d2"
+        },
+        {
+          "id": "affix",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/EquipAffixExcelConfigData.json#/60",
+          "sha256": "d3c4d0a9b25950f5e3be918df9ac4c8b7f34306c96953cf3b02217f428f6d39d"
+        },
+        {
+          "id": "talent",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Talent/EquipTalents/ConfigAffix_Sword.json#/Weapon_Sword_AttackGainFullDamgeUpBuff",
+          "sha256": "2be347f74c882b3155308705a059991c92520aabbe6db38542e6c2b3e1dc30be"
+        },
+        {
+          "id": "ability",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Sword.json#/13/Default",
+          "sha256": "120d407537d65742cb7297b9a11ca751270d458bb3e8d31c5c731c3f38d90950"
+        },
+        {
+          "id": "reference",
+          "kind": "reference_implementation",
+          "locator": "https://raw.githubusercontent.com/genshinsim/gcsim/8792c73d64439feb74fa139c3b745022952b3dc9/internal/weapons/sword/ironsting/ironsting.go",
+          "sha256": "e5f103259e4b5bfe06e1966ab14a8675df6cf16ecc102d9fdcc7861864985e0c"
+        }
+      ],
+      "applicability": {
+        "version_line": "release",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "normalization_fingerprint": "4b792020b8fbfffd4103b4e019065602f205f42d46a8f6bcb995c6f76d278cb1"
+      },
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      },
+      "payload": {
+        "id": "weapon.elemental-contact-dmg.r1.parameter.duration",
+        "revision": 1,
+        "kind": "parameter_role",
+        "claim": {
+          "ref": "duration",
+          "value_type": "seconds_exact_us",
+          "unit": "seconds",
+          "targets": [
+            {
+              "rule_key": "contact",
+              "target": "timing.duration"
+            }
+          ]
+        },
+        "evidence_tier": "experimental_reference",
+        "evidence_refs": [
+          "weapon",
+          "affix",
+          "talent",
+          "ability",
+          "reference"
+        ]
+      }
+    },
+    {
+      "id": "weapon.elemental-contact-dmg.r1.parameter.cooldown",
+      "revision": 1,
+      "subject": {
+        "target_type": "weapon",
+        "target_id": 11407
+      },
+      "evidence": [
+        {
+          "id": "weapon",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/WeaponExcelConfigData.json#/24",
+          "sha256": "93a794d0352d5773097ee3a6b7469e7208f496cffeda4e5eecb4a58a52c591d2"
+        },
+        {
+          "id": "affix",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/EquipAffixExcelConfigData.json#/60",
+          "sha256": "d3c4d0a9b25950f5e3be918df9ac4c8b7f34306c96953cf3b02217f428f6d39d"
+        },
+        {
+          "id": "talent",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Talent/EquipTalents/ConfigAffix_Sword.json#/Weapon_Sword_AttackGainFullDamgeUpBuff",
+          "sha256": "2be347f74c882b3155308705a059991c92520aabbe6db38542e6c2b3e1dc30be"
+        },
+        {
+          "id": "ability",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Sword.json#/13/Default",
+          "sha256": "120d407537d65742cb7297b9a11ca751270d458bb3e8d31c5c731c3f38d90950"
+        },
+        {
+          "id": "reference",
+          "kind": "reference_implementation",
+          "locator": "https://raw.githubusercontent.com/genshinsim/gcsim/8792c73d64439feb74fa139c3b745022952b3dc9/internal/weapons/sword/ironsting/ironsting.go",
+          "sha256": "e5f103259e4b5bfe06e1966ab14a8675df6cf16ecc102d9fdcc7861864985e0c"
+        }
+      ],
+      "applicability": {
+        "version_line": "release",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "normalization_fingerprint": "4b792020b8fbfffd4103b4e019065602f205f42d46a8f6bcb995c6f76d278cb1"
+      },
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      },
+      "payload": {
+        "id": "weapon.elemental-contact-dmg.r1.parameter.cooldown",
+        "revision": 1,
+        "kind": "parameter_role",
+        "claim": {
+          "ref": "cooldown",
+          "value_type": "seconds_exact_us",
+          "unit": "seconds",
+          "targets": [
+            {
+              "rule_key": "contact",
+              "target": "timing.cooldown"
+            }
+          ]
+        },
+        "evidence_tier": "experimental_reference",
+        "evidence_refs": [
+          "weapon",
+          "affix",
+          "talent",
+          "ability",
+          "reference"
+        ]
+      }
+    },
+    {
+      "id": "weapon.elemental-contact-dmg.r1.qualification",
+      "revision": 1,
+      "subject": {
+        "target_type": "weapon",
+        "target_id": 11407
+      },
+      "evidence": [
+        {
+          "id": "weapon",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/WeaponExcelConfigData.json#/24",
+          "sha256": "93a794d0352d5773097ee3a6b7469e7208f496cffeda4e5eecb4a58a52c591d2"
+        },
+        {
+          "id": "affix",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/EquipAffixExcelConfigData.json#/60",
+          "sha256": "d3c4d0a9b25950f5e3be918df9ac4c8b7f34306c96953cf3b02217f428f6d39d"
+        },
+        {
+          "id": "talent",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Talent/EquipTalents/ConfigAffix_Sword.json#/Weapon_Sword_AttackGainFullDamgeUpBuff",
+          "sha256": "2be347f74c882b3155308705a059991c92520aabbe6db38542e6c2b3e1dc30be"
+        },
+        {
+          "id": "ability",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Sword.json#/13/Default",
+          "sha256": "120d407537d65742cb7297b9a11ca751270d458bb3e8d31c5c731c3f38d90950"
+        },
+        {
+          "id": "reference",
+          "kind": "reference_implementation",
+          "locator": "https://raw.githubusercontent.com/genshinsim/gcsim/8792c73d64439feb74fa139c3b745022952b3dc9/internal/weapons/sword/ironsting/ironsting.go",
+          "sha256": "e5f103259e4b5bfe06e1966ab14a8675df6cf16ecc102d9fdcc7861864985e0c"
+        }
+      ],
+      "applicability": {
+        "version_line": "release",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "normalization_fingerprint": "4b792020b8fbfffd4103b4e019065602f205f42d46a8f6bcb995c6f76d278cb1"
+      },
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      },
+      "payload": {
+        "id": "weapon.elemental-contact-dmg.r1.qualification",
+        "revision": 1,
+        "kind": "execution_qualification",
+        "claim": {
+          "schema_version": 3,
+          "target_dependency": {
+            "mode": "ordinary_single_target_reference",
+            "ruleset": "gauge-freeze-reference-v1"
+          },
+          "coverage": {
+            "mode": "all_provider_contacts",
+            "scope": "callback_hit_filter",
+            "reject_unknown_contact": true
+          },
+          "consumer": null,
+          "scenario_requirements": {
+            "target_kind": "ordinary_non_animal_monster",
+            "party_mode": "single_player_fixed",
+            "all_party_alive": true,
+            "initial_effect": "none",
+            "no_external_source_changes": true,
+            "no_source_state_changes": true,
+            "hitlag_policy": "zero_hitlag_reference",
+            "event_order_policy": "declared_atomic_hit_order",
+            "no_provider_transformative_damage": true
+          },
+          "parent": {
+            "profile_kind": "actual_contact_v1",
+            "allowed_profile_kinds": [
+              "calibrated_single_contact_v1",
+              "calibrated_multi_contact_v1"
+            ],
+            "selection": {
+              "constellation": 0,
+              "talent_level": 10
+            },
+            "required_receipts": [
+              "contact_identity"
+            ],
+            "hit": {
+              "damage_systems": [
+                "classic"
+              ],
+              "count": 1,
+              "scaling_stats": [
+                "atk"
+              ],
+              "elements": [
+                "physical",
+                "hydro",
+                "cryo",
+                "anemo"
+              ],
+              "damage_type_ids": [
+                "damage.elemental_skill",
+                "damage.elemental_burst"
+              ]
+            },
+            "callback_bridge": {
+              "kind": "owner_attack_landed",
+              "node_id": "ability",
+              "mount_pointer": "/EMGBJJOIENB/0",
+              "handler_pointer": "/GPPBBDEICKP/UNIQUE_Sword_AttackGainFullDamgeUpBuff_Handler",
+              "callback_pointer": "/GPPBBDEICKP/UNIQUE_Sword_AttackGainFullDamgeUpBuff_Handler/LBABCICJBKE",
+              "predicate_pointers": [
+                "/GPPBBDEICKP/UNIQUE_Sword_AttackGainFullDamgeUpBuff_Handler/LBABCICJBKE/0/MJKPCGCAPLK/0",
+                "/GPPBBDEICKP/UNIQUE_Sword_AttackGainFullDamgeUpBuff_Handler/LBABCICJBKE/0/MJKPCGCAPLK/1"
+              ],
+              "apply_pointers": [
+                "/GPPBBDEICKP/UNIQUE_Sword_AttackGainFullDamgeUpBuff_Handler/LBABCICJBKE/0/MLJNNELMEFL/0"
+              ],
+              "hit_filter": {
+                "elements": [
+                  "pyro",
+                  "hydro",
+                  "electro",
+                  "cryo",
+                  "anemo",
+                  "geo",
+                  "dendro"
+                ]
+              }
+            },
+            "activation": {
+              "phase": "post",
+              "offset_policy": "fixed_zero"
+            }
+          },
+          "provider": {
+            "relation": "equipped_weapon",
+            "weapon_node_id": "weapon",
+            "affix_node_id": "affix",
+            "affix_id": 1114070,
+            "source_level": 0,
+            "refinement": 1,
+            "requirement_coverage": "complete_selected_effect_reference"
+          },
+          "duplicate_identity": {
+            "kind": "weapon",
+            "source_id": 11407,
+            "parts": [
+              "elemental_hit_damage_bonus"
+            ]
+          }
+        },
+        "evidence_tier": "experimental_reference",
+        "evidence_refs": [
+          "weapon",
+          "affix",
+          "talent",
+          "ability",
+          "reference"
+        ]
+      }
+    },
+    {
+      "id": "weapon.elemental-contact-dmg.r2.rule",
+      "revision": 1,
+      "subject": {
+        "target_type": "weapon",
+        "target_id": 11407
+      },
+      "evidence": [
+        {
+          "id": "weapon",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/WeaponExcelConfigData.json#/24",
+          "sha256": "93a794d0352d5773097ee3a6b7469e7208f496cffeda4e5eecb4a58a52c591d2"
+        },
+        {
+          "id": "affix",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/EquipAffixExcelConfigData.json#/61",
+          "sha256": "b32796235685f4e87d4f8df68700bdae69ad68261d8a6018402232e0f4f5dc2a"
+        },
+        {
+          "id": "talent",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Talent/EquipTalents/ConfigAffix_Sword.json#/Weapon_Sword_AttackGainFullDamgeUpBuff",
+          "sha256": "2be347f74c882b3155308705a059991c92520aabbe6db38542e6c2b3e1dc30be"
+        },
+        {
+          "id": "ability",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Sword.json#/13/Default",
+          "sha256": "120d407537d65742cb7297b9a11ca751270d458bb3e8d31c5c731c3f38d90950"
+        },
+        {
+          "id": "reference",
+          "kind": "reference_implementation",
+          "locator": "https://raw.githubusercontent.com/genshinsim/gcsim/8792c73d64439feb74fa139c3b745022952b3dc9/internal/weapons/sword/ironsting/ironsting.go",
+          "sha256": "e5f103259e4b5bfe06e1966ab14a8675df6cf16ecc102d9fdcc7861864985e0c"
+        }
+      ],
+      "applicability": {
+        "version_line": "release",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "normalization_fingerprint": "4b792020b8fbfffd4103b4e019065602f205f42d46a8f6bcb995c6f76d278cb1"
+      },
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      },
+      "payload": {
+        "id": "weapon.elemental-contact-dmg.r2.rule",
+        "revision": 1,
+        "kind": "rule_template",
+        "claim": {
+          "key": "contact",
+          "rule": {
+            "name_zh": "元素命中共同续期增伤·精炼2",
+            "trigger": {
+              "event": "hit",
+              "phase": "post",
+              "owner_presence": "frontline",
+              "elements": [
+                "pyro",
+                "hydro",
+                "electro",
+                "cryo",
+                "anemo",
+                "geo",
+                "dendro"
+              ]
+            },
+            "beneficiaries": {
+              "mode": "self",
+              "scope": "locked"
+            },
+            "timing": {
+              "delay": 0,
+              "cooldown_anchor": "success"
+            },
+            "stacking": {
+              "max": 2,
+              "add": 1,
+              "policy": "add_and_refresh"
+            },
+            "effects": [
+              {
+                "id": "bonus",
+                "benefit_type_id": "benefit.dmg_bonus.all",
+                "domain": "self"
+              }
+            ]
+          },
+          "value_bindings": [
+            {
+              "target": "effects.bonus.value",
+              "parameter_ref": "factor"
+            },
+            {
+              "target": "timing.duration",
+              "parameter_ref": "duration"
+            },
+            {
+              "target": "timing.cooldown",
+              "parameter_ref": "cooldown"
+            }
+          ],
+          "execution_ports": [
+            {
+              "target": "owner",
+              "role": "provider"
+            },
+            {
+              "target": "trigger.event_ids",
+              "role": "qualifying_hits"
+            }
+          ],
+          "requirements": [
+            "single_target",
+            "fresh_empty_instance",
+            "fixed_party",
+            "no_hitlag",
+            "no_duplicate_source",
+            "qualified_contact_origin",
+            "no_provider_transformative_damage"
+          ]
+        },
+        "evidence_tier": "experimental_reference",
+        "evidence_refs": [
+          "weapon",
+          "affix",
+          "talent",
+          "ability",
+          "reference"
+        ]
+      }
+    },
+    {
+      "id": "weapon.elemental-contact-dmg.r2.parameter.factor",
+      "revision": 1,
+      "subject": {
+        "target_type": "weapon",
+        "target_id": 11407
+      },
+      "evidence": [
+        {
+          "id": "weapon",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/WeaponExcelConfigData.json#/24",
+          "sha256": "93a794d0352d5773097ee3a6b7469e7208f496cffeda4e5eecb4a58a52c591d2"
+        },
+        {
+          "id": "affix",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/EquipAffixExcelConfigData.json#/61",
+          "sha256": "b32796235685f4e87d4f8df68700bdae69ad68261d8a6018402232e0f4f5dc2a"
+        },
+        {
+          "id": "talent",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Talent/EquipTalents/ConfigAffix_Sword.json#/Weapon_Sword_AttackGainFullDamgeUpBuff",
+          "sha256": "2be347f74c882b3155308705a059991c92520aabbe6db38542e6c2b3e1dc30be"
+        },
+        {
+          "id": "ability",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Sword.json#/13/Default",
+          "sha256": "120d407537d65742cb7297b9a11ca751270d458bb3e8d31c5c731c3f38d90950"
+        },
+        {
+          "id": "reference",
+          "kind": "reference_implementation",
+          "locator": "https://raw.githubusercontent.com/genshinsim/gcsim/8792c73d64439feb74fa139c3b745022952b3dc9/internal/weapons/sword/ironsting/ironsting.go",
+          "sha256": "e5f103259e4b5bfe06e1966ab14a8675df6cf16ecc102d9fdcc7861864985e0c"
+        }
+      ],
+      "applicability": {
+        "version_line": "release",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "normalization_fingerprint": "4b792020b8fbfffd4103b4e019065602f205f42d46a8f6bcb995c6f76d278cb1"
+      },
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      },
+      "payload": {
+        "id": "weapon.elemental-contact-dmg.r2.parameter.factor",
+        "revision": 1,
+        "kind": "parameter_role",
+        "claim": {
+          "ref": "factor",
+          "value_type": "finite_number",
+          "unit": "ratio",
+          "targets": [
+            {
+              "rule_key": "contact",
+              "target": "effects.bonus.value"
+            }
+          ]
+        },
+        "evidence_tier": "experimental_reference",
+        "evidence_refs": [
+          "weapon",
+          "affix",
+          "talent",
+          "ability",
+          "reference"
+        ]
+      }
+    },
+    {
+      "id": "weapon.elemental-contact-dmg.r2.parameter.duration",
+      "revision": 1,
+      "subject": {
+        "target_type": "weapon",
+        "target_id": 11407
+      },
+      "evidence": [
+        {
+          "id": "weapon",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/WeaponExcelConfigData.json#/24",
+          "sha256": "93a794d0352d5773097ee3a6b7469e7208f496cffeda4e5eecb4a58a52c591d2"
+        },
+        {
+          "id": "affix",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/EquipAffixExcelConfigData.json#/61",
+          "sha256": "b32796235685f4e87d4f8df68700bdae69ad68261d8a6018402232e0f4f5dc2a"
+        },
+        {
+          "id": "talent",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Talent/EquipTalents/ConfigAffix_Sword.json#/Weapon_Sword_AttackGainFullDamgeUpBuff",
+          "sha256": "2be347f74c882b3155308705a059991c92520aabbe6db38542e6c2b3e1dc30be"
+        },
+        {
+          "id": "ability",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Sword.json#/13/Default",
+          "sha256": "120d407537d65742cb7297b9a11ca751270d458bb3e8d31c5c731c3f38d90950"
+        },
+        {
+          "id": "reference",
+          "kind": "reference_implementation",
+          "locator": "https://raw.githubusercontent.com/genshinsim/gcsim/8792c73d64439feb74fa139c3b745022952b3dc9/internal/weapons/sword/ironsting/ironsting.go",
+          "sha256": "e5f103259e4b5bfe06e1966ab14a8675df6cf16ecc102d9fdcc7861864985e0c"
+        }
+      ],
+      "applicability": {
+        "version_line": "release",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "normalization_fingerprint": "4b792020b8fbfffd4103b4e019065602f205f42d46a8f6bcb995c6f76d278cb1"
+      },
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      },
+      "payload": {
+        "id": "weapon.elemental-contact-dmg.r2.parameter.duration",
+        "revision": 1,
+        "kind": "parameter_role",
+        "claim": {
+          "ref": "duration",
+          "value_type": "seconds_exact_us",
+          "unit": "seconds",
+          "targets": [
+            {
+              "rule_key": "contact",
+              "target": "timing.duration"
+            }
+          ]
+        },
+        "evidence_tier": "experimental_reference",
+        "evidence_refs": [
+          "weapon",
+          "affix",
+          "talent",
+          "ability",
+          "reference"
+        ]
+      }
+    },
+    {
+      "id": "weapon.elemental-contact-dmg.r2.parameter.cooldown",
+      "revision": 1,
+      "subject": {
+        "target_type": "weapon",
+        "target_id": 11407
+      },
+      "evidence": [
+        {
+          "id": "weapon",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/WeaponExcelConfigData.json#/24",
+          "sha256": "93a794d0352d5773097ee3a6b7469e7208f496cffeda4e5eecb4a58a52c591d2"
+        },
+        {
+          "id": "affix",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/EquipAffixExcelConfigData.json#/61",
+          "sha256": "b32796235685f4e87d4f8df68700bdae69ad68261d8a6018402232e0f4f5dc2a"
+        },
+        {
+          "id": "talent",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Talent/EquipTalents/ConfigAffix_Sword.json#/Weapon_Sword_AttackGainFullDamgeUpBuff",
+          "sha256": "2be347f74c882b3155308705a059991c92520aabbe6db38542e6c2b3e1dc30be"
+        },
+        {
+          "id": "ability",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Sword.json#/13/Default",
+          "sha256": "120d407537d65742cb7297b9a11ca751270d458bb3e8d31c5c731c3f38d90950"
+        },
+        {
+          "id": "reference",
+          "kind": "reference_implementation",
+          "locator": "https://raw.githubusercontent.com/genshinsim/gcsim/8792c73d64439feb74fa139c3b745022952b3dc9/internal/weapons/sword/ironsting/ironsting.go",
+          "sha256": "e5f103259e4b5bfe06e1966ab14a8675df6cf16ecc102d9fdcc7861864985e0c"
+        }
+      ],
+      "applicability": {
+        "version_line": "release",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "normalization_fingerprint": "4b792020b8fbfffd4103b4e019065602f205f42d46a8f6bcb995c6f76d278cb1"
+      },
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      },
+      "payload": {
+        "id": "weapon.elemental-contact-dmg.r2.parameter.cooldown",
+        "revision": 1,
+        "kind": "parameter_role",
+        "claim": {
+          "ref": "cooldown",
+          "value_type": "seconds_exact_us",
+          "unit": "seconds",
+          "targets": [
+            {
+              "rule_key": "contact",
+              "target": "timing.cooldown"
+            }
+          ]
+        },
+        "evidence_tier": "experimental_reference",
+        "evidence_refs": [
+          "weapon",
+          "affix",
+          "talent",
+          "ability",
+          "reference"
+        ]
+      }
+    },
+    {
+      "id": "weapon.elemental-contact-dmg.r2.qualification",
+      "revision": 1,
+      "subject": {
+        "target_type": "weapon",
+        "target_id": 11407
+      },
+      "evidence": [
+        {
+          "id": "weapon",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/WeaponExcelConfigData.json#/24",
+          "sha256": "93a794d0352d5773097ee3a6b7469e7208f496cffeda4e5eecb4a58a52c591d2"
+        },
+        {
+          "id": "affix",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/EquipAffixExcelConfigData.json#/61",
+          "sha256": "b32796235685f4e87d4f8df68700bdae69ad68261d8a6018402232e0f4f5dc2a"
+        },
+        {
+          "id": "talent",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Talent/EquipTalents/ConfigAffix_Sword.json#/Weapon_Sword_AttackGainFullDamgeUpBuff",
+          "sha256": "2be347f74c882b3155308705a059991c92520aabbe6db38542e6c2b3e1dc30be"
+        },
+        {
+          "id": "ability",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Sword.json#/13/Default",
+          "sha256": "120d407537d65742cb7297b9a11ca751270d458bb3e8d31c5c731c3f38d90950"
+        },
+        {
+          "id": "reference",
+          "kind": "reference_implementation",
+          "locator": "https://raw.githubusercontent.com/genshinsim/gcsim/8792c73d64439feb74fa139c3b745022952b3dc9/internal/weapons/sword/ironsting/ironsting.go",
+          "sha256": "e5f103259e4b5bfe06e1966ab14a8675df6cf16ecc102d9fdcc7861864985e0c"
+        }
+      ],
+      "applicability": {
+        "version_line": "release",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "normalization_fingerprint": "4b792020b8fbfffd4103b4e019065602f205f42d46a8f6bcb995c6f76d278cb1"
+      },
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      },
+      "payload": {
+        "id": "weapon.elemental-contact-dmg.r2.qualification",
+        "revision": 1,
+        "kind": "execution_qualification",
+        "claim": {
+          "schema_version": 3,
+          "target_dependency": {
+            "mode": "ordinary_single_target_reference",
+            "ruleset": "gauge-freeze-reference-v1"
+          },
+          "coverage": {
+            "mode": "all_provider_contacts",
+            "scope": "callback_hit_filter",
+            "reject_unknown_contact": true
+          },
+          "consumer": null,
+          "scenario_requirements": {
+            "target_kind": "ordinary_non_animal_monster",
+            "party_mode": "single_player_fixed",
+            "all_party_alive": true,
+            "initial_effect": "none",
+            "no_external_source_changes": true,
+            "no_source_state_changes": true,
+            "hitlag_policy": "zero_hitlag_reference",
+            "event_order_policy": "declared_atomic_hit_order",
+            "no_provider_transformative_damage": true
+          },
+          "parent": {
+            "profile_kind": "actual_contact_v1",
+            "allowed_profile_kinds": [
+              "calibrated_single_contact_v1",
+              "calibrated_multi_contact_v1"
+            ],
+            "selection": {
+              "constellation": 0,
+              "talent_level": 10
+            },
+            "required_receipts": [
+              "contact_identity"
+            ],
+            "hit": {
+              "damage_systems": [
+                "classic"
+              ],
+              "count": 1,
+              "scaling_stats": [
+                "atk"
+              ],
+              "elements": [
+                "physical",
+                "hydro",
+                "cryo",
+                "anemo"
+              ],
+              "damage_type_ids": [
+                "damage.elemental_skill",
+                "damage.elemental_burst"
+              ]
+            },
+            "callback_bridge": {
+              "kind": "owner_attack_landed",
+              "node_id": "ability",
+              "mount_pointer": "/EMGBJJOIENB/0",
+              "handler_pointer": "/GPPBBDEICKP/UNIQUE_Sword_AttackGainFullDamgeUpBuff_Handler",
+              "callback_pointer": "/GPPBBDEICKP/UNIQUE_Sword_AttackGainFullDamgeUpBuff_Handler/LBABCICJBKE",
+              "predicate_pointers": [
+                "/GPPBBDEICKP/UNIQUE_Sword_AttackGainFullDamgeUpBuff_Handler/LBABCICJBKE/0/MJKPCGCAPLK/0",
+                "/GPPBBDEICKP/UNIQUE_Sword_AttackGainFullDamgeUpBuff_Handler/LBABCICJBKE/0/MJKPCGCAPLK/1"
+              ],
+              "apply_pointers": [
+                "/GPPBBDEICKP/UNIQUE_Sword_AttackGainFullDamgeUpBuff_Handler/LBABCICJBKE/0/MLJNNELMEFL/0"
+              ],
+              "hit_filter": {
+                "elements": [
+                  "pyro",
+                  "hydro",
+                  "electro",
+                  "cryo",
+                  "anemo",
+                  "geo",
+                  "dendro"
+                ]
+              }
+            },
+            "activation": {
+              "phase": "post",
+              "offset_policy": "fixed_zero"
+            }
+          },
+          "provider": {
+            "relation": "equipped_weapon",
+            "weapon_node_id": "weapon",
+            "affix_node_id": "affix",
+            "affix_id": 1114071,
+            "source_level": 1,
+            "refinement": 2,
+            "requirement_coverage": "complete_selected_effect_reference"
+          },
+          "duplicate_identity": {
+            "kind": "weapon",
+            "source_id": 11407,
+            "parts": [
+              "elemental_hit_damage_bonus"
+            ]
+          }
+        },
+        "evidence_tier": "experimental_reference",
+        "evidence_refs": [
+          "weapon",
+          "affix",
+          "talent",
+          "ability",
+          "reference"
+        ]
+      }
+    },
+    {
+      "id": "weapon.elemental-contact-dmg.r3.rule",
+      "revision": 1,
+      "subject": {
+        "target_type": "weapon",
+        "target_id": 11407
+      },
+      "evidence": [
+        {
+          "id": "weapon",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/WeaponExcelConfigData.json#/24",
+          "sha256": "93a794d0352d5773097ee3a6b7469e7208f496cffeda4e5eecb4a58a52c591d2"
+        },
+        {
+          "id": "affix",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/EquipAffixExcelConfigData.json#/62",
+          "sha256": "c844332bc66041284f67445b43431863ad4c7c7e71423cf2d30ae95f5213fe23"
+        },
+        {
+          "id": "talent",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Talent/EquipTalents/ConfigAffix_Sword.json#/Weapon_Sword_AttackGainFullDamgeUpBuff",
+          "sha256": "2be347f74c882b3155308705a059991c92520aabbe6db38542e6c2b3e1dc30be"
+        },
+        {
+          "id": "ability",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Sword.json#/13/Default",
+          "sha256": "120d407537d65742cb7297b9a11ca751270d458bb3e8d31c5c731c3f38d90950"
+        },
+        {
+          "id": "reference",
+          "kind": "reference_implementation",
+          "locator": "https://raw.githubusercontent.com/genshinsim/gcsim/8792c73d64439feb74fa139c3b745022952b3dc9/internal/weapons/sword/ironsting/ironsting.go",
+          "sha256": "e5f103259e4b5bfe06e1966ab14a8675df6cf16ecc102d9fdcc7861864985e0c"
+        }
+      ],
+      "applicability": {
+        "version_line": "release",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "normalization_fingerprint": "4b792020b8fbfffd4103b4e019065602f205f42d46a8f6bcb995c6f76d278cb1"
+      },
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      },
+      "payload": {
+        "id": "weapon.elemental-contact-dmg.r3.rule",
+        "revision": 1,
+        "kind": "rule_template",
+        "claim": {
+          "key": "contact",
+          "rule": {
+            "name_zh": "元素命中共同续期增伤·精炼3",
+            "trigger": {
+              "event": "hit",
+              "phase": "post",
+              "owner_presence": "frontline",
+              "elements": [
+                "pyro",
+                "hydro",
+                "electro",
+                "cryo",
+                "anemo",
+                "geo",
+                "dendro"
+              ]
+            },
+            "beneficiaries": {
+              "mode": "self",
+              "scope": "locked"
+            },
+            "timing": {
+              "delay": 0,
+              "cooldown_anchor": "success"
+            },
+            "stacking": {
+              "max": 2,
+              "add": 1,
+              "policy": "add_and_refresh"
+            },
+            "effects": [
+              {
+                "id": "bonus",
+                "benefit_type_id": "benefit.dmg_bonus.all",
+                "domain": "self"
+              }
+            ]
+          },
+          "value_bindings": [
+            {
+              "target": "effects.bonus.value",
+              "parameter_ref": "factor"
+            },
+            {
+              "target": "timing.duration",
+              "parameter_ref": "duration"
+            },
+            {
+              "target": "timing.cooldown",
+              "parameter_ref": "cooldown"
+            }
+          ],
+          "execution_ports": [
+            {
+              "target": "owner",
+              "role": "provider"
+            },
+            {
+              "target": "trigger.event_ids",
+              "role": "qualifying_hits"
+            }
+          ],
+          "requirements": [
+            "single_target",
+            "fresh_empty_instance",
+            "fixed_party",
+            "no_hitlag",
+            "no_duplicate_source",
+            "qualified_contact_origin",
+            "no_provider_transformative_damage"
+          ]
+        },
+        "evidence_tier": "experimental_reference",
+        "evidence_refs": [
+          "weapon",
+          "affix",
+          "talent",
+          "ability",
+          "reference"
+        ]
+      }
+    },
+    {
+      "id": "weapon.elemental-contact-dmg.r3.parameter.factor",
+      "revision": 1,
+      "subject": {
+        "target_type": "weapon",
+        "target_id": 11407
+      },
+      "evidence": [
+        {
+          "id": "weapon",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/WeaponExcelConfigData.json#/24",
+          "sha256": "93a794d0352d5773097ee3a6b7469e7208f496cffeda4e5eecb4a58a52c591d2"
+        },
+        {
+          "id": "affix",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/EquipAffixExcelConfigData.json#/62",
+          "sha256": "c844332bc66041284f67445b43431863ad4c7c7e71423cf2d30ae95f5213fe23"
+        },
+        {
+          "id": "talent",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Talent/EquipTalents/ConfigAffix_Sword.json#/Weapon_Sword_AttackGainFullDamgeUpBuff",
+          "sha256": "2be347f74c882b3155308705a059991c92520aabbe6db38542e6c2b3e1dc30be"
+        },
+        {
+          "id": "ability",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Sword.json#/13/Default",
+          "sha256": "120d407537d65742cb7297b9a11ca751270d458bb3e8d31c5c731c3f38d90950"
+        },
+        {
+          "id": "reference",
+          "kind": "reference_implementation",
+          "locator": "https://raw.githubusercontent.com/genshinsim/gcsim/8792c73d64439feb74fa139c3b745022952b3dc9/internal/weapons/sword/ironsting/ironsting.go",
+          "sha256": "e5f103259e4b5bfe06e1966ab14a8675df6cf16ecc102d9fdcc7861864985e0c"
+        }
+      ],
+      "applicability": {
+        "version_line": "release",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "normalization_fingerprint": "4b792020b8fbfffd4103b4e019065602f205f42d46a8f6bcb995c6f76d278cb1"
+      },
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      },
+      "payload": {
+        "id": "weapon.elemental-contact-dmg.r3.parameter.factor",
+        "revision": 1,
+        "kind": "parameter_role",
+        "claim": {
+          "ref": "factor",
+          "value_type": "finite_number",
+          "unit": "ratio",
+          "targets": [
+            {
+              "rule_key": "contact",
+              "target": "effects.bonus.value"
+            }
+          ]
+        },
+        "evidence_tier": "experimental_reference",
+        "evidence_refs": [
+          "weapon",
+          "affix",
+          "talent",
+          "ability",
+          "reference"
+        ]
+      }
+    },
+    {
+      "id": "weapon.elemental-contact-dmg.r3.parameter.duration",
+      "revision": 1,
+      "subject": {
+        "target_type": "weapon",
+        "target_id": 11407
+      },
+      "evidence": [
+        {
+          "id": "weapon",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/WeaponExcelConfigData.json#/24",
+          "sha256": "93a794d0352d5773097ee3a6b7469e7208f496cffeda4e5eecb4a58a52c591d2"
+        },
+        {
+          "id": "affix",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/EquipAffixExcelConfigData.json#/62",
+          "sha256": "c844332bc66041284f67445b43431863ad4c7c7e71423cf2d30ae95f5213fe23"
+        },
+        {
+          "id": "talent",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Talent/EquipTalents/ConfigAffix_Sword.json#/Weapon_Sword_AttackGainFullDamgeUpBuff",
+          "sha256": "2be347f74c882b3155308705a059991c92520aabbe6db38542e6c2b3e1dc30be"
+        },
+        {
+          "id": "ability",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Sword.json#/13/Default",
+          "sha256": "120d407537d65742cb7297b9a11ca751270d458bb3e8d31c5c731c3f38d90950"
+        },
+        {
+          "id": "reference",
+          "kind": "reference_implementation",
+          "locator": "https://raw.githubusercontent.com/genshinsim/gcsim/8792c73d64439feb74fa139c3b745022952b3dc9/internal/weapons/sword/ironsting/ironsting.go",
+          "sha256": "e5f103259e4b5bfe06e1966ab14a8675df6cf16ecc102d9fdcc7861864985e0c"
+        }
+      ],
+      "applicability": {
+        "version_line": "release",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "normalization_fingerprint": "4b792020b8fbfffd4103b4e019065602f205f42d46a8f6bcb995c6f76d278cb1"
+      },
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      },
+      "payload": {
+        "id": "weapon.elemental-contact-dmg.r3.parameter.duration",
+        "revision": 1,
+        "kind": "parameter_role",
+        "claim": {
+          "ref": "duration",
+          "value_type": "seconds_exact_us",
+          "unit": "seconds",
+          "targets": [
+            {
+              "rule_key": "contact",
+              "target": "timing.duration"
+            }
+          ]
+        },
+        "evidence_tier": "experimental_reference",
+        "evidence_refs": [
+          "weapon",
+          "affix",
+          "talent",
+          "ability",
+          "reference"
+        ]
+      }
+    },
+    {
+      "id": "weapon.elemental-contact-dmg.r3.parameter.cooldown",
+      "revision": 1,
+      "subject": {
+        "target_type": "weapon",
+        "target_id": 11407
+      },
+      "evidence": [
+        {
+          "id": "weapon",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/WeaponExcelConfigData.json#/24",
+          "sha256": "93a794d0352d5773097ee3a6b7469e7208f496cffeda4e5eecb4a58a52c591d2"
+        },
+        {
+          "id": "affix",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/EquipAffixExcelConfigData.json#/62",
+          "sha256": "c844332bc66041284f67445b43431863ad4c7c7e71423cf2d30ae95f5213fe23"
+        },
+        {
+          "id": "talent",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Talent/EquipTalents/ConfigAffix_Sword.json#/Weapon_Sword_AttackGainFullDamgeUpBuff",
+          "sha256": "2be347f74c882b3155308705a059991c92520aabbe6db38542e6c2b3e1dc30be"
+        },
+        {
+          "id": "ability",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Sword.json#/13/Default",
+          "sha256": "120d407537d65742cb7297b9a11ca751270d458bb3e8d31c5c731c3f38d90950"
+        },
+        {
+          "id": "reference",
+          "kind": "reference_implementation",
+          "locator": "https://raw.githubusercontent.com/genshinsim/gcsim/8792c73d64439feb74fa139c3b745022952b3dc9/internal/weapons/sword/ironsting/ironsting.go",
+          "sha256": "e5f103259e4b5bfe06e1966ab14a8675df6cf16ecc102d9fdcc7861864985e0c"
+        }
+      ],
+      "applicability": {
+        "version_line": "release",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "normalization_fingerprint": "4b792020b8fbfffd4103b4e019065602f205f42d46a8f6bcb995c6f76d278cb1"
+      },
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      },
+      "payload": {
+        "id": "weapon.elemental-contact-dmg.r3.parameter.cooldown",
+        "revision": 1,
+        "kind": "parameter_role",
+        "claim": {
+          "ref": "cooldown",
+          "value_type": "seconds_exact_us",
+          "unit": "seconds",
+          "targets": [
+            {
+              "rule_key": "contact",
+              "target": "timing.cooldown"
+            }
+          ]
+        },
+        "evidence_tier": "experimental_reference",
+        "evidence_refs": [
+          "weapon",
+          "affix",
+          "talent",
+          "ability",
+          "reference"
+        ]
+      }
+    },
+    {
+      "id": "weapon.elemental-contact-dmg.r3.qualification",
+      "revision": 1,
+      "subject": {
+        "target_type": "weapon",
+        "target_id": 11407
+      },
+      "evidence": [
+        {
+          "id": "weapon",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/WeaponExcelConfigData.json#/24",
+          "sha256": "93a794d0352d5773097ee3a6b7469e7208f496cffeda4e5eecb4a58a52c591d2"
+        },
+        {
+          "id": "affix",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/EquipAffixExcelConfigData.json#/62",
+          "sha256": "c844332bc66041284f67445b43431863ad4c7c7e71423cf2d30ae95f5213fe23"
+        },
+        {
+          "id": "talent",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Talent/EquipTalents/ConfigAffix_Sword.json#/Weapon_Sword_AttackGainFullDamgeUpBuff",
+          "sha256": "2be347f74c882b3155308705a059991c92520aabbe6db38542e6c2b3e1dc30be"
+        },
+        {
+          "id": "ability",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Sword.json#/13/Default",
+          "sha256": "120d407537d65742cb7297b9a11ca751270d458bb3e8d31c5c731c3f38d90950"
+        },
+        {
+          "id": "reference",
+          "kind": "reference_implementation",
+          "locator": "https://raw.githubusercontent.com/genshinsim/gcsim/8792c73d64439feb74fa139c3b745022952b3dc9/internal/weapons/sword/ironsting/ironsting.go",
+          "sha256": "e5f103259e4b5bfe06e1966ab14a8675df6cf16ecc102d9fdcc7861864985e0c"
+        }
+      ],
+      "applicability": {
+        "version_line": "release",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "normalization_fingerprint": "4b792020b8fbfffd4103b4e019065602f205f42d46a8f6bcb995c6f76d278cb1"
+      },
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      },
+      "payload": {
+        "id": "weapon.elemental-contact-dmg.r3.qualification",
+        "revision": 1,
+        "kind": "execution_qualification",
+        "claim": {
+          "schema_version": 3,
+          "target_dependency": {
+            "mode": "ordinary_single_target_reference",
+            "ruleset": "gauge-freeze-reference-v1"
+          },
+          "coverage": {
+            "mode": "all_provider_contacts",
+            "scope": "callback_hit_filter",
+            "reject_unknown_contact": true
+          },
+          "consumer": null,
+          "scenario_requirements": {
+            "target_kind": "ordinary_non_animal_monster",
+            "party_mode": "single_player_fixed",
+            "all_party_alive": true,
+            "initial_effect": "none",
+            "no_external_source_changes": true,
+            "no_source_state_changes": true,
+            "hitlag_policy": "zero_hitlag_reference",
+            "event_order_policy": "declared_atomic_hit_order",
+            "no_provider_transformative_damage": true
+          },
+          "parent": {
+            "profile_kind": "actual_contact_v1",
+            "allowed_profile_kinds": [
+              "calibrated_single_contact_v1",
+              "calibrated_multi_contact_v1"
+            ],
+            "selection": {
+              "constellation": 0,
+              "talent_level": 10
+            },
+            "required_receipts": [
+              "contact_identity"
+            ],
+            "hit": {
+              "damage_systems": [
+                "classic"
+              ],
+              "count": 1,
+              "scaling_stats": [
+                "atk"
+              ],
+              "elements": [
+                "physical",
+                "hydro",
+                "cryo",
+                "anemo"
+              ],
+              "damage_type_ids": [
+                "damage.elemental_skill",
+                "damage.elemental_burst"
+              ]
+            },
+            "callback_bridge": {
+              "kind": "owner_attack_landed",
+              "node_id": "ability",
+              "mount_pointer": "/EMGBJJOIENB/0",
+              "handler_pointer": "/GPPBBDEICKP/UNIQUE_Sword_AttackGainFullDamgeUpBuff_Handler",
+              "callback_pointer": "/GPPBBDEICKP/UNIQUE_Sword_AttackGainFullDamgeUpBuff_Handler/LBABCICJBKE",
+              "predicate_pointers": [
+                "/GPPBBDEICKP/UNIQUE_Sword_AttackGainFullDamgeUpBuff_Handler/LBABCICJBKE/0/MJKPCGCAPLK/0",
+                "/GPPBBDEICKP/UNIQUE_Sword_AttackGainFullDamgeUpBuff_Handler/LBABCICJBKE/0/MJKPCGCAPLK/1"
+              ],
+              "apply_pointers": [
+                "/GPPBBDEICKP/UNIQUE_Sword_AttackGainFullDamgeUpBuff_Handler/LBABCICJBKE/0/MLJNNELMEFL/0"
+              ],
+              "hit_filter": {
+                "elements": [
+                  "pyro",
+                  "hydro",
+                  "electro",
+                  "cryo",
+                  "anemo",
+                  "geo",
+                  "dendro"
+                ]
+              }
+            },
+            "activation": {
+              "phase": "post",
+              "offset_policy": "fixed_zero"
+            }
+          },
+          "provider": {
+            "relation": "equipped_weapon",
+            "weapon_node_id": "weapon",
+            "affix_node_id": "affix",
+            "affix_id": 1114072,
+            "source_level": 2,
+            "refinement": 3,
+            "requirement_coverage": "complete_selected_effect_reference"
+          },
+          "duplicate_identity": {
+            "kind": "weapon",
+            "source_id": 11407,
+            "parts": [
+              "elemental_hit_damage_bonus"
+            ]
+          }
+        },
+        "evidence_tier": "experimental_reference",
+        "evidence_refs": [
+          "weapon",
+          "affix",
+          "talent",
+          "ability",
+          "reference"
+        ]
+      }
+    },
+    {
+      "id": "weapon.elemental-contact-dmg.r4.rule",
+      "revision": 1,
+      "subject": {
+        "target_type": "weapon",
+        "target_id": 11407
+      },
+      "evidence": [
+        {
+          "id": "weapon",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/WeaponExcelConfigData.json#/24",
+          "sha256": "93a794d0352d5773097ee3a6b7469e7208f496cffeda4e5eecb4a58a52c591d2"
+        },
+        {
+          "id": "affix",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/EquipAffixExcelConfigData.json#/63",
+          "sha256": "2aeecfd504edfdd49e9ec6bbd3661e4907bc7a7c04db6ee19b71f55c9d2ca8e7"
+        },
+        {
+          "id": "talent",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Talent/EquipTalents/ConfigAffix_Sword.json#/Weapon_Sword_AttackGainFullDamgeUpBuff",
+          "sha256": "2be347f74c882b3155308705a059991c92520aabbe6db38542e6c2b3e1dc30be"
+        },
+        {
+          "id": "ability",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Sword.json#/13/Default",
+          "sha256": "120d407537d65742cb7297b9a11ca751270d458bb3e8d31c5c731c3f38d90950"
+        },
+        {
+          "id": "reference",
+          "kind": "reference_implementation",
+          "locator": "https://raw.githubusercontent.com/genshinsim/gcsim/8792c73d64439feb74fa139c3b745022952b3dc9/internal/weapons/sword/ironsting/ironsting.go",
+          "sha256": "e5f103259e4b5bfe06e1966ab14a8675df6cf16ecc102d9fdcc7861864985e0c"
+        }
+      ],
+      "applicability": {
+        "version_line": "release",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "normalization_fingerprint": "4b792020b8fbfffd4103b4e019065602f205f42d46a8f6bcb995c6f76d278cb1"
+      },
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      },
+      "payload": {
+        "id": "weapon.elemental-contact-dmg.r4.rule",
+        "revision": 1,
+        "kind": "rule_template",
+        "claim": {
+          "key": "contact",
+          "rule": {
+            "name_zh": "元素命中共同续期增伤·精炼4",
+            "trigger": {
+              "event": "hit",
+              "phase": "post",
+              "owner_presence": "frontline",
+              "elements": [
+                "pyro",
+                "hydro",
+                "electro",
+                "cryo",
+                "anemo",
+                "geo",
+                "dendro"
+              ]
+            },
+            "beneficiaries": {
+              "mode": "self",
+              "scope": "locked"
+            },
+            "timing": {
+              "delay": 0,
+              "cooldown_anchor": "success"
+            },
+            "stacking": {
+              "max": 2,
+              "add": 1,
+              "policy": "add_and_refresh"
+            },
+            "effects": [
+              {
+                "id": "bonus",
+                "benefit_type_id": "benefit.dmg_bonus.all",
+                "domain": "self"
+              }
+            ]
+          },
+          "value_bindings": [
+            {
+              "target": "effects.bonus.value",
+              "parameter_ref": "factor"
+            },
+            {
+              "target": "timing.duration",
+              "parameter_ref": "duration"
+            },
+            {
+              "target": "timing.cooldown",
+              "parameter_ref": "cooldown"
+            }
+          ],
+          "execution_ports": [
+            {
+              "target": "owner",
+              "role": "provider"
+            },
+            {
+              "target": "trigger.event_ids",
+              "role": "qualifying_hits"
+            }
+          ],
+          "requirements": [
+            "single_target",
+            "fresh_empty_instance",
+            "fixed_party",
+            "no_hitlag",
+            "no_duplicate_source",
+            "qualified_contact_origin",
+            "no_provider_transformative_damage"
+          ]
+        },
+        "evidence_tier": "experimental_reference",
+        "evidence_refs": [
+          "weapon",
+          "affix",
+          "talent",
+          "ability",
+          "reference"
+        ]
+      }
+    },
+    {
+      "id": "weapon.elemental-contact-dmg.r4.parameter.factor",
+      "revision": 1,
+      "subject": {
+        "target_type": "weapon",
+        "target_id": 11407
+      },
+      "evidence": [
+        {
+          "id": "weapon",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/WeaponExcelConfigData.json#/24",
+          "sha256": "93a794d0352d5773097ee3a6b7469e7208f496cffeda4e5eecb4a58a52c591d2"
+        },
+        {
+          "id": "affix",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/EquipAffixExcelConfigData.json#/63",
+          "sha256": "2aeecfd504edfdd49e9ec6bbd3661e4907bc7a7c04db6ee19b71f55c9d2ca8e7"
+        },
+        {
+          "id": "talent",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Talent/EquipTalents/ConfigAffix_Sword.json#/Weapon_Sword_AttackGainFullDamgeUpBuff",
+          "sha256": "2be347f74c882b3155308705a059991c92520aabbe6db38542e6c2b3e1dc30be"
+        },
+        {
+          "id": "ability",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Sword.json#/13/Default",
+          "sha256": "120d407537d65742cb7297b9a11ca751270d458bb3e8d31c5c731c3f38d90950"
+        },
+        {
+          "id": "reference",
+          "kind": "reference_implementation",
+          "locator": "https://raw.githubusercontent.com/genshinsim/gcsim/8792c73d64439feb74fa139c3b745022952b3dc9/internal/weapons/sword/ironsting/ironsting.go",
+          "sha256": "e5f103259e4b5bfe06e1966ab14a8675df6cf16ecc102d9fdcc7861864985e0c"
+        }
+      ],
+      "applicability": {
+        "version_line": "release",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "normalization_fingerprint": "4b792020b8fbfffd4103b4e019065602f205f42d46a8f6bcb995c6f76d278cb1"
+      },
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      },
+      "payload": {
+        "id": "weapon.elemental-contact-dmg.r4.parameter.factor",
+        "revision": 1,
+        "kind": "parameter_role",
+        "claim": {
+          "ref": "factor",
+          "value_type": "finite_number",
+          "unit": "ratio",
+          "targets": [
+            {
+              "rule_key": "contact",
+              "target": "effects.bonus.value"
+            }
+          ]
+        },
+        "evidence_tier": "experimental_reference",
+        "evidence_refs": [
+          "weapon",
+          "affix",
+          "talent",
+          "ability",
+          "reference"
+        ]
+      }
+    },
+    {
+      "id": "weapon.elemental-contact-dmg.r4.parameter.duration",
+      "revision": 1,
+      "subject": {
+        "target_type": "weapon",
+        "target_id": 11407
+      },
+      "evidence": [
+        {
+          "id": "weapon",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/WeaponExcelConfigData.json#/24",
+          "sha256": "93a794d0352d5773097ee3a6b7469e7208f496cffeda4e5eecb4a58a52c591d2"
+        },
+        {
+          "id": "affix",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/EquipAffixExcelConfigData.json#/63",
+          "sha256": "2aeecfd504edfdd49e9ec6bbd3661e4907bc7a7c04db6ee19b71f55c9d2ca8e7"
+        },
+        {
+          "id": "talent",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Talent/EquipTalents/ConfigAffix_Sword.json#/Weapon_Sword_AttackGainFullDamgeUpBuff",
+          "sha256": "2be347f74c882b3155308705a059991c92520aabbe6db38542e6c2b3e1dc30be"
+        },
+        {
+          "id": "ability",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Sword.json#/13/Default",
+          "sha256": "120d407537d65742cb7297b9a11ca751270d458bb3e8d31c5c731c3f38d90950"
+        },
+        {
+          "id": "reference",
+          "kind": "reference_implementation",
+          "locator": "https://raw.githubusercontent.com/genshinsim/gcsim/8792c73d64439feb74fa139c3b745022952b3dc9/internal/weapons/sword/ironsting/ironsting.go",
+          "sha256": "e5f103259e4b5bfe06e1966ab14a8675df6cf16ecc102d9fdcc7861864985e0c"
+        }
+      ],
+      "applicability": {
+        "version_line": "release",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "normalization_fingerprint": "4b792020b8fbfffd4103b4e019065602f205f42d46a8f6bcb995c6f76d278cb1"
+      },
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      },
+      "payload": {
+        "id": "weapon.elemental-contact-dmg.r4.parameter.duration",
+        "revision": 1,
+        "kind": "parameter_role",
+        "claim": {
+          "ref": "duration",
+          "value_type": "seconds_exact_us",
+          "unit": "seconds",
+          "targets": [
+            {
+              "rule_key": "contact",
+              "target": "timing.duration"
+            }
+          ]
+        },
+        "evidence_tier": "experimental_reference",
+        "evidence_refs": [
+          "weapon",
+          "affix",
+          "talent",
+          "ability",
+          "reference"
+        ]
+      }
+    },
+    {
+      "id": "weapon.elemental-contact-dmg.r4.parameter.cooldown",
+      "revision": 1,
+      "subject": {
+        "target_type": "weapon",
+        "target_id": 11407
+      },
+      "evidence": [
+        {
+          "id": "weapon",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/WeaponExcelConfigData.json#/24",
+          "sha256": "93a794d0352d5773097ee3a6b7469e7208f496cffeda4e5eecb4a58a52c591d2"
+        },
+        {
+          "id": "affix",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/EquipAffixExcelConfigData.json#/63",
+          "sha256": "2aeecfd504edfdd49e9ec6bbd3661e4907bc7a7c04db6ee19b71f55c9d2ca8e7"
+        },
+        {
+          "id": "talent",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Talent/EquipTalents/ConfigAffix_Sword.json#/Weapon_Sword_AttackGainFullDamgeUpBuff",
+          "sha256": "2be347f74c882b3155308705a059991c92520aabbe6db38542e6c2b3e1dc30be"
+        },
+        {
+          "id": "ability",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Sword.json#/13/Default",
+          "sha256": "120d407537d65742cb7297b9a11ca751270d458bb3e8d31c5c731c3f38d90950"
+        },
+        {
+          "id": "reference",
+          "kind": "reference_implementation",
+          "locator": "https://raw.githubusercontent.com/genshinsim/gcsim/8792c73d64439feb74fa139c3b745022952b3dc9/internal/weapons/sword/ironsting/ironsting.go",
+          "sha256": "e5f103259e4b5bfe06e1966ab14a8675df6cf16ecc102d9fdcc7861864985e0c"
+        }
+      ],
+      "applicability": {
+        "version_line": "release",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "normalization_fingerprint": "4b792020b8fbfffd4103b4e019065602f205f42d46a8f6bcb995c6f76d278cb1"
+      },
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      },
+      "payload": {
+        "id": "weapon.elemental-contact-dmg.r4.parameter.cooldown",
+        "revision": 1,
+        "kind": "parameter_role",
+        "claim": {
+          "ref": "cooldown",
+          "value_type": "seconds_exact_us",
+          "unit": "seconds",
+          "targets": [
+            {
+              "rule_key": "contact",
+              "target": "timing.cooldown"
+            }
+          ]
+        },
+        "evidence_tier": "experimental_reference",
+        "evidence_refs": [
+          "weapon",
+          "affix",
+          "talent",
+          "ability",
+          "reference"
+        ]
+      }
+    },
+    {
+      "id": "weapon.elemental-contact-dmg.r4.qualification",
+      "revision": 1,
+      "subject": {
+        "target_type": "weapon",
+        "target_id": 11407
+      },
+      "evidence": [
+        {
+          "id": "weapon",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/WeaponExcelConfigData.json#/24",
+          "sha256": "93a794d0352d5773097ee3a6b7469e7208f496cffeda4e5eecb4a58a52c591d2"
+        },
+        {
+          "id": "affix",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/EquipAffixExcelConfigData.json#/63",
+          "sha256": "2aeecfd504edfdd49e9ec6bbd3661e4907bc7a7c04db6ee19b71f55c9d2ca8e7"
+        },
+        {
+          "id": "talent",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Talent/EquipTalents/ConfigAffix_Sword.json#/Weapon_Sword_AttackGainFullDamgeUpBuff",
+          "sha256": "2be347f74c882b3155308705a059991c92520aabbe6db38542e6c2b3e1dc30be"
+        },
+        {
+          "id": "ability",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Sword.json#/13/Default",
+          "sha256": "120d407537d65742cb7297b9a11ca751270d458bb3e8d31c5c731c3f38d90950"
+        },
+        {
+          "id": "reference",
+          "kind": "reference_implementation",
+          "locator": "https://raw.githubusercontent.com/genshinsim/gcsim/8792c73d64439feb74fa139c3b745022952b3dc9/internal/weapons/sword/ironsting/ironsting.go",
+          "sha256": "e5f103259e4b5bfe06e1966ab14a8675df6cf16ecc102d9fdcc7861864985e0c"
+        }
+      ],
+      "applicability": {
+        "version_line": "release",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "normalization_fingerprint": "4b792020b8fbfffd4103b4e019065602f205f42d46a8f6bcb995c6f76d278cb1"
+      },
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      },
+      "payload": {
+        "id": "weapon.elemental-contact-dmg.r4.qualification",
+        "revision": 1,
+        "kind": "execution_qualification",
+        "claim": {
+          "schema_version": 3,
+          "target_dependency": {
+            "mode": "ordinary_single_target_reference",
+            "ruleset": "gauge-freeze-reference-v1"
+          },
+          "coverage": {
+            "mode": "all_provider_contacts",
+            "scope": "callback_hit_filter",
+            "reject_unknown_contact": true
+          },
+          "consumer": null,
+          "scenario_requirements": {
+            "target_kind": "ordinary_non_animal_monster",
+            "party_mode": "single_player_fixed",
+            "all_party_alive": true,
+            "initial_effect": "none",
+            "no_external_source_changes": true,
+            "no_source_state_changes": true,
+            "hitlag_policy": "zero_hitlag_reference",
+            "event_order_policy": "declared_atomic_hit_order",
+            "no_provider_transformative_damage": true
+          },
+          "parent": {
+            "profile_kind": "actual_contact_v1",
+            "allowed_profile_kinds": [
+              "calibrated_single_contact_v1",
+              "calibrated_multi_contact_v1"
+            ],
+            "selection": {
+              "constellation": 0,
+              "talent_level": 10
+            },
+            "required_receipts": [
+              "contact_identity"
+            ],
+            "hit": {
+              "damage_systems": [
+                "classic"
+              ],
+              "count": 1,
+              "scaling_stats": [
+                "atk"
+              ],
+              "elements": [
+                "physical",
+                "hydro",
+                "cryo",
+                "anemo"
+              ],
+              "damage_type_ids": [
+                "damage.elemental_skill",
+                "damage.elemental_burst"
+              ]
+            },
+            "callback_bridge": {
+              "kind": "owner_attack_landed",
+              "node_id": "ability",
+              "mount_pointer": "/EMGBJJOIENB/0",
+              "handler_pointer": "/GPPBBDEICKP/UNIQUE_Sword_AttackGainFullDamgeUpBuff_Handler",
+              "callback_pointer": "/GPPBBDEICKP/UNIQUE_Sword_AttackGainFullDamgeUpBuff_Handler/LBABCICJBKE",
+              "predicate_pointers": [
+                "/GPPBBDEICKP/UNIQUE_Sword_AttackGainFullDamgeUpBuff_Handler/LBABCICJBKE/0/MJKPCGCAPLK/0",
+                "/GPPBBDEICKP/UNIQUE_Sword_AttackGainFullDamgeUpBuff_Handler/LBABCICJBKE/0/MJKPCGCAPLK/1"
+              ],
+              "apply_pointers": [
+                "/GPPBBDEICKP/UNIQUE_Sword_AttackGainFullDamgeUpBuff_Handler/LBABCICJBKE/0/MLJNNELMEFL/0"
+              ],
+              "hit_filter": {
+                "elements": [
+                  "pyro",
+                  "hydro",
+                  "electro",
+                  "cryo",
+                  "anemo",
+                  "geo",
+                  "dendro"
+                ]
+              }
+            },
+            "activation": {
+              "phase": "post",
+              "offset_policy": "fixed_zero"
+            }
+          },
+          "provider": {
+            "relation": "equipped_weapon",
+            "weapon_node_id": "weapon",
+            "affix_node_id": "affix",
+            "affix_id": 1114073,
+            "source_level": 3,
+            "refinement": 4,
+            "requirement_coverage": "complete_selected_effect_reference"
+          },
+          "duplicate_identity": {
+            "kind": "weapon",
+            "source_id": 11407,
+            "parts": [
+              "elemental_hit_damage_bonus"
+            ]
+          }
+        },
+        "evidence_tier": "experimental_reference",
+        "evidence_refs": [
+          "weapon",
+          "affix",
+          "talent",
+          "ability",
+          "reference"
+        ]
+      }
+    },
+    {
+      "id": "weapon.elemental-contact-dmg.r5.rule",
+      "revision": 1,
+      "subject": {
+        "target_type": "weapon",
+        "target_id": 11407
+      },
+      "evidence": [
+        {
+          "id": "weapon",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/WeaponExcelConfigData.json#/24",
+          "sha256": "93a794d0352d5773097ee3a6b7469e7208f496cffeda4e5eecb4a58a52c591d2"
+        },
+        {
+          "id": "affix",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/EquipAffixExcelConfigData.json#/64",
+          "sha256": "260b4b294b7f4a53adf1c16f8c2888df3f9939c6bef6361a8685a6b869beb4d4"
+        },
+        {
+          "id": "talent",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Talent/EquipTalents/ConfigAffix_Sword.json#/Weapon_Sword_AttackGainFullDamgeUpBuff",
+          "sha256": "2be347f74c882b3155308705a059991c92520aabbe6db38542e6c2b3e1dc30be"
+        },
+        {
+          "id": "ability",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Sword.json#/13/Default",
+          "sha256": "120d407537d65742cb7297b9a11ca751270d458bb3e8d31c5c731c3f38d90950"
+        },
+        {
+          "id": "reference",
+          "kind": "reference_implementation",
+          "locator": "https://raw.githubusercontent.com/genshinsim/gcsim/8792c73d64439feb74fa139c3b745022952b3dc9/internal/weapons/sword/ironsting/ironsting.go",
+          "sha256": "e5f103259e4b5bfe06e1966ab14a8675df6cf16ecc102d9fdcc7861864985e0c"
+        }
+      ],
+      "applicability": {
+        "version_line": "release",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "normalization_fingerprint": "4b792020b8fbfffd4103b4e019065602f205f42d46a8f6bcb995c6f76d278cb1"
+      },
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      },
+      "payload": {
+        "id": "weapon.elemental-contact-dmg.r5.rule",
+        "revision": 1,
+        "kind": "rule_template",
+        "claim": {
+          "key": "contact",
+          "rule": {
+            "name_zh": "元素命中共同续期增伤·精炼5",
+            "trigger": {
+              "event": "hit",
+              "phase": "post",
+              "owner_presence": "frontline",
+              "elements": [
+                "pyro",
+                "hydro",
+                "electro",
+                "cryo",
+                "anemo",
+                "geo",
+                "dendro"
+              ]
+            },
+            "beneficiaries": {
+              "mode": "self",
+              "scope": "locked"
+            },
+            "timing": {
+              "delay": 0,
+              "cooldown_anchor": "success"
+            },
+            "stacking": {
+              "max": 2,
+              "add": 1,
+              "policy": "add_and_refresh"
+            },
+            "effects": [
+              {
+                "id": "bonus",
+                "benefit_type_id": "benefit.dmg_bonus.all",
+                "domain": "self"
+              }
+            ]
+          },
+          "value_bindings": [
+            {
+              "target": "effects.bonus.value",
+              "parameter_ref": "factor"
+            },
+            {
+              "target": "timing.duration",
+              "parameter_ref": "duration"
+            },
+            {
+              "target": "timing.cooldown",
+              "parameter_ref": "cooldown"
+            }
+          ],
+          "execution_ports": [
+            {
+              "target": "owner",
+              "role": "provider"
+            },
+            {
+              "target": "trigger.event_ids",
+              "role": "qualifying_hits"
+            }
+          ],
+          "requirements": [
+            "single_target",
+            "fresh_empty_instance",
+            "fixed_party",
+            "no_hitlag",
+            "no_duplicate_source",
+            "qualified_contact_origin",
+            "no_provider_transformative_damage"
+          ]
+        },
+        "evidence_tier": "experimental_reference",
+        "evidence_refs": [
+          "weapon",
+          "affix",
+          "talent",
+          "ability",
+          "reference"
+        ]
+      }
+    },
+    {
+      "id": "weapon.elemental-contact-dmg.r5.parameter.factor",
+      "revision": 1,
+      "subject": {
+        "target_type": "weapon",
+        "target_id": 11407
+      },
+      "evidence": [
+        {
+          "id": "weapon",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/WeaponExcelConfigData.json#/24",
+          "sha256": "93a794d0352d5773097ee3a6b7469e7208f496cffeda4e5eecb4a58a52c591d2"
+        },
+        {
+          "id": "affix",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/EquipAffixExcelConfigData.json#/64",
+          "sha256": "260b4b294b7f4a53adf1c16f8c2888df3f9939c6bef6361a8685a6b869beb4d4"
+        },
+        {
+          "id": "talent",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Talent/EquipTalents/ConfigAffix_Sword.json#/Weapon_Sword_AttackGainFullDamgeUpBuff",
+          "sha256": "2be347f74c882b3155308705a059991c92520aabbe6db38542e6c2b3e1dc30be"
+        },
+        {
+          "id": "ability",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Sword.json#/13/Default",
+          "sha256": "120d407537d65742cb7297b9a11ca751270d458bb3e8d31c5c731c3f38d90950"
+        },
+        {
+          "id": "reference",
+          "kind": "reference_implementation",
+          "locator": "https://raw.githubusercontent.com/genshinsim/gcsim/8792c73d64439feb74fa139c3b745022952b3dc9/internal/weapons/sword/ironsting/ironsting.go",
+          "sha256": "e5f103259e4b5bfe06e1966ab14a8675df6cf16ecc102d9fdcc7861864985e0c"
+        }
+      ],
+      "applicability": {
+        "version_line": "release",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "normalization_fingerprint": "4b792020b8fbfffd4103b4e019065602f205f42d46a8f6bcb995c6f76d278cb1"
+      },
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      },
+      "payload": {
+        "id": "weapon.elemental-contact-dmg.r5.parameter.factor",
+        "revision": 1,
+        "kind": "parameter_role",
+        "claim": {
+          "ref": "factor",
+          "value_type": "finite_number",
+          "unit": "ratio",
+          "targets": [
+            {
+              "rule_key": "contact",
+              "target": "effects.bonus.value"
+            }
+          ]
+        },
+        "evidence_tier": "experimental_reference",
+        "evidence_refs": [
+          "weapon",
+          "affix",
+          "talent",
+          "ability",
+          "reference"
+        ]
+      }
+    },
+    {
+      "id": "weapon.elemental-contact-dmg.r5.parameter.duration",
+      "revision": 1,
+      "subject": {
+        "target_type": "weapon",
+        "target_id": 11407
+      },
+      "evidence": [
+        {
+          "id": "weapon",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/WeaponExcelConfigData.json#/24",
+          "sha256": "93a794d0352d5773097ee3a6b7469e7208f496cffeda4e5eecb4a58a52c591d2"
+        },
+        {
+          "id": "affix",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/EquipAffixExcelConfigData.json#/64",
+          "sha256": "260b4b294b7f4a53adf1c16f8c2888df3f9939c6bef6361a8685a6b869beb4d4"
+        },
+        {
+          "id": "talent",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Talent/EquipTalents/ConfigAffix_Sword.json#/Weapon_Sword_AttackGainFullDamgeUpBuff",
+          "sha256": "2be347f74c882b3155308705a059991c92520aabbe6db38542e6c2b3e1dc30be"
+        },
+        {
+          "id": "ability",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Sword.json#/13/Default",
+          "sha256": "120d407537d65742cb7297b9a11ca751270d458bb3e8d31c5c731c3f38d90950"
+        },
+        {
+          "id": "reference",
+          "kind": "reference_implementation",
+          "locator": "https://raw.githubusercontent.com/genshinsim/gcsim/8792c73d64439feb74fa139c3b745022952b3dc9/internal/weapons/sword/ironsting/ironsting.go",
+          "sha256": "e5f103259e4b5bfe06e1966ab14a8675df6cf16ecc102d9fdcc7861864985e0c"
+        }
+      ],
+      "applicability": {
+        "version_line": "release",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "normalization_fingerprint": "4b792020b8fbfffd4103b4e019065602f205f42d46a8f6bcb995c6f76d278cb1"
+      },
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      },
+      "payload": {
+        "id": "weapon.elemental-contact-dmg.r5.parameter.duration",
+        "revision": 1,
+        "kind": "parameter_role",
+        "claim": {
+          "ref": "duration",
+          "value_type": "seconds_exact_us",
+          "unit": "seconds",
+          "targets": [
+            {
+              "rule_key": "contact",
+              "target": "timing.duration"
+            }
+          ]
+        },
+        "evidence_tier": "experimental_reference",
+        "evidence_refs": [
+          "weapon",
+          "affix",
+          "talent",
+          "ability",
+          "reference"
+        ]
+      }
+    },
+    {
+      "id": "weapon.elemental-contact-dmg.r5.parameter.cooldown",
+      "revision": 1,
+      "subject": {
+        "target_type": "weapon",
+        "target_id": 11407
+      },
+      "evidence": [
+        {
+          "id": "weapon",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/WeaponExcelConfigData.json#/24",
+          "sha256": "93a794d0352d5773097ee3a6b7469e7208f496cffeda4e5eecb4a58a52c591d2"
+        },
+        {
+          "id": "affix",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/EquipAffixExcelConfigData.json#/64",
+          "sha256": "260b4b294b7f4a53adf1c16f8c2888df3f9939c6bef6361a8685a6b869beb4d4"
+        },
+        {
+          "id": "talent",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Talent/EquipTalents/ConfigAffix_Sword.json#/Weapon_Sword_AttackGainFullDamgeUpBuff",
+          "sha256": "2be347f74c882b3155308705a059991c92520aabbe6db38542e6c2b3e1dc30be"
+        },
+        {
+          "id": "ability",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Sword.json#/13/Default",
+          "sha256": "120d407537d65742cb7297b9a11ca751270d458bb3e8d31c5c731c3f38d90950"
+        },
+        {
+          "id": "reference",
+          "kind": "reference_implementation",
+          "locator": "https://raw.githubusercontent.com/genshinsim/gcsim/8792c73d64439feb74fa139c3b745022952b3dc9/internal/weapons/sword/ironsting/ironsting.go",
+          "sha256": "e5f103259e4b5bfe06e1966ab14a8675df6cf16ecc102d9fdcc7861864985e0c"
+        }
+      ],
+      "applicability": {
+        "version_line": "release",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "normalization_fingerprint": "4b792020b8fbfffd4103b4e019065602f205f42d46a8f6bcb995c6f76d278cb1"
+      },
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      },
+      "payload": {
+        "id": "weapon.elemental-contact-dmg.r5.parameter.cooldown",
+        "revision": 1,
+        "kind": "parameter_role",
+        "claim": {
+          "ref": "cooldown",
+          "value_type": "seconds_exact_us",
+          "unit": "seconds",
+          "targets": [
+            {
+              "rule_key": "contact",
+              "target": "timing.cooldown"
+            }
+          ]
+        },
+        "evidence_tier": "experimental_reference",
+        "evidence_refs": [
+          "weapon",
+          "affix",
+          "talent",
+          "ability",
+          "reference"
+        ]
+      }
+    },
+    {
+      "id": "weapon.elemental-contact-dmg.r5.qualification",
+      "revision": 1,
+      "subject": {
+        "target_type": "weapon",
+        "target_id": 11407
+      },
+      "evidence": [
+        {
+          "id": "weapon",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/WeaponExcelConfigData.json#/24",
+          "sha256": "93a794d0352d5773097ee3a6b7469e7208f496cffeda4e5eecb4a58a52c591d2"
+        },
+        {
+          "id": "affix",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/EquipAffixExcelConfigData.json#/64",
+          "sha256": "260b4b294b7f4a53adf1c16f8c2888df3f9939c6bef6361a8685a6b869beb4d4"
+        },
+        {
+          "id": "talent",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Talent/EquipTalents/ConfigAffix_Sword.json#/Weapon_Sword_AttackGainFullDamgeUpBuff",
+          "sha256": "2be347f74c882b3155308705a059991c92520aabbe6db38542e6c2b3e1dc30be"
+        },
+        {
+          "id": "ability",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Sword.json#/13/Default",
+          "sha256": "120d407537d65742cb7297b9a11ca751270d458bb3e8d31c5c731c3f38d90950"
+        },
+        {
+          "id": "reference",
+          "kind": "reference_implementation",
+          "locator": "https://raw.githubusercontent.com/genshinsim/gcsim/8792c73d64439feb74fa139c3b745022952b3dc9/internal/weapons/sword/ironsting/ironsting.go",
+          "sha256": "e5f103259e4b5bfe06e1966ab14a8675df6cf16ecc102d9fdcc7861864985e0c"
+        }
+      ],
+      "applicability": {
+        "version_line": "release",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "normalization_fingerprint": "4b792020b8fbfffd4103b4e019065602f205f42d46a8f6bcb995c6f76d278cb1"
+      },
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      },
+      "payload": {
+        "id": "weapon.elemental-contact-dmg.r5.qualification",
+        "revision": 1,
+        "kind": "execution_qualification",
+        "claim": {
+          "schema_version": 3,
+          "target_dependency": {
+            "mode": "ordinary_single_target_reference",
+            "ruleset": "gauge-freeze-reference-v1"
+          },
+          "coverage": {
+            "mode": "all_provider_contacts",
+            "scope": "callback_hit_filter",
+            "reject_unknown_contact": true
+          },
+          "consumer": null,
+          "scenario_requirements": {
+            "target_kind": "ordinary_non_animal_monster",
+            "party_mode": "single_player_fixed",
+            "all_party_alive": true,
+            "initial_effect": "none",
+            "no_external_source_changes": true,
+            "no_source_state_changes": true,
+            "hitlag_policy": "zero_hitlag_reference",
+            "event_order_policy": "declared_atomic_hit_order",
+            "no_provider_transformative_damage": true
+          },
+          "parent": {
+            "profile_kind": "actual_contact_v1",
+            "allowed_profile_kinds": [
+              "calibrated_single_contact_v1",
+              "calibrated_multi_contact_v1"
+            ],
+            "selection": {
+              "constellation": 0,
+              "talent_level": 10
+            },
+            "required_receipts": [
+              "contact_identity"
+            ],
+            "hit": {
+              "damage_systems": [
+                "classic"
+              ],
+              "count": 1,
+              "scaling_stats": [
+                "atk"
+              ],
+              "elements": [
+                "physical",
+                "hydro",
+                "cryo",
+                "anemo"
+              ],
+              "damage_type_ids": [
+                "damage.elemental_skill",
+                "damage.elemental_burst"
+              ]
+            },
+            "callback_bridge": {
+              "kind": "owner_attack_landed",
+              "node_id": "ability",
+              "mount_pointer": "/EMGBJJOIENB/0",
+              "handler_pointer": "/GPPBBDEICKP/UNIQUE_Sword_AttackGainFullDamgeUpBuff_Handler",
+              "callback_pointer": "/GPPBBDEICKP/UNIQUE_Sword_AttackGainFullDamgeUpBuff_Handler/LBABCICJBKE",
+              "predicate_pointers": [
+                "/GPPBBDEICKP/UNIQUE_Sword_AttackGainFullDamgeUpBuff_Handler/LBABCICJBKE/0/MJKPCGCAPLK/0",
+                "/GPPBBDEICKP/UNIQUE_Sword_AttackGainFullDamgeUpBuff_Handler/LBABCICJBKE/0/MJKPCGCAPLK/1"
+              ],
+              "apply_pointers": [
+                "/GPPBBDEICKP/UNIQUE_Sword_AttackGainFullDamgeUpBuff_Handler/LBABCICJBKE/0/MLJNNELMEFL/0"
+              ],
+              "hit_filter": {
+                "elements": [
+                  "pyro",
+                  "hydro",
+                  "electro",
+                  "cryo",
+                  "anemo",
+                  "geo",
+                  "dendro"
+                ]
+              }
+            },
+            "activation": {
+              "phase": "post",
+              "offset_policy": "fixed_zero"
+            }
+          },
+          "provider": {
+            "relation": "equipped_weapon",
+            "weapon_node_id": "weapon",
+            "affix_node_id": "affix",
+            "affix_id": 1114074,
+            "source_level": 4,
+            "refinement": 5,
+            "requirement_coverage": "complete_selected_effect_reference"
+          },
+          "duplicate_identity": {
+            "kind": "weapon",
+            "source_id": 11407,
+            "parts": [
+              "elemental_hit_damage_bonus"
+            ]
+          }
+        },
+        "evidence_tier": "experimental_reference",
+        "evidence_refs": [
+          "weapon",
+          "affix",
+          "talent",
+          "ability",
+          "reference"
+        ]
+      }
+    }
+  ],
+  "descriptors": [
+    {
+      "id": "artifact.skill-burst-contact-dendro-res-shred",
+      "revision": 1,
+      "subject": {
+        "target_type": "artifact_set",
+        "target_id": 15025
+      },
+      "evidence": [
+        {
+          "id": "set",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/ReliquarySetExcelConfigData.json#/42",
+          "sha256": "647cc41c86654011efe65cef82315a9ecb093e10b7f8107a2f38cfe8aaa18ef6"
+        },
+        {
+          "id": "affix",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/EquipAffixExcelConfigData.json#/1350",
+          "sha256": "6a3a051b35dabc10d0a691fbf0a78ba25730e4ffa88b9176657a2abb4bf60a03"
+        },
+        {
+          "id": "talent",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Talent/RelicTalents/ConfigAffix_Relic.json#/Relic_ReactionGrassEnhance",
+          "sha256": "00630b4a16994d5da0f334615c3ad5c834d911c1c21b241353ba445dcba889df"
+        },
+        {
+          "id": "ability",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json#/51/Default",
+          "sha256": "898a4b08204b533415770c041f6baf98b9b58b00a8aa15c2d29040559c7e19a0"
+        },
+        {
+          "id": "reference",
+          "kind": "reference_implementation",
+          "locator": "https://raw.githubusercontent.com/genshinsim/gcsim/8792c73d64439feb74fa139c3b745022952b3dc9/internal/artifacts/deepwood/deepwood.go",
+          "sha256": "84b775e2d75897b32d3db389e4862849c1c5c3fbb1af5732e6d03cf465c7dfb9"
+        }
+      ],
+      "applicability": {
+        "version_line": "release",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "normalization_fingerprint": "4b792020b8fbfffd4103b4e019065602f205f42d46a8f6bcb995c6f76d278cb1"
+      },
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      },
+      "payload": {
+        "source_binding": {
+          "schema_version": 1,
+          "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+          "normalization_fingerprint": "4b792020b8fbfffd4103b4e019065602f205f42d46a8f6bcb995c6f76d278cb1",
+          "subject": {
+            "target_type": "artifact_set",
+            "target_id": 15025
+          },
+          "selection": {},
+          "nodes": [
+            {
+              "id": "set",
+              "definition_kind": "excel_record",
+              "source_path": "ExcelBinOutput/ReliquarySetExcelConfigData.json",
+              "source_sha256": "d915f4a2e353aefc19116b80bf127d578e5c0cdcd505bbe9da1c66c502163f7e",
+              "json_pointer": "/42",
+              "node_sha256": "647cc41c86654011efe65cef82315a9ecb093e10b7f8107a2f38cfe8aaa18ef6"
+            },
+            {
+              "id": "affix",
+              "definition_kind": "excel_record",
+              "source_path": "ExcelBinOutput/EquipAffixExcelConfigData.json",
+              "source_sha256": "67cce4b66ecfae8ab20b4567005ff0e2efa76446af1fcc71d99e8a2383def4e6",
+              "json_pointer": "/1350",
+              "node_sha256": "6a3a051b35dabc10d0a691fbf0a78ba25730e4ffa88b9176657a2abb4bf60a03"
+            },
+            {
+              "id": "talent",
+              "definition_kind": "talent_config",
+              "source_path": "BinOutput/Talent/RelicTalents/ConfigAffix_Relic.json",
+              "source_sha256": "0937b29eb3f02b07aacdc02abdcf0af460ac7cb5cf951207ff626ba27b4052ba",
+              "json_pointer": "/Relic_ReactionGrassEnhance",
+              "node_sha256": "00630b4a16994d5da0f334615c3ad5c834d911c1c21b241353ba445dcba889df"
+            },
+            {
+              "id": "ability",
+              "definition_kind": "ability",
+              "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json",
+              "source_sha256": "96c506df3e2a2b12871b3a8b381c7851ea5aa7d5eb432b18553255e078ce3803",
+              "json_pointer": "/51/Default",
+              "node_sha256": "898a4b08204b533415770c041f6baf98b9b58b00a8aa15c2d29040559c7e19a0"
+            }
+          ],
+          "parameters": [
+            {
+              "ref": "factor",
+              "value_type": "finite_number",
+              "unit": "ratio",
+              "node_id": "affix",
+              "pointer": "/paramList/0"
+            },
+            {
+              "ref": "duration",
+              "value_type": "seconds_exact_us",
+              "unit": "seconds",
+              "node_id": "affix",
+              "pointer": "/paramList/1"
+            }
+          ],
+          "evidence": [
+            {
+              "id": "set",
+              "kind": "runtime_node",
+              "locator": "ExcelBinOutput/ReliquarySetExcelConfigData.json#/42",
+              "sha256": "647cc41c86654011efe65cef82315a9ecb093e10b7f8107a2f38cfe8aaa18ef6"
+            },
+            {
+              "id": "affix",
+              "kind": "runtime_node",
+              "locator": "ExcelBinOutput/EquipAffixExcelConfigData.json#/1350",
+              "sha256": "6a3a051b35dabc10d0a691fbf0a78ba25730e4ffa88b9176657a2abb4bf60a03"
+            },
+            {
+              "id": "talent",
+              "kind": "runtime_node",
+              "locator": "BinOutput/Talent/RelicTalents/ConfigAffix_Relic.json#/Relic_ReactionGrassEnhance",
+              "sha256": "00630b4a16994d5da0f334615c3ad5c834d911c1c21b241353ba445dcba889df"
+            },
+            {
+              "id": "ability",
+              "kind": "runtime_node",
+              "locator": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Relic.json#/51/Default",
+              "sha256": "898a4b08204b533415770c041f6baf98b9b58b00a8aa15c2d29040559c7e19a0"
+            },
+            {
+              "id": "reference",
+              "kind": "reference_implementation",
+              "locator": "https://raw.githubusercontent.com/genshinsim/gcsim/8792c73d64439feb74fa139c3b745022952b3dc9/internal/artifacts/deepwood/deepwood.go",
+              "sha256": "84b775e2d75897b32d3db389e4862849c1c5c3fbb1af5732e6d03cf465c7dfb9"
+            }
+          ],
+          "coverage": {
+            "whole_source_status": "partial",
+            "excluded_branches": [
+              "受审普通单目标实际接触参考；保留完整原始callback筛选，当前派发子集不等于来源全部触发范围。",
+              "零hitlag与输入原子命中顺序为显式参考，不认证官方帧顺序或Q自快照时点。",
+              "固定装备与队伍、全员存活、初始无同源实例、无恢复/状态重施加或外部同源写入；不覆盖运行中换装。",
+              "完整原始视觉、哨兵与回收节点保留；未执行ModifierVM，不把Unique直接解释成通用冷却。",
+              "仅本affix有限情景完整投影，不包含两件常驻或整个装备。",
+              "原文Elemental_Art_Extra保留；参考实现未枚举该标签，当前父接触必须另有精确资格。"
+            ],
+            "unknown_branches": []
+          }
+        },
+        "descriptor": {
+          "schema_version": 1,
+          "mechanism_id": "artifact.skill-burst-contact-dendro-res-shred",
+          "revision": 1,
+          "evidence_fact_ids": [
+            "artifact.skill-burst-contact-dendro-res-shred.rule@1",
+            "artifact.skill-burst-contact-dendro-res-shred.parameter.factor@1",
+            "artifact.skill-burst-contact-dendro-res-shred.parameter.duration@1",
+            "artifact.skill-burst-contact-dendro-res-shred.qualification@1"
+          ],
+          "rule_templates": [
+            {
+              "key": "contact",
+              "rule": {
+                "name_zh": "战技或爆发命中降低草抗",
+                "trigger": {
+                  "event": "hit",
+                  "phase": "post",
+                  "owner_presence": "any",
+                  "damage_type_ids": [
+                    "damage.elemental_skill",
+                    "damage.elemental_burst"
+                  ]
+                },
+                "beneficiaries": {
+                  "mode": "self",
+                  "scope": "locked"
+                },
+                "timing": {
+                  "delay": 0,
+                  "cooldown_anchor": "success",
+                  "cooldown": 0
+                },
+                "stacking": {
+                  "max": 1,
+                  "add": 1,
+                  "policy": "refresh"
+                },
+                "effects": [
+                  {
+                    "id": "bonus",
+                    "benefit_type_id": "benefit.res_shred.dendro",
+                    "domain": "enemy"
+                  }
+                ]
+              },
+              "value_bindings": [
+                {
+                  "target": "effects.bonus.value",
+                  "parameter_ref": "factor"
+                },
+                {
+                  "target": "timing.duration",
+                  "parameter_ref": "duration"
+                }
+              ],
+              "execution_ports": [
+                {
+                  "target": "owner",
+                  "role": "provider"
+                },
+                {
+                  "target": "trigger.event_ids",
+                  "role": "qualifying_hits"
+                }
+              ],
+              "requirements": [
+                "single_target",
+                "fresh_empty_instance",
+                "fixed_party",
+                "no_hitlag",
+                "no_duplicate_source",
+                "qualified_contact_origin"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "weapon.elemental-contact-dmg.r1",
+      "revision": 1,
+      "subject": {
+        "target_type": "weapon",
+        "target_id": 11407
+      },
+      "evidence": [
+        {
+          "id": "weapon",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/WeaponExcelConfigData.json#/24",
+          "sha256": "93a794d0352d5773097ee3a6b7469e7208f496cffeda4e5eecb4a58a52c591d2"
+        },
+        {
+          "id": "affix",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/EquipAffixExcelConfigData.json#/60",
+          "sha256": "d3c4d0a9b25950f5e3be918df9ac4c8b7f34306c96953cf3b02217f428f6d39d"
+        },
+        {
+          "id": "talent",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Talent/EquipTalents/ConfigAffix_Sword.json#/Weapon_Sword_AttackGainFullDamgeUpBuff",
+          "sha256": "2be347f74c882b3155308705a059991c92520aabbe6db38542e6c2b3e1dc30be"
+        },
+        {
+          "id": "ability",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Sword.json#/13/Default",
+          "sha256": "120d407537d65742cb7297b9a11ca751270d458bb3e8d31c5c731c3f38d90950"
+        },
+        {
+          "id": "reference",
+          "kind": "reference_implementation",
+          "locator": "https://raw.githubusercontent.com/genshinsim/gcsim/8792c73d64439feb74fa139c3b745022952b3dc9/internal/weapons/sword/ironsting/ironsting.go",
+          "sha256": "e5f103259e4b5bfe06e1966ab14a8675df6cf16ecc102d9fdcc7861864985e0c"
+        }
+      ],
+      "applicability": {
+        "version_line": "release",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "normalization_fingerprint": "4b792020b8fbfffd4103b4e019065602f205f42d46a8f6bcb995c6f76d278cb1"
+      },
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      },
+      "payload": {
+        "source_binding": {
+          "schema_version": 1,
+          "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+          "normalization_fingerprint": "4b792020b8fbfffd4103b4e019065602f205f42d46a8f6bcb995c6f76d278cb1",
+          "subject": {
+            "target_type": "weapon",
+            "target_id": 11407
+          },
+          "selection": {
+            "refinement": 1
+          },
+          "nodes": [
+            {
+              "id": "weapon",
+              "definition_kind": "excel_record",
+              "source_path": "ExcelBinOutput/WeaponExcelConfigData.json",
+              "source_sha256": "dec1e4206c09bbe845e2415d7df008dcd6d36d430273687dd279d5a5534e3a5c",
+              "json_pointer": "/24",
+              "node_sha256": "93a794d0352d5773097ee3a6b7469e7208f496cffeda4e5eecb4a58a52c591d2"
+            },
+            {
+              "id": "affix",
+              "definition_kind": "excel_record",
+              "source_path": "ExcelBinOutput/EquipAffixExcelConfigData.json",
+              "source_sha256": "67cce4b66ecfae8ab20b4567005ff0e2efa76446af1fcc71d99e8a2383def4e6",
+              "json_pointer": "/60",
+              "node_sha256": "d3c4d0a9b25950f5e3be918df9ac4c8b7f34306c96953cf3b02217f428f6d39d"
+            },
+            {
+              "id": "talent",
+              "definition_kind": "talent_config",
+              "source_path": "BinOutput/Talent/EquipTalents/ConfigAffix_Sword.json",
+              "source_sha256": "aef6ee7beec2385f78e77e280861ff2e2c774dbfd5f2134567e99310d92195e5",
+              "json_pointer": "/Weapon_Sword_AttackGainFullDamgeUpBuff",
+              "node_sha256": "2be347f74c882b3155308705a059991c92520aabbe6db38542e6c2b3e1dc30be"
+            },
+            {
+              "id": "ability",
+              "definition_kind": "ability",
+              "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Sword.json",
+              "source_sha256": "721efa01e8043a06d239316038406305f2417afabdc6ecacf962881dd1a9a689",
+              "json_pointer": "/13/Default",
+              "node_sha256": "120d407537d65742cb7297b9a11ca751270d458bb3e8d31c5c731c3f38d90950"
+            }
+          ],
+          "parameters": [
+            {
+              "ref": "factor",
+              "value_type": "finite_number",
+              "unit": "ratio",
+              "node_id": "affix",
+              "pointer": "/paramList/0"
+            },
+            {
+              "ref": "duration",
+              "value_type": "seconds_exact_us",
+              "unit": "seconds",
+              "node_id": "affix",
+              "pointer": "/paramList/2"
+            },
+            {
+              "ref": "cooldown",
+              "value_type": "seconds_exact_us",
+              "unit": "seconds",
+              "node_id": "affix",
+              "pointer": "/paramList/1"
+            }
+          ],
+          "evidence": [
+            {
+              "id": "weapon",
+              "kind": "runtime_node",
+              "locator": "ExcelBinOutput/WeaponExcelConfigData.json#/24",
+              "sha256": "93a794d0352d5773097ee3a6b7469e7208f496cffeda4e5eecb4a58a52c591d2"
+            },
+            {
+              "id": "affix",
+              "kind": "runtime_node",
+              "locator": "ExcelBinOutput/EquipAffixExcelConfigData.json#/60",
+              "sha256": "d3c4d0a9b25950f5e3be918df9ac4c8b7f34306c96953cf3b02217f428f6d39d"
+            },
+            {
+              "id": "talent",
+              "kind": "runtime_node",
+              "locator": "BinOutput/Talent/EquipTalents/ConfigAffix_Sword.json#/Weapon_Sword_AttackGainFullDamgeUpBuff",
+              "sha256": "2be347f74c882b3155308705a059991c92520aabbe6db38542e6c2b3e1dc30be"
+            },
+            {
+              "id": "ability",
+              "kind": "runtime_node",
+              "locator": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Sword.json#/13/Default",
+              "sha256": "120d407537d65742cb7297b9a11ca751270d458bb3e8d31c5c731c3f38d90950"
+            },
+            {
+              "id": "reference",
+              "kind": "reference_implementation",
+              "locator": "https://raw.githubusercontent.com/genshinsim/gcsim/8792c73d64439feb74fa139c3b745022952b3dc9/internal/weapons/sword/ironsting/ironsting.go",
+              "sha256": "e5f103259e4b5bfe06e1966ab14a8675df6cf16ecc102d9fdcc7861864985e0c"
+            }
+          ],
+          "coverage": {
+            "whole_source_status": "partial",
+            "excluded_branches": [
+              "受审普通单目标实际接触参考；保留完整原始callback筛选，当前派发子集不等于来源全部触发范围。",
+              "零hitlag与输入原子命中顺序为显式参考，不认证官方帧顺序或Q自快照时点。",
+              "固定装备与队伍、全员存活、初始无同源实例、无恢复/状态重施加或外部同源写入；不覆盖运行中换装。",
+              "完整原始视觉、哨兵与回收节点保留；未执行ModifierVM，不把Unique直接解释成通用冷却。",
+              "仅本精炼效果有限情景；提供者转化反应伤害必须不存在，实际流水验证，不推断反应永远不触发。",
+              "OnEnemyDamage参考未排转化反应；完整7元素筛选不能用于扩大当前派发/附着模型。"
+            ],
+            "unknown_branches": []
+          }
+        },
+        "descriptor": {
+          "schema_version": 1,
+          "mechanism_id": "weapon.elemental-contact-dmg.r1",
+          "revision": 1,
+          "evidence_fact_ids": [
+            "weapon.elemental-contact-dmg.r1.rule@1",
+            "weapon.elemental-contact-dmg.r1.parameter.factor@1",
+            "weapon.elemental-contact-dmg.r1.parameter.duration@1",
+            "weapon.elemental-contact-dmg.r1.parameter.cooldown@1",
+            "weapon.elemental-contact-dmg.r1.qualification@1"
+          ],
+          "rule_templates": [
+            {
+              "key": "contact",
+              "rule": {
+                "name_zh": "元素命中共同续期增伤·精炼1",
+                "trigger": {
+                  "event": "hit",
+                  "phase": "post",
+                  "owner_presence": "frontline",
+                  "elements": [
+                    "pyro",
+                    "hydro",
+                    "electro",
+                    "cryo",
+                    "anemo",
+                    "geo",
+                    "dendro"
+                  ]
+                },
+                "beneficiaries": {
+                  "mode": "self",
+                  "scope": "locked"
+                },
+                "timing": {
+                  "delay": 0,
+                  "cooldown_anchor": "success"
+                },
+                "stacking": {
+                  "max": 2,
+                  "add": 1,
+                  "policy": "add_and_refresh"
+                },
+                "effects": [
+                  {
+                    "id": "bonus",
+                    "benefit_type_id": "benefit.dmg_bonus.all",
+                    "domain": "self"
+                  }
+                ]
+              },
+              "value_bindings": [
+                {
+                  "target": "effects.bonus.value",
+                  "parameter_ref": "factor"
+                },
+                {
+                  "target": "timing.duration",
+                  "parameter_ref": "duration"
+                },
+                {
+                  "target": "timing.cooldown",
+                  "parameter_ref": "cooldown"
+                }
+              ],
+              "execution_ports": [
+                {
+                  "target": "owner",
+                  "role": "provider"
+                },
+                {
+                  "target": "trigger.event_ids",
+                  "role": "qualifying_hits"
+                }
+              ],
+              "requirements": [
+                "single_target",
+                "fresh_empty_instance",
+                "fixed_party",
+                "no_hitlag",
+                "no_duplicate_source",
+                "qualified_contact_origin",
+                "no_provider_transformative_damage"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "weapon.elemental-contact-dmg.r2",
+      "revision": 1,
+      "subject": {
+        "target_type": "weapon",
+        "target_id": 11407
+      },
+      "evidence": [
+        {
+          "id": "weapon",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/WeaponExcelConfigData.json#/24",
+          "sha256": "93a794d0352d5773097ee3a6b7469e7208f496cffeda4e5eecb4a58a52c591d2"
+        },
+        {
+          "id": "affix",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/EquipAffixExcelConfigData.json#/61",
+          "sha256": "b32796235685f4e87d4f8df68700bdae69ad68261d8a6018402232e0f4f5dc2a"
+        },
+        {
+          "id": "talent",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Talent/EquipTalents/ConfigAffix_Sword.json#/Weapon_Sword_AttackGainFullDamgeUpBuff",
+          "sha256": "2be347f74c882b3155308705a059991c92520aabbe6db38542e6c2b3e1dc30be"
+        },
+        {
+          "id": "ability",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Sword.json#/13/Default",
+          "sha256": "120d407537d65742cb7297b9a11ca751270d458bb3e8d31c5c731c3f38d90950"
+        },
+        {
+          "id": "reference",
+          "kind": "reference_implementation",
+          "locator": "https://raw.githubusercontent.com/genshinsim/gcsim/8792c73d64439feb74fa139c3b745022952b3dc9/internal/weapons/sword/ironsting/ironsting.go",
+          "sha256": "e5f103259e4b5bfe06e1966ab14a8675df6cf16ecc102d9fdcc7861864985e0c"
+        }
+      ],
+      "applicability": {
+        "version_line": "release",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "normalization_fingerprint": "4b792020b8fbfffd4103b4e019065602f205f42d46a8f6bcb995c6f76d278cb1"
+      },
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      },
+      "payload": {
+        "source_binding": {
+          "schema_version": 1,
+          "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+          "normalization_fingerprint": "4b792020b8fbfffd4103b4e019065602f205f42d46a8f6bcb995c6f76d278cb1",
+          "subject": {
+            "target_type": "weapon",
+            "target_id": 11407
+          },
+          "selection": {
+            "refinement": 2
+          },
+          "nodes": [
+            {
+              "id": "weapon",
+              "definition_kind": "excel_record",
+              "source_path": "ExcelBinOutput/WeaponExcelConfigData.json",
+              "source_sha256": "dec1e4206c09bbe845e2415d7df008dcd6d36d430273687dd279d5a5534e3a5c",
+              "json_pointer": "/24",
+              "node_sha256": "93a794d0352d5773097ee3a6b7469e7208f496cffeda4e5eecb4a58a52c591d2"
+            },
+            {
+              "id": "affix",
+              "definition_kind": "excel_record",
+              "source_path": "ExcelBinOutput/EquipAffixExcelConfigData.json",
+              "source_sha256": "67cce4b66ecfae8ab20b4567005ff0e2efa76446af1fcc71d99e8a2383def4e6",
+              "json_pointer": "/61",
+              "node_sha256": "b32796235685f4e87d4f8df68700bdae69ad68261d8a6018402232e0f4f5dc2a"
+            },
+            {
+              "id": "talent",
+              "definition_kind": "talent_config",
+              "source_path": "BinOutput/Talent/EquipTalents/ConfigAffix_Sword.json",
+              "source_sha256": "aef6ee7beec2385f78e77e280861ff2e2c774dbfd5f2134567e99310d92195e5",
+              "json_pointer": "/Weapon_Sword_AttackGainFullDamgeUpBuff",
+              "node_sha256": "2be347f74c882b3155308705a059991c92520aabbe6db38542e6c2b3e1dc30be"
+            },
+            {
+              "id": "ability",
+              "definition_kind": "ability",
+              "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Sword.json",
+              "source_sha256": "721efa01e8043a06d239316038406305f2417afabdc6ecacf962881dd1a9a689",
+              "json_pointer": "/13/Default",
+              "node_sha256": "120d407537d65742cb7297b9a11ca751270d458bb3e8d31c5c731c3f38d90950"
+            }
+          ],
+          "parameters": [
+            {
+              "ref": "factor",
+              "value_type": "finite_number",
+              "unit": "ratio",
+              "node_id": "affix",
+              "pointer": "/paramList/0"
+            },
+            {
+              "ref": "duration",
+              "value_type": "seconds_exact_us",
+              "unit": "seconds",
+              "node_id": "affix",
+              "pointer": "/paramList/2"
+            },
+            {
+              "ref": "cooldown",
+              "value_type": "seconds_exact_us",
+              "unit": "seconds",
+              "node_id": "affix",
+              "pointer": "/paramList/1"
+            }
+          ],
+          "evidence": [
+            {
+              "id": "weapon",
+              "kind": "runtime_node",
+              "locator": "ExcelBinOutput/WeaponExcelConfigData.json#/24",
+              "sha256": "93a794d0352d5773097ee3a6b7469e7208f496cffeda4e5eecb4a58a52c591d2"
+            },
+            {
+              "id": "affix",
+              "kind": "runtime_node",
+              "locator": "ExcelBinOutput/EquipAffixExcelConfigData.json#/61",
+              "sha256": "b32796235685f4e87d4f8df68700bdae69ad68261d8a6018402232e0f4f5dc2a"
+            },
+            {
+              "id": "talent",
+              "kind": "runtime_node",
+              "locator": "BinOutput/Talent/EquipTalents/ConfigAffix_Sword.json#/Weapon_Sword_AttackGainFullDamgeUpBuff",
+              "sha256": "2be347f74c882b3155308705a059991c92520aabbe6db38542e6c2b3e1dc30be"
+            },
+            {
+              "id": "ability",
+              "kind": "runtime_node",
+              "locator": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Sword.json#/13/Default",
+              "sha256": "120d407537d65742cb7297b9a11ca751270d458bb3e8d31c5c731c3f38d90950"
+            },
+            {
+              "id": "reference",
+              "kind": "reference_implementation",
+              "locator": "https://raw.githubusercontent.com/genshinsim/gcsim/8792c73d64439feb74fa139c3b745022952b3dc9/internal/weapons/sword/ironsting/ironsting.go",
+              "sha256": "e5f103259e4b5bfe06e1966ab14a8675df6cf16ecc102d9fdcc7861864985e0c"
+            }
+          ],
+          "coverage": {
+            "whole_source_status": "partial",
+            "excluded_branches": [
+              "受审普通单目标实际接触参考；保留完整原始callback筛选，当前派发子集不等于来源全部触发范围。",
+              "零hitlag与输入原子命中顺序为显式参考，不认证官方帧顺序或Q自快照时点。",
+              "固定装备与队伍、全员存活、初始无同源实例、无恢复/状态重施加或外部同源写入；不覆盖运行中换装。",
+              "完整原始视觉、哨兵与回收节点保留；未执行ModifierVM，不把Unique直接解释成通用冷却。",
+              "仅本精炼效果有限情景；提供者转化反应伤害必须不存在，实际流水验证，不推断反应永远不触发。",
+              "OnEnemyDamage参考未排转化反应；完整7元素筛选不能用于扩大当前派发/附着模型。"
+            ],
+            "unknown_branches": []
+          }
+        },
+        "descriptor": {
+          "schema_version": 1,
+          "mechanism_id": "weapon.elemental-contact-dmg.r2",
+          "revision": 1,
+          "evidence_fact_ids": [
+            "weapon.elemental-contact-dmg.r2.rule@1",
+            "weapon.elemental-contact-dmg.r2.parameter.factor@1",
+            "weapon.elemental-contact-dmg.r2.parameter.duration@1",
+            "weapon.elemental-contact-dmg.r2.parameter.cooldown@1",
+            "weapon.elemental-contact-dmg.r2.qualification@1"
+          ],
+          "rule_templates": [
+            {
+              "key": "contact",
+              "rule": {
+                "name_zh": "元素命中共同续期增伤·精炼2",
+                "trigger": {
+                  "event": "hit",
+                  "phase": "post",
+                  "owner_presence": "frontline",
+                  "elements": [
+                    "pyro",
+                    "hydro",
+                    "electro",
+                    "cryo",
+                    "anemo",
+                    "geo",
+                    "dendro"
+                  ]
+                },
+                "beneficiaries": {
+                  "mode": "self",
+                  "scope": "locked"
+                },
+                "timing": {
+                  "delay": 0,
+                  "cooldown_anchor": "success"
+                },
+                "stacking": {
+                  "max": 2,
+                  "add": 1,
+                  "policy": "add_and_refresh"
+                },
+                "effects": [
+                  {
+                    "id": "bonus",
+                    "benefit_type_id": "benefit.dmg_bonus.all",
+                    "domain": "self"
+                  }
+                ]
+              },
+              "value_bindings": [
+                {
+                  "target": "effects.bonus.value",
+                  "parameter_ref": "factor"
+                },
+                {
+                  "target": "timing.duration",
+                  "parameter_ref": "duration"
+                },
+                {
+                  "target": "timing.cooldown",
+                  "parameter_ref": "cooldown"
+                }
+              ],
+              "execution_ports": [
+                {
+                  "target": "owner",
+                  "role": "provider"
+                },
+                {
+                  "target": "trigger.event_ids",
+                  "role": "qualifying_hits"
+                }
+              ],
+              "requirements": [
+                "single_target",
+                "fresh_empty_instance",
+                "fixed_party",
+                "no_hitlag",
+                "no_duplicate_source",
+                "qualified_contact_origin",
+                "no_provider_transformative_damage"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "weapon.elemental-contact-dmg.r3",
+      "revision": 1,
+      "subject": {
+        "target_type": "weapon",
+        "target_id": 11407
+      },
+      "evidence": [
+        {
+          "id": "weapon",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/WeaponExcelConfigData.json#/24",
+          "sha256": "93a794d0352d5773097ee3a6b7469e7208f496cffeda4e5eecb4a58a52c591d2"
+        },
+        {
+          "id": "affix",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/EquipAffixExcelConfigData.json#/62",
+          "sha256": "c844332bc66041284f67445b43431863ad4c7c7e71423cf2d30ae95f5213fe23"
+        },
+        {
+          "id": "talent",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Talent/EquipTalents/ConfigAffix_Sword.json#/Weapon_Sword_AttackGainFullDamgeUpBuff",
+          "sha256": "2be347f74c882b3155308705a059991c92520aabbe6db38542e6c2b3e1dc30be"
+        },
+        {
+          "id": "ability",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Sword.json#/13/Default",
+          "sha256": "120d407537d65742cb7297b9a11ca751270d458bb3e8d31c5c731c3f38d90950"
+        },
+        {
+          "id": "reference",
+          "kind": "reference_implementation",
+          "locator": "https://raw.githubusercontent.com/genshinsim/gcsim/8792c73d64439feb74fa139c3b745022952b3dc9/internal/weapons/sword/ironsting/ironsting.go",
+          "sha256": "e5f103259e4b5bfe06e1966ab14a8675df6cf16ecc102d9fdcc7861864985e0c"
+        }
+      ],
+      "applicability": {
+        "version_line": "release",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "normalization_fingerprint": "4b792020b8fbfffd4103b4e019065602f205f42d46a8f6bcb995c6f76d278cb1"
+      },
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      },
+      "payload": {
+        "source_binding": {
+          "schema_version": 1,
+          "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+          "normalization_fingerprint": "4b792020b8fbfffd4103b4e019065602f205f42d46a8f6bcb995c6f76d278cb1",
+          "subject": {
+            "target_type": "weapon",
+            "target_id": 11407
+          },
+          "selection": {
+            "refinement": 3
+          },
+          "nodes": [
+            {
+              "id": "weapon",
+              "definition_kind": "excel_record",
+              "source_path": "ExcelBinOutput/WeaponExcelConfigData.json",
+              "source_sha256": "dec1e4206c09bbe845e2415d7df008dcd6d36d430273687dd279d5a5534e3a5c",
+              "json_pointer": "/24",
+              "node_sha256": "93a794d0352d5773097ee3a6b7469e7208f496cffeda4e5eecb4a58a52c591d2"
+            },
+            {
+              "id": "affix",
+              "definition_kind": "excel_record",
+              "source_path": "ExcelBinOutput/EquipAffixExcelConfigData.json",
+              "source_sha256": "67cce4b66ecfae8ab20b4567005ff0e2efa76446af1fcc71d99e8a2383def4e6",
+              "json_pointer": "/62",
+              "node_sha256": "c844332bc66041284f67445b43431863ad4c7c7e71423cf2d30ae95f5213fe23"
+            },
+            {
+              "id": "talent",
+              "definition_kind": "talent_config",
+              "source_path": "BinOutput/Talent/EquipTalents/ConfigAffix_Sword.json",
+              "source_sha256": "aef6ee7beec2385f78e77e280861ff2e2c774dbfd5f2134567e99310d92195e5",
+              "json_pointer": "/Weapon_Sword_AttackGainFullDamgeUpBuff",
+              "node_sha256": "2be347f74c882b3155308705a059991c92520aabbe6db38542e6c2b3e1dc30be"
+            },
+            {
+              "id": "ability",
+              "definition_kind": "ability",
+              "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Sword.json",
+              "source_sha256": "721efa01e8043a06d239316038406305f2417afabdc6ecacf962881dd1a9a689",
+              "json_pointer": "/13/Default",
+              "node_sha256": "120d407537d65742cb7297b9a11ca751270d458bb3e8d31c5c731c3f38d90950"
+            }
+          ],
+          "parameters": [
+            {
+              "ref": "factor",
+              "value_type": "finite_number",
+              "unit": "ratio",
+              "node_id": "affix",
+              "pointer": "/paramList/0"
+            },
+            {
+              "ref": "duration",
+              "value_type": "seconds_exact_us",
+              "unit": "seconds",
+              "node_id": "affix",
+              "pointer": "/paramList/2"
+            },
+            {
+              "ref": "cooldown",
+              "value_type": "seconds_exact_us",
+              "unit": "seconds",
+              "node_id": "affix",
+              "pointer": "/paramList/1"
+            }
+          ],
+          "evidence": [
+            {
+              "id": "weapon",
+              "kind": "runtime_node",
+              "locator": "ExcelBinOutput/WeaponExcelConfigData.json#/24",
+              "sha256": "93a794d0352d5773097ee3a6b7469e7208f496cffeda4e5eecb4a58a52c591d2"
+            },
+            {
+              "id": "affix",
+              "kind": "runtime_node",
+              "locator": "ExcelBinOutput/EquipAffixExcelConfigData.json#/62",
+              "sha256": "c844332bc66041284f67445b43431863ad4c7c7e71423cf2d30ae95f5213fe23"
+            },
+            {
+              "id": "talent",
+              "kind": "runtime_node",
+              "locator": "BinOutput/Talent/EquipTalents/ConfigAffix_Sword.json#/Weapon_Sword_AttackGainFullDamgeUpBuff",
+              "sha256": "2be347f74c882b3155308705a059991c92520aabbe6db38542e6c2b3e1dc30be"
+            },
+            {
+              "id": "ability",
+              "kind": "runtime_node",
+              "locator": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Sword.json#/13/Default",
+              "sha256": "120d407537d65742cb7297b9a11ca751270d458bb3e8d31c5c731c3f38d90950"
+            },
+            {
+              "id": "reference",
+              "kind": "reference_implementation",
+              "locator": "https://raw.githubusercontent.com/genshinsim/gcsim/8792c73d64439feb74fa139c3b745022952b3dc9/internal/weapons/sword/ironsting/ironsting.go",
+              "sha256": "e5f103259e4b5bfe06e1966ab14a8675df6cf16ecc102d9fdcc7861864985e0c"
+            }
+          ],
+          "coverage": {
+            "whole_source_status": "partial",
+            "excluded_branches": [
+              "受审普通单目标实际接触参考；保留完整原始callback筛选，当前派发子集不等于来源全部触发范围。",
+              "零hitlag与输入原子命中顺序为显式参考，不认证官方帧顺序或Q自快照时点。",
+              "固定装备与队伍、全员存活、初始无同源实例、无恢复/状态重施加或外部同源写入；不覆盖运行中换装。",
+              "完整原始视觉、哨兵与回收节点保留；未执行ModifierVM，不把Unique直接解释成通用冷却。",
+              "仅本精炼效果有限情景；提供者转化反应伤害必须不存在，实际流水验证，不推断反应永远不触发。",
+              "OnEnemyDamage参考未排转化反应；完整7元素筛选不能用于扩大当前派发/附着模型。"
+            ],
+            "unknown_branches": []
+          }
+        },
+        "descriptor": {
+          "schema_version": 1,
+          "mechanism_id": "weapon.elemental-contact-dmg.r3",
+          "revision": 1,
+          "evidence_fact_ids": [
+            "weapon.elemental-contact-dmg.r3.rule@1",
+            "weapon.elemental-contact-dmg.r3.parameter.factor@1",
+            "weapon.elemental-contact-dmg.r3.parameter.duration@1",
+            "weapon.elemental-contact-dmg.r3.parameter.cooldown@1",
+            "weapon.elemental-contact-dmg.r3.qualification@1"
+          ],
+          "rule_templates": [
+            {
+              "key": "contact",
+              "rule": {
+                "name_zh": "元素命中共同续期增伤·精炼3",
+                "trigger": {
+                  "event": "hit",
+                  "phase": "post",
+                  "owner_presence": "frontline",
+                  "elements": [
+                    "pyro",
+                    "hydro",
+                    "electro",
+                    "cryo",
+                    "anemo",
+                    "geo",
+                    "dendro"
+                  ]
+                },
+                "beneficiaries": {
+                  "mode": "self",
+                  "scope": "locked"
+                },
+                "timing": {
+                  "delay": 0,
+                  "cooldown_anchor": "success"
+                },
+                "stacking": {
+                  "max": 2,
+                  "add": 1,
+                  "policy": "add_and_refresh"
+                },
+                "effects": [
+                  {
+                    "id": "bonus",
+                    "benefit_type_id": "benefit.dmg_bonus.all",
+                    "domain": "self"
+                  }
+                ]
+              },
+              "value_bindings": [
+                {
+                  "target": "effects.bonus.value",
+                  "parameter_ref": "factor"
+                },
+                {
+                  "target": "timing.duration",
+                  "parameter_ref": "duration"
+                },
+                {
+                  "target": "timing.cooldown",
+                  "parameter_ref": "cooldown"
+                }
+              ],
+              "execution_ports": [
+                {
+                  "target": "owner",
+                  "role": "provider"
+                },
+                {
+                  "target": "trigger.event_ids",
+                  "role": "qualifying_hits"
+                }
+              ],
+              "requirements": [
+                "single_target",
+                "fresh_empty_instance",
+                "fixed_party",
+                "no_hitlag",
+                "no_duplicate_source",
+                "qualified_contact_origin",
+                "no_provider_transformative_damage"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "weapon.elemental-contact-dmg.r4",
+      "revision": 1,
+      "subject": {
+        "target_type": "weapon",
+        "target_id": 11407
+      },
+      "evidence": [
+        {
+          "id": "weapon",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/WeaponExcelConfigData.json#/24",
+          "sha256": "93a794d0352d5773097ee3a6b7469e7208f496cffeda4e5eecb4a58a52c591d2"
+        },
+        {
+          "id": "affix",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/EquipAffixExcelConfigData.json#/63",
+          "sha256": "2aeecfd504edfdd49e9ec6bbd3661e4907bc7a7c04db6ee19b71f55c9d2ca8e7"
+        },
+        {
+          "id": "talent",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Talent/EquipTalents/ConfigAffix_Sword.json#/Weapon_Sword_AttackGainFullDamgeUpBuff",
+          "sha256": "2be347f74c882b3155308705a059991c92520aabbe6db38542e6c2b3e1dc30be"
+        },
+        {
+          "id": "ability",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Sword.json#/13/Default",
+          "sha256": "120d407537d65742cb7297b9a11ca751270d458bb3e8d31c5c731c3f38d90950"
+        },
+        {
+          "id": "reference",
+          "kind": "reference_implementation",
+          "locator": "https://raw.githubusercontent.com/genshinsim/gcsim/8792c73d64439feb74fa139c3b745022952b3dc9/internal/weapons/sword/ironsting/ironsting.go",
+          "sha256": "e5f103259e4b5bfe06e1966ab14a8675df6cf16ecc102d9fdcc7861864985e0c"
+        }
+      ],
+      "applicability": {
+        "version_line": "release",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "normalization_fingerprint": "4b792020b8fbfffd4103b4e019065602f205f42d46a8f6bcb995c6f76d278cb1"
+      },
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      },
+      "payload": {
+        "source_binding": {
+          "schema_version": 1,
+          "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+          "normalization_fingerprint": "4b792020b8fbfffd4103b4e019065602f205f42d46a8f6bcb995c6f76d278cb1",
+          "subject": {
+            "target_type": "weapon",
+            "target_id": 11407
+          },
+          "selection": {
+            "refinement": 4
+          },
+          "nodes": [
+            {
+              "id": "weapon",
+              "definition_kind": "excel_record",
+              "source_path": "ExcelBinOutput/WeaponExcelConfigData.json",
+              "source_sha256": "dec1e4206c09bbe845e2415d7df008dcd6d36d430273687dd279d5a5534e3a5c",
+              "json_pointer": "/24",
+              "node_sha256": "93a794d0352d5773097ee3a6b7469e7208f496cffeda4e5eecb4a58a52c591d2"
+            },
+            {
+              "id": "affix",
+              "definition_kind": "excel_record",
+              "source_path": "ExcelBinOutput/EquipAffixExcelConfigData.json",
+              "source_sha256": "67cce4b66ecfae8ab20b4567005ff0e2efa76446af1fcc71d99e8a2383def4e6",
+              "json_pointer": "/63",
+              "node_sha256": "2aeecfd504edfdd49e9ec6bbd3661e4907bc7a7c04db6ee19b71f55c9d2ca8e7"
+            },
+            {
+              "id": "talent",
+              "definition_kind": "talent_config",
+              "source_path": "BinOutput/Talent/EquipTalents/ConfigAffix_Sword.json",
+              "source_sha256": "aef6ee7beec2385f78e77e280861ff2e2c774dbfd5f2134567e99310d92195e5",
+              "json_pointer": "/Weapon_Sword_AttackGainFullDamgeUpBuff",
+              "node_sha256": "2be347f74c882b3155308705a059991c92520aabbe6db38542e6c2b3e1dc30be"
+            },
+            {
+              "id": "ability",
+              "definition_kind": "ability",
+              "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Sword.json",
+              "source_sha256": "721efa01e8043a06d239316038406305f2417afabdc6ecacf962881dd1a9a689",
+              "json_pointer": "/13/Default",
+              "node_sha256": "120d407537d65742cb7297b9a11ca751270d458bb3e8d31c5c731c3f38d90950"
+            }
+          ],
+          "parameters": [
+            {
+              "ref": "factor",
+              "value_type": "finite_number",
+              "unit": "ratio",
+              "node_id": "affix",
+              "pointer": "/paramList/0"
+            },
+            {
+              "ref": "duration",
+              "value_type": "seconds_exact_us",
+              "unit": "seconds",
+              "node_id": "affix",
+              "pointer": "/paramList/2"
+            },
+            {
+              "ref": "cooldown",
+              "value_type": "seconds_exact_us",
+              "unit": "seconds",
+              "node_id": "affix",
+              "pointer": "/paramList/1"
+            }
+          ],
+          "evidence": [
+            {
+              "id": "weapon",
+              "kind": "runtime_node",
+              "locator": "ExcelBinOutput/WeaponExcelConfigData.json#/24",
+              "sha256": "93a794d0352d5773097ee3a6b7469e7208f496cffeda4e5eecb4a58a52c591d2"
+            },
+            {
+              "id": "affix",
+              "kind": "runtime_node",
+              "locator": "ExcelBinOutput/EquipAffixExcelConfigData.json#/63",
+              "sha256": "2aeecfd504edfdd49e9ec6bbd3661e4907bc7a7c04db6ee19b71f55c9d2ca8e7"
+            },
+            {
+              "id": "talent",
+              "kind": "runtime_node",
+              "locator": "BinOutput/Talent/EquipTalents/ConfigAffix_Sword.json#/Weapon_Sword_AttackGainFullDamgeUpBuff",
+              "sha256": "2be347f74c882b3155308705a059991c92520aabbe6db38542e6c2b3e1dc30be"
+            },
+            {
+              "id": "ability",
+              "kind": "runtime_node",
+              "locator": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Sword.json#/13/Default",
+              "sha256": "120d407537d65742cb7297b9a11ca751270d458bb3e8d31c5c731c3f38d90950"
+            },
+            {
+              "id": "reference",
+              "kind": "reference_implementation",
+              "locator": "https://raw.githubusercontent.com/genshinsim/gcsim/8792c73d64439feb74fa139c3b745022952b3dc9/internal/weapons/sword/ironsting/ironsting.go",
+              "sha256": "e5f103259e4b5bfe06e1966ab14a8675df6cf16ecc102d9fdcc7861864985e0c"
+            }
+          ],
+          "coverage": {
+            "whole_source_status": "partial",
+            "excluded_branches": [
+              "受审普通单目标实际接触参考；保留完整原始callback筛选，当前派发子集不等于来源全部触发范围。",
+              "零hitlag与输入原子命中顺序为显式参考，不认证官方帧顺序或Q自快照时点。",
+              "固定装备与队伍、全员存活、初始无同源实例、无恢复/状态重施加或外部同源写入；不覆盖运行中换装。",
+              "完整原始视觉、哨兵与回收节点保留；未执行ModifierVM，不把Unique直接解释成通用冷却。",
+              "仅本精炼效果有限情景；提供者转化反应伤害必须不存在，实际流水验证，不推断反应永远不触发。",
+              "OnEnemyDamage参考未排转化反应；完整7元素筛选不能用于扩大当前派发/附着模型。"
+            ],
+            "unknown_branches": []
+          }
+        },
+        "descriptor": {
+          "schema_version": 1,
+          "mechanism_id": "weapon.elemental-contact-dmg.r4",
+          "revision": 1,
+          "evidence_fact_ids": [
+            "weapon.elemental-contact-dmg.r4.rule@1",
+            "weapon.elemental-contact-dmg.r4.parameter.factor@1",
+            "weapon.elemental-contact-dmg.r4.parameter.duration@1",
+            "weapon.elemental-contact-dmg.r4.parameter.cooldown@1",
+            "weapon.elemental-contact-dmg.r4.qualification@1"
+          ],
+          "rule_templates": [
+            {
+              "key": "contact",
+              "rule": {
+                "name_zh": "元素命中共同续期增伤·精炼4",
+                "trigger": {
+                  "event": "hit",
+                  "phase": "post",
+                  "owner_presence": "frontline",
+                  "elements": [
+                    "pyro",
+                    "hydro",
+                    "electro",
+                    "cryo",
+                    "anemo",
+                    "geo",
+                    "dendro"
+                  ]
+                },
+                "beneficiaries": {
+                  "mode": "self",
+                  "scope": "locked"
+                },
+                "timing": {
+                  "delay": 0,
+                  "cooldown_anchor": "success"
+                },
+                "stacking": {
+                  "max": 2,
+                  "add": 1,
+                  "policy": "add_and_refresh"
+                },
+                "effects": [
+                  {
+                    "id": "bonus",
+                    "benefit_type_id": "benefit.dmg_bonus.all",
+                    "domain": "self"
+                  }
+                ]
+              },
+              "value_bindings": [
+                {
+                  "target": "effects.bonus.value",
+                  "parameter_ref": "factor"
+                },
+                {
+                  "target": "timing.duration",
+                  "parameter_ref": "duration"
+                },
+                {
+                  "target": "timing.cooldown",
+                  "parameter_ref": "cooldown"
+                }
+              ],
+              "execution_ports": [
+                {
+                  "target": "owner",
+                  "role": "provider"
+                },
+                {
+                  "target": "trigger.event_ids",
+                  "role": "qualifying_hits"
+                }
+              ],
+              "requirements": [
+                "single_target",
+                "fresh_empty_instance",
+                "fixed_party",
+                "no_hitlag",
+                "no_duplicate_source",
+                "qualified_contact_origin",
+                "no_provider_transformative_damage"
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "weapon.elemental-contact-dmg.r5",
+      "revision": 1,
+      "subject": {
+        "target_type": "weapon",
+        "target_id": 11407
+      },
+      "evidence": [
+        {
+          "id": "weapon",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/WeaponExcelConfigData.json#/24",
+          "sha256": "93a794d0352d5773097ee3a6b7469e7208f496cffeda4e5eecb4a58a52c591d2"
+        },
+        {
+          "id": "affix",
+          "kind": "runtime_node",
+          "locator": "ExcelBinOutput/EquipAffixExcelConfigData.json#/64",
+          "sha256": "260b4b294b7f4a53adf1c16f8c2888df3f9939c6bef6361a8685a6b869beb4d4"
+        },
+        {
+          "id": "talent",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Talent/EquipTalents/ConfigAffix_Sword.json#/Weapon_Sword_AttackGainFullDamgeUpBuff",
+          "sha256": "2be347f74c882b3155308705a059991c92520aabbe6db38542e6c2b3e1dc30be"
+        },
+        {
+          "id": "ability",
+          "kind": "runtime_node",
+          "locator": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Sword.json#/13/Default",
+          "sha256": "120d407537d65742cb7297b9a11ca751270d458bb3e8d31c5c731c3f38d90950"
+        },
+        {
+          "id": "reference",
+          "kind": "reference_implementation",
+          "locator": "https://raw.githubusercontent.com/genshinsim/gcsim/8792c73d64439feb74fa139c3b745022952b3dc9/internal/weapons/sword/ironsting/ironsting.go",
+          "sha256": "e5f103259e4b5bfe06e1966ab14a8675df6cf16ecc102d9fdcc7861864985e0c"
+        }
+      ],
+      "applicability": {
+        "version_line": "release",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+        "normalization_fingerprint": "4b792020b8fbfffd4103b4e019065602f205f42d46a8f6bcb995c6f76d278cb1"
+      },
+      "review": {
+        "status": "pending",
+        "reviewer": null,
+        "reviewed_at": null
+      },
+      "payload": {
+        "source_binding": {
+          "schema_version": 1,
+          "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+          "normalization_fingerprint": "4b792020b8fbfffd4103b4e019065602f205f42d46a8f6bcb995c6f76d278cb1",
+          "subject": {
+            "target_type": "weapon",
+            "target_id": 11407
+          },
+          "selection": {
+            "refinement": 5
+          },
+          "nodes": [
+            {
+              "id": "weapon",
+              "definition_kind": "excel_record",
+              "source_path": "ExcelBinOutput/WeaponExcelConfigData.json",
+              "source_sha256": "dec1e4206c09bbe845e2415d7df008dcd6d36d430273687dd279d5a5534e3a5c",
+              "json_pointer": "/24",
+              "node_sha256": "93a794d0352d5773097ee3a6b7469e7208f496cffeda4e5eecb4a58a52c591d2"
+            },
+            {
+              "id": "affix",
+              "definition_kind": "excel_record",
+              "source_path": "ExcelBinOutput/EquipAffixExcelConfigData.json",
+              "source_sha256": "67cce4b66ecfae8ab20b4567005ff0e2efa76446af1fcc71d99e8a2383def4e6",
+              "json_pointer": "/64",
+              "node_sha256": "260b4b294b7f4a53adf1c16f8c2888df3f9939c6bef6361a8685a6b869beb4d4"
+            },
+            {
+              "id": "talent",
+              "definition_kind": "talent_config",
+              "source_path": "BinOutput/Talent/EquipTalents/ConfigAffix_Sword.json",
+              "source_sha256": "aef6ee7beec2385f78e77e280861ff2e2c774dbfd5f2134567e99310d92195e5",
+              "json_pointer": "/Weapon_Sword_AttackGainFullDamgeUpBuff",
+              "node_sha256": "2be347f74c882b3155308705a059991c92520aabbe6db38542e6c2b3e1dc30be"
+            },
+            {
+              "id": "ability",
+              "definition_kind": "ability",
+              "source_path": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Sword.json",
+              "source_sha256": "721efa01e8043a06d239316038406305f2417afabdc6ecacf962881dd1a9a689",
+              "json_pointer": "/13/Default",
+              "node_sha256": "120d407537d65742cb7297b9a11ca751270d458bb3e8d31c5c731c3f38d90950"
+            }
+          ],
+          "parameters": [
+            {
+              "ref": "factor",
+              "value_type": "finite_number",
+              "unit": "ratio",
+              "node_id": "affix",
+              "pointer": "/paramList/0"
+            },
+            {
+              "ref": "duration",
+              "value_type": "seconds_exact_us",
+              "unit": "seconds",
+              "node_id": "affix",
+              "pointer": "/paramList/2"
+            },
+            {
+              "ref": "cooldown",
+              "value_type": "seconds_exact_us",
+              "unit": "seconds",
+              "node_id": "affix",
+              "pointer": "/paramList/1"
+            }
+          ],
+          "evidence": [
+            {
+              "id": "weapon",
+              "kind": "runtime_node",
+              "locator": "ExcelBinOutput/WeaponExcelConfigData.json#/24",
+              "sha256": "93a794d0352d5773097ee3a6b7469e7208f496cffeda4e5eecb4a58a52c591d2"
+            },
+            {
+              "id": "affix",
+              "kind": "runtime_node",
+              "locator": "ExcelBinOutput/EquipAffixExcelConfigData.json#/64",
+              "sha256": "260b4b294b7f4a53adf1c16f8c2888df3f9939c6bef6361a8685a6b869beb4d4"
+            },
+            {
+              "id": "talent",
+              "kind": "runtime_node",
+              "locator": "BinOutput/Talent/EquipTalents/ConfigAffix_Sword.json#/Weapon_Sword_AttackGainFullDamgeUpBuff",
+              "sha256": "2be347f74c882b3155308705a059991c92520aabbe6db38542e6c2b3e1dc30be"
+            },
+            {
+              "id": "ability",
+              "kind": "runtime_node",
+              "locator": "BinOutput/Ability/Temp/EquipAbilities/ConfigAbility_Weapon_Sword.json#/13/Default",
+              "sha256": "120d407537d65742cb7297b9a11ca751270d458bb3e8d31c5c731c3f38d90950"
+            },
+            {
+              "id": "reference",
+              "kind": "reference_implementation",
+              "locator": "https://raw.githubusercontent.com/genshinsim/gcsim/8792c73d64439feb74fa139c3b745022952b3dc9/internal/weapons/sword/ironsting/ironsting.go",
+              "sha256": "e5f103259e4b5bfe06e1966ab14a8675df6cf16ecc102d9fdcc7861864985e0c"
+            }
+          ],
+          "coverage": {
+            "whole_source_status": "partial",
+            "excluded_branches": [
+              "受审普通单目标实际接触参考；保留完整原始callback筛选，当前派发子集不等于来源全部触发范围。",
+              "零hitlag与输入原子命中顺序为显式参考，不认证官方帧顺序或Q自快照时点。",
+              "固定装备与队伍、全员存活、初始无同源实例、无恢复/状态重施加或外部同源写入；不覆盖运行中换装。",
+              "完整原始视觉、哨兵与回收节点保留；未执行ModifierVM，不把Unique直接解释成通用冷却。",
+              "仅本精炼效果有限情景；提供者转化反应伤害必须不存在，实际流水验证，不推断反应永远不触发。",
+              "OnEnemyDamage参考未排转化反应；完整7元素筛选不能用于扩大当前派发/附着模型。"
+            ],
+            "unknown_branches": []
+          }
+        },
+        "descriptor": {
+          "schema_version": 1,
+          "mechanism_id": "weapon.elemental-contact-dmg.r5",
+          "revision": 1,
+          "evidence_fact_ids": [
+            "weapon.elemental-contact-dmg.r5.rule@1",
+            "weapon.elemental-contact-dmg.r5.parameter.factor@1",
+            "weapon.elemental-contact-dmg.r5.parameter.duration@1",
+            "weapon.elemental-contact-dmg.r5.parameter.cooldown@1",
+            "weapon.elemental-contact-dmg.r5.qualification@1"
+          ],
+          "rule_templates": [
+            {
+              "key": "contact",
+              "rule": {
+                "name_zh": "元素命中共同续期增伤·精炼5",
+                "trigger": {
+                  "event": "hit",
+                  "phase": "post",
+                  "owner_presence": "frontline",
+                  "elements": [
+                    "pyro",
+                    "hydro",
+                    "electro",
+                    "cryo",
+                    "anemo",
+                    "geo",
+                    "dendro"
+                  ]
+                },
+                "beneficiaries": {
+                  "mode": "self",
+                  "scope": "locked"
+                },
+                "timing": {
+                  "delay": 0,
+                  "cooldown_anchor": "success"
+                },
+                "stacking": {
+                  "max": 2,
+                  "add": 1,
+                  "policy": "add_and_refresh"
+                },
+                "effects": [
+                  {
+                    "id": "bonus",
+                    "benefit_type_id": "benefit.dmg_bonus.all",
+                    "domain": "self"
+                  }
+                ]
+              },
+              "value_bindings": [
+                {
+                  "target": "effects.bonus.value",
+                  "parameter_ref": "factor"
+                },
+                {
+                  "target": "timing.duration",
+                  "parameter_ref": "duration"
+                },
+                {
+                  "target": "timing.cooldown",
+                  "parameter_ref": "cooldown"
+                }
+              ],
+              "execution_ports": [
+                {
+                  "target": "owner",
+                  "role": "provider"
+                },
+                {
+                  "target": "trigger.event_ids",
+                  "role": "qualifying_hits"
+                }
+              ],
+              "requirements": [
+                "single_target",
+                "fresh_empty_instance",
+                "fixed_party",
+                "no_hitlag",
+                "no_duplicate_source",
+                "qualified_contact_origin",
+                "no_provider_transformative_damage"
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "heads": [
+    {
+      "record_kind": "fact",
+      "record_id": "artifact.skill-burst-contact-dendro-res-shred.rule",
+      "revision": 1,
+      "expected_head_revision": null
+    },
+    {
+      "record_kind": "fact",
+      "record_id": "artifact.skill-burst-contact-dendro-res-shred.parameter.factor",
+      "revision": 1,
+      "expected_head_revision": null
+    },
+    {
+      "record_kind": "fact",
+      "record_id": "artifact.skill-burst-contact-dendro-res-shred.parameter.duration",
+      "revision": 1,
+      "expected_head_revision": null
+    },
+    {
+      "record_kind": "fact",
+      "record_id": "artifact.skill-burst-contact-dendro-res-shred.qualification",
+      "revision": 1,
+      "expected_head_revision": null
+    },
+    {
+      "record_kind": "fact",
+      "record_id": "weapon.elemental-contact-dmg.r1.rule",
+      "revision": 1,
+      "expected_head_revision": null
+    },
+    {
+      "record_kind": "fact",
+      "record_id": "weapon.elemental-contact-dmg.r1.parameter.factor",
+      "revision": 1,
+      "expected_head_revision": null
+    },
+    {
+      "record_kind": "fact",
+      "record_id": "weapon.elemental-contact-dmg.r1.parameter.duration",
+      "revision": 1,
+      "expected_head_revision": null
+    },
+    {
+      "record_kind": "fact",
+      "record_id": "weapon.elemental-contact-dmg.r1.parameter.cooldown",
+      "revision": 1,
+      "expected_head_revision": null
+    },
+    {
+      "record_kind": "fact",
+      "record_id": "weapon.elemental-contact-dmg.r1.qualification",
+      "revision": 1,
+      "expected_head_revision": null
+    },
+    {
+      "record_kind": "fact",
+      "record_id": "weapon.elemental-contact-dmg.r2.rule",
+      "revision": 1,
+      "expected_head_revision": null
+    },
+    {
+      "record_kind": "fact",
+      "record_id": "weapon.elemental-contact-dmg.r2.parameter.factor",
+      "revision": 1,
+      "expected_head_revision": null
+    },
+    {
+      "record_kind": "fact",
+      "record_id": "weapon.elemental-contact-dmg.r2.parameter.duration",
+      "revision": 1,
+      "expected_head_revision": null
+    },
+    {
+      "record_kind": "fact",
+      "record_id": "weapon.elemental-contact-dmg.r2.parameter.cooldown",
+      "revision": 1,
+      "expected_head_revision": null
+    },
+    {
+      "record_kind": "fact",
+      "record_id": "weapon.elemental-contact-dmg.r2.qualification",
+      "revision": 1,
+      "expected_head_revision": null
+    },
+    {
+      "record_kind": "fact",
+      "record_id": "weapon.elemental-contact-dmg.r3.rule",
+      "revision": 1,
+      "expected_head_revision": null
+    },
+    {
+      "record_kind": "fact",
+      "record_id": "weapon.elemental-contact-dmg.r3.parameter.factor",
+      "revision": 1,
+      "expected_head_revision": null
+    },
+    {
+      "record_kind": "fact",
+      "record_id": "weapon.elemental-contact-dmg.r3.parameter.duration",
+      "revision": 1,
+      "expected_head_revision": null
+    },
+    {
+      "record_kind": "fact",
+      "record_id": "weapon.elemental-contact-dmg.r3.parameter.cooldown",
+      "revision": 1,
+      "expected_head_revision": null
+    },
+    {
+      "record_kind": "fact",
+      "record_id": "weapon.elemental-contact-dmg.r3.qualification",
+      "revision": 1,
+      "expected_head_revision": null
+    },
+    {
+      "record_kind": "fact",
+      "record_id": "weapon.elemental-contact-dmg.r4.rule",
+      "revision": 1,
+      "expected_head_revision": null
+    },
+    {
+      "record_kind": "fact",
+      "record_id": "weapon.elemental-contact-dmg.r4.parameter.factor",
+      "revision": 1,
+      "expected_head_revision": null
+    },
+    {
+      "record_kind": "fact",
+      "record_id": "weapon.elemental-contact-dmg.r4.parameter.duration",
+      "revision": 1,
+      "expected_head_revision": null
+    },
+    {
+      "record_kind": "fact",
+      "record_id": "weapon.elemental-contact-dmg.r4.parameter.cooldown",
+      "revision": 1,
+      "expected_head_revision": null
+    },
+    {
+      "record_kind": "fact",
+      "record_id": "weapon.elemental-contact-dmg.r4.qualification",
+      "revision": 1,
+      "expected_head_revision": null
+    },
+    {
+      "record_kind": "fact",
+      "record_id": "weapon.elemental-contact-dmg.r5.rule",
+      "revision": 1,
+      "expected_head_revision": null
+    },
+    {
+      "record_kind": "fact",
+      "record_id": "weapon.elemental-contact-dmg.r5.parameter.factor",
+      "revision": 1,
+      "expected_head_revision": null
+    },
+    {
+      "record_kind": "fact",
+      "record_id": "weapon.elemental-contact-dmg.r5.parameter.duration",
+      "revision": 1,
+      "expected_head_revision": null
+    },
+    {
+      "record_kind": "fact",
+      "record_id": "weapon.elemental-contact-dmg.r5.parameter.cooldown",
+      "revision": 1,
+      "expected_head_revision": null
+    },
+    {
+      "record_kind": "fact",
+      "record_id": "weapon.elemental-contact-dmg.r5.qualification",
+      "revision": 1,
+      "expected_head_revision": null
+    },
+    {
+      "record_kind": "descriptor",
+      "record_id": "artifact.skill-burst-contact-dendro-res-shred",
+      "revision": 1,
+      "expected_head_revision": null
+    },
+    {
+      "record_kind": "descriptor",
+      "record_id": "weapon.elemental-contact-dmg.r1",
+      "revision": 1,
+      "expected_head_revision": null
+    },
+    {
+      "record_kind": "descriptor",
+      "record_id": "weapon.elemental-contact-dmg.r2",
+      "revision": 1,
+      "expected_head_revision": null
+    },
+    {
+      "record_kind": "descriptor",
+      "record_id": "weapon.elemental-contact-dmg.r3",
+      "revision": 1,
+      "expected_head_revision": null
+    },
+    {
+      "record_kind": "descriptor",
+      "record_id": "weapon.elemental-contact-dmg.r4",
+      "revision": 1,
+      "expected_head_revision": null
+    },
+    {
+      "record_kind": "descriptor",
+      "record_id": "weapon.elemental-contact-dmg.r5",
+      "revision": 1,
+      "expected_head_revision": null
+    }
+  ]
+}

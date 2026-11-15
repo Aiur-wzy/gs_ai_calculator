@@ -1,0 +1,120 @@
+{
+  "profile": {
+    "id": "equipment-static-included-v2",
+    "version": 2,
+    "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+    "indexer_version": "7",
+    "runtime_schema_version": 1,
+    "default_absent_affix_level": 0,
+    "open_config": "must_be_absent",
+    "param_slots": 8,
+    "add_prop_slots": 3,
+    "parameters": "all_zero",
+    "negative_zero": "rejected",
+    "raw_parent_metadata": [
+      "bagSortValue",
+      "dungeonGroup",
+      "disableFilter"
+    ],
+    "duplicate_prop_type": "rejected_within_one_affix",
+    "scope": "artifact_set_given_panel_only",
+    "property_mapping": {
+      "FIGHT_PROP_BASE_ATTACK": [
+        "base_atk",
+        "flat"
+      ],
+      "FIGHT_PROP_ATTACK": [
+        "atk",
+        "flat"
+      ],
+      "FIGHT_PROP_ATTACK_PERCENT": [
+        "atk",
+        "percent"
+      ],
+      "FIGHT_PROP_HP": [
+        "hp",
+        "flat"
+      ],
+      "FIGHT_PROP_HP_PERCENT": [
+        "hp",
+        "percent"
+      ],
+      "FIGHT_PROP_DEFENSE": [
+        "def",
+        "flat"
+      ],
+      "FIGHT_PROP_DEFENSE_PERCENT": [
+        "def",
+        "percent"
+      ],
+      "FIGHT_PROP_CRITICAL": [
+        "crit_rate",
+        "flat"
+      ],
+      "FIGHT_PROP_CRITICAL_HURT": [
+        "crit_dmg",
+        "flat"
+      ],
+      "FIGHT_PROP_ELEMENT_MASTERY": [
+        "em",
+        "flat"
+      ],
+      "FIGHT_PROP_CHARGE_EFFICIENCY": [
+        "energy_recharge",
+        "flat"
+      ],
+      "FIGHT_PROP_ADD_HURT": [
+        "dmg_bonus:all",
+        "flat"
+      ],
+      "FIGHT_PROP_PHYSICAL_ADD_HURT": [
+        "dmg_bonus:physical",
+        "flat"
+      ],
+      "FIGHT_PROP_FIRE_ADD_HURT": [
+        "dmg_bonus:pyro",
+        "flat"
+      ],
+      "FIGHT_PROP_WATER_ADD_HURT": [
+        "dmg_bonus:hydro",
+        "flat"
+      ],
+      "FIGHT_PROP_ELEC_ADD_HURT": [
+        "dmg_bonus:electro",
+        "flat"
+      ],
+      "FIGHT_PROP_ICE_ADD_HURT": [
+        "dmg_bonus:cryo",
+        "flat"
+      ],
+      "FIGHT_PROP_WIND_ADD_HURT": [
+        "dmg_bonus:anemo",
+        "flat"
+      ],
+      "FIGHT_PROP_ROCK_ADD_HURT": [
+        "dmg_bonus:geo",
+        "flat"
+      ],
+      "FIGHT_PROP_GRASS_ADD_HURT": [
+        "dmg_bonus:dendro",
+        "flat"
+      ]
+    },
+    "snapshot_scope": {
+      "version_line": "release",
+      "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+      "schema_version": 1,
+      "indexer_version": "7",
+      "snapshot_id": "1111111111111111111111111111111111111111111111111111111111111111",
+      "manifest_fingerprint": "3333333333333333333333333333333333333333333333333333333333333333",
+      "normalization": {
+        "mapping_fingerprint": "2222222222222222222222222222222222222222222222222222222222222222",
+        "normalization_version": 2,
+        "profile_id": "upstream-34208429-reviewed-schema-v1",
+        "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53"
+      }
+    }
+  },
+  "fingerprint": "543463236d503abf93090671f3a2b3d703a3faadc7601b02f68e1e93ab9cef6a",
+  "purpose": "synthetic test only; not real DB admission"
+}

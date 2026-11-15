@@ -1,0 +1,515 @@
+{
+  "facts_version": 1,
+  "status": "ready",
+  "snapshot": {
+    "version_line": "release",
+    "state": "ready",
+    "index_state": "ready",
+    "schema_version": 1,
+    "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+    "snapshot_id": "1b620db802a937506dc870cc25c08b5c7c336a01b193b945e9471d75c3bee172",
+    "execution_support": "not_evaluated",
+    "built_at": "2026-10-01T19:46:55.591099+00:00",
+    "profile_id": "upstream-combat-catalog-v1",
+    "profile_version": 1,
+    "indexer_version": "4",
+    "manifest_fingerprint": "b14c57925636407203b679f5517dd51ec9a5249e42a792157cb72269f55b32e6",
+    "counts": {
+      "runtime_definition": 152351,
+      "runtime_parameter_binding": 6082,
+      "runtime_reference": 165747,
+      "runtime_source": 3356
+    },
+    "reference_states": {
+      "ambiguous": 157,
+      "external_asset": 10445,
+      "missing": 89,
+      "resolved": 145772,
+      "unsupported_reference_form": 9284
+    },
+    "normalization": {
+      "mapping_fingerprint": "506862bc6c0bf033d8272b75f193cd2a620fc513320b3223d07afcc6f04356e2",
+      "normalization_version": 2,
+      "profile_id": "upstream-34208429-reviewed-schema-v1",
+      "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53"
+    }
+  },
+  "selection": {
+    "character_id": 10000047,
+    "skill_depot_id": 4701,
+    "skill_id": 10472,
+    "slot": "skill",
+    "matching_slots": [
+      "skill"
+    ],
+    "constellation": 0,
+    "active_constellation_ids": []
+  },
+  "level": {
+    "base_level": null,
+    "effective_level": 10,
+    "source": "explicit_effective_level",
+    "constellation_applied": false,
+    "constellation_level_support": "not_applicable"
+  },
+  "records": {
+    "avatar": {
+      "definition": {
+        "definition_id": "d88acccec8f050be7e3e2dd24c68230c7cd2206f435abc7014f6b4642d109238",
+        "definition_kind": "excel_record",
+        "owner_definition_id": null,
+        "source_path": "ExcelBinOutput/AvatarExcelConfigData.json",
+        "json_pointer": "/34",
+        "variant_key": null,
+        "namespace_key": "excel",
+        "node_sha256": "4aa7772affeacd541e7fb529415b030bd6c7d6efe87cfdf83ac77a0557f301ed",
+        "exact_key": {
+          "id": 10000047
+        }
+      },
+      "source_path": "ExcelBinOutput/AvatarExcelConfigData.json",
+      "json_pointer": "/34",
+      "source_sha256": "d3b4ce3253e6c4a11ffca5bfad200f53c00b86dabeb9a14eb505556954e87aee",
+      "fields": {
+        "id": 10000047,
+        "skillDepotId": 4701,
+        "combatConfigHash": "9919316577460724427",
+        "animatorConfigPathHash": "14167135086670867959"
+      },
+      "field_pointers": {
+        "id": "/34/id",
+        "skillDepotId": "/34/skillDepotId",
+        "combatConfigHash": "/34/combatConfigHash",
+        "animatorConfigPathHash": "/34/animatorConfigPathHash"
+      }
+    },
+    "depot": {
+      "definition": {
+        "definition_id": "7b1b320479991b8942623c819a416f20b02e7859e940df795b4ef3f809ebc22e",
+        "definition_kind": "excel_record",
+        "owner_definition_id": null,
+        "source_path": "ExcelBinOutput/AvatarSkillDepotExcelConfigData.json",
+        "json_pointer": "/97",
+        "variant_key": null,
+        "namespace_key": "excel",
+        "node_sha256": "504dda55d61a261ed581f9f10fcd39858ba3ea8fbc2d0d4175d9429923ddc7e5",
+        "exact_key": {
+          "id": 4701
+        }
+      },
+      "source_path": "ExcelBinOutput/AvatarSkillDepotExcelConfigData.json",
+      "json_pointer": "/97",
+      "source_sha256": "76058ddd01946435248d158ef4cc659ba995643c5635e9948161ce47a7ed814b",
+      "fields": {
+        "id": 4701,
+        "skills": [
+          10471,
+          10472,
+          0,
+          0
+        ],
+        "subSkills": [
+          10101,
+          10102,
+          10001,
+          10473,
+          10474,
+          5047010
+        ],
+        "energySkill": 10475,
+        "talents": [
+          471,
+          472,
+          473,
+          474,
+          475,
+          476
+        ],
+        "inherentProudSkillOpens": [
+          {
+            "proudSkillGroupId": 4721,
+            "needAvatarPromoteLevel": 1
+          },
+          {
+            "proudSkillGroupId": 4722,
+            "needAvatarPromoteLevel": 4
+          },
+          {
+            "proudSkillGroupId": 4723
+          },
+          {},
+          {}
+        ],
+        "extraAbilities": [
+          "",
+          "",
+          ""
+        ]
+      },
+      "field_pointers": {
+        "id": "/97/id",
+        "skills": "/97/skills",
+        "subSkills": "/97/subSkills",
+        "energySkill": "/97/energySkill",
+        "talents": "/97/talents",
+        "inherentProudSkillOpens": "/97/inherentProudSkillOpens",
+        "extraAbilities": "/97/extraAbilities"
+      }
+    },
+    "skill": {
+      "definition": {
+        "definition_id": "d83b48ba3902d3600a32a124e9fab616d26d4c3792bbdc7000696a47adefb7ea",
+        "definition_kind": "excel_record",
+        "owner_definition_id": null,
+        "source_path": "ExcelBinOutput/AvatarSkillExcelConfigData.json",
+        "json_pointer": "/215",
+        "variant_key": null,
+        "namespace_key": "excel",
+        "node_sha256": "4d657d54887550a392904af883a4b4dac5a714eb2c1f4331b744304db80741b4",
+        "exact_key": {
+          "id": 10472
+        }
+      },
+      "source_path": "ExcelBinOutput/AvatarSkillExcelConfigData.json",
+      "json_pointer": "/215",
+      "source_sha256": "f86481ed705468ba3e7a4b05e05eade9c89cf3add291308c3469859728ae96db",
+      "fields": {
+        "id": 10472,
+        "proudSkillGroupId": 4732,
+        "triggerID": 2,
+        "cdTime": 6,
+        "maxChargeNum": 1,
+        "nameTextMapHash": 3645236685,
+        "descTextMapHash": 3589501064
+      },
+      "field_pointers": {
+        "id": "/215/id",
+        "proudSkillGroupId": "/215/proudSkillGroupId",
+        "triggerID": "/215/triggerID",
+        "cdTime": "/215/cdTime",
+        "maxChargeNum": "/215/maxChargeNum",
+        "nameTextMapHash": "/215/nameTextMapHash",
+        "descTextMapHash": "/215/descTextMapHash"
+      }
+    },
+    "proud_skill": {
+      "definition": {
+        "definition_id": "b98285e306c7429c54e9ecb5432e4a9812d2e8a8424a24b8eabde1594da8fc8a",
+        "definition_kind": "excel_record",
+        "owner_definition_id": null,
+        "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+        "json_pointer": "/3560",
+        "variant_key": null,
+        "namespace_key": "excel",
+        "node_sha256": "611e43dae224de61c725b016700916a14abfd8ce9e613268a14541338cd34aa8",
+        "exact_key": {
+          "proudSkillId": 473210
+        }
+      },
+      "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+      "json_pointer": "/3560",
+      "source_sha256": "4897a68ebc6772e7b553a58a548a3756a1cf9b6e9ca22250bb0da987a3fa4d70",
+      "fields": {
+        "proudSkillId": 473210,
+        "proudSkillGroupId": 4732,
+        "level": 10,
+        "paramList": [
+          3.4560000896453857,
+          6,
+          4.694399833679199,
+          9,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "paramDescList": [
+          738282510,
+          1865076974,
+          482589087,
+          3106904503,
+          2602190854,
+          4287001698,
+          3899800583,
+          351964629,
+          1794832860,
+          3116719279,
+          1389239324,
+          3676582115,
+          3804464487,
+          3290771723,
+          328976526,
+          3823544605,
+          2861976617,
+          964340747,
+          351476087,
+          4232819173
+        ],
+        "openConfig": "Kazuha_SkillUpgrade_2"
+      },
+      "field_pointers": {
+        "proudSkillId": "/3560/proudSkillId",
+        "proudSkillGroupId": "/3560/proudSkillGroupId",
+        "level": "/3560/level",
+        "paramList": "/3560/paramList",
+        "paramDescList": "/3560/paramDescList",
+        "openConfig": "/3560/openConfig"
+      }
+    }
+  },
+  "talents": [
+    {
+      "role": "skill_level",
+      "definition": {
+        "definition_id": "7c44989b9aa00cc130c4895c7032cf9744a44ba639a27d3fa7f22bfa0fc4e6d8",
+        "definition_kind": "talent_config",
+        "owner_definition_id": null,
+        "source_path": "BinOutput/Talent/AvatarTalents/ConfigTalent_Kazuha.json",
+        "json_pointer": "/Kazuha_SkillUpgrade_2",
+        "variant_key": null,
+        "namespace_key": "talent",
+        "node_sha256": "29f2892d1718e53c858bd4385d12fc25215e1c2d198fb3b5cdcfcadb460c963b",
+        "exact_key": "Kazuha_SkillUpgrade_2"
+      },
+      "source_path": "BinOutput/Talent/AvatarTalents/ConfigTalent_Kazuha.json",
+      "json_pointer": "/Kazuha_SkillUpgrade_2",
+      "source_sha256": "0c8a948580d2a8806fef335fd9daaeaf674cffe7ebecca52b733b12c326faeb4",
+      "parameter_record_origin": {
+        "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+        "json_pointer": "/3560",
+        "source_sha256": "4897a68ebc6772e7b553a58a548a3756a1cf9b6e9ca22250bb0da987a3fa4d70"
+      },
+      "param_list": [
+        3.4560000896453857,
+        6,
+        4.694399833679199,
+        9,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "operations_raw": [
+        {
+          "$type": "BIAHEMMGABC",
+          "GBPFBNHLOFD": true,
+          "IIBMNPFLNMJ": "Avatar_Kazuha_ElementalArt_EmptyJump",
+          "PCABAADALND": "%1",
+          "PEOJKHKHAKL": "ElementalArt_EmptyJump_Damage"
+        },
+        {
+          "$type": "BIAHEMMGABC",
+          "GBPFBNHLOFD": true,
+          "IIBMNPFLNMJ": "Avatar_Kazuha_ElementalArt_FlyAway",
+          "PCABAADALND": "%3",
+          "PEOJKHKHAKL": "ElementalArt_FlyAway_Damage"
+        }
+      ],
+      "operations_normalized": [
+        {
+          "$type": "ModifyAbility",
+          "CLGIKOPIKBC": true,
+          "abilityName": "Avatar_Kazuha_ElementalArt_EmptyJump",
+          "paramDelta": "%1",
+          "paramSpecial": "ElementalArt_EmptyJump_Damage"
+        },
+        {
+          "$type": "ModifyAbility",
+          "CLGIKOPIKBC": true,
+          "abilityName": "Avatar_Kazuha_ElementalArt_FlyAway",
+          "paramDelta": "%3",
+          "paramSpecial": "ElementalArt_FlyAway_Damage"
+        }
+      ],
+      "references": [
+        {
+          "reference_id": "fe154a4accd8cc24536a401aabdf8c76a505d967322e0fb9955875e4d2664c65",
+          "from_definition_id": "7c44989b9aa00cc130c4895c7032cf9744a44ba639a27d3fa7f22bfa0fc4e6d8",
+          "source_path": "BinOutput/Talent/AvatarTalents/ConfigTalent_Kazuha.json",
+          "json_pointer": "/Kazuha_SkillUpgrade_2/0/IIBMNPFLNMJ",
+          "field_name": "abilityName",
+          "relation_kind": "ability_operation",
+          "target_kind": "ability",
+          "source_order": 0,
+          "presence_status": "present",
+          "resolution_status": "resolved",
+          "resolved_definition_id": "da26344037404bbd48362cf83e79e70143192bb47826fbad0438835d01eccb4c",
+          "extraction_rule_id": "4",
+          "version_line": "release",
+          "snapshot_id": "1b620db802a937506dc870cc25c08b5c7c336a01b193b945e9471d75c3bee172",
+          "target_key": "Avatar_Kazuha_ElementalArt_EmptyJump",
+          "scope": {
+            "owner_definition_id": null
+          },
+          "candidate_ids": [
+            "da26344037404bbd48362cf83e79e70143192bb47826fbad0438835d01eccb4c"
+          ]
+        },
+        {
+          "reference_id": "04fe8774db9bd7192b875a202b575ed97837fd9dd81b6400e312b7a50fc188a6",
+          "from_definition_id": "7c44989b9aa00cc130c4895c7032cf9744a44ba639a27d3fa7f22bfa0fc4e6d8",
+          "source_path": "BinOutput/Talent/AvatarTalents/ConfigTalent_Kazuha.json",
+          "json_pointer": "/Kazuha_SkillUpgrade_2/1/IIBMNPFLNMJ",
+          "field_name": "abilityName",
+          "relation_kind": "ability_operation",
+          "target_kind": "ability",
+          "source_order": 1,
+          "presence_status": "present",
+          "resolution_status": "resolved",
+          "resolved_definition_id": "6b8a0a100c4a90012070ca7df1c9f584eb8197de6d6d4ab79e52007888059cc7",
+          "extraction_rule_id": "4",
+          "version_line": "release",
+          "snapshot_id": "1b620db802a937506dc870cc25c08b5c7c336a01b193b945e9471d75c3bee172",
+          "target_key": "Avatar_Kazuha_ElementalArt_FlyAway",
+          "scope": {
+            "owner_definition_id": null
+          },
+          "candidate_ids": [
+            "6b8a0a100c4a90012070ca7df1c9f584eb8197de6d6d4ab79e52007888059cc7"
+          ]
+        }
+      ],
+      "execution_support": "not_evaluated"
+    }
+  ],
+  "parameter_bindings": [
+    {
+      "role": "skill_level",
+      "operation_pointer": "/Kazuha_SkillUpgrade_2/0",
+      "source_path": "BinOutput/Talent/AvatarTalents/ConfigTalent_Kazuha.json",
+      "parameter_name": "ElementalArt_EmptyJump_Damage",
+      "raw_expression": "%1",
+      "operation_semantics": "not_evaluated",
+      "target": {
+        "ability_name": "Avatar_Kazuha_ElementalArt_EmptyJump",
+        "relation": "parameter_modification_target",
+        "candidate_ids": [
+          "da26344037404bbd48362cf83e79e70143192bb47826fbad0438835d01eccb4c"
+        ],
+        "resolution_status": "resolved",
+        "origin": {
+          "source_path": "BinOutput/Talent/AvatarTalents/ConfigTalent_Kazuha.json",
+          "json_pointer": "/Kazuha_SkillUpgrade_2",
+          "source_sha256": "0c8a948580d2a8806fef335fd9daaeaf674cffe7ebecca52b733b12c326faeb4"
+        }
+      },
+      "parameter_input_status": "resolved",
+      "parameter_input": 3.4560000896453857,
+      "parameter_input_origin": {
+        "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+        "json_pointer": "/3560/paramList/0",
+        "source_sha256": "4897a68ebc6772e7b553a58a548a3756a1cf9b6e9ca22250bb0da987a3fa4d70"
+      }
+    },
+    {
+      "role": "skill_level",
+      "operation_pointer": "/Kazuha_SkillUpgrade_2/1",
+      "source_path": "BinOutput/Talent/AvatarTalents/ConfigTalent_Kazuha.json",
+      "parameter_name": "ElementalArt_FlyAway_Damage",
+      "raw_expression": "%3",
+      "operation_semantics": "not_evaluated",
+      "target": {
+        "ability_name": "Avatar_Kazuha_ElementalArt_FlyAway",
+        "relation": "parameter_modification_target",
+        "candidate_ids": [
+          "6b8a0a100c4a90012070ca7df1c9f584eb8197de6d6d4ab79e52007888059cc7"
+        ],
+        "resolution_status": "resolved",
+        "origin": {
+          "source_path": "BinOutput/Talent/AvatarTalents/ConfigTalent_Kazuha.json",
+          "json_pointer": "/Kazuha_SkillUpgrade_2",
+          "source_sha256": "0c8a948580d2a8806fef335fd9daaeaf674cffe7ebecca52b733b12c326faeb4"
+        }
+      },
+      "parameter_input_status": "resolved",
+      "parameter_input": 4.694399833679199,
+      "parameter_input_origin": {
+        "source_path": "ExcelBinOutput/ProudSkillExcelConfigData.json",
+        "json_pointer": "/3560/paramList/2",
+        "source_sha256": "4897a68ebc6772e7b553a58a548a3756a1cf9b6e9ca22250bb0da987a3fa4d70"
+      }
+    }
+  ],
+  "ability_candidates": [
+    {
+      "definition_id": "da26344037404bbd48362cf83e79e70143192bb47826fbad0438835d01eccb4c",
+      "definition_kind": "ability",
+      "owner_definition_id": null,
+      "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Kazuha.json",
+      "json_pointer": "/7/Default",
+      "variant_key": "Default",
+      "namespace_key": "Temp",
+      "node_sha256": "e2c54b9458cccf73f2b149d46375dfe7cecb4502e047ce60d07a706ee0f3fd09",
+      "exact_key": "Avatar_Kazuha_ElementalArt_EmptyJump"
+    },
+    {
+      "definition_id": "6b8a0a100c4a90012070ca7df1c9f584eb8197de6d6d4ab79e52007888059cc7",
+      "definition_kind": "ability",
+      "owner_definition_id": null,
+      "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Kazuha.json",
+      "json_pointer": "/9/Default",
+      "variant_key": "Default",
+      "namespace_key": "Temp",
+      "node_sha256": "972d08c84dfbf0cb26c6d9de2f9fcb88d8413c6e73d6d856fc8b5809f3592616",
+      "exact_key": "Avatar_Kazuha_ElementalArt_FlyAway"
+    }
+  ],
+  "direct_skill_ability": null,
+  "issues": [],
+  "action_dispatch": {
+    "status": "pending",
+    "reasons": [
+      "avatar_resource_identity_unresolved",
+      "action_trigger_semantics_not_compiled"
+    ]
+  },
+  "execution_support": "not_evaluated",
+  "limits": {
+    "max_bytes": 262144,
+    "max_operations": 128,
+    "max_abilities": 64,
+    "max_issues": 256
+  },
+  "notes": [
+    "ready仅表示所列资料关系已装配，不证明动作派发、时序、技能完整效果或可执行性",
+    "Talent原始操作可查询不代表支持执行，所有操作语义均未评估",
+    "ModifyAbility目标是参数修改对象，不能作为技能释放入口",
+    "parameter_input是参数表输入值，不是执行修改后最终ability参数",
+    "未解释的字段原样保留；数值缺失不默认为0；elementDurability不转换为GU"
+  ],
+  "content_fingerprint": "1f95815a005840185b27727d245beac35fc85028ff032e9d3913cdbfc271f523"
+}

@@ -1,0 +1,233 @@
+{
+  "kind": "genshin-rotation-check",
+  "version": 1,
+  "template": {
+    "version": 2,
+    "form": "resolved",
+    "meta": {
+      "name": "动作与能量循环演示（人工情景）",
+      "assumptions": [
+        "纯数值教学情景，不是实际角色排轴：满能开场，固定每轮产 4 个冰元素微粒并在爆发后到账。",
+        "动作占用和冷却为显式示例参数；不认证命中、体力、元素附着或 Buff 完整性。"
+      ]
+    },
+    "enemy": {
+      "level": 90,
+      "resistance": {
+        "default": 0.1
+      }
+    },
+    "characters": [
+      {
+        "id": "a",
+        "level": 90,
+        "stats": {
+          "atk": 1000,
+          "base_atk": 500,
+          "crit_rate": 0,
+          "crit_dmg": 0.5
+        }
+      }
+    ],
+    "switches": [],
+    "buffs": [],
+    "hits": [
+      {
+        "id": "e.hit",
+        "character": "a",
+        "skill": "示例战技命中",
+        "t": 0.2,
+        "damage_type_ids": [
+          "damage.elemental_skill"
+        ],
+        "multiplier": 1,
+        "damage_system": "classic",
+        "element": "cryo"
+      },
+      {
+        "id": "q.hit",
+        "character": "a",
+        "skill": "示例爆发命中",
+        "t": 1.1,
+        "damage_type_ids": [
+          "damage.elemental_burst"
+        ],
+        "multiplier": 2,
+        "damage_system": "classic",
+        "element": "cryo"
+      }
+    ],
+    "loop_duration": 10,
+    "id_registry_version": 1,
+    "type_definitions": {
+      "damage_types": []
+    }
+  },
+  "rotation_model": {
+    "schema_version": 1,
+    "period": 10,
+    "max_cycles": 3,
+    "initial_frontline": "a",
+    "characters": [
+      {
+        "id": "a",
+        "element": "cryo",
+        "energy_recharge": 1,
+        "energy_capacity": 10,
+        "initial_energy": 10,
+        "status": "assumed",
+        "source": "独立数值情景，用于验证事件模型"
+      }
+    ],
+    "abilities": [
+      {
+        "id": "e",
+        "character": "a",
+        "action_type_id": "action.elemental_skill",
+        "cooldown": {
+          "group": "e",
+          "duration": 10,
+          "start": "action_start",
+          "charges": 1,
+          "recovery": "sequential"
+        },
+        "energy": null,
+        "rules": [
+          {
+            "id": "particles",
+            "kind": "energy_spawn"
+          }
+        ],
+        "status": "assumed",
+        "source": "独立数值情景，用于验证事件模型"
+      },
+      {
+        "id": "q",
+        "character": "a",
+        "action_type_id": "action.elemental_burst",
+        "cooldown": null,
+        "energy": {
+          "required": 10,
+          "amount": 10
+        },
+        "rules": [],
+        "status": "assumed",
+        "source": "独立数值情景，用于验证事件模型"
+      }
+    ],
+    "actions": [
+      {
+        "id": "e1",
+        "ability_id": "e",
+        "start": 0,
+        "occupation_end": 0.5,
+        "order": 0,
+        "repeat": {
+          "mode": "each_cycle"
+        },
+        "status": "assumed",
+        "source": "独立数值情景，用于验证事件模型",
+        "rule_outcomes": [
+          {
+            "rule_id": "particles",
+            "status": "triggered",
+            "event_ids": [
+              "spawn"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "q1",
+        "ability_id": "q",
+        "start": 1,
+        "occupation_end": 1.5,
+        "order": 0,
+        "repeat": {
+          "mode": "each_cycle"
+        },
+        "status": "assumed",
+        "source": "独立数值情景，用于验证事件模型"
+      }
+    ],
+    "events": [
+      {
+        "id": "spawn",
+        "type": "energy_spawn",
+        "t": 0.3,
+        "order": 0,
+        "repeat": {
+          "mode": "each_cycle"
+        },
+        "status": "assumed",
+        "source": "独立数值情景，用于验证事件模型",
+        "action_id": "e1",
+        "particle_type": "particle",
+        "element": "cryo",
+        "count": 4,
+        "source_kind": "skill"
+      },
+      {
+        "id": "spend",
+        "type": "energy_spend",
+        "t": 1,
+        "order": 1,
+        "repeat": {
+          "mode": "each_cycle"
+        },
+        "status": "assumed",
+        "source": "独立数值情景，用于验证事件模型",
+        "action_id": "q1",
+        "character": "a",
+        "required": 10,
+        "amount": 10
+      },
+      {
+        "id": "credit",
+        "type": "energy_credit",
+        "credit_at": 1.2,
+        "order": 0,
+        "repeat": {
+          "mode": "each_cycle"
+        },
+        "status": "assumed",
+        "source": "独立数值情景，用于验证事件模型",
+        "spawn_id": "spawn",
+        "count": 4
+      }
+    ],
+    "initial_cooldowns": [
+      {
+        "character": "a",
+        "group": "e",
+        "ready_in": []
+      }
+    ],
+    "assumptions": [
+      "纯数值教学情景，不是实际角色排轴：满能开场，固定每轮产 4 个冰元素微粒并在爆发后到账。",
+      "动作占用和冷却为显式示例参数；不认证命中、体力、元素附着或 Buff 完整性。"
+    ],
+    "action_hit_links": [
+      {
+        "action_id": "e1",
+        "hit_id": "e.hit"
+      },
+      {
+        "action_id": "q1",
+        "hit_id": "q.hit"
+      }
+    ],
+    "gap_explanations": [
+      {
+        "start": 0.5,
+        "end": 1,
+        "reason": "等待示例爆发窗口"
+      },
+      {
+        "start": 1.5,
+        "end": 10,
+        "reason": "演示等待冷却；不是实战最优轴"
+      }
+    ]
+  }
+}

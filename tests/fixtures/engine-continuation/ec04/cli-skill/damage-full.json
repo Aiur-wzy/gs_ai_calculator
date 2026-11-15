@@ -1,0 +1,143 @@
+{
+  "profile_version": 1,
+  "status": "ready",
+  "group": "ElementReaction_Damage_Attenuation_1",
+  "snapshot": {
+    "version_line": "release",
+    "state": "ready",
+    "index_state": "ready",
+    "schema_version": 1,
+    "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53",
+    "snapshot_id": "1b620db802a937506dc870cc25c08b5c7c336a01b193b945e9471d75c3bee172",
+    "execution_support": "not_evaluated",
+    "built_at": "2026-10-01T19:46:55.591099+00:00",
+    "profile_id": "upstream-combat-catalog-v1",
+    "profile_version": 1,
+    "indexer_version": "4",
+    "manifest_fingerprint": "b14c57925636407203b679f5517dd51ec9a5249e42a792157cb72269f55b32e6",
+    "counts": {
+      "runtime_definition": 152351,
+      "runtime_parameter_binding": 6082,
+      "runtime_reference": 165747,
+      "runtime_source": 3356
+    },
+    "reference_states": {
+      "ambiguous": 157,
+      "external_asset": 10445,
+      "missing": 89,
+      "resolved": 145772,
+      "unsupported_reference_form": 9284
+    },
+    "normalization": {
+      "mapping_fingerprint": "506862bc6c0bf033d8272b75f193cd2a620fc513320b3223d07afcc6f04356e2",
+      "normalization_version": 2,
+      "profile_id": "upstream-34208429-reviewed-schema-v1",
+      "upstream_commit": "342084292ba4c3c6ec2bc34c045de4de72ae8d53"
+    }
+  },
+  "source": {
+    "source_path": "ExcelBinOutput/AttackAttenuationExcelConfigData.json",
+    "json_pointer": "/87",
+    "source_sha256": "07cd969d728431de86df463344ecda18c3883a681dc5dc830bfa6f5917a9a512",
+    "definition_id": "d3c670c9754fa7cc1fda1cf071673b546d3103eb8fd8e2dda9f530d8eeb17ffb",
+    "node_sha256": "38c52ee4952353db2787c22148abeff5d4c9dc491bf587b1d15cc6c25f5edb96",
+    "definition": {
+      "definition_id": "d3c670c9754fa7cc1fda1cf071673b546d3103eb8fd8e2dda9f530d8eeb17ffb",
+      "definition_kind": "excel_record",
+      "owner_definition_id": null,
+      "source_path": "ExcelBinOutput/AttackAttenuationExcelConfigData.json",
+      "json_pointer": "/87",
+      "variant_key": null,
+      "namespace_key": "public_config",
+      "node_sha256": "38c52ee4952353db2787c22148abeff5d4c9dc491bf587b1d15cc6c25f5edb96",
+      "exact_key": {
+        "group": "ElementReaction_Damage_Attenuation_1"
+      }
+    },
+    "field_pointers": {
+      "group": "/87/group",
+      "resetCycle": "/87/resetCycle",
+      "damageSequence": "/87/damageSequence"
+    }
+  },
+  "raw_record": {
+    "group": "ElementReaction_Damage_Attenuation_1",
+    "durabilitySequence": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "enbreakSequence": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "resetCycle": 0.5,
+    "damageSequence": [
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  },
+  "projection": {
+    "semantics": "finite-binary-damage-sequence-v1",
+    "reset_cycle_seconds_raw": 0.5,
+    "reset_cycle_ticks": 500000,
+    "reset_cycle_seconds_rounded": 0.5,
+    "rounding_error_seconds": 0.0,
+    "rounding_method": "decimal_roundtrip_half_even_to_microseconds",
+    "max_absolute_rounding_error_seconds": 5e-07,
+    "damage_sequence": [
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "sequence_exhausted_coefficient": 0
+  },
+  "execution": {
+    "status": "ready",
+    "semantics": "finite-binary-damage-sequence-v1",
+    "issues": [],
+    "attack_binding": "not_evaluated"
+  },
+  "limits": {
+    "max_source_rows": 4096,
+    "max_bytes": 65536,
+    "max_executable_sequence_length": 64,
+    "max_reset_ticks": 1000000000000000
+  },
+  "notes": [
+    "damageSequence是独立伤害系数，不能作为附着序列。",
+    "ready仅表示二元序列投影，不证明攻击归属或完整能力执行。"
+  ],
+  "channel": "damage",
+  "content_fingerprint": "bbf4d876128121b7c2427eae919c08cb112da94ca10a0f96c7d3eb59f94aa93e"
+}

@@ -1,0 +1,3689 @@
+{
+  "cases": {
+    "timer-counter": {
+      "input": [
+        {
+          "version": 2,
+          "form": "resolved",
+          "id_registry_version": 1,
+          "type_definitions": {
+            "damage_types": []
+          },
+          "enemy": {
+            "level": 90,
+            "resistance": {
+              "default": 0.1
+            }
+          },
+          "characters": [
+            {
+              "id": "a",
+              "level": 90,
+              "stats": {
+                "atk": 100,
+                "base_atk": 50,
+                "em": 0,
+                "crit_rate": 0,
+                "crit_dmg": 0.5
+              }
+            }
+          ],
+          "hits": [
+            {
+              "id": "h0",
+              "t": 0.15,
+              "character": "a",
+              "skill": "工程技能",
+              "hit_name": "h0",
+              "damage_type_ids": [
+                "damage.elemental_skill"
+              ],
+              "damage_system": "classic",
+              "element": "anemo",
+              "multiplier": 1
+            },
+            {
+              "id": "h1",
+              "t": 0.35,
+              "character": "a",
+              "skill": "工程技能",
+              "hit_name": "h1",
+              "damage_type_ids": [
+                "damage.elemental_skill"
+              ],
+              "damage_system": "classic",
+              "element": "anemo",
+              "multiplier": 1
+            }
+          ],
+          "buffs": [],
+          "switches": [],
+          "loop_duration": 1
+        },
+        {
+          "schema_version": 1,
+          "period": 1,
+          "max_cycles": 3,
+          "initial_frontline": "a",
+          "characters": [
+            {
+              "id": "a",
+              "element": "cryo",
+              "energy_recharge": 1,
+              "energy_capacity": 10,
+              "initial_energy": 10,
+              "status": "assumed",
+              "source": "虚构确定性工程情景"
+            }
+          ],
+          "abilities": [
+            {
+              "id": "e",
+              "character": "a",
+              "action_type_id": "action.elemental_skill",
+              "cooldown": null,
+              "energy": null,
+              "status": "assumed",
+              "source": "虚构确定性工程情景"
+            }
+          ],
+          "actions": [
+            {
+              "id": "cast",
+              "ability_id": "e",
+              "start": 0,
+              "occupation_end": 0.1,
+              "order": 0,
+              "repeat": {
+                "mode": "once"
+              },
+              "status": "assumed",
+              "source": "虚构确定性工程情景"
+            }
+          ],
+          "events": [],
+          "initial_cooldowns": []
+        },
+        {
+          "schema_version": 1,
+          "rules": [],
+          "hit_events": [
+            {
+              "hit_id": "h0",
+              "action_id": "cast",
+              "order": 10,
+              "application": {
+                "profile_id": "anemo",
+                "target_id": "enemy",
+                "landed": true
+              }
+            },
+            {
+              "hit_id": "h1",
+              "action_id": "cast",
+              "order": 11,
+              "application": {
+                "profile_id": "anemo",
+                "target_id": "enemy",
+                "landed": true
+              }
+            }
+          ],
+          "hit_patterns": [],
+          "condition_events": [],
+          "initial_state": {
+            "rules": []
+          },
+          "shared_pools": {
+            "schema_version": 2,
+            "pools": [
+              {
+                "id": "pool",
+                "name_zh": "共享池",
+                "owner": "a",
+                "source_id": "binding:pool",
+                "scope": "team",
+                "capacity": 1000,
+                "initial": {
+                  "team": 19
+                },
+                "status": "assumed",
+                "source": "合成工程资料",
+                "unit_scale": 10
+              }
+            ],
+            "operations": [
+              {
+                "id": "refill",
+                "pool_id": "pool",
+                "source_id": "source:field",
+                "trigger": {
+                  "event": "condition",
+                  "phase": "post",
+                  "event_ids": [
+                    "@state_route:e5ef7e99b0f4fb2b681fd47df4a7a5fabbdce13c6d138bb9b9dfa60cde13255f"
+                  ]
+                },
+                "order": 0,
+                "operation": "spend",
+                "amount": 8,
+                "targets": {
+                  "mode": "all_pool_keys"
+                },
+                "cooldown": {
+                  "seconds": 0,
+                  "anchor": "success"
+                },
+                "status": "assumed",
+                "source": "合成工程资料",
+                "spend_policy": "up_to_available"
+              },
+              {
+                "id": "reaction-income",
+                "pool_id": "pool",
+                "source_id": "binding:reaction-income",
+                "trigger": {
+                  "event": "elemental_reaction",
+                  "phase": "post",
+                  "reaction_types": [
+                    "swirl"
+                  ]
+                },
+                "order": 10,
+                "operation": "grant",
+                "amount": 3,
+                "targets": {
+                  "mode": "all_pool_keys"
+                },
+                "cooldown": {
+                  "seconds": 0,
+                  "anchor": "success"
+                },
+                "status": "assumed",
+                "source": "合成工程资料"
+              }
+            ],
+            "consumers": []
+          },
+          "state_runtime": {
+            "schema_version": 1,
+            "lifecycles": [
+              {
+                "id": "field",
+                "name_zh": "工程领域",
+                "owner": "a",
+                "source_id": "source:field",
+                "start": {
+                  "event": "action_start",
+                  "phase": "post",
+                  "action_ids": [
+                    "cast"
+                  ]
+                },
+                "start_order": 1,
+                "establishment_order": 10,
+                "end_order": 1,
+                "establishment_delay_us": 0,
+                "duration_us": 400000,
+                "restart": "replace",
+                "pending_cancel": "source_action_cancel_before_establishment",
+                "hooks": {
+                  "create": [],
+                  "established": [],
+                  "end": []
+                },
+                "status": "assumed",
+                "source": "Invented timer for engineering tests"
+              }
+            ],
+            "timers": [
+              {
+                "id": "refresh",
+                "source_id": "source:field",
+                "lifecycle_id": "field",
+                "anchor": "established",
+                "first_offset_us": 100000,
+                "interval_us": 100000,
+                "max_ticks": 3,
+                "order": 20,
+                "end_tick": "exclude",
+                "payload": {
+                  "kind": "resource_operation",
+                  "ref_id": "refill"
+                },
+                "status": "assumed",
+                "source": "Invented timer for engineering tests"
+              }
+            ]
+          },
+          "resource_counters": {
+            "schema_version": 1,
+            "counters": [
+              {
+                "id": "count",
+                "name_zh": "实际消费累计",
+                "owner": "a",
+                "source_id": "source:counter",
+                "pool_id": "pool",
+                "operation_ids": [
+                  "refill"
+                ],
+                "scope": "pool_total",
+                "lifecycle_id": "field",
+                "accumulate_window": "created_until_end",
+                "reset_on": "create",
+                "status": "assumed",
+                "source": "合成测试"
+              }
+            ]
+          },
+          "elemental_model": {
+            "schema_version": 1,
+            "ruleset": "gauge-swirl-dynamic-v3",
+            "target": {
+              "id": "enemy",
+              "kind": "ordinary",
+              "knowledge": "known",
+              "initial_aura": {
+                "element": "pyro",
+                "remaining_gu": 3.2,
+                "decay_gu_per_second": 0.001,
+                "source": "明确工程单底"
+              },
+              "status": "assumed",
+              "source": "虚构确定性工程情景"
+            },
+            "profiles": [
+              {
+                "id": "pyro",
+                "element": "pyro",
+                "application": "apply",
+                "gauge_units": 1,
+                "icd": {
+                  "kind": "none"
+                },
+                "status": "assumed",
+                "source": "虚构确定性工程情景"
+              },
+              {
+                "id": "hydro",
+                "element": "hydro",
+                "application": "apply",
+                "gauge_units": 1,
+                "icd": {
+                  "kind": "none"
+                },
+                "status": "assumed",
+                "source": "虚构确定性工程情景"
+              },
+              {
+                "id": "cryo",
+                "element": "cryo",
+                "application": "apply",
+                "gauge_units": 1,
+                "icd": {
+                  "kind": "none"
+                },
+                "status": "assumed",
+                "source": "虚构确定性工程情景"
+              },
+              {
+                "id": "anemo",
+                "element": "anemo",
+                "application": "apply",
+                "gauge_units": 1,
+                "icd": {
+                  "kind": "none"
+                },
+                "status": "assumed",
+                "source": "虚构确定性工程情景"
+              }
+            ],
+            "swirl_damage": {
+              "icd": {
+                "kind": "sequence",
+                "reset_seconds": 0.5,
+                "sequence": [
+                  1,
+                  1,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ]
+              },
+              "status": "assumed",
+              "source": "普通冰水原目标扩散，AttackAttenuation组1的damageSequence"
+            }
+          }
+        }
+      ],
+      "output": {
+        "status": "unproven",
+        "issues": [],
+        "result": {
+          "summary": {
+            "total_damage": 1652.598,
+            "dps": 1652.598,
+            "by_skill": {
+              "工程技能": 90.0,
+              "扩散": 1562.598
+            },
+            "by_character": {
+              "a": 1652.598
+            }
+          },
+          "hits": [
+            {
+              "t": 0.15,
+              "skill": "工程技能",
+              "hit_name": "h0",
+              "character": "a",
+              "count": 1,
+              "damage_system": "classic",
+              "expected": 45.0,
+              "crit": 67.5,
+              "buffs": [],
+              "zones": {
+                "base": 100.0,
+                "base_mult": 1.0,
+                "aggravate_flat": 0.0,
+                "dmg_bonus": 1.0,
+                "resistance": 0.9,
+                "defense": 0.5,
+                "amplify": 1.0,
+                "crit_expected": 1.0
+              },
+              "snapshot_at": null,
+              "id": "h0",
+              "damage_type_ids": [
+                "damage.elemental_skill"
+              ],
+              "matched_effect_refs": []
+            },
+            {
+              "t": 0.15,
+              "skill": "扩散",
+              "hit_name": "火扩散",
+              "character": "a",
+              "count": 1,
+              "damage_system": "transformative",
+              "expected": 781.299,
+              "crit": null,
+              "buffs": [],
+              "zones": {
+                "reaction_base": 868.1099999999999,
+                "em_zone": 1.0,
+                "reaction_flat": 0.0,
+                "resistance": 0.9
+              },
+              "snapshot_at": null,
+              "id": "h0:reaction_damage:0",
+              "damage_type_ids": [
+                "damage.reaction"
+              ],
+              "matched_effect_refs": []
+            },
+            {
+              "t": 0.35,
+              "skill": "工程技能",
+              "hit_name": "h1",
+              "character": "a",
+              "count": 1,
+              "damage_system": "classic",
+              "expected": 45.0,
+              "crit": 67.5,
+              "buffs": [],
+              "zones": {
+                "base": 100.0,
+                "base_mult": 1.0,
+                "aggravate_flat": 0.0,
+                "dmg_bonus": 1.0,
+                "resistance": 0.9,
+                "defense": 0.5,
+                "amplify": 1.0,
+                "crit_expected": 1.0
+              },
+              "snapshot_at": null,
+              "id": "h1",
+              "damage_type_ids": [
+                "damage.elemental_skill"
+              ],
+              "matched_effect_refs": []
+            },
+            {
+              "t": 0.35,
+              "skill": "扩散",
+              "hit_name": "火扩散",
+              "character": "a",
+              "count": 1,
+              "damage_system": "transformative",
+              "expected": 781.299,
+              "crit": null,
+              "buffs": [],
+              "zones": {
+                "reaction_base": 868.1099999999999,
+                "em_zone": 1.0,
+                "reaction_flat": 0.0,
+                "resistance": 0.9
+              },
+              "snapshot_at": null,
+              "id": "h1:reaction_damage:0",
+              "damage_type_ids": [
+                "damage.reaction"
+              ],
+              "matched_effect_refs": []
+            }
+          ],
+          "buffs_coverage": [],
+          "patches_applied": [],
+          "assumptions": [
+            "期望口径（暴击按期望值合并，暴击大数字另列）",
+            "帧率未纳入（rotation.md 附录精神，默认原生系统）",
+            "社区共识公式，粗粒度不追游戏内舍入"
+          ],
+          "template_version": 2,
+          "id_registry_version": 1,
+          "mechanics": {
+            "schema_version": 1,
+            "scope": "verified_first_cycle_prefix",
+            "complete_first_cycle": true,
+            "execution_status": "unproven"
+          },
+          "elemental": {
+            "ruleset": "gauge-swirl-dynamic-v3",
+            "mode": "simulated",
+            "input_window_state": {
+              "target_id": "enemy",
+              "t": 1.0,
+              "knowledge": "known",
+              "aura": {
+                "element": "pyro",
+                "remaining_gu": 2.1990000000000003,
+                "decay_gu_per_second": 0.001,
+                "source": "明确工程单底"
+              },
+              "icd": [],
+              "reaction_damage_icd": [
+                {
+                  "actor": "a",
+                  "target_id": "enemy",
+                  "reaction_type": "swirl",
+                  "reaction_element": "pyro",
+                  "attempts": 2,
+                  "timer_remaining": 0.0
+                }
+              ]
+            },
+            "final_checked_state": {
+              "target_id": "enemy",
+              "t": 3.0,
+              "knowledge": "known",
+              "aura": {
+                "element": "pyro",
+                "remaining_gu": 2.1970000000000005,
+                "decay_gu_per_second": 0.001,
+                "source": "明确工程单底"
+              },
+              "icd": [],
+              "reaction_damage_icd": [
+                {
+                  "actor": "a",
+                  "target_id": "enemy",
+                  "reaction_type": "swirl",
+                  "reaction_element": "pyro",
+                  "attempts": 2,
+                  "timer_remaining": 0.0
+                }
+              ]
+            },
+            "trace": [
+              {
+                "type": "elemental_application",
+                "event_id": "0:h0",
+                "action_id": "cast",
+                "character": "a",
+                "target_id": "enemy",
+                "t": 0.15,
+                "profile_id": "anemo",
+                "source": "虚构确定性工程情景",
+                "ruleset": "gauge-swirl-dynamic-v3",
+                "element": "anemo",
+                "before": {
+                  "target_id": "enemy",
+                  "t": 0.15,
+                  "knowledge": "known",
+                  "aura": {
+                    "element": "pyro",
+                    "remaining_gu": 3.19985,
+                    "decay_gu_per_second": 0.001,
+                    "source": "明确工程单底"
+                  },
+                  "icd": [],
+                  "reaction_damage_icd": []
+                },
+                "reaction": {
+                  "id": "h0:reaction:0",
+                  "type": "swirl",
+                  "trigger_element": "anemo",
+                  "aura_element": "pyro",
+                  "consumed_gu": 0.5,
+                  "trigger_gu": 1,
+                  "owner": "a",
+                  "target_id": "enemy",
+                  "parent_event_id": "h0",
+                  "run_id": "0:h0:reaction:0",
+                  "parent_run_id": "0:h0",
+                  "action_id": "cast",
+                  "reaction_element": "pyro",
+                  "ruleset": "gauge-swirl-dynamic-v3",
+                  "source": "虚构确定性工程情景"
+                },
+                "stable_event_id": "h0",
+                "run_id": "0:h0",
+                "allowed": true,
+                "reason": "no_icd",
+                "application_gu": 1,
+                "outcome": "reaction",
+                "after": {
+                  "target_id": "enemy",
+                  "t": 0.15,
+                  "knowledge": "known",
+                  "aura": {
+                    "element": "pyro",
+                    "remaining_gu": 2.69985,
+                    "decay_gu_per_second": 0.001,
+                    "source": "明确工程单底"
+                  },
+                  "icd": [],
+                  "reaction_damage_icd": []
+                },
+                "status": "executed",
+                "cycle": 0
+              },
+              {
+                "type": "reaction_damage_attempt",
+                "event_id": "h0:reaction_damage:0",
+                "run_id": "0:h0:reaction_damage:0",
+                "t": 0.15,
+                "reaction_id": "h0:reaction:0",
+                "reaction_run_id": "0:h0:reaction:0",
+                "parent_event_id": "h0",
+                "parent_run_id": "0:h0",
+                "action_id": "cast",
+                "character": "a",
+                "target_id": "enemy",
+                "reaction_type": "swirl",
+                "reaction_element": "pyro",
+                "channel": "damage",
+                "damage_scope": "origin_target",
+                "source": "普通冰水原目标扩散，AttackAttenuation组1的damageSequence",
+                "ruleset": "gauge-swirl-dynamic-v3",
+                "allowed": true,
+                "reason": "first_damage_attempt",
+                "status": "executed",
+                "shared_key": [
+                  "a",
+                  "enemy",
+                  "swirl",
+                  "pyro"
+                ],
+                "sequence_index": 0,
+                "coefficient": 1,
+                "anchor_t": 0.15,
+                "reset_at": 0.65,
+                "cycle": 0
+              },
+              {
+                "type": "elemental_application",
+                "event_id": "0:h1",
+                "action_id": "cast",
+                "character": "a",
+                "target_id": "enemy",
+                "t": 0.35,
+                "profile_id": "anemo",
+                "source": "虚构确定性工程情景",
+                "ruleset": "gauge-swirl-dynamic-v3",
+                "element": "anemo",
+                "before": {
+                  "target_id": "enemy",
+                  "t": 0.35,
+                  "knowledge": "known",
+                  "aura": {
+                    "element": "pyro",
+                    "remaining_gu": 2.69965,
+                    "decay_gu_per_second": 0.001,
+                    "source": "明确工程单底"
+                  },
+                  "icd": [],
+                  "reaction_damage_icd": [
+                    {
+                      "actor": "a",
+                      "target_id": "enemy",
+                      "reaction_type": "swirl",
+                      "reaction_element": "pyro",
+                      "attempts": 1,
+                      "timer_remaining": 0.3
+                    }
+                  ]
+                },
+                "reaction": {
+                  "id": "h1:reaction:0",
+                  "type": "swirl",
+                  "trigger_element": "anemo",
+                  "aura_element": "pyro",
+                  "consumed_gu": 0.5,
+                  "trigger_gu": 1,
+                  "owner": "a",
+                  "target_id": "enemy",
+                  "parent_event_id": "h1",
+                  "run_id": "0:h1:reaction:0",
+                  "parent_run_id": "0:h1",
+                  "action_id": "cast",
+                  "reaction_element": "pyro",
+                  "ruleset": "gauge-swirl-dynamic-v3",
+                  "source": "虚构确定性工程情景"
+                },
+                "stable_event_id": "h1",
+                "run_id": "0:h1",
+                "allowed": true,
+                "reason": "no_icd",
+                "application_gu": 1,
+                "outcome": "reaction",
+                "after": {
+                  "target_id": "enemy",
+                  "t": 0.35,
+                  "knowledge": "known",
+                  "aura": {
+                    "element": "pyro",
+                    "remaining_gu": 2.19965,
+                    "decay_gu_per_second": 0.001,
+                    "source": "明确工程单底"
+                  },
+                  "icd": [],
+                  "reaction_damage_icd": [
+                    {
+                      "actor": "a",
+                      "target_id": "enemy",
+                      "reaction_type": "swirl",
+                      "reaction_element": "pyro",
+                      "attempts": 1,
+                      "timer_remaining": 0.3
+                    }
+                  ]
+                },
+                "status": "executed",
+                "cycle": 0
+              },
+              {
+                "type": "reaction_damage_attempt",
+                "event_id": "h1:reaction_damage:0",
+                "run_id": "0:h1:reaction_damage:0",
+                "t": 0.35,
+                "reaction_id": "h1:reaction:0",
+                "reaction_run_id": "0:h1:reaction:0",
+                "parent_event_id": "h1",
+                "parent_run_id": "0:h1",
+                "action_id": "cast",
+                "character": "a",
+                "target_id": "enemy",
+                "reaction_type": "swirl",
+                "reaction_element": "pyro",
+                "channel": "damage",
+                "damage_scope": "origin_target",
+                "source": "普通冰水原目标扩散，AttackAttenuation组1的damageSequence",
+                "ruleset": "gauge-swirl-dynamic-v3",
+                "allowed": true,
+                "reason": "damage_icd_sequence",
+                "status": "executed",
+                "shared_key": [
+                  "a",
+                  "enemy",
+                  "swirl",
+                  "pyro"
+                ],
+                "sequence_index": 1,
+                "coefficient": 1,
+                "anchor_t": 0.15,
+                "reset_at": 0.65,
+                "cycle": 0
+              }
+            ],
+            "event_counts": {
+              "total_scheduled_including_synchronous": 43,
+              "synchronous": {
+                "elemental_reaction": 2,
+                "reaction_damage": 2
+              },
+              "limit": 40000
+            }
+          },
+          "shared_pools": {
+            "schema_version": 2,
+            "scope": "declared_shared_atom_pools",
+            "state": {
+              "balances": {
+                "pool": {
+                  "team": 3
+                }
+              },
+              "cooldown_remaining_us": {
+                "refill": 0,
+                "reaction-income": 0
+              },
+              "quantity_unit": "atoms",
+              "unit_scales": {
+                "pool": 10
+              },
+              "resource_counters": {
+                "values": {
+                  "count": {
+                    "total": 22
+                  }
+                },
+                "lifecycles": {
+                  "field": {
+                    "phase": "ended",
+                    "established_observed": true,
+                    "establishment_remaining_us": null,
+                    "end_remaining_us": null
+                  }
+                }
+              }
+            },
+            "trace": [
+              {
+                "id": "pool:1345072fb48c926161e648b1575a4d0b3d3278c0ec828bc9c82d62edcd17515c",
+                "type": "operation",
+                "pool_id": "pool",
+                "source_id": "source:field",
+                "operation_id": "refill",
+                "event_id": "@state_route:e5ef7e99b0f4fb2b681fd47df4a7a5fabbdce13c6d138bb9b9dfa60cde13255f",
+                "run_id": "@state_dispatch:3ffb55bcd7a7957d419d4d853ecba2e9b60faa48f25ad83799465f35ef7b3a60",
+                "t_us": 100000,
+                "phase": "post",
+                "key": "team",
+                "before": 19,
+                "requested": 8,
+                "accepted": 8,
+                "after": 11,
+                "delta": -8,
+                "reason": "spent",
+                "qualification_scope": "engine_declared_event",
+                "unit_scale": 10,
+                "quantity_unit": "atoms",
+                "unfulfilled": 0,
+                "qualified": true,
+                "succeeded": true,
+                "operation": "spend",
+                "spend_policy": "up_to_available",
+                "cooldown_until_us": 100000,
+                "cycle": 0,
+                "t": 0.1
+              },
+              {
+                "id": "pool:b1e015a8f75653d247a6d993a4830d7b6882f56576f04db203145e7058a65651",
+                "type": "operation",
+                "pool_id": "pool",
+                "source_id": "binding:reaction-income",
+                "operation_id": "reaction-income",
+                "event_id": "h0:reaction:0",
+                "run_id": "0:h0:reaction:0",
+                "t_us": 150000,
+                "phase": "post",
+                "key": "team",
+                "before": 11,
+                "requested": 3,
+                "accepted": 3,
+                "after": 14,
+                "delta": 3,
+                "reason": "granted",
+                "qualification_scope": "engine_declared_event",
+                "unit_scale": 10,
+                "quantity_unit": "atoms",
+                "wasted": 0,
+                "qualified": true,
+                "succeeded": true,
+                "operation": "grant",
+                "cooldown_until_us": 150000,
+                "cycle": 0,
+                "t": 0.15
+              },
+              {
+                "id": "pool:59f17c9e0351219dfbc23ce758879c94bfa9e30d4d269b8f80ad1de7f43cf2f5",
+                "type": "operation",
+                "pool_id": "pool",
+                "source_id": "source:field",
+                "operation_id": "refill",
+                "event_id": "@state_route:e5ef7e99b0f4fb2b681fd47df4a7a5fabbdce13c6d138bb9b9dfa60cde13255f",
+                "run_id": "@state_dispatch:c28022e0cef6ad140d80d8b9fd725cb147fa7c3b6f8019a0096897aa7d69d572",
+                "t_us": 200000,
+                "phase": "post",
+                "key": "team",
+                "before": 14,
+                "requested": 8,
+                "accepted": 8,
+                "after": 6,
+                "delta": -8,
+                "reason": "spent",
+                "qualification_scope": "engine_declared_event",
+                "unit_scale": 10,
+                "quantity_unit": "atoms",
+                "unfulfilled": 0,
+                "qualified": true,
+                "succeeded": true,
+                "operation": "spend",
+                "spend_policy": "up_to_available",
+                "cooldown_until_us": 200000,
+                "cycle": 0,
+                "t": 0.2
+              },
+              {
+                "id": "pool:05badeb142c0f1b65043dbfb3f665f3eecc2529be630e76d7ac18d2e4fcb1709",
+                "type": "operation",
+                "pool_id": "pool",
+                "source_id": "source:field",
+                "operation_id": "refill",
+                "event_id": "@state_route:e5ef7e99b0f4fb2b681fd47df4a7a5fabbdce13c6d138bb9b9dfa60cde13255f",
+                "run_id": "@state_dispatch:2b6e3820f12c0e27ab500baeddd5f1406d320d561d8f82c7b4397f72ab4b4505",
+                "t_us": 300000,
+                "phase": "post",
+                "key": "team",
+                "before": 6,
+                "requested": 8,
+                "accepted": 6,
+                "after": 0,
+                "delta": -6,
+                "reason": "spent",
+                "qualification_scope": "engine_declared_event",
+                "unit_scale": 10,
+                "quantity_unit": "atoms",
+                "unfulfilled": 2,
+                "qualified": true,
+                "succeeded": true,
+                "operation": "spend",
+                "spend_policy": "up_to_available",
+                "cooldown_until_us": 300000,
+                "cycle": 0,
+                "t": 0.3
+              },
+              {
+                "id": "pool:64a14b9537ed9783996487045caf924b5734f3208612d5db60efc8a9c8b78b62",
+                "type": "operation",
+                "pool_id": "pool",
+                "source_id": "binding:reaction-income",
+                "operation_id": "reaction-income",
+                "event_id": "h1:reaction:0",
+                "run_id": "0:h1:reaction:0",
+                "t_us": 350000,
+                "phase": "post",
+                "key": "team",
+                "before": 0,
+                "requested": 3,
+                "accepted": 3,
+                "after": 3,
+                "delta": 3,
+                "reason": "granted",
+                "qualification_scope": "engine_declared_event",
+                "unit_scale": 10,
+                "quantity_unit": "atoms",
+                "wasted": 0,
+                "qualified": true,
+                "succeeded": true,
+                "operation": "grant",
+                "cooldown_until_us": 350000,
+                "cycle": 0,
+                "t": 0.35
+              }
+            ],
+            "database_source_approval": "not_evaluated_by_engine",
+            "event_counts": {
+              "total": 43,
+              "limit": 40000
+            }
+          },
+          "resource_counters": {
+            "contract": "resource-counters-v1",
+            "execution": "mechanics_event_queue",
+            "scope": "declared_actual_spend_accounting",
+            "state": {
+              "values": {
+                "count": {
+                  "total": 22
+                }
+              },
+              "lifecycles": {
+                "field": {
+                  "phase": "ended",
+                  "established_observed": true,
+                  "establishment_remaining_us": null,
+                  "end_remaining_us": null
+                }
+              }
+            },
+            "applied_state": {
+              "definition_fingerprint": "30dfa6e5a71c2a6f3b786c1af054878781e01bbaee7a4081c975b8b8c3c9cea3",
+              "last_control_sequence": 7,
+              "last_ledger_sequence": 5,
+              "last_time_us": 400000,
+              "active_dispatch": null,
+              "values": {
+                "count": {
+                  "total": 22
+                }
+              },
+              "lifecycles": {
+                "field": {
+                  "phase": "ended",
+                  "generation_uid": "@generation:deda31b6239b858d6aeb6035e36326e9f4696b23356d9d33437365ed44d27204",
+                  "revision": 1,
+                  "created_us": 0,
+                  "established_us": 0,
+                  "end_us": 400000,
+                  "established_observed": true,
+                  "closing_us": 400000
+                }
+              }
+            },
+            "trace": [
+              {
+                "type": "counter_reset",
+                "counter_id": "count",
+                "source_id": "source:counter",
+                "lifecycle_id": "field",
+                "generation_uid": "@generation:deda31b6239b858d6aeb6035e36326e9f4696b23356d9d33437365ed44d27204",
+                "before": {
+                  "total": 0
+                },
+                "after": {
+                  "total": 0
+                },
+                "phase": "created",
+                "control_sequence": 1,
+                "time_us": 0
+              },
+              {
+                "type": "counter_window",
+                "counter_id": "count",
+                "source_id": "source:counter",
+                "lifecycle_id": "field",
+                "generation_uid": "@generation:deda31b6239b858d6aeb6035e36326e9f4696b23356d9d33437365ed44d27204",
+                "before": {
+                  "total": 0
+                },
+                "after": {
+                  "total": 0
+                },
+                "phase": "established",
+                "control_sequence": 2,
+                "time_us": 0
+              },
+              {
+                "type": "counter_accumulation",
+                "counter_id": "count",
+                "source_id": "source:counter",
+                "resource_receipt_id": "pool:1345072fb48c926161e648b1575a4d0b3d3278c0ec828bc9c82d62edcd17515c",
+                "ledger_sequence": 1,
+                "pool_id": "pool",
+                "key": "total",
+                "requested": 8,
+                "resource_accepted": 8,
+                "accepted": 8,
+                "before": 0,
+                "after": 8,
+                "unit_scale": 10,
+                "quantity_unit": "atoms",
+                "generation_uid": "@generation:deda31b6239b858d6aeb6035e36326e9f4696b23356d9d33437365ed44d27204",
+                "reason": "accumulated",
+                "time_us": 100000,
+                "lifecycle_id": "field",
+                "history_scope": "since_last_reset"
+              },
+              {
+                "type": "counter_accumulation",
+                "counter_id": "count",
+                "source_id": "source:counter",
+                "resource_receipt_id": "pool:59f17c9e0351219dfbc23ce758879c94bfa9e30d4d269b8f80ad1de7f43cf2f5",
+                "ledger_sequence": 3,
+                "pool_id": "pool",
+                "key": "total",
+                "requested": 8,
+                "resource_accepted": 8,
+                "accepted": 8,
+                "before": 8,
+                "after": 16,
+                "unit_scale": 10,
+                "quantity_unit": "atoms",
+                "generation_uid": "@generation:deda31b6239b858d6aeb6035e36326e9f4696b23356d9d33437365ed44d27204",
+                "reason": "accumulated",
+                "time_us": 200000,
+                "lifecycle_id": "field",
+                "history_scope": "since_last_reset"
+              },
+              {
+                "type": "counter_accumulation",
+                "counter_id": "count",
+                "source_id": "source:counter",
+                "resource_receipt_id": "pool:05badeb142c0f1b65043dbfb3f665f3eecc2529be630e76d7ac18d2e4fcb1709",
+                "ledger_sequence": 4,
+                "pool_id": "pool",
+                "key": "total",
+                "requested": 8,
+                "resource_accepted": 6,
+                "accepted": 6,
+                "before": 16,
+                "after": 22,
+                "unit_scale": 10,
+                "quantity_unit": "atoms",
+                "generation_uid": "@generation:deda31b6239b858d6aeb6035e36326e9f4696b23356d9d33437365ed44d27204",
+                "reason": "accumulated",
+                "time_us": 300000,
+                "lifecycle_id": "field",
+                "history_scope": "since_last_reset"
+              },
+              {
+                "type": "counter_window",
+                "counter_id": "count",
+                "source_id": "source:counter",
+                "lifecycle_id": "field",
+                "generation_uid": "@generation:deda31b6239b858d6aeb6035e36326e9f4696b23356d9d33437365ed44d27204",
+                "before": {
+                  "total": 22
+                },
+                "after": {
+                  "total": 22
+                },
+                "phase": "closing",
+                "control_sequence": 6,
+                "time_us": 400000
+              },
+              {
+                "type": "counter_window",
+                "counter_id": "count",
+                "source_id": "source:counter",
+                "lifecycle_id": "field",
+                "generation_uid": "@generation:deda31b6239b858d6aeb6035e36326e9f4696b23356d9d33437365ed44d27204",
+                "before": {
+                  "total": 22
+                },
+                "after": {
+                  "total": 22
+                },
+                "phase": "ended",
+                "control_sequence": 7,
+                "time_us": 400000
+              }
+            ],
+            "quantity_unit": "atoms",
+            "unit_scales": {
+              "pool": 10
+            },
+            "counter_units": {
+              "count": 10
+            },
+            "source_approval": "not_evaluated_by_engine",
+            "damage_projection": "unsupported",
+            "event_counts": {
+              "total": 43,
+              "limit": 40000
+            }
+          },
+          "state_runtime": {
+            "contract": "finite-state-mechanics-bridge-v1",
+            "engine_queue_integration": "mechanics_event_queue",
+            "status": "active",
+            "issued_trace": [
+              {
+                "type": "lifecycle_start",
+                "lifecycle_id": "field",
+                "generation_uid": "@generation:deda31b6239b858d6aeb6035e36326e9f4696b23356d9d33437365ed44d27204",
+                "revision": 1,
+                "time_us": 0,
+                "parent_run_id": "0:cast"
+              },
+              {
+                "type": "lifecycle_established",
+                "lifecycle_id": "field",
+                "generation_uid": "@generation:deda31b6239b858d6aeb6035e36326e9f4696b23356d9d33437365ed44d27204",
+                "revision": 1,
+                "time_us": 0
+              },
+              {
+                "type": "dispatch",
+                "lifecycle_id": "field",
+                "generation_uid": "@generation:deda31b6239b858d6aeb6035e36326e9f4696b23356d9d33437365ed44d27204",
+                "revision": 1,
+                "time_us": 100000,
+                "event": "timer_tick",
+                "owner": "a",
+                "source_id": "source:field",
+                "payload": {
+                  "kind": "resource_operation",
+                  "ref_id": "refill"
+                },
+                "order": 20,
+                "causal_parent": {
+                  "event_id": "@state:6f6a9644edff1da43dc3b47c86c8016977078245e163d0955222ce33ea620cab",
+                  "run_id": "@state:6f6a9644edff1da43dc3b47c86c8016977078245e163d0955222ce33ea620cab",
+                  "t_us": 100000,
+                  "order": 20,
+                  "phase": "post",
+                  "causal": []
+                },
+                "source_event": {
+                  "event_id": "cast",
+                  "run_id": "0:cast",
+                  "t_us": 0,
+                  "order": 0,
+                  "phase": "post",
+                  "causal": []
+                },
+                "frame": "after_parent",
+                "qualification": "not_evaluated",
+                "timer_id": "refresh",
+                "ordinal": 1,
+                "run_id": "@state_dispatch:3ffb55bcd7a7957d419d4d853ecba2e9b60faa48f25ad83799465f35ef7b3a60"
+              },
+              {
+                "type": "dispatch",
+                "lifecycle_id": "field",
+                "generation_uid": "@generation:deda31b6239b858d6aeb6035e36326e9f4696b23356d9d33437365ed44d27204",
+                "revision": 1,
+                "time_us": 200000,
+                "event": "timer_tick",
+                "owner": "a",
+                "source_id": "source:field",
+                "payload": {
+                  "kind": "resource_operation",
+                  "ref_id": "refill"
+                },
+                "order": 20,
+                "causal_parent": {
+                  "event_id": "@state:1a5cd7d4853e0aaa35837dd71de9483673667721b872ad7af62fbf4dcc9cc570",
+                  "run_id": "@state:1a5cd7d4853e0aaa35837dd71de9483673667721b872ad7af62fbf4dcc9cc570",
+                  "t_us": 200000,
+                  "order": 20,
+                  "phase": "post",
+                  "causal": []
+                },
+                "source_event": {
+                  "event_id": "cast",
+                  "run_id": "0:cast",
+                  "t_us": 0,
+                  "order": 0,
+                  "phase": "post",
+                  "causal": []
+                },
+                "frame": "after_parent",
+                "qualification": "not_evaluated",
+                "timer_id": "refresh",
+                "ordinal": 2,
+                "run_id": "@state_dispatch:c28022e0cef6ad140d80d8b9fd725cb147fa7c3b6f8019a0096897aa7d69d572"
+              },
+              {
+                "type": "dispatch",
+                "lifecycle_id": "field",
+                "generation_uid": "@generation:deda31b6239b858d6aeb6035e36326e9f4696b23356d9d33437365ed44d27204",
+                "revision": 1,
+                "time_us": 300000,
+                "event": "timer_tick",
+                "owner": "a",
+                "source_id": "source:field",
+                "payload": {
+                  "kind": "resource_operation",
+                  "ref_id": "refill"
+                },
+                "order": 20,
+                "causal_parent": {
+                  "event_id": "@state:1df0d096212a375601ccc5725566380ef944201f0e45b2d58b5ca451bb56c65f",
+                  "run_id": "@state:1df0d096212a375601ccc5725566380ef944201f0e45b2d58b5ca451bb56c65f",
+                  "t_us": 300000,
+                  "order": 20,
+                  "phase": "post",
+                  "causal": []
+                },
+                "source_event": {
+                  "event_id": "cast",
+                  "run_id": "0:cast",
+                  "t_us": 0,
+                  "order": 0,
+                  "phase": "post",
+                  "causal": []
+                },
+                "frame": "after_parent",
+                "qualification": "not_evaluated",
+                "timer_id": "refresh",
+                "ordinal": 3,
+                "run_id": "@state_dispatch:2b6e3820f12c0e27ab500baeddd5f1406d320d561d8f82c7b4397f72ab4b4505"
+              },
+              {
+                "type": "lifecycle_end",
+                "lifecycle_id": "field",
+                "generation_uid": "@generation:deda31b6239b858d6aeb6035e36326e9f4696b23356d9d33437365ed44d27204",
+                "revision": 1,
+                "time_us": 400000,
+                "reason": "natural_expiry"
+              }
+            ],
+            "execution_trace": [
+              {
+                "type": "state_control_completed",
+                "kind": "lifecycle_start",
+                "control_sequence": 1,
+                "time_us": 0,
+                "lifecycle_id": "field",
+                "generation_uid": "@generation:deda31b6239b858d6aeb6035e36326e9f4696b23356d9d33437365ed44d27204",
+                "event_run_id": "0:cast"
+              },
+              {
+                "type": "state_control_completed",
+                "kind": "lifecycle_established",
+                "control_sequence": 2,
+                "time_us": 0,
+                "lifecycle_id": "field",
+                "generation_uid": "@generation:deda31b6239b858d6aeb6035e36326e9f4696b23356d9d33437365ed44d27204",
+                "event_run_id": "0:cast"
+              },
+              {
+                "type": "state_control_completed",
+                "kind": "dispatch",
+                "control_sequence": 3,
+                "time_us": 100000,
+                "lifecycle_id": "field",
+                "generation_uid": "@generation:deda31b6239b858d6aeb6035e36326e9f4696b23356d9d33437365ed44d27204",
+                "event_run_id": "@state:6f6a9644edff1da43dc3b47c86c8016977078245e163d0955222ce33ea620cab"
+              },
+              {
+                "type": "state_dispatch_completed",
+                "outcome": "resource_operation",
+                "run_id": "@state_dispatch:3ffb55bcd7a7957d419d4d853ecba2e9b60faa48f25ad83799465f35ef7b3a60",
+                "event": "timer_tick",
+                "lifecycle_id": "field",
+                "timer_id": "refresh",
+                "ordinal": 1,
+                "time_us": 100000,
+                "frame": "after_parent",
+                "payload": {
+                  "kind": "resource_operation",
+                  "ref_id": "refill"
+                },
+                "source_event_id": "cast",
+                "source_run_id": "0:cast",
+                "activation_count": 0,
+                "operation_count": 1,
+                "qualification": "existing_phase_filter_and_cooldown"
+              },
+              {
+                "type": "state_control_completed",
+                "kind": "dispatch",
+                "control_sequence": 4,
+                "time_us": 200000,
+                "lifecycle_id": "field",
+                "generation_uid": "@generation:deda31b6239b858d6aeb6035e36326e9f4696b23356d9d33437365ed44d27204",
+                "event_run_id": "@state:1a5cd7d4853e0aaa35837dd71de9483673667721b872ad7af62fbf4dcc9cc570"
+              },
+              {
+                "type": "state_dispatch_completed",
+                "outcome": "resource_operation",
+                "run_id": "@state_dispatch:c28022e0cef6ad140d80d8b9fd725cb147fa7c3b6f8019a0096897aa7d69d572",
+                "event": "timer_tick",
+                "lifecycle_id": "field",
+                "timer_id": "refresh",
+                "ordinal": 2,
+                "time_us": 200000,
+                "frame": "after_parent",
+                "payload": {
+                  "kind": "resource_operation",
+                  "ref_id": "refill"
+                },
+                "source_event_id": "cast",
+                "source_run_id": "0:cast",
+                "activation_count": 0,
+                "operation_count": 1,
+                "qualification": "existing_phase_filter_and_cooldown"
+              },
+              {
+                "type": "state_control_completed",
+                "kind": "dispatch",
+                "control_sequence": 5,
+                "time_us": 300000,
+                "lifecycle_id": "field",
+                "generation_uid": "@generation:deda31b6239b858d6aeb6035e36326e9f4696b23356d9d33437365ed44d27204",
+                "event_run_id": "@state:1df0d096212a375601ccc5725566380ef944201f0e45b2d58b5ca451bb56c65f"
+              },
+              {
+                "type": "state_dispatch_completed",
+                "outcome": "resource_operation",
+                "run_id": "@state_dispatch:2b6e3820f12c0e27ab500baeddd5f1406d320d561d8f82c7b4397f72ab4b4505",
+                "event": "timer_tick",
+                "lifecycle_id": "field",
+                "timer_id": "refresh",
+                "ordinal": 3,
+                "time_us": 300000,
+                "frame": "after_parent",
+                "payload": {
+                  "kind": "resource_operation",
+                  "ref_id": "refill"
+                },
+                "source_event_id": "cast",
+                "source_run_id": "0:cast",
+                "activation_count": 0,
+                "operation_count": 1,
+                "qualification": "existing_phase_filter_and_cooldown"
+              },
+              {
+                "type": "state_control_completed",
+                "kind": "lifecycle_closing",
+                "control_sequence": 6,
+                "time_us": 400000,
+                "lifecycle_id": "field",
+                "generation_uid": "@generation:deda31b6239b858d6aeb6035e36326e9f4696b23356d9d33437365ed44d27204",
+                "event_run_id": "@state:9c057f9d6332e09424323c25663bdfd28d7afa31a65b0c0d9101fad26c517205"
+              },
+              {
+                "type": "state_control_completed",
+                "kind": "lifecycle_end",
+                "control_sequence": 7,
+                "time_us": 400000,
+                "lifecycle_id": "field",
+                "generation_uid": "@generation:deda31b6239b858d6aeb6035e36326e9f4696b23356d9d33437365ed44d27204",
+                "event_run_id": "@state:9c057f9d6332e09424323c25663bdfd28d7afa31a65b0c0d9101fad26c517205"
+              }
+            ],
+            "source_approval": "not_evaluated_by_engine",
+            "state": {
+              "lifecycles": {
+                "field": {
+                  "phase": "inactive"
+                }
+              },
+              "retained_captures": []
+            },
+            "execution_status": "unproven",
+            "event_counts": {
+              "total": 43,
+              "limit": 40000
+            }
+          },
+          "buff_state_timeline": {
+            "contract": "buff-state-timeline-v1",
+            "version": 1,
+            "duration": 1,
+            "execution_limit": 1,
+            "execution_status": "unproven",
+            "states": [],
+            "excluded": [],
+            "notes": [
+              "持续条表示声明规则或明确输入区间的状态；筛选、前台限制、目标条件和快照取样仍以逐击计算为准。",
+              "区间右端不包含；同刻事件的先后与该次命中收益请查看计算流水。"
+            ]
+          }
+        },
+        "resolved_template": {
+          "version": 2,
+          "form": "resolved",
+          "id_registry_version": 1,
+          "type_definitions": {
+            "damage_types": []
+          },
+          "enemy": {
+            "level": 90,
+            "resistance": {
+              "default": 0.1
+            }
+          },
+          "characters": [
+            {
+              "id": "a",
+              "level": 90,
+              "stats": {
+                "atk": 100,
+                "base_atk": 50,
+                "em": 0,
+                "crit_rate": 0,
+                "crit_dmg": 0.5
+              }
+            }
+          ],
+          "hits": [
+            {
+              "id": "h0",
+              "t": 0.15,
+              "character": "a",
+              "skill": "工程技能",
+              "hit_name": "h0",
+              "damage_type_ids": [
+                "damage.elemental_skill"
+              ],
+              "damage_system": "classic",
+              "element": "anemo",
+              "multiplier": 1,
+              "extensions": {
+                "elemental": {
+                  "mode": "simulated",
+                  "ruleset": "gauge-swirl-dynamic-v3",
+                  "target_id": "enemy",
+                  "application_event_id": "0:h0",
+                  "reaction": {
+                    "id": "h0:reaction:0",
+                    "type": "swirl",
+                    "trigger_element": "anemo",
+                    "aura_element": "pyro",
+                    "consumed_gu": 0.5,
+                    "trigger_gu": 1,
+                    "owner": "a",
+                    "target_id": "enemy",
+                    "parent_event_id": "h0",
+                    "run_id": "0:h0:reaction:0",
+                    "parent_run_id": "0:h0",
+                    "action_id": "cast",
+                    "reaction_element": "pyro",
+                    "ruleset": "gauge-swirl-dynamic-v3",
+                    "source": "虚构确定性工程情景"
+                  }
+                }
+              },
+              "snapshot": false
+            },
+            {
+              "id": "h0:reaction_damage:0",
+              "t": 0.15,
+              "character": "a",
+              "skill": "扩散",
+              "hit_name": "火扩散",
+              "damage_type_ids": [
+                "damage.reaction"
+              ],
+              "damage_system": "transformative",
+              "element": "pyro",
+              "reaction": {
+                "type": "swirl"
+              },
+              "count": 1,
+              "extensions": {
+                "elemental": {
+                  "mode": "simulated",
+                  "ruleset": "gauge-swirl-dynamic-v3",
+                  "damage_scope": "origin_target",
+                  "target_id": "enemy",
+                  "reaction_id": "h0:reaction:0",
+                  "reaction_run_id": "0:h0:reaction:0",
+                  "parent_event_id": "h0",
+                  "parent_run_id": "0:h0",
+                  "run_id": "0:h0:reaction_damage:0",
+                  "action_id": "cast",
+                  "reaction_type": "swirl",
+                  "reaction_element": "pyro",
+                  "source": "普通冰水原目标扩散，AttackAttenuation组1的damageSequence",
+                  "provider_sample_phase": "reaction_created",
+                  "enemy_sample_phase": "reaction_damage_pre",
+                  "provider_sample_t": 0.15,
+                  "reaction": {
+                    "id": "h0:reaction:0",
+                    "type": "swirl",
+                    "trigger_element": "anemo",
+                    "aura_element": "pyro",
+                    "consumed_gu": 0.5,
+                    "trigger_gu": 1,
+                    "owner": "a",
+                    "target_id": "enemy",
+                    "parent_event_id": "h0",
+                    "run_id": "0:h0:reaction:0",
+                    "parent_run_id": "0:h0",
+                    "action_id": "cast",
+                    "reaction_element": "pyro",
+                    "ruleset": "gauge-swirl-dynamic-v3",
+                    "source": "虚构确定性工程情景"
+                  },
+                  "damage_icd": {
+                    "type": "reaction_damage_attempt",
+                    "event_id": "h0:reaction_damage:0",
+                    "run_id": "0:h0:reaction_damage:0",
+                    "t": 0.15,
+                    "reaction_id": "h0:reaction:0",
+                    "reaction_run_id": "0:h0:reaction:0",
+                    "parent_event_id": "h0",
+                    "parent_run_id": "0:h0",
+                    "action_id": "cast",
+                    "character": "a",
+                    "target_id": "enemy",
+                    "reaction_type": "swirl",
+                    "reaction_element": "pyro",
+                    "channel": "damage",
+                    "damage_scope": "origin_target",
+                    "source": "普通冰水原目标扩散，AttackAttenuation组1的damageSequence",
+                    "ruleset": "gauge-swirl-dynamic-v3",
+                    "allowed": true,
+                    "reason": "first_damage_attempt",
+                    "status": "executed",
+                    "shared_key": [
+                      "a",
+                      "enemy",
+                      "swirl",
+                      "pyro"
+                    ],
+                    "sequence_index": 0,
+                    "coefficient": 1,
+                    "anchor_t": 0.15,
+                    "reset_at": 0.65,
+                    "cycle": 0
+                  },
+                  "provider_stat_sample": {
+                    "contract": "ordinary-em-sample-v1",
+                    "character": "a",
+                    "stat": "em",
+                    "basis": "total",
+                    "phase": "reaction_created",
+                    "t": 0.15,
+                    "base_value": 0,
+                    "value": 0,
+                    "dependencies": []
+                  }
+                }
+              },
+              "snapshot": false
+            },
+            {
+              "id": "h1",
+              "t": 0.35,
+              "character": "a",
+              "skill": "工程技能",
+              "hit_name": "h1",
+              "damage_type_ids": [
+                "damage.elemental_skill"
+              ],
+              "damage_system": "classic",
+              "element": "anemo",
+              "multiplier": 1,
+              "extensions": {
+                "elemental": {
+                  "mode": "simulated",
+                  "ruleset": "gauge-swirl-dynamic-v3",
+                  "target_id": "enemy",
+                  "application_event_id": "0:h1",
+                  "reaction": {
+                    "id": "h1:reaction:0",
+                    "type": "swirl",
+                    "trigger_element": "anemo",
+                    "aura_element": "pyro",
+                    "consumed_gu": 0.5,
+                    "trigger_gu": 1,
+                    "owner": "a",
+                    "target_id": "enemy",
+                    "parent_event_id": "h1",
+                    "run_id": "0:h1:reaction:0",
+                    "parent_run_id": "0:h1",
+                    "action_id": "cast",
+                    "reaction_element": "pyro",
+                    "ruleset": "gauge-swirl-dynamic-v3",
+                    "source": "虚构确定性工程情景"
+                  }
+                }
+              },
+              "snapshot": false
+            },
+            {
+              "id": "h1:reaction_damage:0",
+              "t": 0.35,
+              "character": "a",
+              "skill": "扩散",
+              "hit_name": "火扩散",
+              "damage_type_ids": [
+                "damage.reaction"
+              ],
+              "damage_system": "transformative",
+              "element": "pyro",
+              "reaction": {
+                "type": "swirl"
+              },
+              "count": 1,
+              "extensions": {
+                "elemental": {
+                  "mode": "simulated",
+                  "ruleset": "gauge-swirl-dynamic-v3",
+                  "damage_scope": "origin_target",
+                  "target_id": "enemy",
+                  "reaction_id": "h1:reaction:0",
+                  "reaction_run_id": "0:h1:reaction:0",
+                  "parent_event_id": "h1",
+                  "parent_run_id": "0:h1",
+                  "run_id": "0:h1:reaction_damage:0",
+                  "action_id": "cast",
+                  "reaction_type": "swirl",
+                  "reaction_element": "pyro",
+                  "source": "普通冰水原目标扩散，AttackAttenuation组1的damageSequence",
+                  "provider_sample_phase": "reaction_created",
+                  "enemy_sample_phase": "reaction_damage_pre",
+                  "provider_sample_t": 0.35,
+                  "reaction": {
+                    "id": "h1:reaction:0",
+                    "type": "swirl",
+                    "trigger_element": "anemo",
+                    "aura_element": "pyro",
+                    "consumed_gu": 0.5,
+                    "trigger_gu": 1,
+                    "owner": "a",
+                    "target_id": "enemy",
+                    "parent_event_id": "h1",
+                    "run_id": "0:h1:reaction:0",
+                    "parent_run_id": "0:h1",
+                    "action_id": "cast",
+                    "reaction_element": "pyro",
+                    "ruleset": "gauge-swirl-dynamic-v3",
+                    "source": "虚构确定性工程情景"
+                  },
+                  "damage_icd": {
+                    "type": "reaction_damage_attempt",
+                    "event_id": "h1:reaction_damage:0",
+                    "run_id": "0:h1:reaction_damage:0",
+                    "t": 0.35,
+                    "reaction_id": "h1:reaction:0",
+                    "reaction_run_id": "0:h1:reaction:0",
+                    "parent_event_id": "h1",
+                    "parent_run_id": "0:h1",
+                    "action_id": "cast",
+                    "character": "a",
+                    "target_id": "enemy",
+                    "reaction_type": "swirl",
+                    "reaction_element": "pyro",
+                    "channel": "damage",
+                    "damage_scope": "origin_target",
+                    "source": "普通冰水原目标扩散，AttackAttenuation组1的damageSequence",
+                    "ruleset": "gauge-swirl-dynamic-v3",
+                    "allowed": true,
+                    "reason": "damage_icd_sequence",
+                    "status": "executed",
+                    "shared_key": [
+                      "a",
+                      "enemy",
+                      "swirl",
+                      "pyro"
+                    ],
+                    "sequence_index": 1,
+                    "coefficient": 1,
+                    "anchor_t": 0.15,
+                    "reset_at": 0.65,
+                    "cycle": 0
+                  },
+                  "provider_stat_sample": {
+                    "contract": "ordinary-em-sample-v1",
+                    "character": "a",
+                    "stat": "em",
+                    "basis": "total",
+                    "phase": "reaction_created",
+                    "t": 0.35,
+                    "base_value": 0,
+                    "value": 0,
+                    "dependencies": []
+                  }
+                }
+              },
+              "snapshot": false
+            }
+          ],
+          "buffs": [],
+          "switches": [
+            {
+              "t": 0,
+              "character": "a"
+            }
+          ],
+          "loop_duration": 1
+        },
+        "rotation_check": {
+          "schema_version": 1,
+          "status": "unproven",
+          "issues": [],
+          "assumptions": [
+            "a：虚构确定性工程情景",
+            "cast：虚构确定性工程情景",
+            "e：虚构确定性工程情景",
+            "普通扩散伤害：普通冰水原目标扩散，AttackAttenuation组1的damageSequence",
+            "附着 anemo：虚构确定性工程情景",
+            "附着 cryo：虚构确定性工程情景",
+            "附着 enemy：虚构确定性工程情景",
+            "附着 hydro：虚构确定性工程情景",
+            "附着 pyro：虚构确定性工程情景"
+          ],
+          "determinacy": "conditional",
+          "unchecked_constraints": [
+            "体力消耗",
+            "元素附着与反应",
+            "攻击是否命中",
+            "距离与位置",
+            "未声明的机制完整性",
+            "后续轮次伤害汇总与实战 DPS"
+          ],
+          "action_check": {
+            "status": "passed",
+            "checked_constraints": [
+              "前台",
+              "动作占用",
+              "冷却与技能次数"
+            ]
+          },
+          "energy_check": {
+            "status": "unproven",
+            "opening_status": "passed",
+            "cycle_status": "unproven",
+            "checked_cycles": 3,
+            "completed_cycles": 3,
+            "failed_cycle": null,
+            "proven_cycle": null,
+            "proof_scope": {
+              "kind": "checked_windows",
+              "period_seconds": 1,
+              "periodic_action_ids": [],
+              "finite_action_ids": [
+                "cast"
+              ],
+              "damage_verified": false
+            }
+          },
+          "event_log": [
+            {
+              "id": "cast",
+              "run_id": "0:cast",
+              "cycle": 0,
+              "source_cycle": 0,
+              "type": "action",
+              "t": 0.0,
+              "order": 0,
+              "frontline": "a",
+              "status": "passed",
+              "source": "虚构确定性工程情景",
+              "action_id": "cast",
+              "character": "a",
+              "action_type_id": "action.elemental_skill",
+              "occupation_end": 0.1,
+              "frontline_after": "a"
+            },
+            {
+              "id": "cast:end",
+              "run_id": "0:cast:end",
+              "cycle": 0,
+              "source_cycle": 0,
+              "type": "mechanics_end",
+              "t": 0.1,
+              "order": 0,
+              "frontline": "a",
+              "status": "passed",
+              "source": "虚构确定性工程情景",
+              "action_id": "cast"
+            },
+            {
+              "id": "@state:6f6a9644edff1da43dc3b47c86c8016977078245e163d0955222ce33ea620cab",
+              "run_id": "@state:6f6a9644edff1da43dc3b47c86c8016977078245e163d0955222ce33ea620cab",
+              "cycle": 0,
+              "source_cycle": 0,
+              "type": "state_runtime_event",
+              "t": 0.1,
+              "order": 20,
+              "frontline": "a",
+              "status": "passed",
+              "source": null,
+              "action_id": null
+            },
+            {
+              "id": "h0",
+              "run_id": "0:h0",
+              "cycle": 0,
+              "source_cycle": 0,
+              "type": "mechanics_hit",
+              "t": 0.15,
+              "order": 10,
+              "frontline": "a",
+              "status": "passed",
+              "source": null,
+              "action_id": "cast"
+            },
+            {
+              "id": "@state:1a5cd7d4853e0aaa35837dd71de9483673667721b872ad7af62fbf4dcc9cc570",
+              "run_id": "@state:1a5cd7d4853e0aaa35837dd71de9483673667721b872ad7af62fbf4dcc9cc570",
+              "cycle": 0,
+              "source_cycle": 0,
+              "type": "state_runtime_event",
+              "t": 0.2,
+              "order": 20,
+              "frontline": "a",
+              "status": "passed",
+              "source": null,
+              "action_id": null
+            },
+            {
+              "id": "@state:1df0d096212a375601ccc5725566380ef944201f0e45b2d58b5ca451bb56c65f",
+              "run_id": "@state:1df0d096212a375601ccc5725566380ef944201f0e45b2d58b5ca451bb56c65f",
+              "cycle": 0,
+              "source_cycle": 0,
+              "type": "state_runtime_event",
+              "t": 0.3,
+              "order": 20,
+              "frontline": "a",
+              "status": "passed",
+              "source": null,
+              "action_id": null
+            },
+            {
+              "id": "h1",
+              "run_id": "0:h1",
+              "cycle": 0,
+              "source_cycle": 0,
+              "type": "mechanics_hit",
+              "t": 0.35,
+              "order": 11,
+              "frontline": "a",
+              "status": "passed",
+              "source": null,
+              "action_id": "cast"
+            },
+            {
+              "id": "@state:9c057f9d6332e09424323c25663bdfd28d7afa31a65b0c0d9101fad26c517205",
+              "run_id": "@state:9c057f9d6332e09424323c25663bdfd28d7afa31a65b0c0d9101fad26c517205",
+              "cycle": 0,
+              "source_cycle": 0,
+              "type": "state_runtime_event",
+              "t": 0.4,
+              "order": 1,
+              "frontline": "a",
+              "status": "passed",
+              "source": null,
+              "action_id": null
+            }
+          ],
+          "cycles": [
+            {
+              "cycle": 0,
+              "status": "passed",
+              "start_energy": {
+                "a": 10
+              },
+              "end_energy": {
+                "a": 10
+              },
+              "boundary_state": {
+                "energy": {
+                  "a": 10
+                },
+                "frontline": "a",
+                "cooldown_ready_in": {},
+                "occupation_remaining": 0,
+                "switch_block_remaining": 0,
+                "in_flight": [],
+                "pending_events": [],
+                "temporary_er": [],
+                "time_unit": "microseconds",
+                "mechanics": {
+                  "elemental": {
+                    "target_id": "enemy",
+                    "knowledge": "known",
+                    "aura": {
+                      "element": "pyro",
+                      "remaining_gu": 2.1990000000000003,
+                      "decay_gu_per_second": 0.001
+                    },
+                    "icd": [],
+                    "reaction_damage_icd": []
+                  },
+                  "shared_pools": {
+                    "balances": {
+                      "pool": {
+                        "team": 3
+                      }
+                    },
+                    "cooldown_remaining_us": {
+                      "refill": 0,
+                      "reaction-income": 0
+                    },
+                    "quantity_unit": "atoms",
+                    "unit_scales": {
+                      "pool": 10
+                    },
+                    "resource_counters": {
+                      "values": {
+                        "count": {
+                          "total": 22
+                        }
+                      },
+                      "lifecycles": {
+                        "field": {
+                          "phase": "ended",
+                          "established_observed": true,
+                          "establishment_remaining_us": null,
+                          "end_remaining_us": null
+                        }
+                      }
+                    }
+                  },
+                  "state_runtime": {
+                    "lifecycles": {
+                      "field": {
+                        "phase": "inactive"
+                      }
+                    },
+                    "retained_captures": []
+                  },
+                  "rules": {},
+                  "conditions": {},
+                  "pending_samples": [],
+                  "manual_buffs": [],
+                  "cancelled_ends": []
+                },
+                "mechanics_cooldown_anchor": null
+              },
+              "scheduled_action_count": 1,
+              "executed_action_count": 1,
+              "burst_action_count": 0,
+              "energy_spend_count": 0,
+              "burst_energy_spend_count": 0,
+              "periodic_action_coverage": false
+            },
+            {
+              "cycle": 1,
+              "status": "passed",
+              "start_energy": {
+                "a": 10
+              },
+              "end_energy": {
+                "a": 10
+              },
+              "boundary_state": {
+                "energy": {
+                  "a": 10
+                },
+                "frontline": "a",
+                "cooldown_ready_in": {},
+                "occupation_remaining": 0,
+                "switch_block_remaining": 0,
+                "in_flight": [],
+                "pending_events": [],
+                "temporary_er": [],
+                "time_unit": "microseconds",
+                "mechanics": {
+                  "elemental": {
+                    "target_id": "enemy",
+                    "knowledge": "known",
+                    "aura": {
+                      "element": "pyro",
+                      "remaining_gu": 2.1980000000000004,
+                      "decay_gu_per_second": 0.001
+                    },
+                    "icd": [],
+                    "reaction_damage_icd": []
+                  },
+                  "shared_pools": {
+                    "balances": {
+                      "pool": {
+                        "team": 3
+                      }
+                    },
+                    "cooldown_remaining_us": {
+                      "refill": 0,
+                      "reaction-income": 0
+                    },
+                    "quantity_unit": "atoms",
+                    "unit_scales": {
+                      "pool": 10
+                    },
+                    "resource_counters": {
+                      "values": {
+                        "count": {
+                          "total": 22
+                        }
+                      },
+                      "lifecycles": {
+                        "field": {
+                          "phase": "ended",
+                          "established_observed": true,
+                          "establishment_remaining_us": null,
+                          "end_remaining_us": null
+                        }
+                      }
+                    }
+                  },
+                  "state_runtime": {
+                    "lifecycles": {
+                      "field": {
+                        "phase": "inactive"
+                      }
+                    },
+                    "retained_captures": []
+                  },
+                  "rules": {},
+                  "conditions": {},
+                  "pending_samples": [],
+                  "manual_buffs": [],
+                  "cancelled_ends": []
+                },
+                "mechanics_cooldown_anchor": null
+              },
+              "scheduled_action_count": 0,
+              "executed_action_count": 0,
+              "burst_action_count": 0,
+              "energy_spend_count": 0,
+              "burst_energy_spend_count": 0,
+              "periodic_action_coverage": false
+            },
+            {
+              "cycle": 2,
+              "status": "passed",
+              "start_energy": {
+                "a": 10
+              },
+              "end_energy": {
+                "a": 10
+              },
+              "boundary_state": {
+                "energy": {
+                  "a": 10
+                },
+                "frontline": "a",
+                "cooldown_ready_in": {},
+                "occupation_remaining": 0,
+                "switch_block_remaining": 0,
+                "in_flight": [],
+                "pending_events": [],
+                "temporary_er": [],
+                "time_unit": "microseconds",
+                "mechanics": {
+                  "elemental": {
+                    "target_id": "enemy",
+                    "knowledge": "known",
+                    "aura": {
+                      "element": "pyro",
+                      "remaining_gu": 2.1970000000000005,
+                      "decay_gu_per_second": 0.001
+                    },
+                    "icd": [],
+                    "reaction_damage_icd": []
+                  },
+                  "shared_pools": {
+                    "balances": {
+                      "pool": {
+                        "team": 3
+                      }
+                    },
+                    "cooldown_remaining_us": {
+                      "refill": 0,
+                      "reaction-income": 0
+                    },
+                    "quantity_unit": "atoms",
+                    "unit_scales": {
+                      "pool": 10
+                    },
+                    "resource_counters": {
+                      "values": {
+                        "count": {
+                          "total": 22
+                        }
+                      },
+                      "lifecycles": {
+                        "field": {
+                          "phase": "ended",
+                          "established_observed": true,
+                          "establishment_remaining_us": null,
+                          "end_remaining_us": null
+                        }
+                      }
+                    }
+                  },
+                  "state_runtime": {
+                    "lifecycles": {
+                      "field": {
+                        "phase": "inactive"
+                      }
+                    },
+                    "retained_captures": []
+                  },
+                  "rules": {},
+                  "conditions": {},
+                  "pending_samples": [],
+                  "manual_buffs": [],
+                  "cancelled_ends": []
+                },
+                "mechanics_cooldown_anchor": null
+              },
+              "scheduled_action_count": 0,
+              "executed_action_count": 0,
+              "burst_action_count": 0,
+              "energy_spend_count": 0,
+              "burst_energy_spend_count": 0,
+              "periodic_action_coverage": false
+            }
+          ],
+          "characters": [
+            {
+              "id": "a",
+              "element": "cryo",
+              "energy_recharge": 1,
+              "energy_capacity": 10,
+              "initial_energy": 10,
+              "final_energy": 10
+            }
+          ],
+          "gaps": [
+            {
+              "start": 0.1,
+              "end": 1.0,
+              "duration": 0.9,
+              "cycle": 0,
+              "reason": null,
+              "status": "needs_explanation"
+            },
+            {
+              "start": 1.0,
+              "end": 2.0,
+              "duration": 1.0,
+              "cycle": 1,
+              "reason": null,
+              "status": "needs_explanation"
+            },
+            {
+              "start": 2.0,
+              "end": 3.0,
+              "duration": 1.0,
+              "cycle": 2,
+              "reason": null,
+              "status": "needs_explanation"
+            }
+          ],
+          "damage_interpretation": "完整显式输入窗口（origin0）的已执行事件数值投影；内部检查窗口不是游戏第一轮，不自动复制动作，不证明实战稳态DPS。"
+        },
+        "mechanics_trace": [
+          {
+            "type": "elemental_application",
+            "event_id": "0:h0",
+            "action_id": "cast",
+            "character": "a",
+            "target_id": "enemy",
+            "t": 0.15,
+            "profile_id": "anemo",
+            "source": "虚构确定性工程情景",
+            "ruleset": "gauge-swirl-dynamic-v3",
+            "element": "anemo",
+            "before": {
+              "target_id": "enemy",
+              "t": 0.15,
+              "knowledge": "known",
+              "aura": {
+                "element": "pyro",
+                "remaining_gu": 3.19985,
+                "decay_gu_per_second": 0.001,
+                "source": "明确工程单底"
+              },
+              "icd": [],
+              "reaction_damage_icd": []
+            },
+            "reaction": {
+              "id": "h0:reaction:0",
+              "type": "swirl",
+              "trigger_element": "anemo",
+              "aura_element": "pyro",
+              "consumed_gu": 0.5,
+              "trigger_gu": 1,
+              "owner": "a",
+              "target_id": "enemy",
+              "parent_event_id": "h0",
+              "run_id": "0:h0:reaction:0",
+              "parent_run_id": "0:h0",
+              "action_id": "cast",
+              "reaction_element": "pyro",
+              "ruleset": "gauge-swirl-dynamic-v3",
+              "source": "虚构确定性工程情景"
+            },
+            "stable_event_id": "h0",
+            "run_id": "0:h0",
+            "allowed": true,
+            "reason": "no_icd",
+            "application_gu": 1,
+            "outcome": "reaction",
+            "after": {
+              "target_id": "enemy",
+              "t": 0.15,
+              "knowledge": "known",
+              "aura": {
+                "element": "pyro",
+                "remaining_gu": 2.69985,
+                "decay_gu_per_second": 0.001,
+                "source": "明确工程单底"
+              },
+              "icd": [],
+              "reaction_damage_icd": []
+            },
+            "status": "executed",
+            "cycle": 0
+          },
+          {
+            "type": "hit",
+            "event_id": "h0",
+            "cycle": 0,
+            "t": 0.15,
+            "reported_damage": true,
+            "status": "executed",
+            "effect_count": 0
+          },
+          {
+            "id": "h0:reaction:0",
+            "type": "elemental_reaction",
+            "trigger_element": "anemo",
+            "aura_element": "pyro",
+            "consumed_gu": 0.5,
+            "trigger_gu": 1,
+            "owner": "a",
+            "target_id": "enemy",
+            "parent_event_id": "h0",
+            "run_id": "0:h0:reaction:0",
+            "parent_run_id": "0:h0",
+            "action_id": "cast",
+            "reaction_element": "pyro",
+            "ruleset": "gauge-swirl-dynamic-v3",
+            "source": "虚构确定性工程情景",
+            "reaction_type": "swirl",
+            "event_id": "h0:reaction:0",
+            "cycle": 0,
+            "t": 0.15,
+            "status": "executed"
+          },
+          {
+            "type": "reaction_damage_attempt",
+            "event_id": "h0:reaction_damage:0",
+            "run_id": "0:h0:reaction_damage:0",
+            "t": 0.15,
+            "reaction_id": "h0:reaction:0",
+            "reaction_run_id": "0:h0:reaction:0",
+            "parent_event_id": "h0",
+            "parent_run_id": "0:h0",
+            "action_id": "cast",
+            "character": "a",
+            "target_id": "enemy",
+            "reaction_type": "swirl",
+            "reaction_element": "pyro",
+            "channel": "damage",
+            "damage_scope": "origin_target",
+            "source": "普通冰水原目标扩散，AttackAttenuation组1的damageSequence",
+            "ruleset": "gauge-swirl-dynamic-v3",
+            "allowed": true,
+            "reason": "first_damage_attempt",
+            "status": "executed",
+            "shared_key": [
+              "a",
+              "enemy",
+              "swirl",
+              "pyro"
+            ],
+            "sequence_index": 0,
+            "coefficient": 1,
+            "anchor_t": 0.15,
+            "reset_at": 0.65,
+            "cycle": 0
+          },
+          {
+            "type": "reaction_damage",
+            "event_id": "h0:reaction_damage:0",
+            "cycle": 0,
+            "t": 0.15,
+            "reported_damage": true,
+            "status": "executed",
+            "effect_count": 0,
+            "mode": "simulated",
+            "ruleset": "gauge-swirl-dynamic-v3",
+            "damage_scope": "origin_target",
+            "target_id": "enemy",
+            "reaction_id": "h0:reaction:0",
+            "reaction_run_id": "0:h0:reaction:0",
+            "parent_event_id": "h0",
+            "parent_run_id": "0:h0",
+            "run_id": "0:h0:reaction_damage:0",
+            "action_id": "cast",
+            "reaction_type": "swirl",
+            "reaction_element": "pyro",
+            "source": "普通冰水原目标扩散，AttackAttenuation组1的damageSequence",
+            "provider_sample_phase": "reaction_created",
+            "enemy_sample_phase": "reaction_damage_pre",
+            "provider_sample_t": 0.15,
+            "reaction": {
+              "id": "h0:reaction:0",
+              "type": "swirl",
+              "trigger_element": "anemo",
+              "aura_element": "pyro",
+              "consumed_gu": 0.5,
+              "trigger_gu": 1,
+              "owner": "a",
+              "target_id": "enemy",
+              "parent_event_id": "h0",
+              "run_id": "0:h0:reaction:0",
+              "parent_run_id": "0:h0",
+              "action_id": "cast",
+              "reaction_element": "pyro",
+              "ruleset": "gauge-swirl-dynamic-v3",
+              "source": "虚构确定性工程情景"
+            },
+            "damage_icd": {
+              "type": "reaction_damage_attempt",
+              "event_id": "h0:reaction_damage:0",
+              "run_id": "0:h0:reaction_damage:0",
+              "t": 0.15,
+              "reaction_id": "h0:reaction:0",
+              "reaction_run_id": "0:h0:reaction:0",
+              "parent_event_id": "h0",
+              "parent_run_id": "0:h0",
+              "action_id": "cast",
+              "character": "a",
+              "target_id": "enemy",
+              "reaction_type": "swirl",
+              "reaction_element": "pyro",
+              "channel": "damage",
+              "damage_scope": "origin_target",
+              "source": "普通冰水原目标扩散，AttackAttenuation组1的damageSequence",
+              "ruleset": "gauge-swirl-dynamic-v3",
+              "allowed": true,
+              "reason": "first_damage_attempt",
+              "status": "executed",
+              "shared_key": [
+                "a",
+                "enemy",
+                "swirl",
+                "pyro"
+              ],
+              "sequence_index": 0,
+              "coefficient": 1,
+              "anchor_t": 0.15,
+              "reset_at": 0.65,
+              "cycle": 0
+            },
+            "provider_stat_sample": {
+              "contract": "ordinary-em-sample-v1",
+              "character": "a",
+              "stat": "em",
+              "basis": "total",
+              "phase": "reaction_created",
+              "t": 0.15,
+              "base_value": 0,
+              "value": 0,
+              "dependencies": []
+            }
+          },
+          {
+            "type": "elemental_application",
+            "event_id": "0:h1",
+            "action_id": "cast",
+            "character": "a",
+            "target_id": "enemy",
+            "t": 0.35,
+            "profile_id": "anemo",
+            "source": "虚构确定性工程情景",
+            "ruleset": "gauge-swirl-dynamic-v3",
+            "element": "anemo",
+            "before": {
+              "target_id": "enemy",
+              "t": 0.35,
+              "knowledge": "known",
+              "aura": {
+                "element": "pyro",
+                "remaining_gu": 2.69965,
+                "decay_gu_per_second": 0.001,
+                "source": "明确工程单底"
+              },
+              "icd": [],
+              "reaction_damage_icd": [
+                {
+                  "actor": "a",
+                  "target_id": "enemy",
+                  "reaction_type": "swirl",
+                  "reaction_element": "pyro",
+                  "attempts": 1,
+                  "timer_remaining": 0.3
+                }
+              ]
+            },
+            "reaction": {
+              "id": "h1:reaction:0",
+              "type": "swirl",
+              "trigger_element": "anemo",
+              "aura_element": "pyro",
+              "consumed_gu": 0.5,
+              "trigger_gu": 1,
+              "owner": "a",
+              "target_id": "enemy",
+              "parent_event_id": "h1",
+              "run_id": "0:h1:reaction:0",
+              "parent_run_id": "0:h1",
+              "action_id": "cast",
+              "reaction_element": "pyro",
+              "ruleset": "gauge-swirl-dynamic-v3",
+              "source": "虚构确定性工程情景"
+            },
+            "stable_event_id": "h1",
+            "run_id": "0:h1",
+            "allowed": true,
+            "reason": "no_icd",
+            "application_gu": 1,
+            "outcome": "reaction",
+            "after": {
+              "target_id": "enemy",
+              "t": 0.35,
+              "knowledge": "known",
+              "aura": {
+                "element": "pyro",
+                "remaining_gu": 2.19965,
+                "decay_gu_per_second": 0.001,
+                "source": "明确工程单底"
+              },
+              "icd": [],
+              "reaction_damage_icd": [
+                {
+                  "actor": "a",
+                  "target_id": "enemy",
+                  "reaction_type": "swirl",
+                  "reaction_element": "pyro",
+                  "attempts": 1,
+                  "timer_remaining": 0.3
+                }
+              ]
+            },
+            "status": "executed",
+            "cycle": 0
+          },
+          {
+            "type": "hit",
+            "event_id": "h1",
+            "cycle": 0,
+            "t": 0.35,
+            "reported_damage": true,
+            "status": "executed",
+            "effect_count": 0
+          },
+          {
+            "id": "h1:reaction:0",
+            "type": "elemental_reaction",
+            "trigger_element": "anemo",
+            "aura_element": "pyro",
+            "consumed_gu": 0.5,
+            "trigger_gu": 1,
+            "owner": "a",
+            "target_id": "enemy",
+            "parent_event_id": "h1",
+            "run_id": "0:h1:reaction:0",
+            "parent_run_id": "0:h1",
+            "action_id": "cast",
+            "reaction_element": "pyro",
+            "ruleset": "gauge-swirl-dynamic-v3",
+            "source": "虚构确定性工程情景",
+            "reaction_type": "swirl",
+            "event_id": "h1:reaction:0",
+            "cycle": 0,
+            "t": 0.35,
+            "status": "executed"
+          },
+          {
+            "type": "reaction_damage_attempt",
+            "event_id": "h1:reaction_damage:0",
+            "run_id": "0:h1:reaction_damage:0",
+            "t": 0.35,
+            "reaction_id": "h1:reaction:0",
+            "reaction_run_id": "0:h1:reaction:0",
+            "parent_event_id": "h1",
+            "parent_run_id": "0:h1",
+            "action_id": "cast",
+            "character": "a",
+            "target_id": "enemy",
+            "reaction_type": "swirl",
+            "reaction_element": "pyro",
+            "channel": "damage",
+            "damage_scope": "origin_target",
+            "source": "普通冰水原目标扩散，AttackAttenuation组1的damageSequence",
+            "ruleset": "gauge-swirl-dynamic-v3",
+            "allowed": true,
+            "reason": "damage_icd_sequence",
+            "status": "executed",
+            "shared_key": [
+              "a",
+              "enemy",
+              "swirl",
+              "pyro"
+            ],
+            "sequence_index": 1,
+            "coefficient": 1,
+            "anchor_t": 0.15,
+            "reset_at": 0.65,
+            "cycle": 0
+          },
+          {
+            "type": "reaction_damage",
+            "event_id": "h1:reaction_damage:0",
+            "cycle": 0,
+            "t": 0.35,
+            "reported_damage": true,
+            "status": "executed",
+            "effect_count": 0,
+            "mode": "simulated",
+            "ruleset": "gauge-swirl-dynamic-v3",
+            "damage_scope": "origin_target",
+            "target_id": "enemy",
+            "reaction_id": "h1:reaction:0",
+            "reaction_run_id": "0:h1:reaction:0",
+            "parent_event_id": "h1",
+            "parent_run_id": "0:h1",
+            "run_id": "0:h1:reaction_damage:0",
+            "action_id": "cast",
+            "reaction_type": "swirl",
+            "reaction_element": "pyro",
+            "source": "普通冰水原目标扩散，AttackAttenuation组1的damageSequence",
+            "provider_sample_phase": "reaction_created",
+            "enemy_sample_phase": "reaction_damage_pre",
+            "provider_sample_t": 0.35,
+            "reaction": {
+              "id": "h1:reaction:0",
+              "type": "swirl",
+              "trigger_element": "anemo",
+              "aura_element": "pyro",
+              "consumed_gu": 0.5,
+              "trigger_gu": 1,
+              "owner": "a",
+              "target_id": "enemy",
+              "parent_event_id": "h1",
+              "run_id": "0:h1:reaction:0",
+              "parent_run_id": "0:h1",
+              "action_id": "cast",
+              "reaction_element": "pyro",
+              "ruleset": "gauge-swirl-dynamic-v3",
+              "source": "虚构确定性工程情景"
+            },
+            "damage_icd": {
+              "type": "reaction_damage_attempt",
+              "event_id": "h1:reaction_damage:0",
+              "run_id": "0:h1:reaction_damage:0",
+              "t": 0.35,
+              "reaction_id": "h1:reaction:0",
+              "reaction_run_id": "0:h1:reaction:0",
+              "parent_event_id": "h1",
+              "parent_run_id": "0:h1",
+              "action_id": "cast",
+              "character": "a",
+              "target_id": "enemy",
+              "reaction_type": "swirl",
+              "reaction_element": "pyro",
+              "channel": "damage",
+              "damage_scope": "origin_target",
+              "source": "普通冰水原目标扩散，AttackAttenuation组1的damageSequence",
+              "ruleset": "gauge-swirl-dynamic-v3",
+              "allowed": true,
+              "reason": "damage_icd_sequence",
+              "status": "executed",
+              "shared_key": [
+                "a",
+                "enemy",
+                "swirl",
+                "pyro"
+              ],
+              "sequence_index": 1,
+              "coefficient": 1,
+              "anchor_t": 0.15,
+              "reset_at": 0.65,
+              "cycle": 0
+            },
+            "provider_stat_sample": {
+              "contract": "ordinary-em-sample-v1",
+              "character": "a",
+              "stat": "em",
+              "basis": "total",
+              "phase": "reaction_created",
+              "t": 0.35,
+              "base_value": 0,
+              "value": 0,
+              "dependencies": []
+            }
+          }
+        ],
+        "sampling_trace": [],
+        "capabilities_version": 1,
+        "elemental_trace": [
+          {
+            "type": "elemental_application",
+            "event_id": "0:h0",
+            "action_id": "cast",
+            "character": "a",
+            "target_id": "enemy",
+            "t": 0.15,
+            "profile_id": "anemo",
+            "source": "虚构确定性工程情景",
+            "ruleset": "gauge-swirl-dynamic-v3",
+            "element": "anemo",
+            "before": {
+              "target_id": "enemy",
+              "t": 0.15,
+              "knowledge": "known",
+              "aura": {
+                "element": "pyro",
+                "remaining_gu": 3.19985,
+                "decay_gu_per_second": 0.001,
+                "source": "明确工程单底"
+              },
+              "icd": [],
+              "reaction_damage_icd": []
+            },
+            "reaction": {
+              "id": "h0:reaction:0",
+              "type": "swirl",
+              "trigger_element": "anemo",
+              "aura_element": "pyro",
+              "consumed_gu": 0.5,
+              "trigger_gu": 1,
+              "owner": "a",
+              "target_id": "enemy",
+              "parent_event_id": "h0",
+              "run_id": "0:h0:reaction:0",
+              "parent_run_id": "0:h0",
+              "action_id": "cast",
+              "reaction_element": "pyro",
+              "ruleset": "gauge-swirl-dynamic-v3",
+              "source": "虚构确定性工程情景"
+            },
+            "stable_event_id": "h0",
+            "run_id": "0:h0",
+            "allowed": true,
+            "reason": "no_icd",
+            "application_gu": 1,
+            "outcome": "reaction",
+            "after": {
+              "target_id": "enemy",
+              "t": 0.15,
+              "knowledge": "known",
+              "aura": {
+                "element": "pyro",
+                "remaining_gu": 2.69985,
+                "decay_gu_per_second": 0.001,
+                "source": "明确工程单底"
+              },
+              "icd": [],
+              "reaction_damage_icd": []
+            },
+            "status": "executed",
+            "cycle": 0
+          },
+          {
+            "type": "reaction_damage_attempt",
+            "event_id": "h0:reaction_damage:0",
+            "run_id": "0:h0:reaction_damage:0",
+            "t": 0.15,
+            "reaction_id": "h0:reaction:0",
+            "reaction_run_id": "0:h0:reaction:0",
+            "parent_event_id": "h0",
+            "parent_run_id": "0:h0",
+            "action_id": "cast",
+            "character": "a",
+            "target_id": "enemy",
+            "reaction_type": "swirl",
+            "reaction_element": "pyro",
+            "channel": "damage",
+            "damage_scope": "origin_target",
+            "source": "普通冰水原目标扩散，AttackAttenuation组1的damageSequence",
+            "ruleset": "gauge-swirl-dynamic-v3",
+            "allowed": true,
+            "reason": "first_damage_attempt",
+            "status": "executed",
+            "shared_key": [
+              "a",
+              "enemy",
+              "swirl",
+              "pyro"
+            ],
+            "sequence_index": 0,
+            "coefficient": 1,
+            "anchor_t": 0.15,
+            "reset_at": 0.65,
+            "cycle": 0
+          },
+          {
+            "type": "elemental_application",
+            "event_id": "0:h1",
+            "action_id": "cast",
+            "character": "a",
+            "target_id": "enemy",
+            "t": 0.35,
+            "profile_id": "anemo",
+            "source": "虚构确定性工程情景",
+            "ruleset": "gauge-swirl-dynamic-v3",
+            "element": "anemo",
+            "before": {
+              "target_id": "enemy",
+              "t": 0.35,
+              "knowledge": "known",
+              "aura": {
+                "element": "pyro",
+                "remaining_gu": 2.69965,
+                "decay_gu_per_second": 0.001,
+                "source": "明确工程单底"
+              },
+              "icd": [],
+              "reaction_damage_icd": [
+                {
+                  "actor": "a",
+                  "target_id": "enemy",
+                  "reaction_type": "swirl",
+                  "reaction_element": "pyro",
+                  "attempts": 1,
+                  "timer_remaining": 0.3
+                }
+              ]
+            },
+            "reaction": {
+              "id": "h1:reaction:0",
+              "type": "swirl",
+              "trigger_element": "anemo",
+              "aura_element": "pyro",
+              "consumed_gu": 0.5,
+              "trigger_gu": 1,
+              "owner": "a",
+              "target_id": "enemy",
+              "parent_event_id": "h1",
+              "run_id": "0:h1:reaction:0",
+              "parent_run_id": "0:h1",
+              "action_id": "cast",
+              "reaction_element": "pyro",
+              "ruleset": "gauge-swirl-dynamic-v3",
+              "source": "虚构确定性工程情景"
+            },
+            "stable_event_id": "h1",
+            "run_id": "0:h1",
+            "allowed": true,
+            "reason": "no_icd",
+            "application_gu": 1,
+            "outcome": "reaction",
+            "after": {
+              "target_id": "enemy",
+              "t": 0.35,
+              "knowledge": "known",
+              "aura": {
+                "element": "pyro",
+                "remaining_gu": 2.19965,
+                "decay_gu_per_second": 0.001,
+                "source": "明确工程单底"
+              },
+              "icd": [],
+              "reaction_damage_icd": [
+                {
+                  "actor": "a",
+                  "target_id": "enemy",
+                  "reaction_type": "swirl",
+                  "reaction_element": "pyro",
+                  "attempts": 1,
+                  "timer_remaining": 0.3
+                }
+              ]
+            },
+            "status": "executed",
+            "cycle": 0
+          },
+          {
+            "type": "reaction_damage_attempt",
+            "event_id": "h1:reaction_damage:0",
+            "run_id": "0:h1:reaction_damage:0",
+            "t": 0.35,
+            "reaction_id": "h1:reaction:0",
+            "reaction_run_id": "0:h1:reaction:0",
+            "parent_event_id": "h1",
+            "parent_run_id": "0:h1",
+            "action_id": "cast",
+            "character": "a",
+            "target_id": "enemy",
+            "reaction_type": "swirl",
+            "reaction_element": "pyro",
+            "channel": "damage",
+            "damage_scope": "origin_target",
+            "source": "普通冰水原目标扩散，AttackAttenuation组1的damageSequence",
+            "ruleset": "gauge-swirl-dynamic-v3",
+            "allowed": true,
+            "reason": "damage_icd_sequence",
+            "status": "executed",
+            "shared_key": [
+              "a",
+              "enemy",
+              "swirl",
+              "pyro"
+            ],
+            "sequence_index": 1,
+            "coefficient": 1,
+            "anchor_t": 0.15,
+            "reset_at": 0.65,
+            "cycle": 0
+          }
+        ],
+        "shared_pool_trace": [
+          {
+            "id": "pool:1345072fb48c926161e648b1575a4d0b3d3278c0ec828bc9c82d62edcd17515c",
+            "type": "operation",
+            "pool_id": "pool",
+            "source_id": "source:field",
+            "operation_id": "refill",
+            "event_id": "@state_route:e5ef7e99b0f4fb2b681fd47df4a7a5fabbdce13c6d138bb9b9dfa60cde13255f",
+            "run_id": "@state_dispatch:3ffb55bcd7a7957d419d4d853ecba2e9b60faa48f25ad83799465f35ef7b3a60",
+            "t_us": 100000,
+            "phase": "post",
+            "key": "team",
+            "before": 19,
+            "requested": 8,
+            "accepted": 8,
+            "after": 11,
+            "delta": -8,
+            "reason": "spent",
+            "qualification_scope": "engine_declared_event",
+            "unit_scale": 10,
+            "quantity_unit": "atoms",
+            "unfulfilled": 0,
+            "qualified": true,
+            "succeeded": true,
+            "operation": "spend",
+            "spend_policy": "up_to_available",
+            "cooldown_until_us": 100000,
+            "cycle": 0,
+            "t": 0.1
+          },
+          {
+            "id": "pool:b1e015a8f75653d247a6d993a4830d7b6882f56576f04db203145e7058a65651",
+            "type": "operation",
+            "pool_id": "pool",
+            "source_id": "binding:reaction-income",
+            "operation_id": "reaction-income",
+            "event_id": "h0:reaction:0",
+            "run_id": "0:h0:reaction:0",
+            "t_us": 150000,
+            "phase": "post",
+            "key": "team",
+            "before": 11,
+            "requested": 3,
+            "accepted": 3,
+            "after": 14,
+            "delta": 3,
+            "reason": "granted",
+            "qualification_scope": "engine_declared_event",
+            "unit_scale": 10,
+            "quantity_unit": "atoms",
+            "wasted": 0,
+            "qualified": true,
+            "succeeded": true,
+            "operation": "grant",
+            "cooldown_until_us": 150000,
+            "cycle": 0,
+            "t": 0.15
+          },
+          {
+            "id": "pool:59f17c9e0351219dfbc23ce758879c94bfa9e30d4d269b8f80ad1de7f43cf2f5",
+            "type": "operation",
+            "pool_id": "pool",
+            "source_id": "source:field",
+            "operation_id": "refill",
+            "event_id": "@state_route:e5ef7e99b0f4fb2b681fd47df4a7a5fabbdce13c6d138bb9b9dfa60cde13255f",
+            "run_id": "@state_dispatch:c28022e0cef6ad140d80d8b9fd725cb147fa7c3b6f8019a0096897aa7d69d572",
+            "t_us": 200000,
+            "phase": "post",
+            "key": "team",
+            "before": 14,
+            "requested": 8,
+            "accepted": 8,
+            "after": 6,
+            "delta": -8,
+            "reason": "spent",
+            "qualification_scope": "engine_declared_event",
+            "unit_scale": 10,
+            "quantity_unit": "atoms",
+            "unfulfilled": 0,
+            "qualified": true,
+            "succeeded": true,
+            "operation": "spend",
+            "spend_policy": "up_to_available",
+            "cooldown_until_us": 200000,
+            "cycle": 0,
+            "t": 0.2
+          },
+          {
+            "id": "pool:05badeb142c0f1b65043dbfb3f665f3eecc2529be630e76d7ac18d2e4fcb1709",
+            "type": "operation",
+            "pool_id": "pool",
+            "source_id": "source:field",
+            "operation_id": "refill",
+            "event_id": "@state_route:e5ef7e99b0f4fb2b681fd47df4a7a5fabbdce13c6d138bb9b9dfa60cde13255f",
+            "run_id": "@state_dispatch:2b6e3820f12c0e27ab500baeddd5f1406d320d561d8f82c7b4397f72ab4b4505",
+            "t_us": 300000,
+            "phase": "post",
+            "key": "team",
+            "before": 6,
+            "requested": 8,
+            "accepted": 6,
+            "after": 0,
+            "delta": -6,
+            "reason": "spent",
+            "qualification_scope": "engine_declared_event",
+            "unit_scale": 10,
+            "quantity_unit": "atoms",
+            "unfulfilled": 2,
+            "qualified": true,
+            "succeeded": true,
+            "operation": "spend",
+            "spend_policy": "up_to_available",
+            "cooldown_until_us": 300000,
+            "cycle": 0,
+            "t": 0.3
+          },
+          {
+            "id": "pool:64a14b9537ed9783996487045caf924b5734f3208612d5db60efc8a9c8b78b62",
+            "type": "operation",
+            "pool_id": "pool",
+            "source_id": "binding:reaction-income",
+            "operation_id": "reaction-income",
+            "event_id": "h1:reaction:0",
+            "run_id": "0:h1:reaction:0",
+            "t_us": 350000,
+            "phase": "post",
+            "key": "team",
+            "before": 0,
+            "requested": 3,
+            "accepted": 3,
+            "after": 3,
+            "delta": 3,
+            "reason": "granted",
+            "qualification_scope": "engine_declared_event",
+            "unit_scale": 10,
+            "quantity_unit": "atoms",
+            "wasted": 0,
+            "qualified": true,
+            "succeeded": true,
+            "operation": "grant",
+            "cooldown_until_us": 350000,
+            "cycle": 0,
+            "t": 0.35
+          }
+        ],
+        "shared_pool_state": {
+          "balances": {
+            "pool": {
+              "team": 3
+            }
+          },
+          "cooldown_remaining_us": {
+            "refill": 0,
+            "reaction-income": 0
+          },
+          "quantity_unit": "atoms",
+          "unit_scales": {
+            "pool": 10
+          },
+          "resource_counters": {
+            "values": {
+              "count": {
+                "total": 22
+              }
+            },
+            "lifecycles": {
+              "field": {
+                "phase": "ended",
+                "established_observed": true,
+                "establishment_remaining_us": null,
+                "end_remaining_us": null
+              }
+            }
+          }
+        },
+        "resource_counters": {
+          "contract": "resource-counters-v1",
+          "execution": "mechanics_event_queue",
+          "scope": "declared_actual_spend_accounting",
+          "state": {
+            "values": {
+              "count": {
+                "total": 22
+              }
+            },
+            "lifecycles": {
+              "field": {
+                "phase": "ended",
+                "established_observed": true,
+                "establishment_remaining_us": null,
+                "end_remaining_us": null
+              }
+            }
+          },
+          "applied_state": {
+            "definition_fingerprint": "30dfa6e5a71c2a6f3b786c1af054878781e01bbaee7a4081c975b8b8c3c9cea3",
+            "last_control_sequence": 7,
+            "last_ledger_sequence": 5,
+            "last_time_us": 400000,
+            "active_dispatch": null,
+            "values": {
+              "count": {
+                "total": 22
+              }
+            },
+            "lifecycles": {
+              "field": {
+                "phase": "ended",
+                "generation_uid": "@generation:deda31b6239b858d6aeb6035e36326e9f4696b23356d9d33437365ed44d27204",
+                "revision": 1,
+                "created_us": 0,
+                "established_us": 0,
+                "end_us": 400000,
+                "established_observed": true,
+                "closing_us": 400000
+              }
+            }
+          },
+          "trace": [
+            {
+              "type": "counter_reset",
+              "counter_id": "count",
+              "source_id": "source:counter",
+              "lifecycle_id": "field",
+              "generation_uid": "@generation:deda31b6239b858d6aeb6035e36326e9f4696b23356d9d33437365ed44d27204",
+              "before": {
+                "total": 0
+              },
+              "after": {
+                "total": 0
+              },
+              "phase": "created",
+              "control_sequence": 1,
+              "time_us": 0
+            },
+            {
+              "type": "counter_window",
+              "counter_id": "count",
+              "source_id": "source:counter",
+              "lifecycle_id": "field",
+              "generation_uid": "@generation:deda31b6239b858d6aeb6035e36326e9f4696b23356d9d33437365ed44d27204",
+              "before": {
+                "total": 0
+              },
+              "after": {
+                "total": 0
+              },
+              "phase": "established",
+              "control_sequence": 2,
+              "time_us": 0
+            },
+            {
+              "type": "counter_accumulation",
+              "counter_id": "count",
+              "source_id": "source:counter",
+              "resource_receipt_id": "pool:1345072fb48c926161e648b1575a4d0b3d3278c0ec828bc9c82d62edcd17515c",
+              "ledger_sequence": 1,
+              "pool_id": "pool",
+              "key": "total",
+              "requested": 8,
+              "resource_accepted": 8,
+              "accepted": 8,
+              "before": 0,
+              "after": 8,
+              "unit_scale": 10,
+              "quantity_unit": "atoms",
+              "generation_uid": "@generation:deda31b6239b858d6aeb6035e36326e9f4696b23356d9d33437365ed44d27204",
+              "reason": "accumulated",
+              "time_us": 100000,
+              "lifecycle_id": "field",
+              "history_scope": "since_last_reset"
+            },
+            {
+              "type": "counter_accumulation",
+              "counter_id": "count",
+              "source_id": "source:counter",
+              "resource_receipt_id": "pool:59f17c9e0351219dfbc23ce758879c94bfa9e30d4d269b8f80ad1de7f43cf2f5",
+              "ledger_sequence": 3,
+              "pool_id": "pool",
+              "key": "total",
+              "requested": 8,
+              "resource_accepted": 8,
+              "accepted": 8,
+              "before": 8,
+              "after": 16,
+              "unit_scale": 10,
+              "quantity_unit": "atoms",
+              "generation_uid": "@generation:deda31b6239b858d6aeb6035e36326e9f4696b23356d9d33437365ed44d27204",
+              "reason": "accumulated",
+              "time_us": 200000,
+              "lifecycle_id": "field",
+              "history_scope": "since_last_reset"
+            },
+            {
+              "type": "counter_accumulation",
+              "counter_id": "count",
+              "source_id": "source:counter",
+              "resource_receipt_id": "pool:05badeb142c0f1b65043dbfb3f665f3eecc2529be630e76d7ac18d2e4fcb1709",
+              "ledger_sequence": 4,
+              "pool_id": "pool",
+              "key": "total",
+              "requested": 8,
+              "resource_accepted": 6,
+              "accepted": 6,
+              "before": 16,
+              "after": 22,
+              "unit_scale": 10,
+              "quantity_unit": "atoms",
+              "generation_uid": "@generation:deda31b6239b858d6aeb6035e36326e9f4696b23356d9d33437365ed44d27204",
+              "reason": "accumulated",
+              "time_us": 300000,
+              "lifecycle_id": "field",
+              "history_scope": "since_last_reset"
+            },
+            {
+              "type": "counter_window",
+              "counter_id": "count",
+              "source_id": "source:counter",
+              "lifecycle_id": "field",
+              "generation_uid": "@generation:deda31b6239b858d6aeb6035e36326e9f4696b23356d9d33437365ed44d27204",
+              "before": {
+                "total": 22
+              },
+              "after": {
+                "total": 22
+              },
+              "phase": "closing",
+              "control_sequence": 6,
+              "time_us": 400000
+            },
+            {
+              "type": "counter_window",
+              "counter_id": "count",
+              "source_id": "source:counter",
+              "lifecycle_id": "field",
+              "generation_uid": "@generation:deda31b6239b858d6aeb6035e36326e9f4696b23356d9d33437365ed44d27204",
+              "before": {
+                "total": 22
+              },
+              "after": {
+                "total": 22
+              },
+              "phase": "ended",
+              "control_sequence": 7,
+              "time_us": 400000
+            }
+          ],
+          "quantity_unit": "atoms",
+          "unit_scales": {
+            "pool": 10
+          },
+          "counter_units": {
+            "count": 10
+          },
+          "source_approval": "not_evaluated_by_engine",
+          "damage_projection": "unsupported",
+          "event_counts": {
+            "total": 43,
+            "limit": 40000
+          }
+        },
+        "state_runtime_trace": [
+          {
+            "type": "state_control_completed",
+            "kind": "lifecycle_start",
+            "control_sequence": 1,
+            "time_us": 0,
+            "lifecycle_id": "field",
+            "generation_uid": "@generation:deda31b6239b858d6aeb6035e36326e9f4696b23356d9d33437365ed44d27204",
+            "event_run_id": "0:cast"
+          },
+          {
+            "type": "state_control_completed",
+            "kind": "lifecycle_established",
+            "control_sequence": 2,
+            "time_us": 0,
+            "lifecycle_id": "field",
+            "generation_uid": "@generation:deda31b6239b858d6aeb6035e36326e9f4696b23356d9d33437365ed44d27204",
+            "event_run_id": "0:cast"
+          },
+          {
+            "type": "state_control_completed",
+            "kind": "dispatch",
+            "control_sequence": 3,
+            "time_us": 100000,
+            "lifecycle_id": "field",
+            "generation_uid": "@generation:deda31b6239b858d6aeb6035e36326e9f4696b23356d9d33437365ed44d27204",
+            "event_run_id": "@state:6f6a9644edff1da43dc3b47c86c8016977078245e163d0955222ce33ea620cab"
+          },
+          {
+            "type": "state_dispatch_completed",
+            "outcome": "resource_operation",
+            "run_id": "@state_dispatch:3ffb55bcd7a7957d419d4d853ecba2e9b60faa48f25ad83799465f35ef7b3a60",
+            "event": "timer_tick",
+            "lifecycle_id": "field",
+            "timer_id": "refresh",
+            "ordinal": 1,
+            "time_us": 100000,
+            "frame": "after_parent",
+            "payload": {
+              "kind": "resource_operation",
+              "ref_id": "refill"
+            },
+            "source_event_id": "cast",
+            "source_run_id": "0:cast",
+            "activation_count": 0,
+            "operation_count": 1,
+            "qualification": "existing_phase_filter_and_cooldown"
+          },
+          {
+            "type": "state_control_completed",
+            "kind": "dispatch",
+            "control_sequence": 4,
+            "time_us": 200000,
+            "lifecycle_id": "field",
+            "generation_uid": "@generation:deda31b6239b858d6aeb6035e36326e9f4696b23356d9d33437365ed44d27204",
+            "event_run_id": "@state:1a5cd7d4853e0aaa35837dd71de9483673667721b872ad7af62fbf4dcc9cc570"
+          },
+          {
+            "type": "state_dispatch_completed",
+            "outcome": "resource_operation",
+            "run_id": "@state_dispatch:c28022e0cef6ad140d80d8b9fd725cb147fa7c3b6f8019a0096897aa7d69d572",
+            "event": "timer_tick",
+            "lifecycle_id": "field",
+            "timer_id": "refresh",
+            "ordinal": 2,
+            "time_us": 200000,
+            "frame": "after_parent",
+            "payload": {
+              "kind": "resource_operation",
+              "ref_id": "refill"
+            },
+            "source_event_id": "cast",
+            "source_run_id": "0:cast",
+            "activation_count": 0,
+            "operation_count": 1,
+            "qualification": "existing_phase_filter_and_cooldown"
+          },
+          {
+            "type": "state_control_completed",
+            "kind": "dispatch",
+            "control_sequence": 5,
+            "time_us": 300000,
+            "lifecycle_id": "field",
+            "generation_uid": "@generation:deda31b6239b858d6aeb6035e36326e9f4696b23356d9d33437365ed44d27204",
+            "event_run_id": "@state:1df0d096212a375601ccc5725566380ef944201f0e45b2d58b5ca451bb56c65f"
+          },
+          {
+            "type": "state_dispatch_completed",
+            "outcome": "resource_operation",
+            "run_id": "@state_dispatch:2b6e3820f12c0e27ab500baeddd5f1406d320d561d8f82c7b4397f72ab4b4505",
+            "event": "timer_tick",
+            "lifecycle_id": "field",
+            "timer_id": "refresh",
+            "ordinal": 3,
+            "time_us": 300000,
+            "frame": "after_parent",
+            "payload": {
+              "kind": "resource_operation",
+              "ref_id": "refill"
+            },
+            "source_event_id": "cast",
+            "source_run_id": "0:cast",
+            "activation_count": 0,
+            "operation_count": 1,
+            "qualification": "existing_phase_filter_and_cooldown"
+          },
+          {
+            "type": "state_control_completed",
+            "kind": "lifecycle_closing",
+            "control_sequence": 6,
+            "time_us": 400000,
+            "lifecycle_id": "field",
+            "generation_uid": "@generation:deda31b6239b858d6aeb6035e36326e9f4696b23356d9d33437365ed44d27204",
+            "event_run_id": "@state:9c057f9d6332e09424323c25663bdfd28d7afa31a65b0c0d9101fad26c517205"
+          },
+          {
+            "type": "state_control_completed",
+            "kind": "lifecycle_end",
+            "control_sequence": 7,
+            "time_us": 400000,
+            "lifecycle_id": "field",
+            "generation_uid": "@generation:deda31b6239b858d6aeb6035e36326e9f4696b23356d9d33437365ed44d27204",
+            "event_run_id": "@state:9c057f9d6332e09424323c25663bdfd28d7afa31a65b0c0d9101fad26c517205"
+          }
+        ],
+        "state_runtime_state": {
+          "lifecycles": {
+            "field": {
+              "phase": "inactive"
+            }
+          },
+          "retained_captures": []
+        },
+        "state_runtime": {
+          "contract": "finite-state-mechanics-bridge-v1",
+          "engine_queue_integration": "mechanics_event_queue",
+          "status": "active",
+          "issued_trace": [
+            {
+              "type": "lifecycle_start",
+              "lifecycle_id": "field",
+              "generation_uid": "@generation:deda31b6239b858d6aeb6035e36326e9f4696b23356d9d33437365ed44d27204",
+              "revision": 1,
+              "time_us": 0,
+              "parent_run_id": "0:cast"
+            },
+            {
+              "type": "lifecycle_established",
+              "lifecycle_id": "field",
+              "generation_uid": "@generation:deda31b6239b858d6aeb6035e36326e9f4696b23356d9d33437365ed44d27204",
+              "revision": 1,
+              "time_us": 0
+            },
+            {
+              "type": "dispatch",
+              "lifecycle_id": "field",
+              "generation_uid": "@generation:deda31b6239b858d6aeb6035e36326e9f4696b23356d9d33437365ed44d27204",
+              "revision": 1,
+              "time_us": 100000,
+              "event": "timer_tick",
+              "owner": "a",
+              "source_id": "source:field",
+              "payload": {
+                "kind": "resource_operation",
+                "ref_id": "refill"
+              },
+              "order": 20,
+              "causal_parent": {
+                "event_id": "@state:6f6a9644edff1da43dc3b47c86c8016977078245e163d0955222ce33ea620cab",
+                "run_id": "@state:6f6a9644edff1da43dc3b47c86c8016977078245e163d0955222ce33ea620cab",
+                "t_us": 100000,
+                "order": 20,
+                "phase": "post",
+                "causal": []
+              },
+              "source_event": {
+                "event_id": "cast",
+                "run_id": "0:cast",
+                "t_us": 0,
+                "order": 0,
+                "phase": "post",
+                "causal": []
+              },
+              "frame": "after_parent",
+              "qualification": "not_evaluated",
+              "timer_id": "refresh",
+              "ordinal": 1,
+              "run_id": "@state_dispatch:3ffb55bcd7a7957d419d4d853ecba2e9b60faa48f25ad83799465f35ef7b3a60"
+            },
+            {
+              "type": "dispatch",
+              "lifecycle_id": "field",
+              "generation_uid": "@generation:deda31b6239b858d6aeb6035e36326e9f4696b23356d9d33437365ed44d27204",
+              "revision": 1,
+              "time_us": 200000,
+              "event": "timer_tick",
+              "owner": "a",
+              "source_id": "source:field",
+              "payload": {
+                "kind": "resource_operation",
+                "ref_id": "refill"
+              },
+              "order": 20,
+              "causal_parent": {
+                "event_id": "@state:1a5cd7d4853e0aaa35837dd71de9483673667721b872ad7af62fbf4dcc9cc570",
+                "run_id": "@state:1a5cd7d4853e0aaa35837dd71de9483673667721b872ad7af62fbf4dcc9cc570",
+                "t_us": 200000,
+                "order": 20,
+                "phase": "post",
+                "causal": []
+              },
+              "source_event": {
+                "event_id": "cast",
+                "run_id": "0:cast",
+                "t_us": 0,
+                "order": 0,
+                "phase": "post",
+                "causal": []
+              },
+              "frame": "after_parent",
+              "qualification": "not_evaluated",
+              "timer_id": "refresh",
+              "ordinal": 2,
+              "run_id": "@state_dispatch:c28022e0cef6ad140d80d8b9fd725cb147fa7c3b6f8019a0096897aa7d69d572"
+            },
+            {
+              "type": "dispatch",
+              "lifecycle_id": "field",
+              "generation_uid": "@generation:deda31b6239b858d6aeb6035e36326e9f4696b23356d9d33437365ed44d27204",
+              "revision": 1,
+              "time_us": 300000,
+              "event": "timer_tick",
+              "owner": "a",
+              "source_id": "source:field",
+              "payload": {
+                "kind": "resource_operation",
+                "ref_id": "refill"
+              },
+              "order": 20,
+              "causal_parent": {
+                "event_id": "@state:1df0d096212a375601ccc5725566380ef944201f0e45b2d58b5ca451bb56c65f",
+                "run_id": "@state:1df0d096212a375601ccc5725566380ef944201f0e45b2d58b5ca451bb56c65f",
+                "t_us": 300000,
+                "order": 20,
+                "phase": "post",
+                "causal": []
+              },
+              "source_event": {
+                "event_id": "cast",
+                "run_id": "0:cast",
+                "t_us": 0,
+                "order": 0,
+                "phase": "post",
+                "causal": []
+              },
+              "frame": "after_parent",
+              "qualification": "not_evaluated",
+              "timer_id": "refresh",
+              "ordinal": 3,
+              "run_id": "@state_dispatch:2b6e3820f12c0e27ab500baeddd5f1406d320d561d8f82c7b4397f72ab4b4505"
+            },
+            {
+              "type": "lifecycle_end",
+              "lifecycle_id": "field",
+              "generation_uid": "@generation:deda31b6239b858d6aeb6035e36326e9f4696b23356d9d33437365ed44d27204",
+              "revision": 1,
+              "time_us": 400000,
+              "reason": "natural_expiry"
+            }
+          ],
+          "execution_trace": [
+            {
+              "type": "state_control_completed",
+              "kind": "lifecycle_start",
+              "control_sequence": 1,
+              "time_us": 0,
+              "lifecycle_id": "field",
+              "generation_uid": "@generation:deda31b6239b858d6aeb6035e36326e9f4696b23356d9d33437365ed44d27204",
+              "event_run_id": "0:cast"
+            },
+            {
+              "type": "state_control_completed",
+              "kind": "lifecycle_established",
+              "control_sequence": 2,
+              "time_us": 0,
+              "lifecycle_id": "field",
+              "generation_uid": "@generation:deda31b6239b858d6aeb6035e36326e9f4696b23356d9d33437365ed44d27204",
+              "event_run_id": "0:cast"
+            },
+            {
+              "type": "state_control_completed",
+              "kind": "dispatch",
+              "control_sequence": 3,
+              "time_us": 100000,
+              "lifecycle_id": "field",
+              "generation_uid": "@generation:deda31b6239b858d6aeb6035e36326e9f4696b23356d9d33437365ed44d27204",
+              "event_run_id": "@state:6f6a9644edff1da43dc3b47c86c8016977078245e163d0955222ce33ea620cab"
+            },
+            {
+              "type": "state_dispatch_completed",
+              "outcome": "resource_operation",
+              "run_id": "@state_dispatch:3ffb55bcd7a7957d419d4d853ecba2e9b60faa48f25ad83799465f35ef7b3a60",
+              "event": "timer_tick",
+              "lifecycle_id": "field",
+              "timer_id": "refresh",
+              "ordinal": 1,
+              "time_us": 100000,
+              "frame": "after_parent",
+              "payload": {
+                "kind": "resource_operation",
+                "ref_id": "refill"
+              },
+              "source_event_id": "cast",
+              "source_run_id": "0:cast",
+              "activation_count": 0,
+              "operation_count": 1,
+              "qualification": "existing_phase_filter_and_cooldown"
+            },
+            {
+              "type": "state_control_completed",
+              "kind": "dispatch",
+              "control_sequence": 4,
+              "time_us": 200000,
+              "lifecycle_id": "field",
+              "generation_uid": "@generation:deda31b6239b858d6aeb6035e36326e9f4696b23356d9d33437365ed44d27204",
+              "event_run_id": "@state:1a5cd7d4853e0aaa35837dd71de9483673667721b872ad7af62fbf4dcc9cc570"
+            },
+            {
+              "type": "state_dispatch_completed",
+              "outcome": "resource_operation",
+              "run_id": "@state_dispatch:c28022e0cef6ad140d80d8b9fd725cb147fa7c3b6f8019a0096897aa7d69d572",
+              "event": "timer_tick",
+              "lifecycle_id": "field",
+              "timer_id": "refresh",
+              "ordinal": 2,
+              "time_us": 200000,
+              "frame": "after_parent",
+              "payload": {
+                "kind": "resource_operation",
+                "ref_id": "refill"
+              },
+              "source_event_id": "cast",
+              "source_run_id": "0:cast",
+              "activation_count": 0,
+              "operation_count": 1,
+              "qualification": "existing_phase_filter_and_cooldown"
+            },
+            {
+              "type": "state_control_completed",
+              "kind": "dispatch",
+              "control_sequence": 5,
+              "time_us": 300000,
+              "lifecycle_id": "field",
+              "generation_uid": "@generation:deda31b6239b858d6aeb6035e36326e9f4696b23356d9d33437365ed44d27204",
+              "event_run_id": "@state:1df0d096212a375601ccc5725566380ef944201f0e45b2d58b5ca451bb56c65f"
+            },
+            {
+              "type": "state_dispatch_completed",
+              "outcome": "resource_operation",
+              "run_id": "@state_dispatch:2b6e3820f12c0e27ab500baeddd5f1406d320d561d8f82c7b4397f72ab4b4505",
+              "event": "timer_tick",
+              "lifecycle_id": "field",
+              "timer_id": "refresh",
+              "ordinal": 3,
+              "time_us": 300000,
+              "frame": "after_parent",
+              "payload": {
+                "kind": "resource_operation",
+                "ref_id": "refill"
+              },
+              "source_event_id": "cast",
+              "source_run_id": "0:cast",
+              "activation_count": 0,
+              "operation_count": 1,
+              "qualification": "existing_phase_filter_and_cooldown"
+            },
+            {
+              "type": "state_control_completed",
+              "kind": "lifecycle_closing",
+              "control_sequence": 6,
+              "time_us": 400000,
+              "lifecycle_id": "field",
+              "generation_uid": "@generation:deda31b6239b858d6aeb6035e36326e9f4696b23356d9d33437365ed44d27204",
+              "event_run_id": "@state:9c057f9d6332e09424323c25663bdfd28d7afa31a65b0c0d9101fad26c517205"
+            },
+            {
+              "type": "state_control_completed",
+              "kind": "lifecycle_end",
+              "control_sequence": 7,
+              "time_us": 400000,
+              "lifecycle_id": "field",
+              "generation_uid": "@generation:deda31b6239b858d6aeb6035e36326e9f4696b23356d9d33437365ed44d27204",
+              "event_run_id": "@state:9c057f9d6332e09424323c25663bdfd28d7afa31a65b0c0d9101fad26c517205"
+            }
+          ],
+          "source_approval": "not_evaluated_by_engine",
+          "state": {
+            "lifecycles": {
+              "field": {
+                "phase": "inactive"
+              }
+            },
+            "retained_captures": []
+          },
+          "execution_status": "unproven",
+          "event_counts": {
+            "total": 43,
+            "limit": 40000
+          }
+        },
+        "buff_state_timeline": {
+          "contract": "buff-state-timeline-v1",
+          "version": 1,
+          "duration": 1,
+          "execution_limit": 1,
+          "execution_status": "unproven",
+          "states": [],
+          "excluded": [],
+          "notes": [
+            "持续条表示声明规则或明确输入区间的状态；筛选、前台限制、目标条件和快照取样仍以逐击计算为准。",
+            "区间右端不包含；同刻事件的先后与该次命中收益请查看计算流水。"
+          ]
+        }
+      },
+      "summary": {
+        "status": "unproven",
+        "issues": [],
+        "expected": [
+          45.0,
+          781.299,
+          45.0,
+          781.299
+        ],
+        "operations": [
+          {
+            "operation": "refill",
+            "run_id": "@state_dispatch:3ffb55bcd7a7957d419d4d853ecba2e9b60faa48f25ad83799465f35ef7b3a60",
+            "accepted": 8,
+            "after": 11,
+            "reason": "spent"
+          },
+          {
+            "operation": "reaction-income",
+            "run_id": "0:h0:reaction:0",
+            "accepted": 3,
+            "after": 14,
+            "reason": "granted"
+          },
+          {
+            "operation": "refill",
+            "run_id": "@state_dispatch:c28022e0cef6ad140d80d8b9fd725cb147fa7c3b6f8019a0096897aa7d69d572",
+            "accepted": 8,
+            "after": 6,
+            "reason": "spent"
+          },
+          {
+            "operation": "refill",
+            "run_id": "@state_dispatch:2b6e3820f12c0e27ab500baeddd5f1406d320d561d8f82c7b4397f72ab4b4505",
+            "accepted": 6,
+            "after": 0,
+            "reason": "spent"
+          },
+          {
+            "operation": "reaction-income",
+            "run_id": "0:h1:reaction:0",
+            "accepted": 3,
+            "after": 3,
+            "reason": "granted"
+          }
+        ]
+      }
+    }
+  }
+}

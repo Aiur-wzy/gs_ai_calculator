@@ -1,0 +1,1030 @@
+{
+  "schema_version": 1,
+  "id": "character-action-appendices-v1",
+  "items": [
+    {
+      "id": "appendix.ayaka.burst-timing-icd.v1",
+      "target_type": "skill",
+      "target_id": 10019,
+      "version_line": "release",
+      "category": "action_dispatch",
+      "title": "神里绫华元素爆发动作时序与附着候选",
+      "conclusion": "霜灭的切割伤害使用普通元素附着序列；60帧制资料给出的施放命中标记约104帧，爆发后可接战技约124帧。",
+      "conditions": "单目标完整承受霜灭；命中时点从动作开始计，附着按切割伤害自身序列判定。",
+      "numeric_pattern": "切割伤害为普通3次命中/2.5秒附着规则；动作候选hitmark约104f，Q→E约124f。",
+      "exceptions": "19次切割加1次绽放及快照结论已在stable-facts记录；本事实不定义动作结束与取消时点。",
+      "unconfirmed": "首段切割、各段间隔、末段绽放的逐帧时点及绽放是否与切割共享同一计数器仍待当前版本独立复验。",
+      "status": "pending",
+      "sources": [
+        {
+          "title": "KQM TCL：Kamisato Ayaka Evidence",
+          "url": "https://library.keqingmains.com/evidence/characters/cryo/kamisato-ayaka",
+          "locator": "Burst Mechanics：20 ticks、Cutting DMG standard ICD",
+          "source_version": "网页历史测试条目；查阅日快照",
+          "source_date": null,
+          "retrieved_at": "2026-10-21"
+        },
+        {
+          "title": "gcsim Ayaka burst.go（固定提交）",
+          "url": "https://github.com/genshinsim/gcsim/blob/8792c73d64439feb74fa139c3b745022952b3dc9/internal/characters/ayaka/burst.go",
+          "locator": "Burst action frame、hit callbacks与attack info",
+          "source_version": "8792c73d64439feb74fa139c3b745022952b3dc9",
+          "source_date": null,
+          "retrieved_at": "2026-10-21"
+        }
+      ]
+    },
+    {
+      "id": "appendix.shenhe.skill-quill-lifecycle.v1",
+      "target_type": "skill",
+      "target_id": 10632,
+      "version_line": "release",
+      "category": "action_lifecycle",
+      "title": "申鹤元素战技冰翎生命周期候选",
+      "conclusion": "点按与长按分别建立5层/10秒和7层/15秒冰翎；各受益角色独立计数，重施以最新一次点按或长按的上限和持续时间重置。",
+      "conditions": "角色造成满足类型条件的冰元素伤害时消耗其自己的冰翎次数；基础区加成读取申鹤当前攻击力。",
+      "numeric_pattern": "点按：1U、无ICD、5翎、10秒、CD10秒；长按：2U、无ICD、7翎、15秒、CD15秒；等级10系数候选0.82180798×当前攻击力。",
+      "exceptions": "产球和动态取值已在stable-facts记录；本项只补充次数、持续时间、重施和动作分支。",
+      "unconfirmed": "精确赋予帧、同帧伤害与冰翎建立先后、多人/多目标消耗边界和当前版本系数仍待独立复验。",
+      "status": "pending",
+      "sources": [
+        {
+          "title": "KQM TCL：Shenhe",
+          "url": "https://library.keqingmains.com/characters/cryo/shenhe",
+          "locator": "Spring Spirit Summoning表格与Icy Quill说明",
+          "source_version": "网页查阅日快照",
+          "source_date": null,
+          "retrieved_at": "2026-10-21"
+        },
+        {
+          "title": "gcsim Shenhe skill.go（固定提交）",
+          "url": "https://github.com/genshinsim/gcsim/blob/8792c73d64439feb74fa139c3b745022952b3dc9/internal/characters/shenhe/skill.go",
+          "locator": "press/hold action、quill stacks、duration与ICD配置",
+          "source_version": "8792c73d64439feb74fa139c3b745022952b3dc9",
+          "source_date": null,
+          "retrieved_at": "2026-10-21"
+        }
+      ]
+    },
+    {
+      "id": "appendix.shenhe.burst-timing-icd.v1",
+      "target_type": "skill",
+      "target_id": 10635,
+      "version_line": "release",
+      "category": "periodic_attack",
+      "title": "申鹤元素爆发初段与持续段时序候选",
+      "conclusion": "爆发初段与持续伤害使用彼此独立的附着序列；持续伤害使用普通附着规则。初段动态取值，持续伤害快照攻击类增益但场内A1为动态效果。",
+      "conditions": "领域成功建立且目标持续处于范围内；动作与周期时点按60帧制候选解释。",
+      "numeric_pattern": "初段/持续段均为1U；hitmark约79f，首个DoT约129f；持续12秒，共12次持续伤害，约每2秒两次；减抗在领域结束后约残留2秒。",
+      "exceptions": "12次伤害与约每2秒两次已在stable-facts记录；本项补充两组ICD、逐帧候选、快照和尾留。",
+      "unconfirmed": "每组双击内部精确帧距、领域建立帧、尾留边界及当前版本快照清单仍待独立复验。",
+      "status": "pending",
+      "sources": [
+        {
+          "title": "KQM TCL：Shenhe Evidence",
+          "url": "https://library.keqingmains.com/evidence/characters/cryo/shenhe",
+          "locator": "Basic Mechanics ICDs、Burst Mechanics、shred persists 2 seconds",
+          "source_version": "历史测试版本2.4/2.5；网页查阅日快照",
+          "source_date": null,
+          "retrieved_at": "2026-10-21"
+        },
+        {
+          "title": "gcsim Shenhe burst.go（固定提交）",
+          "url": "https://github.com/genshinsim/gcsim/blob/8792c73d64439feb74fa139c3b745022952b3dc9/internal/characters/shenhe/burst.go",
+          "locator": "burst action frames、tick callbacks与attack info",
+          "source_version": "8792c73d64439feb74fa139c3b745022952b3dc9",
+          "source_date": null,
+          "retrieved_at": "2026-10-21"
+        }
+      ]
+    },
+    {
+      "id": "appendix.kazuha.skill-plunge-timing.v1",
+      "target_type": "skill",
+      "target_id": 10474,
+      "version_line": "release",
+      "category": "action_dispatch",
+      "title": "枫原万叶下落攻击·乱岚拨止派发候选",
+      "conclusion": "乱岚拨止是千早振后由玩家另行输入的下落攻击，具有独立的下落攻击伤害与独立附着事件，不能合并为千早振本体命中。",
+      "conditions": "千早振成功将枫原万叶抬升，随后在允许窗口内实际执行下落攻击。",
+      "numeric_pattern": "风元素下落攻击组件为1U且无ICD；技能状态最长可保留约10秒，实际动作时点由下落输入决定。",
+      "exceptions": "只施放千早振而不输入下落攻击时不得自动生成乱岚拨止；相闻之剑法的元素转化附加伤害属于另一固有天赋组件。",
+      "unconfirmed": "速降的场景占用、落地帧、低空/高空分支、命中停顿和多目标扩散传播仍待独立复验。",
+      "status": "pending",
+      "sources": [
+        {
+          "title": "KQM TCL：Kaedehara Kazuha",
+          "url": "https://library.keqingmains.com/characters/anemo/kaedehara-kazuha",
+          "locator": "Chihayaburu、Midare Ranzan与Frames/Skill表格",
+          "source_version": "网页查阅日快照",
+          "source_date": null,
+          "retrieved_at": "2026-10-21"
+        },
+        {
+          "title": "gcsim Kazuha skill.go（固定提交）",
+          "url": "https://github.com/genshinsim/gcsim/blob/8792c73d64439feb74fa139c3b745022952b3dc9/internal/characters/kazuha/skill.go",
+          "locator": "press/hold action frames、plunge状态与attack info",
+          "source_version": "8792c73d64439feb74fa139c3b745022952b3dc9",
+          "source_date": null,
+          "retrieved_at": "2026-10-21"
+        }
+      ]
+    },
+    {
+      "id": "appendix.kazuha.skill-branch-timing.v1",
+      "target_type": "skill",
+      "target_id": 10472,
+      "version_line": "release",
+      "category": "action_dispatch",
+      "title": "枫原万叶元素战技点按与长按分支候选",
+      "conclusion": "点按和长按千早振是两个动作分支，具有不同命中时点、元素量、产球与冷却；两者本体均无ICD。",
+      "conditions": "选择点按或长按分支且千早振本体命中有效目标。",
+      "numeric_pattern": "点按hitmark约10f、1U风、3枚风元素微粒、CD6秒；长按约33f、2U风、4枚风元素微粒、CD9秒；两者均无ICD。",
+      "exceptions": "本体命中不等于随后一定执行乱岚拨止；下落攻击与相闻之剑法元素转化必须按各自角色组件另行派发。",
+      "unconfirmed": "动作取消帧、受卡肉影响的占用、多目标吸附顺序及各分支当前版本精确帧仍待独立复验。",
+      "status": "pending",
+      "sources": [
+        {
+          "title": "KQM TCL：Kaedehara Kazuha",
+          "url": "https://library.keqingmains.com/characters/anemo/kaedehara-kazuha",
+          "locator": "Chihayaburu、Midare Ranzan与Frames/Skill表格",
+          "source_version": "网页查阅日快照",
+          "source_date": null,
+          "retrieved_at": "2026-10-21"
+        },
+        {
+          "title": "gcsim Kazuha skill.go（固定提交）",
+          "url": "https://github.com/genshinsim/gcsim/blob/8792c73d64439feb74fa139c3b745022952b3dc9/internal/characters/kazuha/skill.go",
+          "locator": "press/hold action frames、plunge状态与attack info",
+          "source_version": "8792c73d64439feb74fa139c3b745022952b3dc9",
+          "source_date": null,
+          "retrieved_at": "2026-10-21"
+        }
+      ]
+    },
+    {
+      "id": "appendix.kazuha.a1-midare-elemental-conversion.v1",
+      "target_type": "inherent_skill",
+      "target_id": 4721,
+      "version_line": "release",
+      "category": "action_dispatch",
+      "title": "枫原万叶固有天赋「相闻之剑法」元素转化候选",
+      "conclusion": "千早振施放时接触水、火、冰或雷元素后，本次千早振对应的乱岚拨止会额外派发一段所吸收元素的下落攻击伤害；每次千早振至多发生一次元素转化。",
+      "conditions": "已解锁固有天赋，千早振成功接触可吸收元素，并在效果有效期内实际执行乱岚拨止。",
+      "numeric_pattern": "额外伤害为200%攻击力、1U、伤害类型为下落攻击；吸收优先级候选为火>水>雷>冰；该元素组件在风元素乱岚拨止之前结算。",
+      "exceptions": "这是乱岚拨止的元素转化附加组件，不是万叶之一刀领域的元素转化；没有执行下落攻击时不生成该伤害。",
+      "unconfirmed": "同优先级来源选择、精确吸收判定帧、自附着异常及元素组件与风伤的同帧排序仍待当前版本独立复验。",
+      "status": "pending",
+      "sources": [
+        {
+          "title": "KQM TCL：Kaedehara Kazuha",
+          "url": "https://library.keqingmains.com/characters/anemo/kaedehara-kazuha",
+          "locator": "Chihayaburu、Midare Ranzan与Frames/Skill表格",
+          "source_version": "网页查阅日快照",
+          "source_date": null,
+          "retrieved_at": "2026-10-21"
+        }
+      ]
+    },
+    {
+      "id": "appendix.kazuha.burst-periodic-timing.v1",
+      "target_type": "skill",
+      "target_id": 10475,
+      "version_line": "release",
+      "category": "periodic_attack",
+      "title": "枫原万叶元素爆发周期与染色附着候选",
+      "conclusion": "万叶之一刀由初始斩击和5次领域持续伤害组成；斩击、风元素持续伤害和染色附着应作为可区分组件派发。",
+      "conditions": "领域完整持续且目标留在范围内；染色只在领域成功吸收一种可吸收元素后生成。",
+      "numeric_pattern": "快照候选81f、斩击约82f、首个DoT约140f、后续约117f间隔；斩击2U且无ICD，风DoT 1U，染色附着1U；吸收优先级火>水>雷>冰；持续8秒、CD15秒、能量60。",
+      "exceptions": "5次持续伤害已在stable-facts记录；未吸收元素时不得生成染色组件。",
+      "unconfirmed": "领域各跳的精确帧、风DoT与染色伤害的同帧顺序、各自ICD组和目标选择仍待独立复验。",
+      "status": "pending",
+      "sources": [
+        {
+          "title": "KQM TCL：Kaedehara Kazuha",
+          "url": "https://library.keqingmains.com/characters/anemo/kaedehara-kazuha",
+          "locator": "Kazuha Slash、吸收优先级与Frames/Burst表格",
+          "source_version": "网页查阅日快照",
+          "source_date": null,
+          "retrieved_at": "2026-10-21"
+        },
+        {
+          "title": "gcsim Kazuha burst.go（固定提交）",
+          "url": "https://github.com/genshinsim/gcsim/blob/8792c73d64439feb74fa139c3b745022952b3dc9/internal/characters/kazuha/burst.go",
+          "locator": "burst action、periodic callbacks、absorb element与attack info",
+          "source_version": "8792c73d64439feb74fa139c3b745022952b3dc9",
+          "source_date": null,
+          "retrieved_at": "2026-10-21"
+        }
+      ]
+    },
+    {
+      "id": "appendix.kazuha.c2-em-field.v1",
+      "target_type": "talent",
+      "target_id": 472,
+      "version_line": "release",
+      "category": "action_lifecycle",
+      "title": "枫原万叶二命「山岚残芯」领域元素精通增益候选",
+      "conclusion": "二命解锁后，万叶之一刀生成的流风秋野持续期间，枫原万叶自身获得200点元素精通；当前场上角色仅在流风秋野范围内获得200点元素精通。两条由同一命座提供的增益不叠加，因此万叶本人处于场上且在领域内时仍只获得200点。",
+      "conditions": "角色命座至少为2且本次元素爆发已经生成流风秋野。万叶自身分支以领域仍存在为条件；场上角色分支还要求该角色处于领域范围内。",
+      "numeric_pattern": "self_em_add=200；active_in_field_em_add=200；stacking=unique/non-stack；增益随流风秋野存在，Q资料给出的领域持续时间为8秒。",
+      "exceptions": "除万叶外的后台角色不直接获得该命座增益；其他来源的元素精通增益按各自规则共存。不得把“万叶自身”与“场上角色”两条相加为400点。",
+      "unconfirmed": "命座增益相对Q初始斩击的精确生效帧、角色进入或离开领域后的刷新频率与尾随时间、领域边缘的精确空间判定仍待当前版本独立复验。",
+      "status": "pending",
+      "sources": [
+        {
+          "title": "KQM TCL：Kaedehara Kazuha",
+          "url": "https://library.keqingmains.com/characters/anemo/kaedehara-kazuha",
+          "locator": "Constellations / C2 Yamaarashi Tailwind",
+          "source_version": "网页查阅日快照",
+          "source_date": null,
+          "retrieved_at": "2026-10-21"
+        },
+        {
+          "title": "gcsim Kazuha cons.go（固定提交）",
+          "url": "https://github.com/genshinsim/gcsim/blob/8792c73d64439feb74fa139c3b745022952b3dc9/internal/characters/kazuha/cons.go",
+          "locator": "c2：Q领域生命周期、场内当前角色与万叶自身分支、同一角色去重",
+          "source_version": "8792c73d64439feb74fa139c3b745022952b3dc9",
+          "source_date": null,
+          "retrieved_at": "2026-10-21"
+        }
+      ]
+    },
+    {
+      "id": "appendix.kazuha.a4-elemental-bonus.v1",
+      "target_type": "inherent_skill",
+      "target_id": 4722,
+      "version_line": "release",
+      "category": "mechanics",
+      "title": "枫原万叶固有天赋「风物之诗咏」触发与刷新候选",
+      "conclusion": "枫原万叶触发具备对应元素归属的扩散或星扩散后，按触发瞬间万叶的元素精通，为全队提供对应元素伤害加成。万叶处于后台不妨碍其后台伤害触发；同一元素再次触发时按当次元素精通重新取样并刷新覆盖，火、水、雷、冰各元素增益可以同时存在。",
+      "conditions": "反应归属必须是枫原万叶，且反应结果明确给出被扩散或星扩散的元素；普通扩散分支为火、水、雷、冰。",
+      "numeric_pattern": "element_dmg_bonus=Kazuha_EM_at_trigger×0.0004；duration=8秒；same_element=unique/replace+refresh；different_elements=coexist；beneficiary=all_party。",
+      "exceptions": "同一元素多次触发不累加；新触发可按更高或更低的当前元素精通覆盖旧值。增益元素由实际扩散反应元素决定，不能用Q的元素转化元素或伤害事件元素代替反应结果。",
+      "unconfirmed": "星扩散各元素分支的元素归属、多个元素同帧触发顺序及特殊附魔攻击所触发扩散的资格边界仍待当前版本独立复验。",
+      "status": "pending",
+      "sources": [
+        {
+          "title": "KQM TCL：Kaedehara Kazuha",
+          "url": "https://library.keqingmains.com/characters/anemo/kaedehara-kazuha",
+          "locator": "Ascension Passives / Poetics of Fuubutsu / Notes",
+          "source_version": "网页查阅日快照",
+          "source_date": null,
+          "retrieved_at": "2026-10-21"
+        },
+        {
+          "title": "KQM Evidence：Kaedehara Kazuha",
+          "url": "https://library.keqingmains.com/evidence/characters/anemo/kaedehara-kazuha",
+          "locator": "Ascension Mechanics / A4: Poetics of Fuubutsu；Kazuha's Dynamically Changing Buff",
+          "source_version": "测试条目v2.6；网页查阅日快照",
+          "source_date": "2022-04-09",
+          "retrieved_at": "2026-10-21"
+        }
+      ]
+    },
+    {
+      "id": "appendix.kokomi.skill-application-refresh.v1",
+      "target_type": "skill",
+      "target_id": 10542,
+      "version_line": "release",
+      "category": "action_lifecycle",
+      "title": "珊瑚宫心海元素战技水母周期与附着候选",
+      "conclusion": "化海月的每次伤害为1U水且无ICD；水母伤害按自身周期持续派发，并沿用建立时的战技快照。",
+      "conditions": "化海月实例仍存在，且目标处于水母伤害范围。",
+      "numeric_pattern": "战技持续12秒、CD20秒；首命中约24f、第二次约150f，之后约每2秒；动作换人候选约60f。",
+      "exceptions": "周期、产球和快照基础结论已在stable-facts记录；爆发刷新属于海人化羽的角色组件，不写入本战技事实。",
+      "unconfirmed": "各周期精确帧、范围边界、多目标命中顺序和实例销毁时点仍待当前版本独立复验。",
+      "status": "pending",
+      "sources": [
+        {
+          "title": "KQM TCL：Sangonomiya Kokomi",
+          "url": "https://library.keqingmains.com/characters/hydro/sangonomiya-kokomi",
+          "locator": "Kurage's Oath、Nereid's Ascension与技能完整数值表",
+          "source_version": "网页查阅日快照",
+          "source_date": null,
+          "retrieved_at": "2026-10-21"
+        },
+        {
+          "title": "KQM TCL：Kokomi Evidence",
+          "url": "https://library.keqingmains.com/evidence/characters/hydro/sangonomiya-kokomi",
+          "locator": "Basic Mechanics ICD与Bake-Kurage refresh timing",
+          "source_version": "网页历史测试条目；查阅日快照",
+          "source_date": null,
+          "retrieved_at": "2026-10-21"
+        }
+      ]
+    },
+    {
+      "id": "appendix.kokomi.burst-jellyfish-refresh.v1",
+      "target_type": "skill",
+      "target_id": 10545,
+      "version_line": "release",
+      "category": "action_lifecycle",
+      "title": "珊瑚宫心海元素爆发刷新化海月候选",
+      "conclusion": "海人化羽只刷新爆发动画结束时仍存在的化海月剩余持续时间；它不重新创建已经消失的水母，也不让现存水母重新快照元素战技属性。",
+      "conditions": "爆发动画结束帧存在有效化海月实例。",
+      "numeric_pattern": "refresh=existing_instance_duration_reset；recreate=false；resnapshot=false；刷新判定发生在爆发动画结束时。",
+      "exceptions": "若化海月在爆发完成前消失则不刷新；刷新不能留下旧、新两组并行周期。",
+      "unconfirmed": "爆发动画结束与水母到期同帧时的精确顺序、刷新后的首个周期相位和多实例异常边界仍待当前版本独立复验。",
+      "status": "pending",
+      "sources": [
+        {
+          "title": "KQM TCL：Sangonomiya Kokomi",
+          "url": "https://library.keqingmains.com/characters/hydro/sangonomiya-kokomi",
+          "locator": "Kurage's Oath、Nereid's Ascension与技能完整数值表",
+          "source_version": "网页查阅日快照",
+          "source_date": null,
+          "retrieved_at": "2026-10-21"
+        },
+        {
+          "title": "KQM TCL：Kokomi Evidence",
+          "url": "https://library.keqingmains.com/evidence/characters/hydro/sangonomiya-kokomi",
+          "locator": "Basic Mechanics ICD与Bake-Kurage refresh timing",
+          "source_version": "网页历史测试条目；查阅日快照",
+          "source_date": null,
+          "retrieved_at": "2026-10-21"
+        }
+      ]
+    },
+    {
+      "id": "appendix.diluc.normal-application-group.v1",
+      "target_type": "skill",
+      "target_id": 10160,
+      "version_line": "release",
+      "category": "action_dispatch",
+      "title": "迪卢克普通攻击动作与附着组候选",
+      "conclusion": "火附魔后的普通攻击使用普通攻击自己的标准附着组；该组与元素战技、元素爆发彼此独立。",
+      "conditions": "武器处于火元素附魔，动作按N1至N4语义派发。",
+      "numeric_pattern": "60帧制命中候选N1-N4=[24,39,26,49]f；动作占用候选=[32,46,34,99]f；附着为标准3次命中/2.5秒。",
+      "exceptions": "物理普通攻击不生成火附着；元素战技与爆发不得共用本组计数器；六命的连段保持另挂命座事实。",
+      "unconfirmed": "攻速、命中停顿、取消方式对动作时长的修正及当前版本帧数仍待独立复验。",
+      "status": "pending",
+      "sources": [
+        {
+          "title": "KQM TCL：Diluc",
+          "url": "https://library.keqingmains.com/characters/pyro/diluc",
+          "locator": "Normal Attacks、Frames/NA与C6说明",
+          "source_version": "网页查阅日快照",
+          "source_date": null,
+          "retrieved_at": "2026-10-21"
+        },
+        {
+          "title": "gcsim Diluc attack.go（固定提交）",
+          "url": "https://github.com/genshinsim/gcsim/blob/8792c73d64439feb74fa139c3b745022952b3dc9/internal/characters/diluc/attack.go",
+          "locator": "normal action frames与ICD attack tags",
+          "source_version": "8792c73d64439feb74fa139c3b745022952b3dc9",
+          "source_date": null,
+          "retrieved_at": "2026-10-21"
+        }
+      ]
+    },
+    {
+      "id": "appendix.diluc.c6-normal-chain-retention.v1",
+      "target_type": "talent",
+      "target_id": 166,
+      "version_line": "release",
+      "category": "action_lifecycle",
+      "title": "迪卢克六命战技插入与普攻连段保持候选",
+      "conclusion": "六命解锁后，施放逆焰之刃不会打断普通攻击连击段数；每次施放后6秒内的后续2次普通攻击获得攻击速度与伤害提升。",
+      "conditions": "角色命座至少为6，逆焰之刃成功施放，并在6秒窗口内继续普通攻击。",
+      "numeric_pattern": "duration=6秒；affected_normal_attacks=2；attack_speed_add=30%；damage_bonus=30%；normal_chain_reset=false。",
+      "exceptions": "命座保持普攻段数不代表重置普通攻击附着计数器；元素战技仍使用其自身独立附着身份。",
+      "unconfirmed": "增益生效相对战技命中的精确帧、不同段战技重复施放后的次数池刷新和取消动作边界仍待当前版本独立复验。",
+      "status": "pending",
+      "sources": [
+        {
+          "title": "KQM TCL：Diluc",
+          "url": "https://library.keqingmains.com/characters/pyro/diluc",
+          "locator": "Normal Attacks、Frames/NA与C6说明",
+          "source_version": "网页查阅日快照",
+          "source_date": null,
+          "retrieved_at": "2026-10-21"
+        }
+      ]
+    },
+    {
+      "id": "appendix.diluc.skill-chain-window.v1",
+      "target_type": "skill",
+      "target_id": 10161,
+      "version_line": "release",
+      "category": "action_lifecycle",
+      "title": "迪卢克三段元素战技续段窗口候选",
+      "conclusion": "逆焰之刃是同一次技能的三段连续动作；第一段开始总冷却，成功释放第一或第二段后刷新约4秒续段窗口，段间没有额外最短冷却。每段独立造成1U火且无ICD。",
+      "conditions": "前一段已经成功施放且续段窗口未超时；动作没有被死亡、换人等状态清除。",
+      "numeric_pattern": "三段hitmark候选=[24,28,46]f；动作占用=[32,38,66]f；总CD10秒，从第一段起算；每段1U、无ICD。",
+      "exceptions": "不得把第二、第三段当作重新等待10秒CD的独立技能；冻结异常延长属于特殊交互，不作为通用续段。",
+      "unconfirmed": "4秒窗口的精确起算帧、换人/受控状态清除语义和当前版本动作帧仍待独立复验。",
+      "status": "pending",
+      "sources": [
+        {
+          "title": "KQM TCL：Diluc",
+          "url": "https://library.keqingmains.com/characters/pyro/diluc",
+          "locator": "Searing Onslaught与Frames/Skill表格",
+          "source_version": "网页查阅日快照",
+          "source_date": null,
+          "retrieved_at": "2026-10-21"
+        },
+        {
+          "title": "gcsim Diluc skill.go（固定提交）",
+          "url": "https://github.com/genshinsim/gcsim/blob/8792c73d64439feb74fa139c3b745022952b3dc9/internal/characters/diluc/skill.go",
+          "locator": "skill step state、timeout、cooldown与action frames",
+          "source_version": "8792c73d64439feb74fa139c3b745022952b3dc9",
+          "source_date": null,
+          "retrieved_at": "2026-10-21"
+        }
+      ]
+    },
+    {
+      "id": "appendix.diluc.burst-shared-icd.v1",
+      "target_type": "skill",
+      "target_id": 10165,
+      "version_line": "release",
+      "category": "elemental_application",
+      "title": "迪卢克元素爆发组件与共享附着组候选",
+      "conclusion": "黎明的主斩、飞行伤害与终结爆炸属于不同伤害组件，但共享同一爆发附着组；该组采用5次命中/5秒规则，首个有效组件附着后按五击序列计数。",
+      "conditions": "凤凰实际碰撞目标；飞行段命中数取决于目标体型、距离和路径。",
+      "numeric_pattern": "主击约100f、动作结束约140f；飞行体约每12f检查，候选最多8次，终结约再102f；组件为2U；有限序列候选[1,0,0,0,0]循环。",
+      "exceptions": "不得固定假设每个目标承受最大飞行命中；主击、飞行与爆炸不得各自重置附着计数器。",
+      "unconfirmed": "具体碰撞次数、终结时点、5秒计时与5hit计数优先关系、快照边界仍待独立复验。",
+      "status": "pending",
+      "sources": [
+        {
+          "title": "KQM TCL：Diluc Evidence",
+          "url": "https://library.keqingmains.com/evidence/characters/pyro/diluc",
+          "locator": "Burst Mechanics：5-hit rule与initial hit 2U",
+          "source_version": "历史测试版本1.5/2.0；网页查阅日快照",
+          "source_date": null,
+          "retrieved_at": "2026-10-21"
+        },
+        {
+          "title": "gcsim Diluc burst.go（固定提交）",
+          "url": "https://github.com/genshinsim/gcsim/blob/8792c73d64439feb74fa139c3b745022952b3dc9/internal/characters/diluc/burst.go",
+          "locator": "burst action、travel tick、explosion与shared ICD配置",
+          "source_version": "8792c73d64439feb74fa139c3b745022952b3dc9",
+          "source_date": null,
+          "retrieved_at": "2026-10-21"
+        }
+      ]
+    },
+    {
+      "id": "appendix.citlali.skill-frostfall-lifecycle.v1",
+      "target_type": "skill",
+      "target_id": 11072,
+      "version_line": "release",
+      "category": "periodic_attack",
+      "title": "茜特菈莉元素战技与霜陨风暴生命周期候选",
+      "conclusion": "战技初击建立伊兹帕帕与夜魂状态；达到阈值后霜陨风暴约每秒命中。重施战技替换旧持续状态，但霜陨风暴的1.5秒附着冷却不会因此重置。",
+      "conditions": "茜特菈莉至少50夜魂进入白燧状态，随后以8点/秒消耗夜魂；目标在风暴范围内。",
+      "numeric_pattern": "初击约20f、1U且无ICD；状态约18f建立并获得24夜魂，盾约37f，动作约50f，CD16秒从约18f起算；霜陨风暴首轮及后续约每59f，1U，候选1.5秒有限[1,0]序列；伊兹帕帕/盾持续20秒。",
+      "exceptions": "新风暴首跳若距离上一风暴成功附着不足1.5秒，可能命中但不附着；不能因重施E直接重置附着器。",
+      "unconfirmed": "精确首跳相位、59f漂移、重施时伤害队列清空/替换顺序、六命刷新交互和产球时点仍待独立复验。",
+      "status": "pending",
+      "sources": [
+        {
+          "title": "梅信心：茜特菈莉",
+          "url": "https://meropide.com/chs/characters/%E8%8C%9C%E7%89%B9%E8%8F%88%E8%8E%89/",
+          "locator": "霜昼黑星技能说明、20秒持续、8点/秒与六命机制备注",
+          "source_version": "网页查阅日快照",
+          "source_date": null,
+          "retrieved_at": "2026-10-21"
+        },
+        {
+          "title": "gcsim Citlali skill.go（固定提交）",
+          "url": "https://github.com/genshinsim/gcsim/blob/8792c73d64439feb74fa139c3b745022952b3dc9/internal/characters/citlali/skill.go",
+          "locator": "skill action frames、frostfall scheduling与ICD配置",
+          "source_version": "8792c73d64439feb74fa139c3b745022952b3dc9",
+          "source_date": null,
+          "retrieved_at": "2026-10-21"
+        }
+      ]
+    },
+    {
+      "id": "appendix.citlali.burst-components.v1",
+      "target_type": "skill",
+      "target_id": 11075,
+      "version_line": "release",
+      "category": "action_dispatch",
+      "title": "茜特菈莉元素爆发主击与髑弹候选",
+      "conclusion": "诸曜饬令至少分为冰风暴主击与延迟爆炸的宿灵之髑组件；二者需要独立事件和独立附着身份。",
+      "conditions": "主击命中；每个宿灵之髑对应其召唤目标并在延迟后爆炸。",
+      "numeric_pattern": "主击hitmark候选约118f、无ICD、2U；髑弹相对主击约+87至+117f、1U、独立附着组。",
+      "exceptions": "多目标产生的髑弹不得无条件全部计入同一个目标。",
+      "unconfirmed": "髑弹数量、目标绑定、爆炸延迟分布、范围重叠与逐目标命中上限仍待独立复验。",
+      "status": "pending",
+      "sources": [
+        {
+          "title": "梅信心：茜特菈莉",
+          "url": "https://meropide.com/chs/characters/%E8%8C%9C%E7%89%B9%E8%8F%88%E8%8E%89/",
+          "locator": "诸曜饬令技能说明：冰风暴与至多3个宿灵之髑",
+          "source_version": "网页查阅日快照",
+          "source_date": null,
+          "retrieved_at": "2026-10-21"
+        },
+        {
+          "title": "gcsim Citlali burst.go（固定提交）",
+          "url": "https://github.com/genshinsim/gcsim/blob/8792c73d64439feb74fa139c3b745022952b3dc9/internal/characters/citlali/burst.go",
+          "locator": "burst action frames、skull scheduling与attack info",
+          "source_version": "8792c73d64439feb74fa139c3b745022952b3dc9",
+          "source_date": null,
+          "retrieved_at": "2026-10-21"
+        }
+      ]
+    },
+    {
+      "id": "appendix.bennett.skill-press-timing.v1",
+      "target_type": "skill",
+      "target_id": 10322,
+      "version_line": "release",
+      "category": "action_dispatch",
+      "title": "班尼特点按元素战技动作候选",
+      "conclusion": "点按热情过载为单次火伤，无ICD；命中后执行一次2或3枚火元素微粒的局部随机检查。",
+      "conditions": "采用点按分支并命中有效敌人。",
+      "numeric_pattern": "命中约16f、动作约42f、换人约41f；2U；CD5秒从约14f起算；2球且约25%概率为3球。",
+      "exceptions": "长按一阶、二阶与六命追击是不同动作组件，不能复用点按单击模板。",
+      "unconfirmed": "精确随机分布、粒子生成/收取时点、命中停顿及当前版本帧数仍待独立复验。",
+      "status": "pending",
+      "sources": [
+        {
+          "title": "KQM TCL：Bennett",
+          "url": "https://library.keqingmains.com/characters/bennett/",
+          "locator": "Passion Overload Press属性表与Frames/Skill",
+          "source_version": "网页查阅日快照",
+          "source_date": null,
+          "retrieved_at": "2026-10-21"
+        },
+        {
+          "title": "gcsim Bennett skill.go（固定提交）",
+          "url": "https://github.com/genshinsim/gcsim/blob/8792c73d64439feb74fa139c3b745022952b3dc9/internal/characters/bennett/skill.go",
+          "locator": "press action frames、cooldown、particle callback与attack info",
+          "source_version": "8792c73d64439feb74fa139c3b745022952b3dc9",
+          "source_date": null,
+          "retrieved_at": "2026-10-21"
+        }
+      ]
+    },
+    {
+      "id": "appendix.bennett.burst-field-timing.v1",
+      "target_type": "skill",
+      "target_id": 10323,
+      "version_line": "release",
+      "category": "action_lifecycle",
+      "title": "班尼特元素爆发领域判定时序候选",
+      "conclusion": "美妙旅程的爆发伤害与领域周期检查是不同事件；领域按周期向当前前台角色刷新短时收益，不能只建一个覆盖全场持续时间的静态快照。",
+      "conditions": "前台角色处于领域内；生命与命座条件按当前角色状态判定。",
+      "numeric_pattern": "首个领域tick约34f、爆发伤害约37f；伤害无ICD、2U；候选13次领域tick，从34f起每60f至+720f；每次向前台刷新约126f/2.1秒收益；动作约53f、换人约51f。",
+      "exceptions": "离开领域后只保留最后一次短时刷新，不应继续生成后续领域tick收益。",
+      "unconfirmed": "领域建立与爆发伤害同帧先后、边缘进出、生命阈值采样和当前版本帧数仍待独立复验。",
+      "status": "pending",
+      "sources": [
+        {
+          "title": "KQM TCL：Bennett",
+          "url": "https://library.keqingmains.com/characters/bennett/",
+          "locator": "Fantastic Voyage与Frames/Burst",
+          "source_version": "网页查阅日快照",
+          "source_date": null,
+          "retrieved_at": "2026-10-21"
+        },
+        {
+          "title": "gcsim Bennett burst.go（固定提交）",
+          "url": "https://github.com/genshinsim/gcsim/blob/8792c73d64439feb74fa139c3b745022952b3dc9/internal/characters/bennett/burst.go",
+          "locator": "burst action frames、field tick与buff refresh",
+          "source_version": "8792c73d64439feb74fa139c3b745022952b3dc9",
+          "source_date": null,
+          "retrieved_at": "2026-10-21"
+        }
+      ]
+    },
+    {
+      "id": "appendix.aroha.skill-mark-lifecycle.v1",
+      "target_type": "skill",
+      "target_id": 11482,
+      "version_line": "release",
+      "category": "action_lifecycle",
+      "title": "阿罗夏元素战技标记与增益生命周期候选",
+      "conclusion": "元素战技造成一次雷元素命中并建立15秒标记/关联增益；命中与状态建立应作为相邻但可区分事件派发。",
+      "conditions": "战技命中有效目标；标记、角色增益及命座或反应派生条件按各自角色组件分别判断。",
+      "numeric_pattern": "初击1U雷；确定产5枚雷元素微粒；标记与关联增益候选持续15秒。",
+      "exceptions": "标记、角色增益和后续爆发领域不是同一个生命周期对象。",
+      "unconfirmed": "精确命中帧、状态建立先后、刷新/覆盖规则和多目标标记范围仍待当前版本独立复验。",
+      "status": "pending",
+      "sources": [
+        {
+          "title": "梅信心：阿罗夏机制",
+          "url": "https://meropide.com/chs/characters/%E9%98%BF%E7%BD%97%E5%A4%8F/theorycraft/",
+          "locator": "元素战技章节：附着、产球、标记和15秒持续",
+          "source_version": "网页查阅日快照",
+          "source_date": null,
+          "retrieved_at": "2026-10-21"
+        }
+      ]
+    },
+    {
+      "id": "appendix.aroha.burst-dual-channel.v1",
+      "target_type": "skill",
+      "target_id": 11485,
+      "version_line": "release",
+      "category": "periodic_attack",
+      "title": "阿罗夏元素爆发双通道伤害与共享附着规则",
+      "conclusion": "元素爆发的轰霆猎场与图加林是两条独立的雷伤通道，两种伤害均须保留；两通道共享附着计数，不能因为组件或衍生物不同而分别套用独立默认ICD。当前固定快照中，两种攻击具有相同附着计数标签和规则组，附着序列为[1,0]、重置时间约1.6秒；公开机制研究与之相符。目标位于猎场内时，正常周期由猎场攻击产生附着；目标在猎场外而只有图加林命中时，图加林可逐次附着。",
+      "conditions": "轰霆猎场与图加林处于有效生命周期；共享计数按同一施加者、同一目标处理。伙伴实体身份与伤害组件身份不等于另一个附着施加者。目标所在区域及真实命中先后需要分别确定。",
+      "numeric_pattern": "两条伤害通道约每2秒攻击；基础持续14秒，二命延长单列。当前固定快照附着模板Alyosha_ElementalBurst：resetCycle=1.600000023841858秒、durabilitySequence=[1,0]，公开查询投影为1.6秒；两攻击attenuationTag均为Elemental_Burst。伤害和削韧序列均为[1,1,1,1]，不得误用为附着序列；相同规则组本身不足以证明共享，本项还结合了计数标签、归属和机制资料。",
+      "exceptions": "两个通道均造成伤害不代表同周期产生两次附着。附着被ICD阻断时，仍保留该次合法雷伤；不因此删除攻击，也不一并否定按攻击或伤害条件成立的其他效果。不能永久禁用图加林附着来代替共享计数。离场不自动停止后台周期；命座延长与标记另挂事实。",
+      "unconfirmed": "首次周期相位、两通道精确出伤帧差、领域边缘与进出范围的同刻先后、目标切换及生命周期边界仍待逐帧复验。共享身份与规则已有联合证据，但不据此宣称所有空间和回调细节已验证。不得自行给定短时差以制造第二次附着，也不得把未闭合的中间状态时长相加后宣称已确认。",
+      "status": "pending",
+      "sources": [
+        {
+          "title": "梅信心：阿罗夏机制",
+          "url": "https://meropide.com/chs/characters/%E9%98%BF%E7%BD%97%E5%A4%8F/theorycraft/",
+          "locator": "元素爆发与命座2章节：双通道、周期、14秒/20秒与附着",
+          "source_version": "网页查阅日快照",
+          "source_date": null,
+          "retrieved_at": "2026-10-21"
+        },
+        {
+          "title": "梅信心：阿罗夏机制（再次核对）",
+          "url": "https://meropide.com/chs/characters/%E9%98%BF%E7%BD%97%E5%A4%8F/theorycraft/",
+          "locator": "机制/附着与元素爆发：两通道共享2 hits/1.6s；领域内外附着来源；独立双伤害",
+          "source_version": "网页2026-11-07查阅快照；网页未标明游戏版本",
+          "source_date": null,
+          "retrieved_at": "2026-11-07",
+          "source_kind": "web"
+        },
+        {
+          "title": "固定上游：阿罗夏元素爆发两攻击的原始绑定",
+          "url": null,
+          "locator": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Alyosha.json；/10/Default/PGMKHCKJIKM/Alyosha_ElementalBurst_Material/IBNPAHCLDEN/2/LCOCHKLDAPI/LONMFMMEPNN 与 /10/Default/PGMKHCKJIKM/Avatar_Alyosha_ElementalBurst_AttackLogic/MMEPDPBJHMB/1/LCOCHKLDAPI/LONMFMMEPNN",
+          "source_version": "f11cf545a7eee32a29999f960ebfba305f896ed3 / CNCBWin7.2.50",
+          "source_date": null,
+          "retrieved_at": "2026-11-07",
+          "source_kind": "database_snapshot",
+          "evidence_sha256": "4858b6a103335662c7f30b8f7459408fc1edb612754e5bad21b4100be38a5bc7",
+          "evidence_range": "同一能力与OriginOwner；两攻击相同attenuationTag=Elemental_Burst及attenuationGroup=Alyosha_ElementalBurst"
+        },
+        {
+          "title": "固定上游：元素爆发附着衰减规则",
+          "url": null,
+          "locator": "ExcelBinOutput/AttackAttenuationExcelConfigData.json；JSON pointer /9",
+          "source_version": "f11cf545a7eee32a29999f960ebfba305f896ed3 / CNCBWin7.2.50",
+          "source_date": null,
+          "retrieved_at": "2026-11-07",
+          "source_kind": "database_snapshot",
+          "evidence_sha256": "5b346eb5916c13d9344c454ab7a73846714d86e89951c918d914dd2c2fa9f57e",
+          "evidence_range": "group=Alyosha_ElementalBurst；resetCycle、durabilitySequence与damageSequence/enbreakSequence分开"
+        },
+        {
+          "title": "本快照已知字段映射证据",
+          "url": null,
+          "locator": "src/genshin_runtime/resources/reaction_damage_f11cf545_profile.json；fields.BJNOBFDFNGG与fields.HJCIMBGEGIA及对应field_evidence",
+          "source_version": "f11cf545a7eee32a29999f960ebfba305f896ed3 已保存的字段映射证据；不是额外游戏时序规则",
+          "source_date": null,
+          "retrieved_at": "2026-11-07",
+          "source_kind": "database_snapshot",
+          "evidence_sha256": "85a7e3ece94b87704a0384f37d9245d2669fb3e6da73a04a81b2db6c2b2675b4",
+          "evidence_range": "已知字段含义为attenuationGroup和attenuationTag；不由未知字段推断时序"
+        }
+      ]
+    },
+    {
+      "id": "appendix.aroha.c2-burst-extension.v1",
+      "target_type": "talent",
+      "target_id": 1482,
+      "version_line": "release",
+      "category": "action_lifecycle",
+      "title": "阿罗夏二命爆发延长与预施标记候选",
+      "conclusion": "二命将元素爆发建立的领域持续时间延长6秒；图加林每次攻击前会先为其目标施加标记，使本次攻击能够按标记存在状态结算。",
+      "conditions": "角色命座至少为2，元素爆发领域或图加林攻击处于有效生命周期。",
+      "numeric_pattern": "burst_duration_add=6秒；基础14秒时总持续候选20秒；mark_application_phase=before_tugalin_attack。",
+      "exceptions": "二命延长不创建第二个并行领域；预施标记只作用图加林本次选定目标，不能无条件扩展到所有敌人。",
+      "unconfirmed": "延长对已存在周期队列的末跳边界、预施标记与伤害的精确帧差及多目标选择仍待当前版本独立复验。",
+      "status": "pending",
+      "sources": [
+        {
+          "title": "梅信心：阿罗夏机制",
+          "url": "https://meropide.com/chs/characters/%E9%98%BF%E7%BD%97%E5%A4%8F/theorycraft/",
+          "locator": "元素爆发与命座2章节：双通道、周期、14秒/20秒与附着",
+          "source_version": "网页查阅日快照",
+          "source_date": null,
+          "retrieved_at": "2026-10-21"
+        }
+      ]
+    },
+    {
+      "id": "appendix.odetta.skill-companion-lifecycle.v1",
+      "target_type": "skill",
+      "target_id": 11502,
+      "version_line": "release",
+      "category": "action_lifecycle",
+      "title": "奥黛塔元素战技独舞倒影生命周期候选",
+      "conclusion": "元素战技召唤或重置独舞倒影，持续20秒；重召应销毁旧实例并从新实例重新调度，不能让旧、新周期并存。",
+      "conditions": "元素战技成功施放；特殊战技期间伙伴周期存在暂停和恢复行为。",
+      "numeric_pattern": "完整持续期候选10次伙伴攻击；首次约2.2秒，后续约1.9/2.1秒交替；每次伙伴攻击候选1U冰。",
+      "exceptions": "精确频率来自社区观测候选，不得作为已审执行规则；爆发刷新/无伙伴时召唤需要独立生命周期分支。",
+      "unconfirmed": "首次相位、交替周期、特殊战技暂停后的补偿tick、切后台与重召同帧顺序仍待当前版本逐帧复验。",
+      "status": "pending",
+      "sources": [
+        {
+          "title": "梅信心：奥黛塔机制",
+          "url": "https://meropide.com/chs/characters/%E5%A5%A5%E9%BB%9B%E5%A1%94/theorycraft/",
+          "locator": "元素战技、独舞倒影、20秒生命周期与攻击/附着章节",
+          "source_version": "网页查阅日快照",
+          "source_date": null,
+          "retrieved_at": "2026-10-21"
+        },
+        {
+          "title": "羽化者：奥黛塔机制整理",
+          "url": "https://yuhuazhe.cn/%E5%A5%A5%E9%BB%9B%E5%A1%94/a.html",
+          "locator": "独舞倒影攻击频率与技能流程",
+          "source_version": "社区资料；查阅日快照",
+          "source_date": null,
+          "retrieved_at": "2026-10-21"
+        }
+      ]
+    },
+    {
+      "id": "appendix.odetta.skill-special-sequence.v1",
+      "target_type": "skill",
+      "target_id": 11502,
+      "version_line": "release",
+      "category": "elemental_application",
+      "title": "奥黛塔特殊元素战技三段与终奏候选",
+      "conclusion": "特殊元素战技应拆成3段普通伤害和终奏星反应组件；三段普通伤害共享一个附着组，仅首段在当前候选中附着，终奏本身不施加冰元素。",
+      "conditions": "满足特殊战技进入条件并完整执行三段与终奏。",
+      "numeric_pattern": "战技本体初击1U；特殊三段候选普通附着组为3秒/4hit且序列[1,0,0]；终奏星反应组件0U。",
+      "exceptions": "终奏造成星反应伤害不等同于施加冰元素；三段不得各自建立独立无ICD附着器。",
+      "unconfirmed": "3秒/4hit规则、三段精确时点、终奏与领域结算先后及对独舞倒影暂停/补偿的影响仍待独立复验。",
+      "status": "pending",
+      "sources": [
+        {
+          "title": "梅信心：奥黛塔机制",
+          "url": "https://meropide.com/chs/characters/%E5%A5%A5%E9%BB%9B%E5%A1%94/theorycraft/",
+          "locator": "特殊元素战技、普通段/终奏与附着章节",
+          "source_version": "网页查阅日快照",
+          "source_date": null,
+          "retrieved_at": "2026-10-21"
+        },
+        {
+          "title": "TapTap：奥黛塔实测机制整理",
+          "url": "https://www.taptap.cn/moment/836558201024416220?group_id=201765",
+          "locator": "特殊战技分段、攻击频率与附着观测",
+          "source_version": "社区实测；查阅日快照",
+          "source_date": null,
+          "retrieved_at": "2026-10-21"
+        }
+      ]
+    },
+    {
+      "id": "appendix.odetta.burst-refresh-components.v1",
+      "target_type": "skill",
+      "target_id": 11505,
+      "version_line": "release",
+      "category": "action_dispatch",
+      "title": "奥黛塔元素爆发四段与伙伴刷新候选",
+      "conclusion": "元素爆发按四个伤害段派发，首段与末段附着、中间两段不附着；爆发会刷新已存在的独舞倒影，若不存在则召唤新实例。",
+      "conditions": "爆发成功释放；伙伴生命周期分支由施放时是否已有独舞倒影决定。",
+      "numeric_pattern": "四段候选附着序列=[1U,0U,0U,1U]。",
+      "exceptions": "伙伴刷新不应同时保留旧周期队列；四段伤害不应合并为一次倍率。",
+      "unconfirmed": "四段精确时点、首末是否独立附着组、爆发刷新保留还是重置伙伴相位仍待独立复验。",
+      "status": "pending",
+      "sources": [
+        {
+          "title": "梅信心：奥黛塔机制",
+          "url": "https://meropide.com/chs/characters/%E5%A5%A5%E9%BB%9B%E5%A1%94/theorycraft/",
+          "locator": "元素爆发、四段攻击与独舞倒影刷新章节",
+          "source_version": "网页查阅日快照",
+          "source_date": null,
+          "retrieved_at": "2026-10-21"
+        }
+      ]
+    },
+    {
+      "id": "appendix.sandrone.normal-charged-beams.v1",
+      "target_type": "skill",
+      "target_id": 11331,
+      "version_line": "release",
+      "category": "action_dispatch",
+      "title": "桑多涅长重击光束与喷射组件候选",
+      "conclusion": "零命完整长重击候选派发3束星耀伤害光束；长重击还包含应单独标识的喷射伤害组件。 适用的辉映·星超导状态下，受影响普通冰伤射线转为对应星超导直伤，是同组件替换而非在普通冰伤上追加。",
+      "conditions": "角色为零命并完整完成长重击蓄力与命中；解算模式未被命座修改。",
+      "numeric_pattern": "C0完整长重击候选光束数3；每束作为独立星耀伤害事件。",
+      "exceptions": "光束的星反应伤害组件为0U，不得因伤害次数自动施加冰元素；喷射组件不可漏记或与光束倍率合并；命座改变另挂命座事实。 替换只作用于有证据的状态适用区间和射线组件；未满足状态保留适用普通形式，不追溯已结算射线，也不把其它独立组件一并转化或删除。",
+      "unconfirmed": "蓄力占用、体力、3/6束精确时点、喷射命中时点和多目标分配仍待独立复验。 状态在发射、命中或其它时点取样仍待核，不将某一时点写成已证事实。",
+      "status": "pending",
+      "sources": [
+        {
+          "title": "KQM：Sandrone Quick Guide",
+          "url": "https://keqingmains.com/q/sandrone-quickguide/",
+          "locator": "Version 7.1：Charged Attack与Constellation 1说明",
+          "source_version": "7.1",
+          "source_date": null,
+          "retrieved_at": "2026-10-21"
+        },
+        {
+          "title": "米游社：桑多涅机制实测",
+          "url": "https://www.miyoushe.com/planet/article/76245066",
+          "locator": "长重击光束、喷射与星超导段观测",
+          "source_version": "社区实测；查阅日快照",
+          "source_date": null,
+          "retrieved_at": "2026-10-21"
+        },
+        {
+          "title": "用户明确机制补充（N14）",
+          "source_kind": "user_statement",
+          "url": null,
+          "locator": "本项目本轮用户反馈：射线替换与Q脱手；原陈述见r9数据库变更提案",
+          "source_version": "用户机制说明，待独立复核；不作为精确时点证据",
+          "source_date": null,
+          "retrieved_at": "2026-11-06",
+          "evidence_sha256": "2ac12aa194c85a39324271805e98a5f3e9db043e243e1d2f6781157e0fda91e1",
+          "evidence_range": "上述用户机制陈述UTF-8全文，不含排版换行"
+        }
+      ]
+    },
+    {
+      "id": "appendix.sandrone.c1-charged-capacity.v1",
+      "target_type": "talent",
+      "target_id": 1331,
+      "version_line": "release",
+      "category": "action_lifecycle",
+      "title": "桑多涅一命长重击容量与星耀增伤候选",
+      "conclusion": "一命使解算模式中的解算功率增长速度降低50%，从而延长单次长重击可持续派发光束的阶段；同时全队造成的星耀反应伤害提高30%。",
+      "conditions": "角色命座至少为1，木偶处于解算模式；伤害增益仅用于星耀反应伤害。",
+      "numeric_pattern": "decoding_power_gain_rate_multiplier=0.5；party_stellar_glimmer_damage_bonus=30%；社区实测的完整长重击光束容量候选为6。",
+      "exceptions": "增长减速是状态进度规则，不能直接写成固定动作时长；6束仍是待审动作容量候选，不代表被打断或提前取消时也生成6束。",
+      "unconfirmed": "6束候选的精确时点、进度阈值、卡肉与取消影响，以及不同帧率下完整输入窗口仍待当前版本独立复验。",
+      "status": "pending",
+      "sources": [
+        {
+          "title": "KQM：Sandrone Quick Guide",
+          "url": "https://keqingmains.com/q/sandrone-quickguide/",
+          "locator": "Version 7.1：Charged Attack与Constellation 1说明",
+          "source_version": "7.1",
+          "source_date": null,
+          "retrieved_at": "2026-10-21"
+        },
+        {
+          "title": "米游社：桑多涅机制实测",
+          "url": "https://www.miyoushe.com/planet/article/76245066",
+          "locator": "长重击光束、喷射与星超导段观测",
+          "source_version": "社区实测；查阅日快照",
+          "source_date": null,
+          "retrieved_at": "2026-10-21"
+        }
+      ]
+    },
+    {
+      "id": "appendix.sandrone.skill-projectiles.v1",
+      "target_type": "skill",
+      "target_id": 11332,
+      "version_line": "release",
+      "category": "action_dispatch",
+      "title": "桑多涅元素战技双棱晶弹候选",
+      "conclusion": "每次元素战技派发两枚棱晶弹；第一弹建立领域，第二弹在领域建立后命中，但不追溯转换第一弹已经结算的伤害。",
+      "conditions": "两枚弹均命中同一有效目标；领域建立成功。",
+      "numeric_pattern": "每次E候选2弹，CD4秒；E命中参与1枚冰元素微粒检查，并与长重击光束共用约2.5秒产球冷却。",
+      "exceptions": "领域建立后的转换规则只作用后续组件，不能回写已结算的第一弹。",
+      "unconfirmed": "双弹精确时点、产球绑定哪一弹、附着量与ICD组、领域建立和第二弹同帧顺序仍待独立复验。",
+      "status": "pending",
+      "sources": [
+        {
+          "title": "KQM：Sandrone Quick Guide",
+          "url": "https://keqingmains.com/q/sandrone-quickguide/",
+          "locator": "Version 7.1：Elemental Skill、domain与projectile说明",
+          "source_version": "7.1",
+          "source_date": null,
+          "retrieved_at": "2026-10-21"
+        },
+        {
+          "title": "TapTap：桑多涅实测机制整理",
+          "url": "https://www.taptap.cn/moment/821344134882135960",
+          "locator": "元素战技双弹、领域建立与产球频率观测",
+          "source_version": "社区实测；查阅日快照",
+          "source_date": null,
+          "retrieved_at": "2026-10-21"
+        }
+      ]
+    },
+    {
+      "id": "appendix.sandrone.burst-components.v1",
+      "target_type": "skill",
+      "target_id": 11335,
+      "version_line": "release",
+      "category": "action_dispatch",
+      "title": "桑多涅元素爆发三爆与光束组件候选",
+      "conclusion": "元素爆发应拆成3次爆炸与1束星超导光束，不应以单次合并倍率代替四个组件。 Q施放动作结束后，后续伤害可以继续结算；达到允许后续动作的时点即可继续重击，不需等待Q全部伤害打完。",
+      "conditions": "爆发成功释放且各组件命中。",
+      "numeric_pattern": "候选3次爆炸+1束光束；CD15秒、能量60；星反应光束组件0U。",
+      "exceptions": "星反应伤害事件不自动施加冰元素；多目标下各爆炸和光束命中需单独判断。 动作占用与后续命中序列分开表达并可时间重叠；脱手不等于0秒施放，不证明任意取消方式、快照或无限保留均成立。",
+      "unconfirmed": "各组件精确时点、爆炸附着组、光束目标选择与领域交互仍待独立复验。 精确施放占用、可取消点及特殊中断/销毁条件仍待独立复验。",
+      "status": "pending",
+      "sources": [
+        {
+          "title": "KQM：Sandrone Quick Guide",
+          "url": "https://keqingmains.com/q/sandrone-quickguide/",
+          "locator": "Version 7.1：Elemental Burst组件说明",
+          "source_version": "7.1",
+          "source_date": null,
+          "retrieved_at": "2026-10-21"
+        },
+        {
+          "title": "梅信心：桑多涅资料",
+          "url": "https://meropide.com/chs/characters/%E6%A1%91%E5%A4%9A%E6%B6%85/materials/",
+          "locator": "角色技能文本与爆发基础参数",
+          "source_version": "网页查阅日快照",
+          "source_date": null,
+          "retrieved_at": "2026-10-21"
+        },
+        {
+          "title": "用户明确机制补充（N14）",
+          "source_kind": "user_statement",
+          "url": null,
+          "locator": "本项目本轮用户反馈：射线替换与Q脱手；原陈述见r9数据库变更提案",
+          "source_version": "用户机制说明，待独立复核；不作为精确时点证据",
+          "source_date": null,
+          "retrieved_at": "2026-11-06",
+          "evidence_sha256": "2ac12aa194c85a39324271805e98a5f3e9db043e243e1d2f6781157e0fda91e1",
+          "evidence_range": "上述用户机制陈述UTF-8全文，不含排版换行"
+        }
+      ]
+    },
+    {
+      "id": "appendix.sucrose.normal-first-hit.v1",
+      "target_type": "skill",
+      "target_id": 10431,
+      "version_line": "release",
+      "category": "action_dispatch",
+      "title": "砂糖普通攻击第一段动作候选",
+      "conclusion": "砂糖普通攻击第一段派发一次风元素伤害和一次附着候选。",
+      "conditions": "从普通攻击第一段开始执行，且没有继承上一段连击状态。",
+      "numeric_pattern": "N1命中标记约14f；下一次普通攻击/动作占用候选约17f；1U风。",
+      "exceptions": "本项只描述N1角色动作；调用方使用的动作符号如何映射到N1属于场景输入，不进入角色事实。",
+      "unconfirmed": "取消帧、命中停顿对动作占用的修正及当前版本精确帧仍待独立复验。",
+      "status": "pending",
+      "sources": [
+        {
+          "title": "KQM TCL：Sucrose",
+          "url": "https://library.keqingmains.com/characters/anemo/sucrose",
+          "locator": "Normal Attack与Frames/NA：N1 hitmark及GU",
+          "source_version": "网页查阅日快照",
+          "source_date": null,
+          "retrieved_at": "2026-10-21"
+        }
+      ]
+    },
+    {
+      "id": "appendix.sucrose.skill-single-hit.v1",
+      "target_type": "skill",
+      "target_id": 10432,
+      "version_line": "release",
+      "category": "action_dispatch",
+      "title": "砂糖元素战技单击与产球候选",
+      "conclusion": "风灵作成·陆叁零捌是单次风元素伤害，1U且无ICD；命中后生成4枚风元素微粒。",
+      "conditions": "元素战技命中有效目标；额外使用次数、武器重置及其确定性分别由对应命座或装备组件判断。",
+      "numeric_pattern": "单hit、1U风、无ICD、4枚风元素微粒、基础CD15秒。",
+      "exceptions": "一次E动作只派发一次战技命中；命座增加可用次数仍需两次动作，随机武器重置不得作为确定事件。",
+      "unconfirmed": "精确命中帧、动作占用、粒子生成/收取时点和多目标扩散传播仍待独立复验。",
+      "status": "pending",
+      "sources": [
+        {
+          "title": "KQM TCL：Sucrose",
+          "url": "https://library.keqingmains.com/characters/anemo/sucrose",
+          "locator": "Astable Anemohypostasis Creation - 6308与Frames/Skill",
+          "source_version": "网页查阅日快照",
+          "source_date": null,
+          "retrieved_at": "2026-10-21"
+        },
+        {
+          "title": "KQM Elemental Skill Particles Database",
+          "url": "https://library.keqingmains.com/resources/compendiums/elemental-skill-particles",
+          "locator": "Sucrose：4 Anemo particles per skill hit",
+          "source_version": "网页查阅日快照",
+          "source_date": null,
+          "retrieved_at": "2026-10-21"
+        }
+      ]
+    },
+    {
+      "id": "appendix.sucrose.c1-skill-charge.v1",
+      "target_type": "talent",
+      "target_id": 431,
+      "version_line": "release",
+      "category": "action_lifecycle",
+      "title": "砂糖一命元素战技使用次数候选",
+      "conclusion": "一命使风灵作成·陆叁零捌的可使用次数增加1次；每次使用仍是独立动作与独立冷却次数消费。",
+      "conditions": "角色命座至少为1。",
+      "numeric_pattern": "skill_charge_add=1。",
+      "exceptions": "增加使用次数不让一次E自动双击；祭礼残章的概率重置属于武器效果，不能并入命座。",
+      "unconfirmed": "开场充能层、两次使用的逐层冷却显示及武器重置与次数恢复的同帧顺序仍待当前版本独立复验。",
+      "status": "pending",
+      "sources": [
+        {
+          "title": "KQM TCL：Sucrose",
+          "url": "https://library.keqingmains.com/characters/anemo/sucrose",
+          "locator": "Astable Anemohypostasis Creation - 6308与Frames/Skill",
+          "source_version": "网页查阅日快照",
+          "source_date": null,
+          "retrieved_at": "2026-10-21"
+        }
+      ]
+    }
+  ]
+}
