@@ -35,8 +35,9 @@ def test_external_database_skips_legacy_service_and_marks_window(tmp_path, monke
             return SimpleNamespace()
 
         @staticmethod
-        def start():
+        def start(**options):
             captured["started"] = True
+            captured["webview_options"] = options
 
     monkeypatch.setitem(__import__("sys").modules, "webview", Webview)
     monkeypatch.setattr(launcher, "GuiApi", api_factory)
@@ -78,6 +79,7 @@ def test_external_database_skips_legacy_service_and_marks_window(tmp_path, monke
     )
 
     assert result == 0 and captured["started"] is True
+    assert captured["webview_options"] == {"storage_path": str(profile / "webview-profile"), "private_mode": False}
     args, kwargs = captured["api"]
     assert args == profile
     assert kwargs["database_path"] == shared.resolve()

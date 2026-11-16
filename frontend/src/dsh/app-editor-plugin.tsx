@@ -8,6 +8,7 @@ import {Button} from "@deepseek-ai/dsh-client-ui-primitives";
 import {conversationPhase} from "@deepseek-ai/dsh-client-ui-conversation/client";
 import type {FactoryComponentPropsOf,PropsRenderFactories,PropsRuntime} from "@deepseek-ai/dsh-client-ui-slots";
 import type {AppEditorBridge} from "./app-editor-bridge";
+import {useWindowPresentation,WindowRecoveryControl} from "./app-window-presentation";
 
 const PAGES = [
   ["whiteboard", "排轴白板", "▦"], ["rotation", "计算模型（高级）", "⚙"],
@@ -43,7 +44,8 @@ function UnstartedConversation({ctx,props}:{ctx:Context;props:PropsRuntime<"conv
 }
 
 function EditorWorkbench({editor,props}:{editor:AppEditorBridge;props:FactoryComponentPropsOf<"genshin.editor.workbench">}) {
-  const [visible,setVisible]=useState(()=>{try{return localStorage.getItem("genshin.editor.assistant.hidden")!=="1";}catch{return true;}});
+  const presentation=useWindowPresentation();
+  const [visible,setVisible]=useState(()=>{try{return localStorage.getItem("genshin.editor.assistant.hidden")==="0";}catch{return false;}});
   const [width,setWidth]=useState(()=>{try{const stored=Number(localStorage.getItem("genshin.editor.assistant.width"));return Number.isFinite(stored)&&stored>=300&&stored<=900?stored:400;}catch{return 400;}});
   const drag=useRef<{id:number;x:number;width:number}>();
   const workbench=useRef<HTMLDivElement>(null);
@@ -62,7 +64,7 @@ function EditorWorkbench({editor,props}:{editor:AppEditorBridge;props:FactoryCom
     return ()=>window.removeEventListener("resize",measure);
   },[]);
   const narrow=available>0&&available<720;
-  const showing=narrow?narrowChat:visible;
+  const showing=presentation.presentation==="main"&&(narrow?narrowChat:visible);
   const maximum=available?Math.max(300,Math.min(900,available-360-5)):900;
   const effectiveWidth=Math.min(width,maximum);
   const resize=(value:number)=>{const next=Math.max(300,Math.min(900,value));setWidth(next);try{localStorage.setItem("genshin.editor.assistant.width",String(next));}catch{/* Session-local layout remains usable. */}};
@@ -83,7 +85,7 @@ function EditorWorkbench({editor,props}:{editor:AppEditorBridge;props:FactoryCom
     }
   },[editor,props.page,narrow,showing]);
   return <div ref={workbench} className="gs-editor-workbench" data-layout={narrow?"narrow":"wide"} data-embedded-assistant={showing?"open":"closed"} style={{gridTemplateColumns:showing&&!narrow?`minmax(0,1fr) 5px ${effectiveWidth}px`:"minmax(0,1fr)"}}>
-    <section ref={business} className="gs-editor-business" hidden={narrow&&showing}><div className="gs-editor-toolbar"><Button size="sm" variant="ghost" aria-expanded={showing} onClick={toggle}>{showing?"隐藏 AI 小窗":"打开 AI 小窗"}</Button></div><EditorIsland editor={editor} page={props.page}/></section>
+    <section ref={business} className="gs-editor-business" hidden={narrow&&showing}><div className="gs-editor-toolbar">{presentation.presentation!=="main"?<WindowRecoveryControl/>:<Button size="sm" variant="ghost" aria-expanded={showing} onClick={toggle}>{showing?"隐藏 AI 小窗":"打开 AI 小窗"}</Button>}{presentation.error&&<span role="alert">{presentation.error}</span>}</div><EditorIsland editor={editor} page={props.page}/></section>
     {showing&&<>{!narrow&&<div className="gs-editor-assistant-resizer" role="separator" aria-label="调整 AI 小窗宽度" aria-orientation="vertical" aria-valuemin={300} aria-valuemax={maximum} aria-valuenow={effectiveWidth} tabIndex={0}
       onPointerDown={event=>{if(event.button!==0)return;event.preventDefault();drag.current={id:event.pointerId,x:event.clientX,width:effectiveWidth};event.currentTarget.setPointerCapture?.(event.pointerId);}}
       onPointerMove={event=>{if(drag.current?.id===event.pointerId)resize(Math.min(maximum,drag.current.width+drag.current.x-event.clientX));}}
@@ -110,7 +112,7 @@ function EditorIsland({editor, page}: {editor: AppEditorBridge; page: typeof PAG
 /** Business pages only. The DSH root, navigation, Chat and Theme remain upstream-owned. */
 export function createAppEditorPlugin(editor: AppEditorBridge) {
   return {
-    name: "genshin-editor-islands", inject: ["slots", "layout", "theme","uiWorkspace"],
+    name: "genshin-editor-islands", inject: ["slots", "layout", "theme","uiWorkspace","sessions"],
     apply(ctx: Context) {
       // One-time legacy preference input; all ongoing preference and DOM work
       // goes through the upstream ThemeRuntime, never a parallel controller.

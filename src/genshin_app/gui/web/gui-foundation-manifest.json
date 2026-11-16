@@ -3,8 +3,8 @@
   "assets": [
     {
       "name": "gui-foundation-v2.js",
-      "bytes": 16004,
-      "sha256": "994b1002f6df5bf9059b829b7cca5c4bba37fbb5406bef9527811cbf0d799d0e"
+      "bytes": 34319,
+      "sha256": "37a97de45d1d3c9c34a83e5e118e908037752534ce15ee533f826412b2f062af"
     },
     {
       "name": "gui-foundation-tokens.css",

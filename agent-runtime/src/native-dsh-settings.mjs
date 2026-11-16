@@ -6,7 +6,7 @@ import { PRUNE_MARKER } from '@deepseek-ai/dsh-compaction-tool-result-pruner'
 export const NATIVE_DSH_SETTINGS_CONTRACT = 'genshin-native-dsh-settings-v1'
 export const NATIVE_DSH_SETTINGS_VERSION = 1
 export const NATIVE_DSH_SETTINGS_FILE = 'native-agent-dsh-settings.json'
-export const NATIVE_DSH_RELEASE = '0.2.1-rc.5'
+export const NATIVE_DSH_RELEASE = '0.2.2-rc.3'
 export const NATIVE_DSH_REVIEWED_MODEL_IDS = Object.freeze([
   'deepseek-flash',
   'deepseek-v4-pro',

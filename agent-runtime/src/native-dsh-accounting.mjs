@@ -1,7 +1,6 @@
 /** Thin Host research/accounting adapters; no generic Agent or retry owner. */
 import { createHash, randomUUID } from 'node:crypto'
-import * as ToolWeb from '@deepseek-ai/dsh-tool-web'
-import { NATIVE_WEB_LIMITS, setupNativeWebAgentScope } from './native-dsh-web-stack.mjs'
+import { setupNativeWebAgentScope } from './native-dsh-web-stack.mjs'
 import { NativeDshDomainError } from './native-dsh-domain-transport.mjs'
 
 const hash = value => createHash('sha256').update(value, 'utf8').digest('hex')
@@ -67,11 +66,7 @@ export function mountNativeDshAccounting(ctx, { transport }) {
 
   ctx.on('agent/created', async ({ agent }) => {
     const scope = agent.ctx
-    await scope.plugin(ToolWeb, {
-      search: true, fetch: true, searchMaxResults: NATIVE_WEB_LIMITS.searchMaxResults,
-      searchMaxQueries: NATIVE_WEB_LIMITS.searchMaxQueries, searchTimeoutMs: NATIVE_WEB_LIMITS.searchTimeoutMs,
-      fetchTimeoutMs: NATIVE_WEB_LIMITS.fetchTimeoutMs, fetchMaxOutputChars: NATIVE_WEB_LIMITS.fetchMaxOutputChars,
-    })
+
     scope.on('tools/pre-execute', async (execution, next) => {
       // App and web calls already reserve through their exact effect ledgers.
       // Standard DSH tools use the same generous total budget, with no new

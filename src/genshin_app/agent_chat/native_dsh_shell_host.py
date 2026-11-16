@@ -70,6 +70,7 @@ class NativeDshShellHost:
         self._resources: dict[str, bytes] = {}
         self._lock = threading.RLock()
         self._closed = False
+        self._retiring = False
         self._cancelled_requests: set[str] = set()
         self._cancelled_streams: set[str] = set()
         self._seen_requests: set[str] = set()
@@ -192,27 +193,45 @@ class NativeDshShellHost:
                 raise NativeDshMuxError("dsh_shell_stream_cancelled")
 
     def dsh_client_stream_read(self, request: dict):
-        identity, state = self._stream(request)
+        identity = _identity(request["stream_id"])
         cursor = request["cursor"]
         if type(cursor) is not int or cursor < 0:
             raise NativeDshMuxError("dsh_shell_cursor_invalid")
-        with state.lock:
-            self._ensure_stream(state)
-            if cursor == state.previous_cursor:
-                return copy.deepcopy(state.previous_result)
-            if cursor != state.cursor or state.ended:
-                raise NativeDshMuxError("dsh_shell_cursor_stale")
-            value = self._client.stream_next(identity)
-            self._ensure_stream(state)
-            state.cursor += 1
-            result = {"items": [] if value["done"] else [value["value"]],
-                      "cursor": state.cursor, "done": value["done"]}
-            if "error" in value:
-                result["error"] = value["error"]
-            state.ended = value["done"]
-            state.previous_cursor = cursor
-            state.previous_result = result
-            return copy.deepcopy(result)
+        try:
+            identity, state = self._stream(request)
+            with state.lock:
+                self._ensure_stream(state)
+                if cursor == state.previous_cursor:
+                    return copy.deepcopy(state.previous_result)
+                if cursor != state.cursor or state.ended:
+                    raise NativeDshMuxError("dsh_shell_cursor_stale")
+                value = self._client.stream_next(identity)
+                self._ensure_stream(state)
+                state.cursor += 1
+                result = {"items": [] if value["done"] else [value["value"]],
+                          "cursor": state.cursor, "done": value["done"]}
+                if "error" in value:
+                    result["error"] = value["error"]
+                state.ended = value["done"]
+                state.previous_cursor = cursor
+                state.previous_result = result
+                return copy.deepcopy(result)
+        except NativeDshMuxError as error:
+            with self._lock:
+                retired = identity in self._cancelled_streams
+                shutting_down = self._retiring
+            # Only this window's recorded cancellation/retirement is normal.
+            # A live unknown stream, corrupt protocol or provider error remains
+            # an error rather than being hidden behind a generic close result.
+            normal_terminal = error.code in {"dsh_mux_stream_cancelled", "dsh_shell_stream_cancelled",
+                "dsh_shell_closed", "dsh_mux_closed", "dsh_shell_stream_unknown"}
+            # Shutdown closes the pipe after durable drain. An ordinary
+            # per-stream cancel is not permission to hide a broken connection.
+            owner_eof = shutting_down and error.code == "dsh_mux_connection_lost"
+            if retired and (normal_terminal or owner_eof):
+                return {"items": [], "cursor": cursor + 1, "done": True,
+                        "error": {"code": "gateway/cancelled", "message": "窗口已停止读取此流。", "details": {}}}
+            raise
 
     def dsh_client_stream_send(self, request: dict):
         identity, state = self._stream(request)
@@ -303,13 +322,20 @@ class NativeDshShellHost:
             data.release()
         return {"released": data is not None}
 
+    def retire_stream_reads(self):
+        """Mark this client's readers retired before the shared owner drains."""
+        with self._lock:
+            self._retiring = True
+            self._cancelled_streams.update(self._streams)
+            for state in self._streams.values():
+                state.cancelled = True
+
     def close(self):
         with self._lock:
             if self._closed:
                 return
             self._closed = True
-            for state in self._streams.values():
-                state.cancelled = True
+            self.retire_stream_reads()
             self._streams.clear()
             resources = list(self._resources.values())
             self._resources.clear()

@@ -198,7 +198,9 @@ def project_special_reaction_party_capabilities_detailed(
         escaped = str(actor_id).replace("~", "~0").replace("/", "~1")
         path = f"/equipment_inputs/{escaped}"
 
-        def explain(code, field, actual, expected, message, category="request_error"):
+        # Invoked synchronously below within this iteration, never retained.
+        def explain(code, field, actual, expected, message, category="request_error",
+                    *, actor_id=actor_id, path=path):
             diagnostics.append({"character_id": actor_id, "code": code, "category": category,
                 "input_ref": path + field, "actual": copy.deepcopy(actual),
                 "expected": copy.deepcopy(expected), "message": message,

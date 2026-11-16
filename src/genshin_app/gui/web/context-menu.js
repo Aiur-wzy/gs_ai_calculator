@@ -113,7 +113,8 @@
           event.preventDefault?.();
           if (!enabled.length) return;
           const index = enabled.indexOf(documentObject.activeElement);
-          const next = event.key === "Home" ? 0 : event.key === "End" ? enabled.length - 1
+          const next = event.key === "Home" || (event.key === "ArrowDown" && index < 0) ? 0
+            : event.key === "End" || index < 0 ? enabled.length - 1
             : (index + (event.key === "ArrowDown" ? 1 : -1) + enabled.length) % enabled.length;
           enabled[next]?.focus?.();
         } else if (event.key === "Enter" || event.key === " ") {
@@ -126,10 +127,13 @@
         }
       });
       const opened=surfaceKernel.create({surface:popup,trigger,returnFocus:current.returnFocus,kind:"popover",role:"menu",
-        ariaLabel:String(config.label||"操作"),initialFocus:config.focus===false?null:enabled[0]||null,removeOnClose:true,
+        ariaLabel:String(config.label||"操作"),removeOnClose:true,
         dismissOnOutside:true,dismissOnScroll:true,onRequestClose:()=>true,onClosed:()=>{if(active===current)active=null;}});
       if(!opened)return false;
       active=current;place(current);
+      // The menu is hidden while its size is measured. Move focus only
+      // after the positioned surface becomes visible.
+      if(config.focus!==false)enabled[0]?.focus();
       return true;
     }
 
@@ -138,7 +142,7 @@
       target.setAttribute?.("aria-haspopup", "menu");
       target.setAttribute?.("aria-expanded", "false");
       const show = (event, keyboard) => {
-        if (!keyboard && editable(event.target) && event.target !== target) return;
+        if (editable(event.target) && event.target !== target) return;
         event.preventDefault?.();
         event.stopPropagation?.();
         const items = typeof config.items === "function" ? config.items() : config.items;

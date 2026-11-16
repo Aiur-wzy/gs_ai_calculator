@@ -11,8 +11,9 @@ const root = path.join(__dirname, '..');
 const clone = value => JSON.parse(JSON.stringify(value));
 const helpers = {module: {exports: {}}, require, __dirname, console};
 vm.runInNewContext(fs.readFileSync(path.join(__dirname, 'gui_hit_parameters_review.test.cjs'), 'utf8')
-  .split('\ntest(')[0] + '\nmodule.exports={setup,all};', helpers);
-const {setup: base, all} = helpers.module.exports;
+  .split('\ntest(')[0] + '\nmodule.exports={setup,all,Element};', helpers);
+const {setup: base, all, Element} = helpers.module.exports;
+Element.prototype.replaceChildren = function (...nodes) { this.innerHTML = ''; this.append(...nodes); };
 const real = JSON.parse(Python.execFileSync(['-X', 'utf8', '-c', `
 import json,sys,tempfile
 from pathlib import Path
@@ -21,16 +22,20 @@ from test_pipeline import fake_repo
 from test_runtime_limited_hit_benefit import benefit_repo,benefit_db
 from test_limited_hit_benefit_sources import benefit_plan,confirm_benefit
 from test_mechanics_execution import EVIDENCE
-from genshin_app.equipment import run_plan_calc
 from genshin_app.equipment.service import plan_capabilities
+from genshin_app.gui.api import GuiApi
 with tempfile.TemporaryDirectory(prefix='genshin-ec19-gui-review-') as folder:
  p=Path(folder); repo=benefit_repo.__wrapped__(fake_repo.__wrapped__(p)); db=benefit_db.__wrapped__(p,repo)
+ app=GuiApi(p/'app', database_path=db)
  plan=benefit_plan(db)
  plan['action_event_overrides']=[{'action_id':'cast','landed':False,'order':20,**EVIDENCE}]
- zero=run_plan_calc(confirm_benefit(plan,db),db)
+ zero_response=app.run_plan_calc(confirm_benefit(plan,db))
  ordinary_plan=benefit_plan(db)
  ordinary_plan['manual_template']['characters'][0]['stats'].update(atk=0,base_atk=0)
- ordinary=run_plan_calc(confirm_benefit(ordinary_plan,db),db)
+ ordinary_response=app.run_plan_calc(confirm_benefit(ordinary_plan,db))
+ assert zero_response['code']==ordinary_response['code']==0, (zero_response.get('message'), ordinary_response.get('message'))
+ zero,ordinary=zero_response['data'],ordinary_response['data']
+ assert zero['report_handle'] and ordinary['report_handle'] and zero['report_handle']!=ordinary['report_handle']
  assert zero['result']['hits']==[] and len(ordinary['result']['hits'])==1
  assert zero['result']['summary']['total_damage']==ordinary['result']['summary']['total_damage']==0
  print(json.dumps({'caps':plan_capabilities(),'zero':zero,'ordinary':ordinary},ensure_ascii=False))
@@ -47,6 +52,11 @@ function setup(calculated = real.zero) {
   w.PL.replace(clone(calculated.plan), 'independent-zero.plan.json', 'fixture-sha', true);
   e.RS = w.RS;
   e.calls = [];
+  e.picks = [];
+  w.WB = {pickUserFile: async request => {
+    e.picks.push(clone(request));
+    return {cancelled: false, path: `fixture/${request.suggested_name}`, file_sha: 'selected-file-sha'};
+  }};
   w.callApi = async (name, ...args) => {
     e.calls.push([name, ...clone(args)]);
     return name === 'run_plan_calc' ? {code: 0, data: clone(calculated)} : {code: 0, data: {path: 'out.xlsx'}};
@@ -55,6 +65,13 @@ function setup(calculated = real.zero) {
   e.body = () => w.document.querySelector('#result-body');
   e.button = format => w.document.querySelector('#btn-exp-' + format);
   return e;
+}
+
+function expandReportSection(body, name) {
+  const section = all(body).find(n => n.className?.split(' ').includes(`result-section-${name}`));
+  assert.ok(section);
+  section.open = true;
+  section.emit('toggle');
 }
 
 test('independent native GUI uses actual caps and actual known-zero response with real cycle labels', async () => {
@@ -69,9 +86,14 @@ test('independent native GUI uses actual caps and actual known-zero response wit
   assert.equal(e.RS.isCurrent(), true);
   assert.deepEqual(Array.from(all(e.body()).filter(n => n.className === 'stat-value'), n => n.textContent), ['0', '0']);
   assert.match(e.body().textContent, /1 个已声明接触全部未命中/);
+  assert.match(e.body().textContent, /循环与机制/);
+  assert.doesNotMatch(e.body().textContent, /尚未证明周期稳定/);
+  expandReportSection(e.body(), 'mechanics');
   assert.match(e.body().textContent, /尚未证明周期稳定/);
   assert.match(e.body().textContent, /循环是否成立另行检查/);
-  assert.match(e.body().textContent, /逐伤害事件明细（0）/);
+  assert.match(e.body().textContent, /伤害明细（0）/);
+  expandReportSection(e.body(), 'damage');
+  assert.match(e.body().textContent, /引擎逐伤害事件明细（0）/);
   assert.match(e.status, /总伤 0，每秒伤害 0/);
   assert.equal(e.RS.state.result.result_receipt.damage_reporting.contract, contract.contract);
 });
@@ -85,13 +107,16 @@ test('independent native export routing blocks CSV before API and leaves JSON/XL
   assert.equal(e.button('formula').disabled, false);
   await e.RS.exportResult('csv');
   assert.equal(e.calls.length, 0);
+  assert.equal(e.picks.length, 0);
   assert.match(e.status, /CSV 不支持/);
   await e.RS.exportResult('json'); await e.RS.exportResult('xlsx');
-  assert.deepEqual(e.calls.map(c => [c[0], c[2]]), [['export_plan_result', 'json'], ['export_plan_result', 'xlsx']]);
-  for (const call of e.calls) {
-    assert.equal(call[1].action_event_overrides[0].landed, false);
-    assert.equal(call[1].manual_template.hits.length, 1);
-  }
+  assert.deepEqual(e.picks.map(pick => [pick.action, pick.document_kind]), [['export', 'report_json'], ['export', 'report_xlsx']]);
+  assert.deepEqual(e.calls, [
+    ['export_viewed_report', real.zero.report_handle, 'json', `fixture/${e.picks[0].suggested_name}`, 'selected-file-sha'],
+    ['export_viewed_report', real.zero.report_handle, 'xlsx', `fixture/${e.picks[1].suggested_name}`, 'selected-file-sha'],
+  ]);
+  assert.match(e.picks[0].suggested_name, /\.calculated\.json$/);
+  assert.match(e.picks[1].suggested_name, /\.xlsx$/);
 });
 
 test('independent real zero-valued hit stays a normal result and clears all-miss export restrictions', async () => {
@@ -99,7 +124,9 @@ test('independent real zero-valued hit stays a normal result and clears all-miss
   e.world.PL.replace(clone(real.ordinary.plan), 'ordinary.plan.json', 'ordinary-sha', true);
   e.world.callApi = async () => ({code: 0, data: clone(real.ordinary)});
   await e.RS.runCalc();
-  assert.match(e.body().textContent, /逐伤害事件明细（1）/);
+  assert.match(e.body().textContent, /伤害明细（1）/);
+  expandReportSection(e.body(), 'damage');
+  assert.match(e.body().textContent, /引擎逐伤害事件明细（1）/);
   assert.doesNotMatch(e.body().textContent, /伤害报告证明|全部未命中/);
   assert.deepEqual(Array.from(all(e.body()).filter(n => n.className === 'stat-value'), n => n.textContent), ['0', '0']);
   assert.equal(e.button('csv').disabled, false);

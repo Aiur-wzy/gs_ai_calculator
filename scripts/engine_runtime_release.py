@@ -6,6 +6,7 @@ qualification is a separate layer and cannot be inferred from this result.
 from __future__ import annotations
 
 import hashlib
+import marshal
 import subprocess
 import sys
 from pathlib import Path
@@ -59,6 +60,24 @@ def _code_contract(code):
 def _digest(path):
     with path.open("rb") as stream:
         return hashlib.file_digest(stream, "sha256").hexdigest()
+
+
+def _verify_app_entry(outer, source_root: Path, filename: str) -> dict:
+    """The PyInstaller script entry lives outside PYZ and owns startup guards."""
+    entry = "app_entry"
+    if entry not in outer.toc or outer.toc[entry][-1] != "s":
+        raise EngineRuntimePackageError("app_package_entry_script_missing", entry=filename, script=entry)
+    try:
+        actual = marshal.loads(outer.extract(entry))
+    except (ValueError, TypeError, EOFError) as error:
+        raise EngineRuntimePackageError("app_package_entry_script_invalid", entry=filename, script=entry) from error
+    source = source_root.parent / "app_entry.py"
+    if not source.is_file():
+        raise EngineRuntimePackageError("app_package_entry_source_missing", entry=filename, script=entry)
+    expected = compile(source.read_text(encoding="utf-8-sig"), str(source), "exec", dont_inherit=True)
+    if not isinstance(actual, CodeType) or _code_contract(actual) != _code_contract(expected):
+        raise EngineRuntimePackageError("app_package_entry_source_mismatch", entry=filename, script=entry)
+    return {"script": entry, "source_sha256": _digest(source)}
 
 
 def changed_project_modules(source_root: Path) -> set[str]:
@@ -131,7 +150,8 @@ def validate_engine_package_archive(package_root: Path, *, source_root: Path | N
             expected = compile(source.read_text(encoding="utf-8-sig"), str(source), "exec", dont_inherit=True)
             if not isinstance(actual, CodeType) or _code_contract(actual) != _code_contract(expected):
                 raise EngineRuntimePackageError("engine_package_source_mismatch", entry=filename, module=name)
-        records.append({"entry": filename, "sha256": _digest(path),
+        entry_script = _verify_app_entry(outer, source_root, filename)
+        records.append({"entry": filename, "sha256": _digest(path), "entry_script": entry_script,
                         "declared_closure_modules": len(closure),
                         "declared_app_closure_modules": len(app_closure),
                         "semantic_source_modules": len(project_modules | set(closure) | set(app_closure) | changed)})

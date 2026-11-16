@@ -358,7 +358,7 @@ export class NativeWebResearchLifecycle {
   }
 }
 
-/** Mount the one fixed official search provider and the safe public fetcher. */
+/** Reuse configured official providers; standalone fixtures retain an explicit composition. */
 export async function mountNativeWebRuntime(ctx) {
   if (ctx === null || typeof ctx !== 'object'
       || ctx.credentials === undefined || ctx.tools === undefined) {
@@ -367,6 +367,15 @@ export async function mountNativeWebRuntime(ctx) {
   if (DEEPSEEK_SEARCH_API_PROVIDER_ID !== NATIVE_WEB_SEARCH_PROVIDER
       || DEEPSEEK_WEB_API_BASE_URL !== 'https://api.deepseek.com/v1/tools') {
     fail('native_web_upstream_contract_changed')
+  }
+
+  // Production base owns the complete upstream search-provider registry and
+  // its public settings. Research accounting remains the Agent scope below.
+  // Keep this standalone composition solely for isolated seam fixtures.
+  if (ctx.get('web')) {
+    await ctx.plugin(ToolCallTimeoutPolicy)
+    return Object.freeze({ searchProvider: 'dsh-configured', fetchProvider: 'dsh-configured',
+      deepSeekFetchProviderMounted: false, limits: NATIVE_WEB_LIMITS })
   }
 
   await ctx.plugin(WebRuntime, {
@@ -411,7 +420,7 @@ export async function setupNativeWebAgentScope({
   const lifecycle = new NativeWebResearchLifecycle({
     agentCtx, agent, callbacks, resolveToolBinding, budgetController, isCurrentTurn,
   })
-  if (!installTools) return lifecycle
+  if (!installTools || agentCtx.tools.schemas(agent).some(tool => tool.name === 'web_search')) return lifecycle
   await agentCtx.plugin(ToolWeb, {
     search: true,
     fetch: true,

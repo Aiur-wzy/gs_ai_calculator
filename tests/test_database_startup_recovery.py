@@ -230,7 +230,9 @@ def test_controller_requires_consent_and_recovers_through_real_launcher(fixed_pa
         window = SimpleNamespace(evaluate_js=lambda _script: None, destroy=lambda: calls.append("splash_destroyed"))
         created.append((kwargs, window))
         return window
-    def start(callback):
+    def start(callback, *, storage_path, private_mode):
+        assert Path(storage_path) == data / "webview-profile"
+        assert private_mode is False
         callback()
         assert len(created) == 1 and not calls
         port = created[0][0]["js_api"]

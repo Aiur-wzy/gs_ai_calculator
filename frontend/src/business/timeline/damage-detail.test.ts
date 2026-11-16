@@ -53,4 +53,15 @@ describe("damage explanation reference and lazy UI",()=>{
   it("ignores lazy work after selection or result changes",()=>{
     const {box,view}=render();view.projection={};const mods=open(box,1);expect(mods.textContent).not.toContain("队友基础加算");
   });
+  it("shows exact Buff links only for adopted benefits and rejects cross-event explanation refs",()=>{
+    const f=fixture();f.event.character="a";f.doc.events.e.event_id="hit1";
+    expect(resolveDamageExplanation(f.projection,{...f.event.detail,hit_id:"hit2"}).status).toBe("invalid");
+    f.doc.modifiers.m.buff_id="buff";f.doc.modifiers.unused={name_zh:"未采用收益",consumed:false,value:42,zone:"def"};
+    f.doc.events.e.modifier_refs.push("unused");
+    const target={id:"buff-row",start:0,end:3,character:"a",detail:{buff_id:"buff"}};f.projection.views={effects:{events:[target]}};
+    const {box,view}=render(f);let received:any;view.navigateEvidence=(...args:any[])=>received=args;
+    const mods=open(box,1);const button=mods.querySelector("button")!;button.click();expect(received[0]).toBe(target);expect(received[1]).toBe("effects");
+    expect(mods.querySelector("details")?.textContent).toContain("本段未采用的属性");
+    received=null;view.projection={};button.click();expect(received).toBeNull();
+  });
 });

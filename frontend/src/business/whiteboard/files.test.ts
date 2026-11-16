@@ -42,4 +42,11 @@ describe("whiteboard file-kind inspection keeps the original document fence",()=
     expect(await pending).toBe(true);expect(state.owner.leave).toHaveBeenCalledOnce();expect(state.owner.replace).toHaveBeenCalledOnce();
     expect(state.api.mock.calls.map(([name])=>name)).toEqual(["inspect_plan_file","whiteboard_load"]);
   });
+  it("forwards a structured load error while preserving the current whiteboard",async()=>{
+    const state=fixture(),failure={code:1,message:"白板内容校验未通过。",details:{field:"team"}},onError=vi.fn();
+    state.api.mockImplementation(async name=>name==="inspect_plan_file"?{code:0,data:{kind:"genshin-whiteboard"}}:failure);
+    expect(await state.files.load("invalid.json",{onError})).toBe(false);
+    expect(onError).toHaveBeenCalledExactlyOnceWith(failure);expect(state.ui.error).toHaveBeenCalledExactlyOnceWith(failure);
+    expect(state.owner.replace).not.toHaveBeenCalled();expect(state.state.board.board_id).toBe("a");
+  });
 });

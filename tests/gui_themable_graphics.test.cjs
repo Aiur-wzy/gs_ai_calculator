@@ -21,7 +21,9 @@ test('timeline event colours resolve through the app theme and repaint when it c
 test('whiteboard SVG uses semantic axis colours and redraws in-place on theme change', () => {
   assert.match(whiteboard, /const themeColor =/);
   for (const token of ['color-axis-lane-even', 'color-axis-coverage-lane',
-    'color-axis-grid', 'color-axis-event-text', 'color-axis-cursor']) assert.ok(whiteboard.includes(token), token);
+    'color-axis-grid', 'color-axis-character-', 'color-axis-cursor']) assert.ok(whiteboard.includes(token), token);
+  assert.match(whiteboard, /fill:markerInk\(color,0\.78,laneFill\(/);
+  assert.match(whiteboard, /fill:markerInk\(color\)/);
   assert.match(whiteboard, /genshin-theme-change/);
   assert.match(whiteboard, /WB\.refreshThemeColors\(\);WB\.draw\(\)/);
 });

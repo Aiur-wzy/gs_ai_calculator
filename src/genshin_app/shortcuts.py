@@ -60,6 +60,9 @@ if ($saved.TargetPath -ine $spec.target -or $saved.Arguments -cne $spec.argument
         if result.returncode or not output.is_file():
             detail = result.stderr.decode("utf-8", errors="replace").strip()
             raise RuntimeError(f"创建 Windows 快捷方式失败：{detail or result.returncode}")
+        if spec.get("app_user_model_id"):
+            from .windows_shell_identity import set_shortcut_app_id
+            set_shortcut_app_id(output, spec["app_user_model_id"])
         return output.read_bytes()
 
 

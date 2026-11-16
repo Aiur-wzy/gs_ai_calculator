@@ -16,6 +16,14 @@ async function mount(api:AppCandidateGuiApi,onImported=vi.fn()){
 async function click(text:string){const button=[...document.querySelectorAll("button")].find(node=>node.textContent===text);expect(button).toBeDefined();await act(async()=>{button!.click();await Promise.resolve();});}
 
 describe("user-only candidate input file entry",()=>{
+  it("shows a manual copy route when the WebView clipboard is unavailable",async()=>{
+    vi.stubGlobal("navigator",{});
+    const api={agent_candidate:vi.fn(),agent_candidate_read:vi.fn(),dsh_client_open_candidate_input_draft:vi.fn(async()=>({code:0,data:{preview:{compatible:false},preview_id:"old-copy",migration_prompt:"请保留旧方案并在新版本复算"}}))};
+    await mount(api);await click("打开候选输入草稿");await click("复制兼容修改要求");
+    const dialog=document.querySelector('[role="dialog"]')!;
+    expect(dialog.querySelector('[role="alert"]')?.textContent).toContain("手动复制");
+    expect(dialog.textContent).toContain("请保留旧方案并在新版本复算");
+  });
   it("drops an old preview and its delayed read when the DSH Session changes",async()=>{
     let resolve!:(value:any)=>void;
     const api={agent_candidate:vi.fn(),agent_candidate_read:vi.fn(),dsh_client_open_candidate_input_draft:vi.fn(async()=>({code:0,data:{preview:{compatible:false},preview_id:"old-a",migration_prompt:"A的旧草稿"}})),dsh_client_candidate_input_draft_preview_read:vi.fn(()=>new Promise<any>(done=>{resolve=done;}))};

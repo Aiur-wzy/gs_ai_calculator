@@ -14,7 +14,7 @@ function harness(options={}){
   // Accelerate polling only; this fixture has no Session/Turn reducer or loop.
   w.setTimeout=(fn,delay)=>setTimeout(fn,Math.min(delay,1));
   const calls=[],effects={sent:0,review:0,apply:0,save:0,load:0,resultSave:0,resultImport:0,newSession:0};
-  let sent=false,statusReads=0,savedBoard=null;
+  let sent=false,statusReads=0,savedBoard=null,page='whiteboard';
   const clone=value=>JSON.parse(JSON.stringify(value));
   const board=()=>({kind:'genshin-whiteboard',schema_version:3,board_id:'board-one',revision:0,
     title:'fixture',team:[],actions:[{id:'action-one',action_type_id:'skill'}]});
@@ -24,10 +24,12 @@ function harness(options={}){
   const app=d.getElementById('dsh-app-root'),editor=d.getElementById('genshin-legacy-editor');
   w.GenshinDshClient={ready:Promise.resolve()};w.GenshinEditorBridge={};
   w.WB={state:{board:null,path:'',fileSha:null,result:null,mode:'actions'}};
-  add(app,'排轴白板',()=>{editor.hidden=false;});
+  w.WS={tab:()=>page};
+  const showWhiteboard=()=>{editor.hidden=false;page='whiteboard';};
+  add(app,'排轴白板',showWhiteboard);
   const embedded=d.createElement('div');embedded.className='gs-editor-assistant';app.append(embedded);
   add(embedded,'完整页面',()=>{
-    embedded.remove();const conversation=d.createElement('div');conversation.dataset.conversationContent='';
+    embedded.remove();page='agent';editor.hidden=true;const conversation=d.createElement('div');conversation.dataset.conversationContent='';
     conversation.dataset.conversationSession='session-one';app.append(conversation);
     const input=d.createElement('div');input.setAttribute('contenteditable','true');app.append(input);
     input.addEventListener('paste',event=>{input.textContent=event.clipboardData.getData('text/plain');});
@@ -50,11 +52,13 @@ function harness(options={}){
   for(const label of ['文件','计算与交接'])add(d.getElementById('workspace-menubar'),label,()=>popup(label));
   add(app,'审核候选',()=>{
     effects.review++;
-    add(app,'审核并同步到正式白板',()=>add(app,'确认同步',()=>{
-      effects.apply++;w.WB.state.board={...board(),revision:1};w.WB.state.result=calculated;
+    if(options.missingReviewDom)return;
+    const review=d.createElement('div');review.setAttribute('role','dialog');review.setAttribute('aria-modal','true');d.body.append(review);
+    add(review,'同意并同步',()=>{
+      effects.apply++;review.remove();w.WB.state.board={...board(),revision:1};w.WB.state.result=calculated;showWhiteboard();
       add(app,'计算结果另存为…',()=>{effects.resultSave++;const p=d.createElement('p');p.textContent=CONFIG.calculated_path;app.append(p);});
-      add(app,'查看正式白板',()=>{editor.hidden=false;});
-    }));
+      add(app,'查看正式白板',showWhiteboard);
+    });
   });
   w.pywebview={api:new Proxy({}, {get(_target,method){return async(...args)=>{
     calls.push([method,...args]);
@@ -109,6 +113,12 @@ test('durable completion reaches exact candidate lookup despite stale using-tool
   const h=harness({unsealed:true});try{
     const receipt=await terminal(h);assert.equal(receipt.error_code,'webview_smoke_candidate_not_ready');
     const candidate=h.calls.find(row=>row[0]==='dsh_client_candidate');assert.equal(candidate[1].conversation_id,'domain-one');noPublication(h);
+  }finally{h.dom.window.close();}
+});
+test('missing review confirmation cannot sync even after candidate acceptance',async()=>{
+  const h=harness({missingReviewDom:true});try{
+    const receipt=await terminal(h,{timeout_ms:1000});assert.equal(receipt.status,'failed');assert.equal(receipt.error_code,'webview_smoke_review_not_rendered');
+    assert.equal(h.effects.review,1);assert.equal(h.effects.apply,0);assert.equal(h.effects.save,0);assert.equal(h.effects.resultSave,0);
   }finally{h.dom.window.close();}
 });
 test('missing result DOM cannot be reported as verified after file effects settle',async()=>{

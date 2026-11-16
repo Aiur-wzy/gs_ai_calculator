@@ -7,6 +7,7 @@ import {createAppEditorPlugin} from "../../src/dsh/app-editor-plugin";
 import type {AppEditorBridge} from "../../src/dsh/app-editor-bridge";
 import {createAppCredentialSettingsPlugin,type AppCredentialHostApi} from "../../src/dsh/app-credential-settings";
 import {createAppRuntimeSettingsPlugin,type AppRuntimeSettingsApi} from "../../src/dsh/app-runtime-settings";
+import {createWindowPresentationPlugin,detachedWindow} from "../../src/dsh/app-window-presentation";
 
 declare module "@deepseek-ai/cordis" {
   interface Context {
@@ -19,7 +20,8 @@ export const inject = ["slots", "sidebarRightTabs", "sessions"];
 
 export function apply(ctx: Context) {
   const editor = (window as unknown as {GenshinEditorBridge?: AppEditorBridge}).GenshinEditorBridge;
-  if (editor) void ctx.plugin(createAppEditorPlugin(editor));
+  if (editor && !detachedWindow()) void ctx.plugin(createAppEditorPlugin(editor));
+  void ctx.plugin(createWindowPresentationPlugin());
   let installed = false;
   let disposed = false;
   const install = () => {

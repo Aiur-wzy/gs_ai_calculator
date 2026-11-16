@@ -3,6 +3,7 @@ import {Button,Modal} from "@deepseek-ai/dsh-client-ui-primitives";
 import type {AppCandidateGuiApi,AppDomainBinding,AppDomainBindings} from "./app-domain-candidate";
 import type {AppEditorFilePort,AppFilePhase} from "./app-editor-bridge";
 import {useAppDomainRead} from "./app-domain-read";
+import {detachedWindow,presentInMain} from "./app-window-presentation";
 import {APP_ACTION_LABELS,AppActionExecutionPending,AppActionSettlementPending,executeAppAction,parseAppActions,recoverAppAction,settleAppAction,type AppAction} from "./app-file-actions";
 
 export function AppFileActionCards({api,binding,bindings,files,onSettled,focusActionId,onFocused}:{api:AppCandidateGuiApi;binding:AppDomainBinding;bindings:AppDomainBindings;files?:AppEditorFilePort;onSettled?:()=>void;focusActionId?:string;onFocused?:()=>void}){
@@ -43,6 +44,11 @@ export function AppFileActionCards({api,binding,bindings,files,onSettled,focusAc
         action.status==="claimed_for_external_execution"?<><p>{actionStatus(action)}</p>{action.draft_publication?.status==="verified"?
           <Button size="sm" variant="outline" disabled={!!busy} onClick={()=>void perform(()=>recoverAppAction(api,binding,action),action.action_id)}>补记已保存结果</Button>:
           <Button size="sm" variant="outline" disabled={!!busy} onClick={()=>setRecovery(action)}>核对未知操作</Button>}</>:
+        !files&&detachedWindow()?<Button size="sm" variant="outline" disabled={!!busy} onClick={()=>{
+          void presentInMain({command:"file_action",session_id:binding.dshSessionId,conversation_id:binding.conversationId,action_id:action.action_id})
+            .then(()=>{setError("");setMessage("已通知主窗口。请在主窗口的候选工作区找到操作卡，再选择文件位置并确认。");})
+            .catch(reason=>setError(reason instanceof Error?reason.message:"主窗口未能打开。"));
+        }}>在主窗口处理文件</Button>:
         <Button size="sm" variant="outline" disabled={!!busy||!files} onClick={()=>files&&void perform(()=>executeAppAction(api,binding,files,action,setPhase),action.action_id)}>处理这项操作</Button>}
       <DraftFileDetails action={action}/>
     </div>)}
@@ -53,7 +59,8 @@ export function AppFileActionCards({api,binding,bindings,files,onSettled,focusAc
       <strong>{APP_ACTION_LABELS[action.action]}</strong><p>{action.result_message||actionStatus(action)}</p><DraftFileDetails action={action}/>
     </article>)}</details>}
     <Modal open={!!recovery} title="核对未确认的 App 操作" description="文件或页面操作可能已经发生。关闭未知状态不会再次执行原操作，也不会把它当成成功。" closeLabel="关闭未知操作确认" onClose={()=>{if(!busy)setRecovery(undefined);}}
-      footer={<><Button variant="outline" disabled={!!busy} onClick={()=>setRecovery(undefined)}>返回核对</Button><Button disabled={!!busy} onClick={()=>recovery&&void perform(()=>recoverAppAction(api,binding,recovery),recovery.action_id)}>关闭未知状态，不重做操作</Button></>}>
+      className="gs-domain-dialog" contentClassName="gs-domain-dialog-content"
+      footer={<div className="gs-domain-dialog-actions"><Button variant="outline" disabled={!!busy} onClick={()=>setRecovery(undefined)}>返回核对</Button><Button disabled={!!busy} onClick={()=>recovery&&void perform(()=>recoverAppAction(api,binding,recovery),recovery.action_id)}>关闭未知状态，不重做操作</Button></div>}>
       <p>{recovery?APP_ACTION_LABELS[recovery.action]:""}</p><p>{recovery?.reason}</p>
     </Modal>
   </section>;

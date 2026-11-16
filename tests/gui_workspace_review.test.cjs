@@ -129,11 +129,12 @@ function workspace(){
     append(...items){items.forEach(item=>{item.parent=this;this.children.push(item);});}appendChild(item){this.append(item);return item;}
     replaceChildren(...items){this.children=[];this.append(...items);}setAttribute(key,value){(this.attributes??={})[key]=value;}
     addEventListener(type,fn){this.listeners[type]=fn;}emit(type,event={}){return this.listeners[type]?.({target:this,preventDefault(){},...event});}
-    click(){return this.emit('click');}focus(){}showModal(){this.open=true;this.showModalCalls=(this.showModalCalls||0)+1;}close(){this.open=false;}
+    click(){return this.emit('click');}focus(){world.document.activeElement=this;}showModal(){this.open=true;this.showModalCalls=(this.showModalCalls||0)+1;}close(){this.open=false;}
+    contains(node){for(let current=node;current;current=current.parent)if(current===this)return true;return false;}
     remove(){if(this.parent)this.parent.children=this.parent.children.filter(item=>item!==this);}
     querySelector(selector){return this.querySelectorAll(selector)[0]||null;}
     querySelectorAll(selector){const descendants=node=>node.children.flatMap(child=>[child,...descendants(child)]),matches=(node,part)=>
-      part.startsWith('#')?node.id===part.slice(1):part.startsWith('.')?String(node.className||'').split(' ').includes(part.slice(1)):
+      part.startsWith('#')?node.id===part.slice(1):part.startsWith('.')?part.slice(1).split('.').every(cls=>String(node.className||'').split(' ').includes(cls)):
       part.startsWith('[data-resize-side=')?node.dataset.resizeSide===part.match(/"([^"]+)"/)[1]:false;
       return descendants(this).filter(node=>selector.split(',').some(part=>matches(node,part)));}
     set textContent(value){this.text=String(value);this.children=[];}get textContent(){return(this.text||'')+this.children.map(item=>item.textContent).join('');}
@@ -196,12 +197,65 @@ test('workspace shortcuts respect modal input and switch only the active axis',(
 
 test('workspace layout controls preserve independent view preferences without saving document inputs',()=>{
   const env=workspace();env.WS.preference('whiteboard');env.WS.preference('rotation');
-  env.WS.toggle('whiteboard','right');assert.equal(env.WS.preference('whiteboard').rightHidden,true);
-  assert.equal(env.WS.preference('rotation').rightHidden,false);env.WS.reveal('whiteboard','right');assert.equal(env.WS.preference('whiteboard').rightHidden,false);
+  assert.equal(env.WS.preference('whiteboard').rightHidden,true);assert.equal(env.WS.preference('rotation').rightHidden,true);
+  env.WS.toggle('whiteboard','right');assert.equal(env.WS.preference('whiteboard').rightHidden,false);
+  assert.equal(env.WS.preference('rotation').rightHidden,true);
   env.WS.resizePane('whiteboard','left',99999);assert.equal(env.WS.preference('whiteboard').left,340);
   env.WS.resizePane('rotation','right',-10);assert.equal(env.WS.preference('rotation').right,230);
   env.WS.resizePane('rotation','right',Infinity);assert.equal(env.WS.preference('rotation').right,230);
   assert.equal(env.calls.length,0);assert.ok(env.stored.has('genshin.workspace.v1'));
+});
+
+test('selection reveals inspector without persisting it or leaking it into the next document',()=>{
+  const env=workspace(),context={},mount=(owner,rightContext)=>{
+    const root=new env.Node('div'),team=new env.Node('aside'),detail=new env.Node('aside');root.clientWidth=1280;
+    team.className='team';detail.className='detail';root.append(team,detail);env.body.append(root);
+    env.WS.mount(root,{key:'whiteboard',left:'.team',right:'.detail',context:owner,rightContext});return env.WS.layouts.get('whiteboard');
+  };
+  let record=mount(context,'action1');assert.equal(env.WS.preference('whiteboard').rightHidden,true);
+  env.WS.reveal('whiteboard','right');assert.equal(record.revealed.right,true);assert.equal(env.WS.preference('whiteboard').rightHidden,true);
+  assert.equal(env.stored.has('genshin.workspace.v1'),false);
+  record=mount(context,'action1');assert.equal(record.revealed.right,true);
+  record=mount(context,'newly-added-action');assert.equal(record.revealed.right,true);
+  record=mount(context,null);assert.equal(record.revealed.right,undefined);
+  record=mount({},null);assert.equal(record.revealed.right,undefined);
+  env.WS.toggle('whiteboard','right');assert.equal(env.WS.preference('whiteboard').rightHidden,false);
+  mount({},null);assert.equal(env.WS.preference('whiteboard').rightHidden,false);
+});
+
+test('reusing the advanced work area resets its temporary inspector when the document changes',()=>{
+  const env=workspace(),root=new env.Node(),left=new env.Node(),right=new env.Node(),context={};
+  root.clientWidth=1280;left.id='left';right.id='right';root.append(left,right);
+  let repaints=0;
+  const mount=(document,selection)=>env.WS.mount(root,{key:'rotation',left:'#left',right:'#right',context:document,rightContext:selection,repaint:()=>repaints++});
+  mount(context,'selected');env.WS.reveal('rotation','right');
+  const record=env.WS.layouts.get('rotation'),handle=root.querySelector('.ws-resizer'),previousPaints=repaints;
+  env.WS.reveal('rotation','right');assert.equal(repaints,previousPaints,'existing reveal does not replace an already focused event');
+  mount(context,'another selection');assert.equal(record.revealed.right,true);
+  mount(context,null);assert.deepEqual(Object.keys(record.revealed),[]);
+  env.WS.reveal('rotation','right');mount({},null);assert.deepEqual(Object.keys(record.revealed),[]);
+  assert.equal(root.querySelector('.ws-resizer'),handle);
+  assert.equal(env.WS.preference('rotation').rightHidden,true);
+});
+
+test('closed narrow navigation leaves the focus order and Escape restores its toggle',()=>{
+  const env=workspace(),panel=new env.Node(),selected=new env.Node('button'),toggle=new env.Node('button'),root=new env.Node();
+  selected.className='tab active';panel.append(selected);const media={matches:true};
+  Object.assign(env.WS.sidebar,{root,panel,toggle,media,overlayOpen:false});env.WS.init();env.WS.applySidebarState();
+  assert.equal(panel.inert,true);assert.equal(toggle.attributes['aria-expanded'],'false');
+  env.WS.toggleGlobalSidebar();assert.equal(panel.inert,false);assert.equal(env.world.document.activeElement,selected);
+  assert.equal(toggle.attributes['aria-expanded'],'true');
+  const escape={key:'Escape',preventDefault(){this.defaultPrevented=true;}};
+  env.listeners.get('keydown')(escape);
+  assert.equal(escape.defaultPrevented,true);assert.equal(panel.inert,true);assert.equal(env.world.document.activeElement,toggle);
+  env.WS.toggleGlobalSidebar();media.matches=false;env.WS.applySidebarState();
+  assert.equal(panel.inert,false);assert.equal(toggle.attributes['aria-expanded'],'false');
+  media.matches=true;env.WS.applySidebarState();assert.equal(panel.inert,true);assert.equal(env.world.document.activeElement,toggle);
+});
+
+test('saved explicit inspector preference remains intact when new defaults are loaded',()=>{
+  const env=workspace();env.stored.set('genshin.workspace.v1',JSON.stringify({whiteboard:{rightHidden:false},rotation:{}}));
+  env.WS.loadPreferences();assert.equal(env.WS.preference('whiteboard').rightHidden,false);assert.equal(env.WS.preference('rotation').rightHidden,true);
 });
 
 test('workspace native picker routes inspected whiteboards without touching native loader',async()=>{

@@ -108,7 +108,9 @@ def test_launcher_passes_path_as_bridge_data_without_opening_real_window(tmp_pat
         created.append({"title": title, "window": window, **kwargs})
         return window
 
-    def start(callback=None):
+    def start(callback=None, *, storage_path, private_mode):
+        assert Path(storage_path) == tmp_path / "webview-profile"
+        assert private_mode is False
         if callback is not None:
             callback()
         entry = created[-1]
@@ -158,8 +160,12 @@ def test_verified_app_only_launches_main_without_database_service(tmp_path, monk
         windows.append(kwargs)
         return SimpleNamespace(evaluate_js=lambda _text: None, destroy=lambda: None)
 
-    monkeypatch.setitem(sys.modules, "webview", SimpleNamespace(create_window=create_window,
-                                                                  start=lambda callback: callback()))
+    def start(callback, *, storage_path, private_mode):
+        assert Path(storage_path) == tmp_path / "webview-profile"
+        assert private_mode is False
+        callback()
+
+    monkeypatch.setitem(sys.modules, "webview", SimpleNamespace(create_window=create_window, start=start))
     monkeypatch.setattr(product_database_setup, "build_database_setup", lambda _path: setup)
     monkeypatch.setattr(launcher, "prepare_database_startup", Mock(side_effect=AssertionError("uninstalled database")))
     monkeypatch.setattr(launcher, "ServiceManager", Mock(side_effect=AssertionError("uninstalled database")))
@@ -185,7 +191,9 @@ def test_launcher_cleans_service_when_window_setup_or_start_fails(tmp_path, monk
     elif failure_stage == "close_guard":
         close_guard.side_effect = RuntimeError("injected window startup failure")
 
-    def webview_start(callback=None):
+    def webview_start(callback=None, *, storage_path, private_mode):
+        assert Path(storage_path) == tmp_path / "webview-profile"
+        assert private_mode is False
         if failure_stage == "start":
             raise RuntimeError("injected window startup failure")
         if callback is not None:
@@ -231,7 +239,9 @@ def test_database_gate_failure_stays_on_startup_page_and_never_constructs_runtim
         destroy=lambda: pytest.fail("failed admission must keep the error page visible"),
     )
 
-    def start(callback=None):
+    def start(callback=None, *, storage_path, private_mode):
+        assert Path(storage_path) == tmp_path / "webview-profile"
+        assert private_mode is False
         assert callback is not None
         callback()
 

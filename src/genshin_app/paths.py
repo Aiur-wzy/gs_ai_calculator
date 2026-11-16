@@ -1,8 +1,8 @@
 """运行路径定位（G5）：开发态 vs PyInstaller frozen 态。
 
 - resource_dir：捆绑只读资源（web 前端、预构建库、skill/）。frozen 时在 sys._MEIPASS 下。
-- default_data_dir：开发态 ./data；frozen 态 %LOCALAPPDATA%\\GenshinCalc\\data
-  （Program Files 安装目录不可写）。
+- default_data_dir：开发态固定仓库根/data，不随工作目录改变；已登记 frozen 安装使用所选安装根/data，
+  新便携版从受校验标记选择同包data；新EXE缺少登记或标记时拒绝回落旧资料。
 - ensure_data_dir：首启初始化——目录创建 + 预构建 genshin.db 复制（离线可用）。
 """
 
@@ -15,7 +15,6 @@ from pathlib import Path
 from uuid import uuid4
 
 from genshin_app.database_transaction import serialized_profile_writer
-from genshin_app.version import APP_DIR_NAME
 
 
 def is_frozen() -> bool:
@@ -49,9 +48,13 @@ def web_dir() -> Path:
 
 def default_data_dir() -> Path:
     if is_frozen():
-        base = os.environ.get("LOCALAPPDATA") or str(Path.home() / "AppData" / "Local")
-        return Path(base) / APP_DIR_NAME / "data"
-    return Path("data")
+        from .installation_location import resolve_runtime_root
+        root = resolve_runtime_root(sys.executable)
+        if root is not None:
+            return root / "data"
+        from .portable_layout import resolve_portable_data
+        return resolve_portable_data(sys.executable)
+    return resource_dir() / "data"
 
 
 @serialized_profile_writer()

@@ -187,11 +187,14 @@ def build_fixed_inputs(root, database):
         {"op": "replace", "path": "/extensions/event_topology_bindings", "value": bindings},
     ]}}
     refresh = {"tool": "gs_refresh_data_refs", "arguments": {"expected_revision": 3, "reason": SOURCE}}
-    adopt = {"tool": "gs_adopt_attributes", "arguments": {"expected_revision": 4, "note": SOURCE}}
-    calculate = {"tool": "gs_calculate", "arguments": {"expected_revision": 5}}
+    adopt = {"tool": "gs_adopt_attributes", "arguments": {"note": SOURCE}}
+    calculate = {"tool": "gs_calculate", "arguments": {}}
     # Use the existing App itself to validate only the fixed fixture inputs.
     # The DSH case receives these inputs, never this dry result/receipt.
     for call in (patch, refresh, adopt, calculate):
+        # A refresh/adoption that changes nothing preserves the revision. Bind
+        # the scripted call to the actual preflight identity, not a tool count.
+        call["arguments"]["expected_revision"] = dry.revision
         reply = dry.call_tool(call["tool"], call["arguments"])
         if reply.get("code") != 0:
             raise RuntimeError("selfcheck_fixed_input_invalid:" + call["tool"] + ":" + str(reply))

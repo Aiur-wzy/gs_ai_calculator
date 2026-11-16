@@ -205,6 +205,35 @@ class GuiApi(DshShellApi):
         self._dsh_credentials_lock = Lock()
         self._dsh_result_save_dialog = dsh_result_save_dialog
         self._dsh_file_dialog = dsh_file_dialog
+        self._agent_windows = None
+
+    def dsh_window_state(self):
+        return self._agent_windows.state() if self._agent_windows else {"role": "main", "presentation": "main", "generation": 0, "handoff": None}
+
+    def dsh_window_open(self, request):
+        if self._agent_windows is None:
+            raise ValueError("agent_window_unavailable")
+        return self._agent_windows.open(request)
+
+    def dsh_window_poll(self):
+        return self._agent_windows.poll() if self._agent_windows else {**self.dsh_window_state(), "commands": []}
+
+    def dsh_window_acknowledge(self, request):
+        return self._agent_windows.acknowledge(request)
+
+    def dsh_window_recover(self):
+        return self._agent_windows.recover_main()
+
+    def dsh_window_main_ready(self, request):
+        return self._agent_windows.main_ready(request)
+
+    def dsh_window_cancel_return(self, request):
+        if self._agent_windows is None:
+            raise ValueError("agent_window_unavailable")
+        return self._agent_windows.cancel_return(request)
+
+    def dsh_window_select(self, request):
+        return self._agent_windows.select_session(request)
 
     def get_startup_file(self) -> dict:
         """Claim this window's initial file once, including concurrent bridge calls."""
@@ -218,11 +247,26 @@ class GuiApi(DshShellApi):
         return self._ok({"initialized": True})
 
     def confirm_close(self) -> dict:
+        if self._agent_windows is not None:
+            try:
+                if not self._agent_windows.prepare_application_close():
+                    return self._ok({"closed": False, "cancelled": True})
+            except (RuntimeError, ValueError) as error:
+                return {"code": 1, "message": str(error), "reason": "agent_window_exit_not_ready"}
         if self._agent_manager is not None:
             result = self.agent_shutdown()
             if result.get("code"):
+                if self._agent_windows is not None:
+                    self._agent_windows.cancel_close()
                 return result
-        self._close_dsh_shell()
+        try:
+            self._close_dsh_shell()
+            if self._agent_windows is not None:
+                self._agent_windows.shutdown()
+        except Exception:
+            if self._agent_windows is not None:
+                self._agent_windows.cancel_close()
+            raise
         self._closing_approved = True
         if self._window is not None:
             self._window.destroy()

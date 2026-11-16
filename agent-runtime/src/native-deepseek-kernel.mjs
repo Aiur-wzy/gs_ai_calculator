@@ -5,6 +5,7 @@ import {
   createLaunchEnvironmentSnapshot,
 } from '@deepseek-ai/dsh-launch-environment'
 import { mkdir } from 'node:fs/promises'
+import { join } from 'node:path'
 
 import { NativeMemoryCredentials } from './memory-credentials.mjs'
 import { installNativeProviderProxy } from './native-provider-proxy.mjs'
@@ -66,7 +67,7 @@ export async function createNativeDeepSeekKernel({
   try {
     providerProxy = await installNativeProviderProxy()
     ctx.provide(DSH_LAUNCH_ENVIRONMENT_KEY, createLaunchEnvironmentSnapshot([]))
-    await ctx.plugin(credentialsPlugin)
+    await ctx.plugin(credentialsPlugin, { directory: join(compositionPaths.profileRoot, 'credentials') })
     fullProfile = await createNativeFullProfile(ctx, {
       paths: compositionPaths, personaPrefix, dshSettings, providerRetryPolicy, model, reasoningEffort,
     })

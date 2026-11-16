@@ -1,4 +1,5 @@
 /** DOM-only time-axis components. Input/selection remain owned by the supplied editor. */
+import {TIMELINE_ACTION_HEIGHT,TIMELINE_VIEW_HEIGHT} from "./geometry";
 export interface TimelineDomPorts {
   view:Record<string,any>; editor:Record<string,any>;
   query:(selector:string)=>any; document:Document;
@@ -9,8 +10,8 @@ export interface TimelineDomPorts {
 }
 export function createTimelineDom(ports:TimelineDomPorts){
   const TV=ports.view,$=ports.query;
-const VIEW_ROW_H = 44;
-const ACTION_ROW_H = 84;
+const VIEW_ROW_H = TIMELINE_VIEW_HEIGHT;
+const ACTION_ROW_H = TIMELINE_ACTION_HEIGHT;
 const ACTION_CAPTIONS:Record<string,string> = {"action.elemental_skill":"战技","action.elemental_burst":"爆发",
   "action.normal_attack":"普攻","action.charged_attack":"重击","action.plunging_attack":"下落",
   "action.dash":"冲刺","action.jump":"跳跃","action.wait":"等待"};
@@ -20,6 +21,7 @@ const VIEW_KINDS:Record<string,any> = {
   hit: {label:"命中生效", shape:"circle",colorToken:"color-axis-action",fallback:"#5b8cff"},
   activation: {label:"效果触发", shape:"diamond",colorToken:"color-axis-warning",fallback:"#d19a66"},
   coverage: {label:"持续Buff区间", shape:"bar",colorToken:"color-axis-buff",fallback:"#56b6c2"},
+  source_directory: {label:"同名独立来源",shape:"bar",colorToken:"color-axis-buff",fallback:"#56b6c2"},
   calculation_sampling: {label:"计算采样窗口",shape:"bar",colorToken:"color-axis-label-muted",fallback:"#9aa3b5"},
   field_layers: {label:"领域累计层数",shape:"bar",colorToken:"color-axis-warning",fallback:"#d19a66"},
   settled_layers: {label:"领域结算增益",shape:"bar",colorToken:"color-axis-buff",fallback:"#56b6c2"},

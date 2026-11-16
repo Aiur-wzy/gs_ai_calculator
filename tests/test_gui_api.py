@@ -169,6 +169,9 @@ def test_check_update_cache(tmp_path, monkeypatch):
     from genshin_app import version
 
     calls = []
+    # The legacy development update lookup is cached; stable uses the signed
+    # product index and is covered by the paired update tests below.
+    monkeypatch.setattr(version, "DATABASE_RELEASE_CHANNEL", "dev")
 
     def fake_check():
         calls.append(1)
@@ -396,7 +399,8 @@ def test_update_check_uses_only_reviewed_release_pair_discovery(tmp_path, monkey
         },
     )
     response = make_api(tmp_path).check_database_update()
-    assert response["code"] == 0 and response["data"]["available"]
+    assert response["code"] == 0
+    assert response["data"]["available"] is False  # no verified selectable combination
     assert response["data"]["authoritative"] is True
     assert response["data"]["coordinator_available"] is False
     assert response["data"]["update_action_available"] is False
@@ -410,7 +414,7 @@ def test_update_check_uses_only_reviewed_release_pair_discovery(tmp_path, monkey
     assert calls == [{
         "url": "https://updates.example/latest.json",
         "cache_path": tmp_path / "cache" / "release-pair-latest.json",
-        "channel": "dev",
+        "channel": app_version.DATABASE_RELEASE_CHANNEL,
     }]
     assert db.read_bytes() == b"unchanged"
 
@@ -442,7 +446,9 @@ def test_update_check_discovery_failure_returns_message(tmp_path, monkeypatch):
         rejected,
     )
     response = make_api(tmp_path).check_database_update()
-    assert response["code"] == 1 and "检查数据更新失败" in response["message"]
+    assert response["code"] == 1
+    assert response["message"] == "无法完成更新检查。请核对当前安装状态。"
+    assert response["reason"] == "release_pair_discovery_url_invalid"
 
 
 def test_update_check_unconfigured_is_clear_and_not_available(tmp_path):
@@ -452,7 +458,7 @@ def test_update_check_unconfigured_is_clear_and_not_available(tmp_path):
     assert response["data"]["disabled"] is True
     assert response["data"]["available"] is False
     assert response["data"]["reason"] == "release_pair_discovery_url_unconfigured"
-    assert response["data"]["message"] == "尚未配置应用与数据库联合更新源"
+    assert response["data"]["message"] == "尚未配置发布更新源。当前已安装的版本可继续使用。"
     assert response["data"]["coordinator_available"] is False
     assert response["data"]["update_action_available"] is False
 
@@ -473,8 +479,8 @@ def test_manual_database_only_update_fails_closed_without_touching_live_db(
     assert response == {
         "code": 1,
         "message": (
-            "数据库不能脱离应用单独更新。当前尚未配置已验证的应用与数据库"
-            "联合更新包；在用数据库未被修改。"
+            "当前没有可用的已验证更新器，在用数据库未被修改。"
+            "请从发布页下载安装器，再选择更新程序或数据库。"
         ),
         "reason": "database_pair_update_coordinator_required",
     }
@@ -492,24 +498,9 @@ def test_gui_pair_update_requires_exact_confirmation_then_hands_off(tmp_path):
             return {"available": True, "reason": None}
 
         def discover(self):
-            return {
-                "status": "available",
-                "source": "remote",
-                "checked_at": "2026-10-28T00:00:00Z",
-                "authoritative": True,
-                "can_offer_update": True,
-                "reason": None,
-                "release_pair_id": "pair-next",
-                "database_release_id": "db-next",
-                "confirmation_digest": "d" * 64,
-                "document_sha256": "d" * 64,
-                "pair_manifest": {"app": {"app_release_id": "app-next"}},
-                "database_manifest": {"database": {"game_version": "7.2"}},
-                "artifacts": {
-                    "app": {"size_bytes": 12, "format": "zip"},
-                    "database": {"size_bytes": 34, "format": "sqlite"},
-                },
-            }
+            from tests.release_update_fixtures import reviewed_discovery
+
+            return reviewed_discovery()
 
         def prepare_and_launch(self, discovery, **kwargs):
             self.calls.append((discovery, kwargs))
@@ -528,7 +519,8 @@ def test_gui_pair_update_requires_exact_confirmation_then_hands_off(tmp_path):
     checked = api.check_database_update()
     assert checked["data"]["coordinator_available"] is True
     assert checked["data"]["update_action_available"] is True
-    assert checked["data"]["confirmation_digest"] == "d" * 64
+    assert checked["data"]["confirmation_digest"] is None
+    assert checked["data"]["update_options"][0]["confirmation_digest"] == "d" * 64
     assert checked["data"]["artifacts"]["database"]["size_bytes"] == 34
 
     rejected = api.update_database("d" * 64, False)

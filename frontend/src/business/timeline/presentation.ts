@@ -22,7 +22,7 @@ export function enrichTimeline(context:TimelineContext & {trace:any[];displayed:
       const rid = part.rule?.kind === "mechanics" ? part.rule.rule_id : null;
       if (!rid) continue;
       if (!bindingsByRule.has(rid)) bindingsByRule.set(rid, []);
-      bindingsByRule.get(rid).push({owner:copy(binding.owner), provider_character_id:binding.provider_character_id,
+      bindingsByRule.get(rid).push({binding_id:binding.binding_id,part_id:part.part_id,owner:copy(binding.owner), provider_character_id:binding.provider_character_id,
         label:part.label, source_refs:copy(binding.source_refs)});
     }
     const appliedByInstance = new Map<any,any>();

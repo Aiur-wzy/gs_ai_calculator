@@ -197,8 +197,13 @@ def calculation_fixture(tmp_path, db_path):
         ]}}
     assert dry.call_tool(patch["tool"], patch["arguments"])["code"] == 0
     refresh = {"tool": "gs_refresh_data_refs", "arguments": {"expected_revision": 2, "reason": "同步当前数据库引用"}}
-    assert dry.call_tool(refresh["tool"], refresh["arguments"])["code"] == 0
-    computed = dry.call_tool("gs_calculate", {"expected_revision": 3})
+    refreshed = dry.call_tool(refresh["tool"], refresh["arguments"])
+    assert refreshed["code"] == 0, refreshed
+    # Refreshing already-current data is idempotent; use the resulting
+    # candidate revision rather than assume every tool call writes a revision.
+    calculation_revision = dry.revision
+    computed = dry.call_tool("gs_calculate", {"expected_revision": calculation_revision})
     assert computed["code"] == 0, (computed, dry.topology_receipt(),
         (dry.calculated or {}).get("result", {}).get("calculation_coverage"))
-    return board, [prepare, patch, refresh, {"tool": "gs_calculate", "arguments": {"expected_revision": 3}}]
+    return board, [prepare, patch, refresh,
+                   {"tool": "gs_calculate", "arguments": {"expected_revision": calculation_revision}}]

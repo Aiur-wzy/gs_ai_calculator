@@ -115,13 +115,21 @@ EW.mount=(container,options={})=>{
       actor.artifact_presence ||= Object.fromEntries(EW.slots.map(([slot])=>[slot,"unknown"]));actor.artifact_presence[key]=v;change("presence");})));
   };
   const invalidatePresence=()=>{if(actor.artifact_presence){actor.artifact_presence=Object.fromEntries(EW.slots.map(([slot])=>[slot,"unknown"]));presenceNote.textContent="套装已变更；五槽存在状态已置为未知，请按实际装备重新确认。";renderPresence();}};
+  const updateSetChoices=()=>{
+    for(const [index,button] of Array.from(setControls.children).entries()){
+      if(button.tagName.toLowerCase()!=="button")continue;
+      const selected=actor.artifact_sets[index];
+      button.textContent=selected?`${safeName("set",selected.set_id,selected.name)} · ${selected.count} 件`:`选择第 ${index+1} 套`;
+      button.disabled=index===1&&!actor.artifact_sets[0];
+    }
+    describeSets();
+  };
   const renderSets=()=>{setControls.innerHTML="";
     if(setMode==="none")setControls.append(UI.el("p","不启用圣遗物套装效果；保留当前给定面板。","ew-note"));
     else for(let index=0;index<(setMode==="2+2"?2:1);index++){
-      const selected=actor.artifact_sets[index];let button;
-      button=UI.button(selected?`${safeName("set",selected.set_id,selected.name)} · ${selected.count} 件`:`选择第 ${index+1} 套`,()=>openSearch("set",index,button),"ew-choice");
-      button.disabled=index===1&&!actor.artifact_sets[0];button.setAttribute("aria-label",`选择第 ${index+1} 套`);setControls.append(button);}
-    describeSets();
+      const button=UI.button("",()=>openSearch("set",index,button),"ew-choice");
+      button.setAttribute("aria-label",`选择第 ${index+1} 套`);setControls.append(button);}
+    updateSetChoices();
   };
   const selectItem=async(kind,item,index,list)=>{
     const selected=++selectionRequest,search=searchRequest;feedback.textContent="正在核对装备资料…";
@@ -141,7 +149,7 @@ EW.mount=(container,options={})=>{
         if(index===1&&!actor.artifact_sets[0]){feedback.textContent="请先选择第一套。";return;}
         if(actor.artifact_sets.some((s,i)=>i!==index&&s.set_id===item.id)){feedback.textContent="两件组合需选择两个不同套装；同一套装请选择四件套。";return;}
         invalidatePresence();actor.artifact_sets[index]={set_id:item.id,name:detail.artifact_set?.name||item.name,count:setMode==="4"?4:2};
-        details.set(`set:${item.id}`,detail);renderSets();
+        details.set(`set:${item.id}`,detail);updateSetChoices();
       }
       lockedDataVersion ||= detail.data_version;closeSearch("selected");feedback.textContent="已更新草稿。请核对初始面板后应用。";change(kind==="weapon"?"weapon":"sets",{dataVersion:detail.data_version});
     }catch(error){if(current()&&selected===selectionRequest)feedback.textContent=`装备资料读取失败：${error.message||error}`;}
@@ -168,7 +176,7 @@ EW.mount=(container,options={})=>{
     search.addEventListener("keydown",event=>{if(event.key==="Enter"){event.preventDefault();submit();}});
     searchPanel.append(title,UI.field("按中文名搜索",search),UI.button("搜索",submit),list,nav,UI.button("关闭装备搜索",()=>closeSearch("button")));
     if(window.AppSurfaceKernel){searchSurface=AppSurfaceKernel.create({surface:searchPanel,trigger:opener,returnFocus:opener,kind:"drawer",ariaLabel:"装备搜索",initialFocus:search,
-      onRequestClose:(reason,node)=>{resetSearch();if(searchSurface===node)searchSurface=null;return true;}});
+      onClosed:(_reason,node)=>{resetSearch();if(searchSurface===node)searchSurface=null;}});
       if(!searchSurface){resetSearch();searchPanel.hidden=true;feedback.textContent="当前还有一项操作需要先处理，装备搜索尚未打开。";return;}
     }else search.focus?.();
     if(kind==="weapon"&&!weaponType&&actor.db_character_id){
@@ -259,8 +267,7 @@ EW.mount=(container,options={})=>{
   // Loading labels and descriptions must not rebuild or overwrite focused inputs.
   const hydrate=async(kind,id)=>{try{const response=await api(kind==="weapon"?"weapon_detail":"artifact_set_detail",id,line);if(!current())return;
     if(response.code){feedback.textContent="部分已选装备的说明未能读取，原选择与面板仍保留。";return;}details.set(`${kind}:${id}`,response.data);
-    if(kind==="weapon"&&actor.weapon?.weapon_id===id)describeWeapon();else if(kind==="set"){
-      const buttons=Array.from(setControls.children||[]);actor.artifact_sets.forEach((set,index)=>{if(buttons[index])buttons[index].textContent=`${safeName("set",set.set_id,set.name)} · ${set.count} 件`;});describeSets();}
+    if(kind==="weapon"&&actor.weapon?.weapon_id===id)describeWeapon();else if(kind==="set")updateSetChoices();
   }catch{if(current())feedback.textContent="部分装备说明读取失败，原草稿已保留。";}};
   if(actor.weapon?.weapon_id)hydrate("weapon",actor.weapon.weapon_id);actor.artifact_sets.forEach(s=>{if(s.set_id)hydrate("set",s.set_id);});
   const cached=options.basisSnapshot;

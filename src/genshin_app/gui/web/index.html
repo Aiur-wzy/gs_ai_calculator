@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="dsh-shell.css">
 </head>
 <body>
+<div id="genshin-application-root">
 <div id="genshin-editor-parking"><div id="genshin-legacy-editor" class="gs-legacy-island" hidden>
 <header class="desktop-header">
   <h1>原神拉表</h1>
@@ -156,11 +157,12 @@
   </section>
 </main>
 
-<div id="app-overlay-root" aria-live="off"></div>
-
 <footer><span id="status-bar">就绪</span><span id="ping-status" class="badge">连接中…</span></footer>
 </div></div>
 <div id="dsh-app-root" aria-label="原神拉表工作台"><p role="status">正在打开工作台…</p></div>
+</div>
+<!-- Surfaces must outlive the parked editor, but retain its isolated styles. -->
+<div id="app-overlay-root" class="gs-legacy-island gs-legacy-portal" aria-live="off"></div>
 <script src="json-transport.js"></script>
 <script src="display.js"></script>
 <script src="rotation.js"></script>

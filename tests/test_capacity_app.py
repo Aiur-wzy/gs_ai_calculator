@@ -1,7 +1,5 @@
 # ruff: noqa: F811 - pytest fixture injection uses imported names.
 import copy
-import json
-from pathlib import Path
 
 import pytest
 from test_capacity_inputs import input_plan
@@ -44,7 +42,6 @@ def test_actual_complete_app_calc(ready):
     except PlanError as exc:
         pytest.fail(str(exc.details))
     assert calculated['result']['rotation_check']['action_capacity_consumption']['committed_actions'] == 1
-    Path(__file__).resolve().parents[1].joinpath('backend-sample-calculated.json').write_text(json.dumps(calculated, ensure_ascii=False), 'utf8')
 
 
 

@@ -1,8 +1,11 @@
+import {canReceiveFocus, focusableElements} from "@/design-system/focus/dom-focus";
 import {FocusManager} from "@/design-system/focus/focus-manager";
 import {SurfaceCoordinator} from "@/design-system/surfaces/coordinator";
 import {DomSurfaceHost} from "@/design-system/surfaces/dom-surface-host";
 import {createHostEnvelopeAdapter} from "@/host/adapter";
 import {createAppStateStore} from "@/state/store";
+
+export const domFocus = Object.freeze({canReceiveFocus, focusableElements});
 
 export const GUI_FOUNDATION_CONTRACT = "genshin-gui-foundation-v2" as const;
 

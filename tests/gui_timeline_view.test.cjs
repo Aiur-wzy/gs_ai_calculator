@@ -15,13 +15,15 @@ class Element {
   set innerHTML(v){this.children=[];this.text=v;} set textContent(v){this.children=[];this.text=String(v);}
   get textContent(){return (this.text||'')+this.children.map(n=>n.textContent).join('');}
   setAttribute(k,v){this.attributes[k]=v;if(k.startsWith('data-'))this.dataset[k.slice(5).replace(/-([a-z])/g,(_,c)=>c.toUpperCase())]=String(v);}
+  get tabIndex(){return Object.hasOwn(this.attributes,'tabindex')?Number(this.attributes.tabindex):['summary','button','input','select','textarea'].includes(this.tagName)?0:-1;}
+  set tabIndex(value){this.attributes.tabindex=String(value);}
   removeAttribute(k){delete this.attributes[k];}
   addEventListener(type,fn){if(!this.listeners.has(type))this.listeners.set(type,new Set());this.listeners.get(type).add(fn);}
   removeEventListener(type,fn){this.listeners.get(type)?.delete(fn);}
   emit(type,values={}){const e={button:0,pointerId:1,clientX:0,clientY:0,target:this,preventDefault(){this.prevented=true;},stopPropagation(){this.stopped=true;},...values};
     for(const fn of [...(this.listeners.get(type)||[])])fn(e);return e;}
   closest(selector){const classes=String(this.attributes.class||'').split(' ');
-    return selector.split(', ').some(s=>classes.includes(s.slice(1)))?this:this.parent?.closest(selector)||null;}
+    return selector.split(', ').some(s=>s.startsWith('[')?Object.hasOwn(this.attributes,s.slice(1,-1)):classes.includes(s.slice(1)))?this:this.parent?.closest(selector)||null;}
   getBoundingClientRect(){return {left:0,top:0,width:this.clientWidth,height:this.clientHeight};}
   setPointerCapture(id){this.captured=id;}hasPointerCapture(id){return this.captured===id;}releasePointerCapture(){this.captured=null;}
   contains(node){return all(this).includes(node);}
@@ -35,7 +37,7 @@ const projection=(views={})=>({duration:120,characters:[{id:'a',label:'甲角色
 function setup({data=projection(),native=true,actual=false,result={},template:provided,plan:providedPlan,surfaceKernel=false}={}){
   const nodes=new Map(),world=new Element('window'),frames=[],stats={build:0,current:0,inputs:0,invalidations:0,actionEdits:[]};
   const get=s=>{if(!nodes.has(s))nodes.set(s,new Element(s==='#timeline'?'svg':'div'));return nodes.get(s);};
-  world.window=world;world.console=console;world.$=get;world.setStatus=()=>{};
+  world.window=world;world.console=console;world.$=get;world.setStatus=()=>{};world.innerWidth=1000;world.innerHeight=800;
   const documentListeners=new Map();
   world.document={body:new Element('body'),createElement:t=>new Element(t),createElementNS:(_,t)=>new Element(t),querySelector:get,
     querySelectorAll:()=>all(get('#timeline')).filter(n=>n.dataset.selectKind),
@@ -84,8 +86,10 @@ test('recorded exhausted interval has gray marker and Chinese read-only status d
 test('overlapping active and exhausted recipients cannot merge into a falsely active bar',()=>{
   const a=event('active','coverage',1,{end:10,detail:{state_status:'active'}}),b=event('exhausted','coverage',3,{end:8,detail:{state_status:'exhausted'}});
   const ctx=setup({data:projection({effects:{events:[a,b],notes:[]}})});ctx.world.TV.changeMode('effects');
-  assert.equal(ctx.world.TV.rows.length,2);assert.equal(marks(ctx).length,2);
-  assert.deepEqual(new Set(marks(ctx).map(n=>n.children[0].attributes.fill)),new Set(['#56b6c2','#89919c']));
+  assert.equal(ctx.world.TV.rows.length,1);assert.equal(marks(ctx).length,3);
+  assert.equal(ctx.world.TV.rows[0].items[1].state.status,'mixed');
+  assert.equal(marks(ctx)[1].children[0].attributes['stroke-dasharray'],'4 2');
+  assert.deepEqual(Array.from(ctx.world.TV.rows[0].items[1].events,e=>e.id),['active','exhausted']);
 });
 
 test('three views are exclusive, colors agree with legend and action/effect surfaces omit damage values',()=>{
@@ -149,7 +153,7 @@ test('dense point aggregation keeps every identity, supports paged drilldown and
   firstButtons.find(n=>n.textContent==='下一页').emit('click');assert.match(ctx.get('#timeline-detail').textContent,/第 2\/25 页/);
   all(ctx.get('#timeline-detail')).find(n=>n.tagName==='button'&&n.textContent.includes('元素战技')).emit('click');
   assert.equal(serialized,0);
-  const raw=all(ctx.get('#timeline-detail')).find(n=>n.tagName==='details');raw.open=true;raw.emit('toggle');raw.emit('toggle');
+  const raw=all(ctx.get('#timeline-detail')).filter(n=>n.tagName==='details').at(-1);raw.open=true;raw.emit('toggle');raw.emit('toggle');
   assert.equal(serialized,1);assert.match(raw.textContent,/仅展开时读取/);
 });
 
@@ -170,8 +174,8 @@ test('viewport culls both axes, coalesces scrolls and never rechecks large input
 test('zoom anchors, view switches, panning and filters preserve input and current result',()=>{
   const events=[event('h','damage',50)],ctx=setup({native:false,data:projection({damage:{events,notes:[]},effects:{events:[event('f','activation',50)],notes:[]}})});
   const {TV,RT}=ctx.world,wrap=ctx.get('#timeline-wrap'),before=JSON.stringify(ctx.template),revision=RT.state.revision;
-  const anchor=600,sec=(anchor-210)/TV.pixelsPerSecond;TV.zoomAt(2,anchor);
-  assert.ok(Math.abs((wrap.scrollLeft+anchor-210)/TV.pixelsPerSecond-sec)<1e-9);
+  const anchor=600,sec=(anchor-TV.labelWidth)/TV.pixelsPerSecond;TV.zoomAt(2,anchor);
+  assert.ok(Math.abs((wrap.scrollLeft+anchor-TV.labelWidth)/TV.pixelsPerSecond-sec)<1e-9);
   const zoom=TV.zoom,left=wrap.scrollLeft;TV.changeMode('effects');assert.equal(TV.zoom,zoom);assert.equal(wrap.scrollLeft,left);
   wrap.emit('pointerdown',{target:ctx.get('#timeline'),clientX:500,clientY:100});
   ctx.world.emit('pointermove',{clientX:450,clientY:80});ctx.world.emit('pointerup',{clientX:450,clientY:80});ctx.flush();
@@ -248,7 +252,7 @@ test('actual executed hit trace is normal and translated in both effects and dam
     assert.match(mark.attributes['aria-label'],/已执行/);assert.doesNotMatch(mark.textContent,/状态待解释|未验证/);
     assert.equal(mark.children[0].attributes['stroke-dasharray'],undefined);
     assert.equal(mark.children[0].attributes.opacity,undefined);
-    TV.showDetail(TV.rows.find(r=>r.kind===kind).events[0]);
+    TV.showDetail(TV.rows.flatMap(r=>r.events).find(e=>e.kind===kind));
     assert.match(ctx.get('#timeline-detail').textContent,/执行状态：已执行/);
   }
 });
@@ -273,17 +277,18 @@ test('effects lead with shared buff windows, retain recipients and filter withou
   const data=projection({effects:{events:[event('h','hit',2),shared('a'),shared('b')],notes:[]}});
   const original=JSON.stringify(data),ctx=setup({data}),{TV,RT}=ctx.world;
   TV.changeMode('effects');assert.equal(TV.rows[0].kind,'coverage');
-  assert.equal(TV.rows[0].events.length,1);assert.equal(TV.rows[0].events[0].characters.length,2);
-  TV.showDetail(TV.rows[0].events[0]);assert.match(ctx.get('#timeline-detail').textContent,/接收角色：甲角色、乙角色/);
+  assert.equal(TV.rows[0].events.length,2);assert.deepEqual(Array.from(TV.rows[0].events,e=>e.character),['a','b']);
+  TV.showDetail({events:TV.rows[0].events});assert.match(ctx.get('#timeline-detail').textContent,/2 条区间记录/);
+  assert.match(ctx.get('#timeline-detail').textContent,/接收：甲角色.*接收：乙角色/);
   const focus=label=>all(ctx.get('#timeline-filters')).find(n=>n.tagName==='button'&&n.textContent===label).emit('click');
   const builds=ctx.stats.build,before=JSON.stringify(ctx.plan),revision=RT.state.revision;
   focus('持续Buff');assert.equal(TV.rows.map(r=>r.kind).join(','),'coverage');
-  focus('命中与触发');assert.equal(TV.rows.map(r=>r.kind).join(','),'hit');
+  focus('命中与触发');assert.equal(TV.rows.map(r=>r.kind).join(','),'points');
   focus('全部效果');assert.equal(TV.rows.length,2);
   assert.equal(ctx.stats.build,builds);assert.equal(JSON.stringify(ctx.plan),before);assert.equal(RT.state.revision,revision);
   assert.equal(JSON.stringify(data),original);
-  TV.characterFilter='a';TV.rebuildRows();assert.equal(TV.rows[0].events[0].characters.length,1);
-  assert.equal(TV.rows[0].events[0].characters[0],'a');
+  TV.characterFilter='a';TV.rebuildRows();assert.equal(TV.rows[0].events.length,1);
+  assert.equal(TV.rows[0].events[0].character,'a');
 });
 
 test('action lanes group by character while sources and switches remain distinct records',()=>{
@@ -327,12 +332,20 @@ test('filter dismissal distinguishes inside pointers, resets filters and does no
 test('filter menu uses the shared surface lifecycle when the application kernel is available',()=>{
   const ctx=setup({surfaceKernel:true,data:projection({actions:{events:[event('e','action',1)],notes:[]}})}),
     {TV,AppSurfaceKernel}=ctx.world;
-  const menu=TV.filterDetails,summary=menu.children.find(node=>node.tagName==='summary');
+  const menu=TV.filterDetails,summary=menu.children.find(node=>node.tagName==='summary'),panel=TV.filterPanel;
+  summary.getBoundingClientRect=()=>({left:640,right:700,top:120,bottom:150});
+  panel.offsetWidth=310;panel.offsetHeight=270;
   menu.open=true;menu.emit('toggle');
-  assert.equal(AppSurfaceKernel.getActive(),TV.filterSurface);assert.equal(summary.attributes['aria-expanded'],'true');
+  assert.equal(AppSurfaceKernel.getActive(),TV.filterBinding.getSurface());assert.equal(summary.attributes['aria-expanded'],'true');
+  assert.equal(panel.classList.contains('app-disclosure-popup'),true);
+  assert.equal(panel.style.left,'390px'); assert.equal(panel.style.top,'156px');
+  const type=control(panel,'技能释放');type.checked=false;type.emit('change');
+  assert.equal(TV.filterDetails.open,true);assert.equal(AppSurfaceKernel.getActive(),TV.filterBinding.getSurface());
+  assert.notEqual(TV.filterPanel,panel);
   AppSurfaceKernel.close('outside');
-  assert.equal(menu.open,false);assert.equal(TV.filterOpen,false);assert.equal(TV.filterSurface,null);
-  assert.equal(summary.attributes['aria-expanded'],'false');assert.equal(summary.focused,true);
+  const restored=TV.filterDetails.children.find(node=>node.tagName==='summary');
+  assert.equal(TV.filterDetails.open,false);assert.equal(TV.filterOpen,false);assert.equal(TV.filterBinding.getSurface(),null);
+  assert.equal(restored.attributes['aria-expanded'],'false');assert.equal(restored.focused,true);
 });
 
 test('selected records remain highlighted after zoom and paging without serializing input',()=>{
@@ -342,7 +355,7 @@ test('selected records remain highlighted after zoom and paging without serializ
   marks(ctx)[0].emit('click');assert.equal(reveals,1);
   assert.equal(marks(ctx)[0].classList.contains('tl-event-selected'),true);
   assert.equal(marks(ctx)[0].attributes['aria-pressed'],'true');
-  TV.zoomAt(2,210+5*TV.pixelsPerSecond);assert.equal(marks(ctx).find(n=>n.attributes['data-event-id']==='d').classList.contains('tl-event-selected'),true);
+  TV.zoomAt(2,TV.labelWidth+5*TV.pixelsPerSecond);assert.equal(marks(ctx).find(n=>n.attributes['data-event-id']==='d').classList.contains('tl-event-selected'),true);
   assert.match(ctx.get('#timeline-detail').textContent,/角色：甲角色/);assert.match(ctx.get('#timeline-detail').textContent,/时间：5秒/);
   TV.changeMode('effects');assert.equal(TV.detailSelection,null);
   assert.equal(JSON.stringify(ctx.template),before);assert.equal(ctx.stats.build,initial.build);assert.equal(ctx.stats.inputs,initial.inputs);assert.equal(ctx.stats.invalidations,0);
@@ -415,4 +428,19 @@ test('action label click opens original records without starting pan or editing 
   ctx.get('#timeline-wrap').emit('pointerdown',{target:badge.children[1]});assert.equal(TV.cancelPan,undefined);
   badge.emit('click');assert.match(ctx.get('#timeline-detail').textContent,/2 条聚合记录/);
   assert.equal(ctx.stats.actionEdits.length,0);assert.equal(JSON.stringify(ctx.plan),before);assert.equal(ctx.stats.invalidations,0);
+});
+
+test('source-directory control survives native pointer capture even with the pan tool active',()=>{
+  const events=['one','two'].map((id,index)=>event(id,'coverage',1+index,{
+    end:4+index,sourceKey:id,sourceLabel:'重名增益',detail:{owner:'a',rule_id:id}}));
+  const ctx=setup({data:projection({effects:{events,notes:[]}})}),{TV}=ctx.world;
+  TV.changeMode('effects');const folder=all(ctx.get('#timeline')).find(node=>node.attributes.class==='tl-source-directory');
+  assert.ok(folder);assert.equal(folder.attributes['aria-expanded'],'false');
+  TV.panMode=true;
+  const press=ctx.get('#timeline-wrap').emit('pointerdown',{target:folder.children.find(node=>node.tagName==='rect')});
+  assert.equal(press.prevented,undefined);assert.equal(TV.cancelPan,undefined);
+  folder.emit('click');assert.equal(TV.rows.length,3);
+  const updated=all(ctx.get('#timeline')).find(node=>node.attributes.class==='tl-source-directory');
+  assert.equal(updated.attributes['aria-expanded'],'true');
+  updated.emit('click');assert.equal(TV.rows.length,1);
 });

@@ -35,19 +35,15 @@ window.UI = {
 // domain drafts and authorization remain with the calling feature.
 window.AppDialogKernel = (() => {
   let sequence = 0, active = null, lastCreateResult = {ok:true,status:"idle"};
-  const focus = target => { if (target && target.isConnected !== false && typeof target.focus === "function") target.focus(); };
+  const {canReceiveFocus,focusableElements:focusable}=window.GenshinGuiFoundationV2.focus;
+  const focus = target => { if (canReceiveFocus(target)) target.focus(); };
   const descendants = root => {
     const found=[];for(const child of Array.from(root?.children||[])){found.push(child,...descendants(child));}return found;
   };
-  const focusable = root => descendants(root).filter(node=>{
-    if(node.hidden||node.disabled||Number(node.tabIndex)<0)return false;
-    const tag=String(node.tagName||"").toLowerCase();
-    return ["button","input","select","textarea","a"].includes(tag)||Number(node.tabIndex)>=0;
-  });
   const initialTarget = (dialog, preferred) => {
     const explicit=typeof preferred==="function"?preferred(dialog):preferred;
-    if(explicit)return explicit;
-    return descendants(dialog).find(node=>node.autofocus||node.hasAttribute?.("autofocus"))||focusable(dialog)[0]||dialog;
+    if(canReceiveFocus(explicit)&&dialog.contains(explicit))return explicit;
+    return descendants(dialog).find(node=>canReceiveFocus(node)&&(node.autofocus||node.hasAttribute?.("autofocus")))||focusable(dialog)[0]||dialog;
   };
   const replaceActive = () => {
     if(!active)return true;const previous=active;
@@ -97,6 +93,9 @@ window.AppDialogKernel = (() => {
     dialog.addEventListener("cancel",event=>{event.preventDefault();if(dialog.appBusy)return;dialog.finish("escape",{allowBusy:false});});
     dialog.addEventListener("keydown",event=>{
       if(event.key!=="Tab")return;const choices=focusable(dialog);
+      // The native top-layer modal owns Tab while open. An official DSH modal
+      // arriving asynchronously must not steal it through its document hook.
+      event.stopPropagation?.();
       if(!choices.length){event.preventDefault();focus(dialog);return;}
       const current=document.activeElement,index=choices.indexOf(current),next=event.shiftKey
         ?(index<=0?choices.length-1:index-1):(index<0||index===choices.length-1?0:index+1);
@@ -142,17 +141,27 @@ window.AppSurfaceKernel = (() => {
       if(typeof root.contains!=="function")root.contains=target=>{for(let node=target;node;node=node.parentNode)if(node===root)return true;return false;};
     }
   };
+  const syncPortalTheme=detail=>{if(!overlayRoot?.dataset||!detail)return;
+    overlayRoot.dataset.theme=detail.preference;overlayRoot.dataset.themeResolved=detail.resolved;};
   const getHost=()=>{if(host)return host;overlayRoot=document.getElementById?.("app-overlay-root")||document.body;
-    const appRoot=document.querySelector?.("main")||document.body;normalizePartialDom(document,appRoot,overlayRoot);
+    syncPortalTheme(window.ThemeController?.current?.());
+    document.addEventListener?.("genshin-theme-change",event=>syncPortalTheme(event.detail));
+    const appRoot=document.getElementById?.("genshin-application-root")||document.querySelector?.("main")||document.body;normalizePartialDom(document,appRoot,overlayRoot);
     host=foundation.runtime().attachDom({document,appRoot,overlayRoot});return host;};
   let sequence=0,lastCreateResult={ok:true,status:"idle"};const surfaces=[];
   const current=()=>surfaces.at(-1)||null;
   const containsNode=(root,target)=>{if(!root||!target)return false;if(typeof root.contains==="function")return root.contains(target);
     for(let node=target;node;node=node.parentNode)if(node===root)return true;return false;};
   const restoreAttribute=(node,name,value)=>{if(value==null)node?.removeAttribute?.(name);else node?.setAttribute?.(name,value);};
+  const foreignModal=()=>Array.from(document.querySelectorAll?.('[role="dialog"][aria-modal="true"],dialog[open]')||[]).find(node=>
+    !surfaces.some(surface=>containsNode(surface,node))&&!node.closest?.("[hidden]")
+    &&(!node.getClientRects||node.getClientRects().length>0));
   const create=({surface=null,trigger=null,returnFocus=trigger||document.activeElement,className="",kind="overlay",
     role="dialog",ariaLabel="",ariaLabelledby="",onRequestClose=null,onClosed=null,initialFocus=null,removeOnClose=surface==null,
     dismissOnOutside=true,dismissOnScroll=kind!=="drawer"}={})=>{
+    // The official client owns its modal state. Never close it, overlay it or
+    // replay its action merely to open a legacy surface.
+    const external=foreignModal();if(external){lastCreateResult={ok:false,status:"blocked",reason:"external_modal_active",active:external};return null;}
     const owned=!surface,node=surface||UI.el("section",null,className);if(className&&surface)node.classList?.add?.(...className.split(/\s+/).filter(Boolean));
     const modal=kind==="modal";
     const modalParent=!modal?[...surfaces].reverse().find(candidate=>(candidate.getAttribute?.("aria-modal")||candidate.attributes?.["aria-modal"])==="true"
@@ -185,7 +194,13 @@ window.AppSurfaceKernel = (() => {
     node.requestClose=(reason="cancel",options={})=>{const ownIndex=surfaces.indexOf(node);
       while(ownIndex>=0&&surfaces.length>ownIndex+1){const child=current(),accepted=child?.requestClose?.(`parent-${reason}`,{allowBusy:false,restoreFocus:false});
         if(accepted===false||current()===child)return false;}
-      return surfaceHost.requestClose(node.id,reason,{restoreFocus:options.restoreFocus!==false});};
+      const accepted=surfaceHost.requestClose(node.id,reason,{restoreFocus:options.restoreFocus!==false});
+      // An official modal may have arrived asynchronously behind the native
+      // top layer. Leave its state intact and yield focus after our layer ends.
+      if(accepted&&modal&&options.restoreFocus!==false){const external=foreignModal();
+        if(external){const choices=foundation.focus.focusableElements(external),preferred=choices.find(target=>target.hasAttribute?.("data-modal-autofocus"));
+          const target=preferred||choices[0]||external;if(foundation.focus.canReceiveFocus(target))target.focus();}}
+      return accepted;};
     node.finish=node.requestClose;node.destroy=(reason="destroy",options={})=>{const ownIndex=surfaces.indexOf(node);
       while(ownIndex>=0&&surfaces.length>ownIndex+1)current()?.destroy?.(`parent-${reason}`,{restoreFocus:false});
       return surfaceHost.destroy(node.id,reason,{restoreFocus:options.restoreFocus===true});};surfaces.push(node);
@@ -196,35 +211,62 @@ window.AppSurfaceKernel = (() => {
   // the live App one consistent outside-click, Escape, focus and page-change
   // lifecycle for status, filter and tool popovers.
   const bindDisclosure=(details,{panel=null,kind="popover",role="dialog",ariaLabel="",initialFocus=null,
-    dismissOnOutside=true,dismissOnScroll=true,onRequestClose=null}={})=>{
+    dismissOnOutside=true,dismissOnScroll=true,onRequestClose=null,align="end",above=false}={})=>{
     if(!details)return null;
     const children=Array.from(details.children||[]),summary=children.find(node=>String(node.tagName||"").toLowerCase()==="summary"),
       content=panel||children.find(node=>node!==summary);
     if(!summary||!content)return null;
     let surface=null,destroyed=false,syncing=false;
     const setOpen=value=>{syncing=true;details.open=!!value;summary.setAttribute("aria-expanded",String(!!value));syncing=false;};
+    const position=()=>{
+      const anchor=summary.getBoundingClientRect?.(),style=content.style;
+      if(!anchor||!style)return;
+      const margin=8,gap=6,width=document.documentElement?.clientWidth||window.innerWidth,
+        height=document.documentElement?.clientHeight||window.innerHeight;
+      if(!width||!height)return;
+      style.maxWidth=`${Math.max(1,width-margin*2)}px`;
+      const below=height-anchor.bottom-gap-margin,up=anchor.top-gap-margin;
+      const preferred=above?up:below,alternate=above?below:up;
+      const useAbove=content.offsetHeight>preferred&&alternate>preferred?!above:above;
+      style.maxHeight=`${Math.max(1,useAbove?up:below)}px`;
+      const left=align==="start"?anchor.left:anchor.right-content.offsetWidth;
+      style.left=`${Math.max(margin,Math.min(left,width-content.offsetWidth-margin))}px`;
+      style.top=`${Math.max(margin,useAbove?anchor.top-gap-content.offsetHeight:anchor.bottom+gap)}px`;
+    };
     const open=()=>{
       if(destroyed)return null;
       if(surface&&!surface.appFinished)return surface;
       summary.setAttribute("aria-expanded","false");
+      const savedCss=content.style?.cssText;
+      const restore=()=>{
+        content.classList?.remove?.("app-disclosure-popup");
+        if(savedCss!==undefined)content.style.cssText=savedCss;
+      };
+      content.classList?.add?.("app-disclosure-popup");
+      if(content.style)content.style.visibility="hidden";
       const opened=create({surface:content,trigger:summary,returnFocus:summary,kind,role,ariaLabel,
-        initialFocus,removeOnClose:false,dismissOnOutside,dismissOnScroll,onRequestClose:(reason,node)=>{
-          if(typeof onRequestClose==="function"&&onRequestClose(reason,node)===false)return false;
-          surface=null;setOpen(false);return true;
-        }});
-      if(!opened){setOpen(false);return null;}
-      surface=opened;setOpen(true);return opened;
+        removeOnClose:false,dismissOnOutside,dismissOnScroll,onRequestClose,
+        onClosed:()=>{surface=null;restore();setOpen(false);}});
+      if(!opened){restore();setOpen(false);return null;}
+      surface=opened;setOpen(true);position();
+      if(content.style)content.style.visibility="";
+      const target=typeof initialFocus==="function"?initialFocus(content):initialFocus;
+      target?.focus();
+      return opened;
     };
     const close=(reason="disclosure-close")=>{
       if(!surface||surface.appFinished){surface=null;setOpen(false);return true;}
       const current=surface,accepted=current.finish?.(reason);
-      if(accepted!==false){surface=null;setOpen(false);}return accepted!==false;
+      if(accepted===false)setOpen(true);
+      return accepted!==false;
     };
     const onToggle=()=>{if(syncing||destroyed)return;if(details.open)open();else close("native-close");};
     details.addEventListener("toggle",onToggle);summary.setAttribute("aria-expanded",String(!!details.open));
     const controller={open,close,getSurface:()=>surface,destroy:()=>{if(destroyed)return true;destroyed=true;
       details.removeEventListener?.("toggle",onToggle);const current=surface;surface=null;
-      current?.destroy?.("binding-destroyed",{restoreFocus:false});return true;}};
+      current?.destroy?.("binding-destroyed",{restoreFocus:false});setOpen(false);
+      if(details.appSurfaceController===controller)delete details.appSurfaceController;
+      return true;}};
     details.appSurfaceController=controller;if(details.open)open();return controller;
   };
   return Object.freeze({create,bindDisclosure,getActive:current,getLastCreateResult:()=>lastCreateResult,

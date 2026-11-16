@@ -23,6 +23,7 @@ import {
 import {APP_CANDIDATE_PANEL, APP_CANDIDATE_PLUGIN_ID, CandidateWorkspace} from "./app-domain-plugin";
 import contract from "../../dsh-client-composition.json";
 import {AppDomainHostError} from "./app-domain-errors";
+import * as windowPresentation from "./app-window-presentation";
 
 const binding: AppDomainBinding = {
   dshSessionId: "dsh-session-a", conversationId: "app-conversation-a", projectionRevision: 1, availableCommands: [],
@@ -64,9 +65,27 @@ afterEach(async () => {
   container?.remove();
   container = undefined;
   vi.unstubAllGlobals();
+  vi.restoreAllMocks();
 });
 
 describe("App candidate read port", () => {
+  it.each(["reveal_timeline_event", "show_page"])("does not settle %s while its main-window owner is working",async(command)=>{
+    const {api,source}=fixture(),request={command_id:"global-in-flight",command,session_id:binding.dshSessionId};
+    vi.spyOn(windowPresentation,"useMainWindowCommands").mockReturnValue([request]);
+    const acknowledge=vi.spyOn(windowPresentation,"acknowledgeMainCommand").mockResolvedValue(undefined);
+    const host=await mount(source,api);
+    expect(host.textContent).toContain("候选版本 5");
+    // The global handler may still be locating/rendering the requested page.
+    // Removing its command here would discard its eventual result-bearing ACK.
+    expect(acknowledge).not.toHaveBeenCalled();
+  });
+  it.each(["open_candidate","review_candidate","file_action"])("settles its own %s navigation only after loading this candidate",async(command)=>{
+    const {api,source}=fixture(),request={command_id:"candidate-navigation",command,session_id:binding.dshSessionId,conversation_id:binding.conversationId,revision:5};
+    vi.spyOn(windowPresentation,"useMainWindowCommands").mockReturnValue([request]);
+    const acknowledge=vi.spyOn(windowPresentation,"acknowledgeMainCommand").mockResolvedValue(undefined);
+    await mount(source,api);
+    expect(acknowledge).toHaveBeenCalledWith("candidate-navigation");
+  });
   it("shows the existing full task review without reading a calculated package or creating a new GUI port",async()=>{
     const {api,source}=fixture();
     vi.mocked(api.agent_candidate).mockResolvedValue({code:0,data:{kind:"whiteboard",revision:5,
@@ -157,6 +176,37 @@ describe("App candidate read port", () => {
 });
 
 describe("candidate workspace", () => {
+  it("keeps the save-candidate action scoped to the displayed candidate, not its baseline",async()=>{
+    const {api,source}=fixture();
+    const save=vi.fn(async()=>({code:0,data:{}}));api.dsh_client_request_candidate_input_draft=save;
+    const view=await mount(source,api);
+    const button=(label:string)=>[...view.querySelectorAll("button")].find(node=>node.textContent===label);
+    expect(button("保存输入草稿")?.disabled).toBe(false);
+    await act(async()=>button("本会话的正式白板基线")!.click());
+    expect(button("保存输入草稿")).toBeUndefined();expect(save).not.toHaveBeenCalled();
+    await act(async()=>button("Agent 候选")!.click());
+    await act(async()=>button("保存输入草稿")!.click());
+    expect(save).toHaveBeenCalledExactlyOnceWith({conversation_id:binding.conversationId,expected_revision:5});
+  });
+  it.each(["formal_result", "draft_sync"])("does not ask to review an already applied %s candidate",async scope=>{
+    const {api,source,update}=fixture();
+    const original=await api.agent_candidate("app-conversation-a") as {code:number;data:Record<string,unknown>};
+    vi.mocked(api.agent_candidate).mockResolvedValue({...original,data:{...original.data,ready_scope:scope}});
+    update({...binding,applicationState:"committed"});
+    const view=await mount(source,api);
+    expect(view.textContent).toContain("此候选版本此前已同步");
+    expect(view.textContent).not.toContain("同步到白板仍需你的审核");
+    expect(view.textContent).not.toContain("草稿可审核同步");
+  });
+  it("describes an unfinished synchronization separately from accepted calculation",async()=>{
+    const {api,source,update}=fixture();
+    const original=await api.agent_candidate("app-conversation-a") as {code:number;data:Record<string,unknown>};
+    vi.mocked(api.agent_candidate).mockResolvedValue({...original,data:{...original.data,ready_scope:"formal_result"}});
+    update({...binding,applicationState:"outcome_unknown"});
+    const view=await mount(source,api);
+    expect(view.textContent).toContain("上次白板同步的结果尚未确认");
+    expect(view.textContent).not.toContain("同步到白板仍需你的审核");
+  });
   for(const [scope,message] of [["draft_sync","草稿可审核同步；尚未获得正式计算结果。"],["formal_result","计算已接纳；同步到白板仍需你的审核。"]]){
     it(`renders Host readiness scope ${scope} without granting new review authority`,async()=>{
       const {api,source}=fixture();const original=await api.agent_candidate("app-conversation-a") as {code:number;data:Record<string,unknown>};
@@ -237,7 +287,7 @@ describe("public DSH slot composition", () => {
       window: {__ModuleLoader__: {load(row: ClientBundleRegistration) { registration = row; }}},
     });
     const platform = getStaticModules();
-    const module = registration!.factory(Object.assign((key: string) => platform[key], {async: async (key: string) => platform[key]}));
+    const module = registration!.factory(Object.assign((key: string) => platform[key], {async: async (key: string) => platform[key],asset:(path:string)=>new URL(path,"https://dsh-shell.invalid/assets/").href}));
     const Registry = module.SlotRegistry as new (ctx: Context) => SlotRegistry;
     const ctx = new Context();
     await ctx.plugin(Registry);
@@ -259,6 +309,7 @@ describe("public DSH slot composition", () => {
       dsh_client_candidate_read: vi.fn(({conversation_id,resource,pointer,offset,limit}: {conversation_id: string;resource:"candidate"|"baseline";pointer:string;offset:number;limit:number}) => api.agent_candidate_read(conversation_id,resource,pointer,offset,limit)),
       dsh_client_domain_binding: vi.fn(async () => ({binding: null}))};
     ctx.provide("sessions", {list: {getSnapshot: () => ({byId: {}}), subscribe: () => () => undefined}, binding: () => undefined} as unknown as Context["sessions"]);
+    ctx.provide("conversation",{} as Context["conversation"]);
     // The real client composition provides this public store. The domain
     // plugin uses it to avoid reopening an archived draft Session.
     ctx.provide("workspaces", {list: {getSnapshot: () => ({state: "idle", archivedSessionIds: []}), subscribe: () => () => undefined}} as unknown as Context["workspaces"]);
@@ -285,11 +336,11 @@ describe("public DSH slot composition", () => {
     const required: string[] = [];
     let conversationRegistration:ClientBundleRegistration|undefined;
     new Script(await readFile(createRequire(import.meta.url).resolve("@deepseek-ai/dsh-client-ui-conversation/client"),"utf8")).runInNewContext({document,window:{__ModuleLoader__:{load(row:ClientBundleRegistration){conversationRegistration=row;}}}});
-    const conversationModule=conversationRegistration!.factory(Object.assign((key:string)=>platform[key],{async:async(key:string)=>platform[key]}));
+    const conversationModule=conversationRegistration!.factory(Object.assign((key:string)=>platform[key],{async:async(key:string)=>platform[key],asset:(path:string)=>new URL(path,"https://dsh-shell.invalid/assets/").href}));
     const lookup=(key:string)=>key==="@deepseek-ai/dsh-client-ui-conversation/client"?conversationModule:platform[key];
     const domainModule = domain!.factory(Object.assign((key: string) => { required.push(key); return lookup(key); },
-      {async: async (key: string) => lookup(key)}));
-    expect(required.sort()).toEqual(["@deepseek-ai/dsh-client-store", "@deepseek-ai/dsh-client-ui-conversation/client", "@deepseek-ai/dsh-client-ui-primitives", "react", "react/jsx-runtime"]);
+      {async: async (key: string) => lookup(key),asset:(path:string)=>new URL(path,"https://dsh-shell.invalid/assets/").href}));
+    expect(required.sort()).toEqual(["@deepseek-ai/dsh-client-store", "@deepseek-ai/dsh-client-ui-conversation/client", "@deepseek-ai/dsh-client-ui-primitives", "react", "react-dom", "react/jsx-runtime"]);
     expect(domainModule.inject).toEqual(["slots", "sidebarRightTabs", "sessions"]);
     expect(typeof domainModule.apply).toBe("function");
     const plugin = await ctx.plugin(domainModule as unknown as {inject: string[]; apply(ctx: Context): void});

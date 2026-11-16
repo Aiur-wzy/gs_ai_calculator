@@ -3,12 +3,17 @@ import {Button,Modal} from "@deepseek-ai/dsh-client-ui-primitives";
 import {childPointer,parseInputPage,type AppCandidateGuiApi,type CandidatePage} from "./app-domain-candidate";
 import {assertAppDomainSuccess} from "./app-domain-errors";
 import {selectedDraftNotice} from "./app-candidate-draft-selection";
+import {copyAppText} from "./app-clipboard";
 
 /** User file UI, not a model filesystem or a second conversation owner. */
-export function OpenCandidateDraft({api,sessionId,onImported}:{api:AppCandidateGuiApi;sessionId:string;onImported?:()=>void}){
+export function OpenCandidateDraft({api,sessionId,onImported,compact=false}:{api:AppCandidateGuiApi;sessionId:string;onImported?:()=>void;compact?:boolean}){
   type Resource="source_document"|"candidate"|"evidence";
   const [busy,setBusy]=useState(false),[message,setMessage]=useState(""),[legacy,setLegacy]=useState<{prompt:string;previewId:string}>(),[detail,setDetail]=useState<{resource:Resource;page:CandidatePage;history:number[]}>(),[reading,setReading]=useState(false);
   const readGeneration=useRef(0);
+  const currentLegacy=useRef(legacy);currentLegacy.current=legacy;
+  const [copyStatus,setCopyStatus]=useState<{previewId:string;copied:boolean}>();
+  useEffect(()=>setCopyStatus(undefined),[legacy]);
+  const [chooseOpen,setChooseOpen]=useState(false);
   const openGeneration=useRef(0);
   useEffect(()=>{setBusy(false);setMessage("");setLegacy(undefined);setDetail(undefined);setReading(false);return()=>{openGeneration.current++;readGeneration.current++;};},[sessionId]);
   const selected=useSyncExternalStore(selectedDraftNotice.subscribe,()=>selectedDraftNotice.snapshot(sessionId));
@@ -21,7 +26,7 @@ export function OpenCandidateDraft({api,sessionId,onImported}:{api:AppCandidateG
   },[selected]);
   if(!api.dsh_client_open_candidate_input_draft)return null;
   const open=async(newCopy=false)=>{
-    if(busy)return;setBusy(true);setMessage("");
+    if(busy)return;setChooseOpen(false);setBusy(true);setMessage("");
     const generation=++openGeneration.current,intent=(window as unknown as {AppDocumentOpenIntents?:{begin():{current():boolean}}}).AppDocumentOpenIntents?.begin(),
       isCurrent=()=>generation===openGeneration.current&&(!intent||intent.current());
     try{
@@ -55,9 +60,15 @@ export function OpenCandidateDraft({api,sessionId,onImported}:{api:AppCandidateG
     catch{if(generation===readGeneration.current)setMessage("暂时无法展开旧草稿资料；源文件没有改动。");}
     finally{if(generation===readGeneration.current)setReading(false);}
   };
-  return <span><Button size="sm" variant="outline" disabled={busy} onClick={()=>void open()}>{busy?"正在打开…":"打开候选输入草稿"}</Button><Button size="sm" variant="ghost" disabled={busy} onClick={()=>void open(true)}>新开独立副本</Button>{message&&<small role="status">{message}</small>}
-    <Modal open={!!legacy} title="旧输入草稿仅供查看" description="本文件没有获得当前版本的计算或应用资格。可复制以下要求，让 Agent 在新任务重新整理。" closeLabel="关闭旧草稿说明" onClose={()=>{readGeneration.current++;setReading(false);setLegacy(undefined);setDetail(undefined);}}>
-      <p style={{userSelect:"text"}}>{legacy?.prompt}</p><Button variant="outline" onClick={()=>legacy&&void navigator.clipboard.writeText(legacy.prompt)}>复制兼容修改要求</Button>
+  const choices=<><Button size="sm" variant="outline" disabled={busy} onClick={()=>void open()}>{busy?"正在打开…":"打开候选输入草稿"}</Button><Button size="sm" variant="ghost" disabled={busy} onClick={()=>void open(true)}>新开独立副本</Button></>;
+  return <span className="gs-draft-file-actions">{compact?<Button size="sm" variant="ghost" disabled={busy} onClick={()=>setChooseOpen(true)}>导入草稿</Button>:choices}{message&&<small role="status">{message}</small>}
+    <Modal open={chooseOpen} title="导入候选草稿" description="打开保存的候选继续完善，或建立独立副本。正式白板不会因此被覆盖。" closeLabel="关闭导入草稿" onClose={()=>setChooseOpen(false)} className="gs-domain-dialog" contentClassName="gs-domain-dialog-content"><div className="gs-draft-file-choices">{choices}</div></Modal>
+    <Modal open={!!legacy} title="旧输入草稿仅供查看" description="本文件没有获得当前版本的计算或应用资格。可复制以下要求，让 Agent 在新任务重新整理。" closeLabel="关闭旧草稿说明" onClose={()=>{readGeneration.current++;setReading(false);setLegacy(undefined);setDetail(undefined);}}
+      className="gs-domain-dialog" contentClassName="gs-domain-dialog-content">
+      <p style={{userSelect:"text"}}>{legacy?.prompt}</p><Button variant="outline" onClick={()=>{
+        if(legacy)void copyAppText(legacy.prompt).then(copied=>{if(currentLegacy.current===legacy)setCopyStatus({previewId:legacy.previewId,copied});});
+      }}>复制兼容修改要求</Button>
+      {copyStatus&&copyStatus.previewId===legacy?.previewId&&<p role={copyStatus.copied?"status":"alert"}>{copyStatus.copied?"已复制兼容修改要求。":"剪贴板暂不可用，请选中上面的提示手动复制。"}</p>}
       <p><Button size="sm" disabled={reading} onClick={()=>void read("source_document")}>查看原始意图</Button><Button size="sm" disabled={reading} onClick={()=>void read("candidate")}>查看候选输入</Button><Button size="sm" disabled={reading} onClick={()=>void read("evidence")}>查看来源资料</Button></p>
       {reading&&<p role="status">正在读取…</p>}
       {detail&&<section aria-label="旧草稿输入内容" style={{maxHeight:"40vh",overflow:"auto",userSelect:"text"}}>

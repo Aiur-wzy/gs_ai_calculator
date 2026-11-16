@@ -26,6 +26,15 @@ def _identity(value):
     return value
 
 
+def _route_label(value):
+    # DSH owns provider/catalog validation. These are ledger labels, never paths:
+    # compatible gateways legitimately use slashes, colons, and dated aliases.
+    if (type(value) is not str or not 1 <= len(value) <= 1024
+            or value != value.strip() or any(ord(char) < 32 or ord(char) == 127 for char in value)):
+        raise NativeDshMuxError("dsh_budget_route_label_invalid")
+    return value
+
+
 def _counter(value, *, optional=False):
     if optional and value is None:
         return None
@@ -152,9 +161,8 @@ class NativeDshBudgetLedger:
                 raise ValueError
         except (TypeError, ValueError, AttributeError):
             raise NativeDshMuxError("dsh_budget_lease_identity_invalid") from None
-        if request["provider"] != "deepseek-official":
-            raise NativeDshMuxError("dsh_budget_provider_invalid")
-        _identity(request["model"])
+        _route_label(request["provider"])
+        _route_label(request["model"])
         _counter(request["turn"], optional=True)
         _counter(request["step"], optional=True)
         _counter(request["max_tokens"], optional=True)

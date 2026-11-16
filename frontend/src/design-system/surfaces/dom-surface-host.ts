@@ -161,7 +161,12 @@ export class DomSurfaceHost {
   }
 
   private dismissAmbient(reason: string): void {
-    for (const descriptor of [...this.coordinator.list()].reverse()) this.requestClose(descriptor.id, reason);
+    // Resize, focus loss and workspace visibility are not user decisions to
+    // discard modal/drawer drafts. Ephemeral popovers still lose their anchor;
+    // owner destruction/disposal explicitly tears down every surface kind.
+    for (const descriptor of [...this.coordinator.list()].reverse()) {
+      if (descriptor.kind === "ephemeral" && !descriptor.modal) this.requestClose(descriptor.id, reason);
+    }
   }
 
   private reconcileDisconnected(): void {

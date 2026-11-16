@@ -482,7 +482,8 @@ class NativeDshMuxClient:
     def control(self, operation: str, payload: dict | None = None):
         """Host-only control seam; no credential is part of an RPC URL/argv."""
         if operation not in {"dsh_secret_set", "dsh_secret_clear",
-                             "dsh_runtime_status", "dsh_runtime_session_status", "dsh_runtime_drain", "dsh_runtime_shutdown"}:
+                             "dsh_runtime_status", "dsh_runtime_session_status", "dsh_runtime_client_create",
+                             "dsh_runtime_client_close", "dsh_runtime_drain", "dsh_runtime_shutdown"}:
             raise NativeDshMuxError("dsh_mux_control_operation_invalid")
         packet = self._exchange("control", operation, _json(payload or {}),
                                 "dsh_runtime_control_result")
@@ -556,7 +557,7 @@ class NativeDshMuxClient:
             return stream
 
     def open_stream(self, endpoint: str, payload: Any, *, has_uplink=False,
-                    stream_id: str | None = None) -> str:
+                    stream_id: str | None = None, peer_id: str | None = None) -> str:
         identity = stream_id or str(uuid.uuid4())
         with self._condition:
             self._ensure_open()
@@ -567,6 +568,7 @@ class NativeDshMuxClient:
             self._streams[identity] = _Stream(has_uplink=has_uplink)
         self._stream_send(identity, "dsh_stream_open", {
             "endpoint": endpoint, "payload": payload, "has_uplink": has_uplink,
+            **({"peer_id": peer_id} if peer_id is not None else {}),
         })
         # Opening an upstream stream can itself await its first uplink item.
         # Return its transport identity immediately, not a synthetic DSH result.

@@ -534,7 +534,8 @@ def execute_external_pair_update(
     if _inside(helper, active_app):
         _fail("release_pair_helper_must_run_outside_active_app")
     _wait_for_parent_exit(parent_pid, parent_wait_timeout)
-    with profile_writer(data):
+    from .installation_runtime import installation_mutation_lock
+    with installation_mutation_lock(data.parent), profile_writer(data):
         if current_user:
             from genshin_app.database_legacy_processes import packaged_peer_processes
 
@@ -691,6 +692,19 @@ def _activate_prepared_pair(
             if cleanup
             else None
         )
+        registration = None
+        if (data.parent / "installation.json").is_file():
+            from .database_transaction import atomic_json
+            from .installation_inventory import save_maintenance_proof
+            from .installation_location import read_registration
+            registered = read_registration(data.parent)
+            if registered.get("layout_version") == 2:
+                signed = pair_update._read_json(data / pair_update.LIVE_PAIR_PROOF_FILENAME,
+                                               "product_uninstall_release_proof_missing")
+                save_maintenance_proof(data.parent, signed)
+                registration = {"registration_state": "registration_pending"}
+                atomic_json(data.parent / "installation.json", {**registered, "installation_state": "registration_pending",
+                            "app_release_id": pair["app"]["app_release_id"]})
         return {
             "contract": HELPER_RESULT_CONTRACT,
             "status": "complete",
@@ -699,6 +713,7 @@ def _activate_prepared_pair(
             "pair_operational": True,
             "storage_preflight": storage_plan,
             "cleanup": cleaned,
+            "registration": registration,
             "restart": {"requested": False, "started": False, "pid": None},
         }
     except Exception as error:
@@ -822,7 +837,10 @@ def _current_user_product_roots() -> tuple[Path, Path, Path]:
     try:
         if is_windows_elevated():
             _fail("release_pair_helper_current_user_elevation_unsupported")
-        profile = known_folder_path(FOLDERID_LOCAL_APP_DATA) / APP_DIR_NAME
+        from .installation_location import resolve_runtime_root
+        profile = resolve_runtime_root(sys.executable)
+        if profile is None:
+            profile = known_folder_path(FOLDERID_LOCAL_APP_DATA) / APP_DIR_NAME
         return tuple(
             reject_reparse_chain(profile / name, reason="release_pair_helper_install_identity_invalid")
             for name in ("app", "data", "update-workspace")

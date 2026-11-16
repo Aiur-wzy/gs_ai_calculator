@@ -33,6 +33,7 @@ RAW_METHODS = frozenset({"dsh_client_boot", "dsh_client_rpc", "dsh_client_reques
     "dsh_client_bundle", "dsh_client_resource_read", "dsh_client_resource_release", "dsh_client_runtime_status",
     "dsh_client_credential_status", "whiteboard_capabilities", "action_admission_capabilities"})
 INITIALIZATION_METHODS = frozenset({"ping", "editor_initialized", "get_startup_file", "get_enums", "get_display_catalog",
+    "dsh_window_state", "dsh_window_poll",
     "check_database_update",
     "plan_capabilities", "rotation_capabilities", "mechanics_capabilities", "db_capabilities", "db_overview",
     "list_characters", "list_weapons", "list_artifact_sets", "list_artifacts", "list_plan_details", "list_plans",

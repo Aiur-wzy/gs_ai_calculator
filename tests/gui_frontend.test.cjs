@@ -15,6 +15,7 @@ class Element {
     const classes = new Set();
     this.classList = {add: (...items) => items.forEach((item) => classes.add(item)),
       remove: (...items) => items.forEach((item) => classes.delete(item)),
+      contains: item => classes.has(item) || String(this.className || '').split(/\s+/).includes(item),
       toggle: (item, enabled) => enabled ? classes.add(item) : classes.delete(item)};
   }
   get childElementCount() { return this.children.length; }
@@ -29,9 +30,10 @@ class Element {
     [...(this.listeners.get(type) || [])].forEach((fn) => fn(event));
     return event;
   }
-  appendChild(child) { this.children.push(child); return child; }
-  append(...children) { this.children.push(...children); }
-  replaceChildren(...children) { this.children = [...children]; }
+  appendChild(child) { if(child.parentElement)child.parentElement.children=child.parentElement.children.filter(n=>n!==child);this.children.push(child);child.parentElement=this;return child; }
+  append(...children) { children.forEach(child=>this.appendChild(child)); }
+  insertBefore(child, reference) { const index=this.children.indexOf(reference);this.children.splice(index<0?this.children.length:index,0,child);child.parentElement=this;return child; }
+  replaceChildren(...children) { this.children.forEach(child=>{child.parentElement=null;});this.children=[];this.append(...children); }
   insertRow() { return this.appendChild(new Element('tr')); }
   insertCell() { return this.appendChild(new Element('td')); }
   set innerHTML(value) { this.children = []; this.text = value; }
@@ -72,6 +74,11 @@ function setup({renderPanels = false, renderResults = false} = {}) {
   const world = new Element();
   world.window = world;
   world.console = console;
+  // Real update polling must be available to the VM and cancelled on every
+  // settled branch. Track timers so these cases also assert cleanup.
+  const timers=new Set();world.activeIntervals=timers;
+  world.setInterval=(callback,delay)=>{const timer=setInterval(callback,delay);timer.unref();timers.add(timer);return timer;};
+  world.clearInterval=timer=>{clearInterval(timer);timers.delete(timer);};
   const body = new Element();
   world.document = {
     body,
@@ -87,6 +94,10 @@ function setup({renderPanels = false, renderResults = false} = {}) {
     createElementNS(ns, tag) { return new Element(tag); },
   };
   world.pywebview = {api: {run_calc: async () => result()}};
+  // The production axis now moves labels into a sibling SVG. Model a real
+  // parent rather than silently bypassing that renderer branch.
+  const timelinePane=new Element();timelinePane.appendChild(world.document.querySelector('#timeline-wrap'));
+  world.document.querySelector('#tab-result').classList.add('active');
   vm.createContext(world);
   const web = path.join(__dirname, '..', 'src', 'genshin_app', 'gui', 'web');
   for (const file of ['display.js', 'rotation.js', 'panel.js', 'chars.js', 'timeline-view.js', 'timeline.js', 'result.js', 'format.js', 'data.js', 'app.js']) {
@@ -340,16 +351,19 @@ test('72-second dense timeline zoom anchors the pointer, pins labels and does no
   assert.equal(world.TV.projection.views.damage.events.filter(event=>event.kind==='damage').length,252);
   assert.equal(world.TV.projection.views.effects.events.filter(event=>event.kind==='coverage').length,252);
   assert.ok(descendants(svg).filter(n=>n.attributes.class?.includes('tl-view-event')).length<=252,'dense viewport renders a bounded subset of the complete read model');
-  const anchor = 600, seconds = (anchor - 210) / RT.pxPerSec;
+  const anchor = 600, labelWidth=world.TV.labelWidth, seconds = (anchor - labelWidth) / RT.pxPerSec;
   const wheel = wrap.emit('wheel', {ctrlKey: true, deltaY: -100, clientX: anchor});
   assert.equal(wheel.defaultPrevented, true);
-  assert.ok(Math.abs((wrap.scrollLeft + anchor - 210) / RT.pxPerSec - seconds) < 1e-9);
+  assert.ok(Math.abs((wrap.scrollLeft + anchor - world.TV.labelWidth) / RT.pxPerSec - seconds) < 1e-9);
   assert.equal(world.TV.zoom, 1.2);
   assert.ok(world.TV.tickStep(RT.pxPerSec) * RT.pxPerSec >= 64);
   wrap.scrollTop = 450; wrap.emit('scroll');
-  assert.equal(world.TV.labels.attributes.transform, `translate(${wrap.scrollLeft},0)`);
+  const labelGroup=world.TV.labelSvg.children.find(n=>n.attributes.class==='tl-label-overlay');
+  assert.equal(labelGroup.attributes.transform, 'translate(0,-450)');
+  assert.equal(world.TV.labelSvg.parentElement.className,'tl-label-pane');
   assert.equal(world.TV.ruler.attributes.transform, 'translate(0,450)');
-  assert.equal(world.TV.corner.attributes.transform, `translate(${wrap.scrollLeft},450)`);
+  const corner=world.TV.labelSvg.children.find(n=>n.attributes.class==='tl-corner-overlay');
+  assert.equal(corner.attributes.transform,undefined,'fixed corner does not follow the plot horizontal scroll');
   RT.renderAll();
   assert.equal(world.TV.zoom, 1.2);
   assert.equal(wrap.scrollTop, 450);
@@ -484,7 +498,7 @@ test('pair discovery without an installer stays read-only and a late result cann
     remote_game_version: '7.1.53',
     message: '发现已验证的应用与数据库联合更新；当前版本尚未接入联合安装协调器'}});
   await checking;
-  await DV.updateDatabase();
+  await DV.updateDatabase();assert.equal(world.activeIntervals.size,0,'settled updates release polling timers');
   assert.equal(refreshes, 0);
   assert.equal(updateCalls, 0);
   assert.match(nodes.get('#db-update-status').textContent, /尚未接入联合安装协调器/);
@@ -494,12 +508,38 @@ test('pair discovery without an installer stays read-only and a late result cann
   assert.equal(nodes.get('#data-update').disabled, true);
 });
 
+test('a failed update check withdraws an earlier App or database offer', async () => {
+  for (const [mode, checkFailure] of [
+    ['app_only', async () => ({code: 1, message: '无法核实当前安装版本'})],
+    ['database_only', async () => { throw new Error('bridge disconnected'); }],
+  ]) {
+    const {world, nodes} = setup();
+    world.pywebview.api.check_database_update = async () => ({code: 0, data: {
+      initialized: true, available: true, update_action_available: true,
+      update_options: [{mode, confirmation_digest: 'old-offer'}],
+    }});
+    await world.DV.checkDatabaseUpdate();
+    const banner = nodes.get('#update-banner');
+    assert.equal(banner.classList.contains('hidden'), false);
+    assert.ok(banner.childElementCount > 0);
+
+    world.pywebview.api.check_database_update = checkFailure;
+    await world.DV.checkDatabaseUpdate();
+    assert.equal(world.DV.state.databaseUpdate, null);
+    assert.equal(nodes.get('#data-update').disabled, true);
+    assert.equal(banner.classList.contains('hidden'), true);
+    assert.equal(banner.childElementCount, 0);
+    assert.match(nodes.get('#db-version-details').textContent, /版本检查未完成/);
+  }
+});
+
 test('database update failures keep the button usable and show the reason', async () => {
   const {world, nodes} = setup();
   world.confirm=()=>true;
   world.DV.state.databaseUpdate = {update_action_available: true,confirmation_digest:'confirmed-pair'};
   world.pywebview.api.update_database = async () => { throw new Error('network unavailable'); };
   await world.DV.updateDatabase();
+  assert.equal(world.activeIntervals.size,0,'settled updates release polling timers');
   assert.equal(nodes.get('#data-update').disabled, false);
   assert.match(nodes.get('#db-update-status').textContent, /network unavailable/);
 });
@@ -520,7 +560,7 @@ test('already-current pair preserves accepted plan and editing context without m
   world.confirm=()=>true;
   world.pywebview.api.check_database_update = async () => ({code:0,data:{initialized:true,available:false,update_action_available:false,message:'当前版本没有可用更新'}});
   world.pywebview.api.update_database = async () => ({code: 0, data: {updated: false, action: 'already_current'}});
-  await DV.updateDatabase();
+  await DV.updateDatabase();assert.equal(world.activeIntervals.size,0,'settled updates release polling timers');
   assert.equal(invalidated, 0);
   assert.equal(world.ED.detail, equipmentDetail);
   assert.equal(world.ED.dataVersion, 'same-source');
@@ -542,6 +582,7 @@ test('an unknown updater action fails closed without invalidating in-memory plan
   world.DV.state.databaseUpdate = {update_action_available: true,confirmation_digest:'confirmed-pair'};
   world.pywebview.api.update_database = async () => ({code: 0, data: {updated: true, action: 'future-action'}});
   await world.DV.updateDatabase();
+  assert.equal(world.activeIntervals.size,0,'settled updates release polling timers');
   assert.equal(invalidated, 0);
   assert.equal(nodes.get('#db-update-status').textContent, '更新尚未进入安装阶段。');
 });
@@ -556,9 +597,9 @@ test('B04 displays database Chinese names and source buff labels without changin
   const {world,RT,nodes} = setup({renderPanels:true});
   const input=b04Template(), before=JSON.stringify(input);
   RT.replaceTemplate(input,'B04.json');await Promise.resolve();
-  for(const name of ['神里绫华','申鹤','枫原万叶','珊瑚宫心海'])assert.ok(visibleText(nodes.get('#timeline')).includes(name));
-  world.TV.changeMode('effects');assert.match(visibleText(nodes.get('#timeline')),/翠绿之影减抗/);
-  assert.doesNotMatch(visibleText(nodes.get('#timeline')),/ayaka|shenheq1|vv1|team|cryo/);
+  for(const name of ['神里绫华','申鹤','枫原万叶','珊瑚宫心海'])assert.ok(descendants(world.TV.labelSvg).some(node=>node.attributes['aria-label']?.includes(name)),`full source name remains reachable: ${name}`);
+  world.TV.changeMode('effects');assert.match(visibleText(world.TV.labelSvg),/翠绿之影减抗/);
+  assert.doesNotMatch(visibleText(world.TV.labelSvg)+visibleText(nodes.get('#timeline')),/ayaka|shenheq1|vv1|team|cryo/);
   RT.select('hit',input.hits.findIndex(h=>h.element==='cryo'));const options=descendants(nodes.get('#prop-panel')).filter(n=>n.tagName==='option');
   assert.ok(options.some(n=>n.value==='cryo'&&n.textContent==='冰元素'));
   assert.ok(options.some(n=>n.value==='classic'&&n.textContent==='传统伤害'));
@@ -653,7 +694,7 @@ test('successful handoff leaves catalogs untouched and closes only after the ext
   world.confirm=()=>true;DV.state.databaseUpdate={update_action_available:true,confirmation_digest:'confirmed-pair'};
   world.pywebview.api.update_database=async(...args)=>{updateArgs.push(args);return {code:0,data:{updated:true,action:'handoff_launched'}};};
   world.pywebview.api.confirm_close=async()=>{closed++;return {code:0,data:{}};};DV.loadOverview=async()=>{};
-  await DV.updateDatabase();assert.equal(calls.filter(x=>x==='release').length,1);assert.equal(calls.includes('beta'),false);
+  await DV.updateDatabase();assert.equal(world.activeIntervals.size,0,'settled updates release polling timers');assert.equal(calls.filter(x=>x==='release').length,1);assert.equal(calls.includes('beta'),false);
   assert.deepEqual(updateArgs,[['confirmed-pair',true]]);assert.equal(closed,1);
   oldFinish({code:0,data:{version_line:'release',characters:[{id:1,name:'更新前资料'}]}});await old;
   assert.equal(DS.catalogs.get('release').characters[0].name,'更新前资料');

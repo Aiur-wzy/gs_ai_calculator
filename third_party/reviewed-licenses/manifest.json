@@ -1,7 +1,7 @@
 {
   "contract": "genshin-reviewed-license-evidence-v1",
-  "reviewed_on": "2026-11-15",
-  "scope": "r18 fixed software dependency materials. No game-data licence inference; no general legal warranty.",
+  "reviewed_on": "2026-11-16",
+  "scope": "Version-bound software dependency materials; rc.3 and LibreOffice Kit 0.2.3 were rechecked from the installed locked packages. Unchanged dependency reviews retain their exact metadata bindings. No game-data licence inference; no general legal warranty.",
   "components": [
     {
       "purl": "pkg:generic/node.js@24.19.0",
@@ -121,276 +121,398 @@
       ]
     },
     {
-      "purl": "pkg:npm/%40deepseek-ai/dsh-experimental-inspector@0.2.1-rc.5",
+      "purl": "pkg:npm/%40deepseek-ai/dsh-experimental-inspector@0.2.2-rc.3",
       "binding": {
-        "package_metadata_sha256": "9912a7bc3c366d3cb4fe5fcb3c2bbdf61f3973b7f35d395f5107884db9ce9242"
+        "package_metadata_sha256": "5735334a242d4f55a0b3f58e8f5a0a73a551a2a9eea39aeb92ab916908d9f333"
       },
-      "concluded_license": "MIT",
+      "concluded_license": "MIT AND bundled third-party terms",
       "resolved_codes": [
         "license_text_missing"
       ],
-      "resolution": "verified_upstream_materials",
-      "review_note": "DSH release tag dsh-v0.2.1-rc.5 matches package version. Include its MIT text plus all 29 nested DevTools licence files, including MPL, BSD, ISC and Apache notices, without reclassifying them as MIT.",
-      "publisher_artifact": {
-        "url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.1-rc.5.tgz",
-        "sha256": "fbcc10c87e8e13046cc1f846b154b3ca89ea32bbeca6301b0cb4ecd282bf9a5c",
-        "integrity": "sha512-Dds795N/Y6qZ9bgPNobmofGSlHMobvRz2ORE14xu6q9TxN3bO6uGdan0p59JH/fx4RGEiHv/LGQFa/Mt4wK96g==",
-        "registry_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/0.2.1-rc.5"
-      },
+      "resolution": "verified_installed_upstream_materials",
+      "review_note": "Installed rc.3 metadata is bound exactly. DSH tag rc.3 MIT text was checked against the official repository. Include all 29 nested DevTools licence files; their separate MPL/BSD/ISC/Apache terms remain unchanged. No old package identity or tarball hash is reused.",
       "documents": [
         {
-          "path": "texts/deepseek-ai--dsh-experimental-inspector-declaration.json",
-          "sha256": "193b13b571b75dae6c12b69c6cd282a9e8e9d0bb3a4c8ff17afa867ebf6aae9b",
-          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.1-rc.5.tgz",
-          "kind": "publisher_metadata_excerpt"
+          "path": "texts/inspector-rc3/lib/devtools/LICENSE",
+          "sha256": "ff11d445fb41a1087c7630e120ab15f1a2cb67c1b707173cb494141805fca35e",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.2-rc.3.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/inspector-rc3/lib/devtools/third_party/acorn/package/LICENSE",
+          "sha256": "76a876cf886ff9be2a8b5e2e86514fed06223c8c9f0c1e9ee9606e93841e00b7",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.2-rc.3.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/inspector-rc3/lib/devtools/third_party/axe-core/LICENSE",
+          "sha256": "af175b9d96ee93c21a036152e1b905b0b95304d4ae8c2c921c7609100ba8df7e",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.2-rc.3.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/inspector-rc3/lib/devtools/third_party/chromium/LICENSE",
+          "sha256": "ff11d445fb41a1087c7630e120ab15f1a2cb67c1b707173cb494141805fca35e",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.2-rc.3.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/inspector-rc3/lib/devtools/third_party/codemirror/package/LICENSE",
+          "sha256": "a3f2fe2ac6b471aa80c737c5d283dd049bdc903a73835ee6d4d2cac02fdd53bf",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.2-rc.3.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/inspector-rc3/lib/devtools/third_party/codemirror.next/LICENSE",
+          "sha256": "aa8f65819a471c1a25fb3c0816c5a75e45f009b7899d292ee3cc70d9dbdd8f7e",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.2-rc.3.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/inspector-rc3/lib/devtools/third_party/csp_evaluator/package/LICENSE",
+          "sha256": "58d1e17ffe5109a7ae296caafcadfdbe6a7d176f0bc4ab01e12a689b0499d8bd",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.2-rc.3.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/inspector-rc3/lib/devtools/third_party/diff/LICENSE",
+          "sha256": "58d1e17ffe5109a7ae296caafcadfdbe6a7d176f0bc4ab01e12a689b0499d8bd",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.2-rc.3.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/inspector-rc3/lib/devtools/third_party/i18n/LICENSE",
+          "sha256": "7ec9661a8afafab1eee3523d6f1a193eff76314a5ab10b4ce96aefd87621b0c3",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.2-rc.3.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/inspector-rc3/lib/devtools/third_party/intl-messageformat/LICENSE",
+          "sha256": "0212e9ffd60f4c2e05426ac172b91266256b9ff4c0f0156e85b761a1d6f5e17f",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.2-rc.3.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/inspector-rc3/lib/devtools/third_party/intl-messageformat/package/LICENSE.md",
+          "sha256": "ef3882f3b2cf9e1c07172adbf49b7c72a5c75d8a01f3b3ed4777117364ca43fa",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.2-rc.3.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/inspector-rc3/lib/devtools/third_party/json5/LICENSE",
+          "sha256": "53e59feb13058722d977c699eb0407c7bce2f93c949b681bbd2ff31698535927",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.2-rc.3.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/inspector-rc3/lib/devtools/third_party/legacy-javascript/LICENSE",
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.2-rc.3.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/inspector-rc3/lib/devtools/third_party/lighthouse/LICENSE",
+          "sha256": "7ec9661a8afafab1eee3523d6f1a193eff76314a5ab10b4ce96aefd87621b0c3",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.2-rc.3.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/inspector-rc3/lib/devtools/third_party/lit/LICENSE",
+          "sha256": "45d31799d0db956cc3eb5469346abbd9b7025babc5ff29fab10d7095da992ef1",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.2-rc.3.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/inspector-rc3/lib/devtools/third_party/marked/LICENSE",
+          "sha256": "91968bf678e8c3d94ebf8596e98ca9cb5fca1c6555b53f721a940cb50f1b3d66",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.2-rc.3.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/inspector-rc3/lib/devtools/third_party/marked/package/LICENSE.md",
+          "sha256": "8e3a3f82f59a60958f56ca08f445647c32a4733dc7ca6c2c46f6eb898471ab9c",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.2-rc.3.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/inspector-rc3/lib/devtools/third_party/puppeteer/LICENSE",
+          "sha256": "a27ca07269b3518550b2e83aed13eadd7d14d924b5864e14889b40cf227530ca",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.2-rc.3.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/inspector-rc3/lib/devtools/third_party/puppeteer/third_party/mitt/LICENSE",
+          "sha256": "4687b3b5b6eb3af13be50891dd67dab9e85bdca3f41c63d3e33b3364d6a717b5",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.2-rc.3.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/inspector-rc3/lib/devtools/third_party/puppeteer/third_party/parsel/LICENSE",
+          "sha256": "eb0fa16c7452341017d97ac695c737cd19a8a47e8a87edd66db9493017c0d077",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.2-rc.3.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/inspector-rc3/lib/devtools/third_party/puppeteer/third_party/rxjs/LICENSE",
+          "sha256": "a8d80f63116de4ec1abd3800ec98f68e0acba524f12db62518868649a722f631",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.2-rc.3.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/inspector-rc3/lib/devtools/third_party/puppeteer-replay/package/LICENSE",
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.2-rc.3.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/inspector-rc3/lib/devtools/third_party/source-map-scopes-codec/LICENSE",
+          "sha256": "53b4475d1cda8c46465bbaff85432631f0830cc2c0a4b28234b7e4d12d862e7b",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.2-rc.3.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/inspector-rc3/lib/devtools/third_party/source-map-scopes-codec/package/LICENSE",
+          "sha256": "53b4475d1cda8c46465bbaff85432631f0830cc2c0a4b28234b7e4d12d862e7b",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.2-rc.3.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/inspector-rc3/lib/devtools/third_party/third-party-web/LICENSE",
+          "sha256": "e1f2a92813d0a7160c8bb0e27da66ec2f6599f2832ae5b4d9f95c108e60af5e6",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.2-rc.3.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/inspector-rc3/lib/devtools/third_party/third-party-web/package/LICENSE",
+          "sha256": "e1f2a92813d0a7160c8bb0e27da66ec2f6599f2832ae5b4d9f95c108e60af5e6",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.2-rc.3.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/inspector-rc3/lib/devtools/third_party/vscode.web-custom-data/package/LICENSE.md",
+          "sha256": "c2cfccb812fe482101a8f04597dfc5a9991a6b2748266c47ac91b6a5aae15383",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.2-rc.3.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/inspector-rc3/lib/devtools/third_party/wasmparser/package/LICENSE",
+          "sha256": "0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.2-rc.3.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/inspector-rc3/lib/devtools/third_party/web-vitals/package/LICENSE",
+          "sha256": "bfdeded4040e05da31ca9b6239dc83bd23fa26ac8db87342a7ca4363f68916ff",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.2-rc.3.tgz",
+          "kind": "upstream_original"
         },
         {
           "path": "texts/dsh-LICENSE.txt",
           "sha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
-          "source_url": "https://raw.githubusercontent.com/deepseek-ai/deepseek-harness/b830ec950faba0a46dda564be3e2d854afed94f1/LICENSE",
+          "source_url": "https://raw.githubusercontent.com/deepseek-ai/deepseek-harness/38a6a5c965aa99ab525161efb7cc5cf1fe62fced/LICENSE",
           "kind": "upstream_original"
         },
         {
-          "path": "texts/inspector/lib/devtools/LICENSE",
-          "sha256": "ff11d445fb41a1087c7630e120ab15f1a2cb67c1b707173cb494141805fca35e",
-          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.1-rc.5.tgz",
-          "kind": "upstream_original"
-        },
-        {
-          "path": "texts/inspector/lib/devtools/third_party/acorn/package/LICENSE",
-          "sha256": "76a876cf886ff9be2a8b5e2e86514fed06223c8c9f0c1e9ee9606e93841e00b7",
-          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.1-rc.5.tgz",
-          "kind": "upstream_original"
-        },
-        {
-          "path": "texts/inspector/lib/devtools/third_party/axe-core/LICENSE",
-          "sha256": "af175b9d96ee93c21a036152e1b905b0b95304d4ae8c2c921c7609100ba8df7e",
-          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.1-rc.5.tgz",
-          "kind": "upstream_original"
-        },
-        {
-          "path": "texts/inspector/lib/devtools/third_party/chromium/LICENSE",
-          "sha256": "ff11d445fb41a1087c7630e120ab15f1a2cb67c1b707173cb494141805fca35e",
-          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.1-rc.5.tgz",
-          "kind": "upstream_original"
-        },
-        {
-          "path": "texts/inspector/lib/devtools/third_party/codemirror.next/LICENSE",
-          "sha256": "aa8f65819a471c1a25fb3c0816c5a75e45f009b7899d292ee3cc70d9dbdd8f7e",
-          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.1-rc.5.tgz",
-          "kind": "upstream_original"
-        },
-        {
-          "path": "texts/inspector/lib/devtools/third_party/codemirror/package/LICENSE",
-          "sha256": "a3f2fe2ac6b471aa80c737c5d283dd049bdc903a73835ee6d4d2cac02fdd53bf",
-          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.1-rc.5.tgz",
-          "kind": "upstream_original"
-        },
-        {
-          "path": "texts/inspector/lib/devtools/third_party/csp_evaluator/package/LICENSE",
-          "sha256": "58d1e17ffe5109a7ae296caafcadfdbe6a7d176f0bc4ab01e12a689b0499d8bd",
-          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.1-rc.5.tgz",
-          "kind": "upstream_original"
-        },
-        {
-          "path": "texts/inspector/lib/devtools/third_party/diff/LICENSE",
-          "sha256": "58d1e17ffe5109a7ae296caafcadfdbe6a7d176f0bc4ab01e12a689b0499d8bd",
-          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.1-rc.5.tgz",
-          "kind": "upstream_original"
-        },
-        {
-          "path": "texts/inspector/lib/devtools/third_party/i18n/LICENSE",
-          "sha256": "7ec9661a8afafab1eee3523d6f1a193eff76314a5ab10b4ce96aefd87621b0c3",
-          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.1-rc.5.tgz",
-          "kind": "upstream_original"
-        },
-        {
-          "path": "texts/inspector/lib/devtools/third_party/intl-messageformat/LICENSE",
-          "sha256": "0212e9ffd60f4c2e05426ac172b91266256b9ff4c0f0156e85b761a1d6f5e17f",
-          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.1-rc.5.tgz",
-          "kind": "upstream_original"
-        },
-        {
-          "path": "texts/inspector/lib/devtools/third_party/json5/LICENSE",
-          "sha256": "53e59feb13058722d977c699eb0407c7bce2f93c949b681bbd2ff31698535927",
-          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.1-rc.5.tgz",
-          "kind": "upstream_original"
-        },
-        {
-          "path": "texts/inspector/lib/devtools/third_party/legacy-javascript/LICENSE",
-          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
-          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.1-rc.5.tgz",
-          "kind": "upstream_original"
-        },
-        {
-          "path": "texts/inspector/lib/devtools/third_party/lighthouse/LICENSE",
-          "sha256": "7ec9661a8afafab1eee3523d6f1a193eff76314a5ab10b4ce96aefd87621b0c3",
-          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.1-rc.5.tgz",
-          "kind": "upstream_original"
-        },
-        {
-          "path": "texts/inspector/lib/devtools/third_party/lit/LICENSE",
-          "sha256": "45d31799d0db956cc3eb5469346abbd9b7025babc5ff29fab10d7095da992ef1",
-          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.1-rc.5.tgz",
-          "kind": "upstream_original"
-        },
-        {
-          "path": "texts/inspector/lib/devtools/third_party/marked/LICENSE",
-          "sha256": "91968bf678e8c3d94ebf8596e98ca9cb5fca1c6555b53f721a940cb50f1b3d66",
-          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.1-rc.5.tgz",
-          "kind": "upstream_original"
-        },
-        {
-          "path": "texts/inspector/lib/devtools/third_party/puppeteer-replay/package/LICENSE",
-          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
-          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.1-rc.5.tgz",
-          "kind": "upstream_original"
-        },
-        {
-          "path": "texts/inspector/lib/devtools/third_party/puppeteer/LICENSE",
-          "sha256": "a27ca07269b3518550b2e83aed13eadd7d14d924b5864e14889b40cf227530ca",
-          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.1-rc.5.tgz",
-          "kind": "upstream_original"
-        },
-        {
-          "path": "texts/inspector/lib/devtools/third_party/puppeteer/third_party/mitt/LICENSE",
-          "sha256": "4687b3b5b6eb3af13be50891dd67dab9e85bdca3f41c63d3e33b3364d6a717b5",
-          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.1-rc.5.tgz",
-          "kind": "upstream_original"
-        },
-        {
-          "path": "texts/inspector/lib/devtools/third_party/puppeteer/third_party/parsel/LICENSE",
-          "sha256": "eb0fa16c7452341017d97ac695c737cd19a8a47e8a87edd66db9493017c0d077",
-          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.1-rc.5.tgz",
-          "kind": "upstream_original"
-        },
-        {
-          "path": "texts/inspector/lib/devtools/third_party/puppeteer/third_party/rxjs/LICENSE",
-          "sha256": "a8d80f63116de4ec1abd3800ec98f68e0acba524f12db62518868649a722f631",
-          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.1-rc.5.tgz",
-          "kind": "upstream_original"
-        },
-        {
-          "path": "texts/inspector/lib/devtools/third_party/source-map-scopes-codec/LICENSE",
-          "sha256": "53b4475d1cda8c46465bbaff85432631f0830cc2c0a4b28234b7e4d12d862e7b",
-          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.1-rc.5.tgz",
-          "kind": "upstream_original"
-        },
-        {
-          "path": "texts/inspector/lib/devtools/third_party/source-map-scopes-codec/package/LICENSE",
-          "sha256": "53b4475d1cda8c46465bbaff85432631f0830cc2c0a4b28234b7e4d12d862e7b",
-          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.1-rc.5.tgz",
-          "kind": "upstream_original"
-        },
-        {
-          "path": "texts/inspector/lib/devtools/third_party/third-party-web/LICENSE",
-          "sha256": "e1f2a92813d0a7160c8bb0e27da66ec2f6599f2832ae5b4d9f95c108e60af5e6",
-          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.1-rc.5.tgz",
-          "kind": "upstream_original"
-        },
-        {
-          "path": "texts/inspector/lib/devtools/third_party/third-party-web/package/LICENSE",
-          "sha256": "e1f2a92813d0a7160c8bb0e27da66ec2f6599f2832ae5b4d9f95c108e60af5e6",
-          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.1-rc.5.tgz",
-          "kind": "upstream_original"
-        },
-        {
-          "path": "texts/inspector/lib/devtools/third_party/wasmparser/package/LICENSE",
-          "sha256": "0d542e0c8804e39aa7f37eb00da5a762149dc682d7829451287e11b938e94594",
-          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.1-rc.5.tgz",
-          "kind": "upstream_original"
-        },
-        {
-          "path": "texts/inspector/lib/devtools/third_party/web-vitals/package/LICENSE",
-          "sha256": "bfdeded4040e05da31ca9b6239dc83bd23fa26ac8db87342a7ca4363f68916ff",
-          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.1-rc.5.tgz",
-          "kind": "upstream_original"
-        },
-        {
-          "path": "texts/inspector/lib/devtools/third_party/intl-messageformat/package/LICENSE.md",
-          "sha256": "ef3882f3b2cf9e1c07172adbf49b7c72a5c75d8a01f3b3ed4777117364ca43fa",
-          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.1-rc.5.tgz",
-          "kind": "upstream_original"
-        },
-        {
-          "path": "texts/inspector/lib/devtools/third_party/marked/package/LICENSE.md",
-          "sha256": "8e3a3f82f59a60958f56ca08f445647c32a4733dc7ca6c2c46f6eb898471ab9c",
-          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.1-rc.5.tgz",
-          "kind": "upstream_original"
-        },
-        {
-          "path": "texts/inspector/lib/devtools/third_party/vscode.web-custom-data/package/LICENSE.md",
-          "sha256": "c2cfccb812fe482101a8f04597dfc5a9991a6b2748266c47ac91b6a5aae15383",
-          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.1-rc.5.tgz",
-          "kind": "upstream_original"
-        },
-        {
-          "path": "texts/inspector-source-availability.txt",
-          "sha256": "a180972a6811e38924e19522dbd93de4d6141dd37a6e4c642098ad4539d91eb3",
-          "source_url": "https://github.com/ChromeDevTools/devtools-frontend/tree/0e1186138ed519d9659c1874bf6375eca4483c72",
+          "path": "texts/inspector-rc3-source-availability.txt",
+          "sha256": "a17a74e038e44ad9af6ba1cf00c66c4ea42a51ee2f9753810252c672e2b9c762",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/dsh-experimental-inspector/-/dsh-experimental-inspector-0.2.2-rc.3.tgz",
           "kind": "source_availability_notice"
         }
       ]
     },
     {
-      "purl": "pkg:npm/%40deepseek-ai/libreoffice-kit-win32-x64@0.1.5",
+      "purl": "pkg:npm/%40deepseek-ai/libreoffice-kit-wasm@0.2.3",
       "binding": {
-        "package_metadata_sha256": "ee4d605b69a60d35f8d0bd449d92dc3d5cc39938841d2fefc885f4f4174bfe31"
+        "package_metadata_sha256": "bbe7556595dc5fc2f9266011a1277630e1b9bb5aceec6aa85a3548b7fe13ad3c"
       },
-      "concluded_license": "MPL-2.0",
+      "concluded_license": "MPL-2.0 AND bundled third-party terms",
       "resolved_codes": [
         "license_text_missing"
       ],
-      "resolution": "verified_upstream_materials",
-      "review_note": "False missing-file flag caused by root-only scanning. Verified exact archive already contains complete nested licence/NOTICE files and source patches. Preserve them and add explicit source access instructions.",
-      "publisher_artifact": {
-        "url": "https://registry.npmjs.org/@deepseek-ai/libreoffice-kit-win32-x64/-/libreoffice-kit-win32-x64-0.1.5.tgz",
-        "sha256": "5cc9051e7d29a6dfe409bb3dbfcb931cbb1591709d83b84b404faf319a64d0ae",
-        "integrity": "sha512-uKuDGZdofxuW4iRmUh8b3+XWU28JeOCYMTAONzo7tEHIq00DV2cARcgUYiTP7gUH49tH4A/RyPMOVEBzK7qjjw==",
-        "registry_url": "https://registry.npmjs.org/@deepseek-ai/libreoffice-kit-win32-x64/0.1.5"
-      },
+      "resolution": "verified_installed_upstream_materials",
+      "review_note": "Read the exact installed package, not the previous 0.1.5 review. Include its full nested notices and original source-availability metadata. Sources/ and build patches remain in the distribution; the engine core revision is bound by its original core-source.json.",
       "documents": [
         {
-          "path": "texts/deepseek-ai--libreoffice-kit-win32-x64-declaration.json",
-          "sha256": "defc8a7a8022d4f51d091c688c2398c326ee0d546543b90d698e2a640ccfc59e",
-          "source_url": "https://registry.npmjs.org/@deepseek-ai/libreoffice-kit-win32-x64/-/libreoffice-kit-win32-x64-0.1.5.tgz",
-          "kind": "publisher_metadata_excerpt"
+          "path": "texts/libreoffice-kit-wasm-0.2.3/licenses/DeepSeek-Harness-MIT.txt",
+          "sha256": "637f43ba3b0193253cd80de6ce6ed4ed4d8a34eac84f6aaa7cc14f532e36318f",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/libreoffice-kit-wasm/-/libreoffice-kit-wasm-0.2.3.tgz",
+          "kind": "upstream_original"
         },
         {
-          "path": "texts/libreoffice/program/NOTICE",
+          "path": "texts/libreoffice-kit-wasm-0.2.3/licenses/LICENSE",
+          "sha256": "31c915ae5b7eafe51f06fc2537d2e7fefdee08e40d6b0d761d03d9f0fd58d660",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/libreoffice-kit-wasm/-/libreoffice-kit-wasm-0.2.3.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/libreoffice-kit-wasm-0.2.3/licenses/NOTICE",
           "sha256": "8d34210ebbfaee4ba258ef7b30c3044170f356ab82c8259c81b53860bcdeef7b",
-          "source_url": "https://registry.npmjs.org/@deepseek-ai/libreoffice-kit-win32-x64/-/libreoffice-kit-win32-x64-0.1.5.tgz",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/libreoffice-kit-wasm/-/libreoffice-kit-wasm-0.2.3.tgz",
           "kind": "upstream_original"
         },
         {
-          "path": "texts/libreoffice/licenses/LibreOffice-third-party.html",
-          "sha256": "6ef5eb44a3b8127960c27cb9c038fe89c221e139431ef33057c70811d91026ea",
-          "source_url": "https://registry.npmjs.org/@deepseek-ai/libreoffice-kit-win32-x64/-/libreoffice-kit-win32-x64-0.1.5.tgz",
+          "path": "texts/libreoffice-kit-wasm-0.2.3/sources/core-source.json",
+          "sha256": "39340edab26fd8f702380a0b9fedcfcc6a181793b46dd6d7dee01fa80a2458f0",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/libreoffice-kit-wasm/-/libreoffice-kit-wasm-0.2.3.tgz",
           "kind": "upstream_original"
         },
         {
-          "path": "texts/libreoffice/licenses/DeepSeek-Harness-MIT.txt",
-          "sha256": "69393380a3ec85c465dd4b22497a5de04c3408435126d8f50930d46de3886034",
-          "source_url": "https://registry.npmjs.org/@deepseek-ai/libreoffice-kit-win32-x64/-/libreoffice-kit-win32-x64-0.1.5.tgz",
+          "path": "texts/libreoffice-kit-wasm-0.2.3/sources/engine/wasm-source/source.json",
+          "sha256": "5cbd80154f0d6a83442335ffec195021709d0ba26319758f9ad9e24c083e1709",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/libreoffice-kit-wasm/-/libreoffice-kit-wasm-0.2.3.tgz",
           "kind": "upstream_original"
         },
         {
-          "path": "texts/libreoffice/licenses/LibreOffice-MPL-2.0.txt",
-          "sha256": "1f256ecad192880510e84ad60474eab7589218784b9a50bc7ceee34c2b91f1d5",
-          "source_url": "https://registry.npmjs.org/@deepseek-ai/libreoffice-kit-win32-x64/-/libreoffice-kit-win32-x64-0.1.5.tgz",
-          "kind": "upstream_original"
-        },
-        {
-          "path": "texts/libreoffice/program/license.txt",
-          "sha256": "9a7e34fbf3903507665e3ec7ca8b3d0c11f73bf2d5a0d754a079ab9f505bafef",
-          "source_url": "https://registry.npmjs.org/@deepseek-ai/libreoffice-kit-win32-x64/-/libreoffice-kit-win32-x64-0.1.5.tgz",
-          "kind": "upstream_original"
-        },
-        {
-          "path": "texts/libreoffice-source-availability.txt",
-          "sha256": "f12b15f0f776fc68df2cd9dc3ef4532bc737b3f04fae95629b07ca11472ce1cb",
-          "source_url": "https://registry.npmjs.org/@deepseek-ai/libreoffice-kit-win32-x64/-/libreoffice-kit-win32-x64-0.1.5.tgz",
+          "path": "texts/libreoffice-kit-wasm-0.2.3-source-availability.txt",
+          "sha256": "3dbbb41b35f7fe3863a0d7ed380e297ec86dcb965023908a3387f8a3a73b92b7",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/libreoffice-kit-wasm/-/libreoffice-kit-wasm-0.2.3.tgz",
           "kind": "source_availability_notice"
+        }
+      ]
+    },
+    {
+      "purl": "pkg:npm/%40deepseek-ai/libreoffice-kit-win32-x64@0.2.3",
+      "binding": {
+        "package_metadata_sha256": "590eee248c365af13a0409e1cee1252c3030c2634700b9e5d86195f29174ef4c"
+      },
+      "concluded_license": "MPL-2.0 AND bundled third-party terms",
+      "resolved_codes": [
+        "license_text_missing"
+      ],
+      "resolution": "verified_installed_upstream_materials",
+      "review_note": "Read the exact installed package, not the previous 0.1.5 review. Include its full nested notices and original source-availability metadata. Sources/ and build patches remain in the distribution; the engine core revision is bound by its original core-source.json.",
+      "documents": [
+        {
+          "path": "texts/libreoffice-kit-win32-x64-0.2.3/licenses/DeepSeek-Harness-MIT.txt",
+          "sha256": "73f5117527960163111c3d4059c6d26f4a3558e8d2ea53ac8ed9700604f1d6c6",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/libreoffice-kit-win32-x64/-/libreoffice-kit-win32-x64-0.2.3.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/libreoffice-kit-win32-x64-0.2.3/licenses/LibreOffice-MPL-2.0.txt",
+          "sha256": "1f256ecad192880510e84ad60474eab7589218784b9a50bc7ceee34c2b91f1d5",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/libreoffice-kit-win32-x64/-/libreoffice-kit-win32-x64-0.2.3.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/libreoffice-kit-win32-x64-0.2.3/licenses/LibreOffice-third-party.html",
+          "sha256": "6ef5eb44a3b8127960c27cb9c038fe89c221e139431ef33057c70811d91026ea",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/libreoffice-kit-win32-x64/-/libreoffice-kit-win32-x64-0.2.3.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/libreoffice-kit-win32-x64-0.2.3/licenses/webgpu/abseil-cpp/LICENSE",
+          "sha256": "c79a7fea0e3cac04cd43f20e7b648e5a0ff8fa5344e644b0ee09ca1162b62747",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/libreoffice-kit-win32-x64/-/libreoffice-kit-win32-x64-0.2.3.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/libreoffice-kit-win32-x64-0.2.3/licenses/webgpu/dawn/LICENSE",
+          "sha256": "e2908f7576fb12be5bdb8480cddb0be62badb498cadb821d043aeaf01b0b0899",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/libreoffice-kit-win32-x64/-/libreoffice-kit-win32-x64-0.2.3.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/libreoffice-kit-win32-x64-0.2.3/licenses/webgpu/DSH-LICENSE",
+          "sha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/libreoffice-kit-win32-x64/-/libreoffice-kit-win32-x64-0.2.3.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/libreoffice-kit-win32-x64-0.2.3/licenses/webgpu/jinja2/LICENSE.rst",
+          "sha256": "3b49dcee4105eb37bac10faf1be260408fe85d252b8e9df2e0979fc1e094437b",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/libreoffice-kit-win32-x64/-/libreoffice-kit-win32-x64-0.2.3.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/libreoffice-kit-win32-x64-0.2.3/licenses/webgpu/markupsafe/LICENSE",
+          "sha256": "0bbe88228fd63d20ec097f64e58d5a0a465123ae139140a18d406c60b48824b5",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/libreoffice-kit-win32-x64/-/libreoffice-kit-win32-x64-0.2.3.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/libreoffice-kit-win32-x64-0.2.3/licenses/webgpu/spirv-headers/LICENSE",
+          "sha256": "ea43b1de38a6f90c488800d66dec1ed671e68cda530266bc96951fb5b6307613",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/libreoffice-kit-win32-x64/-/libreoffice-kit-win32-x64-0.2.3.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/libreoffice-kit-win32-x64-0.2.3/licenses/webgpu/spirv-headers/LICENSES/CC-BY-4.0.txt",
+          "sha256": "d557539df68e771cc1eedcc91d13f70fca930e508d11eedcafa4b15db49e3744",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/libreoffice-kit-win32-x64/-/libreoffice-kit-win32-x64-0.2.3.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/libreoffice-kit-win32-x64-0.2.3/licenses/webgpu/spirv-headers/LICENSES/MIT.txt",
+          "sha256": "6d7c9e9d7d12c8d3753bdb24417b84819ba4d6c2f025c37948113d86dc81eef9",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/libreoffice-kit-win32-x64/-/libreoffice-kit-win32-x64-0.2.3.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/libreoffice-kit-win32-x64-0.2.3/program/license.txt",
+          "sha256": "9a7e34fbf3903507665e3ec7ca8b3d0c11f73bf2d5a0d754a079ab9f505bafef",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/libreoffice-kit-win32-x64/-/libreoffice-kit-win32-x64-0.2.3.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/libreoffice-kit-win32-x64-0.2.3/program/NOTICE",
+          "sha256": "8d34210ebbfaee4ba258ef7b30c3044170f356ab82c8259c81b53860bcdeef7b",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/libreoffice-kit-win32-x64/-/libreoffice-kit-win32-x64-0.2.3.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/libreoffice-kit-win32-x64-0.2.3/sources/packages/frame-forwarding/LICENSE",
+          "sha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/libreoffice-kit-win32-x64/-/libreoffice-kit-win32-x64-0.2.3.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/libreoffice-kit-win32-x64-0.2.3/sources/core-source.json",
+          "sha256": "39340edab26fd8f702380a0b9fedcfcc6a181793b46dd6d7dee01fa80a2458f0",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/libreoffice-kit-win32-x64/-/libreoffice-kit-win32-x64-0.2.3.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/libreoffice-kit-win32-x64-0.2.3-source-availability.txt",
+          "sha256": "25716a2f66543c329ca99334ef904a80a58a378c68226638e8f47fd37292ef8a",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/libreoffice-kit-win32-x64/-/libreoffice-kit-win32-x64-0.2.3.tgz",
+          "kind": "source_availability_notice"
+        }
+      ]
+    },
+    {
+      "purl": "pkg:npm/%40deepseek-ai/libreoffice-kit@0.2.3",
+      "binding": {
+        "package_metadata_sha256": "072df1e17148319f5d211b3bed3268cd1188a005b8f5b56f5532c45af21c7fbf"
+      },
+      "concluded_license": "MPL-2.0 AND MIT AND Apache-2.0",
+      "resolved_codes": [],
+      "resolution": "verified_installed_upstream_materials",
+      "review_note": "Root licence and NOTICE were already discovered. This supplemental review adds the separate frame-forwarding MIT and Windows delay-load MIT notices explicitly referenced by the root NOTICE. Engine packages are reviewed separately.",
+      "documents": [
+        {
+          "path": "texts/libreoffice-kit-0.2.3/LICENSE",
+          "sha256": "1f256ecad192880510e84ad60474eab7589218784b9a50bc7ceee34c2b91f1d5",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/libreoffice-kit/-/libreoffice-kit-0.2.3.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/libreoffice-kit-0.2.3/NOTICE",
+          "sha256": "eb5da42167335b1db17b35df23eb6aa1b503d2f9625d7d6cce87151892d4b55e",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/libreoffice-kit/-/libreoffice-kit-0.2.3.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/libreoffice-kit-0.2.3/frame-forwarding/LICENSE",
+          "sha256": "ebb4f09972aee8608be255debaf78451a68e95c290f55c240dec2ecfa16ea6be",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/libreoffice-kit/-/libreoffice-kit-0.2.3.tgz",
+          "kind": "upstream_original"
+        },
+        {
+          "path": "texts/libreoffice-kit-0.2.3/frame-forwarding/src/win-delay-load.LICENSE",
+          "sha256": "662a1b0115251cfb29c6aed0f221f8847bc49c6365d1c53a62c9f4bccc2489c3",
+          "source_url": "https://registry.npmjs.org/@deepseek-ai/libreoffice-kit/-/libreoffice-kit-0.2.3.tgz",
+          "kind": "upstream_original"
         }
       ]
     },

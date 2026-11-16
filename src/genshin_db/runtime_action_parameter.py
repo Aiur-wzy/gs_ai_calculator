@@ -5,7 +5,6 @@ import copy
 import math
 
 from genshin_db.parameter_references import parameter_indices
-
 from genshin_db.runtime_catalog import RuntimeConfigError, dumps, fingerprint
 
 TEXT_MAP_PATH = "TextMap/TextMap_MediumCHS.json"

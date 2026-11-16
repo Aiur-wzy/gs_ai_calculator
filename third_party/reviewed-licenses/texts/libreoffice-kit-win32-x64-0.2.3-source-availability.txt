@@ -1,0 +1,11 @@
+This installed engine package is version 0.2.3. It retains its separate MPL-2.0 and bundled third-party terms.
+Its sources/core-source.json pins LibreOffice core commit bce0998afefdbc355585ca324285661a2170ba77:
+https://github.com/LibreOffice/core/tree/bce0998afefdbc355585ca324285661a2170ba77
+The package includes the engine modifications, source identity, patches and build recipe under sources/.
+These files are distributed unchanged within the App runtime at node_modules/@deepseek-ai/libreoffice-kit-win32-x64/sources/
+They are also obtainable in this exact publisher archive:
+https://registry.npmjs.org/@deepseek-ai/libreoffice-kit-win32-x64/-/libreoffice-kit-win32-x64-0.2.3.tgz
+The integration repository is https://github.com/deepseek-ai/dsh-libreoffice-kit .
+The program and WebAssembly engine may carry different patches; use the source files from the corresponding package.
+Original licence texts and notices from this installed package are reproduced in this evidence set.
+The App MIT licence does not relicense any bundled third-party component.

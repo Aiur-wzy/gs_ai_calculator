@@ -20,11 +20,16 @@ def builder(tmp_path, monkeypatch):
     root = tmp_path / "workspace"
     root.mkdir()
     monkeypatch.setattr(module, "ROOT", root)
+    # These domain orchestration fixtures omit the real frontend build tree.
+    # Dedicated production-asset tests verify its provenance and rejection gate.
+    monkeypatch.setattr(module, "verify_production_web_assets", lambda *_a, **_k: {"fixture": "frontend-gate"})
     # Orchestration fixtures without a predecessor model a first release.
     # Successor/predecessor cases below opt into an explicit later sequence.
     isolated_version = SimpleNamespace(**{name: value for name, value in vars(module.app_version).items()
                                          if not name.startswith("__")})
     isolated_version.RELEASE_PAIR_SEQUENCE = 1
+    isolated_version.DATABASE_RELEASE_CHANNEL = "dev"
+    isolated_version.DATABASE_PAIR_POLICY = "current_only"
     monkeypatch.setattr(module, "app_version", isolated_version)
     monkeypatch.setenv("GENSHIN_BUNDLED_DATABASE", "untrusted-inherited-value")
     plan = SimpleNamespace(
@@ -156,6 +161,21 @@ def test_candidate_is_passed_to_build_without_replacing_formal(builder, monkeypa
         "build\\native-agent-v2\\pyinstaller-stage",
     )
     assert formal.read_bytes() == b"formal" and candidate.read_bytes() == b"candidate"
+
+
+@pytest.mark.parametrize("member", ["old-layout-file", "data/session.json", "app-file"])
+def test_build_does_not_erase_existing_portable_contents(builder, monkeypatch, member):
+    module, root = builder
+    portable = root / "dist/protected/GenshinCalc"
+    target = portable / ("app" if member == "app-file" else member)
+    target.parent.mkdir(parents=True)
+    target.write_bytes(b"must survive")
+    monkeypatch.setattr(module.sys, "argv", ["build_dist.py", "--dist-root", "dist/protected"])
+    monkeypatch.setattr(module.subprocess, "run", lambda *_a, **_k: pytest.fail("preflight must stop build"))
+    with pytest.raises(SystemExit) as error:
+        module.main()
+    assert error.value.code == 2
+    assert target.read_bytes() == b"must survive"
 
 
 @pytest.mark.parametrize("accepted_name", ["database-release-manifest.json", "database-live-manifest.json"])

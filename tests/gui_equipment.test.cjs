@@ -742,6 +742,18 @@ test('saved report first renders the stored source and loads only the requested 
   tab='result';assert.equal(RS.view().kind,'saved');assert.equal(RS.view().result.reported_hit_count,203);
 });
 
+test('opening an invalid calculated report preserves its typed failure and current report',async()=>{
+  const {world,RS}=setup();
+  const existing={kind:'saved',result:{summary:{total_damage:20300}},snapshot:{name:'原报告'}};
+  const failure={code:1,reason:'invalid_calculation_package',message:'计算报告完整性校验失败。',details:{field:'integrity'}};
+  RS.reportOrigin=existing;
+  world.pywebview.api.open_saved_calculation=async()=>failure;
+  const errors=[];
+  assert.equal(await RS.openSavedReport('invalid.calculated.json',{onError:error=>errors.push(error)}),false);
+  assert.deepEqual(clone(errors),[failure]);
+  assert.equal(RS.reportOrigin,existing);
+});
+
 test('formal whiteboard reports export by applied capability and reject a document switch at the picker',async()=>{
   const {world,RS,nodes}=setup();let tab='result',choose;const fingerprint='c'.repeat(64),requests=[];
   const board={title:'原生DSH正式计算链'};

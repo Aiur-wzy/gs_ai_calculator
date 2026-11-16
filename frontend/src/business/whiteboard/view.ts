@@ -1,4 +1,5 @@
 import {type WhiteboardPorts} from "./ports";
+import {timelineLabelWidth} from "../timeline/geometry";
 export function createWhiteboardView(ports:WhiteboardPorts){
   const WB=ports.owner,UI=ports.ui,$=ports.query,services=ports.services;
 const themeColor =(token:any,fallback:any)=>services.theme?.token?.(token)||fallback;
@@ -7,13 +8,14 @@ const refreshThemeColors =()=>{
 };
 const number =(v:any)=>typeof v==="number"&&Number.isFinite(v)?v.toLocaleString("zh-CN",{maximumFractionDigits:2}):"—";
 const setMode =(mode:any)=>{if(!["actions","effects","damage"].includes(mode))return false;
-  WB.state.mode=mode;WB.state.selectedDerived=null;WB.state.derivedBack=null;WB.render();return true;};
+  WB.state.mode=mode;WB.state.evidenceAction=false;WB.state.selectedDerived=null;WB.state.derivedBack=null;WB.render();return true;};
 const openAdd =()=>{WB.state.mode="actions";WB.state.addOpen=true;WB.render();services.workspace?.reveal?.("whiteboard","right");};
 const render =()=>{
   const root=$("#tab-whiteboard");if(!root)return;const b=WB.state.board,oldTrack=WB.state.wrap,active=ports.document.activeElement;
   const trackFocused=oldTrack?.contains?.(active),focusId=trackFocused?active?.getAttribute?.("data-axis-event"):null;
   root.innerHTML="";
   if(!b){
+    WB.state.wrap=null;WB.state.svg=null;WB.state.labelSvg=null;
     const empty=UI.el("section",null,"wb-empty wb-start");empty.setAttribute("aria-labelledby","wb-start-title");
     const title=UI.el("h2","尚未打开创作白板");title.id="wb-start-title";
     const actions=UI.el("div",null,"wb-start-actions"),create=UI.button("新建创作白板",async()=>{
@@ -40,20 +42,24 @@ const render =()=>{
   const layout=UI.el("div",null,"wb-layout"),team=UI.el("aside",null,"wb-team"),center=UI.el("div",null,"wb-center"),inspector=UI.el("aside",null,"wb-inspector");
   team.setAttribute("aria-label","白板队伍与装备");inspector.setAttribute("aria-label","白板动作编辑与只读详情");
   root.append(head);const workflowState=WB.workflowState();if(workflowState){const stage=services.workbench?.renderStageTracker?.(workflowState);if(stage){stage.classList.add("wb-stage-flow");root.append(stage);}}root.append(layout);layout.append(team,center,inspector);WB.renderTeam(team);WB.renderCenter(center);WB.renderInspector(inspector);
-  services.workspace?.mount?.(layout,{key:"whiteboard",left:".wb-team",right:".wb-inspector",repaint:()=>WB.draw()});
+  services.workspace?.mount?.(layout,{key:"whiteboard",left:".wb-team",right:".wb-inspector",context:b,
+    rightContext:WB.state.mode==="actions"?WB.state.selectedAction||(WB.state.addOpen?"adding":null):WB.state.selectedDerived?.id||null,repaint:()=>WB.draw()});
   if(trackFocused)WB.restoreAxisFocus(WB.state.wrap,focusId);
   services.workbench?.documentChanged?.();
 };
 const renderTeam =(box:any)=>{
   const b=WB.state.board;box.append(UI.el("h3","队伍与初始面板"));
   b.team.forEach((c:any,i:any)=>{const card=UI.button("",()=>{WB.state.selectedActor=c.id;WB.render();},`wb-team-card${WB.state.selectedActor===c.id?" active":""}`);
-    card.style.setProperty?.("--wb-color",WB.colors[i]);card.append(UI.el("strong",c.name),UI.el("span",`${c.level} 级 · ${c.constellation} 命 · ${c.weapon?.name||"武器未选"}`),
-      UI.el("span",c.artifact_sets.map((s:any)=>`${s.name} ${s.count} 件`).join(" + ")||"套装未选"),UI.el("span",`攻击 ${c.panel.atk??"待填"} · 充能 ${c.panel.energy_recharge==null?"待填":`${WB.number(c.panel.energy_recharge*100)}%`}`));
+    const equipment=c.artifact_sets.map((s:any)=>`${s.name} ${s.count} 件`).join(" + ")||"套装未选",
+      panel=`攻击 ${c.panel.atk??"待填"} · 充能 ${c.panel.energy_recharge==null?"待填":`${WB.number(c.panel.energy_recharge*100)}%`}`;
+    card.style.setProperty?.("--wb-color",WB.colors[i]);card.append(UI.el("strong",c.name),UI.el("span",`${c.level} 级 · ${c.constellation} 命 · ${c.weapon?.name||"武器未选"}`));
+    card.title=`${equipment}；${panel}`;
     if(c.character_ref?.kind==="provisional"||c.weapon?.entity_ref?.kind==="provisional"||(c.artifact_sets||[]).some((s:any)=>s.entity_ref?.kind==="provisional")){
       card.append(UI.el("span","临时资料 · 仅限当前方案 · 正式结果将标注近似","wb-warning"));
     }
     WB.bindCommandMenu(card,`${c.name}操作`,()=>WB.characterMenuItems(c.id));box.append(card);
-    if(WB.state.selectedActor===c.id){const tools=UI.el("div",null,"wb-toolbar"),more=UI.button("更多…",()=>WB.openCommandMenu(more,`${c.name}操作`,WB.characterMenuItems(c.id)),"wb-menu-trigger");
+    if(WB.state.selectedActor===c.id){const details=WB.fold("套装与面板摘要","teamSummaryOpen");details.append(UI.el("p",equipment,"wb-note"),UI.el("p",panel,"wb-note"));box.append(details);
+      const tools=UI.el("div",null,"wb-toolbar"),more=UI.button("更多…",()=>WB.openCommandMenu(more,`${c.name}操作`,WB.characterMenuItems(c.id)),"wb-menu-trigger");
       tools.append(UI.button("装备与面板",()=>WB.editCharacter(c.id)),more);box.append(tools);}
   });
   const add=UI.button("＋ 添加角色",WB.addCharacter);add.disabled=b.team.length>=4;box.append(add);
@@ -90,12 +96,14 @@ const renderCenter =(box:any)=>{
   if(WB.state.mode==="actions")tools.append(UI.button("＋ 添加动作",WB.openAdd));
   tools.append(UI.button("−",()=>WB.zoom(1/1.3)),UI.el("span",`${Math.round(WB.state.scale*100)}%`,"wb-scale"),
     UI.button("＋",()=>WB.zoom(1.3)),UI.button("适应全轴",()=>{WB.state.scale=1;WB.state.scroll=0;WB.render();}));
+  tools.append(UI.button(WB.state.labelsCollapsed?"展开轴标签":"收起轴标签",()=>{WB.state.labelsCollapsed=!WB.state.labelsCollapsed;WB.render();}));
   if(WB.state.mode==="effects"){
     const filters=UI.el("div",null,"wb-toolbar wb-effect-filters");filters.setAttribute("aria-label","效果视图筛选");
     for(const [key,label] of [["all","全部效果"],["coverage","持续 Buff"],["points","命中与触发"]]){
       const button=UI.button(label,()=>{WB.state.effectFilter=key;WB.state.selectedDerived=null;WB.render();},WB.state.effectFilter===key?"active":"");
       button.setAttribute("aria-pressed",WB.state.effectFilter===key);filters.append(button);
-    }tools.append(filters);
+    }filters.append(UI.button(WB.state.showCalculationSampling?"隐藏采样区间":"显示采样区间",()=>{
+      WB.state.showCalculationSampling=!WB.state.showCalculationSampling;WB.state.effectFilter="all";WB.render();}));tools.append(filters);
   }
   if(WB.state.mode==="damage"){
     const filters=UI.el("div",null,"wb-toolbar wb-effect-filters");filters.setAttribute("aria-label","伤害视图筛选");
@@ -157,8 +165,16 @@ const renderCenter =(box:any)=>{
     box.append(empty);WB.state.wrap=null;WB.state.svg=null;return;
   }
   const wrap=UI.el("div",null,"wb-track");wrap.id="wb-track";wrap.tabIndex=0;wrap.setAttribute("aria-label","白板时间轴；动作可拖动，效果和伤害只读");
-  const svg=ports.document.createElementNS("http://www.w3.org/2000/svg","svg");svg.id="wb-svg";wrap.append(svg);box.append(wrap);
-  WB.state.wrap=wrap;WB.state.svg=svg;wrap.scrollLeft=WB.state.scroll;wrap.addEventListener("scroll",()=>{WB.state.scroll=wrap.scrollLeft;WB.draw();});
+  const shell=UI.el("div",null,"wb-axis-shell"),labels=UI.el("div",null,"wb-label-pane");labels.style.width=`${timelineLabelWidth(WB.state.labelsCollapsed)}px`;
+  const labelSvg=ports.document.createElementNS("http://www.w3.org/2000/svg","svg");labels.append(labelSvg);
+  const svg=ports.document.createElementNS("http://www.w3.org/2000/svg","svg");svg.id="wb-svg";wrap.append(svg);shell.append(labels,wrap);box.append(shell);
+  WB.state.labelSvg=labelSvg;WB.state.wrap=wrap;WB.state.svg=svg;
+  const mode=WB.state.mode,initialScroll={left:WB.state.scroll||0,top:WB.state.axisScrollTop?.[mode]||0};
+  wrap.addEventListener("scroll",()=>{if(WB.state.wrap!==wrap)return;
+    WB.state.scroll=wrap.scrollLeft;WB.state.axisScrollTop ||= {};WB.state.axisScrollTop[mode]=wrap.scrollTop;
+    if(WB.state.drawQueued===wrap)return;const request=ports.document.defaultView?.requestAnimationFrame;
+    if(!request){WB.draw();return;}WB.state.drawQueued=wrap;request.call(ports.document.defaultView,()=>{
+      if(WB.state.drawQueued===wrap)WB.state.drawQueued=null;if(WB.state.wrap===wrap)WB.draw();});});
   wrap.addEventListener("wheel",(e:any)=>{if(e.ctrlKey){e.preventDefault();WB.zoom(e.deltaY<0?1.15:1/1.15,e.clientX-wrap.getBoundingClientRect().left);}
     else if(e.shiftKey){e.preventDefault();wrap.scrollLeft+=e.deltaY;}},{passive:false});
   wrap.addEventListener("pointerdown",(e:any)=>{if(e.button===0||e.button===1)WB.beginPointer(e,null);});
@@ -168,7 +184,8 @@ const renderCenter =(box:any)=>{
     if(e.key==="+"||e.key==="="){e.preventDefault();WB.zoom(1.3);return;}if(e.key==="-"){e.preventDefault();WB.zoom(1/1.3);return;}
     if(WB.state.mode!=="actions")return;const action=WB.action(WB.state.selectedAction);if(!action)return;
     if(["ArrowLeft","ArrowRight"].includes(e.key)){e.preventDefault();WB.setTime(action.id,WB.clampTime(action.start+(e.key==="ArrowLeft"?-1:1)*(e.shiftKey?1:0.1)));}
-  });WB.draw();
+  });WB.draw(initialScroll);
+  WB.state.scroll=wrap.scrollLeft;WB.state.axisScrollTop ||= {};WB.state.axisScrollTop[mode]=wrap.scrollTop;
 };
 const init =async()=>{
   WB.render();

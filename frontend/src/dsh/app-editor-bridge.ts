@@ -1,14 +1,16 @@
 import type {ShellCarrierPort, ShellUnaryRequest} from "./shell-carrier";
 import {assertAppDomainSuccess,canContinueWithoutAppDomain} from "./app-domain-errors";
+import type {TimelineSelection} from "../business/timeline/evidence-index";
 
 export type EditorDocument = Readonly<{document_kind: "whiteboard" | "native" | null; document: unknown}>;
 export interface AppEditorBridge {
   readonly root: HTMLElement;
   navigate(page: "whiteboard" | "rotation" | "result" | "data"): void;
   show?(page: "whiteboard" | "rotation" | "result" | "data"): Promise<void>;
-  document(): EditorDocument;
+  document(): EditorDocument | Promise<EditorDocument>;
   setTheme(preference: string, resolved: string): void;
-  projectCandidate?(document: Record<string,unknown>,kind:"native"|"whiteboard",calculated?:Record<string,unknown>):unknown;
+  projectCandidate?(document: Record<string,unknown>,kind:"native"|"whiteboard",calculated?:Record<string,unknown>,metadata?:{hasCalculation?:boolean}):unknown;
+  revealTimelineEvent?(selection:TimelineSelection):Promise<{status:"located";message:string}>;
   application?:AppEditorApplicationPort;
   files?:AppEditorFilePort;
 }
@@ -67,7 +69,7 @@ export function withDocumentBinding(port: ShellCarrierPort, api: DocumentBinding
         // The Host is idempotent: existing sessions keep their original document.
         // This snapshot is never used to rebind a cold-restored conversation.
         let conversationId:string;
-        try{conversationId=await bindDocument(api, sessionId, editor.document(), signal);}
+        try{conversationId=await bindDocument(api, sessionId, await editor.document(), signal);}
         catch(reason){
           // A known unavailable App domain must not disable ordinary DSH
           // conversation/search. Node's exact resolver omits domain tools and

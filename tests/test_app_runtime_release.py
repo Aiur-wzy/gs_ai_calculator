@@ -4,6 +4,7 @@ from __future__ import annotations
 import ast
 import hashlib
 import json
+import marshal
 from pathlib import Path
 from types import SimpleNamespace
 
@@ -27,6 +28,12 @@ from scripts.app_runtime_release import (
 )
 
 ROOT = Path(__file__).resolve().parents[1]
+
+
+def _current_archive(pyz):
+    entry = compile((ROOT / "app_entry.py").read_text("utf-8-sig"), "old/build/path/app_entry.py", "exec", dont_inherit=True)
+    return SimpleNamespace(toc={"PYZ.pyz": (0, 0, 0, 0, "z"), "app_entry": (0, 0, 0, 0, "s")},
+                           open_embedded_archive=lambda _: pyz, extract=lambda _: marshal.dumps(entry))
 
 
 def test_actual_entry_closure_contains_new_public_paths_without_collect_all():
@@ -77,7 +84,7 @@ def test_both_archive_entries_must_include_retained_coverage_facade(monkeypatch,
         names = inventory - {missing} if Path(path).name == entry else inventory
         pyz = SimpleNamespace(toc={name: () for name in names}, extract=lambda name: compile(
             module_source(ROOT / "src", name).read_text("utf-8-sig"), name, "exec", dont_inherit=True))
-        return SimpleNamespace(toc={"PYZ.pyz": (0, 0, 0, 0, "z")}, open_embedded_archive=lambda _: pyz)
+        return _current_archive(pyz)
 
     monkeypatch.setattr("PyInstaller.archive.readers.CArchiveReader", archive)
     for name in ("GenshinCalc.exe", "GenshinCalcGUI.exe"):
@@ -125,7 +132,7 @@ def test_portable_archive_uses_actual_entry_closure_with_explicit_release_only_o
     monkeypatch.setattr(engine_runtime_release, "changed_project_modules", lambda _: changed)
     pyz = SimpleNamespace(toc={name: () for name in inventory}, extract=lambda name: compile(
         module_source(source, name).read_text("utf-8-sig"), name, "exec", dont_inherit=True))
-    archive = SimpleNamespace(toc={"PYZ.pyz": (0, 0, 0, 0, "z")}, open_embedded_archive=lambda _: pyz)
+    archive = _current_archive(pyz)
     monkeypatch.setattr("PyInstaller.archive.readers.CArchiveReader", lambda _: archive)
     for name in ("GenshinCalc.exe", "GenshinCalcGUI.exe"):
         (tmp_path / name).write_bytes(b"inert archive fixture; never execute")
@@ -181,16 +188,22 @@ def test_archive_guard_checks_app_paths_after_engine_closure(monkeypatch, tmp_pa
     assert missing in failure.value.details["modules"]
 
 
-def test_r18_identity_advances_database_and_pins_exact_accepted_r17_predecessor():
-    release_inputs = ROOT / "docs/pm/audits/2026-11-14-r18-release-inputs"
-    raw = (release_inputs / "release-pair-manifest.json").read_bytes()
+def _current_predecessor_path():
+    public_input = ROOT / "release-inputs/r21/release-pair-manifest.json"
+    if public_input.is_file():
+        return public_input
+    return ROOT / "docs/publication/public-main" / public_input.relative_to(ROOT)
+
+
+def test_current_identity_reuses_database_and_pins_exact_accepted_r21_predecessor():
+    raw = _current_predecessor_path().read_bytes()
     prior = json.loads(raw)
     assert hashlib.sha256(raw).hexdigest() == version.ACCEPTED_PREDECESSOR_PAIR_MANIFEST_SHA256
     assert prior["pair_sequence"] + 1 == version.RELEASE_PAIR_SEQUENCE
-    assert prior["database"]["database_release_id"] == "db-7.2.50-r4"
-    assert version.DATABASE_RELEASE_ID == "db-7.2.50-r5"
-    assert version.APP_RELEASE_ID == "app-0.46.0-r18"
-    assert version.RELEASE_PAIR_ID == "pair-0.46.0-r18-db-7.2.50-r5"
+    assert prior["database"]["database_release_id"] == version.DATABASE_RELEASE_ID == "db-7.2.50-r6"
+    assert version.APP_VERSION == "1.0.0"
+    assert version.APP_RELEASE_ID == "app-1.0.0"
+    assert version.RELEASE_PAIR_ID == "pair-1.0.0-db-7.2.50-r6"
     assert version.NATIVE_AGENT_PACKAGE_MANAGER == "pnpm@11.25.0"
     for relative in ("agent-runtime/package.json", "frontend/package.json"):
         assert json.loads((ROOT / relative).read_text(encoding="utf-8"))["packageManager"] == version.NATIVE_AGENT_PACKAGE_MANAGER
@@ -210,22 +223,38 @@ def test_historical_r17_identity_reused_database_and_pinned_accepted_r16_predece
     assert historical_r17["database"] == prior["database"]
 
 
-def test_real_build_predecessor_admission_accepts_r17_for_r18_database_upgrade():
-    directory = ROOT / "docs/pm/audits/2026-11-14-r18-release-inputs"
-    database = load_database_release_manifest(directory / "r5-database-release-manifest.json")
+def test_real_build_predecessor_admission_accepts_r21_for_1_0_0_same_database():
+    directory = ROOT / "tests/fixtures/accepted-r20"
+    database = load_database_release_manifest(directory / "database-release-manifest.json")
     # Only a prospective in-memory App artifact contract; no final package
     # manifest or runtime pin is published by this structure test.
     pair = create_release_pair_manifest(database, release_pair_id=version.RELEASE_PAIR_ID,
-        pair_sequence=version.RELEASE_PAIR_SEQUENCE, pair_policy=version.DATABASE_PAIR_POLICY,
+        pair_sequence=version.RELEASE_PAIR_SEQUENCE, pair_policy="exact",
         app_release_id=version.APP_RELEASE_ID, app_version=version.APP_VERSION,
         app_artifact_manifest_sha256="a" * 64, released_at="2026-11-14T00:00:00+00:00")
-    predecessor = directory / "release-pair-manifest.json"
+    predecessor = _current_predecessor_path()
     prior = build_dist._load_accepted_predecessor_pair(predecessor,
-        workspace_root=ROOT, build_root=ROOT / "build", dist_root=ROOT / "dist/release-0.46.0-r18",
+        workspace_root=ROOT, build_root=ROOT / "build", dist_root=ROOT / "dist/release-1.0.0",
         pair_manifest=pair, database_manifest=database,
-        expected_sha256=version.ACCEPTED_PREDECESSOR_PAIR_MANIFEST_SHA256, allow_database_upgrade=True)
-    assert prior["pair_sequence"] == 15
-    assert pair["pair_sequence"] == 16
+        expected_sha256=version.ACCEPTED_PREDECESSOR_PAIR_MANIFEST_SHA256, allow_database_upgrade=False)
+    assert prior["pair_sequence"] == 3
+    assert pair["pair_sequence"] == 4
     assert pair["database"]["database_release_id"] == database["database_release_id"]
+    assert prior["database"] == pair["database"]
+    assert database["release_sequence"] == version.DATABASE_RELEASE_SEQUENCE == 8
+
+
+def test_historical_r17_to_r18_database_upgrade_remains_supported():
+    directory = ROOT / "docs/pm/audits/2026-11-14-r18-release-inputs"
+    database = load_database_release_manifest(directory / "r5-database-release-manifest.json")
+    predecessor = directory / "release-pair-manifest.json"
+    pair = create_release_pair_manifest(database, release_pair_id="pair-0.46.0-r18-db-7.2.50-r5",
+        pair_sequence=16, pair_policy="current_only", app_release_id="app-0.46.0-r18", app_version="0.46.0",
+        app_artifact_manifest_sha256="a" * 64, released_at="2026-11-14T00:00:00+00:00")
+    prior = build_dist._load_accepted_predecessor_pair(predecessor,
+        workspace_root=ROOT, build_root=ROOT / "build", dist_root=ROOT / "dist/historical-r18",
+        pair_manifest=pair, database_manifest=database,
+        expected_sha256=hashlib.sha256(predecessor.read_bytes()).hexdigest(), allow_database_upgrade=True)
+    assert prior["pair_sequence"] == 15
     assert prior["database"]["database_release_id"] == "db-7.2.50-r4"
-    assert database["release_sequence"] == version.DATABASE_RELEASE_SEQUENCE == 7
+    assert database["release_sequence"] == 7

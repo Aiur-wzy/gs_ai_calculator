@@ -123,7 +123,7 @@ test('registered Chinese skill aliases merge only in display, keeping owner scop
 test('whole page loads editor before app and both result and native checks expose entry',()=>{
   const e=setup(),html=fs.readFileSync(path.join(web,'index.html'),'utf8');assert.ok(html.indexOf('external-damage.js')<html.indexOf('app.js'));
   e.w.RC.shown=true;e.w.RC.render();assert.match(e.w.document.querySelector('#rotation-checks').textContent,/添加外部伤害补充/);
-  e.w.RS.renderAll();assert.match(e.w.document.querySelector('#result-body').textContent,/添加外部伤害补充/);assert.match(e.w.document.querySelector('#result-body').textContent,/计算后才展开/);
+  e.w.RS.renderAll();assert.match(e.w.document.querySelector('#result-body').textContent,/添加外部伤害补充/);assert.match(e.w.document.querySelector('#result-body').textContent,/当前计算模型尚未计算。点击「计算」查看结果。/);
 });
 test('external supplement rows use one contextual command and relocate by stable id',()=>{
   const e=setup(),opened=[],calls=[];e.w.AppContextMenu={forDocument:()=>({open:config=>{opened.push(config);return true;},bind(){}})};

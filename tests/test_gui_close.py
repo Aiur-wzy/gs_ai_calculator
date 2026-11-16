@@ -1,11 +1,13 @@
 """Closing must release the UI thread before asking WebView about dirty input."""
+import subprocess
 import threading
+from pathlib import Path
 from types import SimpleNamespace
 
 import pytest
 
 from genshin_app.gui.api import GuiApi
-from genshin_app.gui.launcher import install_close_guard
+from genshin_app.gui.launcher import _EDITOR_CLOSE_SCRIPT, install_close_guard
 
 
 class ClosingEvent:
@@ -73,6 +75,16 @@ def test_dirty_editor_decides_when_to_confirm_close(tmp_path):
     assert window.done.wait(3) and window.closed
 
 
+def test_close_failure_message_is_visible_and_does_not_destroy_window(tmp_path):
+    window, api = setup(tmp_path)
+    api.confirm_close = lambda: {"code": 1, "message": "聊天草稿尚未读取完成，请重试。"}
+    window.release.set()
+    assert window.events.closing.handler() is False
+    assert window.done.wait(3)
+    assert not window.closed and not api._closing_approved
+    assert window.warning == ("暂未退出应用", "聊天草稿尚未读取完成，请重试。")
+
+
 @pytest.mark.parametrize("initialized", [True, False])
 def test_failed_editor_query_preserves_initialized_input(tmp_path, initialized):
     window, api = setup(tmp_path, RuntimeError("WebView unavailable"))
@@ -82,3 +94,18 @@ def test_failed_editor_query_preserves_initialized_input(tmp_path, initialized):
     assert window.done.wait(3)
     assert window.closed is not initialized
     assert bool(window.warning) is initialized
+
+
+@pytest.mark.parametrize(("setup_script", "expected"), [
+    ("globalThis.window={WB:{},PL:{}};", "true"),
+    ("globalThis.window={WB:{requestClose:()=>false}};", "false"),
+    ("globalThis.window={WB:{},PL:{requestClose:()=>false}};", "false"),
+    ("globalThis.window={WB:{requestClose:()=>true},PL:{requestClose:()=>false}};", "true"),
+])
+def test_close_checks_only_initialized_editor_functions(setup_script, expected):
+    node = Path(__file__).resolve().parents[1] / "agent-runtime" / "node.exe"
+    result = subprocess.run(
+        [str(node), "-e", setup_script + "console.log(" + _EDITOR_CLOSE_SCRIPT + ")"],
+        capture_output=True, text=True, check=True, timeout=15,
+    )
+    assert result.stdout.strip() == expected

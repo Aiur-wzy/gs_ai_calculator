@@ -1,7 +1,9 @@
 import {fileURLToPath, URL} from "node:url";
 import {defineConfig} from "vite";
+import {sourceProvenancePlugin} from "./scripts/build-source-provenance.mjs";
 
 export default defineConfig({
+  plugins: [sourceProvenancePlugin(fileURLToPath(new URL(".", import.meta.url)), "foundation")],
   resolve: {
     alias: {"@": fileURLToPath(new URL("./src", import.meta.url))},
   },

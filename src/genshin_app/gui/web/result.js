@@ -25,12 +25,12 @@ RS.sourceKind=()=>{
   if(page==="rotation")return "editor";
   return RS.reportOrigin?.kind||(!window.WS&&window.RT?.tpl?.()?"editor":null);
 };
-RS.openSavedReport=async(path,{expectedFileSha,isCurrent=()=>true,onError=()=>{}}={})=>{
+RS.openSavedReport=async(path,{expectedFileSha,isCurrent=()=>true,onError=response=>setStatus(response.message,response.details)}={})=>{
   const response=await callApi("open_saved_calculation",path,expectedFileSha??null);
   if(!isCurrent())return false;
   if(response.code){
     const message=response.message||"无法核验所选计算结果，原文件和当前文档已保留。";
-    setStatus(message);onError(message);
+    onError({...response,message});
     if(response.reason==="saved_calculation_version_incompatible"&&typeof response.details?.migration_prompt==="string")
       RS.showReportMigration(message,response.details.migration_prompt);
     return false;
@@ -371,23 +371,24 @@ RS.runCalc = async () => {
 };
 
 RS.exportResult = async (fmt,onOutcome) => {
-  if(RS.state.exportPending)return false;
+  if(RS.state.exportPending){onOutcome?.("failed");return false;}
   const view=RS.view(),{kind,result,snapshot}=view;
   if (!view.current || view.pending || snapshot?.exportAllowed===false) {
-    setStatus("结果未就绪或已失效，请重新计算后导出"); return false;
+    setStatus("结果未就绪或已失效，请重新计算后导出"); onOutcome?.("failed");return false;
   }
   if(fmt === "csv" && RS.isVerifiedZero(result)) {
-    setStatus("已验证零伤结果需保留伤害报告证明，请导出 JSON 或 Excel；CSV 不支持。"); return false;
+    setStatus("已验证零伤结果需保留伤害报告证明，请导出 JSON 或 Excel；CSV 不支持。");onOutcome?.("failed");return false;
   }
   if(fmt === "csv" && RS.hasExternal(result)) {
-    setStatus("含外部计算值的结果须保留引擎与补充明细，请导出 JSON 或 Excel；CSV 不支持。"); return false;
+    setStatus("含外部计算值的结果须保留引擎与补充明细，请导出 JSON 或 Excel；CSV 不支持。");onOutcome?.("failed");return false;
   }
-  RS.state.exportPending=true;RS.renderAll();
+  RS.state.exportPending=true;let writeAttempted=false,confirmedWrite=false;
   const feedback=(message,state="status",path)=>{
     if(snapshot)RS.exportFeedback.set(snapshot,{message,state,path});
     setStatus(message,path?{path}:undefined);RS.renderAll();
   };
   try{
+    RS.renderAll();
     let response;
     const application=kind==="whiteboard"?WB.state.reusableResult:null;
     if(!snapshot.reportHandle&&RS.hasAppliedWhiteboardExport(kind,fmt)){
@@ -400,36 +401,47 @@ RS.exportResult = async (fmt,onOutcome) => {
       };
       if(fmt==="json"){
         feedback("正在准备完整计算结果…");
-        response=await window.AppAppliedResultSave(application.sessionId,board,calculated,unchanged);
+        writeAttempted=true;response=await window.AppAppliedResultSave(application.sessionId,board,calculated,unchanged);
       }
       else{
         const selected=await WB.pickUserFile({action:"export",document_kind:`report_${fmt}`,suggested_name:`${snapshot.name}.${fmt}`});
-        if(!selected||selected.cancelled){feedback("已取消导出");onOutcome?.("cancelled");return false;}
-        if(!unchanged()){feedback("选择位置期间白板或报告发生变化，未导出","alert");return false;}
+        if(!selected){feedback("文件选择窗口不可用，尚未导出","alert");onOutcome?.("failed");return false;}
+        if(selected.cancelled){feedback("已取消导出");onOutcome?.("cancelled");return false;}
+        if(!unchanged()){feedback("选择位置期间白板或报告发生变化，未导出","alert");onOutcome?.("failed");return false;}
         feedback("正在写出当前白板的计算结果…");
-        response=await callApi("dsh_client_publish_whiteboard_result",{
+        writeAttempted=true;response=await callApi("dsh_client_publish_whiteboard_result",{
           conversation_id:application.sessionId,delivery_capability:application.deliveryCapability,
           output_path:selected.path,format:fmt,expected_file_sha:selected.file_sha??null,
           expected_result_fingerprint:snapshot.resultFingerprint,
         });
       }
     }else{
-      if(!snapshot.reportHandle&&(kind!=="editor"||window.PL?.state.plan)){setStatus("这份结果没有对应的导出凭据，请重新打开已保存的完整结果");return false;}
+      if(!snapshot.reportHandle&&(kind!=="editor"||window.PL?.state.plan)){setStatus("这份结果没有对应的导出凭据，请重新打开已保存的完整结果");onOutcome?.("failed");return false;}
       const suffix=fmt==="json"&&snapshot.reportHandle?"calculated.json":fmt;
       const selected=await WB.pickUserFile({action:"export",document_kind:`report_${fmt}`,suggested_name:`${snapshot.name}.${suffix}`});
-      if(!selected||selected.cancelled){feedback("已取消导出");onOutcome?.("cancelled");return false;}
+      if(!selected){feedback("文件选择窗口不可用，尚未导出","alert");onOutcome?.("failed");return false;}
+        if(selected.cancelled){feedback("已取消导出");onOutcome?.("cancelled");return false;}
       const active=RS.view();
-      if(!active.current||active.kind!==kind||active.snapshot!==snapshot||active.result!==result){feedback("报告已变化，未导出，请重新选择","alert");return false;}
+      if(!active.current||active.kind!==kind||active.snapshot!==snapshot||active.result!==result){feedback("报告已变化，未导出，请重新选择","alert");onOutcome?.("failed");return false;}
       feedback("正在写出计算结果…");
-      response=snapshot.reportHandle
+      writeAttempted=true;response=snapshot.reportHandle
         ?await callApi("export_viewed_report",snapshot.reportHandle,fmt,selected.path,selected.file_sha??null)
         :await callApi("export_result",result,fmt,snapshot.name,selected.path);
     }
-    if(response.code){UI.error(response);feedback(response.message||"导出未完成，请查看状态详情。","alert");return false;}
+    if(response.code){
+      const notWritten=window.GenshinBusinessUI?.confirmedNoFileWrite?.(response)===true;
+      UI.error(response);
+      feedback(notWritten?response.message||"结果未导出，请查看输入或文件冲突提示。":"暂时无法确认结果是否已经写出，请先核对所选文件；不要直接重复导出。","alert");
+      onOutcome?.(notWritten?"failed":"unknown");return false;
+    }
     if(response.data?.cancelled||response.data?.status==="cancelled"){feedback("已取消导出");onOutcome?.("cancelled");return false;}
     if(!response.data?.path){feedback("App 未确认写出结果，请先核对所选文件","alert");onOutcome?.("unknown");return false;}
-    onOutcome?.("completed");feedback("结果已导出","status",response.data.path);return true;
-  }catch(error){feedback(`导出未完成，请先核对目标文件。${error?.message||""}`,"alert");onOutcome?.("unknown");return false;}
+    confirmedWrite=true;onOutcome?.("completed");feedback("结果已导出","status",response.data.path);return true;
+  }catch(error){
+    if(confirmedWrite){onOutcome?.("completed");return true;}
+    onOutcome?.(writeAttempted?"unknown":"failed");
+    feedback(`${writeAttempted?"暂时无法确认结果是否已写出，请先核对目标文件。":"尚未执行导出，请先处理文件选择或输入问题。"}${error?.message||""}`,"alert");return false;
+  }
   finally{RS.state.exportPending=false;RS.renderAll();window.WS?.refresh?.();}
 };
 

@@ -4,7 +4,10 @@ export function createTimelineControls(ports:TimelineDomPorts){
   const TV=ports.view,RT=ports.editor,$=ports.query,TD=ports.projection,services=ports.services;
   const {VIEW_NAMES,viewKind,viewEl,viewPermission,viewEmptyDetail}=createTimelineDom(ports);
   const LABEL_W=210,RULER_H=44;
-  const viewRestoreFilterFocus=(label:string)=>$("#timeline-filters")?.querySelector?.(`[aria-label="${label}"]`)?.focus?.();
+  const viewRestoreFilterFocus=(label:string)=>{
+    const selector=`[aria-label="${label}"]`;
+    (TV.filterPanel?.querySelector?.(selector) ?? $("#timeline-filters")?.querySelector?.(selector))?.focus?.();
+  };
 const changeMode = (mode:any) => {
   if(!VIEW_NAMES[mode] || TV.mode===mode)return;
   const wrap=$("#timeline-wrap"); TV.modeScroll[TV.mode]=wrap.scrollTop || 0;
@@ -26,11 +29,12 @@ const renderControls = (view:any) => {
     // Rebuilding the controls must retire the old overlay instance first.  The
     // filter choices themselves remain in TV, so an open menu can be restored
     // without leaving document-level dismissal handlers behind.
-    if(TV.filterSurface && !TV.filterSurface.appFinished){
-      TV.filterSurface.destroy?.("rerender",{restoreFocus:false});
-    }
-    TV.filterSurface=null;
+    const reopen=!!TV.filterOpen;
+    TV.filterBinding?.destroy();
+    TV.filterBinding=null;
     filters.innerHTML="";
+    const labels=viewEl("button",TV.labelsCollapsed?"展开轴标签":"收起轴标签");labels.type="button";
+    labels.addEventListener("click",()=>{TV.labelsCollapsed=!TV.labelsCollapsed;TV.rebuildRows();TV.paintProjection();});filters.appendChild(labels);
     if(TV.mode==="effects")for(const [value,label] of [["all","全部效果"],["coverage","持续Buff"],["points","命中与触发"]]){
       const button=viewEl("button",label);button.type="button";button.setAttribute("aria-pressed",String((TV.effectFocus||"all")===value));
       button.addEventListener("click",()=>{TV.effectFocus=value;TV.rebuildRows();TV.paintProjection();});filters.appendChild(button);
@@ -52,38 +56,13 @@ const renderControls = (view:any) => {
       +Number(TV.mode==="effects"&&!!TV.showCalculationSampling);
     const filter=viewEl("details",null,"tl-filter-menu"),summary=viewEl("summary",`筛选${active?` · ${active}`:""}`);
     const panel=viewEl("div",null,"tl-filter-panel");panel.id="timeline-filter-options";
-    filter.open=!!TV.filterOpen;summary.setAttribute("aria-expanded",String(filter.open));summary.setAttribute("aria-controls",panel.id);
-    filter.append(summary,panel);filters.appendChild(filter);TV.filterDetails=filter;
-    const openSurface=()=>{
-      if(TV.filterDetails!==filter)return;
-      TV.filterOpen=true;
-      if(!services.surface){summary.setAttribute("aria-expanded","true");return;}
-      if(TV.filterSurface===panel&&!panel.appFinished)return;
-      // Let the shared surface own expanded/controls while it is active.  A
-      // false previous value guarantees that dismissal restores the summary.
-      summary.setAttribute("aria-expanded","false");
-      const opened=services.surface.create({surface:panel,trigger:summary,returnFocus:summary,kind:"popover",
-        role:"dialog",ariaLabel:"时间轴显示筛选",removeOnClose:false,dismissOnOutside:true,dismissOnScroll:true,
-        onRequestClose:()=>{filter.open=false;TV.filterOpen=false;if(TV.filterSurface===panel)TV.filterSurface=null;return true;}});
-      if(!opened){filter.open=false;TV.filterOpen=false;summary.setAttribute("aria-expanded","false");return;}
-      TV.filterSurface=opened;TV.filterOpen=true;
+    filter.open=false;summary.setAttribute("aria-expanded","false");summary.setAttribute("aria-controls",panel.id);
+    filter.append(summary,panel);filters.appendChild(filter);TV.filterDetails=filter;TV.filterPanel=panel;
+    const setOpen=(opened:boolean)=>{filter.open=opened;TV.filterOpen=opened;summary.setAttribute("aria-expanded",String(opened));};
+    const close=()=>{
+      if(TV.filterBinding){TV.filterBinding.close("close-button");return;}
+      setOpen(false);summary.focus?.();
     };
-    const close=(reason="button")=>{
-      filter.open=false;TV.filterOpen=false;
-      const opened=TV.filterSurface===panel?TV.filterSurface:null;
-      if(opened&&!opened.appFinished)opened.finish?.(reason);
-      if(TV.filterSurface===panel)TV.filterSurface=null;
-      summary.setAttribute("aria-expanded","false");summary.focus?.();
-    };
-    filter.addEventListener("toggle",()=>{
-      if(TV.filterDetails!==filter)return;
-      if(filter.open)openSurface();else close("native-close");
-    });
-    filter.addEventListener("keydown",(e:any)=>{if(e.key==="Escape"&&filter.open){e.preventDefault();e.stopPropagation();close();}});
-    if(!services.surface&&!TV.filterOutsideBound){TV.filterOutsideBound=true;ports.events.addEventListener("pointerdown",e=>{
-      const open=TV.filterDetails;if(open?.open && !open.contains?.(e.target)){open.open=false;TV.filterOpen=false;
-        open.querySelector?.("summary")?.setAttribute("aria-expanded","false");}
-    });}
     panel.appendChild(viewEl("div","筛选记录","tl-filter-heading"));
     if(TV.mode==="effects"&&view.coverage?.sampling_count){
       const label=viewEl("label"),check=viewEl("input");check.type="checkbox";
@@ -105,9 +84,25 @@ const renderControls = (view:any) => {
     panel.appendChild(kinds);
     if(legend)panel.appendChild(legend);
     const reset=viewEl("button","重置筛选"),done=viewEl("button","收起");reset.type=done.type="button";
-    reset.addEventListener("click",()=>{TV.characterFilter="";TV.sourceFilter="";TV.componentFilter="";TV.kindVisibility[TV.mode]={};TV.effectFocus="all";TV.damageFocus="damage";TV.showCalculationSampling=false;TV.rebuildRows();TV.paintProjection();TV.filterDetails?.querySelector?.("summary")?.focus?.();});
+    reset.addEventListener("click",()=>{TV.characterFilter="";TV.sourceFilter="";TV.componentFilter="";TV.kindVisibility[TV.mode]={};TV.effectFocus="all";TV.damageFocus="damage";TV.showCalculationSampling=false;TV.rebuildRows();TV.paintProjection();viewRestoreFilterFocus("来源");});
     done.addEventListener("click",close);const footer=viewEl("div",null,"tl-filter-footer");footer.append(reset,done);panel.appendChild(footer);
-    if(filter.open)openSurface();
+    const binding=services.surface?.bindDisclosure?.(filter,{panel,ariaLabel:"时间轴显示筛选",
+      initialFocus:()=>panel.querySelector?.("select"),onRequestClose:()=>{TV.filterOpen=false;return true;}});
+    TV.filterBinding=binding;
+    filter.addEventListener("toggle",()=>{
+      if(TV.filterDetails!==filter)return;
+      TV.filterOpen=filter.open;
+      if(!binding)summary.setAttribute("aria-expanded",String(filter.open));
+    });
+    if(binding){if(reopen)TV.filterOpen=!!binding.open();}
+    else {
+      setOpen(reopen);
+      filter.addEventListener("keydown",(e:any)=>{if(e.key==="Escape"&&filter.open){e.preventDefault();e.stopPropagation();close();}});
+      if(!TV.filterOutsideBound){TV.filterOutsideBound=true;ports.events.addEventListener("pointerdown",e=>{
+        const open=TV.filterDetails;if(open?.open && !open.contains?.(e.target)){open.open=false;TV.filterOpen=false;
+          open.querySelector?.("summary")?.setAttribute("aria-expanded","false");}
+      });}
+    }
   }
   if(legend){legend.innerHTML="";const symbols:Record<string,string>={bar:"━",circle:"●",diamond:"◆",triangle:"▲",square:"■"};
     const shown=(kind:any)=>TV.kindVisibility[TV.mode][kind]!==false

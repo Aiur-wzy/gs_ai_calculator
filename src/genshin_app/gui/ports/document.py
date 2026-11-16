@@ -199,12 +199,17 @@ class DocumentGuiPort(GuiResponses):
         try:
             validate_template(template)
         except TemplateError as e:
-            return self._err(f"模板校验失败，未写入: {e}")
+            return {"code": 1, "message": f"模板校验失败，未写入: {e}", "reason": "invalid_template",
+                    "details": {"publication_state": "not_written", "published_paths": [], "unknown_paths": []}}
         try:
             p = Path(path)
             observed = file_sha(p) if expected_file_sha is None else expected_file_sha
-            published = publish_files([(p, json.dumps(template, ensure_ascii=False, indent=2, allow_nan=False).encode("utf-8"))],
-                                      overwrite=True, expected_shas={p: observed})
+            content = json.dumps(template, ensure_ascii=False, indent=2, allow_nan=False).encode("utf-8")
+        except (OSError, UnicodeError, ValueError, TypeError) as e:
+            return {"code": 1, "message": f"保存模板失败，未写入 {path}: {e}", "reason": "template_save_preparation_failed",
+                    "details": {"publication_state": "not_written", "published_paths": [], "unknown_paths": []}}
+        try:
+            published = publish_files([(p, content)], overwrite=True, expected_shas={p: observed})
         except PlanError as exc:
             return {"code": 1, "message": f"保存模板失败 {path}: {exc}", "reason": exc.reason, "details": exc.details}
         except (OSError, UnicodeError, ValueError, TypeError) as e:

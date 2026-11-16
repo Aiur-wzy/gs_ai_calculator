@@ -196,6 +196,7 @@ def _cmd_agent_gui_workflow(args: argparse.Namespace) -> dict:
         input_path=args.input,
         output_dir=args.output_dir,
         workflow=args.workflow,
+        provider=getattr(args, "provider", None),
         model=args.model,
         effort=args.effort,
         timeout_seconds=args.timeout_seconds,
@@ -1702,9 +1703,11 @@ COMMANDS += [
             {"name": "--workflow", "kind": "value", "default": "artifact",
              "description": "artifact：模型自主安排工作重点，工件与计算仍由App验证"},
             {"name": "--model", "kind": "value", "default": None,
-             "description": "DeepSeek模型ID；新会话省略时用提供方默认模型，恢复会话省略时保留原选择"},
+             "description": "当前DSH提供商的模型ID；新会话省略时用官方默认，恢复会话省略时保留原选择"},
+            {"name": "--provider", "kind": "value", "default": None,
+             "description": "可选DSH提供商ID；指定时同时给出--model，省略时保留当前或默认提供商"},
             {"name": "--effort", "kind": "value", "default": None,
-             "description": "模型支持的推理档位；新会话默认high，恢复会话省略时保留原选择"},
+             "description": "模型支持的推理档位；省略时采用DSH默认或保留原选择，换模型不沿用旧模型档位"},
             {"name": "--timeout-seconds", "kind": "value", "type": "int", "default": 1800,
              "description": "单次Host状态观察窗口，默认30分钟；不是模型或任务总时限，健康运行不会因此被取消"},
             {"name": "--allow-draft", "kind": "flag", "default": False,
@@ -2327,7 +2330,7 @@ def main(argv: list[str] | None = None) -> int:
         args = build_parser().parse_args(cli_argv)
     except CLIUsageError as e:
         return _emit_error(str(e), "--pretty" in cli_argv, reason=e.reason, details=e.details, operation="cli.parse")
-    if args.data_dir is None:  # 开发态 ./data；frozen 态 %LOCALAPPDATA%\GenshinCalc\data
+    if args.data_dir is None:  # 源码使用仓库 data；打包版使用已登记安装根或本便携包 data。
         from genshin_app.paths import default_data_dir
         args.data_dir = str(default_data_dir())
     from genshin_app.cli_dispatch import execute

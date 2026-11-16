@@ -1,4 +1,4 @@
-/** Offline S0 proof for rc.5's carrier-neutral Host and Remote seams. */
+/** Offline proof for rc.3's carrier-neutral Host and Remote seams. */
 import { randomUUID } from 'node:crypto'
 import { createRequire } from 'node:module'
 import { Server as NetServer } from 'node:net'

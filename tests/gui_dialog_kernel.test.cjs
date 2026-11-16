@@ -19,6 +19,8 @@ class Element{
   removeAttribute(name){delete this.attributes[name];}
   getAttribute(name){return Object.hasOwn(this.attributes,name)?this.attributes[name]:null;}
   hasAttribute(name){return Object.hasOwn(this.attributes,name);}
+  get tabIndex(){return this.hasAttribute('tabindex')?Number(this.attributes.tabindex):['button','input','select','textarea','a','summary'].includes(this.tagName)?0:-1;}
+  set tabIndex(value){this.attributes.tabindex=String(value);}
   focus(){this.ownerDocument.activeElement=this;this.focused=true;}
   showModal(){this.open=true;}
   close(){this.open=false;}
@@ -28,6 +30,10 @@ class Element{
 const all=node=>[node,...node.children.flatMap(all)];
 function setup(){
   const document=target({activeElement:null,hidden:false}),body=new Element('body',document);body.setConnected(true);document.body=body;document.createElement=tag=>new Element(tag,document);
+  // The shipped business root and modal portal are siblings. Inert must not
+  // accidentally cover the modal itself in this lightweight DOM fixture.
+  const app=document.createElement('main'),portal=document.createElement('aside');app.id='genshin-application-root';portal.id='app-overlay-root';body.append(app,portal);
+  document.getElementById=id=>all(body).find(node=>node.id===id)||null;
   const world=target({document,console,Math,Date,JSONTransport:{clone:value=>JSON.parse(JSON.stringify(value))},setStatus(){}});world.window=world;world.visualViewport=target({});document.defaultView=world;vm.createContext(world);
   vm.runInContext(fs.readFileSync(path.join(__dirname,'../src/genshin_app/gui/web/gui-foundation-v2.js'),'utf8'),world,{filename:'gui-foundation-v2.js'});
   vm.runInContext(fs.readFileSync(path.join(__dirname,'../src/genshin_app/gui/web/ui.js'),'utf8'),world,{filename:'ui.js'});return {world,document,body};

@@ -3,9 +3,11 @@ import {copyFile, mkdir} from "node:fs/promises";
 import {readFile, writeFile} from "node:fs/promises";
 import {dirname, resolve} from "node:path";
 import {fileURLToPath} from "node:url";
+import {verifySourceInputs} from "./build-source-provenance.mjs";
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const web = resolve(root, "../src/genshin_app/gui/web");
+await verifySourceInputs(root, "foundation", await readFile(resolve(root, "dist/legacy/gui-foundation-v2.js")));
 await mkdir(web, {recursive: true});
 await copyFile(resolve(root, "dist/legacy/gui-foundation-v2.js"), resolve(web, "gui-foundation-v2.js"));
 await copyFile(resolve(root, "src/design-system/tokens/tokens.generated.css"), resolve(web, "gui-foundation-tokens.css"));

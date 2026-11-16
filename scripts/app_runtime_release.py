@@ -25,7 +25,6 @@ APP_RUNTIME_ROOTS = (
 # Keep this list exact so the archive guard still rejects unaccounted source.
 NON_PORTABLE_RELEASE_ENTRIES = frozenset({
     "genshin_app.cli_client",  # Python client used by callers in source environments.
-    "genshin_app.product_first_install",
     "genshin_app.release_pair_feed",
     "genshin_app.setup_frozen_qualification",  # Setup-only frozen acceptance entry.
     "genshin_db.release_hygiene",  # Used when producing release artifacts.

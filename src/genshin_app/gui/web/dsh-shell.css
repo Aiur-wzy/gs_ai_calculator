@@ -1,6 +1,7 @@
 /* DSH owns its root and theme. This file sizes the desktop carrier only. */
 html,body {width:100%;height:100%;margin:0;overflow:hidden;}
 #dsh-app-root {width:100%;height:100%;min-height:0;isolation:isolate;}
+#genshin-application-root {width:100%;height:100%;min-height:0;}
 #genshin-editor-parking {display:none;}
 .gs-legacy-island,.gs-legacy-island[data-theme-resolved] {height:100%;width:100%;min-width:0;min-height:0;display:flex;flex-direction:column;overflow:hidden;
   --color-canvas:var(--dsw-alias-bg-base);--color-surface:var(--dsw-alias-bg-base);--color-surface-elevated:var(--dsw-alias-bg-layer-1);
@@ -26,6 +27,9 @@ html,body {width:100%;height:100%;margin:0;overflow:hidden;}
   --scrim:var(--color-scrim);--shadow-color:var(--color-shadow);
 }
 .gs-legacy-island[hidden] {display:none!important;}
+/* A permanently mounted portal owns only legacy surfaces. It is a sibling of
+   the inert application root; it must not inherit the editor's page layout. */
+#app-overlay-root.gs-legacy-portal {display:contents;width:auto;height:auto;overflow:visible;}
 .gs-legacy-island .workspace-global-sidebar,.gs-legacy-island .workspace-sidebar-resizer,.gs-legacy-island .workspace-sidebar-scrim,
 .gs-legacy-island .workspace-sidebar-mobile-toggle,.gs-legacy-island #agent-chat-toggle,.gs-legacy-island #tab-agent {display:none!important;}
 .gs-legacy-island .workspace-app-shell {grid-template-columns:minmax(0,1fr)!important;}
@@ -42,3 +46,21 @@ html,body {width:100%;height:100%;margin:0;overflow:hidden;}
 .gs-editor-assistant-content>div {min-height:0;min-width:0;flex:1;}
 .gs-editor-assistant-resizer {cursor:col-resize;background:var(--dsw-alias-border-l2);touch-action:none;}
 .gs-editor-assistant-resizer:focus-visible {outline:2px solid var(--dsw-alias-state-business-primary);}
+/* One editor surface; moving Chat out returns this space to the document. */
+body:not([data-agent-window="detached"])[data-agent-presentation="detached"] [data-conversation-content] {display:none!important;}
+.gs-window-controls {display:inline-flex;align-items:center;flex-wrap:wrap;gap:6px;min-width:0;}
+.gs-window-controls>button {white-space:nowrap;flex:none;}
+.gs-window-controls [role="alert"] {flex-basis:100%;}
+.gs-unstarted-conversation {display:inline-flex;align-items:center;white-space:nowrap;}
+.gs-draft-file-actions {display:inline-flex;align-items:center;flex-wrap:wrap;min-width:0;}
+.gs-draft-file-choices {display:flex;gap:8px;flex-wrap:wrap;}
+.gs-draft-file-actions>small {flex-basis:100%;overflow-wrap:anywhere;}
+.gs-window-controls [role="alert"] {max-width:30rem;overflow-wrap:anywhere;color:var(--dsw-alias-state-error-primary);}
+.gs-legacy-island .desktop-header h1,.gs-legacy-island .desktop-caption,.gs-legacy-island .workspace-page-kicker {display:none;}
+.gs-legacy-island .desktop-header {height:32px;flex-basis:32px;padding-inline:8px;gap:8px;}
+.gs-legacy-island .workspace-page-chrome {min-height:32px;padding:3px 8px;border-top:0;}
+.gs-legacy-island main {padding:4px;}
+.gs-editor-toolbar {padding:2px 8px;min-height:28px;gap:6px;align-items:center;}
+.gs-editor-assistant>header {padding:4px 8px;}
+body[data-agent-window="detached"] .gs-candidate-workspace {padding:12px;}
+@media(max-width:640px){.gs-window-controls{flex-wrap:wrap;}.gs-editor-toolbar{padding-inline:4px;}}

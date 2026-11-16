@@ -17,7 +17,7 @@ const object = value => value !== null && typeof value === 'object' && !Array.is
 
 /** Explicit product policies, not a generic-tool denylist. */
 export const APP_PROFILE_POLICY = Object.freeze({
-  provider: 'deepseek-official', credentials: 'windows-app-memory',
+  provider: 'dsh-native-provider-directory', credentials: 'windows-protected-profile',
   sessionUpload: false, telemetry: false, publicListener: false,
 })
 
@@ -68,18 +68,19 @@ export async function createNativeFullProfile(ctx, {
     { insert: [{ id: 'genshin-settings-controller', name: new URL('./native-dsh-app-settings.mjs', import.meta.url).href }] },
     override('session-persistence-jsonl', { root: paths.sessionRoot }),
     override('storage-json', { root: paths.storageRoot }),
+    // Scope attachments even when the Host is embedded without a launcher
+    // environment. The official store must not fall back to the user's DSH.
+    override('attachment-local', { dshHome: join(paths.profileRoot, 'dsh-home') }),
     override('session-query-sqlite', { path: paths.queryPath, openAt: 'startup' }),
     override('system-prompt', { personaPrefix, includeHarnessIdentity: false, includeRuntimeContext: false }),
     override('sandbox-policy', { workspaceRoot: workspace, mode: 'workspace-write' }),
     override('agent-default-model', { provider: 'deepseek-official', model, reasoningEffort }),
     // The App injects the sole credential provider before mounting this tree.
-    disable('credentials'), disable('llm-pi-ai'), disable('llm-deepseek-account'),
-    disable('deepseek-account'), disable('session-log-deepseek'),
+    disable('credentials'), disable('session-log-deepseek'),
     disable('session-telemetry-otel'), disable('otel'),
     // Product search/fetch uses upstream implementations with the existing
     // public-only fetch + explicit research-accounting policy.
-    disable('web'), disable('web-search-deepseek'), disable('web-deepseek-api'),
-    disable('web-fetch-http'), disable('tool-web'), disable('timeout-policy'),
+    disable('timeout-policy'),
     // A title is not permission to initiate an unbudgeted auxiliary request.
     // The ordinary DSH title projection remains available.
     disable('session-title-llm'),
@@ -89,8 +90,7 @@ export async function createNativeFullProfile(ctx, {
     }),
   ]
   const lockedRows = [
-    disable('credentials'), disable('llm-pi-ai'), disable('llm-deepseek-account'),
-    disable('deepseek-account'), disable('session-log-deepseek'),
+    disable('credentials'), disable('session-log-deepseek'),
     disable('session-telemetry-otel'), disable('otel'),
   ]
   let clientRows = []
@@ -108,12 +108,6 @@ export async function createNativeFullProfile(ctx, {
     overlays: lockedRows, telemetryDisabledEnv: '1' })
   const loaded = loadProfileDirectory('genshin', dir, installAnchor)
   if (loaded.skippedBundles.length) throw new Error('native_dsh_full_profile_bundle_missing')
-  for (const patch of loaded.patches ?? []) {
-    if (patch.id === 'llm-deepseek' && patch.config?.baseURL !== undefined
-        && patch.config.baseURL !== 'https://api.deepseek.com/anthropic') {
-      throw new Error('native_dsh_official_provider_endpoint_required')
-    }
-  }
   ctx.provide('profileContext', profile)
   ctx.provide('dshHomePath', (...parts) => resolve(home, ...parts))
   ctx.baseUrl = pathToFileURL(dir + '/').href

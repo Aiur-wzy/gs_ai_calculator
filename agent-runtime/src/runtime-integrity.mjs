@@ -20,7 +20,7 @@ const SELFCHECK_DEFERRED_IMPORTS = new Set([
 
 export const DSH_CLIENT_SHELL_RUNTIME_FILES = Object.freeze([
   '.npmrc', 'package.json', 'pnpm-lock.yaml', 'pnpm-workspace.yaml',
-  'patches/@deepseek-ai__cordis@4.0.5.patch',
+  'patches/dsh-client-ui-conversation-0.2.2-rc.3-public-draft.patch',
   'src/native-app-tool-catalog.mjs', 'src/native-app-tool-schema.mjs', 'src/native-app-system-failure.mjs',
   'src/bridge-envelope.mjs', 'src/dsh-client-shell-runtime-contract.mjs',
   'src/dependency-payloads.mjs',
@@ -44,7 +44,7 @@ export const DSH_CLIENT_SHELL_RUNTIME_FILES = Object.freeze([
   'src/native-mux-pipe-client.mjs', 'src/native-mux-protocol.mjs',
   'src/native-pipe-multiplexer.mjs',
   'src/native-provider-admission.mjs', 'src/native-provider-proxy.mjs',
-  'src/native-retry-admission.mjs', 'src/native-shell-credentials.mjs',
+  'src/native-retry-admission.mjs', 'src/native-shell-credentials.mjs', 'src/native-protected-credentials.mjs',
   'src/production-composition-contract.mjs', 'src/publication-usage.mjs', 'src/runtime-integrity.mjs',
   'src/runtime-version.mjs', 'src/secret-control.mjs',
 ].sort())

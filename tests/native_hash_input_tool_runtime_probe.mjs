@@ -37,26 +37,27 @@ try {
     async setup(scope) { scope.tools.register(definition) },
   })
   for (const [index, args] of config.cases.entries()) {
-    const result = await kernel.context.tools.execute({
-      callId: `hash-valid-${index}`, name: config.definition.name, arguments: args,
+    const batch = await kernel.context.tools.execute({
+      calls: [{ type: 'tool-call', id: `hash-valid-${index}`, name: config.definition.name,
+        arguments: JSON.stringify(args) }],
       agent: handle.agent, signal: new AbortController().signal,
     })
-    send({ type: 'case', index, result })
+    send({ type: 'case', index, result: batch.results[0].result })
   }
   const beforeInvalid = calls
   for (const [index, args] of [
-    { kind: 'unsupported', value: {} },
-    { kind: 'canonical_json', value: Number.NaN },
-    { kind: 'canonical_json', value: { nested: Number.POSITIVE_INFINITY } },
-    { kind: 'canonical_json', value: { nested: undefined } },
-    { kind: 'canonical_json', value: -0 },
-    { kind: 'canonical_json', value: 2 ** 53 },
+    '{"kind":"unsupported","value":{}}',
+    '{"kind":"canonical_json","value":NaN}',
+    '{"kind":"canonical_json","value":{"nested":Infinity}}',
+    '{"kind":"canonical_json","value":{"nested":undefined}}',
+    '{"kind":"canonical_json","value":-0}',
+    '{"kind":"canonical_json","value":9007199254740992}',
   ].entries()) {
-    const result = await kernel.context.tools.execute({
-      callId: `hash-invalid-${index}`, name: config.definition.name, arguments: args,
+    const batch = await kernel.context.tools.execute({
+      calls: [{ type: 'tool-call', id: `hash-invalid-${index}`, name: config.definition.name, arguments: args }],
       agent: handle.agent, signal: new AbortController().signal,
     })
-    assert.equal(result.isError, true)
+    assert.equal(batch.results[0].result.isError, true)
   }
   assert.equal(calls, beforeInvalid)
   send({ type: 'done', invoked: calls, invalid_rejected_before_host: 6, network_calls: 0 })

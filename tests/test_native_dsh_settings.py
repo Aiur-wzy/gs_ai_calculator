@@ -54,7 +54,7 @@ def test_builtin_snapshot_tracks_pinned_dsh_defaults_without_pinning_derived_max
     assert snapshot["default_sources"]["compaction"]["maxTokens"] == {
         "kind": "dsh_derived_default",
         "package": "@deepseek-ai/dsh-compaction-basic",
-        "version": "0.2.1-rc.5",
+        "version": "0.2.2-rc.3",
         "field": "maxTokens",
         "expression": "headroomTokens",
     }

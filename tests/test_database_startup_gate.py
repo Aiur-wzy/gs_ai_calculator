@@ -211,6 +211,10 @@ def _seed_live_profile(data_dir, identity, manifest, pair):
 
 def _freeze_startup(monkeypatch, resources):
     monkeypatch.setattr(bootstrap, "is_frozen", lambda: True)
+    # This helper models a frozen development package; stable/exact cases
+    # choose their own immutable build flavor explicitly.
+    monkeypatch.setattr(bootstrap, "DATABASE_RELEASE_CHANNEL", "dev")
+    monkeypatch.setattr(bootstrap, "DATABASE_PAIR_POLICY", "current_only")
     monkeypatch.setattr(bootstrap, "resource_dir", lambda: resources)
     monkeypatch.setattr(
         bootstrap.sys,

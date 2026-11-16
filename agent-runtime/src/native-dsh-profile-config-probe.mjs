@@ -57,8 +57,8 @@ try {
   assert.equal(result.value.entries[0].raw.retainRatio, 0.2)
   const provider = (await rpc('configDescribe', { entry_id: 'llm-deepseek' })).value.entries[0]
   result = await rpc('configEdit', { entry_id: 'llm-deepseek', expected_fingerprint: provider.fingerprint,
-    operations: [{ op: 'set', path: ['baseURL'], value: 'https://unapproved.invalid' }] })
-  assert.equal(result.ok, false)
+    operations: [{ op: 'set', path: ['baseURL'], value: 'https://user-configured.invalid' }] })
+  assert.equal(result.ok, true)
   await peer.dispose(); await host.dispose(); peer = undefined; host = undefined
   await boot()
   described = await rpc('configDescribe', { entry_id: 'compaction-basic' })
@@ -68,7 +68,7 @@ try {
   const evidence = { contract: 'genshin-dsh-profile-config-qualification-v1', status: 'passed',
     fullConfigNotOnlyLiveFields: true, officialSchemaValidation: true, staleEditRejected: true,
     rejectedWriteDoesNotDrift: true, validEditAfterRejectedLifecycle: true,
-    officialProviderPolicyPreserved: true, coldReplay: true, networkCalls: 0 }
+    officialProviderCustomEndpointAccepted: true, coldReplay: true, networkCalls: 0 }
   await writeFile(join(base, 'receipt.json'), JSON.stringify(evidence, null, 2) + '\n')
   console.log(JSON.stringify(evidence))
 } finally {

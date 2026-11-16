@@ -36,6 +36,20 @@ try {
   const rejected = assert.rejects(active,
     error => error.code === 'domain_call_cancelled' && error.outcomeUnknown === true)
   control.abort()
+  // Local cancellation asks the Host for durable outcome. It cannot settle
+  // the call until that independent control acknowledgement arrives.
+  await Promise.resolve()
+  const cancelPacket = packets.at(-1)
+  assert.equal(cancelPacket.payloadKind, 'dsh_app_call_cancel')
+  const cancel = JSON.parse(cancelPacket.payload)
+  transport.accept({ header: { lane: 'control', payload_kind: 'dsh_app_call_cancel_result',
+    correlation_id: cancelPacket.correlationId }, payload: Buffer.from(JSON.stringify({
+      contract: 'genshin-native-dsh-domain-cancel-result-v1', request_id: cancel.request_id,
+      session_id: cancel.session_id, target_request_id: cancel.target_request_id,
+      target_kind: cancel.target_kind, call_id: cancel.call_id,
+      disposition: 'running', app_call_admission: 'inflight', execution_state: 'running',
+      outcome_unknown: true, settlement_ref: null, diagnostic_id: null,
+    })) })
   await rejected
   // An already claimed Host operation may settle after caller cancellation;
   // retire its late response without redirecting it to another pending call.

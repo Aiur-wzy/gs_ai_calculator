@@ -96,7 +96,7 @@ def discovered_database_status(discovered, coordinator_state, identity: CurrentR
         options = []
         index = (discovered.get("product_index") or {}).get("signed_index", {})
         app_dates = {item["app_release_id"]: item["released_at"] for item in index.get("apps", [])}
-        for row in discovered.get("update_options", []):
+        for row in (discovered.get("update_options", []) if authoritative and status != "disabled" else []):
             document = row["document"]
             app, database = document["pair_manifest"]["app"], document["database_manifest"]
             options.append({"mode": row["mode"], "confirmation_digest": row["confirmation_digest"],
@@ -107,6 +107,10 @@ def discovered_database_status(discovered, coordinator_state, identity: CurrentR
                             **product_release_details(document, app_released_at=app_dates.get(app["app_release_id"]))})
         result["update_options"] = options
         result["confirmation_digest"] = None
+        # Stable releases offer only verified, selectable combinations. A
+        # newer remote identity alone is not an installable update path.
+        result["available"] = authoritative and status != "disabled" and bool(options)
+        result["update_action_available"] = result["available"] and coordinator_available
         if status == "disabled":
             result["message"] = "尚未配置发布更新源。当前已安装的版本可继续使用。"
         elif not authoritative:
@@ -134,7 +138,7 @@ def read_only_update_failure(settings: ReleaseUpdateSettings):
 
 def update_failure_message(reason):
     return {
-        "release_pair_update_confirmation_required": "用户尚未确认联合更新。",
+        "release_pair_update_confirmation_required": "用户尚未确认本次更新。",
         "release_pair_update_confirmation_mismatch": "远端版本说明已经变化，请重新检查并确认。",
         "release_pair_artifact_download_cancelled": "联合更新下载已取消。",
         "release_pair_update_recovery_required": "上次联合更新尚待恢复或清理，请先查看更新诊断。",

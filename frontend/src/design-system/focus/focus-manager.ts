@@ -1,3 +1,4 @@
+import {canReceiveFocus, focusableElements} from "./dom-focus";
 import type {AppStateStore} from "@/state/store";
 import {SurfaceCoordinator} from "@/design-system/surfaces/coordinator";
 
@@ -69,14 +70,16 @@ export class FocusManager {
 
   private initialFocus(container: HTMLElement, preferred: HTMLElement | null): void {
     if (!container.isConnected) return;
-    const target = preferred?.isConnected === false ? null : preferred
-      ?? container.querySelector?.<HTMLElement>("[autofocus], button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex='-1'])");
-    (target ?? container).focus();
+    const candidates = focusableElements(container);
+    const target = canReceiveFocus(preferred) && container.contains(preferred) ? preferred
+      : candidates.find(node => node.hasAttribute?.("autofocus")) ?? candidates[0];
+    if (target) target.focus();
+    else if (canReceiveFocus(container)) container.focus();
   }
 
   private restoreFocus(binding: Binding): void {
-    const target = binding.trigger && binding.trigger.isConnected !== false ? binding.trigger
-      : binding.fallback && binding.fallback.isConnected !== false ? binding.fallback : null;
+    const target = canReceiveFocus(binding.trigger) ? binding.trigger
+      : canReceiveFocus(binding.fallback) ? binding.fallback : null;
     target?.focus();
   }
 
@@ -98,12 +101,18 @@ export class FocusManager {
   private readonly onPointerdown = (event: PointerEvent): void => {
     const surfaces = [...this.coordinator.list()].reverse();
     const target = event.target;
+    if (!target) return;
+    const node = target as Node;
     for (const surface of surfaces) {
-      if (!surface.dismissOnOutside) continue;
       const binding = this.bindings.get(surface.id);
-      if (!binding || !target) return;
-      const node = target as Node;
+      if (!binding) continue;
       if (binding.container.contains(node) || binding.trigger?.contains(node)) return;
+      // A higher modal still owns clicks through its scrim when it requires an
+      // explicit decision. Do not dismiss a surface behind it.
+      if (!surface.dismissOnOutside) {
+        if (surface.modal) return;
+        continue;
+      }
       this.requestDismiss(surface.id, "outside");
       return;
     }

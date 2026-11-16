@@ -37,6 +37,7 @@ async function rpc(endpoint, request) {
 }
 try {
   await boot()
+  assert.equal(host.context.attachments.root, join(root, 'dsh-home', 'attachments', 'v1'))
   host.context.tools.register(defineTool({ name: 'fixture_approval', description: 'Only fixture permission request',
     parameters: {}, execute: async (_args, exec) => {
       const control = new AbortController()
@@ -90,25 +91,28 @@ try {
   assert.equal(oversized.error.code, 'note-too-large')
   evidence.feedbackCompareAndSetNoopAndOfficial8192BytePolicy = true
   const other = host.context.agents.get('collaboration-missing')
+  const referenceRoute = { provider: 'deepseek-official', model: 'deepseek-flash' }
   const referenced = await host.context.sessionReferenceResolver.prepare(other,
-    [{ type: 'text', text: 'Read explicitly selected source' }], [{ sessionId: id }])
+    [{ type: 'text', text: 'Read explicitly selected source' }], [{ sessionId: id }], referenceRoute)
   assert.equal(referenced.additionalContext.source.kind, 'session-reference')
   const content = JSON.stringify(referenced.additionalContext)
   assert.ok(content.includes('Source user visible allowed-once'))
   assert.ok(content.includes('phase5b official answer'))
   assert.equal(content.includes('phase5b offline reasoning'), false)
   assert.equal(content.includes('Preserve note verbatim'), false)
-  await assert.rejects(host.context.sessionReferenceResolver.prepare(other, [], [{ sessionId: other.id }]),
+  await assert.rejects(host.context.sessionReferenceResolver.prepare(other, [], [{ sessionId: other.id }], referenceRoute),
     error => error.code === 'SESSION_REFERENCE_SELF_REFERENCE')
   evidence.referencesUseVisibleConversationNotReasoningOrFeedback = true
   const bytes = Buffer.from('User attachment\n中文\0exact bytes')
   const upload = await host.context.fileUploads.uploadStream({ sessionId: id, name: '../source.txt',
     data: { async *[Symbol.asyncIterator]() { yield bytes.subarray(0, 4); yield bytes.subarray(4) } } })
-  assert.deepEqual(host.context.fileUploads.resolve(host.context.agents.get(id), upload.receiptId), upload.file)
+  assert.deepEqual(host.context.fileUploads.resolve(host.context.agents.get(id), upload.receiptId),
+    { type: 'file', attachment: upload.file })
   assert.equal(host.context.fileUploads.resolve(other, upload.receiptId), undefined)
   const chunks = []
   for await (const chunk of host.context.attachments.readFileStream(upload.file)) chunks.push(chunk)
   assert.deepEqual(Buffer.concat(chunks), bytes)
+  evidence.attachmentsStayInExplicitProfileWithoutAmbientDshHome = true
   evidence.streamedAttachmentIntegrityAndSessionReceiptIsolation = true
   const title = host.context.sessionTitle.rename(host.context.agents.get(id).session, 'User selected durable title')
   assert.equal(title.title, 'User selected durable title')

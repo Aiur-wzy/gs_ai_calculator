@@ -36,8 +36,9 @@ export function AppDomainApprovals({api,binding,bindings,onSettled}:{api:AppCand
     {(state.error||message)&&<p role={state.error||error?"alert":"status"}>{state.error?"暂时无法读取资料修正请求，可刷新后重试。":message}</p>}
     {(state.error||error)&&<details><summary>操作详情</summary><code>{state.error||error}</code><Button size="sm" variant="outline" disabled={busy} onClick={state.refresh}>刷新状态</Button></details>}
     <Modal open={!!selected} title="确认当前方案的资料修正" closeLabel="关闭资料修正确认" onClose={()=>{if(!busy)setSelected(undefined);}}
+      className="gs-domain-dialog" contentClassName="gs-domain-dialog-content"
       description="这是 App 资料修正授权，不是普通聊天中的回答。请核对差异和来源；不会写回公共数据库。"
-      footer={<><Button variant="outline" disabled={busy} onClick={()=>void decide("reject")}>拒绝修正</Button><Button disabled={busy} onClick={()=>void decide("approve")}>{busy?"正在记录…":"批准当前修正"}</Button></>}>
+      footer={<div className="gs-domain-dialog-actions"><Button variant="outline" disabled={busy} onClick={()=>void decide("reject")}>拒绝修正</Button><Button disabled={busy} onClick={()=>void decide("approve")}>{busy?"正在记录…":"批准当前修正"}</Button></div>}>
       {selected&&<><h3>{selected.question}</h3><p className="gs-domain-prewrap">{selected.detail||"未提供详细差异，请暂不批准并向 Agent 要求说明。"}</p><dl><dt>临时资料</dt><dd>{selected.entityType} · {selected.provisionalId}</dd><dt>绑定版本</dt><dd>候选 {selected.candidateRevision} · 阶段 {selected.stageRevision}</dd><dt>内容标识</dt><dd><code>{selected.fingerprint}</code></dd></dl></>}
       {error&&<p role="alert">{message}</p>}
     </Modal>

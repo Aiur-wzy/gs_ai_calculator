@@ -10,7 +10,7 @@ import { dependencyPayloadInventory, projectDependencyShim } from './dependency-
 export const DSH_CLIENT_SHELL_PHASE = 'dsh_client_shell'
 export const DSH_CLIENT_SHELL_MANIFEST = 'genshin-native-dsh-client-shell-manifest-v1'
 export const DSH_CLIENT_SHELL_ENTRY = 'src/native-dsh-runtime-entry.mjs'
-export const DSH_CLIENT_SHELL_RELEASE = '0.2.1-rc.5'
+export const DSH_CLIENT_SHELL_RELEASE = '0.2.2-rc.3'
 const RUNTIME_ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..')
 const hash = bytes => createHash('sha256').update(bytes).digest('hex')
 function canonical(value) {
@@ -115,7 +115,7 @@ export async function auditDshClientShell({ runtimeRoot = RUNTIME_ROOT, assetsRo
   const node = await auditNodeExecutable(nodeExecutable)
   return {
     contract: DSH_CLIENT_SHELL_MANIFEST, phase: DSH_CLIENT_SHELL_PHASE,
-    app_version: '0.46.0', runtime_generation: DSH_CLIENT_SHELL_PHASE,
+    app_version: '1.0.0', runtime_generation: DSH_CLIENT_SHELL_PHASE,
     entry: DSH_CLIENT_SHELL_ENTRY, node_version: PINNED_NODE_VERSION, dsh_release: DSH_CLIENT_SHELL_RELEASE,
     runtime_files: closure.files, runtime_closure_hash: closure.runtimeClosureHash,
     dependency_lock_hash: closure.dependencyLockHash, node_binary_sha256: node.nodeBinarySha256,

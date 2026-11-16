@@ -50,17 +50,32 @@ class TestCheckUpdate:
 
 
 class TestPaths:
-    def test_dev_defaults(self, monkeypatch):
+    def test_dev_defaults_do_not_follow_working_directory(self, monkeypatch, tmp_path):
         monkeypatch.delattr(sys, "frozen", raising=False)
+        expected = paths.resource_dir() / "data"
+        monkeypatch.chdir(tmp_path)
         assert not paths.is_frozen()
-        assert paths.default_data_dir() == paths.Path("data")
+        assert paths.default_data_dir() == expected
+        assert paths.default_data_dir().is_absolute()
+
+    def test_explicit_data_dir_still_overrides_repository_default(self, monkeypatch, tmp_path):
+        monkeypatch.delattr(sys, "frozen", raising=False)
+        monkeypatch.chdir(tmp_path)
+        monkeypatch.setattr(paths, "bundled_db_path", lambda: tmp_path / "not-installed.db")
+        explicit = paths.Path("chosen-data")
+        assert paths.ensure_data_dir(explicit) == explicit
+        assert (tmp_path / "chosen-data/plans").is_dir()
 
     def test_frozen_data_dir(self, monkeypatch, tmp_path):
         monkeypatch.setattr(sys, "frozen", True, raising=False)
         monkeypatch.setattr(sys, "_MEIPASS", str(tmp_path), raising=False)
         monkeypatch.setenv("LOCALAPPDATA", str(tmp_path))
+        (tmp_path / "app").mkdir()
+        (tmp_path / "installation.json").write_text(json.dumps({"contract": "genshin-product-first-install-v1",
+            "scope": "current_user", "app_directory": "app", "data_directory": "data"}), encoding="utf-8")
+        monkeypatch.setattr(sys, "executable", str(tmp_path / "app/GenshinCalcGUI.exe"))
         assert paths.is_frozen()
-        assert paths.default_data_dir() == tmp_path / "GenshinCalc" / "data"
+        assert paths.default_data_dir() == tmp_path / "data"
         assert paths.bundled_db_path() == tmp_path / "bundled" / "genshin.db"
         assert paths.web_dir().as_posix().endswith("genshin_app/gui/web")
 

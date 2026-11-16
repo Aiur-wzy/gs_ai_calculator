@@ -2,6 +2,8 @@ import gzip
 import hashlib
 import importlib.util
 import io
+import json
+import re
 import subprocess
 import zipfile
 from pathlib import Path
@@ -15,6 +17,22 @@ def _load_exporter():
     module = importlib.util.module_from_spec(spec)
     spec.loader.exec_module(module)
     return module
+
+
+def test_public_export_covers_pinned_workspace_patches():
+    exporter = _load_exporter()
+    root = Path(__file__).resolve().parents[1]
+    rules = json.loads((root / exporter.ALLOWLIST).read_text("utf-8"))
+    trees = rules["main_repository"]["include_trees_after_review"]
+    for project in ("frontend", "agent-runtime"):
+        workspace = (root / project / "pnpm-workspace.yaml").read_text("utf-8")
+        patches = re.findall(r'^\s*"[^"\n]+":\s*(patches/[^\n]+\.patch)\s*$', workspace, re.MULTILINE)
+        assert patches, f"{project}: expected the reviewed DSH source contract patch"
+        for patch in patches:
+            name = f"{project}/{patch}"
+            assert (root / name).is_file(), name
+            assert any(name.startswith(tree.rstrip("/") + "/") for tree in trees), name
+            assert not exporter._excluded(name, rules), name
 
 
 def test_source_export_rejects_stale_inputs_and_unexpected_outputs(tmp_path):

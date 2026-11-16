@@ -13,7 +13,10 @@ from genshin_app.agent_chat.runtime_integrity import (
     RuntimeIntegrityError,
     verify_runtime_integrity,
 )
-from scripts.native_agent_release import _materialize_dependency_release_metadata
+from scripts.native_agent_release import (
+    _materialize_dependency_release_metadata,
+    _read_dependency_release_metadata,
+)
 from tests.pinned_native_node import pinned_native_node
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -25,11 +28,17 @@ def shell_identity(tmp_path_factory):
     node = pinned_native_node(required=False)
     if node is None:
         pytest.skip("Pinned Node fixture unavailable")
+    # Match the real staging preflight before scanning/copying the full tree;
+    # an unfinished install should fail here, not after copying 43k files.
+    _read_dependency_release_metadata(
+        ROOT / "agent-runtime/node_modules", require_canonical_release=False,
+    )
     scratch = tmp_path_factory.mktemp("new-shell-integrity")
     candidate = scratch / "candidate.json"
-    subprocess.run([str(node), str(ROOT / "scripts/generate_dsh_client_shell_manifest.mjs"),
+    generated = subprocess.run([str(node), str(ROOT / "scripts/generate_dsh_client_shell_manifest.mjs"),
                     str(ROOT / "agent-runtime"), str(ROOT / "frontend"), str(node), str(candidate)],
-                   check=True, capture_output=True, text=True, cwd=ROOT)
+                   check=False, capture_output=True, text=True, cwd=ROOT)
+    assert generated.returncode == 0, generated.stdout + generated.stderr
     manifest = json.loads(candidate.read_text())
     runtime = scratch / "runtime"
     assets = scratch / "assets"

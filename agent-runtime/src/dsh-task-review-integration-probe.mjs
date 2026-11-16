@@ -42,8 +42,9 @@ try {
   // This probe only reads; do not request OS write grants for the PTC worker.
   setSandboxMode(agent.session, 'read-only')
   const disposePtc = enableCliPtc(agent, { enabled: true })
-  const assembly = await context.systemPrompt.assemble({ scope: agent, agent })
-  assert.deepEqual(assembly.tools.map(tool => tool.name), ['run_code'])
+  const toolSet = await agent.ctx.tools.resolve({agent,modelSelection:agent.model.current(),signal:new AbortController().signal})
+  assert.ok(toolSet.view(agent).has('read'))
+  toolSet.dispose()
   // Uses the official generated SDK and registry, not a bespoke batch tool.
   globalThis.fetch = createNativeDshDomainFixtureFetch({ calls: [{ tool: 'run_code', arguments: {
     code: 'return await tools.read({file_path:"probe.txt"})', description: '读取本地测试资料',
@@ -66,12 +67,12 @@ try {
   assert.equal(reviewed.stopReason, 'completed')
   const child = context.agents.get(activation.childId)
   if (child) {
-    const denied = await child.ctx.tools.execute({ callId: 'readonly-denial', name: 'read',
-      arguments: { file_path: 'probe.txt' }, agent: child, signal: new AbortController().signal })
-    assert.equal(denied.isError, true)
+    const denied = await child.ctx.tools.execute({ calls: [{ type: 'tool-call', id: 'readonly-denial', name: 'read',
+      arguments: JSON.stringify({ file_path: 'probe.txt' }) }], agent: child, signal: new AbortController().signal })
+    assert.equal(denied.results[0].result.isError, true)
   }
   await agent.whenIdle()
-  console.log(JSON.stringify({ status: 'passed', dsh: '0.2.1-rc.5', provider: 'offline-fixture',
+  console.log(JSON.stringify({ status: 'passed', dsh: '0.2.2-rc.3', provider: 'offline-fixture',
     cliPtcScope: 'actual-file-tool-dispatch', readonlyReview: 'official-spawn-explicit-budget',
     nativeDomainPtc: 'unsupported-call-identity' }))
 } finally {

@@ -113,7 +113,7 @@ def completed_builder(builder, monkeypatch):
     def run(command, **_kwargs):
         assert command[1:4] == ["-m", "PyInstaller", "genshin_app.spec"]
         state["calls"].append("pyinstaller")
-        package = state["dist_root"] / "GenshinCalc"
+        package = state["dist_root"] / "GenshinCalc/app"
         bundled = package / "_internal/bundled"
         bundled.mkdir(parents=True)
         (package / "_internal/agent-runtime/node_modules").mkdir(parents=True)
@@ -171,10 +171,10 @@ def test_real_main_preserves_static_gates_and_records_actual_execution_policy(
     module, state = completed_builder
     monkeypatch.setattr(module.sys, "argv", [*state["argv"], *(["--no-app-execution"] if no_app else [])])
     assert module.main() == 0
-    package = state["dist_root"] / "GenshinCalc"
+    package = state["dist_root"] / "GenshinCalc/app"
     receipt_path = state["dist_root"] / "build-qualification.json"
     receipt = json.loads(receipt_path.read_text("utf8"))
-    assert receipt_path.parent == package.parent and not receipt_path.is_relative_to(package)
+    assert receipt_path.parent == package.parent.parent and not receipt_path.is_relative_to(package)
     assert state["calls"] == (["pyinstaller", "native_gate", "updater_build"] if no_app
         else ["pyinstaller", "native_gate", "app_smoke_mock", "updater_build"])
     expected = "not_run_user_acceptance" if no_app else "passed"
@@ -231,7 +231,7 @@ def test_reused_database_keeps_its_date_while_both_pair_builds_use_release_date(
 
     def package_fixture(command, **kwargs):
         result = inert_build(command, **kwargs)
-        bundled = state["dist_root"] / "GenshinCalc/_internal/bundled"
+        bundled = state["dist_root"] / "GenshinCalc/app/_internal/bundled"
         for filename in (module.DATABASE_MANIFEST_FILENAME, module.PAIR_MANIFEST_FILENAME):
             shutil.copyfile(state["root"] / "build-py" / filename, bundled / filename)
         return result
@@ -259,7 +259,7 @@ def test_reused_database_keeps_its_date_while_both_pair_builds_use_release_date(
     assert pairs[0]["database"] == pairs[1]["database"]
     assert database.read_bytes() == original_database
     assert accepted.read_bytes() == original_manifest
-    package = state["dist_root"] / "GenshinCalc/_internal/bundled"
+    package = state["dist_root"] / "GenshinCalc/app/_internal/bundled"
     assert (package / "genshin.db").read_bytes() == original_database
     assert (package / module.DATABASE_MANIFEST_FILENAME).read_bytes() == original_manifest
     assert (state["root"] / "build-py" / module.DATABASE_MANIFEST_FILENAME).read_bytes() == original_manifest
@@ -276,7 +276,7 @@ def test_no_app_policy_cannot_bypass_engine_dependency_failure(completed_builder
     monkeypatch.setattr(module, "validate_engine_package_archive", fail)
     monkeypatch.setattr(module.sys, "argv", [*state["argv"], "--no-app-execution"])
     assert module.main() == 1
-    assert not (state["dist_root"] / "GenshinCalc").exists()
+    assert not (state["dist_root"] / "GenshinCalc/app").exists()
     assert "native_gate" not in state["calls"]
     assert "app_smoke_mock" not in state["calls"]
     output = capsys.readouterr().out
@@ -288,7 +288,7 @@ def test_no_app_policy_cannot_bypass_engine_dependency_failure(completed_builder
 def test_no_app_policy_cannot_accept_a_missing_database_validation_file(completed_builder, monkeypatch, capsys):
     module, state = completed_builder
     inert_build = module.subprocess.run
-    candidate = state["dist_root"] / "GenshinCalc"
+    candidate = state["dist_root"] / "GenshinCalc/app"
 
     def run(command, **kwargs):
         result = inert_build(command, **kwargs)
@@ -332,7 +332,7 @@ def test_no_app_policy_does_not_bypass_native_package_failure_or_keep_stale_succ
     monkeypatch.setattr(module.sys, "argv", [*state["argv"], "--no-app-execution"])
     assert module.main() == 1
     assert not receipt.exists()
-    assert not (state["dist_root"] / "GenshinCalc").exists()
+    assert not (state["dist_root"] / "GenshinCalc/app").exists()
     assert "app_smoke_mock" not in state["calls"]
 
 
@@ -377,7 +377,7 @@ def test_directory_publication_failure_cannot_qualify_or_enter_native_gate(
     assert cleaned == [True]
     assert state["calls"] == ["pyinstaller"]
     assert not (state["dist_root"] / "build-qualification.json").exists()
-    assert not (state["dist_root"] / "GenshinCalc").exists()
+    assert not (state["dist_root"] / "GenshinCalc/app").exists()
 
 
 def test_layout_failure_preserves_relative_diagnostic_without_success(
@@ -430,7 +430,7 @@ def test_failed_qualification_publication_removes_candidate_and_installer_inputs
     monkeypatch.setattr(module.sys, "argv", [*state["argv"], "--no-app-execution"])
     assert module.main() == 1
     assert not (state["dist_root"] / "build-qualification.json").exists()
-    assert not (state["dist_root"] / "GenshinCalc").exists()
+    assert not (state["dist_root"] / "GenshinCalc/app").exists()
     assert not (state["root"] / "build-py/app-layout.iss").exists()
 
 
@@ -444,7 +444,7 @@ def test_no_app_policy_still_rejects_invalid_final_inventory(completed_builder, 
     monkeypatch.setattr(module.sys, "argv", [*state["argv"], "--no-app-execution"])
     assert module.main() == 1
     assert not (state["dist_root"] / "build-qualification.json").exists()
-    assert not (state["dist_root"] / "GenshinCalc").exists()
+    assert not (state["dist_root"] / "GenshinCalc/app").exists()
     assert state["calls"] == ["pyinstaller", "native_gate"]
 
 

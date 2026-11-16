@@ -15,7 +15,7 @@ import {JSDOM, VirtualConsole, ResourceLoader} from "jsdom";
 import {pinnedTestNode} from "./pinned-test-node.mjs";
 
 const root = fileURLToPath(new URL("../../", import.meta.url));
-const web = join(root, "src/genshin_app/gui/web");
+const web = resolve(process.env.GENSHIN_PRODUCTION_WEB_DIR || join(root, "src/genshin_app/gui/web"));
 const node = pinnedTestNode();
 const oldApp = process.env.GENSHIN_STARTUP_BASELINE_APP;
 const baseline = Boolean(oldApp);

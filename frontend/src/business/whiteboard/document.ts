@@ -36,7 +36,9 @@ const agentPayloadSnapshot =()=>{
   WB.state.agentPayloadCache=snapshot;return snapshot;
 };
 const setAgentResult =(result:any)=>{
-  const replaced=WB.state.result!==result;WB.state.result=result;WB.invalidateAgentPayload(false,replaced);return result;
+  const replaced=WB.state.result!==result;WB.state.result=result;
+  if(replaced)WB.state.expandedRows=new Set();
+  WB.invalidateAgentPayload(false,replaced);return result;
 };
 const unappliedEditor =()=>!!WB.state.editorSession&&WB.state.editorSession.base!==WB.state.editorSession.json()||Object.keys(WB.state.equipmentDrafts||{}).length>0;
 const dirty =()=>WB.unappliedEditor()||!!WB.state.board&&WB.json()!==WB.state.savedJson;
@@ -64,6 +66,7 @@ const replace =(data:any,saved=true,render=true)=>{
   WB.invalidateAgentPayload(true,true);
   WB.state.equipmentDrafts={};WB.state.reusableResult=null;WB.state.equipmentReport=null;
   WB.state.selectedActor=data.board.team[0]?.id||null;WB.state.selectedAction=null;WB.state.selectedDerived=null;
+  WB.state.axisScrollTop={};WB.state.expandedRows=new Set();WB.state.axisPacked=null;
   WB.state.mode="actions";WB.state.effectFilter="all";WB.state.damageFocus="events";WB.state.cursor=0;WB.state.scale=1;WB.state.scroll=0;WB.state.page=0;WB.state.addOpen=false;WB.state.derivedBack=null;if(render)WB.render();
 };
 // Applying a reviewed construction candidate replaces only the unsaved draft, never the saved file.

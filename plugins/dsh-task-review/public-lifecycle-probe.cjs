@@ -29,7 +29,7 @@ async function main() {
   } })
   try {
     const modules = ['dsh-session', 'dsh-session-projection', 'dsh-system-prompt', 'dsh-tools',
-      ...(dshVersion === '0.2.2-rc.1' ? ['dsh-tool-executor-native'] : []),
+      ...(dshVersion.startsWith('0.2.2-') ? ['dsh-tool-executor-native'] : []),
       'dsh-agent', 'dsh-llm', 'dsh-agent-loop']
     for (const name of modules) {
       const module = fromDsh(`@deepseek-ai/${name}`)
@@ -60,7 +60,7 @@ async function main() {
       },
     })
     mountTaskReview(ctx, { port: { read: async () => snapshot() }, context: true,
-      eligible: agent => ctx.agents.roots().includes(agent) })
+      eligible: agent => ctx.agents.get(agent.id) === agent && agent.session.header.origin !== 'subagent' })
     const handle = await ctx.agents.create({ sessionId: 'compat-lifecycle',
       agentOptions: { provider: 'offline-lifecycle', model: 'fixture' } })
     const { agent } = handle

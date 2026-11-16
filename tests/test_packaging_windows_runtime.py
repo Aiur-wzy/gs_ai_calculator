@@ -38,6 +38,14 @@ def test_release_packages_require_the_runtime_normalization_registry(tmp_path):
     ]
 
 
+def test_setup_archive_checks_new_maintenance_transaction_modules():
+    common = set(verify_frozen_setup_archive.COMMON_MODULES)
+    setup = common | set(verify_frozen_setup_archive.ENTRY_MODULES["GenshinCalcSetup.exe"])
+    assert {"genshin_app.installation_location", "genshin_app.installation_inventory"} <= common
+    assert {"genshin_app.managed_installation", "genshin_app.installation_migration",
+            "genshin_app.windows_product_registration", "genshin_app.windows_shell_identity"} <= setup
+
+
 @pytest.mark.parametrize("entry_name", ["GenshinCalcSetup.exe", "GenshinCalcUpdater.exe"])
 @pytest.mark.parametrize("fault,expected_error", [
     ("none", None),

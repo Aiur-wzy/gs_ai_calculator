@@ -113,6 +113,8 @@ def _parser() -> argparse.ArgumentParser:
     app = commands.add_parser("prepare-app", help="从已核验构建生成无数据库的独立 App 工件目录")
     app.add_argument("--source", type=Path, required=True)
     app.add_argument("--updater", type=Path, required=True)
+    app.add_argument("--maintenance", type=Path, required=True,
+                     help="经冻结代码核验的安装/卸载程序，作为 App 的签名成员交付")
     app.add_argument("--output", type=Path, required=True)
     pair = commands.add_parser("prepare-pair", help="为独立 App 工件与 DB 清单建立精确配对")
     pair.add_argument("--app-root", type=Path, required=True)
@@ -138,10 +140,18 @@ def _parser() -> argparse.ArgumentParser:
     return parser
 
 
-def prepare_independent_app(source: Path, output: Path, *, updater: Path) -> dict:
+def prepare_independent_app(source: Path, output: Path, *, updater: Path, maintenance: Path) -> dict:
+    from genshin_app.portable_layout import PORTABLE_MARKER
     source, output = source.resolve(strict=True), output.resolve()
     if output.exists() or source in output.parents:
         raise ReleasePairFeedError("release_pair_feed_output_exists")
+    if maintenance.is_symlink() or maintenance.name != "GenshinCalcSetup.exe":
+        raise ReleasePairFeedError("product_release_maintenance_invalid")
+    if __package__:
+        from .verify_frozen_setup_archive import verify_archive
+    else:
+        from verify_frozen_setup_archive import verify_archive
+    maintenance_verification = verify_archive(maintenance)
     before = verify_package_artifact(source)
     _, _, source_inventory = _read_package_manifest(source)
     pair = load_release_pair_manifest(source / "_internal" / "bundled" / "release-pair-manifest.json")
@@ -161,7 +171,7 @@ def prepare_independent_app(source: Path, output: Path, *, updater: Path) -> dic
         target = Path(staging) / "app"
         target.mkdir()
         for relative, original in _safe_members(source):
-            if relative == "PACKAGE-FILES.sha256" or relative.startswith("_internal/bundled/"):
+            if relative in {"PACKAGE-FILES.sha256", PORTABLE_MARKER} or relative.startswith("_internal/bundled/"):
                 continue
             destination = target / relative
             destination.parent.mkdir(parents=True, exist_ok=True)
@@ -169,11 +179,23 @@ def prepare_independent_app(source: Path, output: Path, *, updater: Path) -> dic
         bundled_updater = target / PER_USER_UPDATER_RELATIVE
         bundled_updater.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(updater, bundled_updater)
+        maintenance_member = "maintenance/GenshinCalcSetup.exe"
+        layout_member = "maintenance/installation-layout.json"
+        if maintenance_member in source_inventory or layout_member in source_inventory:
+            raise ReleasePairFeedError("product_release_maintenance_already_present")
+        (target / "maintenance").mkdir()
+        shutil.copy2(maintenance, target / maintenance_member)
+        (target / layout_member).write_text(
+            '{"contract":"genshin-installation-layout-v2"}\n', encoding="utf-8")
+        if _sha256(target / maintenance_member) != maintenance_verification["executable_sha256"]:
+            raise ReleasePairFeedError("product_release_maintenance_changed")
         receipt = write_package_file_manifest(target)
         _, _, target_inventory = _read_package_manifest(target)
         expected_inventory = {name: sha for name, sha in source_inventory.items()
-                              if not name.startswith("_internal/bundled/")}
+                              if name != PORTABLE_MARKER and not name.startswith("_internal/bundled/")}
         expected_inventory[PER_USER_UPDATER_RELATIVE] = updater_identity["sha256"]
+        expected_inventory[maintenance_member] = maintenance_verification["executable_sha256"]
+        expected_inventory[layout_member] = _sha256(target / layout_member)
         if target_inventory != expected_inventory:
             raise ReleasePairFeedError("release_pair_feed_app_copy_mismatch")
         if verify_package_artifact(source) != before:
@@ -402,7 +424,7 @@ def main(argv: list[str] | None = None) -> int:
             result = prepare_next_index(args.previous_index, args.pair_document or (), args.released_at,
                                         args.expires_at, args.output, version.DATABASE_RELEASE_TRUST_KEYS, renew=args.renew)
         elif args.command == "prepare-app":
-            result = prepare_independent_app(args.source, args.output, updater=args.updater)
+            result = prepare_independent_app(args.source, args.output, updater=args.updater, maintenance=args.maintenance)
         elif args.command == "prepare-pair":
             if args.output.exists() or (args.app_root / "_internal" / "bundled").exists():
                 raise ReleasePairFeedError("release_pair_feed_input_invalid")

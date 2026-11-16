@@ -269,11 +269,11 @@ for(const mutation of ['edit','replace','close'])test(`stale returned calculatio
   if(mutation==='edit')e.WB.change(b=>b.notes='new');if(mutation==='replace')e.WB.replace({board:board()},true);if(mutation==='close')e.press('返回白板',d);
   finish({code:0,data:{calculated:returned(),path:'old.json'}});await pending;assert.equal(e.WB.state.result,null);
 });
-test('action order renders bounded pages and timeline caps dense visible nodes',()=>{
+test('action order and dense timeline preserve access to all actions through pages',()=>{
   const e=setup();for(let i=0;i<1000;i++)e.WB.state.board.actions.push({id:`a.${i}`,character:'a',action_type_id:'action.normal_attack',label:'普攻',start:1,variant:'',notes:''});e.WB.render();
-  assert.equal(all(e.root).filter(n=>n.className==='wb-order-row').length,40);assert.equal(all(e.WB.state.svg).filter(n=>n.attributes.class==='wb-action').length,3);assert.match(e.root.textContent,/先显示 800 项/);
-  const more=all(e.WB.state.svg).find(n=>n.attributes['aria-label']==='查看同区域 797 个动作');assert.ok(more);more.emit('click');assert.match(e.dialog().textContent,/密集动作/);
-  const chosen=all(e.dialog()).find(n=>n.tagName==='button'&&n.textContent==='1 秒 · 甲 · 普攻');chosen.emit('click');assert.equal(e.WB.state.selectedAction,'a.3');
+  assert.equal(all(e.root).filter(n=>n.className==='wb-order-row').length,40);assert.equal(all(e.WB.state.svg).filter(n=>n.attributes.class==='wb-action').length,2);assert.doesNotMatch(e.root.textContent,/先显示 800 项/);
+  const more=all(e.WB.state.svg).find(n=>n.attributes['aria-label']==='查看同区域 998 个动作');assert.ok(more);more.emit('click');assert.match(e.dialog().textContent,/密集动作/);
+  const chosen=all(e.dialog()).find(n=>n.tagName==='button'&&n.textContent==='1 秒 · 甲 · 普攻');chosen.emit('click');assert.equal(e.WB.state.selectedAction,'a.2');
 });
 test('coincident action cards occupy distinct visual rows without changing timestamps',()=>{
   const e=setup();e.WB.addAction('action.elemental_skill');e.WB.addAction('action.elemental_burst');const before=e.WB.json();e.WB.render();
@@ -338,7 +338,7 @@ test('empty team gets an actionable onboarding state without covering a populate
 test('damage view defaults to one marker per hit while preserving associated calculation detail',()=>{
   const e=setup(),damage={id:'d',kind:'damage',character:'a',sourceKey:'source',label:'命中',start:2,value:30,detail:{hit_id:'h'}},
     calculation={id:'c',kind:'calculation',character:'a',sourceKey:'source',label:'命中计算',start:2,detail:{hit_id:'h',hit:{expected:30,crit:60},zones:{base:20}}},events=[damage,calculation],before=JSON.stringify(events);
-  e.WB.state.result=returned();e.WB.state.resultProjection={views:{damage:{events},effects:{events:[]}}};e.WB.setMode('damage');
+  e.WB.state.result=returned();e.WB.state.resultProjectionOwner=e.WB.state.result;e.WB.state.resultProjection={views:{damage:{events},effects:{events:[]}}};e.WB.setMode('damage');
   assert.equal(e.WB.project().events.length,1);assert.equal(all(e.WB.state.svg).filter(n=>n.attributes.class==='wb-derived').length,1);
   assert.doesNotMatch(e.WB.state.svg.textContent,/2 条相邻记录/);e.WB.selectEvent(e.WB.project().events[0]);assert.match(e.root.textContent,/暴击伤害/);assert.match(e.root.textContent,/60/);assert.match(e.root.textContent,/本次命中计算明细/);
   e.press('含计算记录');assert.equal(e.WB.project().events.length,2);e.press('伤害事件');assert.equal(e.WB.project().events.length,1);assert.equal(JSON.stringify(events),before);assert.equal(e.WB.dirty(),false);
@@ -348,8 +348,9 @@ test('dense damage group total counts damage events but never the calculation co
   const e=setup(),events=[{id:'d1',kind:'damage',character:'a',sourceKey:'s',label:'命中甲',start:2,value:30,detail:{hit_id:'h1'}},
     {id:'d2',kind:'external_damage',character:'a',sourceKey:'s',label:'外部补充',start:2.001,value:5,detail:{}},
     {id:'c1',kind:'calculation',character:'a',sourceKey:'s',label:'计算记录',start:2,value:999,detail:{hit_id:'h1'}}];
-  e.WB.state.result=returned();e.WB.state.resultProjection={views:{damage:{events},effects:{events:[]}}};e.WB.setMode('damage');e.press('含计算记录');
-  const marker=all(e.WB.state.svg).find(n=>n.attributes.class==='wb-derived');marker.emit('click');assert.match(e.root.textContent,/组内合计：35（2 条伤害事件/);assert.doesNotMatch(e.root.textContent,/组内合计：1034/);
+  e.WB.state.result=returned();e.WB.state.resultProjectionOwner=e.WB.state.result;e.WB.state.resultProjection={views:{damage:{events},effects:{events:[]}}};e.WB.setMode('damage');e.press('含计算记录');
+  assert.equal(all(e.WB.state.svg).filter(n=>n.attributes.class==='wb-derived').length,3,'external and computed kinds retain separate markers');
+  e.WB.selectEvent({events});assert.match(e.root.textContent,/组内合计：35（2 条伤害事件/);assert.doesNotMatch(e.root.textContent,/组内合计：1034/);
 });
 
 
@@ -431,10 +432,14 @@ test('database bases are a draft until applied, and manual source mode survives 
 });
 
 // The old source is test-only and executes independently, never as a production fallback.
-test('G5 independent whiteboard oracle preserves document commands, layout, result and payload CAS',()=>{
+test('G5 independent whiteboard oracle preserves document commands, unchanged shell/inspector, result and payload CAS',()=>{
  const actual=setup(),expected=setup({reference:true});
  for(const e of [actual,expected]){let n=0;e.w.crypto.randomUUID=()=>`stable-${++n}`;}
- const summarize=(node,cutoff)=>({tag:node.tagName,attrs:node.attributes,text:node.text||'',children:node.children.filter(child=>child!==cutoff).map(child=>summarize(child,cutoff))});
+ // r20-next intentionally replaces team-card detail density and the two
+ // advanced intent blocks with disclosures. Their new DOM is covered by
+ // view-layout/geometry checks; the legacy oracle still compares every saved
+ // input, command, identity, payload, unchanged shell and inspector.
+ const summarize=(node,cutoff)=>({tag:node.tagName,attrs:node.attributes,text:node.text||'',children:node.children.filter(child=>child!==cutoff&&!['wb-center','wb-team'].includes(child.className)).map(child=>summarize(child,cutoff))});
  const next06Control=e=>{
    assert.equal(Object.hasOwn(e.WB.state.board,'damage_report'),false,'the frozen comparison only covers legacy default documents');
    const labels=all(e.root).filter(node=>node.tagName==='label'&&node.children.some(child=>child.tagName==='span'&&child.textContent==='DPS截止'));

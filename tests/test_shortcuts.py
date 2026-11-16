@@ -128,6 +128,8 @@ def test_real_windows_shortcut_unicode_and_argv_round_trip(input_file,tmp_path):
     assert destination.read_bytes()[:4] == b"L\x00\x00\x00"
     assert destination.stat().st_size > 76
     # The COM writer also reopens and verifies the saved target/arguments/workdir.
+
+
     command = subprocess.list2cmdline([report["launcher"], *report["argv"]])
     parse = ctypes.windll.shell32.CommandLineToArgvW
     parse.argtypes = [ctypes.c_wchar_p, ctypes.POINTER(ctypes.c_int)]
@@ -138,3 +140,12 @@ def test_real_windows_shortcut_unicode_and_argv_round_trip(input_file,tmp_path):
         assert [pointer[i] for i in range(count.value)] == [report["launcher"], *report["argv"]]
     finally:
         ctypes.windll.kernel32.LocalFree(ctypes.cast(pointer,ctypes.c_void_p))
+
+
+@pytest.mark.skipif(sys.platform != "win32", reason="Windows property store integration")
+def test_installed_shortcut_app_user_model_id_round_trip(tmp_path):
+    from genshin_app.shortcuts import _windows_link
+    from genshin_app.windows_product_registration import APP_USER_MODEL_ID
+    raw = _windows_link({"target": sys.executable, "arguments": "", "working_directory": str(Path(sys.executable).parent),
+                         "description": "isolated installation test", "app_user_model_id": APP_USER_MODEL_ID})
+    assert raw[:4] == b"L\x00\x00\x00"  # helper verifies property-store readback before returning

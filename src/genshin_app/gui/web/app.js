@@ -160,14 +160,14 @@ function bindSharedDisclosureSurfaces() {
   if (!window.AppSurfaceKernel?.bindDisclosure) return;
   const bindings = [
     {details: "#workspace-status-hub", panel: "#workspace-notice-list", label: "页面状态与最近动态"},
-    {details: ".workspace-plan-state", panel: "#plan-status", label: "当前方案状态"},
+    {details: ".workspace-plan-state", panel: "#plan-status", label: "当前方案状态", align: "start"},
     {details: "#data-tools-panel", panel: ".data-tools-popover", label: "资料筛选与工具"},
-    {details: ".axis-help", panel: ".axis-help-panel", label: "时间轴操作与说明"},
+    {details: ".axis-help", panel: ".axis-help-panel", label: "时间轴操作与说明", above: true},
   ];
   for (const item of bindings) {
     const details = $(item.details), panel = $(item.panel);
     if (!details || !panel || details.appSurfaceController) continue;
-    AppSurfaceKernel.bindDisclosure(details, {panel, kind: "popover", ariaLabel: item.label,
+    AppSurfaceKernel.bindDisclosure(details, {panel, kind: "popover", ariaLabel: item.label, align: item.align, above: item.above,
       dismissOnOutside: true, dismissOnScroll: true});
   }
 }
@@ -194,6 +194,7 @@ function reportAppStartupFailure(message, details) {
 
 async function openStartupFile(showEditor) {
   let path = null;
+  let phase = "startup_request";
   try {
     const r = await callApi("get_startup_file");
     path = r.code === 0 ? r.data?.path : null;
@@ -201,21 +202,28 @@ async function openStartupFile(showEditor) {
     // A legacy tab click only changes a hidden editor island. Wait for the
     // actual DSH layout owner, then reuse the mounted-page ACK before loading.
     // No file means no navigation and no new document on an ordinary launch.
+    phase = "workbench_boot";
     const ready = window.GenshinDshClient?.ready;
     if (!ready || typeof ready.then !== "function") throw new Error("原生工作台尚未提供启动就绪状态");
     await ready;
     if (r.code !== 0) { setStatus(r.message, r.details); return; }
     const intent=window.AppDocumentOpenIntents.begin();
+    phase = "file_inspection";
     const inspected=await callApi("inspect_plan_file",path);
     if (inspected.code !== 0) { setStatus(inspected.message, inspected.details); return; }
+    phase = "document_import";
     const opened=await window.GenshinBusinessUI.openInspectedDocument(path,inspected.data,intent,{board:WB,editor:RT,report:RS,show:showEditor});
-    setStatus(opened.message);
+    setStatus(opened.message,opened.details);
   } catch (e) {
-    reportAppStartupFailure("启动文件加载失败，请检查文件后重新打开", {path, error:String(e.message || e)});
+    const message = phase === "workbench_boot"
+      ? "工作台未能启动，尚未读取方案文件。请保留诊断信息；这不表示方案已损坏。"
+      : phase === "document_import" ? "方案导入未完成，请查看下方原因。"
+      : "未能读取启动方案，请查看文件路径和下方原因。";
+    reportAppStartupFailure(message, {phase, path, error:String(e.message || e)});
   }
 }
 
-window.addEventListener("pywebviewready", async () => {
+async function initializeEditor() {
   try {
   const appIdentity = await refreshPing();
   const networkMode = String(appIdentity?.network_mode || appIdentity?.network_policy || "");
@@ -276,9 +284,14 @@ window.addEventListener("pywebviewready", async () => {
     document.dispatchEvent(new CustomEvent("genshin-open-editor",{detail:{page,onUnavailable:()=>finish("当前工作区不支持此页面。")}}));
   });
   window.AppAppliedResultSave=async(conversationId,board,calculated,isCurrent=()=>true)=>{
-    const response=await callApi("dsh_client_saved_whiteboard",{conversation_id:conversationId,command:"current_delivery",arguments:{board,calculated}});
-    if(response.code!==0)return response;
-    if(!isCurrent())return {code:1,message:"白板或计算结果已变化，未打开保存对话框。"};
+    let response;
+    try{response=await callApi("dsh_client_saved_whiteboard",{conversation_id:conversationId,command:"current_delivery",arguments:{board,calculated}});}
+    catch(error){return {code:1,message:error instanceof Error?error.message:"无法读取当前计算交付，尚未执行保存。",details:{publication_state:"not_written",published_paths:[],unknown_paths:[]}};}
+    // This read-only delivery lookup happens before any picker or file writer.
+    // Mark that boundary explicitly so callers do not confuse it with a lost
+    // acknowledgement after an actual write.
+    if(response.code!==0)return {...response,details:{...(response.details||{}),publication_state:"not_written",published_paths:[],unknown_paths:[]}};
+    if(!isCurrent())return {code:1,message:"白板或计算结果已变化，未打开保存对话框。",details:{publication_state:"not_written",published_paths:[],unknown_paths:[]}};
     const data=response.data;
     return callApi("dsh_client_save_whiteboard_result",{conversation_id:conversationId,delivery_capability:data.delivery_capability,
       expected_revision:data.revision,expected_receipt:data.receipt_fingerprint});
@@ -293,7 +306,44 @@ window.addEventListener("pywebviewready", async () => {
       return {document_kind:null,document:null};
     },
     setTheme(preference,resolved){editorRoot.dataset.theme=preference;editorRoot.dataset.themeResolved=resolved;window.ThemeController?.accept?.({preference,resolved});},
-    projectCandidate(document,kind,calculated){return window.CandidateDocumentProjection.build(document,calculated);},
+    projectCandidate(document,kind,calculated,metadata){return window.CandidateDocumentProjection.build(document,calculated,metadata);},
+    async revealTimelineEvent(selection){
+      const business=window.GenshinBusinessUI;
+      const navigator=business.createTimelineNavigator({
+        capture(){
+          const board=window.WB?.state.board,boardResult=window.WB?.state.result;
+          const boardOwner=board&&business.timelineDocumentOwner(board,"whiteboard");
+          if(boardOwner&&boardResult&&selection?.owner===boardOwner){
+            if(WB.state.resultProjectionOwner!==boardResult){WB.state.resultProjection=null;WB.state.resultProjectionOwner=boardResult;}
+            WB.state.resultProjection ||= TD.build({plan:boardResult.plan,
+              template:boardResult.plan?.resolved_template||boardResult.plan?.manual_template,result:boardResult.result,
+              executionModel:boardResult.report?.mechanics_model,executionTemplate:boardResult.report?.mechanics_input_template,current:true});
+            return {owner:boardOwner,projection:WB.state.resultProjection,document:board,result:boardResult,page:"whiteboard"};
+          }
+          const plan=window.PL?.state.plan,planOwner=plan&&business.timelineDocumentOwner(plan,"native");
+          if(planOwner&&selection?.owner===planOwner&&window.RS?.isCurrent?.()){
+            TV.refreshProjection();return {owner:planOwner,projection:TV.projection,document:plan,result:RS.state.result,page:"rotation"};
+          }
+          return null;
+        },
+        show:showEditor,
+        select(snapshot,event){
+          if(snapshot.page==="whiteboard"){
+            WB.state.mode="damage";WB.state.damageFocus="all";WB.state.evidenceAction=false;WB.state.evidenceBack=null;WB.state.derivedBack=null;
+            WB.state.scroll=Math.max(0,event.start*(WB.state.geometry?.pps||1)-80);WB.selectEvent(event);
+            const rows=WB.project().lanes,row=rows.findIndex(item=>item.events?.some(member=>member.id===event.id));
+            if(WB.state.wrap&&row>=0){WB.state.wrap.scrollTop=row*business.TIMELINE_VIEW_HEIGHT;WB.draw();}
+          }else{
+            TV.mode="damage";TV.characterFilter="";TV.sourceFilter="";TV.componentFilter="";TV.kindVisibility.damage={};TV.damageFocus="all";
+            TV.rebuildRows();TV.paintProjection();const wrap=$("#timeline-wrap"),row=TV.rows.findIndex(item=>item.events?.some(member=>member.id===event.id));
+            if(wrap){wrap.scrollLeft=Math.max(0,event.start*TV.pixelsPerSecond-80);if(row>=0)wrap.scrollTop=row*business.TIMELINE_VIEW_HEIGHT;TV.paintProjection();}
+            TV.showDetail(event);
+          }
+        },
+      });
+      try{const response=await navigator.reveal(selection);setStatus(response.message);return response;}
+      catch(error){setStatus(error.message||"无法定位这段伤害，白板未被修改。");throw error;}
+    },
     application:window.CandidateEditorApplication.create(),
     files:window.AppEditorFileActions.create({root:editorRoot,show:showEditor}),
   });
@@ -310,4 +360,16 @@ window.addEventListener("pywebviewready", async () => {
   } catch (e) {
     reportAppStartupFailure("界面初始化失败，请重新打开应用；若仍失败请保留以下详情", {error:String(e.message || e)});
   }
-}, {once:true});
+}
+// WebView may inject its API and emit readiness before a cached app script is
+// evaluated. Both load orders enter the same promise, so the later event cannot
+// bind controls twice or consume the startup document a second time.
+let editorInitialization = null;
+function ensureEditorInitialized() {
+  if (editorInitialization) return editorInitialization;
+  if (typeof window.pywebview?.api?.ping !== "function") return;
+  editorInitialization = initializeEditor();
+  return editorInitialization;
+}
+window.addEventListener("pywebviewready", ensureEditorInitialized, {once:true});
+void ensureEditorInitialized();

@@ -8,6 +8,7 @@ from __future__ import annotations
 
 import copy
 import re
+import uuid
 
 from genshin_app.agent_chat.native_dsh_mux_client import NativeDshMuxError
 
@@ -522,8 +523,33 @@ class DshShellApi:
     def dsh_client_rpc(self, request):
         return self._get_dsh_shell().dsh_client_rpc(request)
 
+    def _dsh_cleanup(self, method, request, identity_field, retired_result):
+        # Browser abort/finally callbacks can arrive after the application has
+        # retired its Host. Cleanup must not create a replacement runtime.
+        with self._dsh_shell_lock:
+            shell = self._dsh_shell
+            if self._dsh_shell_closed or shell is None:
+                try:
+                    identity = request[identity_field]
+                    if type(identity) is not str or str(uuid.UUID(identity)) != identity:
+                        raise ValueError
+                except (KeyError, TypeError, ValueError):
+                    raise NativeDshMuxError("dsh_shell_identity_invalid") from None
+                return retired_result
+            # Snapshot only: _get_dsh_shell acquires this same non-reentrant
+            # lock and may start a Host. Both would be wrong for cleanup.
+            # The runtime call below must also run outside the lifecycle lock.
+        try:
+            return getattr(shell, method)(request)
+        except NativeDshMuxError as error:
+            with self._dsh_shell_lock:
+                retired = self._dsh_shell_closed
+            if retired and error.code in {"dsh_shell_closed", "dsh_mux_closed", "dsh_mux_stream_cancelled"}:
+                return retired_result
+            raise
+
     def dsh_client_request_cancel(self, request):
-        return self._get_dsh_shell().dsh_client_request_cancel(request)
+        return self._dsh_cleanup("dsh_client_request_cancel", request, "request_id", {"cancelled": True})
 
     def dsh_client_stream_open(self, request):
         return self._get_dsh_shell().dsh_client_stream_open(request)
@@ -535,7 +561,7 @@ class DshShellApi:
         return self._get_dsh_shell().dsh_client_stream_send(request)
 
     def dsh_client_stream_cancel(self, request):
-        return self._get_dsh_shell().dsh_client_stream_cancel(request)
+        return self._dsh_cleanup("dsh_client_stream_cancel", request, "stream_id", {"cancelled": True})
 
     def dsh_client_bundle(self, request):
         return self._get_dsh_shell().dsh_client_bundle(request)
@@ -544,4 +570,4 @@ class DshShellApi:
         return self._get_dsh_shell().dsh_client_resource_read(request)
 
     def dsh_client_resource_release(self, request):
-        return self._get_dsh_shell().dsh_client_resource_release(request)
+        return self._dsh_cleanup("dsh_client_resource_release", request, "resource_id", {"released": False})

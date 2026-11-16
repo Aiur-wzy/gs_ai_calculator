@@ -442,6 +442,9 @@ class _FirstInstallCoordinator:
         if os.path.lexists(self._profile):
             raise FirstInstallError("product_first_install_existing_profile")
 
+    def _publish_first_profile(self, profile, registration):
+        profile.rename(self._profile)
+
     def _reinstall_selection(self):
         if not os.path.lexists(self._profile):
             return None
@@ -497,9 +500,12 @@ class _FirstInstallCoordinator:
                     yield transaction
                 finally:
                     # An interrupted bootstrap may leave this directory; the next lock owner cleans it.
-                    shutil.rmtree(transaction, ignore_errors=True)
+                    self._cleanup_private_transaction(transaction)
         except LockBusyError as error:
             raise FirstInstallError("product_first_install_busy") from error
+
+    def _cleanup_private_transaction(self, transaction):
+        shutil.rmtree(transaction, ignore_errors=True)
 
     def _local_pair(self, index_path):
         path = reject_reparse_chain(Path(index_path), reason="product_first_install_local_index_invalid")
@@ -618,7 +624,7 @@ class _FirstInstallCoordinator:
             _emit_phase(progress, "committing")
             # Same-volume Windows rename fails if a different process created the destination.
             try:
-                profile.rename(self._profile)
+                self._publish_first_profile(profile, registration)
             except OSError as error:
                 reason = ("product_first_install_existing_profile" if os.path.lexists(self._profile)
                           else "product_first_install_publish_failed")
@@ -666,7 +672,7 @@ class _FirstInstallCoordinator:
                 self._require_new_profile()
                 _emit_phase(progress, "committing")
                 try:
-                    profile.rename(self._profile)
+                    self._publish_first_profile(profile, registration)
                 except OSError as error:
                     raise FirstInstallError("product_first_install_publish_failed") from error
             else:
@@ -705,7 +711,7 @@ class _FirstInstallCoordinator:
         return registration
 
 
-def build_first_install_coordinator() -> _FirstInstallCoordinator:
+def build_first_install_coordinator(*, install_root=None, system_registration=None) -> _FirstInstallCoordinator:
     """Bind a setup frontend to the product's pinned feed and current user."""
     if _windows_is_elevated():
         raise FirstInstallError("product_first_install_elevation_unsupported")
@@ -716,5 +722,17 @@ def build_first_install_coordinator() -> _FirstInstallCoordinator:
         raise FirstInstallError("product_first_install_trust_unconfigured")
     local = reject_reparse_chain(known_folder_path(FOLDERID_LOCAL_APP_DATA),
                                  reason="product_first_install_profile_path_invalid")
-    return _FirstInstallCoordinator(local=local, url=version.DATABASE_RELEASE_MANIFEST_URL, trust_verifier=verifier,
-                                    programs_folder=lambda: known_folder_path(_PROGRAMS_FOLDER_ID))
+    from .managed_installation import ManagedInstallationCoordinator
+    from .windows_product_registration import current_build_registration
+
+    if system_registration is None and os.name == "nt" and getattr(sys, "frozen", False):
+        system_registration = current_build_registration()
+    def programs():
+        base = known_folder_path(_PROGRAMS_FOLDER_ID)
+        locate = getattr(system_registration, "programs_folder", None)
+        return locate(base) if callable(locate) else base
+    return ManagedInstallationCoordinator(
+        local=local, install_root=install_root, url=version.DATABASE_RELEASE_MANIFEST_URL,
+        trust_verifier=verifier, programs_folder=programs,
+        system_registration=system_registration,
+    )

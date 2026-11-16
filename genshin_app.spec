@@ -211,5 +211,5 @@ coll = COLLECT(
     a.datas,
     strip=False,
     upx=False,
-    name="GenshinCalc",
+    name="app",
 )

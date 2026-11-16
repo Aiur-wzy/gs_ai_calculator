@@ -1,7 +1,7 @@
 """Legacy sparse settings accepted only as a one-time DSH profile migration.
 
 The values here intentionally mirror public configuration defaults in the
-locked ``@deepseek-ai/*`` 0.2.1-rc.5 cohort. Active settings are owned by the
+locked ``@deepseek-ai/*`` 0.2.2-rc.3 cohort. Active settings are owned by the
 official DSH Settings/ConfigEditor and are not mirrored here. App security and domain
 limits (provider retry, credentials, paths, tool authority and write
 serialization) are not part of this user-configurable contract.
@@ -27,7 +27,7 @@ SETTINGS_CONTRACT = "genshin-native-dsh-settings-v1"
 SETTINGS_VERSION = 1
 SETTINGS_FILE = "native-agent-dsh-settings.json"
 DEFAULT_PROFILE_RELATIVE_PATH = Path("native_agent_sessions_v2") / "dsh-production-v1"
-DSH_RELEASE = "0.2.1-rc.5"
+DSH_RELEASE = "0.2.2-rc.3"
 APPLY_SCOPE = "next_runtime"
 MAX_SETTINGS_BYTES = 256 * 1024
 MAX_GENERATION = 2**53 - 1

@@ -2,7 +2,7 @@ const GUI_TEST_RUNTIME = require('./helpers/gui_runtime.cjs');
 const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),path=require('node:path'),vm=require('node:vm');
 class Element {
   constructor(tag='div'){this.tagName=tag;this.children=[];this.listeners={};this.style={};this.attributes={};}
-  append(...nodes){this.children.push(...nodes);}appendChild(node){this.append(node);return node;}
+  append(...nodes){this.children.push(...nodes);}replaceChildren(...nodes){this.children=[...nodes];}appendChild(node){this.append(node);return node;}
   insertRow(){return this.appendChild(new Element('tr'));}insertCell(){return this.appendChild(new Element('td'));}
   set innerHTML(value){this.children=[];this.text=value;}set textContent(value){this.children=[];this.text=String(value);}
   get textContent(){return(this.text||'')+this.children.map(n=>n.textContent).join('');}

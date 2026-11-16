@@ -15,10 +15,10 @@ def _freeze(monkeypatch, tmp_path):
     return resources, executable.parent
 
 
-def test_current_build_pins_drive_development_frozen_policy(monkeypatch, tmp_path):
+def test_development_frozen_pins_drive_current_only_policy(monkeypatch, tmp_path):
     resources, package = _freeze(monkeypatch, tmp_path)
-    assert version.DATABASE_RELEASE_CHANNEL == "dev"
-    assert version.DATABASE_PAIR_POLICY == "current_only"
+    monkeypatch.setattr(bootstrap, "DATABASE_RELEASE_CHANNEL", "dev")
+    monkeypatch.setattr(bootstrap, "DATABASE_PAIR_POLICY", "current_only")
 
     root, policy, package_root, frozen = bootstrap._resolve_startup_flavor(
         resource_root=None,
@@ -32,6 +32,17 @@ def test_current_build_pins_drive_development_frozen_policy(monkeypatch, tmp_pat
         package,
         True,
     )
+
+
+def test_current_source_can_use_accepted_stable_database_without_frozen_pair(monkeypatch, tmp_path):
+    # Source acceptance can advance to an accepted stable database without
+    # claiming that this checkout is already a frozen, signed App/DB pair.
+    monkeypatch.setattr(bootstrap, "is_frozen", lambda: False)
+    monkeypatch.setattr(bootstrap, "resource_dir", lambda: tmp_path)
+    assert version.DATABASE_PAIR_POLICY == "current_only"
+    assert bootstrap._resolve_startup_flavor(
+        resource_root=None, pair_policy=None, app_package_root=None,
+    ) == (tmp_path, "current_only", tmp_path, False)
 
 
 def test_stable_frozen_build_is_pinned_to_exact(monkeypatch, tmp_path):

@@ -1,5 +1,5 @@
 /**
- * Qualification-only proof for rc.5's public FileUploads Host service.
+ * Qualification-only proof for rc.3's public FileUploads Host service.
  *
  * This probe deliberately mounts no production runtime or WebView owner.  It
  * proves the public package accepts a backpressured multi-chunk source,
@@ -66,7 +66,7 @@ function assert(condition, code) {
 function packageIdentity(name) {
   const manifest = require(`${name}/package.json`)
   assert(manifest.name === name, `file_upload_package_name:${name}`)
-  assert(manifest.version === '0.2.1-rc.5', `file_upload_package_version:${name}`)
+  assert(manifest.version === '0.2.2-rc.3', `file_upload_package_version:${name}`)
   assert(manifest.exports?.['.'] !== undefined, `file_upload_public_root:${name}`)
   return Object.freeze({ name: manifest.name, version: manifest.version })
 }

@@ -1,7 +1,9 @@
-#tab-whiteboard { padding:8px 10px; overflow:hidden; min-height:0; }
+#tab-whiteboard { padding:8px 10px; overflow-x:hidden; overflow-y:auto; min-height:0; }
 #tab-whiteboard.active { display:flex; flex-direction:column; gap:8px; }
-#tab-whiteboard .wb-header { display:flex; align-items:center; gap:12px; min-height:38px; flex:0 0 auto; flex-wrap:nowrap; }
-#tab-whiteboard .wb-header .eq-field { display:flex; flex-direction:row; align-items:center; gap:6px; margin:0; min-width:0; }
+#tab-whiteboard .wb-header { display:flex; align-items:center; gap:12px; min-height:38px; flex:0 0 auto; flex-wrap:wrap; }
+/* Keep each label/input pair together; narrow layouts wrap whole fields.
+   The panel owns overflow when the toolbar and readable axis exceed its height. */
+#tab-whiteboard .wb-header .eq-field { display:flex; flex:0 0 auto; flex-direction:row; align-items:center; gap:6px; margin:0; min-width:0; }
 #tab-whiteboard .wb-header .eq-field>span { font-size:12px; white-space:nowrap; color:var(--muted); }
 #tab-whiteboard .wb-header .wb-title { width:clamp(150px,22vw,290px); }
 #tab-whiteboard .wb-header input[type="number"] { width:76px; }
@@ -24,19 +26,30 @@
 .wb-toolbar button.active { background:#345d99; border-color:#709ef4; }
 #tab-whiteboard .wb-mode-tabs { flex:0 0 auto; border-bottom:1px solid var(--border); padding-bottom:5px; gap:4px; }
 #tab-whiteboard .wb-mode-tabs button { min-width:78px; padding:6px 12px; font-size:13px; }
-.wb-mode-state { margin-left:auto; color:var(--muted); font-size:11px; padding:2px 7px; background:#263243; border-radius:4px; }
+.wb-mode-state { margin-left:auto; color:var(--color-text-secondary); font-size:11px; padding:2px 7px; background:var(--color-control-hover); border-radius:4px; }
 #tab-whiteboard .wb-timeline-tools { flex:0 0 auto; gap:4px; min-height:30px; }
 #tab-whiteboard .wb-timeline-tools button { padding:4px 8px; font-size:12px; }
 .wb-scale { min-width:39px; font-size:11px; color:var(--muted); text-align:center; }
 .wb-note { font-size:12px; color:var(--muted); line-height:1.55; }
 #tab-whiteboard .wb-track { min-height:180px; flex:1; overflow:auto; border:1px solid var(--border); border-radius:6px; background:var(--g-color-axis-lane-even); touch-action:none; outline-offset:2px; }
+.wb-axis-shell { display:flex; flex:1 1 0; min-width:0; min-height:180px; overflow:hidden; border:1px solid var(--border); border-radius:6px; }
+.wb-label-pane { flex:0 0 auto; overflow:hidden; background:var(--panel); border-right:1px solid var(--border); }
+.wb-label-pane svg { display:block; }
+#tab-whiteboard .wb-axis-shell .wb-track { min-width:0; min-height:0; border:0; border-radius:0; }
+.wb-label-pane .tl-lane-label { fill:var(--text); font-weight:600; }
+.wb-label-pane .tl-lane-subtitle { fill:var(--muted); }
+.wb-label-pane [role="button"] { cursor:pointer; }
+.wb-label-pane [role="button"]:focus-visible { outline:2px solid var(--accent); outline-offset:-2px; }
+.wb-source-directory { cursor:pointer; }
+.wb-source-directory text { fill:var(--text); }
+.wb-source-directory:focus-visible { outline:2px solid var(--accent); }
 .wb-track svg { display:block; user-select:none; }
 .wb-track .wb-action { cursor:ew-resize; }
 .wb-track [data-axis-event]:focus-visible > :is(rect,path) { stroke:var(--g-color-focus-ring); stroke-width:3; }
 .wb-track .wb-derived { cursor:pointer; }
 @media (forced-colors:active) { .wb-track [data-axis-event]:focus-visible > :is(rect,path) { stroke:Highlight; } }
 #tab-whiteboard .wb-effect-filters { border-left:1px solid var(--border); padding-left:6px; gap:3px; }
-.wb-coverage-source { color:#9cdbbf; line-height:1.6; overflow-wrap:anywhere; font-size:12px; }
+.wb-coverage-source { color:var(--color-success); line-height:1.6; overflow-wrap:anywhere; font-size:12px; }
 .wb-action-add { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:5px; }
 .wb-action-add button { font-size:12px; padding:7px 3px; }
 .wb-inspector .eq-field { min-width:0; }

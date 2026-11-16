@@ -5,6 +5,8 @@ import hashlib
 import json
 import os
 import re
+from concurrent.futures import ThreadPoolExecutor
+from itertools import islice
 from pathlib import Path
 
 DEPENDENCY_METADATA_POLICY = "pnpm-release-metadata-v2"
@@ -45,10 +47,9 @@ def dependency_payload_inventory(runtime_root):
     if not root.is_dir() or root.is_symlink() or root.is_junction():
         raise DependencyPayloadError("dsh_dependency_payload_root")
     files, aliases, directories = {}, {}, {""}
-    total_bytes = 0
+    payloads = []
 
     def walk(prefix):
-        nonlocal total_bytes
         folder = root.joinpath(*prefix.split("/")) if prefix else root
         for item in sorted(os.scandir(folder), key=lambda entry: entry.name):
             name = f"{prefix}/{item.name}" if prefix else item.name
@@ -57,7 +58,7 @@ def dependency_payload_inventory(runtime_root):
                     raise DependencyPayloadError("dsh_dependency_metadata_type")
                 continue
             path = Path(item.path)
-            if item.is_symlink() or path.is_junction():
+            if item.is_symlink() or item.is_junction():
                 try:
                     aliases[name] = path.resolve(strict=True).relative_to(root).as_posix()
                 except ValueError:
@@ -66,36 +67,55 @@ def dependency_payload_inventory(runtime_root):
                 directories.add(name)
                 walk(name)
             elif item.is_file(follow_symlinks=False):
-                name, shim_bytes = project_dependency_shim(name, path)
-                if name in files:
-                    raise DependencyPayloadError("dsh_dependency_shim_name_collision")
-                if name == ".modules.yaml":
-                    value = json.loads(path.read_bytes())
-                    if not isinstance(value, dict):
-                        raise DependencyPayloadError("dsh_dependency_metadata_type")
-                    for field in INSTALL_ONLY_MODULE_FIELDS:
-                        value.pop(field, None)
-                    raw = (json.dumps(value, ensure_ascii=False, allow_nan=False,
-                                      sort_keys=True, separators=(",", ":")) + "\n").encode()
-                    files[name] = hashlib.sha256(raw).hexdigest()
-                    total_bytes += len(raw)
-                elif shim_bytes is not None:
-                    files[name] = hashlib.sha256(shim_bytes).hexdigest()
-                    total_bytes += len(shim_bytes)
-                else:
-                    digest = hashlib.sha256()
-                    with path.open("rb") as stream:
-                        while chunk := stream.read(1024 * 1024):
-                            digest.update(chunk)
-                    files[name] = digest.hexdigest()
-                    total_bytes += path.stat().st_size
+                payloads.append((name, path))
             else:
                 raise DependencyPayloadError("dsh_dependency_payload_type")
 
     walk("")
+    # Verify every byte on every admission. A bounded set of independent file
+    # reads avoids serial Windows I/O latency; no persisted mtime/hash cache is
+    # trusted. Inventory ordering and metadata projection stay deterministic.
+    total_bytes = 0
+    iterator = iter(payloads)
+    with ThreadPoolExecutor(max_workers=8, thread_name_prefix="dsh-payload-check") as pool:
+        while batch := tuple(islice(iterator, 256)):
+            for results in pool.map(_hash_payload_batch, (batch[i:i + 32] for i in range(0, len(batch), 32))):
+                for name, digest, size in results:
+                    if name in files:
+                        raise DependencyPayloadError("dsh_dependency_shim_name_collision")
+                    files[name] = digest
+                    total_bytes += size
     if ".modules.yaml" not in files:
         raise DependencyPayloadError("dsh_dependency_metadata_missing")
     if any(target not in files and target not in directories for target in aliases.values()):
         raise DependencyPayloadError("dsh_dependency_alias_uninventoried")
     return {"contract": "genshin-node-dependency-payloads-v1", "metadata_policy": DEPENDENCY_METADATA_POLICY,
             "files": dict(sorted(files.items())), "aliases": dict(sorted(aliases.items())), "total_bytes": total_bytes}
+
+
+def _hash_payload_batch(payloads):
+    # Most packages contain many small files. Reuse one buffer across a batch
+    # instead of allocating a megabyte for every read/EOF and Future per file.
+    buffer = memoryview(bytearray(64 * 1024))
+    return [_hash_payload(payload, buffer) for payload in payloads]
+
+
+def _hash_payload(payload, buffer):
+    name, path = payload
+    name, raw = project_dependency_shim(name, path)
+    if name == ".modules.yaml":
+        value = json.loads(path.read_bytes())
+        if not isinstance(value, dict):
+            raise DependencyPayloadError("dsh_dependency_metadata_type")
+        for field in INSTALL_ONLY_MODULE_FIELDS:
+            value.pop(field, None)
+        raw = (json.dumps(value, ensure_ascii=False, allow_nan=False,
+                          sort_keys=True, separators=(",", ":")) + "\n").encode()
+    if raw is not None:
+        return name, hashlib.sha256(raw).hexdigest(), len(raw)
+    digest, size = hashlib.sha256(), 0
+    with path.open("rb") as stream:
+        while count := stream.readinto(buffer):
+            digest.update(buffer[:count])
+            size += count
+    return name, digest.hexdigest(), size

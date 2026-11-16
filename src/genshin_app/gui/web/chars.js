@@ -11,10 +11,12 @@ RT.renderTeamPanel = () => {
   // ---- 方案 meta ----
   panel.appendChild(hdr2("方案"));
   const meta = t.meta || {};
-  panel.appendChild(field("名称", textIn(DS.prose(meta.name ?? "", "方案中文名待补"), (v) => {
+  // Editable values are document data; localized fallbacks belong only in
+  // read-only presentation and must never become saved text after another edit.
+  panel.appendChild(field("名称", textIn(meta.name ?? "", (v) => {
     if (v === null) { if(t.meta)delete t.meta.name; } else (t.meta??={}).name = v;
   }, { optional: true })));
-  panel.appendChild(field("计算假设", textAreaIn((meta.assumptions || []).map(a => DS.prose(a)).join("\n"), (v) => {
+  panel.appendChild(field("计算假设", textAreaIn((meta.assumptions || []).join("\n"), (v) => {
     const lines = v.split(/\r?\n/).map((line) => line.trim()).filter(Boolean);
     if (lines.length) (t.meta??={}).assumptions = lines; else if(t.meta)delete t.meta.assumptions;
   })));
@@ -48,7 +50,7 @@ RT.renderTeamPanel = () => {
     const dot = document.createElement("span");
     dot.className = "char-dot";
     dot.style.background = RT.charColor(c.id);
-    const name = textIn(DS.character(c.id), (v) => {
+    const name = textIn(c.name ?? "", (v) => {
       if (!v || !DS.hasChinese(v)) { setStatus("请填写角色中文名称"); return; }
       c.name = v;
     });
@@ -70,7 +72,7 @@ RT.renderTeamPanel = () => {
     head.appendChild(del);
     box.appendChild(head);
     box.appendChild(DS.raw("角色标识与原名称", {id:c.id, name:c.name, description:c.description}));
-    box.appendChild(field("角色说明", textIn(DS.prose(c.description || ""), v => {
+    box.appendChild(field("角色说明", textIn(c.description ?? "", v => {
       if (v === null) delete c.description; else c.description = v;
     }, {optional:true})));
 

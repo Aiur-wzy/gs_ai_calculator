@@ -1,0 +1,31 @@
+diff --git a/lib/windowsPtyAgent.js b/lib/windowsPtyAgent.js
+index 90ffd8fb69764052b0714cfb2b1213c073603c28..4d2b95ebe3ffcd8222aac4ab45746bd5108ebc5c 100644
+--- a/lib/windowsPtyAgent.js
++++ b/lib/windowsPtyAgent.js
+@@ -61,6 +61,14 @@ var WindowsPtyAgent = /** @class */ (function () {
+         // to avoid blocking the Node.js event loop in ConnectNamedPipe.
+         // See https://github.com/microsoft/node-pty/issues/763
+         this._conoutSocketWorker = options.conoutConnectionFactory(term.conout, this._useConptyDll);
++        // A closed output transport has already delivered all terminal bytes.
++        // The bundled ConPTY path does not schedule its worker cleanup on exit.
++        if (this._useConptyDll) {
++            this._outSocket.once('close', function () {
++                _this._inSocket.destroy();
++                _this._conoutSocketWorker.dispose();
++            });
++        }
+         // Store pending connection info - we'll complete the connection when worker is ready
+         this._pendingPtyInfo = { pty: this._pty, commandLine: commandLine, cwd: cwd, env: env };
+         // Never call connect() before the worker is ready, as ConnectNamedPipe
+@@ -183,6 +191,11 @@ var WindowsPtyAgent = /** @class */ (function () {
+     };
+     WindowsPtyAgent.prototype.kill = function () {
+         var _this = this;
++        // The bundled native handle may be released only once.
++        if (this._useConptyDll) {
++            if (this._killRequested) return;
++            this._killRequested = true;
++        }
+         // Prevent deferred connection from completing after kill
+         this._clearConnectionTimeout();
+         this._pendingPtyInfo = undefined;

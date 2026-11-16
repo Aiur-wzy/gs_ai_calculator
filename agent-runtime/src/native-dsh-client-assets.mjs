@@ -35,7 +35,7 @@ async function localEntry(name, local, baseUrl) {
 }
 
 export async function mountNativeDshClientAssets({ context: ctx, contract, acceptedManifest, localModuleBaseUrl, profileRoot }) {
-  if (typeof contract?.productionOwner !== 'boolean' || contract?.dshRelease !== '0.2.1-rc.5'
+  if (typeof contract?.productionOwner !== 'boolean' || contract?.dshRelease !== '0.2.2-rc.3'
       || acceptedManifest?.contract !== 'genshin-dsh-client-accepted-manifest-v1'
       || contract.dshRelease !== acceptedManifest.dshRelease
       || contract.dshCommit !== acceptedManifest.dshCommit) throw new Error('native_dsh_client_assets_contract_invalid')
@@ -68,6 +68,8 @@ export async function mountNativeDshClientAssets({ context: ctx, contract, accep
     const specifier = await localEntry(name, contract.localModules?.[name], localModuleBaseUrl)
     entries.push({ id: nativeDshSettingsEntryId(name), name: specifier, packageName: name,
       ...(name === '@deepseek-ai/dsh-client-locale' ? { config: { preference: 'zh' } } : {}),
+      ...(name === '@deepseek-ai/dsh-client-ui-chat'
+        ? { config: { transcriptView: 'compact', collapseTiming: 'completion', foldedReplies: 'final' } } : {}),
       ...(name === '@deepseek-ai/dsh-api-session-controller' ? { config: { nativeOpen: false } } : {}),
     })
   }

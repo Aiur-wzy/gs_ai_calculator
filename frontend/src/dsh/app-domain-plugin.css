@@ -37,32 +37,28 @@
 .gs-candidate-team h3 {font-size:.95rem;margin:0;}
 .gs-candidate-team pre,.gs-candidate-event-detail pre {max-height:24rem;overflow:auto;}
 .gs-candidate-axis {overflow:auto;border:1px solid var(--dsw-alias-border-l2);border-radius:.5rem;max-width:100%;}
-.gs-candidate-axis svg text {font-size:11px;fill:var(--dsw-alias-label-secondary);}
+.gs-candidate-axis svg text {font-size:11px;fill:var(--dsw-alias-label-secondary);pointer-events:none;}
+.gs-candidate-axis svg .gs-candidate-mark-count {fill:var(--dsw-alias-label-primary);paint-order:stroke;stroke:var(--dsw-alias-bg-base);stroke-width:2px;}
 .gs-candidate-grid {stroke:var(--dsw-alias-border-l2);stroke-width:1;}
 .gs-candidate-mark {fill:var(--dsw-alias-state-business-primary);}
 .gs-candidate-mark.effects {fill:var(--dsw-alias-state-success-primary);}
 .gs-candidate-mark.damage {fill:var(--dsw-alias-state-error-primary);}
 .gs-candidate-axis [role="button"] {cursor:pointer;}
 .gs-candidate-axis [role="button"]:focus {outline:2px solid var(--dsw-alias-state-business-primary);}
-.gs-candidate-review-dialog[role="dialog"] {
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
-  width: min(58rem, calc(100vw - 1.5rem));
+.gs-domain-dialog[role="dialog"] {
   min-width: 0;
-  max-width: none;
-  max-height: calc(100dvh - 1.5rem);
-  overflow: hidden;
+  max-height: 100%;
 }
-.gs-candidate-review-dialog .gs-candidate-review-content {
+.gs-candidate-review-dialog[role="dialog"] {width:min(58rem,100%);max-width:100%;}
+.gs-domain-dialog .gs-domain-dialog-content {
   flex: 1 1 auto;
   min-height: 0;
   overflow: auto;
   overscroll-behavior: contain;
   overflow-wrap: anywhere;
 }
-.gs-candidate-review-actions {display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:.5rem;min-width:0;}
-.gs-candidate-review-actions button {max-width:100%;white-space:normal;}
+.gs-domain-dialog-actions {display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:.5rem;min-width:0;}
+.gs-domain-dialog-actions button {max-width:100%;white-space:normal;}
 .gs-candidate-workspace.is-compact .gs-candidate-fields > div { grid-template-columns: 1fr; gap: .25rem; }
 .gs-domain-card {padding:.75rem;margin-block:.75rem;border:1px solid var(--dsw-alias-border-l2);border-radius:.5rem;background:var(--dsw-alias-bg-layer-1);}
 .gs-domain-prewrap {white-space:pre-wrap;overflow-wrap:anywhere;}

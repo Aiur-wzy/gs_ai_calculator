@@ -134,8 +134,7 @@ def test_cancel_during_stream_open_does_not_publish_late_success():
             release.set()
         with pytest.raises(NativeDshMuxError, match="stream_cancelled"):
             opening.result(timeout=1)
-    with pytest.raises(NativeDshMuxError, match="stream_unknown"):
-        host.dsh_client_stream_read({**request, "cursor": 0})
+    assert host.dsh_client_stream_read({**request, "cursor": 0})["error"]["code"] == "gateway/cancelled"
     assert client.releases == [request["stream_id"]]
 
 
@@ -214,9 +213,61 @@ def test_cancel_wakes_pending_read_without_waiting_for_read_lock():
         pending = pool.submit(host.dsh_client_stream_read, {**request, "cursor": 0})
         assert entered.wait(1)
         assert host.dsh_client_stream_cancel(request) == {"cancelled": True}
-        with pytest.raises(NativeDshMuxError, match="stream_cancelled"):
-            pending.result(timeout=1)
+        terminal = pending.result(timeout=1)
+        assert terminal == {"items": [], "cursor": 1, "done": True,
+                            "error": {"code": "gateway/cancelled", "message": "窗口已停止读取此流。", "details": {}}}
     assert client.releases == [request["stream_id"]]
+
+
+def test_retired_reader_is_cancelled_but_live_transport_failure_is_not_hidden():
+    host, client = host_fixture()
+    request = stream_request()
+    host.dsh_client_stream_open(request)
+    client.stream_next = lambda _identity: (_ for _ in ()).throw(NativeDshMuxError("dsh_mux_stream_cancelled"))
+    with pytest.raises(NativeDshMuxError, match="dsh_mux_stream_cancelled"):
+        host.dsh_client_stream_read({**request, "cursor": 0})
+    host.retire_stream_reads()
+    assert host.dsh_client_stream_read({**request, "cursor": 0})["error"]["code"] == "gateway/cancelled"
+    host.close()
+    assert host.dsh_client_stream_read({**request, "cursor": 0})["error"]["code"] == "gateway/cancelled"
+    with pytest.raises(NativeDshMuxError, match="dsh_shell_closed"):
+        host.dsh_client_stream_read({**stream_request(), "cursor": 0})
+
+
+def test_retirement_does_not_mask_an_unrelated_pending_read_error():
+    host, client = host_fixture()
+    request = stream_request()
+    host.dsh_client_stream_open(request)
+
+    def failed(_identity):
+        host.retire_stream_reads()
+        raise NativeDshMuxError("dsh_mux_frame_invalid")
+
+    client.stream_next = failed
+    with pytest.raises(NativeDshMuxError, match="dsh_mux_frame_invalid"):
+        host.dsh_client_stream_read({**request, "cursor": 0})
+
+
+@pytest.mark.parametrize("retirement", ["live", "cancel_one", "owner_shutdown"])
+def test_pipe_eof_is_normal_only_after_explicit_owner_retirement(retirement):
+    host, client = host_fixture()
+    request = stream_request()
+    host.dsh_client_stream_open(request)
+
+    def ending(_identity):
+        if retirement == "owner_shutdown":
+            host.retire_stream_reads()
+        elif retirement == "cancel_one":
+            host.dsh_client_stream_cancel(request)
+        raise NativeDshMuxError("dsh_mux_connection_lost")
+
+    client.stream_next = ending
+    if retirement == "owner_shutdown":
+        result = host.dsh_client_stream_read({**request, "cursor": 0})
+        assert result["done"] and result["error"]["code"] == "gateway/cancelled"
+    else:
+        with pytest.raises(NativeDshMuxError, match="dsh_mux_connection_lost"):
+            host.dsh_client_stream_read({**request, "cursor": 0})
 
 
 def test_first_uplink_sequence_is_zero_and_eos_closes_only_uplink():

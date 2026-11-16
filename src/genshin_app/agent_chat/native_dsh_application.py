@@ -5,24 +5,28 @@ Session, resumes a Turn, starts a provider request or interprets model output.
 """
 from __future__ import annotations
 
+import re
 import threading
 
 from .credential_generation import CredentialGenerationController
 from .native_dsh_mux_client import NativeDshMuxError
+from .native_dsh_peer_client import NativeDshPeerClient
 from .native_dsh_shell_host import NativeDshShellHost
 
 
 class NativeDshApplication(NativeDshShellHost):
-    def __init__(self, process, *, credentials: CredentialGenerationController):
+    def __init__(self, process, *, credentials: CredentialGenerationController, synchronize_legacy=True):
         self._process_owner = process
         self._credentials = credentials
         self._lifecycle_lock = threading.RLock()
         self._disposed = False
         self._shutdown_diagnostic = None
         self._retire_cli_link = None
+        self._clients = {}
         super().__init__(process.client, boot=process.client.boot, bundle=process.client.bundle)
         try:
-            self.synchronize_credentials()
+            if synchronize_legacy:
+                self.synchronize_credentials()
         except Exception:
             try:
                 self.close()
@@ -88,14 +92,51 @@ class NativeDshApplication(NativeDshShellHost):
             raise TypeError("CLI retirement must be callable")
         self._retire_cli_link = retire
 
+    def create_client(self, peer_id, interactions="answer"):
+        """Create a public DSH Peer and independent WebView resources.
+
+        ``none`` is DSH's passive stream mode, not a read-only security policy.
+        The caller limits domain actions/routes for inspection-only windows.
+        """
+        if (not isinstance(peer_id, str) or re.fullmatch(r"[A-Za-z0-9_-]{1,128}", peer_id) is None
+                or interactions not in {"answer", "none"}):
+            raise NativeDshMuxError("dsh_shell_peer_invalid")
+        with self._lifecycle_lock:
+            if self._disposed:
+                raise NativeDshMuxError("dsh_shell_closed")
+            if peer_id in self._clients:
+                raise NativeDshMuxError("dsh_shell_peer_duplicate")
+            result = self._client.control("dsh_runtime_client_create",
+                {"peer_id": peer_id, "interactions": interactions})
+            if result != {"peer_id": peer_id, "interactions": interactions, "state": "ready"}:
+                raise NativeDshMuxError("dsh_shell_peer_ack_invalid")
+            carrier = NativeDshPeerClient(self._client, peer_id,
+                on_close=lambda: self._forget_client(peer_id))
+            host = NativeDshShellHost(carrier, boot=carrier.boot, bundle=carrier.bundle)
+            self._clients[peer_id] = host
+            return host
+
+    def _forget_client(self, peer_id):
+        with self._lifecycle_lock:
+            self._clients.pop(peer_id, None)
+
+    def close_client(self, peer_id):
+        with self._lifecycle_lock:
+            host = self._clients.get(peer_id)
+        if host is not None:
+            host.close()
+
     def close(self):
         with self._lifecycle_lock:
             if self._disposed:
                 return
             self._disposed = True
+            self.retire_stream_reads()
             try:
                 if self._retire_cli_link is not None:
                     self._retire_cli_link()
+                for client in list(self._clients.values()):
+                    client.close()
                 drained = self._client.control("dsh_runtime_drain")
                 if not isinstance(drained, dict) or drained.get("state") != "drained":
                     raise NativeDshMuxError("dsh_runtime_drain_ack_invalid")

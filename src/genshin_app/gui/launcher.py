@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import logging
+import sys
 import threading
 from collections.abc import Callable, Mapping
 from pathlib import Path
@@ -33,7 +34,11 @@ def _shutdown_agent_transports(api):
         if callable(close_dsh):
             close_dsh()
     finally:
-        api.agent_shutdown()
+        try:
+            if getattr(api, "_agent_windows", None) is not None:
+                api._agent_windows.shutdown()
+        finally:
+            api.agent_shutdown()
 
 
 _DATABASE_STARTUP_HTML = """<!doctype html>
@@ -106,6 +111,12 @@ window.databaseRecoveryStatus = function(value) {
 </script></body></html>"""
 
 
+_EDITOR_CLOSE_SCRIPT = (
+    "typeof window.WB?.requestClose === 'function' ? window.WB.requestClose() : "
+    "(typeof window.PL?.requestClose === 'function' ? window.PL.requestClose() : true)"
+)
+
+
 def install_close_guard(window, api: GuiApi) -> None:
     """Ask the editor outside the native closing callback's UI thread."""
     lock = threading.Lock()
@@ -114,8 +125,11 @@ def install_close_guard(window, api: GuiApi) -> None:
     def request_close():
         nonlocal checking
         try:
-            if window.evaluate_js("window.WB ? WB.requestClose() : (window.PL ? PL.requestClose() : true)") is True and not api._closing_approved:
-                api.confirm_close()
+            if window.evaluate_js(_EDITOR_CLOSE_SCRIPT) is True and not api._closing_approved:
+                result = api.confirm_close()
+                if isinstance(result, dict) and result.get("code"):
+                    logging.getLogger(__name__).warning("应用关闭检查未完成: %s", result.get("message"))
+                    window.create_confirmation_dialog("暂未退出应用", str(result.get("message") or "关闭检查尚未完成，请保存输入后重试。"))
         except Exception:
             if api._closing_approved:
                 return
@@ -158,6 +172,9 @@ def run_gui(
     emit_startup_status: bool = True,
 ) -> int:
     import webview  # 延迟导入：无 GUI 环境下 CLI 仍可用
+
+    from genshin_app.windows_product_registration import set_process_app_id
+    set_process_app_id()
 
     data_dir = Path(data_dir)
     profile_database = (data_dir / "genshin.db").resolve()
@@ -216,9 +233,9 @@ def run_gui(
             api._window = window
             install_close_guard(window, api)
             if main_window_callback is None:
-                webview.start()
+                webview.start(storage_path=str(data_dir / "webview-profile"), private_mode=False)
             else:
-                webview.start(lambda: main_window_callback(window, api))
+                webview.start(lambda: main_window_callback(window, api), storage_path=str(data_dir / "webview-profile"), private_mode=False)
         finally:
             _shutdown_agent_transports(api)
         return 0
@@ -254,6 +271,9 @@ def _create_main_window(
     *,
     hidden: bool = False,
 ):
+    from genshin_app.gui.agent_window import AgentWindowController
+
+    api._agent_windows = AgentWindowController(api, webview, web_dir())
     return webview.create_window(
         _main_title(open_path, identity),
         url=str(web_dir() / "index.html"),
@@ -336,6 +356,14 @@ def _run_paired_database_gui(
                 recovery._admission_aborted()
                 return
             identity = dict(app_identity) if app_identity is not None else {}
+            if is_frozen():
+                from genshin_app.installation_location import resolve_runtime_root
+                from genshin_app.managed_installation import (
+                    refresh_registered_installation,
+                )
+                installation_root = resolve_runtime_root(sys.executable)
+                if installation_root is not None:
+                    identity["installation_registration"] = refresh_registered_installation(installation_root)
             identity["release_plan_state"] = str(gate["state"])
             identity["service_mode"] = "database_setup" if database_setup else "local_database_service"
             manager = None if database_setup else ServiceManager(prepared_data_dir)
@@ -422,16 +450,18 @@ def _run_paired_database_gui(
         events.closing += recovery._can_close
 
     try:
-        webview.start(bootstrap)
+        webview.start(bootstrap, storage_path=str(data_dir / "webview-profile"), private_mode=False)
     finally:
         recovery.cancel_recovery()
         recovery._join()
-        api = runtime.get("api")
-        if api is not None:
-            _shutdown_agent_transports(api)
-        manager = runtime.get("manager")
-        if manager is not None:
-            manager.stop()
+        try:
+            api = runtime.get("api")
+            if api is not None:
+                _shutdown_agent_transports(api)
+        finally:
+            manager = runtime.get("manager")
+            if manager is not None:
+                manager.stop()
 
     error = runtime.get("error")
     if error is not None:

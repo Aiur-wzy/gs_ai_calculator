@@ -5,7 +5,6 @@ import hashlib
 import io
 import json
 import shutil
-import subprocess
 import sys
 from concurrent.futures import ThreadPoolExecutor
 from datetime import UTC, datetime, timedelta
@@ -108,8 +107,16 @@ def releases(tmp_path, monkeypatch):
         updater = root / PER_USER_UPDATER_RELATIVE
         updater.parent.mkdir()
         updater.write_bytes(f"app-updater-{generation}".encode())
+        (root / "GenshinCalcGUI.exe").write_bytes(f"gui-{generation}".encode())
+        maintenance = root / "maintenance" / "GenshinCalcSetup.exe"
+        maintenance.parent.mkdir()
+        maintenance.write_bytes(f"maintenance-{generation}".encode())
+        capability = root / "maintenance/installation-layout.json"
+        capability.write_text('{"contract":"genshin-installation-layout-v2"}', encoding="utf-8")
         inventory = root / "PACKAGE-FILES.sha256"
-        inventory.write_bytes(f"{_sha(executable)}  app.bin\n{_sha(updater)}  {PER_USER_UPDATER_RELATIVE}\n".encode())
+        names = sorted(["GenshinCalcGUI.exe", "app.bin", PER_USER_UPDATER_RELATIVE, "maintenance/GenshinCalcSetup.exe",
+                        "maintenance/installation-layout.json"])
+        inventory.write_bytes("".join(f"{_sha(root / name)}  {name}\n" for name in names).encode())
         apps[generation] = (root, _sha(inventory))
         database = tmp_path / f"db-source-{generation}.sqlite"
         _fixture_database(database, upstream_commit=str(generation) * 40,
@@ -280,7 +287,9 @@ def test_first_index_requires_verified_first_stable_app_pair(tmp_path, monkeypat
     assert verified["latest"] == ("app-product-1", "db-7.0.0-r1")
 
 
-def test_prepare_app_binds_updater_to_the_same_reviewed_portable_build(tmp_path, releases):
+def test_prepare_app_binds_updater_to_the_same_reviewed_portable_build(tmp_path, releases, monkeypatch):
+    monkeypatch.syspath_prepend(str(Path(__file__).resolve().parents[1] / "scripts"))
+    from scripts import build_release_pair_feed, verify_frozen_setup_archive
     apps, databases, documents, _, _ = releases
     source = tmp_path / "portable"
     shutil.copytree(apps[1][0], source)
@@ -292,8 +301,14 @@ def test_prepare_app_binds_updater_to_the_same_reviewed_portable_build(tmp_path,
     updater_dir.mkdir()
     updater = updater_dir / "GenshinCalcUpdater.exe"
     (source / PER_USER_UPDATER_RELATIVE).rename(updater)
+    maintenance = updater_dir / "GenshinCalcSetup.exe"
+    (source / "maintenance/GenshinCalcSetup.exe").rename(maintenance)
+    (source / "maintenance/installation-layout.json").unlink()
+    from genshin_app.portable_layout import PORTABLE_MARKER, PORTABLE_MARKER_BYTES
+    (source / PORTABLE_MARKER).write_bytes(PORTABLE_MARKER_BYTES)
     inventory = source / "PACKAGE-FILES.sha256"
-    files = ["_internal/bundled/genshin.db", "app.bin"]
+    files = sorted(path.relative_to(source).as_posix() for path in source.rglob("*")
+                   if path.is_file() and path.name != "PACKAGE-FILES.sha256")
     inventory.write_bytes("".join(f"{_sha(source / filename)}  {filename}\n" for filename in files).encode())
     pair = release_profile.create_release_pair_manifest(
         databases[1][1], release_pair_id=original_pair["release_pair_id"], pair_sequence=original_pair["pair_sequence"],
@@ -311,19 +326,23 @@ def test_prepare_app_binds_updater_to_the_same_reviewed_portable_build(tmp_path,
                     "sha256": _sha(updater), "size_bytes": updater.stat().st_size},
     }
     (updater_dir / "updater-artifact.json").write_bytes(canonical(receipt))
-    script = Path(__file__).resolve().parents[1] / "scripts" / "build_release_pair_feed.py"
-    command = [sys.executable, str(script), "prepare-app", "--source", str(source), "--updater", str(updater)]
+    verified = []
+    monkeypatch.setattr(verify_frozen_setup_archive, "verify_archive", lambda path:
+                        verified.append(path) or {"status": "verified", "executable_sha256": _sha(path)})
     target = tmp_path / "prepared-app"
-    result = subprocess.run([*command, "--output", str(target)], capture_output=True, check=False)
-    assert result.returncode == 0, result.stderr.decode()
+    build_release_pair_feed.prepare_independent_app(source, target, updater=updater, maintenance=maintenance)
+    assert verified == [maintenance]
     assert verify_package_artifact(target)["status"] == "verified"
     assert _sha(target / PER_USER_UPDATER_RELATIVE) == _sha(updater)
     assert _sha(target / "app.bin") == _sha(source / "app.bin")
+    assert _sha(target / "maintenance/GenshinCalcSetup.exe") == _sha(maintenance)
+    assert json.loads((target / "maintenance/installation-layout.json").read_text())["contract"] == "genshin-installation-layout-v2"
     assert not (target / "_internal" / "bundled").exists()
+    assert not (target / PORTABLE_MARKER).exists()
     updater.write_bytes(b"tampered bytes")
     rejected = tmp_path / "rejected-app"
-    failed = subprocess.run([*command, "--output", str(rejected)], capture_output=True, check=False)
-    assert failed.returncode == 1 and b"product_release_updater_build_mismatch" in failed.stderr
+    with pytest.raises(release_pair_feed.ReleasePairFeedError, match="product_release_updater_build_mismatch"):
+        build_release_pair_feed.prepare_independent_app(source, rejected, updater=updater, maintenance=maintenance)
     assert not rejected.exists()
 
 
@@ -421,7 +440,11 @@ def first_install(tmp_path, monkeypatch, releases):
         return Response(url)
 
     monkeypatch.setattr(transport, "_open_https", open_artifact)
-    return product_first_install.build_first_install_coordinator(), local, index, downloads
+    # Keep the signed r19/r20 transaction port covered independently of the
+    # new location/maintenance wrapper (covered in test_managed_installation).
+    return product_first_install._FirstInstallCoordinator(
+        local=local, url=version.DATABASE_RELEASE_MANIFEST_URL, trust_verifier=_verify,
+        programs_folder=lambda: local), local, index, downloads
 
 
 def test_first_install_boots_signed_pair_offline_and_keeps_existing_profile(monkeypatch, releases, first_install):
@@ -707,8 +730,8 @@ def test_paired_portable_offers_the_transition_before_database_only(tmp_path, mo
     bundled_manifest = bundled / "database-release-manifest.json"
     release_profile.write_database_release_manifest(bundled_manifest, manifest)
     inventory = active / "PACKAGE-FILES.sha256"
-    inventory.write_bytes(f"{_sha(bundled_manifest)}  _internal/bundled/database-release-manifest.json\n".encode()
-                          + inventory.read_bytes())
+    rows = inventory.read_text().splitlines() + [f"{_sha(bundled_manifest)}  _internal/bundled/database-release-manifest.json"]
+    inventory.write_text("\n".join(sorted(rows, key=lambda line: line.split("  ", 1)[1])) + "\n", newline="\n")
     original = documents[1, 1]["pair_manifest"]
     pair = release_profile.create_release_pair_manifest(
         manifest, release_pair_id=original["release_pair_id"], pair_sequence=original["pair_sequence"],
@@ -739,15 +762,24 @@ def test_paired_portable_offers_the_transition_before_database_only(tmp_path, mo
     assert [option["mode"] for option in service.discover()["update_options"]] == ["database_only"]
 
 
-def test_current_user_install_cold_boot_and_repeat_independent_updates(monkeypatch, releases, first_install):
+@pytest.mark.parametrize("custom_location", [False, True], ids=["default", "custom"])
+def test_current_user_install_cold_boot_and_repeat_independent_updates(monkeypatch, releases, first_install, custom_location):
     apps, databases, documents, _, payload = releases
     setup, local, index, downloads = first_install
+    profile = local / version.APP_DIR_NAME
+    if custom_location:
+        from genshin_app import managed_installation
+
+        profile = local.parent / "自选 安装目录"
+        monkeypatch.setattr(managed_installation, "_quiet", lambda *_args: None)
+        setup = managed_installation.ManagedInstallationCoordinator(
+            local=local, install_root=profile, url=setup._url, trust_verifier=_verify,
+        )
     initial = {**payload, "latest_app_release_id": "app-product-1", "latest_database_release_id": "db-7.0.0-r1",
                "apps": payload["apps"][:1], "pairs": [documents[1, 1]], "index_sequence": payload["index_sequence"] - 1}
     index[0] = canonical(_signed(initial))
     preview = setup.preview()
     setup.install(user_confirmed=True, confirmation_digest=preview["confirmation_digest"])
-    profile = local / version.APP_DIR_NAME
     app, data, workspace = profile / "app", profile / "data", profile / "update-workspace"
     executable = app / "app.bin"
     calls = []
@@ -933,7 +965,9 @@ def test_frozen_upgrade_qualification_uses_signed_local_files_and_keeps_profile(
     assert outcome["local_transport"]["database_archives"] == 0
     assert outcome["previous"]["database_sha256"] == outcome["target"]["database_sha256"]
     assert outcome["previous"]["app_inventory_sha256"] != outcome["target"]["app_inventory_sha256"]
-    assert set(outcome["preserved_profile_marker_sha256"]) == {"settings", "session", "plan", "registration"}
+    assert set(outcome["preserved_profile_marker_sha256"]) == {"settings", "session", "plan"}
+    assert outcome["registration_migration"] == {"layout_version": 2, "original_operation_retained": True,
+                                                "maintenance_ready": True, "windows_registration": "not_exercised_in_isolation"}
     assert outcome["startup_admission"]["can_start"] is True and outcome["journal_state"] == "cleanup_complete"
     assert all(duration >= 0 for duration in outcome["elapsed_seconds"].values())
     assert not first_install[3]  # no fallback to the fixture's ordinary network seam

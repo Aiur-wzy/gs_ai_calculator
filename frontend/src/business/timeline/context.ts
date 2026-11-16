@@ -2,12 +2,12 @@ import {actionNames,damageNames,reactionNames,elementNames,list,finite,copy,key,
 import {componentSource,createDamageSourceReader} from "./damage-sources";
 import {buffPresentation} from "./buff-presentation";
 export type JsonRecord=Record<string,any>;
-export interface TimelineInput {template?:JsonRecord|null;plan?:JsonRecord|null;result?:JsonRecord|null;executionModel?:JsonRecord|null;executionTemplate?:JsonRecord|null;current?:boolean;describeEffect?:(event:TimelineEvent,context:{characterName:(id:any)=>string})=>JsonRecord;}
+export interface TimelineInput {template?:JsonRecord|null;plan?:JsonRecord|null;result?:JsonRecord|null;executionModel?:JsonRecord|null;executionTemplate?:JsonRecord|null;current?:boolean;resultAvailability?:"not_loaded";describeEffect?:(event:TimelineEvent,context:{characterName:(id:any)=>string})=>JsonRecord;}
 export type ViewName="actions"|"effects"|"damage";
 export interface TimelineEvent extends JsonRecord {id:string;kind:string;start:number;end?:number;detail:JsonRecord;label:string;}
 export interface TimelineView {events:TimelineEvent[];notes:string[];coverage?:JsonRecord;}
 export type TimelineViews=Record<ViewName,TimelineView>;
-export function createTimelineContext({template={},plan=null,result=null,executionModel=null,executionTemplate=null,current=false,describeEffect}:TimelineInput={}) {
+export function createTimelineContext({template={},plan=null,result=null,executionModel=null,executionTemplate=null,current=false,resultAvailability,describeEffect}:TimelineInput={}) {
     const t = template?.manual_template || template || {};
     const r = current ? (result?.result || result) : null;
     const explanationDocument = r?.damage_explanations?.contract === "damage-explanation-v1"
@@ -116,7 +116,9 @@ export function createTimelineContext({template={},plan=null,result=null,executi
     const cancelled = new Map(logs.filter(row => row.cancelled_action && row.status === "passed")
       .map(row => [row.cancelled_action.id, row.t]));
     if (!r) {
-      const message = result ? "计算结果已失效；这里只显示当前输入，不使用旧数值或机制流水。" : "尚未计算；这里只显示显式输入。自动档案的各段伤害需计算后查看，不代表动作已执行。";
+      const message = result ? "计算结果已失效；这里只显示当前输入，不使用旧数值或机制流水。" : resultAvailability==="not_loaded"
+        ? "已有计算记录，当前尚未载入效果和伤害详情；这里只显示显式输入，不能据此判断某段伤害未执行。"
+        : "尚未计算；这里只显示显式输入。自动档案的各段伤害需计算后查看，不代表动作已执行。";
       for (const view of Object.keys(views) as ViewName[]) note(view, message);
     }
     return {t,r,rotation,model,actions,abilities,actionMap,rules,receipt,reportWindow,manualBuffPresentation,manualBuffSource,poolModel,pools,operations,consumers,gateConsumerFor,gateRecipients,characters,characterName,readable,duration,views,within,note,put,source,actionLabel,hitLabel,hitSource,hitLineage,damageSources,explanationDocument,explanationFingerprint,ruleSource,logs,executionLimit,actionLogs,cancelled,template,plan,result,executionModel,executionTemplate,current,describeEffect};

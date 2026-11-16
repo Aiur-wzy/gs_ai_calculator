@@ -1,3 +1,4 @@
+import {confirmedNoFileWrite} from "../file-write-outcome";
 import {type WhiteboardPorts} from "./ports";
 export function createWhiteboardFiles(ports:WhiteboardPorts){
   const WB=ports.owner,UI=ports.ui,$=ports.query,callApi=ports.api,setStatus=ports.status,services=ports.services;
@@ -11,14 +12,14 @@ const load =async (path:any,options:any={})=>{
   const intent=options.openIntent||beginOpen();if(!intent.current())return false;
   const inspected=await callApi("inspect_plan_file",path);
   if(!intent.current()){setStatus("检查文件期间当前白板已变化，没有载入或切换文件；请重新操作。");return false;}
-  if(inspected?.code){UI.error(inspected);return false;}
+  if(inspected?.code){options.onError?.(inspected);UI.error(inspected);return false;}
   if(inspected?.data?.kind==="genshin-candidate-input-draft"){
     const opener=window.GenshinCandidateDraftFiles;
     if(!opener){setStatus("请在支持原生 AI 的客户端中打开候选输入草稿；正式白板未改变。");return false;}
     const opened=await opener.openSelected(path,inspected.data.file_sha,{isCurrent:()=>intent.current()});setStatus(opened.message);return opened.opened;
   }
   if(!await WB.leave({openIntent:intent}))return false;if(!intent.current())return false;const r=await callApi("whiteboard_load",path);
-  if(!intent.current())return false;if(r.code){UI.error(r);return false;}WB.replace(r.data,true);UI.tabs("whiteboard");setStatus("已加载创作白板，动作草稿可继续编辑。");return true;
+  if(!intent.current())return false;if(r.code){options.onError?.(r);UI.error(r);return false;}WB.replace(r.data,true);UI.tabs("whiteboard");setStatus("已加载创作白板，动作草稿可继续编辑。");return true;
 };
 const defaultPath =()=>`${ports.plansDir()||"plans"}/${(WB.state.board.title||"排轴白板").replace(/[<>:"/\\|?*]/g,"_")}.whiteboard.json`;
 const fileDialog =(mode:any,options:any={})=>{
@@ -38,7 +39,7 @@ const fileDialog =(mode:any,options:any={})=>{
 const openFile =(options:any={})=>nativeFileAction("open",options);
 const saveAs =(options:any={})=>nativeFileAction("save",options);
 const save =async (path:any,options:any={})=>{
-  if(WB.unappliedEditor()){setStatus("请先保存角色设置或明确放弃角色修改，再保存白板。");return false;}
+  if(WB.unappliedEditor()){const message="请先保存角色设置或明确放弃角色修改，再保存白板。";options.onResponse?.({code:1,message,details:{publication_state:"not_written",published_paths:[],unknown_paths:[]}});setStatus(message);return false;}
   path=typeof path==="string"?path:($("#wb-path")?.value.trim()||WB.state.path||WB.defaultPath());
   const chatSnapshot=services.workbench?.beforeDocumentSave?.(),token=WB.token(),copy=UI.clone(WB.state.board);WB.state.activeSave=token;
   const r=await callApi("whiteboard_save",path,copy,path===WB.state.path?WB.state.fileSha:null);
@@ -97,17 +98,34 @@ const importResultPathDialog =()=>{
     }finally{WB.state.userFilePickerPending=false;}
   }
   async function nativeFileAction(mode:"open"|"save",options:any={}){
-    const finish=(status:string,message:string)=>{options.onAgentActionResult?.({status,message});return status==="completed";};
+    const finish=(status:string,message:string)=>{
+      if(status!=="completed")setStatus(message);
+      options.onAgentActionResult?.({status,message});return status==="completed";
+    };
     if(mode==="save"&&!WB.state.board)return finish("failed","请先新建或打开白板。");
-    if(WB.state.userFilePickerPending)return finish("cancelled","文件选择窗口已经打开。");
+    if(WB.state.userFilePickerPending)return finish("failed","文件选择窗口已经打开，请先完成当前操作；本次未执行。");
     const intent=mode==="open"?beginOpen():null,token=mode==="save"?WB.token():null;
-    try{const picked=await pickUserFile({action:mode,document_kind:"whiteboard",suggested_name:mode==="save"?`${WB.state.board?.title||"排轴白板"}.whiteboard.json`:null});
-      if(!picked||picked.cancelled)return finish("cancelled","已取消文件操作，当前文档已保留。");
-      if(!(intent?intent.current():WB.current(token))){setStatus("选择文件期间当前草稿发生变化，没有覆盖或打开文件；请重新操作。");return finish("cancelled","当前草稿已变化，文件操作未执行。");}
-      let written=false;const ok=mode==="save"?await WB.save(picked.path,{onWritten:()=>{written=true;}}):await WB.load(picked.path,{openIntent:intent});
-      if(written&&!ok)return finish("completed","所提交的白板副本已保存；当前草稿随后有变化，仍需保存。");
-      return finish(ok?"completed":"cancelled",ok?mode==="save"?"App已确认白板副本保存完成。":"App已确认打开所选白板。":"App未确认文件操作完成，当前草稿已保留。");
-    }catch(error){const message=`文件操作未完成：${error instanceof Error?error.message:String(error)}`;setStatus(message);return finish("failed",message);}
+    let written=false,writeAttempted=false,response:any=null,loadError:any=null;
+    try{
+      const picked=await pickUserFile({action:mode,document_kind:"whiteboard",suggested_name:mode==="save"?`${WB.state.board?.title||"排轴白板"}.whiteboard.json`:null});
+      if(!picked)return finish("failed","当前文件选择窗口不可用，本次未执行文件操作。");
+      if(picked.cancelled)return finish("cancelled","已取消文件操作，当前文档已保留。");
+      if(!(intent?intent.current():WB.current(token)))return finish("failed","选择文件期间当前草稿发生变化，文件操作未执行；请重新操作。");
+      writeAttempted=mode==="save";
+      const ok=mode==="save"
+        ?await WB.save(picked.path,{onWritten:()=>{written=true;},onResponse:(value:any)=>{response=value;}})
+        :await WB.load(picked.path,{openIntent:intent,onError:(value:any)=>{loadError=value;}});
+      if(written||ok)return finish("completed",ok?mode==="save"?"App已确认白板副本保存完成。":"App已确认打开所选白板。":"所提交的白板副本已保存；当前草稿随后有变化，仍需保存。");
+      if(mode==="save")return !confirmedNoFileWrite(response)
+        ?finish("unknown","暂时无法确认文件是否已经写入，请先核对所选文件；不要直接重复保存。")
+        :finish("failed",response?.message||"白板未保存，请查看输入或文件冲突提示。");
+      if(loadError)return finish("failed",loadError.message||"所选白板无法打开，当前文档已保留。");
+      return finish("cancelled","未打开所选白板，当前文档已保留。");
+    }catch(error){
+      if(written)return finish("completed","白板副本已保存；界面刷新未完成，请核对当前文档。");
+      if(writeAttempted&&!confirmedNoFileWrite(response))return finish("unknown","暂时无法确认文件是否已经写入，请先核对所选文件；不要直接重复保存。");
+      return finish("failed",`文件操作未完成：${error instanceof Error?error.message:String(error)}`);
+    }
   }
   async function importResult(path?:string,expectedFileSha?:string){
     if(!WB.state.board){setStatus("请先打开结果对应的白板。");return false;}
@@ -137,7 +155,7 @@ const importResultPathDialog =()=>{
     try{
       setStatus("请选择完整计算结果的保存位置。");
       const response=await publish(applied.sessionId,board,calculated,isCurrent);
-      if(response?.code!==0){setStatus(response?.message||"结果没有保存，请核对当前白板和保存位置。",response?.details);return false;}
+      if(response?.code!==0){setStatus(confirmedNoFileWrite(response)?response?.message||"结果没有保存，请核对当前白板和保存位置。":"暂时无法确认结果是否已保存，请先核对所选文件；不要直接重复保存。",response?.details);return false;}
       if(response.data?.cancelled){setStatus("已取消计算结果另存为。");return false;}
       if(typeof response.data?.path!=="string"){setStatus("保存状态尚未确认，请先核对所选位置。");return false;}
       if(isCurrent()){WB.state.appliedResultFile={calculated,path:response.data.path};WB.render();}

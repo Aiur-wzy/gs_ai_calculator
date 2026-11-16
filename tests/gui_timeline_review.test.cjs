@@ -277,7 +277,7 @@ test('same-time cluster retains the execution trace order after two-digit trace 
   const first=input.result.mechanics_trace.find(row=>row.type==='activation');
   input.result.mechanics_trace=Array.from({length:12},(_,i)=>({...first,t:1,event_id:`trigger:${i}`}));
   const {world}=renderer(input);world.TV.changeMode('effects');
-  const row=world.TV.rows.find(row=>row.kind==='activation');
+  const row=world.TV.rows.find(row=>row.events.some(event=>event.kind==='activation'));
   assert.deepEqual(plain(row.events.map(event=>event.detail.trace_index)),Array.from({length:12},(_,i)=>i));
   assert.deepEqual(plain(row.items[0].events.map(event=>event.detail.trace_index)),Array.from({length:12},(_,i)=>i));
 });
@@ -353,6 +353,17 @@ function migratedBenefitDom(box,event){
   return box;
 }
 
+function migratedCoverageRecipientHeading(box,event,projection){
+  const knownRecipient=event.kind==='coverage'&&projection.characters.some(character=>
+    character.id===event.character&&Boolean(character.label||character.name));
+  if(knownRecipient){
+    const headings=descendants(box).filter(node=>node.tagName==='dt'&&node.text==='角色：');
+    assert.equal(headings.length,1,'only the coverage recipient heading may change');
+    headings[0].text='接收角色：';
+  }
+  return box;
+}
+
 test('G4 pure stages equal the independent frozen projection on real receipts and stale inputs',()=>{
   const reference={console};reference.window=reference;vm.createContext(reference);
   vm.runInContext(fs.readFileSync(path.join(__dirname,'reference/gui-timeline-data-v1.js'),'utf8'),reference);
@@ -380,7 +391,7 @@ test('NEXT-06 real report window retains inclusive damage and full effect timing
   assert.equal(JSON.stringify(input),before,'the report projection must not rewrite engine inputs');
 });
 
-test('G4 DOM/layout/detail components equal frozen modern renderer across all views',()=>{
+test('G4 execution members and detail facts survive the N07 presentation replacement',()=>{
   const summarize=node=>({tag:node.tagName,attrs:Object.fromEntries(Object.entries(node.attributes).map(([key,value])=>[key,String(value)])),text:node.text||'',children:node.children.map(summarize)});
   for(const name of ['independent','snapshot','failed','quota_keep','initial']){
     const input=plain(fixtures[name]),before=JSON.stringify(input),actual=renderer(input),expected=renderer(plain(input),true);
@@ -390,8 +401,12 @@ test('G4 DOM/layout/detail components equal frozen modern renderer across all vi
     for(const mode of ['actions','effects','damage']){
       actual.world.TV.changeMode(mode);expected.world.TV.changeMode(mode);
       for(const pair of [actual,expected]){pair.world.TV.sourceFilter='';pair.world.TV.rebuildRows();pair.world.TV.paintProjection();}
-      assert.deepEqual(plain(actual.world.TV.rows),plain(expected.world.TV.rows),name+':'+mode+' rows');
-      assert.deepEqual(summarize(actual.nodes.get('#timeline')),summarize(expected.nodes.get('#timeline')),name+':'+mode+' SVG');
+      // N07 deliberately replaces row identities, stacking, geometry and point
+      // clustering. The independent execution projection remains the oracle;
+      // new DOM/geometry interactions are covered by axis-layout.test.ts.
+      const visible=actual.world.TV.rows.flatMap(row=>row.events),referenceEvents=expected.world.TV.projection.views[mode].events
+        .filter(event=>event.kind!=='calculation_sampling'&&(mode!=='damage'||event.kind!=='calculation'));
+      assert.deepEqual(plain(visible.map(e=>e.id).sort()),plain(referenceEvents.map(e=>e.id).sort()),name+':'+mode+' all original members');
       const events=actual.world.TV.projection.views[mode].events;
       for(const event of events.slice(0,4)){
         actual.world.TV.showDetail(event);expected.world.TV.showDetail(expected.world.TV.projection.views[mode].events.find(e=>e.id===event.id));
@@ -411,9 +426,10 @@ test('G4 DOM/layout/detail components equal frozen modern renderer across all vi
         }
         // Remove exactly the newly asserted section, not old zones, damage,
         // quota/effect/sampling detail or any other renderer output.
-        const actualDetail=summarize({...box,children:box.children.filter(n=>!added.includes(n))});
+        const actualDetail=summarize({...box,children:box.children.filter(n=>!added.includes(n)&&n.className!=='tl-name-details')});
         const expectedEvent=expected.world.TV.projection.views[mode].events.find(e=>e.id===event.id);
-        assert.deepEqual(actualDetail,summarize(migratedBenefitDom(expected.nodes.get('#timeline-detail'),expectedEvent)),name+':'+mode+' detail');
+        const expectedBox=migratedBenefitDom(expected.nodes.get('#timeline-detail'),expectedEvent);
+        assert.deepEqual(actualDetail,summarize(migratedCoverageRecipientHeading(expectedBox,expectedEvent,expected.world.TV.projection)),name+':'+mode+' detail');
       }
     }
     assert.equal(JSON.stringify(input),before);

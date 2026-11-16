@@ -34,6 +34,11 @@ def test_public_bridge_signatures_match_frozen_pre_refactor_contract():
     assert additions["extended_methods"] == {}
     assert not expected.keys() & additions["added_methods"].keys()
     expected.update({name: new_methods[name] for name in additions["added_methods"]})
+    windows = json.loads((ROOT / "tests/fixtures/gui-api-public-contract-r21-additive.json").read_text(encoding="utf-8"))
+    window_methods = reviewed_expected_contract(baseline, windows)
+    assert windows["extended_methods"] == {}
+    assert not expected.keys() & windows["added_methods"].keys()
+    expected.update({name: window_methods[name] for name in windows["added_methods"]})
     assert actual == expected
 
 

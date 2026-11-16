@@ -6,8 +6,6 @@ from copy import deepcopy
 from dataclasses import replace
 from threading import Lock
 
-from .release_pair_coordinator import ReleasePairCoordinatorError
-from .release_pair_discovery import ReleasePairDiscoveryError
 from .release_pair_helper import read_update_outcome
 from .release_pair_update import ReleasePairUpdateError
 from .release_update_contracts import (
@@ -70,6 +68,9 @@ class ReleaseUpdateService:
             return result
 
     def _check_database_update(self):
+        # A failed or inapplicable fresh check must not leave an older offer
+        # actionable. The coordinator still revalidates at installation time.
+        self._discovery = None
         identity = self.ports.current_release()
         if self._database_setup is not None and not self.settings.host_network_restricted:
             current = self._current_database_status(identity)
@@ -116,17 +117,17 @@ class ReleaseUpdateService:
         if self.settings.host_network_restricted or not exists:
             return unavailable_database_status(current, self.settings, initialized=exists)
         coordinator = self._coordinator
-        state = (coordinator.availability() if coordinator is not None else {
-            "available": False, "reason": self._coordinator_error or "release_pair_update_coordinator_unavailable",
-        })
         try:
+            state = (coordinator.availability() if coordinator is not None else {
+                "available": False, "reason": self._coordinator_error or "release_pair_update_coordinator_unavailable",
+            })
             discovered = coordinator.discover() if coordinator is not None else self.ports.discover_pair(
                 url=identity.manifest_url or None,
                 cache_path=self.settings.data_dir / "cache/release-pair-latest.json",
                 channel=identity.release_channel,
             )
             result = discovered_database_status(discovered, state, identity, current)
-            self._discovery = discovered if discovered.get("authoritative") is True else None
+            self._discovery = discovered if result.get("update_action_available") is True else None
             if identity.release_channel == "stable":
                 workspace = getattr(coordinator, "workspace", None)
                 outcome = read_update_outcome(workspace) if workspace is not None else None
@@ -142,7 +143,7 @@ class ReleaseUpdateService:
                     reason = outcome["reason"]
                     result["message"] = f"{message}（{reason}）" if reason else message
             return result
-        except (ReleasePairCoordinatorError, ReleasePairDiscoveryError, ReleasePairUpdateError, OSError, ValueError) as error:
+        except (RuntimeError, OSError, ValueError) as error:
             self._discovery = None
             raise ReleaseUpdateFailure("无法完成更新检查。请核对当前安装状态。",
                                        getattr(error, "reason", "release_pair_update_check_failed")) from error
@@ -160,15 +161,21 @@ class ReleaseUpdateService:
                 raise ReleaseUpdateFailure("数据库安装未完成。请重新检查可用版本或继续恢复。",
                                            getattr(error, "reason", "database_setup_failed")) from error
         coordinator, discovery = self._coordinator, self._discovery
-        if coordinator is None or coordinator.availability().get("available") is not True:
+        try:
+            available = coordinator is not None and coordinator.availability().get("available") is True
+        except (RuntimeError, OSError, ValueError) as error:
+            self._discovery = None
+            raise ReleaseUpdateFailure("无法核实更新器状态。请重新检查版本后重试。",
+                                       getattr(error, "reason", "release_pair_update_check_failed")) from error
+        if not available:
             raise ReleaseUpdateFailure(
-                "数据库不能脱离应用单独更新。当前尚未配置已验证的应用与数据库联合更新包；在用数据库未被修改。",
+                "当前没有可用的已验证更新器，在用数据库未被修改。请从发布页下载安装器，再选择更新程序或数据库。",
                 "database_pair_update_coordinator_required")
         if discovery is None:
-            raise ReleaseUpdateFailure("请先重新检查版本，再确认本次应用与数据库联合更新。",
+            raise ReleaseUpdateFailure("请先重新检查版本，再选择并确认要更新的内容。",
                                        "release_pair_update_discovery_required")
         if user_confirmed is not True:
-            raise ReleaseUpdateFailure("用户尚未确认联合更新。", "release_pair_update_confirmation_required")
+            raise ReleaseUpdateFailure("用户尚未确认本次更新。", "release_pair_update_confirmation_required")
         options = discovery.get("update_options")
         authorized = (any(item["confirmation_digest"] == confirmation_digest for item in options)
                       if isinstance(options, list) else confirmation_digest == discovery.get("confirmation_digest"))

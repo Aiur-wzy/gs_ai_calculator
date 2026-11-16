@@ -1,5 +1,6 @@
 /** Scoped App catalog over public DSH agent creation and tool execution facts. */
 import { createHash } from 'node:crypto'
+import { symbols } from '@deepseek-ai/cordis'
 import { compileAppToolDefinitions, validateAppToolsSnapshot, MAX_APP_TOOL_RESULT_BYTES } from './native-app-tool-catalog.mjs'
 import { NativeDshDomainError } from './native-dsh-domain-transport.mjs'
 import { nativeAppToolWireSchemas } from './native-app-tool-schema.mjs'
@@ -42,28 +43,27 @@ function exposeDomainFailure(error, tool) {
   return error
 }
 
-function replaceOwnedSchemas(existing, ownedNames, schemas) {
-  const pending = new Map(structuredClone(schemas).map(schema => [schema.name, schema]))
-  const result = existing.flatMap(schema => {
-    if (!ownedNames.has(schema.name)) return [schema]
-    const replacement = pending.get(schema.name)
-    pending.delete(schema.name)
-    return replacement === undefined ? [] : [replacement]
-  })
-  // Preserve every other owner's relative order (including a configured DSH
-  // order). Newly discovered App tools use canonical name insertion.
-  for (const schema of pending.values()) {
-    const index = result.findIndex(other => other.name > schema.name)
-    result.splice(index < 0 ? result.length : index, 0, schema)
-  }
-  return result
-}
-
 export function mountNativeDshDomainTools(ctx, { transport }) {
   if (typeof transport?.bindSession !== 'function' || typeof transport?.execute !== 'function') {
     throw new TypeError('domain_transport_required')
   }
   const sessions = new Map()
+  // rc.3 freezes registrations in this public entry before assembling prompt
+  // text. Refresh the App-owned catalog first, then delegate the entire tool
+  // admission/execution lifecycle to the official implementation. There is no
+  // awaitable pre-resolve event in this release; do not patch its private loop.
+  const registry = ctx.tools[symbols.original] ?? ctx.tools
+  const originalResolve = registry.resolve
+  const resolveWithDomain = async function (context) {
+    const scoped = sessions.get(context.agent.id)
+    if (scoped) await scoped.prepare(context.signal)
+    context.signal.throwIfAborted()
+    return originalResolve.call(this, context)
+  }
+  registry.resolve = resolveWithDomain
+  ctx.effect(() => () => {
+    if (registry.resolve === resolveWithDomain) registry.resolve = originalResolve
+  }, 'App: refresh domain before official tool admission')
   const knownUnknown = new Set()
   const pendingCalls = new Map()
   const key = (sessionId, turn, step) => JSON.stringify([sessionId, turn, step])
@@ -81,7 +81,6 @@ export function mountNativeDshDomainTools(ctx, { transport }) {
     let assembling = false
     let activity = 0
     let adviceIssue = null
-    const ownedNames = new Set()
     const policyFor = bundle => {
       if (bundle === undefined) return FALLBACK_POLICY
       if (typeof bundle.system_prompt !== 'string' || bundle.system_prompt.length === 0
@@ -277,7 +276,6 @@ export function mountNativeDshDomainTools(ctx, { transport }) {
         try {
           for (const definition of definitions) {
             disposeTools.push(scope.tools.register(definition))
-            ownedNames.add(definition.name)
           }
         } catch (error) {
           clearTools()
@@ -313,15 +311,15 @@ export function mountNativeDshDomainTools(ctx, { transport }) {
       }
     }
     await refreshPublished(signal)
-    // Public assemble waterfall runs before the request freezes tools. A
-    // pre-step hook is too late even though context is subsequently refreshed.
+    // The presentation waterfall owns text only in rc.3. Definitions already
+    // passed through official resolve() above, so never replace its schemas.
     scope.on('system-prompt/assemble', async (_assembly, context, next) => {
       if (assembling) throw new NativeDshDomainError('domain_assembly_reentrant')
       assembling = true
       try {
         context.signal?.throwIfAborted()
         const assembly = await next()
-        const view = await refreshPublished(context.signal)
+        const view = context.toolSet === undefined ? await refreshPublished(context.signal) : published
         context.signal?.throwIfAborted()
         await projectCurrentAppContext(ctx, agent, view.context, context.signal)
         return { ...assembly,
@@ -329,13 +327,12 @@ export function mountNativeDshDomainTools(ctx, { transport }) {
             ? { ...section, text: view.policy } : section),
           contexts: assembly.contexts.map(entry => entry.name === 'genshin:app-domain'
             ? { ...entry, text: view.context } : entry),
-          tools: replaceOwnedSchemas(assembly.tools, ownedNames, view.schemas),
         }
       } finally {
         assembling = false
       }
     }, { prepend: true })
-    sessions.set(agent.id, { get snapshot() { return structuredClone(snapshot) },
+    sessions.set(agent.id, { prepare: refreshPublished, get snapshot() { return structuredClone(snapshot) },
       get advice() { return { binding: bindingState, activity,
         review: structuredClone(runtimeContext.task_review ?? runtimeContext.candidate?.task_review
           ?? runtimeContext.feedback_context?.task_review ?? null),

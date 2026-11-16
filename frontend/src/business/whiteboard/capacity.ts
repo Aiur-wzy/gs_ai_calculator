@@ -17,7 +17,8 @@ const removeCapacityIntent =(index:any)=>{
 const capacityIntentMenuItems =(index:any)=>WB.capacityIntents()[index]?[{id:"edit-capacity-intent",label:"编辑次数意图",run:()=>WB.editCapacityIntent(index)},
   {type:"separator"},{id:"remove-capacity-intent",label:"删除次数意图",danger:true,run:()=>WB.removeCapacityIntent(index)}]:[];
 const renderCapacityIntents =(box:any)=>{
-  const intents=WB.capacityIntents(),section=UI.el("section",null,"wb-capacity-intents"),unknown=intents.filter((intent:any)=>intent.context===null).length;
+  const intents=WB.capacityIntents(),unknown=intents.filter((intent:any)=>intent.context===null).length,
+    section=WB.fold(`次数意图（${intents.length}）${unknown?` · ${unknown} 项待确认`:""}`,"capacityIntentsOpen");section.className+=" wb-capacity-intents";
   section.append(UI.el("h3",`技能次数意图（${intents.length}）`),
     UI.el("p",unknown?`次数场景未确认 · 尚有 ${unknown} 个次数意图未确认场景`:intents.length?"全部次数意图已明确场景":"次数场景未确认 · 当前没有次数意图",unknown?"wb-warning":"wb-note"));
   if(WB.capacityContextConflict())section.append(UI.el("p","多个次数意图的场景不一致，保存、目录与后续计算都会被阻断；请逐项统一或清除。","wb-danger"));

@@ -458,10 +458,15 @@ DV.checkDatabaseUpdate = async () => {
   const r = await callApi("check_database_update");
   if (request !== DV.state.updateRequest) return;
   const button = $("#data-update"), details = $("#db-version-details");
-  if (r.code !== 0) {
+  const banner = $("#update-banner");
+  if (banner) {
+    banner.replaceChildren();
+    banner.classList.add("hidden");
+  }
+  if (r?.code !== 0) {
     DV.state.databaseUpdate = null;
     button.disabled = true;
-    DS.setText($("#db-update-status"), r.message);
+    DS.setText($("#db-update-status"), r?.message || "暂时无法检查应用和数据库更新。");
     DS.setText(details, "版本检查未完成。当前应用和数据库未发生改变。");
     window.WS?.refresh?.();
     return;
@@ -502,13 +507,11 @@ DV.checkDatabaseUpdate = async () => {
   rows.push(data.coordinator_available ? "安装方式：保存当前工作后，按确认的选项更新并重启"
     : "安装方式：当前未找到可用更新器，仅显示版本信息");
   DS.setText(details, rows.join("\n"));
-  const banner = $("#update-banner");
   if (banner) {
-    banner.textContent = "";
     const setup=data.local_database_setup_available===true;
     const showOnline=product&&data.update_action_available===true;
-    banner.classList.toggle("hidden", !setup&&!showOnline);
     if (setup||showOnline) {
+      banner.classList.remove("hidden");
       banner.append(UI.el("span", setup ? "安装数据库后即可查询资料和计算。" : "发现新的应用或数据库版本。"));
       if(showOnline)banner.append(UI.button(setup?"下载数据库":"查看更新选项", () => DV.updateDatabase()));
       if(setup)banner.append(UI.button("选择本地发行包", () => DV.chooseLocalDatabase()));

@@ -11,19 +11,7 @@ window.AppEditorFileActions=Object.freeze({create({root,show}){
   };
   const matches=snapshot=>snapshot.base?adapter.currentMatches(snapshot.base):!WB.state.board&&!PL.state.plan&&snapshot.empty.boardEpoch===WB.state.request&&snapshot.empty.planEpoch===PL.state.sourceEpoch;
   const outcome=(status,message,guard=false)=>({status,message,dirty_open_guard_passed:guard});
-  const confirmedNoWrite=response=>{
-    if(!response||response.code===0)return false;
-    const details=response.details;
-    // A request-classified error can still follow a completed replace or a
-    // lost response. Only the publisher's explicit side-effect account or a
-    // known pre-publication validation error proves that nothing was written.
-    if(details&&(Array.isArray(details.published_paths)||Array.isArray(details.unknown_paths))){
-      return Array.isArray(details.published_paths)&&details.published_paths.length===0&&
-        Array.isArray(details.unknown_paths)&&details.unknown_paths.length===0;
-    }
-    return details?.publication_state==="not_written"||["invalid_plan","invalid_whiteboard","candidate_input_draft_filename",
-      "candidate_input_draft_target_invalid","dsh_domain_session_unbound"].includes(response.reason);
-  };
+  const confirmedNoWrite=response=>window.GenshinBusinessUI?.confirmedNoFileWrite?.(response)===true;
   const unconfirmed=response=>{throw new Error(response?.details?.publication_state==="written_unverified"?"app_action_written_unverified":response?.reason||"app_action_execution_outcome_unknown");};
   const pick=async(action,documentKind,suggested)=>{
     const response=await callApi("dsh_client_file_dialog",{action,document_kind:documentKind,suggested_name:suggested||null});
@@ -40,7 +28,9 @@ window.AppEditorFileActions=Object.freeze({create({root,show}){
       const target=request.target;
       if(target?.kind!=="candidate_input_draft"||typeof target.workspace_id!=="string"||typeof request.ui_receipt!=="string"||typeof conversationId!=="string"||!conversationId)return outcome("failed","候选草稿保存目标不一致，未执行保存。");
       onPhase?.("choosing");
-      const picked=await callApi("dsh_client_file_dialog",{action:"save",document_kind:"candidate_input_draft",suggested_name:request.suggested_name||"候选输入草稿.gencdraft.json"});
+      let picked;
+      try{picked=await callApi("dsh_client_file_dialog",{action:"save",document_kind:"candidate_input_draft",suggested_name:request.suggested_name||"候选输入草稿.gencdraft.json"});}
+      catch{return outcome("failed","无法选择草稿保存位置，未写入文件。请重新尝试选择位置。");}
       if(picked.code)return outcome("failed",picked.message||"无法选择草稿保存位置，未写入文件。");
       if(picked.data?.cancelled)return outcome("cancelled","已取消保存，草稿仍保留在候选区。");
       if(!matches(snapshot))return outcome("failed","选择保存位置期间正式文档已变化，未写入文件。请回到原会话重新保存草稿。");
@@ -63,19 +53,29 @@ window.AppEditorFileActions=Object.freeze({create({root,show}){
       try{path=await pick("open",selected,request.suggested_name);}catch(error){return outcome("failed",error.message);}
       if(!path)return outcome("cancelled","用户取消了打开文件。");
       if(!matches(snapshot)||!openIntent.current())return outcome("failed","选择文件期间文档已变化，未打开新文件。");
-      const inspected=await callApi("inspect_plan_file",path);if(inspected.code)return outcome("failed","所选文件未通过检查，当前文档已保留。");
+      let inspected;
+      try{inspected=await callApi("inspect_plan_file",path);}
+      catch{return outcome("failed","无法完成所选文件的检查，当前文档已保留。请重新尝试打开。");}
+      if(inspected.code)return outcome("failed","所选文件未通过检查，当前文档已保留。");
       if(!matches(snapshot)||!openIntent.current())return outcome("failed","检查文件期间文档已变化，未打开新文件。");
       const opened=await window.GenshinBusinessUI.openInspectedDocument(path,inspected.data,openIntent,{board:WB,editor:RT,report:RS,show});
-      return opened.opened?{...outcome("completed",opened.message,!opened.readOnly),...(opened.readOnly?{read_only_open:true}:{})}:outcome("cancelled",opened.message);
+      return opened.opened?{...outcome("completed",opened.message,!opened.readOnly),...(opened.readOnly?{read_only_open:true}:{})}:outcome(opened.failed?"failed":"cancelled",opened.message);
     }
     if(action==="save_current"||action==="save_as"){
       if(!snapshot.currentDocumentId)return outcome("failed","当前没有可保存的正式文档，请先审核并同步候选。");
-      let path=action==="save_current"&&snapshot.workspace.has_path?null:await pick("save",selected,request.suggested_name);
+      let path=null;
+      if(!(action==="save_current"&&snapshot.workspace.has_path)){
+        try{path=await pick("save",selected,request.suggested_name);}
+        catch(error){return outcome("failed",error.message);}
+      }
       if(path===null&&!(action==="save_current"&&snapshot.workspace.has_path))return outcome("cancelled","用户取消了另存为。");
       if(!matches(snapshot))return outcome("failed","选择保存位置期间文档已变化，未保存原文档。");
-      if(selected==="whiteboard"){let written=false,response=null;const clean=await WB.save(path||undefined,{onWritten:()=>{written=true;},onResponse:value=>{response=value;}});if(written||clean)return outcome("completed",clean?"App已确认白板保存完成。":"所提交的白板副本已保存；当前草稿随后有变化，仍需保存。");return response&&!confirmedNoWrite(response)?unconfirmed():outcome("failed","白板未保存，请查看文件冲突或输入提示。");}
+      if(selected==="whiteboard"){let written=false,response=null;let clean=false;try{clean=await WB.save(path||undefined,{onWritten:()=>{written=true;},onResponse:value=>{response=value;}});}
+        catch(error){if(written)return outcome("completed","白板副本已保存；界面刷新未完成，请重新打开保存的文件核对。");throw error;}
+        if(written||clean)return outcome("completed",clean?"App已确认白板保存完成。":"所提交的白板副本已保存；当前草稿随后有变化，仍需保存。");return !confirmedNoWrite(response)?unconfirmed(response):outcome("failed","白板未保存，请查看文件冲突或输入提示。");}
       const input=document.getElementById("tpl-path"),previousPath=input.value;if(path)input.value=path;
-      let saved=false,written=false,response=null;try{saved=await RT.saveTemplate({onWritten:()=>{written=true;},onResponse:value=>{response=value;}});if(saved||written)return outcome("completed",saved?"App已确认方案保存完成。":"所提交的方案副本已保存；当前文档已变化，请核对当前草稿。");return response&&!confirmedNoWrite(response)?unconfirmed():outcome("failed","方案未保存，请查看文件冲突或输入提示。");}
+      let saved=false,written=false,response=null;try{saved=await RT.saveTemplate({onWritten:()=>{written=true;},onResponse:value=>{response=value;}});if(saved||written)return outcome("completed",saved?"App已确认方案保存完成。":"所提交的方案副本已保存；当前文档已变化，请核对当前草稿。");return !confirmedNoWrite(response)?unconfirmed(response):outcome("failed","方案未保存，请查看文件冲突或输入提示。");}
+      catch(error){if(written)return outcome("completed","方案副本已保存；界面刷新未完成，请重新打开保存的文件核对。");throw error;}
       finally{if(!saved&&!written&&PL.state.plan===snapshot.base?.documentRef)input.value=previousPath;}
     }
     if(action==="export_result"){
@@ -88,7 +88,7 @@ window.AppEditorFileActions=Object.freeze({create({root,show}){
       const exported=await RS.exportResult("json",status=>{deliveryStatus=status;});
       return exported?outcome("completed","计算结果已导出到你选择的位置。"):
         deliveryStatus==="cancelled"?outcome("cancelled","你已取消结果导出。"):
-        deliveryStatus==="unknown"?unconfirmed():outcome("failed","App 未确认导出完成，请检查当前报告和文件。 ");
+        deliveryStatus==="failed"?outcome("failed","App 未确认导出完成，请检查当前报告和文件。 "):unconfirmed();
     }
     return outcome("failed","当前不支持这项 App 操作。");
   }});

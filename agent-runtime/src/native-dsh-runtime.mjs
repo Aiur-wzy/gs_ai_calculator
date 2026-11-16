@@ -7,7 +7,7 @@ import { NativeDshDomainTransport } from './native-dsh-domain-transport.mjs'
 import { NATIVE_DSH_RUNTIME_CONTRACT, NATIVE_DSH_RUNTIME_CONTROL_CONTRACT } from './native-dsh-runtime-config.mjs'
 import { drainNativeJobs } from './native-dsh-job-drain.mjs'
 
-const CONTROLS = new Set(['dsh_secret_set', 'dsh_secret_clear', 'dsh_runtime_status', 'dsh_runtime_session_status', 'dsh_runtime_drain', 'dsh_runtime_shutdown'])
+const CONTROLS = new Set(['dsh_secret_set', 'dsh_secret_clear', 'dsh_runtime_status', 'dsh_runtime_session_status', 'dsh_runtime_client_create', 'dsh_runtime_client_close', 'dsh_runtime_drain', 'dsh_runtime_shutdown'])
 const record = value => value !== null && typeof value === 'object' && !Array.isArray(value)
 const decode = bytes => JSON.parse(new TextDecoder('utf8', { fatal: true }).decode(bytes))
 const LOCAL_STARTUP_CODES = new Set(['fixed_root_filesystem_root_invalid', 'fixed_root_filesystem_qualification_hook_invalid'])
@@ -69,6 +69,9 @@ export async function runNativeDshRuntime({ carrier, config, retryAdmission } = 
         const jobs = await drainNativeJobs(host.context, agents)
         await Promise.allSettled(agents.map(agent => agent.whenIdle()))
         const research = await host.accounts.retireResearch()
+        // OAuth refresh owns its official read/refresh/write callback. A
+        // returned rotated token must be persisted before maintenance ends.
+        await host.context.credentials.settleWrites?.()
         await host.kernel.flushSessions()
         drained = true
         return { state: 'drained', agents: agents.length, jobs, research,
@@ -93,6 +96,20 @@ export async function runNativeDshRuntime({ carrier, config, retryAdmission } = 
             let result
             if (operation === 'dsh_secret_set') result = await host.kernel.secretController.set(value)
             else if (operation === 'dsh_secret_clear') result = await host.kernel.secretController.clear(value)
+            else if (operation === 'dsh_runtime_client_create') {
+              if (draining || !record(value) || Object.keys(value).length !== 2
+                  || !/^[A-Za-z0-9_-]{1,128}$/u.test(value.peer_id ?? '')
+                  || !['answer', 'none'].includes(value.interactions)) throw new Error('native_dsh_peer_payload_invalid')
+              const peer = host.createPeer(value.interactions)
+              try { gateway.addPeer(value.peer_id, peer) } catch (error) { await peer.dispose(); throw error }
+              result = { peer_id: value.peer_id, interactions: value.interactions, state: 'ready' }
+            }
+            else if (operation === 'dsh_runtime_client_close') {
+              if (!record(value) || Object.keys(value).length !== 1 || typeof value.peer_id !== 'string') {
+                throw new Error('native_dsh_peer_payload_invalid')
+              }
+              result = { peer_id: value.peer_id, closed: await gateway.removePeer(value.peer_id) }
+            }
             else if (operation === 'dsh_runtime_session_status') {
               if (!record(value) || Object.keys(value).length !== 1 || !Object.hasOwn(value, 'session_id')) {
                 throw new Error('native_dsh_session_status_payload_invalid')
@@ -111,6 +128,8 @@ export async function runNativeDshRuntime({ carrier, config, retryAdmission } = 
                 credentials: host.kernel.secretController.status,
                 provider_admission: host.admission.snapshot(),
                 lifecycle: drained ? 'drained' : draining ? 'draining' : 'ready',
+                agents: host.context.agents.list().map(agent => ({session_id:agent.id,
+                  status:agent.status, subagent:agent.session.header.origin === 'subagent'})),
               }
             }
             await reply(header, 'dsh_runtime_control_result', {

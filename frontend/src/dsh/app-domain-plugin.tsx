@@ -39,10 +39,17 @@ import {AppDomainIncompatibilityNotice} from "./app-domain-incompatibility";
 import {AppIncompatibleApplications} from "./app-incompatible-applications";
 import {AppOperationsInspector,AppDiagnosticsInspector,AppQuestionsInspector} from "./app-domain-inspector";
 import {AppTaskCenter} from "./app-task-center";
+import {useMainWindowCommands,acknowledgeMainCommand} from "./app-window-presentation";
 
 const executionNumber = new Intl.NumberFormat("zh-CN", {maximumFractionDigits: 3});
 
-function executionStatus(summary: CandidateSummary): string {
+function executionStatus(summary: CandidateSummary, applicationState?: AppDomainBinding["applicationState"]): string {
+  if (applicationState === "committed") return summary.readyScope === "formal_result"
+    ? "计算已接纳，此候选版本此前已同步。当前白板可能已继续修改，请以打开的文档为准。"
+    : "此候选版本此前已同步；尚未获得正式计算结果。";
+  if (summary.readyScope === "formal_result" && ["prepared", "baseline_advanced", "outcome_unknown"].includes(applicationState ?? "")) {
+    return "计算已接纳；上次白板同步的结果尚未确认，请检查未完成的同步。";
+  }
   if (summary.readyScope === "draft_sync") return "草稿可审核同步；尚未获得正式计算结果。";
   if (summary.readyScope === "formal_result") return "计算已接纳；同步到白板仍需你的审核。";
   if (summary.execution?.status === "complete") return "执行已结束，正式结果尚未接纳。";
@@ -209,6 +216,21 @@ function CandidateWorkspace({bindings, api, dshSessionId, compact = false,refres
   const changeResource = (next: "candidate" | "baseline") => { setResource(next); open(""); };
   const parts = pointer.split("/").slice(1);
   const [localFileFocus,setLocalFileFocus]=useState<string>();
+  const windowCommands=useMainWindowCommands();
+  const [windowNotice,setWindowNotice]=useState("");
+  useEffect(()=>{
+    if(compact||!binding||!currentRead||loading)return;
+    for(const command of windowCommands){
+      // Page/timeline commands have their own async handler and result ACK.
+      // Do not remove them while that handler is still locating the target.
+      if(!["open_candidate","review_candidate","file_action"].includes(command.command))continue;
+      if(command.session_id!==binding.dshSessionId)continue;
+      if(command.conversation_id&&command.conversation_id!==binding.conversationId){setWindowNotice("请求所属候选已变化，请重新选择会话；没有进行同步或文件操作。");}
+      else if(command.command==="file_action")setLocalFileFocus(command.action_id);
+      else if(command.command==="review_candidate")setWindowNotice(command.revision===visibleSummary?.revision?"已从独立聊天窗口定位到此候选。请核对版面与差异后审核同步。":"候选已经更新，请重新核对当前版本后审核；尚未进行同步。");
+      void acknowledgeMainCommand(command.command_id);
+    }
+  },[binding,currentRead,loading,compact,windowCommands,visibleSummary?.revision]);
   const incomingFocus=pendingFileFocus.get(bindings);
   const fileFocus=localFileFocus??(binding?.conversationId===incomingFocus?.conversationId?incomingFocus?.actionId:undefined);
   const clearFileFocus=()=>{setLocalFileFocus(undefined);if(incomingFocus)pendingFileFocus.delete(bindings);};
@@ -217,6 +239,7 @@ function CandidateWorkspace({bindings, api, dshSessionId, compact = false,refres
       <h2>{compact ? "候选详情" : "Agent 候选工作区"}</h2>
       <p>这里显示 Agent 的候选版本。只有经你审核并应用后，修改才会进入正式白板。</p>
     </header>
+    {windowNotice&&<p role="status">{windowNotice}</p>}
     {openedDraft?.data.imported===true&&<p role="status">输入草稿已打开，可在本会话继续完善。正式白板保持原样。</p>}
     <AppIncompatibleApplications api={api} onSettled={refresh}/>
     {!binding ? bindingError ? isAppDomainIncompatibility(bindingError)?<AppDomainIncompatibilityNotice key={`${dshSessionId}:${bindingError.code}`} error={bindingError}/>:<div role="alert"><p>{bindingError.message}</p><details><summary>操作详情</summary><code>{bindingError instanceof AppDomainHostError?bindingError.code:bindingError instanceof AppCandidateReadError?bindingError.code:"app_domain_read_failed"}</code>{bindingError instanceof AppDomainHostError&&bindingError.operationMayHaveCompleted&&<p>先前操作可能已经提交，请先刷新状态，避免重复操作。</p>}</details></div> : <p role="status">当前会话尚未绑定候选白板。请先在会话中开始或打开任务。</p> : <>
@@ -231,7 +254,7 @@ function CandidateWorkspace({bindings, api, dshSessionId, compact = false,refres
         <Button size="sm" type="button" variant="outline" aria-pressed={resource === "baseline"}
           onClick={() => changeResource("baseline")}>本会话的正式白板基线</Button>
         <Button size="sm" type="button" onClick={() => setReload(value => value + 1)} disabled={loading}>刷新</Button>
-        {api.dsh_client_request_candidate_input_draft&&<Button size="sm" type="button" variant="outline" disabled={draftFileBusy||loading||!currentRead||!visibleSummary||!!error} onClick={()=>{
+        {resource==="candidate"&&api.dsh_client_request_candidate_input_draft&&<Button size="sm" type="button" variant="outline" disabled={draftFileBusy||loading||!currentRead||!visibleSummary||!!error} onClick={()=>{
           if(!visibleSummary||draftFileBusy)return;setDraftFileBusy(true);setDraftFileMessage("");
           void api.dsh_client_request_candidate_input_draft!({conversation_id:binding.conversationId,expected_revision:visibleSummary.revision}).then(response=>{assertAppDomainSuccess(response);setDraftFileMessage("已请求保存输入草稿，请在文件操作卡选择保存位置。");refresh?.();setReload(value=>value+1);}).catch(reason=>setDraftFileMessage(reason instanceof Error?reason.message:"暂时无法请求保存草稿。")).finally(()=>setDraftFileBusy(false));
         }}>{draftFileBusy?"正在准备…":"保存输入草稿"}</Button>}
@@ -243,7 +266,7 @@ function CandidateWorkspace({bindings, api, dshSessionId, compact = false,refres
         {visibleSummary?.counts.actions !== undefined ? ` · ${visibleSummary.counts.actions} 个动作` : ""}
         {visibleSummary?.counts.duration !== undefined ? ` · ${visibleSummary.counts.duration} 秒` : ""}
       </p>
-      {(visibleSummary?.readyScope || visibleSummary?.execution) && <p className="gs-candidate-state">{executionStatus(visibleSummary)}</p>}
+      {(visibleSummary?.readyScope || visibleSummary?.execution) && <p className="gs-candidate-state">{executionStatus(visibleSummary,binding.applicationState)}</p>}
       {executionFailure && <p>{executionFailure}</p>}
       <TaskReviewDetails review={visibleSummary?.taskReview}/>
       {visibleSummary?.execution?.status === "diagnostic" && visibleSummary.execution.reportedHits !== null
@@ -263,7 +286,7 @@ function CandidateWorkspace({bindings, api, dshSessionId, compact = false,refres
       {error&&(isAppDomainIncompatibility(error)?<AppDomainIncompatibilityNotice key={`${scope}:${error.code}`} error={error}/>:<div role="alert"><p>{error.message}{visibleSnapshot?" 当前显示上一版。":""}</p><details><summary>诊断详情</summary><code>{error instanceof AppCandidateReadError ? error.code : error instanceof AppDomainHostError?error.code:"candidate_read_failed"}</code></details></div>)}
       {presentation==="preview" ? visibleSnapshot&&!isAppDomainIncompatibility(error)&&<>
         {resource==="candidate"&&visibleSnapshot.summary.hasCalculation&&!includeCalculated&&<Button size="sm" variant="outline" onClick={()=>setIncludeCalculated(true)}>加载已计算的效果和伤害</Button>}
-        <CandidatePreview document={visibleSnapshot.document} calculated={visibleSnapshot.calculated} kind={visibleSnapshot.summary.kind} editor={(window as unknown as {GenshinEditorBridge?:AppEditorBridge}).GenshinEditorBridge}/>
+        <CandidatePreview document={visibleSnapshot.document} calculated={visibleSnapshot.calculated} hasCalculation={resource==="candidate"&&visibleSnapshot.summary.hasCalculation} kind={visibleSnapshot.summary.kind} sessionId={binding.dshSessionId} conversationId={binding.conversationId} editor={(window as unknown as {GenshinEditorBridge?:AppEditorBridge}).GenshinEditorBridge}/>
       </> : value && !loading && <>
         {value.page.kind === "object" || value.page.kind === "array" ? <dl className="gs-candidate-fields">
           {value.page.items.map(item => <div key={item.key}>
@@ -287,7 +310,7 @@ function CandidateWorkspace({bindings, api, dshSessionId, compact = false,refres
 export function createAppDomainClientPlugin(options: {bindings: AppDomainBindings; api: AppCandidateGuiApi;refresh?:()=>void}) {
   return {
     name: APP_CANDIDATE_PLUGIN_ID,
-    inject: ["slots", "sidebarRightTabs","uiWorkspace","layout","sessions","workspaces"],
+    inject: ["slots", "sidebarRightTabs","uiWorkspace","layout","sessions","workspaces","conversation"],
     apply(ctx: Context) {
       ctx.effect(()=>{
         const previous=window.GenshinCandidateDraftFiles;
@@ -343,9 +366,9 @@ export function createAppDomainClientPlugin(options: {bindings: AppDomainBinding
       ctx.slots.inject("conversation.session.header.actions",()=>ctx.slots.register({name:"conversation.session.header.actions",id:APP_CANDIDATE_PLUGIN_ID,order:300},
         (props:PropsRuntime<"conversation.session.header.actions">)=><CandidateHeaderAction api={options.api} bindings={options.bindings} sessionId={props.sessionId} refresh={options.refresh} onOpen={()=>ctx.layout.selectPanel(APP_CANDIDATE_PANEL as Parameters<Context["layout"]["selectPanel"]>[0])}/>));
       ctx.slots.inject("genshin.editor.assistant.actions",()=>ctx.slots.register({name:"genshin.editor.assistant.actions"},
-        (props:PropsRuntime<"genshin.editor.assistant.actions">)=>props.sessionId?<CandidateHeaderAction api={options.api} bindings={options.bindings} sessionId={props.sessionId} refresh={options.refresh} onOpen={()=>ctx.layout.selectPanel(APP_CANDIDATE_PANEL as Parameters<Context["layout"]["selectPanel"]>[0])}/>:null));
+        (props:PropsRuntime<"genshin.editor.assistant.actions">)=>props.sessionId?<><CandidateHeaderAction api={options.api} bindings={options.bindings} sessionId={props.sessionId} refresh={options.refresh} onOpen={()=>ctx.layout.selectPanel(APP_CANDIDATE_PANEL as Parameters<Context["layout"]["selectPanel"]>[0])}/></>:null));
       ctx.slots.inject("conversation.hero.options",()=>ctx.slots.register({name:"conversation.hero.options",id:"genshin-open-candidate-input-draft",order:310},
-        (props:PropsRuntime<"conversation.hero.options">)=><OpenCandidateDraft api={options.api} sessionId={props.sessionId} onImported={()=>{options.refresh?.();ctx.layout.selectPanel(APP_CANDIDATE_PANEL as Parameters<Context["layout"]["selectPanel"]>[0]);}}/>));
+        (props:PropsRuntime<"conversation.hero.options">)=><OpenCandidateDraft compact api={options.api} sessionId={props.sessionId} onImported={()=>{options.refresh?.();ctx.layout.selectPanel(APP_CANDIDATE_PANEL as Parameters<Context["layout"]["selectPanel"]>[0]);}}/>));
       ctx.effect(() => ctx.sidebarRightTabs.register({
         id: APP_CANDIDATE_PLUGIN_ID, kind: APP_CANDIDATE_INSPECTOR,
         title: () => "候选详情", priority: "extension",

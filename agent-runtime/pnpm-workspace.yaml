@@ -16,5 +16,7 @@ allowBuilds:
   node-pty: false
   protobufjs: false
 
+# Expose the existing semantic draft implementation; no runtime behavior fork.
 patchedDependencies:
-  '@deepseek-ai/cordis@4.0.5': patches/@deepseek-ai__cordis@4.0.5.patch
+  "@deepseek-ai/dsh-client-ui-conversation@0.2.2-rc.3": patches/dsh-client-ui-conversation-0.2.2-rc.3-public-draft.patch
+  node-pty@1.2.0-beta.15: patches/node-pty@1.2.0-beta.15.patch

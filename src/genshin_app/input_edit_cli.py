@@ -68,7 +68,10 @@ def command(args):
         input_paths=protected)
     response.update(writes=True, revision=prepared["revision"], input_fingerprint=fingerprint(input_view(prepared)))
     if changed:
-        from genshin_app.agent_chat.skill_context import input_change_paths, recommend_focus
+        from genshin_app.agent_chat.skill_context import (
+            input_change_paths,
+            recommend_focus,
+        )
         response["work_card_recommendation"] = recommend_focus({"revision": prepared["revision"],
             "changes": [{"revision": prepared["revision"],
                          "input_paths": input_change_paths(original["input"], prepared)}]})

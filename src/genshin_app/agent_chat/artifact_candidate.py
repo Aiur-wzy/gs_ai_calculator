@@ -275,11 +275,12 @@ class ArtifactCandidateSession(StagedCandidateSession):
         return None, None
 
     def stage_context(self):
+        from genshin_app.task_evidence import session_review
+
         from . import tools
         from .candidate_input_draft_store import historical_resource_descriptors
         from .operation_attempts import attempt_projection
         from .skill_context import recommend_focus
-        from genshin_app.task_evidence import session_review
         latest = attempt_projection(self)
         recommendation = recommend_focus({"focus": self.workflow_stage, "revision": self.revision,
             "latest_attempt": latest, "changes": self.changes, "task_review": session_review(self)})

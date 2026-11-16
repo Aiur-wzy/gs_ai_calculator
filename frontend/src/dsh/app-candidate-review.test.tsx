@@ -31,7 +31,7 @@ describe("candidate review in the upstream Modal",()=>{
     const show=vi.fn(async()=>{}),f=await fixture(true,false,show);await act(async()=>{f.host.querySelector("button")!.click();});
     const modal=document.querySelector('[role="dialog"]');expect(modal?.textContent).toContain("候选角色");expect(f.editor.application.applyReviewed).not.toHaveBeenCalled();
     expect(modal?.textContent).toContain("1 名角色 · 1 个动作");
-    const body=modal?.querySelector(".gs-candidate-review-content"),footer=modal?.querySelector(".gs-candidate-review-actions");
+    const body=modal?.querySelector(".gs-domain-dialog-content"),footer=modal?.querySelector(".gs-domain-dialog-actions");
     expect(body?.textContent).toContain("候选动作");expect(footer?.textContent).toContain("同意并同步");expect(body?.contains(footer??null)).toBe(false);
     expect(show).not.toHaveBeenCalled();
     await act(async()=>{[...document.querySelectorAll("button")].find(button=>button.textContent==="同意并同步")!.click();});

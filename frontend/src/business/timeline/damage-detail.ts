@@ -1,3 +1,5 @@
+import {modifierEvidence} from "./evidence-index";
+import {eventDisplayName,appendFullName} from "./display-names";
 /** Lazy read-only explanation UI. All numbers come from the sealed calculator. */
 const labels:Record<string,string>={atk:"攻击力",hp:"生命值",def:"防御力",base_atk:"基础攻击力",base_hp:"基础生命值",base_def:"基础防御力",em:"元素精通",multiplier:"本体倍率",
   scaling:"结算属性",crit_rate:"暴击率",crit_rate_raw:"暴击率输入",crit_rate_effective:"本段有效暴击率",crit_dmg:"暴击伤害",
@@ -27,6 +29,7 @@ export function resolveDamageExplanation(projection:any,detail:any):any {
   if(!detail.explanation_ref)return {status:doc.status==="partial"?"omitted":"missing"};
   const event=own(doc.events,detail.explanation_ref);
   if(!event)return {status:"invalid"};
+  if(detail.hit_id!=null&&event.event_id!=null&&detail.hit_id!==event.event_id)return {status:"invalid"};
   const source=own(doc.sources,event.source_ref),panel=event.panel_ref==null?null:own(doc.panels,event.panel_ref);
   const formula=event.formula_ref==null?null:own(doc.formulas,event.formula_ref);
   const modifiers=(event.modifier_refs||[]).map((id:any)=>own(doc.modifiers,id));
@@ -97,10 +100,14 @@ export function renderDamageExplanation(box:HTMLElement,event:any,ports:any):voi
   });
   lazy(`收益来源与加算项（${modifiers.length}项）`,node=>{
     if(!modifiers.length){node.appendChild(el("p","没有记录额外收益项。"));return;}
+    const unused=el("details");unused.appendChild(el("summary",`本段未采用的属性（${modifiers.filter((m:any)=>m.consumed===false).length}项）`));
     for(const modifier of modifiers){
       const row=el("section"),execution=modifier.execution||{},sampling=modifier.sampling||{};
       const zone=modifier.zone||"";
-      row.appendChild(el("h6",modifier.name_zh||name(zone)||"收益项"));
+      const full=modifier.name_zh||name(zone)||"收益项";
+      const links=modifierEvidence(identity,modifier,{character:event.character,target_id:source.target_id,area_id:source.area_id});
+      const caption=eventDisplayName({label:full,sourceLabel:full,detail:{source_name:full,source_bindings:links.sources.filter((s:any)=>s?.owner)}});
+      row.appendChild(el("h6",caption.short));if(caption.short!==full)appendFullName(row,document,full);
       fields(row,[["作用区域",name(zone)],["实际贡献",finite(modifier.value)?number(modifier.value):null],
         ["提供者",execution.provider?char(execution.provider):null],
         ["取样时点",finite(sampling.sample_t??execution.sample_t)?`${number(sampling.sample_t??execution.sample_t)}秒`:null],
@@ -115,8 +122,21 @@ export function renderDamageExplanation(box:HTMLElement,event:any,ports:any):voi
         ["固定加值",finite(expression.add)?number(expression.add):null],["表达式下限",finite(expression.min)?number(expression.min):null],
         ["表达式上限",finite(expression.max)?number(expression.max):null]]);
       if(modifier.consumed===false)row.appendChild(el("p","本段未消费此属性收益。"));
-      node.appendChild(row);
+      const nav=el("div");nav.className="tl-source-links";
+      const button=(title:string,target:any,mode:string)=>{const b=el("button",title) as HTMLButtonElement;b.type="button";
+        b.addEventListener("click",()=>{if(fresh())view.navigateEvidence?.(target,mode,event);});nav.appendChild(b);};
+      if(view.navigateEvidence&&modifier.consumed!==false){
+        for(const target of links.events)button(`看对应 Buff · ${target.start}–${target.end}秒${target.character?` · ${char(target.character)}`:""}`,target,"effects");
+        for(const target of links.actions)button(`看触发动作 · ${target.label}`,target,"actions");
+      }
+      if(links.message&&modifier.consumed!==false)nav.appendChild(el("p",links.message));
+      if(links.sources.length){const sources=el("details");sources.appendChild(el("summary","来源说明与完整引用"));
+        for(const source of links.sources){const title=source.label||source.name_zh||source.title||"保存的来源依据";sources.appendChild(el("p",String(title)),el("pre",typeof source==="string"?source:JSON.stringify(source,null,2)));}
+        nav.appendChild(sources);}
+      row.appendChild(nav);
+      (modifier.consumed===false?unused:node).appendChild(row);
     }
+    if(modifiers.some((m:any)=>m.consumed===false))node.appendChild(unused);
   });
   lazy("输入基线、采样与完整证据",node=>{
     if(panel){fields(node,[["属性所属",char(panel.character)],["取样时间",finite(panel.sample_t)?`${number(panel.sample_t)}秒`:"各域分别取样"],

@@ -27,6 +27,30 @@ MANIFEST_FILE = "dsh-client-shell-runtime-manifest.json"
 MAX_MANIFEST_BYTES = 16 * 1024 * 1024
 
 
+def legacy_credential_import_allowed(profile: Path) -> bool:
+    """Only a pre-existing profile may adopt the former shared Windows key.
+
+    The non-secret decision survives restarts; a new installation must not
+    import another installation's credential on its second launch.
+    """
+    marker = safe_path(profile, "legacy-credential-import.json")
+    allowed = (profile / "runtime-profile" / "legacy-settings-migration.json").is_file()
+    payload = {"contract": "genshin-legacy-credential-import-v1", "allowed": allowed}
+    try:
+        with marker.open("x", encoding="utf-8") as handle:
+            json.dump(payload, handle)
+    except FileExistsError:
+        try:
+            payload = json.loads(marker.read_text(encoding="utf-8"))
+        except (OSError, ValueError):
+            raise NativeDshMuxError("dsh_credential_migration_marker_invalid") from None
+    if (not isinstance(payload, dict) or set(payload) != {"contract", "allowed"}
+            or payload["contract"] != "genshin-legacy-credential-import-v1"
+            or type(payload["allowed"]) is not bool):
+        raise NativeDshMuxError("dsh_credential_migration_marker_invalid")
+    return payload["allowed"]
+
+
 def _strict_object(pairs):
     value = {}
     for key, item in pairs:
@@ -87,6 +111,7 @@ def create_native_dsh_application(data_dir: Path, *, workspaces, credentials=Non
     # These are App-selected private roots. They are never accepted from the
     # Renderer, a prompt, a tool call or an inherited working directory.
     profile.mkdir(parents=True, exist_ok=True)
+    import_legacy = legacy_credential_import_allowed(profile)
     mirror.mkdir(parents=True, exist_ok=True)
     safe_path(profile, "sessions")
     supplied_environment = (None if runtime_environment is None else
@@ -102,7 +127,8 @@ def create_native_dsh_application(data_dir: Path, *, workspaces, credentials=Non
         diagnostics_root=profile / "process-diagnostics")
     try:
         application = NativeDshApplication(process, credentials=credentials or
-            CredentialGenerationController(default_credential_store()))
+            CredentialGenerationController(default_credential_store()),
+            synchronize_legacy=import_legacy or credentials is not None)
         application.release_evidence = {key: verified[key] for key in (
             "manifest_sha256", "verification_mode")}
         enable_cli_link = getattr(workspaces, "enable_cli_link", None)

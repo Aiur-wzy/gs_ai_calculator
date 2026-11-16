@@ -269,6 +269,12 @@ class DatabaseSetup:
                 atomic_json(self.data_dir / LIVE_PAIR_PROOF_FILENAME, document)
                 atomic_json(self.data_dir / LIVE_PAIR_MANIFEST_FILENAME, pair)
                 self.pending.unlink()
+                if self.registration.is_file():
+                    from .installation_inventory import save_maintenance_proof
+                    save_maintenance_proof(self.data_dir.parent, document)
+                    row = _read_control(self.registration)
+                    row.update(database_state="installed", app_release_id=pair["app"]["app_release_id"])
+                    atomic_json(self.registration, row)
             return {"status": "complete", "requires_restart": True,
                     "database_release_id": manifest["database_release_id"]}
         finally:

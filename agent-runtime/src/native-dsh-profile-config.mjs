@@ -122,7 +122,7 @@ export class ProfileConfigController extends TypertRemoteService {
     // It is deliberately not a configurable field inside the model's request.
     const input = structuredClone(editInput.parse(request)), { described } = prepareEdit(this.ctx, input)
     const agent = typeof agentId === 'string' ? this.ctx.agents.get(agentId) : undefined
-    if (!agent || !this.ctx.agents.roots().includes(agent) || !this.ctx.typertGateway.hasLiveClient()) {
+    if (!agent || !(this.ctx.agents.get(agent.id) === agent && agent.session.header.origin !== 'subagent') || !this.ctx.typertGateway.hasLiveClient()) {
       reject('修改 DSH 配置需要当前执行中的会话和已连接的用户界面。请在 GUI 中确认本次操作；空闲时可使用官方设置页面。',
         { entry_id: input.entry_id, approval_outcome: 'unavailable' })
     }

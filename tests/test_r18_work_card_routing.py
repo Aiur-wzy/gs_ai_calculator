@@ -7,14 +7,21 @@ import json
 import pytest
 
 from genshin_app.agent_chat.candidate import CandidateSession
-from genshin_app.agent_chat.native_app_binding_provider import CandidateNativeAppBindingProviderV2
-from genshin_app.agent_chat.native_prompt_v2 import build_native_prompt_v2, validate_native_prompt_v2_bundle
+from genshin_app.agent_chat.native_app_binding_provider import (
+    CandidateNativeAppBindingProviderV2,
+)
+from genshin_app.agent_chat.native_prompt_v2 import (
+    build_native_prompt_v2,
+    validate_native_prompt_v2_bundle,
+)
 from genshin_app.agent_chat.skill_context import current_focus_card, recommend_focus
 from genshin_app.task_evidence import record_task_source
 from genshin_app.whiteboard import new_whiteboard
+from tests import test_native_app_binding_provider as binding_tests
 from tests.test_agent_artifact_workflow import focus, native_plan
 from tests.test_energy_trials import plan as energy_plan
-from tests.test_native_app_binding_provider import app_database  # noqa: F401
+
+app_database = binding_tests.app_database
 
 
 def binding_for(tmp_path, app_database, document=None):

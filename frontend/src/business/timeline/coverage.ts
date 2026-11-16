@@ -12,7 +12,7 @@ export function projectCoverage(context:TimelineContext & {trace:any[];displayed
       const sampling=samplingCoverage(buff);
       put("effects", {id:key("manual-buff", buff.id || index), kind:sampling?.kind||"coverage", character:buff.target ?? null,
         ...source(owner, "manual", buff.id || index, label), label:`${label}（手工声明）`, start:buff.start, end:buff.end,
-        detail:{buff:copy(buff),...(sampling?{buff_id:buff.id,presentation:sampling.presentation}:{}),
+        detail:{buff:copy(buff),buff_id:buff.id,...(sampling?{presentation:sampling.presentation}:{}),
           interpretation:sampling?.interpretation||"手工声明的时间区间；选择器、前台限制与快照取样另见命中明细。"},
         ...(sampling?{label:`${label} · ${sampling.label}`} : {}),
         ...(!executionTemplate || executionTemplate === t ? {edit:{kind:"buff", index}} : {})});
@@ -133,7 +133,7 @@ export function projectCoverage(context:TimelineContext & {trace:any[];displayed
           if (!finite(slice.start) || !finite(slice.end) || slice.end <= slice.start
             || !["active", "exhausted"].includes(slice.status)) continue;
           const label = chinese(state.name_zh, "机制增益"), detail = {
-            receipt_id:state.id, owner:state.owner, rule_id:state.rule_id, source_id:state.source_id, source_name:state.name_zh,
+            receipt_id:state.id, buff_id:state.buff_id, owner:state.owner, rule_id:state.rule_id, source_id:state.source_id, source_name:state.name_zh,
             instance_id:state.instance_id, source:state.source, origin:state.origin, evidence_status:state.evidence_status,
             state_status:slice.status, beneficiaries_scope:copy(state.beneficiaries_scope),
             filters:copy(state.filters), effects:copy(state.effects), buff:copy(state.buff),

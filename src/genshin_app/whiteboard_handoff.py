@@ -161,6 +161,12 @@ def make_handoff(board, db_path=None):
                 managed_weapon["refinements"] = [{"source_index": effect["source_index"], "affix_group_id": effect["affix_group_id"],
                     "refinement": weapon["refinement"]} for effect in detail["effects"]]
                 version = detail["data_version"]
+        if (version is None and character_entity_ref["kind"] == "database"
+                and references.admission_available):
+            # A user-supplied panel with no weapon still uses the selected
+            # catalog character. Stamp its actual source during conversion,
+            # rather than generating a plan that immediately looks outdated.
+            version = references.character_data_version(actor["db_character_id"], line)
         plan["equipment_inputs"][actor["id"]] = {"mode": "panel", "panel_policy": "static_included",
             "character_ref": ({"db_character_id": actor["db_character_id"], "version_line": line}
                               if character_entity_ref["kind"] == "database" else None),

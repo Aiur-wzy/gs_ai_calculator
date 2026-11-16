@@ -6,6 +6,7 @@ models, emits executable certificates, compiles a rule, or writes a database.
 
 from __future__ import annotations
 
+import sqlite3
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -28,6 +29,26 @@ class WhiteboardReferenceGateway:
         return get_weapon_detail(
             self.database_path, weapon_id, version_line=version_line
         )
+
+    def character_data_version(self, character_id, version_line):
+        """Bind an actual catalog character to the same snapshot as composition.
+
+        This only records source identity. It does not replace a user's finished
+        panel, grant a rule execution authority, or confirm game mechanics.
+        """
+        from genshin_app.equipment.data_version import equipment_data_version
+        from genshin_app.equipment.schema import PlanError
+        from genshin_db import queries
+
+        try:
+            with queries.equipment_read_session(self.database_path):
+                queries.get_character_detail(self.database_path, character_id, version_line)
+                return equipment_data_version(queries.get_meta(self.database_path), version_line)
+        except (sqlite3.Error, queries.NotFoundError, PlanError):
+            # Handoff remains an editable draft when reference material cannot
+            # be read. Never stamp an identity for an unverified character;
+            # ordinary composition still reports the missing/invalid source.
+            return None
 
     def action_admission_profile(self, intent):
         from genshin_db.runtime_action_admission import get_action_admission_profile

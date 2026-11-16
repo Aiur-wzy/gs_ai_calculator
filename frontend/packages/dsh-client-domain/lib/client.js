@@ -1,3 +1,4 @@
+/*! GENSHIN_SOURCE_INPUTS_V1:eyJjb250cmFjdCI6ImdlbnNoaW4tc291cmNlLWlucHV0cy12MSIsInNjb3BlIjoiZG9tYWluIiwiaW5wdXRzIjp7ImRzaC1jbGllbnQtY29tcG9zaXRpb24uanNvbiI6ImRkYmM5NTVjZmMwMjU3NTJmZDE1ZmFmYTI3Mjg3MzlmYWQ4ZmU0MTUxYmQwNWViZGU1MmIxZmY1MGRlODBjYmQiLCJwYWNrYWdlLmpzb24iOiIxMGQwYjM5ZWM5ZjJlMDlhYzBkNzJjYTNkYmU2NDI4ZmMzZmViMDkwM2U1MTFjODVjZGFiOTM0NzcyMzYyZjU5IiwicGFja2FnZXMvZHNoLWNsaWVudC1kb21haW4vY2xpZW50LnRzIjoiZWJhNzFiYzQ2MDJkMzUxM2ViYTI3NTcyNjRmNzg2ZDlhYmE5OTcwNzk4Zjk5NGE3OGJmOWE3YjZkZTgzNTVjMiIsInBhY2thZ2VzL2RzaC1jbGllbnQtZG9tYWluL2hvc3QubWpzIjoiNjRiYjFkZjQ2MWYyNmVlNTRkYmMwNDBmNTkxOGQ4YjM5YThmZTY5ZjkzZGRiNGMyODdiNjQ3YWE3MTU2MmY1NyIsInBhY2thZ2VzL2RzaC1jbGllbnQtZG9tYWluL3BhY2thZ2UuanNvbiI6IjUzNmVkMTI3YjBkZjRhOTg0YjI0OWZhZDE1NjAxMDg3OWQyMTUwMDRiMTM5ZDc5ZDllMWQwMWYzNTNiMzljZmIiLCJwbnBtLWxvY2sueWFtbCI6Ijk2MDE5MzA3OTZmZTY0MWRlMTM1NjU3MGM2YzYzNDEzMTU0MWRlMzY4NTU3OGEwNzUzMDY0N2E1NWIwNTMyNzQiLCJzY3JpcHRzL2J1aWxkLWRzaC1kb21haW4tcGx1Z2luLm1qcyI6ImY4ZGYwNjlkNTZiMDM4MDU1NjNjMmNlYmY5YTMxMWRjZmQ0MGQyMWVmN2QyNjdhMWZhZThmOTBlM2UyMzdiMDQiLCJzY3JpcHRzL2J1aWxkLXNvdXJjZS1wcm92ZW5hbmNlLm1qcyI6Ijc1MTgyYzQxYjcyMmQzZWI2NjM0ODczNzU2YmVjZTQ4MWI5MTg3YzE4ZTYxY2RmN2QyNjNhMzg3OGEzMGI4M2MiLCJzY3JpcHRzL3N5bmMtYnVzaW5lc3MtdWkubWpzIjoiMzY2MzI5ZjI5YjY1NGY4NWIzOTRkNGJhMjkyYWFjMzAxMTVmN2Q3MTZmYzNlNzE3N2U4ZWM1ZmIzMjIxZjhkNSIsInNjcmlwdHMvc3luYy1wcm9kdWN0aW9uLWZvdW5kYXRpb24ubWpzIjoiZTI3NGI4M2U5YTQ4MGVlMzFhYzRiNTRjMjBmOWM4NjFhMjAxYWEzY2FhZWIzNmM1Yzc4ZThhYmFkN2I4NTQyMSIsInNyYy9hcHAvQXBwLnRzeCI6ImVhOTRjNzE3ZTgyZDRhMjY2Y2U0ODRhZGJkODdkNjExM2VhODdiMTM1ZTVkYzhjOGMwZjBmNGQ0YjFiNzQ1YzUiLCJzcmMvYXBwL2ZpeHR1cmUudHMiOiI0MTgxN2ZjNmFjNzk1YmZlMmEwYWYzMDRhOGI3OTY1NDliYjVlZDIwOGE1YzQzZTgwOTQ5ZTcyYWRkMTcyMGM2Iiwic3JjL2FwcC9mb3VuZGF0aW9uLWdhbGxlcnkuY3NzIjoiODJmMTViNDIxYTdkYzZjZDQ5YzM3NjMwZWI4M2IwN2Q2NGE3NThhNmNhNmYyODlhZDMzODI5NWU3MTVlYTk3YSIsInNyYy9hcHAvbWFpbi50c3giOiI0OGQ2ZGJlMzIyNTFiMDE5Y2E2NjQwMzIzZmUwMGZhOGI5OWI5MjM5Zjg1YTc4ZGFjMjg3YjU5ZjgyNTNjYzczIiwic3JjL2J1c2luZXNzL2RvY3VtZW50LW9wZW4taW50ZW50LnRzIjoiZTkzMzRlNTFmYTAyNzUxOGQ2MDM0MmE2OWQ2NzA4MGJkZjg2NzU4ZTZlNDFjNzM5ZThjMjJmYzhlYjU0YzYyMCIsInNyYy9idXNpbmVzcy9lbnRyeS50cyI6ImM1YjUyYzVmNmM3ZDQ0YzQ2NzA2ZWJiYWYwOWI0N2Q4MTVhNjI1YjZiNzEzYWQ2ZGI0YWUxNGYwNmNkZDZhMDIiLCJzcmMvYnVzaW5lc3MvZmlsZS13cml0ZS1vdXRjb21lLnRzIjoiODQ1MTcwNWMzOGI1YmIxMGQ1YWI4MTM0MWIwZWVjNmYzM2YwNGJjZGQ4MjMxNzg1ZTA1YWY5YzgyMmZlYjkwZSIsInNyYy9idXNpbmVzcy9tZWNoYW5pY3MvY29udHJhY3RzLnRzIjoiZWQ3NjljMjY0MzA3NDE5ZDA2YWMyMDZiNTNkYWFmNGE2NTFiODcyNDg0MDAxNmQ4NWJiZTg5NGIzYjE1NjFmOCIsInNyYy9idXNpbmVzcy9tZWNoYW5pY3MvY29udHJvbGxlci50cyI6ImIyZWRlMWVlZmFmYWVmZWM5NzZjMmJiYjJhNjBmZDBmN2Q4OGU0MmVkNjEyMGNjMDI4NDNhZjgxZGFiYmU0MDMiLCJzcmMvYnVzaW5lc3MvbWVjaGFuaWNzL2VsZW1lbnRhbC1zb3VyY2VzLnRzIjoiNzUyZGNkMTc5ZDNmNzI5YTZkYmVmMjQ2NmI5MTg3YjFiZmFhYmRhMTM3YTc4YmE0OTM2MzA0NjAwNjZmYjYxZiIsInNyYy9idXNpbmVzcy9tZWNoYW5pY3MvaGl0LXBhcmFtZXRlci1zb3VyY2VzLnRzIjoiNGNhY2I1ODVjZWE2YTJiYWE2YzE2ZDhmOTQ1MzUxMTgyYTBkMWZjNmM1ZjcwZDkwNmNkMzRjYmEwY2YxOWZlOCIsInNyYy9idXNpbmVzcy9tZWNoYW5pY3MvaW5kZXgudHMiOiI1MGI1MDJiYzk2YWEzN2EyZGQzZWMxMDdkYjY4ZmMzMWEzMTkyYTk4Yjc1MzJhMDkxMzZkZjhiZDU3MGI3ZjA5Iiwic3JjL2J1c2luZXNzL21lY2hhbmljcy9yZWFjdGlvbi1zb3VyY2VzLnRzIjoiYTFhZmIzODk2NTRlYWIzMWEwYjZjMzAxNDMwMGZlYTNkNmZhMzIxODliOGFjMzNjOGVhNmY2NmU0YWRkYjlhOSIsInNyYy9idXNpbmVzcy9tZWNoYW5pY3MvcmVwb3J0cy50cyI6IjE5OGMyMzkwN2ZjOTVhMDc0NDczNzI2MThiYTg5ZDFlY2ZiZjRkZmJiZmQ2ODNiZTFhYzM3MzgxNzMwOTBjYTEiLCJzcmMvYnVzaW5lc3MvbWVjaGFuaWNzL3NjaGVtYS1mb3JtLnRzIjoiYzRiODk0MGVjNmYxYzcxNGVhNWU4NGJmNTZkYjRkODRlZjI0YmFjNTdkMjAxMzUxYzllMTQxNWQ4NGE5OTIwNCIsInNyYy9idXNpbmVzcy9tZWNoYW5pY3Mvdmlldy50cyI6ImNlZmFkZWVkZDE4MzgxNGRhM2UxYTEzZGI1OWIyYTk3MDRkOGQ3NWQyMDRhNTY2ZDJhZTVmNjQ0OTczMWFmYjciLCJzcmMvYnVzaW5lc3MvbWVjaGFuaWNzL3ZvY2FidWxhcnkudHMiOiI3MjM3YzljZTk0NTRkZDVhNDM2N2E5YmE2ZmNhNWVhMzJkNmYxMDY3ZGE1YWYyMjkxY2MyM2RlOGIzNjkyNmRhIiwic3JjL2J1c2luZXNzL3RpbWVsaW5lLXBvaW50ZXIudHMiOiJhY2FhNzhkYWIxZjBhNmNjNmE0YzZjOWY3MWUzYjhmYjJkNzczZjczMDU1ZjI1NmQ3M2Y0OWE3ZmFjOGQxMDAxIiwic3JjL2J1c2luZXNzL3RpbWVsaW5lL2FjdGlvbnMudHMiOiI2YTAzYjE1ZjAzMWIyMjZhYjMwNDhjNDhmZmUyMGZlNjZlZjMwZjBhNTMzNGU4OTEzNTcwZTQ1MDg0OTZiODcxIiwic3JjL2J1c2luZXNzL3RpbWVsaW5lL2F4aXMtY29udHJhc3QudHMiOiIzOTJiODE1MTZhNzJlMTc3NTExYzY0MzIyODZkMDZlNTU0MjRkMDFlODRlNDU5MWNjMzVlNGRkNDAyMGYxOTgyIiwic3JjL2J1c2luZXNzL3RpbWVsaW5lL2J1ZmYtcHJlc2VudGF0aW9uLnRzIjoiN2FiZThiYmM1MTJkMDY4OTgzYTY2NTBhMTFlMTU1M2ZjODIzZTE2MTBlMDQxMjEzYTUwMjU4YzQ1NWM0ZGQ4YyIsInNyYy9idXNpbmVzcy90aW1lbGluZS9jb250ZXh0LnRzIjoiM2EyNDAzY2Y1YzA3ZmVjMTBlYTNjZGRiOTg4OTEwMmIzZmJkOTY4ZDkxOTIwYTRlNjIwYjE4YmRkNWFkZWNiYyIsInNyYy9idXNpbmVzcy90aW1lbGluZS9jb250cm9scy50cyI6ImIwNzk3NjFhZWQ0YWM2NjQ5NzExNWFjNDMyMWM1NjE0ODQ4ZTNmMDBjZmYyNTQ4OTJmOGNlYWIyNDFmOTE4YzkiLCJzcmMvYnVzaW5lc3MvdGltZWxpbmUvY292ZXJhZ2UudHMiOiI2YjhlNmZkM2VhMmZhODA0M2M2NzllMWMzYmEzNWFjNmVjMjY1YTljMDYyMjg2ZWYzZTM0NTc1YzEzOTAwMjQ5Iiwic3JjL2J1c2luZXNzL3RpbWVsaW5lL2RhbWFnZS1kZXRhaWwudHMiOiJlMjgxZTgxZjQzN2U2OWY5ZGY5Y2FkMWE5MDc2MGRjZDc2Mzg0MzA0NmIyNjFjZTRhNjVhY2U0MmE4ODY1NTA3Iiwic3JjL2J1c2luZXNzL3RpbWVsaW5lL2RhbWFnZS1zb3VyY2VzLnRzIjoiOGRlZGY2MDIwNjhhN2Q5MTk0ZjA5MjM0YjYzZTQ4NjMzNjY1M2M0NDA2Nzk2MGFhZmRiYjk0NWJmMzRhYmJlNCIsInNyYy9idXNpbmVzcy90aW1lbGluZS9kZXRhaWwudHMiOiIwZjgyYjhkM2RmYjY4MGUzOTljMjgyN2NlMWNkODQzYTBiZjE5M2ZjOWRiZDVjNTA3NTMyYzhmNjFhYTg1ZjQzIiwic3JjL2J1c2luZXNzL3RpbWVsaW5lL2Rpc3BsYXktbmFtZXMudHMiOiI2MmRkNzVlNDYwZjVhYjE3MDQ1ZWJmMzY4ZDFlMmJhNGY5MjYxYWNlZGQ3ZWFlMDFlNGFjOGU3YWExZjk4NGQyIiwic3JjL2J1c2luZXNzL3RpbWVsaW5lL2Rpc3BsYXktcm93cy50cyI6ImNiN2M1MDhjNjc5OGJhYjdmNzlkZTNlMjlmMmY0ODczNmRkMDM0MWVhMGVjNzUzYjg3MzY2MWEzY2RlYmE4N2UiLCJzcmMvYnVzaW5lc3MvdGltZWxpbmUvZG9tLnRzIjoiODQ0YjZhYTE4Mjk5YmIxZDUzZGRiMjU3ZTVjYTZiMDE1YjY4MDExZTYyYzI5Yzg0MzFkZGZmYTNlNzIxODhhMiIsInNyYy9idXNpbmVzcy90aW1lbGluZS9lbGVtZW50YWwudHMiOiI0M2U5ZWEyYTYzNzMzNDIxYTFiMDIzYzVjMjQ1NzZkOWU4MzExZGJlMDAxMzUyOTEyNjAwMzEyZjYxNTVhYzUzIiwic3JjL2J1c2luZXNzL3RpbWVsaW5lL2V2aWRlbmNlLWluZGV4LnRzIjoiZjE2Y2M2ODY0NWJlMGU3N2M3ZjNiNmViN2VkMzdlYjdjODcyOTBmMzQ4MjVjZDMxMTIyZThhMTc1MzNmYTNhMCIsInNyYy9idXNpbmVzcy90aW1lbGluZS9nZW9tZXRyeS50cyI6IjVkNjA0YTViMmQ2ZjBlNDc3YjQ1NzFhYjUwYzY0ZjQxMTgxYjFlZGM5YWYwZThiNGE3NDQzYmVlNDFkNzQ4ZmYiLCJzcmMvYnVzaW5lc3MvdGltZWxpbmUvaGl0cy50cyI6IjIxMzQzZmY5MjdhMzE3MTVkMDMyOWI2YTU0ZjU1MDcyNWNjMTU0MjRmNjk2NGMxOGMxMTJhYTBjNTM4ZDdjOTMiLCJzcmMvYnVzaW5lc3MvdGltZWxpbmUvaW5kZXgudHMiOiJkYTI2MTRiZmYwNDJmZmVmNWNjNjNhYTA4MDA4ODUyYmU3ZDQ2NTJhMmEwOTcyNmUwZGVjYjRlY2IyMGQ2YzlmIiwic3JjL2J1c2luZXNzL3RpbWVsaW5lL2xheW91dC50cyI6ImQyZjAzMmRmNzRhZDJjNDM1ODM1YTFkNGEwMzkyZTdmYTc1NGQ0MmVlOTIxYzM1MWY1OGVkNDg2NGM5NzRjYzgiLCJzcmMvYnVzaW5lc3MvdGltZWxpbmUvbmF2aWdhdGlvbi50cyI6Ijc4ZjgyZTg2YjYwOThhMGY4ZjBjZDVhNDIxYTMyOGZkYTllYmM4MTZhNzI1MDg2Yzc5NTJlNjA2YWFjZmQ3NTAiLCJzcmMvYnVzaW5lc3MvdGltZWxpbmUvcHJlc2VudGF0aW9uLnRzIjoiNTc2ZWJjNDMyYjU3OWE5ZjNkMzFhZjUzOGM5N2IxZjUzMDkxODkxZmM0YjdkZjJkNjY0NTVmYzRiZTFmYTMwMSIsInNyYy9idXNpbmVzcy90aW1lbGluZS9yZXNvdXJjZXMudHMiOiJkNGY2YmIwMjQ4ZTQwOGM0YzQxYTEyMDcwZTI3M2I1OTEwMDYzY2U1MGJkNjM1MjUwZTA0ODkxNzg2MjI1ODIwIiwic3JjL2J1c2luZXNzL3RpbWVsaW5lL3Jvdy1kaXNjbG9zdXJlLnRzIjoiMmNlYjY2YzU0MjhjMWJjZDc1YWVjODgwZGQyZDEyNzA1MDI4ZWIxOGZmODJlMTc2NWE1NTdhNzA0ZGMwMGU1YiIsInNyYy9idXNpbmVzcy90aW1lbGluZS9zaGFyZWQudHMiOiJkY2IzNTQyNjM3NTdjZTIyMWIyY2ZmYjNmMmUxOTBlYWM3NzFjZjhhZGYyMmUzY2FjYjkzYWZmNjVhODc1ZjFiIiwic3JjL2J1c2luZXNzL3RpbWVsaW5lL3NwZWNpYWwtc3RhdGVzLnRzIjoiYTg0MWY1OTFiN2ZjZTQzZDI5OWQ0MDFjODY4NjZmN2FmZjRlOGIwNWEzMzU3OWMxNTAxNmNmNDEwMTc3NTE4YyIsInNyYy9idXNpbmVzcy90aW1lbGluZS9zdmcudHMiOiJmMDY2OGVkYjJmNDFjNWZlYTViMzFlYmRiNjE4NGY3N2Y4YTI2YTdhMzkwZDkwZTZiMDkyY2UzNDVkZjhhYmViIiwic3JjL2J1c2luZXNzL3VzZXItZmlsZS1hY3Rpb25zLnRzIjoiYThlZGFhNmJmMmYyOWZmN2U5Y2I0ZmU4OTg1OWZkZmZlZGEwYjlhMzA1NTdlZGU4Y2I0YzkzZmRhYWFkNGY5NyIsInNyYy9idXNpbmVzcy93aGl0ZWJvYXJkL2FjdGlvbnMudHMiOiJjMGY1OThmNmViMzAwYjRkZWUwOTI1OWQ5MWE1M2E2NzE1ZGEyZDdlZWE5ZTIzY2ZlMWY2MjgwNTNiODdkNTFhIiwic3JjL2J1c2luZXNzL3doaXRlYm9hcmQvYWRtaXNzaW9uLnRzIjoiNThlZTRmNWU3OTU3OGRiMGMyMDdhOTJhYTUwYzFjMGRlYjY2MTQ2MTI4OTU4YmUwYjIyNTM2ODIxYjU1OGUzNCIsInNyYy9idXNpbmVzcy93aGl0ZWJvYXJkL2NhcGFjaXR5LnRzIjoiYzBiODE4NTBiZTg0ZDNiOWM2NjhlM2EyODQwNjY2NTIzNTNmMjQ1OWJmM2M1YzAzZmI0ZWUzZGU0NGI1OTdhMiIsInNyYy9idXNpbmVzcy93aGl0ZWJvYXJkL2RvY3VtZW50LnRzIjoiMmUwMmVhMTFjY2MxNjNmOTI1YzgyZWNkYzA2NTE5NTNhNTAxZDRmZWM1ZmFkZTUyMTY2YmI0NDc2MDQyNWU3MiIsInNyYy9idXNpbmVzcy93aGl0ZWJvYXJkL2VxdWlwbWVudC50cyI6IjAyYTcyZWM4NWFkYjBlMjc3NThjN2ZiNzc1OGFmMmFkNDc1NTlhY2Y5ZTIyYmZhNTYyNDZhNzc4OWM5YzQwNDEiLCJzcmMvYnVzaW5lc3Mvd2hpdGVib2FyZC9maWxlcy50cyI6IjBkNjA0NzJlOTM3MzlhZjE4MTBkMTYwNzg1NDFmODMxZTcwNjFiZmIxN2RkN2U0OWE2Zjc1NGY1ZTFkNjc3NDMiLCJzcmMvYnVzaW5lc3Mvd2hpdGVib2FyZC9pbmRleC50cyI6IjQzNGIyMGIwN2ZjNWFmOGFkNWEzYzAxNGQyOTNjMjM3ZGJiMDAzYzVhZTE5OTA5ZjVjMDg4ODZlYTU1ZTgyZjEiLCJzcmMvYnVzaW5lc3Mvd2hpdGVib2FyZC9pbnNwZWN0b3IudHMiOiJjZDliOTUzMzU2ZWNjZDJkZGQ5MmFiMTU3Yzk2NDM0NTA3ZDE4ZTNmNWY4NTZmZTFjM2E5NDdjNzM1YTRmNzlkIiwic3JjL2J1c2luZXNzL3doaXRlYm9hcmQvcG9pbnRlci50cyI6IjI3ZDAxMjljN2YzYTkxNjk3YzQ4ZGFjZWJhYzE0OWZjY2IzOWM0NDEzMzg2ZGRhNGUzOWZhM2FjYWViMmE0MGYiLCJzcmMvYnVzaW5lc3Mvd2hpdGVib2FyZC9wb3J0cy50cyI6ImM5NWRmN2U3ZmZjYjA1MmE0NTQyMGM4NTQyMmUwZjg2NDNjNWRhZTRiNDgyYjYyMzYxNzZiOTIzNThhNzE3NmYiLCJzcmMvYnVzaW5lc3Mvd2hpdGVib2FyZC9wcm9qZWN0aW9uLnRzIjoiOGEyOGUwMTY3OGM3ZTBjZTg5YjU3NWE3Mjc3YzQwOTBmYzUzOTBmMDU3NmQzMzJhMjA0MGIzMjc4MmVjOWY4ZiIsInNyYy9idXNpbmVzcy93aGl0ZWJvYXJkL3N1cmZhY2VzLnRzIjoiOWQ1YTMwZTdlMWY4NmUxZTBlMjc0ZWRkZjM5YmVhZjA3YTIwNTY2ZjVjMjE1YzY3ZTA2ZGZkYjZhMDQyZTU5NyIsInNyYy9idXNpbmVzcy93aGl0ZWJvYXJkL3N2Zy50cyI6ImFlMmQ0NDk5YjkzMmYxMzVjMzNlMTNlNTcyZGU4ZTI5MjE4ZmE2YmE4ZDc1ZTJhNzZiZDRjMWY0MzRlMjk2YTUiLCJzcmMvYnVzaW5lc3Mvd2hpdGVib2FyZC92aWV3LnRzIjoiMjkxMDU5MGRmNTkzZGU0Y2E1ZWY5NjZmMTdjZTM4ZDZlYTVmNGNhMTQ3MWEyM2QwMWU4NjUzNTBhYTc1NzhhYiIsInNyYy9idXNpbmVzcy93aGl0ZWJvYXJkL3dvcmtmbG93LnRzIjoiNzliNDE0Zjk5N2IyYTdkZTgyYzJiZDFkM2JmNjNkY2E5Njg1MGI0ODVhZmMxMmUxYWU4YTQzNWEzNTE3MjFlNCIsInNyYy9kZXNpZ24tc3lzdGVtL2Jhc2UuY3NzIjoiYjZiZTczNDgxYzYzYjMwYTNjYjFmMTI4OTQ3NTA1MTg3MTgwYmU4ODc0ZjZjNzdjNmM1MWI4MjRjMjdkNjBmYiIsInNyYy9kZXNpZ24tc3lzdGVtL2ZvY3VzL2RvbS1mb2N1cy50cyI6IjFjNmYxYzVlMTVkMzNhMzQ3YThmMjVlYTQ5YmE5MTUzOWFkM2UxODhjN2NjMGEyNDMyN2EyNWJiMzlmOTNjMDkiLCJzcmMvZGVzaWduLXN5c3RlbS9mb2N1cy9mb2N1cy1tYW5hZ2VyLnRzIjoiY2M2NzNjMGUyZDk4YTQ1MDZiYTViNWNjYTAyM2E0NDgzMDIwMmYyMmUzNjBiZGQ2ZGE0NzU5MWI0M2YzNzM2MiIsInNyYy9kZXNpZ24tc3lzdGVtL2xheW91dHMvU3BsaXRQYW5lLnRzeCI6IjFiN2QwYzFlOWU1YTk4ODgyODk1YjJjOTZkNGEwNjhhNTU5ODg1ZTcxNTI0ZDhiYTU0NzM3MmMxNjNhNDAwYTMiLCJzcmMvZGVzaWduLXN5c3RlbS9wcmltaXRpdmVzL0J1dHRvbi50c3giOiI1Zjk1ODgyYzYzODRjNTA4NjQyOTdmMTkwM2QxNzA5YjFiZmI0OTgzZTIwMDNhNzU2MGJhN2I3ZjExN2ZjODY5Iiwic3JjL2Rlc2lnbi1zeXN0ZW0vc3VyZmFjZXMvY29vcmRpbmF0b3IudHMiOiIwMTM4MTRjNGEzMzJkZThlNDI3MDQ1MzJkNjEzNTE4YTA2MzI0MGE1OTQzMDc3NGEyOTM0MzY0Y2Q4YzkwNzkwIiwic3JjL2Rlc2lnbi1zeXN0ZW0vc3VyZmFjZXMvZG9tLXN1cmZhY2UtaG9zdC50cyI6IjI3MjAyNzhlNjhjNGJhYzQ5Mjc2MDA4NzM3YjA1N2M1NWRjZTVmZjI3MzcyMGJjMjgxMDYyYjUzYTg1YmY2ZTkiLCJzcmMvZGVzaWduLXN5c3RlbS90b2tlbnMvcmVnaXN0cnkuanNvbiI6ImVjZDE0YjVhNDE5ZGZhNTU1ZWZhNWQ5MjU2OWY0Zjc5YTFkNTRmZDJkMDdiZDY0MzQwYzAwNzczODBmZTVkMDEiLCJzcmMvZGVzaWduLXN5c3RlbS90b2tlbnMvdG9rZW5zLmdlbmVyYXRlZC5jc3MiOiJlMzc1ZjBhMWM2OWQxMWQ5NWI1NzRmOWY1NDIzYWMxZGEwNDJmYWE0Yzc4MjkxMDAxMWRkNDRiNTZiNzEzZTRiIiwic3JjL2RzaC9hcHAtY2FuZGlkYXRlLWNvbW1hbmRzLnRzIjoiNTFhYmJlMTI3MmQ1Y2JiOWZhMWQzMWVhZjM4YjhkMzk0MWJkNGM5MDdjMDk3OWFlYzIwZDJmZTRmMmFhYjgwMCIsInNyYy9kc2gvYXBwLWNhbmRpZGF0ZS1kcmFmdC1maWxlLnRzeCI6ImJhMTY4MjlhOTQ2NmViMDBkMWM0ZTJhM2ExZmVjMjY5NjVjOTc2NDcxNzkzY2RjYzcwZGY0NWJlMjgwMzE1ZmYiLCJzcmMvZHNoL2FwcC1jYW5kaWRhdGUtZHJhZnQtc2VsZWN0aW9uLnRzIjoiOGNjYjFlZjU0ZDIzZDEzMjgyOTcxZWMwZDhjMjAwZWRjMzczZmRmZDA2YjRlNDVkZjI5ZThjMDgzOTlmMmVlOSIsInNyYy9kc2gvYXBwLWNhbmRpZGF0ZS1wcmV2aWV3LnRzeCI6IjIzYWQyMWQ1OWRhMWU3OGFhZGVjMjYyMjlhZGYxODE2NzEyM2Q4M2Y5OGJiMzhjMWQ1NDZmYWQ4YTkxMzcwNWUiLCJzcmMvZHNoL2FwcC1jYW5kaWRhdGUtcmV2aWV3LnRzeCI6IjlkNTZkMDExYjRiYzE1NGMyMTVkNjIyOGIwMWNkZWE4OTAwNDJkYzMzNTVjNDNkMzhlNGE4ZjE4NWFjZDhiYWUiLCJzcmMvZHNoL2FwcC1jbGlwYm9hcmQudHMiOiJmYTc3N2ZmNjdjZWE3YTJkYzNkMjYyOTQ5MjRjMDAyZDdmOGE3NGJkZjU3M2Y0NGZkNzgzNTQyZmU1N2RjMjk3Iiwic3JjL2RzaC9hcHAtY3JlZGVudGlhbC1zZXR0aW5ncy50c3giOiI2YTc3YjAyZDc5MTQ4ZTYzNmYzOWNjMjc5MjBkZDM5MTRjNTI5ZWZkMWEzM2YzOWU4YTA5YTk3MzkwYjIwYTkyIiwic3JjL2RzaC9hcHAtZG9jdW1lbnQtdHJhbnNwb3J0LnRzIjoiYzUzMjgzNWVjNTE5YThiYTUzMzgwY2FmNWVjNjkxNzU3NzQ5NmU1MDJhMGU4YjMxMGEzYjJmZmU3MzgzYjM0MCIsInNyYy9kc2gvYXBwLWRvbWFpbi1hcHByb3ZhbHMudHN4IjoiODUzOTU0Y2Y3ODE4MmVmYzQ2Yzg2ZDU3MmQ0ZWQ2Y2RiMGViYzE2YWVhOGJjYTc3MmIxNDY0ZmZjNTQ2MWQwMiIsInNyYy9kc2gvYXBwLWRvbWFpbi1icmlkZ2UudHMiOiI4ODViYzk0NWIzMzVlNDM4YmM5ZDU2MjFlNjIxYTU2ZGNjZjQ1OThhNTA2MzE3NDA1ZDFjMDk2ZmI1YjE4NjQ4Iiwic3JjL2RzaC9hcHAtZG9tYWluLWNhbmRpZGF0ZS50cyI6ImM0NGU5ZTIwZGVkMzVkM2Q2Yjc3YTQzYjI1NTBkMzUyMGU1ZTNkZjdlYWI5MmYxNmM2YTMxMjAwN2Y4ZDM1ZTIiLCJzcmMvZHNoL2FwcC1kb21haW4tZXJyb3JzLnRzIjoiZDUxZjE5ZjFhMjU3NmQ1YWNiNDhhMzVkNTViMzAxYmJiM2E1NWI5YzJiMTVjODY3OGJhMTEyZGJiZmUzNmM1YiIsInNyYy9kc2gvYXBwLWRvbWFpbi1pbmNvbXBhdGliaWxpdHkudHN4IjoiYzdiMjI2MmFjMjU2OGRjNWNjODlkOTQ0YTZkNjhiODE4Y2IyNGIzZGFlYjkxNTc1MmM1MDYyYTFkMmE4MzVlMyIsInNyYy9kc2gvYXBwLWRvbWFpbi1pbnNwZWN0b3IudHN4IjoiMWNlYWY2MTdkM2E2NmM5ZjJlZGUzY2EzNGZkOGNiZTU2OTIxYTBjMzkyZDFjN2Y0YWQ1NzcxOWViNjYyYzk5MiIsInNyYy9kc2gvYXBwLWRvbWFpbi1wbHVnaW4uY3NzIjoiZWY0MmQwYTFhMDc3YjQ4ZWIyM2I0NThlNmIwNmUzZmI1NWYxMmZjM2VmODYzNzE4MTBjYzkyZDBiOTA1YTk5NiIsInNyYy9kc2gvYXBwLWRvbWFpbi1wbHVnaW4udHN4IjoiNWI3MTQ2ZTBlMDVjODBkYWRjNWZlODE0ZjI0Mjg0ODViYTljNGMwNzFjZjBlMzhiZTIzMjFhMmQ5NjRiN2E5MyIsInNyYy9kc2gvYXBwLWRvbWFpbi1yZWFkLnRzIjoiNjg5NWFhY2RjNzk4NTY0ZjU2MDIzYmVlMjJjZjgzYTcxMzFhNmQ5YjZkZDM3MDMzNGIwNmY4NDBhMmJmZTU5ZiIsInNyYy9kc2gvYXBwLWVkaXRvci1icmlkZ2UudHMiOiI4MDEyNjY5MzRiNWY5ZGNiM2E5NWQ2OTEzYTcwNzc3MTFmNzc0MDMzNDllMmVjOTBlYzNlOGU0MjgwODBlNmE0Iiwic3JjL2RzaC9hcHAtZWRpdG9yLXBsdWdpbi50c3giOiI5MTE0ODlkZjRmODcyMDgwMDc4NTY5N2UxNjUxMzNhODM1NWQwYzYzNDhhZWY3YjA4YWNhN2M3OTNkNjEyMmE4Iiwic3JjL2RzaC9hcHAtZmlsZS1hY3Rpb24tY2FyZHMudHN4IjoiNjY4MzhkYmMzZWM1M2VjN2Q4Y2NlOGNjNjkxMDNiZmUzYWJkODMxMmZjMTNlZTYxN2MyY2E5MjM3Nzc5MmUwZCIsInNyYy9kc2gvYXBwLWZpbGUtYWN0aW9ucy50cyI6ImVkOTUwZDMwMGE0MmNlZGUyMTU3YmUyYmVmZGEzNTg3NDQ0M2FmNjQxYWFlMDdlYmFmNzBmMmYyNjhlOWZjYmIiLCJzcmMvZHNoL2FwcC1pbmNvbXBhdGlibGUtYXBwbGljYXRpb25zLnRzeCI6ImJhMWRjN2Q3MzI3MGFjNDEzMTJlYjVkYTQyNDM2ZTNjODJkOTYxZTAyOTcwYjdmMWFiMDdjYjBkMTQyODQ4OTciLCJzcmMvZHNoL2FwcC1ydW50aW1lLXNldHRpbmdzLnRzeCI6IjU5NDM5ZTdiODhjYmYwZGUyNmQxYTE0MjRmOTE0NjRhYWVkMjFlZjJhN2I4MWY4MTI3MGNiYmY5MzZmZGQyYjYiLCJzcmMvZHNoL2FwcC1zYXZlZC13aGl0ZWJvYXJkLWNvbnRyb2xzLnRzeCI6IjExMjFhMTc1OTE4NjI4NzU0OTYyZWY3NTcxYmRhOWQ4NmUwOTg5MDkyNDIxZDY3MWQ1ZWU0NTE3Y2E3MDFmNDMiLCJzcmMvZHNoL2FwcC1zYXZlZC13aGl0ZWJvYXJkLnRzIjoiMDNhNGQyN2M5MzFkYmRkZjE5MWIxMmQ4MjAzMTA2Y2JlMjNhODc0MzVmNmRhYWNlYzczMmE3M2QzNzMyNDcxMiIsInNyYy9kc2gvYXBwLXRhc2stY2VudGVyLnRzeCI6IjY0MDc2NjE2YjBkNzgwNDE1ZWI3NTE0MWUxYjE0MWQ4NzgzZGY0NDhmZTdhNDY3ODI2MTEyOWE0YTZmYTMwMTkiLCJzcmMvZHNoL2FwcC10YXNrLXJldmlldy50c3giOiJlNmUzYzZmNzU0MjUwNzlkZWYyNzQ1NTYzNDZkMThhMjA1Y2ExNDhkNDUwNjcyYzU2OGE0ZmFhZWM3ZTAyNGFlIiwic3JjL2RzaC9hcHAtd2luZG93LWRyYWZ0LnRzIjoiZmJjZmVhMDYyNjJjMzhiNWFlNjc0Yzc1YjdlOTczOWIwZTZjZjI0OWU0YjYwMWE3MGNhMTMyOWY2NWI4ODRjMCIsInNyYy9kc2gvYXBwLXdpbmRvdy1pbnB1dC1mZW5jZS50cyI6IjBkNmUzZDI5YTM5MzU0NjMwYTcyMDliYjM3NzVjY2M4Nzc1M2JmNjY5YjcxYmI3NzFmMTkxMzEyN2UyMTllN2QiLCJzcmMvZHNoL2FwcC13aW5kb3ctcHJlc2VudGF0aW9uLnRzeCI6ImNhMTg2YmJkMjA5NmVhNWJlY2Y2ZDRjZWRhMGFlMzE5YjMzOTQ3MzViNzdkNzJmMjIwYWQxNjE0ZjIyMDRjNzciLCJzcmMvZHNoL2FwcC13aW5kb3ctc2Vzc2lvbi1jb250cm9sbGVyLnRzIjoiYWUwYzgwZWYzMmRkZWZmZDJkZDFhMDAwODM0YWFiMGYzOTBkZDQ4YjgyNjEwYWNkNGMxMzFjOWNiZTRlMTAzNSIsInNyYy9kc2gvYnJvd3Nlci1ub2RlLW1vZHVsZS50cyI6ImU4ZjI1ODZkODFlOTM3OTBkMDdkYWQ1NTg3ZmMxMzgyYWJmNjVkZTg4ZmQ1M2UxZTBhOWYzNTliNGIwZjRmNzgiLCJzcmMvZHNoL2NsaWVudC1jb21wb3NpdGlvbi50cyI6ImYyMmMzODAzMDExMDhhNWZiMjBmYmEwZDA1NWRiNzZjZGQwZTY5ZmZlOGU1MmE1NmNhYmEwYzUzMTA4YTk1ZGQiLCJzcmMvZHNoL2hvc3Qtc2hlbGwtY2Fycmllci50cyI6IjMwYWZhODg3N2U5ZTdiODk1MmI1ZmQxMWVjOWMwNzEzZjZmYjQ4MzE0M2M0MzNlODNiMTA5YzJmMzI2MTUzOWEiLCJzcmMvZHNoL3NoZWxsLWNhcnJpZXIudHMiOiJhOWQyYmFmOWUyODJmZjI2Y2JjOTJlM2MwOWJjNGQ3ZjUxNjgyYTU2MDBlMzU5ZDMwNzYyY2Q1NzVjM2YyNDYzIiwic3JjL2Vudi5kLnRzIjoiNjU5OTY5MzZmYmIwNDI5MTVmN2I3NGEyMDBmY2RkZTdlNDEwZjMyYTY2OWIxYWI5NTk3Y2ZhYTRiMGZhZGRiNSIsInNyYy9ob3N0L2FkYXB0ZXIudHMiOiJmZmUyMzk3MWY3YmNlYzY4MDE4MDdmMzE0YTg4MzliZjI4Yzg1YmZiYWI4NzE0N2NhMDVmZjJmYjhjMzAyYTNjIiwic3JjL2hvc3Qvc2NoZW1hLnRzIjoiYjJiNTAxOWEzODMxMmY5NjE5MzdiZTg5YTU5NzYzNTAxZDkxMmI0MWQ4MmI0ZTZjMDJkOTM3MjliN2ViYTI3YiIsInNyYy9sZWdhY3ktZW50cnkudHMiOiJlMzNkNWUwMTE0ZTQ5NmJmNGQwY2Q5MDc3OWU1MTczZTVhZjI3OTc2YTMwMDA0MjlhZjdjOWUyMzA5YTNjYjg5Iiwic3JjL2xlZ2FjeS9mb3VuZGF0aW9uLWJyaWRnZS50cyI6IjJkYmJjZjgyZmYxOWUyNWMyZWYwZmJjZGQyZjZkOGIzM2EyYzUxZmM1YWZkMDZlM2Q1ZjM3OGQxNGVmYjE4NjMiLCJzcmMvcHJvZHVjdGlvbi1lbnRyeS50cyI6IjkxYTRkYjNmZGI4MTBjZjU5NWU1M2E4Mzc5NWVmNzU1MmRmNzFmZTBjYWE4NzkxNzQ0NDYzMjA5MWQ2ZTQ1ODAiLCJzcmMvc3RhdGUvbW9kZWwudHMiOiIwNTc3ZDUzM2VkMGNmOWRiZTY0OTIxZDQzNzg5NDcxNmY1YjY4ODhjYjQyYzk2N2QyNDcxMDczZDA0ODEzMzFiIiwic3JjL3N0YXRlL3N0b3JlLnRzIjoiMGUyNDZlM2FjYTc5MTM3NGQyZDkyMWNhNmRkYzY4NzdlMWNhOTczYjRkNzYzMjA4MDI0NGZhMGVhZjgzOWM0ZSIsInRzY29uZmlnLmpzb24iOiIwODY4ZGYxYjZiOWMyN2M3MTRhM2ZmNDBmOGU2M2UyODdlYWM0ZDU3MThlYzdiYjc0YWZiMDk1Y2Q1YjJmYjYzIiwidml0ZS5idXNpbmVzcy5jb25maWcudHMiOiIxNDcyNGYzNzIzZjM1ZWY1ZmQ5YThkODUyODAwYWI2OGJmYjc2MTc1YTNhYzg3NDc5YWI5ODgwNDc1MTJiN2ZmIiwidml0ZS5sZWdhY3kuY29uZmlnLnRzIjoiYWIzMTVmZGVjNzdjNjU0ZDlhOTBhYjAxMzQyMDIwNDg4YjBhNjU5ZTk1MDY2MWI1YTBmYjQ5OWUyZmM4ZGYwMCJ9fQ== */
 window.__ModuleLoader__.load({ id: "@genshin-calc/dsh-client-domain", factory: function(require2) {
   var module = { exports: {} };
   var exports = module.exports;
@@ -7,6 +8,7 @@ window.__ModuleLoader__.load({ id: "@genshin-calc/dsh-client-domain", factory: f
   const dshClientUiPrimitives = require2("@deepseek-ai/dsh-client-ui-primitives");
   const react = require2("react");
   const dshClientStore = require2("@deepseek-ai/dsh-client-store");
+  const reactDom = require2("react-dom");
   const client = require2("@deepseek-ai/dsh-client-ui-conversation/client");
   const object$8 = (value) => value && typeof value === "object" && !Array.isArray(value) ? value : void 0;
   const text$2 = (value) => typeof value === "string" ? value : void 0;
@@ -450,20 +452,20 @@ window.__ModuleLoader__.load({ id: "@genshin-calc/dsh-client-domain", factory: f
     }
     return { summary: after, document: record$1(document2), calculated };
   }
-  let current;
-  const listeners = /* @__PURE__ */ new Set();
+  let current$1;
+  const listeners$1 = /* @__PURE__ */ new Set();
   const selectedDraftNotice = {
     publish(sessionId, data) {
-      current = Object.freeze({ sessionId, data });
-      dshClientStore.notifySubscribers(listeners, "[genshin-draft-file-notice]");
+      current$1 = Object.freeze({ sessionId, data });
+      dshClientStore.notifySubscribers(listeners$1, "[genshin-draft-file-notice]");
     },
     snapshot(sessionId) {
-      return (current == null ? void 0 : current.sessionId) === sessionId ? current : void 0;
+      return (current$1 == null ? void 0 : current$1.sessionId) === sessionId ? current$1 : void 0;
     },
     subscribe(listener) {
-      listeners.add(listener);
+      listeners$1.add(listener);
       return () => {
-        listeners.delete(listener);
+        listeners$1.delete(listener);
       };
     }
   };
@@ -498,9 +500,24 @@ window.__ModuleLoader__.load({ id: "@genshin-calc/dsh-client-domain", factory: f
       return result;
     } };
   }
-  function OpenCandidateDraft({ api, sessionId, onImported }) {
+  async function copyAppText(value) {
+    var _a;
+    try {
+      if (!((_a = navigator.clipboard) == null ? void 0 : _a.writeText)) return false;
+      await navigator.clipboard.writeText(value);
+      return true;
+    } catch {
+      return false;
+    }
+  }
+  function OpenCandidateDraft({ api, sessionId, onImported, compact = false }) {
     const [busy, setBusy] = react.useState(false), [message, setMessage] = react.useState(""), [legacy, setLegacy] = react.useState(), [detail, setDetail] = react.useState(), [reading, setReading] = react.useState(false);
     const readGeneration = react.useRef(0);
+    const currentLegacy = react.useRef(legacy);
+    currentLegacy.current = legacy;
+    const [copyStatus, setCopyStatus] = react.useState();
+    react.useEffect(() => setCopyStatus(void 0), [legacy]);
+    const [chooseOpen, setChooseOpen] = react.useState(false);
     const openGeneration = react.useRef(0);
     react.useEffect(() => {
       setBusy(false);
@@ -527,6 +544,7 @@ window.__ModuleLoader__.load({ id: "@genshin-calc/dsh-client-domain", factory: f
     const open = async (newCopy = false) => {
       var _a;
       if (busy) return;
+      setChooseOpen(false);
       setBusy(true);
       setMessage("");
       const generation = ++openGeneration.current, intent = (_a = window.AppDocumentOpenIntents) == null ? void 0 : _a.begin(), isCurrent = () => generation === openGeneration.current && (!intent || intent.current());
@@ -587,67 +605,760 @@ window.__ModuleLoader__.load({ id: "@genshin-calc/dsh-client-domain", factory: f
         if (generation === readGeneration.current) setReading(false);
       }
     };
-    return /* @__PURE__ */ jsxRuntime.jsxs("span", { children: [
+    const choices = /* @__PURE__ */ jsxRuntime.jsxs(jsxRuntime.Fragment, { children: [
       /* @__PURE__ */ jsxRuntime.jsx(dshClientUiPrimitives.Button, { size: "sm", variant: "outline", disabled: busy, onClick: () => void open(), children: busy ? "正在打开…" : "打开候选输入草稿" }),
-      /* @__PURE__ */ jsxRuntime.jsx(dshClientUiPrimitives.Button, { size: "sm", variant: "ghost", disabled: busy, onClick: () => void open(true), children: "新开独立副本" }),
+      /* @__PURE__ */ jsxRuntime.jsx(dshClientUiPrimitives.Button, { size: "sm", variant: "ghost", disabled: busy, onClick: () => void open(true), children: "新开独立副本" })
+    ] });
+    return /* @__PURE__ */ jsxRuntime.jsxs("span", { className: "gs-draft-file-actions", children: [
+      compact ? /* @__PURE__ */ jsxRuntime.jsx(dshClientUiPrimitives.Button, { size: "sm", variant: "ghost", disabled: busy, onClick: () => setChooseOpen(true), children: "导入草稿" }) : choices,
       message && /* @__PURE__ */ jsxRuntime.jsx("small", { role: "status", children: message }),
-      /* @__PURE__ */ jsxRuntime.jsxs(dshClientUiPrimitives.Modal, { open: !!legacy, title: "旧输入草稿仅供查看", description: "本文件没有获得当前版本的计算或应用资格。可复制以下要求，让 Agent 在新任务重新整理。", closeLabel: "关闭旧草稿说明", onClose: () => {
-        readGeneration.current++;
-        setReading(false);
-        setLegacy(void 0);
-        setDetail(void 0);
-      }, children: [
-        /* @__PURE__ */ jsxRuntime.jsx("p", { style: { userSelect: "text" }, children: legacy == null ? void 0 : legacy.prompt }),
-        /* @__PURE__ */ jsxRuntime.jsx(dshClientUiPrimitives.Button, { variant: "outline", onClick: () => legacy && void navigator.clipboard.writeText(legacy.prompt), children: "复制兼容修改要求" }),
-        /* @__PURE__ */ jsxRuntime.jsxs("p", { children: [
-          /* @__PURE__ */ jsxRuntime.jsx(dshClientUiPrimitives.Button, { size: "sm", disabled: reading, onClick: () => void read("source_document"), children: "查看原始意图" }),
-          /* @__PURE__ */ jsxRuntime.jsx(dshClientUiPrimitives.Button, { size: "sm", disabled: reading, onClick: () => void read("candidate"), children: "查看候选输入" }),
-          /* @__PURE__ */ jsxRuntime.jsx(dshClientUiPrimitives.Button, { size: "sm", disabled: reading, onClick: () => void read("evidence"), children: "查看来源资料" })
-        ] }),
-        reading && /* @__PURE__ */ jsxRuntime.jsx("p", { role: "status", children: "正在读取…" }),
-        detail && /* @__PURE__ */ jsxRuntime.jsxs("section", { "aria-label": "旧草稿输入内容", style: { maxHeight: "40vh", overflow: "auto", userSelect: "text" }, children: [
-          /* @__PURE__ */ jsxRuntime.jsxs("nav", { "aria-label": "资料位置", children: [
-            /* @__PURE__ */ jsxRuntime.jsx(dshClientUiPrimitives.Button, { size: "sm", disabled: reading || !detail.page.pointer, onClick: () => void read(detail.resource), children: "全部内容" }),
-            detail.page.pointer.split("/").slice(1).map((part, index, parts) => /* @__PURE__ */ jsxRuntime.jsx(dshClientUiPrimitives.Button, { size: "sm", disabled: reading || index === parts.length - 1, onClick: () => void read(detail.resource, "/" + parts.slice(0, index + 1).join("/")), children: part.replaceAll("~1", "/").replaceAll("~0", "~") }, index))
-          ] }),
-          detail.page.kind === "object" || detail.page.kind === "array" ? /* @__PURE__ */ jsxRuntime.jsx("dl", { children: detail.page.items.map((item) => /* @__PURE__ */ jsxRuntime.jsxs("div", { children: [
-            /* @__PURE__ */ jsxRuntime.jsx("dt", { children: String(item.key) }),
-            /* @__PURE__ */ jsxRuntime.jsx("dd", { children: item.value !== null && typeof item.value === "object" ? /* @__PURE__ */ jsxRuntime.jsx(dshClientUiPrimitives.Button, { size: "sm", disabled: reading, onClick: () => void read(detail.resource, childPointer(detail.page.pointer, item.key)), children: "查看内容" }) : /* @__PURE__ */ jsxRuntime.jsx("span", { children: String(item.value) }) })
-          ] }, item.key)) }) : /* @__PURE__ */ jsxRuntime.jsx("pre", { style: { whiteSpace: "pre-wrap" }, children: detail.page.kind === "text" ? detail.page.text : JSON.stringify(detail.page.value, null, 2) }),
-          /* @__PURE__ */ jsxRuntime.jsxs("footer", { children: [
-            /* @__PURE__ */ jsxRuntime.jsx("span", { children: detail.page.total !== void 0 ? `共 ${detail.page.total} 项` : "" }),
-            detail.history.length > 0 && /* @__PURE__ */ jsxRuntime.jsx(dshClientUiPrimitives.Button, { size: "sm", disabled: reading, onClick: () => void read(detail.resource, detail.page.pointer, detail.history.at(-1), detail.history.slice(0, -1)), children: "上一页" }),
-            detail.page.nextOffset !== null && /* @__PURE__ */ jsxRuntime.jsx(dshClientUiPrimitives.Button, { size: "sm", disabled: reading, onClick: () => void read(detail.resource, detail.page.pointer, detail.page.nextOffset, [...detail.history, detail.page.offset]), children: "下一页" })
-          ] })
-        ] })
-      ] })
+      /* @__PURE__ */ jsxRuntime.jsx(dshClientUiPrimitives.Modal, { open: chooseOpen, title: "导入候选草稿", description: "打开保存的候选继续完善，或建立独立副本。正式白板不会因此被覆盖。", closeLabel: "关闭导入草稿", onClose: () => setChooseOpen(false), className: "gs-domain-dialog", contentClassName: "gs-domain-dialog-content", children: /* @__PURE__ */ jsxRuntime.jsx("div", { className: "gs-draft-file-choices", children: choices }) }),
+      /* @__PURE__ */ jsxRuntime.jsxs(
+        dshClientUiPrimitives.Modal,
+        {
+          open: !!legacy,
+          title: "旧输入草稿仅供查看",
+          description: "本文件没有获得当前版本的计算或应用资格。可复制以下要求，让 Agent 在新任务重新整理。",
+          closeLabel: "关闭旧草稿说明",
+          onClose: () => {
+            readGeneration.current++;
+            setReading(false);
+            setLegacy(void 0);
+            setDetail(void 0);
+          },
+          className: "gs-domain-dialog",
+          contentClassName: "gs-domain-dialog-content",
+          children: [
+            /* @__PURE__ */ jsxRuntime.jsx("p", { style: { userSelect: "text" }, children: legacy == null ? void 0 : legacy.prompt }),
+            /* @__PURE__ */ jsxRuntime.jsx(dshClientUiPrimitives.Button, { variant: "outline", onClick: () => {
+              if (legacy) void copyAppText(legacy.prompt).then((copied) => {
+                if (currentLegacy.current === legacy) setCopyStatus({ previewId: legacy.previewId, copied });
+              });
+            }, children: "复制兼容修改要求" }),
+            copyStatus && copyStatus.previewId === (legacy == null ? void 0 : legacy.previewId) && /* @__PURE__ */ jsxRuntime.jsx("p", { role: copyStatus.copied ? "status" : "alert", children: copyStatus.copied ? "已复制兼容修改要求。" : "剪贴板暂不可用，请选中上面的提示手动复制。" }),
+            /* @__PURE__ */ jsxRuntime.jsxs("p", { children: [
+              /* @__PURE__ */ jsxRuntime.jsx(dshClientUiPrimitives.Button, { size: "sm", disabled: reading, onClick: () => void read("source_document"), children: "查看原始意图" }),
+              /* @__PURE__ */ jsxRuntime.jsx(dshClientUiPrimitives.Button, { size: "sm", disabled: reading, onClick: () => void read("candidate"), children: "查看候选输入" }),
+              /* @__PURE__ */ jsxRuntime.jsx(dshClientUiPrimitives.Button, { size: "sm", disabled: reading, onClick: () => void read("evidence"), children: "查看来源资料" })
+            ] }),
+            reading && /* @__PURE__ */ jsxRuntime.jsx("p", { role: "status", children: "正在读取…" }),
+            detail && /* @__PURE__ */ jsxRuntime.jsxs("section", { "aria-label": "旧草稿输入内容", style: { maxHeight: "40vh", overflow: "auto", userSelect: "text" }, children: [
+              /* @__PURE__ */ jsxRuntime.jsxs("nav", { "aria-label": "资料位置", children: [
+                /* @__PURE__ */ jsxRuntime.jsx(dshClientUiPrimitives.Button, { size: "sm", disabled: reading || !detail.page.pointer, onClick: () => void read(detail.resource), children: "全部内容" }),
+                detail.page.pointer.split("/").slice(1).map((part, index, parts) => /* @__PURE__ */ jsxRuntime.jsx(dshClientUiPrimitives.Button, { size: "sm", disabled: reading || index === parts.length - 1, onClick: () => void read(detail.resource, "/" + parts.slice(0, index + 1).join("/")), children: part.replaceAll("~1", "/").replaceAll("~0", "~") }, index))
+              ] }),
+              detail.page.kind === "object" || detail.page.kind === "array" ? /* @__PURE__ */ jsxRuntime.jsx("dl", { children: detail.page.items.map((item) => /* @__PURE__ */ jsxRuntime.jsxs("div", { children: [
+                /* @__PURE__ */ jsxRuntime.jsx("dt", { children: String(item.key) }),
+                /* @__PURE__ */ jsxRuntime.jsx("dd", { children: item.value !== null && typeof item.value === "object" ? /* @__PURE__ */ jsxRuntime.jsx(dshClientUiPrimitives.Button, { size: "sm", disabled: reading, onClick: () => void read(detail.resource, childPointer(detail.page.pointer, item.key)), children: "查看内容" }) : /* @__PURE__ */ jsxRuntime.jsx("span", { children: String(item.value) }) })
+              ] }, item.key)) }) : /* @__PURE__ */ jsxRuntime.jsx("pre", { style: { whiteSpace: "pre-wrap" }, children: detail.page.kind === "text" ? detail.page.text : JSON.stringify(detail.page.value, null, 2) }),
+              /* @__PURE__ */ jsxRuntime.jsxs("footer", { children: [
+                /* @__PURE__ */ jsxRuntime.jsx("span", { children: detail.page.total !== void 0 ? `共 ${detail.page.total} 项` : "" }),
+                detail.history.length > 0 && /* @__PURE__ */ jsxRuntime.jsx(dshClientUiPrimitives.Button, { size: "sm", disabled: reading, onClick: () => void read(detail.resource, detail.page.pointer, detail.history.at(-1), detail.history.slice(0, -1)), children: "上一页" }),
+                detail.page.nextOffset !== null && /* @__PURE__ */ jsxRuntime.jsx(dshClientUiPrimitives.Button, { size: "sm", disabled: reading, onClick: () => void read(detail.resource, detail.page.pointer, detail.page.nextOffset, [...detail.history, detail.page.offset]), children: "下一页" })
+              ] })
+            ] })
+          ]
+        }
+      )
     ] });
   }
-  const stylesheet = '.gs-candidate-workspace {\n  color: var(--dsw-alias-label-primary, currentColor);\n  background: var(--dsw-alias-bg-base, transparent);\n  padding: 1rem;\n  min-width: 0;\n  max-width: 100%;\n  height: 100%;\n  overflow: auto;\n  overflow-wrap: anywhere;\n}\n.gs-candidate-workspace h2 { margin: 0 0 .5rem; font-size: 1.15rem; }\n.gs-candidate-workspace p { margin: .5rem 0; }\n.gs-candidate-toolbar, .gs-candidate-breadcrumb, .gs-candidate-pagination {\n  display: flex;\n  flex-wrap: wrap;\n  align-items: center;\n  gap: .5rem;\n  margin-block: .75rem;\n}\n.gs-candidate-fields { margin-block: .75rem; }\n.gs-candidate-fields > div {\n  display: grid;\n  grid-template-columns: minmax(7rem, 1fr) minmax(0, 3fr);\n  gap: .75rem;\n  padding-block: .5rem;\n  border-bottom: 1px solid var(--dsw-alias-border-l2, currentColor);\n}\n.gs-candidate-fields dd { margin: 0; min-width: 0; white-space: pre-wrap; }\n.gs-candidate-workspace pre { white-space: pre-wrap; overflow-wrap: anywhere; }\n.gs-credential-settings {max-width:42rem;padding:1rem;color:var(--dsw-alias-label-primary);}\n.gs-credential-settings h2 {font-size:1.1rem;margin-bottom:1rem;}\n.gs-credential-settings p {margin-block:.75rem;line-height:1.6;}\n.gs-credential-settings label {display:flex;flex-direction:column;gap:.5rem;}\n.gs-credential-settings input {padding:.65rem;border:1px solid var(--dsw-alias-border-l2);border-radius:.5rem;background:var(--dsw-alias-bg-base);color:var(--dsw-alias-label-primary);}\n.gs-candidate-team {display:grid;grid-template-columns:repeat(auto-fit,minmax(11rem,1fr));gap:.75rem;}\n.gs-candidate-team article {padding:.75rem;border:1px solid var(--dsw-alias-border-l2);border-radius:.5rem;min-width:0;}\n.gs-candidate-team h3 {font-size:.95rem;margin:0;}\n.gs-candidate-team pre,.gs-candidate-event-detail pre {max-height:24rem;overflow:auto;}\n.gs-candidate-axis {overflow:auto;border:1px solid var(--dsw-alias-border-l2);border-radius:.5rem;max-width:100%;}\n.gs-candidate-axis svg text {font-size:11px;fill:var(--dsw-alias-label-secondary);}\n.gs-candidate-grid {stroke:var(--dsw-alias-border-l2);stroke-width:1;}\n.gs-candidate-mark {fill:var(--dsw-alias-state-business-primary);}\n.gs-candidate-mark.effects {fill:var(--dsw-alias-state-success-primary);}\n.gs-candidate-mark.damage {fill:var(--dsw-alias-state-error-primary);}\n.gs-candidate-axis [role="button"] {cursor:pointer;}\n.gs-candidate-axis [role="button"]:focus {outline:2px solid var(--dsw-alias-state-business-primary);}\n.gs-candidate-review-dialog[role="dialog"] {\n  display: flex;\n  flex-direction: column;\n  box-sizing: border-box;\n  width: min(58rem, calc(100vw - 1.5rem));\n  min-width: 0;\n  max-width: none;\n  max-height: calc(100dvh - 1.5rem);\n  overflow: hidden;\n}\n.gs-candidate-review-dialog .gs-candidate-review-content {\n  flex: 1 1 auto;\n  min-height: 0;\n  overflow: auto;\n  overscroll-behavior: contain;\n  overflow-wrap: anywhere;\n}\n.gs-candidate-review-actions {display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:.5rem;min-width:0;}\n.gs-candidate-review-actions button {max-width:100%;white-space:normal;}\n.gs-candidate-workspace.is-compact .gs-candidate-fields > div { grid-template-columns: 1fr; gap: .25rem; }\n.gs-domain-card {padding:.75rem;margin-block:.75rem;border:1px solid var(--dsw-alias-border-l2);border-radius:.5rem;background:var(--dsw-alias-bg-layer-1);}\n.gs-domain-prewrap {white-space:pre-wrap;overflow-wrap:anywhere;}\n.gs-domain-approvals dl {display:grid;grid-template-columns:auto minmax(0,1fr);gap:.5rem;}\n.gs-domain-approvals dd {margin:0;overflow-wrap:anywhere;}\n.gs-runtime-settings {padding:1rem;max-width:52rem;color:var(--dsw-alias-label-primary);}\n.gs-runtime-settings fieldset {border:0;padding:0;min-width:0;}\n.gs-unstarted-conversation {display:inline-flex;gap:.35rem;align-items:center;font-size:.8rem;color:var(--dsw-alias-label-secondary);}\n.gs-runtime-settings details {margin-block:.5rem;}\n.gs-setting-field {display:grid;grid-template-columns:minmax(12rem,1fr) minmax(8rem,1fr);gap:.4rem;padding:.6rem 0;border-bottom:1px solid var(--dsw-alias-border-l2);}\n.gs-setting-field label {display:flex;gap:.5rem;align-items:center;}\n.gs-setting-field > details {grid-column:1/-1;color:var(--dsw-alias-label-secondary);font-size:.8rem;}\n.gs-setting-field input:not([type=checkbox]),.gs-setting-field select,.gs-setting-field textarea {width:100%;min-width:0;padding:.4rem;border:1px solid var(--dsw-alias-border-l2);border-radius:.3rem;background:var(--dsw-alias-bg-layer-1);color:var(--dsw-alias-label-primary);}\n.gs-setting-field textarea {min-height:8rem;}\n@media(max-width:42rem){.gs-setting-field{grid-template-columns:1fr;}}\n@media (max-width: 42rem) {\n  .gs-candidate-fields > div { grid-template-columns: 1fr; gap: .25rem; }\n}\n';
+  const stylesheet = '.gs-candidate-workspace {\n  color: var(--dsw-alias-label-primary, currentColor);\n  background: var(--dsw-alias-bg-base, transparent);\n  padding: 1rem;\n  min-width: 0;\n  max-width: 100%;\n  height: 100%;\n  overflow: auto;\n  overflow-wrap: anywhere;\n}\n.gs-candidate-workspace h2 { margin: 0 0 .5rem; font-size: 1.15rem; }\n.gs-candidate-workspace p { margin: .5rem 0; }\n.gs-candidate-toolbar, .gs-candidate-breadcrumb, .gs-candidate-pagination {\n  display: flex;\n  flex-wrap: wrap;\n  align-items: center;\n  gap: .5rem;\n  margin-block: .75rem;\n}\n.gs-candidate-fields { margin-block: .75rem; }\n.gs-candidate-fields > div {\n  display: grid;\n  grid-template-columns: minmax(7rem, 1fr) minmax(0, 3fr);\n  gap: .75rem;\n  padding-block: .5rem;\n  border-bottom: 1px solid var(--dsw-alias-border-l2, currentColor);\n}\n.gs-candidate-fields dd { margin: 0; min-width: 0; white-space: pre-wrap; }\n.gs-candidate-workspace pre { white-space: pre-wrap; overflow-wrap: anywhere; }\n.gs-credential-settings {max-width:42rem;padding:1rem;color:var(--dsw-alias-label-primary);}\n.gs-credential-settings h2 {font-size:1.1rem;margin-bottom:1rem;}\n.gs-credential-settings p {margin-block:.75rem;line-height:1.6;}\n.gs-credential-settings label {display:flex;flex-direction:column;gap:.5rem;}\n.gs-credential-settings input {padding:.65rem;border:1px solid var(--dsw-alias-border-l2);border-radius:.5rem;background:var(--dsw-alias-bg-base);color:var(--dsw-alias-label-primary);}\n.gs-candidate-team {display:grid;grid-template-columns:repeat(auto-fit,minmax(11rem,1fr));gap:.75rem;}\n.gs-candidate-team article {padding:.75rem;border:1px solid var(--dsw-alias-border-l2);border-radius:.5rem;min-width:0;}\n.gs-candidate-team h3 {font-size:.95rem;margin:0;}\n.gs-candidate-team pre,.gs-candidate-event-detail pre {max-height:24rem;overflow:auto;}\n.gs-candidate-axis {overflow:auto;border:1px solid var(--dsw-alias-border-l2);border-radius:.5rem;max-width:100%;}\n.gs-candidate-axis svg text {font-size:11px;fill:var(--dsw-alias-label-secondary);pointer-events:none;}\n.gs-candidate-axis svg .gs-candidate-mark-count {fill:var(--dsw-alias-label-primary);paint-order:stroke;stroke:var(--dsw-alias-bg-base);stroke-width:2px;}\n.gs-candidate-grid {stroke:var(--dsw-alias-border-l2);stroke-width:1;}\n.gs-candidate-mark {fill:var(--dsw-alias-state-business-primary);}\n.gs-candidate-mark.effects {fill:var(--dsw-alias-state-success-primary);}\n.gs-candidate-mark.damage {fill:var(--dsw-alias-state-error-primary);}\n.gs-candidate-axis [role="button"] {cursor:pointer;}\n.gs-candidate-axis [role="button"]:focus {outline:2px solid var(--dsw-alias-state-business-primary);}\n.gs-domain-dialog[role="dialog"] {\n  min-width: 0;\n  max-height: 100%;\n}\n.gs-candidate-review-dialog[role="dialog"] {width:min(58rem,100%);max-width:100%;}\n.gs-domain-dialog .gs-domain-dialog-content {\n  flex: 1 1 auto;\n  min-height: 0;\n  overflow: auto;\n  overscroll-behavior: contain;\n  overflow-wrap: anywhere;\n}\n.gs-domain-dialog-actions {display:flex;flex-wrap:wrap;align-items:center;justify-content:flex-end;gap:.5rem;min-width:0;}\n.gs-domain-dialog-actions button {max-width:100%;white-space:normal;}\n.gs-candidate-workspace.is-compact .gs-candidate-fields > div { grid-template-columns: 1fr; gap: .25rem; }\n.gs-domain-card {padding:.75rem;margin-block:.75rem;border:1px solid var(--dsw-alias-border-l2);border-radius:.5rem;background:var(--dsw-alias-bg-layer-1);}\n.gs-domain-prewrap {white-space:pre-wrap;overflow-wrap:anywhere;}\n.gs-domain-approvals dl {display:grid;grid-template-columns:auto minmax(0,1fr);gap:.5rem;}\n.gs-domain-approvals dd {margin:0;overflow-wrap:anywhere;}\n.gs-runtime-settings {padding:1rem;max-width:52rem;color:var(--dsw-alias-label-primary);}\n.gs-runtime-settings fieldset {border:0;padding:0;min-width:0;}\n.gs-unstarted-conversation {display:inline-flex;gap:.35rem;align-items:center;font-size:.8rem;color:var(--dsw-alias-label-secondary);}\n.gs-runtime-settings details {margin-block:.5rem;}\n.gs-setting-field {display:grid;grid-template-columns:minmax(12rem,1fr) minmax(8rem,1fr);gap:.4rem;padding:.6rem 0;border-bottom:1px solid var(--dsw-alias-border-l2);}\n.gs-setting-field label {display:flex;gap:.5rem;align-items:center;}\n.gs-setting-field > details {grid-column:1/-1;color:var(--dsw-alias-label-secondary);font-size:.8rem;}\n.gs-setting-field input:not([type=checkbox]),.gs-setting-field select,.gs-setting-field textarea {width:100%;min-width:0;padding:.4rem;border:1px solid var(--dsw-alias-border-l2);border-radius:.3rem;background:var(--dsw-alias-bg-layer-1);color:var(--dsw-alias-label-primary);}\n.gs-setting-field textarea {min-height:8rem;}\n@media(max-width:42rem){.gs-setting-field{grid-template-columns:1fr;}}\n@media (max-width: 42rem) {\n  .gs-candidate-fields > div { grid-template-columns: 1fr; gap: .25rem; }\n}\n';
+  const stable = (value) => JSON.stringify(value, (_key, item) => item && typeof item === "object" && !Array.isArray(item) ? Object.fromEntries(Object.keys(item).sort().map((key) => [key, item[key]])) : item);
+  function intervalItems(events) {
+    var _a;
+    const boundaries = /* @__PURE__ */ new Map();
+    const stateAt = /* @__PURE__ */ new Map();
+    const boundary = (t) => {
+      if (!boundaries.has(t)) boundaries.set(t, { add: [], remove: [] });
+      return boundaries.get(t);
+    };
+    for (const e of events) {
+      if (!(e.end > e.start)) continue;
+      const states = Array.isArray((_a = e.detail) == null ? void 0 : _a.states) ? e.detail.states : [];
+      const slices = states.filter((s) => Number.isFinite(s.start) && Number.isFinite(s.end) && s.end > s.start);
+      if (slices.length) {
+        for (const s of slices) {
+          const start = Math.max(e.start, s.start), end = Math.min(e.end, s.end);
+          if (end <= start) continue;
+          const token = { event: e };
+          stateAt.set(token, s);
+          boundary(start).add.push(token);
+          boundary(end).remove.push(token);
+        }
+      } else {
+        const token = { event: e };
+        stateAt.set(token, e.detail || {});
+        boundary(e.start).add.push(token);
+        boundary(e.end).remove.push(token);
+      }
+    }
+    const times = [...boundaries.keys()].sort((a, b) => a - b), active = /* @__PURE__ */ new Set(), out = [];
+    for (let i = 0; i < times.length - 1; i++) {
+      const start = times[i], end = times[i + 1], change = boundaries.get(start);
+      for (const token of change.remove) active.delete(token);
+      for (const token of change.add) active.add(token);
+      if (!active.size || end <= start) continue;
+      const tokens = [...active], records2 = [...new Set(tokens.map((x) => x.event))];
+      const states = tokens.map((t) => stateAt.get(t));
+      const summaries = states.map((s) => ({
+        status: s.status ?? s.state_status,
+        layers: s.layers,
+        remaining_quota: s.remaining_quota,
+        resource_balance: s.resource_balance
+      }));
+      const reference = stable(summaries[0]), single = summaries.every((s) => stable(s) === reference);
+      out.push({ events: records2, start, end, interval: true, state: single ? { ...states[0], start, end } : { status: "mixed", layers: null, remaining_quota: null, resource_balance: null, label: "多个实例 / 接收者", start, end } });
+    }
+    return out;
+  }
+  function selectionReference(owner, projection, event, view) {
+    var _a;
+    if (!owner || !projection.explanationFingerprint || !(event == null ? void 0 : event.id)) return null;
+    return {
+      contract: "timeline-selection-v1",
+      owner,
+      result: projection.explanationFingerprint,
+      view,
+      event: event.id,
+      ...((_a = event.detail) == null ? void 0 : _a.explanation_ref) ? { explanation: event.detail.explanation_ref } : {}
+    };
+  }
+  function timelineDocumentOwner(document2, kind) {
+    const id = document2 == null ? void 0 : document2[kind === "whiteboard" ? "board_id" : "plan_id"], revision = document2 == null ? void 0 : document2.revision;
+    if (typeof id !== "string" || !id || !Number.isSafeInteger(revision) || Number(revision) < 0) return null;
+    return `${kind}:${id}:${revision}`;
+  }
+  const editable = (state) => ["plain", "claimed"].includes(state.phase);
+  async function fileWire(file) {
+    const bytes = new Uint8Array(await file.arrayBuffer());
+    let text2 = "";
+    for (let offset = 0; offset < bytes.length; offset += 16384) text2 += String.fromCharCode(...bytes.subarray(offset, offset + 16384));
+    return { name: file.name, type: file.type, modified: file.lastModified, body: btoa(text2) };
+  }
+  function wireFile(file) {
+    return new File([Uint8Array.from(atob(file.body), (char) => char.charCodeAt(0))], file.name, { type: file.type, lastModified: file.modified });
+  }
+  async function captureWindowDraft(input, attachments) {
+    const before = input.state.getSnapshot();
+    if (!editable(before)) throw new Error("消息正在提交，请等接纳后再移动窗口。");
+    const semantic = structuredClone(input.draftSnapshot);
+    const originals = attachments.resolveDraftAttachments(before.attachmentIds);
+    if (originals.length !== before.attachmentIds.length) throw new Error("附件尚未准备完整，原窗口继续保留草稿。");
+    const files = await Promise.all(originals.map((item) => fileWire(item.file)));
+    const after = input.state.getSnapshot();
+    if (!editable(after) || after.draftRev !== before.draftRev || JSON.stringify(after.attachmentIds) !== JSON.stringify(before.attachmentIds))
+      throw new Error("草稿在移动前发生了变化，请重新移动；当前内容已保留。");
+    return { semantic, files };
+  }
+  function draftWireIdentity(value) {
+    return JSON.stringify(value, (_key, item) => item && typeof item === "object" && !Array.isArray(item) ? Object.fromEntries(Object.keys(item).sort().map((key) => [key, item[key]])) : item);
+  }
+  async function awaitSemanticRestore(input, expected) {
+    const matches = () => draftWireIdentity(input.draftSnapshot) === draftWireIdentity(expected);
+    if (matches()) return;
+    await new Promise((resolve, reject) => {
+      let unsubscribe = () => {
+      };
+      const timeout = setTimeout(() => {
+        unsubscribe();
+        reject(new Error("引用或命令尚未完整恢复，原窗口仍保留草稿。"));
+      }, 1e4);
+      const check = () => {
+        if (matches()) {
+          clearTimeout(timeout);
+          unsubscribe();
+          resolve();
+        }
+      };
+      unsubscribe = input.state.subscribe(check);
+      check();
+    });
+  }
+  async function restoreWindowDraft(input, attachments, sessionId, draft) {
+    const before = input.state.getSnapshot();
+    if (!editable(before)) throw new Error("消息正在发送，暂时不能移动输入区。");
+    const previous = structuredClone(input.draftSnapshot), previousIds = [...before.attachmentIds];
+    const files = draft.files.map(wireFile);
+    const created = attachments.createDrafts(sessionId, files, true);
+    try {
+      if (created.length !== files.length) throw new Error("附件尚未完整恢复，原窗口仍保留文件。");
+      for (const id of previousIds) input.removeAttachment(id);
+      input.setDraft(draft.semantic);
+      if (!input.addAttachments(created.map((item) => item.id))) throw new Error("附件尚未完成交接，原窗口仍保留文件。");
+      await awaitSemanticRestore(input, draft.semantic);
+      for (const id of previousIds) attachments.releaseDraftAttachment(id);
+    } catch (error) {
+      for (const item of created) {
+        input.removeAttachment(item.id);
+        attachments.releaseDraftAttachment(item.id);
+      }
+      input.setDraft(previous);
+      input.addAttachments(previousIds);
+      throw error;
+    }
+  }
+  const moving = "正在移动聊天窗口，草稿已保留…";
+  const detached = "聊天位于独立窗口，可使用「收回聊天」返回。";
+  function createWindowInputFence(blocks, sessionId, commit) {
+    let pending = false, presentationLocked = false, owned = false, previous;
+    const update = () => {
+      const store = blocks.storeFor(sessionId), current2 = store.getSnapshot();
+      if (pending || presentationLocked) {
+        if (!owned) {
+          previous = current2;
+          owned = true;
+        }
+        if (current2 !== void 0 && current2.reason !== moving && current2.reason !== detached && current2 !== previous) return;
+        blocks.set(sessionId, { reason: presentationLocked && !pending ? detached : moving });
+      } else if (owned) {
+        if ((current2 == null ? void 0 : current2.reason) === moving || (current2 == null ? void 0 : current2.reason) === detached) blocks.set(sessionId, previous);
+        owned = false;
+        previous = void 0;
+      }
+    };
+    return {
+      begin() {
+        if (pending) throw new Error("窗口正在交接，请等待当前操作完成。");
+        pending = true;
+        commit(update);
+      },
+      release() {
+        pending = false;
+        commit(update);
+      },
+      presentation(locked, settled) {
+        presentationLocked = locked;
+        if (settled) pending = false;
+        update();
+      },
+      dispose() {
+        pending = false;
+        presentationLocked = false;
+        update();
+      }
+    };
+  }
+  class WindowDraftRestoreError extends Error {
+    constructor(message, cancelSafe, options) {
+      super(message, options);
+      this.cancelSafe = cancelSafe;
+      this.name = "WindowDraftRestoreError";
+    }
+  }
+  function selectedWindowSession(ctx) {
+    const selected = Object.entries(ctx.sessions.list.getSnapshot().byId).filter(([, row2]) => (row2.retainedBy.mainView ?? 0) > 0);
+    return selected.length === 1 ? selected[0][0] : void 0;
+  }
+  function createWindowSessionController(ctx, commit) {
+    const entries = /* @__PURE__ */ new Map(), ownedDrafts = /* @__PURE__ */ new Set();
+    let locked = false, disposed = false, lastRegistered;
+    let pendingRestore;
+    const ensure = (id) => {
+      if (disposed) throw new Error("聊天窗口已关闭，原窗口仍保留交接草稿。");
+      let entry = entries.get(id);
+      if (entry) return entry;
+      const reference = ctx.sessions.retain(id, { source: "workspaceOperation" });
+      void reference.ready.catch(() => {
+      });
+      entry = { reference, fence: createWindowInputFence(ctx.conversation.blocks, id, commit), persist: /* @__PURE__ */ new Set() };
+      entries.set(id, entry);
+      entry.fence.presentation(locked, false);
+      return entry;
+    };
+    const captureOne = async (id) => {
+      const entry = ensure(id);
+      for (const persist of entry.persist) persist();
+      await entry.reference.ready;
+      if (disposed) throw new Error("聊天窗口已关闭，原窗口仍保留交接草稿。");
+      return captureWindowDraft(ctx.conversation.input.for(entry.reference.binding.ctx), ctx.conversation);
+    };
+    const api = {
+      register(id, actions) {
+        const entry = ensure(id), persist = () => actions.persistDraft();
+        entry.persist.add(persist);
+        lastRegistered = id;
+        ownedDrafts.add(id);
+        return () => {
+          persist();
+          entry.persist.delete(persist);
+        };
+      },
+      selected: () => selectedWindowSession(ctx) ?? lastRegistered,
+      has: (id) => entries.has(id),
+      async capture() {
+        const id = api.selected();
+        if (!id) throw new Error("聊天仍在载入，请稍后再移动窗口。");
+        try {
+          ensure(id);
+          for (const entry of entries.values()) entry.fence.begin();
+          const drafts = {};
+          for (const entryId of entries.keys()) drafts[entryId] = await captureOne(entryId);
+          return { session_id: id, draft: drafts[id], drafts };
+        } catch (error) {
+          api.releaseCapture();
+          throw error;
+        }
+      },
+      async selection(id) {
+        return { session_id: id, draft: await captureOne(id) };
+      },
+      async adopt(handoff, { seedOnly = false, preserveSelectedView = false, generation } = {}) {
+        const drafts = { ...handoff.drafts, ...handoff.draft ? { [handoff.session_id]: handoff.draft } : {} };
+        const transaction = generation !== void 0 && (pendingRestore == null ? void 0 : pendingRestore.generation) === generation ? pendingRestore : { generation: generation ?? -1, previous: /* @__PURE__ */ new Map(), attempted: /* @__PURE__ */ new Set() };
+        if (generation !== void 0) pendingRestore = transaction;
+        const { previous, attempted } = transaction;
+        try {
+          for (const key of Object.keys(drafts)) {
+            const id = key;
+            if (seedOnly && ownedDrafts.has(id)) continue;
+            if (!previous.has(id)) previous.set(id, await captureOne(id));
+          }
+          for (const [id] of previous) {
+            const entry = ensure(id);
+            attempted.add(id);
+            await restoreWindowDraft(ctx.conversation.input.for(entry.reference.binding.ctx), ctx.conversation, id, drafts[id]);
+          }
+          if (disposed) throw new Error("聊天窗口已关闭，原窗口仍保留交接草稿。");
+          const selected = handoff.session_id;
+          ensure(selected);
+          if (!preserveSelectedView || selectedWindowSession(ctx) !== selected) ctx.uiWorkspace.openSession(selected);
+          for (const id of previous.keys()) ownedDrafts.add(id);
+          if (pendingRestore === transaction) pendingRestore = void 0;
+        } catch (error) {
+          let rolledBack = true;
+          for (const id of [...attempted].reverse()) {
+            try {
+              const entry = ensure(id);
+              await restoreWindowDraft(ctx.conversation.input.for(entry.reference.binding.ctx), ctx.conversation, id, previous.get(id));
+            } catch {
+              rolledBack = false;
+            }
+          }
+          const detail = error instanceof Error ? error.message : String(error);
+          throw new WindowDraftRestoreError(rolledBack ? `${detail} 目标窗口的原草稿已保留，可以重试。` : `${detail} 目标草稿尚未全部恢复，原窗口和交接记录仍保留；请重试恢复，不要重复发送。`, rolledBack, { cause: error });
+        }
+      },
+      persist() {
+        for (const entry of entries.values()) for (const persist of entry.persist) persist();
+      },
+      async prepareExit() {
+        api.persist();
+        let unsent_count = 0, sending = false, attachments = 0;
+        for (const id of Object.keys(ctx.sessions.list.getSnapshot().byId)) {
+          const binding = ctx.sessions.binding(id);
+          if (!binding) continue;
+          const input = ctx.conversation.input.for(binding.ctx), state = input.state.getSnapshot();
+          if (input.draftSnapshot.text.trim().length > 0 || state.attachmentIds.length > 0) unsent_count++;
+          attachments += state.attachmentIds.length;
+          sending || (sending = !["plain", "claimed"].includes(state.phase));
+        }
+        return { unsent_count, sending, attachments };
+      },
+      releaseCapture() {
+        for (const entry of entries.values()) entry.fence.release();
+      },
+      presentation(nextLocked, settled) {
+        locked = nextLocked;
+        for (const entry of entries.values()) entry.fence.presentation(locked, settled);
+      },
+      dispose() {
+        disposed = true;
+        for (const entry of entries.values()) {
+          entry.fence.dispose();
+          entry.reference.release();
+        }
+        entries.clear();
+        ownedDrafts.clear();
+        pendingRestore = void 0;
+      }
+    };
+    return api;
+  }
+  const initial = { role: "main", generation: 0, presentation: "main", handoff: null };
+  let current = initial;
+  const listeners = /* @__PURE__ */ new Set();
+  let restoreFailure = null;
+  const recoveryListeners = /* @__PURE__ */ new Set();
+  const setRestoreFailure = (failure) => {
+    restoreFailure = failure;
+    for (const listener of recoveryListeners) listener();
+  };
+  const useRestoreFailure = () => react.useSyncExternalStore((callback) => {
+    recoveryListeners.add(callback);
+    return () => recoveryListeners.delete(callback);
+  }, () => restoreFailure);
+  function WindowReturnRecovery() {
+    var _a;
+    const state = useWindowPresentation(), failure = useRestoreFailure(), [busy, setBusy] = react.useState(false), [error, setError] = react.useState("");
+    if (detachedWindow() || state.presentation !== "returning" || (failure == null ? void 0 : failure.generation) !== state.generation) return null;
+    const cancel = async () => {
+      if (busy || (restoreFailure == null ? void 0 : restoreFailure.cancelling) || !failure.cancelSafe || !state.return_source_id) return;
+      setBusy(true);
+      setError("");
+      setRestoreFailure({ ...failure, cancelling: true });
+      try {
+        const next = await windowHost().dsh_window_cancel_return({ generation: state.generation, source_window_id: state.return_source_id });
+        emit(next);
+        setRestoreFailure(null);
+      } catch (cause) {
+        setError(cause instanceof Error ? cause.message : "原窗口暂时不可用，交接记录仍保留；请重试恢复主窗口。");
+        if ((restoreFailure == null ? void 0 : restoreFailure.generation) === state.generation) setRestoreFailure({ ...failure, cancelling: false });
+      } finally {
+        setBusy(false);
+      }
+    };
+    return /* @__PURE__ */ jsxRuntime.jsxs("span", { className: "gs-window-controls", children: [
+      /* @__PURE__ */ jsxRuntime.jsx("span", { role: "alert", children: error || failure.message }),
+      /* @__PURE__ */ jsxRuntime.jsx(dshClientUiPrimitives.Button, { size: "sm", variant: "ghost", disabled: busy || failure.cancelling, onClick: () => {
+        if (!(restoreFailure == null ? void 0 : restoreFailure.cancelling)) setRestoreFailure(null);
+      }, children: "重试恢复主窗口" }),
+      failure.cancelSafe && state.return_source_id && ((_a = windowHost()) == null ? void 0 : _a.dsh_window_cancel_return) && /* @__PURE__ */ jsxRuntime.jsx(dshClientUiPrimitives.Button, { size: "sm", variant: "ghost", disabled: busy || failure.cancelling, onClick: () => void cancel(), children: "取消返回，继续在独立窗口" })
+    ] });
+  }
+  let mainCommands = [];
+  const commandListeners = /* @__PURE__ */ new Set();
+  const useMainWindowCommands = () => react.useSyncExternalStore((callback) => {
+    commandListeners.add(callback);
+    return () => commandListeners.delete(callback);
+  }, () => mainCommands);
+  async function acknowledgeMainCommand(id, result) {
+    var _a, _b;
+    await ((_b = (_a = windowHost()) == null ? void 0 : _a.dsh_window_acknowledge) == null ? void 0 : _b.call(_a, { command_id: id, ...result }));
+    mainCommands = mainCommands.filter((item) => item.command_id !== id);
+    for (const listener of commandListeners) listener();
+  }
+  const emit = (state) => {
+    if (JSON.stringify(current) === JSON.stringify(state)) return;
+    current = state;
+    document.body.dataset.agentPresentation = state.presentation;
+    for (const listener of listeners) listener();
+  };
+  const detachedWindow = () => document.body.dataset.agentWindow === "detached";
+  const windowHost = () => {
+    var _a;
+    return (_a = window.pywebview) == null ? void 0 : _a.api;
+  };
+  const useWindowPresentation = () => react.useSyncExternalStore((callback) => {
+    listeners.add(callback);
+    return () => listeners.delete(callback);
+  }, () => current);
+  async function presentInMain(command2) {
+    const api = windowHost();
+    if (!(api == null ? void 0 : api.dsh_window_command)) throw new Error("主窗口连接不可用，请返回主窗口处理。");
+    return api.dsh_window_command({ ...command2, generation: current.generation });
+  }
+  function useWindowOperationError(state) {
+    const [error, setError] = react.useState("");
+    const prior = react.useRef(state), origin = react.useRef(void 0);
+    const report = (message) => {
+      origin.current = { generation: current.generation, presentation: current.presentation };
+      setError(message);
+    };
+    react.useEffect(() => {
+      const previous = prior.current;
+      prior.current = state;
+      const old = origin.current;
+      if (!state.error && ["opening", "returning"].includes(previous.presentation) && ["main", "detached"].includes(state.presentation) && old && old.generation <= previous.generation && ["opening", "returning"].includes(old.presentation)) {
+        origin.current = void 0;
+        setError("");
+      }
+    }, [state.generation, state.presentation, state.error]);
+    return [error, report];
+  }
+  const controllers = /* @__PURE__ */ new WeakMap();
+  function WindowControls({ ctx, props }) {
+    var _a;
+    const state = useWindowPresentation(), [busy, setBusy] = react.useState(false), [error, setError] = useWindowOperationError(state);
+    const controller = controllers.get(ctx);
+    react.useEffect(() => controller == null ? void 0 : controller.register(props.sessionId, props.inputActions), [controller, props.sessionId, props.inputActions]);
+    react.useEffect(() => {
+      const failed = (event) => setError(event.detail.message);
+      document.addEventListener("genshin-window-error", failed);
+      return () => document.removeEventListener("genshin-window-error", failed);
+    }, []);
+    react.useEffect(() => {
+      if (state.error) setError(state.error);
+    }, [state.error]);
+    const move = async () => {
+      if (busy || !controller) return;
+      setBusy(true);
+      setError("");
+      try {
+        const api = windowHost();
+        if (detachedWindow()) emit(await api.dsh_window_return({ ...await controller.capture(), generation: state.generation }));
+        else if (state.presentation !== "main") {
+          emit(await api.dsh_window_recover());
+          controller.releaseCapture();
+        } else emit(await api.dsh_window_open(await controller.capture()));
+      } catch (reason) {
+        controller.releaseCapture();
+        setError(reason instanceof Error ? reason.message : "窗口交接未完成，草稿仍保留。");
+      } finally {
+        setBusy(false);
+      }
+    };
+    if (!((_a = windowHost()) == null ? void 0 : _a.dsh_window_state)) return null;
+    if (!detachedWindow() && state.presentation === "returning") return /* @__PURE__ */ jsxRuntime.jsxs(jsxRuntime.Fragment, { children: [
+      /* @__PURE__ */ jsxRuntime.jsx("span", { className: "gs-window-controls", children: "正在恢复主窗口…" }),
+      /* @__PURE__ */ jsxRuntime.jsx(WindowReturnRecovery, {})
+    ] });
+    return /* @__PURE__ */ jsxRuntime.jsxs("span", { className: "gs-window-controls", children: [
+      /* @__PURE__ */ jsxRuntime.jsx(dshClientUiPrimitives.Button, { size: "sm", variant: "ghost", disabled: busy || state.presentation === "returning", onClick: () => void move(), children: busy ? "正在移动…" : state.presentation === "returning" ? "正在恢复主窗口…" : detachedWindow() ? "返回主窗口" : state.presentation === "opening" ? "取消窗口交接" : state.presentation === "detached" ? "收回聊天" : "独立窗口" }),
+      error && /* @__PURE__ */ jsxRuntime.jsx("span", { role: "alert", children: error })
+    ] });
+  }
+  function WindowRecoveryControl() {
+    const state = useWindowPresentation(), [busy, setBusy] = react.useState(false), [error, setError] = useWindowOperationError(state);
+    if (detachedWindow() || state.presentation === "main") return null;
+    const recover = async () => {
+      if (busy) return;
+      setBusy(true);
+      setError("");
+      try {
+        emit(await windowHost().dsh_window_recover());
+      } catch (reason) {
+        setError(reason instanceof Error ? reason.message : "聊天窗口尚未收回，请重试。");
+      } finally {
+        setBusy(false);
+      }
+    };
+    if (state.presentation === "returning") return /* @__PURE__ */ jsxRuntime.jsxs(jsxRuntime.Fragment, { children: [
+      /* @__PURE__ */ jsxRuntime.jsx("span", { className: "gs-window-controls", children: "正在恢复主窗口…" }),
+      /* @__PURE__ */ jsxRuntime.jsx(WindowReturnRecovery, {})
+    ] });
+    return /* @__PURE__ */ jsxRuntime.jsxs("span", { className: "gs-window-controls", children: [
+      /* @__PURE__ */ jsxRuntime.jsx(dshClientUiPrimitives.Button, { size: "sm", variant: "ghost", disabled: busy, onClick: () => void recover(), children: busy ? "正在收回聊天…" : state.presentation === "opening" ? "取消窗口交接" : "收回聊天" }),
+      error && /* @__PURE__ */ jsxRuntime.jsx("span", { role: "alert", children: error })
+    ] });
+  }
+  function createWindowPresentationPlugin() {
+    return { name: "genshin-native-window-presentation", inject: ["slots", "sessions", "uiWorkspace", "conversation", "layout"], apply(ctx) {
+      const controller = createWindowSessionController(ctx, reactDom.flushSync);
+      controllers.set(ctx, controller);
+      for (const name of ["conversation.hero.options", "conversation.composer.dock"])
+        ctx.slots.inject(name, () => ctx.slots.register({ name, id: "genshin-native-window", order: 80 }, (props) => /* @__PURE__ */ jsxRuntime.jsx(WindowControls, { ctx, props })));
+      ctx.slots.inject("conversation.header.leading", () => ctx.slots.register({ name: "conversation.header.leading" }, () => /* @__PURE__ */ jsxRuntime.jsx(WindowRecoveryControl, {})));
+      ctx.effect(() => {
+        const previous = window.GenshinWindowPresentation;
+        setRestoreFailure(null);
+        let previousPresentation = current.presentation;
+        const sync = () => {
+          const settled = !!current.error || current.presentation === "main" && previousPresentation !== "main" || !detachedWindow() && current.presentation === "detached" || detachedWindow() && current.presentation === "detached" && previousPresentation === "returning";
+          controller.presentation(detachedWindow() ? current.presentation !== "detached" : current.presentation !== "main", settled);
+          previousPresentation = current.presentation;
+        };
+        listeners.add(sync);
+        sync();
+        window.GenshinWindowPresentation = { capture: () => controller.capture(), releaseCapture: () => controller.releaseCapture(), prepareExit: () => controller.prepareExit(), requestReturn: async () => {
+          try {
+            emit(await windowHost().dsh_window_return({ ...await controller.capture(), generation: current.generation }));
+          } catch (error) {
+            controller.releaseCapture();
+            throw error;
+          }
+        } };
+        return () => {
+          listeners.delete(sync);
+          window.GenshinWindowPresentation = previous;
+          controllers.delete(ctx);
+          controller.dispose();
+        };
+      });
+      ctx.effect(() => {
+        const api = windowHost();
+        if (!(api == null ? void 0 : api.dsh_window_state)) return () => {
+        };
+        let disposed = false, timer, lastAdopted = -1, lastAcknowledged = -1, lastSelection = -1, lastSelectionAck = -1, lastRequested = "";
+        const handled = /* @__PURE__ */ new Set();
+        const poll = async () => {
+          var _a, _b, _c, _d;
+          try {
+            const state = await (detachedWindow() ? api.dsh_window_state() : api.dsh_window_poll());
+            if (disposed) return;
+            emit(state);
+            if (restoreFailure && restoreFailure.generation !== state.generation) setRestoreFailure(null);
+            if (state.handoff && state.generation !== lastAcknowledged && (detachedWindow() && state.presentation === "opening" || !detachedWindow() && state.presentation === "returning")) {
+              if (lastAdopted !== state.generation) {
+                if (!detachedWindow() && (restoreFailure == null ? void 0 : restoreFailure.generation) === state.generation) return;
+                try {
+                  await controller.adopt(state.handoff, { preserveSelectedView: !detachedWindow(), generation: state.generation });
+                  lastAdopted = state.generation;
+                } catch (error) {
+                  if (disposed) return;
+                  if (!detachedWindow()) setRestoreFailure({ generation: state.generation, message: error instanceof Error ? error.message : String(error), cancelSafe: error instanceof WindowDraftRestoreError && error.cancelSafe });
+                  throw error;
+                }
+              }
+              if (disposed) return;
+              if (detachedWindow()) {
+                await ((_a = window.GenshinDshClient) == null ? void 0 : _a.ready);
+                if (disposed) return;
+                emit(await api.dsh_window_ready({ generation: state.generation }));
+              } else emit(await api.dsh_window_main_ready({ generation: state.generation }));
+              lastAcknowledged = state.generation;
+            } else emit(state);
+            if (detachedWindow() && state.presentation === "detached" && state.selected_session_id && state.selection_revision !== void 0 && state.selection_revision !== lastSelectionAck) {
+              if (state.selection_revision !== lastSelection) {
+                controller.persist();
+                await controller.adopt(state.selection_handoff ?? { session_id: state.selected_session_id }, { seedOnly: true });
+                lastSelection = state.selection_revision;
+              }
+              if (disposed) return;
+              if (api.dsh_window_selection_ready) await api.dsh_window_selection_ready({ generation: state.generation, selection_revision: state.selection_revision });
+              lastSelectionAck = state.selection_revision;
+            } else if (!detachedWindow() && ["opening", "detached"].includes(state.presentation)) {
+              const selected = controller.selected();
+              if (selected && selected !== state.selected_session_id && selected !== lastRequested && api.dsh_window_select) {
+                try {
+                  await api.dsh_window_select({ ...await controller.selection(selected), generation: state.generation });
+                  lastRequested = selected;
+                } catch (error) {
+                  lastRequested = "";
+                  throw error;
+                }
+              } else if (selected === state.selected_session_id) lastRequested = "";
+            }
+            const commands = state.commands || [];
+            if (JSON.stringify(commands) !== JSON.stringify(mainCommands)) {
+              mainCommands = commands;
+              for (const listener of commandListeners) listener();
+            }
+            for (const command2 of commands) {
+              if (!handled.has(command2.command_id)) {
+                ctx.uiWorkspace.openSession(command2.session_id);
+                if (command2.command === "reveal_timeline_event") {
+                  let result;
+                  try {
+                    if (!command2.selection || !((_b = window.GenshinEditorBridge) == null ? void 0 : _b.revealTimelineEvent)) throw new Error("主窗口暂时不能定位这段伤害；未修改白板。");
+                    result = await window.GenshinEditorBridge.revealTimelineEvent(command2.selection);
+                  } catch (error) {
+                    const message = error instanceof Error ? error.message : String(error);
+                    result = { status: (error == null ? void 0 : error.code) === "timeline_selection_stale" ? "stale" : "failed", message };
+                    document.dispatchEvent(new CustomEvent("genshin-window-error", { detail: { message } }));
+                  }
+                  if (disposed) return;
+                  await acknowledgeMainCommand(command2.command_id, result);
+                } else if (command2.command === "show_page" && ["whiteboard", "rotation", "result", "data"].includes(command2.page || "")) {
+                  await ((_d = (_c = window.GenshinEditorBridge) == null ? void 0 : _c.show) == null ? void 0 : _d.call(_c, command2.page));
+                  if (disposed) return;
+                  await acknowledgeMainCommand(command2.command_id);
+                } else ctx.layout.selectPanel("genshin-candidate-workspace");
+                handled.add(command2.command_id);
+              }
+            }
+          } catch (reason) {
+            if (disposed) return;
+            document.dispatchEvent(new CustomEvent("genshin-window-error", { detail: { message: reason instanceof Error ? reason.message : String(reason) } }));
+          } finally {
+            if (!disposed) timer = setTimeout(() => void poll(), 750);
+          }
+        };
+        void poll();
+        return () => {
+          disposed = true;
+          if (timer) clearTimeout(timer);
+        };
+      });
+    } };
+  }
   const rows = (value) => Array.isArray(value) ? value.filter((row2) => row2 && typeof row2 === "object") : [];
   const object$7 = (value) => value && typeof value === "object" && !Array.isArray(value) ? value : {};
   const text$1 = (value) => typeof value === "string" || typeof value === "number" ? String(value) : "未填写";
-  function CandidatePreview({ document: source, calculated, kind, editor }) {
-    var _a, _b, _c, _d, _e, _f;
-    const [view, setView] = react.useState("actions"), [selected, setSelected] = react.useState(), [zoom, setZoom] = react.useState(1);
-    react.useEffect(() => setSelected(void 0), [source]);
+  const when = (event) => `${event.start.toFixed(2)}秒${typeof event.end === "number" && event.end > event.start ? `至 ${event.end.toFixed(2)}秒` : ""}`;
+  function candidateMarks(events, pixelsPerSecond) {
+    const intervals = intervalItems(events.filter((event) => Number.isFinite(event.end) && event.end > event.start));
+    const points = [];
+    const pointWidth = 8 / pixelsPerSecond;
+    for (const event of events.filter((item) => !Number.isFinite(item.end) || item.end <= item.start).sort((a, b) => a.start - b.start)) {
+      const previous = points.at(-1);
+      if (previous && event.start <= previous.end + pointWidth) {
+        previous.events.push(event);
+        previous.end = event.start;
+      } else points.push({ events: [event], start: event.start, end: event.start, interval: false });
+    }
+    return [...intervals, ...points];
+  }
+  function CandidatePreview({ document: source, calculated, hasCalculation, kind, editor, sessionId, conversationId }) {
+    var _a, _b, _c;
+    const [view, setView] = react.useState("actions"), [selected, setSelected] = react.useState(), [group, setGroup] = react.useState(), [zoom, setZoom] = react.useState(1);
+    const [memberPage, setMemberPage] = react.useState(0);
+    const [navigationMessage, setNavigationMessage] = react.useState(""), [navigationBusy, setNavigationBusy] = react.useState(false);
+    const [navigationCommand, setNavigationCommand] = react.useState(), windowState = useWindowPresentation();
+    const navigationEpoch = react.useRef(0);
+    react.useEffect(() => {
+      navigationEpoch.current++;
+      setNavigationMessage("");
+      setNavigationCommand(void 0);
+      setNavigationBusy(false);
+    }, [selected, view, source, calculated]);
+    react.useEffect(() => {
+      setSelected(void 0);
+      setGroup(void 0);
+      setNavigationMessage("");
+      setNavigationCommand(void 0);
+    }, [source, calculated]);
+    react.useEffect(() => {
+      const result = windowState.command_result;
+      if (navigationCommand && (result == null ? void 0 : result.command_id) === navigationCommand) {
+        setNavigationMessage(result.message);
+        setNavigationCommand(void 0);
+      }
+    }, [windowState.command_result, navigationCommand]);
     const board = source.kind === "genshin-whiteboard" ? source : object$7(object$7(object$7(source.extensions).whiteboard_handoff).board);
     const team = rows(board.team).length ? rows(board.team) : rows(object$7(source.manual_template).characters);
     const value = react.useMemo(() => {
       var _a2;
       try {
-        return { projection: (_a2 = editor == null ? void 0 : editor.projectCandidate) == null ? void 0 : _a2.call(editor, source, kind, calculated) };
+        return { projection: (_a2 = editor == null ? void 0 : editor.projectCandidate) == null ? void 0 : _a2.call(editor, source, kind, calculated, { hasCalculation }) };
       } catch {
         return { error: "当前草稿的部分输入尚不能形成时间轴，可在资料视图继续查看原文。" };
       }
-    }, [source, kind, editor, calculated]);
+    }, [source, kind, editor, calculated, hasCalculation]);
     const projection = value.projection;
     const duration = projection && Number.isFinite(projection.duration) && projection.duration > 0 ? projection.duration : typeof board.duration === "number" ? board.duration : 20;
-    const events = (((_b = (_a = projection == null ? void 0 : projection.views) == null ? void 0 : _a[view]) == null ? void 0 : _b.events) || []).filter((event) => Number.isFinite(event.start));
-    const lanes = ((_c = projection == null ? void 0 : projection.characters) == null ? void 0 : _c.length) ? projection.characters : team.map((actor, index) => ({ id: actor.id, label: text$1(actor.name || `角色 ${index + 1}`) }));
-    const extra = events.some((event) => !lanes.some((lane) => lane.id === event.character));
-    const allLanes = extra ? [...lanes, { id: null, label: "其他事件" }] : lanes;
-    const width = 900 * zoom, height = Math.max(90, allLanes.length * 48 + 30);
+    const width = 900 * zoom, pixelsPerSecond = (width - 125) / duration;
+    const tracks = react.useMemo(() => {
+      var _a2, _b2, _c2;
+      const lanes = ((_a2 = projection == null ? void 0 : projection.characters) == null ? void 0 : _a2.length) ? projection.characters : team.map((actor, index) => ({ id: actor.id, label: text$1(actor.name || `角色 ${index + 1}`) }));
+      const tracks2 = lanes.map(({ id, label: label2 }) => ({ id, label: label2, events: [] }));
+      const other = { id: null, label: "其他事件", events: [] };
+      for (const event of ((_c2 = (_b2 = projection == null ? void 0 : projection.views) == null ? void 0 : _b2[view]) == null ? void 0 : _c2.events) || []) {
+        if (Number.isFinite(event.start)) (tracks2.find((lane) => lane.id === event.character) ?? other).events.push(event);
+      }
+      if (other.events.length) tracks2.push(other);
+      return tracks2.map((lane) => ({ ...lane, marks: candidateMarks(lane.events, pixelsPerSecond) }));
+    }, [projection, view, pixelsPerSecond, source]);
+    const laneHeight = 48, height = Math.max(90, tracks.length * laneHeight + 30);
+    const selectMark = (mark) => {
+      setGroup(mark.events.length > 1 ? mark : void 0);
+      setMemberPage(0);
+      setSelected(mark.events.length === 1 ? mark.events[0] : void 0);
+    };
+    const owner = timelineDocumentOwner(source, kind);
+    const selection = view === "damage" && owner && selected && projection ? selectionReference(owner, projection, selected, view) : null;
+    const locate = async () => {
+      if (!selection || navigationBusy) return;
+      setNavigationBusy(true);
+      setNavigationMessage("");
+      const epoch = navigationEpoch.current;
+      try {
+        if (detachedWindow()) {
+          if (!sessionId) throw new Error("缺少会话身份，无法向主窗口定位。");
+          const reply = await presentInMain({ command: "reveal_timeline_event", session_id: sessionId, conversation_id: conversationId, selection });
+          if (epoch !== navigationEpoch.current) return;
+          if (reply == null ? void 0 : reply.command_id) setNavigationCommand(reply.command_id);
+          setNavigationMessage("已请求主窗口定位；仅定位相同方案和结果，不导入候选或修改白板。");
+        } else {
+          if (!(editor == null ? void 0 : editor.revealTimelineEvent)) throw new Error("主窗口定位入口暂不可用。");
+          const response = await editor.revealTimelineEvent(selection);
+          if (epoch === navigationEpoch.current) setNavigationMessage(response.message);
+        }
+      } catch (error) {
+        if (epoch === navigationEpoch.current) setNavigationMessage(error instanceof Error ? error.message : "无法定位，白板未被修改。");
+      } finally {
+        if (epoch === navigationEpoch.current) setNavigationBusy(false);
+      }
+    };
     return /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "gs-candidate-preview", children: [
       /* @__PURE__ */ jsxRuntime.jsx("div", { className: "gs-candidate-team", children: team.map((actor, index) => /* @__PURE__ */ jsxRuntime.jsxs("article", { children: [
         /* @__PURE__ */ jsxRuntime.jsx("h3", { children: text$1(actor.name || actor.id) }),
@@ -673,6 +1384,7 @@ window.__ModuleLoader__.load({ id: "@genshin-calc/dsh-client-domain", factory: f
         [["actions", "技能释放"], ["effects", "效果生效"], ["damage", "伤害事件"]].map(([id, label2]) => /* @__PURE__ */ jsxRuntime.jsx(dshClientUiPrimitives.Button, { size: "sm", variant: view === id ? "primary" : "outline", "aria-pressed": view === id, onClick: () => {
           setView(id);
           setSelected(void 0);
+          setGroup(void 0);
         }, children: label2 }, id)),
         /* @__PURE__ */ jsxRuntime.jsxs("label", { children: [
           "缩放 ",
@@ -686,7 +1398,7 @@ window.__ModuleLoader__.load({ id: "@genshin-calc/dsh-client-domain", factory: f
         "。计算记录不等于审核许可，是否可同步以 App 当前检查为准。"
       ] }),
       value.error && /* @__PURE__ */ jsxRuntime.jsx("p", { role: "status", children: value.error }),
-      /* @__PURE__ */ jsxRuntime.jsx("div", { className: "gs-candidate-axis", tabIndex: 0, "aria-label": "候选时间轴，可横向滚动", children: /* @__PURE__ */ jsxRuntime.jsxs("svg", { width, height, viewBox: `0 0 ${width} ${height}`, role: "img", "aria-label": `${view === "actions" ? "技能释放" : view === "effects" ? "效果生效" : "伤害事件"}时间轴`, children: [
+      /* @__PURE__ */ jsxRuntime.jsx("div", { className: "gs-candidate-axis", tabIndex: 0, "aria-label": "候选时间轴，可横向滚动", children: /* @__PURE__ */ jsxRuntime.jsxs("svg", { width, height, viewBox: `0 0 ${width} ${height}`, role: "group", "aria-label": `${view === "actions" ? "技能释放" : view === "effects" ? "效果生效" : "伤害事件"}时间轴`, children: [
         Array.from({ length: 7 }, (_, i) => {
           const x = 110 + (width - 125) * i / 6;
           return /* @__PURE__ */ jsxRuntime.jsxs("g", { children: [
@@ -697,33 +1409,79 @@ window.__ModuleLoader__.load({ id: "@genshin-calc/dsh-client-domain", factory: f
             ] })
           ] }, i);
         }),
-        allLanes.map((lane, index) => /* @__PURE__ */ jsxRuntime.jsx("text", { x: 4, y: 46 + index * 48, children: lane.label }, index)),
-        events.map((event, index) => {
-          const found = allLanes.findIndex((lane2) => lane2.id === event.character), lane = found < 0 ? allLanes.length - 1 : found;
-          const x = 110 + Math.max(0, event.start) / duration * (width - 125), y = 36 + Math.max(0, lane) * 48;
-          const interval = typeof event.end === "number" && event.end > event.start ? Math.max(3, (event.end - event.start) / duration * (width - 125)) : 5;
-          return /* @__PURE__ */ jsxRuntime.jsxs("g", { tabIndex: 0, role: "button", "aria-label": `${event.start.toFixed(2)}秒 ${event.label || "事件"}`, onClick: () => setSelected(event), onKeyDown: (e) => {
-            if (e.key === "Enter" || e.key === " ") {
-              e.preventDefault();
-              setSelected(event);
-            }
-          }, children: [
-            /* @__PURE__ */ jsxRuntime.jsx("title", { children: `${event.start.toFixed(2)}s ${event.label || "事件"}` }),
-            /* @__PURE__ */ jsxRuntime.jsx("rect", { x, y, width: interval, height: 18, rx: 3, className: `gs-candidate-mark ${view}` }),
-            view === "damage" && typeof event.value === "number" && /* @__PURE__ */ jsxRuntime.jsx("text", { x: x + 8, y: y + 14, children: event.value.toLocaleString("zh-CN", { maximumFractionDigits: 1 }) })
-          ] }, `${event.id}-${index}`);
-        })
+        tracks.map((lane, laneIndex) => /* @__PURE__ */ jsxRuntime.jsxs("g", { children: [
+          /* @__PURE__ */ jsxRuntime.jsx("text", { x: 4, y: 46 + laneIndex * laneHeight, children: lane.label }),
+          lane.marks.map((mark, index) => {
+            const event = mark.events[0], count = mark.events.length;
+            const label2 = count === 1 ? `${when(event)} ${event.label || "事件"}` : `${mark.start.toFixed(2)}秒 · ${count} 条记录`;
+            const x = 110 + Math.max(0, mark.start) * pixelsPerSecond, y = 31 + laneIndex * laneHeight + (mark.interval ? 0 : 19);
+            const barWidth = (mark.end - mark.start) * pixelsPerSecond + (mark.interval ? 0 : 8);
+            const next = lane.marks[index + 1];
+            const damageLabel = view === "damage" && count === 1 && typeof event.value === "number" ? event.value.toLocaleString("zh-CN", { maximumFractionDigits: 1 }) : "";
+            const labelSpace = mark.interval ? barWidth : (next ? next.start - mark.end : duration - mark.end) * pixelsPerSecond - 8;
+            return /* @__PURE__ */ jsxRuntime.jsxs(
+              "g",
+              {
+                tabIndex: 0,
+                role: "button",
+                "aria-label": label2,
+                "aria-pressed": mark === group || !!selected && mark.events.includes(selected),
+                onClick: () => selectMark(mark),
+                onKeyDown: (e) => {
+                  if (e.key === "Enter" || e.key === " ") {
+                    e.preventDefault();
+                    selectMark(mark);
+                  }
+                },
+                children: [
+                  /* @__PURE__ */ jsxRuntime.jsxs("title", { children: [
+                    label2,
+                    damageLabel ? ` · ${damageLabel}` : ""
+                  ] }),
+                  /* @__PURE__ */ jsxRuntime.jsx("rect", { x, y, width: barWidth, height: mark.interval ? 16 : 12, rx: 2, className: `gs-candidate-mark ${view}` }),
+                  count > 1 && barWidth >= 18 && /* @__PURE__ */ jsxRuntime.jsxs("text", { x: x + 3, y: y + 10, className: "gs-candidate-mark-count", children: [
+                    "×",
+                    count
+                  ] }),
+                  damageLabel && labelSpace >= 7 * damageLabel.length + 5 && /* @__PURE__ */ jsxRuntime.jsx("text", { x: x + (mark.interval ? 3 : 10), y: y + 10, className: mark.interval ? "gs-candidate-mark-count" : void 0, children: damageLabel })
+                ]
+              },
+              index
+            );
+          })
+        ] }, laneIndex))
       ] }) }),
-      !events.length && /* @__PURE__ */ jsxRuntime.jsx("p", { children: view === "actions" ? "尚未填写动作时点。" : "当前草稿在此视图还没有可展示的显式事件；不代表计算已完成。" }),
-      (_f = (_e = (_d = projection == null ? void 0 : projection.views) == null ? void 0 : _d[view]) == null ? void 0 : _e.notes) == null ? void 0 : _f.map((note, index) => /* @__PURE__ */ jsxRuntime.jsx("p", { children: note }, index)),
+      !tracks.some((lane) => lane.marks.length) && /* @__PURE__ */ jsxRuntime.jsx("p", { children: view === "actions" ? "尚未填写动作时点。" : hasCalculation && !calculated ? "当前尚未载入已计算的事件；请先加载已有的效果和伤害记录。" : "当前草稿在此视图还没有可展示的显式事件；不代表计算已完成。" }),
+      (_c = (_b = (_a = projection == null ? void 0 : projection.views) == null ? void 0 : _a[view]) == null ? void 0 : _b.notes) == null ? void 0 : _c.map((note, index) => /* @__PURE__ */ jsxRuntime.jsx("p", { children: note }, index)),
+      group && /* @__PURE__ */ jsxRuntime.jsxs("section", { "aria-label": "聚合的候选时间轴记录", children: [
+        /* @__PURE__ */ jsxRuntime.jsxs("p", { children: [
+          group.events.length,
+          " 条记录，选择一项查看原始时点与详情。"
+        ] }),
+        /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "gs-candidate-toolbar", children: [
+          group.events.slice(memberPage * 40, (memberPage + 1) * 40).map((event, index) => /* @__PURE__ */ jsxRuntime.jsxs(dshClientUiPrimitives.Button, { size: "sm", variant: "outline", "aria-pressed": selected === event, onClick: () => setSelected(event), children: [
+            when(event),
+            " · ",
+            event.label || "事件"
+          ] }, index)),
+          memberPage > 0 && /* @__PURE__ */ jsxRuntime.jsx(dshClientUiPrimitives.Button, { size: "sm", variant: "ghost", onClick: () => setMemberPage(memberPage - 1), children: "上一页" }),
+          (memberPage + 1) * 40 < group.events.length && /* @__PURE__ */ jsxRuntime.jsx(dshClientUiPrimitives.Button, { size: "sm", variant: "ghost", onClick: () => setMemberPage(memberPage + 1), children: "下一页" })
+        ] })
+      ] }),
       selected && /* @__PURE__ */ jsxRuntime.jsxs("details", { open: true, className: "gs-candidate-event-detail", children: [
         /* @__PURE__ */ jsxRuntime.jsxs("summary", { children: [
-          selected.start.toFixed(2),
-          "秒 · ",
+          when(selected),
+          " · ",
           selected.label || "事件"
         ] }),
+        view === "damage" && (selection ? /* @__PURE__ */ jsxRuntime.jsx(dshClientUiPrimitives.Button, { size: "sm", disabled: navigationBusy, onClick: () => void locate(), children: navigationBusy ? "正在请求定位…" : "在主窗口定位这段伤害" }) : /* @__PURE__ */ jsxRuntime.jsx("p", { children: "此记录缺少完整方案或结果身份，不能跨窗口精确定位。" })),
+        view === "damage" && typeof selected.value === "number" && /* @__PURE__ */ jsxRuntime.jsxs("p", { children: [
+          "本次伤害 ",
+          selected.value.toLocaleString("zh-CN", { maximumFractionDigits: 1 })
+        ] }),
+        navigationMessage && /* @__PURE__ */ jsxRuntime.jsx("p", { role: "status", children: navigationMessage }),
         /* @__PURE__ */ jsxRuntime.jsx("pre", { children: JSON.stringify(selected.detail || selected, null, 2) })
-      ] })
+      ] }, `${selected.id}:${selected.start}`)
     ] });
   }
   async function callAppDocumentApi(host, method, args) {
@@ -1136,6 +1894,10 @@ window.__ModuleLoader__.load({ id: "@genshin-calc/dsh-client-domain", factory: f
     }, children: "查看未完成的文件操作" });
     return /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "gs-candidate-review", children: [
       /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "gs-candidate-toolbar", children: [
+        !application && detachedWindow() && (canReview || canRecover) && /* @__PURE__ */ jsxRuntime.jsx(dshClientUiPrimitives.Button, { size: "sm", disabled: busy || !currentRead, onClick: () => {
+          setBusy(true);
+          void presentInMain({ command: "review_candidate", session_id: binding.dshSessionId, conversation_id: binding.conversationId, revision: summary2.revision }).then(() => setMessage("已通知主窗口。请在主窗口的候选工作区核对差异，再确认同步。")).catch((reason) => setMessage(reason instanceof Error ? reason.message : "主窗口未能打开，候选没有同步。")).finally(() => setBusy(false));
+        }, children: "在主窗口审核并同步" }),
         canReview && !autoOpen && /* @__PURE__ */ jsxRuntime.jsx(dshClientUiPrimitives.Button, { size: "sm", onClick: () => void begin(), disabled: !currentRead || busy || !application || !api.dsh_client_candidate_command, children: "审核并同步到正式白板" }),
         canRecover && /* @__PURE__ */ jsxRuntime.jsx(dshClientUiPrimitives.Button, { size: "sm", variant: "outline", onClick: () => void begin(true), disabled: !currentRead || busy || !application, children: "检查未完成的同步" }),
         applied && /* @__PURE__ */ jsxRuntime.jsx(dshClientUiPrimitives.Button, { size: "sm", variant: "outline", onClick: () => void showApplied(), children: summary2.kind === "native" ? "查看计算模型" : "查看正式白板" }),
@@ -1160,10 +1922,10 @@ window.__ModuleLoader__.load({ id: "@genshin-calc/dsh-client-domain", factory: f
           title: (review == null ? void 0 : review.creation) ? "审核并新建正式文档" : "审核候选修改",
           closeLabel: "关闭审核",
           onClose: () => closeReview(),
-          className: "gs-candidate-review-dialog",
-          contentClassName: "gs-candidate-review-content",
+          className: "gs-domain-dialog gs-candidate-review-dialog",
+          contentClassName: "gs-domain-dialog-content",
           description: isFormal ? "这份候选已有正式计算结果。同步后可在 App 中查看，并可另存文件。" : "这份候选可以同步为可编辑草稿，尚无可交付的正式计算结果。",
-          footer: /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "gs-candidate-review-actions", children: [
+          footer: /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "gs-domain-dialog-actions", children: [
             /* @__PURE__ */ jsxRuntime.jsx(dshClientUiPrimitives.Button, { variant: "ghost", onClick: () => closeReview("本次未同意同步。候选已保留，正式文档保持原样。"), disabled: busy, children: "不同意同步" }),
             /* @__PURE__ */ jsxRuntime.jsx(dshClientUiPrimitives.Button, { variant: "outline", onClick: () => closeReview("候选已保留。请在输入框告诉 Agent 需要改哪里。"), disabled: busy, children: "返回对话继续修改" }),
             /* @__PURE__ */ jsxRuntime.jsx(dshClientUiPrimitives.Button, { onClick: () => void apply2(), disabled: busy || !!code, children: busy ? "正在同步…" : "同意并同步" })
@@ -1349,8 +2111,10 @@ window.__ModuleLoader__.load({ id: "@genshin-calc/dsh-client-domain", factory: f
           onClose: () => {
             if (!busy) setSelected(void 0);
           },
+          className: "gs-domain-dialog",
+          contentClassName: "gs-domain-dialog-content",
           description: "这是 App 资料修正授权，不是普通聊天中的回答。请核对差异和来源；不会写回公共数据库。",
-          footer: /* @__PURE__ */ jsxRuntime.jsxs(jsxRuntime.Fragment, { children: [
+          footer: /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "gs-domain-dialog-actions", children: [
             /* @__PURE__ */ jsxRuntime.jsx(dshClientUiPrimitives.Button, { variant: "outline", disabled: busy, onClick: () => void decide("reject"), children: "拒绝修正" }),
             /* @__PURE__ */ jsxRuntime.jsx(dshClientUiPrimitives.Button, { disabled: busy, onClick: () => void decide("approve"), children: busy ? "正在记录…" : "批准当前修正" })
           ] }),
@@ -1450,23 +2214,23 @@ window.__ModuleLoader__.load({ id: "@genshin-calc/dsh-client-domain", factory: f
       throw new AppActionSettlementPending(action, receipt, outcome);
     }
   }
-  async function executeAppAction(api, binding, files, initial, onPhase) {
-    if (initial.legacy_read_only) throw new Error("app_action_legacy_read_only");
+  async function executeAppAction(api, binding, files, initial2, onPhase) {
+    if (initial2.legacy_read_only) throw new Error("app_action_legacy_read_only");
     if (!api.dsh_client_workspace_state) throw new Error("app_workspace_state_unavailable");
     const snapshot2 = files.capture();
     unwrap$1(await api.dsh_client_workspace_state(appFileWorkspaceState(binding.conversationId, snapshot2)));
     if (!files.matches(snapshot2)) throw new Error("app_action_document_changed");
-    let action = initial;
+    let action = initial2;
     if (action.status === "queued") {
       const presented = await command(api, binding, "present", { action_id: action.action_id });
-      action = sameAction(presented.card, initial);
+      action = sameAction(presented.card, initial2);
       if (presented.status !== "presented_for_user" || action.status !== "presented") throw new Error("app_action_not_presented");
     }
     const receipt = action.ui_receipt;
     if (action.status !== "presented" || typeof receipt !== "string" || !/^ui_[A-Za-z0-9_-]{43}$/.test(receipt)) throw new Error("app_action_receipt_invalid");
     if (!files.matches(snapshot2)) throw new Error("app_action_document_changed");
     const claim = await command(api, binding, "claim", { action_id: action.action_id, ui_receipt: receipt });
-    const claimedCard = sameAction(claim.card, initial, receipt);
+    const claimedCard = sameAction(claim.card, initial2, receipt);
     if (claim.status !== "claimed_for_external_execution") {
       if (claim.request != null) throw new Error("app_action_request_invalid");
       return claimedCard;
@@ -1551,7 +2315,12 @@ window.__ModuleLoader__.load({ id: "@genshin-calc/dsh-client-domain", factory: f
           busy === action.action_id ? /* @__PURE__ */ jsxRuntime.jsx("p", { role: "status", children: phase === "choosing" ? "等待选择保存位置…" : phase === "writing" ? "正在写入并核实文件…" : "正在处理…" }) : action.legacy_read_only ? /* @__PURE__ */ jsxRuntime.jsx("p", { children: "旧版本操作仅供查看；本版不会执行或重放。" }) : action.status === "claimed_for_external_execution" ? /* @__PURE__ */ jsxRuntime.jsxs(jsxRuntime.Fragment, { children: [
             /* @__PURE__ */ jsxRuntime.jsx("p", { children: actionStatus(action) }),
             ((_a2 = action.draft_publication) == null ? void 0 : _a2.status) === "verified" ? /* @__PURE__ */ jsxRuntime.jsx(dshClientUiPrimitives.Button, { size: "sm", variant: "outline", disabled: !!busy, onClick: () => void perform(() => recoverAppAction(api, binding, action), action.action_id), children: "补记已保存结果" }) : /* @__PURE__ */ jsxRuntime.jsx(dshClientUiPrimitives.Button, { size: "sm", variant: "outline", disabled: !!busy, onClick: () => setRecovery(action), children: "核对未知操作" })
-          ] }) : /* @__PURE__ */ jsxRuntime.jsx(dshClientUiPrimitives.Button, { size: "sm", variant: "outline", disabled: !!busy || !files, onClick: () => files && void perform(() => executeAppAction(api, binding, files, action, setPhase), action.action_id), children: "处理这项操作" }),
+          ] }) : !files && detachedWindow() ? /* @__PURE__ */ jsxRuntime.jsx(dshClientUiPrimitives.Button, { size: "sm", variant: "outline", disabled: !!busy, onClick: () => {
+            void presentInMain({ command: "file_action", session_id: binding.dshSessionId, conversation_id: binding.conversationId, action_id: action.action_id }).then(() => {
+              setError("");
+              setMessage("已通知主窗口。请在主窗口的候选工作区找到操作卡，再选择文件位置并确认。");
+            }).catch((reason) => setError(reason instanceof Error ? reason.message : "主窗口未能打开。"));
+          }, children: "在主窗口处理文件" }) : /* @__PURE__ */ jsxRuntime.jsx(dshClientUiPrimitives.Button, { size: "sm", variant: "outline", disabled: !!busy || !files, onClick: () => files && void perform(() => executeAppAction(api, binding, files, action, setPhase), action.action_id), children: "处理这项操作" }),
           /* @__PURE__ */ jsxRuntime.jsx(DraftFileDetails, { action })
         ] }, action.action_id);
       }),
@@ -1584,7 +2353,9 @@ window.__ModuleLoader__.load({ id: "@genshin-calc/dsh-client-domain", factory: f
           onClose: () => {
             if (!busy) setRecovery(void 0);
           },
-          footer: /* @__PURE__ */ jsxRuntime.jsxs(jsxRuntime.Fragment, { children: [
+          className: "gs-domain-dialog",
+          contentClassName: "gs-domain-dialog-content",
+          footer: /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "gs-domain-dialog-actions", children: [
             /* @__PURE__ */ jsxRuntime.jsx(dshClientUiPrimitives.Button, { variant: "outline", disabled: !!busy, onClick: () => setRecovery(void 0), children: "返回核对" }),
             /* @__PURE__ */ jsxRuntime.jsx(dshClientUiPrimitives.Button, { disabled: !!busy, onClick: () => recovery && void perform(() => recoverAppAction(api, binding, recovery), recovery.action_id), children: "关闭未知状态，不重做操作" })
           ] }),
@@ -1735,23 +2506,36 @@ window.__ModuleLoader__.load({ id: "@genshin-calc/dsh-client-domain", factory: f
         /* @__PURE__ */ jsxRuntime.jsx("summary", { children: "操作详情" }),
         /* @__PURE__ */ jsxRuntime.jsx("code", { children: error })
       ] }),
-      /* @__PURE__ */ jsxRuntime.jsxs(dshClientUiPrimitives.Modal, { open: !!saved, title: "此前已同步的白板", description: "这是以前已经审核并同步的版本。查看不会更改当前白板；只有再次确认后才恢复。当前文档有其他修改时会拒绝覆盖。", closeLabel: "关闭已同步版本", onClose: () => {
-        if (!busy) setSaved(void 0);
-      }, footer: /* @__PURE__ */ jsxRuntime.jsxs(jsxRuntime.Fragment, { children: [
-        /* @__PURE__ */ jsxRuntime.jsx(dshClientUiPrimitives.Button, { variant: "outline", disabled: busy, onClick: () => setSaved(void 0), children: "仅查看，返回" }),
-        /* @__PURE__ */ jsxRuntime.jsx(dshClientUiPrimitives.Button, { disabled: busy || !(editor == null ? void 0 : editor.application), onClick: () => void restore(), children: busy ? "正在恢复…" : "确认恢复到正式白板" })
-      ] }), children: [
-        saved && /* @__PURE__ */ jsxRuntime.jsxs(jsxRuntime.Fragment, { children: [
-          /* @__PURE__ */ jsxRuntime.jsxs("p", { children: [
-            "候选版本 ",
-            String(saved.revision),
-            " · ",
-            saved.application_kind === "whiteboard_calculated" ? "含计算结果" : "阶段草稿"
+      /* @__PURE__ */ jsxRuntime.jsxs(
+        dshClientUiPrimitives.Modal,
+        {
+          open: !!saved,
+          title: "此前已同步的白板",
+          description: "这是以前已经审核并同步的版本。查看不会更改当前白板；只有再次确认后才恢复。当前文档有其他修改时会拒绝覆盖。",
+          closeLabel: "关闭已同步版本",
+          onClose: () => {
+            if (!busy) setSaved(void 0);
+          },
+          className: "gs-domain-dialog gs-candidate-review-dialog",
+          contentClassName: "gs-domain-dialog-content",
+          footer: /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "gs-domain-dialog-actions", children: [
+            /* @__PURE__ */ jsxRuntime.jsx(dshClientUiPrimitives.Button, { variant: "outline", disabled: busy, onClick: () => setSaved(void 0), children: "仅查看，返回" }),
+            /* @__PURE__ */ jsxRuntime.jsx(dshClientUiPrimitives.Button, { disabled: busy || !(editor == null ? void 0 : editor.application), onClick: () => void restore(), children: busy ? "正在恢复…" : "确认恢复到正式白板" })
           ] }),
-          /* @__PURE__ */ jsxRuntime.jsx(CandidatePreview, { document: saved.board, kind: "whiteboard", editor })
-        ] }),
-        error && /* @__PURE__ */ jsxRuntime.jsx("p", { role: "alert", children: message })
-      ] })
+          children: [
+            saved && /* @__PURE__ */ jsxRuntime.jsxs(jsxRuntime.Fragment, { children: [
+              /* @__PURE__ */ jsxRuntime.jsxs("p", { children: [
+                "候选版本 ",
+                String(saved.revision),
+                " · ",
+                saved.application_kind === "whiteboard_calculated" ? "含计算结果" : "阶段草稿"
+              ] }),
+              /* @__PURE__ */ jsxRuntime.jsx(CandidatePreview, { document: saved.board, kind: "whiteboard", editor })
+            ] }),
+            error && /* @__PURE__ */ jsxRuntime.jsx("p", { role: "alert", children: message })
+          ]
+        }
+      )
     ] });
   }
   function identity(value) {
@@ -1793,11 +2577,8 @@ window.__ModuleLoader__.load({ id: "@genshin-calc/dsh-client-domain", factory: f
         facts.migrationPrompt && /* @__PURE__ */ jsxRuntime.jsxs(jsxRuntime.Fragment, { children: [
           /* @__PURE__ */ jsxRuntime.jsx("pre", { children: facts.migrationPrompt }),
           /* @__PURE__ */ jsxRuntime.jsx(dshClientUiPrimitives.Button, { size: "sm", variant: "outline", onClick: () => {
-            const target = error;
-            void navigator.clipboard.writeText(facts.migrationPrompt).then(() => {
-              if (currentError.current === target) setCopyState("copied");
-            }).catch(() => {
-              if (currentError.current === target) setCopyState("failed");
+            void copyAppText(facts.migrationPrompt).then((copied) => {
+              if (currentError.current === error) setCopyState(copied ? "copied" : "failed");
             });
           }, children: copyState === "copied" ? "已复制适配提示" : "复制适配提示" }),
           copyState === "failed" && /* @__PURE__ */ jsxRuntime.jsx("p", { role: "alert", children: "复制未完成，请选中上面的提示手动复制。" })
@@ -1922,8 +2703,10 @@ window.__ModuleLoader__.load({ id: "@genshin-calc/dsh-client-domain", factory: f
           onClose: () => {
             if (!busy) setSelected(void 0);
           },
+          className: "gs-domain-dialog",
+          contentClassName: "gs-domain-dialog-content",
           description: "这只解除旧同步的占用，不代表原同步成功或失败。原结果仍记为未知，文件和当前白板不会改变。",
-          footer: /* @__PURE__ */ jsxRuntime.jsxs(jsxRuntime.Fragment, { children: [
+          footer: /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "gs-domain-dialog-actions", children: [
             /* @__PURE__ */ jsxRuntime.jsx(dshClientUiPrimitives.Button, { variant: "outline", disabled: busy, onClick: () => setSelected(void 0), children: "保留并取消" }),
             /* @__PURE__ */ jsxRuntime.jsx(dshClientUiPrimitives.Button, { disabled: busy || mustRefresh || loading, onClick: () => void abandon(), children: busy ? "正在记录…" : "确认放弃恢复并解除占用" })
           ] }),
@@ -1968,14 +2751,15 @@ window.__ModuleLoader__.load({ id: "@genshin-calc/dsh-client-domain", factory: f
       return (_a = bindings.getError) == null ? void 0 : _a.call(bindings, props.sessionId);
     }, [bindings, props.sessionId]), bindingError = react.useSyncExternalStore(subscribe, getError);
     const editor = window.GenshinEditorBridge;
+    const scope = binding ? `${binding.dshSessionId}:${binding.conversationId}` : void 0;
     return /* @__PURE__ */ jsxRuntime.jsxs("section", { className: "gs-candidate-workspace", "aria-label": "文件与 App 操作", children: [
       /* @__PURE__ */ jsxRuntime.jsx("h2", { children: "文件与 App 操作" }),
       /* @__PURE__ */ jsxRuntime.jsx("p", { children: "文件由你选择位置和确认保存。这里的待办来自 App，不会替代普通聊天里的问题与批准。" }),
       /* @__PURE__ */ jsxRuntime.jsx(AppIncompatibleApplications, { api, onSettled: refresh2 }),
       !binding ? isAppDomainIncompatibility(bindingError) ? /* @__PURE__ */ jsxRuntime.jsx(AppDomainIncompatibilityNotice, { error: bindingError }, props.sessionId) : bindingError ? /* @__PURE__ */ jsxRuntime.jsx("p", { role: "alert", children: bindingError.message }) : /* @__PURE__ */ jsxRuntime.jsx("p", { children: "此会话尚未绑定 App 候选；可以继续在聊天中描述任务。" }) : /* @__PURE__ */ jsxRuntime.jsxs(jsxRuntime.Fragment, { children: [
-        api.dsh_client_app_actions && api.dsh_client_app_action && /* @__PURE__ */ jsxRuntime.jsx(AppFileActionCards, { api, binding, bindings, files: editor == null ? void 0 : editor.files, onSettled: refresh2 }),
-        api.dsh_client_domain_approvals && api.dsh_client_domain_approval_decide && /* @__PURE__ */ jsxRuntime.jsx(AppDomainApprovals, { api, binding, bindings, onSettled: refresh2 }),
-        api.dsh_client_saved_whiteboard && /* @__PURE__ */ jsxRuntime.jsx(SavedWhiteboardControls, { api, binding, editor })
+        api.dsh_client_app_actions && api.dsh_client_app_action && /* @__PURE__ */ jsxRuntime.jsx(AppFileActionCards, { api, binding, bindings, files: editor == null ? void 0 : editor.files, onSettled: refresh2 }, `files:${scope}`),
+        api.dsh_client_domain_approvals && api.dsh_client_domain_approval_decide && /* @__PURE__ */ jsxRuntime.jsx(AppDomainApprovals, { api, binding, bindings, onSettled: refresh2 }, `approvals:${scope}`),
+        api.dsh_client_saved_whiteboard && /* @__PURE__ */ jsxRuntime.jsx(SavedWhiteboardControls, { api, binding, editor }, `saved:${scope}`)
       ] })
     ] });
   }
@@ -1990,9 +2774,13 @@ window.__ModuleLoader__.load({ id: "@genshin-calc/dsh-client-domain", factory: f
       var _a;
       return (_a = bindings.retain) == null ? void 0 : _a.call(bindings, props.sessionId);
     }, [bindings, props.sessionId]);
-    const [copied, setCopied] = react.useState(false);
+    const [copyStatus, setCopyStatus] = react.useState();
     const incompatibility = isAppDomainIncompatibility(appError);
     const rows2 = [...openError ? [{ label: "会话历史读取失败", code: openError.code, message: openError.message }] : [], ...promptError ? [{ label: promptError.op === "send" ? "消息发送失败" : "停止操作未完成", code: promptError.error.code, message: promptError.error.message }] : [], ...agentError ? [{ label: "本轮运行报告了错误", code: "agent_error", message: agentError }] : [], ...appError ? [{ label: incompatibility ? "排轴候选与当前版本不兼容" : "App 文档或候选暂时不可用", code: appError instanceof AppDomainHostError ? appError.code : "app_domain_error", message: appError.message }] : []];
+    const summary2 = JSON.stringify({ dsh_session_id: props.sessionId, errors: rows2 }, null, 2);
+    const currentSummary = react.useRef(summary2);
+    currentSummary.current = summary2;
+    const status = (copyStatus == null ? void 0 : copyStatus.text) === summary2 ? copyStatus : void 0;
     return /* @__PURE__ */ jsxRuntime.jsxs("section", { className: "gs-candidate-workspace", "aria-label": "会话诊断", children: [
       /* @__PURE__ */ jsxRuntime.jsx("h2", { children: "会话诊断" }),
       /* @__PURE__ */ jsxRuntime.jsx("p", { children: "这里显示当前会话与 App 的错误事实，不复制推理、工具正文或密钥。" }),
@@ -2006,7 +2794,13 @@ window.__ModuleLoader__.load({ id: "@genshin-calc/dsh-client-domain", factory: f
           /* @__PURE__ */ jsxRuntime.jsx("code", { children: row2.code })
         ] })
       ] }, `${row2.code}:${index}`)) : /* @__PURE__ */ jsxRuntime.jsx("p", { role: "status", children: "当前没有已报告的会话或 App 错误。" }),
-      /* @__PURE__ */ jsxRuntime.jsx(dshClientUiPrimitives.Button, { size: "sm", variant: "outline", onClick: () => void navigator.clipboard.writeText(JSON.stringify({ dsh_session_id: props.sessionId, errors: rows2 }, null, 2)).then(() => setCopied(true)).catch(() => setCopied(false)), children: copied ? "已复制诊断摘要" : "复制诊断摘要" })
+      /* @__PURE__ */ jsxRuntime.jsx(dshClientUiPrimitives.Button, { size: "sm", variant: "outline", onClick: () => void copyAppText(summary2).then((copied) => {
+        if (currentSummary.current === summary2) setCopyStatus({ text: summary2, copied });
+      }), children: (status == null ? void 0 : status.copied) ? "已复制诊断摘要" : "复制诊断摘要" }),
+      (status == null ? void 0 : status.copied) === false && /* @__PURE__ */ jsxRuntime.jsxs(jsxRuntime.Fragment, { children: [
+        /* @__PURE__ */ jsxRuntime.jsx("p", { role: "alert", children: "剪贴板暂不可用，可选中下方内容手动复制。" }),
+        /* @__PURE__ */ jsxRuntime.jsx("pre", { style: { userSelect: "text" }, children: summary2 })
+      ] })
     ] });
   }
   const object$1 = (value) => {
@@ -2178,8 +2972,12 @@ window.__ModuleLoader__.load({ id: "@genshin-calc/dsh-client-domain", factory: f
     ] });
   }
   const executionNumber = new Intl.NumberFormat("zh-CN", { maximumFractionDigits: 3 });
-  function executionStatus(summary2) {
+  function executionStatus(summary2, applicationState) {
     var _a, _b;
+    if (applicationState === "committed") return summary2.readyScope === "formal_result" ? "计算已接纳，此候选版本此前已同步。当前白板可能已继续修改，请以打开的文档为准。" : "此候选版本此前已同步；尚未获得正式计算结果。";
+    if (summary2.readyScope === "formal_result" && ["prepared", "baseline_advanced", "outcome_unknown"].includes(applicationState ?? "")) {
+      return "计算已接纳；上次白板同步的结果尚未确认，请检查未完成的同步。";
+    }
     if (summary2.readyScope === "draft_sync") return "草稿可审核同步；尚未获得正式计算结果。";
     if (summary2.readyScope === "formal_result") return "计算已接纳；同步到白板仍需你的审核。";
     if (((_a = summary2.execution) == null ? void 0 : _a.status) === "complete") return "执行已结束，正式结果尚未接纳。";
@@ -2404,6 +3202,20 @@ window.__ModuleLoader__.load({ id: "@genshin-calc/dsh-client-domain", factory: f
     };
     const parts = pointer.split("/").slice(1);
     const [localFileFocus, setLocalFileFocus] = react.useState();
+    const windowCommands = useMainWindowCommands();
+    const [windowNotice, setWindowNotice] = react.useState("");
+    react.useEffect(() => {
+      if (compact || !binding || !currentRead || loading) return;
+      for (const command2 of windowCommands) {
+        if (!["open_candidate", "review_candidate", "file_action"].includes(command2.command)) continue;
+        if (command2.session_id !== binding.dshSessionId) continue;
+        if (command2.conversation_id && command2.conversation_id !== binding.conversationId) {
+          setWindowNotice("请求所属候选已变化，请重新选择会话；没有进行同步或文件操作。");
+        } else if (command2.command === "file_action") setLocalFileFocus(command2.action_id);
+        else if (command2.command === "review_candidate") setWindowNotice(command2.revision === (visibleSummary == null ? void 0 : visibleSummary.revision) ? "已从独立聊天窗口定位到此候选。请核对版面与差异后审核同步。" : "候选已经更新，请重新核对当前版本后审核；尚未进行同步。");
+        void acknowledgeMainCommand(command2.command_id);
+      }
+    }, [binding, currentRead, loading, compact, windowCommands, visibleSummary == null ? void 0 : visibleSummary.revision]);
     const incomingFocus = pendingFileFocus.get(bindings);
     const fileFocus = localFileFocus ?? ((binding == null ? void 0 : binding.conversationId) === (incomingFocus == null ? void 0 : incomingFocus.conversationId) ? incomingFocus == null ? void 0 : incomingFocus.actionId : void 0);
     const clearFileFocus = () => {
@@ -2415,6 +3227,7 @@ window.__ModuleLoader__.load({ id: "@genshin-calc/dsh-client-domain", factory: f
         /* @__PURE__ */ jsxRuntime.jsx("h2", { children: compact ? "候选详情" : "Agent 候选工作区" }),
         /* @__PURE__ */ jsxRuntime.jsx("p", { children: "这里显示 Agent 的候选版本。只有经你审核并应用后，修改才会进入正式白板。" })
       ] }),
+      windowNotice && /* @__PURE__ */ jsxRuntime.jsx("p", { role: "status", children: windowNotice }),
       (openedDraft == null ? void 0 : openedDraft.data.imported) === true && /* @__PURE__ */ jsxRuntime.jsx("p", { role: "status", children: "输入草稿已打开，可在本会话继续完善。正式白板保持原样。" }),
       /* @__PURE__ */ jsxRuntime.jsx(AppIncompatibleApplications, { api, onSettled: refresh2 }),
       !binding ? bindingError ? isAppDomainIncompatibility(bindingError) ? /* @__PURE__ */ jsxRuntime.jsx(AppDomainIncompatibilityNotice, { error: bindingError }, `${dshSessionId}:${bindingError.code}`) : /* @__PURE__ */ jsxRuntime.jsxs("div", { role: "alert", children: [
@@ -2454,7 +3267,7 @@ window.__ModuleLoader__.load({ id: "@genshin-calc/dsh-client-domain", factory: f
             }
           ),
           /* @__PURE__ */ jsxRuntime.jsx(dshClientUiPrimitives.Button, { size: "sm", type: "button", onClick: () => setReload((value2) => value2 + 1), disabled: loading, children: "刷新" }),
-          api.dsh_client_request_candidate_input_draft && /* @__PURE__ */ jsxRuntime.jsx(dshClientUiPrimitives.Button, { size: "sm", type: "button", variant: "outline", disabled: draftFileBusy || loading || !currentRead || !visibleSummary || !!error, onClick: () => {
+          resource === "candidate" && api.dsh_client_request_candidate_input_draft && /* @__PURE__ */ jsxRuntime.jsx(dshClientUiPrimitives.Button, { size: "sm", type: "button", variant: "outline", disabled: draftFileBusy || loading || !currentRead || !visibleSummary || !!error, onClick: () => {
             if (!visibleSummary || draftFileBusy) return;
             setDraftFileBusy(true);
             setDraftFileMessage("");
@@ -2473,7 +3286,7 @@ window.__ModuleLoader__.load({ id: "@genshin-calc/dsh-client-domain", factory: f
           (visibleSummary == null ? void 0 : visibleSummary.counts.actions) !== void 0 ? ` · ${visibleSummary.counts.actions} 个动作` : "",
           (visibleSummary == null ? void 0 : visibleSummary.counts.duration) !== void 0 ? ` · ${visibleSummary.counts.duration} 秒` : ""
         ] }),
-        ((visibleSummary == null ? void 0 : visibleSummary.readyScope) || (visibleSummary == null ? void 0 : visibleSummary.execution)) && /* @__PURE__ */ jsxRuntime.jsx("p", { className: "gs-candidate-state", children: executionStatus(visibleSummary) }),
+        ((visibleSummary == null ? void 0 : visibleSummary.readyScope) || (visibleSummary == null ? void 0 : visibleSummary.execution)) && /* @__PURE__ */ jsxRuntime.jsx("p", { className: "gs-candidate-state", children: executionStatus(visibleSummary, binding.applicationState) }),
         executionFailure && /* @__PURE__ */ jsxRuntime.jsx("p", { children: executionFailure }),
         /* @__PURE__ */ jsxRuntime.jsx(TaskReviewDetails, { review: visibleSummary == null ? void 0 : visibleSummary.taskReview }),
         ((_b = visibleSummary == null ? void 0 : visibleSummary.execution) == null ? void 0 : _b.status) === "diagnostic" && visibleSummary.execution.reportedHits !== null && /* @__PURE__ */ jsxRuntime.jsxs("p", { children: [
@@ -2512,7 +3325,7 @@ window.__ModuleLoader__.load({ id: "@genshin-calc/dsh-client-domain", factory: f
         ] })),
         presentation === "preview" ? visibleSnapshot && !isAppDomainIncompatibility(error) && /* @__PURE__ */ jsxRuntime.jsxs(jsxRuntime.Fragment, { children: [
           resource === "candidate" && visibleSnapshot.summary.hasCalculation && !includeCalculated && /* @__PURE__ */ jsxRuntime.jsx(dshClientUiPrimitives.Button, { size: "sm", variant: "outline", onClick: () => setIncludeCalculated(true), children: "加载已计算的效果和伤害" }),
-          /* @__PURE__ */ jsxRuntime.jsx(CandidatePreview, { document: visibleSnapshot.document, calculated: visibleSnapshot.calculated, kind: visibleSnapshot.summary.kind, editor: window.GenshinEditorBridge })
+          /* @__PURE__ */ jsxRuntime.jsx(CandidatePreview, { document: visibleSnapshot.document, calculated: visibleSnapshot.calculated, hasCalculation: resource === "candidate" && visibleSnapshot.summary.hasCalculation, kind: visibleSnapshot.summary.kind, sessionId: binding.dshSessionId, conversationId: binding.conversationId, editor: window.GenshinEditorBridge })
         ] }) : value && !loading && /* @__PURE__ */ jsxRuntime.jsxs(jsxRuntime.Fragment, { children: [
           value.page.kind === "object" || value.page.kind === "array" ? /* @__PURE__ */ jsxRuntime.jsx("dl", { className: "gs-candidate-fields", children: value.page.items.map((item) => /* @__PURE__ */ jsxRuntime.jsxs("div", { children: [
             /* @__PURE__ */ jsxRuntime.jsx("dt", { children: label(String(item.key)) }),
@@ -2542,7 +3355,7 @@ window.__ModuleLoader__.load({ id: "@genshin-calc/dsh-client-domain", factory: f
   function createAppDomainClientPlugin(options) {
     return {
       name: APP_CANDIDATE_PLUGIN_ID,
-      inject: ["slots", "sidebarRightTabs", "uiWorkspace", "layout", "sessions", "workspaces"],
+      inject: ["slots", "sidebarRightTabs", "uiWorkspace", "layout", "sessions", "workspaces", "conversation"],
       apply(ctx) {
         ctx.effect(() => {
           const previous = window.GenshinCandidateDraftFiles;
@@ -2614,11 +3427,11 @@ window.__ModuleLoader__.load({ id: "@genshin-calc/dsh-client-domain", factory: f
         ));
         ctx.slots.inject("genshin.editor.assistant.actions", () => ctx.slots.register(
           { name: "genshin.editor.assistant.actions" },
-          (props) => props.sessionId ? /* @__PURE__ */ jsxRuntime.jsx(CandidateHeaderAction, { api: options.api, bindings: options.bindings, sessionId: props.sessionId, refresh: options.refresh, onOpen: () => ctx.layout.selectPanel(APP_CANDIDATE_PANEL) }) : null
+          (props) => props.sessionId ? /* @__PURE__ */ jsxRuntime.jsx(jsxRuntime.Fragment, { children: /* @__PURE__ */ jsxRuntime.jsx(CandidateHeaderAction, { api: options.api, bindings: options.bindings, sessionId: props.sessionId, refresh: options.refresh, onOpen: () => ctx.layout.selectPanel(APP_CANDIDATE_PANEL) }) }) : null
         ));
         ctx.slots.inject("conversation.hero.options", () => ctx.slots.register(
           { name: "conversation.hero.options", id: "genshin-open-candidate-input-draft", order: 310 },
-          (props) => /* @__PURE__ */ jsxRuntime.jsx(OpenCandidateDraft, { api: options.api, sessionId: props.sessionId, onImported: () => {
+          (props) => /* @__PURE__ */ jsxRuntime.jsx(OpenCandidateDraft, { compact: true, api: options.api, sessionId: props.sessionId, onImported: () => {
             var _a;
             (_a = options.refresh) == null ? void 0 : _a.call(options);
             ctx.layout.selectPanel(APP_CANDIDATE_PANEL);
@@ -2691,11 +3504,12 @@ window.__ModuleLoader__.load({ id: "@genshin-calc/dsh-client-domain", factory: f
     ] });
   }
   function EditorWorkbench({ editor, props }) {
+    const presentation = useWindowPresentation();
     const [visible, setVisible] = react.useState(() => {
       try {
-        return localStorage.getItem("genshin.editor.assistant.hidden") !== "1";
+        return localStorage.getItem("genshin.editor.assistant.hidden") === "0";
       } catch {
-        return true;
+        return false;
       }
     });
     const [width, setWidth] = react.useState(() => {
@@ -2727,7 +3541,7 @@ window.__ModuleLoader__.load({ id: "@genshin-calc/dsh-client-domain", factory: f
       return () => window.removeEventListener("resize", measure);
     }, []);
     const narrow = available > 0 && available < 720;
-    const showing = narrow ? narrowChat : visible;
+    const showing = presentation.presentation === "main" && (narrow ? narrowChat : visible);
     const maximum = available ? Math.max(300, Math.min(900, available - 360 - 5)) : 900;
     const effectiveWidth = Math.min(width, maximum);
     const resize = (value) => {
@@ -2774,7 +3588,10 @@ window.__ModuleLoader__.load({ id: "@genshin-calc/dsh-client-domain", factory: f
     }, [editor, props.page, narrow, showing]);
     return /* @__PURE__ */ jsxRuntime.jsxs("div", { ref: workbench, className: "gs-editor-workbench", "data-layout": narrow ? "narrow" : "wide", "data-embedded-assistant": showing ? "open" : "closed", style: { gridTemplateColumns: showing && !narrow ? `minmax(0,1fr) 5px ${effectiveWidth}px` : "minmax(0,1fr)" }, children: [
       /* @__PURE__ */ jsxRuntime.jsxs("section", { ref: business, className: "gs-editor-business", hidden: narrow && showing, children: [
-        /* @__PURE__ */ jsxRuntime.jsx("div", { className: "gs-editor-toolbar", children: /* @__PURE__ */ jsxRuntime.jsx(dshClientUiPrimitives.Button, { size: "sm", variant: "ghost", "aria-expanded": showing, onClick: toggle, children: showing ? "隐藏 AI 小窗" : "打开 AI 小窗" }) }),
+        /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "gs-editor-toolbar", children: [
+          presentation.presentation !== "main" ? /* @__PURE__ */ jsxRuntime.jsx(WindowRecoveryControl, {}) : /* @__PURE__ */ jsxRuntime.jsx(dshClientUiPrimitives.Button, { size: "sm", variant: "ghost", "aria-expanded": showing, onClick: toggle, children: showing ? "隐藏 AI 小窗" : "打开 AI 小窗" }),
+          presentation.error && /* @__PURE__ */ jsxRuntime.jsx("span", { role: "alert", children: presentation.error })
+        ] }),
         /* @__PURE__ */ jsxRuntime.jsx(EditorIsland, { editor, page: props.page })
       ] }),
       showing && /* @__PURE__ */ jsxRuntime.jsxs(jsxRuntime.Fragment, { children: [
@@ -2846,7 +3663,7 @@ window.__ModuleLoader__.load({ id: "@genshin-calc/dsh-client-domain", factory: f
   function createAppEditorPlugin(editor) {
     return {
       name: "genshin-editor-islands",
-      inject: ["slots", "layout", "theme", "uiWorkspace"],
+      inject: ["slots", "layout", "theme", "uiWorkspace", "sessions"],
       apply(ctx) {
         try {
           if (!window.localStorage.getItem("genshin.theme.dsh-migrated.v1")) {
@@ -2905,89 +3722,19 @@ window.__ModuleLoader__.load({ id: "@genshin-calc/dsh-client-domain", factory: f
       }
     };
   }
-  function credentialState(value) {
-    const row2 = value;
-    if (!row2 || typeof row2.available !== "boolean" || typeof row2.saved !== "boolean" || (row2.credential_generation === null ? row2.saved || !["error", "unavailable"].includes(row2.status || "") : !Number.isSafeInteger(row2.credential_generation) || row2.credential_generation < 0)) throw new Error("credential_status_invalid");
-    return row2;
-  }
-  function WindowsCredentialSettings({ api }) {
-    const [state, setState] = react.useState(), [key, setKey] = react.useState(""), [busy, setBusy] = react.useState(false), [message, setMessage] = react.useState(""), [failed, setFailed] = react.useState(false);
-    const generation = react.useRef(0);
-    const refresh2 = async () => {
-      const request = ++generation.current;
-      setBusy(true);
-      setMessage("");
-      try {
-        const value = credentialState(await api.dsh_client_credential_status());
-        if (request === generation.current) {
-          setState(value);
-          setFailed(false);
-        }
-      } catch {
-        if (request === generation.current) {
-          setFailed(true);
-          setMessage("暂时无法读取 Windows 密钥状态，请刷新后重试。");
-        }
-      } finally {
-        if (request === generation.current) setBusy(false);
-      }
-    };
-    react.useEffect(() => {
-      void refresh2();
-      return () => {
-        generation.current++;
-      };
-    }, [api]);
-    const change = async (remove) => {
-      var _a;
-      if (busy || !state || state.credential_generation === null) return;
-      const request = ++generation.current;
-      const payload = { api_key: key, expected_generation: state.credential_generation };
-      setKey("");
-      setBusy(true);
-      setMessage("");
-      try {
-        const value = credentialState(await (remove ? api.dsh_client_credential_delete({ expected_generation: payload.expected_generation }) : api.dsh_client_credential_save(payload)));
-        if (request !== generation.current) return;
-        setState(value);
-        const syncFailed = ((_a = value.runtime_sync) == null ? void 0 : _a.state) === "failed";
-        setFailed(syncFailed);
-        setMessage(syncFailed ? "Windows 中的密钥已更新，但当前 AI 服务未同步。请重新打开应用后再发送消息。" : remove ? "已从 Windows 删除保存的密钥。" : "密钥已安全保存到 Windows。以后打开应用可以继续使用。");
-      } catch {
-        if (request === generation.current) {
-          setFailed(true);
-          setMessage("密钥未能更新。请刷新状态后重试；密钥内容不会显示在错误信息中。");
-        }
-      } finally {
-        payload.api_key = "";
-        if (request === generation.current) setBusy(false);
-      }
-    };
-    return /* @__PURE__ */ jsxRuntime.jsxs("section", { className: "gs-credential-settings", "aria-label": "DeepSeek 密钥", children: [
-      /* @__PURE__ */ jsxRuntime.jsx("h2", { children: "DeepSeek 密钥" }),
-      /* @__PURE__ */ jsxRuntime.jsx("p", { children: "密钥安全保存在 Windows 中。这里只管理本 App 的 DeepSeek 官方服务，不会读取或显示已保存的密钥。" }),
-      /* @__PURE__ */ jsxRuntime.jsx("p", { role: "status", children: state ? state.status === "error" ? "无法读取 Windows 安全存储，请刷新状态后重试。" : state.available ? state.saved ? "已保存密钥" : "尚未保存密钥" : "当前环境不支持 Windows 安全存储。" : "正在读取状态…" }),
-      /* @__PURE__ */ jsxRuntime.jsxs("form", { onSubmit: (event) => {
-        event.preventDefault();
-        void change(false);
-      }, children: [
-        /* @__PURE__ */ jsxRuntime.jsxs("label", { children: [
-          "API Key",
-          /* @__PURE__ */ jsxRuntime.jsx("input", { type: "password", autoComplete: "new-password", "aria-label": "DeepSeek API Key", value: key, onChange: (event) => setKey(event.target.value), disabled: busy || !(state == null ? void 0 : state.available) || (state == null ? void 0 : state.credential_generation) == null, placeholder: (state == null ? void 0 : state.saved) ? "输入新密钥以替换" : "输入 DeepSeek API Key" })
-        ] }),
-        /* @__PURE__ */ jsxRuntime.jsxs("div", { className: "gs-candidate-toolbar", children: [
-          /* @__PURE__ */ jsxRuntime.jsx(dshClientUiPrimitives.Button, { type: "submit", disabled: busy || !(state == null ? void 0 : state.available) || (state == null ? void 0 : state.credential_generation) == null || !key.trim(), children: "安全保存" }),
-          /* @__PURE__ */ jsxRuntime.jsx(dshClientUiPrimitives.Button, { type: "button", variant: "outline", onClick: () => void refresh2(), disabled: busy, children: "刷新状态" }),
-          /* @__PURE__ */ jsxRuntime.jsx(dshClientUiPrimitives.Button, { type: "button", variant: "outline", onClick: () => void change(true), disabled: busy || !(state == null ? void 0 : state.saved), children: "删除密钥" })
-        ] })
-      ] }),
-      message && /* @__PURE__ */ jsxRuntime.jsx("p", { role: failed ? "alert" : "status", children: message }),
-      /* @__PURE__ */ jsxRuntime.jsx("p", { children: "打开设置和保存密钥不会发起模型请求。模型与推理档位在消息输入区选择。" })
+  function WindowsCredentialSettings() {
+    return /* @__PURE__ */ jsxRuntime.jsxs("section", { className: "gs-credential-settings", "aria-label": "连接与凭据说明", children: [
+      /* @__PURE__ */ jsxRuntime.jsx("h2", { children: "连接与凭据" }),
+      /* @__PURE__ */ jsxRuntime.jsx("p", { children: "在左侧「模型」中添加提供商、API Key 或兼容服务地址，并选择要使用的模型。支持的连接方式由当前 DSH 版本提供。" }),
+      /* @__PURE__ */ jsxRuntime.jsx("p", { children: "搜索服务在「网络搜索和读取」中单独设置。更换模型不会自动转用其他服务的密钥；未配置搜索时，仍可使用本地资料和计算工具。" }),
+      /* @__PURE__ */ jsxRuntime.jsx("p", { children: "密钥和授权记录加密保存在本 App 的资料目录，仅当前 Windows 用户可以解密。保留用户资料时会一并保留；卸载时选择删除资料会一并删除。" }),
+      /* @__PURE__ */ jsxRuntime.jsx("p", { children: "OAuth、云服务身份等连接需要完成各自的授权步骤。外部云凭据由原工具管理，本 App 卸载不会删除它们。" }),
+      /* @__PURE__ */ jsxRuntime.jsx("p", { children: "打开设置和保存密钥不会调用模型。供应商、模型和推理档位在输入区选择；可用参数以所选服务为准。" })
     ] });
   }
-  function createAppCredentialSettingsPlugin(api) {
-    return { name: "genshin-windows-credentials", inject: ["slots"], apply(ctx) {
-      ctx.slots.inject("settings.section", () => ctx.slots.register({ name: "settings.section", id: "genshin-deepseek", label: "DeepSeek 密钥", order: 120 }, () => /* @__PURE__ */ jsxRuntime.jsx(WindowsCredentialSettings, { api })));
+  function createAppCredentialSettingsPlugin(_api) {
+    return { name: "genshin-protected-credentials", inject: ["slots"], apply(ctx) {
+      ctx.slots.inject("settings.section", () => ctx.slots.register({ name: "settings.section", id: "genshin-credentials", label: "连接与凭据说明", order: 120 }, () => /* @__PURE__ */ jsxRuntime.jsx(WindowsCredentialSettings, {})));
     } };
   }
   const object = (value) => {
@@ -3107,7 +3854,8 @@ window.__ModuleLoader__.load({ id: "@genshin-calc/dsh-client-domain", factory: f
   const inject = ["slots", "sidebarRightTabs", "sessions"];
   function apply(ctx) {
     const editor = window.GenshinEditorBridge;
-    if (editor) void ctx.plugin(createAppEditorPlugin(editor));
+    if (editor && !detachedWindow()) void ctx.plugin(createAppEditorPlugin(editor));
+    void ctx.plugin(createWindowPresentationPlugin());
     let installed = false;
     let disposed = false;
     const install = () => {
@@ -3121,7 +3869,7 @@ window.__ModuleLoader__.load({ id: "@genshin-calc/dsh-client-domain", factory: f
       ctx.effect(() => () => bridge.dispose());
       void ctx.plugin(createAppDomainClientPlugin(bridge));
       const credentials = host;
-      if (typeof credentials.dsh_client_credential_status === "function" && typeof credentials.dsh_client_credential_save === "function" && typeof credentials.dsh_client_credential_delete === "function") void ctx.plugin(createAppCredentialSettingsPlugin(credentials));
+      if (typeof credentials.dsh_client_credential_status === "function" && typeof credentials.dsh_client_credential_save === "function" && typeof credentials.dsh_client_credential_delete === "function") void ctx.plugin(createAppCredentialSettingsPlugin());
       const settings = host;
       if (["agent_budget_settings", "agent_update_budget_settings", "agent_reset_budget_settings", "agent_dsh_settings", "agent_update_dsh_settings", "agent_reset_dsh_settings"].every((key) => typeof Reflect.get(settings, key) === "function")) void ctx.plugin(createAppRuntimeSettingsPlugin(settings));
     };

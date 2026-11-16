@@ -180,8 +180,23 @@ def _resume_document(api, documents, session_id, target, input_path):
     }
 
 
+def _projected_model_selection(catalog, prior_selection, *, session_id, provider=None, model=None, effort=None):
+    """Project route intent; DSH owns catalog validation and derived parameters."""
+    selected = {**(prior_selection.get("next") or prior_selection.get("lastUsed") or catalog["default"]),
+        "sessionId": session_id}
+    if provider is not None:
+        selected["provider"] = provider
+    if model is not None:
+        selected["model"] = model
+    if provider is not None or model is not None:
+        selected.pop("reasoningEffort", None)
+    if effort is not None:
+        selected["reasoningEffort"] = effort
+    return selected
+
+
 def run_gui_agent_workflow(*, data_dir, prompt, output_dir, input_path=None, workflow="artifact",
-                           model=None, effort=None, timeout_seconds=1800, allow_draft=False, resume_session_id=None,
+                           provider=None, model=None, effort=None, timeout_seconds=1800, allow_draft=False, resume_session_id=None,
                            provider_mode="saved_credential", api_factory=None):
     if workflow != "artifact":
         raise GuiWorkflowError("当前原生Agent使用自由工作重点与工件验证；请使用artifact工作流。",
@@ -194,6 +209,9 @@ def run_gui_agent_workflow(*, data_dir, prompt, output_dir, input_path=None, wor
         raise GuiWorkflowError("任务或观察周期不合法", reason="gui_workflow_arguments_invalid")
     if resume_session_id is not None and (not isinstance(resume_session_id, str) or not resume_session_id.strip()):
         raise GuiWorkflowError("恢复会话ID不能为空", reason="gui_workflow_arguments_invalid")
+    if provider is not None and (not isinstance(provider, str) or not provider.strip() or not model):
+        raise GuiWorkflowError("指定 --provider 时请同时指定 --model；提供商和模型以DSH目录为准",
+            reason="gui_workflow_model_route_required")
     if api_factory is None:
         from genshin_app.gui.api import GuiApi
 
@@ -245,17 +263,13 @@ def run_gui_agent_workflow(*, data_dir, prompt, output_dir, input_path=None, wor
                 "current_view": "whiteboard", "dirty": input_path is None, "has_path": input_path is not None,
                 "can_save": True, "can_open": True, "can_export": False}})
         stage = "model_selection"
-        if resume_session_id is None or model is not None or effort is not None:
+        if resume_session_id is None or provider is not None or model is not None or effort is not None:
             catalog = _rpc(api, "session/modelCatalog")
             prior_selection = previous.get("values", {}).get("modelSelection", {}) if resume_session_id is not None else {}
-            selected = {**(prior_selection.get("next") or prior_selection.get("lastUsed") or catalog["default"]),
-                "sessionId": sid}
-            if effort is not None or resume_session_id is None:
-                selected["reasoningEffort"] = effort or "high"
-            if model is not None:
-                selected.update(provider="deepseek-official", model=model)
+            selected = _projected_model_selection(catalog, prior_selection, session_id=sid,
+                provider=provider, model=model, effort=effort)
             _rpc(api, "session/selectModel", selected)
-            receipt["model_selection"] = {key: selected[key] for key in ("provider", "model", "reasoningEffort")}
+            receipt["model_selection"] = {key: selected[key] for key in ("provider", "model", "reasoningEffort") if key in selected}
             if resume_session_id is not None:
                 receipt["resume"]["model_selection_reinitialized"] = True
         else:

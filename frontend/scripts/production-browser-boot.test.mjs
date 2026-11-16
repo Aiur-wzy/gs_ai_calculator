@@ -2,6 +2,9 @@ import assert from "node:assert/strict";
 import {readFile} from "node:fs/promises";
 import {randomUUID,createHash,webcrypto} from "node:crypto";
 import {test} from "node:test";
+import {resolve} from "node:path";
+import {verifyEmbeddedInputs,productionInputs} from "./production-provenance.mjs";
+import {fileURLToPath} from "node:url";
 import {JSDOM,VirtualConsole} from "jsdom";
 import {bootInjections} from "@deepseek-ai/dsh-client-modules";
 import {composeReviewedRegistry,readCompositionContract} from "./dsh-client-review-lib.mjs";
@@ -12,8 +15,11 @@ test("production browser bundle boots one real DSH owner without Node globals an
   const errors=[];
   const console=new VirtualConsole();console.on("jsdomError",error=>errors.push(error));console.on("error",(...values)=>errors.push(new Error(values.map(value=>value?.stack||String(value)).join(" "))));
   const dom=new JSDOM('<!doctype html><html><head></head><body><div id="genshin-editor-parking"></div><div id="dsh-app-root"></div></body></html>',{runScripts:"dangerously",url:"https://dsh-shell.invalid/",pretendToBeVisual:true,virtualConsole:console});
-  const w=dom.window,resources=new Map(),navigation=[];
+  const w=dom.window,resources=new Map(),accessStreams=new Map(),navigation=[];
   Object.assign(w,{TextEncoder,TextDecoder,Request,Response,ResizeObserver:class{observe(){}unobserve(){}disconnect(){}},matchMedia:()=>({matches:false,addEventListener(){},removeEventListener(){}})});
+  // JSDOM has no browser layout implementation; the upstream settings focus
+  // handler uses this native DOM method without changing product state.
+  w.HTMLElement.prototype.scrollIntoView=()=>{};
   Object.defineProperty(w.crypto,"subtle",{value:webcrypto.subtle});
   Object.defineProperty(w.document,"fonts",{value:{addEventListener(){},removeEventListener(){},ready:Promise.resolve()},configurable:true});
   const editor=w.document.createElement("div");editor.textContent="business editor sentinel";editor.hidden=true;
@@ -23,9 +29,15 @@ test("production browser bundle boots one real DSH owner without Node globals an
     async dsh_client_boot(){return {injections:bootInjections(graph)};},
     async dsh_client_rpc(){return {ok:false,error:{code:"fixture_remote_unavailable",message:"No provider is contacted by this browser-only test.",details:{}}};},
     async dsh_client_request_cancel(){return {cancelled:true};},
-    async dsh_client_stream_open(request){return {stream_id:request.stream_id,cursor:0};},
-    async dsh_client_stream_read(request){return {items:[],cursor:request.cursor+1,done:true};},
-    async dsh_client_stream_cancel(){return {cancelled:true};},
+    async dsh_client_stream_open(request){if(request.endpoint==="remoteAccess/follow")accessStreams.set(request.stream_id,{});return {stream_id:request.stream_id,cursor:0};},
+    async dsh_client_stream_read(request){
+      const access=accessStreams.get(request.stream_id);
+      // An isolated fake Host represents an authenticated local owner. rc.3
+      // publishes its access baseline on the official follow stream.
+      if(access){if(request.cursor===0)return {items:[{type:"baseline",owner:true}],cursor:1,done:false};return new Promise(resolve=>{access.finish=()=>resolve({items:[],cursor:request.cursor,done:true});});}
+      return {items:[],cursor:request.cursor+1,done:true};
+    },
+    async dsh_client_stream_cancel(request){accessStreams.get(request.stream_id)?.finish?.();accessStreams.delete(request.stream_id);return {cancelled:true};},
     async dsh_client_stream_send(request){return {sequence:request.sequence};},
     async dsh_client_bundle({url}){
       const response=await ctx.clientModules.fetchBundle(new Request(new URL(url,"https://dsh-shell.invalid/")));
@@ -45,7 +57,11 @@ test("production browser bundle boots one real DSH owner without Node globals an
   }};
   try{
     assert.equal(w.process,undefined);assert.equal(w.require,undefined);
-    const script=w.document.createElement("script");script.textContent=await readFile(new URL("../dist/production/dsh-production.js",import.meta.url),"utf8");w.document.head.append(script);
+    // An explicit final-resource directory is read-only: this probe never rebuilds it.
+    const scriptPath=process.env.GENSHIN_PRODUCTION_WEB_DIR?resolve(process.env.GENSHIN_PRODUCTION_WEB_DIR,"dsh-production.js"):new URL("../dist/production/dsh-production.js",import.meta.url);
+    const compiled=await readFile(scriptPath);
+    verifyEmbeddedInputs(compiled,await productionInputs(fileURLToPath(new URL("..",import.meta.url))));
+    const script=w.document.createElement("script");script.textContent=compiled.toString("utf8");w.document.head.append(script);
     assert.ok(w.GenshinDshClient,errors.map(error=>`${error.message}\n${error.detail?.stack||""}`).join("\n"));await w.GenshinDshClient.ready;
     // Give the single upstream React root its first commit; no second createRoot.
     for(let i=0;i<80&&!w.document.body.textContent.includes("排轴白板");i++)await new Promise(resolve=>setTimeout(resolve,10));
@@ -56,6 +72,9 @@ test("production browser bundle boots one real DSH owner without Node globals an
     assert.ok(board,"App business pages must be registered in the real DSH sidebar");board.click();
     for(let i=0;i<80&&!navigation.length;i++)await new Promise(resolve=>setTimeout(resolve,10));
     assert.deepEqual(navigation,["whiteboard"]);assert.equal(editor.hidden,false);
+    assert.equal(w.document.querySelectorAll("[data-conversation-content]").length,0,"A fresh editor opens with its optional assistant collapsed to preserve timeline space");
+    const showAssistant=[...w.document.querySelectorAll("button")].find(button=>button.textContent==="打开 AI 小窗");
+    assert.ok(showAssistant);showAssistant.click();
     for(let i=0;i<80&&!w.document.querySelector(".gs-editor-assistant [data-conversation-content]");i++)await new Promise(resolve=>setTimeout(resolve,10));
     assert.equal(w.document.querySelectorAll("[data-conversation-content]").length,1,`Editor embedded mode must not mount a second simultaneous Conversation\n${errors.map(error=>error.message).join("\n")}\n${w.document.body.textContent.slice(-1500)}`);
     assert.ok(w.document.querySelector(".gs-editor-assistant [data-conversation-content]"),errors.map(error=>error.message).join("\n"));
@@ -68,14 +87,15 @@ test("production browser bundle boots one real DSH owner without Node globals an
     assert.ok(candidate);candidate.click();
     for(let i=0;i<80&&!editor.hidden;i++)await new Promise(resolve=>setTimeout(resolve,10));
     assert.equal(editor.hidden,true,"DSH panel switch parks the existing editor DOM instead of cloning a second editor");
-    const settings=[...w.document.querySelectorAll("button")].find(button=>/设置|Settings/.test(button.textContent));
-    assert.ok(settings,"The upstream settings-general shell must be included");
+    const settings=[...w.document.querySelectorAll("button")].find(button=>/设置|Settings/.test(`${button.textContent} ${button.getAttribute("aria-label")||""}`));
+    assert.ok(settings,`The upstream settings-general shell must be included: ${[...w.document.querySelectorAll("button")].map(button=>JSON.stringify({text:button.textContent,aria:button.getAttribute("aria-label"),title:button.title})).join("; ")}`);
     settings.click();
-    for(let i=0;i<80&&!w.document.body.textContent.includes("DeepSeek 密钥");i++)await new Promise(resolve=>setTimeout(resolve,10));
-    const account=[...w.document.querySelectorAll("button")].find(button=>button.textContent.includes("DeepSeek 密钥"));
-    assert.ok(account,"App Windows credentials must be reachable through the upstream settings section");account.click();
-    for(let i=0;i<80&&!w.document.querySelector('[aria-label="DeepSeek API Key"]');i++)await new Promise(resolve=>setTimeout(resolve,10));
-    assert.ok(w.document.querySelector('[aria-label="DeepSeek API Key"]'));
+    for(let i=0;i<80&&!w.document.body.textContent.includes("连接与凭据说明");i++)await new Promise(resolve=>setTimeout(resolve,10));
+    const account=[...w.document.querySelectorAll("button")].find(button=>button.textContent.includes("连接与凭据说明"));
+    assert.ok(account,"Protected Windows credentials guidance must be reachable through upstream settings");account.click();
+    for(let i=0;i<80&&!w.document.querySelector('[aria-label="连接与凭据说明"]');i++)await new Promise(resolve=>setTimeout(resolve,10));
+    assert.ok(w.document.querySelector('[aria-label="连接与凭据说明"]'));
+    assert.equal(w.document.querySelector('[aria-label="DeepSeek API Key"]'),null,"Provider-owned settings replace the old duplicate DeepSeek-only credential form");
     assert.equal(w.process,undefined);assert.equal(w.require,undefined);assert.equal(resources.size,0);
     assert.equal(errors.filter(error=>/Uncaught|node:module is not/.test(error.message)).length,0,errors.map(error=>error.message).join("\n"));
   }finally{await w.GenshinDshClient?.dispose();w.close();await ctx.fiber.dispose();}

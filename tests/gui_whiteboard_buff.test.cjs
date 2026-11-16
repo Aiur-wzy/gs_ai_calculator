@@ -17,43 +17,44 @@ function setup(events){const root=new Element(),body=new Element('body');root.id
   vm.createContext(w);for(const file of ['ui.js','timeline-data.js','whiteboard.js'])GUI_TEST_RUNTIME.loadWebFile(w, path.join(web,file), {filename:file});
   const team=[{id:'support',name:'辅助'},{id:'a',name:'队友甲'},{id:'b',name:'队友乙'}].map(c=>({...c,level:90,constellation:0,weapon:null,artifact_sets:[],panel:{atk:2000,dmg_bonus:{}}}));
   const WB=w.WB;WB.replace({board:{kind:'genshin-whiteboard',revision:0,title:'持续增益展示',version_line:'release',duration:20,team,actions:[],notes:''}});
-  WB.state.result={plan:{},result:{summary:{total_damage:10,dps:.5}}};WB.state.resultProjection={views:{effects:{events},damage:{events:[]}}};WB.state.mode='effects';WB.render();
+  WB.state.result={plan:{},result:{summary:{total_damage:10,dps:.5}}};WB.state.resultProjectionOwner=WB.state.result;WB.state.resultProjection={views:{effects:{events},damage:{events:[]}}};WB.state.mode='effects';WB.render();
   return{WB,w,root,click:label=>{const button=all(root).find(n=>n.tagName==='button'&&n.textContent===label);assert.ok(button,label);button.emit('click');}};
 }
 function coverage(recipient='a',start=2,end=10,overrides={}){return{id:`coverage-${recipient}-${start}-${end}`,kind:'coverage',character:recipient,sourceKey:'support-rule',sourceLabel:'辅助 · 天赋增益',label:'天赋增益 · 规则有效',start,end,detail:{owner:'support',instance_id:'one',remaining_quota:null},...overrides};}
 const point={id:'activation',kind:'activation',character:'support',sourceKey:'support-rule',sourceLabel:'辅助 · 天赋增益',label:'天赋增益 · 激活',start:2,detail:{}};
 
-test('whiteboard separates interval and point lanes, deduplicating equal recipient windows',()=>{
+test('whiteboard shares display rows while retaining equal recipient records',()=>{
   const events=[coverage(),coverage('b'),point],original=clone(events),e=setup(events),projection=e.WB.project();
-  assert.equal(projection.events.length,2);assert.equal(projection.lanes.length,2);
+  assert.equal(projection.events.length,3);assert.equal(projection.lanes.length,2);
   assert.deepEqual(clone(projection.lanes.map(l=>l.kind)),['coverage','points']);
-  const bar=projection.events.find(x=>x.kind==='coverage');assert.equal(bar.character,'support');assert.deepEqual(Array.from(bar.characters),['a','b']);
+  const bar=projection.events.find(x=>x.kind==='coverage');assert.deepEqual(Array.from(projection.lanes[0].events,e=>e.character),['a','b']);
   assert.notEqual(bar.lane,projection.events.find(x=>x.kind==='activation').lane);assert.deepEqual(events,original);
 });
 
 test('filtering continuous buffs and triggers only changes view and keeps return package read-only',()=>{
   const e=setup([coverage(),coverage('b'),point]),before=e.WB.json(),result=JSON.stringify(e.WB.state.result);
-  e.click('持续 Buff');assert.ok(e.WB.project().events.every(x=>x.kind==='coverage'));assert.equal(e.WB.project().events.length,1);
+  e.click('持续 Buff');assert.ok(e.WB.project().events.every(x=>x.kind==='coverage'));assert.equal(e.WB.project().events.length,2);
   assert.doesNotMatch(e.root.textContent,/添加动作时点|释放时点 \/ 秒|删除动作/);
   const g=all(e.WB.state.svg).find(n=>n.attributes.class==='wb-derived wb-coverage');assert.ok(g);
-  g.emit('click');assert.match(e.root.textContent,/接收角色：队友甲、队友乙/);assert.match(e.root.textContent,/区间长度：8 秒/);assert.match(e.root.textContent,/来源：辅助 · 天赋增益/);
-  assert.match(g.attributes['aria-label'],/2 → 10 秒/);assert.match(g.attributes['aria-label'],/队友甲、队友乙/);
+  g.emit('click');assert.equal(e.WB.state.selectedDerived.events.length,2);
+  all(e.root).find(n=>n.className==='wb-detail-choice').emit('click');assert.match(e.root.textContent,/接收角色：队友甲/);assert.match(e.root.textContent,/区间长度：8 秒/);assert.match(e.root.textContent,/来源：辅助 · 天赋增益/);
+  assert.match(g.attributes['aria-label'],/2 → 10 秒/);
   e.WB.beginPointer({button:0},'coverage-a-2-10');assert.equal(e.WB.state.pointer,undefined);
   e.click('命中与触发');assert.deepEqual(clone(e.WB.project().events.map(x=>x.id)),['activation']);assert.equal(e.WB.state.selectedDerived,null);
-  e.click('全部效果');assert.equal(e.WB.project().events.length,2);assert.equal(e.WB.json(),before);assert.equal(e.WB.dirty(),false);assert.equal(JSON.stringify(e.WB.state.result),result);
+  e.click('全部效果');assert.equal(e.WB.project().events.length,3);assert.equal(e.WB.json(),before);assert.equal(e.WB.dirty(),false);assert.equal(JSON.stringify(e.WB.state.result),result);
 });
 
-test('overlapping distinct windows are stacked and separated gaps remain separate bars',()=>{
+test('overlapping windows share a row with exact pieces and retained gap',()=>{
   const e=setup([coverage('a',2,10),coverage('b',3,9),coverage('a',12,16)]),p=e.WB.project();
-  assert.equal(p.events.length,3);assert.equal(p.lanes.length,2);
-  assert.notEqual(p.events[0].lane,p.events[1].lane);assert.equal(p.events[0].lane,p.events[2].lane);
+  assert.equal(p.events.length,3);assert.equal(p.lanes.length,1);
+  assert.equal(p.events[0].lane,p.events[1].lane);assert.equal(p.events[0].lane,p.events[2].lane);
   assert.deepEqual(clone(p.events.map(x=>[x.start,x.end])),[[2,10],[3,9],[12,16]]);
-  assert.equal(all(e.WB.state.svg).filter(n=>n.attributes.class==='wb-derived wb-coverage').length,3);
+  assert.equal(all(e.WB.state.svg).filter(n=>n.attributes.class==='wb-derived wb-coverage').length,4);
 });
 
 test('quota states at identical time remain separately selectable',()=>{
   const e=setup([coverage('a',2,10,{detail:{owner:'support',instance_id:'one',remaining_quota:2}}),coverage('b',2,10,{detail:{owner:'support',instance_id:'one',remaining_quota:5}})]),p=e.WB.project();
-  assert.equal(p.events.length,2);assert.notEqual(p.events[0].lane,p.events[1].lane);
+  assert.equal(p.events.length,2);assert.equal(p.events[0].lane,p.events[1].lane);
   assert.deepEqual(clone(p.events.map(x=>x.detail.remaining_quota)),[2,5]);
 });
 
@@ -83,7 +84,7 @@ test('derived left press keeps the node for native click; middle press can bubbl
 
 test('dense nearby effect points remain individually accessible through bounded detail pages',()=>{
   const events=Array.from({length:91},(_,i)=>({...point,id:`near-${i}`,label:`触发 ${i}`,start:2+i*.0001})),e=setup(events),before=e.WB.json();
-  const markers=all(e.WB.state.svg).filter(n=>n.attributes.class==='wb-derived');assert.equal(markers.length,1);assert.match(markers[0].attributes['aria-label'],/91 条相邻记录/);
+  const markers=all(e.WB.state.svg).filter(n=>n.attributes.class==='wb-derived');assert.equal(markers.length,1);assert.match(markers[0].attributes['aria-label'],/91 条记录/);
   markers[0].emit('click');assert.equal(e.WB.state.selectedDerived.events.length,91);
   assert.equal(all(e.root).filter(n=>n.className==='wb-detail-choice').length,40);e.click('下一页');assert.equal(all(e.root).filter(n=>n.className==='wb-detail-choice').length,40);
   const selected=all(e.root).find(n=>n.className==='wb-detail-choice');selected.emit('click');assert.equal(e.WB.state.selectedDerived.id,'near-40');e.click('← 返回相邻记录');assert.equal(e.WB.state.selectedDerived.events.length,91);

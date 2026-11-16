@@ -155,6 +155,8 @@ export class NativeDshMuxGateway {
   #handler
   #wireStream
   #peer
+  #peers = new Map()
+  #fetchPeers = new Map()
   #send
   #streams = new Map()
   #fetches = new Map()
@@ -211,6 +213,39 @@ export class NativeDshMuxGateway {
     return task
   }
 
+  addPeer(id, peer) {
+    if (this.#closed || !this.#accepting) fail('dsh_mux_runtime_draining')
+    if (typeof id !== 'string' || !/^[A-Za-z0-9_-]{1,128}$/u.test(id)
+        || this.#peers.has(id) || typeof peer?.dispose !== 'function') fail('dsh_mux_peer_invalid')
+    this.#peers.set(id, peer)
+  }
+
+  async removePeer(id) {
+    const peer = this.#peers.get(id)
+    if (peer === undefined) return false
+    this.#peers.delete(id)
+    for (const [request, owner] of this.#fetchPeers) {
+      if (owner === id) this.#fetches.get(request)?.abort()
+    }
+    for (const [identity, state] of this.#streams) {
+      if (state.peerId !== id) continue
+      this.#cancelledStreams.add(identity)
+      state.control.abort()
+      state.uplink.abort()
+      this.#streams.delete(identity)
+      void state.ready.then(iterator => iterator.return?.()).catch(() => {})
+    }
+    await peer.dispose()
+    return true
+  }
+
+  #selectPeer(value) {
+    if (!Object.hasOwn(value, 'peer_id')) return this.#peer
+    const peer = this.#peers.get(value.peer_id)
+    if (peer === undefined) fail('dsh_mux_peer_closed')
+    return peer
+  }
+
   async #respond(header, kind, response, signal) {
     const logical = await this.#logicalReady
     if (logical === null) return this.#emit(header, kind, await responsePayload(response, signal))
@@ -230,7 +265,11 @@ export class NativeDshMuxGateway {
         code: 'dsh_mux_request_cancelled', message: 'Request cancelled before dispatch', details: {},
       }))
     }
-    exact(metadata, ['method', 'path', 'headers'])
+    exact(metadata, ['method', 'path', 'headers', ...(Object.hasOwn(metadata, 'peer_id') ? ['peer_id'] : [])])
+    let peer
+    try { peer = this.#selectPeer(metadata) } catch (error) {
+      return this.#task(() => this.#emit(header, 'dsh_fetch_error', this.#wireStream.failure(error)))
+    }
     const { method, path, headers } = metadata
     if (typeof method !== 'string' || !/^[A-Z]+$/u.test(method)
         || typeof path !== 'string' || !/^\/api(?:\/|\?|$)/u.test(path)
@@ -246,13 +285,14 @@ export class NativeDshMuxGateway {
         ? { body: logicalRequestBody(body), duplex: 'half' } : { body }) })
     this.#usedFetches.add(id)
     this.#fetches.set(id, control)
+    this.#fetchPeers.set(id, metadata.peer_id)
     return this.#task(async () => {
       try {
-        const response = await this.#handler.fetch(request, this.#peer)
+        const response = await this.#handler.fetch(request, peer)
         await this.#respond(header, 'dsh_fetch_result', response, control.signal)
       } catch (error) {
         await this.#emit(header, 'dsh_fetch_error', this.#wireStream.failure(error))
-      } finally { this.#fetches.delete(id) }
+      } finally { this.#fetches.delete(id); this.#fetchPeers.delete(id) }
     })
   }
 
@@ -413,19 +453,20 @@ export class NativeDshMuxGateway {
         return
       }
       const value = json(payload)
-      exact(value, ['endpoint', 'payload', 'has_uplink'])
+      exact(value, ['endpoint', 'payload', 'has_uplink', ...(Object.hasOwn(value, 'peer_id') ? ['peer_id'] : [])])
       if (typeof value.endpoint !== 'string' || value.endpoint.length === 0
           || typeof value.has_uplink !== 'boolean') fail('dsh_mux_stream_open_invalid')
       if (this.#usedStreams.has(id)) fail('dsh_mux_stream_replayed')
       this.#usedStreams.add(id)
       const state = {
+        peerId: value.peer_id,
         control: new AbortController(), uplink: new Uplink(), outSequence: 0,
         pullBusy: false, pullSending: false, pendingCredit: null, ready: null,
       }
       if (!value.has_uplink) state.uplink.end()
       this.#streams.set(id, state)
       state.ready = Promise.resolve().then(() => this.#wireStream.open(
-        value.endpoint, value.payload, state.uplink, this.#peer, state.control.signal,
+        value.endpoint, value.payload, state.uplink, this.#selectPeer(value), state.control.signal,
       )).then(source => source[Symbol.asyncIterator]())
       // Opening errors belong to DSH's stable wire failure mapper.
       this.#task(async () => {
@@ -511,8 +552,11 @@ export class NativeDshMuxGateway {
       void state.ready.then(iterator => iterator.return?.()).catch(() => {})
     }
     this.#fetches.clear()
+    this.#fetchPeers.clear()
     this.#streams.clear()
     await (await this.#logicalReady)?.close()
     await this.#peer.dispose()
+    await Promise.allSettled([...this.#peers.values()].map(peer => peer.dispose()))
+    this.#peers.clear()
   }
 }

@@ -4,6 +4,7 @@ import {readFile, writeFile} from 'node:fs/promises'
 import {fileURLToPath} from 'node:url'
 import {build} from 'vite'
 import react from '@vitejs/plugin-react'
+import {sourceProvenancePlugin,verifySourceInputs} from './build-source-provenance.mjs'
 
 const frontend = fileURLToPath(new URL('..', import.meta.url))
 const packageDir = fileURLToPath(new URL('../packages/dsh-client-domain', import.meta.url))
@@ -22,7 +23,7 @@ if (id !== '@genshin-calc/dsh-client-domain') throw new Error('dsh_domain_packag
 const artifacts = await build({
   configFile: false,
   root: frontend,
-  plugins: [react()],
+  plugins: [react(),sourceProvenancePlugin(frontend,'domain')],
   build: {
     write: true,
     outDir: `${packageDir}/lib`,
@@ -51,6 +52,7 @@ const entry = chunks[0]
 if (entry.imports.some(name => !externals.includes(name))) throw new Error('dsh_domain_unreviewed_external')
 if (entry.moduleIds.some(name => name.includes('node_modules'))) throw new Error('dsh_domain_inlined_dependency')
 const bytes = Buffer.from(entry.code)
+await verifySourceInputs(frontend,'domain',bytes)
 await writeFile(`${packageDir}/lib/build-manifest.json`, `${JSON.stringify({
   contract: 'genshin-dsh-domain-client-build-v1',
   package: id,

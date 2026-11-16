@@ -177,3 +177,25 @@ def test_unused_account_summary_creates_no_directory_or_lock(tmp_path):
     store = ledger(tmp_path / "untouched")
     assert store.summary("one")["provider_requests"] == 0
     assert not store.data_dir.exists()
+
+
+@pytest.mark.parametrize("provider,model", [("openai", "gpt-qualification"),
+    ("anthropic", "claude-qualification"), ("google", "gemini-qualification"),
+    ("openrouter", "anthropic/claude-qualification:thinking"),
+    ("custom-compatible", "vendor/team/model-2026")])
+def test_upstream_provider_routes_share_accounting_without_vendor_allowlist(tmp_path, provider, model):
+    store = ledger(tmp_path, provider_steps=2)
+    req = request(provider=provider, model=model)
+    assert store.acquire(req)["allowed"]
+    assert settle(store, req)["status"] == "settled"
+    assert store._read()["leases"][req["lease_id"]]["request"]["model"] == model
+    compact = request(provider=provider, model=model, purpose="compaction")
+    assert store.acquire(compact)["allowed"]
+    assert not store.acquire(request())["allowed"]
+
+
+@pytest.mark.parametrize("field,value", [("provider", ""), ("model", "bad\nname"),
+    ("provider", "a" * 1025), ("model", " alias ")])
+def test_route_labels_remain_bounded_and_cannot_inject_control_characters(tmp_path, field, value):
+    with pytest.raises(NativeDshMuxError, match="route_label_invalid"):
+        ledger(tmp_path).acquire(request(**{field: value}))

@@ -17,6 +17,7 @@ const OFFICIAL_ROOT = 'https://api.deepseek.com/anthropic'
 const originalFetch = globalThis.fetch
 let ctx
 let calls = 0
+let modelListingCalls = 0
 let requestFacts
 
 function assert(condition, code) {
@@ -40,6 +41,11 @@ function sse(events) {
 
 try {
   globalThis.fetch = async (url, init) => {
+    if (url === 'https://api.deepseek.com/models') {
+      modelListingCalls++
+      return Response.json({ data: [{ id: 'deepseek-flash', input_modalities: ['text'],
+        output_modalities: ['text'], api_capabilities: { anthropic_messages: {} } }] })
+    }
     calls += 1
     assert(url === `${OFFICIAL_ROOT}/v1/messages`, 'official_endpoint_changed')
     assert(init?.method === 'POST' && init?.redirect === 'error', 'request_policy_changed')
@@ -108,6 +114,7 @@ try {
   })) chunks.push(chunk)
 
   assert(calls === 1, 'unexpected_provider_request_count')
+  assert(modelListingCalls === 1, 'official_model_listing_count_changed')
   assert(requestFacts?.model === 'deepseek-flash', 'model_not_forwarded')
   assert(requestFacts?.system === 'offline system', 'system_not_forwarded')
   assert(requestFacts?.effort === 'high', 'reasoning_effort_not_forwarded')
@@ -127,6 +134,7 @@ try {
     contract: 'genshin-native-official-deepseek-adapter-offline-v1',
     status: 'passed',
     providerRequests: calls,
+    modelListingCalls,
     requestFacts,
     chunkTypes: chunks.map(chunk => chunk.type),
     officialAdapterOwnsSse: true,

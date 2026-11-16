@@ -1,9 +1,14 @@
 import {type TimelineDomPorts,createTimelineDom} from "./dom";
 import {isCoverageKind} from "./shared";
+import {itemSelection,type DisplayRow} from "./display-rows";
+import {timelineLabelWidth} from "./geometry";
+import {createRowDisclosure,restoreRowDisclosureFocus,updateDisclosureButton} from "./row-disclosure";
+import {compactLaneName} from "./display-names";
+import {markerInk} from "./axis-contrast";
 export function createTimelineSvg(ports:TimelineDomPorts){
   const TV=ports.view,RT=ports.editor,$=ports.query,TD=ports.projection,services=ports.services;
   const {VIEW_ROW_H,ACTION_ROW_H,viewThemeColor,viewKind,viewName,viewStatus,viewSeconds,viewTime}=createTimelineDom(ports);
-  const LABEL_W=210,RULER_H=44;
+  const LABEL_W=0,RULER_H=44;
   const svgEl=(tag:string,attrs:Record<string,any>={}):any=>{const node=ports.document.createElementNS("http://www.w3.org/2000/svg",tag);for(const [key,value] of Object.entries(attrs))node.setAttribute(key,String(value));return node;};
 const color = (character:any) => {
   const index=(TV.projection.characters||[]).findIndex((c:any)=>c.id===character);
@@ -21,10 +26,30 @@ const updateDetailSelection = () => {
   }
 };
 
+const toggleRow = (row: DisplayRow) => {
+  TV.expandedRows ||= new Set();
+  const expanded = !TV.expandedRows.has(row.key);
+  if(expanded)TV.expandedRows.add(row.key);else TV.expandedRows.delete(row.key);
+  TV.rebuildRows();TV.paintProjection();
+  const button=$("#timeline-detail")?.querySelector?.("[data-inspector-row-toggle]");
+  if(button?.getAttribute("data-inspector-row-toggle")===row.key)updateDisclosureButton(button,row,expanded);
+};
+
 const paintProjection = () => {
   if(!TV.projection)return;
   TV.paintQueued=false;
   const template=RT.tpl(), svg=$("#timeline"), wrap=$("#timeline-wrap");
+  const focused=ports.document.activeElement;
+  const focusScope=focused?.hasAttribute("data-axis-row-key")
+    ? TV.labelSvg?.contains(focused)?"label":svg.contains?.(focused)?"plot":null : null;
+  const labelWidth=timelineLabelWidth(TV.labelsCollapsed);
+  if(wrap.parentElement&&!wrap.parentElement.classList.contains("tl-axis-shell")){
+    const shell=ports.document.createElement("div"),pane=ports.document.createElement("div");shell.className="tl-axis-shell";pane.className="tl-label-pane";
+    pane.style.width=`${labelWidth}px`;const labelSvg=svgEl("svg");pane.append(labelSvg);
+    wrap.parentElement.insertBefore(shell,wrap);shell.append(pane,wrap);TV.labelSvg=labelSvg;
+  }
+  if(TV.labelSvg?.parentElement)TV.labelSvg.parentElement.style.width=`${labelWidth}px`;
+  TV.labelWidth=0;
   TV.markers=[];
   // Read the container before replacing content; CSS reserves scrollbar space.
   const width=TV.prepare(template, Math.max(0.001,TV.projection.duration || 10));
@@ -41,7 +66,7 @@ const paintProjection = () => {
   const X=(sec:any)=>LABEL_W+sec*TV.pixelsPerSecond;
   const first=Math.max(0,Math.floor((top-RULER_H)/rowHeight)-2);
   const last=Math.min(TV.rows.length,Math.ceil((top+viewportHeight-RULER_H)/rowHeight)+2);
-  labels.appendChild(svgEl("rect",{x:0,y:top,width:LABEL_W-8,height:viewportHeight,class:"tl-overlay-bg"}));
+  if(TV.labelSvg){TV.labelSvg.setAttribute("width",labelWidth);TV.labelSvg.setAttribute("height",viewportHeight);}
   ruler.appendChild(svgEl("rect",{x:left,y:0,width:viewportWidth,height:RULER_H,class:"tl-overlay-bg"}));
   const step=TV.tickStep(TV.pixelsPerSecond);
   for(let s=Math.max(0,Math.ceil(startTime/step)*step);s<=Math.min(TV.duration,endTime);s+=step){
@@ -55,18 +80,28 @@ const paintProjection = () => {
     const owner=TV.characterNames.get(row.character), name=(owner && !row.sourceLabel.startsWith(owner)?`${owner} · `:"")
       +row.sourceLabel+` · ${viewKind(row.kind).label}`;
     const actionLane=TV.mode==="actions";
-    const sourceName=owner && row.sourceLabel.startsWith(`${owner} · `)?row.sourceLabel.slice(owner.length+3):row.sourceLabel;
-    const primary=actionLane?(owner||"全队"):sourceName;
-    const secondary=actionLane?"技能释放 · 切换角色":`${owner||"全队"} · ${row.stateStatus?TD.stateName(row.stateStatus):viewKind(row.kind).label}`;
-    labels.appendChild(svgEl("circle",{cx:10,cy:y+20,r:4,fill:TV.color(row.character),class:"tl-character-color"}));
-    const text=svgEl("text",{x:20,y:y+18,class:"tl-lane-label"});text.textContent=primary.length>14?`${primary.slice(0,13)}…`:primary;
+    const primary=actionLane?(owner||"全队"):(row.shortLabel||row.sourceLabel);
+    const qualifier=row.directory?`${row.sourceCount} 个来源`:row.sourceNumber?`来源 ${row.sourceNumber}${row.instanceNumber?` / ${row.instanceNumber}`:""}`:
+      row.instanceNumber?`实例 ${row.instanceNumber}`:row.stateStatus?TD.stateName(row.stateStatus):viewKind(row.kind).label;
+    const secondary=actionLane?"技能释放 · 切换角色":`${owner||"全队"} · ${qualifier}`;
+    if(row.expandable)labels.appendChild(createRowDisclosure(ports.document,row,
+      {x:0,y:y+3,width:18,height:34,className:"tl-row-disclosure"},()=>TV.toggleRow(row)));
+    else labels.appendChild(svgEl("circle",{cx:10,cy:y+20,r:4,fill:TV.color(row.character),class:"tl-character-color"}));
+    const text=svgEl("text",{x:TV.labelsCollapsed?(row.expandable?18:5):20,y:y+18,class:"tl-lane-label",role:"button",tabindex:0,"aria-label":name});text.textContent=TV.labelsCollapsed?String(index+1):compactLaneName(primary,actionLane?undefined:owner);
     const title=svgEl("title");title.textContent=actionLane?secondary+` · ${primary}`:name;text.appendChild(title);labels.appendChild(text);
-    const sub=svgEl("text",{x:20,y:y+34,class:"tl-lane-subtitle"});sub.textContent=secondary;labels.appendChild(sub);
+    if(!TV.labelsCollapsed){const sub=svgEl("text",{x:20,y:y+34,class:"tl-lane-subtitle"});sub.textContent=secondary;labels.appendChild(sub);}
+    const openRow=()=>TV.showDetail({id:row.id,events:row.directoryMembers||row.events,label:row.sourceLabel,displayRow:row});text.addEventListener("click",openRow);
+    text.addEventListener("keydown",(e:any)=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();openRow();}});
     nodes.push(svgEl("line",{x1:left+LABEL_W-4,y1:y,x2:left+viewportWidth,y2:y,class:"tl-lane-line"}));
+    if(row.directory){
+      const caption=`${row.sourceCount} 个独立来源 · ${row.expanded?"收起":"展开查看各自区间"}`;
+      nodes.push(createRowDisclosure(ports.document,row,{x:left+9,y:y+7,width:Math.min(viewportWidth-12,caption.length*13+20),
+        height:34,className:"tl-source-directory",caption},()=>TV.toggleRow(row)));continue;
+    }
     const items=TV.visibleItems(row,startTime,endTime);
     for(let i=0;i<items.length;i++){
       const item=items[i], event=item.events[0], count=item.events.length;
-      const kind=viewKind(event.kind), color=event.detail?.state_status==="exhausted"?viewThemeColor("color-axis-exhausted","#89919c"):TV.mode==="actions" && event.kind==="action"?TV.color(event.character):kind.color, group=svgEl("g",{class:`tl-view-event tl-${event.kind}`,
+      const kind=viewKind(event.kind), color=(item.state?.status??event.detail?.state_status)==="exhausted"?viewThemeColor("color-axis-exhausted","#89919c"):TV.mode==="actions" && event.kind==="action"?TV.color(event.character):kind.color, group=svgEl("g",{class:`tl-view-event tl-${event.kind}`,
         "data-event-id":event.id,"data-event-count":count,role:"button",tabindex:0});
       const sec=item.interval?item.start:(item.start+(item.last??item.start))/2;
       const x=X(sec), cy=y+22;
@@ -80,8 +115,11 @@ const paintProjection = () => {
       const statuses:string[]=[...new Set<string>(item.events.map((e:any)=>e.detail?.execution_status).filter(Boolean))];
       const failed=statuses.some(s=>["failed","invalid","cancelled"].includes(s));
       if(failed){shape.setAttribute("stroke",viewThemeColor("color-danger","#ff7070"));shape.setAttribute("stroke-width",2);}
-      if(statuses.some(s=>!["passed","calculated","executed"].includes(s))){shape.setAttribute("stroke-dasharray","3 2");shape.setAttribute("opacity",0.7);}
+      const faded=statuses.some(s=>!["passed","calculated","executed"].includes(s));
+      if(faded){shape.setAttribute("stroke-dasharray","3 2");shape.setAttribute("opacity",0.7);}
+      const ink=markerInk(color,faded?0.7:1,viewThemeColor("color-axis-lane-even","#19212c"));
       group.appendChild(shape);
+      if(item.state?.status==="mixed"){shape.setAttribute("stroke-dasharray","4 2");shape.setAttribute("stroke",viewThemeColor("color-axis-exhausted","#89919c"));}
       const nextX=i+1<items.length?X(items[i+1].start):left+viewportWidth;
       const available=item.interval?(item.end-item.start)*TV.pixelsPerSecond:nextX-x-14;
       let label=count>1?`×${count}`:viewName(event.label);
@@ -89,7 +127,7 @@ const paintProjection = () => {
       const damageValue=TV.mode==="damage" && item.events.every((e:any)=>["damage","external_damage"].includes(e.kind)&&Number.isFinite(e.value))
         ?Math.round(item.events.reduce((sum:any,e:any)=>sum+e.value,0)).toLocaleString("zh-CN"):null;
       if(count>1 && !item.interval){const text=svgEl("text",{x,y:cy+3,class:"tl-view-count","text-anchor":"middle"});
-        text.textContent=count>99?"99+":String(count);group.appendChild(text);
+        text.style.fill=ink;text.textContent=count>99?"99+":String(count);group.appendChild(text);
         if(damageValue!==null && available>=(damageValue.length+2)*7){
           const total=svgEl("text",{x:x+12,y:cy+4,class:"tl-view-label"});total.textContent=`Σ ${damageValue}`;group.appendChild(total);
         }
@@ -105,24 +143,26 @@ const paintProjection = () => {
           }
         }else if(item.interval && isCoverageKind(event.kind) && available>=64){
           // The lane already names this effect; the bar communicates duration.
-          const range=`${event.detail?.state_status==="exhausted"?"耗尽 ":""}${viewSeconds(item.start)}–${viewSeconds(item.end)}秒${count>1?` ×${count}`:""}`;
+          const state=item.state||event.detail||{};
+          const range=`${(state.status??state.state_status)==="exhausted"?"耗尽 ":""}${state.layers!=null?`${state.layers}层 `:""}${viewSeconds(item.start)}–${viewSeconds(item.end)}秒${count>1?` ×${count}`:""}`;
           if(range.length<=capacity)visibleLabel=range;
           else if(count>1)visibleLabel=`×${count}`;
         }
         if(visibleLabel){const text=svgEl("text",{x:item.interval?X(item.start)+5:x+10,y:cy+4,class:"tl-view-label"});
+          if(item.interval)text.style.fill=ink;
           text.textContent=visibleLabel;group.appendChild(text);}
       }
-      const title=svgEl("title");title.textContent=count>1?`${TV.mode==="actions"?owner||"动作":row.sourceLabel} · ${count}条记录，点击逐条查看`
+      const title=svgEl("title");title.textContent=count>1?`${TV.mode==="actions"?owner||"动作":row.sourceLabel} · ${count}条记录${item.state?.status==="mixed"?"，状态不同":""}，点击逐条查看`
         :`${viewName(event.label)} · ${event.start}秒${item.interval?`～${event.end}秒`:""}`;group.appendChild(title);
       if(count===1 && TV.mode==="effects" && services.effects){
-        const description=services.effects.describe(event,{characterName:(id:any)=>TV.characterNames?.get(id)||"未指定角色"});
+        const description=services.effects.describe(itemSelection(item),{characterName:(id:any)=>TV.characterNames?.get(id)||"未指定角色"});
         title.textContent=[description.title,description.source,description.duration,...description.values].filter(Boolean).join("\n");
       }
       if(damageValue!==null)title.textContent+=` · ${count>1?"本组期望伤害合计":"期望伤害"}：${damageValue}`;
       if(statuses.length)title.textContent+=` · ${statuses.map(viewStatus).join("、")}`;
       group.setAttribute("aria-label",title.textContent);
       TV.markers.push({node:group,events:item.events});
-      const selected=count>1?item:event;
+      const selected=itemSelection(item,row);
       group.addEventListener("click",()=>TV.showDetail(selected));
       group.addEventListener("keydown",(e:any)=>{if(e.key==="Enter" || e.key===" "){e.preventDefault();TV.showDetail(selected);}});
       if(count===1 && event.edit && ["hit","buff"].includes(event.edit.kind))TV.bindEditable(group,event);
@@ -143,12 +183,14 @@ const paintProjection = () => {
   }
   if(!TV.rows.length){const hint=svgEl("text",{x:LABEL_W+12,y:70,class:"tl-hint"});
     hint.textContent=template?"当前视图与筛选没有记录":"加载或新建模板开始排轴";nodes.push(hint);}
-  const corner=svgEl("g",{class:"tl-corner-overlay"});corner.appendChild(svgEl("rect",{x:0,y:0,width:LABEL_W-8,height:RULER_H,class:"tl-overlay-bg"}));
-  const title=svgEl("text",{x:6,y:23,class:"tl-lane-label"});title.textContent=TV.mode==="actions"?"出场角色":"效果来源 / 角色";corner.appendChild(title);
+  const corner=svgEl("g",{class:"tl-corner-overlay"});corner.appendChild(svgEl("rect",{x:0,y:0,width:labelWidth,height:RULER_H,class:"tl-overlay-bg"}));
+  const title=svgEl("text",{x:6,y:23,class:"tl-lane-label"});title.textContent=TV.labelsCollapsed?"行":TV.mode==="actions"?"出场角色":"效果来源 / 角色";corner.appendChild(title);
   // Build off-DOM and swap once, instead of exposing an empty auto-sized SVG.
-  if(svg.replaceChildren)svg.replaceChildren(...nodes,labels,ruler,corner);
-  else {svg.innerHTML="";svg.append(...nodes,labels,ruler,corner);}
-  TV.labels=labels;TV.ruler=ruler;TV.corner=corner;TV.updateOverlays();
+  if(svg.replaceChildren)svg.replaceChildren(...nodes,ruler);
+  else {svg.innerHTML="";svg.append(...nodes,ruler);}
+  if(TV.labelSvg){labels.setAttribute("transform",`translate(0,${-top})`);TV.labelSvg.replaceChildren(labels,corner);}
+  if(focusScope)restoreRowDisclosureFocus(focusScope==="label"?TV.labelSvg:svg,focused);
+  TV.labels=null;TV.ruler=ruler;TV.corner=null;TV.updateOverlays();
   TV.updateDetailSelection();
   const stats=$("#timeline-stats");if(stats){stats.textContent=`${TV.filteredCount} 条记录 · ${TV.rows.length} 条泳道 · ${viewSeconds(TV.projection.duration||10)}秒`;
     stats.title=`聚合后 ${TV.markerCount} 个标记；当前视口绘制 ${drawn} 个。缩放或筛选不改变计算结果。`;}
@@ -167,5 +209,5 @@ const bindEditable = (group:any,event:any) => {
 };
 
 
-  return {color,updateDetailSelection,paintProjection,bindEditable};
+  return {color,updateDetailSelection,paintProjection,bindEditable,toggleRow};
 }

@@ -1,0 +1,17 @@
+{
+  "contract": "genshin-gui-api-additive-contract-v1",
+  "baseline_contract": "genshin-gui-api-public-signatures-v1",
+  "baseline_semantic_sha256": "02f229dea0b9e21d08a473c73f97a14ca097dd24f2a65628a5f1815e11772ba0",
+  "source": "R21 reviewed same-Host native window presentation, exact command acknowledgement and recoverable draft return",
+  "added_methods": {
+    "dsh_window_state": {"arguments": "self", "returns": null},
+    "dsh_window_open": {"arguments": "self, request", "returns": null},
+    "dsh_window_poll": {"arguments": "self", "returns": null},
+    "dsh_window_acknowledge": {"arguments": "self, request", "returns": null},
+    "dsh_window_recover": {"arguments": "self", "returns": null},
+    "dsh_window_main_ready": {"arguments": "self, request", "returns": null},
+    "dsh_window_cancel_return": {"arguments": "self, request", "returns": null},
+    "dsh_window_select": {"arguments": "self, request", "returns": null}
+  },
+  "extended_methods": {}
+}

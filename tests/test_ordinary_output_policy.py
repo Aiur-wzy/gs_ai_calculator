@@ -225,6 +225,8 @@ def test_sealed_package_rejects_new_file_and_resolved_alias(tmp_path, monkeypatc
     exe = package / "GenshinCalc.exe"
     exe.write_bytes(b"exe")
     monkeypatch.setattr(paths, "is_frozen", lambda: True)
+    # This synthetic package exercises output protection after profile resolution.
+    monkeypatch.setattr(paths, "default_data_dir", lambda: tmp_path / "data")
     monkeypatch.setattr(policy.sys, "executable", str(exe))
     monkeypatch.setattr(policy.sys, "_MEIPASS", str(package / "_internal"), raising=False)
     with pytest.raises(PlanError):

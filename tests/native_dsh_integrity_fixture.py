@@ -34,9 +34,9 @@ def build_identity(tmp_path: Path):
     (runtime / "package.json").write_bytes(canonical({"dependencies": {}}))
     (runtime / "node_modules").mkdir()
     (runtime / "node_modules/.modules.yaml").write_bytes(canonical({"nodeLinker": "hoisted"}))
-    composition = {"dshRelease": "0.2.1-rc.5", "dshCommit": "fixture-commit",
+    composition = {"dshRelease": "0.2.2-rc.3", "dshCommit": "fixture-commit",
                    "dynamicModules": [], "localModules": {}}
-    accepted = {"dshRelease": "0.2.1-rc.5", "dshCommit": "fixture-commit", "entryOrder": []}
+    accepted = {"dshRelease": "0.2.2-rc.3", "dshCommit": "fixture-commit", "entryOrder": []}
     unsigned = canonical(accepted)
     accepted["semanticSha256"] = sha(unsigned)
     files = {
@@ -59,7 +59,7 @@ def build_identity(tmp_path: Path):
         "contract": "genshin-native-dsh-client-shell-manifest-v1", "phase": "dsh_client_shell",
         "app_version": APP_VERSION, "runtime_generation": "dsh_client_shell",
         "entry": "src/native-dsh-runtime-entry.mjs", "node_version": NATIVE_AGENT_NODE_VERSION,
-        "dsh_release": "0.2.1-rc.5", "runtime_files": closure["files"],
+        "dsh_release": "0.2.2-rc.3", "runtime_files": closure["files"],
         "runtime_closure_hash": closure["runtime_closure_hash"],
         "dependency_lock_hash": closure["dependency_lock_hash"], "node_binary_sha256": sha(node.read_bytes()),
         "dependency_cohort": {}, "dependency_payloads": dependency_payload_inventory(runtime),

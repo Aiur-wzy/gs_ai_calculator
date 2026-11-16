@@ -12,7 +12,7 @@ _RUNTIME = _ROOT / "agent-runtime"
 _PROBE = _RUNTIME / "src" / "dsh-file-upload-qualification-probe.mjs"
 
 
-def test_file_upload_qualification_uses_only_public_rc5_package_roots():
+def test_file_upload_qualification_uses_only_public_rc3_package_roots():
     source = _PROBE.read_text(encoding="utf-8")
     assert "@deepseek-ai/dsh-client-file-upload'" in source
     assert "@deepseek-ai/dsh-client-connection'" in source
@@ -21,7 +21,7 @@ def test_file_upload_qualification_uses_only_public_rc5_package_roots():
     assert "PRODUCTION_OWNER = false" in source
 
     package = json.loads((_RUNTIME / "package.json").read_text(encoding="utf-8"))
-    assert package["dependencies"]["@deepseek-ai/dsh-client-file-upload"] == "0.2.1-rc.5"
+    assert package["dependencies"]["@deepseek-ai/dsh-client-file-upload"] == "0.2.2-rc.3"
     assert package["scripts"]["probe:s0-file-upload"].endswith(
         "src/dsh-file-upload-qualification-probe.mjs"
     )
@@ -58,6 +58,6 @@ def test_pinned_node_runs_public_file_upload_qualification():
     assert receipt["receiptScoped"] is True
     assert receipt["cancellationSettled"] is True
     assert receipt["packages"] == [
-        {"name": "@deepseek-ai/dsh-client-file-upload", "version": "0.2.1-rc.5"},
-        {"name": "@deepseek-ai/dsh-client-connection", "version": "0.2.1-rc.5"},
+        {"name": "@deepseek-ai/dsh-client-file-upload", "version": "0.2.2-rc.3"},
+        {"name": "@deepseek-ai/dsh-client-connection", "version": "0.2.2-rc.3"},
     ]

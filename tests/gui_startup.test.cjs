@@ -31,6 +31,10 @@ class Element {
     node.parentNode = this; this.children.push(node);
   } }
   appendChild(node) { this.append(node); return node; }
+  closest(selector) { for (let node = this; node; node = node.parentNode) {
+    if (selector === '[hidden]' && node.hidden) return node;
+    if (selector.startsWith('#') && node.id === selector.slice(1)) return node;
+  } return null; }
   set innerHTML(value) { this.children = []; this.text = value; }
   set textContent(value) { this.children = []; this.text = String(value); }
   get textContent() { return (this.text || '') + this.children.map(n => n.textContent).join(''); }
@@ -41,7 +45,7 @@ function deferred() { let resolve, reject; const promise = new Promise((done, fa
 const turn = () => new Promise(resolve => setImmediate(resolve));
 
 function setup({startupPath = 'D:\\中文 空格\\方案\'s.json', kind = 'genshin-plan', overrides = {}, dataInit,
-  dshReady = Promise.resolve(), autoShow = true, missingDsh = false} = {}) {
+  dshReady = Promise.resolve(), autoShow = true, missingDsh = false, apiInitiallyReady = true} = {}) {
   const world = new Element(), nodes = new Map(), calls = [];
   const tabs = ['whiteboard', 'rotation', 'result', 'data'].map(name => {
     const tab = new Element('button'); tab.dataset.tab = name;
@@ -51,6 +55,7 @@ function setup({startupPath = 'D:\\中文 空格\\方案\'s.json', kind = 'gensh
   const panels = tabs.map(tab => { const panel = new Element(); panel.id = `tab-${tab.dataset.tab}`;
     nodes.set(`#${panel.id}`, panel); return panel; });
   world.window = world; world.console = console;
+  world.setTimeout = setTimeout; world.clearTimeout = clearTimeout;
   world.Event=Event;world.CustomEvent=CustomEvent;
   const documentEvents = new EventTarget();
   world.document = {body: new Element('body'), createElement: tag => new Element(tag),
@@ -103,11 +108,12 @@ function setup({startupPath = 'D:\\中文 空格\\方案\'s.json', kind = 'gensh
     load_template: selected => ({code: 0, data: {template: clone(template), path: selected}}),
     ...overrides,
   };
-  world.pywebview = {api: new Proxy({}, {get(_target, name) { return async (...args) => {
+  const pywebview = {api: new Proxy({}, {get(_target, name) { return async (...args) => {
     calls.push({name, args});
     if (!handlers[name]) throw new Error(`Unexpected API: ${name}`);
     return handlers[name](...args);
   }; }})};
+  if (apiInitiallyReady) world.pywebview = pywebview;
   vm.createContext(world);
   const web = path.join(__dirname, '../src/genshin_app/gui/web');
   for (const file of ['display', 'rotation', 'ui', 'plans', 'mechanics', 'app'])
@@ -119,9 +125,30 @@ function setup({startupPath = 'D:\\中文 空格\\方案\'s.json', kind = 'gensh
   world.RC = {async init() {}, render() {}};
   world.MC.render = () => {};
   world.DV = {async init() { if (dataInit) await dataInit(); world.setStatus('资料页初始化完成'); }};
+  world.WB = {state: {board: null}, async init() {}, render() {}};
   return {world, nodes, calls, template, plan, editorRoot, parking, editorHost, show,
+    injectApi: () => { world.pywebview = pywebview; },
     start: () => world.emit('pywebviewready')};
 }
+
+test('API injected before app.js starts the editor without needing another readiness event', async () => {
+  const e = setup({startupPath: null});
+  await turn();
+  assert.ok(e.world.GenshinEditorBridge);
+  assert.equal(e.calls.filter(c => c.name === 'get_startup_file').length, 1);
+  await e.start(); await e.start();
+  assert.equal(e.calls.filter(c => c.name === 'editor_initialized').length, 1);
+  assert.equal(e.calls.filter(c => c.name === 'ping').length, 1);
+});
+
+test('API injected after app.js waits for readiness and initializes exactly once', async () => {
+  const e = setup({startupPath: null, apiInitiallyReady: false});
+  await turn(); assert.equal(e.calls.length, 0); assert.equal(e.world.GenshinEditorBridge, undefined);
+  e.injectApi(); await e.start(); await e.start();
+  assert.ok(e.world.GenshinEditorBridge);
+  assert.equal(e.calls.filter(c => c.name === 'editor_initialized').length, 1);
+  assert.equal(e.calls.filter(c => c.name === 'get_startup_file').length, 1);
+});
 
 test('startup waits for RT, PL, mechanics and data initialization; repeated readiness loads only once', async () => {
   const enums = deferred(), plans = deferred(), mechanics = deferred(), data = deferred();
@@ -150,7 +177,7 @@ test('startup waits for RT, PL, mechanics and data initialization; repeated read
   assert.equal(world.PL.state.fileSha, 'loaded-sha');
   assert.equal(nodes.get('[data-tab="rotation"]').classList.contains('active'), true);
   assert.equal(nodes.get('[data-tab="result"]').classList.contains('active'), false);
-  assert.match(nodes.get('#status-bar').textContent, /已加载装备方案/);
+  assert.match(nodes.get('#status-bar').textContent, /已打开所选计算方案/);
   assert.equal(calls.some(c => /calc|^new_/.test(c.name)), false);
 });
 
@@ -195,14 +222,14 @@ test('initialization exceptions are visible and cannot silently skip startup loa
 test('whiteboard startup routes the linked source to the whiteboard without composing it', async () => {
   const {world, calls, start} = setup({kind: 'genshin-whiteboard'});
   const loaded = [];
-  world.WB = {async init() {}, render() {}, async load(path) { loaded.push(path); }};
+  world.WB = {async init() {}, render() {}, async load(path) { loaded.push(path); return true; }};
   await start();
   assert.deepEqual(loaded, ["D:\\中文 空格\\方案's.json"]);
   assert.equal(calls.some(c => /^(load_plan|load_template|run_plan_calc|compose_plan)$/.test(c.name)), false);
 });
 
 for (const kind of ['genshin-plan', null, 'genshin-whiteboard']) {
-  test(`DSH startup ${kind || 'legacy'} waits for shell and matching visible ACK before importing`, async () => {
+  test(`DSH startup ${kind || 'legacy'} waits for shell, imports once and confirms the matching visible page`, async () => {
     const dsh = deferred(), e = setup({kind, dshReady:dsh.promise, autoShow:false}), loadedBoards = [];
     const page = kind === 'genshin-whiteboard' ? 'whiteboard' : 'rotation';
     if (kind === 'genshin-whiteboard') e.world.WB = {async init() {}, render() {}, async load(path) {loadedBoards.push(path); return true;}};
@@ -213,12 +240,12 @@ for (const kind of ['genshin-plan', null, 'genshin-whiteboard']) {
     dsh.resolve(); await turn();
     const navigation = e.calls.filter(call=>call.name==='event:genshin-open-editor');
     assert.deepEqual(clone(navigation.map(call=>call.args[0])),[{page}]);
-    assert.equal(e.calls.some(call=>/^(load_plan|load_template)$/.test(call.name)),false);
-    assert.deepEqual(loadedBoards,[]); assert.equal(e.editorRoot.hidden,true);
+    assert.equal(e.calls.filter(call=>/^(load_plan|load_template)$/.test(call.name)).length,kind==='genshin-whiteboard'?0:1);
+    assert.deepEqual(loadedBoards,kind==='genshin-whiteboard'?["D:\\中文 空格\\方案's.json"]:[]); assert.equal(e.editorRoot.hidden,true);
     // An unrelated mounted page must not acknowledge this requested page.
     e.world.document.dispatchEvent(new CustomEvent('genshin-editor-visible',{detail:{page:'data'}})); await turn();
-    assert.equal(e.calls.some(call=>/^(load_plan|load_template)$/.test(call.name)),false);
-    assert.deepEqual(loadedBoards,[]);
+    assert.equal(e.calls.filter(call=>/^(load_plan|load_template)$/.test(call.name)).length,kind==='genshin-whiteboard'?0:1);
+    assert.deepEqual(loadedBoards,kind==='genshin-whiteboard'?["D:\\中文 空格\\方案's.json"]:[]);
     e.show(page); await startup;
     assert.equal(e.editorRoot.hidden,false); assert.equal(e.editorRoot.parentNode,e.editorHost);
     assert.equal(e.world.WS.tab(),page);
@@ -246,7 +273,7 @@ for (const failure of ['missing-client','boot-rejected']) {
     assert.equal(e.editorRoot.hidden,true);
     assert.equal(e.calls.some(call=>/^(inspect_plan_file|load_plan|load_template|event:genshin-open-editor)$/.test(call.name)),false);
     const shell = e.nodes.get('#dsh-app-root');
-    assert.ok(shell.children.some(node=>node.attributes.get('role')==='alert'&&/启动文件加载失败/.test(node.textContent)));
+    assert.ok(shell.children.some(node=>node.attributes.get('role')==='alert'&&/工作台未能启动，尚未读取方案文件/.test(node.textContent)));
     assert.match(shell.textContent,/中文 空格/);
   });
 }

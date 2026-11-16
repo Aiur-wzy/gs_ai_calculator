@@ -20,7 +20,40 @@ from genshin_app.whiteboard import (
 )
 from genshin_app.whiteboard_reference_gateway import WhiteboardReferenceGateway
 from genshin_app.whiteboard_revision import revision_transition_capabilities
+from tests.test_equipment_plan import database as _equipment_database
 from tests.test_whiteboard import board_fixture, provisional_board_fixture
+
+equipment_database = _equipment_database
+
+
+def test_no_weapon_handoff_binds_character_snapshot_without_changing_user_panel(equipment_database, monkeypatch):
+    from genshin_app.equipment import compose_equipment_plan
+    from genshin_db import queries
+
+    database, current = equipment_database
+    monkeypatch.setattr(queries, "get_character_detail", lambda *_a, **_kw: {
+        "character": {"id": 1, "name": "工程角色", "weapon_type": "WEAPON_SWORD_ONE_HAND"},
+        "skills": [], "talents": [], "extra_info": [], "annotations": []})
+    board = board_fixture()
+    actor = board["team"][0]
+    actor["panel_basis_mode"] = "manual"
+    actor["panel"].update(atk=1000, crit_rate=.5, crit_dmg=1)
+    actor["panel"]["dmg_bonus"]["physical"] = 0
+    before = copy.deepcopy(board)
+    plan = make_handoff(board, database)
+    gear = plan["equipment_inputs"]["actor.a"]
+    assert gear["weapon"] is None and gear["artifact_sets"] == []
+    assert gear["data_version"] == current
+    assert board == before
+    assert plan["manual_template"]["characters"][0]["stats"]["atk"] == 1000
+    report = compose_equipment_plan(plan, database)
+    assert not any(row["code"] == "source_changed" for row in report["missing_inputs"])
+    # A later actual database change must still make the original binding stale.
+    current["upstream_commit"] = "b" * 40
+    stale = compose_equipment_plan(plan, database)
+    assert any(row["code"] == "source_changed" and row["path"] == "equipment_inputs.actor.a.data_version"
+               for row in stale["missing_inputs"])
+    assert gear["data_version"]["upstream_commit"] == "a" * 40
 
 
 def _independent_board_hash(board):

@@ -26,7 +26,7 @@ WS.isBoard = () => WS.tab()==="whiteboard"||(WS.tab()==="result"&&window.RS?.sou
 WS.isPlan = () => WS.tab()==="rotation"||(WS.tab()==="result"&&window.RS?.sourceKind()==="editor");
 WS.axisKey = () => WS.tab()==="whiteboard"?"whiteboard":WS.tab()==="rotation"?"rotation":null;
 WS.modalOpen = () => !!document.querySelector("dialog[open]");
-WS.navigate = tab => { document.querySelector(`.tab[data-tab="${tab}"]`)?.click(); WS.sidebar.overlayOpen=false;WS.applySidebarState?.();WS.refresh(); };
+WS.navigate = tab => { document.querySelector(`.tab[data-tab="${tab}"]`)?.click(); WS.setSidebarOverlay(false);WS.refresh(); };
 WS.click = id => { const node=document.getElementById(id); if(node&&!node.disabled)node.click(); };
 WS.canClick = id => { const node=document.getElementById(id); return !!node&&!node.disabled; };
 WS.legacyCommandAdapters=Object.freeze({
@@ -45,7 +45,7 @@ WS.legacyCommandAdapters=Object.freeze({
 WS.runLegacyAdapter = commandId => {const adapter=WS.legacyCommandAdapters[commandId],node=adapter&&document.getElementById(adapter.button);if(!node||node.disabled)return false;node.click();return true;};
 WS.persist = () => { try { localStorage.setItem("genshin.workspace.v1",JSON.stringify(WS.preferences)); } catch { /* Layout remains session-local. */ } };
 WS.preference = (key,width=1280) => {
-  if(!WS.preferences[key])WS.preferences[key]={left:205,right:292,leftHidden:key==="rotation"||width<1000,rightHidden:width<780};
+  if(!WS.preferences[key])WS.preferences[key]={left:205,right:292,leftHidden:key==="rotation"||width<1000,rightHidden:true};
   return WS.preferences[key];
 };
 WS.loadPreferences = () => {
@@ -54,7 +54,7 @@ WS.loadPreferences = () => {
       const value=saved[key];WS.preferences[key]={left:Number.isFinite(value.left)?Math.min(340,Math.max(160,value.left)):205,
         right:Number.isFinite(value.right)?Math.min(460,Math.max(230,value.right)):292,
         leftHidden:typeof value.leftHidden==="boolean"?value.leftHidden:key==="rotation",
-        rightHidden:value.rightHidden===true};
+        rightHidden:typeof value.rightHidden==="boolean"?value.rightHidden:true};
     }
     const sidebarWidth=Number(saved.globalSidebar?.width);
     WS.preferences.globalSidebar={collapsed:saved.globalSidebar?.collapsed===true,
@@ -86,20 +86,36 @@ WS.updateSidebarLabels = nav => {
   for(const page of WS.sidebarPages){const button=nav.querySelector(`.tab[data-tab="${page.tab}"]`);if(!button)continue;
     button.replaceChildren();button.dataset.workspaceLabel=page.label;button.title=`${page.label}：${page.description}`;
     const icon=document.createElement("span"),label=document.createElement("span");icon.className="workspace-sidebar-icon";icon.setAttribute("aria-hidden","true");icon.textContent=page.icon;
-    label.className="workspace-sidebar-label";label.textContent=page.label;button.append(icon,label);button.addEventListener("click",()=>{WS.sidebar.overlayOpen=false;WS.applySidebarState();});
+    label.className="workspace-sidebar-label";label.textContent=page.label;button.append(icon,label);button.addEventListener("click",()=>WS.setSidebarOverlay(false));
   }
 };
 WS.applySidebarState = () => {
   const shell=WS.sidebar.root;if(!shell)return;
   const preference=WS.sidebarPreference(),collapsed=preference.collapsed===true;
+  const narrow=WS.sidebar.media?.matches===true;
+  if(!narrow)WS.sidebar.overlayOpen=false;
+  const open=WS.sidebar.overlayOpen===true;
+  const returnFocus=narrow&&!open&&WS.sidebar.panel?.contains(document.activeElement);
+  if(WS.sidebar.panel)WS.sidebar.panel.inert=narrow&&!open;
   shell.style.setProperty("--workspace-sidebar-width",`${preference.width}px`);
   shell.classList.toggle("workspace-sidebar-collapsed",collapsed);
-  shell.classList.toggle("workspace-sidebar-overlay-open",WS.sidebar.overlayOpen===true);
+  shell.classList.toggle("workspace-sidebar-overlay-open",open);
   WS.sidebar.collapse?.setAttribute("aria-pressed",String(collapsed));
   WS.sidebar.collapse?.setAttribute("aria-label",collapsed?"展开左侧导航":"收起左侧导航");
   if(WS.sidebar.collapse)WS.sidebar.collapse.textContent=collapsed?"›":"‹";
-  WS.sidebar.toggle?.setAttribute("aria-expanded",String(WS.sidebar.overlayOpen===true));
+  WS.sidebar.toggle?.setAttribute("aria-expanded",String(open));
+  WS.sidebar.toggle?.setAttribute("aria-label",open?"关闭页面导航":"打开页面导航");
   WS.sidebar.resizer?.setAttribute("aria-valuenow",String(Math.round(preference.width)));
+  if(returnFocus)WS.sidebar.toggle?.focus();
+};
+WS.setSidebarOverlay = open => {
+  if(!WS.sidebar.media?.matches||WS.sidebar.overlayOpen===open)return;
+  WS.sidebar.overlayOpen=open;
+  WS.applySidebarState();
+  if(open){
+    const selected=WS.sidebar.panel?.querySelector(".tab.active")||WS.sidebar.panel?.querySelector(".tab");
+    selected?.focus();
+  }
 };
 WS.resizeGlobalSidebar = (width,{persist=true}={}) => {
   const preference=WS.sidebarPreference(),next=Math.min(280,Math.max(220,Number(width)||240));preference.width=next;
@@ -107,9 +123,10 @@ WS.resizeGlobalSidebar = (width,{persist=true}={}) => {
   if(persist)WS.persist();return next;
 };
 WS.toggleGlobalSidebar = (force=null) => {
-  const narrow=typeof window.matchMedia==="function"&&window.matchMedia("(max-width: 959px)").matches;
-  if(narrow){WS.sidebar.overlayOpen=typeof force==="boolean"?force:!WS.sidebar.overlayOpen;}
-  else {const preference=WS.sidebarPreference();preference.collapsed=typeof force==="boolean"?!force:!preference.collapsed;WS.persist();}
+  if(WS.sidebar.media?.matches){
+    WS.setSidebarOverlay(typeof force==="boolean"?force:!WS.sidebar.overlayOpen);return;
+  }
+  const preference=WS.sidebarPreference();preference.collapsed=typeof force==="boolean"?!force:!preference.collapsed;WS.persist();
   WS.applySidebarState();
 };
 WS.attachContextHistory = (node,{owner="agent"}={}) => {
@@ -151,13 +168,21 @@ WS.mountGlobalShell = () => {
   resizer.className="workspace-sidebar-resizer";resizer.tabIndex=0;resizer.setAttribute("role","separator");resizer.setAttribute("aria-orientation","vertical");resizer.setAttribute("aria-label","调整左侧导航宽度");resizer.setAttribute("aria-valuemin","220");resizer.setAttribute("aria-valuemax","280");let sidebarDrag=null;
   resizer.addEventListener("pointerdown",event=>{if(event.button!==0)return;event.preventDefault();sidebarDrag={id:event.pointerId,x:event.clientX,width:WS.sidebarPreference().width};resizer.setPointerCapture?.(event.pointerId);});
   resizer.addEventListener("pointermove",event=>{if(sidebarDrag?.id!==event.pointerId)return;WS.resizeGlobalSidebar(sidebarDrag.width+event.clientX-sidebarDrag.x,{persist:false});});
-  const finishSidebarResize=event=>{if(sidebarDrag?.id!==event.pointerId)return;resizer.releasePointerCapture?.(event.pointerId);sidebarDrag=null;WS.persist();};resizer.addEventListener("pointerup",finishSidebarResize);resizer.addEventListener("pointercancel",finishSidebarResize);
+  const finishSidebarResize=event=>{
+    if(sidebarDrag?.id!==event.pointerId)return;
+    sidebarDrag=null;if(resizer.hasPointerCapture?.(event.pointerId))resizer.releasePointerCapture(event.pointerId);WS.persist();
+  };
+  for(const event of ["pointerup","pointercancel","lostpointercapture"])resizer.addEventListener(event,finishSidebarResize);
   resizer.addEventListener("keydown",event=>{if(!["ArrowLeft","ArrowRight","Home","End"].includes(event.key))return;event.preventDefault();WS.resizeGlobalSidebar(event.key==="Home"?220:event.key==="End"?280:WS.sidebarPreference().width+(event.key==="ArrowRight"?12:-12));});
   toggle.id="workspace-sidebar-toggle";toggle.type="button";toggle.className="workspace-sidebar-mobile-toggle";toggle.setAttribute("aria-controls",sidebar.id);toggle.setAttribute("aria-label","打开页面导航");toggle.textContent="☰";toggle.addEventListener("click",()=>WS.toggleGlobalSidebar());
-  scrim.type="button";scrim.className="workspace-sidebar-scrim";scrim.setAttribute("aria-label","关闭页面导航");scrim.addEventListener("click",()=>WS.toggleGlobalSidebar(false));
+  scrim.type="button";scrim.className="workspace-sidebar-scrim";scrim.tabIndex=-1;scrim.setAttribute("aria-label","关闭页面导航");
+  scrim.addEventListener("click",()=>{WS.setSidebarOverlay(false);toggle.focus();});
   const parent=nav.parentNode;parent.insertBefore(shell,nav);WS.updateSidebarLabels(nav);sidebar.append(newButton,nav,context,history,theme,collapse);content.append(chrome);if(attention)content.append(attention);content.append(main);if(footer)content.append(footer);shell.append(sidebar,resizer,content,scrim);
   document.querySelector(".desktop-header")?.append(toggle);(document.getElementById("genshin-legacy-editor")||document.body).classList.add("workspace-shell-mounted");
-  WS.sidebar={...WS.sidebar,root:shell,panel:sidebar,content,context,history,historyDefault:defaultHistory,toggle,collapse,resizer,theme:themeSelect,scrim};
+  const media=window.matchMedia?.("(max-width: 959px)");
+  WS.sidebar.media?.removeEventListener?.("change",WS.applySidebarState);
+  WS.sidebar={...WS.sidebar,root:shell,panel:sidebar,content,context,history,historyDefault:defaultHistory,toggle,collapse,resizer,theme:themeSelect,scrim,media};
+  media?.addEventListener?.("change",WS.applySidebarState);
   WS.applySidebarState();WS.refreshSidebar();
   if(typeof window.CustomEvent==="function")window.dispatchEvent?.(new CustomEvent("workspace:sidebar-mounted",{detail:{historyHost:history,attach:WS.attachContextHistory}}));
   return shell;
@@ -166,7 +191,7 @@ WS.applyLayout = record => {
   const {root,key,repaint}=record,p=WS.preference(key),width=root.clientWidth||1280;
   // DSH's optional Chat/sidebar changes the editor's available width without
   // changing window.innerWidth. Follow the measured island, not only @media.
-  const compact=width<780,leftHidden=compact?record.compactSide!=="left":p.leftHidden,rightHidden=compact?record.compactSide!=="right":p.rightHidden;
+  const compact=width<780,leftHidden=compact?record.compactSide!=="left":p.leftHidden&&!record.revealed?.left,rightHidden=compact?record.compactSide!=="right":p.rightHidden&&!record.revealed?.right;
   const budget=Math.max(230,width-336),left=leftHidden?0:Math.min(p.left,Math.max(160,budget-(rightHidden?0:230))),
     right=rightHidden?0:Math.min(p.right,Math.max(230,budget-left));
   root.style.setProperty("--workspace-left",`${left}px`);root.style.setProperty("--workspace-right",`${right}px`);
@@ -192,27 +217,36 @@ WS.toggle = (key,side) => {
   if(!key||!["left","right"].includes(side))return;
   const record=WS.layouts.get(key);
   if(record&&(record.root.clientWidth||1280)<780){record.compactSide=record.compactSide===side?null:side;WS.applyLayout(record);return;}
-  const p=WS.preference(key);p[`${side}Hidden`]=!p[`${side}Hidden`];if(record)WS.applyLayout(record);WS.persist();
+  const p=WS.preference(key),hidden=p[`${side}Hidden`]&&!record?.revealed?.[side];
+  p[`${side}Hidden`]=!hidden;if(record){record.revealed={...record.revealed,[side]:false};WS.applyLayout(record);}WS.persist();
 };
 WS.reveal = (key,side) => {
   const record=WS.layouts.get(key);
-  if(record&&(record.root.clientWidth||1280)<780){record.compactSide=side;WS.applyLayout(record);return;}
-  if(WS.preference(key)[`${side}Hidden`])WS.toggle(key,side);
+  if(record&&(record.root.clientWidth||1280)<780){
+    if(record.compactSide!==side){record.compactSide=side;WS.applyLayout(record);}
+    return;
+  }
+  // Selection reveals are temporary view state, never a persisted user choice.
+  if(record&&!record.revealed?.[side]){record.revealed={...record.revealed,[side]:true};WS.applyLayout(record);}
 };
 WS.resetLayout = () => {
   const key=WS.axisKey();if(!key)return;delete WS.preferences[key];
-  WS.preference(key,WS.layouts.get(key)?.root.clientWidth);const record=WS.layouts.get(key);if(record){record.compactSide=null;WS.applyLayout(record);}WS.persist();
+  WS.preference(key,WS.layouts.get(key)?.root.clientWidth);const record=WS.layouts.get(key);if(record){record.compactSide=null;record.revealed={};WS.applyLayout(record);}WS.persist();
 };
-WS.mount = (root,{key,left,right,repaint}) => {
+WS.mount = (root,{key,left,right,repaint,context,rightContext}) => {
   if(!root)return;
   const previous=WS.layouts.get(key);
+  const sameContext=previous?.context===context&&(previous?.rightContext===rightContext||!!rightContext);
   if(previous?.root===root&&root.querySelector(left)?.querySelector(".ws-pane-close")&&root.querySelector(right)?.querySelector(".ws-pane-close")){
-    previous.repaint=repaint;WS.applyLayout(previous);return;}
+    Object.assign(previous,{repaint,context,rightContext});
+    if(!sameContext){previous.revealed={};previous.compactSide=null;}
+    WS.applyLayout(previous);return;
+  }
   previous?.observer?.disconnect();
   root.querySelectorAll(".ws-resizer,.ws-pane-close").forEach(node=>node.remove());
   root.classList.add("workspace-layout");root.dataset.workspace=key;
   WS.preference(key,root.clientWidth);
-  const record={root,key,repaint};WS.layouts.set(key,record);
+  const record={root,key,repaint,context,rightContext,revealed:sameContext?previous?.revealed||{}:{},compactSide:sameContext?previous?.compactSide:null};WS.layouts.set(key,record);
   for(const [side,selector,label] of [["left",left,"队伍"],["right",right,"详情"]]){
     const pane=root.querySelector(selector);if(!pane)continue;pane.classList.add(`ws-${side}-pane`);
     const close=UI.button("×",()=>WS.toggle(key,side),"ws-pane-close");close.title=`收起${label}`;close.setAttribute("aria-label",`收起${label}面板`);pane.append(close);
@@ -222,8 +256,8 @@ WS.mount = (root,{key,left,right,repaint}) => {
     let drag=null;
     handle.addEventListener("pointerdown",e=>{if(e.button!==0)return;e.preventDefault();drag={id:e.pointerId,x:e.clientX,width:WS.preference(key)[side]};handle.setPointerCapture?.(e.pointerId);});
     handle.addEventListener("pointermove",e=>{if(drag?.id!==e.pointerId)return;WS.resizePane(key,side,drag.width+(e.clientX-drag.x)*(side==="left"?1:-1));});
-    const end=e=>{if(drag?.id!==e.pointerId)return;handle.releasePointerCapture?.(e.pointerId);drag=null;};
-    handle.addEventListener("pointerup",end);handle.addEventListener("pointercancel",end);
+    const end=e=>{if(drag?.id!==e.pointerId)return;drag=null;if(handle.hasPointerCapture?.(e.pointerId))handle.releasePointerCapture(e.pointerId);};
+    for(const event of ["pointerup","pointercancel","lostpointercapture"])handle.addEventListener(event,end);
     handle.addEventListener("keydown",e=>{if(!["ArrowLeft","ArrowRight","Home"].includes(e.key))return;e.preventDefault();
       WS.resizePane(key,side,e.key==="Home"?(side==="left"?205:292):WS.preference(key)[side]+(e.key==="ArrowRight"?1:-1)*(side==="left"?1:-1)*16);});
     root.append(handle);
@@ -323,7 +357,8 @@ WS.commands = () => {
   return groups;
 };
 WS.invoke = async id => {
-  WS.closeMenu();const result=await WS.registerCommands().invoke(id,WS.commandContext());WS.refresh();return result.ok;
+  WS.closeMenu(WS.menu?.popup.contains?.(document.activeElement)===true);
+  const result=await WS.registerCommands().invoke(id,WS.commandContext());WS.refresh();return result.ok;
 };
 WS.closeMenu = (focus=false) => {if(!WS.menu)return;const {popup,button}=WS.menu;
   if(typeof popup.finish==="function")return popup.finish("menubar-close",{restoreFocus:focus});
@@ -345,10 +380,13 @@ WS.openMenu = (index,focus=false) => {
   popup.style.left=`${Math.max(margin,Math.min(rect.left,window.innerWidth-popup.offsetWidth-margin))}px`;
   popup.style.top=`${Math.max(margin,Math.min(rect.bottom+3,window.innerHeight-popup.offsetHeight-margin))}px`;
   WS.menu={index,button,popup};
-  popup.addEventListener("keydown",e=>{const items=choices(),current=items.indexOf(document.activeElement);if(["ArrowDown","ArrowUp","Home","End"].includes(e.key)){e.preventDefault();items[e.key==="Home"?0:e.key==="End"?items.length-1:(current+(e.key==="ArrowDown"?1:-1)+items.length)%items.length]?.focus();}
+  popup.addEventListener("keydown",e=>{const items=choices(),current=items.indexOf(document.activeElement);if(["ArrowDown","ArrowUp","Home","End"].includes(e.key)){e.preventDefault();items[e.key==="Home"||e.key==="ArrowDown"&&current<0?0:e.key==="End"||current<0?items.length-1:(current+(e.key==="ArrowDown"?1:-1)+items.length)%items.length]?.focus();}
     else if(["ArrowLeft","ArrowRight"].includes(e.key)){e.preventDefault();WS.openMenu((index+(e.key==="ArrowRight"?1:-1)+WS.commands().length)%WS.commands().length,true);}
-    else if(e.key==="Escape"){e.preventDefault();WS.closeMenu(true);}else if(e.key==="Tab")WS.closeMenu();});
-  if(focus)choices()[0]?.focus();
+    else if(e.key==="Escape"){e.preventDefault();WS.closeMenu(true);}else if(e.key==="Tab")WS.closeMenu(true);});
+  if(focus){
+    document.querySelectorAll(".workspace-menu-button").forEach(item=>{item.tabIndex=item===button?0:-1;});
+    (choices()[0]||button).focus();
+  }
 };
 WS.pageChromeState = () => {
   const context=WS.commandContext(),labels=WS.sidebar.root?{whiteboard:"排轴白板",rotation:"计算模型（高级）",result:"计算报告",data:"资料库",agent:"AI 助手"}:{whiteboard:"创作白板",rotation:"高级编辑",result:"计算报告",data:"资料库",agent:"AI 助手"};
@@ -405,6 +443,7 @@ WS.init = () => {
     if(document.getElementById("genshin-legacy-editor")?.hidden)return;
     if(e.defaultPrevented||WS.modalOpen())return;
     if(e.key==="Escape"&&WS.menu){e.preventDefault();WS.closeMenu(true);return;}
+    if(e.key==="Escape"&&WS.sidebar.overlayOpen){e.preventDefault();WS.setSidebarOverlay(false);WS.sidebar.toggle?.focus();return;}
     if(!(e.ctrlKey||e.metaKey)||e.altKey)return;const key=e.key.toLowerCase();
     const id=key==="o"?"open":key==="s"?(e.shiftKey?"save-as":"save"):["1","2","3"].includes(key)?`axis-${["actions","effects","damage"][Number(key)-1]}`:null;
     if(id){e.preventDefault();if(key==="s")document.activeElement?.blur?.();WS.invoke(id);}

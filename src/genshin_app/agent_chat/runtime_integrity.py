@@ -20,7 +20,8 @@ _SELFCHECK_DEFERRED_IMPORTS = frozenset({
 
 DSH_CLIENT_SHELL_RUNTIME_FILES = tuple(sorted((
     ".npmrc", "package.json", "pnpm-lock.yaml", "pnpm-workspace.yaml",
-    "patches/@deepseek-ai__cordis@4.0.5.patch", "src/dsh-task-review.mjs", "src/publication-usage.mjs",
+    "patches/dsh-client-ui-conversation-0.2.2-rc.3-public-draft.patch",
+    "src/dsh-task-review.mjs", "src/publication-usage.mjs",
     "src/native-app-tool-catalog.mjs", "src/native-app-tool-schema.mjs", "src/native-app-system-failure.mjs",
     "src/bridge-envelope.mjs", "src/dsh-client-shell-runtime-contract.mjs",
     "src/dependency-payloads.mjs",
@@ -42,7 +43,7 @@ DSH_CLIENT_SHELL_RUNTIME_FILES = tuple(sorted((
     "src/native-mux-pipe-client.mjs", "src/native-mux-protocol.mjs",
     "src/native-pipe-multiplexer.mjs",
     "src/native-provider-admission.mjs", "src/native-provider-proxy.mjs",
-    "src/native-retry-admission.mjs", "src/native-shell-credentials.mjs",
+    "src/native-retry-admission.mjs", "src/native-shell-credentials.mjs", "src/native-protected-credentials.mjs",
     "src/production-composition-contract.mjs", "src/runtime-integrity.mjs",
     "src/runtime-version.mjs", "src/secret-control.mjs",
 )))
@@ -301,16 +302,16 @@ def verify_dsh_client_shell_manifest(
     if (manifest["contract"] != "genshin-native-dsh-client-shell-manifest-v1"
             or manifest["phase"] != manifest["runtime_generation"] or manifest["phase"] != "dsh_client_shell"
             or manifest["app_version"] != APP_VERSION or manifest["node_version"] != NATIVE_AGENT_NODE_VERSION
-            or manifest["dsh_release"] != "0.2.1-rc.5" or manifest["entry"] != "src/native-dsh-runtime-entry.mjs"):
+            or manifest["dsh_release"] != "0.2.2-rc.3" or manifest["entry"] != "src/native-dsh-runtime-entry.mjs"):
         _fail("dsh_shell_manifest_identity")
     root = _strict_root(runtime_root)
     from .native_dsh_dependency_payloads import (
         DependencyPayloadError,
         dependency_payload_inventory,
-        project_dependency_shim,
     )
     try:
-        if manifest["dependency_payloads"] != dependency_payload_inventory(root):
+        payloads = dependency_payload_inventory(root)
+        if manifest["dependency_payloads"] != payloads:
             _fail("dsh_shell_dependency_payload_mismatch")
     except (DependencyPayloadError, OSError, ValueError):
         _fail("dsh_shell_dependency_payload_invalid")
@@ -359,7 +360,7 @@ def verify_dsh_client_shell_manifest(
         accepted = json.loads(accepted_bytes)
         accepted_semantic = accepted["semanticSha256"]
         accepted_unsigned = {key: value for key, value in accepted.items() if key != "semanticSha256"}
-        if (composition["dshRelease"] != "0.2.1-rc.5" or accepted["dshRelease"] != "0.2.1-rc.5"
+        if (composition["dshRelease"] != "0.2.2-rc.3" or accepted["dshRelease"] != "0.2.2-rc.3"
                 or composition["dshCommit"] != accepted["dshCommit"]
                 or composition["dynamicModules"] != accepted["entryOrder"]):
             _fail("dsh_shell_client_cohort")
@@ -382,26 +383,26 @@ def verify_dsh_client_shell_manifest(
         for name, version in sorted(package["dependencies"].items()):
             if not name.startswith("@deepseek-ai/"):
                 continue
-            if (name == "@deepseek-ai/dsh" or name.startswith("@deepseek-ai/dsh-")) and version != "0.2.1-rc.5":
+            if (name == "@deepseek-ai/dsh" or name.startswith("@deepseek-ai/dsh-")) and version != "0.2.2-rc.3":
                 _fail("dsh_shell_dependency_cohort_mixed")
             content = (root / "node_modules" / name / "package.json").read_bytes()
             dependency = json.loads(content)
             if dependency["name"] != name or dependency["version"] != version:
                 _fail("dsh_shell_dependency_identity")
             package_root = (root / "node_modules" / name).resolve(strict=True)
-            package_files = {}
-            for item in sorted(package_root.rglob("*")):
-                if item.is_symlink():
-                    _fail("dsh_shell_dependency_alias")
-                if item.is_file():
-                    relative_name = item.relative_to(package_root).as_posix()
-                    if _RELATIVE_FILE.fullmatch(relative_name) is None:
-                        _fail("dsh_shell_dependency_file_name")
-                    release_name, projected = project_dependency_shim(relative_name, item)
-                    if release_name in package_files:
-                        _fail("dsh_dependency_shim_name_collision")
-                    package_files[release_name] = (_sha256_file(item) if projected is None
-                                                   else hashlib.sha256(projected).hexdigest())
+            prefix = package_root.relative_to(root / "node_modules").as_posix() + "/"
+            if any(alias.startswith(prefix) for alias in payloads["aliases"]):
+                _fail("dsh_shell_dependency_alias")
+            # The complete tree was hashed immediately above. Reuse that same
+            # admitted snapshot for the cohort rather than reopen every DSH
+            # file a second time. There is no cross-launch cache or size-only
+            # admission; extra/missing/modified payloads were already checked.
+            package_files = {filename[len(prefix):]: digest for filename, digest in payloads["files"].items()
+                             if filename.startswith(prefix)}
+            if any(_RELATIVE_FILE.fullmatch(filename) is None for filename in package_files):
+                _fail("dsh_shell_dependency_file_name")
+            if package_files.get("package.json") != hashlib.sha256(content).hexdigest():
+                _fail("dsh_shell_dependency_identity")
             cohort[name] = {"version": version, "package_json_sha256": hashlib.sha256(content).hexdigest(),
                             "files": package_files}
     except (DependencyPayloadError, ValueError, KeyError, TypeError, OSError):

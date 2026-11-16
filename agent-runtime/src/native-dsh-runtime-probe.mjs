@@ -84,9 +84,9 @@ try {
   assert.equal((await control('dsh_runtime_status')).result.credentials.configured, false)
   evidence.badControlDoesNotShutDownRuntime = true
   const set = await control('dsh_secret_set', { provider: 'deepseek-official', credential_generation: 1, secret: sentinel })
-  assert.equal(set.result.disposition, 'installed')
+  assert.equal(set.result.disposition, 'synchronized')
   const replay = await control('dsh_secret_set', { provider: 'deepseek-official', credential_generation: 1, secret: sentinel })
-  assert.equal(replay.result.disposition, 'replay')
+  assert.equal(replay.result.disposition, 'synchronized')
   await control('dsh_secret_clear', { provider: 'deepseek-official', credential_generation: 2 })
   const rejected = await control('dsh_secret_set', { provider: 'deepseek-official', credential_generation: 1, secret: sentinel }, 'dsh_runtime_control_error')
   assert.equal(rejected.code, 'secret_generation_stale')

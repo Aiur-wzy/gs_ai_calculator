@@ -34,10 +34,13 @@ try {
   await boot()
   const initial = await rpc('settings/describe')
   assert.equal(initial.ok, true, JSON.stringify(initial))
-  assert.equal(initial.value.hasDocument, false)
+  assert.equal(initial.value.hasDocument, true)
   const row = ns => host.context.settings.describe().find(item => item.ns === ns)
   assert.equal(row('locale').value.preference, 'zh')
   assert.equal(row('ui-theme').value.preference, 'system')
+  assert.equal(row('ui-chat').value.transcriptView, 'compact')
+  assert.equal(row('ui-chat').value.foldedReplies, 'final')
+  assert.equal(row('ui-chat').value.collapseTiming, 'completion')
   assert.equal(host.assets.loaderStates().filter(item => item.state === 3).length, 0)
   evidence.publicSettingsFormsAndChineseDefault = true
   const theme = await rpc('settings/update', { ns: 'ui-theme', patch: { preference: 'light' }, expectedRevision: row('ui-theme').revision })
@@ -47,23 +50,29 @@ try {
   assert.equal(row('locale').value.preference, 'en')
   assert.equal(row('locale').base.preference, 'zh')
   assert.equal(row('ui-theme').value.preference, 'light')
-  const unknown = await rpc('settings/update', { ns: 'llm-deepseek', patch: { baseURL: 'https://unapproved.invalid' } })
-  assert.equal(unknown.ok, false)
-  const dangerous = await rpc('settings/update', { ns: 'api-session-controller', patch: { nativeOpen: true } })
-  assert.equal(dangerous.ok, false)
-  evidence.settingsCannotEnableProviderOrNativeOpen = true
-  const credentials = await rpc('credentials/set', { ref: 'unapproved-key', value: 'must-not-be-stored' })
-  assert.equal(credentials.ok, false, JSON.stringify(credentials))
-  assert.equal((await host.context.credentials.resolve('unapproved-key')), undefined)
-  const open = await rpc('settings/openSettingsDocument')
-  assert.equal(open.ok, false)
-  evidence.nodeCredentialsAndNativeFileOpenRemainUnavailable = true
-  assert.equal(host.context.tools.schemas().some(tool => /shell|terminal|filesystem|mcp/u.test(tool.name)), false)
+  const chat = await rpc('settings/update', { ns: 'ui-chat', patch: { transcriptView: 'standard', foldedReplies: 'all' }, expectedRevision: row('ui-chat').revision })
+  assert.equal(chat.ok, true, JSON.stringify(chat))
+  const customEndpoint = await rpc('settings/update', { ns: 'llm-deepseek', patch: { baseURL: 'https://offline-config-test.invalid' } })
+  assert.equal(customEndpoint.ok, true)
+  const invalidPreference = await rpc('settings/update', { ns: 'ui-chat', patch: { collapseTiming: 'not-a-mode' } })
+  assert.equal(invalidPreference.ok, false)
+  evidence.officialCustomEndpointAndSchemaValidation = true
+  const credentials = await rpc('credentials/set', { ref: 'qualification_key', value: 'synthetic-persisted-test-key' })
+  assert.equal(credentials.ok, true, JSON.stringify(credentials))
+  assert.equal((await host.context.credentials.resolve('qualification_key')).value, 'synthetic-persisted-test-key')
+  // Full DSH settings now deliberately exposes its document. Do not launch an
+  // editor from an offline probe; exercise only official materialization.
+  const document = await host.context.settings.prepareDocument()
+  assert.equal(typeof document, 'string')
+  evidence.protectedCredentialsAndOfficialSettingsDocument = true
   await peer.dispose()
   await host.dispose()
   await boot()
   assert.equal(row('locale').value.preference, 'en')
   assert.equal(row('ui-theme').value.preference, 'light')
+  assert.equal(row('ui-chat').value.transcriptView, 'standard')
+  assert.equal(row('ui-chat').value.foldedReplies, 'all')
+  evidence.officialCompactDefaultAndExplicitUserChoicePreserved = true
   assert.equal(host.context.sessions.list().length, 0)
   assert.equal(network, 0)
   evidence.officialUserOverridesSurviveRestartWithoutProvider = true

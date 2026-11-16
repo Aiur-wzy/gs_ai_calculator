@@ -26,6 +26,7 @@ class Element{
   replaceChildren(...children){for(const child of this.children)child.parentNode=null;this.children=[];this._text='';this.append(...children);}
   querySelector(selector){return this.querySelectorAll(selector)[0]||null;}
   querySelectorAll(selector){return descendants(this).filter(node=>matches(node,selector));}
+  contains(node){for(let ancestor=node;ancestor;ancestor=ancestor.parentNode)if(ancestor===this)return true;return false;}
   setAttribute(name,value){this.attributes[name]=String(value);}
   getAttribute(name){return this.attributes[name]??null;}
   addEventListener(type,handler){(this.listeners[type]||=[]).push(handler);}

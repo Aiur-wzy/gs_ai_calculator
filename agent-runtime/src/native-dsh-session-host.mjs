@@ -87,7 +87,7 @@ export async function createNativeDshSessionHost({
     const accounts = accounting ? mountNativeDshAccounting(ctx, { transport: taskTransport }) : undefined
     if (domainTools) mountTaskReview(ctx, {
       port: { read: agent => domainTools.advisorySnapshot(agent.id) },
-      eligible: agent => ctx.agents.roots().includes(agent),
+      eligible: agent => (ctx.agents.get(agent.id) === agent && agent.session.header.origin !== 'subagent'),
       record: (agent, row) => appendPluginRecord(agent.session, 'plugin:genshin/task-review', row),
     })
     await mountNativeDshGenericCapabilities(ctx, {
@@ -121,7 +121,7 @@ export async function createNativeDshSessionHost({
     // It never grants a peer or App domain capability.
     const productionOwner = assets?.productionOwner ?? false
     const composition = {
-      contract: NATIVE_DSH_SESSION_HOST_CONTRACT, productionOwner, dshRelease: '0.2.1-rc.5',
+      contract: NATIVE_DSH_SESSION_HOST_CONTRACT, productionOwner, dshRelease: '0.2.2-rc.3',
       baseCompositionHash: kernel.productionCompositionReport().composition_hash,
       hostModules: Object.freeze([...new Set([
         ...kernel.compositionRows.filter(row => !row.disabled && row.name?.startsWith('@'))
@@ -170,7 +170,10 @@ export async function createNativeDshSessionHost({
       },
       handler: sessionBinding(ctx.connection.createSharedFetchHandler('/api'), workspaceRoot, appWorkspace.id),
       wireStream: ctx.typertGateway.wireStream,
-      createPeer: () => ctx.connection.createPeer({ principal: { kind: 'owner' }, interactions: 'answer' }),
+      createPeer: (interactions = 'answer') => {
+        if (!['answer', 'none'].includes(interactions)) throw new Error('native_dsh_peer_interactions_invalid')
+        return ctx.connection.createPeer({ principal: { kind: 'owner' }, interactions })
+      },
       dispose: () => kernel.dispose(),
     })
   } catch (error) {

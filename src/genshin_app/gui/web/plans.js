@@ -211,7 +211,7 @@ RT.loadTemplate = async (path,options={}) => {
   const intent=options.openIntent||AppDocumentOpenIntents.begin(),current=()=>intent.current(),stale=()=>{setStatus("打开期间当前输入或文件身份已变化，未替换文档；请重新打开。");return false;};
   if(!current())return stale();
   const kind = await callApi("inspect_plan_file", path); if (!current()) return stale();
-  if (kind.code) { UI.error(kind); return; }
+  if (kind.code) { options.onError?.(kind);UI.error(kind); return; }
   if(kind.data.kind==="genshin-candidate-input-draft"){
     const opener=window.GenshinCandidateDraftFiles;
     if(!opener){setStatus("请在支持原生 AI 的客户端中打开候选输入草稿；正式文档未改变。");return;}
@@ -224,10 +224,10 @@ RT.loadTemplate = async (path,options={}) => {
     return await WB.load(path,{openIntent:intent});
   }
   if (kind.data.kind) { const r = await callApi("load_plan", path); if (!current()) return stale();
-    if (r.code) { UI.error(r); return; } PL.replace(r.data.plan, r.data.path, r.data.file_sha, true,r.data.report?.equipment_summary);
+    if (r.code) { options.onError?.(r);UI.error(r); return; } PL.replace(r.data.plan, r.data.path, r.data.file_sha, true,r.data.report?.equipment_summary);
     setStatus("已加载装备方案");return true; }
   else { const r=await callApi("load_template",path);if(!current())return stale();
-    if(r.code){UI.error(r);return;}
+    if(r.code){options.onError?.(r);UI.error(r);return;}
     PL.state.plan = null; PL.state.draft = null; PL.state.fileSha = null;PL.state.appliedSummary=null;
     RT.replaceTemplate(r.data.template,r.data.path,r.data.file_sha??null);PL.state.savedJson = PL.currentInputJson();
     EQ.closeView();PL.renderStatus();RT.renderAll();setStatus("已加载数值快照：装备来源未附带",{path:r.data.path});return true; }
@@ -238,8 +238,11 @@ PL.chooseDraftSave = () => new Promise(resolve=>{const dialog=PL.dialog("装备�
   dialog.appBody.append(UI.button("应用草稿并保存",()=>done("apply")),UI.button("仅保存当前已应用方案",()=>done("applied")),
     UI.button("继续编辑",()=>done("cancel")));if(!dialog.onClosed)dialog.addEventListener("cancel",()=>done("cancel"));});
 RT.saveTemplate = async (options = {}) => {
-  if (PL.draftChanged()) { const choice=await PL.chooseDraftSave();if(choice==="cancel")return false;
-    if(choice==="apply"&&!await PL.apply())return false; }
+  const beforeWriteFailure=(reason,message)=>{options.onResponse?.({code:1,reason,message,details:{publication_state:"not_written"}});return false;};
+  if (PL.draftChanged()) { const choice=await PL.chooseDraftSave();
+    if(choice==="cancel")return beforeWriteFailure("save_cancelled","已取消保存，当前草稿继续保留。");
+    if(choice==="apply"&&!await PL.apply())return beforeWriteFailure("equipment_draft_unapplied","装备草稿尚未应用，未写入文件。"); }
+  if(!PL.state.plan&&!RT.tpl()){setStatus("没有可保存的模板");return beforeWriteFailure("no_template","没有可保存的模板，未写入文件。");}
   if (!PL.state.plan) { const template=RT.tpl(),json=PL.currentInputJson(),saving=legacySave(options),request=RT.state.saveRequest;
     if (!await saving || request!==RT.state.acceptedSaveRequest || RT.tpl()!==template || PL.state.plan) return false;
     PL.state.savedJson = json; PL.renderStatus(); return true; }
@@ -249,6 +252,7 @@ RT.saveTemplate = async (options = {}) => {
   const plan = UI.clone(source), json = PL.currentInputJson();
   const sha = path === RT.state.path ? PL.state.fileSha : null;
   const r = await callApi("save_plan", path, plan, sha);
+  options.onResponse?.(r);
   if (r.code) { UI.error(r); return false; }
   options.onWritten?.({path:r.data.path,fileSha:r.data.file_sha,current:PL.state.plan===source&&json===PL.currentInputJson()});
   if (request<RT.state.acceptedSaveRequest || PL.state.plan!==source) {

@@ -204,7 +204,8 @@ try {
   assert.equal(host.context.tools.get('gs_app_get_workspace', unboundAgent), undefined)
   evidence.explicitUnboundDoesNotBlockGenericChatOrGrantDomainTools = true
   await prompt('scope-one')
-  assert.equal(calls.length, 2)
+  assert.equal(calls.length, 2, JSON.stringify((await host.context.sessionQuery.readSession('scope-one')).events
+    .filter(event => event.type === 'turn/end' || event.type === 'llm/failure')))
   assert.equal(host.domainTools.snapshot('scope-one').candidate_revision, 2)
   const log = await host.context.sessionQuery.readSession('scope-one')
   for (const call of calls) {
@@ -260,9 +261,15 @@ try {
   assert.ok(host.domainTools.snapshot('unbound-session'))
   evidence.firstBoundProviderRequestHasActualAppSchemas = true
   const scopedAgent = host.context.agents.get('scope-one')
+  const admittedAssembly = async (signal = new AbortController().signal) => {
+    const toolSet = await host.context.tools.resolve({ agent: scopedAgent,
+      modelSelection: scopedAgent.model.current(), signal })
+    try { return await host.context.systemPrompt.assemble({ scope: scopedAgent, signal, toolSet }) }
+    finally { toolSet.dispose() }
+  }
   const definitionBefore = host.context.tools.get('gs_patch_candidate', scopedAgent)
-  const stable = await host.context.systemPrompt.assemble({ scope: scopedAgent })
-  await host.context.systemPrompt.assemble({ scope: scopedAgent })
+  const stable = await admittedAssembly()
+  await admittedAssembly()
   assert.equal(host.context.tools.get('gs_patch_candidate', scopedAgent), definitionBefore)
   hostFacts.set('scope-one', 'Not accepted until another assembly')
   const admissionView = host.context.systemPrompt.refreshContext(stable, { scope: scopedAgent })
@@ -273,7 +280,7 @@ try {
   removed.tools = removed.tools.filter(tool => tool.name !== 'gs_patch_candidate')
   removed.policies = Object.fromEntries(Object.entries(removed.policies).filter(([name]) => name !== 'gs_patch_candidate'))
   snapshots.set('scope-one', { ...removed, catalog_hash: hashAppToolsSnapshotBody(removed) })
-  const without = await host.context.systemPrompt.assemble({ scope: scopedAgent })
+  const without = await admittedAssembly()
   assert.equal(without.tools.some(tool => tool.name === 'gs_patch_candidate'), false)
   assert.equal(host.context.tools.get('gs_patch_candidate', scopedAgent), undefined)
   const genericNames = stable.tools.filter(tool => !tool.name.startsWith('gs_')).map(tool => tool.name)
@@ -282,9 +289,9 @@ try {
   assert.ok(host.context.tools.get('gs_app_get_workspace', host.context.agents.get('scope-two')))
   const cancelled = new AbortController()
   cancelled.abort()
-  await assert.rejects(host.context.systemPrompt.assemble({ scope: scopedAgent, signal: cancelled.signal }))
+  await assert.rejects(admittedAssembly(cancelled.signal))
   snapshots.set('scope-one', source)
-  await host.context.systemPrompt.assemble({ scope: scopedAgent })
+  await admittedAssembly()
   assert.ok(host.context.tools.get('gs_patch_candidate', scopedAgent))
   evidence.immutableAdmissionViewAndSameHashRegistration = true
   evidence.removalAndCancelledAssemblyPreserveOtherScopesAndGenericTools = true

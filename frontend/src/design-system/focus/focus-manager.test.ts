@@ -68,4 +68,21 @@ describe("FocusManager", () => {
     expect(document.activeElement).toBe(fallback);
     item.manager.detach();
   });
+
+  it("does not send pointers through a non-dismissible modal to surfaces beneath it", () => {
+    const item = fixture();
+    const modal = document.createElement("section");
+    const modalButton = document.createElement("button");
+    modal.append(modalButton);
+    document.body.append(modal);
+    item.coordinator.open(descriptor("menu"));
+    item.manager.bind("menu", {container: item.surface, trigger: item.trigger, fallback: null});
+    item.coordinator.open({...descriptor("modal", true), dismissOnOutside:false});
+    item.manager.bind("modal", {container:modal, trigger:null, fallback:null});
+    modalButton.dispatchEvent(new MouseEvent("pointerdown", {bubbles:true}));
+    document.body.dispatchEvent(new MouseEvent("pointerdown", {bubbles:true}));
+    expect(item.coordinator.list().map(surface => surface.id)).toEqual(["menu","modal"]);
+    expect(document.activeElement).toBe(modalButton);
+    item.manager.detach();
+  });
 });

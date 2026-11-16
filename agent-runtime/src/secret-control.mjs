@@ -97,6 +97,12 @@ export class NativeSecretController {
     const nextGeneration = generation(payload.credential_generation)
     const nextSecret = secret(payload.secret)
     this.#admit(nextGeneration)
+    if (typeof this.#credentials.installLegacyCredential === 'function') {
+      const result = await this.#credentials.installLegacyCredential(nextGeneration, nextSecret)
+      this.#generation = nextGeneration
+      this.#configured = result.configured
+      return Object.freeze({ disposition: 'synchronized', ...this.status })
+    }
     if (nextGeneration === this.#generation) {
       const current = await this.#credentials.resolve(DEEPSEEK_CREDENTIAL_REF)
       if (!this.#configured || current?.value !== nextSecret) {
@@ -119,6 +125,12 @@ export class NativeSecretController {
     provider(payload.provider)
     const nextGeneration = generation(payload.credential_generation)
     this.#admit(nextGeneration)
+    if (typeof this.#credentials.installLegacyCredential === 'function') {
+      const result = await this.#credentials.installLegacyCredential(nextGeneration, null)
+      this.#generation = nextGeneration
+      this.#configured = result.configured
+      return Object.freeze({ disposition: 'synchronized', ...this.status })
+    }
     if (nextGeneration === this.#generation) {
       const current = await this.#credentials.resolve(DEEPSEEK_CREDENTIAL_REF)
       if (this.#configured || current !== undefined) fail('secret_generation_conflict')
@@ -139,7 +151,8 @@ export class NativeSecretController {
     this.#disposed = true
     this.#configured = false
     try {
-      await this.#credentials.unset(DEEPSEEK_CREDENTIAL_REF)
+      if (typeof this.#credentials.releaseMemory === 'function') await this.#credentials.releaseMemory()
+      else await this.#credentials.unset(DEEPSEEK_CREDENTIAL_REF)
     } catch {
       // Runtime teardown is already fail-closed.  Do not surface provider or
       // secret-adjacent error text while dropping the final project reference.

@@ -158,7 +158,7 @@ SPECS = {
         _schema({"expected_revision": REVISION}, ("expected_revision",))),
     "gs_validate_execution_bindings": ("校验事件拓扑节点是否映射到当前候选中的强类型可执行输入对象；只证明引用覆盖和新鲜度，不核实角色特有事实。",
         _schema({"expected_revision": REVISION}, ("expected_revision",))),
-    "gs_validate_agent_materialization": ("校验Agent自包含的通用机制材料化输入；或通过可选request生成通用机制、攻击组合及绑定刷新草稿。request.kind=catalog可查当前辅助能力。只读，不查询数据库，不核实角色特有事实，不应用、不确认来源、不改变接纳。",
+    "gs_validate_agent_materialization": ("校验Agent自包含的通用机制材料化输入；或通过可选request生成通用机制、攻击组合及绑定刷新草稿。request.kind=catalog可查当前辅助能力。外层和request.expected_revision均填写当前会话候选修订；返回edit_request可直接经候选编辑工具采用，input_identity.revision是独立的文件内部修订。只读，不查询数据库，不核实角色特有事实，不应用、不确认来源、不改变接纳。",
         _schema({"expected_revision": REVISION, "request": authoring_request_schema()}, ("expected_revision",))),
     "gs_verify_public_data_lookup": (
         "让App按真实ID或精确中文名核对一项当前方案临时公共资料。查询失败只报告不可用，绝不当成数据库缺失；本工具不批准纠错。",
@@ -2326,7 +2326,16 @@ def _validate_agent_materialization(session, args):
             raise PlanError("辅助请求与当前候选修订不一致，请读取当前修订后重试", "agent_stale_revision",
                             {"path": "/request/expected_revision", "actual": request.get("expected_revision"),
                              "expected": session.revision})
-        return authoring_assistance(request, plan=session.candidate, composition_report=session.report)
+        # The session CAS advances across board edits, native conversion and
+        # source refresh. The file revision has its own history. Keep the
+        # native input and its fingerprint exact; translate only the adapter's
+        # revision envelope when calling the same helper used by the file CLI.
+        native_request = {**request, "expected_revision": session.candidate["revision"]}
+        result = authoring_assistance(
+            native_request, plan=session.candidate, composition_report=session.report)
+        if result.get("edit_request") is not None:
+            result["edit_request"] = {**result["edit_request"], "expected_revision": session.revision}
+        return {**result, "candidate_revision": session.revision}
     if session.workflow == "artifact" and session._is_board():
         raise PlanError("当前还是白板，尚无原生机制输入可校验；可用request.kind=catalog查看作者辅助，继续编辑白板或准备原生输入。",
                         "agent_native_artifact_required")

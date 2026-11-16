@@ -4,6 +4,7 @@ import json
 import os
 import queue
 import subprocess
+import threading
 import uuid
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
@@ -423,6 +424,12 @@ def test_gui_shell_projection_is_lazy_and_never_falls_back_to_v2(tmp_path, monke
     api._close_dsh_shell()
     with pytest.raises(NativeDshMuxError, match="dsh_shell_closed"):
         api.dsh_client_boot()
+    identity = str(uuid.uuid4())
+    assert api.dsh_client_request_cancel({"request_id": identity}) == {"cancelled": True}
+    assert api.dsh_client_stream_cancel({"stream_id": identity}) == {"cancelled": True}
+    assert api.dsh_client_resource_release({"resource_id": identity}) == {"released": False}
+    with pytest.raises(NativeDshMuxError, match="identity_invalid"):
+        api.dsh_client_stream_cancel({"stream_id": "not-a-uuid"})
     assert calls == [tmp_path, "closed"]
     from genshin_app.agent_chat import native_dsh_production
 
@@ -437,6 +444,67 @@ def test_gui_shell_projection_is_lazy_and_never_falls_back_to_v2(tmp_path, monke
         ordinary_api.dsh_client_boot()
     assert calls[-1] == "production-factory"
     assert ordinary_api._agent_manager is None
+
+
+@pytest.mark.parametrize(("method", "identity_field", "expected"), [
+    ("dsh_client_request_cancel", "request_id", {"cancelled": True}),
+    ("dsh_client_stream_cancel", "stream_id", {"cancelled": True}),
+    ("dsh_client_resource_release", "resource_id", {"released": False}),
+])
+def test_gui_cleanup_without_a_host_never_starts_one(tmp_path, method, identity_field, expected):
+    api = GuiApi(tmp_path, dsh_shell_factory=lambda _: pytest.fail("cleanup created a Host"))
+    assert getattr(api, method)({identity_field: str(uuid.uuid4())}) == expected
+    assert api._dsh_shell is None
+
+
+def test_live_resource_release_does_not_reenter_or_hold_gui_lifecycle_lock(tmp_path):
+    entered, finish_release, released, booted = (threading.Event() for _ in range(4))
+    errors = []
+    identity = str(uuid.uuid4())
+
+    def release(request):
+        assert request == {"resource_id": identity}
+        entered.set()
+        if not finish_release.wait(3):
+            raise TimeoutError("concurrent boot could not acquire lifecycle lock")
+        return {"released": True}
+
+    shell = SimpleNamespace(dsh_client_boot=lambda: {"injections": []},
+                            dsh_client_resource_release=release)
+    api = GuiApi(tmp_path, dsh_shell_factory=lambda _: shell)
+    # Use the actual GuiApi threading.Lock, not an RLock or a mock lock.
+    assert type(api._dsh_shell_lock) is type(threading.Lock())
+    assert api.dsh_client_boot() == {"injections": []}
+
+    def clean():
+        try:
+            assert api.dsh_client_resource_release({"resource_id": identity}) == {"released": True}
+        except (AssertionError, NativeDshMuxError, TimeoutError) as error:
+            errors.append(error)
+        finally:
+            released.set()
+
+    def boot():
+        try:
+            assert api.dsh_client_boot() == {"injections": []}
+        except (AssertionError, NativeDshMuxError, TimeoutError) as error:
+            errors.append(error)
+        finally:
+            booted.set()
+
+    # Daemon workers let the assertion report the original nested-lock
+    # regression instead of leaving the whole test process deadlocked.
+    cleaner = threading.Thread(target=clean, daemon=True)
+    reader = threading.Thread(target=boot, daemon=True)
+    cleaner.start()
+    try:
+        assert entered.wait(2), "cleanup re-entered the non-reentrant lifecycle lock"
+        reader.start()
+        assert booted.wait(2), "resource cleanup held the lifecycle lock during its runtime call"
+    finally:
+        finish_release.set()
+    assert released.wait(2)
+    assert errors == []
 
 
 @pytest.mark.skipif(os.name != "nt" or os.environ.get("GENSHIN_NATIVE_DSH_MUX_OS_SMOKE") != "1",

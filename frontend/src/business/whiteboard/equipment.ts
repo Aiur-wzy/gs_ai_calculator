@@ -42,7 +42,7 @@ const addCharacter =()=>{
 const editCharacter =(id:any)=>{
   const original=WB.actor(id);if(!original)return;const board=WB.state.board,base=JSON.stringify(original),saved=WB.state.equipmentDrafts?.[id],
     retained=saved?.base===base?saved:null,d=WB.dialog(`${original.name} · 装备与初始面板`);if(!d)return null;
-  const body=UI.el("div"),error=UI.el("div");
+  const body=UI.el("div"),error=UI.el("div");error.setAttribute("role","status");
   d.classList.add("wb-equipment-dialog");let latestMeta={equipmentChanged:retained?.equipmentChanged||false,panelConfirmed:retained?.panelConfirmed||false};
   const editor=services.equipment.mount(body,{actorDraft:retained?.draft||original,versionLine:board.version_line,weaponShape:"whiteboard",
     requirePanelConfirmation:retained?.equipmentChanged,panelConfirmed:retained?.panelConfirmed,
@@ -54,17 +54,26 @@ const editCharacter =(id:any)=>{
     }else if(WB.state.equipmentDrafts)delete WB.state.equipmentDrafts[id];editor.destroy();};
   const returnBack=()=>{WB.closeDialog(d);WB.render();},heading=UI.el("div",null,"ew-dialog-heading");
   heading.append(UI.button("← 返回白板",returnBack),UI.el("p","返回保留本次草稿；应用前不改变当前角色与计算结果。","ew-note"));
+  let validating=false;
   const apply=async (calculate:any)=>{
+    if(validating)return;
     if(board!==WB.state.board||JSON.stringify(WB.actor(id))!==base){error.textContent="角色资料已变化，请返回后重新打开。";return;}
     const issues=editor.validate();if(issues.length){error.textContent=issues.join(" ");return;}
     const copy=editor.draft(),settingsJson=JSON.stringify(copy),candidate=UI.clone(board),token=WB.token();candidate.team[candidate.team.findIndex((c:any)=>c.id===id)]=copy;
-    error.textContent="正在检查角色设置…";const r=await callApi("whiteboard_validate",candidate);if(d.wbClosed||!WB.current(token))return;
-    if(settingsJson!==JSON.stringify(editor.draft())){error.textContent="角色设置在检查期间变化，请再次保存以检查最新内容。";return;}
-    if(r.code){error.innerHTML="";error.append(UI.error(r));return;}
+    validating=true;applyAndCalculate.disabled=true;saveSettings.disabled=true;error.textContent="正在检查角色设置…";
+    try{
+      const r=await callApi("whiteboard_validate",candidate);if(d.wbClosed)return;
+      if(!WB.current(token)||settingsJson!==JSON.stringify(editor.draft())){error.textContent="设置在检查期间变化，请再次保存以检查最新内容。";return;}
+      if(r.code){error.innerHTML="";error.append(UI.error(r));return;}
+    }catch{
+      if(!d.wbClosed)error.textContent="角色设置未能完成检查，请重新保存。";
+      return;
+    }finally{validating=false;applyAndCalculate.disabled=false;saveSettings.disabled=false;}
     d.wbDiscard=true;WB.closeDialog(d);WB.change((current:any)=>{current.team[current.team.findIndex((c:any)=>c.id===id)]=copy;});
     if(calculate)await WB.recalculateEquipment();else setStatus("角色设置已应用到白板。可继续编辑，或使用“重新计算装备与面板”检查结果。");
   };
-  const actions=UI.el("div",null,"ew-actions");actions.append(UI.button("应用并计算",()=>apply(true),"primary"),UI.button("保存角色设置",()=>apply(false)),
+  const applyAndCalculate=UI.button("应用并计算",()=>apply(true),"primary"),saveSettings=UI.button("保存角色设置",()=>apply(false));
+  const actions=UI.el("div",null,"ew-actions");actions.append(applyAndCalculate,saveSettings,
     UI.button("放弃本次修改",()=>{d.wbDiscard=true;WB.closeDialog(d);WB.render();},"danger"));
   d.appBody.append(heading,body,error,actions);d.addEventListener("cancel",(event:any)=>{event.preventDefault();returnBack();});
 };

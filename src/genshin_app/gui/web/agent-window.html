@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>原神拉表 · AI 助手</title>
+<link rel="stylesheet" href="dsh-production.css"><link rel="stylesheet" href="dsh-shell.css">
+</head><body data-agent-window="detached">
+<div id="genshin-editor-parking"></div><div id="dsh-app-root"><p role="status">正在连接已有会话…</p></div>
+<script src="json-transport.js"></script><script src="business-ui.js"></script><script src="timeline-data.js"></script><script src="candidate-projection.js"></script>
+<script>
+window.GenshinEditorBridge = {
+  root: document.createElement('div'),
+  document: async () => window.JSONTransport.parse(await window.pywebview.api.dsh_window_document()),
+  navigate: () => {}, setTheme: (preference,resolved) => {document.body.dataset.theme=preference;document.body.dataset.themeResolved=resolved;},
+  projectCandidate: (source,kind,calculated,metadata) => window.CandidateDocumentProjection.build(source,calculated,metadata)
+};
+</script><script src="dsh-production.js"></script></body></html>

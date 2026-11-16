@@ -143,6 +143,8 @@ TV.bind = () => {
     if (!RT.tpl() || (e.button !== 0 && e.button !== 1)) return;
     // 原生滚动条以容器为目标，交还浏览器，空白画布仍可拖动。
     if (e.target === wrap) return;
+    // SVG controls stay clickable even when the background pan tool is active.
+    if (e.button === 0 && e.target.closest?.("[data-axis-control]")) return;
     const isEvent = e.target.closest?.(".tl-hit, .buff-bar, .buff-handle, .tl-switch, .tl-view-event, .tl-action-caption");
     if (e.button === 0 && !TV.panMode && isEvent) return;
     e.preventDefault();

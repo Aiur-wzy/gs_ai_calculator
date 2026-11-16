@@ -1,5 +1,6 @@
 """The hidden GUI entry reports GUI failures without popping up background errors."""
 
+import ctypes
 import importlib.util
 import sys
 from pathlib import Path
@@ -44,9 +45,10 @@ def test_gui_command_detection_skips_global_option_values(entry, argv, expected)
 ])
 def test_hidden_entry_only_shows_interactive_gui_failure(entry, monkeypatch, argv, code, visible):
     message_box = Mock()
-    monkeypatch.setitem(sys.modules, "ctypes", SimpleNamespace(
-        windll=SimpleNamespace(user32=SimpleNamespace(MessageBoxW=message_box))
-    ))
+    if hasattr(ctypes, "windll"):
+        monkeypatch.setattr(ctypes.windll.user32, "MessageBoxW", message_box)
+    else:
+        monkeypatch.setattr(ctypes, "windll", SimpleNamespace(user32=SimpleNamespace(MessageBoxW=message_box)), raising=False)
     monkeypatch.setattr(sys, "platform", "win32")
     monkeypatch.setattr(sys, "argv", ["GenshinCalcGUI.exe", *argv])
     monkeypatch.setattr(sys, "stdout", None)
@@ -66,9 +68,10 @@ def test_hidden_entry_only_shows_interactive_gui_failure(entry, monkeypatch, arg
 
 def test_console_entry_keeps_error_on_console(entry, monkeypatch, capsys):
     message_box = Mock()
-    monkeypatch.setitem(sys.modules, "ctypes", SimpleNamespace(
-        windll=SimpleNamespace(user32=SimpleNamespace(MessageBoxW=message_box))
-    ))
+    if hasattr(ctypes, "windll"):
+        monkeypatch.setattr(ctypes.windll.user32, "MessageBoxW", message_box)
+    else:
+        monkeypatch.setattr(ctypes, "windll", SimpleNamespace(user32=SimpleNamespace(MessageBoxW=message_box)), raising=False)
     monkeypatch.setattr(sys, "argv", ["GenshinCalc.exe", "gui"])
 
     def failed_main(_):
@@ -79,3 +82,15 @@ def test_console_entry_keeps_error_on_console(entry, monkeypatch, capsys):
     assert entry.entry_main() == 1
     assert "console failure" in capsys.readouterr().err
     message_box.assert_not_called()
+
+
+def test_missing_portable_identity_explains_full_extraction(entry, monkeypatch, capsys):
+    from genshin_app.product_install_contract import FirstInstallError
+    monkeypatch.setattr(sys, "argv", ["GenshinCalc.exe", "db", "catalog"])
+    def missing(_):
+        raise FirstInstallError("portable_layout_missing")
+    monkeypatch.setattr(entry, "main", missing)
+    assert entry.entry_main() == 2
+    message = capsys.readouterr().err
+    assert "完整便携包" in message and "app 和 data" in message
+    assert "正在维护" not in message

@@ -1,5 +1,10 @@
 import {type TimelineDomPorts,createTimelineDom} from "./dom";
 import {renderDamageExplanation} from "./damage-detail";
+import {appendFullName} from "./display-names";
+import {TIMELINE_ACTION_HEIGHT,TIMELINE_VIEW_HEIGHT} from "./geometry";
+import {coverageHistory,recipientNames} from "./display-rows";
+import {updateDisclosureButton} from "./row-disclosure";
+import {isCoverageKind} from "./shared";
 export function createTimelineDetail(ports:TimelineDomPorts){
   const TV=ports.view,RT=ports.editor,$=ports.query,TD=ports.projection,services=ports.services;
   const {viewKind,viewName,viewStatus,viewEl,viewSeconds,viewTime}=createTimelineDom(ports);
@@ -15,15 +20,29 @@ const showDetail = (selection:any,back:any=null,page=0) => {
   box.innerHTML="";TV.detailSelection=selection;TV.updateDetailSelection();
   services.workspace?.reveal?.("rotation","right");
   const button=(label:any,fn:any)=>{const n=viewEl("button",label);n.type="button";n.addEventListener("click",fn);return n;};
+  const row=selection.displayRow;
+  const recipients=(event:any)=>recipientNames(event,id=>TV.characterNames?.get(id));
+  const appendRowToggle=()=>{
+    if(!row?.expandable)return;
+    const control=button("",()=>TV.toggleRow(row));
+    control.setAttribute("data-inspector-row-toggle",row.key);
+    updateDisclosureButton(control,row,TV.expandedRows?.has(row.key)??row.expanded);
+    box.appendChild(control);
+  };
   if(selection.events){
     const events=selection.events, size=40, pages=Math.ceil(events.length/size);
-    box.appendChild(viewEl("div","密集时间点","tl-detail-eyebrow"));
-    box.appendChild(viewEl("h4",`${events.length} 条聚合记录 · 第 ${page+1}/${pages} 页`));
+    const coverage=events.length>0&&events.every((event:any)=>isCoverageKind(event.kind));
+    if(selection.label)box.appendChild(viewEl("h4",selection.label));
+    if(selection.displayRow?.directory)box.appendChild(viewEl("p","这些条目显示名称相同，但来源身份独立。此目录不表示同一个 Buff，也不合并覆盖、层数或伤害；展开后逐项查看。"));
+    appendRowToggle();
+    box.appendChild(viewEl("div",row?.directory?"同名独立来源":coverage?"Buff 区间":"密集时间点","tl-detail-eyebrow"));
+    box.appendChild(viewEl("h4",`${events.length} 条${coverage?"区间":"聚合"}记录${pages>1?` · 第 ${page+1}/${pages} 页`:""}`));
     if(TV.mode==="damage"&&events.every((event:any)=>["damage","external_damage"].includes(event.kind)&&Number.isFinite(event.value)))
       box.appendChild(viewEl("p",`本组伤害合计：${Math.round(events.reduce((sum:any,event:any)=>sum+event.value,0)).toLocaleString("zh-CN")}`,"tl-detail-damage"));
-    box.appendChild(viewEl("p","选择一条记录查看详情；放大时间轴可分开相邻时间点。","tl-detail-hint"));
+    box.appendChild(viewEl("p",coverage?"选择一个区间查看接收角色、来源和刷新明细。":"选择一条记录查看详情；放大时间轴可分开相邻时间点。","tl-detail-hint"));
     for(const event of events.slice(page*size,(page+1)*size)){
-      const entry=button(`${viewTime(event)} · ${viewName(event.label)}${event.beneficiary_names?.length?` · ${event.beneficiary_names.join("、")}`:""}${TV.mode==="damage"&&Number.isFinite(event.value)?` · ${Math.round(event.value).toLocaleString("zh-CN")}`:""}`,
+      const names=coverage?recipients(event):[];
+      const entry=button(`${names.length?`接收：${names.join("、")} · `:""}${viewTime(event)} · ${viewName(event.label)}${TV.mode==="damage"&&Number.isFinite(event.value)?` · ${Math.round(event.value).toLocaleString("zh-CN")}`:""}`,
         ()=>TV.showDetail(event,{selection,page}));entry.className="tl-detail-record";box.appendChild(entry);
     }
     if(page>0)box.appendChild(button("上一页",()=>TV.showDetail(selection,null,page-1)));
@@ -35,6 +54,8 @@ const showDetail = (selection:any,back:any=null,page=0) => {
   if(back?.event)box.appendChild(button("← 返回伤害事件",()=>TV.showDetail(back.event,back.back)));
   box.appendChild(viewEl("div",`${viewKind(event.kind).label} · ${event.edit?"输入可编辑":"只读记录"}`,"tl-detail-eyebrow"));
   box.appendChild(viewEl("h4",viewName(event.label)));
+  appendRowToggle();
+  if(event.sourceLabel&&event.sourceLabel!==event.label)appendFullName(box,ports.document,event.sourceLabel);
   const explanation=TV.mode==="effects" && !event.detail?.special_state_contract && services.effects && services.display?.renderEffectDescription
     ? services.effects.describe(event,{characterName:(id:any)=>TV.characterNames?.get(id)||"未指定角色"}) : null;
   if(explanation)box.appendChild(services.display.renderEffectDescription(explanation));
@@ -44,7 +65,9 @@ const showDetail = (selection:any,back:any=null,page=0) => {
     for(const line of services.effects.eligibilityDescription(event.detail.beneficiaries_scope,(id:any)=>TV.characterNames?.get(id)||"未指定角色"))field("受益资格",line);
     for(const line of services.effects.selectionDescription(event.detail.beneficiary_selection,(id:any)=>TV.characterNames?.get(id)||"未指定角色"))field("实际选人",line);
   }
-  field("角色",TV.characterNames?.get(event.character)||"全队 / 未指定角色");
+  const receiver=event.kind==="coverage"?recipients(event).join("、"):"";
+  if(receiver)field("接收角色",receiver);
+  else field("角色",TV.characterNames?.get(event.character)||"全队 / 未指定角色");
   field("时间",viewTime(event));
   if(event.detail?.special_state_contract){
     if(Number.isFinite(event.detail.next_settlement_at))field("下次领域结算",`${viewSeconds(event.detail.next_settlement_at)}秒`);
@@ -64,7 +87,6 @@ const showDetail = (selection:any,back:any=null,page=0) => {
   if(!explanation)field("来源",viewName(event.sourceLabel));
   if(event.element)field("元素",services.display?.label?.("elements",event.element)||event.element);
   if(event.detail?.execution_status)field("执行状态",viewStatus(event.detail.execution_status));
-  if(event.kind==="coverage"&&event.beneficiary_names?.length)field(event.detail?.receipt_id?"实例角色范围":"接收角色",event.beneficiary_names.join("、"));
   if(event.detail?.presentation?.purpose==="calculation_sampling"){
     field("展示用途","作者标记的计算采样窗口，非游戏Buff寿命");field("原因",event.detail.presentation.reason);
   }
@@ -79,6 +101,16 @@ const showDetail = (selection:any,back:any=null,page=0) => {
   const damage=TV.mode==="damage"?(Number.isFinite(event.value)?event.value:event.detail?.hit?.expected):null;
   if(Number.isFinite(damage))card.appendChild(viewEl("p",`期望伤害：${Math.round(damage).toLocaleString("zh-CN")}`,"tl-detail-damage"));
   card.appendChild(fields);box.appendChild(card);
+  TV.navigateEvidence=(target:any,mode:string,origin:any)=>{
+    const originalMode=TV.mode,projection=TV.projection;TV.changeMode?.(mode);TV.characterFilter="";TV.sourceFilter="";TV.componentFilter="";
+    TV.effectFocus="all";TV.kindVisibility[mode]={};TV.rebuildRows();
+    const directory=TV.rows.find((r:any)=>r.directory&&!r.expanded&&r.directoryMembers?.some((e:any)=>e.id===target.id));
+    if(directory){TV.expandedRows.add(directory.key);TV.rebuildRows();}TV.paintProjection();
+    const wrap=$("#timeline-wrap"),row=TV.rows.findIndex((r:any)=>r.events.some((e:any)=>e.id===target.id));
+    if(wrap){wrap.scrollLeft=Math.max(0,target.start*TV.pixelsPerSecond-80);if(row>=0)wrap.scrollTop=Math.max(0,row*(mode==="actions"?TIMELINE_ACTION_HEIGHT:TIMELINE_VIEW_HEIGHT));}
+    TV.showDetail(target);const detailBox=$("#timeline-detail");
+    detailBox?.prepend(button("← 返回原伤害",()=>{if(TV.projection!==projection)return;TV.changeMode?.(originalMode);TV.showDetail(origin);}));
+  };
   if(TV.mode==="damage"&&["damage","calculation","external_damage"].includes(event.kind))
     renderDamageExplanation(box,event,ports);
   if(event.kind==="coverage"){
@@ -123,8 +155,10 @@ const showDetail = (selection:any,back:any=null,page=0) => {
   }
   for(const key of ["message","note","reason","meaning","interpretation"]){const value=event.detail?.[key];
     if(typeof value==="string")box.appendChild(viewEl("p",value));}
-  if(event.kind==="coverage" && Array.isArray(event.detail?.states)){
-    const activations=new Map(),states=event.detail.states;
+  const historyEvent=coverageHistory(event);
+  if(event.kind==="coverage" && Array.isArray(historyEvent.detail?.states)){
+    const activations=new Map(),states=historyEvent.detail.states;
+    if(historyEvent!==event)box.appendChild(viewEl("p",`当前选中一个状态片段。下列记录覆盖完整连续区间 ${viewTime(historyEvent)}。`));
     for(const state of states){
       if(!Number.isInteger(state.activation_trace_index) || !Number.isFinite(state.start) || !Number.isFinite(state.rule_expires_at))continue;
       // 次数消费和层数到期可切分同一次激活，不能把每个 state 都当作刷新。
@@ -133,7 +167,7 @@ const showDetail = (selection:any,back:any=null,page=0) => {
     }
     const entries=[...activations.values()],seconds=(n:any)=>Number(n.toFixed(4));
     if(entries.length>1){
-      box.appendChild(viewEl("p",`此连续可用段由 ${entries.length} 次激活/刷新合并形成；整段长度 ${seconds(event.end-event.start)} 秒包含后续刷新，单次到期分别见下列记录。`));
+      box.appendChild(viewEl("p",`此连续可用段由 ${entries.length} 次激活/刷新合并形成；整段长度 ${seconds(historyEvent.end-historyEvent.start)} 秒包含后续刷新，单次到期分别见下列记录。`));
       const history=viewEl("details"),list=viewEl("ol");history.open=true;
       history.appendChild(viewEl("summary",`激活/刷新明细（${entries.length} 次）`));
       for(const [i,state] of entries.slice(0,8).entries())list.appendChild(viewEl("li",
@@ -145,7 +179,7 @@ const showDetail = (selection:any,back:any=null,page=0) => {
       box.appendChild(viewEl("p",`${seconds(state.activation_time??state.start)}秒${state.activation_trace_index<0?"初态登记":"激活"}，规则到期 ${seconds(state.rule_expires_at)}秒；本段未合并后续刷新。`));
     }
     if(entries.length && states.length>entries.length)box.appendChild(viewEl("p","本段还包含次数或层数等状态变化；这些变化不计为刷新。"));
-    if(event.detail.receipt_id){const history=viewEl("details");history.appendChild(viewEl("summary",`状态变化（${states.length} 段）`));
+    if(historyEvent.detail.receipt_id){const history=viewEl("details");history.appendChild(viewEl("summary",`状态变化（${states.length} 段）`));
       for(const state of states.slice(0,40)){const balance=state.resource_balance,scale=Number.isFinite(balance?.unit_scale)&&balance.unit_scale>0?balance.unit_scale:1;
         history.appendChild(viewEl("p",`${seconds(state.start)}～${seconds(state.end)}秒：${TD.stateName(state.status)}；${state.layers} 层${state.remaining_quota!=null?`；剩余 ${state.remaining_quota} 次`:""}${Number.isFinite(balance?.remaining)?`；共享库存 ${seconds(balance.remaining/scale)}`:""}；结束原因：${TD.endReason(state.end_reason)}`));}
       if(states.length>40)history.appendChild(viewEl("p","其余切片见原始记录。"));box.appendChild(history);}
@@ -156,7 +190,7 @@ const showDetail = (selection:any,back:any=null,page=0) => {
   }
   const raw=viewEl("details"), summary=viewEl("summary","原始记录（按需展开）");raw.appendChild(summary);
   let populated=false;raw.addEventListener("toggle",()=>{if(raw.open&&!populated){populated=true;
-    raw.appendChild(viewEl("pre",JSON.stringify(event.detail??{},null,2)));}});box.appendChild(raw);
+    raw.appendChild(viewEl("pre",JSON.stringify(historyEvent.detail??{},null,2)));}});box.appendChild(raw);
 };
 
 

@@ -15,11 +15,10 @@ body {
 }
 :root[data-theme-resolved="light"] :where(.desktop-header h1,.workspace-page-identity h2,.workspace-notice,.workspace-help-list dt) { color:var(--color-text-primary); }
 :root[data-theme-resolved="light"] :where(.desktop-caption,.workspace-page-kicker,#workspace-notice-count,.workspace-help-list dd) { color:var(--color-text-secondary); }
-:root[data-theme-resolved="light"] :where(.workspace-menu-popup,.workspace-notice-list,.workspace-plan-state>#plan-status,.axis-help-panel,.data-tools-popover,.database-version-details,.app-dialog,.eq-dialog) {
+:root[data-theme-resolved="light"] :where(.workspace-menu-popup,.workspace-notice-list,.workspace-plan-state>#plan-status,.axis-help-panel,.data-tools-popover,.database-version-details,.app-dialog,.eq-dialog),:root[data-theme-resolved="light"] #plan-status.app-disclosure-popup {
   background:var(--color-overlay); border-color:var(--color-border-strong); color:var(--color-text-primary); box-shadow:var(--shadow-elevated);
 }
-:root[data-theme-resolved="light"] :where(.workspace-menu-button:hover,.workspace-menu-button[aria-expanded="true"],.workspace-menu-item:hover:not(:disabled),.workspace-menu-item:focus-visible) { background:var(--color-control-hover); border-color:var(--color-border-strong); }
-:root[data-theme-resolved="light"] :where(.workspace-status-hub>summary,.workspace-plan-state>summary,.workspace-pane-toggle[aria-pressed="true"],.timeline-tools button[aria-pressed="true"],.timeline-modes button[aria-pressed="true"],.timeline-filters button[aria-pressed="true"]) {
+:root[data-theme-resolved="light"] :where(.workspace-status-hub>summary,.workspace-plan-state>summary) {
   background:var(--color-control-selected); border-color:var(--color-border-strong); color:var(--color-text-primary);
 }
 :root[data-theme-resolved="light"] :where(.workspace-attention-shelf,.ew-confirmation,.ew-agent-report) { background:var(--color-warning-surface); border-color:var(--color-warning); color:var(--color-warning); }
@@ -30,7 +29,23 @@ body {
 :root[data-theme-resolved="light"] :where(input,select,textarea) { background:var(--color-input); border-color:var(--color-border-subtle); color:var(--color-text-primary); }
 :root[data-theme-resolved="light"] :where(button) { background:var(--color-surface); border-color:var(--color-border-subtle); color:var(--color-text-primary); }
 :root[data-theme-resolved="light"] :where(button:hover:not(:disabled)) { border-color:var(--color-accent); }
-:root[data-theme-resolved="light"] :where(button.primary,.ew-actions .primary,.wb-toolbar button.active,.wb-order-row .active) { background:var(--color-accent); border-color:var(--color-accent-strong); color:var(--color-on-accent); }
+:root[data-theme-resolved="light"] :where(button.primary,.ew-actions .primary) { background:var(--color-accent); border-color:var(--color-accent-strong); color:var(--color-on-accent); }
+/* Keep the foreground with its selected surface in both themes. The control
+   selectors must outrank the older scoped timeline and whiteboard rules. */
+:root :is(.timeline-tools,.timeline-modes,.timeline-filters,.wb-toolbar) button[aria-pressed="true"],
+:root .workspace-pane-toggle[aria-pressed="true"],
+:root .workspace-menu-button[aria-expanded="true"],
+:root .wb-toolbar button.active,
+:root .wb-order-row button.active,
+:root button.wb-team-card.active,
+:root .tl-filter-menu[open]>summary {
+  background:var(--color-control-selected); border-color:var(--color-accent); color:var(--color-text-primary);
+}
+:root .workspace-menu-button:hover:not([aria-expanded="true"]),
+:root .workspace-menu-item:hover:not(:disabled),
+:root .workspace-menu-item:focus-visible {
+  background:var(--color-control-hover); border-color:var(--color-border-strong); color:var(--color-text-primary);
+}
 :root[data-theme-resolved="light"] :where(.eq-error,.eq-issue,.wb-danger) { color:var(--color-danger); }
 :root[data-theme-resolved="light"] :where(.wb-warning,.ew-basis-diff,.ew-feedback,.data-notice) { color:var(--color-warning); }
 :root[data-theme-resolved="light"] :where(.mc-section-card>summary,.ew-identity-section>summary,.ew-extra>summary,.ew-native-advanced>summary,.ew-native-binding>summary,.capacity-catalog-group>summary,.wb-fold>summary,.wb-raw>summary,.timeline-detail h3,.timeline-note) { color:var(--color-text-primary); }

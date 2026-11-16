@@ -35,7 +35,8 @@ RT.renderAll = () => {
   RT.renderTimeline();
   if (window.RC) RC.render();
   if (window.MC) MC.render();
-  if(window.WS?.ready)WS.mount($("#rotation-main"),{key:"rotation",left:"#team-panel",right:".timeline-inspector",repaint:()=>window.TV?.requestPaint?.()});
+  if(window.WS?.ready)WS.mount($("#rotation-main"),{key:"rotation",left:"#team-panel",right:".timeline-inspector",
+    context:RT.tpl(),rightContext:window.TV?.detailSelection||RT.sel(),repaint:()=>window.TV?.requestPaint?.()});
 };
 
 RT.replaceTemplate = (template, path, fileSha = null) => {

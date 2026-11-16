@@ -17,7 +17,7 @@ const evidence={profileRoot:root}
 try {
  host=await createNativeDshSessionHost({profileRoot:root,mirrorRoot:join(root,'media')})
  const {agent}=await host.context.agents.create({sessionId:'actual-fs-shell',meta:{cwd:host.kernel.fullProfile.workspace}})
- const execute=(name,args)=>host.context.tools.execute({callId:`actual-${++calls}`,name,arguments:args,agent,signal:new AbortController().signal})
+ const execute=async(name,args,owner=agent)=>(await host.context.tools.execute({calls:[{type:'tool-call',id:`actual-${++calls}`,name,arguments:JSON.stringify(args)}],agent:owner,signal:new AbortController().signal})).results[0].result
  const check=r=>{assert.equal(r.isError,false,JSON.stringify(r));return r}
  check(await execute('write',{file_path:'character-note.txt',content:'facts: original\n'}))
  check(await execute('read',{file_path:'character-note.txt'}))
@@ -33,7 +33,7 @@ try {
  await host.dispose();host=undefined
  host=await createNativeDshSessionHost({profileRoot:root,mirrorRoot:join(root,'media')})
  const restored=await host.context.agents.resume({resumeSessionId:'actual-fs-shell'})
- const reread=await host.context.tools.execute({callId:'after-cold-restore',name:'read',arguments:{file_path:'character-note.txt'},agent:restored.agent,signal:new AbortController().signal})
+ const reread=await execute('read',{file_path:'character-note.txt'},restored.agent)
  check(reread)
  assert.match(JSON.stringify(reread),/verified/)
  evidence.coldRestoreNotes=true

@@ -5,7 +5,6 @@ import { mkdtemp, mkdir, writeFile, readFile, rm } from 'node:fs/promises'
 import { join } from 'node:path'
 import { serverResponseSchema } from '@deepseek-ai/dsh-client-connection'
 import { createNativeDshSessionHost, NATIVE_DSH_SESSION_HOST_CONTRACT } from './native-dsh-session-host.mjs'
-import { FIXED_ROOT_VIRTUAL_ROOT } from './fixed-root-filesystem-contract.mjs'
 import { createPhase5bOfficialFakeFetch } from './phase5b-official-fake-fetch.mjs'
 import { assertPinnedNodeVersion } from './runtime-version.mjs'
 
@@ -203,14 +202,18 @@ try {
   assert.equal(fakeFetch.requestCount, beforeCold)
   evidence.coldListPageFollowRestoresDurableConversation = true
 
-  const read = await host.handler.fetch(new Request(`https://genshin-shell.invalid/api/file?path=${
-    encodeURIComponent(`${FIXED_ROOT_VIRTUAL_ROOT}/${leaf}`)}`), peer)
+  const fileUrl = new URL(`https://genshin-shell.invalid/api/file?path=${encodeURIComponent(join(mirrorRoot, leaf))}`)
+  const version = await host.handler.fetch(new Request(fileUrl), peer)
+  assert.equal(version.status, 302)
+  assert.equal(version.headers.get('cache-control'), 'private, no-store')
+  const read = await host.handler.fetch(new Request(new URL(version.headers.get('location'), fileUrl)), peer)
   assert.equal(read.status, 200)
   assert.deepEqual(Buffer.from(await read.arrayBuffer()), media)
-  const escape = await host.handler.fetch(new Request(`https://genshin-shell.invalid/api/file?path=${
-    encodeURIComponent(join(root, 'session-query.sqlite'))}`), peer)
-  assert.equal(escape.status, 403)
-  evidence.controllerFileUsesFixedRoot = true
+  const directory = await host.handler.fetch(new Request(`https://genshin-shell.invalid/api/file?path=${
+    encodeURIComponent(mirrorRoot)}`), peer)
+  assert.equal(directory.status, 403)
+  assert.match(read.headers.get('cache-control'), /immutable/)
+  evidence.controllerFileUsesOfficialFilesystemAndVersionedRead = true
   evidence.providerRequests = fakeFetch.requestCount
   process.stdout.write(`${JSON.stringify({ contract: NATIVE_DSH_SESSION_HOST_CONTRACT,
     status: 'passed', qualificationOnly: true, ...evidence }, null, 2)}\n`)

@@ -1,5 +1,5 @@
 /**
- * Machine-verifiable S0 contract for the rc.5 carrier-neutral Host seams.
+ * Machine-verifiable contract for the rc.3 carrier-neutral Host seams.
  *
  * This is qualification evidence only.  It does not mount a production
  * client owner, expose a GUI route, or authorize SessionController prompt.
@@ -7,10 +7,10 @@
 export const DSH_HOST_REMOTE_QUALIFICATION_CONTRACT =
   'genshin-dsh-host-remote-qualification-v1'
 export const DSH_HOST_REMOTE_QUALIFICATION_VERSION = 1
-export const DSH_HOST_REMOTE_RELEASE = '0.2.1-rc.5'
+export const DSH_HOST_REMOTE_RELEASE = '0.2.2-rc.3'
 export const DSH_HOST_REMOTE_DEPENDENCY_IDENTITY = Object.freeze({
   node: '24.19.0',
-  cordis: '4.0.5',
+  cordis: '4.1.0',
   dsh: DSH_HOST_REMOTE_RELEASE,
 })
 
@@ -93,7 +93,7 @@ export const DSH_HOST_REMOTE_QUALIFICATION = Object.freeze({
 
 export function assertQualificationContract() {
   if (DSH_HOST_REMOTE_DEPENDENCY_IDENTITY.node !== '24.19.0'
-      || DSH_HOST_REMOTE_DEPENDENCY_IDENTITY.cordis !== '4.0.5'
+      || DSH_HOST_REMOTE_DEPENDENCY_IDENTITY.cordis !== '4.1.0'
       || DSH_HOST_REMOTE_DEPENDENCY_IDENTITY.dsh !== DSH_HOST_REMOTE_RELEASE
       || DSH_HOST_REMOTE_QUALIFICATION.productionOwner !== false
       || DSH_HOST_REMOTE_QUALIFICATION.transport.httpListener !== false

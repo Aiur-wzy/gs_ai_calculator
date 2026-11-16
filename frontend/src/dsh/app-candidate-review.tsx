@@ -5,6 +5,7 @@ import type {AppEditorBridge} from "./app-editor-bridge";
 import {applyReviewedCandidate,hasCandidateCommand,recoverCandidate,reviewCandidate,type ReviewedCandidate} from "./app-candidate-commands";
 import {CandidatePreview} from "./app-candidate-preview";
 import {AppDomainHostError} from "./app-domain-errors";
+import {detachedWindow,presentInMain} from "./app-window-presentation";
 
 type Row=Record<string,unknown>;
 const row=(value:unknown):Row=>value&&typeof value==="object"&&!Array.isArray(value)?value as Row:{};
@@ -101,6 +102,12 @@ export function CandidateReviewControls({api,binding,summary,currentRead=true,ca
   const blockedButton=blockedAction&&onOpenCandidate&&<Button size="sm" variant="outline" onClick={()=>{setReview(undefined);onOpenCandidate(blockedAction);}}>查看未完成的文件操作</Button>;
   return <div className="gs-candidate-review">
     <div className="gs-candidate-toolbar">
+      {!application&&detachedWindow()&&(canReview||canRecover)&&<Button size="sm" disabled={busy||!currentRead} onClick={()=>{
+        setBusy(true);void presentInMain({command:"review_candidate",session_id:binding.dshSessionId,conversation_id:binding.conversationId,revision:summary.revision})
+          .then(()=>setMessage("已通知主窗口。请在主窗口的候选工作区核对差异，再确认同步。"))
+          .catch(reason=>setMessage(reason instanceof Error?reason.message:"主窗口未能打开，候选没有同步。"))
+          .finally(()=>setBusy(false));
+      }}>在主窗口审核并同步</Button>}
       {canReview&&!autoOpen&&<Button size="sm" onClick={()=>void begin()} disabled={!currentRead||busy||!application||!api.dsh_client_candidate_command}>审核并同步到正式白板</Button>}
       {canRecover&&<Button size="sm" variant="outline" onClick={()=>void begin(true)} disabled={!currentRead||busy||!application}>检查未完成的同步</Button>}
       {applied&&<Button size="sm" variant="outline" onClick={()=>void showApplied()}>{summary.kind==="native"?"查看计算模型":"查看正式白板"}</Button>}
@@ -113,9 +120,9 @@ export function CandidateReviewControls({api,binding,summary,currentRead=true,ca
     {code&&<details><summary>操作详情</summary><code>{code}</code></details>}
     {savedPath&&<p>结果文件：<code>{savedPath}</code></p>}
     <Modal open={!!review} title={review?.creation?"审核并新建正式文档":"审核候选修改"} closeLabel="关闭审核" onClose={()=>closeReview()}
-      className="gs-candidate-review-dialog" contentClassName="gs-candidate-review-content"
+      className="gs-domain-dialog gs-candidate-review-dialog" contentClassName="gs-domain-dialog-content"
       description={isFormal?"这份候选已有正式计算结果。同步后可在 App 中查看，并可另存文件。":"这份候选可以同步为可编辑草稿，尚无可交付的正式计算结果。"}
-      footer={<div className="gs-candidate-review-actions"><Button variant="ghost" onClick={()=>closeReview("本次未同意同步。候选已保留，正式文档保持原样。")} disabled={busy}>不同意同步</Button><Button variant="outline" onClick={()=>closeReview("候选已保留。请在输入框告诉 Agent 需要改哪里。")} disabled={busy}>返回对话继续修改</Button><Button onClick={()=>void apply()} disabled={busy||!!code}>{busy?"正在同步…":"同意并同步"}</Button></div>}>
+      footer={<div className="gs-domain-dialog-actions"><Button variant="ghost" onClick={()=>closeReview("本次未同意同步。候选已保留，正式文档保持原样。")} disabled={busy}>不同意同步</Button><Button variant="outline" onClick={()=>closeReview("候选已保留。请在输入框告诉 Agent 需要改哪里。")} disabled={busy}>返回对话继续修改</Button><Button onClick={()=>void apply()} disabled={busy||!!code}>{busy?"正在同步…":"同意并同步"}</Button></div>}>
       {review&&target&&<><p>{review.creation?"将新建未保存的文档":`对照当前正式文档「${named(review.base?.document)||"未命名"}」`} · 候选版本 {review.summary.revision}{counts.length?` · ${counts.join(" · ")}`:""}</p>
         {changes.length>0&&<ul aria-label="相对正式文档的主要变化">{changes.map(change=><li key={change.label}>{change.label}　{change.change}{change.examples.length>0&&<p>{change.examples.join("、")}</p>}</li>)}</ul>}
         <details><summary>版本与校验详情</summary><code>{review.summary.receipt}</code>{typeof row(acceptedCalculated.result_receipt).database_fingerprint==="string"&&<p>资料库指纹　<code>{String(row(acceptedCalculated.result_receipt).database_fingerprint)}</code></p>}</details>

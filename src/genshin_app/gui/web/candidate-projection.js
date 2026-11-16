@@ -1,10 +1,10 @@
 // Pure App document projection shared by the DSH candidate view. Never assign
 // WB/RT/PL state and never run calculation while rendering a candidate.
 window.CandidateDocumentProjection=Object.freeze({
-  build(source,calculated){
+  build(source,calculated,metadata={}){
     const plan=calculated?.plan||source?.plan||source||{},board=source?.kind==="genshin-whiteboard"?source:plan.extensions?.whiteboard_handoff?.board;
     const template=plan.resolved_template||plan.manual_template||{characters:board?.team||[],loop_duration:board?.duration,hits:[],buffs:[]};
-    const projection=TD.build({plan,template,result:calculated,
+    const projection=TD.build({plan,template,result:calculated,resultAvailability:metadata.hasCalculation&&!calculated?"not_loaded":undefined,
       executionModel:calculated?.report?.mechanics_model,executionTemplate:calculated?.report?.mechanics_input_template,current:!!calculated});
     if(board){
       projection.duration=board.duration;

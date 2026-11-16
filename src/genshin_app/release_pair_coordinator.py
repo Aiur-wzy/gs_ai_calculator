@@ -31,7 +31,9 @@ from genshin_app.database_release_reuse import (
     verified_reusable_database,
 )
 from genshin_app.database_transaction import profile_writer
+from genshin_app.installation_location import resolve_runtime_root
 from genshin_app.package_integrity import PackageIntegrityError, _read_package_manifest
+from genshin_app.product_install_contract import FirstInstallError
 from genshin_app.product_release_index import PER_USER_UPDATER_RELATIVE
 from genshin_app.release_pair_discovery import discover_latest_release_pair
 from genshin_app.release_pair_helper import (
@@ -291,11 +293,18 @@ def _current_identity(data_dir: Path, active_app_root: Path) -> dict[str, Any]:
     }
 
 
+def _current_user_profile() -> Path:
+    root = resolve_runtime_root(sys.executable)
+    if root is not None:
+        return root
+    return known_folder_path(FOLDERID_LOCAL_APP_DATA) / APP_DIR_NAME
+
+
 def _locate_current_user_updater(app_root: Path, data_dir: Path) -> dict[str, Any]:
     try:
         if is_windows_elevated():
             _fail("release_pair_updater_current_user_elevation_unsupported")
-        profile = known_folder_path(FOLDERID_LOCAL_APP_DATA) / APP_DIR_NAME
+        profile = _current_user_profile()
         if (app_root, data_dir) != (profile / "app", profile / "data"):
             _fail("release_pair_updater_current_user_path_mismatch")
         identity = _current_identity(data_dir, app_root)
@@ -309,7 +318,8 @@ def _locate_current_user_updater(app_root: Path, data_dir: Path) -> dict[str, An
         if (hashlib.sha256(manifest).hexdigest() != pair["app"]["artifact_manifest"]["sha256"]
                 or expected is None or not executable.is_file() or _sha256(executable) != expected):
             _fail("release_pair_updater_artifact_mismatch")
-    except (OSError, PackageIntegrityError, WindowsPathAuthorityError, release_pair_update.ReleasePairUpdateError) as error:
+    except (OSError, FirstInstallError, PackageIntegrityError, WindowsPathAuthorityError,
+            release_pair_update.ReleasePairUpdateError) as error:
         raise ReleasePairCoordinatorError(getattr(error, "reason", "release_pair_updater_missing")) from error
     return {"executable": executable, "sha256": expected}
 
@@ -702,9 +712,11 @@ def build_default_release_pair_coordinator(data_dir: Path):
     updater_locator, launcher = locate_installed_updater, _launch_updater
     if os.name == "nt" and DATABASE_RELEASE_CHANNEL == "stable":
         try:
-            profile = known_folder_path(FOLDERID_LOCAL_APP_DATA) / APP_DIR_NAME
+            profile = _current_user_profile()
         except WindowsPathAuthorityError:
             profile = None
+        except FirstInstallError as error:
+            raise ReleasePairCoordinatorError(error.reason) from error
         if profile is not None and (active, data) == (profile / "app", profile / "data"):
             updater_locator = partial(_locate_current_user_updater, active, data)
             launcher = partial(_launch_current_user_updater, app_root=active, data_dir=data)

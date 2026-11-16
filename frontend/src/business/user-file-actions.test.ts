@@ -19,7 +19,7 @@ describe("ordinary file open routes candidate drafts",()=>{
     const board={state:{board:null},json:()=>"",pickUserFile:async()=>({path:"draft.json"}),load:vi.fn()};
     const editor={tpl:()=>null,state:{path:null},loadTemplate:vi.fn()},status=vi.fn();
     const files=createWorkspaceFileActions({board,editor,workspace:{isBoard:()=>false,refresh:vi.fn()},api:async()=>({code:0,data:{kind:"genshin-candidate-input-draft",file_sha:"a".repeat(64)}}),query:vi.fn(),serialize:JSON.stringify,status,error:vi.fn()});
-    expect(await files.openFile()).toBe(false);expect(editor.loadTemplate).not.toHaveBeenCalled();expect(status).toHaveBeenCalledWith(expect.stringContaining("支持原生 AI 的客户端"));
+    expect(await files.openFile()).toBe(false);expect(editor.loadTemplate).not.toHaveBeenCalled();expect(status).toHaveBeenCalledWith(expect.stringContaining("支持原生 AI 的客户端"),undefined);
   });
 });
 
@@ -30,4 +30,29 @@ it("keeps an already opened native plan when its page fails to mount",async()=>{
   expect(opened.opened).toBe(true);expect(opened.message).toContain("已打开所选计算方案");expect(opened.message).toContain("未能切换页面");
   expect(editor.loadTemplate).toHaveBeenCalledOnce();expect(show).toHaveBeenCalledExactlyOnceWith("rotation");
   expect(board.load).not.toHaveBeenCalled();expect(report.openSavedReport).not.toHaveBeenCalled();
+});
+
+it.each(["genshin-whiteboard","genshin-plan"])("preserves the structured %s loader failure without navigating",async kind=>{
+  const failure={code:1,message:"所选文件缺少必要的数据，当前方案已保留。",details:{reason:"fixture_schema_invalid",field:"actions"}};
+  const load=vi.fn(async(_path,options)=>{options.onError(failure);return false;}),show=vi.fn();
+  const opened=await openInspectedDocument("broken.json",{kind},{current:()=>true},{board:{load},editor:{loadTemplate:load},show});
+  expect(opened).toEqual({opened:false,failed:true,message:failure.message,details:failure.details});
+  expect(show).not.toHaveBeenCalled();expect(load).toHaveBeenCalledOnce();
+});
+
+it("distinguishes a declined open from a reported loader error",async()=>{
+  const opened=await openInspectedDocument("cancelled.json",{kind:"genshin-whiteboard"},{current:()=>true},{board:{load:async()=>false},editor:{},show:vi.fn()});
+  expect(opened.opened).toBe(false);expect(opened.failed).toBeUndefined();expect(opened.details).toBeUndefined();
+});
+
+it("keeps an inspected-file rejection and its details in the status and the completion callback",async()=>{
+  const failure={code:1,message:"所选文件不是支持的计算方案。",details:{reason:"invalid_plan_file"}};
+  const board={state:{board:null},json:()=>"",pickUserFile:async()=>({path:"wrong.json"}),load:vi.fn()};
+  const editor={tpl:()=>null,state:{path:null},loadTemplate:vi.fn()},status=vi.fn(),onAgentActionResult=vi.fn();
+  const files=createWorkspaceFileActions({board,editor,workspace:{isBoard:()=>false,refresh:vi.fn()},
+    api:async()=>failure,query:vi.fn(),serialize:JSON.stringify,status,error:vi.fn()});
+  expect(await files.openFile({onAgentActionResult})).toBe(false);
+  expect(status).toHaveBeenCalledExactlyOnceWith(failure.message,failure.details);
+  expect(onAgentActionResult).toHaveBeenCalledExactlyOnceWith({status:"failed",message:failure.message});
+  expect(editor.loadTemplate).not.toHaveBeenCalled();
 });

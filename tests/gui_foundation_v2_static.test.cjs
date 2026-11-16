@@ -51,7 +51,7 @@ test('package metadata ships synchronized assets without tracking development ou
   assert.match(pyproject, /gui\/web\/\*\.json/u);
   assert.match(frozenSpec, /\("src\/genshin_app\/gui\/web", "genshin_app\/gui\/web"\)/u);
   assert.equal(frontendPackage.packageManager, runtimePackage.packageManager);
-  assert.equal(frontendPackage.packageManager, 'pnpm@11.28.5');
+  assert.equal(frontendPackage.packageManager, 'pnpm@11.25.0');
   assert.ok(frontendIgnore.includes('node_modules/'));
   assert.ok(frontendIgnore.includes('dist/'));
 });

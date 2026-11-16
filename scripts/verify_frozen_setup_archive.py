@@ -27,6 +27,9 @@ ROOT = Path(__file__).resolve().parents[1]
 COMMON_MODULES = (
     "genshin_app.database_release_reuse",
     "genshin_app.database_transaction",
+    "genshin_app.installation_location",
+    "genshin_app.installation_inventory",
+    "genshin_app.installation_runtime",
     "genshin_app.product_release_index",
     "genshin_app.release_pair_helper",
     "genshin_app.release_pair_trust",
@@ -38,8 +41,10 @@ COMMON_MODULES = (
     "genshin_runtime.normalization",
 )
 ENTRY_MODULES = {
-    "GenshinCalcSetup.exe": ("genshin_app.product_first_install", "genshin_app.release_pair_transport",
-                             "genshin_app.setup_frozen_qualification"),
+    "GenshinCalcSetup.exe": ("genshin_app.product_first_install", "genshin_app.product_database_setup", "genshin_app.release_pair_transport",
+                             "genshin_app.setup_frozen_qualification", "genshin_app.managed_installation",
+                             "genshin_app.installation_migration", "genshin_app.windows_product_registration",
+                             "genshin_app.windows_shell_identity", "genshin_app.shortcuts", "genshin_app.paths"),
     "GenshinCalcUpdater.exe": (),
 }
 ENTRY_SCRIPTS = {"GenshinCalcSetup.exe": "installer_entry", "GenshinCalcUpdater.exe": "updater_entry"}

@@ -50,3 +50,4 @@ export function buildTimelineProjection(input:TimelineInput={}) {
   }
 
 export {stateName,endReason};
+export {selectionReference,resolveSelection} from "./evidence-index";

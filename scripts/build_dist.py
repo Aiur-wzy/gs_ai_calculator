@@ -16,17 +16,22 @@ import runpy
 import shutil
 import subprocess
 import sys
+import time
 import uuid
 from contextlib import contextmanager
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-DIST = ROOT / "dist" / "GenshinCalc"
+DIST = ROOT / "dist" / "GenshinCalc" / "app"
 UPDATER_ARTIFACT_DIRECTORY = "GenshinCalcUpdater"
 UPDATER_EXE_FILENAME = "GenshinCalcUpdater.exe"
 UPDATER_RECEIPT_FILENAME = "updater-artifact.json"
 UPDATER_ARTIFACT_CONTRACT = "genshin-updater-artifact-v1"
 UPDATER_REQUEST_SCHEMA_VERSION = 1
+# A recorded cold r6 migration took 435 s (including a 257 s full semantic
+# check). Match the existing portable first-start qualification's 900 s budget;
+# do not interrupt a healthy first admission at the old arbitrary 180 s limit.
+PACKAGED_STARTUP_TIMEOUT_SECONDS = 900
 if str(ROOT / "src") not in sys.path:
     sys.path.insert(0, str(ROOT / "src"))
 if str(ROOT / "scripts") not in sys.path:
@@ -63,9 +68,11 @@ from release_supply_chain import (
     write_package_file_manifest,
 )
 from verify_frozen_setup_archive import verify_archive as verify_updater_archive
+from verify_production_web_assets import verify_production_web_assets
 
 from genshin_app import version as app_version
 from genshin_app.database_bootstrap import LIVE_MANIFEST_FILENAME
+from genshin_app.portable_layout import PORTABLE_MARKER, PORTABLE_MARKER_BYTES
 from genshin_app.release_pair_helper import HELPER_RESULT_CONTRACT
 from genshin_db.release_hygiene import validate_database_release_hygiene
 from genshin_db.release_profile import MANIFEST_FILENAME as DATABASE_MANIFEST_FILENAME
@@ -133,12 +140,56 @@ def _managed_build_temp_dir(*, build_root: Path, prefix: str):
             shutil.rmtree(canonical_root)
 
 
+def _database_artifact_bytes(path: Path, expected: dict | None = None) -> dict:
+    """Prove the entire DB is unchanged without repeating semantic parsing.
+
+    The builder has already fully validated the supplied release manifest and
+    actual database. A full SHA-256 comparison covers every table and metadata
+    byte; size or timestamps alone are never accepted as proof.
+    """
+    with path.open("rb") as stream:
+        result = {"sha256": hashlib.file_digest(stream, "sha256").hexdigest(),
+                  "size_bytes": os.fstat(stream.fileno()).st_size}
+    if expected is not None and result != {key: expected[key] for key in result}:
+        raise ValueError("packaged_startup_database_bytes_mismatch")
+    return result
+
+
+@contextmanager
+def _startup_smoke_observation(mode: str):
+    """Keep timings and failure evidence after the isolated profile is removed."""
+    directory = ROOT / "build-py" / "startup-observations"
+    directory.mkdir(parents=True, exist_ok=True)
+    destination = directory / f"{mode}-{uuid.uuid4().hex}.json"
+    report = {"mode": mode, "status": "running", "phases": {},
+              "command_timeout_seconds": PACKAGED_STARTUP_TIMEOUT_SECONDS}
+    started = time.monotonic()
+
+    def measure(name, function, *args, **kwargs):
+        phase = time.monotonic()
+        try:
+            return function(*args, **kwargs)
+        finally:
+            report["phases"][name] = time.monotonic() - phase
+
+    try:
+        yield measure
+        report["status"] = "passed"
+    except BaseException as error:
+        report.update(status="failed", error_type=type(error).__name__, error=str(error))
+        raise
+    finally:
+        report["elapsed_seconds"] = time.monotonic() - started
+        destination.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", "utf-8")
+
+
 def _run_packaged_startup_rebind_smoke(
     *,
     package_root: Path,
     database_manifest: dict,
     pair_manifest: dict,
     predecessor_pair: dict,
+    validated_database_identity: dict | None = None,
 ) -> dict:
     """Exercise the frozen runtime gate with the accepted predecessor pair.
 
@@ -160,7 +211,7 @@ def _run_packaged_startup_rebind_smoke(
     if not release_pair_matches_database_manifest(predecessor, database_manifest):
         raise ValueError("packaged_startup_smoke_predecessor_database_mismatch")
     build_root = ROOT / "build-py"
-    with _managed_build_temp_dir(
+    with _startup_smoke_observation("current-only-rebind") as measure, _managed_build_temp_dir(
         build_root=build_root,
         prefix="packaged-startup-rebind-",
     ) as root:
@@ -171,14 +222,20 @@ def _run_packaged_startup_rebind_smoke(
             os.link(packaged_database, linked_database)
         except OSError:
             shutil.copy2(packaged_database, linked_database)
-        identity_before = read_database_identity(linked_database)
+        identity_before = measure("database_hash_before", _database_artifact_bytes,
+                                  linked_database, database_manifest["database"])
+        receipt_identity = validated_database_identity
+        if receipt_identity is None:
+            receipt_identity = measure("database_identity", read_database_identity, linked_database)
+        if identity_before != {key: receipt_identity[key] for key in identity_before}:
+            raise ValueError("packaged_startup_validated_identity_mismatch")
         write_database_release_manifest(
             profile_dir / "database-live-manifest.json",
             database_manifest,
         )
         receipt = create_database_live_receipt(
             database_manifest,
-            identity_before,
+            receipt_identity,
             installed_at=database_manifest["released_at"],
         )
         (profile_dir / "database-live-receipt.json").write_text(
@@ -194,7 +251,7 @@ def _run_packaged_startup_rebind_smoke(
         )
         write_release_pair_manifest(live_pair_path, predecessor)
         output = root / "board.json"
-        completed = subprocess.run(
+        completed = measure("frozen_startup", subprocess.run,
             [
                 str(cli),
                 "--data-dir",
@@ -210,13 +267,13 @@ def _run_packaged_startup_rebind_smoke(
             text=True,
             encoding="utf-8",
             errors="replace",
-            timeout=180,
+            timeout=PACKAGED_STARTUP_TIMEOUT_SECONDS,
         )
         if completed.returncode != 0 or not output.is_file():
             detail = (completed.stderr or completed.stdout).strip()[-2048:]
             raise ValueError(f"packaged_startup_smoke_failed:{detail}")
         rebound_pair = load_release_pair_manifest(live_pair_path)
-        identity_after = read_database_identity(linked_database)
+        identity_after = measure("database_hash_after", _database_artifact_bytes, linked_database)
         if (
             rebound_pair != pair_manifest
             or identity_after != identity_before
@@ -246,7 +303,7 @@ def _run_packaged_clean_startup_smoke(
     if not cli.is_file() or not packaged_database.is_file():
         raise ValueError("packaged_clean_startup_smoke_input_missing")
     build_root = ROOT / "build-py"
-    with _managed_build_temp_dir(
+    with _startup_smoke_observation("clean-startup") as measure, _managed_build_temp_dir(
         build_root=build_root,
         prefix="packaged-clean-startup-",
     ) as root:
@@ -257,9 +314,11 @@ def _run_packaged_clean_startup_smoke(
             os.link(packaged_database, linked_database)
         except OSError:
             shutil.copy2(packaged_database, linked_database)
-        identity_before = read_database_identity(linked_database)
+        manifest = load_database_release_manifest(package_root / "_internal/bundled" / DATABASE_MANIFEST_FILENAME)
+        identity_before = measure("database_hash_before", _database_artifact_bytes,
+                                  linked_database, manifest["database"])
         output = root / "board.json"
-        completed = subprocess.run(
+        completed = measure("frozen_startup", subprocess.run,
             [
                 str(cli),
                 "--data-dir",
@@ -275,14 +334,16 @@ def _run_packaged_clean_startup_smoke(
             text=True,
             encoding="utf-8",
             errors="replace",
-            timeout=180,
+            timeout=PACKAGED_STARTUP_TIMEOUT_SECONDS,
         )
         if completed.returncode != 0 or not output.is_file():
             detail = (completed.stderr or completed.stdout).strip()[-2048:]
             raise ValueError(f"packaged_clean_startup_smoke_failed:{detail}")
-        identity_after = read_database_identity(linked_database)
+        identity_after = measure("database_hash_after", _database_artifact_bytes, linked_database)
         if identity_after != identity_before:
             raise ValueError("packaged_clean_startup_smoke_identity_mismatch")
+        if load_release_pair_manifest(profile_dir / "release-pair-live-manifest.json") != pair_manifest:
+            raise ValueError("packaged_clean_startup_smoke_pair_mismatch")
         return {
             "status": "passed",
             "mode": "new_database_clean_startup",
@@ -292,9 +353,66 @@ def _run_packaged_clean_startup_smoke(
         }
 
 
+def _run_packaged_exact_predecessor_rejection(
+    *, package_root: Path, database_manifest: dict, predecessor_pair: dict,
+    validated_database_identity: dict | None = None,
+) -> dict:
+    """An exact portable package must not silently adopt an older live pair.
+
+    Signed installation upgrade is qualified separately through the actual
+    updater. This negative check must leave the older profile untouched.
+    """
+    predecessor = validate_release_pair_manifest(dict(predecessor_pair))
+    with _startup_smoke_observation("exact-predecessor-rejection") as measure, _managed_build_temp_dir(
+        build_root=ROOT / "build-py", prefix="packaged-exact-rejection-",
+    ) as root:
+        profile_dir = root / "profile"
+        profile_dir.mkdir()
+        database = profile_dir / "genshin.db"
+        source = package_root / "_internal/bundled/genshin.db"
+        try:
+            os.link(source, database)
+        except OSError:
+            shutil.copy2(source, database)
+        identity = measure("database_hash_before", _database_artifact_bytes,
+                           database, database_manifest["database"])
+        receipt_identity = validated_database_identity
+        if receipt_identity is None:
+            receipt_identity = measure("database_identity", read_database_identity, database)
+        if identity != {key: receipt_identity[key] for key in identity}:
+            raise ValueError("packaged_startup_validated_identity_mismatch")
+        write_database_release_manifest(profile_dir / LIVE_MANIFEST_FILENAME, database_manifest)
+        receipt = create_database_live_receipt(database_manifest, receipt_identity,
+                                              installed_at=database_manifest["released_at"])
+        receipt_path = profile_dir / "database-live-receipt.json"
+        receipt_path.write_text(json.dumps(receipt, ensure_ascii=False, sort_keys=True) + "\n", "utf-8")
+        pair_path = profile_dir / "release-pair-live-manifest.json"
+        write_release_pair_manifest(pair_path, predecessor)
+        files = {path: path.read_bytes() for path in (profile_dir / LIVE_MANIFEST_FILENAME, receipt_path, pair_path)}
+        output = root / "must-not-exist.json"
+        completed = measure("frozen_rejection", subprocess.run,
+            [str(package_root / "GenshinCalc.exe"), "--data-dir", str(profile_dir),
+             "whiteboard", "new", "--output", str(output)], cwd=package_root, check=False,
+            capture_output=True, text=True, encoding="utf-8", errors="replace",
+            timeout=PACKAGED_STARTUP_TIMEOUT_SECONDS)
+        try:
+            response = json.loads(completed.stderr or completed.stdout)
+        except (ValueError, TypeError) as error:
+            raise ValueError("packaged_exact_predecessor_rejection_response_invalid") from error
+        if (completed.returncode == 0 or output.exists() or not isinstance(response, dict)
+                or response.get("reason") != "database_live_pair_not_bundled_release"):
+            raise ValueError(f"packaged_exact_predecessor_not_rejected:{response}")
+        if (measure("database_hash_after", _database_artifact_bytes, database) != identity
+                or any(path.read_bytes() != value for path, value in files.items())):
+            raise ValueError("packaged_exact_rejected_profile_changed")
+        return {"status": "passed", "reason": response["reason"],
+                "prior_pair_sequence": predecessor["pair_sequence"], "profile_unchanged": True}
+
+
 def _qualify_packaged_app_startup(
     *, execute_app: bool, package_root: Path, database_manifest: dict,
     pair_manifest: dict, predecessor_pair: dict | None, predecessor_database=None,
+    validated_database_identity: dict | None = None,
 ) -> dict:
     """Keep static qualification separate from an explicitly permitted App run."""
     if not execute_app:
@@ -308,6 +426,16 @@ def _qualify_packaged_app_startup(
             "current_pair_sequence": pair_manifest["pair_sequence"],
             "release_pair_id": pair_manifest["release_pair_id"],
         }
+    if pair_manifest.get("pair_policy") == "exact":
+        result = _run_packaged_clean_startup_smoke(package_root=package_root, pair_manifest=pair_manifest)
+        if predecessor_pair is not None:
+            result = {**result, "mode": "exact_clean_startup_and_predecessor_rejection",
+                      "predecessor_rejection": _run_packaged_exact_predecessor_rejection(
+                          package_root=package_root, database_manifest=database_manifest,
+                          predecessor_pair=predecessor_pair,
+                          validated_database_identity=validated_database_identity),
+                      "signed_installation_upgrade": "separate_qualification_required"}
+        return result
     if predecessor_pair is None:
         return _run_packaged_clean_startup_smoke(
             package_root=package_root, pair_manifest=pair_manifest,
@@ -322,6 +450,7 @@ def _qualify_packaged_app_startup(
     return _run_packaged_startup_rebind_smoke(
         package_root=package_root, database_manifest=database_manifest,
         pair_manifest=pair_manifest, predecessor_pair=predecessor_pair,
+        validated_database_identity=validated_database_identity,
     )
 
 
@@ -785,7 +914,21 @@ def main() -> int:
     allowed_root = (ROOT / "dist").resolve()
     if dist_root != allowed_root and allowed_root not in dist_root.parents:
         parser.error("产物目录必须在当前工作区的 dist 内")
-    dist = dist_root / "GenshinCalc"
+    portable_root = dist_root / "GenshinCalc"
+    dist = portable_root / "app"
+    # Never let a release rebuild erase a user's portable profile or silently
+    # mix an old bare layout with the new app/data directory contract.
+    if portable_root.exists():
+        if portable_root.is_symlink() or portable_root.is_junction():
+            parser.error("便携产物根不能为链接；请使用新的产物目录")
+        if any(path.name not in {"app", "data"} for path in portable_root.iterdir()):
+            parser.error("产物目录包含旧布局或未知文件；请使用新的产物目录")
+        if dist.is_symlink() or dist.is_junction() or (dist.exists() and not dist.is_dir()):
+            parser.error("便携程序目录不能为链接或文件；请使用新的产物目录")
+        portable_data = portable_root / "data"
+        if portable_data.exists() and (not portable_data.is_dir() or portable_data.is_symlink()
+                or portable_data.is_junction() or any(portable_data.iterdir())):
+            parser.error("产物目录已有便携用户资料；请使用新的产物目录，不能覆盖这些资料")
     updater_dist = dist_root / UPDATER_ARTIFACT_DIRECTORY
     database = (ROOT / args.database).resolve()
     if ROOT not in database.parents or database.name != "genshin.db" or not database.is_file():
@@ -939,6 +1082,10 @@ def main() -> int:
             "原生Agent发行计划存在阻断："
             + ",".join(native_plan.release_blockers),
         )
+    try:
+        verify_production_web_assets(ROOT / "src/genshin_app/gui/web", frontend=ROOT / "frontend")
+    except (OSError, ValueError, KeyError) as error:
+        parser.error(f"前端构建与当前资料不一致，请完整重建前端：{error}")
     # A previous attempt's success evidence must not survive a failed rebuild.
     qualification_path = dist_root / "build-qualification.json"
     qualification_path.unlink(missing_ok=True)
@@ -1007,7 +1154,7 @@ def main() -> int:
         parser.error(f"供应链材料生成失败：{error.code}")
 
     cmd = [sys.executable, "-m", "PyInstaller", "genshin_app.spec",
-           "--clean", "--noconfirm", "--distpath", str(dist_root), "--workpath", "build-py"]
+           "--clean", "--noconfirm", "--distpath", str(portable_root), "--workpath", "build-py"]
     print("执行:", " ".join(cmd))
     environment = dict(
         os.environ,
@@ -1049,6 +1196,7 @@ def main() -> int:
         return 1
     try:
         runtime_resource_hashes = verify_runtime_validation_directory(dist / "_internal", ROOT)
+        verify_production_web_assets(dist / "_internal/genshin_app/gui/web", frontend=ROOT / "frontend")
     except (OSError, ValueError) as error:
         reason = getattr(error, "reason", type(error).__name__)
         print(f"\n警告：最终包数据库校验资源不完整：{reason}")
@@ -1132,6 +1280,7 @@ def main() -> int:
             return 1
         shutil.copy2(source, dist / name)
     try:
+        (dist / PORTABLE_MARKER).write_bytes(PORTABLE_MARKER_BYTES)
         package_receipt = write_package_file_manifest(dist)
     except SupplyChainError as error:
         print(f"\n警告：最终包文件清单生成失败：{error.code}")
@@ -1175,6 +1324,7 @@ def main() -> int:
             database_manifest=database_manifest, pair_manifest=pair_manifest,
             predecessor_pair=predecessor_pair,
             predecessor_database=predecessor_database,
+            validated_database_identity=packaged_identity,
         )
     except (DatabaseReleaseError, OSError, subprocess.TimeoutExpired, ValueError) as error:
         print(f"\n警告：最终包真实启动／旧App配对换代冒烟失败：{error}")
@@ -1216,6 +1366,8 @@ def main() -> int:
         _cleanup_failed_candidate(dist=dist, allowed_root=allowed_root)
         return 1
     try:
+        # Outside the sealed inventory; never overwrite an existing profile.
+        (portable_root / "data").mkdir(exist_ok=True)
         qualification_path = _write_build_qualification(
             dist_root=dist_root, pair_manifest=pair_manifest,
             package_receipt=verified_package, native_receipt=native_package_receipt,

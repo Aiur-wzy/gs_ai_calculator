@@ -108,3 +108,53 @@ def test_upgrade_entry_rejects_source_execution_and_overlapping_inputs(tmp_path,
     assert qualification.verify_frozen_upgrade(**{**inputs, "app_archive": previous_app}) == 2
     assert qualification.verify_frozen_upgrade(**{**inputs, "sandbox_root": tmp_path}) == 2
     assert not root.exists()
+
+
+def test_lifecycle_entry_routes_only_named_isolated_mode(tmp_path, monkeypatch):
+    import installer_entry
+
+    calls = []
+    monkeypatch.setattr(qualification, "verify_frozen_lifecycle", lambda **kw: calls.append(kw) or 0)
+    names = ("index", "app-archive", "database-archive", "sandbox-root", "report")
+    arguments = ["--verify-frozen-lifecycle"]
+    for name in names:
+        arguments.extend(["--" + name, str(tmp_path / name)])
+    assert installer_entry.main(arguments) == 0
+    assert calls[0]["index"] == tmp_path / "index"
+    with pytest.raises(SystemExit):
+        installer_entry.main(arguments + ["--previous-index", str(tmp_path / "previous")])
+
+
+def test_maintenance_preview_cannot_select_unavailable_app_only_mode():
+    import installer_entry
+
+    migration = {"mode": "migrate_installation"}
+    assert installer_entry._preview_choice({False: migration}, True) == (False, migration)
+    assert installer_entry._preview_choice({}, True) == (False, None)
+    assert installer_entry._preview_choice({False: "complete", True: "app"}, True) == (True, "app")
+    assert installer_entry._preview_choice({False: "complete", True: "app"}, True, local_files=True) == (False, "complete")
+
+
+def test_installer_explains_causes_beneath_wrappers_and_does_not_invent_success():
+    import installer_entry
+
+    message = installer_entry._failure_message(
+        ["release_pair_helper_first_install_recovery_required", "product_install_link_unsupported"], "安装")
+    assert "目录联接" in message and "已经完成" not in message
+    message = installer_entry._failure_message(["product_migration_source_changed"], "迁移")
+    assert "保留原目录、目标目录" in message and "原安装没有移动" not in message
+    message = installer_entry._failure_message(["product_uninstall_release_proof_missing"], "卸载")
+    assert "归属" in message and "不要手动删除" in message
+    assert "未知格式" not in installer_entry._failure_message(["unmapped_error"], "迁移")
+
+
+def test_completion_message_distinguishes_app_only_and_migration_cleanup():
+    import installer_entry
+
+    result = installer_entry._installation_completion({"install_directory": "X", "database_state": "database_not_installed",
+                                                        "registration_state": "registration_pending"})
+    assert "补装数据库" in result and "系统入口尚待修复" in result
+    assert "程序和数据库安装完成" not in result
+    result = installer_entry._installation_completion({"install_directory": "Y", "source_directory": "X", "cleanup_pending": True})
+    assert "新位置已生效" in result and "原位置仍有受管文件待清理" in result
+

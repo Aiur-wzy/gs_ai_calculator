@@ -11,6 +11,7 @@ class Element{
   set innerHTML(value){this.children=[];this.text=value;}set textContent(value){this.children=[];this.text=String(value);}get textContent(){return(this.text||'')+this.children.map(n=>n.textContent).join('');}
   setAttribute(key,value){this.attributes[key]=String(value);}addEventListener(key,fn){(this.listeners[key]||=[]).push(fn);}
   querySelector(tag){return all(this).slice(1).find(node=>node.tagName===tag)||null;}
+  contains(node){for(let ancestor=node;ancestor;ancestor=ancestor.parent)if(ancestor===this)return true;return false;}
   emit(key,extra={}){return(this.listeners[key]||[]).map(fn=>fn({preventDefault(){},stopPropagation(){},...extra})).at(-1);}focus(){}showModal(){this.open=true;}close(){this.open=false;}
   remove(){if(this.parent)this.parent.children=this.parent.children.filter(n=>n!==this);}
 }
@@ -917,7 +918,7 @@ test('file picker actions are presented rather than falsely reported as complete
 test('export request opens the report choices but does not invent a format or claim a file export',async()=>{
   const e=setup();e.tab('rotation');e.w.RS.state.result={summary:{total_damage:1}};const s=e.AC.session('export');e.AC.state.selected=s.session_id;s.kind='native';s.live=true;s.base=e.AC.capture('native');
   const action=readyFileAction(s,'export_result',{action_id:'e'.repeat(32),reason:'导出本轮结果'});e.AC.receive(s,{next_seq:1,events:[{seq:1,type:'app_action',action}]});await all(e.AC.actionNodes.get(action.action_id)).find(node=>node.tagName==='button'&&node.textContent==='处理').emit('click');await tick();
-  const resolved=e.calls.find(c=>c.name==='agent_resolve_app_action');assert.equal(e.orders.includes('navigate:result'),true);assert.equal(resolved.args[2],'presented');assert.match(resolved.args[4],/请求标识/);assert.ok(e.calls.every(c=>!['export_plan_result','export_result'].includes(c.name)));
+  const resolved=e.calls.find(c=>c.name==='agent_resolve_app_action');assert.equal(e.orders.includes('navigate:result'),true);assert.equal(resolved.args[2],'presented',resolved.args[4]);assert.match(resolved.args[4],/请求标识/);assert.ok(e.calls.every(c=>!['export_plan_result','export_result'].includes(c.name)));
   const dialog=e.body.children.find(node=>node.tagName==='dialog'&&node.dataset?.agentActionId===action.action_id);assert.ok(dialog);assert.equal(e.w.AppDialogKernel.getActive(),dialog);
   await all(dialog).find(node=>node.tagName==='button'&&node.textContent==='结构化结果').emit('click');await tick();
   const lifecycle=e.calls.filter(c=>c.name==='agent_resolve_app_action');assert.deepEqual(lifecycle.map(c=>c.args[2]),['presented','completed']);assert.equal(e.orders.includes('export:json'),true);

@@ -172,8 +172,17 @@ def publish_files(outputs, *, overwrite=False, expected_shas=None, input_paths=(
     outputs = list(outputs)
     paths = [Path(path).resolve() for path, _ in outputs]
     cas_paths = tuple((expected_shas or {}).keys())
-    validate_output_paths(paths, input_paths=input_paths, cas_paths=cas_paths)
-    _validate_publication_roles(paths)
+    try:
+        validate_output_paths(paths, input_paths=input_paths, cas_paths=cas_paths)
+        _validate_publication_roles(paths)
+    except (OSError, PlanError) as exc:
+        # No lock, temporary file or destination write has started. Later
+        # preparation/commit failures keep their existing partial/unknown truth.
+        cause = getattr(exc, "details", str(exc))
+        details = dict(cause) if isinstance(cause, dict) else {"cause": cause}
+        details.update(publication_state="not_written", published_paths=[], unknown_paths=[],
+                       pending_paths=[str(path) for path in paths])
+        raise PlanError(str(exc), getattr(exc, "reason", "file_conflict"), details) from exc
     expected = {os.path.normcase(str(Path(p).resolve())): sha
                 for p, sha in (expected_shas or {}).items()}
     prepared, published = [], []

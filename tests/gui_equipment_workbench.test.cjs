@@ -113,6 +113,15 @@ test('2+2 cannot duplicate a set and changing combination never rewrites given s
   e.select('套装组合','4');assert.deepEqual(clone(e.editor.draft().artifact_sets.map(s=>[s.set_id,s.count])),[[42,4]]);
   assert.match(e.root.textContent,/四件条件收益/);e.select('套装组合','none');assert.deepEqual(clone(e.editor.draft().artifact_sets),[]);assert.deepEqual(clone(e.editor.draft().panel),panel);
 });
+test('selecting a set restores focus to the same visible slot button',async()=>{
+  const e=setup();
+  e.select('套装组合','2+2');
+  const opener=e.button('选择第 1 套');
+  await e.press('选择第 1 套');await e.press('装备甲 · 5星');
+  assert.equal(e.button('套装42 · 2 件'),opener);
+  assert.equal(e.document.activeElement,opener);
+  assert.equal(e.button('选择第 2 套').disabled,false);
+});
 test('search is debounced, keeps its input element, and applies the latest Chinese query',async()=>{
   const e=setup();e.select('套装组合','4');await e.press('选择第 1 套');const input=e.field('按中文名搜索');input.value='冰';input.emit('input');input.value='冰风';input.emit('input');
   assert.equal(e.timers.size,1);e.flush();await tick();assert.equal(e.calls.filter(c=>c.method==='list_artifact_sets').at(-1).args[0],'冰风');assert.equal(e.field('按中文名搜索'),input);

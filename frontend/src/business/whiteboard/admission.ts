@@ -11,7 +11,8 @@ const removeAdmissionIntent =(index:any)=>{const intent=WB.admissionIntents()[in
 const admissionIntentMenuItems =(index:any)=>WB.admissionIntents()[index]?[{id:"edit-admission-intent",label:"编辑动作接纳意图",run:()=>WB.editAdmissionIntent(index)},
   {type:"separator"},{id:"remove-admission-intent",label:"删除动作接纳意图",danger:true,run:()=>WB.removeAdmissionIntent(index)}]:[];
 const renderAdmissionIntents =(box:any)=>{
-  const intents=WB.admissionIntents(),section=UI.el("section",null,"wb-capacity-intents"),pending=intents.filter((row:any)=>row.context===null||row.initial_ready_in===null).length;
+  const intents=WB.admissionIntents(),pending=intents.filter((row:any)=>row.context===null||row.initial_ready_in===null).length,
+    section=WB.fold(`动作接纳意图（${intents.length}）${pending?` · ${pending} 项待确认`:""}`,"admissionIntentsOpen");section.className+=" wb-capacity-intents";
   section.append(UI.el("h3",`动作接纳意图（${intents.length}）`),UI.el("p",pending?`尚有 ${pending} 项未明确场景或开场冷却；不会自动当作全部就绪`:intents.length?"全部意图已显式选择场景与开场状态":"尚未绑定受审动作门禁",pending?"wb-warning":"wb-note"));
   intents.forEach((intent:any,index:any)=>{const actor=WB.actor(intent.actor),action=WB.action(intent.action_id),card=UI.el("article",null,"wb-capacity-intent"),
       more=UI.button("⋯",()=>WB.openCommandMenu(more,`${intent.id}操作`,WB.admissionIntentMenuItems(index)),"wb-menu-trigger");card.tabIndex=0;

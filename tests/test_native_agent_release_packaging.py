@@ -104,7 +104,7 @@ def test_build_plan_is_path_free_and_accepts_aligned_product_runtime_version(
     identity = release.release_identity()
     raw_manifest = {
         **identity,
-        "app_version": "0.46.0",
+        "app_version": APP_VERSION,
         "runtime_files": {"package.json": "a" * 64},
         "runtime_closure_hash": "b" * 64,
         "dependency_lock_hash": "c" * 64,
@@ -166,8 +166,7 @@ def test_build_plan_is_path_free_and_accepts_aligned_product_runtime_version(
     assert public["path_discovery"] is False
     assert public["state"] == "validated"
     assert public["release_ready"] is True
-    assert public["product_app_version"] == APP_VERSION == "0.46.0"
-    assert public["runtime_app_version"] == "0.46.0"
+    assert public["product_app_version"] == public["runtime_app_version"] == APP_VERSION
     assert public["release_blockers"] == []
     assert str(tmp_path) not in json.dumps(public)
 

@@ -126,9 +126,13 @@ assert.ok(!executed[1].includes('--plan'))
 assert.throws(() => createCliTaskReviewPort({ command: 'python' }), /explicit/)
 assert.deepEqual(await startReadonlyReview({}, {}), { enabled: false, started: false })
 let selected
-const ptc = { ctx: { tools: { presentAs(mode) { selected = mode; return () => { selected = 'native' } } } } }
+const ptc = { ctx: {
+  on() { return () => {} }, effect() {},
+  systemPrompt: { getSectionOrder() { return 0 } },
+  tools: { setExecutor(executor) { selected = executor; return () => { selected = 'native' } } },
+} }
 enableCliPtc(ptc); assert.equal(selected, undefined)
-const dispose = enableCliPtc(ptc, { enabled: true }); assert.equal(selected, 'ptc'); dispose(); assert.equal(selected, 'native')
+const dispose = enableCliPtc(ptc, { enabled: true }); assert.equal(selected.constructor.name, 'PtcExecutor'); dispose(); assert.equal(selected, 'native')
 assert.throws(() => enableCliPtc(ptc, { enabled: true, nativeDomain: true }), /not_supported/)
 let observed = 0, bound = false, sourceWarning = false
 const attributed = new NativeTaskTransport({ sessionQuery: { async observeSession() {

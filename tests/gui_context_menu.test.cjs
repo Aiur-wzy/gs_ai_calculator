@@ -75,3 +75,14 @@ test('document-scoped factory returns one reusable command surface',()=>{
   assert.equal(world.AppContextMenu.menuKey({key:'ContextMenu'}),true);
   assert.equal(world.AppContextMenu.menuKey({key:'F10',shiftKey:true}),true);
 });
+
+test('an editor inside a row keeps its native mouse and keyboard context menu',()=>{
+  const {menu,document}=setup(),row=document.createElement('article'),input=document.createElement('input');
+  row.append(input);document.body.append(row);
+  menu.bind(row,{items:[{id:'one',label:'一',run(){}}]});
+  assert.equal(row.emit('contextmenu',{target:input}).defaultPrevented,false);
+  assert.equal(row.emit('keydown',{target:input,key:'ContextMenu'}).defaultPrevented,false);
+  assert.equal(menu.isOpen(),false);
+  assert.equal(row.emit('keydown',{target:row,key:'ContextMenu'}).defaultPrevented,true);
+  assert.equal(menu.isOpen(),true);
+});

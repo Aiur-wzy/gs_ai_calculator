@@ -18,6 +18,9 @@ class Element{
   contains(target){for(let node=target;node;node=node.parentNode)if(node===this)return true;return false;}
   setAttribute(name,value){this.attributes[name]=String(value);}
   getAttribute(name){return Object.hasOwn(this.attributes,name)?this.attributes[name]:null;}
+  hasAttribute(name){return Object.hasOwn(this.attributes,name);}
+  get tabIndex(){return this.hasAttribute('tabindex')?Number(this.attributes.tabindex):['button','input','select','textarea','a','summary'].includes(this.tagName)?0:-1;}
+  set tabIndex(value){this.attributes.tabindex=String(value);}
   removeAttribute(name){delete this.attributes[name];}
   focus(){this.ownerDocument.activeElement=this;this.focused=true;}
   set textContent(value){this._text=String(value);this.children=[];}
@@ -25,6 +28,8 @@ class Element{
 }
 function setup(){
   const document=eventTarget({activeElement:null,hidden:false}),body=new Element('body',document);body.setConnected(true);document.body=body;document.createElement=tag=>new Element(tag,document);
+  const app=document.createElement('main'),portal=document.createElement('aside');app.id='genshin-application-root';portal.id='app-overlay-root';body.append(app,portal);
+  const descendants=node=>[node,...node.children.flatMap(descendants)];document.getElementById=id=>descendants(body).find(node=>node.id===id)||null;
   const window=eventTarget({});window.visualViewport=eventTarget({});
   const observers=[];window.MutationObserver=class{constructor(callback){this.callback=callback;observers.push(this);}observe(){}disconnect(){this.disconnected=true;}trigger(){this.callback([{type:'childList'}]);}};
   const world={document,console,Math,Date,JSONTransport:{clone:value=>JSON.parse(JSON.stringify(value))},setStatus(){},MutationObserver:window.MutationObserver};
@@ -102,4 +107,19 @@ test('application binds page status and data tools to one shared transient surfa
   help.details.open=true;help.details.emit('toggle');
   assert.equal(tools.details.open,false);assert.equal(world.AppSurfaceKernel.getActive(),help.panel);
   assert.equal(help.panel.attributes['aria-label'],'时间轴操作与说明');
+});
+
+test('ported disclosures remain anchored and flip above when there is no room below',()=>{
+  const {world,document,body}=setup(),details=document.createElement('details'),summary=document.createElement('summary'),panel=document.createElement('section');
+  world.innerWidth=320;world.innerHeight=210;summary.getBoundingClientRect=()=>({left:240,right:306,top:175,bottom:196});
+  panel.style={cssText:'color: red;'};panel.offsetWidth=240;panel.offsetHeight=72;
+  details.append(summary,panel);body.append(details);
+  const binding=world.AppSurfaceKernel.bindDisclosure(details,{panel});
+  binding.open();
+  assert.equal(panel.parentNode.id,'app-overlay-root');assert.equal(panel.style.visibility,'');
+  assert.equal(panel.style.left,'66px');assert.equal(panel.style.top,'97px');
+  assert.equal(panel.style.maxHeight,'161px');
+  binding.destroy();
+  assert.equal(panel.parentNode,details);assert.equal(panel.hidden,true);assert.equal(details.open,false);
+  assert.equal(details.appSurfaceController,undefined);
 });

@@ -2,13 +2,14 @@
   "contract": "genshin-dsh-domain-client-build-v1",
   "package": "@genshin-calc/dsh-client-domain",
   "version": "0.46.0",
-  "dshRelease": "0.2.1-rc.5",
+  "dshRelease": "0.2.2-rc.3",
   "loaderContract": "@deepseek-ai/dsh-client-modules/client:ClientBundleRegistration",
   "external": [
     "react/jsx-runtime",
     "@deepseek-ai/dsh-client-ui-primitives",
     "react",
     "@deepseek-ai/dsh-client-store",
+    "react-dom",
     "@deepseek-ai/dsh-client-ui-conversation/client"
   ],
   "injected": [
@@ -22,6 +23,6 @@
     "@deepseek-ai/dsh-client-ui-conversation",
     "@deepseek-ai/dsh-client-ui-workspace"
   ],
-  "bytes": 218828,
-  "sha256": "bae7cbf940383ab6f2140a4db20e7369b57795c7625aa284e67ec405b4e78aab"
+  "bytes": 278818,
+  "sha256": "8eb8c2165e0577ad0d2f3602e2c004da7f4900a0fade88ee8e7cdf943592adea"
 }

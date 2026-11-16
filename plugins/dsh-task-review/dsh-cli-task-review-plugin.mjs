@@ -63,6 +63,6 @@ export function apply(ctx, config) {
       + '明确执行任务可以用 decision 记录 execution_intent=execute，source_refs 引用本轮原题记录 ID。'
       + '用户另指定路径时遵从用户，并明确本插件仍绑定原路径；不静默监控其他文件。' })
   // The ordinary CLI service remains fully usable without this optional hook.
-  return mountTaskReview(ctx, { port, context: true, cli: true, eligible: agent => ctx.agents.roots().includes(agent),
+  return mountTaskReview(ctx, { port, context: true, cli: true, eligible: agent => (ctx.agents.get(agent.id) === agent && agent.session.header.origin !== 'subagent'),
     onDiagnostic: row => ctx.logger?.debug?.('App task review %s', JSON.stringify(row)) })
 }
