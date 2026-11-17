@@ -22,8 +22,14 @@ def _load_exporter():
 def test_public_export_covers_pinned_workspace_patches():
     exporter = _load_exporter()
     root = Path(__file__).resolve().parents[1]
-    rules = json.loads((root / exporter.ALLOWLIST).read_text("utf-8"))
-    trees = rules["main_repository"]["include_trees_after_review"]
+    rules_path = root / exporter.ALLOWLIST
+    if rules_path.is_file():
+        rules = json.loads(rules_path.read_text("utf-8"))
+        trees = rules["main_repository"]["include_trees_after_review"]
+    else:
+        rules = None
+        snapshot = json.loads((root / exporter.MANIFEST).read_text("utf-8"))
+        snapshot_files = {row["path"]: row for row in snapshot["files"]}
     for project in ("frontend", "agent-runtime"):
         workspace = (root / project / "pnpm-workspace.yaml").read_text("utf-8")
         patches = re.findall(r'^\s*"[^"\n]+":\s*(patches/[^\n]+\.patch)\s*$', workspace, re.MULTILINE)
@@ -31,8 +37,12 @@ def test_public_export_covers_pinned_workspace_patches():
         for patch in patches:
             name = f"{project}/{patch}"
             assert (root / name).is_file(), name
-            assert any(name.startswith(tree.rstrip("/") + "/") for tree in trees), name
-            assert not exporter._excluded(name, rules), name
+            if rules is not None:
+                assert any(name.startswith(tree.rstrip("/") + "/") for tree in trees), name
+                assert not exporter._excluded(name, rules), name
+            else:
+                assert name in snapshot_files
+                assert hashlib.sha256((root / name).read_bytes()).hexdigest() == snapshot_files[name]["sha256"], name
 
 
 def test_source_export_rejects_stale_inputs_and_unexpected_outputs(tmp_path):

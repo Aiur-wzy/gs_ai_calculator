@@ -363,7 +363,8 @@ def _run_paired_database_gui(
                 )
                 installation_root = resolve_runtime_root(sys.executable)
                 if installation_root is not None:
-                    identity["installation_registration"] = refresh_registered_installation(installation_root)
+                    # Keep registration details on the host.
+                    refresh_registered_installation(installation_root)
             identity["release_plan_state"] = str(gate["state"])
             identity["service_mode"] = "database_setup" if database_setup else "local_database_service"
             manager = None if database_setup else ServiceManager(prepared_data_dir)

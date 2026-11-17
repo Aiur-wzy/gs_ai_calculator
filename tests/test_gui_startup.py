@@ -179,6 +179,71 @@ def test_verified_app_only_launches_main_without_database_service(tmp_path, monk
     assert not (tmp_path / "genshin.db").exists()
 
 
+@pytest.mark.parametrize("has_database", [True, False], ids=["paired", "app-only"])
+def test_frozen_registered_install_admits_main_window(tmp_path, monkeypatch, has_database):
+    from genshin_app import managed_installation, product_database_setup, version
+    from genshin_app.installation_location import (
+        FIRST_INSTALL_CONTRACT,
+        LAYOUT_VERSION,
+        REGISTRATION_FILENAME,
+    )
+
+    root = tmp_path / "自选 安装目录"
+    data = root / "data"
+    executable = root / "app/GenshinCalcGUI.exe"
+    executable.parent.mkdir(parents=True)
+    executable.touch()
+    (root / REGISTRATION_FILENAME).write_text(json.dumps({
+        "contract": FIRST_INSTALL_CONTRACT,
+        "scope": "current_user",
+        "app_directory": "app",
+        "data_directory": "data",
+        "layout_version": LAYOUT_VERSION,
+        "installation_id": "a" * 32,
+        "installation_state": "installed",
+        "app_release_id": version.APP_RELEASE_ID,
+    }), encoding="utf-8")
+    monkeypatch.setattr(sys, "executable", str(executable))
+    monkeypatch.setattr(launcher, "is_frozen", lambda: True)
+    monkeypatch.setattr("genshin_app.windows_product_registration.set_process_app_id", Mock())
+    refresh = Mock(wraps=managed_installation.refresh_registered_installation)
+    monkeypatch.setattr(managed_installation, "refresh_registered_installation", refresh)
+
+    setup = None if has_database else Mock()
+    manager = Mock()
+    manager.ensure_running.return_value = None
+    gate = Mock(return_value={"state": "current_pair_ready", "can_start": True})
+    monkeypatch.setattr(product_database_setup, "build_database_setup", Mock(return_value=setup))
+    monkeypatch.setattr(launcher, "ensure_data_dir", lambda path: path)
+    monkeypatch.setattr(launcher, "prepare_database_startup", gate)
+    service = Mock(return_value=manager)
+    monkeypatch.setattr(launcher, "ServiceManager", service)
+    monkeypatch.setattr(launcher, "install_close_guard", Mock())
+    splash = SimpleNamespace(evaluate_js=Mock(), destroy=Mock())
+    main = SimpleNamespace()
+    create_window = Mock(side_effect=[splash, main])
+    monkeypatch.setitem(sys.modules, "webview", SimpleNamespace(
+        create_window=create_window, start=lambda callback, **_kwargs: callback(),
+    ))
+
+    assert launcher.run_gui(data, emit_startup_status=False) == 0
+    refresh.assert_called_once_with(root)
+    splash.destroy.assert_called_once()
+    assert create_window.call_count == 2
+    api = create_window.call_args.kwargs["js_api"]
+    state = "current_pair_ready" if has_database else "database_not_installed"
+    mode = "local_database_service" if has_database else "database_setup"
+    assert api.ping()["data"]["app_identity"] == {"release_plan_state": state, "service_mode": mode}
+    if has_database:
+        gate.assert_called_once()
+        service.assert_called_once_with(data)
+        manager.stop.assert_called_once()
+    else:
+        gate.assert_not_called()
+        service.assert_not_called()
+        setup.validate_app_only.assert_called_once()
+
+
 @pytest.mark.parametrize("failure_stage", ["create_window", "close_guard", "start"])
 def test_launcher_cleans_service_when_window_setup_or_start_fails(tmp_path, monkeypatch, failure_stage):
     manager = Mock()
