@@ -43,6 +43,10 @@ DIRECT_LUNAR_ELEMENTS = {
 DIRECT_STELLAR_SCALING_STATS = DIRECT_LUNAR_SCALING_STATS
 
 DIRECT_STELLAR_ELEMENTS = frozenset(("cryo", "electro"))
+DIRECT_STELLAR_ELEMENT_BY_REACTION = {
+    "stellar_superconduct": DIRECT_STELLAR_ELEMENTS,
+    "stellar_swirl": frozenset(("cryo", "anemo")),
+}
 
 DIRECT_ABILITY_BINDING_KEYS = frozenset((
     "character_id", "ability_id", "component_id", "variant_id",
@@ -87,14 +91,23 @@ _PROFILE_META_KEYS = frozenset((
 
 _BASE_MECHANICS_KEYS = _PROFILE_META_KEYS
 
+# Engine extensions are explicit assumptions layered over the unchanged DB
+# base profile. They are not silently registered as reviewed database facts.
+OPTIONAL_MECHANICS_KEYS = {
+    "stellar_superconduct": frozenset(("initial_grant_layers", "settlement_bonus_layers")),
+    "stellar_swirl": frozenset(("initial_vortex_count", "initial_upgrade_cooldown_seconds")),
+}
+
 _MECHANICS_KEYS = {
     "stellar_superconduct": _BASE_MECHANICS_KEYS | frozenset((
         "field_duration_seconds", "settlement_interval_seconds", "refresh_mode",
+        "initial_grant_layers", "settlement_bonus_layers",
     )),
     "stellar_swirl": _BASE_MECHANICS_KEYS | frozenset((
         "upgrade_threshold", "early_detonation_threshold", "detonation_delay_seconds",
         "ice_application_gu", "creation_batch_cap_once",
         "existing_vortex_counts_each_reaction",
+        "initial_vortex_count", "initial_upgrade_cooldown_seconds",
     )),
     "lunar_electro": _BASE_MECHANICS_KEYS | frozenset((
         "first_tick_delay_seconds", "tick_interval_seconds", "duration_seconds",

@@ -82,6 +82,7 @@ _MECHANICS_ROW_KINDS = {
     "application_events": {"contact", "application", "reaction_candidate"},
 }
 _MECHANICS_CONTRACT_KINDS = {
+    "health_model": {"buff_interval", "state", "resource"},
     "attribute_model": {"buff_interval", "state"},
     "attribute_callbacks": {"buff_interval", "state"},
     "shared_pools": {"buff_interval", "state"},

@@ -1,0 +1,912 @@
+{
+  "contract": "genshin-current-skill-resources-v1",
+  "scope": "source_not_release_qualification",
+  "resource_count": 64,
+  "resources": [
+    {
+      "resource": "references/app-mechanics/actions/admission.md",
+      "title": "动作基础资源与接纳来源",
+      "headings": [
+        "动作基础资源与接纳来源",
+        "action_admission v2",
+        "当前首片边界",
+        "目录、场景与确认",
+        "计算与成功动作资格",
+        "旧 action_resource_sources 路径",
+        "工作步骤",
+        "最小来源形状"
+      ],
+      "bytes": 12084,
+      "sha256": "35e6cf9335b1dab6ae27ec5188c1397981f1500b1399711307176882ec53cdb4"
+    },
+    {
+      "resource": "references/app-mechanics/actions/capacity.md",
+      "title": "受审技能最大次数来源",
+      "headings": [
+        "受审技能最大次数来源",
+        "先确认边界",
+        "工作步骤",
+        "白板最小意图",
+        "无容量资料的兼容路径",
+        "当前限制"
+      ],
+      "bytes": 5066,
+      "sha256": "b1321c69c8ba342d87894e82aefb7cbd385adb8065f55eb2f4465668cb7c0bc2"
+    },
+    {
+      "resource": "references/app-mechanics/actions/cast-sequences.md",
+      "title": "多段施放与续段窗口",
+      "headings": [
+        "多段施放与续段窗口",
+        "通用契约",
+        "资料与动作对账"
+      ],
+      "bytes": 4152,
+      "sha256": "a72aa54c954ccba3b74cead65bf1700a93370b5ffb1650558935ac0092db238a"
+    },
+    {
+      "resource": "references/app-mechanics/actions/dispatch.md",
+      "title": "受审动作派发档案",
+      "headings": [
+        "受审动作派发档案",
+        "查询优先级",
+        "三类输入及处理顺序",
+        "1. 受审自动派发",
+        "2. 可复用手工档案",
+        "3. 逐实例手工补充",
+        "Appendix candidate 不是派发档案",
+        "未知自动来源保持pending",
+        "覆盖与验收"
+      ],
+      "bytes": 10279,
+      "sha256": "28ec880b130135f6ac7197c07ed2e5b1767fbc6217fd6e07404dc0f4ba55a2e1"
+    },
+    {
+      "resource": "references/app-mechanics/actions/event-profiles.md",
+      "title": "共用动作档案与自动命中装配",
+      "headings": [
+        "共用动作档案与自动命中装配",
+        "先确定适用范围",
+        "一次定义，共用到明确动作",
+        "防重复与检查"
+      ],
+      "bytes": 7524,
+      "sha256": "341b2aa8edc11baa999ec1d339538bec301b653c9739be8431dc1c3dc34f5bba"
+    },
+    {
+      "resource": "references/app-mechanics/actions/periodic.md",
+      "title": "周期攻击来源与多通道动作档案",
+      "headings": [
+        "周期攻击来源与多通道动作档案",
+        "资料整理：先发现，保存一次",
+        "冻结前：补齐数据库不能证明的事实",
+        "数值阶段：一次来源与一次档案确认",
+        "检查与交付"
+      ],
+      "bytes": 17788,
+      "sha256": "aa92d150f9913c30fb080c7b3f68ed042ec7e77163858115fb0cb31ca57e23dc"
+    },
+    {
+      "resource": "references/app-mechanics/actions/rotation-energy.md",
+      "title": "动作、冷却与能量检查接口",
+      "headings": [
+        "动作、冷却与能量检查接口",
+        "获取契约与调用",
+        "模型 v1 的组织",
+        "能量事件与规则结论",
+        "解释返回结果"
+      ],
+      "bytes": 16171,
+      "sha256": "a102a17f0f8724c4fbec09cc2fbb84c00595d9cc982965739a4cd831a93dfb89"
+    },
+    {
+      "resource": "references/app-mechanics/authoring-assistance.md",
+      "title": "把已核实事实组装成普通原生输入",
+      "headings": [
+        "把已核实事实组装成普通原生输入",
+        "选择表达",
+        "同一个入口，两个调用位置",
+        "可运行的小例"
+      ],
+      "bytes": 8945,
+      "sha256": "b7b2ae4536c19aa9d33ac43d1ae9c0bba604ff580a839bebf497d3a62346c7b6"
+    },
+    {
+      "resource": "references/app-mechanics/authoring-guide.md",
+      "title": "从计算意图找到输入与观察位置",
+      "headings": [
+        "从计算意图找到输入与观察位置",
+        "输入导航",
+        "安排动作、占用与切人",
+        "一个动作产生多段命中",
+        "让实际附着与元素底决定反应",
+        "命中后触发增益与刷新",
+        "生成微粒、到账并扣除爆发能量",
+        "把一条已核实来源接到执行规则",
+        "按任务范围统计并解释是否完成",
+        "读回后判断"
+      ],
+      "bytes": 5417,
+      "sha256": "37604429e2595f84660eb6ec85bf4e067f654a522886c3fdcbfab36687540923"
+    },
+    {
+      "resource": "references/app-mechanics/elements/compatibility.md",
+      "title": "元素与数值计算的兼容入口",
+      "headings": [
+        "元素与数值计算的兼容入口",
+        "连续冻结实验参考模型",
+        "有效兼容和历史边界"
+      ],
+      "bytes": 4168,
+      "sha256": "beebcd700309f538a67bb9d131731d25f255dd0d352e013762df6cea09ab883f"
+    },
+    {
+      "resource": "references/app-mechanics/elements/runtime.md",
+      "title": "元素执行输入与逐击回执",
+      "headings": [
+        "元素执行输入与逐击回执",
+        "逐攻击分量资料",
+        "逐攻击分量核实工作单",
+        "原生转换",
+        "逐击回执与对抗复核",
+        "用数据库规则减少机械抄写",
+        "普通扩散：范围复核与自动伤害来源",
+        "反应触发与反馈",
+        "App与Excel同源"
+      ],
+      "bytes": 21815,
+      "sha256": "42a03fc92f2e5718cf5eb2b471d9859328e02f380665f68a5cf028637df61b9a"
+    },
+    {
+      "resource": "references/app-mechanics/elements/special-reactions.md",
+      "title": "星月替换、能力直伤与来源资格",
+      "headings": [
+        "星月替换、能力直伤与来源资格",
+        "先读取实际合同",
+        "声明场景和替换",
+        "直接能力伤害",
+        "月绽放草露、转换核及消费收益",
+        "贡献者、顺序与完整性",
+        "数据匹配、历史与研究",
+        "有限额外多人雷击诊断"
+      ],
+      "bytes": 13845,
+      "sha256": "5fd4faccb05e44491a879b56e05a6454cc3a584a3e24b5524b5d1907eb117b1f"
+    },
+    {
+      "resource": "references/app-mechanics/execution/action-captures.md",
+      "title": "动作从属面板取样",
+      "headings": [
+        "动作从属面板取样"
+      ],
+      "bytes": 2648,
+      "sha256": "d957f21f34bf818e9e66db8a9fb3f8461c5581de4fb8ae61adabce9410913e20"
+    },
+    {
+      "resource": "references/app-mechanics/execution/attributes-and-sampling.md",
+      "title": "属性依赖与分域取样",
+      "headings": [
+        "属性依赖与分域取样",
+        "旧输入恢复与来源预览",
+        "属性执行容量",
+        "分域采样"
+      ],
+      "bytes": 10944,
+      "sha256": "e6823a781314a75dacff69797f2b99cdcc5a415e29c3be567a42adfd5492cc1d"
+    },
+    {
+      "resource": "references/app-mechanics/execution/materialization.md",
+      "title": "受审机制资料与通用来源绑定",
+      "headings": [
+        "受审机制资料与通用来源绑定",
+        "当前路线与旧字段范围",
+        "材料化输入的公共作者接口",
+        "资料阶段：先发现，再保存精确资料",
+        "数值阶段：生成候选并材料化强类型输入",
+        "执行与更改",
+        "结果与交付"
+      ],
+      "bytes": 18644,
+      "sha256": "5130f05b1647c6c61742d4599713964b8d8e02db1ee053fabe98b50c13dfad6a"
+    },
+    {
+      "resource": "references/app-mechanics/execution/resources-and-lifecycle.md",
+      "title": "资源、多跳与生命周期",
+      "headings": [
+        "资源、多跳与生命周期",
+        "多跳和资源",
+        "真实反应触发的直接回能"
+      ],
+      "bytes": 15177,
+      "sha256": "380a78e91e0fc4c2935e3fe3f90daa1bbf335ef6dd549779e08246ecbad98a53"
+    },
+    {
+      "resource": "references/app-mechanics/execution/rules.md",
+      "title": "声明式规则与来源绑定",
+      "headings": [
+        "声明式规则与来源绑定",
+        "一个原生输入，两类声明",
+        "来源部件必须接到规则",
+        "交给引擎的机械工作",
+        "执行与查看"
+      ],
+      "bytes": 12385,
+      "sha256": "25521f0e98ba67313ed1eeb38e787678b6058140d8437ae649aa49bf8b090980"
+    },
+    {
+      "resource": "references/app-mechanics/health.md",
+      "title": "生命、治疗与生命之契输入",
+      "headings": [
+        "生命、治疗与生命之契输入"
+      ],
+      "bytes": 3126,
+      "sha256": "217a6a4173da4abd10f953e0f084e24892ca2a66e958b5b63d0a9b47238e9ef7"
+    },
+    {
+      "resource": "references/app-mechanics/index.md",
+      "title": "App机制输入与执行说明",
+      "headings": [
+        "App机制输入与执行说明"
+      ],
+      "bytes": 2872,
+      "sha256": "67c12eb2ee87af094c454cc02e267fb221a9abd23c9ecbc6e15387def32a2d57"
+    },
+    {
+      "resource": "references/app-mechanics/input-editing.md",
+      "title": "共用输入编辑、文件回流与派生视图",
+      "headings": [
+        "共用输入编辑、文件回流与派生视图",
+        "当前表示只有一份主要游戏输入",
+        "三种编辑方式",
+        "文件和候选分别核验",
+        "计算与辅助盘点的边界"
+      ],
+      "bytes": 6156,
+      "sha256": "eedde59ec61aa1f32c6ae32d2b03388f63416b6617b82baa836f9010f8b37c40"
+    },
+    {
+      "resource": "references/app-mechanics/loadouts.md",
+      "title": "指定装备、原生方案与轴微调",
+      "headings": [
+        "指定装备、原生方案与轴微调",
+        "可选的聚合词条参考面板",
+        "资料与来源",
+        "构造与复核",
+        "分类与仅在必要时的 match",
+        "共用命令与交付",
+        "固定面板与构造任务",
+        "可选面板复算"
+      ],
+      "bytes": 22269,
+      "sha256": "a0fbf840b9bdcb9088ed6aa3f5092f455784e4743341233f2de2c9fbbdd4c444"
+    },
+    {
+      "resource": "references/app-mechanics/native-causal-example.md",
+      "title": "原生动作到结果的完整小例",
+      "headings": [
+        "原生动作到结果的完整小例",
+        "要表达的事实",
+        "完整输入",
+        "组合、核对和计算",
+        "如何知道真的执行了",
+        "用小改动分清问题"
+      ],
+      "bytes": 16944,
+      "sha256": "ce6c1568e6a6359563ce57247df2f7c6ea26432eeaf9e1d5c6583dcc36ef44d0"
+    },
+    {
+      "resource": "references/app-mechanics/resolved-template.md",
+      "title": "引擎 resolved 模板契约",
+      "headings": [
+        "引擎 resolved 模板契约",
+        "1. 可运行的最小示例",
+        "2. 字段与默认值",
+        "3. 面板和乘区Buff",
+        "4. hit与四伤害体系",
+        "5. 轴、假设和结构化补丁"
+      ],
+      "bytes": 12920,
+      "sha256": "f01b5410e5b980f5aac13f030683b337ba4505783bc74a00cf431e61fcbd36e9"
+    },
+    {
+      "resource": "references/app-mechanics/review/corrections.md",
+      "title": "自动计算、审查与循环补正",
+      "headings": [
+        "自动计算、审查与循环补正",
+        "逐轮检查",
+        "可选辅助视图与ER试算",
+        "可重新计算的补正",
+        "统一覆盖与当前外部固定伤害"
+      ],
+      "bytes": 13644,
+      "sha256": "cc1185b244e1ea32e05f012062debc9c3336ec74796d26ab9f045845b8b6bf3f"
+    },
+    {
+      "resource": "references/app-mechanics/review/overrides.md",
+      "title": "统一计算覆盖",
+      "headings": [
+        "统一计算覆盖",
+        "当前可执行范围",
+        "使用顺序",
+        "不变量"
+      ],
+      "bytes": 5894,
+      "sha256": "d0cd0c2c94ba18059837fd664e7bfda1f64e1fcd31d9ad23503eb09642085e73"
+    },
+    {
+      "resource": "references/app-mechanics/review/report-window.md",
+      "title": "统计截止与完整任务校验",
+      "headings": [
+        "统计截止与完整任务校验"
+      ],
+      "bytes": 2855,
+      "sha256": "59f1c0df3dbcda8c01b75d3fd699cc407516616bd8f7889cc5311fdfaa45f685"
+    },
+    {
+      "resource": "references/app-mechanics/review/results.md",
+      "title": "App结果、覆盖率与交付状态",
+      "headings": [
+        "App结果、覆盖率与交付状态",
+        "按需读取逐击解释与特殊状态",
+        "6. 同源交付与外查记录",
+        "一份事实记录，多个交付视图",
+        "覆盖率必须说明测量对象",
+        "快照和完整输入窗口"
+      ],
+      "bytes": 7698,
+      "sha256": "6d34b41d7cb13d3fafc75511392c4ca535adbac0e7d698579ccefe974b46f770"
+    },
+    {
+      "resource": "references/app-mechanics/sources/attack-metadata.md",
+      "title": "精确攻击来源与自动元信息",
+      "headings": [
+        "精确攻击来源与自动元信息",
+        "资料阶段查询",
+        "数值阶段转换",
+        "交付与核对"
+      ],
+      "bytes": 8481,
+      "sha256": "4c682c5682a417dad142c35a0f32de917822d752928364a9735202aa62f2c12a"
+    },
+    {
+      "resource": "references/app-mechanics/sources/energy-generation.md",
+      "title": "产能资料：精确物品与参考单位",
+      "headings": [
+        "产能资料：精确物品与参考单位",
+        "先取得并保存资料",
+        "分清可算单位与实际触发",
+        "转换为轴时",
+        "命中自动产球（仅在接口提供时）"
+      ],
+      "bytes": 6794,
+      "sha256": "2f034bd24085fd289621b89110249481ae9fa322d077be3b0aa50785a02bd9c4"
+    },
+    {
+      "resource": "references/app-mechanics/sources/hit-parameters.md",
+      "title": "已有命中的数据库倍率来源",
+      "headings": [
+        "已有命中的数据库倍率来源",
+        "资料整理",
+        "数值阶段的转换"
+      ],
+      "bytes": 3353,
+      "sha256": "f1051818573604ef589eb3f627e7d442314480ef05cf8ad398fafd4869b1ceed"
+    },
+    {
+      "resource": "references/app-mechanics/sources/limited-hit-benefits.md",
+      "title": "有限次数收益来源",
+      "headings": [
+        "有限次数收益来源",
+        "资料阶段：查询父来源并保存一次",
+        "数值阶段：绑定、校准并接受",
+        "执行与轴微调",
+        "结果与工作簿"
+      ],
+      "bytes": 6460,
+      "sha256": "b70b970c9bc5206e16f0fd6593c31563bcd17ed037cb718195836fc03b561594"
+    },
+    {
+      "resource": "references/app-mechanics/sources/passives.md",
+      "title": "固有天赋资料与有限反应增伤",
+      "headings": [
+        "固有天赋资料与有限反应增伤",
+        "动态属性入口",
+        "先发现来源入口，再建立动作检查点与事件拓扑",
+        "原生来源与场景",
+        "一次来源确认与实际触发",
+        "评审与边界"
+      ],
+      "bytes": 10283,
+      "sha256": "9cf0342cc59c883156c9a85ec9dc50ab16e4c1bdae09a50d65c0990885bd0281"
+    },
+    {
+      "resource": "references/app-mechanics/sources/reaction-benefits.md",
+      "title": "普通扩散的装备收益来源",
+      "headings": [
+        "普通扩散的装备收益来源",
+        "资料和转换",
+        "计算核对",
+        "明确边界"
+      ],
+      "bytes": 4002,
+      "sha256": "77b016a8efbac9b32ba6cddd2e25bd4cb3623343d0806b4d305b8e42eb695266"
+    },
+    {
+      "resource": "references/app-mechanics/sources/reaction-em.md",
+      "title": "反应触发的精通来源",
+      "headings": [
+        "反应触发的精通来源"
+      ],
+      "bytes": 2365,
+      "sha256": "0148020f2304c2b8bd802a99a8485bb7a737682a804267ac9c54a3be063e42f7"
+    },
+    {
+      "resource": "references/app-mechanics/sources/static-inclusions.md",
+      "title": "初始面板已经包含的静态装备来源",
+      "headings": [
+        "初始面板已经包含的静态装备来源"
+      ],
+      "bytes": 2881,
+      "sha256": "df4a4a9fb018f7cf2d63ee83d26d632c087727cdbea3e8f60d9b8c8c02ecd92d"
+    },
+    {
+      "resource": "references/app-mechanics/sources/target-conditions.md",
+      "title": "逐击目标条件与固定装备来源",
+      "headings": [
+        "逐击目标条件与固定装备来源",
+        "数据库自动来源",
+        "运行含义与必要微调",
+        "复核与交付"
+      ],
+      "bytes": 5402,
+      "sha256": "b01b19107b1dbb329db334601c8bb676ed11cb95496cb76199dcd5609e378993"
+    },
+    {
+      "resource": "references/app-mechanics/sources/upstream-runtime.md",
+      "title": "上游来源如何接入App执行输入",
+      "headings": [
+        "上游来源如何接入App执行输入",
+        "数值阶段的原生转换",
+        "初始面板与评审",
+        "静态命座参数进入已有命中"
+      ],
+      "bytes": 6338,
+      "sha256": "38d3165c8db543fb404cf54cdafe403d3620c2576c54d5c148b5cd0696728da5"
+    },
+    {
+      "resource": "references/data/character-appendices.md",
+      "title": "角色动作资料附录",
+      "headings": [
+        "角色动作资料附录",
+        "默认读取：先发现正文，再决定采用",
+        "发现新资料后的维护",
+        "何时写入",
+        "候选记录",
+        "角色级 App 填入模板",
+        "与 benchmark 场景绑定分离",
+        "审核与提升",
+        "当前角色资料范围"
+      ],
+      "bytes": 13845,
+      "sha256": "86253b7edc2e08ca489cbc79b685fd48b0d28074de22d707097c99ca8ac9b2b6"
+    },
+    {
+      "resource": "references/data/database-readme.md",
+      "title": "数据库 README：字段语义与关系范式",
+      "headings": [
+        "数据库 README：字段语义与关系范式",
+        "活动库与资料贡献边界",
+        "1. 数据分层与权威",
+        "2. 常用目录字段",
+        "`character`",
+        "`skill`",
+        "`talent`、`skill_param`、`extra_info`",
+        "`annotation` 与 `mechanic_semantic_*`",
+        "3. 运行资料字段",
+        "`runtime_source`",
+        "`runtime_definition`",
+        "`runtime_reference` 与 `runtime_object_reference`",
+        "关系状态",
+        "4. 关系范式",
+        "A. 角色到技能与等级参数",
+        "B. 技能到 Ability 候选",
+        "C. Ability 到 Gadget/Bullet",
+        "D. 动画与动作模式",
+        "E. 公共战斗根配置",
+        "F. 角色 appendix",
+        "G. 名称引用候选的 Agent 材料化",
+        "H. opaque字段与未知`$type`的Agent研究入口",
+        "I. 装备非正式候选与延期边界",
+        "5. 当前版本能力快照",
+        "6. Agent最短读取流程",
+        "7. 禁止推断",
+        "8. 版本维护检查",
+        "当前原生Agent读取入口"
+      ],
+      "bytes": 31010,
+      "sha256": "06234dbdb4b52f70d680e1736743225db8888bf9369b7b1c8f26ea61f659c2d9"
+    },
+    {
+      "resource": "references/data/gadget-sources.md",
+      "title": "创建物资料：精确身份与挂载",
+      "headings": [
+        "创建物资料：精确身份与挂载",
+        "资料阶段",
+        "限界与缺项"
+      ],
+      "bytes": 3636,
+      "sha256": "bb63bf0ea54ef554efcd66b77a9ca6c0db83129cebca2772870124c2869bb471"
+    },
+    {
+      "resource": "references/data/query.md",
+      "title": "数据库接口使用指引",
+      "headings": [
+        "数据库接口使用指引",
+        "查询已选装备的资料附录",
+        "1. 定位服务（使用 HTTP 时）",
+        "2. 调用方式",
+        "3. 常用查询配方",
+        "实验动作资料回填",
+        "直接查询中文身份和基础面板",
+        "原生武器成长与工具合同",
+        "有界上下文与精确选择",
+        "4. 临时资料与缓存",
+        "机制说明的最小内容",
+        "外查与事实变更",
+        "5. 故障速查",
+        "数据查询技巧",
+        "常见坑",
+        "上线状态与资料采用"
+      ],
+      "bytes": 32210,
+      "sha256": "bdaeacf09546ae04a59c7bcc122eb1eb72d2cfbcdda9eb775eeca079c42566ca"
+    },
+    {
+      "resource": "references/data/research.md",
+      "title": "原生Agent公开研究与采用账",
+      "headings": [
+        "原生Agent公开研究与采用账"
+      ],
+      "bytes": 2497,
+      "sha256": "d2c78a3612cfc133d1f0158faf8e40749d867923545142bec6383166eb19210f"
+    },
+    {
+      "resource": "references/data/runtime-query.md",
+      "title": "高级运行资料查询与同快照小资源",
+      "headings": [
+        "高级运行资料查询与同快照小资源",
+        "资料阶段",
+        "同快照批量与资料小文件",
+        "请求范围与定向发现"
+      ],
+      "bytes": 12362,
+      "sha256": "6033bd152d7e145b271b47b08f8f8be534ccc5a453e55100d98a61277551feab"
+    },
+    {
+      "resource": "references/index.md",
+      "title": "按问题查资料",
+      "headings": [
+        "按问题查资料",
+        "任务与专卡",
+        "游戏原理",
+        "资料与研究",
+        "App表达与执行",
+        "运行与入口",
+        "交付"
+      ],
+      "bytes": 4649,
+      "sha256": "79e5a67be0f9d206d0aa8be792a9cf60c094995c5e7c869bcbc04486bd4c02e1"
+    },
+    {
+      "resource": "references/mechanics/artifacts.md",
+      "title": "配装原理、词条与属性规划",
+      "headings": [
+        "配装原理、词条与属性规划",
+        "一、属性来源分层",
+        "元素共鸣（队伍属性加成，用户 2026-09-02 要求标注）",
+        "二、圣遗物主词条速查（5 星满级）",
+        "给定面板与预算构造",
+        "三、副词条机制",
+        "出现规则",
+        "副词条数值表（5 星）",
+        "四、词条收益比较（边际收益法）",
+        "五、套装选择方法",
+        "六、充能效率的特殊地位",
+        "七、武器选择方法",
+        "白值的真实收益（用户 2026-09-02 校订）",
+        "八、面板规划工作流（\"刷什么提升大\"标准解法）",
+        "九、快速检查清单"
+      ],
+      "bytes": 11579,
+      "sha256": "0b71520903f7cf360f13424c3f04ba03f7aa271771d004fa566b28892a8ea322"
+    },
+    {
+      "resource": "references/mechanics/damage-formula.md",
+      "title": "伤害公式与乘区体系",
+      "headings": [
+        "伤害公式与乘区体系",
+        "零、伤害类型判定（计算第一步）",
+        "一、传统直伤公式",
+        "基础区 = `倍率 × 属性 × 大权区 + 羽毛区 + 激化固定增伤`",
+        "暴击区（期望）",
+        "传统增伤区",
+        "抗性系数（分段）",
+        "防御系数",
+        "增幅系数（蒸发/融化）",
+        "二、剧变反应公式",
+        "三、月曜伤害（月感电/月绽放/月结晶）",
+        "直伤月曜（角色技能直接造成，标注\"视为月曜反应伤害\"）",
+        "反应月曜（月感电雷暴云 / 月结晶月笼造成）",
+        "月曜专有乘区",
+        "四、星烁伤害（星超导/星扩散）",
+        "五、攻击区（传统直伤的属性来源）",
+        "六、报告口径",
+        "七、快速检查清单"
+      ],
+      "bytes": 11651,
+      "sha256": "ca966af39aa700200ead74caa4d9e390adfef35e90b2dc18ec4134dbf8ebb959"
+    },
+    {
+      "resource": "references/mechanics/mechanics-glossary.md",
+      "title": "术语表与常见机制速查",
+      "headings": [
+        "术语表与常见机制速查",
+        "一、基础术语",
+        "二、机制术语",
+        "三、配装术语",
+        "四、反应术语速查",
+        "五、计算中易错点速查（拉表前自查）",
+        "六、与数据库 annotation 的分工"
+      ],
+      "bytes": 4892,
+      "sha256": "4e3e33e9354b14ec26eeeb4d6835eb776a20f7548fb8a9317de6fffce5aebafb"
+    },
+    {
+      "resource": "references/mechanics/reactions.md",
+      "title": "元素反应、附着与 ICD",
+      "headings": [
+        "元素反应、附着与 ICD",
+        "一、反应分类速查",
+        "二、增幅反应（蒸发 / 融化）",
+        "三、激化反应",
+        "四、剧变反应（固定伤害）",
+        "四之二、月曜与星烁机制",
+        "五、元素附着与元素量",
+        "六、ICD（附着内置冷却）",
+        "七、附着顺序与实战要点",
+        "八、快速检查清单"
+      ],
+      "bytes": 9332,
+      "sha256": "73eb60227b3575dfc7c95b8dc8bf10870224f1161bf2a0622764f88a779e0eea"
+    },
+    {
+      "resource": "references/mechanics/rotation.md",
+      "title": "排轴原理：Buff 时序、循环结构与快照",
+      "headings": [
+        "排轴原理：Buff 时序、循环结构与快照",
+        "一、基本概念",
+        "二、循环时长的构成",
+        "三、Buff 覆盖率",
+        "四、快照机制（Snapshot）",
+        "五、能量循环（充能约束）",
+        "六、排轴设计要点（评审一份轴时看什么）",
+        "七、循环总伤的拉表方法（软件引擎与 Excel 近似的共同框架）",
+        "八、快速检查清单",
+        "附录：帧率对排轴的影响（附录级参考）"
+      ],
+      "bytes": 11613,
+      "sha256": "d8048fff32ee95b02e064c0c4a709ffc79e8c12284a4a516c9fb4d18bd3504d6"
+    },
+    {
+      "resource": "references/outputs/app-and-excel.md",
+      "title": "按目标一次计算交付App方案与Excel",
+      "headings": [
+        "按目标一次计算交付App方案与Excel",
+        "查找和使用文件",
+        "状态与验证",
+        "已验证全未命中的零结果"
+      ],
+      "bytes": 6241,
+      "sha256": "381fda6402ff84d3e46c2d04a4e0fb9bf1060a5c9b9f81704148c6734f6e81aa"
+    },
+    {
+      "resource": "references/outputs/excel.md",
+      "title": "Excel 模式拉表指南",
+      "headings": [
+        "Excel 模式拉表指南",
+        "原生方案的同源活公式导出",
+        "1. 铁律",
+        "2. 公式权威与映射",
+        "3. annotation → 公式调整路径",
+        "4. 场景模板蓝图",
+        "4.1 单技能期望伤害",
+        "4.2 词条收益梯度",
+        "4.3 武器对比",
+        "4.4 配装对比",
+        "4.5 循环总伤（简化轴）",
+        "5. 校验",
+        "6. 交付清单",
+        "排轴技巧",
+        "Excel 模式技巧"
+      ],
+      "bytes": 11614,
+      "sha256": "cea87f6a89f36d1e7ab2b977df416f8a7e4699e9dbd017e1c657428cf0463598"
+    },
+    {
+      "resource": "references/runtime/native-agent.md",
+      "title": "原生Agent V2运行与恢复",
+      "headings": [
+        "原生Agent V2运行与恢复",
+        "实际能力",
+        "持久化与上下文",
+        "预算与继续",
+        "运行配置与公开CLI",
+        "候选、批准和文件"
+      ],
+      "bytes": 7128,
+      "sha256": "c10ddd94a96bf231bcb7b575173e676423fe5d72db0ed68cc6306488364811dc"
+    },
+    {
+      "resource": "references/runtime/software-entrypoints.md",
+      "title": "软件能力说明",
+      "headings": [
+        "软件能力说明",
+        "1. 按入口获取能力",
+        "三种入口的资源根",
+        "多次调用时复用一个 CLI 进程",
+        "2. 解读返回包络",
+        "3. 命令速查（示意，权威以 capabilities 为准）",
+        "4. 引擎排轴工作流（核心用法）",
+        "5. 从机制事实到原生输入",
+        "6. 常见错误速查",
+        "7. 边界提醒",
+        "8. 双击打开方案",
+        "9. App 分层时间轴",
+        "10. App原生Agent"
+      ],
+      "bytes": 24365,
+      "sha256": "963e48e672b206a2253296e57bcf45045b336ff03583fa5c7499b977c0fcfe2b"
+    },
+    {
+      "resource": "references/workflow/context-use.md",
+      "title": "按需披露、资料缓存与上下文恢复",
+      "headings": [
+        "按需披露、资料缓存与上下文恢复",
+        "小入口与小资源",
+        "DSH Surface与跨轮",
+        "修订与失效"
+      ],
+      "bytes": 4251,
+      "sha256": "9fc7e10c6cb1cece939e7a7948d3d0e351d02490c0bcefc9b28d6fd2c344a350"
+    },
+    {
+      "resource": "references/workflow/coverage-and-review.md",
+      "title": "来源采用、事件盘点与实际执行核对",
+      "headings": [
+        "来源采用、事件盘点与实际执行核对",
+        "1. 配装草稿与来源入口",
+        "2. 动作检查点",
+        "3. 每个动作检查全部触发来源",
+        "4. 闭合数值、能量与附着模型",
+        "5. 严格计算、双向检查与续轮",
+        "机制语义到执行输入",
+        "一条来源怎样采用",
+        "从资料到输入和结果",
+        "容易混淆的语义",
+        "按情况选用的软检查",
+        "动作、效果和伤害分开",
+        "在现有小资源中保留最小采用记录",
+        "算后对照"
+      ],
+      "bytes": 24083,
+      "sha256": "3c5cdfd73de6c3a940e899b36a8951946d424383ad583b1976d9d370f8d2f4b6"
+    },
+    {
+      "resource": "references/workflow/focus/actions.md",
+      "title": "动作工作卡",
+      "headings": [
+        "动作工作卡"
+      ],
+      "bytes": 1511,
+      "sha256": "cd902694581ff6a8d9c1a1fbcf49e610fd91603e2f6859ff497c734a67401ebf"
+    },
+    {
+      "resource": "references/workflow/focus/closure.md",
+      "title": "结果检查与交付工作卡",
+      "headings": [
+        "结果检查与交付工作卡",
+        "失败后继续",
+        "核对用户目标与优化结果",
+        "交付"
+      ],
+      "bytes": 3507,
+      "sha256": "751d90860ed835ea2c3eb874827728d409edaa1a53f763130e615134aa666c7c"
+    },
+    {
+      "resource": "references/workflow/focus/events.md",
+      "title": "事件工作卡",
+      "headings": [
+        "事件工作卡"
+      ],
+      "bytes": 2437,
+      "sha256": "24041b7759569fffabea570d6ddb2443b4f454243271e51f65f2a50a27390b14"
+    },
+    {
+      "resource": "references/workflow/focus/loadout.md",
+      "title": "配装工作卡",
+      "headings": [
+        "配装工作卡"
+      ],
+      "bytes": 2088,
+      "sha256": "efb089aa605aec9357c0fb5b1eb22d41c0935a6297efb06222b5c4f6927eb84e"
+    },
+    {
+      "resource": "references/workflow/focus/numbers.md",
+      "title": "数值工作卡",
+      "headings": [
+        "数值工作卡"
+      ],
+      "bytes": 1676,
+      "sha256": "701cddc3f7c5cabd641d767cab283f8c83ad2f09dc55d2440bf9afb05a57e2f5"
+    },
+    {
+      "resource": "references/workflow/index.md",
+      "title": "当前任务工作法",
+      "headings": [
+        "当前任务工作法",
+        "开始",
+        "建输入、检查和改进",
+        "遇到失败怎样继续",
+        "交付与续接",
+        "五张工作卡"
+      ],
+      "bytes": 6972,
+      "sha256": "f46359f7c66fc06e80967ae1b0651fe790595290bd76c5cce1ad0e2e9408dbdf"
+    },
+    {
+      "resource": "references/workflow/task-evidence.md",
+      "title": "把原题、游戏解释和实际结果对起来",
+      "headings": [
+        "把原题、游戏解释和实际结果对起来",
+        "先保住用户真正要的东西",
+        "阅读时留住会改变计算的条件",
+        "修改后检查变化，而不是从头重读",
+        "一次交付前的最后对照"
+      ],
+      "bytes": 6060,
+      "sha256": "f9c3fd62d9e7857d486c91fdef88a980636dbdab01c9f282e205680c51b54770"
+    },
+    {
+      "resource": "references/workflow/whiteboard.md",
+      "title": "接续用户创作白板与App聊天",
+      "headings": [
+        "接续用户创作白板与App聊天",
+        "修改范围",
+        "从空白板逐步构建",
+        "完善排轴与计算",
+        "动作接纳 v3 意图",
+        "文件交接与工具边界",
+        "向用户交接"
+      ],
+      "bytes": 8898,
+      "sha256": "55bf10b85dcba0d0c1beb37df250b46c4a21bfe843e532908f3e5248b899e5fe"
+    },
+    {
+      "resource": "SKILL.md",
+      "title": "原神拉表计算",
+      "headings": [
+        "原神拉表计算",
+        "拉表原则",
+        "按当前问题读取"
+      ],
+      "bytes": 4866,
+      "sha256": "7fdea4450aab2ea30d56931cae1da8f30d43a36d9afb50a2271192bea6bc2a3c"
+    }
+  ],
+  "authoring_navigation": {
+    "resource": "references/app-mechanics/authoring-intents.json",
+    "generated_resource": "references/app-mechanics/authoring-guide.md",
+    "sha256": "f0786eeb0ed26fcd5413466bb2ad32a5affedc1a2ff3353a3eb5a5f9bda7e525",
+    "intent_count": 7
+  }
+}

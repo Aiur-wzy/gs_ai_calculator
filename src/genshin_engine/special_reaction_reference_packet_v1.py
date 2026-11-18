@@ -156,6 +156,13 @@ def _canonical_replace_stellar_swirl_packet_v1(
                     stellar_swirl_action_id=first_reaction.get("action_id"),
                     stellar_swirl_parent_reaction_id=first["id"],
                 )
+                initial = mechanics.get("initial_vortex_count", 1)
+                if initial > 1 and time >= self.party_state.get("stellar_swirl_initial_upgrade_ready_at", 0):
+                    vortex["stellar_swirl_count"] = initial
+                    vortex["stellar_swirl_level"] = 2 if initial >= mechanics["upgrade_threshold"] else 1
+                    ready = time + _seconds_to_ticks(mechanics.get("initial_upgrade_cooldown_seconds", 0), "initial_upgrade_cooldown_seconds")
+                    self.party_state["stellar_swirl_initial_upgrade_ready_at"] = ready
+                    vortex["stellar_swirl_initial_upgrade_ready_at"] = ready
                 for roles in packet_roles:
                     self._merge_stellar_swirl_roles(
                         vortex, roles, packet_event_id)
@@ -166,7 +173,7 @@ def _canonical_replace_stellar_swirl_packet_v1(
                     "area_id": area_id, "reaction_type": "stellar_swirl",
                     "operation": "create_vortex_from_packet",
                     "packet_size": len(reactions), "packet_started_with_vortex": False,
-                    "counted_children": 1, "count": 1, "vortex_level": 1,
+                    "counted_children": 1, "count": vortex["stellar_swirl_count"], "vortex_level": vortex["stellar_swirl_level"],
                     "detonate_at": vortex["stellar_swirl_detonate_at"]/TICKS,
                     "profile": copy.deepcopy(profile), "status": "executed",
                 })

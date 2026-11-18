@@ -9,7 +9,7 @@ from __future__ import annotations
 import json
 import urllib.request
 
-APP_VERSION = "1.0.1"
+APP_VERSION = "1.0.2"
 UPDATE_MANIFEST_URL = ""  # 更新渠道确定后在此配置
 APP_DIR_NAME = "GenshinCalc"
 
@@ -24,17 +24,17 @@ APP_DIR_NAME = "GenshinCalc"
 # Advance the database ID/sequence only when database content or its own
 # release contract changes.  App compatibility is declared by PairManifest,
 # not by minting a duplicate database release.
-APP_RELEASE_ID = "app-1.0.1"
-RELEASE_PAIR_ID = "pair-1.0.1-db-7.2.50-r6"
+APP_RELEASE_ID = "app-1.0.2"
+RELEASE_PAIR_ID = "pair-1.0.2-db-7.2.50-r6"
 # APP_VERSION is the feature version; each release ID identifies one immutable
 # package and may never be reused for a different rebuild.
-RELEASE_PAIR_SEQUENCE = 5
+RELEASE_PAIR_SEQUENCE = 6
 # Exact bytes of the last accepted predecessor pair used by the portable
 # release build.  This prevents a builder from selecting an arbitrary older
 # in-repository pair merely because its sequence and database happen to look
 # compatible.  Advance this pin only after accepting a new portable candidate.
 ACCEPTED_PREDECESSOR_PAIR_MANIFEST_SHA256 = (
-    "ac57fe3185d8f4be52f46be209003a4be310ec5355a2bec093d99cc3c48e4226"
+    "0b99891fa54331a91012779bbbb01224e39524f76d70e8fe2f8d30c5d01d8b66"
 )
 DATABASE_PAIR_POLICY = "current_only"
 DATABASE_RELEASE_ID = "db-7.2.50-r6"
@@ -58,7 +58,7 @@ NATIVE_AGENT_RUNTIME_GENERATION = "dsh_client_shell"
 # pins belong to historical release evidence, not executable fallback paths.
 # Set after the final runtime + frontend cohort has been reviewed together.
 NATIVE_AGENT_DSH_SHELL_MANIFEST_SHA256 = (
-    "7f63602ad62f25fb349de1690f893201e67eb0ab2fdfd9836cbb2f7d61751e15"
+    "382adea6e8a9fabbdf2995a93abfec0567d19f33f88894428e5171e712ace1d0"
 )
 NATIVE_AGENT_NODE_VERSION = "24.19.0"
 NATIVE_AGENT_NODE_BINARY_SHA256 = (

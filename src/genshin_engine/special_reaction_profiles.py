@@ -17,8 +17,9 @@ from genshin_engine.special_reaction_contracts import (
     DIRECT_ABILITY_BINDING_KEYS,
     DIRECT_LUNAR_ELEMENTS,
     DIRECT_LUNAR_SCALING_STATS,
-    DIRECT_STELLAR_ELEMENTS,
+    DIRECT_STELLAR_ELEMENT_BY_REACTION,
     DIRECT_STELLAR_SCALING_STATS,
+    OPTIONAL_MECHANICS_KEYS,
     SPECIAL_REACTION_TYPES,
     _finite_number,
     _issue,
@@ -305,13 +306,13 @@ def validate_direct_stellar_damage_profile(profile: dict) -> list[dict]:
             "fields", "parameters必须完整声明反应、元素、倍率、结算属性、次数和分项。",
             path+".parameters", expected_fields=sorted(parameter_keys)))
     else:
-        if parameters.get("reaction_type") != "stellar_superconduct":
+        if parameters.get("reaction_type") not in DIRECT_STELLAR_ELEMENT_BY_REACTION:
             issues.append(_issue(
-                "value", "首期直伤星烁接口只接收stellar_superconduct。",
+                "value", "能力直伤支持stellar_superconduct或stellar_swirl。",
                 path+".parameters.reaction_type"))
-        if parameters.get("element") not in DIRECT_STELLAR_ELEMENTS:
+        if parameters.get("element") not in DIRECT_STELLAR_ELEMENT_BY_REACTION.get(parameters.get("reaction_type"), ()):
             issues.append(_issue(
-                "value", "直伤星超导元素必须为cryo或electro。",
+                "value", "星超导直伤元素为cryo/electro；星扩散直伤元素为cryo/anemo。",
                 path+".parameters.element"))
         if not _finite_number(parameters.get("multiplier"), positive=True):
             issues.append(_issue(
@@ -366,7 +367,7 @@ def load_reviewed_special_reaction_profiles() -> dict:
         }
         if not isinstance(row, dict) or set(row) != expected_fields:
             raise RuntimeError(f"{reaction_type}受审profile字段不完整。")
-        parameter_keys = _MECHANICS_KEYS[reaction_type] - _PROFILE_META_KEYS
+        parameter_keys = _MECHANICS_KEYS[reaction_type] - _PROFILE_META_KEYS - OPTIONAL_MECHANICS_KEYS.get(reaction_type, frozenset())
         parameters = row.get("parameters")
         evidence = row.get("evidence_refs")
         if (row.get("profile_id") != f"native.{reaction_type}.v1"

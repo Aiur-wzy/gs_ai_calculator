@@ -36,6 +36,7 @@ _FAMILIES = MappingProxyType({
                              ("genshin_engine.special_deadline_stellar_field",)),
     "stellar_swirl": ("genshin_engine.special_replace_stellar_swirl",
                       ("genshin_engine.special_replace_stellar_packet",
+                       "genshin_engine.special_stellar_initial_upgrade",
                        "genshin_engine.special_stellar_detonation")),
     "lunar_electro": ("genshin_engine.special_replace_lunar_electro",
                       ("genshin_engine.special_lunar_tick_admission",)),

@@ -18,6 +18,11 @@ from genshin_engine.elemental_schema import (
     ELEMENTAL_SCHEMA,
     elemental_capabilities,
 )
+from genshin_engine.health_contract import (
+    HEALTH_EXPR,
+    HEALTH_SCHEMA,
+    health_capabilities,
+)
 from genshin_engine.particle_quantities import PARTICLE_COUNT, PARTICLE_MODE_FIELDS
 from genshin_engine.reaction_event_capabilities import reaction_listener_capabilities
 from genshin_engine.registry import BENEFIT_TYPES
@@ -87,7 +92,7 @@ ACTION_ADMISSION_FILTER = obj({
     "contract": {"const": "action-admission-execution-v1"},
 }, ["contract"])
 FILTER = obj({
-    "event": {"enum": ["action_start", "action_end", "switch", "hit", "condition", "elemental_reaction", "reaction_damage"]},
+    "event": {"enum": ["action_start", "action_end", "switch", "hit", "condition", "elemental_reaction", "reaction_damage", "health_change"]},
     "phase": {"enum": ["pre", "post"]},
     "action_ids": arr(STRING), "event_ids": arr(STRING), "characters": arr(STRING),
     "event_refs": arr(RUNTIME_EVENT_REF_V2_SCHEMA),
@@ -121,6 +126,7 @@ for _field, _label in {"kind": "数值类型", "view_id": "资源读数标识", 
 EXPR["oneOf"][-1]["properties"]["kind"]["x-enum-labels"] = {"counter_view": "累计资源读数"}
 EXPR["oneOf"][-1]["properties"]["sample"]["x-enum-labels"] = {
     "current": "提供者当前累计", "self_frame": "自身当前累计或输出快照"}
+EXPR["oneOf"].append(HEALTH_EXPR)
 EFFECT = obj({"id": STRING, "benefit_type_id": {"enum": [*BENEFIT_TYPES, "benefit.energy_recharge.all"]},
               "value": EXPR, "domain": {"enum": ["self", "provider", "enemy"]},
               "filter": FILTER}, ["id", "benefit_type_id", "value", "domain"])
@@ -225,6 +231,7 @@ GENERAL_FIXED_SOURCE = obj({**copy.deepcopy(FIXED_SOURCE["properties"]),
     "effects": {**arr(GENERAL_FIXED_EFFECT), "minItems": 1, "maxItems": 8}},
     [*FIXED_SOURCE["required"], "damage_systems"])
 MECHANICS_SCHEMA = obj({
+    "health_model": HEALTH_SCHEMA,
     "schema_version": {"const": 1}, "rules": arr(RULE),
     "attribute_model": attribute_model_schema(),
     "execution_options": OPTIONS_SCHEMA,
@@ -313,6 +320,7 @@ def mechanics_capabilities():
 
     return {
         "mechanics_schema_version": 1, "schema": copy.deepcopy(MECHANICS_SCHEMA),
+        "health": health_capabilities(),
         'resource_execution_budget': {'policy': normalize_resource_budget(), 'override_schema': copy.deepcopy(RESOURCE_LIMITS_SCHEMA),
             'engine_path': 'execution_options.resource_limits', 'app_path': 'calculation_options.resource_limits',
             'file_envelopes_independent': True},
@@ -381,10 +389,10 @@ def mechanics_capabilities():
                 "limits_scope": "仅非空v2领域门控的累计工作与私有索引预扣；不是进程总内存、耗时或所有合法轴完成保证。耗尽保留真实前缀，不生成完整总伤。v1和空v2保留原限额。"},
             "unsupported": ["独立无伤害附着父", "freeze参考模型", "手填反应事件名单", "从来源ID自动推断游戏资格"]},
         "attribute_ledger": {**attribute_ledger_capabilities(),
-            "supported_contracts": ["attribute-ledger-v1", "attribute-ledger-v2", "attribute-ledger-v3"],
-            "stats": ["em", "atk"],
+            "supported_contracts": ["attribute-ledger-v1", "attribute-ledger-v2", "attribute-ledger-v3", "attribute-ledger-v4"],
+            "stats": ["em", "atk", "hp", "def", "energy_recharge"],
             "schema_scope": "schema保留纯v1常量账；实际原生输入使用native_schema，各图细节见graph/stat_graph。",
-            "expressions": "v1仅常量；v2单EM输入线性式；v3单EM/ATK输入线性式及受益者基础攻击比例应用。",
+            "expressions": "v1常量；v2单EM；v3单EM/ATK；v4五属性依赖图与基础值。可选health_model提供当前/取样生命读数，不把当前生命混入最大HP。",
             "graph": attribute_graph_capabilities(),
             "stat_graph": attribute_stat_capabilities(),
             "multistat_graph": attribute_multistat_capabilities(),
@@ -392,12 +400,12 @@ def mechanics_capabilities():
             "author_schema": attribute_model_schema(author=True),
             "normalization": "App作者输入可省精确effect_ref分类的component以预览；Engine执行必须使用规范化完整来源，未知分类不提升。",
             "frame_authority": "mechanics_execution",
-            "execution": "显式v1启用常量EM账；v2支持普通EM线性转换；v3共用EM/ATK依赖图。总值来自当前面板，ATK基础值仅来自stats.base_atk；EM的NONEXTRA/base分别声明。",
-            "reads": "已声明属性表达式与动态v3扩散读取真实current/trigger/event帧；v3可读取ATK与base_atk。旧v2和freeze资格不变。",
+            "execution": "显式v4统一ATK/最大HP/DEF/EM/ER，百分比收益使用各自基础值；NONEXTRA仍需来源声明。旧v1-v3行为保持。",
+            "reads": "current/trigger/event使用真实状态及属性帧；v4支持base_atk/base_hp/base_def。生命及生命之契读数走health表达式。",
             "projection": "逐层证明self旧资格/provider当前资格；授权event可绑定实际已执行帧。出伤投影只作TOTAL根，不能共享为面板。v3比例收益先取样并封顶，再乘受益者基础攻击；核心只接收原比例并应用一次。",
             "numeric_audit": "v3经典ATK缩放与真实core输入逐击校验；attribute_inputs来自实际公式上下文，只绑定纳入结果的原始窗口。普通calculate默认输出不变。",
             "limits_scope": "一次执行的事实捕获、增量登记与读取共享execution_work；事件数另有限额。",
-            "unsupported": ["v1表达式转换依赖", "v2的非EM转换闭包", "HP/DEF/ER属性图", "ATK的NONEXTRA", "任意多输入表达式", "命中筛选或限次属性读取", "共享资源门控属性读取", "从未知分类推导NONEXTRA", "v3属性账与旧C2回调合同组合"]},
+            "unsupported": ["v1表达式转换依赖", "v2的非EM转换闭包", "任意多输入表达式", "命中筛选或限次普通属性读取", "共享资源门控普通属性读取", "从未知分类推导NONEXTRA", "未断开取样反馈的生命到最大生命递归"]},
         "elemental": elemental_capabilities(),
         "elemental_state_operations": {
             "contract": "elemental-state-operation-v1",
@@ -517,7 +525,7 @@ def mechanics_capabilities():
         "limits": {"max_rules": 128, "max_expanded_events": 40000, "max_layers": 1000},
         "supported": ["动作开始/结束、切人、命中、显式条件触发", "实际接棒者", "内部冷却与延迟", "整体刷新与独立层到期",
                       "每角色/全队次数池", "逐事件前后相位", "显式命中偏移展开", "自己冻结/提供者当前/敌方当前",
-                      "常量与单层属性比例/上下限", "确定性产球与直接回能", "完整机制状态跨轮继承",
+                      "常量与单层属性比例/上下限", "确定性及显式期望数量产球与直接回能", "完整机制状态跨轮继承", "显式生命、治疗、生命之契和生命条件反馈",
                       "固定来源的逐命中目标条件暴击率（旧冻结参考合同）；general合同按显式伤害系统及实际公式消费常量",
                       "显式v4属性账的ATK/最大HP/DEF/EM/ER来源、传递取样及消费证明；支持范围以版本合同为准"],
         "unsupported": ["从原文自动生成规则", "随机概率", "elemental 能力范围外的元素与反应", "多目标独立额度", "规则触发规则的递归链",

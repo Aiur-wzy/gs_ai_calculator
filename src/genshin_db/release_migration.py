@@ -27,6 +27,7 @@ from pathlib import Path
 from typing import Any
 from uuid import uuid4
 
+from genshin_db.atomic_io import atomic_replace
 from genshin_db.equipment import validate_equipment
 from genshin_db.locking import LockBusyError, database_lock, file_lock
 from genshin_db.release_integrity import (
@@ -147,7 +148,7 @@ def _write_json_atomic(path: Path, value: Mapping[str, Any]) -> None:
             stream.write(raw)
             stream.flush()
             os.fsync(stream.fileno())
-        os.replace(temporary, path)
+        atomic_replace(temporary, path)
         _fsync_directory(path.parent)
     finally:
         temporary.unlink(missing_ok=True)
@@ -160,7 +161,7 @@ def _write_bytes_atomic(path: Path, raw: bytes) -> None:
             stream.write(raw)
             stream.flush()
             os.fsync(stream.fileno())
-        os.replace(temporary, path)
+        atomic_replace(temporary, path)
         _fsync_directory(path.parent)
     finally:
         temporary.unlink(missing_ok=True)

@@ -153,6 +153,19 @@ def build_special_state_timeline(trace, *, duration, execution_limit, execution_
                 accumulator = state(instance, "field_accumulator", layers, expires_at=row.get("expires_at"),
                                     next_settlement_at=row.get("next_settlement_at"))
                 change(instance, "field_accumulator", "active", layers)
+                if fresh and row.get("initial_grant_layers"):
+                    initial = row["initial_grant_layers"]
+                    factor = row.get("initial_grant_factor")
+                    if type(initial) is not int or not 0 < initial <= 12 or not _finite(factor):
+                        issue("state_initial_grant_incomplete", index, area)
+                        bonus = unknown(bonus, "settled_damage_bonus")
+                    else:
+                        close(bonus, boundary, "initial_grant")
+                        bonus = state(instance, "settled_damage_bonus", initial,
+                                      expires_at=row.get("initial_grant_expires_at"),
+                                      system_factor=factor,
+                                      ordinary_cryo_electro_bonus=row.get("initial_grant_ordinary_bonus"))
+                        change(instance, "settled_damage_bonus", "active", initial, system_factor=factor)
             elif operation == "count_successful_application":
                 if accumulator is None:
                     if row.get("reason") == "field_inactive":

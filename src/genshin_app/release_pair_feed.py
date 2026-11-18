@@ -38,6 +38,7 @@ from genshin_app.release_pair_discovery import (
     validate_latest_document,
 )
 from genshin_app.release_pair_trust import build_trust_verifier
+from genshin_db.atomic_io import atomic_replace
 from genshin_db.release_profile import (
     PAIR_MANIFEST_FILENAME,
     DatabaseReleaseError,
@@ -557,7 +558,7 @@ def prepare_release_pair_feed(
             "receipt_sha256": hashlib.sha256(_canonical(receipt_body)).hexdigest(),
         }
         _write_json(temporary / FEED_RECEIPT_FILENAME, receipt)
-        os.replace(temporary, output)
+        atomic_replace(temporary, output)
         return copy.deepcopy(receipt)
     except Exception:
         shutil.rmtree(temporary, ignore_errors=True)

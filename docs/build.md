@@ -1,6 +1,6 @@
 # 源码构建
 
-本版源码对应 App **1.0.1** 与数据库 **db-7.2.50-r6**。Git 源码不带 SQLite、Node 可执行文件或已安装依赖。完整构建需取得配套数据库、数据库发行清单和受验的前代配对清单。
+本版源码对应 App **1.0.2** 与数据库 **db-7.2.50-r6**。Git 源码不带 SQLite、Node 可执行文件或已安装依赖。完整构建需取得配套数据库、数据库发行清单和受验的前代配对清单。
 
 ## 先核对源码
 
@@ -61,7 +61,7 @@ node scripts/generate_dsh_client_shell_manifest.mjs agent-runtime frontend agent
 | `data/genshin.db` | r6 完整数据库，把发行页的数据库包解压后保存为 `genshin.db` |
 | `data/database-release-manifest.json` | 与该 r6 字节对应的正式发行清单 |
 | `agent-runtime/node.exe` | 与锁定发行匹配的 Windows Node |
-| `release-inputs/1.0.0/release-pair-manifest.json` | 构建核验所需的前一验收候选配对清单，已随源码提供 |
+| `release-inputs/1.0.1/release-pair-manifest.json` | 构建核验所需的前一验收候选配对清单，已随源码提供 |
 
 r6 发行清单和数据库包由[数据发行页](https://github.com/Aiur-wzy/gs_ai_calculator_db/releases/tag/db-7.2.50-r6)提供。前代配对清单使用 [release-inputs](../release-inputs/README.md) 中指定路径，保留原始字节。
 
@@ -69,7 +69,7 @@ r6 发行清单和数据库包由[数据发行页](https://github.com/Aiur-wzy/g
 
 ```powershell
 $buildTime = [DateTimeOffset]::UtcNow.ToString('o')
-python scripts/build_dist.py --dist-root dist/local-1.0.1 --database data/genshin.db --accepted-database-manifest data/database-release-manifest.json --accepted-predecessor-pair-manifest release-inputs/1.0.0/release-pair-manifest.json --native-node agent-runtime/node.exe --released-at $buildTime --no-app-execution
+python scripts/build_dist.py --dist-root dist/local-1.0.2 --database data/genshin.db --accepted-database-manifest data/database-release-manifest.json --accepted-predecessor-pair-manifest release-inputs/1.0.1/release-pair-manifest.json --native-node agent-runtime/node.exe --released-at $buildTime --no-app-execution
 ```
 
 `--no-app-execution` 不启动生成的 App，但仍执行 Node 和打包资源校验。`--native-plan-only` 只生成构建计划，仍需配套数据库与锁定运行时输入。实际编译结束后须核对包内版本和文件清单。

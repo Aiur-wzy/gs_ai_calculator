@@ -35,6 +35,8 @@ def _event_identity_conflicts(run):
             add(event["id"], f"mechanics_model.{name}[{index}].id", name)
     for index, capture in enumerate(run.captures or []):
         add(capture["id"], f"mechanics_model.snapshot_captures[{index}].id", "snapshot_capture")
+    for index, event in enumerate(run.request.mechanics_model.get('health_model', {}).get('events', [])):
+        add(event['id'], f'mechanics_model.health_model.events[{index}].id', 'health_operation')
     counts = {}
     for event in run.data["runtime"]:
         counts[event["id"]] = counts.get(event["id"], 0) + 1
@@ -47,6 +49,10 @@ def _event_identity_conflicts(run):
 def prepare_rotation_semantics(run: MechanicsExecutionContext, services: MechanicsExecutionServices) -> bool:
     run.rotation_context, run.data = services.analyze_rotation(run.rotation, run.projected)
     run.rotation_context.assumptions.extend(run.request.mechanics_model.get("assumptions", []))
+    health = run.request.mechanics_model.get("health_model", {})
+    for item in [*health.get('characters', []), *health.get('events', []), *health.get('conditions', [])]:
+        if item['status'] == 'assumed':
+            run.rotation_context.assumptions.append(f"生命模型 {item['id']}：{item['source']}")
     run.rotation_context.assumptions.extend(f"{r['id']}：{r['source']}" for r in run.request.mechanics_model["rules"] if r["status"] == "assumed")
     run.rotation_context.assumptions.extend(f"{s['id']}：{s['source']}" for s in run.fixed_sources if s["status"] == "assumed")
     run.rotation_context.assumptions.extend(f"{e['id']}：{e['source']}" for e in run.request.mechanics_model["condition_events"] if e["status"] == "assumed")
@@ -71,6 +77,9 @@ def prepare_rotation_semantics(run: MechanicsExecutionContext, services: Mechani
 
 
 def expand_execution_events(run: MechanicsExecutionContext, services: MechanicsExecutionServices) -> bool:
+    for event in run.request.mechanics_model.get('health_model', {}).get('events', []):
+        run.runtime_events.append({'id':event['id'], 'kind':'health_operation', 'time':services.tick(event['t']),
+                                   'order':event['order'], 'data':event})
     for action in run.rotation["actions"]:
         run.runtime_events.append({"id": action["id"]+":end", "kind": "mechanics_end", "time": services.tick(action["occupation_end"]),
                         "order": action["order"], "causal": (-1,),
@@ -126,6 +135,7 @@ def admit_event_references_and_matches(run: MechanicsExecutionContext, services:
     stable_source_ids = run.all_ids | {row['id'] for row in run.request.mechanics_model['hit_patterns']}
     deferred_references = []
     run.conditions = {e["condition"] for e in run.request.mechanics_model["condition_events"]}
+    run.conditions.update(e['id'] for e in run.request.mechanics_model.get('health_model', {}).get('conditions', []))
     state_rule_routes, state_operation_routes = {}, {}
     if any(services.reserved_id(eid) for eid in run.all_ids | reaction_ids | reaction_damage_ids):
         run.output["issues"].append(services.issue("state_reserved_identity", "输入或隐式事件占用了生命周期内部身份。", "mechanics_model"))

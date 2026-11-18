@@ -476,7 +476,7 @@ class SpecialReactionRuntime:
     def _vortex_state(self, area_id: str) -> dict:
         if not isinstance(area_id, str) or not area_id:
             raise ValueError("area_id必须是非空空间桶ID。")
-        return self.vortex_by_area.setdefault(area_id, {
+        state = self.vortex_by_area.setdefault(area_id, {
             "stellar_swirl_count": 0,
             "stellar_swirl_level": 0,
             "stellar_swirl_detonate_at": None,
@@ -487,6 +487,10 @@ class SpecialReactionRuntime:
             "stellar_swirl_anemo_trigger_ids": [],
             "stellar_swirl_cryo_applier_ids": [],
         })
+        ready = self.party_state.get("stellar_swirl_initial_upgrade_ready_at")
+        if ready is not None:
+            state["stellar_swirl_initial_upgrade_ready_at"] = ready
+        return state
 
     def _moondrift_state(self, area_id: str) -> dict:
         if not isinstance(area_id, str) or not area_id:
@@ -726,6 +730,7 @@ class SpecialReactionRuntime:
         parameters = {
             name: mechanics.get(name)
             for name in _MECHANICS_KEYS[reaction_type] - _PROFILE_META_KEYS
+            if name in mechanics
         }
         differences = {
             name: {"reviewed": reviewed["parameters"].get(name), "configured": value}
@@ -1026,6 +1031,12 @@ class SpecialReactionRuntime:
         field["stellar_superconduct_physical_res_delta"] = -.4
         if not transition.was_active:
             field["stellar_superconduct_origin_applications"] = [transition.establishing_application]
+            if transition.initial_grant_layers:
+                layers = transition.initial_grant_layers
+                field["stellar_superconduct_settled_layers"] = layers
+                field["stellar_superconduct_factor"] = stellar_superconduct_factor(layers)
+                field["stellar_superconduct_ordinary_bonus"] = self._ordinary_bonus(layers)
+                field["stellar_superconduct_buff_expires_at"] = transition.next_settlement
 
     def _commit_lunar_bloom_transition(self, transition):
         if not isinstance(transition, LunarBloomTransition):
@@ -1077,6 +1088,9 @@ class SpecialReactionRuntime:
             stellar_swirl_anemo_trigger_ids=transition.anemo_trigger_ids,
             stellar_swirl_cryo_applier_ids=transition.cryo_applier_ids,
         )
+        if transition.initial_upgrade_ready_at is not None:
+            vortex["stellar_swirl_initial_upgrade_ready_at"] = transition.initial_upgrade_ready_at
+            self.party_state["stellar_swirl_initial_upgrade_ready_at"] = transition.initial_upgrade_ready_at
 
     def _commit_lunar_crystallize_transition(self, moondrift, transition):
         if not isinstance(transition, LunarCrystallizeTransition):
@@ -1209,6 +1223,8 @@ class SpecialReactionRuntime:
                     time=time, seconds_to_ticks=_seconds_to_ticks,
                 ))
                 self._commit_stellar_field_transition(field, transition)
+                if transition.initial_grant_layers:
+                    transition.generated_event["initial_grant_ordinary_bonus"] = field["stellar_superconduct_ordinary_bonus"]
                 generated.append(transition.generated_event)
             elif reaction_type == "stellar_swirl":
                 replaced["role_provenance"] = copy.deepcopy(stellar_swirl_roles)
@@ -1869,6 +1885,15 @@ class SpecialReactionRuntime:
 
         return self._execute_direct_damage_atomically(commit)
 
+    def direct_stellar_snapshot(self, reaction_type: str, area_id: str) -> dict:
+        """Ability Swirl uses its own coefficient, never a natural vortex level."""
+        if reaction_type == "stellar_superconduct":
+            return self.stellar_superconduct_snapshot(area_id)
+        if reaction_type != "stellar_swirl":
+            raise ValueError("不支持的能力直伤星烁类型。")
+        return {"area_id": area_id, "layers": None, "system_factor": STELLAR_FACTOR["stellar_swirl"],
+                "sample_policy": "ability_coefficient_without_vortex_layers"}
+
     def request_direct_stellar_damage(
         self,
         *,
@@ -1883,7 +1908,7 @@ class SpecialReactionRuntime:
         time: int,
         ability_profile: dict,
     ) -> dict:
-        """Emit one ability-owned Star-Superconduct hit using runtime layers."""
+        """Emit an ability-owned hit; only Superconduct reads field layers."""
         issues = validate_direct_stellar_damage_profile(ability_profile)
         if issues:
             raise SpecialReactionPending(
@@ -1895,7 +1920,7 @@ class SpecialReactionRuntime:
         parameters = ability_profile["parameters"]
         reaction_type = parameters["reaction_type"]
         self._require_ready(reaction_type, event_id)
-        if area_id not in self.stellar_field_by_area:
+        if reaction_type == "stellar_superconduct" and area_id not in self.stellar_field_by_area:
             raise SpecialReactionPending(
                 "direct_stellar_area_unbound",
                 "直伤星超导必须引用已经由反应运行时建立的领域区域。",
@@ -1918,7 +1943,7 @@ class SpecialReactionRuntime:
             self._reject_direct_deadline_id_collision(event_id, due)
             # Area membership was checked before advance.  Expiry clears the
             # state in place, so this read cannot create a typo bucket.
-            snapshot = self.stellar_superconduct_snapshot(area_id)
+            snapshot = self.direct_stellar_snapshot(reaction_type, area_id)
             request = {
                 "type": "special_reaction_damage_request",
                 "event_id": event_id,
@@ -1930,12 +1955,13 @@ class SpecialReactionRuntime:
                 "owner": actor,
                 "action_id": action_id,
                 "parent_reaction_id": None,
-                "reaction_type": "stellar_superconduct",
+                "reaction_type": reaction_type,
                 "damage_system": "stellar",
                 "reaction_base": False,
                 "layers": snapshot["layers"],
                 "system_factor": snapshot["system_factor"],
-                "factor_policy": "event_time_last_completed_four_second_window",
+                "factor_policy": ("event_time_last_completed_four_second_window" if reaction_type == "stellar_superconduct"
+                                  else "ability_coefficient_without_vortex_layers"),
                 "settled_snapshot": copy.deepcopy(snapshot),
                 "element": parameters["element"],
                 "multiplier": parameters["multiplier"],

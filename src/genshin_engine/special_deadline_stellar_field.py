@@ -46,7 +46,7 @@ def plan_stellar_field_deadline_steps(field: Mapping[str, Any], config, *, area_
             config["mechanics"]["settlement_interval_seconds"], "settlement_interval_seconds")
         while next_tick is not None and next_tick <= time and next_tick <= expires:
             basis = replacement_state_fingerprint(state)
-            layers = min(12, state["stellar_superconduct_layers"])
+            layers = min(12, state["stellar_superconduct_layers"] + config["mechanics"].get("settlement_bonus_layers", 0))
             state["stellar_superconduct_settled_layers"] = layers
             yield _field_step("settled_layers", basis, state, None)
             basis = replacement_state_fingerprint(state)

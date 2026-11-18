@@ -342,8 +342,8 @@ def test_audit_uses_reported_origin_not_later_checked_cycle_same_stable_hit_id()
 def test_public_capabilities_expose_exact_native_stat_scope_without_source_authority():
     from genshin_engine.mechanics_schema import mechanics_capabilities
     cap=mechanics_capabilities()['attribute_ledger']
-    assert cap['supported_contracts']==['attribute-ledger-v1','attribute-ledger-v2','attribute-ledger-v3']
-    assert cap['stats']==['em','atk']
+    assert cap['supported_contracts']==['attribute-ledger-v1','attribute-ledger-v2','attribute-ledger-v3','attribute-ledger-v4']
+    assert cap['stats']==['em','atk','hp','def','energy_recharge']
     assert cap['native_schema']['oneOf'][1]['properties']['contract']['const']=='attribute-ledger-v3'
     assert cap['stat_graph']['basis']['atk']==['total','base']
     assert cap['stat_graph']['source_authority']=='none'

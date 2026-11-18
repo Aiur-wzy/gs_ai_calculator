@@ -270,6 +270,8 @@ def validate_special_reaction_bindings(
                     ))
         elif kind == "direct_stellar_damage":
             ability_profile = event.get("ability_profile")
+            parameters = ability_profile.get("parameters", {}) if isinstance(ability_profile, dict) else {}
+            stellar_type = parameters.get("reaction_type") if isinstance(parameters, dict) else None
             profile_issues = validate_direct_stellar_damage_profile(ability_profile)
             for profile_issue in profile_issues:
                 original_path = profile_issue.get("path", "ability_profile")
@@ -283,18 +285,18 @@ def validate_special_reaction_bindings(
                        for key, value in profile_issue.items()
                        if key not in {"code", "message", "path"}},
                 ))
-            if "stellar_superconduct" not in enabled_replacements:
+            if stellar_type not in enabled_replacements:
                 issues.append(_issue(
                     "special_switch_disabled",
-                    "显式直伤星超导事件需要开启星超导替换。", path,
-                    reaction_type="stellar_superconduct",
+                    "能力直伤星烁事件需要开启对应反应的资格模型。", path,
+                    reaction_type=stellar_type,
                 ))
             profile_status = (ability_profile or {}).get("status") if isinstance(
                 ability_profile, dict) else None
             if profile_status in ("confirmed", "assumed") and event.get("status") != profile_status:
                 issues.append(_issue(
                     "direct_stellar_status_mismatch",
-                    "直伤星超导事件与能力profile必须使用相同审计状态。",
+                    "星烁能力直伤事件与能力profile必须使用相同审计状态。",
                     path+".status", event_status=event.get("status"),
                     ability_profile_status=profile_status,
                 ))
@@ -310,15 +312,15 @@ def validate_special_reaction_bindings(
                     != actual.get("effective_level")):
                 issues.append(_issue(
                     "direct_special_ability_binding_mismatch",
-                    "直伤星超导profile没有绑定当前动作的角色与技能。", path,
+                    "星烁能力直伤profile没有绑定当前动作的角色与技能。", path,
                     ability_binding=copy.deepcopy(binding),
                     action_binding=copy.deepcopy(actual),
                 ))
-            elif REQUIRED_CAPABILITY_TAGS["stellar_superconduct"] not in tags_by_character.get(
+            elif REQUIRED_CAPABILITY_TAGS.get(stellar_type) not in tags_by_character.get(
                     binding["character_id"], set()):
                 issues.append(_issue(
                     "direct_special_owner_capability_unproven",
-                    "直伤星超导角色本人缺少对应数据库能力标签。", path,
+                    "星烁能力直伤角色本人缺少对应反应的数据库能力标签。", path,
                     character_id=binding["character_id"],
                 ))
         elif kind not in (

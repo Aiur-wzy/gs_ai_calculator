@@ -245,6 +245,8 @@ class _Mechanics:
                               if "resource_counter_views" in model else None)
         self.state_runtime = None
         self.attribute_runtime = None
+        from genshin_engine.health_runtime import HealthRuntime
+        self.health_runtime = HealthRuntime(model['health_model'], template) if 'health_model' in model else None
         self.attribute_scaling_receipts = {}
         self.attribute_layer_serial = 0
         for initial in model["initial_state"]["rules"]:
@@ -370,9 +372,11 @@ class _Mechanics:
             raise ValueError("事件预算预留必须为非负整数。")
         if (not self.has_beneficiary_eligibility and not _swirl_v2(self.model)
                 and not self.captures and not self.shared_pools and not self.attribute_runtime
-                and not self.state_runtime and self._special_runtime() is None):
+                and not self.state_runtime and not self.health_runtime and self._special_runtime() is None):
             return
         if self.event_budget_count + count > MAX_MECHANICS_EVENTS:
+            if self.health_runtime:
+                raise AttributeLedgerError('health_event_limit', '生命与动作、规则共用事件预算超限', status='pending')
             if self.state_runtime:
                 raise StateRuntimeError("state_event_limit", "生命周期与动作、规则及资源共用事件预算超限", severity="pending")
             if self.attribute_runtime:
@@ -578,6 +582,7 @@ class _Mechanics:
                 frames.end(ev)
 
     def _on_event(self, ev, row, frontline, energy):
+        self.health_event_context = ev
         self.event_emitter.begin_batch()
         if self.attribute_runtime:
             self.attribute_runtime.stage(ev, "capture" if ev["kind"] == "mechanics_snapshot_capture" else "pre")
@@ -585,6 +590,9 @@ class _Mechanics:
         if self.elemental:
             self._advance_elemental(ev["time"], ev["origin"], ev)
         self.frontline = frontline
+        if self.health_runtime:
+            from genshin_engine.health_mechanics import sync_health
+            sync_health(self, ev)
         return dispatch_mechanics_event(self, ev, row, frontline)
 
     def _crystallize_trigger_sample(self, ev, event, application):
@@ -820,6 +828,13 @@ class _Mechanics:
         if self.special_damage_echoes is not None:
             self.special_damage_echoes.boundary(self, next_cycle)
         self.expire(time)
+        if self.health_runtime:
+            from genshin_engine.health_mechanics import sync_health
+            boundary_event = {'id':'health:boundary', 'run_id':f'health:boundary:{next_cycle}', 'origin':next_cycle-1}
+            self.health_event_context = boundary_event
+            if self.attribute_runtime:
+                self.attribute_runtime.stage(boundary_event, 'pre')
+            sync_health(self, boundary_event)
         if self.elemental and self.elemental.freeze_state:
             self._advance_elemental(time, next_cycle-1)
         states = {}
@@ -832,6 +847,10 @@ class _Mechanics:
                     frozen = [sample.get("stats") if sample else None for sample in inst["layer_snapshots"]]
                 instances.append({"beneficiaries": inst["beneficiaries"], "expires_in": [e-time for e in inst["expires"]],
                                   "quota": dict(inst["quota"]), "frozen_stats": frozen})
+                if self.health_runtime:
+                    from genshin_engine.health_runtime import health_signature
+                    instances[-1]['frozen_health'] = [health_signature(sample.get('health', {})) if sample else None
+                                                      for sample in inst['layer_snapshots']]
             states[rid] = {"cooldown_in": max(0, state["cooldown"]-time), "instances": instances,
                            "awaiting_switch": [self.freeze_panel(p["snapshot"])["stats"] for p in state["pending"]]}
         # Retain only snapshots which can be needed by delayed hits from prior casts;
@@ -884,6 +903,7 @@ class _Mechanics:
             if time < state["anchor"] + TICKS//2
         ]
         return {**({"elemental": self.elemental.boundary(time, next_cycle)} if self.elemental else {}),
+                **({'health': self.health_runtime.boundary()} if self.health_runtime else {}),
                 **({"shared_pools": self.shared_pools.boundary(time)} if self.shared_pools else {}),
                 **({"state_runtime": self.state_runtime.boundary(time)} if self.state_runtime else {}),
                 **({"ordinary_bloom_damage_windows": bloom_windows} if bloom_windows else {}),
@@ -892,9 +912,13 @@ class _Mechanics:
                     if ev["kind"] == "mechanics_end" and (ev["origin"], ev["data"]["action_id"]) in self.cancelled_actions]}
 
     def _snapshot_signature(self, snapshot):
-        return {rid: [{"beneficiaries": inst["beneficiaries"], "layers": len(inst["expires"]),
+        result = {rid: [{"beneficiaries": inst["beneficiaries"], "layers": len(inst["expires"]),
                        "quota": inst["quota"], "trigger_stats": [sample.get("stats") if sample else None for sample in inst["layer_snapshots"]]}
                       for inst in state["instances"]] for rid, state in snapshot["state"].items()}
+        if 'health' in snapshot:
+            from genshin_engine.health_runtime import health_signature
+            result['@health'] = health_signature(snapshot['health'])
+        return result
 
 
     # Public execution services address this exact shared runtime. Dynamic

@@ -28,6 +28,8 @@ def snapshot_runtime(runtime: MechanicsExecutionPort):
             instances.append(saved)
         states[rid] = {"cooldown": state["cooldown"], "instances": instances}
     snapshot = {"time": runtime.time, "frontline": runtime.frontline, "state": states}
+    if getattr(runtime, 'health_runtime', None):
+        snapshot['health'] = runtime.health_runtime.snapshot()
     if runtime.attribute_runtime:
         snapshot["attribute_frame"] = runtime.attribute_runtime.capture(snapshot)
     return snapshot
@@ -36,6 +38,8 @@ def snapshot_runtime(runtime: MechanicsExecutionPort):
 def capture_live_attribute_frame(runtime: MechanicsExecutionPort):
     """Read current facts synchronously without freezing the entire rule graph."""
     live = {"time": runtime.time, "frontline": runtime.frontline, "state": runtime.state}
+    if getattr(runtime, 'health_runtime', None):
+        live['health'] = runtime.health_runtime.snapshot()
     return {"time": runtime.time, "attribute_frame": runtime.attribute_runtime.capture(live)}
 
 
@@ -77,6 +81,8 @@ def capture_runtime_snapshot(runtime: MechanicsExecutionPort, ev, row):
     # Measure the same state as snapshot(), before its deep copy is allocated.
     preview = {"time": runtime.time, "frontline": runtime.frontline,
                "state": {rid: {"cooldown": s["cooldown"], "instances": s["instances"]} for rid, s in runtime.state.items()}}
+    if getattr(runtime, 'health_runtime', None):
+        preview['health'] = runtime.health_runtime.snapshot()
     receipt["snapshot_fingerprint"] = capture_contract.fingerprint(preview)
     runtime.reserve_capture({"snapshot": preview, "receipt": receipt})
     runtime.snapshots[key] = runtime.observed_snapshot(ev)

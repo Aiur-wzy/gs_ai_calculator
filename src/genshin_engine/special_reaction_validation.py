@@ -14,7 +14,7 @@ from genshin_engine.special_reaction_contracts import (
     _PROFILE_META_KEYS,
     _QUALIFICATION_KEYS,
     DIRECT_LUNAR_ELEMENTS,
-    DIRECT_STELLAR_ELEMENTS,
+    DIRECT_STELLAR_ELEMENT_BY_REACTION,
     LUNAR_STELLAR_WEIGHTS,
     REPLACEMENT_CONTRACTS,
     REQUIRED_CAPABILITY_TAGS,
@@ -172,6 +172,9 @@ def validate_special_reaction_model(model: Any) -> list[dict]:
             # observations while evidence is being collected.
             continue
         if reaction_type == "stellar_superconduct":
+            for name in ("initial_grant_layers", "settlement_bonus_layers"):
+                if name in mechanics and (type(mechanics[name]) is not int or not 0 <= mechanics[name] <= 12):
+                    issues.append(_issue("value", f"{name}必须是0至12的整数。", path+".mechanics."+name))
             for name in ("field_duration_seconds", "settlement_interval_seconds"):
                 value = mechanics.get(name)
                 if not _finite_number(value, positive=True):
@@ -189,6 +192,15 @@ def validate_special_reaction_model(model: Any) -> list[dict]:
                 issues.append(_issue("refresh_mode", "重复星超导刷新领域但不重置4秒监听窗口。",
                                      path+".mechanics.refresh_mode"))
         elif reaction_type == "stellar_swirl":
+            if "initial_vortex_count" in mechanics:
+                value = mechanics["initial_vortex_count"]
+                if type(value) is not int or not 1 <= value < 6:
+                    issues.append(_issue("value", "初始风旋计数必须是1至5的整数。", path+".mechanics.initial_vortex_count"))
+            if "initial_upgrade_cooldown_seconds" in mechanics:
+                try:
+                    _seconds_to_ticks(mechanics["initial_upgrade_cooldown_seconds"], "initial_upgrade_cooldown_seconds")
+                except ValueError as exc:
+                    issues.append(_issue("value", str(exc), path+".mechanics.initial_upgrade_cooldown_seconds"))
             fixed = {
                 "upgrade_threshold": 3,
                 "early_detonation_threshold": 6,
@@ -394,9 +406,12 @@ def special_reaction_capabilities() -> dict:
                     load_reviewed_direct_special_damage_profiles()),
             },
             "direct_stellar_damage": {
-                "supported_reaction_types": ["stellar_superconduct"],
-                "supported_elements": sorted(DIRECT_STELLAR_ELEMENTS),
+                "supported_reaction_types": sorted(DIRECT_STELLAR_ELEMENT_BY_REACTION),
+                "supported_elements": sorted(set().union(*DIRECT_STELLAR_ELEMENT_BY_REACTION.values())),
+                "elements_by_reaction": {key:sorted(values) for key,values in DIRECT_STELLAR_ELEMENT_BY_REACTION.items()},
                 "factor_policy": "event_time_last_completed_four_second_window",
+                "factor_policy_by_reaction": {"stellar_superconduct":"event_time_last_completed_four_second_window",
+                    "stellar_swirl":"ability_coefficient_without_vortex_layers"},
                 "caller_supplied_layers_or_factor": False,
                 "reaction_creation_does_not_imply_direct_damage": True,
                 "request_method": "request_direct_stellar_damage",
@@ -411,8 +426,8 @@ def special_reaction_capabilities() -> dict:
             },
         },
         "boundaries": {
-            "stellar_superconduct": "area Polestar Field; initial reaction emits no damage or layer, later successful Cryo/Electro applications count atomically across targets",
-            "stellar_swirl": "area packet runtime; every child emits Anemo, empty-area packet creates count 1, existing vortex counts each child, trigger 3 upgrades and trigger 6/3s detonates",
+            "stellar_superconduct": "area Polestar Field; optional initial_grant_layers grants only the first window buff, not application counts; settlement_bonus_layers adds at completed settlement capped at 12; refresh does not regrant",
+            "stellar_swirl": "area packet runtime; optional initial_vortex_count upgrades fresh vortices under a party-shared initial_upgrade_cooldown_seconds; normal reaction counts, expiry and detonation remain active; direct ability damage uses its own coefficient without vortex level",
             "lunar_electro": (
                 "one replaceable cloud per area; refresh extends six-second lifetime without "
                 "resetting existing attack phases; first strike 0.25s, same-target 2s cooldown, "

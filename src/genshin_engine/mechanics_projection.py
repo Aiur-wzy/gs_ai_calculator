@@ -15,6 +15,8 @@ from genshin_engine.rotation_port import rotation_issue as _issue
 def project_mechanics_inputs(template, rotation, mechanics, issues):
     """Project explicit patterns and action switches without mutating user input."""
     t, model = copy.deepcopy(template), copy.deepcopy(rotation)
+    from genshin_engine.health_mechanics import validate_health_bindings
+    issues.extend(validate_health_bindings(mechanics, template, rotation))
     if t.get("version") != 2:
         issues.append(_issue("unsupported", "声明式机制需要伤害模板 v2 的稳定命中 ID。", "template_version"))
         return t, model, []

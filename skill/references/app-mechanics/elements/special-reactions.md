@@ -20,7 +20,9 @@ App 原生从 `capability_index` 的 `/special_reactions` 取真实资源及指�
 
 ## 直接能力伤害
 
-使用`direct_stellar_damage`或`direct_lunar_damage`专用事件；实际支持的reaction types从schema和`engine_catalog/damage`读取。当前星烁直伤合同用于星超导，不能拿它代填能力直伤星扩散；反应型星扩散仍由其状态机产生。
+使用`direct_stellar_damage`或`direct_lunar_damage`专用事件；实际支持的reaction types从schema和`engine_catalog/damage`读取。1.0.2 的星烁能力直伤支持 `stellar_superconduct`（冰／雷）与 `stellar_swirl`（冰／风）。星超导取该区域已生效领域增益；能力星扩散使用能力自己的倍率，不读取自然风旋等级、不生成风旋。反应型星扩散仍由其状态机产生，两类分量不能互相代填。
+
+领域增强通过替换模型的 `mechanics` 输入：星超导 `initial_grant_layers` 只赋予新建领域到首次结算前的增益，不增加附着计数；`settlement_bonus_layers` 在窗口结算时额外增加增益层数，合计封顶12。刷新既有领域不再次发初始增益。星扩散 `initial_vortex_count` 和 `initial_upgrade_cooldown_seconds` 控制新风旋初始升级及全队共用冷却，后续正常反应继续计数。省略这些可选项保持旧行为。实际数值须查明来源；与受审目录不一致时明确采用有据的 assumed profile，不能只填 confirmed。
 
 能力直伤先核对该组件的转换资格。使用 v2 `ability_binding` 绑定实际角色、能力、组件、变体、有效等级、资料线和数据库指纹，并使用专用 profile 内容哈希。填写能力倍率、结算属性、次数、元素和关联领域。出伤时核该领域的真实状态与最近一次完成的结算，运行时由此取层数与基础系数。
 

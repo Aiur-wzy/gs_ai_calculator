@@ -44,6 +44,7 @@ def freeze_runtime_panel(self: MechanicsExecutionPort, snapshot):
                                   defer_stats=GRAPH_STATS if self.attribute_runtime and self.attribute_runtime.five_stats else ())
               for cid in self.data["chars"]}
     return {"time": snapshot["time"], "stats": {cid: value[0] for cid, value in values.items()},
+            **({'health':copy.deepcopy(snapshot['health'])} if 'health' in snapshot else {}),
             "dependencies": {cid: value[1] for cid, value in values.items()},
             **({"attribute_frame": snapshot["attribute_frame"]} if self.attribute_runtime else {})}
 
@@ -80,15 +81,29 @@ def ordinary_runtime_panel(self: MechanicsExecutionPort, cid, snapshot, *, defer
             if not effective_recipient(rule, inst, cid, current["frontline"]):
                 continue
             for effect in rule["effects"]:
-                if isinstance(effect["value"], dict) or "filter" in effect or rule.get("quota") or rule.get("resource_gate"):
+                health_value = isinstance(effect['value'], dict) and effect['value'].get('kind') == 'health'
+                if (isinstance(effect["value"], dict) and not health_value) or "filter" in effect or rule.get("quota") or rule.get("resource_gate"):
                     continue
                 info = BENEFIT_TYPES.get(effect["benefit_type_id"], {"zone": "energy_recharge", "stat": "all"})
+                zone = info.get('zone')
+                output_stat = 'em' if zone == 'em' else 'energy_recharge' if zone == 'energy_recharge' else info.get('stat')
+                if zone not in ('em', 'energy_recharge', 'stat_add', 'stat_pct') or output_stat in deferred:
+                    continue
+                value = effect['value']
+                if health_value:
+                    from genshin_engine.health_mechanics import read_health_expression
+                    for layer, sample in enumerate(inst['layer_snapshots']):
+                        layer_instance = {**inst, 'trigger_snapshot':sample}
+                        sampled = read_health_expression(self, value, rule['owner'], cid, instance=layer_instance, snapshot=current)
+                        contributions.append((zone, info.get('stat'), sampled,
+                            {'rule_id':rid, 'effect_id':effect['id'], 'layers':1, 'layer_index':layer}))
+                    continue
                 if self.attribute_runtime and info.get("zone") == "em":
-                    contributions.extend(("em", info.get("stat"), effect["value"],
+                    contributions.extend(("em", info.get("stat"), value,
                                           {"rule_id": rid, "effect_id": effect["id"], "layers": 1, "layer_id": layer})
                                          for layer in inst["attribute_layers"])
                 else:
-                    contributions.append((info.get("zone"), info.get("stat"), effect["value"]*len(inst["expires"]),
+                    contributions.append((info.get("zone"), info.get("stat"), value*len(inst["expires"]),
                                           {"rule_id": rid, "effect_id": effect["id"], "layers": len(inst["expires"])}))
     stat_terms = {}
     for zone, stat, value, ref in contributions:
@@ -125,6 +140,13 @@ def sample_effect_value(self: MechanicsExecutionPort, effect, rule, inst, cid, e
     expr = effect["value"]
     if isinstance(expr, (int, float)):
         return expr
+    if expr.get('kind') == 'health':
+        from genshin_engine.health_mechanics import read_health_expression
+        value = read_health_expression(self, expr, rule['owner'], cid, instance=inst, snapshot=snapshot, event=event)
+        self.samples.append({'event_id':event['id'], 'cycle':event['origin'], 't':self.time/TICKS,
+                             'rule_id':rule['id'], 'effect_id':effect['id'], 'expression':copy.deepcopy(expr),
+                             'value':value, 'health_revision':{c:s['revision'] for c,s in self.health_runtime.states.items()}})
+        return value
     if counter_view_runtime.is_counter_view(expr):
         return self.counter_views.read(self, expr, rule, effect, inst, cid, event, snapshot)
     sampled = snapshot
@@ -443,7 +465,12 @@ def execute_hit(self: MechanicsExecutionPort, event, payload):
                     "rule_id": rule["id"], "effect_id": effect["id"], "source_id": rule["source_id"], "instance_id": job["instance"],
                     "projected_effect_id": job["projected_id"], "value": value, "layers": 1, "domain": effect["domain"],
                     "sample_t": job["sample_time"]/TICKS, "attribute_receipt_id": em_receipt["receipt_id"], "attribute_node_id": job["node_id"]})
-                if isinstance(effect["value"], dict):
+                if isinstance(effect['value'], dict) and effect['value'].get('kind') == 'health':
+                    self.samples.append({'event_id':event['id'], 'cycle':event['origin'], 't':self.time/TICKS,
+                        'rule_id':rule['id'], 'effect_id':effect['id'], 'expression':copy.deepcopy(effect['value']),
+                        'value':value, 'projection_receipt_id':em_receipt['receipt_id'],
+                        'attribute_node_id':job['node_id'], 'projected_effect_id':job['projected_id']})
+                elif isinstance(effect["value"], dict):
                     source = job["input_receipt"]
                     actor = source["query"]["actor"]
                     self.samples.append({"event_id": event["id"], "cycle": event["origin"], "t": self.time/TICKS,

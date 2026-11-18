@@ -33,7 +33,7 @@ def test_routes_are_frozen_and_only_register_generic_event_kinds():
     assert set(_SYSTEM_HANDLERS) == {
         "state_runtime_event", "elemental_state_operation", "special_reaction_operation",
         "mechanics_snapshot_capture", "mechanics_activate",
-        "target_status_operation",
+        "target_status_operation", "health_operation",
     }
     assert set(_GAMEPLAY_PREPARERS) == {
         "action", "mechanics_end", "mechanics_hit", "elemental_application",
@@ -117,6 +117,7 @@ def test_root_prelude_remains_the_only_batch_time_frontline_sequence():
 
     runtime.expire, runtime._advance_elemental = expire, advance
     runtime.conditions, runtime.shared_pools, runtime.state_runtime = {}, None, None
+    runtime.health_runtime = None
     runtime.cancelled_actions = set()
     runtime.counter_views = SimpleNamespace(frames=SimpleNamespace(bind=lambda event: calls.append(("bind", runtime.frontline))))
     result = runtime._on_event(_event(), {}, "after", {})

@@ -132,6 +132,12 @@ def project_execution_result(run: MechanicsExecutionContext, services: Mechanics
 
 
 def attach_execution_reports(run: MechanicsExecutionContext, services: MechanicsExecutionServices) -> None:
+    if run.has_executor and run.executor.health_runtime:
+        ledger = {'contract':'actor-health-v1', 'final_state':run.executor.health_runtime.snapshot(),
+                  'trace':copy.deepcopy(run.executor.health_runtime.trace)}
+        run.output['health_ledger'] = ledger
+        if isinstance(run.output.get('result'), dict):
+            run.output['result']['health_ledger'] = copy.deepcopy(ledger)
     if run.has_executor and run.executor.captures:
         run.output["snapshot_capture_trace"] = run.executor.capture_trace
         if run.output.get("result") is not None:

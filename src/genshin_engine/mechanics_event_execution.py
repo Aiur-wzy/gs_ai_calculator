@@ -13,6 +13,7 @@ from types import MappingProxyType
 from typing import Any
 
 from genshin_engine.elemental import ElementalPending
+from genshin_engine.health_mechanics import handle_health_event
 from genshin_engine.mechanics_execution_port import MechanicsExecutionPort
 from genshin_engine.mechanics_validation import (
     _freeze_reference,
@@ -271,6 +272,7 @@ def prepare_elemental_state_deadline(self: MechanicsExecutionPort, ev, row, payl
 
 
 _SYSTEM_HANDLERS = MappingProxyType({
+    "health_operation": handle_health_event,
     "target_status_operation": handle_target_status_operation,
     "state_runtime_event": handle_state_runtime_event,
     "elemental_state_operation": handle_elemental_state_operation,

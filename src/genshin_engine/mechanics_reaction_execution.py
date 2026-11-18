@@ -48,7 +48,7 @@ def project_special_damage(self: MechanicsExecutionPort, request, cycle, parent,
         if request.get("damage_system") == "lunar":
             return self.project_direct_lunar_damage(request, cycle, parent)
         if (request.get("damage_system") == "stellar"
-                and request.get("reaction_type") == "stellar_superconduct"):
+                and request.get("reaction_type") in ("stellar_superconduct", "stellar_swirl")):
             return self.project_direct_stellar_damage(request, cycle, parent)
         raise ElementalPending(
             "direct_special_damage_type_unsupported",
@@ -236,18 +236,20 @@ def project_direct_stellar_damage(self: MechanicsExecutionPort, request, cycle, 
     binding = request["ability_profile"]["ability_binding"]
     runtime = self.special_runtime()
     area_id = request.get("area_id")
+    reaction_type = request.get("reaction_type")
     current_snapshot = (
-        runtime.stellar_superconduct_snapshot(area_id)
-        if runtime is not None and area_id in runtime.stellar_field_by_area else None)
+        runtime.direct_stellar_snapshot(reaction_type, area_id)
+        if runtime is not None and (reaction_type == "stellar_swirl" or area_id in runtime.stellar_field_by_area) else None)
     contract_ok = (
         request.get("type") == "special_reaction_damage_request"
         and request.get("status") == "ready_for_stat_sample"
-        and request.get("reaction_type") == "stellar_superconduct"
+        and reaction_type in ("stellar_superconduct", "stellar_swirl")
         and request.get("damage_system") == "stellar"
         and request.get("contributor_ids") == []
         and request.get("actor_sample_policy") == "event_time_owner_attribute"
         and request.get("factor_policy")
-        == "event_time_last_completed_four_second_window"
+        == ("event_time_last_completed_four_second_window" if reaction_type == "stellar_superconduct"
+            else "ability_coefficient_without_vortex_layers")
         and isinstance(request.get("target_id"), str)
         and request.get("target_id") == self.elemental.target
         and isinstance(action, dict) and isinstance(ability, dict)
@@ -276,7 +278,7 @@ def project_direct_stellar_damage(self: MechanicsExecutionPort, request, cycle, 
     event = {
         "id": hit["id"], "origin": cycle, "run_id": f"{cycle}:{hit['id']}",
         "event": "reaction_damage", "character": owner,
-        "action_id": action_id, "reaction_type": "stellar_superconduct",
+        "action_id": action_id, "reaction_type": reaction_type,
         "element": request["element"], "reaction_element": request["element"],
         "damage_type_ids": ["damage.reaction"],
         "conditions": dict(self.conditions), "reaction_snapshot": self.snapshot(),
@@ -295,7 +297,7 @@ def project_direct_stellar_damage(self: MechanicsExecutionPort, request, cycle, 
         "type": "special_reaction_damage_projection",
         "event_id": event_id+":projection", "request_id": event_id,
         "t": request["t"], "time_tick": request["time_tick"], "cycle": cycle,
-        "reaction_type": "stellar_superconduct", "reaction_base": False,
+        "reaction_type": reaction_type, "reaction_base": False,
         "owner": owner, "action_id": action_id, "hit_id": hit["id"],
         "area_id": area_id, "settled_layers": request["layers"],
         "system_factor": request["system_factor"],

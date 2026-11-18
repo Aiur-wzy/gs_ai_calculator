@@ -2,7 +2,7 @@
 
 ## 安装正式版
 
-当前版本是 App **1.0.1**，配套数据库为 **db-7.2.50-r6**。支持 Windows 10/11 x64。请以[应用发行页](https://github.com/Aiur-wzy/gs_ai_calculator/releases)和[数据库发行页](https://github.com/Aiur-wzy/gs_ai_calculator_db/releases)实际提供的附件和 SHA-256 校验值为准。仓库源码 ZIP 不包含 EXE 或完整数据库。
+当前版本是 App **1.0.2**，配套数据库为 **db-7.2.50-r6**。支持 Windows 10/11 x64。请以[应用发行页](https://github.com/Aiur-wzy/gs_ai_calculator/releases)和[数据库发行页](https://github.com/Aiur-wzy/gs_ai_calculator_db/releases)实际提供的附件和 SHA-256 校验值为准。仓库源码 ZIP 不包含 EXE 或完整数据库。
 
 1. 从[官方下载页](https://aiur-wzy.github.io/gs_ai_calculator/)下载 Windows 小安装器，解压后运行 `GenshinCalcSetup.exe`。
 2. 点击「浏览…」选择安装目录。默认位置是 `%LOCALAPPDATA%\GenshinCalcStable`，也可以在其他盘选择空目录。程序和数据库分别存放在所选目录下的 `app` 和 `data`。
@@ -29,7 +29,7 @@
 
 ## 离线安装和后续更新
 
-- 要完整离线安装，从[官方下载页](https://aiur-wzy.github.io/gs_ai_calculator/)下载并解压 `GenshinCalc-1.0.1-full-offline-windows-x64.zip`。运行包内的 `GenshinCalcSetup.exe`，选择安装目录，再点击「使用离线发行包」，依次选择包内的 `latest.json`、App ZIP 和数据库包。分开下载这三个文件时也可按相同步骤安装。
+- 要完整离线安装，从[官方下载页](https://aiur-wzy.github.io/gs_ai_calculator/)下载并解压 `GenshinCalc-1.0.2-full-offline-windows-x64.zip`。运行包内的 `GenshinCalcSetup.exe`，选择安装目录，再点击「使用离线发行包」，依次选择包内的 `latest.json`、App ZIP 和数据库包。分开下载这三个文件时也可按相同步骤安装。
 - 在线更新会列出通过验签且与已装版本兼容的组合。可选范围随发行变化，可能包含仅更新程序、仅更新数据库或同时更新。
 - 在 Windows「设置」→「应用」→「已安装的应用」中找到「原神拉表」，选择卸载。也可在开始菜单搜索「卸载原神拉表」。卸载会删除程序和数据库，界面可选择「保留我的方案、聊天和设置」。另存到安装目录外的方案由用户自行管理。
 

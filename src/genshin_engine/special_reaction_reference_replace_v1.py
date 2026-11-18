@@ -21,6 +21,7 @@ if TYPE_CHECKING:
         SpecialReactionPending,  # noqa: TC004 - injected canonical globals
         _reaction_elements,  # noqa: TC004 - injected canonical globals
         _seconds_to_ticks,  # noqa: TC004 - injected canonical globals
+        stellar_superconduct_factor,  # noqa: TC004 - injected canonical globals
     )
 
 
@@ -140,6 +141,12 @@ def _canonical_replace_v1(self, reaction: dict, *, time: int, payload: dict | No
             # still an eligible successful Cryo/Electro application.
             if not field_was_active:
                 field["stellar_superconduct_origin_applications"] = [establishing]
+                if mechanics.get("initial_grant_layers", 0):
+                    initial = mechanics["initial_grant_layers"]
+                    field["stellar_superconduct_settled_layers"] = initial
+                    field["stellar_superconduct_factor"] = stellar_superconduct_factor(initial)
+                    field["stellar_superconduct_ordinary_bonus"] = self._ordinary_bonus(initial)
+                    field["stellar_superconduct_buff_expires_at"] = time + interval
             generated.append({
                 "type": "special_reaction_state", "event_id": replaced["id"]+":field",
                 "t": time/TICKS, "time_tick": time, "target_id": None,
@@ -157,6 +164,12 @@ def _canonical_replace_v1(self, reaction: dict, *, time: int, payload: dict | No
                 "damage_emitted": False, "damage_policy": "direct_stellar_hits_only",
                 "status": "executed",
             })
+            if not field_was_active and mechanics.get("initial_grant_layers", 0):
+                generated[-1].update(
+                    initial_grant_layers=mechanics["initial_grant_layers"],
+                    initial_grant_factor=field["stellar_superconduct_factor"],
+                    initial_grant_ordinary_bonus=field["stellar_superconduct_ordinary_bonus"],
+                    initial_grant_expires_at=(time+interval)/TICKS)
         elif reaction_type == "stellar_swirl":
             replaced["role_provenance"] = copy.deepcopy(stellar_swirl_roles)
             area_id = reaction.get("area_id") or (payload or {}).get("area_id") or "battlefield.primary"
@@ -168,6 +181,13 @@ def _canonical_replace_v1(self, reaction: dict, *, time: int, payload: dict | No
             vortex["stellar_swirl_owner"] = owner
             vortex["stellar_swirl_action_id"] = reaction.get("action_id")
             if new_vortex:
+                initial = mechanics.get("initial_vortex_count", 1)
+                if initial > 1 and time >= self.party_state.get("stellar_swirl_initial_upgrade_ready_at", 0):
+                    vortex["stellar_swirl_count"] = initial
+                    vortex["stellar_swirl_level"] = 2 if initial >= mechanics["upgrade_threshold"] else 1
+                    ready = time + _seconds_to_ticks(mechanics.get("initial_upgrade_cooldown_seconds", 0), "initial_upgrade_cooldown_seconds")
+                    self.party_state["stellar_swirl_initial_upgrade_ready_at"] = ready
+                    vortex["stellar_swirl_initial_upgrade_ready_at"] = ready
                 vortex["stellar_swirl_parent_reaction_id"] = replaced["id"]
             self._merge_stellar_swirl_roles(
                 vortex, stellar_swirl_roles, event_id)

@@ -9,6 +9,7 @@ from typing import Any
 
 from genshin_engine.rotation_port import TICKS
 from genshin_engine.special_replacement_contracts import replacement_state_fingerprint
+from genshin_engine.special_stellar_initial_upgrade import apply_initial_vortex_upgrade
 
 
 @dataclass(frozen=True, slots=True)
@@ -43,6 +44,7 @@ class StellarSwirlTransition:
     anemo_trigger_ids: list[str]
     cryo_applier_ids: list[str]
     generated_events: list[dict[str, Any]]
+    initial_upgrade_ready_at: int | None = None
 
 
 def plan_stellar_swirl(proposal: StellarSwirlProposal) -> StellarSwirlTransition:
@@ -62,6 +64,7 @@ def plan_stellar_swirl(proposal: StellarSwirlProposal) -> StellarSwirlTransition
     vortex["stellar_swirl_owner"] = owner
     vortex["stellar_swirl_action_id"] = reaction.get("action_id")
     if new_vortex:
+        apply_initial_vortex_upgrade(vortex, mechanics, time, proposal.seconds_to_ticks)
         vortex["stellar_swirl_parent_reaction_id"] = replaced["id"]
     proposal.merge_roles(
         vortex, stellar_swirl_roles, event_id)
@@ -99,6 +102,7 @@ def plan_stellar_swirl(proposal: StellarSwirlProposal) -> StellarSwirlTransition
         anemo_trigger_ids=vortex["stellar_swirl_anemo_trigger_ids"],
         cryo_applier_ids=vortex["stellar_swirl_cryo_applier_ids"],
         generated_events=generated,
+        initial_upgrade_ready_at=vortex.get("stellar_swirl_initial_upgrade_ready_at"),
     )
 
 

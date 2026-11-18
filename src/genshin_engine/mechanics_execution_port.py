@@ -23,6 +23,7 @@ class MechanicsExecutionPort(Protocol):
     resource_reactions: Any
     issues: Any
     attribute_runtime: Any
+    health_runtime: Any
     data: Any
     frontline: Any
     template: Any

@@ -1,0 +1,569 @@
+{
+  "contract": "genshin-skill-context-refactor-map-v1",
+  "date": "2026-11-06",
+  "status": "source_migration_applied_pending_release_qualification",
+  "official_source_count": 52,
+  "migrations": [
+    {
+      "old_resource": "SKILL.md",
+      "old_path": "skill/SKILL.md",
+      "targets": [
+        "SKILL.md"
+      ],
+      "reason": "保留稳定入口；只留当前任务原则、环境选择和问题路由，目录全文另按需发现。",
+      "base_sha256": "e882cef8d2408504130d7370dc4698acc0d4ef4c5aee277fa4ee94f6c472739f"
+    },
+    {
+      "old_resource": "references/native-agent-artifact.md",
+      "old_path": "skill/references/native-agent-artifact.md",
+      "targets": [
+        "references/workflow/index.md"
+      ],
+      "reason": "与当前五重点总览合并为唯一工件工作主干。",
+      "base_sha256": "91ead63ccd467c9d4d0dc39989818cd866a207bea16e0f16acc3adb93ba17319"
+    },
+    {
+      "old_resource": "references/staged-workflow.md",
+      "old_path": "skill/references/staged-workflow.md",
+      "targets": [
+        "references/workflow/index.md"
+      ],
+      "reason": "正文已非硬阶段，合并并退役误导性的staged文件名。",
+      "base_sha256": "ab73c2abd83289e8312ad5cdc093c3fadd9d8e5d24f047b515113e939b0ede86"
+    },
+    {
+      "old_resource": "references/native-agent-v2.md",
+      "old_path": "skill/references/native-agent-v2.md",
+      "targets": [
+        "references/runtime/native-agent.md"
+      ],
+      "reason": "只解释当前DSH运行/恢复/预算/工具边界；删不存在的回执承诺。",
+      "base_sha256": "b9c025730ea8ebfc7d7380b125f64691c2b3541a2f83db03497d95ab14b236c4"
+    },
+    {
+      "old_resource": "references/native-agent.md",
+      "old_path": "skill/references/native-agent.md",
+      "targets": [
+        "docs/archive/skill/native-agent-python-v1.md"
+      ],
+      "reason": "旧Python原型退出自动递归生产bundle；相关残留引用/测试同批迁移，保留CLI owner。",
+      "base_sha256": "6f8acaf5e2fb0c48a21a7d427dae607ff21106762c8ec1383942bad4adf8e911"
+    },
+    {
+      "old_resource": "references/context-staging.md",
+      "old_path": "skill/references/context-staging.md",
+      "targets": [
+        "references/workflow/context-use.md"
+      ],
+      "reason": "按需复用/恢复与依赖变化指导，不维护另一套上下文状态机。",
+      "base_sha256": "ae3f0cdd1c8b953156b9d2ce244a2e2c39b18cc76aa6edd95990ef749482917a"
+    },
+    {
+      "old_resource": "references/creative-whiteboard.md",
+      "old_path": "skill/references/creative-whiteboard.md",
+      "targets": [
+        "references/workflow/whiteboard.md"
+      ],
+      "reason": "白板用户意图、表示转换与候选边界独立。",
+      "base_sha256": "97b02e5543fa749915f540f1db022c2dda3d082e46296006a0d2425ae6d3df3f"
+    },
+    {
+      "old_resource": "references/native-research.md",
+      "old_path": "skill/references/native-research.md",
+      "targets": [
+        "references/data/research.md"
+      ],
+      "reason": "跨工作重点共用的联网与采用账说明。",
+      "base_sha256": "d2c78a3612cfc133d1f0158faf8e40749d867923545142bec6383166eb19210f"
+    },
+    {
+      "old_resource": "references/stages/loadout-draft.md",
+      "old_path": "skill/references/stages/loadout-draft.md",
+      "targets": [
+        "references/workflow/focus/loadout.md"
+      ],
+      "reason": "重写为该工作重点专门任务卡；不改变真实workflow_stage枚举或权限。",
+      "base_sha256": "c4ed0f1a0f10449c6749e4dba3a82e003b651b46d39a9855fa5df27944a9c145"
+    },
+    {
+      "old_resource": "references/stages/action-checkpoint.md",
+      "old_path": "skill/references/stages/action-checkpoint.md",
+      "targets": [
+        "references/workflow/focus/actions.md"
+      ],
+      "reason": "重写为该工作重点专门任务卡；不改变真实workflow_stage枚举或权限。",
+      "base_sha256": "f2fb8aceea2fd0f410442f04a1397d5292dc42712a703664982aa66084f29626"
+    },
+    {
+      "old_resource": "references/stages/event-topology.md",
+      "old_path": "skill/references/stages/event-topology.md",
+      "targets": [
+        "references/workflow/focus/events.md"
+      ],
+      "reason": "重写为该工作重点专门任务卡；不改变真实workflow_stage枚举或权限。",
+      "base_sha256": "c5ad977c57dd92503dc3c6fb262f3d06e5bdcda45b9e811c0f72b1f227b21bc8"
+    },
+    {
+      "old_resource": "references/stages/numeric-model.md",
+      "old_path": "skill/references/stages/numeric-model.md",
+      "targets": [
+        "references/workflow/focus/numbers.md"
+      ],
+      "reason": "重写为该工作重点专门任务卡；不改变真实workflow_stage枚举或权限。",
+      "base_sha256": "98dca0273701e8594cc513ca116a870f1f32085e71c192750e61ac46ac1e9bdc"
+    },
+    {
+      "old_resource": "references/stages/calculation-closure.md",
+      "old_path": "skill/references/stages/calculation-closure.md",
+      "targets": [
+        "references/workflow/focus/closure.md"
+      ],
+      "reason": "重写为该工作重点专门任务卡；不改变真实workflow_stage枚举或权限。",
+      "base_sha256": "550a43b594ddcae9bca55d1d30f4cdd1dbca1d5ccd48e557914cd95d5cabe437"
+    },
+    {
+      "old_resource": "references/mechanics/damage-formula.md",
+      "old_path": "skill/references/mechanics/damage-formula.md",
+      "targets": [
+        "references/mechanics/damage-formula.md"
+      ],
+      "reason": "保留游戏原理；App字段/版本/输入/结果解释移出，已证游戏错误在原出处修正。",
+      "base_sha256": "1f97f18e3aaa88816ad80a8ac9a309acbbb53391a3ea58ab5cb5acddbcd562ed"
+    },
+    {
+      "old_resource": "references/mechanics/reactions.md",
+      "old_path": "skill/references/mechanics/reactions.md",
+      "targets": [
+        "references/mechanics/reactions.md",
+        "references/app-mechanics/elements/runtime.md",
+        "references/app-mechanics/elements/special-reactions.md",
+        "references/app-mechanics/elements/compatibility.md"
+      ],
+      "reason": "保留游戏原理；App字段/版本/输入/结果解释移出，已证游戏错误在原出处修正。",
+      "base_sha256": "c985b40e7361458149c316d57fb805a23482b1ee386e5cfc41d1cec6d89c4355"
+    },
+    {
+      "old_resource": "references/mechanics/rotation.md",
+      "old_path": "skill/references/mechanics/rotation.md",
+      "targets": [
+        "references/mechanics/rotation.md",
+        "references/app-mechanics/actions/rotation-energy.md",
+        "references/app-mechanics/execution/attributes-and-sampling.md",
+        "references/app-mechanics/review/results.md"
+      ],
+      "reason": "保留游戏原理；App字段/版本/输入/结果解释移出，已证游戏错误在原出处修正。",
+      "base_sha256": "edaea0466b4a31a03c057b53b926208ca12539a7c0e2af906c8c5cafdbbdffb5"
+    },
+    {
+      "old_resource": "references/mechanics/artifacts.md",
+      "old_path": "skill/references/mechanics/artifacts.md",
+      "targets": [
+        "references/mechanics/artifacts.md",
+        "references/app-mechanics/loadouts.md"
+      ],
+      "reason": "保留游戏原理；App字段/版本/输入/结果解释移出，已证游戏错误在原出处修正。",
+      "base_sha256": "25d4469124850e6458e55741d7906598c9798012667ca8d02ed731af3bd4ae1b"
+    },
+    {
+      "old_resource": "references/mechanics/mechanics-glossary.md",
+      "old_path": "skill/references/mechanics/mechanics-glossary.md",
+      "targets": [
+        "references/mechanics/mechanics-glossary.md"
+      ],
+      "reason": "保留游戏原理；App字段/版本/输入/结果解释移出，已证游戏错误在原出处修正。",
+      "base_sha256": "3e153553bbdbca1d88919d8fa9eab7a8ca70c7748206f6517176f6fba16e087a"
+    },
+    {
+      "old_resource": "references/data-access.md",
+      "old_path": "skill/references/data-access.md",
+      "targets": [
+        "references/data/query.md"
+      ],
+      "reason": "当前数据入口、实体缓存与只读来源，不混入运行执行合同。",
+      "base_sha256": "0ee42990f614193fca37e044c927008b0cfd24201f0bb9a6385f9dd9e0f17508"
+    },
+    {
+      "old_resource": "references/database-readme.md",
+      "old_path": "skill/references/database-readme.md",
+      "targets": [
+        "references/data/database-readme.md"
+      ],
+      "reason": "数据库字段/关系/opaque语义的唯一资料指南。",
+      "base_sha256": "e68cad06353d300b203cbbab3f0df0f1e46711365f069f18c6c03e7d1994676b"
+    },
+    {
+      "old_resource": "references/character-action-appendices.md",
+      "old_path": "skill/references/character-action-appendices.md",
+      "targets": [
+        "references/data/character-appendices.md"
+      ],
+      "reason": "角色知识、受审状态、库外提案和场景材料化边界。",
+      "base_sha256": "4ad7ae7568e4c55ba2faad59c654933f3cc33755d073c33406c4c350b2ef0d79"
+    },
+    {
+      "old_resource": "references/equipment.md",
+      "old_path": "skill/references/equipment.md",
+      "targets": [
+        "references/app-mechanics/loadouts.md"
+      ],
+      "reason": "App面板/配装输入与条件效果接线；与游戏配装原理分开。",
+      "base_sha256": "993edeea36df5583215b225da0ae2cd06963b8e6cf776ac068155ebd0a2c65d3"
+    },
+    {
+      "old_resource": "references/upstream-runtime.md",
+      "old_path": "skill/references/upstream-runtime.md",
+      "targets": [
+        "references/data/runtime-query.md",
+        "references/app-mechanics/sources/upstream-runtime.md"
+      ],
+      "reason": "查询/批量缓存留资料页，执行来源装配留适配页；两处不重复schema。",
+      "base_sha256": "158553a233975dd18bb20ed6115dcbc84ef67c1d36acf41320212bf5532f3a6e"
+    },
+    {
+      "old_resource": "references/gadget-sources.md",
+      "old_path": "skill/references/gadget-sources.md",
+      "targets": [
+        "references/data/gadget-sources.md"
+      ],
+      "reason": "保留对象和来源查询边界，不让ID解析变成自动生命周期执行。",
+      "base_sha256": "5ef751aff675cd4e46e957ce9623632649d45c7a02dd87015963cdaf2cbebfeb"
+    },
+    {
+      "old_resource": "references/passive-sources.md",
+      "old_path": "skill/references/passive-sources.md",
+      "targets": [
+        "references/app-mechanics/sources/passives.md"
+      ],
+      "reason": "可选来源适配合同；查询ready、采用与执行资格分别描述，范围读真实capability。",
+      "base_sha256": "646e9f47761e5b8477e7f2408150577be283ad054fc8fb1537253d856fc30368"
+    },
+    {
+      "old_resource": "references/hit-parameter-sources.md",
+      "old_path": "skill/references/hit-parameter-sources.md",
+      "targets": [
+        "references/app-mechanics/sources/hit-parameters.md"
+      ],
+      "reason": "可选来源适配合同；查询ready、采用与执行资格分别描述，范围读真实capability。",
+      "base_sha256": "601f049b11998ef279ee21af248c5dfa466cd0261ac1fa5867c11fad384c27e3"
+    },
+    {
+      "old_resource": "references/attack-metadata-sources.md",
+      "old_path": "skill/references/attack-metadata-sources.md",
+      "targets": [
+        "references/app-mechanics/sources/attack-metadata.md"
+      ],
+      "reason": "可选来源适配合同；查询ready、采用与执行资格分别描述，范围读真实capability。",
+      "base_sha256": "868f56926ddc8dd57095c1c2c2d17bbdac41487e4a2ff23727e6f6001aa9084a"
+    },
+    {
+      "old_resource": "references/energy-generation-sources.md",
+      "old_path": "skill/references/energy-generation-sources.md",
+      "targets": [
+        "references/app-mechanics/sources/energy-generation.md"
+      ],
+      "reason": "可选来源适配合同；查询ready、采用与执行资格分别描述，范围读真实capability。",
+      "base_sha256": "f4b3f4eda0a5707f1268d9a73c961afb14de79882e09814f2b7fb34be82b1adf"
+    },
+    {
+      "old_resource": "references/limited-hit-benefit-sources.md",
+      "old_path": "skill/references/limited-hit-benefit-sources.md",
+      "targets": [
+        "references/app-mechanics/sources/limited-hit-benefits.md"
+      ],
+      "reason": "可选来源适配合同；查询ready、采用与执行资格分别描述，范围读真实capability。",
+      "base_sha256": "2059abc3cbad810f690f4753deefb949a0461b806789c11a4e791fdc95d87e85"
+    },
+    {
+      "old_resource": "references/static-included-sources.md",
+      "old_path": "skill/references/static-included-sources.md",
+      "targets": [
+        "references/app-mechanics/sources/static-inclusions.md"
+      ],
+      "reason": "可选来源适配合同；查询ready、采用与执行资格分别描述，范围读真实capability。",
+      "base_sha256": "df4a4a9fb018f7cf2d63ee83d26d632c087727cdbea3e8f60d9b8c8c02ecd92d"
+    },
+    {
+      "old_resource": "references/reaction-em-sources.md",
+      "old_path": "skill/references/reaction-em-sources.md",
+      "targets": [
+        "references/app-mechanics/sources/reaction-em.md"
+      ],
+      "reason": "可选来源适配合同；查询ready、采用与执行资格分别描述，范围读真实capability。",
+      "base_sha256": "563937b6ceb528f48d92fcb9ea128421915268f81a590513e45698ef5fca6917"
+    },
+    {
+      "old_resource": "references/reaction-benefit-sources.md",
+      "old_path": "skill/references/reaction-benefit-sources.md",
+      "targets": [
+        "references/app-mechanics/sources/reaction-benefits.md"
+      ],
+      "reason": "可选来源适配合同；查询ready、采用与执行资格分别描述，范围读真实capability。",
+      "base_sha256": "b2fe910bf64d0e7e3db829447c7d33b17a78ce79b395d338c8cd72d0fb381056"
+    },
+    {
+      "old_resource": "references/target-condition-sources.md",
+      "old_path": "skill/references/target-condition-sources.md",
+      "targets": [
+        "references/app-mechanics/sources/target-conditions.md"
+      ],
+      "reason": "可选来源适配合同；查询ready、采用与执行资格分别描述，范围读真实capability。",
+      "base_sha256": "7c1faf274c85a88f986786c4f6bea6b3b9f6bdf92eb07ee6031d84d19eb2ee56"
+    },
+    {
+      "old_resource": "references/action-energy.md",
+      "old_path": "skill/references/action-energy.md",
+      "targets": [
+        "references/app-mechanics/actions/rotation-energy.md"
+      ],
+      "reason": "动作/时序/资源/派发的App合同集中维护，旧新profile明确分栏。",
+      "base_sha256": "ff6597508fcb3891b5760c29831daca9316782efc2822cee8467e71232bbff5b"
+    },
+    {
+      "old_resource": "references/cast-sequences.md",
+      "old_path": "skill/references/cast-sequences.md",
+      "targets": [
+        "references/app-mechanics/actions/cast-sequences.md"
+      ],
+      "reason": "动作/时序/资源/派发的App合同集中维护，旧新profile明确分栏。",
+      "base_sha256": "1d4cbf0162daf6733f0e07d553b45a0a3a7d14d9100d402f4bf7495cd05ab5a5"
+    },
+    {
+      "old_resource": "references/action-capacity-sources.md",
+      "old_path": "skill/references/action-capacity-sources.md",
+      "targets": [
+        "references/app-mechanics/actions/capacity.md"
+      ],
+      "reason": "动作/时序/资源/派发的App合同集中维护，旧新profile明确分栏。",
+      "base_sha256": "c8048a4bd3e554c94e67b31ab51e64a4b825caf6c32898f59214feaabb8c8a07"
+    },
+    {
+      "old_resource": "references/action-resource-sources.md",
+      "old_path": "skill/references/action-resource-sources.md",
+      "targets": [
+        "references/app-mechanics/actions/admission.md"
+      ],
+      "reason": "动作/时序/资源/派发的App合同集中维护，旧新profile明确分栏。",
+      "base_sha256": "1febe76b4769eb557ec854c112570e37735cb473e004eaa3b302e0cf145e120c"
+    },
+    {
+      "old_resource": "references/action-dispatch-profiles.md",
+      "old_path": "skill/references/action-dispatch-profiles.md",
+      "targets": [
+        "references/app-mechanics/actions/dispatch.md"
+      ],
+      "reason": "动作/时序/资源/派发的App合同集中维护，旧新profile明确分栏。",
+      "base_sha256": "b691731f8b5c72456c749e4c326d7bf63aab1156b2dbb5fdb78634d124127b57"
+    },
+    {
+      "old_resource": "references/action-event-profiles.md",
+      "old_path": "skill/references/action-event-profiles.md",
+      "targets": [
+        "references/app-mechanics/actions/event-profiles.md"
+      ],
+      "reason": "动作/时序/资源/派发的App合同集中维护，旧新profile明确分栏。",
+      "base_sha256": "b09f26417bec8b72cb6bb78b5e904a29189ce50525cd172045639cf4ad422627"
+    },
+    {
+      "old_resource": "references/periodic-action-sources.md",
+      "old_path": "skill/references/periodic-action-sources.md",
+      "targets": [
+        "references/app-mechanics/actions/periodic.md"
+      ],
+      "reason": "动作/时序/资源/派发的App合同集中维护，旧新profile明确分栏。",
+      "base_sha256": "740e762365203d09023f9e38b62bbf8b8a884d2a088390deb46c320d1fd1d5dc"
+    },
+    {
+      "old_resource": "references/rotation-audit.md",
+      "old_path": "skill/references/rotation-audit.md",
+      "targets": [
+        "references/workflow/coverage-and-review.md",
+        "references/app-mechanics/review/results.md"
+      ],
+      "reason": "通用采用/执行核对留工作法；软件覆盖率和具体trace语义归技术页。",
+      "base_sha256": "69f32b65b470f8ed65b9a18fc8390415faee932615e2881733adb8902928ca49"
+    },
+    {
+      "old_resource": "references/mechanism-sources.md",
+      "old_path": "skill/references/mechanism-sources.md",
+      "targets": [
+        "references/app-mechanics/execution/materialization.md"
+      ],
+      "reason": "知识到自包含强类型场景输入的唯一接线说明。",
+      "base_sha256": "fa65ac283fe4f02ade02b804d4628a9215773b469ce582e90e5705644679bfe6"
+    },
+    {
+      "old_resource": "references/declared-mechanics.md",
+      "old_path": "skill/references/declared-mechanics.md",
+      "targets": [
+        "references/app-mechanics/execution/rules.md",
+        "references/app-mechanics/execution/attributes-and-sampling.md",
+        "references/app-mechanics/execution/resources-and-lifecycle.md"
+      ],
+      "reason": "按规则、属性/采样、资源/生命周期拆内容，不按固定篇幅切块。",
+      "base_sha256": "d8e0acfff3c0bb789b2d75cffc7f1f2b96671930a794804236106aa59ae9ff46"
+    },
+    {
+      "old_resource": "references/snapshot-captures.md",
+      "old_path": "skill/references/snapshot-captures.md",
+      "targets": [
+        "references/app-mechanics/execution/action-captures.md"
+      ],
+      "reason": "动作capture专项时点/绑定，链接通用采样，不复制属性图规则。",
+      "base_sha256": "8a1e753d10aeb125c6455d08cebb676322769ac08a3d84701d5035ddf218d017"
+    },
+    {
+      "old_resource": "references/elemental-runtime.md",
+      "old_path": "skill/references/elemental-runtime.md",
+      "targets": [
+        "references/app-mechanics/elements/runtime.md",
+        "references/app-mechanics/elements/compatibility.md",
+        "references/app-mechanics/elements/special-reactions.md"
+      ],
+      "reason": "当前元素输入/审计、仍有效兼容入口及星月专用事件分开；旧冻结模型不污染默认路线。",
+      "base_sha256": "582f0ec504ac9e1957c80a2b73a761cf772a21d6510246e172dd3ad285d71753"
+    },
+    {
+      "old_resource": "references/calculation-corrections.md",
+      "old_path": "skill/references/calculation-corrections.md",
+      "targets": [
+        "references/app-mechanics/review/corrections.md"
+      ],
+      "reason": "实际诊断和最小补正接口。",
+      "base_sha256": "f0f131bfd095fe9ff8a9555ba779861907977349502ad831a15435b94baa5093"
+    },
+    {
+      "old_resource": "references/calculation-overrides.md",
+      "old_path": "skill/references/calculation-overrides.md",
+      "targets": [
+        "references/app-mechanics/review/overrides.md"
+      ],
+      "reason": "精确覆盖、确认、所有权及后继重演接口。",
+      "base_sha256": "1f38df85d04aa244fd0e65f93ea96a8c588542ccd52f0f9043773c5a133dc918"
+    },
+    {
+      "old_resource": "references/engine-template.md",
+      "old_path": "skill/references/engine-template.md",
+      "targets": [
+        "references/app-mechanics/resolved-template.md"
+      ],
+      "reason": "仍受支持数值core合同；不当作原生全部机制的唯一输入。",
+      "base_sha256": "93d6a5c2b0818bc0ede371287793ef55be538b78f8b37eba013f26f271d2e704"
+    },
+    {
+      "old_resource": "references/calculation-delivery.md",
+      "old_path": "skill/references/calculation-delivery.md",
+      "targets": [
+        "references/outputs/app-and-excel.md"
+      ],
+      "reason": "四产物、同源/正式/诊断、索引和文件状态。",
+      "base_sha256": "d1f76dcd6fad35b0bce1ee0c558dc03dc25261288e7d7f254271b0bd8ad6178f"
+    },
+    {
+      "old_resource": "references/excel-mode.md",
+      "old_path": "skill/references/excel-mode.md",
+      "targets": [
+        "references/outputs/excel.md"
+      ],
+      "reason": "独立表与App活公式两条路线；按真实editable字段说明。",
+      "base_sha256": "3b52e5dd52b03f6ceeae1a1c94e87610a1f25add6f50a60319fb76d97dd959f1"
+    },
+    {
+      "old_resource": "references/software-manual.md",
+      "old_path": "skill/references/software-manual.md",
+      "targets": [
+        "references/runtime/software-entrypoints.md"
+      ],
+      "reason": "环境入口/CLI/原生表面区别；不用它重复具体机制schema。",
+      "base_sha256": "bbba88ee3593b8ae4054e11f899b126dc5e4be3b5c40e735986849e6616bbb48"
+    },
+    {
+      "old_resource": "references/tips.md",
+      "old_path": "skill/references/tips.md",
+      "targets": [
+        "references/data/query.md",
+        "references/workflow/coverage-and-review.md",
+        "references/outputs/excel.md"
+      ],
+      "reason": "拆回对应主题；错误旧写库条款删除，退役混合tips入口，避免万能杂项页膨胀。",
+      "base_sha256": "57e1b6a2cd447fcd5211b05f92a69bde8a7fa3878aa7cc4d7808d0503b8c13d7"
+    }
+  ],
+  "additional_entry_pages": [
+    {
+      "path": "references/index.md",
+      "purpose": "按问题列当前主题与适用环境的总资源地图；从目标文件/清单生成，不手抄能力表。"
+    },
+    {
+      "path": "references/app-mechanics/index.md",
+      "purpose": "游戏概念→App接线主题/真实capability的短索引，不复制公式、schema或固定能力数量。"
+    }
+  ],
+  "proposed_skill_paths": [
+    "SKILL.md",
+    "references/app-mechanics/actions/admission.md",
+    "references/app-mechanics/actions/capacity.md",
+    "references/app-mechanics/actions/cast-sequences.md",
+    "references/app-mechanics/actions/dispatch.md",
+    "references/app-mechanics/actions/event-profiles.md",
+    "references/app-mechanics/actions/periodic.md",
+    "references/app-mechanics/actions/rotation-energy.md",
+    "references/app-mechanics/elements/compatibility.md",
+    "references/app-mechanics/elements/runtime.md",
+    "references/app-mechanics/elements/special-reactions.md",
+    "references/app-mechanics/execution/action-captures.md",
+    "references/app-mechanics/execution/attributes-and-sampling.md",
+    "references/app-mechanics/execution/materialization.md",
+    "references/app-mechanics/execution/resources-and-lifecycle.md",
+    "references/app-mechanics/execution/rules.md",
+    "references/app-mechanics/index.md",
+    "references/app-mechanics/loadouts.md",
+    "references/app-mechanics/resolved-template.md",
+    "references/app-mechanics/review/corrections.md",
+    "references/app-mechanics/review/overrides.md",
+    "references/app-mechanics/review/results.md",
+    "references/app-mechanics/sources/attack-metadata.md",
+    "references/app-mechanics/sources/energy-generation.md",
+    "references/app-mechanics/sources/hit-parameters.md",
+    "references/app-mechanics/sources/limited-hit-benefits.md",
+    "references/app-mechanics/sources/passives.md",
+    "references/app-mechanics/sources/reaction-benefits.md",
+    "references/app-mechanics/sources/reaction-em.md",
+    "references/app-mechanics/sources/static-inclusions.md",
+    "references/app-mechanics/sources/target-conditions.md",
+    "references/app-mechanics/sources/upstream-runtime.md",
+    "references/data/character-appendices.md",
+    "references/data/database-readme.md",
+    "references/data/gadget-sources.md",
+    "references/data/query.md",
+    "references/data/research.md",
+    "references/data/runtime-query.md",
+    "references/index.md",
+    "references/mechanics/artifacts.md",
+    "references/mechanics/damage-formula.md",
+    "references/mechanics/mechanics-glossary.md",
+    "references/mechanics/reactions.md",
+    "references/mechanics/rotation.md",
+    "references/outputs/app-and-excel.md",
+    "references/outputs/excel.md",
+    "references/runtime/native-agent.md",
+    "references/runtime/software-entrypoints.md",
+    "references/workflow/context-use.md",
+    "references/workflow/coverage-and-review.md",
+    "references/workflow/focus/actions.md",
+    "references/workflow/focus/closure.md",
+    "references/workflow/focus/events.md",
+    "references/workflow/focus/loadout.md",
+    "references/workflow/focus/numbers.md",
+    "references/workflow/index.md",
+    "references/workflow/whiteboard.md"
+  ],
+  "proposed_skill_path_count": 57,
+  "archived_outside_skill": [
+    "docs/archive/skill/native-agent-python-v1.md"
+  ],
+  "no_page_size_target": true,
+  "focus_is_authorization": false,
+  "no_automatic_facts_execution": true,
+  "changes_not_applied": "Formal source migration applied; App wiring, data integration and complete release qualification are tracked by the next-release checklist.",
+  "implementation_manifest": "docs/design/skill/current-resources.json"
+}

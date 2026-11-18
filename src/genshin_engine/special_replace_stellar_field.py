@@ -6,6 +6,7 @@ from collections.abc import Callable, Mapping
 from dataclasses import dataclass
 from typing import Any
 
+from genshin_engine.constants import stellar_superconduct_factor
 from genshin_engine.rotation_port import TICKS
 from genshin_engine.special_replacement_contracts import replacement_state_fingerprint
 
@@ -32,6 +33,7 @@ class StellarFieldTransition:
     establishing_application: str
     expires_at: int
     generated_event: dict[str, Any]
+    initial_grant_layers: int = 0
 
 
 def plan_stellar_field(proposal: StellarFieldProposal) -> StellarFieldTransition:
@@ -45,6 +47,7 @@ def plan_stellar_field(proposal: StellarFieldProposal) -> StellarFieldTransition
                        if was_active else proposal.time + interval)
     layers = field["stellar_superconduct_layers"] if was_active else 0
     expires_at = proposal.time + duration
+    initial_grant = 0 if was_active else mechanics.get("initial_grant_layers", 0)
     generated = {
         "type": "special_reaction_state", "event_id": proposal.replacement_id+":field",
         "t": proposal.time/TICKS, "time_tick": proposal.time, "target_id": None,
@@ -61,10 +64,15 @@ def plan_stellar_field(proposal: StellarFieldProposal) -> StellarFieldTransition
         "damage_emitted": False, "damage_policy": "direct_stellar_hits_only",
         "status": "executed",
     }
+    if initial_grant:
+        generated.update(initial_grant_layers=initial_grant,
+                         initial_grant_factor=stellar_superconduct_factor(initial_grant),
+                         initial_grant_expires_at=next_settlement/TICKS)
     return StellarFieldTransition(
         expected_prestate_fingerprint=replacement_state_fingerprint(field),
         was_active=was_active, next_settlement=next_settlement, layers=layers,
         establishing_application=establishing, expires_at=expires_at, generated_event=generated,
+        initial_grant_layers=initial_grant,
     )
 
 

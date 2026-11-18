@@ -92,6 +92,8 @@ def validate_mechanics_model(model, *, attribute_author=False, attribute_limits=
     except (TypeError, ValueError, OverflowError, RecursionError):
         issues.append(_issue("schema", "输入不是有限 JSON。", "mechanics_model"))
     if not issues:
+        from genshin_engine.health_mechanics import validate_health_declarations
+        issues.extend(validate_health_declarations(model))
         from genshin_engine.target_status import validate_status_declarations
         issues.extend(validate_status_declarations(model))
         issues.extend(pool_runtime.validate_bindings(model))

@@ -109,7 +109,7 @@ def _canonical_advance_deadlines_v1(
                 interval = _seconds_to_ticks(
                     config["mechanics"]["settlement_interval_seconds"], "settlement_interval_seconds")
                 while next_tick is not None and next_tick <= time and next_tick <= expires:
-                    layers = min(12, state["stellar_superconduct_layers"])
+                    layers = min(12, state["stellar_superconduct_layers"] + config["mechanics"].get("settlement_bonus_layers", 0))
                     state["stellar_superconduct_settled_layers"] = layers
                     state["stellar_superconduct_factor"] = stellar_superconduct_factor(layers)
                     state["stellar_superconduct_ordinary_bonus"] = self._ordinary_bonus(layers)

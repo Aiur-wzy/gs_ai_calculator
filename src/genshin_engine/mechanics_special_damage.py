@@ -214,8 +214,11 @@ def _direct_stellar_damage_hit(request, *, cycle=0):
         )
     layers, factor = request.get("layers"), request.get("system_factor")
     snapshot = request.get("settled_snapshot")
-    if (type(layers) is not int or layers < 0
-            or factor != stellar_superconduct_factor(layers)
+    reaction_type = request.get("reaction_type")
+    valid_factor = ((type(layers) is int and 0 <= layers <= 12 and factor == stellar_superconduct_factor(layers))
+                    if reaction_type == "stellar_superconduct" else
+                    (reaction_type == "stellar_swirl" and layers is None and factor == 1.0))
+    if (not valid_factor
             or not isinstance(snapshot, dict) or snapshot.get("layers") != layers
             or snapshot.get("system_factor") != factor):
         raise ElementalPending(
@@ -226,18 +229,20 @@ def _direct_stellar_damage_hit(request, *, cycle=0):
              "settled_snapshot": copy.deepcopy(snapshot)},
         )
     component = request["component"]
+    label = "星超导" if reaction_type == "stellar_superconduct" else "星扩散"
     return {
         "id": f"{event_id}:direct:{owner}", "t": request["t"],
-        "character": owner, "skill": "星超导",
-        "hit_name": f"星超导·能力直伤（{component}）",
+        "character": owner, "skill": label,
+        "hit_name": f"{label}·能力直伤（{component}）",
         "description": (
             f"由{_direct_profile_evidence_label(request.get('ability_profile'))}生成；"
-            "星超导层数在事件时刻从最近一次四秒结算读取。"
+            + ("星超导层数在事件时刻从最近一次四秒结算读取。" if reaction_type == "stellar_superconduct"
+               else "使用能力自身星扩散倍率，不读取自然风旋层级。")
         ),
         "damage_type_ids": ["damage.reaction"], "damage_system": "stellar",
         "element": request["element"], "multiplier": request["multiplier"],
         "scaling_stat": request["scaling_stat"], "reaction_base": False,
-        "reaction": {"type": "stellar_superconduct", "layers": layers},
+        "reaction": ({"type": reaction_type, "layers": layers} if layers is not None else {"type": reaction_type}),
         "count": request["count"],
         "extensions": {
             "elemental": {
@@ -248,7 +253,7 @@ def _direct_stellar_damage_hit(request, *, cycle=0):
                 "actor_sample_policy": request.get("actor_sample_policy"), "cycle": cycle,
             },
             "special_reaction": {
-                "request_id": event_id, "reaction_type": "stellar_superconduct",
+                "request_id": event_id, "reaction_type": reaction_type,
                 "reaction_base": False, "component": component,
                 "area_id": request.get("area_id"),
                 "profile": copy.deepcopy(request.get("profile")),

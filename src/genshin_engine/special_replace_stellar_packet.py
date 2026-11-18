@@ -13,6 +13,7 @@ from genshin_engine.special_replacement_contracts import (
     ReplacementFamilyBinding,
     replacement_state_fingerprint,
 )
+from genshin_engine.special_stellar_initial_upgrade import apply_initial_vortex_upgrade
 
 
 @dataclass(frozen=True, slots=True)
@@ -51,6 +52,7 @@ def plan_stellar_swirl_packet(proposal: StellarSwirlPacketProposal) -> StellarSw
             stellar_swirl_action_id=first_reaction.get("action_id"),
             stellar_swirl_parent_reaction_id=first["id"],
         )
+        apply_initial_vortex_upgrade(vortex, mechanics, time, proposal.seconds_to_ticks)
         for roles in packet_roles:
             proposal.merge_roles(
                 vortex, roles, packet_event_id)
@@ -61,7 +63,7 @@ def plan_stellar_swirl_packet(proposal: StellarSwirlPacketProposal) -> StellarSw
             "area_id": area_id, "reaction_type": "stellar_swirl",
             "operation": "create_vortex_from_packet",
             "packet_size": len(reactions), "packet_started_with_vortex": False,
-            "counted_children": 1, "count": 1, "vortex_level": 1,
+            "counted_children": 1, "count": vortex["stellar_swirl_count"], "vortex_level": vortex["stellar_swirl_level"],
             "detonate_at": vortex["stellar_swirl_detonate_at"]/TICKS,
             "profile": copy.deepcopy(profile), "status": "executed",
         })
@@ -116,6 +118,7 @@ def plan_stellar_swirl_packet(proposal: StellarSwirlPacketProposal) -> StellarSw
         anemo_trigger_ids=vortex["stellar_swirl_anemo_trigger_ids"],
         cryo_applier_ids=vortex["stellar_swirl_cryo_applier_ids"],
         generated_events=generated,
+        initial_upgrade_ready_at=vortex.get("stellar_swirl_initial_upgrade_ready_at"),
     )
 
 

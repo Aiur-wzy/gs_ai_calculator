@@ -261,6 +261,16 @@ class AttributeRuntime:
                 return
             component = {**classified['component'], 'recipient': actor}
             metadata = {}
+            if isinstance(value, dict) and value.get('kind') == 'health':
+                from genshin_engine.health_mechanics import read_health_expression
+                try:
+                    value = read_health_expression(self.executor, value, rule['owner'], actor,
+                        instance={'trigger_snapshot': sample}, snapshot=snapshot, event=self.context)
+                except AttributeLedgerError as exc:
+                    missing.append({'actor': actor, 'source': list(key), **({'stat': stat} if self.multistat else {}),
+                        'code': exc.issue['code'], 'component': component, 'instance_id': instance, 'layer_id': layer,
+                        'inclusion': classified['nonextra_inclusion'] if classified['status'] != 'pending' else 'unknown'})
+                    return
             if self.graph:
                 metadata['output_domain'] = domain
                 if isinstance(value, dict):

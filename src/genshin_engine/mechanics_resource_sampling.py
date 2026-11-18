@@ -32,6 +32,7 @@ def begin_energy_credit(runtime, event):
     if getattr(runtime, "_energy_credit_failed", False):
         raise SnapshotCapturePending("energy_credit_attempt_failed",
             "上一次到账取样未提交；请从原输入重新计算，不能复用失败执行器。", "energy_credit")
+    runtime.health_event_context = event
     runtime._energy_credit_attempt = {
         "type": "energy_credit_sampling", "event_id": event["id"],
         "run_id": event["run_id"], "source_cycle": event["origin"],

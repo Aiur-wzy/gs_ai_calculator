@@ -16,6 +16,7 @@
 - [星月替换、能力直伤与来源资格](elements/special-reactions.md)
 - [动作从属面板取样](execution/action-captures.md)
 - [属性依赖与分域取样](execution/attributes-and-sampling.md)
+- [当前生命、治疗与生命之契](health.md)
 - [受审机制资料与通用来源绑定](execution/materialization.md)
 - [资源、多跳与生命周期](execution/resources-and-lifecycle.md)
 - [声明式规则与来源绑定](execution/rules.md)

@@ -41,6 +41,7 @@ from genshin_app.product_release_index import (
 from genshin_app.release_pair_trust import ALGORITHM as REMOTE_TRUST_ALGORITHM
 from genshin_app.release_pair_trust import VERIFIER_CONTRACT as REMOTE_VERIFIER_CONTRACT
 from genshin_app.release_pair_trust import build_trust_verifier
+from genshin_db.atomic_io import atomic_replace
 from genshin_db.release_profile import (
     DatabaseReleaseError,
     database_live_receipt_matches,
@@ -181,7 +182,7 @@ def _write_json_atomic(path: Path, value: Mapping[str, Any]) -> None:
             stream.write(raw)
             stream.flush()
             os.fsync(stream.fileno())
-        os.replace(temporary, path)
+        atomic_replace(temporary, path)
     finally:
         temporary.unlink(missing_ok=True)
 

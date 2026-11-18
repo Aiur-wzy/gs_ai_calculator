@@ -1,7 +1,7 @@
 {
   "contract": "genshin-native-dsh-client-shell-manifest-v1",
   "phase": "dsh_client_shell",
-  "app_version": "1.0.1",
+  "app_version": "1.0.2",
   "runtime_generation": "dsh_client_shell",
   "entry": "src/native-dsh-runtime-entry.mjs",
   "node_version": "24.19.0",
@@ -14,7 +14,7 @@
     "pnpm-workspace.yaml": "bbac7421bb82adfbc1c8c571fb1dd96621be69417a969ddc71eaa7e1cb46c4d6",
     "src/bridge-envelope.mjs": "4190f7fbad088a8d0d0d72c549f23dd40ae3ad3848586f1bb1b27521cdb2a5a9",
     "src/dependency-payloads.mjs": "8393ab81a13d2eea9e9bc369ac17b26705f0a602ef2008a8bd6790c59d1c5bb3",
-    "src/dsh-client-shell-runtime-contract.mjs": "398e1873ba29f7cac6ceabc8ccbbbab064c21d846e2200fd5be3c2d8e28fecd7",
+    "src/dsh-client-shell-runtime-contract.mjs": "ad521c1c71f0f218374f98039dfad133494137d5ed4fad9300e3248f60655161",
     "src/dsh-task-review.mjs": "4710aff1a795ad0d49bc21aaf3ca3e0141ce897c8d2b1f7b1e05ab402949468b",
     "src/fixed-root-filesystem-contract.mjs": "fbcb79f39382534d9fbdabfd1c8173690f81ea8a4559427299e38de6fc379739",
     "src/fixed-root-filesystem.mjs": "a6f5e0e340c847ceb8b44f3930e58d5f2a340cd9c1842f1c7a7f5f5421030635",
@@ -64,7 +64,7 @@
     "src/runtime-version.mjs": "f9337f8b614aca007ebcbd64786cfef1f4fe328a2fce3cfef3e6d3b6788aae8f",
     "src/secret-control.mjs": "0f9f0eff42daa50b845a729cb233fd394a826dc4a03d1e3762c27540f3d45fdf"
   },
-  "runtime_closure_hash": "0fa3d88ab16dada9f17d471ab4775bf18e36b47445435495e6ab0ca2fb9d9bde",
+  "runtime_closure_hash": "c35cd35e0d9af8590331c43fd87d8f7af32cf4517ab02782c66bc0dac6a96ce3",
   "dependency_lock_hash": "35a85983148335d1256b004ea1ba4754d391d922e54fac387b2aad9ec915e03d",
   "node_binary_sha256": "3602f2bb1a10f2cbab4c36886218a33c1ab3db87290e73b033c46c77147d0237",
   "dependency_cohort": {
@@ -50607,5 +50607,5 @@
   "client_composition_hash": "ddbc955cfc025752fd15fafa2728739fad8fe4151bd05ebde52b1ff50de80cbd",
   "client_accepted_hash": "ef8ed5cba76fa83f5c45d5bb9d690669085da2a591415e39f7c76e2b8ef7dfbe",
   "client_accepted_semantic_hash": "6d591324eedb000559c4e0c54bfd2e36a415e8850278f8ec0e754521fa67df1c",
-  "manifest_hash": "075a221c0b0301ff58d50880944981d2b53609ccb191fb89fb06d12a900fb1bb"
+  "manifest_hash": "94973e01e11573f737997047e537178b8ea8363391fa520b0ad3368dd8c4af79"
 }

@@ -23,7 +23,6 @@ from genshin_engine.special_reaction_contracts import (
     DIRECT_ABILITY_BINDING_KEYS,
     DIRECT_LUNAR_ELEMENTS,
     DIRECT_LUNAR_SCALING_STATS,
-    DIRECT_STELLAR_ELEMENTS,
     DIRECT_STELLAR_SCALING_STATS,
     REQUIRED_CAPABILITY_TAGS,
     SPECIAL_REACTION_SCHEMA_VERSION,
@@ -193,8 +192,8 @@ DIRECT_LUNAR_DAMAGE_PROFILE_SCHEMA["$comment"] = (
 )
 
 DIRECT_STELLAR_DAMAGE_PARAMETERS_SCHEMA = obj({
-    "reaction_type": {"const": "stellar_superconduct"},
-    "element": {"enum": sorted(DIRECT_STELLAR_ELEMENTS)},
+    "reaction_type": {"enum": ["stellar_superconduct", "stellar_swirl"]},
+    "element": {"enum": ["anemo", "cryo", "electro"]},
     "multiplier": {"type": "number", "exclusiveMinimum": 0},
     "scaling_stat": {"enum": sorted(DIRECT_STELLAR_SCALING_STATS)},
     "count": {"type": "integer", "minimum": 1, "maximum": 100},
