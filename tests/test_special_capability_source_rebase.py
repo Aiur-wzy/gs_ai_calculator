@@ -26,20 +26,28 @@ def _equipment(catalog, commit=COMMIT):
     } for entry in catalog["entries"]}
 
 
+def _pre_mitya_catalog():
+    review = json.loads((ROOT / "docs/pm/audits/2026-11-18-mitya-special-capability-registration.json").read_text(encoding="utf8"))
+    return review["previous_catalog"]
+
+
 def test_catalog_rebase_is_backed_by_all_identity_links_and_bilingual_source_evidence():
-    catalog = load_reviewed_special_reaction_capabilities()
+    catalog = _pre_mitya_catalog()
     review = json.loads((ROOT / "docs/pm/audits/2026-11-06-r9-special-capability-source-review.json").read_text(encoding="utf-8"))
     assert review["review_fingerprint"] == _hash({key: value for key, value in review.items() if key != "review_fingerprint"})
     assert catalog["source_upstream_commit"] == review["source_upstream_commit"] == COMMIT
     assert catalog["source_target_version"] == review["source_target_version"] == "CNCBWin7.2.50"
-    assert catalog["revision"] == review["new_catalog_revision"] == 2
-    assert catalog["content_hash"] == review["new_catalog_content_hash"]
+    assert review["new_catalog_revision"] == 2
+    # Keep historical evidence immutable; later registrations use the same DB.
+    prior = {**catalog, "revision": 2,
+             "entries": [e for e in catalog["entries"] if e["character_id"] not in (10000149, 10000147)]}
+    assert _hash({k: v for k, v in prior.items() if k != "content_hash"}) == review["new_catalog_content_hash"]
     assert set(catalog["source_files"]) < set(review["source_files"])
     for name, digest in catalog["source_files"].items():
         assert review["source_files"][name] == digest
     rows = {row["character_id"]: row for row in review["reviewed_rows"]}
-    assert len(rows) == len(catalog["entries"]) == 13
-    for entry in catalog["entries"]:
+    assert len(rows) == len(prior["entries"]) == 13
+    for entry in prior["entries"]:
         row = rows[entry["character_id"]]
         assert row["identity_and_passive_link_verified"] is True
         assert row["facts_unchanged_from_previous_review"] is True
@@ -55,21 +63,21 @@ def test_catalog_rebase_is_backed_by_all_identity_links_and_bilingual_source_evi
             assert text["pointer"] == "/" + row["proud"]["desc_text_map_hash"]
 
 
-def test_new_snapshot_qualifies_twelve_and_preserves_one_exception_as_pending():
+def test_new_snapshot_qualifies_fifteen_including_explicit_resource_variant():
     catalog = load_reviewed_special_reaction_capabilities()
     projected = project_special_reaction_party_capabilities(_equipment(catalog))
-    assert len(projected) == 12
+    assert len(projected) == 15
     assert all(row["status"] == "confirmed" for row in projected)
     assert all(verified_capability_tags(row) for row in projected)
-    assert all(row["db_character_id"] != 10000136 for row in projected)
+    assert any(row["db_character_id"] == 10000136 for row in projected)
     pending = [row for row in catalog["entries"] if row["runtime_support_status"] == "pending"]
-    assert [row["character_id"] for row in pending] == [10000136]
+    assert pending == []
 
 
 def test_old_snapshot_does_not_gain_new_authority_by_catalog_rebase():
     catalog = load_reviewed_special_reaction_capabilities()
     projected = project_special_reaction_party_capabilities(_equipment(catalog, "224708edc8056f27e9ffc4eacabe797d75274636"))
-    assert len(projected) == 12
+    assert len(projected) == 15
     assert all(row["status"] == "pending" for row in projected)
     assert all(row["projection_reason_code"] == "equipment_upstream_commit_mismatch" for row in projected)
     assert all(not verified_capability_tags(row) for row in projected)
@@ -81,8 +89,52 @@ def test_rebase_preserves_explicit_form_and_exact_entry_integrity():
     inputs["10000005"]["character_ref"].pop("skill_depot_id")
     inputs["10000007"]["character_ref"]["skill_depot_id"] = 701
     rows = project_special_reaction_party_capabilities(inputs)
-    assert len(rows) == 10
+    assert len(rows) == 13
     assert not {10000005, 10000007} & {row["db_character_id"] for row in rows}
     row = rows[0]
     row["catalog_revision"] = 1
     assert not verified_capability_tags(row)
+
+
+def test_anastasia_registration_matches_saved_identity_passive_and_catalog():
+    catalog = _pre_mitya_catalog()
+    review = json.loads((ROOT / "docs/pm/audits/2026-11-18-anastasia-special-capability-registration.json").read_text(encoding="utf8"))
+    assert review["review_fingerprint"] == _hash({k:v for k,v in review.items() if k != "review_fingerprint"})
+    assert review["source_upstream_commit"] == catalog["source_upstream_commit"] == COMMIT
+    assert review["catalog_revision"] == 3
+    prior = {**catalog, "revision": 3,
+             "entries": [e for e in catalog["entries"] if e["character_id"] != 10000147]}
+    assert review["catalog_content_hash"] == _hash({k:v for k,v in prior.items() if k != "content_hash"})
+    entry = next(e for e in catalog["entries"] if e["character_id"] == 10000149)
+    assert review["entry"] == entry
+    raw = review["raw_records"]
+    assert raw["AvatarExcelConfigData"]["id"] == entry["character_id"]
+    assert raw["AvatarExcelConfigData"]["skillDepotId"] == raw["AvatarSkillDepotExcelConfigData"]["id"] == entry["required_skill_depot_id"]
+    proud = raw["ProudSkillExcelConfigData"]
+    assert proud["proudSkillId"] == entry["evidence"]["proud_skill_id"]
+    assert str(proud["descTextMapHash"]) == entry["evidence"]["desc_text_map_hash"]
+    assert {"proudSkillGroupId": proud["proudSkillGroupId"]} in raw["AvatarSkillDepotExcelConfigData"]["inherentProudSkillOpens"]
+    assert "转为触发星超导/星扩散反应" in review["text"]
+
+
+def test_danica_registration_only_qualifies_stellar_superconduct_with_exact_identity():
+    catalog = _pre_mitya_catalog()
+    review = json.loads((ROOT / "docs/pm/audits/2026-11-18-danica-special-capability-registration.json").read_text(encoding="utf8"))
+    assert review["review_fingerprint"] == _hash({k:v for k,v in review.items() if k != "review_fingerprint"})
+    assert review["catalog_revision"] == catalog["revision"] == 4
+    assert review["catalog_content_hash"] == catalog["content_hash"]
+    entry = next(e for e in catalog["entries"] if e["character_id"] == 10000147)
+    assert review["entry"] == entry
+    raw = review["raw_records"]
+    assert raw["AvatarExcelConfigData"]["skillDepotId"] == raw["AvatarSkillDepotExcelConfigData"]["id"] == entry["required_skill_depot_id"] == 14701
+    assert {"proudSkillGroupId":14723} in raw["AvatarSkillDepotExcelConfigData"]["inherentProudSkillOpens"]
+    assert raw["ProudSkillExcelConfigData"]["proudSkillId"] == entry["evidence"]["proud_skill_id"] == 1472301
+    assert str(raw["ProudSkillExcelConfigData"]["descTextMapHash"]) == entry["evidence"]["desc_text_map_hash"]
+    assert "转为触发星超导反应" in json.dumps(review["database_passive"],ensure_ascii=False)
+    inputs = _equipment(catalog)
+    row = next(r for r in project_special_reaction_party_capabilities(inputs) if r['db_character_id']==10000147)
+    assert verified_capability_tags(row) == ('native_reaction_qualification.stellar_superconduct',)
+    row['capability_tags'].append('native_reaction_qualification.stellar_swirl')
+    assert not verified_capability_tags(row)
+    inputs['10000147']['character_ref']['skill_depot_id'] = 14901
+    assert not any(r['db_character_id']==10000147 for r in project_special_reaction_party_capabilities(inputs))

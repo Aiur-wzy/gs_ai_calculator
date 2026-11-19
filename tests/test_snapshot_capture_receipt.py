@@ -156,7 +156,7 @@ def test_budget_before_copy_or_replay(calculated, monkeypatch):
     result.pop("snapshot_capture_execution")
     monkeypatch.setattr(proof, "MAX_EVIDENCE_BYTES", 20)
     monkeypatch.setattr(mechanics, "execute_mechanics", lambda *a, **k: pytest.fail("budget must precede replay"))
-    with pytest.raises(ValueError, match="8MiB"):
+    with pytest.raises(ValueError, match="字节预算 20"):
         proof.make_snapshot_capture_receipt(calculated["plan"], calculated["report"], result)
     assert "snapshot_capture_execution" not in result
 
@@ -214,5 +214,26 @@ def test_exact_total_evidence_budget_and_one_byte_below(calculated, monkeypatch)
     validate(calculated)
     monkeypatch.setattr(proof, "MAX_EVIDENCE_BYTES", size - 1)
     monkeypatch.setattr(mechanics, "execute_mechanics", lambda *a, **k: pytest.fail("over budget executed"))
-    with pytest.raises(ValueError, match="8MiB"):
+    with pytest.raises(ValueError, match=f"字节预算 {size - 1}"):
         validate(calculated)
+
+
+def test_long_rotation_evidence_above_old_limit_is_not_truncated():
+    # Exercise actual UTF-8 accounting above the previous 8 MiB ceiling.
+    value = {"ledger": "层" * (3 * 1024 * 1024)}
+    original_length = len(value["ledger"])
+    proof._bounded(value)
+    assert len(value["ledger"]) == original_length
+
+
+def test_evidence_budget_counts_utf8_bytes(monkeypatch):
+    value = ["层"]
+    size = len(json.dumps(value, ensure_ascii=False, separators=(",", ":")).encode("utf8"))
+    monkeypatch.setattr(proof, "MAX_EVIDENCE_BYTES", size)
+    proof._bounded(value)
+    monkeypatch.setattr(proof, "MAX_EVIDENCE_BYTES", size - 1)
+    with pytest.raises(ValueError, match=f"字节预算 {size - 1}") as caught:
+        proof._bounded(value)
+    assert caught.value.reason == "response_budget_exceeded"
+    assert caught.value.details["phase"] == "snapshot_capture_evidence"
+    assert caught.value.details["truncated"] is False

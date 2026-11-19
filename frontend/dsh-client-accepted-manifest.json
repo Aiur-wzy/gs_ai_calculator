@@ -745,9 +745,9 @@
         "@deepseek-ai/dsh-client-ui-conversation/client"
       ],
       "immediately": false,
-      "executableSha256": "d6c9a84fd88e2ffee5e19481ac421a7eda368e9c616e63e3a032682f3cb4ffd0",
-      "executableBytes": 278785
+      "executableSha256": "ba84b5527046059d8ed6a64bb32320916818f87b703731ec3b6e1c35b383aa08",
+      "executableBytes": 278933
     }
   ],
-  "semanticSha256": "6d591324eedb000559c4e0c54bfd2e36a415e8850278f8ec0e754521fa67df1c"
+  "semanticSha256": "ef331c8376d64ba4bbd51ce9596714214d0acaf88d10b0c68b527639e3fb2713"
 }

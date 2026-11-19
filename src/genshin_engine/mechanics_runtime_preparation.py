@@ -28,6 +28,11 @@ def construct_execution_runtime(run: MechanicsExecutionContext, services: Mechan
 
 def simulate_execution(run: MechanicsExecutionContext, services: MechanicsExecutionServices) -> bool:
     run.simulation_result = services.simulate(run.rotation, run.data, run.expanded, run.windows, run.finite_until, run.rotation_context, observer=run.executor)
+    return accept_simulation_result(run, services)
+
+
+def accept_simulation_result(run: MechanicsExecutionContext, services: MechanicsExecutionServices) -> bool:
+    """Shared completion handling for continuous and resumed simulation."""
     if run.simulation_result["status"] == "pending" and (run.simulation_result.get("automatic_energy_delivery")
                                           or run.simulation_result.get("action_capacity_consumption")
                                           or run.simulation_result.get("action_admission_execution")):

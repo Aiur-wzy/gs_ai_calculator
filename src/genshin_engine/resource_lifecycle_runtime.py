@@ -6,6 +6,7 @@ never reads caller JSON as an applied lifecycle, and cannot schedule work.
 from __future__ import annotations
 
 import copy
+from functools import partial
 
 from genshin_engine.resource_definition_index import Budget, IndexError
 from genshin_engine.resource_lifecycle_index import (
@@ -268,11 +269,12 @@ class Runtime:
         self._hooks_bound = True
         self.clock._pending_scan_guard = bridge._reject_pending_scan
         guard = self._hook_guard
-        # Closure ownership is private to the real bridge; no JSON object can
-        # reproduce the guard or the per-delivery token returned by begin.
-        return (lambda record: self.begin_batch(record, _authority=guard),
-                lambda record, token: self.complete_batch(record, token, _authority=guard),
-                lambda record, token: self.leave_batch(record, token, _authority=guard))
+        # Both bound owner and private guard follow the same copy memo when a
+        # complete execution state is forked. JSON cannot reproduce either
+        # authority or the per-delivery token returned by begin.
+        return (partial(self.begin_batch, _authority=guard),
+                partial(self.complete_batch, _authority=guard),
+                partial(self.leave_batch, _authority=guard))
 
     def hook_identity(self, record, authority, token=None):
         self.identities()

@@ -1,0 +1,554 @@
+{
+  "contract": "genshin-r9-database-readme-facts-v1",
+  "database_release_id": "db-7.2.52-r1",
+  "database_sha256": "7f056d5dd52c554c5752acf4f514737cc3c951ebddc15a265cc437e7c3ba9f1f",
+  "upstream_commit": "6044f5aae7dd79fbbe15c5748ef99b654f6132b7",
+  "runtime_status": {
+    "version_line": "release",
+    "state": "ready",
+    "index_state": "ready",
+    "schema_version": 1,
+    "upstream_commit": "6044f5aae7dd79fbbe15c5748ef99b654f6132b7",
+    "snapshot_id": "7a82c224329e9569f3d868f0981624d73edb5d4ef7fb7b0150346ba822520748",
+    "execution_support": "not_evaluated",
+    "built_at": "2026-11-18T10:02:42-03:00",
+    "profile_id": "upstream-combat-catalog-v1",
+    "profile_version": 1,
+    "indexer_version": "7",
+    "manifest_fingerprint": "607122b7d50034d06d17b80d0fa9bb394c592ed3c04395eaa7d4ab1676a189ff",
+    "counts": {
+      "runtime_definition": 214311,
+      "runtime_material_reference": 427,
+      "runtime_object_reference": 63599,
+      "runtime_parameter_binding": 6240,
+      "runtime_reference": 169755,
+      "runtime_source": 2755
+    },
+    "reference_states": {
+      "ambiguous": 156,
+      "external_asset": 10685,
+      "missing": 165,
+      "resolved": 149157,
+      "unsupported_reference_form": 9592
+    },
+    "normalization_state": "ready",
+    "source_capability_contract": "genshin-runtime-source-capabilities-v1",
+    "source_capability_state": "degraded",
+    "source_capabilities": {
+      "ability": {
+        "requirement": "required",
+        "state": "ready"
+      },
+      "ability_path": {
+        "requirement": "required",
+        "state": "ready"
+      },
+      "animation_pattern": {
+        "requirement": "optional",
+        "state": "unavailable"
+      },
+      "animator": {
+        "requirement": "optional",
+        "state": "unavailable"
+      },
+      "avatar": {
+        "requirement": "required",
+        "state": "ready"
+      },
+      "excel": {
+        "requirement": "required",
+        "state": "ready"
+      },
+      "gadget": {
+        "requirement": "optional",
+        "state": "ready"
+      },
+      "gadget_excel": {
+        "requirement": "required",
+        "state": "ready"
+      },
+      "global_combat": {
+        "requirement": "optional",
+        "state": "ready"
+      },
+      "material_excel": {
+        "requirement": "required",
+        "state": "ready"
+      },
+      "public_config": {
+        "requirement": "required",
+        "state": "ready"
+      },
+      "talent": {
+        "requirement": "required",
+        "state": "ready"
+      },
+      "text_map": {
+        "requirement": "required",
+        "state": "ready"
+      }
+    },
+    "normalization": {
+      "mapping_fingerprint": "cb52e3904c2c67dddc9f9d0a48301b760e44f032d530a2e82b39cc35c899a648",
+      "normalization_version": 2,
+      "profile_id": "upstream-f11cf545-reviewed-schema-v1",
+      "upstream_commit": "6044f5aae7dd79fbbe15c5748ef99b654f6132b7"
+    }
+  },
+  "counts": {
+    "character": 171,
+    "skill": 442,
+    "runtime_source": 2755,
+    "runtime_definition": 214311,
+    "runtime_reference": 169755,
+    "runtime_object_reference": 63599,
+    "runtime_material_reference": 427
+  },
+  "object_states": [
+    {
+      "relation_kind": "gadget_ability_mount",
+      "resolution_status": "missing",
+      "n": 32
+    },
+    {
+      "relation_kind": "gadget_ability_mount",
+      "resolution_status": "resolved",
+      "n": 20668
+    },
+    {
+      "relation_kind": "gadget_config_name",
+      "resolution_status": "missing",
+      "n": 436
+    },
+    {
+      "relation_kind": "gadget_config_name",
+      "resolution_status": "resolved",
+      "n": 24400
+    },
+    {
+      "relation_kind": "gadget_config_name",
+      "resolution_status": "source_empty",
+      "n": 7805
+    },
+    {
+      "relation_kind": "gadget_id_reference",
+      "resolution_status": "missing",
+      "n": 9
+    },
+    {
+      "relation_kind": "gadget_id_reference",
+      "resolution_status": "resolved",
+      "n": 10249
+    }
+  ],
+  "source_families": [
+    {
+      "source_family": "ability",
+      "n": 1427
+    },
+    {
+      "source_family": "ability_path",
+      "n": 1
+    },
+    {
+      "source_family": "avatar",
+      "n": 441
+    },
+    {
+      "source_family": "excel",
+      "n": 19
+    },
+    {
+      "source_family": "gadget",
+      "n": 719
+    },
+    {
+      "source_family": "gadget_excel",
+      "n": 1
+    },
+    {
+      "source_family": "global_combat",
+      "n": 1
+    },
+    {
+      "source_family": "material_excel",
+      "n": 1
+    },
+    {
+      "source_family": "public_config",
+      "n": 4
+    },
+    {
+      "source_family": "talent",
+      "n": 140
+    },
+    {
+      "source_family": "text_map",
+      "n": 1
+    }
+  ],
+  "unsupported_fields": [
+    {
+      "field_name": "abilityName",
+      "resolution_status": "missing",
+      "n": 73
+    },
+    {
+      "field_name": "abilityName",
+      "resolution_status": "resolved",
+      "n": 34420
+    },
+    {
+      "field_name": "abilityName",
+      "resolution_status": "unsupported_reference_form",
+      "n": 4013
+    },
+    {
+      "field_name": "bulletID",
+      "resolution_status": "external_asset",
+      "n": 5667
+    },
+    {
+      "field_name": "configID",
+      "resolution_status": "external_asset",
+      "n": 427
+    },
+    {
+      "field_name": "gadgetID",
+      "resolution_status": "external_asset",
+      "n": 4591
+    },
+    {
+      "field_name": "modifierName",
+      "resolution_status": "ambiguous",
+      "n": 156
+    },
+    {
+      "field_name": "modifierName",
+      "resolution_status": "missing",
+      "n": 6
+    },
+    {
+      "field_name": "modifierName",
+      "resolution_status": "resolved",
+      "n": 96376
+    },
+    {
+      "field_name": "modifierName",
+      "resolution_status": "unsupported_reference_form",
+      "n": 5579
+    },
+    {
+      "field_name": "modifierNameSteps/0",
+      "resolution_status": "missing",
+      "n": 3
+    },
+    {
+      "field_name": "modifierNameSteps/0",
+      "resolution_status": "resolved",
+      "n": 4404
+    },
+    {
+      "field_name": "modifierNameSteps/1",
+      "resolution_status": "missing",
+      "n": 3
+    },
+    {
+      "field_name": "modifierNameSteps/1",
+      "resolution_status": "resolved",
+      "n": 3314
+    },
+    {
+      "field_name": "modifierNameSteps/10",
+      "resolution_status": "resolved",
+      "n": 10
+    },
+    {
+      "field_name": "modifierNameSteps/11",
+      "resolution_status": "resolved",
+      "n": 8
+    },
+    {
+      "field_name": "modifierNameSteps/12",
+      "resolution_status": "resolved",
+      "n": 6
+    },
+    {
+      "field_name": "modifierNameSteps/13",
+      "resolution_status": "resolved",
+      "n": 4
+    },
+    {
+      "field_name": "modifierNameSteps/14",
+      "resolution_status": "resolved",
+      "n": 4
+    },
+    {
+      "field_name": "modifierNameSteps/15",
+      "resolution_status": "resolved",
+      "n": 4
+    },
+    {
+      "field_name": "modifierNameSteps/16",
+      "resolution_status": "resolved",
+      "n": 4
+    },
+    {
+      "field_name": "modifierNameSteps/17",
+      "resolution_status": "resolved",
+      "n": 4
+    },
+    {
+      "field_name": "modifierNameSteps/18",
+      "resolution_status": "resolved",
+      "n": 4
+    },
+    {
+      "field_name": "modifierNameSteps/19",
+      "resolution_status": "resolved",
+      "n": 3
+    },
+    {
+      "field_name": "modifierNameSteps/2",
+      "resolution_status": "missing",
+      "n": 3
+    },
+    {
+      "field_name": "modifierNameSteps/2",
+      "resolution_status": "resolved",
+      "n": 953
+    },
+    {
+      "field_name": "modifierNameSteps/20",
+      "resolution_status": "resolved",
+      "n": 3
+    },
+    {
+      "field_name": "modifierNameSteps/21",
+      "resolution_status": "resolved",
+      "n": 3
+    },
+    {
+      "field_name": "modifierNameSteps/22",
+      "resolution_status": "resolved",
+      "n": 3
+    },
+    {
+      "field_name": "modifierNameSteps/23",
+      "resolution_status": "resolved",
+      "n": 3
+    },
+    {
+      "field_name": "modifierNameSteps/24",
+      "resolution_status": "resolved",
+      "n": 2
+    },
+    {
+      "field_name": "modifierNameSteps/25",
+      "resolution_status": "resolved",
+      "n": 2
+    },
+    {
+      "field_name": "modifierNameSteps/26",
+      "resolution_status": "resolved",
+      "n": 2
+    },
+    {
+      "field_name": "modifierNameSteps/27",
+      "resolution_status": "resolved",
+      "n": 2
+    },
+    {
+      "field_name": "modifierNameSteps/28",
+      "resolution_status": "resolved",
+      "n": 2
+    },
+    {
+      "field_name": "modifierNameSteps/29",
+      "resolution_status": "resolved",
+      "n": 2
+    },
+    {
+      "field_name": "modifierNameSteps/3",
+      "resolution_status": "resolved",
+      "n": 545
+    },
+    {
+      "field_name": "modifierNameSteps/30",
+      "resolution_status": "resolved",
+      "n": 2
+    },
+    {
+      "field_name": "modifierNameSteps/31",
+      "resolution_status": "resolved",
+      "n": 2
+    },
+    {
+      "field_name": "modifierNameSteps/32",
+      "resolution_status": "resolved",
+      "n": 2
+    },
+    {
+      "field_name": "modifierNameSteps/33",
+      "resolution_status": "resolved",
+      "n": 2
+    },
+    {
+      "field_name": "modifierNameSteps/34",
+      "resolution_status": "resolved",
+      "n": 2
+    },
+    {
+      "field_name": "modifierNameSteps/35",
+      "resolution_status": "resolved",
+      "n": 2
+    },
+    {
+      "field_name": "modifierNameSteps/36",
+      "resolution_status": "resolved",
+      "n": 1
+    },
+    {
+      "field_name": "modifierNameSteps/37",
+      "resolution_status": "resolved",
+      "n": 1
+    },
+    {
+      "field_name": "modifierNameSteps/38",
+      "resolution_status": "resolved",
+      "n": 1
+    },
+    {
+      "field_name": "modifierNameSteps/39",
+      "resolution_status": "resolved",
+      "n": 1
+    },
+    {
+      "field_name": "modifierNameSteps/4",
+      "resolution_status": "resolved",
+      "n": 260
+    },
+    {
+      "field_name": "modifierNameSteps/40",
+      "resolution_status": "resolved",
+      "n": 1
+    },
+    {
+      "field_name": "modifierNameSteps/41",
+      "resolution_status": "resolved",
+      "n": 1
+    },
+    {
+      "field_name": "modifierNameSteps/42",
+      "resolution_status": "resolved",
+      "n": 1
+    },
+    {
+      "field_name": "modifierNameSteps/43",
+      "resolution_status": "resolved",
+      "n": 1
+    },
+    {
+      "field_name": "modifierNameSteps/5",
+      "resolution_status": "resolved",
+      "n": 160
+    },
+    {
+      "field_name": "modifierNameSteps/6",
+      "resolution_status": "resolved",
+      "n": 73
+    },
+    {
+      "field_name": "modifierNameSteps/7",
+      "resolution_status": "resolved",
+      "n": 37
+    },
+    {
+      "field_name": "modifierNameSteps/8",
+      "resolution_status": "resolved",
+      "n": 19
+    },
+    {
+      "field_name": "modifierNameSteps/9",
+      "resolution_status": "resolved",
+      "n": 15
+    },
+    {
+      "field_name": "openConfig",
+      "resolution_status": "missing",
+      "n": 77
+    },
+    {
+      "field_name": "openConfig",
+      "resolution_status": "resolved",
+      "n": 8486
+    }
+  ],
+  "opaque_scan": {
+    "scope": "All saved ability/talent/avatar/gadget/global_combat raw sources; uppercase11 candidates absent from reviewed mappings only. Not all names are schema fields and counts are not a semantic-completeness claim.",
+    "summary": {
+      "field_candidate_tokens": 5595,
+      "type_candidate_tokens": 1997,
+      "field_candidate_occurrences": 8440453,
+      "type_candidate_occurrences": 464220
+    },
+    "entries": [
+      {
+        "kind": "field",
+        "token": "BFALOOLJIAE",
+        "occurrences": 2,
+        "samples": [
+          {
+            "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Danica.json",
+            "source_family": "ability",
+            "source_sha256": "9db57dab4341bc354a7d5836a44213b236f30cbfbc909b51e6bc29c221137d58",
+            "json_pointer": "/13/Default/HBNCGKIFKJH/0/BFALOOLJIAE",
+            "value": 202,
+            "parent_type": "KCMKPCNGFKG"
+          },
+          {
+            "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Mitya.json",
+            "source_family": "ability",
+            "source_sha256": "0fe52c5d0f4163e44db148d3b84abf6a75e7353192ee95c904255c5e5ffd488a",
+            "json_pointer": "/28/Default/HBNCGKIFKJH/0/BFALOOLJIAE",
+            "value": 102,
+            "parent_type": "KCMKPCNGFKG"
+          }
+        ],
+        "source_files": 2
+      },
+      {
+        "kind": "field",
+        "token": "BLDKFMFJDLI",
+        "occurrences": 1,
+        "samples": [
+          {
+            "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Mitya.json",
+            "source_family": "ability",
+            "source_sha256": "0fe52c5d0f4163e44db148d3b84abf6a75e7353192ee95c904255c5e5ffd488a",
+            "json_pointer": "/0/Default/PGMKHCKJIKM/UNIQUE_Mitya_C2_Domain_Listen/BGPBLBIFCEG/0/BLDKFMFJDLI",
+            "value": true,
+            "parent_type": "GAOFBDHAABB"
+          }
+        ],
+        "source_files": 1
+      },
+      {
+        "kind": "type",
+        "token": "AAMMODEMOCN",
+        "occurrences": 1,
+        "samples": [
+          {
+            "source_path": "BinOutput/Ability/Temp/AnimalAbilities/ConfigAbility_Animal_JellyFish_N_01.json",
+            "source_family": "ability",
+            "source_sha256": "ac1baa5133c529aea9b98612acc7a8467656d6a834d3abdfeb2d922c4225ddeb",
+            "json_pointer": "/9/Default/HBNCGKIFKJH/1/$type",
+            "value": "AAMMODEMOCN",
+            "parent_type": "AAMMODEMOCN"
+          }
+        ],
+        "source_files": 1
+      }
+    ]
+  }
+}

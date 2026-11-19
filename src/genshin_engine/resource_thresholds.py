@@ -188,6 +188,11 @@ class ThresholdObserverProgram:
                 operation = command["operation"] if kind == "operation" else "consume"
                 requested = receipt["requested"]
                 declared_request = before if operation == "spend" and command["amount"] == "all_available" else command["amount"]
+                if kind == 'operation':
+                    from genshin_engine.shared_pool_probability import validate_probability_receipt
+                    validate_probability_receipt(command, pool, receipt)
+                    if 'random_effect' in command:
+                        declared_request = receipt['requested']  # Independently rederived by the checked trial above.
                 if requested != declared_request or accepted > requested:
                     _fail("threshold_candidate", "请求量必须等于声明原子量，接受量不可超过请求量")
                 if (operation in ("consume", "spend") and after != before-accepted

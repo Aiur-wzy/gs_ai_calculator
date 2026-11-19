@@ -12,6 +12,7 @@ from collections import defaultdict
 from functools import partial
 
 from genshin_engine.rotation_port import TICKS
+from genshin_engine.periodic_resource_timeline import project_resource_intervals
 
 CONTRACT = "special-state-timeline-v1"
 FAMILY = "stellar_superconduct"
@@ -19,7 +20,7 @@ FAMILY = "stellar_superconduct"
 
 def special_state_timeline_capabilities():
     return {"contract": CONTRACT, "version": 1, "result_field": "special_state_timeline",
-            "kinds": ["field_accumulator", "settled_damage_bonus"],
+            "kinds": ["field_accumulator", "settled_damage_bonus", "resource_inventory", "resource_mode"],
             "authority": "committed_business_trace_projection_only",
             "intervals": "half_open_with_ordered_boundaries",
             "notes": "累计层数与最近完成结算的伤害增益分开；不改变状态、公式或附着。"}
@@ -77,6 +78,10 @@ def build_special_state_timeline(trace, *, duration, execution_limit, execution_
         if (not isinstance(row, dict) or row.get("type") != "special_reaction_state"
                 or row.get("reaction_type") != FAMILY or row.get("status") != "executed"
                 or not _finite(row.get("t")) or not 0 <= row["t"] <= execution_limit):
+            continue
+        # Inventory observations are not field layer observations. A resource
+        # creation may also emit an actual field refresh; that row has no count.
+        if row.get('resource_type') == 'periodic_resource' and 'count' in row:
             continue
         area = row.get("area_id")
         if not isinstance(area, str) or not area:
@@ -222,6 +227,10 @@ def build_special_state_timeline(trace, *, duration, execution_limit, execution_
         reason = "execution_limit" if execution_limit < duration else "window_end"
         close(accumulator, boundary, reason)
         close(bonus, boundary, reason)
+    states, changes, issues = project_resource_intervals(trace, execution_limit)
+    output['states'].extend(states)
+    output['changes'].extend(changes)
+    output['issues'].extend(issues)
     if output["issues"]:
         output["status"] = "partial"
     return output

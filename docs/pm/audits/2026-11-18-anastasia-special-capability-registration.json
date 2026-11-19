@@ -1,0 +1,258 @@
+{
+  "contract": "special-capability-registration-review-v1",
+  "date": "2026-11-18",
+  "source_upstream_commit": "f11cf545a7eee32a29999f960ebfba305f896ed3",
+  "source_target_version": "CNCBWin7.2.50",
+  "database_release_id": "db-7.2.50-r6",
+  "source_files": {
+    "ExcelBinOutput/AvatarExcelConfigData.json": "faa39e3da524e6409aed5110b6ad2a00bd2755bc93179a823eb4a4ccdc7d55f2",
+    "ExcelBinOutput/AvatarSkillDepotExcelConfigData.json": "5a94f1053037b764eaef1ed51fcf30d54db4484435d2e0d719f6730bce9041ab",
+    "ExcelBinOutput/ProudSkillExcelConfigData.json": "f9e445a640b46142dffe9d9e4bca5e36ec20f9cadda0825c9e0439cadce820ed",
+    "TextMap/TextMap_MediumEN.json": "f9e628426fdba662414a99ac1596570d29e015001c4b5e36402037ba200b969b"
+  },
+  "previous_catalog_revision": 2,
+  "catalog_revision": 3,
+  "catalog_content_hash": "6e44c1fcfaa9eade076e8ef5f9f0157deb85eba98d33bf188a9a7a89ed16dc6f",
+  "entry": {
+    "character_id": 10000149,
+    "required_skill_depot_id": 14901,
+    "form_selection_required": false,
+    "display_name": "安娜丝塔夏",
+    "capability_tags": [
+      "native_reaction_qualification.stellar_superconduct",
+      "native_reaction_qualification.stellar_swirl"
+    ],
+    "evidence": {
+      "proud_skill_group_id": 14923,
+      "proud_skill_id": 1492301,
+      "desc_text_map_hash": "3047748675"
+    },
+    "runtime_profile_id": "native.special-reactions.v1",
+    "runtime_support_status": "supported",
+    "entry_fingerprint": "c201260cefb4a9e68fe59c2e20054caf49e20c0fbed472af364d673042f683f3"
+  },
+  "raw_records": {
+    "AvatarExcelConfigData": {
+      "secondPropPriority": "FIGHT_PROP_CRITICAL_HURT",
+      "avatarIdentityType": "AVATAR_IDENTITY_NORMAL",
+      "controllerPathRemoteHash": "3981328490037289034",
+      "skillDepotId": 14901,
+      "prefabPathRemoteHash": "16630064291624825334",
+      "nameTextMapHash": 618784050,
+      "criticalHurt": 0.5,
+      "avatarPromoteRewardIdList": [
+        901251,
+        901253,
+        901255
+      ],
+      "staminaRecoverSpeed": 25,
+      "isRangeAttack": true,
+      "controllerPathHash": "11841777097741158094",
+      "manekinMotionConfig": 103,
+      "deformationMeshPathHash": "2132204517517738195",
+      "critical": 0.05000000074505806,
+      "prefabPathHash": "8169768450336996169",
+      "firstPropPriority": "FIGHT_PROP_CRITICAL",
+      "tags": [
+        "None"
+      ],
+      "initialWeapon": 15101,
+      "chargeEfficiency": 1,
+      "animatorConfigPathHash": "8934965230914386269",
+      "HJMAGDKJJCH": "13845005588931413818",
+      "useType": "AVATAR_FORMAL",
+      "prefabPathRagdollHash": "10629515080692770335",
+      "attackBase": 27.743799209594727,
+      "gachaCardNameHash": "17298600886838972180",
+      "coopPicNameHash": "16998788901578893791",
+      "iconName": "UI_AvatarIcon_Anastasya",
+      "descTextMapHash": 1726310537,
+      "avatarPromoteId": 149,
+      "IKLCCDEJBOG": "8145968373916011826",
+      "id": 10000149,
+      "sideIconName": "UI_AvatarIcon_Side_Anastasya",
+      "propGrowCurves": [
+        {
+          "growCurve": "GROW_CURVE_HP_S5",
+          "type": "FIGHT_PROP_BASE_HP"
+        },
+        {
+          "growCurve": "GROW_CURVE_ATTACK_S5",
+          "type": "FIGHT_PROP_BASE_ATTACK"
+        },
+        {
+          "growCurve": "GROW_CURVE_HP_S5",
+          "type": "FIGHT_PROP_BASE_DEFENSE"
+        }
+      ],
+      "combatConfigHash": "16386418103765345400",
+      "JFMFMKILPFK": 1726310537,
+      "defenseBase": 60.607791900634766,
+      "gachaImageNameHash": "9528864065166653661",
+      "manekinJsonConfigHash": "13109631809264726194",
+      "hpBase": 991.4528198242188,
+      "scriptDataPathHash": "3744219756526631032",
+      "LJHBLHEHAJH": "3898931479336699566",
+      "avatarPromoteRewardLevelList": [
+        1,
+        3,
+        5
+      ],
+      "imageName": "AvatarImage_Forward_Anastasya",
+      "qualityType": "QUALITY_ORANGE",
+      "weaponType": "WEAPON_BOW",
+      "manekinPathHash": "16319846499891034945",
+      "bodyType": "BODY_LADY",
+      "featureTagGroupID": 10000149,
+      "ONDDHIPPDIH": 1014901,
+      "thirdPropPriority": "FIGHT_PROP_ATTACK_PERCENT"
+    },
+    "AvatarSkillDepotExcelConfigData": {
+      "specialProudSkillOpens": [
+        {},
+        {}
+      ],
+      "energySkill": 11495,
+      "extraAbilities": [
+        "",
+        "",
+        ""
+      ],
+      "talents": [
+        1491,
+        1492,
+        1493,
+        1494,
+        1495,
+        1496
+      ],
+      "inherentProudSkillOpens": [
+        {
+          "needAvatarPromoteLevel": 1,
+          "proudSkillGroupId": 14921
+        },
+        {
+          "needAvatarPromoteLevel": 4,
+          "proudSkillGroupId": 14922
+        },
+        {
+          "proudSkillGroupId": 14923
+        },
+        {},
+        {
+          "proudSkillGroupId": 14925
+        }
+      ],
+      "attackModeSkill": 20000,
+      "skills": [
+        11491,
+        11492,
+        0,
+        0
+      ],
+      "subSkills": [
+        11493,
+        11494,
+        11496,
+        11497,
+        11498,
+        11499,
+        5149010
+      ],
+      "id": 14901,
+      "talentStarName": "Talent_Anastasya"
+    },
+    "ProudSkillExcelConfigData": {
+      "nameTextMapHash": 1737641421,
+      "proudSkillType": 2,
+      "openConfig": "Anastasya_PermanentSkill_3",
+      "additionalDescTextMapHash": 2211894684,
+      "lifeEffectParams": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "proudSkillId": 1492301,
+      "addProps": [
+        {},
+        {}
+      ],
+      "proudSkillGroupId": 14923,
+      "descTextMapHash": 3047748675,
+      "paramDescList": [
+        2415463470,
+        3428340750,
+        1151879447,
+        3366054975,
+        1365941518,
+        1259630746,
+        718452991,
+        1830735997,
+        3450324236,
+        3485084055,
+        1874715924,
+        1193193571,
+        1622181119,
+        4056547387,
+        4068913542,
+        127804861,
+        2504362369,
+        628311115,
+        447592959,
+        3505990725
+      ],
+      "costItems": [
+        {},
+        {},
+        {},
+        {}
+      ],
+      "uniqueDescTextMapHash": 2512598148,
+      "paramList": [
+        8,
+        0.007000000216066837,
+        0.14000000059604645,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "unlockDescTextMapHash": 3363489858,
+      "filterConds": [
+        "TALENT_FILTER_NONE",
+        "TALENT_FILTER_NONE"
+      ],
+      "level": 1,
+      "icon": "UI_Talent_S_Anastasya_07"
+    }
+  },
+  "text": "处于<color=#FFD780FF>极星辉域</color>中时/队伍中的角色在附近触发星扩散反应后的8秒内，安娜丝塔夏将分别进入<color=#FFD780FF>辉映·星超导</color>/<color=#FFD780FF>辉映·星扩散</color>状态。\\n队伍中的角色触发超导/冰元素扩散反应时，将转为触发星超导/星扩散反应，且基于安娜丝塔夏的攻击力，提升队伍中角色造成的上述反应的基础伤害：每100点攻击力都将提升0.7%上述反应的基础伤害，至多通过这种方式提升14%伤害。",
+  "scope": "仅登记实体已有原生星烁资格，不表示所有角色天赋均实现；额外10%星扩散基础系数仍未支持",
+  "user_authorization": "补齐能力登记并继续计算；源码修复，不修改已发布1.0.2或数据库数值",
+  "review_fingerprint": "64aab1d0ad4e0ae11336e6f72e93857c3aa247952dcb9fe6cf366d0d8f830bac"
+}

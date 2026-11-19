@@ -14,7 +14,10 @@ from genshin_app.equipment.verification_scope import verification_scope
 from .files import fingerprint, input_view
 
 CONTRACT = "action-snapshot-capture-receipt-v1"
-MAX_EVIDENCE_BYTES = 8 * 1024 * 1024
+# A 121.61 s / seven-round real input needs 13,030,748 bytes before
+# the proof envelope, mostly mandatory elemental/mechanics ledgers. Preserve
+# all evidence and replay checks; leave room for conditional buff audits.
+MAX_EVIDENCE_BYTES = 32 * 1024 * 1024
 MESSAGE = "动作从属捕获的声明、真实父动作、取样引用或伤害流水不一致，请重新计算。"
 EXECUTION_KEYS = {"template", "rotation_model", "mechanics_model", "matches"}
 CHECK_APP_KEYS = {"input_fingerprint", "panel_bindings", "resolved_rotation_model", "damage_interpretation"}
@@ -32,7 +35,16 @@ def _bounded(value):
     for chunk in encoder.iterencode(value):
         size += len(chunk.encode("utf8"))
         if size > MAX_EVIDENCE_BYTES:
-            raise ValueError("捕获的完整离线证明超过8MiB，请缩短输入；未截断交付。")
+            from .schema import PlanError
+            raise PlanError(
+                f"捕获的完整离线证明超过字节预算 {MAX_EVIDENCE_BYTES}；"
+                "未截断交付。请减少重复的输入记录或报告容量不足。",
+                "response_budget_exceeded", {
+                    "phase": "snapshot_capture_evidence",
+                    "actual_bytes_at_least": size,
+                    "max_bytes": MAX_EVIDENCE_BYTES,
+                    "truncated": False,
+                })
 
 
 def _declared(model):

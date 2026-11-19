@@ -34,6 +34,7 @@ def test_routes_are_frozen_and_only_register_generic_event_kinds():
         "state_runtime_event", "elemental_state_operation", "special_reaction_operation",
         "mechanics_snapshot_capture", "mechanics_activate",
         "target_status_operation", "health_operation",
+        "mechanics_resource_damage", "mechanics_resource_change",
     }
     assert set(_GAMEPLAY_PREPARERS) == {
         "action", "mechanics_end", "mechanics_hit", "elemental_application",

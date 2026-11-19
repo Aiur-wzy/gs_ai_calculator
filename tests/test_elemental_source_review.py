@@ -9,6 +9,7 @@ from __future__ import annotations
 import copy
 import hashlib
 import json
+import os
 from pathlib import Path
 
 import pytest
@@ -23,7 +24,7 @@ from genshin_engine.elemental import ElementalRuntime, validate_elemental_model
 
 ROOT = Path(__file__).resolve().parents[1]
 DB = ROOT / "data/genshin.db"
-RAW = ROOT / "data/upstream/repo/ExcelBinOutput/AttackAttenuationExcelConfigData.json"
+RAW = Path(os.environ.get("GENSHIN_TEST_UPSTREAM_ROOT", ROOT / "data/upstream/repo")) / "ExcelBinOutput/AttackAttenuationExcelConfigData.json"
 
 
 def sha(path):

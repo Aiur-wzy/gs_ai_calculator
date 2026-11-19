@@ -25,6 +25,8 @@ from .release_pair_discovery import (
 INDEX_CONTRACT = "genshin-product-release-index-v1"
 LIVE_PAIR_PROOF_FILENAME = "release-pair-live-signed.json"
 PER_USER_UPDATER_RELATIVE = "updater/GenshinCalcUpdater.exe"
+LEGACY_STABLE_INDEX = "https://aiur-wzy.github.io/gs_ai_calculator/latest.json"
+STABLE_INDEX = "https://aiur-wzy.github.io/gs_ai_calculator/stable/latest.json"
 
 
 def _invalid(reason: str = "product_release_index_invalid") -> None:
@@ -276,6 +278,11 @@ def discover_product_index(url: str, cache_path: Path, *, channel: str, trust_ve
                     _invalid("release_pair_discovery_304_without_cache")
                 return validate_product_release_index(current["document"], channel=channel,
                                                       trust_verifier=trust_verifier)
+            # The legacy updater kept the bridge receipt in this same file.
+            # Its ETag belongs to another URL, but its signed history still
+            # constrains the first response from the successor endpoint.
+            if current is None and url == STABLE_INDEX and channel == "stable":
+                current = _load_cache(cache_path, expected_url=LEGACY_STABLE_INDEX, expected_channel=channel)
             if current is not None:
                 previous = validate_product_release_index(current["document"], channel=channel,
                                                           trust_verifier=trust_verifier, for_install=False)

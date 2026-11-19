@@ -5,6 +5,7 @@ import {TIMELINE_ACTION_HEIGHT,TIMELINE_VIEW_HEIGHT} from "./geometry";
 import {coverageHistory,recipientNames} from "./display-rows";
 import {updateDisclosureButton} from "./row-disclosure";
 import {isCoverageKind} from "./shared";
+import {probabilityFields} from "./probability-detail";
 export function createTimelineDetail(ports:TimelineDomPorts){
   const TV=ports.view,RT=ports.editor,$=ports.query,TD=ports.projection,services=ports.services;
   const {viewKind,viewName,viewStatus,viewEl,viewSeconds,viewTime}=createTimelineDom(ports);
@@ -69,7 +70,16 @@ const showDetail = (selection:any,back:any=null,page=0) => {
   if(receiver)field("接收角色",receiver);
   else field("角色",TV.characterNames?.get(event.character)||"全队 / 未指定角色");
   field("时间",viewTime(event));
-  if(event.detail?.special_state_contract){
+  for(const [label,value] of probabilityFields(event.detail))field(label,value);
+  if(event.detail?.special_state_contract && ["resource_inventory","resource_mode"].includes(event.detail.kind)){
+    field("适用说明","库存、消费和生成是独立事实，不能据此推定伤害或增益已经生效。");
+    if(event.detail.kind==="resource_inventory")field("本段库存",event.detail.count);
+    field("运行模式",({none:"未开启模式",overflow_consume:"满额时消费新生成资源",extended_generation:"延长资源生成窗口"} as Record<string,string>)[event.detail.mode]);
+    const counters:Record<string,string>={created:"累计生成",consumed:"累计消费",overflow_consumed:"其中满额消费",released:"其中结束释放",expired:"累计到期消失"};
+    for(const [key,label] of Object.entries(counters))if(Number.isFinite(event.detail.counters?.[key]))field(label,event.detail.counters[key]);
+    if(Number.isFinite(event.detail.expires_at))field("已知到期时间",`${viewSeconds(event.detail.expires_at)}秒`);
+    field("记录原因",({created:"资源生成",consumed:"资源消费",expired:"资源到期",overflow_consumed:"满额消费",trial:"自定义概率判定",observed:"读取实际资源",set_mode:"模式开启",end_mode:"模式结束",mode_ended:"模式到期",generation_refreshed:"延长生成窗口"} as Record<string,string>)[event.detail.cause]||"已记录资源变化");
+  } else if(event.detail?.special_state_contract){
     if(Number.isFinite(event.detail.next_settlement_at))field("下次领域结算",`${viewSeconds(event.detail.next_settlement_at)}秒`);
     field("适用说明","领域状态显示不等于该角色每击必然受益，实际收益以逐击计算回执为准。");
     field("层数用途",event.detail.kind==="field_accumulator"?"窗口内累计，等待结算":"最近完成结算，供伤害读取");

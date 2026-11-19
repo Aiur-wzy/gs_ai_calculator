@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 from pathlib import Path
 
 import pytest
@@ -15,7 +16,7 @@ from genshin_db.runtime_reaction_damage import REACTION_LIMITS
 
 ROOT = Path(__file__).resolve().parents[1]
 DB = ROOT / "data/genshin.db"
-RAW = ROOT / "data/upstream/repo"
+RAW = Path(os.environ.get("GENSHIN_TEST_UPSTREAM_ROOT", ROOT / "data/upstream/repo"))
 GROUP = "ElementReaction_Damage_Attenuation_1"
 
 
@@ -184,12 +185,14 @@ def test_review_missing_attacker_is_not_defaulted_and_ability_remains_unexecuted
 
 
 def test_review_true_raw_attack_group_points_to_damage_record(real_sources):
-    # Independent raw-token witnesses for the two accepted snapshots. The
+    # Independent raw-token witnesses for the accepted snapshots. The
     # production recipe is deliberately not consulted to define expectations.
     tokens = {
         "224708edc8056f27e9ffc4eacabe797d75274636":
             ("CODEHPJKBAM", "LGHDGGJIJOK", "HGLEEJNPBEB", "IAFHAPFBBOB"),
         "f11cf545a7eee32a29999f960ebfba305f896ed3":
+            ("ALJBCOCLPOO", "LONMFMMEPNN", "BJNOBFDFNGG", "EOBMOFPGMLP"),
+        "6044f5aae7dd79fbbe15c5748ef99b654f6132b7":
             ("ALJBCOCLPOO", "LONMFMMEPNN", "BJNOBFDFNGG", "EOBMOFPGMLP"),
     }
     for element, result in real_sources.items():

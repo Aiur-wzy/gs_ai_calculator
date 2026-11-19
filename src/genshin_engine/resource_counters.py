@@ -291,6 +291,9 @@ class CounterProgram:
                     _fail("counter_receipt", "资源回执的池、单位或原子值不一致")
                 if candidate["last_time_us"] is not None and receipt["t_us"] < candidate["last_time_us"]:
                     _fail("counter_receipt_order", "资源回执不能追溯到已交付控制或资源之前")
+                if receipt['type']=='operation':
+                    from genshin_engine.shared_pool_probability import validate_probability_receipt
+                    validate_probability_receipt(operation, pool, receipt)
                 is_spend = receipt["type"] == "operation" and operation["operation"] == "spend"
                 if is_spend:
                     if receipt.get("operation") != "spend" or receipt["after"] != receipt["before"]-receipt["accepted"] or receipt["accepted"] > receipt["requested"]:

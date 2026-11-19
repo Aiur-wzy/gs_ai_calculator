@@ -314,7 +314,7 @@ def _canonical_advance_deadlines_v1(
 
 
 _REFERENCE_METHODS = {
-    "_advance_deadlines": _canonical_advance_deadlines_v1,
+    "_advance_standard_deadlines": _canonical_advance_deadlines_v1,
     "_stellar_swirl_detonation": _canonical_stellar_swirl_detonation_v1,
 }
 

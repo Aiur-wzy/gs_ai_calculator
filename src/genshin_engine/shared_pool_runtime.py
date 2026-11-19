@@ -261,7 +261,13 @@ class SharedPoolRuntime:
         modes = self.ledger.snapshot().get("capacity_modes")
         if modes is not None:
             state["capacity_modes"] = modes
+        probability_modes = sorted({operation['random_effect'].get('mode', 'expected')
+                                    for operation in self.config['operations'] if 'random_effect' in operation})
         return {"schema_version": self.config["schema_version"],
+                **({'probability_mode': probability_modes[0] if len(probability_modes)==1 else 'mixed',
+                    'probability_interpretation': ('按期望次数计算，特定情景按用户指定；不是全场随机模拟。'
+                        if 'expected' in probability_modes else '指定触发情景，不是整场期望。')}
+                   if probability_modes else {}),
                 "scope": "declared_shared_atom_pools" if self.config["schema_version"] == 2 else "declared_shared_integer_pools",
                 "state": state, "trace": copy.deepcopy(self.trace),
                 "database_source_approval": "not_evaluated_by_engine"}

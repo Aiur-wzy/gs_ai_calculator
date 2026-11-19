@@ -8,6 +8,7 @@ before execution and duplicate ownership is rejected.
 
 from __future__ import annotations
 
+import copy
 from collections.abc import Callable, Mapping
 from types import MappingProxyType
 from typing import Any
@@ -27,6 +28,14 @@ class RuntimeEventRouter:
                 raise ValueError(f"runtime event type has more than one owner: {event_type}")
             normalized[event_type] = handler
         self._handlers = MappingProxyType(normalized)
+
+    def __deepcopy__(self, memo):
+        # Retain immutable registration, but rebind bound handlers to the
+        # copied owner. Reusing the original proxy would cross branch state.
+        clone = type(self).__new__(type(self))
+        memo[id(self)] = clone
+        clone._handlers = MappingProxyType(copy.deepcopy(dict(self._handlers), memo))
+        return clone
 
     @property
     def event_types(self) -> tuple[str, ...]:

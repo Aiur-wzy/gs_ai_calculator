@@ -25,6 +25,8 @@ const VIEW_KINDS:Record<string,any> = {
   calculation_sampling: {label:"计算采样窗口",shape:"bar",colorToken:"color-axis-label-muted",fallback:"#9aa3b5"},
   field_layers: {label:"领域累计层数",shape:"bar",colorToken:"color-axis-warning",fallback:"#d19a66"},
   settled_layers: {label:"领域结算增益",shape:"bar",colorToken:"color-axis-buff",fallback:"#56b6c2"},
+  resource_inventory: {label:"资源库存",shape:"bar",colorToken:"color-axis-buff",fallback:"#56b6c2"},
+  resource_mode: {label:"资源模式",shape:"bar",colorToken:"color-axis-warning",fallback:"#d19a66"},
   quota: {label:"次数变化", shape:"triangle",colorToken:"color-danger",fallback:"#e06c75"},
   resource: {label:"共享资源变化", shape:"triangle",colorToken:"color-axis-warning",fallback:"#f08c46"},
   reaction: {label:"反应记录", shape:"triangle",colorToken:"color-axis-reaction",fallback:"#da86ee"},

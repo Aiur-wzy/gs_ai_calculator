@@ -41,7 +41,7 @@ def catalog(monkeypatch):
                 "required_skill_depot_id": 321, "form_selection_required": True,
                 "runtime_support_status": "supported", "capability_tags": ["tag"],
                 "runtime_profile_id": "profile", "entry_fingerprint": "e" * 64}]}
-    monkeypatch.setattr(capabilities, "load_reviewed_special_reaction_capabilities", lambda: copy.deepcopy(data))
+    monkeypatch.setattr(capabilities, "load_reviewed_special_reaction_capabilities", lambda commit=None: copy.deepcopy(data))
     return data
 
 

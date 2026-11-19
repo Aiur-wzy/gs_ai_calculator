@@ -1,0 +1,2262 @@
+{
+  "contract": "static-inclusion-profile-review-v1",
+  "verification_scope": "source_shape_and_independent_units_no_source_authority",
+  "database_sha256_before": "7f056d5dd52c554c5752acf4f514737cc3c951ebddc15a265cc437e7c3ba9f1f",
+  "database_sha256_after": "7f056d5dd52c554c5752acf4f514737cc3c951ebddc15a265cc437e7c3ba9f1f",
+  "database_unchanged": true,
+  "database_fingerprint": "0eb4fc8ad484d7415811fb54669b5f6620497fbab0d460e689d254aaed139022",
+  "snapshot": {
+    "version_line": "release",
+    "state": "ready",
+    "index_state": "ready",
+    "schema_version": 1,
+    "upstream_commit": "6044f5aae7dd79fbbe15c5748ef99b654f6132b7",
+    "snapshot_id": "7a82c224329e9569f3d868f0981624d73edb5d4ef7fb7b0150346ba822520748",
+    "execution_support": "not_evaluated",
+    "built_at": "2026-11-18T10:02:42-03:00",
+    "profile_id": "upstream-combat-catalog-v1",
+    "profile_version": 1,
+    "indexer_version": "7",
+    "manifest_fingerprint": "607122b7d50034d06d17b80d0fa9bb394c592ed3c04395eaa7d4ab1676a189ff",
+    "counts": {
+      "runtime_definition": 214311,
+      "runtime_material_reference": 427,
+      "runtime_object_reference": 63599,
+      "runtime_parameter_binding": 6240,
+      "runtime_reference": 169755,
+      "runtime_source": 2755
+    },
+    "reference_states": {
+      "ambiguous": 156,
+      "external_asset": 10685,
+      "missing": 165,
+      "resolved": 149157,
+      "unsupported_reference_form": 9592
+    },
+    "normalization_state": "ready",
+    "source_capability_contract": "genshin-runtime-source-capabilities-v1",
+    "source_capability_state": "degraded",
+    "source_capabilities": {
+      "ability": {
+        "requirement": "required",
+        "state": "ready"
+      },
+      "ability_path": {
+        "requirement": "required",
+        "state": "ready"
+      },
+      "animation_pattern": {
+        "requirement": "optional",
+        "state": "unavailable"
+      },
+      "animator": {
+        "requirement": "optional",
+        "state": "unavailable"
+      },
+      "avatar": {
+        "requirement": "required",
+        "state": "ready"
+      },
+      "excel": {
+        "requirement": "required",
+        "state": "ready"
+      },
+      "gadget": {
+        "requirement": "optional",
+        "state": "ready"
+      },
+      "gadget_excel": {
+        "requirement": "required",
+        "state": "ready"
+      },
+      "global_combat": {
+        "requirement": "optional",
+        "state": "ready"
+      },
+      "material_excel": {
+        "requirement": "required",
+        "state": "ready"
+      },
+      "public_config": {
+        "requirement": "required",
+        "state": "ready"
+      },
+      "talent": {
+        "requirement": "required",
+        "state": "ready"
+      },
+      "text_map": {
+        "requirement": "required",
+        "state": "ready"
+      }
+    },
+    "normalization": {
+      "mapping_fingerprint": "cb52e3904c2c67dddc9f9d0a48301b760e44f032d530a2e82b39cc35c899a648",
+      "normalization_version": 2,
+      "profile_id": "upstream-f11cf545-reviewed-schema-v1",
+      "upstream_commit": "6044f5aae7dd79fbbe15c5748ef99b654f6132b7"
+    }
+  },
+  "candidate_profile": {
+    "id": "equipment-static-included-v5",
+    "version": 5,
+    "upstream_commit": "6044f5aae7dd79fbbe15c5748ef99b654f6132b7",
+    "indexer_version": "7",
+    "runtime_schema_version": 1,
+    "default_absent_affix_level": 0,
+    "open_config": "must_be_absent",
+    "param_slots": 8,
+    "add_prop_slots": 3,
+    "parameters": "all_zero",
+    "negative_zero": "rejected",
+    "raw_parent_metadata": [
+      "bagSortValue",
+      "dungeonGroup",
+      "disableFilter"
+    ],
+    "duplicate_prop_type": "rejected_within_one_affix",
+    "scope": "artifact_set_given_panel_only",
+    "property_mapping": {
+      "FIGHT_PROP_BASE_ATTACK": [
+        "base_atk",
+        "flat"
+      ],
+      "FIGHT_PROP_ATTACK": [
+        "atk",
+        "flat"
+      ],
+      "FIGHT_PROP_ATTACK_PERCENT": [
+        "atk",
+        "percent"
+      ],
+      "FIGHT_PROP_HP": [
+        "hp",
+        "flat"
+      ],
+      "FIGHT_PROP_HP_PERCENT": [
+        "hp",
+        "percent"
+      ],
+      "FIGHT_PROP_DEFENSE": [
+        "def",
+        "flat"
+      ],
+      "FIGHT_PROP_DEFENSE_PERCENT": [
+        "def",
+        "percent"
+      ],
+      "FIGHT_PROP_CRITICAL": [
+        "crit_rate",
+        "flat"
+      ],
+      "FIGHT_PROP_CRITICAL_HURT": [
+        "crit_dmg",
+        "flat"
+      ],
+      "FIGHT_PROP_ELEMENT_MASTERY": [
+        "em",
+        "flat"
+      ],
+      "FIGHT_PROP_CHARGE_EFFICIENCY": [
+        "energy_recharge",
+        "flat"
+      ],
+      "FIGHT_PROP_ADD_HURT": [
+        "dmg_bonus:all",
+        "flat"
+      ],
+      "FIGHT_PROP_PHYSICAL_ADD_HURT": [
+        "dmg_bonus:physical",
+        "flat"
+      ],
+      "FIGHT_PROP_FIRE_ADD_HURT": [
+        "dmg_bonus:pyro",
+        "flat"
+      ],
+      "FIGHT_PROP_WATER_ADD_HURT": [
+        "dmg_bonus:hydro",
+        "flat"
+      ],
+      "FIGHT_PROP_ELEC_ADD_HURT": [
+        "dmg_bonus:electro",
+        "flat"
+      ],
+      "FIGHT_PROP_ICE_ADD_HURT": [
+        "dmg_bonus:cryo",
+        "flat"
+      ],
+      "FIGHT_PROP_WIND_ADD_HURT": [
+        "dmg_bonus:anemo",
+        "flat"
+      ],
+      "FIGHT_PROP_ROCK_ADD_HURT": [
+        "dmg_bonus:geo",
+        "flat"
+      ],
+      "FIGHT_PROP_GRASS_ADD_HURT": [
+        "dmg_bonus:dendro",
+        "flat"
+      ]
+    },
+    "snapshot_scope": {
+      "version_line": "release",
+      "upstream_commit": "6044f5aae7dd79fbbe15c5748ef99b654f6132b7",
+      "schema_version": 1,
+      "indexer_version": "7",
+      "snapshot_id": "7a82c224329e9569f3d868f0981624d73edb5d4ef7fb7b0150346ba822520748",
+      "manifest_fingerprint": "607122b7d50034d06d17b80d0fa9bb394c592ed3c04395eaa7d4ab1676a189ff",
+      "normalization": {
+        "mapping_fingerprint": "cb52e3904c2c67dddc9f9d0a48301b760e44f032d530a2e82b39cc35c899a648",
+        "normalization_version": 2,
+        "profile_id": "upstream-f11cf545-reviewed-schema-v1",
+        "upstream_commit": "6044f5aae7dd79fbbe15c5748ef99b654f6132b7"
+      },
+      "normalization_state": "ready",
+      "source_capability_contract": "genshin-runtime-source-capabilities-v1",
+      "source_capability_state": "degraded",
+      "source_capabilities": {
+        "ability": {
+          "requirement": "required",
+          "state": "ready"
+        },
+        "ability_path": {
+          "requirement": "required",
+          "state": "ready"
+        },
+        "animation_pattern": {
+          "requirement": "optional",
+          "state": "unavailable"
+        },
+        "animator": {
+          "requirement": "optional",
+          "state": "unavailable"
+        },
+        "avatar": {
+          "requirement": "required",
+          "state": "ready"
+        },
+        "excel": {
+          "requirement": "required",
+          "state": "ready"
+        },
+        "gadget": {
+          "requirement": "optional",
+          "state": "ready"
+        },
+        "gadget_excel": {
+          "requirement": "required",
+          "state": "ready"
+        },
+        "global_combat": {
+          "requirement": "optional",
+          "state": "ready"
+        },
+        "material_excel": {
+          "requirement": "required",
+          "state": "ready"
+        },
+        "public_config": {
+          "requirement": "required",
+          "state": "ready"
+        },
+        "talent": {
+          "requirement": "required",
+          "state": "ready"
+        },
+        "text_map": {
+          "requirement": "required",
+          "state": "ready"
+        }
+      }
+    }
+  },
+  "counts": {
+    "shape_ready": 36,
+    "pending": 95
+  },
+  "pending_reasons": {
+    "source_not_closed": 76,
+    "raw_properties": 6,
+    "relation_missing": 2,
+    "raw_parameters": 11
+  },
+  "matrix": [
+    {
+      "set_id": 10001,
+      "name": "行者之心",
+      "required_count": 2,
+      "affix_id": 2100010,
+      "status": "shape_ready",
+      "issues": [],
+      "material_fingerprint": "679d56f419c8d11a38d52274e7b0570748dfd10d2db0a3f7c4f38b4723937da9",
+      "properties": [
+        {
+          "source_index": 0,
+          "prop_type": "FIGHT_PROP_ATTACK_PERCENT",
+          "value": 0.18000000715255737,
+          "unit": "ratio"
+        }
+      ],
+      "numeric_application": false
+    },
+    {
+      "set_id": 10001,
+      "name": "行者之心",
+      "required_count": 4,
+      "affix_id": 2100011,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "source_not_closed",
+          "path": "source"
+        }
+      ],
+      "material_fingerprint": "a745dcfdcdcf4d69cb2a14f2f7c705e8c66197f85d23bd66f45babc12272a795"
+    },
+    {
+      "set_id": 10002,
+      "name": "勇士之心",
+      "required_count": 2,
+      "affix_id": 2100020,
+      "status": "shape_ready",
+      "issues": [],
+      "material_fingerprint": "04d7dbb1048798fd0b64fb61e9144c5d4b2a7d0611abb9b6084654d3a4765219",
+      "properties": [
+        {
+          "source_index": 0,
+          "prop_type": "FIGHT_PROP_ATTACK_PERCENT",
+          "value": 0.18000000715255737,
+          "unit": "ratio"
+        }
+      ],
+      "numeric_application": false
+    },
+    {
+      "set_id": 10002,
+      "name": "勇士之心",
+      "required_count": 4,
+      "affix_id": 2100021,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "source_not_closed",
+          "path": "source"
+        }
+      ],
+      "material_fingerprint": "0f3ac1e183cfa4924c544ef9ebbc525336e0c9ba3797df6dea48059793f6bd63"
+    },
+    {
+      "set_id": 10003,
+      "name": "守护之心",
+      "required_count": 2,
+      "affix_id": 2100030,
+      "status": "shape_ready",
+      "issues": [],
+      "material_fingerprint": "4ec1e581019b8569ca5069d6bf9479d4283b41ae9b874e31c3633da046f0a36e",
+      "properties": [
+        {
+          "source_index": 0,
+          "prop_type": "FIGHT_PROP_DEFENSE_PERCENT",
+          "value": 0.30000001192092896,
+          "unit": "ratio"
+        }
+      ],
+      "numeric_application": false
+    },
+    {
+      "set_id": 10003,
+      "name": "守护之心",
+      "required_count": 4,
+      "affix_id": 2100031,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "source_not_closed",
+          "path": "source"
+        }
+      ],
+      "material_fingerprint": "9d66d41ad9bd45e166dcaab19dc3a975d9d683147531019689f49962fc3a861e"
+    },
+    {
+      "set_id": 10004,
+      "name": "奇迹",
+      "required_count": 2,
+      "affix_id": 2100040,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "source_not_closed",
+          "path": "source"
+        }
+      ],
+      "material_fingerprint": "56547d8f55449f5cf8972528db0078b24bde1831144a886a25644933d6fbec62"
+    },
+    {
+      "set_id": 10004,
+      "name": "奇迹",
+      "required_count": 4,
+      "affix_id": 2100041,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "source_not_closed",
+          "path": "source"
+        }
+      ],
+      "material_fingerprint": "9ab84a2932ae3d26c08a5f4cc9da6088fd5bfe802bdecaff2d4709b2930df662"
+    },
+    {
+      "set_id": 10005,
+      "name": "战狂",
+      "required_count": 2,
+      "affix_id": 2100050,
+      "status": "shape_ready",
+      "issues": [],
+      "material_fingerprint": "615840e4f23e9ca1476b795302457f56f98ecca4b38b6a6472e895e3f52093ec",
+      "properties": [
+        {
+          "source_index": 0,
+          "prop_type": "FIGHT_PROP_CRITICAL",
+          "value": 0.119999997317791,
+          "unit": "ratio"
+        }
+      ],
+      "numeric_application": false
+    },
+    {
+      "set_id": 10005,
+      "name": "战狂",
+      "required_count": 4,
+      "affix_id": 2100051,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "source_not_closed",
+          "path": "source"
+        }
+      ],
+      "material_fingerprint": "b60b390d38f01de240a07d9bfb2cc6d109c2b4790970f0bc3f8be8eccc0b9f21"
+    },
+    {
+      "set_id": 10006,
+      "name": "武人",
+      "required_count": 2,
+      "affix_id": 2100060,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "source_not_closed",
+          "path": "source"
+        }
+      ],
+      "material_fingerprint": "db236d7a08f30b4ef66346b7a863edf421d721bd391aee6ee67e4fc258566bb6"
+    },
+    {
+      "set_id": 10006,
+      "name": "武人",
+      "required_count": 4,
+      "affix_id": 2100061,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "source_not_closed",
+          "path": "source"
+        }
+      ],
+      "material_fingerprint": "54aa9f81177ea1c812bdb7c7e772cc62587fb0c0640026e2f2b1c1d42df0eec3"
+    },
+    {
+      "set_id": 10007,
+      "name": "教官",
+      "required_count": 2,
+      "affix_id": 2100070,
+      "status": "shape_ready",
+      "issues": [],
+      "material_fingerprint": "d1accc8fe9cf8e40a01b3fa7fcda3490f23fd5a8674d78fbf3da4e3a348f5bf2",
+      "properties": [
+        {
+          "source_index": 0,
+          "prop_type": "FIGHT_PROP_ELEMENT_MASTERY",
+          "value": 80,
+          "unit": "flat"
+        }
+      ],
+      "numeric_application": false
+    },
+    {
+      "set_id": 10007,
+      "name": "教官",
+      "required_count": 4,
+      "affix_id": 2100071,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "source_not_closed",
+          "path": "source"
+        }
+      ],
+      "material_fingerprint": "0714c3bab03298ab4831a9f0ca73344d2fd772227170970ea14acf59fe57e4e0"
+    },
+    {
+      "set_id": 10008,
+      "name": "赌徒",
+      "required_count": 2,
+      "affix_id": 2100080,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "source_not_closed",
+          "path": "source"
+        }
+      ],
+      "material_fingerprint": "ae3b1fb0e1e64b90559ce6d8e4602b284010f284493dfc8a74018d671e7b7be3"
+    },
+    {
+      "set_id": 10008,
+      "name": "赌徒",
+      "required_count": 4,
+      "affix_id": 2100081,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "source_not_closed",
+          "path": "source"
+        }
+      ],
+      "material_fingerprint": "6de4a18c89834e859b3d4e29b16582458c5680cf92eb7a610f94193b129dc1fa"
+    },
+    {
+      "set_id": 10009,
+      "name": "流放者",
+      "required_count": 2,
+      "affix_id": 2100090,
+      "status": "shape_ready",
+      "issues": [],
+      "material_fingerprint": "959f11d5031cfce227f02cbbd50667614a9278efd04bd95587d6d93ac475c0a7",
+      "properties": [
+        {
+          "source_index": 0,
+          "prop_type": "FIGHT_PROP_CHARGE_EFFICIENCY",
+          "value": 0.20000000298023224,
+          "unit": "ratio"
+        }
+      ],
+      "numeric_application": false
+    },
+    {
+      "set_id": 10009,
+      "name": "流放者",
+      "required_count": 4,
+      "affix_id": 2100091,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "source_not_closed",
+          "path": "source"
+        }
+      ],
+      "material_fingerprint": "076e5f884041109c3889820c5941e9dec7202d99c1e9db362a1afacb4e4b2163"
+    },
+    {
+      "set_id": 10010,
+      "name": "冒险家",
+      "required_count": 2,
+      "affix_id": 2100100,
+      "status": "shape_ready",
+      "issues": [],
+      "material_fingerprint": "dd2595a35ea30e1a11a6d32cb4aaea0ed14028c465740e849a0079890ea5a768",
+      "properties": [
+        {
+          "source_index": 0,
+          "prop_type": "FIGHT_PROP_HP",
+          "value": 1000,
+          "unit": "flat"
+        }
+      ],
+      "numeric_application": false
+    },
+    {
+      "set_id": 10010,
+      "name": "冒险家",
+      "required_count": 4,
+      "affix_id": 2100101,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "source_not_closed",
+          "path": "source"
+        }
+      ],
+      "material_fingerprint": "b84a73124cbbca4ac4b9dda913076126b3b406bbf8cf6416c5f975684cbe9378"
+    },
+    {
+      "set_id": 10011,
+      "name": "幸运儿",
+      "required_count": 2,
+      "affix_id": 2100110,
+      "status": "shape_ready",
+      "issues": [],
+      "material_fingerprint": "002bb46ecaadd7793c0f6a52f2ca44298eda95c24d55c42b28cff8e696234d27",
+      "properties": [
+        {
+          "source_index": 0,
+          "prop_type": "FIGHT_PROP_DEFENSE",
+          "value": 100,
+          "unit": "flat"
+        }
+      ],
+      "numeric_application": false
+    },
+    {
+      "set_id": 10011,
+      "name": "幸运儿",
+      "required_count": 4,
+      "affix_id": 2100111,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "source_not_closed",
+          "path": "source"
+        }
+      ],
+      "material_fingerprint": "2f7905b274ef7dce2b0ba0e8d6b9be068925ed205e232768afa9f2d0d6c2d7a7"
+    },
+    {
+      "set_id": 10012,
+      "name": "学士",
+      "required_count": 2,
+      "affix_id": 2100120,
+      "status": "shape_ready",
+      "issues": [],
+      "material_fingerprint": "6b139bef6cf1b9caf2de9585386fa1cdb4e939947eb76d876bfecb56a97ebb9d",
+      "properties": [
+        {
+          "source_index": 0,
+          "prop_type": "FIGHT_PROP_CHARGE_EFFICIENCY",
+          "value": 0.20000000298023224,
+          "unit": "ratio"
+        }
+      ],
+      "numeric_application": false
+    },
+    {
+      "set_id": 10012,
+      "name": "学士",
+      "required_count": 4,
+      "affix_id": 2100121,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "source_not_closed",
+          "path": "source"
+        }
+      ],
+      "material_fingerprint": "8ee6d58b715003637f23823d065f689cf7cf1af21dc29575a838f98d5835ded9"
+    },
+    {
+      "set_id": 10013,
+      "name": "游医",
+      "required_count": 2,
+      "affix_id": 2100130,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "raw_properties",
+          "path": "addProps/0"
+        }
+      ],
+      "material_fingerprint": "b528d251d33b213b17cb92f1f777dc7aefa149acccaa50bb426d16f11d86b3a9"
+    },
+    {
+      "set_id": 10013,
+      "name": "游医",
+      "required_count": 4,
+      "affix_id": 2100131,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "source_not_closed",
+          "path": "source"
+        }
+      ],
+      "material_fingerprint": "850adfce06fcf8e897b51b92d457ef2fdc9c5a2ce5e60faea357dbc82654a29d"
+    },
+    {
+      "set_id": 14001,
+      "name": "冰风迷途的勇士",
+      "required_count": 2,
+      "affix_id": 2140010,
+      "status": "shape_ready",
+      "issues": [],
+      "material_fingerprint": "30ff37bf123050838c8c1dfd1c8f8cbaa5d3bbd400c561e8ae28af0fe4213ff6",
+      "properties": [
+        {
+          "source_index": 0,
+          "prop_type": "FIGHT_PROP_ICE_ADD_HURT",
+          "value": 0.15000000596046448,
+          "unit": "ratio"
+        }
+      ],
+      "numeric_application": false
+    },
+    {
+      "set_id": 14001,
+      "name": "冰风迷途的勇士",
+      "required_count": 4,
+      "affix_id": 2140011,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "source_not_closed",
+          "path": "source"
+        }
+      ],
+      "material_fingerprint": "9b84c98a756bd2d0f342b648548ac1d57f0809043f707d7a3c005608d0073976"
+    },
+    {
+      "set_id": 14002,
+      "name": "平息鸣雷的尊者",
+      "required_count": 2,
+      "affix_id": 2140020,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "raw_properties",
+          "path": "addProps/0"
+        }
+      ],
+      "material_fingerprint": "ccc9fa98398f43c4b6a915f3c60e2fb29a23de1e7fe979f9fb23764f01b63064"
+    },
+    {
+      "set_id": 14002,
+      "name": "平息鸣雷的尊者",
+      "required_count": 4,
+      "affix_id": 2140021,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "source_not_closed",
+          "path": "source"
+        }
+      ],
+      "material_fingerprint": "248980c1d7374fc3d33095d7d196488034133e3f32c0ad782b94baf8b960c861"
+    },
+    {
+      "set_id": 14003,
+      "name": "渡过烈火的贤人",
+      "required_count": 2,
+      "affix_id": 2140030,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "raw_properties",
+          "path": "addProps/0"
+        }
+      ],
+      "material_fingerprint": "4b61f3bddd84406c44a313f5d2baf34de42ecf5d4b0d486e2efe99da92bae29c"
+    },
+    {
+      "set_id": 14003,
+      "name": "渡过烈火的贤人",
+      "required_count": 4,
+      "affix_id": 2140031,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "source_not_closed",
+          "path": "source"
+        }
+      ],
+      "material_fingerprint": "64d072b7e7475489a5b55686593b2c53194fd3513041006ba9d77288aff16277"
+    },
+    {
+      "set_id": 14004,
+      "name": "被怜爱的少女",
+      "required_count": 2,
+      "affix_id": 2140040,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "raw_properties",
+          "path": "addProps/0"
+        }
+      ],
+      "material_fingerprint": "9c2648c642d7046be1e82270b264ba45d02a48b03ffb70f28341683d138c220f"
+    },
+    {
+      "set_id": 14004,
+      "name": "被怜爱的少女",
+      "required_count": 4,
+      "affix_id": 2140041,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "source_not_closed",
+          "path": "source"
+        }
+      ],
+      "material_fingerprint": "6dae8dbdbab7484985e0842ffedd7f291d90273412c461c89ecf7c1c64232809"
+    },
+    {
+      "set_id": 15000,
+      "name": null,
+      "required_count": 3,
+      "affix_id": null,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "relation_missing",
+          "path": "effect.affix_id"
+        }
+      ]
+    },
+    {
+      "set_id": 15000,
+      "name": null,
+      "required_count": 5,
+      "affix_id": null,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "relation_missing",
+          "path": "effect.affix_id"
+        }
+      ]
+    },
+    {
+      "set_id": 15001,
+      "name": "角斗士的终幕礼",
+      "required_count": 2,
+      "affix_id": 2150010,
+      "status": "shape_ready",
+      "issues": [],
+      "material_fingerprint": "4b1a95384fb8c644e615ec72e3568245d6f3a8e2a32e7874899ae3cf591efa07",
+      "properties": [
+        {
+          "source_index": 0,
+          "prop_type": "FIGHT_PROP_ATTACK_PERCENT",
+          "value": 0.18000000715255737,
+          "unit": "ratio"
+        }
+      ],
+      "numeric_application": false
+    },
+    {
+      "set_id": 15001,
+      "name": "角斗士的终幕礼",
+      "required_count": 4,
+      "affix_id": 2150011,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "source_not_closed",
+          "path": "source"
+        }
+      ],
+      "material_fingerprint": "8fba146817d80a3c29045ddc3f34741e8db6189b484a27cb7761477c51b6024d"
+    },
+    {
+      "set_id": 15002,
+      "name": "翠绿之影",
+      "required_count": 2,
+      "affix_id": 2150020,
+      "status": "shape_ready",
+      "issues": [],
+      "material_fingerprint": "75228c1176e8bedbdcc34c220ed2d37ac2d232f30fc28c1286d88c8a92441dad",
+      "properties": [
+        {
+          "source_index": 0,
+          "prop_type": "FIGHT_PROP_WIND_ADD_HURT",
+          "value": 0.15000000596046448,
+          "unit": "ratio"
+        }
+      ],
+      "numeric_application": false
+    },
+    {
+      "set_id": 15002,
+      "name": "翠绿之影",
+      "required_count": 4,
+      "affix_id": 2150021,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "source_not_closed",
+          "path": "source"
+        }
+      ],
+      "material_fingerprint": "8ae2221d5baa7b21f91ecac5df23494cbf747737f6164d8ad1b73306e661cd0e"
+    },
+    {
+      "set_id": 15003,
+      "name": "流浪大地的乐团",
+      "required_count": 2,
+      "affix_id": 2150030,
+      "status": "shape_ready",
+      "issues": [],
+      "material_fingerprint": "bb94196a492be6bf71164cec94c0f6fdd58d6065a54d4433c8785f6985070787",
+      "properties": [
+        {
+          "source_index": 0,
+          "prop_type": "FIGHT_PROP_ELEMENT_MASTERY",
+          "value": 80,
+          "unit": "flat"
+        }
+      ],
+      "numeric_application": false
+    },
+    {
+      "set_id": 15003,
+      "name": "流浪大地的乐团",
+      "required_count": 4,
+      "affix_id": 2150031,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "source_not_closed",
+          "path": "source"
+        }
+      ],
+      "material_fingerprint": "338f107e699fbfbc7a2060279df48bbeebe9e122c4837b3d87029fe0b0335f16"
+    },
+    {
+      "set_id": 15004,
+      "name": "冰之川与雪之砂",
+      "required_count": 2,
+      "affix_id": 2150040,
+      "status": "shape_ready",
+      "issues": [],
+      "material_fingerprint": "bfdc9a39407f1fd6d167f9340a97b014c664b28d645db4fdccc72637437de471",
+      "properties": [
+        {
+          "source_index": 0,
+          "prop_type": "FIGHT_PROP_ICE_ADD_HURT",
+          "value": 0.15000000596046448,
+          "unit": "ratio"
+        }
+      ],
+      "numeric_application": false
+    },
+    {
+      "set_id": 15004,
+      "name": "冰之川与雪之砂",
+      "required_count": 4,
+      "affix_id": 2150041,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "source_not_closed",
+          "path": "source"
+        }
+      ],
+      "material_fingerprint": "d927a3095a23ba5974139c752867b0541bbd6448c311193c345e34e5be193867"
+    },
+    {
+      "set_id": 15005,
+      "name": "如雷的盛怒",
+      "required_count": 2,
+      "affix_id": 2150050,
+      "status": "shape_ready",
+      "issues": [],
+      "material_fingerprint": "01d32e4a5ff396cbda1a53c8125d7c80b9cec0b830b33c77af8b2b2306fa42c3",
+      "properties": [
+        {
+          "source_index": 0,
+          "prop_type": "FIGHT_PROP_ELEC_ADD_HURT",
+          "value": 0.15000000596046448,
+          "unit": "ratio"
+        }
+      ],
+      "numeric_application": false
+    },
+    {
+      "set_id": 15005,
+      "name": "如雷的盛怒",
+      "required_count": 4,
+      "affix_id": 2150051,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "source_not_closed",
+          "path": "source"
+        }
+      ],
+      "material_fingerprint": "7c256b2fa253db2822615e42fa37d3d77ce886d3a4575722042dc41fafd92518"
+    },
+    {
+      "set_id": 15006,
+      "name": "炽烈的炎之魔女",
+      "required_count": 2,
+      "affix_id": 2150060,
+      "status": "shape_ready",
+      "issues": [],
+      "material_fingerprint": "b7b7eccde7f03ac2098ec2f33b4254448be026d9b9ce30386981ebcc1c182053",
+      "properties": [
+        {
+          "source_index": 0,
+          "prop_type": "FIGHT_PROP_FIRE_ADD_HURT",
+          "value": 0.15000000596046448,
+          "unit": "ratio"
+        }
+      ],
+      "numeric_application": false
+    },
+    {
+      "set_id": 15006,
+      "name": "炽烈的炎之魔女",
+      "required_count": 4,
+      "affix_id": 2150061,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "source_not_closed",
+          "path": "source"
+        }
+      ],
+      "material_fingerprint": "8592772b07be54459a57313e135fb1c47a8900ee85c9f50195c69ae23b068228"
+    },
+    {
+      "set_id": 15007,
+      "name": "昔日宗室之仪",
+      "required_count": 2,
+      "affix_id": 2150070,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "source_not_closed",
+          "path": "source"
+        }
+      ],
+      "material_fingerprint": "97b0643f4b8ab2c22c68d6aaa9fae78c78c33d4bd3d1e2f815acb27356530299"
+    },
+    {
+      "set_id": 15007,
+      "name": "昔日宗室之仪",
+      "required_count": 4,
+      "affix_id": 2150071,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "source_not_closed",
+          "path": "source"
+        }
+      ],
+      "material_fingerprint": "a3a6b1078be3d2bf1cfc97859165be08b5a660c134808bc5a8272f04128f3b13"
+    },
+    {
+      "set_id": 15008,
+      "name": "染血的骑士道",
+      "required_count": 2,
+      "affix_id": 2150080,
+      "status": "shape_ready",
+      "issues": [],
+      "material_fingerprint": "b7fb1e00d0547cc589592b76dffb43fab45d5e889ffd2f5bc12579fb0ca5280e",
+      "properties": [
+        {
+          "source_index": 0,
+          "prop_type": "FIGHT_PROP_PHYSICAL_ADD_HURT",
+          "value": 0.25,
+          "unit": "ratio"
+        }
+      ],
+      "numeric_application": false
+    },
+    {
+      "set_id": 15008,
+      "name": "染血的骑士道",
+      "required_count": 4,
+      "affix_id": 2150081,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "source_not_closed",
+          "path": "source"
+        }
+      ],
+      "material_fingerprint": "da7403939eb26d8a7c13563fd85c0a9c7d083b3725b3b5aa2841c90c24748524"
+    },
+    {
+      "set_id": 15009,
+      "name": "祭火之人",
+      "required_count": 1,
+      "affix_id": 2150090,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "source_not_closed",
+          "path": "source"
+        }
+      ],
+      "material_fingerprint": "a76446cef2d3f89a4f4c1c1da291aebf644877acdad2fe220ec427c607a791eb"
+    },
+    {
+      "set_id": 15010,
+      "name": "祭水之人",
+      "required_count": 1,
+      "affix_id": 2150100,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "source_not_closed",
+          "path": "source"
+        }
+      ],
+      "material_fingerprint": "69e8ed768d18c20b465e6f6c4c4196d3735ca5b80ca8988205ca8555abe48da8"
+    },
+    {
+      "set_id": 15011,
+      "name": "祭雷之人",
+      "required_count": 1,
+      "affix_id": 2150110,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "source_not_closed",
+          "path": "source"
+        }
+      ],
+      "material_fingerprint": "9bc5d39d4a75891d79569b734faa051aaca544cf0045e86e11732c24d2ec8235"
+    },
+    {
+      "set_id": 15012,
+      "name": "祭风之人",
+      "required_count": 1,
+      "affix_id": 2150120,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "source_not_closed",
+          "path": "source"
+        }
+      ],
+      "material_fingerprint": "0637baa23a643fcea8cd2c7e23bc6126da5d5e6c0237d5c2c86e4eb0bfcdb5ee"
+    },
+    {
+      "set_id": 15013,
+      "name": "祭冰之人",
+      "required_count": 1,
+      "affix_id": 2150130,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "source_not_closed",
+          "path": "source"
+        }
+      ],
+      "material_fingerprint": "2e4f2e9ffe383470f0711084d43092901a007b2eff86cafa0281cc6c45ee3408"
+    },
+    {
+      "set_id": 15014,
+      "name": "悠古的磐岩",
+      "required_count": 2,
+      "affix_id": 2150140,
+      "status": "shape_ready",
+      "issues": [],
+      "material_fingerprint": "babb39c8ffbacbc5e6dea74d7ae57cad23ff49d56f1c17a2a8219cce193b90e4",
+      "properties": [
+        {
+          "source_index": 0,
+          "prop_type": "FIGHT_PROP_ROCK_ADD_HURT",
+          "value": 0.15000000596046448,
+          "unit": "ratio"
+        }
+      ],
+      "numeric_application": false
+    },
+    {
+      "set_id": 15014,
+      "name": "悠古的磐岩",
+      "required_count": 4,
+      "affix_id": 2150141,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "source_not_closed",
+          "path": "source"
+        }
+      ],
+      "material_fingerprint": "3d74f277a4c5185b6603d4db1bc67dc6d81d3295a164c93aa96c84b64e516f8b"
+    },
+    {
+      "set_id": 15015,
+      "name": "逆飞的流星",
+      "required_count": 2,
+      "affix_id": 2150150,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "raw_properties",
+          "path": "addProps/0"
+        }
+      ],
+      "material_fingerprint": "32707db421829cdab38e536367d4bd50999aee3c40cf4fa4daa431d833ab4896"
+    },
+    {
+      "set_id": 15015,
+      "name": "逆飞的流星",
+      "required_count": 4,
+      "affix_id": 2150151,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "source_not_closed",
+          "path": "source"
+        }
+      ],
+      "material_fingerprint": "1867d9895a5d034779dd7b533931c459c06ed445c129144d769555b1ae0e9908"
+    },
+    {
+      "set_id": 15016,
+      "name": "沉沦之心",
+      "required_count": 2,
+      "affix_id": 2150160,
+      "status": "shape_ready",
+      "issues": [],
+      "material_fingerprint": "b25f416a52b477ff903f7206376fb68529380bc31a85f0d15abca072825366da",
+      "properties": [
+        {
+          "source_index": 0,
+          "prop_type": "FIGHT_PROP_WATER_ADD_HURT",
+          "value": 0.15000000596046448,
+          "unit": "ratio"
+        }
+      ],
+      "numeric_application": false
+    },
+    {
+      "set_id": 15016,
+      "name": "沉沦之心",
+      "required_count": 4,
+      "affix_id": 2150161,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "source_not_closed",
+          "path": "source"
+        }
+      ],
+      "material_fingerprint": "a4e32e34eb8abd837ace2409a6be0eef085ce514eb3b323bfc1b353286270e79"
+    },
+    {
+      "set_id": 15017,
+      "name": "千岩牢固",
+      "required_count": 2,
+      "affix_id": 2150170,
+      "status": "shape_ready",
+      "issues": [],
+      "material_fingerprint": "a04b4c02563ec5f4bf285b921c27e0b63c71a37f8f9e5e6f96a234c4e9fa6e7e",
+      "properties": [
+        {
+          "source_index": 0,
+          "prop_type": "FIGHT_PROP_HP_PERCENT",
+          "value": 0.20000000298023224,
+          "unit": "ratio"
+        }
+      ],
+      "numeric_application": false
+    },
+    {
+      "set_id": 15017,
+      "name": "千岩牢固",
+      "required_count": 4,
+      "affix_id": 2150171,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "source_not_closed",
+          "path": "source"
+        }
+      ],
+      "material_fingerprint": "9e35e491304958c6595da03091ff1984a32b1e81e799ad393497b115813f2c50"
+    },
+    {
+      "set_id": 15018,
+      "name": "苍白之火",
+      "required_count": 2,
+      "affix_id": 2150180,
+      "status": "shape_ready",
+      "issues": [],
+      "material_fingerprint": "07ea31f19b89b3a60b3c19879c7025c06f9258e1be31446fe6991523ab3edcc5",
+      "properties": [
+        {
+          "source_index": 0,
+          "prop_type": "FIGHT_PROP_PHYSICAL_ADD_HURT",
+          "value": 0.25,
+          "unit": "ratio"
+        }
+      ],
+      "numeric_application": false
+    },
+    {
+      "set_id": 15018,
+      "name": "苍白之火",
+      "required_count": 4,
+      "affix_id": 2150181,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "source_not_closed",
+          "path": "source"
+        }
+      ],
+      "material_fingerprint": "1343c2c364ca24fa7ff5f4079aec771dd559958c4682acab8b89393adb436ee3"
+    },
+    {
+      "set_id": 15019,
+      "name": "追忆之注连",
+      "required_count": 2,
+      "affix_id": 2150190,
+      "status": "shape_ready",
+      "issues": [],
+      "material_fingerprint": "048d0968693c06a54428796e99c5f0cb43635ded5fc74ac9ed802a401c29771b",
+      "properties": [
+        {
+          "source_index": 0,
+          "prop_type": "FIGHT_PROP_ATTACK_PERCENT",
+          "value": 0.18000000715255737,
+          "unit": "ratio"
+        }
+      ],
+      "numeric_application": false
+    },
+    {
+      "set_id": 15019,
+      "name": "追忆之注连",
+      "required_count": 4,
+      "affix_id": 2150191,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "source_not_closed",
+          "path": "source"
+        }
+      ],
+      "material_fingerprint": "336524eeed0c8d92dded22d4456a4968fde9297f6b643eefa852f2da2edd0e06"
+    },
+    {
+      "set_id": 15020,
+      "name": "绝缘之旗印",
+      "required_count": 2,
+      "affix_id": 2150200,
+      "status": "shape_ready",
+      "issues": [],
+      "material_fingerprint": "06f8da92cd6540bae883b98f0e18b28eb8d26959403d086afe0682689ed651de",
+      "properties": [
+        {
+          "source_index": 0,
+          "prop_type": "FIGHT_PROP_CHARGE_EFFICIENCY",
+          "value": 0.20000000298023224,
+          "unit": "ratio"
+        }
+      ],
+      "numeric_application": false
+    },
+    {
+      "set_id": 15020,
+      "name": "绝缘之旗印",
+      "required_count": 4,
+      "affix_id": 2150201,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "source_not_closed",
+          "path": "source"
+        }
+      ],
+      "material_fingerprint": "2b85ca6815ce9ee27cd52e7b3c5a4b8370c40d90949ff8ed0223bf9cf07322a0"
+    },
+    {
+      "set_id": 15021,
+      "name": "华馆梦醒形骸记",
+      "required_count": 2,
+      "affix_id": 2150210,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "raw_parameters",
+          "path": "paramList"
+        }
+      ],
+      "material_fingerprint": "93806a4e7dc5043d5e523424dd3918f7cf7bc0da391e38894d6d77e80aaf6dc7"
+    },
+    {
+      "set_id": 15021,
+      "name": "华馆梦醒形骸记",
+      "required_count": 4,
+      "affix_id": 2150211,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "source_not_closed",
+          "path": "source"
+        }
+      ],
+      "material_fingerprint": "454b8a3d1229f2dc400404b0e8498537684775f83e4ed204341374a6661be747"
+    },
+    {
+      "set_id": 15022,
+      "name": "海染砗磲",
+      "required_count": 2,
+      "affix_id": 2150220,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "raw_parameters",
+          "path": "paramList"
+        }
+      ],
+      "material_fingerprint": "bb556ddc15e45211c8c835944ec3fc2db71d8fb41cfa1c758db3496b02573aac"
+    },
+    {
+      "set_id": 15022,
+      "name": "海染砗磲",
+      "required_count": 4,
+      "affix_id": 2150221,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "source_not_closed",
+          "path": "source"
+        }
+      ],
+      "material_fingerprint": "ac8ed0c580cef1e738cbe4a0ffa62e0975c29e15717d29b82613af36f75a4f76"
+    },
+    {
+      "set_id": 15023,
+      "name": "辰砂往生录",
+      "required_count": 2,
+      "affix_id": 2150230,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "raw_parameters",
+          "path": "paramList"
+        }
+      ],
+      "material_fingerprint": "7e67c92a03b6187ea5dbc51a8ddc373122c6aa36c8dc2302fd66ef8c2913b232"
+    },
+    {
+      "set_id": 15023,
+      "name": "辰砂往生录",
+      "required_count": 4,
+      "affix_id": 2150231,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "source_not_closed",
+          "path": "source"
+        }
+      ],
+      "material_fingerprint": "7a4c09d87dbe4821b5b435e1ce873b3edcc81a6a8deb7857e72791daeae88302"
+    },
+    {
+      "set_id": 15024,
+      "name": "来歆余响",
+      "required_count": 2,
+      "affix_id": 2150240,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "raw_parameters",
+          "path": "paramList"
+        }
+      ],
+      "material_fingerprint": "b20efe9a9bc94d129084d09f08551b297da1fb393bf88ef745031610b9d8481d"
+    },
+    {
+      "set_id": 15024,
+      "name": "来歆余响",
+      "required_count": 4,
+      "affix_id": 2150241,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "source_not_closed",
+          "path": "source"
+        }
+      ],
+      "material_fingerprint": "3ffd60b7dafce3b8275b1961bb6d1d9c7156b61888e08b752345ca7ed902602d"
+    },
+    {
+      "set_id": 15025,
+      "name": "深林的记忆",
+      "required_count": 2,
+      "affix_id": 2150250,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "raw_parameters",
+          "path": "paramList"
+        }
+      ],
+      "material_fingerprint": "667a7fab25a7cb0c9be02085d3025a898cc4c39ea641235ecd59d6f86de8ba44"
+    },
+    {
+      "set_id": 15025,
+      "name": "深林的记忆",
+      "required_count": 4,
+      "affix_id": 2150251,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "source_not_closed",
+          "path": "source"
+        }
+      ],
+      "material_fingerprint": "e60ea2afc1be44c7c49f5fa7fc2a4cdea342c09274d85495933bd6760e4d8639"
+    },
+    {
+      "set_id": 15026,
+      "name": "饰金之梦",
+      "required_count": 2,
+      "affix_id": 2150260,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "raw_parameters",
+          "path": "paramList"
+        }
+      ],
+      "material_fingerprint": "06d879c36c1f1304503ce63ab40ddf51bffafe29d65c7854cf393d1ab6f0a487"
+    },
+    {
+      "set_id": 15026,
+      "name": "饰金之梦",
+      "required_count": 4,
+      "affix_id": 2150261,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "source_not_closed",
+          "path": "source"
+        }
+      ],
+      "material_fingerprint": "3684eb0bf34183cdc56da61a7b87fc9e0ca00eba833ddf518baa83a6ef052887"
+    },
+    {
+      "set_id": 15027,
+      "name": "沙上楼阁史话",
+      "required_count": 2,
+      "affix_id": 2150270,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "raw_parameters",
+          "path": "paramList"
+        }
+      ],
+      "material_fingerprint": "ba789f04b2638dfa2640a8efdcc26291a6a6c2ac4aa2d5a72fa3f6dc8a2ad0af"
+    },
+    {
+      "set_id": 15027,
+      "name": "沙上楼阁史话",
+      "required_count": 4,
+      "affix_id": 2150271,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "source_not_closed",
+          "path": "source"
+        }
+      ],
+      "material_fingerprint": "aa7fd4e3feea6cad7f9c9d61922b5de83b47d1d2da4eef1ea7787cc6afb25394"
+    },
+    {
+      "set_id": 15028,
+      "name": "乐园遗落之花",
+      "required_count": 2,
+      "affix_id": 2150280,
+      "status": "shape_ready",
+      "issues": [],
+      "material_fingerprint": "5540ef3b71928d09eb8b11e825cd6bba547cde194aeead6b3f466803bff9f05b",
+      "properties": [
+        {
+          "source_index": 0,
+          "prop_type": "FIGHT_PROP_ELEMENT_MASTERY",
+          "value": 80,
+          "unit": "flat"
+        }
+      ],
+      "numeric_application": false
+    },
+    {
+      "set_id": 15028,
+      "name": "乐园遗落之花",
+      "required_count": 4,
+      "affix_id": 2150281,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "source_not_closed",
+          "path": "source"
+        }
+      ],
+      "material_fingerprint": "d72dccce8fbc9146394d9cbf7fdf86b7da5b2a7a9b693193378e3f9c2212434b"
+    },
+    {
+      "set_id": 15029,
+      "name": "水仙之梦",
+      "required_count": 2,
+      "affix_id": 2150290,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "raw_parameters",
+          "path": "paramList"
+        }
+      ],
+      "material_fingerprint": "b8bce09f47b5d40d87f28b834fbc0f41517fcd4f9d4e704bbaf22cfcf2cadec7"
+    },
+    {
+      "set_id": 15029,
+      "name": "水仙之梦",
+      "required_count": 4,
+      "affix_id": 2150291,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "source_not_closed",
+          "path": "source"
+        }
+      ],
+      "material_fingerprint": "994f7bfa2ed24c0fc38898afe453033b999c3939d240cfe7fe98d42ae52eaf8c"
+    },
+    {
+      "set_id": 15030,
+      "name": "花海甘露之光",
+      "required_count": 2,
+      "affix_id": 2150300,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "raw_parameters",
+          "path": "paramList"
+        }
+      ],
+      "material_fingerprint": "6e768158cb644e42927efac060902e94a78007071d489819c1d18aec54d30289"
+    },
+    {
+      "set_id": 15030,
+      "name": "花海甘露之光",
+      "required_count": 4,
+      "affix_id": 2150301,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "source_not_closed",
+          "path": "source"
+        }
+      ],
+      "material_fingerprint": "45c4a9118e2a9b03127c66e05dca060343a9488bbe559b32d1d7aceb6e7a2ce6"
+    },
+    {
+      "set_id": 15031,
+      "name": "逐影猎人",
+      "required_count": 2,
+      "affix_id": 2150310,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "source_not_closed",
+          "path": "source"
+        }
+      ],
+      "material_fingerprint": "18f0fe7c192349707cafedec41363824ca76907e2c378dbc32826dcafdd82803"
+    },
+    {
+      "set_id": 15031,
+      "name": "逐影猎人",
+      "required_count": 4,
+      "affix_id": 2150311,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "source_not_closed",
+          "path": "source"
+        }
+      ],
+      "material_fingerprint": "e81bbb6d6fd38cafff2634ae734a16d5c09e38b1fa5220ddc0cc118dbe4e56ea"
+    },
+    {
+      "set_id": 15032,
+      "name": "黄金剧团",
+      "required_count": 2,
+      "affix_id": 2150320,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "source_not_closed",
+          "path": "source"
+        }
+      ],
+      "material_fingerprint": "57d29fd22b0a1cee220adf9d4627346e3b886615703df15895e4725b1679521a"
+    },
+    {
+      "set_id": 15032,
+      "name": "黄金剧团",
+      "required_count": 4,
+      "affix_id": 2150321,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "source_not_closed",
+          "path": "source"
+        }
+      ],
+      "material_fingerprint": "595d6ea28ff36e31ec22e8e37303e81195154da2c96137739983d759f6f10baf"
+    },
+    {
+      "set_id": 15033,
+      "name": "昔时之歌",
+      "required_count": 2,
+      "affix_id": 2150330,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "raw_properties",
+          "path": "addProps/0"
+        }
+      ],
+      "material_fingerprint": "40fc9c1edf340b1b8055e8717954b6be974f8c7bb0013ad437d2f9e1f102f8d2"
+    },
+    {
+      "set_id": 15033,
+      "name": "昔时之歌",
+      "required_count": 4,
+      "affix_id": 2150331,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "source_not_closed",
+          "path": "source"
+        }
+      ],
+      "material_fingerprint": "6399ee105e3eacb54f584947e112379714ee73055b57870f1f4de3ecef27a3f1"
+    },
+    {
+      "set_id": 15034,
+      "name": "回声之林夜话",
+      "required_count": 2,
+      "affix_id": 2150340,
+      "status": "shape_ready",
+      "issues": [],
+      "material_fingerprint": "7a6058690deb3f464f5ccc52631d0e21b1227928701d325acd645e8090338a92",
+      "properties": [
+        {
+          "source_index": 0,
+          "prop_type": "FIGHT_PROP_ATTACK_PERCENT",
+          "value": 0.18000000715255737,
+          "unit": "ratio"
+        }
+      ],
+      "numeric_application": false
+    },
+    {
+      "set_id": 15034,
+      "name": "回声之林夜话",
+      "required_count": 4,
+      "affix_id": 2150341,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "source_not_closed",
+          "path": "source"
+        }
+      ],
+      "material_fingerprint": "0a101c56275de3bd6486de9912efeabfc06229c3f3b7f6357bbd0e6e9e8013bd"
+    },
+    {
+      "set_id": 15035,
+      "name": "谐律异想断章",
+      "required_count": 2,
+      "affix_id": 2150350,
+      "status": "shape_ready",
+      "issues": [],
+      "material_fingerprint": "647a9f749a5daf70bf4ee546ecb5cab3112b10e4cd4ce0a97f0e850314de2c46",
+      "properties": [
+        {
+          "source_index": 0,
+          "prop_type": "FIGHT_PROP_ATTACK_PERCENT",
+          "value": 0.18000000715255737,
+          "unit": "ratio"
+        }
+      ],
+      "numeric_application": false
+    },
+    {
+      "set_id": 15035,
+      "name": "谐律异想断章",
+      "required_count": 4,
+      "affix_id": 2150351,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "source_not_closed",
+          "path": "source"
+        }
+      ],
+      "material_fingerprint": "28b5a263b8a2a402917683f58976420d52ad863c3f91ec983800c33d29f75dbe"
+    },
+    {
+      "set_id": 15036,
+      "name": "未竟的遐思",
+      "required_count": 2,
+      "affix_id": 2150360,
+      "status": "shape_ready",
+      "issues": [],
+      "material_fingerprint": "dc7a565accfaa34f8cb160b75ac861dc26587a589bc3f56a5b0faba7dbdd41a2",
+      "properties": [
+        {
+          "source_index": 0,
+          "prop_type": "FIGHT_PROP_ATTACK_PERCENT",
+          "value": 0.18000000715255737,
+          "unit": "ratio"
+        }
+      ],
+      "numeric_application": false
+    },
+    {
+      "set_id": 15036,
+      "name": "未竟的遐思",
+      "required_count": 4,
+      "affix_id": 2150361,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "source_not_closed",
+          "path": "source"
+        }
+      ],
+      "material_fingerprint": "e56912a73ca01df62058545d743ffc66e44dd884ef6adb16e1ac1d1dac983497"
+    },
+    {
+      "set_id": 15037,
+      "name": "烬城勇者绘卷",
+      "required_count": 2,
+      "affix_id": 2150370,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "source_not_closed",
+          "path": "source"
+        }
+      ],
+      "material_fingerprint": "d1ced39df0a52696c42c1f4c7b3a5a13ec04e5c0c3279eaa18c9d60e4ecdd264"
+    },
+    {
+      "set_id": 15037,
+      "name": "烬城勇者绘卷",
+      "required_count": 4,
+      "affix_id": 2150371,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "source_not_closed",
+          "path": "source"
+        }
+      ],
+      "material_fingerprint": "f454a82e1b303ab395b4bb948300166c15699b62274cecd39a64483ffac5f5bd"
+    },
+    {
+      "set_id": 15038,
+      "name": "黑曜秘典",
+      "required_count": 2,
+      "affix_id": 2150380,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "source_not_closed",
+          "path": "source"
+        }
+      ],
+      "material_fingerprint": "133b829c581fe5d95b342d59dc63b06888f481188bd703b43fa2602278983969"
+    },
+    {
+      "set_id": 15038,
+      "name": "黑曜秘典",
+      "required_count": 4,
+      "affix_id": 2150381,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "source_not_closed",
+          "path": "source"
+        }
+      ],
+      "material_fingerprint": "2535580e4ffca886046cfc2e781519905f16f69029f36c79cad49719b1b6b1a4"
+    },
+    {
+      "set_id": 15039,
+      "name": "长夜之誓",
+      "required_count": 2,
+      "affix_id": 2150390,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "source_not_closed",
+          "path": "source"
+        }
+      ],
+      "material_fingerprint": "13b60e715017557735560565208f1acc468eea2cb926552b8907ff5ff033052f"
+    },
+    {
+      "set_id": 15039,
+      "name": "长夜之誓",
+      "required_count": 4,
+      "affix_id": 2150391,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "source_not_closed",
+          "path": "source"
+        }
+      ],
+      "material_fingerprint": "c6e75c5a5994203def8b629b3338b74292d556783896ca43d07a378c4930ce00"
+    },
+    {
+      "set_id": 15040,
+      "name": "深廊终曲",
+      "required_count": 2,
+      "affix_id": 2150400,
+      "status": "shape_ready",
+      "issues": [],
+      "material_fingerprint": "6a3cb61a5110688fc15925b943b5109136d48f560c6e3160144344f3b3761759",
+      "properties": [
+        {
+          "source_index": 0,
+          "prop_type": "FIGHT_PROP_ICE_ADD_HURT",
+          "value": 0.15000000596046448,
+          "unit": "ratio"
+        }
+      ],
+      "numeric_application": false
+    },
+    {
+      "set_id": 15040,
+      "name": "深廊终曲",
+      "required_count": 4,
+      "affix_id": 2150401,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "source_not_closed",
+          "path": "source"
+        }
+      ],
+      "material_fingerprint": "d68de1dd19aa8dcd5d9eeff61e69df78c4920ea66a23999d2411e2771a60b9e1"
+    },
+    {
+      "set_id": 15041,
+      "name": "穹境示现之夜",
+      "required_count": 2,
+      "affix_id": 2150410,
+      "status": "shape_ready",
+      "issues": [],
+      "material_fingerprint": "17ab166c3264aa976c6cd3d89049bebda2321647002420c280a58d673e225354",
+      "properties": [
+        {
+          "source_index": 0,
+          "prop_type": "FIGHT_PROP_ELEMENT_MASTERY",
+          "value": 80,
+          "unit": "flat"
+        }
+      ],
+      "numeric_application": false
+    },
+    {
+      "set_id": 15041,
+      "name": "穹境示现之夜",
+      "required_count": 4,
+      "affix_id": 2150411,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "source_not_closed",
+          "path": "source"
+        }
+      ],
+      "material_fingerprint": "7f168aa057a7fa2dfeb8193d89fbcb5fcba7626d6c79c8423e3f90cb237621e4"
+    },
+    {
+      "set_id": 15042,
+      "name": "纺月的夜歌",
+      "required_count": 2,
+      "affix_id": 2150420,
+      "status": "shape_ready",
+      "issues": [],
+      "material_fingerprint": "cc1dccc263298978a3f048d006ca90b2eb72fd5c9e25211ac20d1a29ba11b608",
+      "properties": [
+        {
+          "source_index": 0,
+          "prop_type": "FIGHT_PROP_CHARGE_EFFICIENCY",
+          "value": 0.20000000298023224,
+          "unit": "ratio"
+        }
+      ],
+      "numeric_application": false
+    },
+    {
+      "set_id": 15042,
+      "name": "纺月的夜歌",
+      "required_count": 4,
+      "affix_id": 2150421,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "source_not_closed",
+          "path": "source"
+        }
+      ],
+      "material_fingerprint": "0f87ffdbd7fab4326d5d2837d3ad7dc336e428a5cf0a663f01e7b79409187776"
+    },
+    {
+      "set_id": 15043,
+      "name": "晨星与月的晓歌",
+      "required_count": 2,
+      "affix_id": 2150430,
+      "status": "shape_ready",
+      "issues": [],
+      "material_fingerprint": "d5c62ca53c0cda4d5fc780bdfa2c573d2a08db16eca250a5440882f677a163c9",
+      "properties": [
+        {
+          "source_index": 0,
+          "prop_type": "FIGHT_PROP_ELEMENT_MASTERY",
+          "value": 80,
+          "unit": "flat"
+        }
+      ],
+      "numeric_application": false
+    },
+    {
+      "set_id": 15043,
+      "name": "晨星与月的晓歌",
+      "required_count": 4,
+      "affix_id": 2150431,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "source_not_closed",
+          "path": "source"
+        }
+      ],
+      "material_fingerprint": "fe0f21dd4d9ce830cf99dee91dd802f2e89bd7c9dba0ff30bf69614fd3400a28"
+    },
+    {
+      "set_id": 15044,
+      "name": "风起之日",
+      "required_count": 2,
+      "affix_id": 2150440,
+      "status": "shape_ready",
+      "issues": [],
+      "material_fingerprint": "80c9f33508c06c4b851f30b27a19ca08eef2ffa221029a5e8d912a90c9f208c5",
+      "properties": [
+        {
+          "source_index": 0,
+          "prop_type": "FIGHT_PROP_ATTACK_PERCENT",
+          "value": 0.18000000715255737,
+          "unit": "ratio"
+        }
+      ],
+      "numeric_application": false
+    },
+    {
+      "set_id": 15044,
+      "name": "风起之日",
+      "required_count": 4,
+      "affix_id": 2150441,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "source_not_closed",
+          "path": "source"
+        }
+      ],
+      "material_fingerprint": "c20d9b0c61057c8f03a2799e2efa492fc6c45190822e63b4294683a70a621e57"
+    },
+    {
+      "set_id": 15045,
+      "name": "天之美赐",
+      "required_count": 2,
+      "affix_id": 2150450,
+      "status": "shape_ready",
+      "issues": [],
+      "material_fingerprint": "165f193ed8a8fcef155a411c30aa003b9f4dfc428172bc49565dcb23866b805d",
+      "properties": [
+        {
+          "source_index": 0,
+          "prop_type": "FIGHT_PROP_CHARGE_EFFICIENCY",
+          "value": 0.20000000298023224,
+          "unit": "ratio"
+        }
+      ],
+      "numeric_application": false
+    },
+    {
+      "set_id": 15045,
+      "name": "天之美赐",
+      "required_count": 4,
+      "affix_id": 2150451,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "source_not_closed",
+          "path": "source"
+        }
+      ],
+      "material_fingerprint": "02cf2256e34f790a6678ccf9c5c34f1ab7505d226b30fbb6e747f16798680caa"
+    },
+    {
+      "set_id": 15046,
+      "name": "影中沉凝的幻灭",
+      "required_count": 2,
+      "affix_id": 2150460,
+      "status": "shape_ready",
+      "issues": [],
+      "material_fingerprint": "6119077b94ed412b278c9514960cb0861d84ed89ac7dbb46979daef32efaa5d8",
+      "properties": [
+        {
+          "source_index": 0,
+          "prop_type": "FIGHT_PROP_ATTACK_PERCENT",
+          "value": 0.18000000715255737,
+          "unit": "ratio"
+        }
+      ],
+      "numeric_application": false
+    },
+    {
+      "set_id": 15046,
+      "name": "影中沉凝的幻灭",
+      "required_count": 4,
+      "affix_id": 2150461,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "source_not_closed",
+          "path": "source"
+        }
+      ],
+      "material_fingerprint": "912aebbaf91e35f398ddc567d5b4b5634abb6e73096245123de873176773fe8a"
+    },
+    {
+      "set_id": 15047,
+      "name": "血红之证",
+      "required_count": 2,
+      "affix_id": 2150470,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "raw_parameters",
+          "path": "paramList"
+        }
+      ],
+      "material_fingerprint": "5b078870bf638d40e4a31a5605eee7e33daacda1d2d152a2775f34e5a7e049ac"
+    },
+    {
+      "set_id": 15047,
+      "name": "血红之证",
+      "required_count": 4,
+      "affix_id": 2150471,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "source_not_closed",
+          "path": "source"
+        }
+      ],
+      "material_fingerprint": "901f8b39a61594d494347f210e4fda2fc4703752d4ab9c45d55e0bb0f4371f5f"
+    },
+    {
+      "set_id": 15048,
+      "name": "炉火融炼之心",
+      "required_count": 2,
+      "affix_id": 2150480,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "raw_parameters",
+          "path": "paramList"
+        }
+      ],
+      "material_fingerprint": "b19f17061efcc20d33a6c40692db190d8c17d631b2a6e22cee5df2fc24002d87"
+    },
+    {
+      "set_id": 15048,
+      "name": "炉火融炼之心",
+      "required_count": 4,
+      "affix_id": 2150481,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "source_not_closed",
+          "path": "source"
+        }
+      ],
+      "material_fingerprint": "8a8c0d0acb7f8e31070a2a88c21b4d866148704e959576b18bca8a30ef4dccf6"
+    },
+    {
+      "set_id": 15049,
+      "name": "肇史之遗",
+      "required_count": 2,
+      "affix_id": 2150490,
+      "status": "shape_ready",
+      "issues": [],
+      "material_fingerprint": "9682e93288c0f3b7ca461acaba15647558be8ebfd57491385ec819cd42024c76",
+      "properties": [
+        {
+          "source_index": 0,
+          "prop_type": "FIGHT_PROP_ATTACK_PERCENT",
+          "value": 0.18000000715255737,
+          "unit": "ratio"
+        }
+      ],
+      "numeric_application": false
+    },
+    {
+      "set_id": 15049,
+      "name": "肇史之遗",
+      "required_count": 4,
+      "affix_id": 2150491,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "source_not_closed",
+          "path": "source"
+        }
+      ],
+      "material_fingerprint": "0e072d860356509d5fb767cadc33466a29d3a4bff1c5d936e9fec24e9ca7fbae"
+    },
+    {
+      "set_id": 15050,
+      "name": "遥天奉翠华引",
+      "required_count": 2,
+      "affix_id": 2150500,
+      "status": "shape_ready",
+      "issues": [],
+      "material_fingerprint": "e32c1e81a4170babab4dd43bafffaba2fef7f8c8b6db03d69ad4f12bea7d3c59",
+      "properties": [
+        {
+          "source_index": 0,
+          "prop_type": "FIGHT_PROP_CHARGE_EFFICIENCY",
+          "value": 0.20000000298023224,
+          "unit": "ratio"
+        }
+      ],
+      "numeric_application": false
+    },
+    {
+      "set_id": 15050,
+      "name": "遥天奉翠华引",
+      "required_count": 4,
+      "affix_id": 2150501,
+      "status": "pending",
+      "issues": [
+        {
+          "code": "source_not_closed",
+          "path": "source"
+        }
+      ],
+      "material_fingerprint": "de0ac64e949a2ff59c73f96b84ff0ad4caa495cffb5133c9cd0e9b706a6dd32e"
+    }
+  ],
+  "materials_fingerprint": "7c7ea6197e30c2457c18b15c2fa61a3f6914d68fc2d382024ebf89b158a2cfcd"
+}

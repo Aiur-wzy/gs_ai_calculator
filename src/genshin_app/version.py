@@ -9,7 +9,7 @@ from __future__ import annotations
 import json
 import urllib.request
 
-APP_VERSION = "1.0.2"
+APP_VERSION = "1.0.3"
 UPDATE_MANIFEST_URL = ""  # 更新渠道确定后在此配置
 APP_DIR_NAME = "GenshinCalc"
 
@@ -24,21 +24,24 @@ APP_DIR_NAME = "GenshinCalc"
 # Advance the database ID/sequence only when database content or its own
 # release contract changes.  App compatibility is declared by PairManifest,
 # not by minting a duplicate database release.
-APP_RELEASE_ID = "app-1.0.2"
-RELEASE_PAIR_ID = "pair-1.0.2-db-7.2.50-r6"
+APP_RELEASE_ID = "app-1.0.3"
+RELEASE_PAIR_ID = "pair-1.0.3-db-7.2.52-r1"
 # APP_VERSION is the feature version; each release ID identifies one immutable
 # package and may never be reused for a different rebuild.
-RELEASE_PAIR_SEQUENCE = 6
+RELEASE_PAIR_SEQUENCE = 8
+# Installed 1.0.3 first reuses the 1.0.2 database in pair 7. The portable
+# package goes from the last shipped portable pair (6) directly to pair 8.
+APP_ONLY_BRIDGE_FROM_TO = (6, 8)
 # Exact bytes of the last accepted predecessor pair used by the portable
 # release build.  This prevents a builder from selecting an arbitrary older
 # in-repository pair merely because its sequence and database happen to look
 # compatible.  Advance this pin only after accepting a new portable candidate.
 ACCEPTED_PREDECESSOR_PAIR_MANIFEST_SHA256 = (
-    "0b99891fa54331a91012779bbbb01224e39524f76d70e8fe2f8d30c5d01d8b66"
+    "24e9fddec4e137cf5d17d3207bfb0bbfda696c3835d6f3a21d87681d18b79e85"
 )
 DATABASE_PAIR_POLICY = "current_only"
-DATABASE_RELEASE_ID = "db-7.2.50-r6"
-DATABASE_RELEASE_SEQUENCE = 8
+DATABASE_RELEASE_ID = "db-7.2.52-r1"
+DATABASE_RELEASE_SEQUENCE = 9
 DATABASE_RELEASE_CHANNEL = "stable"
 DATABASE_RELEASE_MANIFEST_URL = ""
 # Public verification keys are release inputs, not user preferences.  Each
@@ -58,7 +61,7 @@ NATIVE_AGENT_RUNTIME_GENERATION = "dsh_client_shell"
 # pins belong to historical release evidence, not executable fallback paths.
 # Set after the final runtime + frontend cohort has been reviewed together.
 NATIVE_AGENT_DSH_SHELL_MANIFEST_SHA256 = (
-    "382adea6e8a9fabbdf2995a93abfec0567d19f33f88894428e5171e712ace1d0"
+    "32ebe348d1b52ef7fe55443c0c543fea36d59911b118c421ebccc815a75d802a"
 )
 NATIVE_AGENT_NODE_VERSION = "24.19.0"
 NATIVE_AGENT_NODE_BINARY_SHA256 = (

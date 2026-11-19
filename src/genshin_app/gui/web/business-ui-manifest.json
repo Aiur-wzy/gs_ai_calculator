@@ -3,13 +3,13 @@
   "assets": [
     {
       "name": "business-ui.js",
-      "bytes": 333400,
-      "sha256": "0ded99c9a33a0c89216292be47defc2e0bfe378d08dd0b75afaaf747506f565a"
+      "bytes": 339122,
+      "sha256": "03904cae81641bd2c8d3735df9fcc12c24a16ca625a53b99d76ac4ebff4b3540"
     },
     {
       "name": "business-ui.js.map",
-      "bytes": 792807,
-      "sha256": "621b4b9a16ce1ea5bda2f926e2e73dddb2ae0a888ca7e4da06d75ed0e13ecbc2"
+      "bytes": 804642,
+      "sha256": "e666e95436dd310f4051839c4f1e5a43a6da0cb022f74c29329a28bfe2b68b8b"
     }
   ]
 }

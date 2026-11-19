@@ -14,7 +14,7 @@ from pathlib import Path
 import pytest
 
 from genshin_app.agent_chat.runtime_integrity import DSH_CLIENT_SHELL_RUNTIME_FILES
-from genshin_app.version import NATIVE_AGENT_DSH_SHELL_MANIFEST_SHA256
+from genshin_app.version import APP_VERSION, NATIVE_AGENT_DSH_SHELL_MANIFEST_SHA256
 
 ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = ROOT / "agent-runtime/dsh-client-shell-runtime-manifest.json"
@@ -33,6 +33,7 @@ def _accepted_manifest(path=MANIFEST):
     raw = path.read_bytes()
     assert _sha(raw) == NATIVE_AGENT_DSH_SHELL_MANIFEST_SHA256, "accepted_release_pin_mismatch"
     value = json.loads(raw)
+    assert value['app_version'] == APP_VERSION, 'accepted_release_app_version_mismatch'
     body = {key: item for key, item in value.items() if key != "manifest_hash"}
     assert _sha(_canonical(body)) == value["manifest_hash"], "accepted_manifest_canonical_hash_mismatch"
     return value

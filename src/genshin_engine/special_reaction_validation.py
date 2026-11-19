@@ -172,6 +172,15 @@ def validate_special_reaction_model(model: Any) -> list[dict]:
             # observations while evidence is being collected.
             continue
         if reaction_type == "stellar_superconduct":
+            if "periodic_resource" in mechanics:
+                from genshin_engine.special_periodic_resource import validate_config
+                try:
+                    validate_config(mechanics["periodic_resource"])
+                except (ValueError, TypeError) as exc:
+                    issues.append(_issue("periodic_resource_invalid", str(exc), path+".mechanics.periodic_resource"))
+                else:
+                    if mechanics["periodic_resource"]["owner_id"] not in (qualification or {}).get("provider_ids", []):
+                        issues.append(_issue("periodic_resource_owner", "资源所有者必须是实际资格提供者。", path+".mechanics.periodic_resource.owner_id"))
             for name in ("initial_grant_layers", "settlement_bonus_layers"):
                 if name in mechanics and (type(mechanics[name]) is not int or not 0 <= mechanics[name] <= 12):
                     issues.append(_issue("value", f"{name}必须是0至12的整数。", path+".mechanics."+name))

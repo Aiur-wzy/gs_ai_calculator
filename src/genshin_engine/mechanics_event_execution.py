@@ -14,6 +14,8 @@ from typing import Any
 
 from genshin_engine.elemental import ElementalPending
 from genshin_engine.health_mechanics import handle_health_event
+from genshin_engine.mechanics_resource_observation import handle_resource_change
+from genshin_engine.resource_damage_emission import handle_resource_damage
 from genshin_engine.mechanics_execution_port import MechanicsExecutionPort
 from genshin_engine.mechanics_validation import (
     _freeze_reference,
@@ -103,7 +105,11 @@ def handle_special_reaction_operation(self: MechanicsExecutionPort, ev, row, pay
     actor = self.data["abilities"][ability_id]["character"]
     transaction = capture_direct_damage_runtime(runtime)
     try:
-        if payload["kind"] == "lunar_bloom_consume":
+        if payload["kind"] == "stellar_resource_operation":
+            receipt = runtime.operate_stellar_resource(event_id=ev["run_id"], actor=actor,
+                area_id=payload["area_id"], time=self.time, operation=payload["operation"],
+                **{k: payload[k] for k in ("amount", "mode", "duration_seconds", "counter", "claim_id", "divisor", "trial", "outcome", "probability_mode") if k in payload})
+        elif payload["kind"] == "lunar_bloom_consume":
             receipt = runtime.consume_lunar_bloom(
                 event_id=ev["run_id"], target_id=payload["target_id"],
                 actor=actor, time=self.time, dew=payload["dew"],
@@ -144,6 +150,14 @@ def handle_special_reaction_operation(self: MechanicsExecutionPort, ev, row, pay
                     "effective_level"),
                 dew_consumption=dew_consumption, bloom_core_absorption=bloom_core_absorption)
         elif payload["kind"] == "direct_stellar_damage":
+            selector = payload.get("resource_consumption")
+            if selector:
+                resource_run = f"{ev['origin']}:{selector['event_id']}"
+                debit = next((r for r in reversed(runtime.trace) if r.get("type") == "stellar_resource_receipt" and r.get("event_id") == resource_run), None)
+                if debit is None or debit.get("amount", 0) <= 0:
+                    row.update(status="suppressed", reason="stellar_resource_consumption_unavailable")
+                    return self.queue
+
             receipt = runtime.request_direct_stellar_damage(
                 event_id=ev["run_id"], target_id=payload["target_id"],
                 area_id=payload["area_id"], actor=actor,
@@ -151,7 +165,9 @@ def handle_special_reaction_operation(self: MechanicsExecutionPort, ev, row, pay
                 ability_variant=self.data["abilities"][ability_id].get("variant"),
                 ability_effective_level=self.data["abilities"][ability_id].get(
                     "effective_level"),
-                time=self.time, ability_profile=payload["ability_profile"])
+                time=self.time, ability_profile=payload["ability_profile"],
+                resource_consumption=({**selector, "run_id": resource_run} if selector else None),
+                **({'resource_trigger': payload['resource_trigger']} if 'resource_trigger' in payload else {}))
         else:
             raise ValueError("未知special_reaction_operation.kind。")
     except SpecialReactionPending as exc:
@@ -167,11 +183,11 @@ def handle_special_reaction_operation(self: MechanicsExecutionPort, ev, row, pay
     except Exception:
         restore_direct_damage_runtime(runtime, transaction)
         raise
-    if payload["kind"] in {"lunar_bloom_consume", "lunar_bloom_reserve_grant"}:
+    if payload["kind"] in {"stellar_resource_operation", "lunar_bloom_consume", "lunar_bloom_reserve_grant"}:
         resource = receipt["resource_event"]
         row["status"] = ("executed" if resource["status"] == "executed"
                          else "rejected")
-        if payload["kind"] == "lunar_bloom_reserve_grant" or payload.get("reserve_pool_ids") or payload.get("spend_policy"):
+        if payload["kind"] in {"lunar_bloom_reserve_grant", "stellar_resource_operation"} or payload.get("reserve_pool_ids") or payload.get("spend_policy"):
             row["resource_event"] = copy.deepcopy(resource)
     else:
         row["status"] = "executed"
@@ -200,6 +216,10 @@ def handle_target_status_operation(self: MechanicsExecutionPort, ev, row, payloa
 
 def prepare_action(self: MechanicsExecutionPort, ev, row, payload, event):
     ability = self.data["abilities"][payload["ability_id"]]
+    # Rotation calls the observer only after the action has actually passed.
+    if not hasattr(self, 'executed_source_actions'):
+        self.executed_source_actions = {}
+    self.executed_source_actions[ev['id']] = {'run_id': ev['run_id'], 'time': ev['time'], 'origin': ev['origin']}
     event.update(event="action_start", action_id=ev["id"], character=ability["character"], action_type_id=ability["action_type_id"])
     admission = row.get("action_admission")
     if admission and admission.get("status") == "committed" and admission.get("certificate"):
@@ -253,6 +273,21 @@ def prepare_mechanics_condition(self: MechanicsExecutionPort, ev, row, payload, 
         self.trace.append({"type": "dew_consumption_condition", "event_id": ev["id"],
                            "t": self.time / TICKS, "cycle": ev["origin"], "value": value,
                            "consumption": copy.deepcopy(details)})
+    if (selector := payload.get("stellar_resource")) is not None:
+        run_id = f"{ev['origin']}:{selector['event_id']}"
+        runtime = self.special_runtime()
+        observed = next((r for r in reversed(runtime.trace) if r.get("type") == "stellar_resource_receipt"
+                         and r.get("event_id") == run_id), None) if runtime else None
+        if observed is None or observed.get("status") not in {"executed", "blocked"}:
+            raise ElementalPending("stellar_resource_condition_receipt_missing", "资源条件找不到已执行的实际回执。", ev["id"])
+        measure = selector.get("measure", "amount")
+        actual = observed["amount"] if measure == "amount" else observed["trial"][measure]
+        value = actual == selector["amount"]
+        details = {"resource_event_id": run_id, "measure": measure, "actual_amount": actual, "required_amount": selector["amount"]}
+        row["stellar_resource_condition"] = copy.deepcopy(details)
+        self.count_event()
+        self.trace.append({"type": "stellar_resource_condition", "event_id": ev["id"],
+                           "t": self.time/TICKS, "cycle": ev["origin"], "value": value, **details})
     self.conditions[payload["condition"]] = value
     event.update(event="condition", conditions=dict(self.conditions))
     if value is None:
@@ -272,6 +307,8 @@ def prepare_elemental_state_deadline(self: MechanicsExecutionPort, ev, row, payl
 
 
 _SYSTEM_HANDLERS = MappingProxyType({
+    "mechanics_resource_damage": handle_resource_damage,
+    "mechanics_resource_change": handle_resource_change,
     "health_operation": handle_health_event,
     "target_status_operation": handle_target_status_operation,
     "state_runtime_event": handle_state_runtime_event,

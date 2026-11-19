@@ -169,7 +169,7 @@ class StateRuntimeMechanics:
         self._positioned = model["state_runtime"]["schema_version"] == 2
         self._ordered_enabled = self._counter_enabled or self._positioned
         self.clock = StateRuntime(model["state_runtime"], character_ids=character_ids,
-            reserve_events=lambda count: ctx._reserve_events(count, "state_runtime"), external_events=external_events,
+            reserve_events=self._reserve_state_events, external_events=external_events,
             rule_ids=[r["id"] for r in model["rules"]],
             operation_ids=[r["id"] for r in model.get("shared_pools", {}).get("operations", [])],
             emit_ordered_steps=self._ordered_enabled,
@@ -198,6 +198,9 @@ class StateRuntimeMechanics:
             "by_life": {lid: sorted([t for t in timers.values() if t["lifecycle_id"] == lid], key=lambda t: t["order"])
                         for lid in lives}}) if self._positioned else None
         self._verify_clock_definition()
+
+    def _reserve_state_events(self, count):
+        self.ctx._reserve_events(count, "state_runtime")
 
     def _verify_clock_definition(self):
         """Bind clock2's actual directories as well as declarative timer rows.

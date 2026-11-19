@@ -495,6 +495,7 @@ def _load_accepted_predecessor_pair(
     database_manifest: dict,
     expected_sha256: str,
     allow_database_upgrade: bool = False,
+    app_only_bridge_from_to: tuple[int, int] | None = None,
 ) -> dict:
     """Load the exact reviewed predecessor and reject ambiguous lineage."""
 
@@ -518,7 +519,12 @@ def _load_accepted_predecessor_pair(
             "accepted_predecessor_pair_manifest_sha256_mismatch"
         )
     predecessor = load_release_pair_manifest(predecessor_path)
-    if predecessor["pair_sequence"] != pair_manifest["pair_sequence"] - 1:
+    prior, target = predecessor["pair_sequence"], pair_manifest["pair_sequence"]
+    bridged = (allow_database_upgrade and target == prior + 2
+               and app_only_bridge_from_to == (prior, target)
+               and predecessor.get("database", {}).get("database_release_id")
+               != database_manifest["database_release_id"])
+    if prior != target - 1 and not bridged:
         raise DatabaseReleaseError("release_pair_predecessor_not_immediate")
     if (
         predecessor["release_pair_id"] == pair_manifest["release_pair_id"]
@@ -1028,6 +1034,7 @@ def main() -> int:
                     app_version.ACCEPTED_PREDECESSOR_PAIR_MANIFEST_SHA256
                 ),
                 allow_database_upgrade=True,
+                app_only_bridge_from_to=getattr(app_version, "APP_ONLY_BRIDGE_FROM_TO", None),
             )
             if not release_pair_matches_database_manifest(predecessor_pair, database_manifest):
                 predecessor_database = load_predecessor_database(

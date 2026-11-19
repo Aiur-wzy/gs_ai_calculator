@@ -10,6 +10,7 @@ from genshin_engine.attribute_ledger import AttributeLedgerError
 from genshin_engine.mechanics_execution_port import MechanicsExecutionPort
 from genshin_engine.rotation_port import TICKS
 from genshin_engine.state_runtime import StateRuntimeError
+from genshin_engine.timed_resource_window import add_quantity
 
 
 def expire_rule_instances(runtime: MechanicsExecutionPort, time):
@@ -164,6 +165,21 @@ def commit_rule_callback(runtime: MechanicsExecutionPort, rule, event, beneficia
                 "rule_id": rule["id"], "event_id": event["id"], "t": runtime.time/TICKS,
                 "cycle": event["origin"], "beneficiary_selection": selection})
             return
+    if (event.get('count_mode') == 'expected' and rule.get('effects')
+            and not rule['trigger'].get('resource_every')):
+        # Default discrete policy is floor of cumulative eligible expectation,
+        # not floor of each fractional observation. User-selected scenarios
+        # arrive through the existing custom events and do not enter this path.
+        prior = runtime.expected_effect_counts.get(rule['id'], 0)
+        current = add_quantity(prior, event.get('resource_weight', 1))
+        runtime.expected_effect_counts[rule['id']] = current
+        activated = int(current) - int(prior)
+        event = {**event, 'expected_effect_activation': activated}
+        runtime.trace.append({'type':'expected_discrete_count', 'rule_id':rule['id'],
+            'event_id':event['id'], 't':runtime.time/TICKS, 'expected_count':current,
+            'applied_count':int(current), 'new_activations':activated, 'rounding':'floor'})
+        if not activated and not rule.get('resources') and not rule.get('resource_damage'):
+            return
     if rule["beneficiaries"]["mode"] == "next_switch" and event["event"] != "switch":
         state["pending"] = [{"event": copy.deepcopy(event), "snapshot": snapshot}]
         return
@@ -175,6 +191,12 @@ def commit_rule_callback(runtime: MechanicsExecutionPort, rule, event, beneficia
 
 
 def rule_filter_decision(runtime: MechanicsExecutionPort, selector, event, rule_id, *, owner=None, selector_matches):
+    declarations = runtime.rules.get(rule_id, {}).get('resource_damage', ())
+    if declarations and declarations[0]['action_id'] not in getattr(runtime, 'executed_source_actions', {}):
+        return 'no_match'
+    threshold = selector.get('resource_every', {})
+    if threshold.get('scope') == 'matching':
+        event = {**event, 'resource_counters': {threshold['counter']: event.get('resource_rule_counts', {}).get(rule_id, 0)}}
     if selector.get("owner_presence") == "frontline" and (runtime.rules[rule_id]["owner"] if owner is None else owner) != runtime.frontline:
         return "no_match"
     condition = selector.get("condition")

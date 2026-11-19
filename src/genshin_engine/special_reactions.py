@@ -19,6 +19,7 @@ from functools import lru_cache
 from types import FunctionType, MappingProxyType
 from typing import Any
 
+from genshin_engine import special_periodic_resource as periodic_resource
 from genshin_engine import special_reaction_contracts as _special_contracts
 from genshin_engine import special_reaction_profiles as _special_profiles
 from genshin_engine import special_reaction_validation as _special_validation
@@ -114,6 +115,7 @@ from genshin_engine.special_reaction_validation import (
     special_reaction_capabilities,  # noqa: F401 -- preserved public/diagnostic facade
     validate_special_reaction_model,
 )
+from genshin_engine.special_replace_stellar_field import plan_stellar_field
 from genshin_engine.special_replace_stellar_packet import (
     StellarSwirlPacketProposal,
     stellar_swirl_packet_binding,
@@ -686,9 +688,103 @@ class SpecialReactionRuntime:
             "next_deadline": self.next_deadline(),
         }
 
+    def _resource_config(self):
+        config = self._config("stellar_superconduct")
+        return config["mechanics"].get("periodic_resource") if config else None
+
+    def _resource_ledger(self):
+        return self.party_state.setdefault("stellar_periodic_resource", periodic_resource.initial_ledger(self.time))
+
+    def _resource_field(self, time, cause):
+        config = self._resource_config()
+        mechanics = dict(self._config("stellar_superconduct")["mechanics"])
+        mechanics["field_duration_seconds"] = config["lifetime_seconds"]
+        area_id = config["area_id"]
+        field = self._stellar_field_state(area_id)
+        transition = plan_stellar_field(StellarFieldProposal(
+            field=MappingProxyType(copy.deepcopy(field)), mechanics=MappingProxyType(mechanics),
+            reaction=MappingProxyType({"atomic_parent_id": cause}), area_id=area_id,
+            event_id=cause, replacement_id=cause, target_id=None, time=time,
+            seconds_to_ticks=_seconds_to_ticks))
+        self._commit_stellar_field_transition(field, transition)
+        transition.generated_event.update(resource_type="periodic_resource", profile=self._profile_audit("stellar_superconduct"))
+        return transition.generated_event
+
+    def _publish_resource_rows(self, rows):
+        config = self._resource_config()
+        output = []
+        for value in rows:
+            event = {"type": "special_reaction_state", "event_id": f"stellar-resource:{config['owner_id']}:{value['sequence']}",
+                     "reaction_type": "stellar_superconduct", "resource_type": "periodic_resource",
+                     "owner": config["owner_id"], "area_id": config["area_id"], "target_id": None,
+                     "t": value["time_tick"]/TICKS, "profile": self._profile_audit("stellar_superconduct"), "status": "executed", **copy.deepcopy(value)}
+            output.append(event)
+            if value["operation"] == "created":
+                output.append(self._resource_field(value["time_tick"], event["event_id"]))
+        return output
+
+    def _trigger_periodic_resource(self, time, area_id):
+        config = self._resource_config()
+        if area_id != config["area_id"]:
+            raise ValueError("星超导资源反应区域必须与显式资源区域一致")
+        # Reserve an inactive area state for the shared deadline contract.
+        # Only a later actual creation activates it and starts settlement.
+        self._stellar_field_state(area_id)
+        ledger, rows = periodic_resource.trigger(self._resource_ledger(), config, time)
+        self.party_state["stellar_periodic_resource"] = ledger
+        return self._publish_resource_rows(rows)
+
+    def operate_stellar_resource(self, *, event_id, actor, area_id, time, operation, **parameters):
+        self._require_ready("stellar_superconduct", event_id)
+        config = self._resource_config()
+        if not config or actor != config["owner_id"] or area_id != config["area_id"]:
+            raise ValueError("星超导资源操作缺少配置或与实际所有者、区域不符")
+        def commit():
+            due = self.advance(time)
+            ledger, rows, amount = periodic_resource.operate(self._resource_ledger(), config, time,
+                                                           event_id, operation, **parameters)
+            self.party_state["stellar_periodic_resource"] = ledger
+            generated = self._publish_resource_rows(rows)
+            receipt = {"type": "stellar_resource_receipt", "event_id": event_id, "owner": actor,
+                       "area_id": area_id, "t": time/TICKS, "time_tick": time, "operation": operation,
+                       "amount": amount, "count": ledger["resource"]["count"], "status": "executed",
+                       "counter": parameters.get("counter")}
+            if operation == "trial":
+                trial = next(r['trial'] for r in reversed(rows) if r['operation'] == 'trial' and r['cause'] == event_id)
+                receipt['trial'] = copy.deepcopy(trial)
+                receipt['status'] = 'executed' if trial['executed'] else 'blocked'
+            self.trace.extend(copy.deepcopy([*generated, receipt]))
+            return {"resource_event": receipt, "generated_events": [*due, *generated], "state": self.state()}
+        return self._execute_direct_damage_atomically(commit)
+
+    def _advance_deadlines(self, time, *, defer_world_lunar_electro_expiry):
+        config = self._resource_config()
+        if not config:
+            return self._advance_standard_deadlines(time, defer_world_lunar_electro_expiry=defer_world_lunar_electro_expiry)
+        if type(time) is not int or time < self.time:
+            raise ValueError("星月反应时间必须是单调非负整数微秒。")
+        output = []
+        while True:
+            deadline = periodic_resource.next_deadline(self._resource_ledger())
+            step = min(time, deadline) if deadline is not None else time
+            # Only the final world boundary may reserve cloud expiry.
+            output.extend(self._advance_standard_deadlines(step,
+                defer_world_lunar_electro_expiry=defer_world_lunar_electro_expiry and step == time))
+            ledger, rows = periodic_resource.advance(self._resource_ledger(), config, step)
+            self.party_state["stellar_periodic_resource"] = ledger
+            generated = self._publish_resource_rows(rows)
+            self.trace.extend(copy.deepcopy(generated))
+            output.extend(generated)
+            if step == time:
+                return output
+
     def next_deadline(self) -> int | None:
         """Earliest microsecond deadline to enqueue beside ordinary mechanics events."""
         values = [row["time_tick"] for row in self.scheduled]
+        if self._resource_config():
+            resource_deadline = periodic_resource.next_deadline(self._resource_ledger())
+            if resource_deadline is not None:
+                values.append(resource_deadline)
         for state in self.stellar_field_by_area.values():
             for key in (
                 "stellar_superconduct_next_settlement", "stellar_superconduct_expires_at",
@@ -1212,20 +1308,25 @@ class SpecialReactionRuntime:
             generated: list[dict] = list(due)
             if reaction_type == "stellar_superconduct":
                 area_id = reaction.get("area_id") or (payload or {}).get("area_id") or "battlefield.primary"
-                field = self._stellar_field_state(area_id)
-                binding = self._bound_replacement_handler(reaction_type, event_id, capability="replace")
-                transition = binding.handler(StellarFieldProposal(
-                    field=MappingProxyType(copy.deepcopy(field)),
-                    mechanics=MappingProxyType(mechanics),
-                    reaction=MappingProxyType(reaction),
-                    area_id=area_id, event_id=event_id,
-                    replacement_id=replaced["id"], target_id=target_id,
-                    time=time, seconds_to_ticks=_seconds_to_ticks,
-                ))
-                self._commit_stellar_field_transition(field, transition)
-                if transition.initial_grant_layers:
-                    transition.generated_event["initial_grant_ordinary_bonus"] = field["stellar_superconduct_ordinary_bonus"]
-                generated.append(transition.generated_event)
+                if self._resource_config():
+                    # The replacement creates the field on actual resource
+                    # creation, not when its delayed generation is scheduled.
+                    generated.extend(self._trigger_periodic_resource(time, area_id))
+                else:
+                    field = self._stellar_field_state(area_id)
+                    binding = self._bound_replacement_handler(reaction_type, event_id, capability="replace")
+                    transition = binding.handler(StellarFieldProposal(
+                        field=MappingProxyType(copy.deepcopy(field)),
+                        mechanics=MappingProxyType(mechanics),
+                        reaction=MappingProxyType(reaction),
+                        area_id=area_id, event_id=event_id,
+                        replacement_id=replaced["id"], target_id=target_id,
+                        time=time, seconds_to_ticks=_seconds_to_ticks,
+                    ))
+                    self._commit_stellar_field_transition(field, transition)
+                    if transition.initial_grant_layers:
+                        transition.generated_event["initial_grant_ordinary_bonus"] = field["stellar_superconduct_ordinary_bonus"]
+                    generated.append(transition.generated_event)
             elif reaction_type == "stellar_swirl":
                 replaced["role_provenance"] = copy.deepcopy(stellar_swirl_roles)
                 area_id = reaction.get("area_id") or (payload or {}).get("area_id") or "battlefield.primary"
@@ -1709,6 +1810,7 @@ class SpecialReactionRuntime:
         ability_variant: str | None,
         ability_effective_level: int | None,
         reaction_type: str,
+        resource_trigger: dict | None = None,
     ) -> str:
         for name, value in (
                 ("event_id", event_id), ("target_id", target_id),
@@ -1757,12 +1859,32 @@ class SpecialReactionRuntime:
             )
         component = ((ability_profile.get("parameters") or {}).get("component")
                      if isinstance(ability_profile, dict) else None)
+        trigger_identity = {}
+        if resource_trigger is not None:
+            if (type(resource_trigger) is not dict or set(resource_trigger) - {'event_id', 'ordinal', 'quantity_weight'}
+                    or not {'event_id', 'ordinal'} <= set(resource_trigger)
+                    or type(resource_trigger['ordinal']) is not int):
+                raise ValueError('资源派生伤害必须引用实际资源变化和整数序号')
+            observation = next((r for r in reversed(self.trace)
+                if r.get('event_id') == resource_trigger['event_id'] and r.get('resource_type') == 'periodic_resource'), None)
+            if (observation is None or observation.get('owner') != actor or observation.get('area_id') != area_id
+                    or observation.get('time_tick') != time
+                    or observation.get('operation') not in {'created', 'consumed', 'overflow_consumed', 'expired'}
+                    or not 0 <= resource_trigger['ordinal']-1 < observation.get('amount', 0)):
+                raise ValueError('资源派生伤害没有同角色、区域和时刻的实际资源变化证据')
+            if 'quantity_weight' in resource_trigger:
+                from genshin_engine.timed_resource_window import add_quantity
+                weight = min(1,add_quantity(observation['amount'], -(resource_trigger['ordinal']-1)))
+                if not _finite_number(resource_trigger['quantity_weight'], positive=True) or resource_trigger['quantity_weight'] != weight:
+                    raise ValueError('期望伤害次数与实际资源变化量不一致')
+            trigger_identity['resource_trigger'] = {k:resource_trigger[k] for k in ('event_id','ordinal')}
         delivery_identity = _profile_hash({
             "action_id": action_id,
             "target_id": target_id,
             "area_id": area_id,
             "time_tick": time,
             "component": component,
+            **trigger_identity,
         })
         if any(row.get("event_id") == event_id for row in self.trace + self.scheduled):
             raise SpecialReactionPending(
@@ -1907,6 +2029,8 @@ class SpecialReactionRuntime:
         ability_effective_level: int,
         time: int,
         ability_profile: dict,
+        resource_consumption: dict | None = None,
+        resource_trigger: dict | None = None,
     ) -> dict:
         """Emit an ability-owned hit; only Superconduct reads field layers."""
         issues = validate_direct_stellar_damage_profile(ability_profile)
@@ -1936,6 +2060,7 @@ class SpecialReactionRuntime:
             ability_variant=ability_variant,
             ability_effective_level=ability_effective_level,
             reaction_type=reaction_type,
+            **({'resource_trigger': resource_trigger} if resource_trigger is not None else {}),
         )
 
         def commit():
@@ -1977,6 +2102,20 @@ class SpecialReactionRuntime:
                 "ability_profile": copy.deepcopy(ability_profile),
                 "status": "ready_for_stat_sample",
             }
+            if resource_trigger is not None:
+                request['resource_trigger'] = copy.deepcopy(resource_trigger)
+            if resource_consumption is not None:
+                selector = resource_consumption
+                debit = next((r for r in reversed(self.trace) if r.get("type") == "stellar_resource_receipt"
+                              and r.get("event_id") == selector.get("run_id")), None)
+                if (not debit or debit.get("owner") != actor or debit.get("area_id") != area_id
+                        or debit.get("time_tick", time+1) > time or debit.get("status") != "executed"
+                        or not _finite_number(debit.get("amount"), positive=True)
+                        or selector.get("mode") not in {"require", "scale_multiplier"}
+                        or debit.get("operation") not in {"consume", "trial", "set_mode", "end_mode", "observe"}
+                        or debit.get("operation") == "observe" and debit.get("counter") not in {"consumed", "overflow_consumed", "released"}):
+                    raise ValueError("星烁直伤缺少有效的同角色实际资源消费回执")
+                request["resource_consumption"] = {**copy.deepcopy(selector), "actual_amount": debit["amount"]}
             self.trace.append(copy.deepcopy(request))
             return {"damage_event": request, "generated_events": [*due, request],
                     "state": self.state()}
@@ -2186,7 +2325,7 @@ class SpecialReactionRuntime:
         else:
             raise ValueError("月露截止步骤不在闭合操作集合内。")
 
-    def _advance_deadlines(
+    def _advance_standard_deadlines(
         self,
         time: int,
         *,

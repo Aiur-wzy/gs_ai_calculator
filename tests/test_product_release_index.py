@@ -189,6 +189,36 @@ def test_index_options_expiry_and_replay(tmp_path, monkeypatch, releases):
         discover_product_index(*args, channel="stable", trust_verifier=_verify)
 
 
+def test_old_endpoint_offers_only_app_then_new_endpoint_only_database(tmp_path, monkeypatch, releases):
+    _, _, documents, _, payload = releases
+    old, bridge, final = (documents[key] for key in ((1, 1), (2, 1), (2, 2)))
+    first = {**payload, "pairs": [old, bridge], "latest_database_release_id": "db-7.0.0-r1"}
+    following = {**payload, "pairs": [old, bridge, final], "index_sequence": first["index_sequence"] + 1}
+    cache = tmp_path / "cache.json"
+    requests = []
+    def fetch(url, *, etag, timeout):
+        requests.append((url, etag))
+        return 200, canonical(_signed(answer)), '"endpoint-specific"'
+    monkeypatch.setattr(product_release_index, "_fetch_https", fetch)
+    def discover(url):
+        return discover_product_index(url, cache, channel="stable", trust_verifier=_verify)
+    def options(index, pair):
+        return [x["mode"] for x in release_options(index, pair["pair_manifest"], pair["database_manifest"])]
+    answer = first
+    legacy, stable = product_release_index.LEGACY_STABLE_INDEX, product_release_index.STABLE_INDEX
+    assert options(discover(legacy), old) == ["app_only"]
+    answer = {**following, "index_sequence": first["index_sequence"] - 1}
+    with pytest.raises(ReleasePairDiscoveryError, match="index_replay"):
+        discover(stable)
+    assert json.loads(cache.read_bytes())["url"] == legacy
+    answer = following
+    current = discover(stable)
+    assert options(current, bridge) == ["database_only"]
+    assert options(current, final) == []
+    assert requests == [(legacy, None), (stable, None), (stable, None)]
+    assert json.loads(cache.read_bytes())["url"] == stable
+
+
 def test_index_304_observes_a_concurrent_cache_advance(tmp_path, monkeypatch, releases):
     *_, payload = releases
     args = ("https://example.invalid/latest.json", tmp_path / "cache" / "index.json")

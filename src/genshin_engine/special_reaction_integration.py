@@ -42,10 +42,15 @@ def validate_special_reaction_bindings(
     """
     special = mechanics_model.get("special_reaction_model")
     rows = mechanics_model.get("special_reaction_party_capabilities", [])
-    events = mechanics_model.get("special_reaction_events", [])
+    from genshin_engine.resource_damage_emission import validation_events
+    event_declarations = [(f'mechanics_model.special_reaction_events.{i}', e)
+                          for i, e in enumerate(mechanics_model.get('special_reaction_events', []))]
+    event_declarations.extend(validation_events(mechanics_model))
+    events = [event for _, event in event_declarations]
     dew_conditions = [event for event in mechanics_model.get("condition_events", ()) if "dew_consumption" in event]
+    resource_conditions = [event for event in mechanics_model.get("condition_events", ()) if "stellar_resource" in event]
     if special is None:
-        if rows or events or dew_conditions:
+        if rows or events or dew_conditions or resource_conditions:
             return [_issue(
                 "special_reaction_model_missing",
                 "星月资格或操作需要显式special_reaction_model；不会从队伍名称自动开启。",
@@ -73,7 +78,6 @@ def validate_special_reaction_bindings(
     target_id = (elemental.get("target") or {}).get("id")
     seen: set[str] = set()
     tags_by_character: dict[str, set[str]] = {}
-    catalog = load_reviewed_special_reaction_capabilities()
     for index, row in enumerate(rows):
         path = f"mechanics_model.special_reaction_party_capabilities.{index}"
         cid = row.get("character_id")
@@ -89,7 +93,9 @@ def validate_special_reaction_bindings(
                 path, severity="pending", character_id=cid,
             ))
             continue
-        entry = special_reaction_capability_entry(row.get("db_character_id"))
+        commit = row.get("equipment_upstream_commit")
+        catalog = load_reviewed_special_reaction_capabilities(commit)
+        entry = special_reaction_capability_entry(row.get("db_character_id"), commit)
         tags = verified_capability_tags(row)
         if not tags:
             details = {
@@ -151,6 +157,20 @@ def validate_special_reaction_bindings(
                 f"mechanics_model.special_reaction_model.replacements.{reaction_type}.qualification",
                 severity="pending", provider_ids=copy.deepcopy(providers), expected_capability_tag=expected,
             ))
+        if reaction_type == 'stellar_superconduct':
+            resource = (entry.get('mechanics') or {}).get('periodic_resource')
+            for row in rows:
+                actor = row.get('character_id')
+                if (actor not in roster or expected not in tags_by_character.get(actor, set())
+                        or row.get('runtime_profile_id') != 'stellar_conduct.gradient_beacon_v1'):
+                    continue
+                if not isinstance(resource, dict) or resource.get('owner_id') != actor:
+                    issues.append(_issue(
+                        'special_capability_resource_profile_required',
+                        '队伍包含定时信标变体；请在periodic_resource中声明该角色的生成、寿命、容量及区域，不能套用普通棱晶。',
+                        'mechanics_model.special_reaction_model.replacements.stellar_superconduct.mechanics.periodic_resource',
+                        severity='pending', character_id=actor,
+                        required_owner_id=actor, runtime_profile_id=row['runtime_profile_id']))
 
     seen_events: set[str] = set()
     events_by_id = {event.get("id"): event for event in events}
@@ -160,8 +180,7 @@ def validate_special_reaction_bindings(
         for reaction_type, entry in special.get("replacements", {}).items()
         if isinstance(entry, dict) and entry.get("enabled")
     }
-    for index, event in enumerate(events):
-        path = f"mechanics_model.special_reaction_events.{index}"
+    for path, event in event_declarations:
         event_id = event.get("id")
         if event_id in seen_events:
             issues.append(_issue("duplicate_id", "星月操作ID不得重复。", path))
@@ -174,14 +193,43 @@ def validate_special_reaction_bindings(
                                  target_id=event.get("target_id"), elemental_target_id=target_id))
         kind = event.get("kind")
         action = action_bindings.get(event.get("action_id"))
-        requires_action = (kind == "lunar_bloom_reserve_grant"
+        requires_action = (kind in {"lunar_bloom_reserve_grant", "stellar_resource_operation"}
                            or kind == "lunar_bloom_consume" and ("reserve_pool_ids" in event or "spend_policy" in event)
-                           or "dew_consumption" in event or "bloom_core_absorption" in event)
+                           or "dew_consumption" in event or "bloom_core_absorption" in event or "resource_consumption" in event)
         if requires_action and action and "start" in action:
             if (_tick(event["t"]), event["order"]) <= (_tick(action["start"]), action["order"]):
                 issues.append(_issue("causality", "月绽放资源或关联直伤必须位于来源动作之后。", path))
             if "repeat" in action and 0 not in _origins(action["repeat"], 1):
                 issues.append(_issue("reference", "当前月绽放操作为单次事件，来源动作须在同一展开轮次执行。", path))
+        if kind == "stellar_resource_operation":
+            resource = special.get("replacements", {}).get("stellar_superconduct", {}).get("mechanics", {}).get("periodic_resource")
+            if "stellar_superconduct" not in enabled_replacements or not resource:
+                issues.append(_issue("stellar_resource_config_missing", "资源操作需要开启星超导并明确periodic_resource配置。", path))
+            elif not action or action.get("character_id") != resource.get("owner_id") or event.get("area_id") != resource.get("area_id"):
+                issues.append(_issue("stellar_resource_owner_mismatch", "资源操作必须属于配置中的实际角色和区域。", path))
+            operation = event.get("operation")
+            allowed = {"grant": {"amount"}, "consume": {"amount"}, "set_mode": {"mode", "duration_seconds"},
+                       "end_mode": set(), "observe": {"counter", "claim_id", "divisor"}, "trial": {"trial", "outcome", "probability_mode"}}
+            required = {"grant": {"amount"}, "consume": {"amount"}, "set_mode": {"mode", "duration_seconds"},
+                        "end_mode": set(), "observe": {"counter"}, "trial": {"trial"}}
+            parameters = set(event) & {"amount", "mode", "duration_seconds", "counter", "claim_id", "divisor", "trial", "outcome", "probability_mode"}
+            if operation not in allowed or parameters - allowed[operation] or required[operation] - parameters:
+                issues.append(_issue("stellar_resource_parameters", "资源操作缺少必需参数或包含不属于此操作的参数。", path))
+            elif operation == "trial" and resource:
+                from genshin_engine.probabilistic_resource_contract import (
+                    resource_trial,
+                    trial_mode,
+                )
+                try:
+                    trial_mode(resource_trial(event["trial"], resource["capacity"]), event.get('probability_mode'), event.get('outcome'))
+                except ValueError as exc:
+                    issues.append(_issue("stellar_resource_trial_invalid", str(exc), path))
+            elif operation == "observe":
+                if event.get("counter") == "inventory":
+                    if "claim_id" in event or event.get("divisor", 1) != 1:
+                        issues.append(_issue("stellar_resource_observation", "库存观察不能使用计数游标或除数。", path))
+                elif not event.get("claim_id"):
+                    issues.append(_issue("stellar_resource_observation", "累计计数观察必须指定独立claim_id。", path))
         if kind in {"lunar_bloom_consume", "lunar_bloom_reserve_grant"} and "lunar_bloom" not in enabled_replacements:
             issues.append(_issue("special_switch_disabled", "草露资源操作需要显式开启月绽放替换。", path))
         elif kind == "direct_lunar_damage":
@@ -269,6 +317,15 @@ def validate_special_reaction_bindings(
                         required_capability_tag=required_tag,
                     ))
         elif kind == "direct_stellar_damage":
+            debit = event.get("resource_consumption")
+            if debit:
+                consumed = events_by_id.get(debit["event_id"])
+                if (not consumed or consumed.get("kind") != "stellar_resource_operation"
+                    or not (consumed.get("operation") in {"consume", "trial", "set_mode", "end_mode"} or
+                            consumed.get("operation") == "observe" and consumed.get("counter") in {"consumed", "overflow_consumed", "released"})
+                    or any(consumed.get(k) != event.get(k) for k in ("action_id", "area_id", "target_id"))
+                    or (_tick(consumed["t"]), consumed["order"]) >= (_tick(event["t"]), event["order"])):
+                    issues.append(_issue("stellar_resource_consumption_binding", "直伤需绑定同动作、区域、目标的先前实际消费或消费观察。", path+".resource_consumption"))
             ability_profile = event.get("ability_profile")
             parameters = ability_profile.get("parameters", {}) if isinstance(ability_profile, dict) else {}
             stellar_type = parameters.get("reaction_type") if isinstance(parameters, dict) else None
@@ -324,7 +381,7 @@ def validate_special_reaction_bindings(
                     character_id=binding["character_id"],
                 ))
         elif kind not in (
-                "lunar_bloom_consume", "lunar_bloom_reserve_grant", "direct_lunar_damage", "direct_stellar_damage"):
+                "stellar_resource_operation", "lunar_bloom_consume", "lunar_bloom_reserve_grant", "direct_lunar_damage", "direct_stellar_damage"):
             issues.append(_issue(
                 "special_operation_kind", "不支持的星月显式操作类型。",
                 path+".kind", kind=kind,
@@ -332,6 +389,19 @@ def validate_special_reaction_bindings(
         if event.get("status") == "pending":
             issues.append(_issue("special_operation_pending", "星月操作来源仍待核实。", path,
                                  severity="pending"))
+    for event in resource_conditions:
+        observed = events_by_id.get(event["stellar_resource"]["event_id"])
+        if (not observed or observed.get("kind") != "stellar_resource_operation"
+                or (_tick(observed["t"]), observed["order"]) >= (_tick(event["t"]), event["order"])
+                or (event["repeat"]["mode"] != "once" and event["repeat"].get("cycles") != [0])):
+            issues.append(_issue("stellar_resource_condition_binding_invalid",
+                "资源条件需引用同一展开轮次中先执行的实际资源操作。", "mechanics_model.condition_events", event_id=event["id"]))
+        elif event["stellar_resource"].get("measure", "amount") != "amount" and observed.get("operation") != "trial":
+            issues.append(_issue("stellar_resource_condition_measure_invalid",
+                "executed_units、consumed_units和created_units仅用于trial实际回执。", "mechanics_model.condition_events", event_id=event["id"]))
+        if event["status"] == "pending":
+            issues.append(_issue("stellar_resource_condition_pending", "资源条件来源仍待核实。",
+                "mechanics_model.condition_events", severity="pending", event_id=event["id"]))
     for event in dew_conditions:
         consumed = events_by_id.get(event["dew_consumption"]["event_id"])
         if (consumed is None or consumed.get("kind") != "lunar_bloom_consume"

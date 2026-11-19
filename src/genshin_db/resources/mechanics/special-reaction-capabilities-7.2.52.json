@@ -1,0 +1,280 @@
+{
+  "schema_version": 1,
+  "collection_id": "native.special-reaction-capabilities.v1",
+  "revision": 6,
+  "status": "reviewed",
+  "version_line": "release",
+  "source_upstream_commit": "6044f5aae7dd79fbbe15c5748ef99b654f6132b7",
+  "source_target_version": "CNCBWin7.2.52",
+  "source_files": {
+    "ExcelBinOutput/AvatarExcelConfigData.json": "fccea88a8a81bc384ff07798cf41c33f4348c8f3e56d228785fa03c97b016eb8",
+    "ExcelBinOutput/AvatarSkillDepotExcelConfigData.json": "970f14dd9e40d86f1497f4f4c9f39f0d16f0a07b48f4ea8b10b62f9b67fb1b14",
+    "ExcelBinOutput/ProudSkillExcelConfigData.json": "8686d399e82b2eb130e356aa4a083a83e1cb4a76a91f8b1058b6c968afa73b6e",
+    "TextMap/TextMap_MediumEN.json": "b4650341b5b851b8be3e441358a24f3798b93bca82f76f8859611e8dc96518f0"
+  },
+  "content_hash": "7d72fef1482215727966adaf073fa8f9657bbedb84ca07faa4a3c8ed1a354e46",
+  "entries": [
+    {
+      "character_id": 10000005,
+      "required_skill_depot_id": 505,
+      "form_selection_required": true,
+      "display_name": "空（冰元素形态）",
+      "capability_tags": [
+        "native_reaction_qualification.stellar_superconduct",
+        "native_reaction_qualification.stellar_swirl"
+      ],
+      "evidence": {
+        "proud_skill_group_id": 823,
+        "proud_skill_id": 82301,
+        "desc_text_map_hash": "2830983603"
+      },
+      "runtime_profile_id": "native.special-reactions.v1",
+      "runtime_support_status": "supported",
+      "entry_fingerprint": "600ff85ccaf1cb9a44614e32bcc522e53940f95ad0e08c224086ff44d55d14f9"
+    },
+    {
+      "character_id": 10000007,
+      "required_skill_depot_id": 705,
+      "form_selection_required": true,
+      "display_name": "荧（冰元素形态）",
+      "capability_tags": [
+        "native_reaction_qualification.stellar_superconduct",
+        "native_reaction_qualification.stellar_swirl"
+      ],
+      "evidence": {
+        "proud_skill_group_id": 823,
+        "proud_skill_id": 82301,
+        "desc_text_map_hash": "2830983603"
+      },
+      "runtime_profile_id": "native.special-reactions.v1",
+      "runtime_support_status": "supported",
+      "entry_fingerprint": "d7de0944c696791d07159e41bbf6f9117b8ad4151836831d2229915182b54e50"
+    },
+    {
+      "character_id": 10000116,
+      "required_skill_depot_id": 11601,
+      "form_selection_required": false,
+      "display_name": "伊涅芙",
+      "capability_tags": [
+        "native_reaction_qualification.lunar_electro"
+      ],
+      "evidence": {
+        "proud_skill_group_id": 11623,
+        "proud_skill_id": 1162301,
+        "desc_text_map_hash": "1550196803"
+      },
+      "runtime_profile_id": "native.special-reactions.v1",
+      "runtime_support_status": "supported",
+      "entry_fingerprint": "90bb9df9b8aa74f5da3ba4b84a46c9b2b523f9cd51523e9f27f6144b33a4513e"
+    },
+    {
+      "character_id": 10000119,
+      "required_skill_depot_id": 11901,
+      "form_selection_required": false,
+      "display_name": "菈乌玛",
+      "capability_tags": [
+        "native_reaction_qualification.lunar_bloom"
+      ],
+      "evidence": {
+        "proud_skill_group_id": 11923,
+        "proud_skill_id": 1192301,
+        "desc_text_map_hash": "3041427899"
+      },
+      "runtime_profile_id": "native.special-reactions.v1",
+      "runtime_support_status": "supported",
+      "entry_fingerprint": "b5d94112e583ad700ad95604ff074f11c2034e9b1d1d095ba0a10df3479738e8"
+    },
+    {
+      "character_id": 10000120,
+      "required_skill_depot_id": 12001,
+      "form_selection_required": false,
+      "display_name": "菲林斯",
+      "capability_tags": [
+        "native_reaction_qualification.lunar_electro"
+      ],
+      "evidence": {
+        "proud_skill_group_id": 12023,
+        "proud_skill_id": 1202301,
+        "desc_text_map_hash": "1784973667"
+      },
+      "runtime_profile_id": "native.special-reactions.v1",
+      "runtime_support_status": "supported",
+      "entry_fingerprint": "7c6ea9d345d362c83d7ee09957fb182910c6c9e999397275456581ddf3592e9e"
+    },
+    {
+      "character_id": 10000122,
+      "required_skill_depot_id": 12201,
+      "form_selection_required": false,
+      "display_name": "奈芙尔",
+      "capability_tags": [
+        "native_reaction_qualification.lunar_bloom"
+      ],
+      "evidence": {
+        "proud_skill_group_id": 12223,
+        "proud_skill_id": 1222301,
+        "desc_text_map_hash": "2351329715"
+      },
+      "runtime_profile_id": "native.special-reactions.v1",
+      "runtime_support_status": "supported",
+      "entry_fingerprint": "7d627a14187e8924ef136810b01c791c2ccb5367184a35640b7de75b1327f449"
+    },
+    {
+      "character_id": 10000125,
+      "required_skill_depot_id": 12501,
+      "form_selection_required": false,
+      "display_name": "哥伦比娅",
+      "capability_tags": [
+        "native_reaction_qualification.lunar_electro",
+        "native_reaction_qualification.lunar_bloom",
+        "native_reaction_qualification.lunar_crystallize"
+      ],
+      "evidence": {
+        "proud_skill_group_id": 12523,
+        "proud_skill_id": 1252301,
+        "desc_text_map_hash": "79900803"
+      },
+      "runtime_profile_id": "native.special-reactions.v1",
+      "runtime_support_status": "supported",
+      "entry_fingerprint": "349fc1d2c2d57951b3ca72e874459014b1c6898ad85e421785b7954cb0b9ee9b"
+    },
+    {
+      "character_id": 10000126,
+      "required_skill_depot_id": 12601,
+      "form_selection_required": false,
+      "display_name": "兹白",
+      "capability_tags": [
+        "native_reaction_qualification.lunar_crystallize"
+      ],
+      "evidence": {
+        "proud_skill_group_id": 12623,
+        "proud_skill_id": 1262301,
+        "desc_text_map_hash": "2330050851"
+      },
+      "runtime_profile_id": "native.special-reactions.v1",
+      "runtime_support_status": "supported",
+      "entry_fingerprint": "e589041c3e524f8baf11bfd998dc9e50792940b135caaa0690c5d17685590560"
+    },
+    {
+      "character_id": 10000130,
+      "required_skill_depot_id": 13001,
+      "form_selection_required": false,
+      "display_name": "莉奈娅",
+      "capability_tags": [
+        "native_reaction_qualification.lunar_crystallize"
+      ],
+      "evidence": {
+        "proud_skill_group_id": 13023,
+        "proud_skill_id": 1302301,
+        "desc_text_map_hash": "954301531"
+      },
+      "runtime_profile_id": "native.special-reactions.v1",
+      "runtime_support_status": "supported",
+      "entry_fingerprint": "e1437232a5392a693513b644aab0a6533a4070735c309cdea7698caa5d865ef4"
+    },
+    {
+      "character_id": 10000133,
+      "required_skill_depot_id": 13301,
+      "form_selection_required": false,
+      "display_name": "桑多涅",
+      "capability_tags": [
+        "native_reaction_qualification.stellar_superconduct",
+        "native_reaction_qualification.stellar_swirl"
+      ],
+      "evidence": {
+        "proud_skill_group_id": 13323,
+        "proud_skill_id": 1332301,
+        "desc_text_map_hash": "2152805699"
+      },
+      "runtime_profile_id": "native.special-reactions.v1",
+      "runtime_support_status": "supported",
+      "entry_fingerprint": "d700fc6c06f4b6c3a4fe38860e0238bb25ecd6a0ad3dd369b7fb8d3d2261df94"
+    },
+    {
+      "character_id": 10000136,
+      "required_skill_depot_id": 13601,
+      "form_selection_required": false,
+      "display_name": "米提亚",
+      "capability_tags": [
+        "native_reaction_qualification.stellar_superconduct"
+      ],
+      "runtime_profile_id": "stellar_conduct.gradient_beacon_v1",
+      "runtime_support_status": "supported",
+      "evidence": {
+        "proud_skill_group_id": 13623,
+        "proud_skill_id": 1362301,
+        "desc_text_map_hash": "1156632939"
+      },
+      "entry_fingerprint": "dc443246b1c2c91187b46f9ba6462def8b9f3031dec5c04d037954506d405275"
+    },
+    {
+      "character_id": 10000143,
+      "required_skill_depot_id": 14301,
+      "form_selection_required": false,
+      "display_name": "薇斯纳",
+      "capability_tags": [
+        "native_reaction_qualification.stellar_swirl"
+      ],
+      "runtime_profile_id": "native.special-reactions.v1",
+      "runtime_support_status": "supported",
+      "evidence": {
+        "proud_skill_group_id": 14323,
+        "proud_skill_id": 1432301,
+        "desc_text_map_hash": "2745170027"
+      },
+      "entry_fingerprint": "07aaa02a70543218cbd5aad7f0c1bb4f0093e6ea6c060a2917417edabe43344f"
+    },
+    {
+      "character_id": 10000147,
+      "required_skill_depot_id": 14701,
+      "form_selection_required": false,
+      "display_name": "达妮卡",
+      "capability_tags": [
+        "native_reaction_qualification.stellar_superconduct"
+      ],
+      "evidence": {
+        "proud_skill_group_id": 14723,
+        "proud_skill_id": 1472301,
+        "desc_text_map_hash": "1126283715"
+      },
+      "runtime_profile_id": "native.special-reactions.v1",
+      "runtime_support_status": "supported",
+      "entry_fingerprint": "b9e6b4ed6426a5eab989b5c131c649954fdd31d3b7461014fa0ae83d5b77d634"
+    },
+    {
+      "character_id": 10000149,
+      "required_skill_depot_id": 14901,
+      "form_selection_required": false,
+      "display_name": "安娜丝塔夏",
+      "capability_tags": [
+        "native_reaction_qualification.stellar_superconduct",
+        "native_reaction_qualification.stellar_swirl"
+      ],
+      "evidence": {
+        "proud_skill_group_id": 14923,
+        "proud_skill_id": 1492301,
+        "desc_text_map_hash": "3047748675"
+      },
+      "runtime_profile_id": "native.special-reactions.v1",
+      "runtime_support_status": "supported",
+      "entry_fingerprint": "c201260cefb4a9e68fe59c2e20054caf49e20c0fbed472af364d673042f683f3"
+    },
+    {
+      "character_id": 10000150,
+      "required_skill_depot_id": 15001,
+      "form_selection_required": false,
+      "display_name": "奥黛塔",
+      "capability_tags": [
+        "native_reaction_qualification.stellar_superconduct",
+        "native_reaction_qualification.stellar_swirl"
+      ],
+      "evidence": {
+        "proud_skill_group_id": 15023,
+        "proud_skill_id": 1502301,
+        "desc_text_map_hash": "3264381339"
+      },
+      "runtime_profile_id": "native.special-reactions.v1",
+      "runtime_support_status": "supported",
+      "entry_fingerprint": "92e181c19369355b684471f16a738b0a54b8a80e30758698302256d0bf11fd68"
+    }
+  ]
+}

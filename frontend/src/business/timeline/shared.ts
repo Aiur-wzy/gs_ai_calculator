@@ -13,7 +13,7 @@ export const reactionNames:Record<string,string> = {amplify:"增幅反应", swir
   lunar_electro:"月感电", lunar_bloom:"月绽放", lunar_crystallize:"月结晶"};
 export const elementNames:Record<string,string> = {pyro:"火", hydro:"水", anemo:"风", electro:"雷", dendro:"草", cryo:"冰", geo:"岩", physical:"物理"};
 export const list = (value:unknown): any[] => Array.isArray(value) ? value : [];
-export const isCoverageKind = (kind:unknown) => ["coverage","field_layers","settled_layers"].includes(String(kind));
+export const isCoverageKind = (kind:unknown) => ["coverage","field_layers","settled_layers","resource_inventory","resource_mode"].includes(String(kind));
 export const finite = (value:unknown): value is number => typeof value === "number" && Number.isFinite(value);
 export const copy = <T>(value:T):T => value == null ? value : JSON.parse(JSON.stringify(value));
 export const key = (...parts:any[]) => JSON.stringify(parts);

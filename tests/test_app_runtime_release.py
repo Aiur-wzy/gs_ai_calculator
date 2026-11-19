@@ -189,21 +189,24 @@ def test_archive_guard_checks_app_paths_after_engine_closure(monkeypatch, tmp_pa
 
 
 def _current_predecessor_path():
-    public_input = ROOT / "release-inputs/1.0.1/release-pair-manifest.json"
+    public_input = ROOT / "release-inputs/1.0.2/release-pair-manifest.json"
     if public_input.is_file():
         return public_input
     return ROOT / "docs/publication/public-main" / public_input.relative_to(ROOT)
 
 
-def test_current_identity_reuses_database_and_pins_exact_accepted_1_0_1_predecessor():
+def test_current_pair_advances_both_components_from_the_accepted_1_0_2_predecessor():
     raw = _current_predecessor_path().read_bytes()
     prior = json.loads(raw)
     assert hashlib.sha256(raw).hexdigest() == version.ACCEPTED_PREDECESSOR_PAIR_MANIFEST_SHA256
-    assert prior["pair_sequence"] + 1 == version.RELEASE_PAIR_SEQUENCE
-    assert prior["database"]["database_release_id"] == version.DATABASE_RELEASE_ID == "db-7.2.50-r6"
-    assert version.APP_VERSION == "1.0.2"
-    assert version.APP_RELEASE_ID == "app-1.0.2"
-    assert version.RELEASE_PAIR_ID == "pair-1.0.2-db-7.2.50-r6"
+    assert (prior["pair_sequence"], version.RELEASE_PAIR_SEQUENCE) == version.APP_ONLY_BRIDGE_FROM_TO == (6, 8)
+    assert prior["database"]["database_release_id"] == "db-7.2.50-r6"
+    predecessor_db = json.loads(_current_predecessor_path().with_name("database-release-manifest.json").read_bytes())
+    assert predecessor_db["release_sequence"] + 1 == version.DATABASE_RELEASE_SEQUENCE == 9
+    assert version.DATABASE_RELEASE_ID == "db-7.2.52-r1"
+    assert version.APP_VERSION == "1.0.3"
+    assert version.APP_RELEASE_ID == "app-1.0.3"
+    assert version.RELEASE_PAIR_ID == "pair-1.0.3-db-7.2.52-r1"
     assert version.NATIVE_AGENT_PACKAGE_MANAGER == "pnpm@11.25.0"
     for relative in ("agent-runtime/package.json", "frontend/package.json"):
         assert json.loads((ROOT / relative).read_text(encoding="utf-8"))["packageManager"] == version.NATIVE_AGENT_PACKAGE_MANAGER
@@ -223,8 +226,8 @@ def test_historical_r17_identity_reused_database_and_pinned_accepted_r16_predece
     assert historical_r17["database"] == prior["database"]
 
 
-def test_real_build_predecessor_admission_accepts_1_0_1_for_1_0_2_same_database():
-    directory = ROOT / "tests/fixtures/accepted-r20"
+def test_real_build_predecessor_admission_accepts_1_0_2_for_joint_1_0_3_upgrade():
+    directory = _current_predecessor_path().parents[1] / "1.0.3"
     database = load_database_release_manifest(directory / "database-release-manifest.json")
     # Only a prospective in-memory App artifact contract; no final package
     # manifest or runtime pin is published by this structure test.
@@ -234,14 +237,17 @@ def test_real_build_predecessor_admission_accepts_1_0_1_for_1_0_2_same_database(
         app_artifact_manifest_sha256="a" * 64, released_at="2026-11-14T00:00:00+00:00")
     predecessor = _current_predecessor_path()
     prior = build_dist._load_accepted_predecessor_pair(predecessor,
-        workspace_root=ROOT, build_root=ROOT / "build", dist_root=ROOT / "dist/release-1.0.2",
+        workspace_root=ROOT, build_root=ROOT / "build", dist_root=ROOT / "dist/release-1.0.3",
         pair_manifest=pair, database_manifest=database,
-        expected_sha256=version.ACCEPTED_PREDECESSOR_PAIR_MANIFEST_SHA256, allow_database_upgrade=False)
-    assert prior["pair_sequence"] == 5
-    assert pair["pair_sequence"] == 6
+        expected_sha256=version.ACCEPTED_PREDECESSOR_PAIR_MANIFEST_SHA256, allow_database_upgrade=True,
+        app_only_bridge_from_to=version.APP_ONLY_BRIDGE_FROM_TO)
+    assert prior["pair_sequence"] == 6
+    assert pair["pair_sequence"] == 8
     assert pair["database"]["database_release_id"] == database["database_release_id"]
-    assert prior["database"] == pair["database"]
-    assert database["release_sequence"] == version.DATABASE_RELEASE_SEQUENCE == 8
+    assert prior["database"]["database_release_id"] == "db-7.2.50-r6"
+    assert pair["database"]["database_release_id"] == version.DATABASE_RELEASE_ID
+    assert prior["database"]["release_core_sha256"] != pair["database"]["release_core_sha256"]
+    assert database["release_sequence"] == version.DATABASE_RELEASE_SEQUENCE == 9
 
 
 def test_historical_r17_to_r18_database_upgrade_remains_supported():

@@ -211,7 +211,7 @@ def test_capability_row_cannot_forge_character_tag_or_catalog_snapshot():
     assert {"special_capability_catalog_mismatch", "special_capability_unproven"} <= codes(value)
 
 
-def test_confirmed_character_with_unimplemented_runtime_variant_fails_closed():
+def test_resource_variant_requires_explicit_resource_configuration():
     value = mechanics("stellar_superconduct")
     entry = special_reaction_capability_entry(10000136)
     row = value["special_reaction_party_capabilities"][0]
@@ -222,10 +222,7 @@ def test_confirmed_character_with_unimplemented_runtime_variant_fails_closed():
         runtime_profile_id=entry["runtime_profile_id"],
         catalog_entry_fingerprint=entry["entry_fingerprint"],
     )
-    assert {
-        "special_capability_runtime_profile_pending",
-        "special_capability_unproven",
-    } <= codes(value)
+    assert "special_capability_resource_profile_required" in codes(value)
 
 
 def test_special_reactions_require_multi_aura_transaction_entry():
@@ -336,14 +333,14 @@ def test_reviewed_catalog_is_complete_for_each_native_reaction_and_detached():
     assert load_reviewed_special_reaction_capabilities()["entries"]
 
 
-def test_catalog_preserves_supported_and_pending_character_specific_profiles():
+def test_catalog_preserves_supported_resource_profile_identity():
     sandrone = special_reaction_capability_entry(10000133)
     assert sandrone["capability_tags"] == [
         REQUIRED_CAPABILITY_TAGS["stellar_superconduct"],
         REQUIRED_CAPABILITY_TAGS["stellar_swirl"],
     ]
     mitya = special_reaction_capability_entry(10000136)
-    assert mitya["runtime_support_status"] == "pending"
+    assert mitya["runtime_support_status"] == "supported"
     assert mitya["runtime_profile_id"] == "stellar_conduct.gradient_beacon_v1"
 
 
@@ -363,13 +360,39 @@ def test_app_projection_derives_tags_from_stable_database_character_id():
     assert not codes(value)
 
 
-def test_app_projection_requires_exact_traveler_form_and_skips_pending_variant():
+def test_anastasya_capability_projection_requires_real_identity_and_current_catalog():
+    from genshin_engine.special_reaction_capabilities import verified_capability_tags
+
+    rows = project_special_reaction_party_capabilities({
+        "anastasya": equipment_snapshot(10000149, skill_depot_id=14901),
+        "wrong_form": equipment_snapshot(10000149, skill_depot_id=13301),
+        "ordinary": equipment_snapshot(10000016),
+    })
+    assert [row["character_id"] for row in rows] == ["anastasya"]
+    assert set(verified_capability_tags(rows[0])) == {
+        REQUIRED_CAPABILITY_TAGS["stellar_superconduct"],
+        REQUIRED_CAPABILITY_TAGS["stellar_swirl"],
+    }
+    assert special_reaction_capability_entry(10000149)["evidence"] == {
+        "proud_skill_group_id": 14923,
+        "proud_skill_id": 1492301,
+        "desc_text_map_hash": "3047748675",
+    }
+    forged = copy.deepcopy(rows[0])
+    forged["db_character_id"] = 10000016
+    assert not verified_capability_tags(forged)
+    stale = copy.deepcopy(rows[0])
+    stale["catalog_revision"] -= 1
+    assert not verified_capability_tags(stale)
+
+
+def test_app_projection_requires_exact_traveler_form_and_includes_resource_variant():
     rows = project_special_reaction_party_capabilities({
         "wrong_form": equipment_snapshot(10000005, skill_depot_id=501),
         "cryo_form": equipment_snapshot(10000005, skill_depot_id=505),
-        "pending_variant": equipment_snapshot(10000136),
+        "resource_variant": equipment_snapshot(10000136),
     })
-    assert [row["character_id"] for row in rows] == ["cryo_form"]
+    assert [row["character_id"] for row in rows] == ["cryo_form", "resource_variant"]
 
 
 def test_app_projection_fails_closed_with_auditable_pending_snapshot_reasons():

@@ -24,9 +24,11 @@ STAR_ABILITIES = ("ElementAbility_StarSwirl_Ice", "ElementAbility_StarSwirl_Ice_
 
 _LEGACY_COMMIT = "224708edc8056f27e9ffc4eacabe797d75274636"
 _F11_COMMIT = "f11cf545a7eee32a29999f960ebfba305f896ed3"
+_NOV18_COMMIT = "6044f5aae7dd79fbbe15c5748ef99b654f6132b7"
 _RECIPES = {
     _LEGACY_COMMIT: "reaction_damage_profiles.json",
     _F11_COMMIT: "reaction_damage_f11cf545_profile.json",
+    _NOV18_COMMIT: "reaction_damage_f11cf545_profile.json",
 }
 
 
@@ -37,6 +39,11 @@ def _recipe(element=None, *, commit=_LEGACY_COMMIT):
         raise RuntimeConfigError("当前提交没有已审定的普通扩散资料提取配方", "unsupported_source", 409)
     path = resources.files("genshin_runtime").joinpath("resources", filename)
     recipe = json.loads(path.read_text(encoding="utf8"))
+    if commit == _NOV18_COMMIT and recipe["commit"] == _F11_COMMIT:
+        # ConfigAbility_Element.json is byte-identical in both Git trees.
+        # All whole-node hash checks still apply to the selected database.
+        recipe["evidence_reference"]["identical_source_commit"] = _F11_COMMIT
+        recipe.update(commit=commit, recipe_id="ordinary-swirl-origin-source-6044f5aa-v3")
     if recipe["commit"] != commit:
         raise RuntimeConfigError("普通扩散资料提取配方与精确提交不匹配", "unsupported_source", 409)
     if element == "pyro" and commit == _LEGACY_COMMIT:

@@ -228,6 +228,16 @@ def _direct_stellar_damage_hit(request, *, cycle=0):
             {"layers": layers, "system_factor": factor,
              "settled_snapshot": copy.deepcopy(snapshot)},
         )
+    debit = request.get("resource_consumption")
+    multiplier = request["multiplier"]
+    if debit:
+        from genshin_engine.timed_resource_window import resource_quantity
+        if not resource_quantity(debit.get("actual_amount")) or debit["actual_amount"] <= 0 or debit.get("mode") not in {"require", "scale_multiplier"}:
+            raise ValueError("星烁直伤资源消费证据无效")
+        if debit["mode"] == "scale_multiplier":
+            multiplier *= debit["actual_amount"]
+    if request.get('resource_trigger',{}).get('quantity_weight') is not None:
+        multiplier *= request['resource_trigger']['quantity_weight']
     component = request["component"]
     label = "星超导" if reaction_type == "stellar_superconduct" else "星扩散"
     return {
@@ -240,7 +250,7 @@ def _direct_stellar_damage_hit(request, *, cycle=0):
                else "使用能力自身星扩散倍率，不读取自然风旋层级。")
         ),
         "damage_type_ids": ["damage.reaction"], "damage_system": "stellar",
-        "element": request["element"], "multiplier": request["multiplier"],
+        "element": request["element"], "multiplier": multiplier,
         "scaling_stat": request["scaling_stat"], "reaction_base": False,
         "reaction": ({"type": reaction_type, "layers": layers} if layers is not None else {"type": reaction_type}),
         "count": request["count"],
@@ -251,6 +261,8 @@ def _direct_stellar_damage_hit(request, *, cycle=0):
                 "target_id": request.get("target_id"), "area_id": request.get("area_id"),
                 "action_id": request.get("action_id"),
                 "actor_sample_policy": request.get("actor_sample_policy"), "cycle": cycle,
+                **({"resource_consumption": copy.deepcopy(debit)} if debit else {}),
+                **({'resource_trigger': copy.deepcopy(request['resource_trigger'])} if 'resource_trigger' in request else {}),
             },
             "special_reaction": {
                 "request_id": event_id, "reaction_type": reaction_type,

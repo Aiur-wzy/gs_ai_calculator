@@ -60,6 +60,8 @@ def run_rotation(
     context: Any,
     *,
     observer: Any = None,
+    resume: Any = None,
+    max_events: int | None = None,
 ):
     """Run the single authoritative rotation scheduler.
 
@@ -75,6 +77,7 @@ def run_rotation(
         finite_until,
         context,
         observer=observer,
+        **({"resume": resume, "max_events": max_events} if resume is not None or max_events is not None else {}),
     )
 
 

@@ -21,6 +21,7 @@ class MechanicsElementalPorts:
     append_trace: Callable[[dict], None]
     count_event: Callable[..., None]
     dispatch_generated: Callable[[dict, int, dict], bool]
+    observe_resource: Callable[[dict, int, dict], None] | None = None
 
 
 class MechanicsElementalBridge:
@@ -31,7 +32,8 @@ class MechanicsElementalBridge:
         self.cursor = 0
 
     def record_special_event(self, row, cycle):
-        if not isinstance(row, dict) or not str(row.get("type", "")).startswith("special_reaction_"):
+        if not isinstance(row, dict) or not (str(row.get("type", "")).startswith("special_reaction_")
+                                             or row.get("type") == "stellar_resource_receipt"):
             return False
         key = (row.get("type"), row.get("event_id"), row.get("time_tick"), row.get("t"),
                row.get("operation"), row.get("reaction_type"),
@@ -68,6 +70,8 @@ class MechanicsElementalBridge:
             events = events.get("generated_events", [])
         for row in events or []:
             new = self.record_special_event(row, cycle)
+            if new and self.ports.observe_resource is not None:
+                self.ports.observe_resource(row, cycle, parent)
             handled = self.ports.dispatch_generated(row, cycle, parent)
             if not handled and new:
                 self.ports.count_event("special_reaction_event")

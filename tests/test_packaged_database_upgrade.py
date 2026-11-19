@@ -71,6 +71,11 @@ def test_upgrade_loader_uses_real_old_manifest_not_new_labels(artifacts):
         build_dist._load_accepted_predecessor_pair(predecessor.pair_path, **kwargs)
     assert build_dist._load_accepted_predecessor_pair(predecessor.pair_path,
         allow_database_upgrade=True, **kwargs) == pairs[0]
+    kwargs["pair_manifest"] = {**pairs[1], "pair_sequence": 8}
+    with pytest.raises(upgrade.DatabaseReleaseError, match="predecessor_not_immediate"):
+        build_dist._load_accepted_predecessor_pair(predecessor.pair_path, allow_database_upgrade=True, **kwargs)
+    assert build_dist._load_accepted_predecessor_pair(predecessor.pair_path, allow_database_upgrade=True,
+        app_only_bridge_from_to=(6, 8), **kwargs) == pairs[0]
 
 
 @pytest.mark.parametrize("fault,reason", [

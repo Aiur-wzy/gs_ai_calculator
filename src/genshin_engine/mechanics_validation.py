@@ -196,9 +196,44 @@ def validate_mechanics_model(model, *, attribute_author=False, attribute_limits=
                     issues.append(_issue("unsupported", "一期不接受已有 trigger 冻结值的初始活跃实例。", initial["rule_id"]))
         for rule in rules:
             path = f"mechanics_model.rules.{rule['id']}"
+            if rule.get('resource_damage'):
+                from genshin_engine.resource_damage_emission import damage_identity
+                trigger = rule['trigger']
+                config = model.get('special_reaction_model', {}).get('replacements', {}).get('stellar_superconduct', {}).get('mechanics', {}).get('periodic_resource', {})
+                if (trigger.get('event') != 'resource_change' or trigger.get('phase') != 'post'
+                        or rule['timing']['delay'] or rule['owner'] != config.get('owner_id')):
+                    issues.append(_issue('resource_damage_scope', '资源派生伤害须由资源所有者的即时resource_change/post规则触发。', path))
+                seen_damage = set()
+                if len({d['action_id'] for d in rule['resource_damage']}) != 1:
+                    issues.append(_issue('resource_damage_source_scope', '同一资源伤害规则的组件须绑定同一次来源动作；其他动作使用独立规则。', path))
+                for declaration in rule['resource_damage']:
+                    if declaration['id'] in seen_damage:
+                        issues.append(_issue('duplicate_id', '同一规则的资源伤害声明ID不得重复。', path))
+                    seen_damage.add(declaration['id'])
+                    if (declaration['area_id'] != config.get('area_id')
+                            or declaration['ability_profile']['ability_binding']['character_id'] != rule['owner']):
+                        issues.append(_issue('resource_damage_owner', '资源伤害须与实际资源的角色、区域一致。', path))
+                    for manual in model.get('special_reaction_events', ()):
+                        if (manual['kind'] == 'direct_stellar_damage'
+                                and damage_identity(manual) == damage_identity(declaration)):
+                            issues.append(_issue('resource_damage_duplicate_owner', '同动作组件已由资源规则产生伤害，不能再手工预填；不同组件应使用不同身份。', path,
+                                                 event_id=manual['id']))
             selectors = [*([rule["trigger"]] if "event" in rule["trigger"] else []), *([rule["quota"]["consume"]] if rule.get("quota") else []),
                          *[e["filter"] for e in rule["effects"] if "filter" in e]]
             for selector in selectors:
+                resource_fields = set(selector) & {'resource_operations','resource_every','resource_modes'}
+                if selector['event']=='resource_change':
+                    config=model.get('special_reaction_model',{}).get('replacements',{}).get('stellar_superconduct',{})
+                    if (selector is not rule['trigger'] or selector['phase']!='post' or not selector.get('resource_operations')
+                            or not config.get('enabled') or not config.get('mechanics',{}).get('periodic_resource')):
+                        issues.append(_issue('resource_change_scope','资源变化仅支持已配置定时资源的规则post触发，并明确resource_operations。',path))
+                    if 'resource_every' in selector:
+                        counter=selector['resource_every']['counter']
+                        eligible={'consumed','overflow_consumed'} if counter=='consumed' else {counter}
+                        if not set(selector['resource_operations'])<=eligible:
+                            issues.append(_issue('resource_change_counter_scope','累计阈值只能监听真正增加该计数的操作，不能重复领取不变的计数。',path))
+                elif resource_fields:
+                    issues.append(_issue('unused_field','resource_operations/resource_every/resource_modes只能用于resource_change。',path))
                 if "action_admission" in selector and (selector is not rule["trigger"]
                         or selector.get("event") != "action_start" or not selector.get("action_ids")):
                     issues.append(_issue("action_admission_scope",
@@ -342,8 +377,8 @@ def validate_mechanics_model(model, *, attribute_author=False, attribute_limits=
             ).get("enabled"):
                 issues.append(_issue("special_switch_disabled", "草原核转化与吸收需要启用月绽放的草原核运行时。", event["id"]))
         for event in model["condition_events"]:
-            if ("value" in event) == ("dew_consumption" in event):
-                issues.append(_issue("condition_value_source", "条件须提供 value 或引用实际扣露结果，二者选一。", event["id"]))
+            if sum(k in event for k in ("value", "dew_consumption", "stellar_resource")) != 1:
+                issues.append(_issue("condition_value_source", "条件须在value、实际扣露结果、实际星超导资源回执中选择且仅选择一种。", event["id"]))
             try:
                 _tick(event["t"])
             except ValueError as exc:
@@ -392,6 +427,22 @@ _STELLAR_SWIRL_DAMAGE_COMPONENTS = frozenset({
 def _selector(selector, event):
     if selector.get("event") != event["event"]:
         return False
+    if 'resource_operations' in selector and event.get('resource_operation') not in selector['resource_operations']:
+        return False
+    if 'resource_modes' in selector and event.get('resource_mode') not in selector['resource_modes']:
+        return False
+    if 'resource_every' in selector:
+        threshold=selector['resource_every']
+        value=event.get('resource_counters',{}).get(threshold['counter'])
+        if event.get('count_mode') == 'expected':
+            from genshin_engine.particle_quantities import quantity
+            from genshin_engine.timed_resource_window import resource_quantity
+            if (not resource_quantity(value) or value <= 0
+                    or quantity(value)//threshold['amount'] <=
+                    (quantity(value)-quantity(event.get('resource_weight',1)))//threshold['amount']):
+                return False
+        elif type(value) is not int or value<=0 or value%threshold['amount']:
+            return False
     if 'event_refs' in selector:
         from genshin_engine.runtime_event_match import reference_matches
         if not any(reference_matches(ref, event) for ref in selector['event_refs']):

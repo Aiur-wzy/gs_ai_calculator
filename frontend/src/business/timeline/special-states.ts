@@ -14,6 +14,21 @@ export function projectSpecialStates(context:TimelineContext) {
   }
   const names:Record<string,string>={field_accumulator:"领域累计",settled_damage_bonus:"结算增益"};
   for(const state of list(receipt.states)){
+    if(["resource_inventory","resource_mode"].includes(state.kind)){
+      if(state.status!=="active"||state.knowledge!=="known"||!state.owner
+        ||!finite(state.start)||!finite(state.end)||state.end<=state.start)continue;
+      const inventory=state.kind==="resource_inventory";
+      const modes:Record<string,string>={overflow_consume:"满额消耗模式",extended_generation:"延长生成模式"};
+      if(inventory?(!Number.isInteger(state.count)||state.count<0):!modes[state.mode])continue;
+      const name=inventory?"资源库存":"资源模式";
+      put("effects",{id:key("special-state",state.id),kind:inventory?"resource_inventory":"resource_mode",
+        character:state.owner,...source(state.owner,state.kind,state.area_id,`星超导 · ${name}`),
+        label:inventory?`库存 ${state.count}`:modes[state.mode],start:state.start,end:state.end,
+        detail:{...copy(state),special_state_contract:receipt.contract,source_name:"星超导定时资源",
+          input_order:state.start_boundary?.trace_index,
+          interpretation:"来自实际资源记录；库存不等于已消费数量，也不代表伤害或Buff已生效。"}});
+      continue;
+    }
     if(!names[state.kind]||state.status!=="active"||state.knowledge!=="known"
       ||!Number.isInteger(state.layers)||!finite(state.start)||!finite(state.end)||state.end<=state.start)continue;
     put("effects",{id:key("special-state",state.id),kind:state.kind==="field_accumulator"?"field_layers":"settled_layers",

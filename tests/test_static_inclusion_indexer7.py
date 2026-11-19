@@ -64,8 +64,9 @@ def test_registered_v2_expected_hash_and_capabilities_are_isolated():
     assert fingerprint(PROFILE_V2) == PROFILE_V2_FINGERPRINT == "e07844a863e6eea9a973e9213811446b0337f22bf5ed0800f6e1b683acbf7d49"
     caps = static_inclusion_profile_capabilities()
     profiles = {row["profile"]["id"]: row["profile"] for row in caps["supported_profiles"]}
-    assert len(caps["supported_profiles"]) == len(profiles) == 4
+    assert len(caps["supported_profiles"]) == len(profiles) == 5
     assert set(profiles) == {"equipment-static-included-v1", "equipment-static-included-v2",
-                             "equipment-static-included-v3", "equipment-static-included-v4"}
+                             "equipment-static-included-v3", "equipment-static-included-v4",
+                             "equipment-static-included-v5"}
     profiles["equipment-static-included-v2"]["snapshot_scope"]["snapshot_id"] = "f" * 64
     assert fingerprint(PROFILE_V2) == PROFILE_V2_FINGERPRINT

@@ -1,0 +1,612 @@
+{
+  "contract": "special-capability-registration-review-v1",
+  "date": "2026-11-18",
+  "source_upstream_commit": "f11cf545a7eee32a29999f960ebfba305f896ed3",
+  "source_target_version": "CNCBWin7.2.50",
+  "database_release_id": "db-7.2.50-r6",
+  "source_files": {
+    "ExcelBinOutput/AvatarExcelConfigData.json": "faa39e3da524e6409aed5110b6ad2a00bd2755bc93179a823eb4a4ccdc7d55f2",
+    "ExcelBinOutput/AvatarSkillDepotExcelConfigData.json": "5a94f1053037b764eaef1ed51fcf30d54db4484435d2e0d719f6730bce9041ab",
+    "ExcelBinOutput/ProudSkillExcelConfigData.json": "f9e445a640b46142dffe9d9e4bca5e36ec20f9cadda0825c9e0439cadce820ed",
+    "TextMap/TextMap_MediumEN.json": "f9e628426fdba662414a99ac1596570d29e015001c4b5e36402037ba200b969b"
+  },
+  "previous_catalog_revision": 3,
+  "catalog_revision": 4,
+  "catalog_content_hash": "6c0e7a530bd1564072196a12ed8a262f6540ab86a080cd24304386a52f49be3a",
+  "entry": {
+    "character_id": 10000147,
+    "required_skill_depot_id": 14701,
+    "form_selection_required": false,
+    "display_name": "达妮卡",
+    "capability_tags": [
+      "native_reaction_qualification.stellar_superconduct"
+    ],
+    "evidence": {
+      "proud_skill_group_id": 14723,
+      "proud_skill_id": 1472301,
+      "desc_text_map_hash": "1126283715"
+    },
+    "runtime_profile_id": "native.special-reactions.v1",
+    "runtime_support_status": "supported",
+    "entry_fingerprint": "b9e6b4ed6426a5eab989b5c131c649954fdd31d3b7461014fa0ae83d5b77d634"
+  },
+  "raw_records": {
+    "AvatarExcelConfigData": {
+      "secondPropPriority": "FIGHT_PROP_ATTACK_PERCENT",
+      "avatarIdentityType": "AVATAR_IDENTITY_NORMAL",
+      "controllerPathRemoteHash": "7568211712604672314",
+      "skillDepotId": 14701,
+      "prefabPathRemoteHash": "13482719668278554834",
+      "nameTextMapHash": 2044438002,
+      "criticalHurt": 0.5,
+      "avatarPromoteRewardIdList": [
+        901261,
+        901263,
+        901265
+      ],
+      "staminaRecoverSpeed": 25,
+      "controllerPathHash": "7767736753920470336",
+      "manekinMotionConfig": 103,
+      "deformationMeshPathHash": "2132204517517738195",
+      "critical": 0.05000000074505806,
+      "prefabPathHash": "17550224847237220512",
+      "firstPropPriority": "FIGHT_PROP_CHARGE_EFFICIENCY",
+      "tags": [
+        "None"
+      ],
+      "initialWeapon": 12101,
+      "chargeEfficiency": 1,
+      "animatorConfigPathHash": "7551165543149436659",
+      "HJMAGDKJJCH": "4676420852335003196",
+      "useType": "AVATAR_FORMAL",
+      "prefabPathRagdollHash": "14972364577955735261",
+      "attackBase": 26.254199981689453,
+      "gachaCardNameHash": "17393247860362215799",
+      "coopPicNameHash": "9025809775673272078",
+      "iconName": "UI_AvatarIcon_Danica",
+      "descTextMapHash": 3781395705,
+      "avatarPromoteId": 147,
+      "IKLCCDEJBOG": "9807664726060690121",
+      "id": 10000147,
+      "sideIconName": "UI_AvatarIcon_Side_Danica",
+      "propGrowCurves": [
+        {
+          "growCurve": "GROW_CURVE_HP_S5",
+          "type": "FIGHT_PROP_BASE_HP"
+        },
+        {
+          "growCurve": "GROW_CURVE_ATTACK_S5",
+          "type": "FIGHT_PROP_BASE_ATTACK"
+        },
+        {
+          "growCurve": "GROW_CURVE_HP_S5",
+          "type": "FIGHT_PROP_BASE_DEFENSE"
+        }
+      ],
+      "combatConfigHash": "15790101987800185906",
+      "JFMFMKILPFK": 3781395705,
+      "defenseBase": 60.42829895019531,
+      "gachaImageNameHash": "14349029711541652509",
+      "manekinJsonConfigHash": "6117752574095513960",
+      "hpBase": 1015.2858276367188,
+      "scriptDataPathHash": "3744219756526631032",
+      "LJHBLHEHAJH": "976462921372198729",
+      "avatarPromoteRewardLevelList": [
+        1,
+        3,
+        5
+      ],
+      "imageName": "AvatarImage_Forward_Danica",
+      "qualityType": "QUALITY_ORANGE",
+      "weaponType": "WEAPON_CLAYMORE",
+      "manekinPathHash": "11110031147022659287",
+      "bodyType": "BODY_LADY",
+      "featureTagGroupID": 10000147,
+      "ONDDHIPPDIH": 1014701,
+      "thirdPropPriority": "FIGHT_PROP_CRITICAL_HURT"
+    },
+    "AvatarSkillDepotExcelConfigData": {
+      "specialProudSkillOpens": [
+        {},
+        {}
+      ],
+      "energySkill": 11475,
+      "extraAbilities": [
+        "",
+        "",
+        ""
+      ],
+      "talents": [
+        1471,
+        1472,
+        1473,
+        1474,
+        1475,
+        1476
+      ],
+      "inherentProudSkillOpens": [
+        {
+          "needAvatarPromoteLevel": 1,
+          "proudSkillGroupId": 14721
+        },
+        {
+          "needAvatarPromoteLevel": 4,
+          "proudSkillGroupId": 14722
+        },
+        {
+          "proudSkillGroupId": 14723
+        },
+        {},
+        {
+          "proudSkillGroupId": 14725
+        }
+      ],
+      "skills": [
+        11471,
+        11472,
+        0,
+        0
+      ],
+      "subSkills": [
+        11473,
+        11474,
+        5147010,
+        11476
+      ],
+      "id": 14701,
+      "talentStarName": "Talent_Danica"
+    },
+    "ProudSkillExcelConfigData": {
+      "nameTextMapHash": 2219332669,
+      "proudSkillType": 2,
+      "openConfig": "Danica_PermanentSkill_3",
+      "additionalDescTextMapHash": 721096772,
+      "lifeEffectParams": [
+        "",
+        "",
+        "",
+        "",
+        ""
+      ],
+      "proudSkillId": 1472301,
+      "addProps": [
+        {},
+        {}
+      ],
+      "proudSkillGroupId": 14723,
+      "descTextMapHash": 1126283715,
+      "paramDescList": [
+        1388263830,
+        4006123878,
+        3728091151,
+        2125850031,
+        3309184366,
+        2677176722,
+        3861737567,
+        4290203069,
+        1562407164,
+        3429419287,
+        165119124,
+        1390406131,
+        4173977775,
+        2006926347,
+        606309718,
+        3044416981,
+        57029001,
+        3426095355,
+        3143909639,
+        99554661
+      ],
+      "costItems": [
+        {},
+        {},
+        {},
+        {}
+      ],
+      "uniqueDescTextMapHash": 2854852004,
+      "paramList": [
+        0.007000000216066837,
+        0.14000000059604645,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "unlockDescTextMapHash": 1422295274,
+      "filterConds": [
+        "TALENT_FILTER_NONE",
+        "TALENT_FILTER_NONE"
+      ],
+      "level": 1,
+      "icon": "UI_Talent_S_Danica_07"
+    }
+  },
+  "database_passive": {
+    "id": 8571,
+    "target_type": "character",
+    "target_id": 10000147,
+    "info_type": "inherent_skill",
+    "content": "[达妮卡] 固有天赋「test星之天赋」（参数组 14723）\n描述：test队伍中的角色触发超导反应时，将转为触发星超导反应，且基于达妮卡的攻击力，提升队伍中角色造成的星超导反应的基础伤害：每点攻击力都将提升0.7%星超导反应的基础伤害，至多通过这种方式提升14%伤害。\\n此外，处于{LINK#N11330003}极星辉域{/LINK}中时，达妮卡将会进入辉映·星超导状态。\n  Lv1: 0.007, 0.14, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0",
+    "version_line": "release",
+    "source_id": 14723,
+    "proud_skill_group_id": 14723,
+    "name": "test星之天赋",
+    "desc_template": "test队伍中的角色触发超导反应时，将转为触发星超导反应，且基于达妮卡的攻击力，提升队伍中角色造成的星超导反应的基础伤害：每点攻击力都将提升0.7%星超导反应的基础伤害，至多通过这种方式提升14%伤害。\\n此外，处于{LINK#N11330003}极星辉域{/LINK}中时，达妮卡将会进入辉映·星超导状态。",
+    "desc_source": {
+      "table": "ProudSkillExcelConfigData",
+      "record_id": 1472301,
+      "text_map_hash": "1126283715",
+      "language": "CHS",
+      "upstream_commit": "f11cf545a7eee32a29999f960ebfba305f896ed3"
+    },
+    "desc_status": "present",
+    "description_variants": [
+      {
+        "level": 1,
+        "desc_template": "test队伍中的角色触发超导反应时，将转为触发星超导反应，且基于达妮卡的攻击力，提升队伍中角色造成的星超导反应的基础伤害：每点攻击力都将提升0.7%星超导反应的基础伤害，至多通过这种方式提升14%伤害。\\n此外，处于{LINK#N11330003}极星辉域{/LINK}中时，达妮卡将会进入辉映·星超导状态。",
+        "desc_source": {
+          "table": "ProudSkillExcelConfigData",
+          "record_id": 1472301,
+          "text_map_hash": "1126283715",
+          "language": "CHS",
+          "upstream_commit": "f11cf545a7eee32a29999f960ebfba305f896ed3"
+        },
+        "desc_status": "present"
+      }
+    ],
+    "params": {
+      "1": {
+        "param_list": [
+          0.007000000216066837,
+          0.14000000059604645,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "param_desc": [
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          "",
+          ""
+        ],
+        "add_props": {},
+        "buff_zone": null,
+        "parameter_references": {
+          "status": "ready",
+          "items": [
+            {
+              "text": "",
+              "description_pointer": "/extra_info/6/params/1/param_desc/0",
+              "level": {
+                "table_level": 1,
+                "effective_level_status": "not_requested"
+              },
+              "references": [],
+              "unresolved_tokens": [],
+              "gameplay_interpretation": "agent_required",
+              "execution_authority": "none",
+              "status": "no_parameter_references"
+            },
+            {
+              "text": "",
+              "description_pointer": "/extra_info/6/params/1/param_desc/1",
+              "level": {
+                "table_level": 1,
+                "effective_level_status": "not_requested"
+              },
+              "references": [],
+              "unresolved_tokens": [],
+              "gameplay_interpretation": "agent_required",
+              "execution_authority": "none",
+              "status": "no_parameter_references"
+            },
+            {
+              "text": "",
+              "description_pointer": "/extra_info/6/params/1/param_desc/2",
+              "level": {
+                "table_level": 1,
+                "effective_level_status": "not_requested"
+              },
+              "references": [],
+              "unresolved_tokens": [],
+              "gameplay_interpretation": "agent_required",
+              "execution_authority": "none",
+              "status": "no_parameter_references"
+            },
+            {
+              "text": "",
+              "description_pointer": "/extra_info/6/params/1/param_desc/3",
+              "level": {
+                "table_level": 1,
+                "effective_level_status": "not_requested"
+              },
+              "references": [],
+              "unresolved_tokens": [],
+              "gameplay_interpretation": "agent_required",
+              "execution_authority": "none",
+              "status": "no_parameter_references"
+            },
+            {
+              "text": "",
+              "description_pointer": "/extra_info/6/params/1/param_desc/4",
+              "level": {
+                "table_level": 1,
+                "effective_level_status": "not_requested"
+              },
+              "references": [],
+              "unresolved_tokens": [],
+              "gameplay_interpretation": "agent_required",
+              "execution_authority": "none",
+              "status": "no_parameter_references"
+            },
+            {
+              "text": "",
+              "description_pointer": "/extra_info/6/params/1/param_desc/5",
+              "level": {
+                "table_level": 1,
+                "effective_level_status": "not_requested"
+              },
+              "references": [],
+              "unresolved_tokens": [],
+              "gameplay_interpretation": "agent_required",
+              "execution_authority": "none",
+              "status": "no_parameter_references"
+            },
+            {
+              "text": "",
+              "description_pointer": "/extra_info/6/params/1/param_desc/6",
+              "level": {
+                "table_level": 1,
+                "effective_level_status": "not_requested"
+              },
+              "references": [],
+              "unresolved_tokens": [],
+              "gameplay_interpretation": "agent_required",
+              "execution_authority": "none",
+              "status": "no_parameter_references"
+            },
+            {
+              "text": "",
+              "description_pointer": "/extra_info/6/params/1/param_desc/7",
+              "level": {
+                "table_level": 1,
+                "effective_level_status": "not_requested"
+              },
+              "references": [],
+              "unresolved_tokens": [],
+              "gameplay_interpretation": "agent_required",
+              "execution_authority": "none",
+              "status": "no_parameter_references"
+            },
+            {
+              "text": "",
+              "description_pointer": "/extra_info/6/params/1/param_desc/8",
+              "level": {
+                "table_level": 1,
+                "effective_level_status": "not_requested"
+              },
+              "references": [],
+              "unresolved_tokens": [],
+              "gameplay_interpretation": "agent_required",
+              "execution_authority": "none",
+              "status": "no_parameter_references"
+            },
+            {
+              "text": "",
+              "description_pointer": "/extra_info/6/params/1/param_desc/9",
+              "level": {
+                "table_level": 1,
+                "effective_level_status": "not_requested"
+              },
+              "references": [],
+              "unresolved_tokens": [],
+              "gameplay_interpretation": "agent_required",
+              "execution_authority": "none",
+              "status": "no_parameter_references"
+            },
+            {
+              "text": "",
+              "description_pointer": "/extra_info/6/params/1/param_desc/10",
+              "level": {
+                "table_level": 1,
+                "effective_level_status": "not_requested"
+              },
+              "references": [],
+              "unresolved_tokens": [],
+              "gameplay_interpretation": "agent_required",
+              "execution_authority": "none",
+              "status": "no_parameter_references"
+            },
+            {
+              "text": "",
+              "description_pointer": "/extra_info/6/params/1/param_desc/11",
+              "level": {
+                "table_level": 1,
+                "effective_level_status": "not_requested"
+              },
+              "references": [],
+              "unresolved_tokens": [],
+              "gameplay_interpretation": "agent_required",
+              "execution_authority": "none",
+              "status": "no_parameter_references"
+            },
+            {
+              "text": "",
+              "description_pointer": "/extra_info/6/params/1/param_desc/12",
+              "level": {
+                "table_level": 1,
+                "effective_level_status": "not_requested"
+              },
+              "references": [],
+              "unresolved_tokens": [],
+              "gameplay_interpretation": "agent_required",
+              "execution_authority": "none",
+              "status": "no_parameter_references"
+            },
+            {
+              "text": "",
+              "description_pointer": "/extra_info/6/params/1/param_desc/13",
+              "level": {
+                "table_level": 1,
+                "effective_level_status": "not_requested"
+              },
+              "references": [],
+              "unresolved_tokens": [],
+              "gameplay_interpretation": "agent_required",
+              "execution_authority": "none",
+              "status": "no_parameter_references"
+            },
+            {
+              "text": "",
+              "description_pointer": "/extra_info/6/params/1/param_desc/14",
+              "level": {
+                "table_level": 1,
+                "effective_level_status": "not_requested"
+              },
+              "references": [],
+              "unresolved_tokens": [],
+              "gameplay_interpretation": "agent_required",
+              "execution_authority": "none",
+              "status": "no_parameter_references"
+            },
+            {
+              "text": "",
+              "description_pointer": "/extra_info/6/params/1/param_desc/15",
+              "level": {
+                "table_level": 1,
+                "effective_level_status": "not_requested"
+              },
+              "references": [],
+              "unresolved_tokens": [],
+              "gameplay_interpretation": "agent_required",
+              "execution_authority": "none",
+              "status": "no_parameter_references"
+            },
+            {
+              "text": "",
+              "description_pointer": "/extra_info/6/params/1/param_desc/16",
+              "level": {
+                "table_level": 1,
+                "effective_level_status": "not_requested"
+              },
+              "references": [],
+              "unresolved_tokens": [],
+              "gameplay_interpretation": "agent_required",
+              "execution_authority": "none",
+              "status": "no_parameter_references"
+            },
+            {
+              "text": "",
+              "description_pointer": "/extra_info/6/params/1/param_desc/17",
+              "level": {
+                "table_level": 1,
+                "effective_level_status": "not_requested"
+              },
+              "references": [],
+              "unresolved_tokens": [],
+              "gameplay_interpretation": "agent_required",
+              "execution_authority": "none",
+              "status": "no_parameter_references"
+            },
+            {
+              "text": "",
+              "description_pointer": "/extra_info/6/params/1/param_desc/18",
+              "level": {
+                "table_level": 1,
+                "effective_level_status": "not_requested"
+              },
+              "references": [],
+              "unresolved_tokens": [],
+              "gameplay_interpretation": "agent_required",
+              "execution_authority": "none",
+              "status": "no_parameter_references"
+            },
+            {
+              "text": "",
+              "description_pointer": "/extra_info/6/params/1/param_desc/19",
+              "level": {
+                "table_level": 1,
+                "effective_level_status": "not_requested"
+              },
+              "references": [],
+              "unresolved_tokens": [],
+              "gameplay_interpretation": "agent_required",
+              "execution_authority": "none",
+              "status": "no_parameter_references"
+            }
+          ],
+          "execution_authority": "none",
+          "note": "参数按原文param编号关联，描述行号不是参数序号；数值用途与有效等级仍须核对。"
+        }
+      }
+    }
+  },
+  "scope": "Only Stellar Superconduct qualification; no Stellar Swirl, numeric balance or live database mutation.",
+  "authorization": "User approved filling Danica registration and continuing full calculation, 2026-11-18",
+  "review_fingerprint": "9f11291ff8ed3b6e8bef9bb95b51434ff3025fc6fedede5e768b950aea7a4e45"
+}

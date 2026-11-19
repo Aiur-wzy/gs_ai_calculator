@@ -16,6 +16,24 @@ const fixture=()=>({template:{loop_duration:10,characters:[],hits:[],buffs:[]},c
   result:{hits:[],rotation_check:{event_log:[]},mechanics_trace:[],special_state_timeline:receipt()}});
 
 describe("committed stellar layer intervals",()=>{
+  it("shows actual inventory and mode separately from layer bonuses",()=>{
+    const input:any=fixture();
+    input.result.special_state_timeline.states.push(
+      {id:"resource",kind:"resource_inventory",owner:"a",area_id:"arena",status:"active",knowledge:"known",count:2,start:2,end:4,counters:{created:3,consumed:1}},
+      {id:"mode",kind:"resource_mode",owner:"a",area_id:"arena",status:"active",knowledge:"known",mode:"extended_generation",start:1,end:5});
+    const before=JSON.stringify(input),out=buildTimelineProjection(input);
+    const rows=out.views.effects.events.filter(e=>e.kind.startsWith("resource_"));
+    expect(rows.map(e=>[e.kind,e.label,e.character])).toEqual([
+      ["resource_mode","延长生成模式","a"],["resource_inventory","库存 2","a"]]);
+    expect(JSON.stringify(input)).toBe(before);
+    document.body.innerHTML='<section id="timeline-detail"></section>';
+    const view:any={mode:"effects",characterNames:new Map(),updateDetailSelection:vi.fn()};
+    const ports:any={view,editor:{sel:()=>null},query:(s:string)=>document.querySelector(s),document,events:window,projection:{},services:{}};
+    createTimelineDetail(ports).showDetail(rows.find(e=>e.kind==="resource_inventory"));
+    const text=document.querySelector('#timeline-detail')?.textContent||"";
+    expect(text).toContain("本段库存");expect(text).toContain("累计消费");
+    expect(text).not.toContain("层数用途");
+  });
   it("keeps accumulation and last settlement separate without changing input",()=>{
     const input=fixture(),before=JSON.stringify(input),out=buildTimelineProjection(input);
     expect(out.views.effects.events.map(e=>[e.kind,e.label,e.start,e.end])).toEqual([

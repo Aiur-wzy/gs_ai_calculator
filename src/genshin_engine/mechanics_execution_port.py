@@ -51,6 +51,7 @@ class MechanicsExecutionPort(Protocol):
     trace: Any
     time: Any
     conditions: Any
+    expected_effect_counts: Any
     special_damage_groups: Any
     special_damage_echoes: Any
     ordinary_bloom_damage_windows: Any

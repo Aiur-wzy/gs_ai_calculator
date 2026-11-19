@@ -1633,11 +1633,11 @@ class ElementalWorldRuntime:
             isinstance(event, dict)
             and event.get("type") == "special_reaction_state"
             and event.get("reaction_type") == "stellar_superconduct"
-            and event.get("operation") in {
+            and (event.get("operation") in {
                 "settle_four_second_window",
                 "expire_field",
                 "expire_settlement_buff",
-            }
+            } or event.get("resource_type") == "periodic_resource")
         )
 
     def _validate_stellar_superconduct_field_state(
@@ -2276,6 +2276,15 @@ class ElementalWorldRuntime:
                  "expected_after": expected_stellar_fields_after,
                  "actual_after": copy.deepcopy(
                      self.special_runtime.stellar_field_by_area)},
+            )
+        expected_resource = reference_runtime.party_state.get('stellar_periodic_resource')
+        actual_resource = self.special_runtime.party_state.get('stellar_periodic_resource')
+        if actual_resource != expected_resource:
+            raise ElementalWorldPending(
+                "world_stellar_resource_deadline_invalid",
+                "资源截止事件虽已返回，但库存、生成节奏或累计消费后态与隔离推导不一致。",
+                {"boundary_tick":time_tick,"expected_after":copy.deepcopy(expected_resource),
+                 "actual_after":copy.deepcopy(actual_resource)},
             )
         unexpected_pre_expiries = [
             row for row in due

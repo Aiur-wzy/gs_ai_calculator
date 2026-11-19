@@ -60,8 +60,8 @@ def prepare_rotation_semantics(run: MechanicsExecutionContext, services: Mechani
         run.rotation_context.assumptions.extend(f"{e['id']}：{e['source']}"
             for e in run.request.mechanics_model.get(name, [])
             if e["status"] == "assumed" and (e["kind"].startswith("bloom_core_")
-                or e["kind"] == "lunar_bloom_reserve_grant" or "reserve_pool_ids" in e
-                or "dew_consumption" in e or "bloom_core_absorption" in e))
+                or e["kind"] in {"lunar_bloom_reserve_grant", "stellar_resource_operation"} or "reserve_pool_ids" in e
+                or "dew_consumption" in e or "bloom_core_absorption" in e or "resource_consumption" in e))
     run.rotation_context.assumptions.extend(f"捕获 {c['id']}：{c['source']}" for c in run.captures if c["status"] == "assumed")
     if "elemental_model" in run.request.mechanics_model:
         elemental = run.request.mechanics_model["elemental_model"]

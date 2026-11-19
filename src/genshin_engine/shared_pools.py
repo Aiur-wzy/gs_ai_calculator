@@ -179,6 +179,12 @@ def validate_shared_pools(config, *, character_ids, rule_ids=None, source_parts=
             if not set(selector.get("characters", [])) <= chars:
                 issues.append(_issue("pool_character_reference", "筛选角色不在队伍中", path+".characters"))
             if collection == "operations":
+                if 'random_effect' in row:
+                    from genshin_engine.shared_pool_probability import validate_random_effect
+                    try:
+                        validate_random_effect(row, pool)
+                    except ValueError as exc:
+                        issues.append(_issue('pool_probability_invalid', str(exc), path+'.random_effect'))
                 if row["operation"] == "spend" and row["amount"] == "all_available" and row["spend_policy"] != "up_to_available":
                     issues.append(_issue("pool_spend_policy", "all_available只接受up_to_available", path+".spend_policy"))
                 key = (row["pool_id"], selector["phase"], row["order"])
@@ -510,6 +516,17 @@ class SharedPoolLedger:
                 receipt.update(wasted=max(0, amount-accepted) if effective else 0, qualified=eligible,
                                succeeded=effective, operation=row["operation"])
             receipts.append(receipt)
+        if 'random_effect' in row:
+            from genshin_engine.shared_pool_probability import resolve_operation
+            for receipt in receipts:
+                try:
+                    change = resolve_operation(row, pool, before=receipt['before'], run_id=run_id,
+                        key=receipt['key'], effective=effective, inactive_reason=reason if not effective else None)
+                except ValueError as exc:
+                    raise SharedPoolError('pool_probability_resolution', str(exc),
+                        'shared_pools.operations.'+operation_id+'.random_effect', run_id=run_id, key=receipt['key']) from exc
+                receipt.update(change)
+                receipt['delta'] = receipt['after']-receipt['before']
         successful = any(r["succeeded"] for r in receipts) if row["operation"] == "spend" else eligible
         if reason != "cooldown" and (successful or row["cooldown"]["anchor"] == "attempt"):
             cooldown = t_us + int(Decimal(str(row["cooldown"]["seconds"])) * 1000000)
@@ -526,6 +543,12 @@ class SharedPoolLedger:
         self._operation_seen.add((operation_id, run_id))
         self._operation_benefits.update(benefit_keys)
         return result
+
+    def unused_probability_outcomes(self):
+        observed = {(r.get('operation_id'), r['run_id'], r['key']) for r in self._receipts if r['type']=='operation'}
+        return [{'operation_id': operation['id'], 'run_id': outcome['run_id'], 'key': outcome['key']}
+                for operation in self._operations.values() for outcome in operation.get('random_effect', {}).get('outcomes', ())
+                if (operation['id'], outcome['run_id'], outcome['key']) not in observed]
 
     def try_consume(self, consumer_id, *, event_id, run_id, t_us, actor, eligible):
         """Read/reuse one whole-cost receipt per consumer and actual event run_id."""

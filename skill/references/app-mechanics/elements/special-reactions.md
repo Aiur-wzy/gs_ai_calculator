@@ -48,6 +48,24 @@ App 原生从 `capability_index` 的 `/special_reactions` 取真实资源及指�
 
 ## 贡献者、顺序与完整性
 
+### 定时资源接口（1.0.3）
+
+先查询当前 App 的 `special_reaction_contract/input_contract/stellar_periodic_resources` 和 schema，旧版不一定具备此接口。开启星超导后，可在 `mechanics.periodic_resource` 声明所有者、区域、生成间隔、共同寿命、容量、普通/延长生成窗口和保持节奏的刷新方式。数值及模式切换条件仍由资料证明，不能仅凭字段存在认定某角色全套机制已支持。
+
+`special_reaction_events` 中的 `stellar_resource_operation` 绑定实际来源动作。`grant/consume` 分别获得和消费；`set_mode/end_mode` 管理模式；`observe` 读取库存，或以独立 `claim_id` 领取累计生成/消费的新增计数，`divisor` 用于累计阈值。库存、生成次数、真实消费、到期消失不可混用。普通消费不足会拒绝并回滚。
+
+`trial` 声明 `cost/base_grant/success_grant/success_waives_cost/chance`。不填写`outcome`时默认按期望次数计算，保留小数库存和消费，不枚举、不掷骰。用户需要特定情景时，由Agent询问确认后使用`probability_mode=custom`并提供布尔`outcome`；旧方案已有`outcome`继续沿用指定情景。返还仍记消费，免消耗不记消费；都先检查完整所需库存，不能借未来返还补足本次成本。查看`stellar_resource_receipt.trial`中的计算口径、符合条件次数、期望次数或指定次数及执行记录，不汇报不存在的实战成功概率。
+
+`condition_events.stellar_resource={event_id,amount,measure}` 根据先前真实回执判断。`measure` 默认 `amount`，trial 可分别读 `executed_units/consumed_units/created_units`。例如免消费仍可执行，但不能触发按实际消费累计的收益。`direct_stellar_damage.resource_consumption` 仅绑定真实消费，`scale_multiplier` 将单位倍率乘实际消费量；不把免消费的零扣量当成伤害必为零的游戏规则，须按实际能力另行绑定合法的执行条件。
+
+创建、消费等变化可用普通规则的 `trigger.event=resource_change, phase=post` 监听。必须明确 `resource_operations`；可用 `resource_modes` 限定模式。每一枚实际资源对应一次触发机会，Buff层数与回能沿用规则的持续时间、叠层和共享冷却；回能仍须声明 `resource_ownership`，使用实际触发的 `source_ref`。不要额外手填一组固定时点的同来源回能。
+
+“每消费N个”的规则使用 `resource_every={counter:"consumed",amount:N,scope:"matching"}`，只累计满足该规则其他筛选（例如炉心有效模式）的实际消费。若确实要读取资源账全程累计，使用 `scope:"global"`（默认）。返还产生的新资源不撤销刚发生的消费，免消耗则不增加消费计数。这里描述执行方法，不替角色原文决定累计是否跨模式保留。
+
+资源触发的额外星烁能力伤害使用规则的 `resource_damage` 列表，各项填写 `id/action_id/target_id/area_id/ability_profile`。来源动作必须已经实际执行；同一规则各组件绑定同一次来源动作，并使用 `timing.delay=0`。伤害时刻来自实际资源变化，不能另填同动作组件的手工伤害。倍率、等级、角色资格、领域层数和当时属性仍走既有直伤校验与公式；同一时刻跨过多个阈值会分别记录。结果命中的 `extensions.elemental.resource_trigger` 可追溯对应的资源变化和序号。
+
+结果中的资源库存/模式时间段由执行记录生成，和领域累计/结算层数分开；它们用于核对过程，不自动证明对应Buff或额外伤害已录入。上面的收益都需要在方案中明确声明，数据库原文不自动执行。期望数量经过容量、阈值和冷却的处理属于近似口径，不是完整随机机制模拟。共享池v2的期望次数与指定情景见[资源、多跳与生命周期](../execution/resources-and-lifecycle.md)；完整角色支持仍以当前能力回执为准。
+
 星扩散按游戏规则保存`anemo_trigger`、`cryo_applier`等角色槽provenance，不只有无类别`contributor_ids`就退回全局排序。缺槽/归属保持pending。月感电按元素/owner保存实际残量与最近合格施加；查询真实owner选择与扣量流水，不用当前前台补所有贡献者。
 
 伤害后附着影响后继，不追溯把父伤害标为融化。读取proposal、replacement decision、commit/rollback、候选rank/skip_reason、元素量、状态机事件与实际伤害；普通结晶晶片、扩散及星月反应不得手工重复交付。
@@ -77,3 +95,11 @@ App 原生从 `capability_index` 的 `/special_reactions` 取真实资源及指�
 此首期子集明确不产生新的 GU 消耗、附着、雷云相位变更、递归或前后置触发／资源回调。上述未知须先核实；必要时只能把本分支作为明确排除这些状态反馈的近似诊断，不宣称完整角色天赋已还原。零触发主分支无需建立该字段。有状态反馈不可用时报告具体缺项，不偷偷改自然雷击或以无回调为由跳过正常伤害消费。复核结果中的 `special_damage_echoes`、实际父与独立多人权重，并 fresh 保存回读；不编辑旧结果数值。
 
 无游戏回调不等于没有属性取样阶段：每个真实额外贡献分量的普通属性阶段、出伤投影及后置属性上下文均由引擎建立，Agent不手填私有属性帧。若回执在内部`registration.frame`报告缺字段，应保留输入和失败时点报告软件问题，不能为了通过而在方案中伪造`frame_kind`或私有投影引用。
+
+## 概率次数的默认取整口径（1.0.3）
+
+默认计算符合条件次数×概率。可线性折算的资源数量、回能和伤害次数保留小数；额外动作和Buff等离散收益，默认对累计期望次数向下取整，不要对每次0.34分别取整成0。Agent可以向用户确认其他指定次数或具体安排；引擎不搜索情景、不枚举随机路径。
+
+资源变化直接触发Buff时，共享规则按累计期望触发数取整，记录`expected_discrete_count`的期望数、已应用次数和本次新增次数。原有条件、CD、叠层上限和持续时间继续执行。动作仍需Agent按合法时点写入排轴，引擎不自行生成额外动作。公开结果需说明这是期望次数的确定性近似，不能保证每次实战循环。
+
+定时资源变体在触发反应时仅安排生成窗口，实际资源创建时才建立或刷新领域；不同时生成普通棱晶。能力目录要求该变体时必须声明对应所有者的`periodic_resource`，不能漏填后静默使用普通领域路径。`trial`一次代表一次概率机会：若原文写每消费一枚判定一次，应逐枚提交，不能把多枚消费批次误写成只判定一次。米提亚的已登记能力为星超导；具体天赋与命座参数仍从当前数据库读取并由Agent编译为通用规则，登记不代表已自动填入全部收益。

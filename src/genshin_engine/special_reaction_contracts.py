@@ -94,14 +94,14 @@ _BASE_MECHANICS_KEYS = _PROFILE_META_KEYS
 # Engine extensions are explicit assumptions layered over the unchanged DB
 # base profile. They are not silently registered as reviewed database facts.
 OPTIONAL_MECHANICS_KEYS = {
-    "stellar_superconduct": frozenset(("initial_grant_layers", "settlement_bonus_layers")),
+    "stellar_superconduct": frozenset(("initial_grant_layers", "settlement_bonus_layers", "periodic_resource")),
     "stellar_swirl": frozenset(("initial_vortex_count", "initial_upgrade_cooldown_seconds")),
 }
 
 _MECHANICS_KEYS = {
     "stellar_superconduct": _BASE_MECHANICS_KEYS | frozenset((
         "field_duration_seconds", "settlement_interval_seconds", "refresh_mode",
-        "initial_grant_layers", "settlement_bonus_layers",
+        "initial_grant_layers", "settlement_bonus_layers", "periodic_resource",
     )),
     "stellar_swirl": _BASE_MECHANICS_KEYS | frozenset((
         "upgrade_threshold", "early_detonation_threshold", "detonation_delay_seconds",

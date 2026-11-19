@@ -16,7 +16,7 @@ from typing import Any
 from genshin_engine.special_reaction_contracts import REQUIRED_CAPABILITY_TAGS
 
 SPECIAL_CAPABILITY_CATALOG_ID = "native.special-reaction-capabilities.v1"
-SPECIAL_CAPABILITY_CATALOG_REVISION = 2
+SPECIAL_CAPABILITY_CATALOG_REVISION = 6
 SPECIAL_CAPABILITY_VERSION_LINE = "release"
 # The project exposes the reviewed closed-beta (OSCB/CNCB) snapshot through its existing
 # ``release`` compatibility line.  Keep that public label stable, but preserve
@@ -55,10 +55,16 @@ def _catalog_hash(data: dict[str, Any]) -> str:
     return hashlib.sha256(encoded).hexdigest()
 
 
-@lru_cache(maxsize=1)
-def _load_reviewed_special_reaction_capabilities() -> dict[str, Any]:
+_UPSTREAM_7252 = "6044f5aae7dd79fbbe15c5748ef99b654f6132b7"
+_UPSTREAM_7250 = "f11cf545a7eee32a29999f960ebfba305f896ed3"
+
+
+@lru_cache(maxsize=2)
+def _load_reviewed_special_reaction_capabilities(new_snapshot=False) -> dict[str, Any]:
+    filename = ("special-reaction-capabilities-7.2.52.json" if new_snapshot
+                else "special-reaction-capabilities.json")
     path = resources.files("genshin_db").joinpath(
-        "resources", "mechanics", "special-reaction-capabilities.json")
+        "resources", "mechanics", filename)
     try:
         data = json.loads(path.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError) as exc:
@@ -67,7 +73,8 @@ def _load_reviewed_special_reaction_capabilities() -> dict[str, Any]:
         raise RuntimeError("星月反应角色资格目录字段不完整。")
     if (data.get("schema_version") != 1
             or data.get("collection_id") != SPECIAL_CAPABILITY_CATALOG_ID
-            or data.get("revision") != SPECIAL_CAPABILITY_CATALOG_REVISION
+            or data.get("revision") != (SPECIAL_CAPABILITY_CATALOG_REVISION if new_snapshot else 5)
+            or data.get("source_upstream_commit") != (_UPSTREAM_7252 if new_snapshot else _UPSTREAM_7250)
             or data.get("status") != "reviewed"
             or data.get("version_line") != SPECIAL_CAPABILITY_VERSION_LINE
             or not isinstance(data.get("source_upstream_commit"), str)
@@ -126,17 +133,17 @@ def _load_reviewed_special_reaction_capabilities() -> dict[str, Any]:
     return data
 
 
-def load_reviewed_special_reaction_capabilities() -> dict[str, Any]:
-    return copy.deepcopy(_load_reviewed_special_reaction_capabilities())
+def load_reviewed_special_reaction_capabilities(commit=None) -> dict[str, Any]:
+    return copy.deepcopy(_load_reviewed_special_reaction_capabilities(commit != _UPSTREAM_7250))
 
 
 def special_reaction_capability_catalog() -> dict[str, Any]:
     """Return a detached, validated catalog snapshot."""
-    return copy.deepcopy(load_reviewed_special_reaction_capabilities())
+    return load_reviewed_special_reaction_capabilities()
 
 
-def special_reaction_capability_entry(db_character_id: int) -> dict[str, Any] | None:
-    catalog = load_reviewed_special_reaction_capabilities()
+def special_reaction_capability_entry(db_character_id: int, commit=None) -> dict[str, Any] | None:
+    catalog = load_reviewed_special_reaction_capabilities(commit)
     for row in catalog["entries"]:
         if row["character_id"] == db_character_id:
             return copy.deepcopy(row)
@@ -145,7 +152,8 @@ def special_reaction_capability_entry(db_character_id: int) -> dict[str, Any] | 
 
 def verified_capability_tags(row: dict[str, Any]) -> tuple[str, ...]:
     """Return only tags proven by the exact frozen catalog snapshot."""
-    catalog = load_reviewed_special_reaction_capabilities()
+    commit = row.get("equipment_upstream_commit")
+    catalog = load_reviewed_special_reaction_capabilities(commit)
     if (row.get("status") != "confirmed"
             or row.get("projection_reason_code") != SPECIAL_CAPABILITY_SNAPSHOT_MATCH
             or row.get("catalog_track") != SPECIAL_CAPABILITY_CATALOG_TRACK
@@ -157,7 +165,7 @@ def verified_capability_tags(row: dict[str, Any]) -> tuple[str, ...]:
             or row.get("catalog_content_hash") != catalog["content_hash"]
             or row.get("version_line") != catalog["version_line"]):
         return ()
-    entry = special_reaction_capability_entry(row.get("db_character_id"))
+    entry = special_reaction_capability_entry(row.get("db_character_id"), commit)
     requested = row.get("capability_tags")
     if (entry is None or not isinstance(requested, list)
             or entry["runtime_support_status"] != "supported"
@@ -190,7 +198,12 @@ def project_special_reaction_party_capabilities_detailed(
     Party membership is supplied by the caller's current input, never inferred
     from display names. The compatibility function still returns identical rows.
     """
-    catalog = load_reviewed_special_reaction_capabilities()
+    # Select one authority for the whole party. Mixed equipment stays pending
+    # for any actor whose snapshot differs from the selected catalog.
+    commits = [item["data_version"].get("upstream_commit") for item in equipment_inputs.values()
+               if isinstance(item, dict) and isinstance(item.get("data_version"), dict)]
+    legacy_only = _UPSTREAM_7250 in commits and _UPSTREAM_7252 not in commits
+    catalog = load_reviewed_special_reaction_capabilities(_UPSTREAM_7250 if legacy_only else _UPSTREAM_7252)
     entries = {entry["character_id"]: entry for entry in catalog["entries"]}
     rows: list[dict[str, Any]] = []
     diagnostics: list[dict[str, Any]] = []

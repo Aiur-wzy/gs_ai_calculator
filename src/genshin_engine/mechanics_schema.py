@@ -33,6 +33,7 @@ from genshin_engine.resource_counter_schema import (
 from genshin_engine.resource_counter_view_schema import RESOURCE_COUNTER_VIEW_SCHEMA
 from genshin_engine.resource_reaction_program import REACTION_ELEMENTS, REACTION_TYPES
 from genshin_engine.resource_source_identity import TRIGGER_SOURCE_SCHEMA
+from genshin_engine.resource_damage_emission import RESOURCE_DAMAGE_SCHEMA
 from genshin_engine.resource_threshold_schema import RESOURCE_THRESHOLD_SCHEMA
 from genshin_engine.resource_threshold_trigger_schema import (
     RESOURCE_THRESHOLD_TRIGGER_SCHEMA,
@@ -92,7 +93,12 @@ ACTION_ADMISSION_FILTER = obj({
     "contract": {"const": "action-admission-execution-v1"},
 }, ["contract"])
 FILTER = obj({
-    "event": {"enum": ["action_start", "action_end", "switch", "hit", "condition", "elemental_reaction", "reaction_damage", "health_change"]},
+    "event": {"enum": ["action_start", "action_end", "switch", "hit", "condition", "elemental_reaction", "reaction_damage", "health_change", "resource_change"]},
+    "resource_operations": {**arr({"enum": ["created", "consumed", "overflow_consumed", "expired"]}), "minItems": 1,"uniqueItems":True},
+    "resource_every": obj({"counter":{"enum":["created","consumed","overflow_consumed","expired"]},
+                           "amount":{"type":"integer","minimum":1},
+                           "scope":{"enum":["global","matching"]}}, ["counter","amount"]),
+    "resource_modes": {**arr({"enum":["none","overflow_consume","extended_generation"]}),"minItems":1,"uniqueItems":True},
     "phase": {"enum": ["pre", "post"]},
     "action_ids": arr(STRING), "event_ids": arr(STRING), "characters": arr(STRING),
     "event_refs": arr(RUNTIME_EVENT_REF_V2_SCHEMA),
@@ -161,7 +167,8 @@ RULE = obj({
                      "policy": {"enum": ["refresh", "independent", "replace", "keep", "extend", "add_and_refresh"]}},
                     ["max", "add", "policy"]),
     "quota": QUOTA, "resource_gate": obj({"consumer_id": STRING}, ["consumer_id"]),
-    "effects": arr(EFFECT), "resources": arr(RESOURCE), **EVIDENCE,
+    "effects": arr(EFFECT), "resources": arr(RESOURCE),
+    "resource_damage": {**arr(RESOURCE_DAMAGE_SCHEMA), "minItems": 1}, **EVIDENCE,
 }, ["id", "name_zh", "owner", "source_id", "trigger", "beneficiaries", "timing", "stacking", "effects", "status", "source"])
 HIT_COMMON = {"action_id": STRING, "target_id": STRING, "report": {"type": "boolean"}, "self_snapshot_event": STRING,
               "application": APPLICATION, "contact": CONTACT}
@@ -193,6 +200,10 @@ ELEMENTAL_STATE_EVENT = {"oneOf": [CRYSTALLIZE_STATE_EVENT, BLOOM_CORE_CONVERSIO
 CONDITION_EVENT = obj({
     "id": STRING, "t": NONNEG, "order": INT, "condition": STRING, "repeat": REPEAT,
     "value": {"type": ["boolean", "null"], "x-label": "已知条件结果"},
+    "stellar_resource": {**obj({
+        "event_id": STRING, "amount": {"type": "integer", "minimum": 0},
+        "measure": {"enum": ["amount", "executed_units", "consumed_units", "created_units"]},
+    }, ["event_id", "amount"]), "x-label": "根据实际星超导资源回执判定"},
     "dew_consumption": {**obj({
         "event_id": STRING, "amount": {"type": "integer", "minimum": 1, "maximum": 3},
     }, ["event_id", "amount"]), "x-label": "根据实际扣露判定"},

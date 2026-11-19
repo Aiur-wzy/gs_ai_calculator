@@ -106,8 +106,18 @@ def execute_mechanics_pipeline(request: MechanicsExecutionRequest, services: Mec
     # Basic schema/time admission has always been outside the fault projector.
     if not _run_pass(_BASIC_PASS, run, services, pass_trace):
         return run.output
+    return execute_prepared_passes(run, services, pass_trace=pass_trace)
+
+
+def execute_prepared_passes(run: MechanicsExecutionContext, services: MechanicsExecutionServices,
+                            *, stages=None, pass_trace=None, attach_reports=True) -> dict:
+    """Continue an in-memory execution using the same fault and reporting rules.
+
+    This is an internal scheduler seam, not authority to bypass admission:
+    each selected pass still checks its prerequisites in ``run.ready``.
+    """
     try:
-        for stage in _EXECUTION_PASSES:
+        for stage in (_EXECUTION_PASSES if stages is None else stages):
             if not _run_pass(stage, run, services, pass_trace):
                 return run.output
     except services.damage_reporting_limit as exc:
@@ -168,6 +178,7 @@ def execute_mechanics_pipeline(request: MechanicsExecutionRequest, services: Mec
         run.output["issues"].append(services.issue("mechanics_execution", str(exc), "mechanics_model"))
         run.output["status"] = "invalid"
     # These report attachments also remain outside the preceding try scope.
-    attach_execution_reports(run, services)
+    if attach_reports:
+        attach_execution_reports(run, services)
     return run.output
 

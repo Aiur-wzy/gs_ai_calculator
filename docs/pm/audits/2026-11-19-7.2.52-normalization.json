@@ -1,0 +1,711 @@
+{
+  "fields": {
+    "ADLINEAEFNE": {
+      "canonical": "buffID",
+      "source_path": "BinOutput/Ability/Temp/ActivityAbilities/ConfigAbility_Activity_BossChallenge_V2.json",
+      "pointer": "/0/Default/PGMKHCKJIKM/UNIQUE_BossChallenge_ElementAddHurt_Ice/ADLINEAEFNE",
+      "unchanged_subtree": [
+        "0",
+        "Default"
+      ],
+      "sha256": "c34a561f0224889354a9c2769fa67fc97a9e9bcf29b5d27600d69212a79d5a22"
+    },
+    "AMFPGNAGNGD": {
+      "canonical": "paramSpecial",
+      "source_path": "BinOutput/Talent/AvatarTalents/ConfigTalent_Aino.json",
+      "pointer": "/Aino_Constellation_1/1/AMFPGNAGNGD",
+      "unchanged_subtree": [
+        "Aino_Constellation_1"
+      ],
+      "sha256": "af7ea1271855b33e3d71458e16f512307bd6535748b728e77c13564c5ed8ca46"
+    },
+    "BAPIHHGLOEL": {
+      "canonical": "damagePercentageRatio",
+      "source_path": "BinOutput/Ability/Temp/ActivityAbilities/ConfigAbility_Activity_AcrobaticsBattle.json",
+      "pointer": "/20/Default/PGMKHCKJIKM/UNIQUE_Activity_AcrobaticsBattle_Lv8_LevelBuff_BuffHandler/BGPBLBIFCEG/0/BAPIHHGLOEL",
+      "unchanged_subtree": [
+        "20",
+        "Default"
+      ],
+      "sha256": "e913309e8174572af02ad51ceeb5de02aa0fd4a57cd8eb740b0ab898a4347e65"
+    },
+    "BCDDFEHKKCI": {
+      "canonical": "abilities",
+      "source_path": "BinOutput/Ability/Temp/ActivityAbilities/ConfigAbility_Activity_V6_7_AquariumDiving_Avatar.json",
+      "pointer": "/0/Default/PGMKHCKJIKM/ActivityAbility_Absorb_SwitchSkill_Octopus/BGPBLBIFCEG/2/BCDDFEHKKCI",
+      "unchanged_subtree": [
+        "0",
+        "Default"
+      ],
+      "sha256": "b4547536b7f4e262039a133da3cf6eccd16b795d5ab14a3676a477741731f11b"
+    },
+    "BHCGKKFIPLM": {
+      "canonical": "isLimitedProperties",
+      "source_path": "BinOutput/Ability/Beyond/AvatarAbilities/ConfigAbility_UGCAvatar_Beyd.json",
+      "pointer": "/0/Default/PGMKHCKJIKM/UGC_Beyond_MasterSkillManager/BHCGKKFIPLM",
+      "unchanged_subtree": [
+        "0",
+        "Default"
+      ],
+      "sha256": "d7b68b34f0de67502fed871072ae97f5fe47dad9f411ca65e112de93b0a24f86"
+    },
+    "BLPJALEANEK": {
+      "canonical": "isDynamicAbility",
+      "source_path": "BinOutput/Ability/Beyond/AvatarAbilities/ConfigAbility_UGCAvatar_Beyd.json",
+      "pointer": "/0/Default/BLPJALEANEK",
+      "unchanged_subtree": [
+        "0",
+        "Default"
+      ],
+      "sha256": "d7b68b34f0de67502fed871072ae97f5fe47dad9f411ca65e112de93b0a24f86"
+    },
+    "BOJOEDHDDDE": {
+      "canonical": "canBeHandledOnRecover",
+      "source_path": "BinOutput/Ability/Beyond/AvatarAbilities/ConfigAbility_UGCAvatar_Beyd.json",
+      "pointer": "/0/Default/NDJFACCPAGC/0/BOJOEDHDDDE",
+      "unchanged_subtree": [
+        "0",
+        "Default"
+      ],
+      "sha256": "d7b68b34f0de67502fed871072ae97f5fe47dad9f411ca65e112de93b0a24f86"
+    },
+    "CEBBPEDFKDF": {
+      "canonical": "onTriggerUltimateSkill",
+      "source_path": "BinOutput/Ability/Temp/ActivityAbilities/ConfigAbility_Activity_ActivityTeamChain.json",
+      "pointer": "/6/Default/PGMKHCKJIKM/UNIQUE_Activity_TeamChain_UltGainEnergy_Handler/BGPBLBIFCEG/0/CEBBPEDFKDF",
+      "unchanged_subtree": [
+        "6",
+        "Default"
+      ],
+      "sha256": "bdf1686cdc71ee34aa12e68ba2c163600b1c3dca5e21d42c6821ce8779e6d45d"
+    },
+    "COLANDOBJDG": {
+      "canonical": "isUnique",
+      "source_path": "BinOutput/Ability/Temp/ActivityAbilities/ConfigAbility_Activity_HideAndSeek_V3.json",
+      "pointer": "/5/Default/PGMKHCKJIKM/ActivityAbility_HideSeek_Aim_Handler/BGPBLBIFCEG/0/COLANDOBJDG",
+      "unchanged_subtree": [
+        "5",
+        "Default"
+      ],
+      "sha256": "0b98686696703a32fe19aef9ea9bdbc6648ea3541ca7d8fa38b6e363850d616a"
+    },
+    "DHEEJDCOKNK": {
+      "canonical": "bulletID",
+      "source_path": "BinOutput/Ability/Beyond/AvatarAbilities/ConfigAbility_UGCAvatar_Beyd.json",
+      "pointer": "/1/Default/PGMKHCKJIKM/UGC_Beyond_FirstSkillTest/BGPBLBIFCEG/31/PJKHAELINHJ/DABHLMCMCOJ/0/PJCAFEDAMFK/0/OIAPNCDGMEM/0/DHEEJDCOKNK",
+      "unchanged_subtree": [
+        "1",
+        "Default"
+      ],
+      "sha256": "3ed56f26a9a8c8ee726ab11425004d2b6f0200b29eb54fbd3f5955be155088c2"
+    },
+    "DKCGFJGMIJG": {
+      "canonical": "paramDelta",
+      "source_path": "BinOutput/Talent/AvatarTalents/ConfigTalent_Aino.json",
+      "pointer": "/Aino_Constellation_1/1/DKCGFJGMIJG",
+      "unchanged_subtree": [
+        "Aino_Constellation_1"
+      ],
+      "sha256": "af7ea1271855b33e3d71458e16f512307bd6535748b728e77c13564c5ed8ca46"
+    },
+    "DOIEFMKODKM": {
+      "canonical": "clearSkillIdDelay",
+      "source_path": "BinOutput/Ability/Temp/ActivityAbilities/ConfigAbility_Activity_ActivityTeamChain.json",
+      "pointer": "/6/Default/PGMKHCKJIKM/UNIQUE_Activity_TeamChain_UltGainEnergy_Handler/BGPBLBIFCEG/0/DOIEFMKODKM",
+      "unchanged_subtree": [
+        "6",
+        "Default"
+      ],
+      "sha256": "bdf1686cdc71ee34aa12e68ba2c163600b1c3dca5e21d42c6821ce8779e6d45d"
+    },
+    "EOBJKNPFMKK": {
+      "canonical": "attackTags",
+      "source_path": "BinOutput/Ability/Beyond/GadgetAbilities/ConfigAbility_Beyond.json",
+      "pointer": "/17/Default/PGMKHCKJIKM/BlockSelf/KFBEHHNMCFD/0/LJFDPHDMOBJ/0/EOBJKNPFMKK",
+      "unchanged_subtree": [
+        "17",
+        "Default"
+      ],
+      "sha256": "042e4f983f9d585d5fe3e8a21b4b1e1d5334fbb2d2c71be1ed63ee6bbdc23c57"
+    },
+    "EPNEOIAINHO": {
+      "canonical": "elementDurability",
+      "source_path": "BinOutput/Ability/Beyond/AvatarAbilities/ConfigAbility_UGCAvatar_Beyd.json",
+      "pointer": "/0/Default/PGMKHCKJIKM/UGC_Beyond_MasterSkillManager/EPNEOIAINHO",
+      "unchanged_subtree": [
+        "0",
+        "Default"
+      ],
+      "sha256": "d7b68b34f0de67502fed871072ae97f5fe47dad9f411ca65e112de93b0a24f86"
+    },
+    "FFBDDLKPPFP": {
+      "canonical": "talentParam",
+      "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Aino.json",
+      "pointer": "/7/Default/PGMKHCKJIKM/Aino_ElementalBurst_Hasoon/NDJFACCPAGC/1/MKAKLFHKJHI/0/FFBDDLKPPFP",
+      "unchanged_subtree": [
+        "7",
+        "Default"
+      ],
+      "sha256": "48534c44d74d0271c71b84e19246692e203e78ed695a046fd88c30746ffd20b1"
+    },
+    "GPJONLFBEGF": {
+      "canonical": "duration",
+      "source_path": "BinOutput/Ability/Beyond/AvatarAbilities/ConfigAbility_UGCAvatar_Beyd.json",
+      "pointer": "/1/Default/PGMKHCKJIKM/UGC_TestEffect_Channel/GPJONLFBEGF",
+      "unchanged_subtree": [
+        "1",
+        "Default"
+      ],
+      "sha256": "3ed56f26a9a8c8ee726ab11425004d2b6f0200b29eb54fbd3f5955be155088c2"
+    },
+    "HBNCGKIFKJH": {
+      "canonical": "abilityMixins",
+      "source_path": "BinOutput/Ability/Beyond/AvatarAbilities/ConfigAbility_UGCAvatar_Beyd_Brawl.json",
+      "pointer": "/2/Default/HBNCGKIFKJH",
+      "unchanged_subtree": [
+        "2",
+        "Default"
+      ],
+      "sha256": "4918f9e20c8711b1b77098ab8b5a8c08334cb1f258f93c63be7bc66a80df4a01"
+    },
+    "IFLMIMGJFDC": {
+      "canonical": "target",
+      "source_path": "BinOutput/Ability/Beyond/AvatarAbilities/ConfigAbility_UGCAvatar_Beyd.json",
+      "pointer": "/4/Default/NDJFACCPAGC/0/LJFDPHDMOBJ/0/IFLMIMGJFDC",
+      "unchanged_subtree": [
+        "4",
+        "Default"
+      ],
+      "sha256": "30a9ffba1a1c5218e12af02256ba3329ebb194d2730c264bb86484ccb4a70cc5"
+    },
+    "IMGAIGFCEGP": {
+      "canonical": "logic",
+      "source_path": "BinOutput/Ability/Beyond/GadgetAbilities/ConfigAbility_Beyond.json",
+      "pointer": "/10/Default/ILELPMMIBAM/0/MKAKLFHKJHI/2/IMGAIGFCEGP",
+      "unchanged_subtree": [
+        "10",
+        "Default"
+      ],
+      "sha256": "bde8b55915abb8b7dac267927a5c3b0929991635953b226748c6c35c6fbe7be5"
+    },
+    "INAIBFEPDKB": {
+      "canonical": "entityTypes",
+      "source_path": "BinOutput/Ability/Beyond/AvatarAbilities/ConfigAbility_UGCAvatar_Beyd_Brawl.json",
+      "pointer": "/0/Default/PGMKHCKJIKM/Skill_Track_Ice_Elf/BGPBLBIFCEG/0/PJKHAELINHJ/DABHLMCMCOJ/0/PJCAFEDAMFK/0/OIAPNCDGMEM/0/LJFDPHDMOBJ/0/INAIBFEPDKB",
+      "unchanged_subtree": [
+        "0",
+        "Default"
+      ],
+      "sha256": "d39ac07d97cec8d3b58cf93d9fc6fcd97d040e2559fcec2acad30a3761e8ddc1"
+    },
+    "IPFFHMOBCAO": {
+      "canonical": "reApplyModifierOnStateChange",
+      "source_path": "BinOutput/Ability/Beyond/GadgetAbilities/ConfigAbility_Beyond.json",
+      "pointer": "/15/Default/PGMKHCKJIKM/UGCSpeedUp/IPFFHMOBCAO",
+      "unchanged_subtree": [
+        "15",
+        "Default"
+      ],
+      "sha256": "c9a7badc358ad68cce0208dec02fbd649d844b0c9a8d8a70eb73f9deb670a061"
+    },
+    "JFAFOJFANOI": {
+      "canonical": "actorIceSubHurtDelta",
+      "source_path": "BinOutput/Ability/Beyond/AvatarAbilities/ConfigAbility_UGCAvatar_Beyd.json",
+      "pointer": "/0/Default/NDJFACCPAGC/0/JFAFOJFANOI",
+      "unchanged_subtree": [
+        "0",
+        "Default"
+      ],
+      "sha256": "d7b68b34f0de67502fed871072ae97f5fe47dad9f411ca65e112de93b0a24f86"
+    },
+    "JPHEELFGNDA": {
+      "canonical": "abilitySpecials",
+      "source_path": "BinOutput/Ability/Beyond/GadgetAbilities/ConfigAbility_Beyond.json",
+      "pointer": "/16/Default/JPHEELFGNDA",
+      "unchanged_subtree": [
+        "16",
+        "Default"
+      ],
+      "sha256": "414ed7b1ee447460cc021bd6302ba24b2aad381cb52ab11fb2a8cdca0efbe9cf"
+    },
+    "KAEMDJCLLFE": {
+      "canonical": "modifierNameSteps",
+      "source_path": "BinOutput/Ability/Beyond/AvatarAbilities/ConfigAbility_UGCAvatar_Beyd.json",
+      "pointer": "/3/Default/PGMKHCKJIKM/UGC_Beyond_SkillController/BGPBLBIFCEG/0/KAEMDJCLLFE",
+      "unchanged_subtree": [
+        "3",
+        "Default"
+      ],
+      "sha256": "f34a5c96471bc3b6fa1b8b4357189eb773ddd2c49d1d9f91234ac9ab4acf2161"
+    },
+    "KCKKGGCFCCA": {
+      "canonical": "gadgetID",
+      "source_path": "BinOutput/Ability/Beyond/AvatarAbilities/ConfigAbility_UGCAvatar_Beyd_Brawl.json",
+      "pointer": "/0/Default/PGMKHCKJIKM/Skill_RotateFire/BGPBLBIFCEG/0/PJKHAELINHJ/DABHLMCMCOJ/0/PJCAFEDAMFK/0/OIAPNCDGMEM/0/KCKKGGCFCCA",
+      "unchanged_subtree": [
+        "0",
+        "Default"
+      ],
+      "sha256": "d39ac07d97cec8d3b58cf93d9fc6fcd97d040e2559fcec2acad30a3761e8ddc1"
+    },
+    "LBJEPNLDOJA": {
+      "canonical": "value",
+      "source_path": "BinOutput/Ability/Beyond/AvatarAbilities/ConfigAbility_UGCAvatar_Beyd_Brawl.json",
+      "pointer": "/0/Default/PGMKHCKJIKM/Skill_Track_Ice_Elf/BGPBLBIFCEG/0/PJKHAELINHJ/DABHLMCMCOJ/0/PJCAFEDAMFK/0/OIAPNCDGMEM/0/LJFDPHDMOBJ/0/LBJEPNLDOJA",
+      "unchanged_subtree": [
+        "0",
+        "Default"
+      ],
+      "sha256": "d39ac07d97cec8d3b58cf93d9fc6fcd97d040e2559fcec2acad30a3761e8ddc1"
+    },
+    "LCLAMDKHOFD": {
+      "canonical": "state",
+      "source_path": "BinOutput/Ability/Beyond/GadgetAbilities/ConfigAbility_Beyond.json",
+      "pointer": "/0/Default/PGMKHCKJIKM/CameraPreviewProtectionModifier/LCLAMDKHOFD",
+      "unchanged_subtree": [
+        "0",
+        "Default"
+      ],
+      "sha256": "6c9640ba2e035e897ff0b080f154d4f2f4d57743bdfa186404bf3ea30c43f02f"
+    },
+    "LGHJGALAIPG": {
+      "canonical": "doOffStage",
+      "source_path": "BinOutput/Ability/Beyond/AvatarAbilities/ConfigAbility_UGCAvatar_Beyd.json",
+      "pointer": "/0/Default/NDJFACCPAGC/0/LGHJGALAIPG",
+      "unchanged_subtree": [
+        "0",
+        "Default"
+      ],
+      "sha256": "d7b68b34f0de67502fed871072ae97f5fe47dad9f411ca65e112de93b0a24f86"
+    },
+    "LJFDPHDMOBJ": {
+      "canonical": "predicates",
+      "source_path": "BinOutput/Ability/Beyond/AvatarAbilities/ConfigAbility_UGCAvatar_Beyd.json",
+      "pointer": "/4/Default/NDJFACCPAGC/0/LJFDPHDMOBJ",
+      "unchanged_subtree": [
+        "4",
+        "Default"
+      ],
+      "sha256": "30a9ffba1a1c5218e12af02256ba3329ebb194d2730c264bb86484ccb4a70cc5"
+    },
+    "MAIHBKOBBKB": {
+      "canonical": "configID",
+      "source_path": "BinOutput/Ability/Beyond/MonsterAbilities/ConfigAbility_Monster_Samurai_Ningyo_Beyd.json",
+      "pointer": "/0/Default/BPLKMEEHDMK/3/BMLIEFNEODL/MAIHBKOBBKB",
+      "unchanged_subtree": [
+        "0",
+        "Default"
+      ],
+      "sha256": "aecbeba8382923e500f3c0eb60aca66dd12105ee3087af71a761923fd3dcc39f"
+    },
+    "MMMADNCKFLA": {
+      "canonical": "abilityName",
+      "source_path": "BinOutput/Ability/Beyond/AvatarAbilities/ConfigAbility_UGCAvatar_Beyd.json",
+      "pointer": "/0/Default/MMMADNCKFLA",
+      "unchanged_subtree": [
+        "0",
+        "Default"
+      ],
+      "sha256": "d7b68b34f0de67502fed871072ae97f5fe47dad9f411ca65e112de93b0a24f86"
+    },
+    "MPFGPJJEDAI": {
+      "canonical": "properties",
+      "source_path": "BinOutput/Ability/Beyond/AvatarAbilities/ConfigAbility_UGCAvatar_Beyd_Brawl.json",
+      "pointer": "/0/Default/PGMKHCKJIKM/Dash_Air_LooseWeight/MPFGPJJEDAI",
+      "unchanged_subtree": [
+        "0",
+        "Default"
+      ],
+      "sha256": "d39ac07d97cec8d3b58cf93d9fc6fcd97d040e2559fcec2acad30a3761e8ddc1"
+    },
+    "NELPEKALHIA": {
+      "canonical": "modifierName",
+      "source_path": "BinOutput/Ability/Beyond/AvatarAbilities/ConfigAbility_UGCAvatar_Beyd.json",
+      "pointer": "/0/Default/NDJFACCPAGC/0/NELPEKALHIA",
+      "unchanged_subtree": [
+        "0",
+        "Default"
+      ],
+      "sha256": "d7b68b34f0de67502fed871072ae97f5fe47dad9f411ca65e112de93b0a24f86"
+    },
+    "NMELJIBAKNA": {
+      "canonical": "minus_one",
+      "source_path": "BinOutput/Ability/Temp/ConfigAbility_Scene_Weather.json",
+      "pointer": "/0/Default/PGMKHCKJIKM/WaterAreaWaterModifier/NMELJIBAKNA",
+      "unchanged_subtree": [
+        "0",
+        "Default"
+      ],
+      "sha256": "cf286b3835f9cefac9a069ebc3e480a86251c7165bdf96f2b86aa073287a2bca"
+    },
+    "ONACPNFMBFG": {
+      "canonical": "value",
+      "source_path": "BinOutput/Ability/Beyond/AvatarAbilities/ConfigAbility_UGCAvatar_Beyd.json",
+      "pointer": "/3/Default/NDJFACCPAGC/1/ONACPNFMBFG",
+      "unchanged_subtree": [
+        "3",
+        "Default"
+      ],
+      "sha256": "f34a5c96471bc3b6fa1b8b4357189eb773ddd2c49d1d9f91234ac9ab4acf2161"
+    },
+    "PGMKHCKJIKM": {
+      "canonical": "modifiers",
+      "source_path": "BinOutput/Ability/Beyond/AvatarAbilities/ConfigAbility_UGCAvatar_Beyd.json",
+      "pointer": "/0/Default/PGMKHCKJIKM",
+      "unchanged_subtree": [
+        "0",
+        "Default"
+      ],
+      "sha256": "d7b68b34f0de67502fed871072ae97f5fe47dad9f411ca65e112de93b0a24f86"
+    }
+  },
+  "types": {
+    "AOCNLPBFEBB": {
+      "canonical": "AttachToStateGroupNormalizedTimeMixin",
+      "source_path": "BinOutput/Ability/Temp/ActivityAbilities/ConfigAbility_Activity_CharMaster.json",
+      "pointer": "/4/Default/PGMKHCKJIKM/UNIQUE_CharMaster_Zhongli01_Buff/BGPBLBIFCEG/0/$type",
+      "unchanged_subtree": [
+        "4",
+        "Default"
+      ],
+      "sha256": "47389ed6b9eabee1c5e3bd48234e9ee46e5b063525c5f3577838416544823833"
+    },
+    "BEPAHJAFHNG": {
+      "canonical": "AttachModifierByNeuronMixin",
+      "source_path": "BinOutput/Ability/Temp/AnimalAbilities/ConfigAbility_Animal_Frigatebird_01.json",
+      "pointer": "/12/Default/HBNCGKIFKJH/8/$type",
+      "unchanged_subtree": [
+        "12",
+        "Default"
+      ],
+      "sha256": "a1602aaff8b389e8605c769f7c6bcb28cc273b81b4889efed12b71923818d48b"
+    },
+    "BFJGDPOKPCE": {
+      "canonical": "AttachToGadgetStateMixin",
+      "source_path": "BinOutput/Ability/Beyond/GadgetAbilities/ConfigAbility_Beyond.json",
+      "pointer": "/10/Default/HBNCGKIFKJH/0/$type",
+      "unchanged_subtree": [
+        "10",
+        "Default"
+      ],
+      "sha256": "bde8b55915abb8b7dac267927a5c3b0929991635953b226748c6c35c6fbe7be5"
+    },
+    "CAEBKCLOLHP": {
+      "canonical": "AttachModifier",
+      "source_path": "BinOutput/Ability/Beyond/AvatarAbilities/ConfigAbility_UGCAvatar_Beyd.json",
+      "pointer": "/0/Default/NDJFACCPAGC/0/$type",
+      "unchanged_subtree": [
+        "0",
+        "Default"
+      ],
+      "sha256": "d7b68b34f0de67502fed871072ae97f5fe47dad9f411ca65e112de93b0a24f86"
+    },
+    "CDGOFKHGJCN": {
+      "canonical": "TriggerBullet",
+      "source_path": "BinOutput/Ability/Beyond/AvatarAbilities/ConfigAbility_UGCAvatar_Beyd.json",
+      "pointer": "/1/Default/PGMKHCKJIKM/UGC_Beyond_FirstSkillTest/BGPBLBIFCEG/31/PJKHAELINHJ/DABHLMCMCOJ/0/PJCAFEDAMFK/0/OIAPNCDGMEM/0/$type",
+      "unchanged_subtree": [
+        "1",
+        "Default"
+      ],
+      "sha256": "3ed56f26a9a8c8ee726ab11425004d2b6f0200b29eb54fbd3f5955be155088c2"
+    },
+    "CFECBNOBLJB": {
+      "canonical": "UnlockTalentParam",
+      "source_path": "BinOutput/Talent/AvatarTalents/ConfigTalent_Aino.json",
+      "pointer": "/Aino_Constellation_2/0/$type",
+      "unchanged_subtree": [
+        "Aino_Constellation_2"
+      ],
+      "sha256": "7d505754e14c94f8b89a93d0553d19d37b4ce381c88a5f5d3505add2a0b2dc21"
+    },
+    "CHPBMBCFDDF": {
+      "canonical": "AttachToElementTypeMixin",
+      "source_path": "BinOutput/Ability/Temp/ActivityAbilities/ConfigAbility_Activity_V4_7_MVM.json",
+      "pointer": "/65/Default/HBNCGKIFKJH/0/$type",
+      "unchanged_subtree": [
+        "65",
+        "Default"
+      ],
+      "sha256": "f6e73a100a31f59992af98de0d3bfb61d2d1bc9eb16deca5a8b309e4102f4de2"
+    },
+    "CMCAFGAHHEH": {
+      "canonical": "AttachToAvatarLogicMoveStateMixin",
+      "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Kachina.json",
+      "pointer": "/13/Default/HBNCGKIFKJH/2/$type",
+      "unchanged_subtree": [
+        "13",
+        "Default"
+      ],
+      "sha256": "66339153847578a8a4a47d230e324a426eb0311e1cbb2c447ba4d39c040688d7"
+    },
+    "DIIILKDJCNN": {
+      "canonical": "AttachToNormalizedTimeMixin",
+      "source_path": "BinOutput/Ability/Beyond/AvatarAbilities/ConfigAbility_UGCAvatar_Beyd_Brawl.json",
+      "pointer": "/5/Default/HBNCGKIFKJH/1/$type",
+      "unchanged_subtree": [
+        "5",
+        "Default"
+      ],
+      "sha256": "894794e98c8ecbe18282daefad7c306fd63e55623581fa91955d597078d59300"
+    },
+    "DLJGBFIKOFM": {
+      "canonical": "AddAbility",
+      "source_path": "BinOutput/Talent/AvatarTalents/ConfigTalent_Aino.json",
+      "pointer": "/Aino_Constellation_1/0/$type",
+      "unchanged_subtree": [
+        "Aino_Constellation_1"
+      ],
+      "sha256": "af7ea1271855b33e3d71458e16f512307bd6535748b728e77c13564c5ed8ca46"
+    },
+    "DPBGCDAHOCB": {
+      "canonical": "OnAvatarUseSkillMixin",
+      "source_path": "BinOutput/Ability/Temp/ActivityAbilities/ConfigAbility_Activity_ActivityTeamChain.json",
+      "pointer": "/6/Default/PGMKHCKJIKM/UNIQUE_Activity_TeamChain_UltGainEnergy_Handler/BGPBLBIFCEG/0/$type",
+      "unchanged_subtree": [
+        "6",
+        "Default"
+      ],
+      "sha256": "bdf1686cdc71ee34aa12e68ba2c163600b1c3dca5e21d42c6821ce8779e6d45d"
+    },
+    "EGAFDIOKCIL": {
+      "canonical": "AttachModifierToPredicateMixin",
+      "source_path": "BinOutput/Ability/Temp/ActivityAbilities/ConfigAbility_Activity_AkaFesPotion.json",
+      "pointer": "/5/Default/PGMKHCKJIKM/AkaFesPotion_Stage_2_1_Driver_Avatar/BGPBLBIFCEG/0/$type",
+      "unchanged_subtree": [
+        "5",
+        "Default"
+      ],
+      "sha256": "bdd4196b34b84c2bc3ab358c5fbb6e7efaf7f300c4e2da7b8daffa66697d2c6a"
+    },
+    "FKGNGBAIDKD": {
+      "canonical": "FollowAttachPointEffectMixin",
+      "source_path": "BinOutput/Ability/Temp/ActivityAbilities/ConfigAbility_Activity_HideAndSeek_V5.json",
+      "pointer": "/1/Default/HBNCGKIFKJH/4/$type",
+      "unchanged_subtree": [
+        "1",
+        "Default"
+      ],
+      "sha256": "d08da72a250879a8c8408cacfc9a3fddaaeb09edae9d67856f7959c01d73fda8"
+    },
+    "GGHAMMBFANB": {
+      "canonical": "GenerateElemBall",
+      "source_path": "BinOutput/Ability/Temp/ActivityAbilities/ConfigAbility_Activity_ArenaChallenge.json",
+      "pointer": "/8/Default/PGMKHCKJIKM/UNIQUE_Activity_ArenaChallenge_ElectricReact_GenerateEnergyBall/BGPBLBIFCEG/0/OIAPNCDGMEM/0/$type",
+      "unchanged_subtree": [
+        "8",
+        "Default"
+      ],
+      "sha256": "3dedd08d8f1fc7c1f79ed1335e3fdeb004284bd1f3bd758b78ae97aa398697bb"
+    },
+    "IGCLEPHJNFH": {
+      "canonical": "CurLocalAvatarMixin",
+      "source_path": "BinOutput/Ability/Temp/ActivityAbilities/ConfigAbility_Activity_ChannellerSlab.json",
+      "pointer": "/13/Default/HBNCGKIFKJH/0/$type",
+      "unchanged_subtree": [
+        "13",
+        "Default"
+      ],
+      "sha256": "92711b622a02b697171d8a1832e9eb33c9206f3f4d2690a8dc5f59ca87711133"
+    },
+    "IGPDNKOPMAI": {
+      "canonical": "AttachToPoseIDMixin",
+      "source_path": "BinOutput/Ability/Beyond/MonsterAbilities/ConfigAbility_Animal_Cat_Custom_Beyd.json",
+      "pointer": "/0/Default/HBNCGKIFKJH/0/$type",
+      "unchanged_subtree": [
+        "0",
+        "Default"
+      ],
+      "sha256": "320435357480dfe0319c7158ddd072dd7ecb7ee740e2202c2fa840102beeb3ef"
+    },
+    "ILPENIJBNMK": {
+      "canonical": "AttachModifierToUIMixin",
+      "source_path": "BinOutput/Ability/Temp/GadgetAbilities/ConfigAbility_Quest_V6_2_Dulin.json",
+      "pointer": "/11/Default/PGMKHCKJIKM/UNIQUE_Storybook_UIManager/BGPBLBIFCEG/0/$type",
+      "unchanged_subtree": [
+        "11",
+        "Default"
+      ],
+      "sha256": "abd1702f1ad45609a8e188cd3f48dd0a2d24b2ce97a6b2e7a77b200c470ce2a6"
+    },
+    "IPIPILCCBIH": {
+      "canonical": "AttachToMultiNormalizedTimeMixin",
+      "source_path": "BinOutput/Ability/Beyond/MonsterAbilities/ConfigAbility_Monster_Natsaurus_Hookwalker_Primo_Custom_Beyd.json",
+      "pointer": "/1/Default/HBNCGKIFKJH/0/$type",
+      "unchanged_subtree": [
+        "1",
+        "Default"
+      ],
+      "sha256": "97c3fb8b9ef76f19ea04cf15e9595acb8ad0ccb64e84e57bf7ecd5817b09975d"
+    },
+    "JADIKJHMIPP": {
+      "canonical": "TriggerAbility",
+      "source_path": "BinOutput/Ability/Beyond/MonsterAbilities/ConfigAbility_Monster_Abyss_Beyd.json",
+      "pointer": "/0/Default/PGMKHCKJIKM/Beyd_ForceDefend/BGPBLBIFCEG/0/IJNKCGAGJEI/0/$type",
+      "unchanged_subtree": [
+        "0",
+        "Default"
+      ],
+      "sha256": "6f8f17879f4488d2a4170a8d1b32e1e8bb6288d48353eb63e6a882fe579f6697"
+    },
+    "JJCDHIFIJOO": {
+      "canonical": "AttachToAnimatorStateIDMixin",
+      "source_path": "BinOutput/Ability/Beyond/MonsterAbilities/ConfigAbility_Monster_Natsaurus_Hookwalker_Primo_Custom_Beyd.json",
+      "pointer": "/0/Default/HBNCGKIFKJH/1/$type",
+      "unchanged_subtree": [
+        "0",
+        "Default"
+      ],
+      "sha256": "aad2c7b96d4c460a5d8c38f893ae62982e51958c8d4c0a6347f9eb80913d52f3"
+    },
+    "JNJCHDBMFLO": {
+      "canonical": "WindZoneMixin",
+      "source_path": "BinOutput/Ability/Temp/ActivityAbilities/ConfigAbility_Activity_AcrobaticsBattle.json",
+      "pointer": "/6/Default/PGMKHCKJIKM/SkillObj_Activity_AcrobaticsBattle_Lv1/BGPBLBIFCEG/0/$type",
+      "unchanged_subtree": [
+        "6",
+        "Default"
+      ],
+      "sha256": "2c140ed9d4621d56121ef3ac3867868b92ebff5d01c8516c9f9ed62015364283"
+    },
+    "KGPECPOBGKC": {
+      "canonical": "RemoveUniqueModifier",
+      "source_path": "BinOutput/Ability/Beyond/AvatarAbilities/ConfigAbility_UGCAvatar_Beyd_Brawl.json",
+      "pointer": "/0/Default/PGMKHCKJIKM/UNIQUE_Team_UGC_BlockShield/KFBEHHNMCFD/0/$type",
+      "unchanged_subtree": [
+        "0",
+        "Default"
+      ],
+      "sha256": "d39ac07d97cec8d3b58cf93d9fc6fcd97d040e2559fcec2acad30a3761e8ddc1"
+    },
+    "LEEOMBNNDMA": {
+      "canonical": "ApplyModifier",
+      "source_path": "BinOutput/Ability/Beyond/AvatarAbilities/ConfigAbility_UGCAvatar_Beyd.json",
+      "pointer": "/1/Default/PGMKHCKJIKM/UGC_Beyond_FirstSkillTest/BGPBLBIFCEG/3/PJKHAELINHJ/HENHLJBDCMO/PJCAFEDAMFK/0/OIAPNCDGMEM/0/$type",
+      "unchanged_subtree": [
+        "1",
+        "Default"
+      ],
+      "sha256": "3ed56f26a9a8c8ee726ab11425004d2b6f0200b29eb54fbd3f5955be155088c2"
+    },
+    "LHGIGDJMCPA": {
+      "canonical": "ByTargetPositionToSelfPosition",
+      "source_path": "BinOutput/Ability/Temp/ActivityAbilities/ConfigAbility_Activity_AcrobaticsBattle.json",
+      "pointer": "/5/Default/PGMKHCKJIKM/Activity_AcrobaticsBattle_Lv1_LevelBuff_GrandHandler/BGPBLBIFCEG/0/OIAPNCDGMEM/0/LJFDPHDMOBJ/0/$type",
+      "unchanged_subtree": [
+        "5",
+        "Default"
+      ],
+      "sha256": "5f43fd55da91c91e577d5e35a08809e6c119d32581963cce7ea3d0017675fe1f"
+    },
+    "LHLCIFNELON": {
+      "canonical": "AttachToAbilityStateMixin",
+      "source_path": "BinOutput/Ability/Temp/ActivityAbilities/ConfigAbility_Activity_AcrobaticsBattle.json",
+      "pointer": "/9/Default/PGMKHCKJIKM/UNIQUE_Activity_AcrobaticsBattle_Lv3_LevelBuff_EnemyHandler/BGPBLBIFCEG/0/$type",
+      "unchanged_subtree": [
+        "9",
+        "Default"
+      ],
+      "sha256": "931c02cd67d2a918cc6c0e00393c8dd45c990d3b1c317edc95bb34e8969bc27c"
+    },
+    "MGOFKPAAHHL": {
+      "canonical": "AttachToDayNightMixin",
+      "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Dahlia.json",
+      "pointer": "/18/Default/PGMKHCKJIKM/UNIQUE_Avatar_Dahlia_Talent_RunningInTheSun_Mixin/BGPBLBIFCEG/0/$type",
+      "unchanged_subtree": [
+        "18",
+        "Default"
+      ],
+      "sha256": "5deb4224f0a2ce1b8b334fee12787d0225ab17974d0b9d295069d0032c8dc24c"
+    },
+    "MHGAFPCJEFO": {
+      "canonical": "ByEntityTypes",
+      "source_path": "BinOutput/Ability/Beyond/AvatarAbilities/ConfigAbility_UGCAvatar_Beyd_Brawl.json",
+      "pointer": "/0/Default/PGMKHCKJIKM/Skill_Track_Ice_Elf/BGPBLBIFCEG/0/PJKHAELINHJ/DABHLMCMCOJ/0/PJCAFEDAMFK/0/OIAPNCDGMEM/0/LJFDPHDMOBJ/0/$type",
+      "unchanged_subtree": [
+        "0",
+        "Default"
+      ],
+      "sha256": "d39ac07d97cec8d3b58cf93d9fc6fcd97d040e2559fcec2acad30a3761e8ddc1"
+    },
+    "MKNMKLICAEK": {
+      "canonical": "AvatarSkillReadyMixin",
+      "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Iansan.json",
+      "pointer": "/10/Default/PGMKHCKJIKM/Avatar_Iansan_NyxSwitchState_UITip/BGPBLBIFCEG/0/$type",
+      "unchanged_subtree": [
+        "10",
+        "Default"
+      ],
+      "sha256": "db023ce4188fd2778090ec01dded0038dac575d28abd575c28c44ff4e7d56913"
+    },
+    "NDOBJELKBMA": {
+      "canonical": "RemoveModifier",
+      "source_path": "BinOutput/Ability/Beyond/AvatarAbilities/ConfigAbility_UGCAvatar_Beyd.json",
+      "pointer": "/1/Default/PGMKHCKJIKM/UGC_Beyond_FirstSkillTest/BGPBLBIFCEG/3/PJKHAELINHJ/BJKCBEFLGMH/0/PJCAFEDAMFK/0/OIAPNCDGMEM/0/$type",
+      "unchanged_subtree": [
+        "1",
+        "Default"
+      ],
+      "sha256": "3ed56f26a9a8c8ee726ab11425004d2b6f0200b29eb54fbd3f5955be155088c2"
+    },
+    "NPDLCNHNAKN": {
+      "canonical": "AttachToAIAlertnessMixin",
+      "source_path": "BinOutput/Ability/Beyond/MonsterAbilities/ConfigAbility_Monster_Natsaurus_Flamingo_Primo_Beyd.json",
+      "pointer": "/1/Default/HBNCGKIFKJH/0/$type",
+      "unchanged_subtree": [
+        "1",
+        "Default"
+      ],
+      "sha256": "d90d7deb472094f601e713409a55a6ae2c3698bec8d741f5ed6f7c2b091a575a"
+    },
+    "OAHFONDNPOE": {
+      "canonical": "ModifyAbility",
+      "source_path": "BinOutput/Talent/AvatarTalents/ConfigTalent_Aino.json",
+      "pointer": "/Aino_Constellation_1/1/$type",
+      "unchanged_subtree": [
+        "Aino_Constellation_1"
+      ],
+      "sha256": "af7ea1271855b33e3d71458e16f512307bd6535748b728e77c13564c5ed8ca46"
+    },
+    "OAHMJBHGDNI": {
+      "canonical": "AttachModifierToSelfGlobalValueMixin",
+      "source_path": "BinOutput/Ability/Beyond/GadgetAbilities/ConfigAbility_Beyond.json",
+      "pointer": "/1/Default/PGMKHCKJIKM/AvatarShowStateHandler/BGPBLBIFCEG/0/$type",
+      "unchanged_subtree": [
+        "1",
+        "Default"
+      ],
+      "sha256": "08a7440d075ad3b9749da42f1e8209a207d86c9d65dc4ecf44d35428acd21b40"
+    },
+    "OCNCDFIINMD": {
+      "canonical": "CreateGadget",
+      "source_path": "BinOutput/Ability/Beyond/AvatarAbilities/ConfigAbility_UGCAvatar_Beyd_Brawl.json",
+      "pointer": "/0/Default/PGMKHCKJIKM/Skill_RotateFire/BGPBLBIFCEG/0/PJKHAELINHJ/DABHLMCMCOJ/0/PJCAFEDAMFK/0/OIAPNCDGMEM/0/$type",
+      "unchanged_subtree": [
+        "0",
+        "Default"
+      ],
+      "sha256": "d39ac07d97cec8d3b58cf93d9fc6fcd97d040e2559fcec2acad30a3761e8ddc1"
+    },
+    "OPMGFMGOIOF": {
+      "canonical": "ModifyDamageMixin",
+      "source_path": "BinOutput/Ability/Temp/ActivityAbilities/ConfigAbility_Activity_AcrobaticsBattle.json",
+      "pointer": "/20/Default/PGMKHCKJIKM/UNIQUE_Activity_AcrobaticsBattle_Lv8_LevelBuff_BuffHandler/BGPBLBIFCEG/0/$type",
+      "unchanged_subtree": [
+        "20",
+        "Default"
+      ],
+      "sha256": "e913309e8174572af02ad51ceeb5de02aa0fd4a57cd8eb740b0ab898a4347e65"
+    },
+    "PEHKGKGGMLK": {
+      "canonical": "AttachToStateIDMixin",
+      "source_path": "BinOutput/Ability/Beyond/AvatarAbilities/ConfigAbility_UGCAvatar_Beyd_Brawl.json",
+      "pointer": "/2/Default/HBNCGKIFKJH/1/$type",
+      "unchanged_subtree": [
+        "2",
+        "Default"
+      ],
+      "sha256": "4918f9e20c8711b1b77098ab8b5a8c08334cb1f258f93c63be7bc66a80df4a01"
+    }
+  }
+}

@@ -122,54 +122,57 @@ def _canonical_replace_v1(self, reaction: dict, *, time: int, payload: dict | No
         generated: list[dict] = list(due)
         if reaction_type == "stellar_superconduct":
             area_id = reaction.get("area_id") or (payload or {}).get("area_id") or "battlefield.primary"
-            field = self._stellar_field_state(area_id)
-            duration = _seconds_to_ticks(mechanics["field_duration_seconds"], "field_duration_seconds")
-            interval = _seconds_to_ticks(mechanics["settlement_interval_seconds"], "settlement_interval_seconds")
-            establishing = (reaction.get("atomic_parent_id")
-                            or reaction.get("parent_event_id") or event_id)
-            field_was_active = field["stellar_superconduct_active"]
-            if not field_was_active:
-                field["stellar_superconduct_next_settlement"] = time + interval
-                field["stellar_superconduct_layers"] = 0
-                field["stellar_superconduct_atomic_parents"] = []
-            field["stellar_superconduct_active"] = True
-            field["stellar_superconduct_expires_at"] = time + duration
-            field["stellar_superconduct_physical_res_delta"] = -.4
-            # Only the application that first creates a Polestar Field is
-            # excluded from layer recording.  A later Superconduct while
-            # the field is already active both refreshes the field and is
-            # still an eligible successful Cryo/Electro application.
-            if not field_was_active:
-                field["stellar_superconduct_origin_applications"] = [establishing]
-                if mechanics.get("initial_grant_layers", 0):
-                    initial = mechanics["initial_grant_layers"]
-                    field["stellar_superconduct_settled_layers"] = initial
-                    field["stellar_superconduct_factor"] = stellar_superconduct_factor(initial)
-                    field["stellar_superconduct_ordinary_bonus"] = self._ordinary_bonus(initial)
-                    field["stellar_superconduct_buff_expires_at"] = time + interval
-            generated.append({
-                "type": "special_reaction_state", "event_id": replaced["id"]+":field",
-                "t": time/TICKS, "time_tick": time, "target_id": None,
-                "trigger_target_id": target_id, "area_id": area_id,
-                "reaction_type": reaction_type, "operation": "establish_or_refresh_field",
-                "initial_application_counted": False,
-                "trigger_application_layer_eligibility": (
-                    "later_application" if field_was_active
-                    else "establishing_application_excluded"),
-                "current_layers": field["stellar_superconduct_layers"],
-                "next_settlement_at": field["stellar_superconduct_next_settlement"]/TICKS,
-                "expires_at": field["stellar_superconduct_expires_at"]/TICKS,
-                "physical_res_delta": -.4, "physical_res_shred": .4,
-                "physical_res_effect_scope": "polestar_field_lifetime",
-                "damage_emitted": False, "damage_policy": "direct_stellar_hits_only",
-                "status": "executed",
-            })
-            if not field_was_active and mechanics.get("initial_grant_layers", 0):
-                generated[-1].update(
-                    initial_grant_layers=mechanics["initial_grant_layers"],
-                    initial_grant_factor=field["stellar_superconduct_factor"],
-                    initial_grant_ordinary_bonus=field["stellar_superconduct_ordinary_bonus"],
-                    initial_grant_expires_at=(time+interval)/TICKS)
+            if self._resource_config():
+                generated.extend(self._trigger_periodic_resource(time, area_id))
+            else:
+                field = self._stellar_field_state(area_id)
+                duration = _seconds_to_ticks(mechanics.get("periodic_resource", {}).get("lifetime_seconds", mechanics["field_duration_seconds"]), "field_duration_seconds")
+                interval = _seconds_to_ticks(mechanics["settlement_interval_seconds"], "settlement_interval_seconds")
+                establishing = (reaction.get("atomic_parent_id")
+                                or reaction.get("parent_event_id") or event_id)
+                field_was_active = field["stellar_superconduct_active"]
+                if not field_was_active:
+                    field["stellar_superconduct_next_settlement"] = time + interval
+                    field["stellar_superconduct_layers"] = 0
+                    field["stellar_superconduct_atomic_parents"] = []
+                field["stellar_superconduct_active"] = True
+                field["stellar_superconduct_expires_at"] = time + duration
+                field["stellar_superconduct_physical_res_delta"] = -.4
+                # Only the application that first creates a Polestar Field is
+                # excluded from layer recording.  A later Superconduct while
+                # the field is already active both refreshes the field and is
+                # still an eligible successful Cryo/Electro application.
+                if not field_was_active:
+                    field["stellar_superconduct_origin_applications"] = [establishing]
+                    if mechanics.get("initial_grant_layers", 0):
+                        initial = mechanics["initial_grant_layers"]
+                        field["stellar_superconduct_settled_layers"] = initial
+                        field["stellar_superconduct_factor"] = stellar_superconduct_factor(initial)
+                        field["stellar_superconduct_ordinary_bonus"] = self._ordinary_bonus(initial)
+                        field["stellar_superconduct_buff_expires_at"] = time + interval
+                generated.append({
+                    "type": "special_reaction_state", "event_id": replaced["id"]+":field",
+                    "t": time/TICKS, "time_tick": time, "target_id": None,
+                    "trigger_target_id": target_id, "area_id": area_id,
+                    "reaction_type": reaction_type, "operation": "establish_or_refresh_field",
+                    "initial_application_counted": False,
+                    "trigger_application_layer_eligibility": (
+                        "later_application" if field_was_active
+                        else "establishing_application_excluded"),
+                    "current_layers": field["stellar_superconduct_layers"],
+                    "next_settlement_at": field["stellar_superconduct_next_settlement"]/TICKS,
+                    "expires_at": field["stellar_superconduct_expires_at"]/TICKS,
+                    "physical_res_delta": -.4, "physical_res_shred": .4,
+                    "physical_res_effect_scope": "polestar_field_lifetime",
+                    "damage_emitted": False, "damage_policy": "direct_stellar_hits_only",
+                    "status": "executed",
+                })
+                if not field_was_active and mechanics.get("initial_grant_layers", 0):
+                    generated[-1].update(
+                        initial_grant_layers=mechanics["initial_grant_layers"],
+                        initial_grant_factor=field["stellar_superconduct_factor"],
+                        initial_grant_ordinary_bonus=field["stellar_superconduct_ordinary_bonus"],
+                        initial_grant_expires_at=(time+interval)/TICKS)
         elif reaction_type == "stellar_swirl":
             replaced["role_provenance"] = copy.deepcopy(stellar_swirl_roles)
             area_id = reaction.get("area_id") or (payload or {}).get("area_id") or "battlefield.primary"

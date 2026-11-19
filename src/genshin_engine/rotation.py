@@ -815,7 +815,14 @@ def check_rotation(template, rotation_model=None):
         raise
 
 
-def _simulate(model, data, expanded, windows, finite_until, ctx, observer=None):
+def _simulate(model, data, expanded, windows, finite_until, ctx, observer=None, *, resume=None, max_events=None):
+    from genshin_engine.rotation_checkpoint import RotationCheckpoint
+    if max_events is not None and (type(max_events) is not int or max_events < 0):
+        raise ValueError('max_events must be a nonnegative integer or None')
+    bindings = (model, data, expanded, windows, finite_until, ctx, observer)
+    restored = resume.restore(bindings) if isinstance(resume, RotationCheckpoint) else None
+    if resume is not None and restored is None:
+        raise TypeError('RotationCheckpoint required')
     result = _base_result("unproven", assumptions=ctx.assumptions)
     chars, abilities = data["chars"], data["abilities"]
     period = data["period"]
@@ -850,11 +857,11 @@ def _simulate(model, data, expanded, windows, finite_until, ctx, observer=None):
     active_action = None
     cast_sequences = {}
     has_cast_sequences = bool(data.get("sequence_groups"))
-    ledger = (auto_energy.Ledger(expanded, abilities, max_cycles * period)
+    ledger = (restored['ledger'] if restored is not None else auto_energy.Ledger(expanded, abilities, max_cycles * period)
               if any(auto_energy.automatic(a) for a in abilities.values()) else None)
-    capacity_ledger = (capacity_audit.Ledger(expanded, abilities, max_cycles * period)
+    capacity_ledger = (restored['capacity_ledger'] if restored is not None else capacity_audit.Ledger(expanded, abilities, max_cycles * period)
                        if any(capacity_audit.bound(a) for a in abilities.values()) else None)
-    admission_ledger = (admission_audit.Ledger(expanded, abilities, max_cycles * period)
+    admission_ledger = (restored['admission_ledger'] if restored is not None else admission_audit.Ledger(expanded, abilities, max_cycles * period)
                         if any(admission_audit.bound(a) for a in abilities.values()) else None)
     termination = None
     periodic_action_ids = sorted(aid for aid, action in data["actions"].items()
@@ -973,14 +980,42 @@ def _simulate(model, data, expanded, windows, finite_until, ctx, observer=None):
             admission_ledger.finish(result, stopped)
         exc.rotation_check_prefix = result
 
-    for cycle in range(max_cycles):
+    start_cycle = 0
+    if restored is not None:
+        result = restored['result']
+        energy, queues = restored['energy'], restored['queues']
+        queue_entry_ids, queue_serials = restored['queue_entry_ids'], restored['queue_serials']
+        frontline, busy_end, cancel_at = restored['frontline'], restored['busy_end'], restored['cancel_at']
+        spawned, average_spawns = restored['spawned'], restored['average_spawns']
+        cursor, fail_kind = restored['cursor'], restored['fail_kind']
+        previous_boundary, cycle_start_energy = restored['previous_boundary'], restored['cycle_start_energy']
+        occupied, admitted_spends = restored['occupied'], restored['admitted_spends']
+        active_action, cast_sequences = restored['active_action'], restored['cast_sequences']
+        ledger, capacity_ledger, admission_ledger = restored['ledger'], restored['capacity_ledger'], restored['admission_ledger']
+        termination, start_cycle = restored['termination'], restored['cycle']
+    stepped = 0
+    for cycle in range(start_cycle, max_cycles):
         boundary = (cycle + 1) * period
-        cycle_failed = False
-        activity = {"scheduled_action_count": 0, "executed_action_count": 0,
-                    "burst_action_count": 0, "energy_spend_count": 0,
-                    "burst_energy_spend_count": 0}
-        periodic_executed = set()
+        if restored is not None and cycle == start_cycle:
+            cycle_failed, activity, periodic_executed = restored['cycle_failed'], restored['activity'], restored['periodic_executed']
+        else:
+            cycle_failed = False
+            activity = {"scheduled_action_count": 0, "executed_action_count": 0,
+                        "burst_action_count": 0, "energy_spend_count": 0,
+                        "burst_energy_spend_count": 0}
+            periodic_executed = set()
         while cursor < len(expanded) and expanded[cursor]["time"] < boundary:
+            if max_events is not None and stepped >= max_events:
+                return RotationCheckpoint(bindings, dict(result=result, energy=energy, queues=queues,
+                    queue_entry_ids=queue_entry_ids, queue_serials=queue_serials,
+                    frontline=frontline, busy_end=busy_end, cancel_at=cancel_at, spawned=spawned,
+                    average_spawns=average_spawns, cursor=cursor, fail_kind=fail_kind,
+                    previous_boundary=previous_boundary, cycle_start_energy=cycle_start_energy,
+                    occupied=occupied, admitted_spends=admitted_spends, active_action=active_action,
+                    cast_sequences=cast_sequences, ledger=ledger, capacity_ledger=capacity_ledger,
+                    admission_ledger=admission_ledger, termination=termination, cycle=cycle,
+                    cycle_failed=cycle_failed, activity=activity, periodic_executed=periodic_executed))
+            stepped += 1
             ev = expanded[cursor]
             cursor += 1
             if ev["time"] < cycle * period:

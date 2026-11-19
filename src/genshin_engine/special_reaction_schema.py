@@ -10,6 +10,7 @@ from genshin_engine.handler_binding_contract import (
     BINDING_CONTRACT,
     BINDING_FIELDS,
 )
+from genshin_engine.probabilistic_resource_contract import TRIAL_SCHEMA
 from genshin_engine.rotation_schema import EVIDENCE, STRING, arr, obj
 from genshin_engine.special_reaction_capabilities import (
     SPECIAL_CAPABILITY_CATALOG_ID,
@@ -85,7 +86,7 @@ PARTY_CAPABILITY_SCHEMA = obj({
     },
     "version_line": {"const": SPECIAL_CAPABILITY_VERSION_LINE},
     "catalog_id": {"const": SPECIAL_CAPABILITY_CATALOG_ID},
-    "catalog_revision": {"const": SPECIAL_CAPABILITY_CATALOG_REVISION},
+    "catalog_revision": {"enum": [5, SPECIAL_CAPABILITY_CATALOG_REVISION]},
     "catalog_content_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
     "catalog_track": {"const": SPECIAL_CAPABILITY_CATALOG_TRACK},
     "catalog_source_upstream_commit": {"type": "string", "pattern": "^[0-9a-f]{40}$"},
@@ -245,6 +246,21 @@ DIRECT_LUNAR_DAMAGE_EVENT_SCHEMA = obj({
     "ability_profile", "status", "source",
 ])
 
+STELLAR_RESOURCE_OPERATION_SCHEMA = obj({
+    "id": STRING, "kind": {"const": "stellar_resource_operation"},
+    "action_id": STRING, "target_id": STRING, "area_id": STRING,
+    "t": {"type": "number", "minimum": 0}, "order": {"type": "integer"},
+    "operation": {"enum": ["grant", "consume", "set_mode", "end_mode", "observe", "trial"]},
+    "trial": TRIAL_SCHEMA, "outcome": {"type": "boolean"},
+    "probability_mode": {"enum": ["expected", "custom"]},
+    "amount": {"type": "integer", "minimum": 1, "maximum": 100},
+    "mode": {"enum": ["overflow_consume", "extended_generation"]},
+    "duration_seconds": {"type": "number", "exclusiveMinimum": 0},
+    "counter": {"enum": ["inventory", "created", "consumed", "overflow_consumed", "released", "expired"]},
+    "claim_id": STRING, "divisor": {"type": "integer", "minimum": 1},
+    **EVIDENCE,
+}, ["id", "kind", "action_id", "target_id", "area_id", "t", "order", "operation", "status", "source"])
+
 DIRECT_STELLAR_DAMAGE_EVENT_SCHEMA = obj({
     "id": STRING,
     "kind": {"const": "direct_stellar_damage"},
@@ -254,6 +270,7 @@ DIRECT_STELLAR_DAMAGE_EVENT_SCHEMA = obj({
     "t": {"type": "number", "minimum": 0},
     "order": {"type": "integer"},
     "ability_profile": DIRECT_STELLAR_DAMAGE_PROFILE_SCHEMA,
+    "resource_consumption": obj({"event_id": STRING, "mode": {"enum": ["require", "scale_multiplier"]}}, ["event_id", "mode"]),
     **EVIDENCE,
 }, [
     "id", "kind", "action_id", "target_id", "area_id", "t", "order",
@@ -262,6 +279,7 @@ DIRECT_STELLAR_DAMAGE_EVENT_SCHEMA = obj({
 
 SPECIAL_REACTION_EVENT_SCHEMA = {
     "oneOf": [
+        STELLAR_RESOURCE_OPERATION_SCHEMA,
         LUNAR_BLOOM_CONSUME_EVENT_SCHEMA,
         LUNAR_BLOOM_RESERVE_GRANT_SCHEMA,
         DIRECT_LUNAR_DAMAGE_EVENT_SCHEMA,
@@ -314,7 +332,17 @@ def special_reaction_input_capabilities() -> dict:
             "entry_count": len(catalog["entries"]),
         },
         "operations": [
-            "lunar_bloom_consume", "lunar_bloom_reserve_grant", "direct_lunar_damage", "direct_stellar_damage"],
+            "stellar_resource_operation", "lunar_bloom_consume", "lunar_bloom_reserve_grant", "direct_lunar_damage", "direct_stellar_damage"],
+        "stellar_periodic_resources": {
+            "configuration": "stellar_superconduct.mechanics.periodic_resource必须显式声明owner_id、area_id、interval_seconds、lifetime_seconds、capacity、window_seconds、extended_window_seconds，以及refresh_mode=extend_window_preserve_cadence；作为assumed覆盖保留来源。",
+            "operations": "stellar_resource_operation支持grant、consume、set_mode、end_mode、observe、trial，绑定实际来源动作与所有者。set_mode指定overflow_consume或extended_generation及duration_seconds；普通consume不足报错并回滚。trial声明cost、base_grant、success_grant、success_waives_cost、chance；未指定outcome时默认expected期望次数，不枚举、不随机。用户指定情景使用probability_mode=custom及布尔outcome；旧方案已有outcome保留原情景。trial先检查完整成本，库存不足记录blocked，不用本次未来返还补成本。返还仍计消费，免消耗不计消费。",
+            "observations": "observe可读inventory，或通过counter和独立claim_id读取created/consumed/overflow_consumed/released/expired累计计数的新增量；divisor允许读取已跨越的阈值次数，不重复领取。",
+            "damage": "direct_stellar_damage.resource_consumption引用同动作先前消费或消费观察；require要求实际消费，scale_multiplier按实际数量乘能力倍率。获得、库存或过期不算消费。",
+            "resource_benefits": "规则trigger可监听resource_change/post，明确resource_operations和可选resource_modes。resource_every按实际整数变化逐个判断；scope=global读取账本累计，scope=matching只累计满足该规则其他筛选条件的变化。创建/消费可触发已有Buff及具有source_ref所有权的回能规则，沿用共享冷却。",
+            "resource_damage": "rules[].resource_damage按真实资源变化派生星烁能力直伤；填写id、已执行的来源action_id、target_id、area_id和完整ability_profile，不预填伤害时刻。与规则owner/资源区域/当前能力资格一致，同一动作组件不得另行手填重复伤害；同一规则各组件绑定同一来源动作，timing.delay须为0。",
+            "condition": "condition_events.stellar_resource引用先执行的资源回执，amount为精确比较值；measure默认amount，trial还支持executed_units、consumed_units、created_units。免消耗时executed_units可为正而consumed_units为零。",
+            "probability": "默认期望次数=符合条件次数×chance，保留小数库存与消费；离散Buff触发按累计期望次数向下取整并记录expected_discrete_count，额外动作由Agent安排。用户要特定情景由Agent询问确认，再提交custom输入。引擎不枚举情景、抽样或输出情景成功率；容量、阈值、冷却及后续连段按确定性期望数量近似处理，结果不代表全场随机机制精确期望或实战保证。",
+        },
         "lunar_bloom_reserves": {
             "generation": "显式声明实际来源动作、时刻、数量、容量与有效期；同池新一次交付增加余额至容量并刷新有效期。",
             "consumption": "lunar_bloom_consume 可指定 reserve_pool_ids，先扣普通草露，再按列表顺序扣替代池。默认余额不足不扣除，spend_policy=up_to_available 时最多扣到所声明的 dew 上限。",

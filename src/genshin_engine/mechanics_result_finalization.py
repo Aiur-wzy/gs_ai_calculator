@@ -14,6 +14,15 @@ from genshin_engine.mechanics_execution_services import MechanicsExecutionServic
 
 
 def project_execution_result(run: MechanicsExecutionContext, services: MechanicsExecutionServices) -> bool:
+    if run.executor.shared_pools and run.simulation_result['status'] in ('passed', 'unproven'):
+        unused = run.executor.shared_pools.ledger.unused_probability_outcomes()
+        if unused:
+            run.output.update(status='invalid', result=None, resolved_template=None,
+                rotation_check=run.simulation_result, mechanics_trace=run.executor.trace, sampling_trace=run.executor.samples)
+            run.output['issues'].append(services.issue('pool_probability_unused_outcomes',
+                '指定概率结果没有对应到本轮实际资源操作；请核对run_id和key，未忽略多余结果。',
+                'mechanics_model.shared_pools.operations', outcomes=unused))
+            return False
     from genshin_engine.runtime_event_match import finalize_runtime_matches
     finalize_runtime_matches(run.executor)
     from genshin_engine.runtime_reference_audit import audit_of

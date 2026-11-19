@@ -13,7 +13,7 @@ export function projectResources(context:TimelineContext & {trace:any[];displaye
       const accepted=finite(row.accepted)?row.accepted:0;
       const eligible=row.eligibility_reason==="eligible"||row.qualified===true&&row.reason!=="ineligible";
       if(isConsume&&!accepted&&!(eligible&&row.reason==="insufficient"))continue;
-      if(isOperation&&!row.succeeded&&!accepted)continue;
+      if(isOperation&&!row.succeeded&&!accepted&&!(eligible&&row.reason==="insufficient"))continue;
       const pool=pools.get(row.pool_id)||{id:row.pool_id,name_zh:"共享资源",owner:null};
       const consumer=isConsume?consumers.get(row.consumer_id):null;
       const operation=isOperation?operations.get(row.operation_id):null;
@@ -28,7 +28,8 @@ export function projectResources(context:TimelineContext & {trace:any[];displaye
         ? accepted>0?`消费 ${accepted}（${change}）`:`库存不足（${change}）`
         : row.operation==="grant"?`补充 ${accepted}（${change}）`
           : row.operation==="set"?`设置库存（${change}）`
-            : row.operation==="spend"?`扣除 ${accepted}（${change}）`:`资源变化（${change}）`;
+            : row.operation==="spend"?row.reason==="waived"?`免消耗（${change}）`:
+              row.reason==="insufficient"?`库存不足（${change}）`:`扣除 ${accepted}（${change}）`:`资源变化（${change}）`;
       const hit=displayed.get(row.event_id)?.hit;
       const detail={...copy(row),type:receiptKind,pool_trace_index:poolTraceIndex,pool:copy(pool),pool_name:poolName,
         ...(consumer?{consumer:copy(consumer)}:{}),...(operation?{operation_spec:copy(operation)}:{}),
@@ -46,6 +47,24 @@ export function projectResources(context:TimelineContext & {trace:any[];displaye
         label:`${poolName} · ${operationLabel}`,start:row.t,detail});
       poolEventCount++;
     }
-    if(poolEventCount)note("effects","共享库存点只显示实际设置、补充、扣除、消费，以及符合资格但库存不足的记录；不合格检查和冷却内补充尝试保留在完整共享资源流水中。");
+    if(poolEventCount)note("effects","共享库存点显示实际设置、补充、扣除、消费、成功免消耗，以及符合资格但库存不足的记录；不合格检查和冷却内尝试保留在完整共享资源流水中。");
+
+    for(const [index,row] of list(r?.special_reactions?.trace).entries()){
+      if(row.type!=="stellar_resource_receipt"||row.trial?.contract!=="probabilistic-resource-v1"||!within(row.t))continue;
+      const trial=row.trial,owner=row.owner_id??row.owner;
+      const outcome=trial.executed===false?"库存不足，未执行":trial.mode==="expected"?`期望触发 ${trial.expected_count} 次`:trial.outcome===true?"按触发处理":"按未触发处理";
+      put("effects",{id:key("stellar-resource-trial",index,row.event_id),kind:"resource",character:owner,
+        ...source(owner,"stellar_resource_trial",row.area_id,"星超导资源判定"),
+        label:`资源判定 · ${outcome}`,start:row.t,detail:{...copy(row),
+          interpretation:trial.mode==="expected"?"按期望次数折算资源，离散收益默认累计后向下取整；不是随机实战保证。":"逐事件指定的概率情景；库存、实际消费与返还分开记录，不代表必定触发。"}});
+    }
+
+    for(const [index,row] of list(r?.mechanics_trace).entries()){
+      if(row.type!=="expected_discrete_count"||!within(row.t))continue;
+      const rule=rules.get(row.rule_id),owner=rule?.owner??null;
+      put("effects",{id:key("expected-discrete",index,row.event_id),kind:"resource",character:owner,
+        ...source(owner,"expected_discrete_count",row.rule_id,rule?.name_zh||"期望次数"),
+        label:`累计期望 ${row.expected_count} → 应用 ${row.applied_count} 次`,start:row.t,detail:copy(row)});
+    }
 
 }

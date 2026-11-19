@@ -1,7 +1,7 @@
 {
   "schema_version": 1,
   "collection_id": "native.special-reaction-capabilities.v1",
-  "revision": 2,
+  "revision": 5,
   "status": "reviewed",
   "version_line": "release",
   "source_upstream_commit": "f11cf545a7eee32a29999f960ebfba305f896ed3",
@@ -12,7 +12,7 @@
     "ExcelBinOutput/ProudSkillExcelConfigData.json": "f9e445a640b46142dffe9d9e4bca5e36ec20f9cadda0825c9e0439cadce820ed",
     "TextMap/TextMap_MediumEN.json": "f9e628426fdba662414a99ac1596570d29e015001c4b5e36402037ba200b969b"
   },
-  "content_hash": "965e801aa9e8e1483ddc0958fa7985f7499cc31023f6377954ed315f35b346a3",
+  "content_hash": "0e8cca0e9a6ac6abea50fb8ac581569d473d70b0de22a9a0621c9b8763a4c115",
   "entries": [
     {
       "character_id": 10000005,
@@ -198,13 +198,13 @@
         "native_reaction_qualification.stellar_superconduct"
       ],
       "runtime_profile_id": "stellar_conduct.gradient_beacon_v1",
-      "runtime_support_status": "pending",
+      "runtime_support_status": "supported",
       "evidence": {
         "proud_skill_group_id": 13623,
         "proud_skill_id": 1362301,
         "desc_text_map_hash": "1156632939"
       },
-      "entry_fingerprint": "f12d3aecb2b54335d5249e59279e49f84cbd39baf8498a2ec30e5cab260412e4"
+      "entry_fingerprint": "dc443246b1c2c91187b46f9ba6462def8b9f3031dec5c04d037954506d405275"
     },
     {
       "character_id": 10000143,
@@ -222,6 +222,41 @@
         "desc_text_map_hash": "2745170027"
       },
       "entry_fingerprint": "07aaa02a70543218cbd5aad7f0c1bb4f0093e6ea6c060a2917417edabe43344f"
+    },
+    {
+      "character_id": 10000147,
+      "required_skill_depot_id": 14701,
+      "form_selection_required": false,
+      "display_name": "达妮卡",
+      "capability_tags": [
+        "native_reaction_qualification.stellar_superconduct"
+      ],
+      "evidence": {
+        "proud_skill_group_id": 14723,
+        "proud_skill_id": 1472301,
+        "desc_text_map_hash": "1126283715"
+      },
+      "runtime_profile_id": "native.special-reactions.v1",
+      "runtime_support_status": "supported",
+      "entry_fingerprint": "b9e6b4ed6426a5eab989b5c131c649954fdd31d3b7461014fa0ae83d5b77d634"
+    },
+    {
+      "character_id": 10000149,
+      "required_skill_depot_id": 14901,
+      "form_selection_required": false,
+      "display_name": "安娜丝塔夏",
+      "capability_tags": [
+        "native_reaction_qualification.stellar_superconduct",
+        "native_reaction_qualification.stellar_swirl"
+      ],
+      "evidence": {
+        "proud_skill_group_id": 14923,
+        "proud_skill_id": 1492301,
+        "desc_text_map_hash": "3047748675"
+      },
+      "runtime_profile_id": "native.special-reactions.v1",
+      "runtime_support_status": "supported",
+      "entry_fingerprint": "c201260cefb4a9e68fe59c2e20054caf49e20c0fbed472af364d673042f683f3"
     },
     {
       "character_id": 10000150,

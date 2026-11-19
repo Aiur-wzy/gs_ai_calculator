@@ -88,6 +88,7 @@ from genshin_engine.mechanics_reporting import (
     attach_state_runtime_report as _attach_state_runtime_report,
 )
 from genshin_engine.mechanics_resource_execution import activate_rule_and_resources
+from genshin_engine.mechanics_resource_observation import enqueue_resource_changes
 from genshin_engine.mechanics_rule_execution import (
     activate_rule_instance,
     commit_rule_callback,
@@ -213,6 +214,9 @@ class _Mechanics:
         self.issues = []
         self.windows = []
         self.cancelled_actions = set()
+        self.executed_source_actions = {}
+        self.resource_trigger_counts = {}
+        self.expected_effect_counts = {}
         special_runtime = build_special_reaction_runtime(model, list(data["chars"]))
         self.elemental = (ElementalRuntime(model["elemental_model"], special_runtime=special_runtime)
                           if "elemental_model" in model else None)
@@ -237,9 +241,10 @@ class _Mechanics:
             append_trace=self._append_runtime_trace,
             count_event=self.count_event,
             dispatch_generated=self.generated_event_router.dispatch,
+            observe_resource=self._observe_resource_change,
         ))
         self.shared_pools = (pool_runtime.SharedPoolRuntime(model, list(data["chars"]),
-            reserve_events=lambda count: self._reserve_events(count, "resource_counters")) if "shared_pools" in model else None)
+            reserve_events=self._reserve_resource_events) if "shared_pools" in model else None)
         self.resource_reactions = (reaction_resource_runtime.Runtime(self) if "resource_reaction_contract" in model else None)
         self.counter_views = (counter_view_runtime.CounterViewRuntime(model["resource_counter_views"], self.shared_pools, context=self)
                               if "resource_counter_views" in model else None)
@@ -290,6 +295,9 @@ class _Mechanics:
 
     def _current_elemental(self):
         return self.elemental
+
+    def _reserve_resource_events(self, count):
+        self._reserve_events(count, "resource_counters")
 
     def _current_time(self):
         return self.time
@@ -536,6 +544,9 @@ class _Mechanics:
         clone["cycle"] = cycle
         self.trace.append(clone)
         self._count_event()
+
+    def _observe_resource_change(self, row, cycle, parent):
+        enqueue_resource_changes(self, row, cycle, parent)
 
     def _drain_special_events(self, cycle=0, parent=None, events=None):
         return self.elemental_bridge.drain_generated(cycle, parent, events)
@@ -903,6 +914,10 @@ class _Mechanics:
             if time < state["anchor"] + TICKS//2
         ]
         return {**({"elemental": self.elemental.boundary(time, next_cycle)} if self.elemental else {}),
+                **({'resource_damage_source_actions': sorted(self.executed_source_actions)}
+                   if any(r.get('resource_damage') for r in self.rules.values()) else {}),
+                **({'resource_trigger_counts': dict(self.resource_trigger_counts)} if self.resource_trigger_counts else {}),
+                **({'expected_effect_counts': dict(self.expected_effect_counts)} if self.expected_effect_counts else {}),
                 **({'health': self.health_runtime.boundary()} if self.health_runtime else {}),
                 **({"shared_pools": self.shared_pools.boundary(time)} if self.shared_pools else {}),
                 **({"state_runtime": self.state_runtime.boundary(time)} if self.state_runtime else {}),
