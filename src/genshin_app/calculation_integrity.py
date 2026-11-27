@@ -18,6 +18,7 @@ _FORMAL_FIELDS = frozenset({
     "damage_explanation_contract",
     "damage_report_window", "damage_report_execution",
     "special_damage_echoes", "special_damage_echo_execution",
+    "special_capability_source",
 })
 
 
@@ -49,6 +50,8 @@ def validate_result_binding(result, receipt=None, *, formal_required=False, _rep
         saved = bound.get("result_fingerprint")
         if not isinstance(saved, str) or _SHA.fullmatch(saved) is None or saved != actual:
             raise ValueError("计算结果与结果回执指纹不一致，请重新计算。")
+    from genshin_app.equipment.special_capability_authority import bind_saved_capability_catalog
+    bind_saved_capability_catalog(result, bound, _session, result_fingerprint=actual, report=_report)
     from genshin_app.equipment.attribute_budget_binding import (
         validate_attribute_budget_binding,
     )

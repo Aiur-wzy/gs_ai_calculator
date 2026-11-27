@@ -3,7 +3,6 @@ from __future__ import annotations
 
 import hashlib
 import json
-import os
 from pathlib import Path
 
 import pytest
@@ -15,8 +14,6 @@ from genshin_db.runtime_queries import query_runtime
 from genshin_db.runtime_reaction_damage import REACTION_LIMITS
 
 ROOT = Path(__file__).resolve().parents[1]
-DB = ROOT / "data/genshin.db"
-RAW = Path(os.environ.get("GENSHIN_TEST_UPSTREAM_ROOT", ROOT / "data/upstream/repo"))
 GROUP = "ElementReaction_Damage_Attenuation_1"
 
 
@@ -38,28 +35,27 @@ def pointer(value, location):
 
 
 @pytest.fixture(scope="module")
-def real_sources():
-    if not DB.is_file() or not RAW.is_dir():
-        pytest.skip("optional project database and raw upstream are absent")
-    before = file_sha(DB)
-    with equipment_read_session(DB):
-        data = {element: query_runtime(DB, {"action": "reaction_damage_profile", "element": element})
+def real_sources(accepted_source_database):
+    if not accepted_source_database.is_file():
+        pytest.skip("optional project database is absent")
+    before = file_sha(accepted_source_database)
+    with equipment_read_session(accepted_source_database):
+        data = {element: query_runtime(accepted_source_database, {"action": "reaction_damage_profile", "element": element})
                 for element in ("hydro", "cryo")}
         yield data
-    assert file_sha(DB) == before, "the independent audit must not write production data"
+    assert file_sha(accepted_source_database) == before, "the independent audit must not write production data"
 
 
 @pytest.mark.parametrize("element", ["hydro", "cryo"])
-def test_review_all_source_fragments_hash_and_raw_pointers_independently(real_sources, element):
+def test_review_all_source_fragments_hash_and_raw_pointers_independently(real_sources, element, exact_upstream_source):
     result = real_sources[element]
     origins = [*result["sources"].values(), *result["raw_nodes"].values(), *result["separate_star_abilities"]]
     files = {}
     for origin in origins:
-        path = RAW / origin["source_path"]
-        if path not in files:
-            files[path] = json.loads(path.read_text("utf8"))
-        assert file_sha(path) == origin["source_sha256"]
-        raw = pointer(files[path], origin["json_pointer"])
+        identity = (origin["source_path"], origin["source_sha256"])
+        if identity not in files:
+            files[identity] = json.loads(exact_upstream_source(result["snapshot"]["upstream_commit"], *identity))
+        raw = pointer(files[identity], origin["json_pointer"])
         assert node_sha(raw) == origin["node_sha256"]
         if "raw" in origin:
             assert raw == origin["raw"]
@@ -68,7 +64,19 @@ def test_review_all_source_fragments_hash_and_raw_pointers_independently(real_so
     assert "_Alter" not in result["sources"]["origin_attack"]["json_pointer"]
 
 
-def test_review_channel_split_and_prechange_application_fingerprints(real_sources):
+def test_review_application_offsets_match_unique_groups_in_exact_source(real_sources, accepted_source_database, exact_upstream_source):
+    commit = real_sources["cryo"]["snapshot"]["upstream_commit"]
+    for group in ("default", GROUP):
+        result = query_runtime(accepted_source_database, {"action": "attenuation_profile", "group": group})
+        source = result["source"]
+        rows = json.loads(exact_upstream_source(commit, source["source_path"], source["source_sha256"]))
+        (index, raw), = [(index, row) for index, row in enumerate(rows) if row.get("group") == group]
+        assert source["json_pointer"] == f"/{index}"
+        assert result["raw_record"] == raw
+        assert source["node_sha256"] == node_sha(raw)
+
+
+def test_review_channel_split_and_prechange_application_fingerprints(real_sources, accepted_source_database):
     baseline = json.loads((ROOT / "tests/fixtures/engine-continuation/ec04-research/independent-prechange-application-fingerprints.json").read_text("utf8"))
     # Frozen EC04 receipts supply raw provenance, not current query expectations.
     # EC13a changes the snapshot/definition IDs without changing these source rows.
@@ -85,22 +93,7 @@ def test_review_channel_split_and_prechange_application_fingerprints(real_source
         old_state = historical["snapshot"]
         assert old_state["snapshot_id"] == baseline["snapshot_id"]
         assert old_state["indexer_version"] == "4"
-        raw_path = RAW / old_source["source_path"]
-        # An array offset belongs to the historical snapshot. Relocate the
-        # current exact group without rewriting or pretending to reuse that
-        # historical pointer; unrelated upstream rows can be inserted first.
-        current_rows = json.loads(raw_path.read_text("utf8"))
-        current_matches = [(index, row) for index, row in enumerate(current_rows) if row.get("group") == group]
-        assert len(current_matches) == 1
-        current_index, raw = current_matches[0]
-        current_pointer = f"/{current_index}"
-        assert raw == historical["raw_record"]
-        # The frozen receipt identifies the complete file at its historical
-        # commit.  A later upstream refresh may change unrelated rows in that
-        # file while preserving this exact reaction record.  Keep the old
-        # source fingerprint in the historical identity below, but audit the
-        # current file separately instead of pretending it is the old blob.
-        current_source_sha = file_sha(raw_path)
+        raw = historical["raw_record"]
         assert len(old_source["source_sha256"]) == 64
         assert node_sha(raw) == old_source["node_sha256"]
         sequence, seconds, ticks = expected_sequences[group]
@@ -119,14 +112,15 @@ def test_review_channel_split_and_prechange_application_fingerprints(real_source
             "projection": projection, "execution_status": "ready"}
         assert node_sha(old_identity) == expected
 
-        default = query_runtime(DB, {"action": "attenuation_profile", "group": group})
-        explicit = query_runtime(DB, {"action": "attenuation_profile", "group": group, "channel": "application"})
+        default = query_runtime(accepted_source_database, {"action": "attenuation_profile", "group": group})
+        explicit = query_runtime(accepted_source_database, {"action": "attenuation_profile", "group": group, "channel": "application"})
         assert default == explicit
         assert default["raw_record"] == raw
         assert default["projection"] == projection
         assert default["execution"] == {"status": "ready", "semantics": projection["semantics"],
                                         "issues": [], "attack_binding": "not_evaluated"}
         state, source = default["snapshot"], default["source"]
+        current_pointer, current_source_sha = source["json_pointer"], source["source_sha256"]
         source_snapshot = node_sha({"version_line": state["version_line"],
             "upstream_commit": state["upstream_commit"], "schema_version": state["schema_version"],
             "manifest": state["manifest_fingerprint"]})
@@ -134,8 +128,6 @@ def test_review_channel_split_and_prechange_application_fingerprints(real_source
                                                 "normalization": state["normalization"]})
         for key in ("source_path", "node_sha256"):
             assert source[key] == old_source[key]
-        assert source["json_pointer"] == current_pointer
-        assert source["source_sha256"] == current_source_sha
         for key in ("definition_kind", "owner_definition_id", "variant_key", "namespace_key", "exact_key"):
             assert source["definition"][key] == old_source["definition"][key]
         assert source["field_pointers"] == {key: current_pointer + "/" + key
@@ -157,15 +149,15 @@ def test_review_channel_split_and_prechange_application_fingerprints(real_source
             assert new_definition_id != old_definition_id
             assert default["content_fingerprint"] != expected
             with pytest.raises(RuntimeConfigError) as error:
-                query_runtime(DB, {"action": "attenuation_profile", "group": group,
+                query_runtime(accepted_source_database, {"action": "attenuation_profile", "group": group,
                                    "snapshot_id": baseline["snapshot_id"]})
             assert error.value.reason == "snapshot_changed"
         else:
             assert default["content_fingerprint"] == expected
-        assert query_runtime(DB, {"action": "attenuation_profile", "group": group,
+        assert query_runtime(accepted_source_database, {"action": "attenuation_profile", "group": group,
                                   "snapshot_id": state["snapshot_id"]}) == default
-    application = query_runtime(DB, {"action": "attenuation_profile", "group": GROUP})
-    damage = query_runtime(DB, {"action": "attenuation_profile", "group": GROUP, "channel": "damage"})
+    application = query_runtime(accepted_source_database, {"action": "attenuation_profile", "group": GROUP})
+    damage = query_runtime(accepted_source_database, {"action": "attenuation_profile", "group": GROUP, "channel": "damage"})
     assert application["projection"]["durability_sequence"] == [1] * 10
     assert damage["projection"]["damage_sequence"] == [1, 1] + [0] * 8
     assert "durability_sequence" not in damage["projection"]
@@ -184,7 +176,7 @@ def test_review_missing_attacker_is_not_defaulted_and_ability_remains_unexecuted
         assert {x["code"] for x in result["issues"]} >= {"alter_unsupported", "star_unsupported", "propagation_unsupported"}
 
 
-def test_review_true_raw_attack_group_points_to_damage_record(real_sources):
+def test_review_true_raw_attack_group_points_to_damage_record(real_sources, exact_upstream_source):
     # Independent raw-token witnesses for the accepted snapshots. The
     # production recipe is deliberately not consulted to define expectations.
     tokens = {
@@ -194,11 +186,15 @@ def test_review_true_raw_attack_group_points_to_damage_record(real_sources):
             ("ALJBCOCLPOO", "LONMFMMEPNN", "BJNOBFDFNGG", "EOBMOFPGMLP"),
         "6044f5aae7dd79fbbe15c5748ef99b654f6132b7":
             ("ALJBCOCLPOO", "LONMFMMEPNN", "BJNOBFDFNGG", "EOBMOFPGMLP"),
+        "770b88c8baccce9ff8923f5fbc95978671342232":
+            ("ALJBCOCLPOO", "LONMFMMEPNN", "BJNOBFDFNGG", "EOBMOFPGMLP"),
     }
     for element, result in real_sources.items():
         source = result["sources"]["origin_attack"]
-        raw = pointer(json.loads((RAW / source["source_path"]).read_text("utf8")), source["json_pointer"])
-        damage_type, attack_info, attenuation_group, attack_tag = tokens[result["snapshot"]["upstream_commit"]]
+        commit = result["snapshot"]["upstream_commit"]
+        source_bytes = exact_upstream_source(commit, source["source_path"], source["source_sha256"])
+        raw = pointer(json.loads(source_bytes), source["json_pointer"])
+        damage_type, attack_info, attenuation_group, attack_tag = tokens[commit]
         assert raw["$type"] == damage_type
         assert raw[attack_info][attenuation_group] == GROUP
         assert raw[attack_info][attack_tag] == "Self_Swirl_" + ("Water" if element == "hydro" else "Ice") + "Damage"
@@ -209,9 +205,9 @@ def test_review_true_raw_attack_group_points_to_damage_record(real_sources):
 
 
 @pytest.mark.parametrize("element", ["electro", "frozen", "star", None, True])
-def test_review_unproven_element_cannot_reuse_ordinary_profile(element):
+def test_review_unproven_element_cannot_reuse_ordinary_profile(accepted_source_database, element):
     with pytest.raises(ValueError):
-        query_runtime(DB, {"action": "reaction_damage_profile", "element": element})
+        query_runtime(accepted_source_database, {"action": "reaction_damage_profile", "element": element})
 
 
 @pytest.mark.parametrize("value", [None, [], [True, False], [1, .5], [1] * 65])
@@ -225,20 +221,20 @@ def test_review_damage_channel_does_not_fall_back_to_valid_application(value):
     assert "durability_sequence" not in projection
 
 
-def test_review_stale_snapshot_is_rejected_before_profile_assembly(real_sources):
+def test_review_stale_snapshot_is_rejected_before_profile_assembly(real_sources, accepted_source_database):
     with pytest.raises(RuntimeConfigError) as error:
-        query_runtime(DB, {"action": "reaction_damage_profile", "element": "cryo", "snapshot_id": "obsolete"})
+        query_runtime(accepted_source_database, {"action": "reaction_damage_profile", "element": "cryo", "snapshot_id": "obsolete"})
     assert error.value.reason == "snapshot_changed"
 
 
-def test_review_caller_mutation_cannot_poison_same_read_session_source_cache(real_sources):
-    first = query_runtime(DB, {"action": "reaction_damage_profile", "element": "cryo"})
+def test_review_caller_mutation_cannot_poison_same_read_session_source_cache(real_sources, accepted_source_database):
+    first = query_runtime(accepted_source_database, {"action": "reaction_damage_profile", "element": "cryo"})
     baseline = first["content_fingerprint"]
     first["raw_nodes"]["ordinary_modifier"]["raw"]["INDEPENDENT_REVIEW_POISON"] = True
     first["raw_nodes"]["attenuation"]["raw"]["damageSequence"][0] = 99
     first["projection"]["damage_sequence"][0] = 99
     first["snapshot"]["counts"]["runtime_source"] = -1
-    second = query_runtime(DB, {"action": "reaction_damage_profile", "element": "cryo"})
+    second = query_runtime(accepted_source_database, {"action": "reaction_damage_profile", "element": "cryo"})
     assert second["content_fingerprint"] == baseline
     assert "INDEPENDENT_REVIEW_POISON" not in second["raw_nodes"]["ordinary_modifier"]["raw"]
     assert second["projection"]["damage_sequence"][0] == second["raw_nodes"]["attenuation"]["raw"]["damageSequence"][0] == 1
@@ -246,8 +242,8 @@ def test_review_caller_mutation_cannot_poison_same_read_session_source_cache(rea
 
 
 @pytest.mark.parametrize("limit,value", [("max_operations", 9), ("max_typed_nodes", 1)])
-def test_review_disclosed_operation_and_typed_node_limits_are_effective(real_sources, monkeypatch, limit, value):
+def test_review_disclosed_operation_and_typed_node_limits_are_effective(real_sources, accepted_source_database, monkeypatch, limit, value):
     monkeypatch.setitem(REACTION_LIMITS, limit, value)
     with pytest.raises(RuntimeConfigError) as error:
-        query_runtime(DB, {"action": "reaction_damage_profile", "element": "hydro"})
+        query_runtime(accepted_source_database, {"action": "reaction_damage_profile", "element": "hydro"})
     assert error.value.reason == "response_too_large"

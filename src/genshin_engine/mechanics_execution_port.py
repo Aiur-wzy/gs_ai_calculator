@@ -30,12 +30,15 @@ class MechanicsExecutionPort(Protocol):
     model: Any
     state: Any
     rules: Any
+    component_quota_rules: Any
+    committed_component_ids: Any
     windows: Any
     captures: Any
     snapshots: Any
     counter_views: Any
     samples: Any
     elemental: Any
+    target_scene: Any
     fixed_sources: Any
     matches: Any
     target_condition_checks: Any

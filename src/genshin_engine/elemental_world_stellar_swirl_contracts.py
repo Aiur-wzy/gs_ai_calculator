@@ -4,9 +4,11 @@ from __future__ import annotations
 
 import copy
 
+from genshin_engine.constants import STELLAR_FACTOR
 from genshin_engine.elemental_world_reaction_port import WorldReactionReadPort
 from genshin_engine.rotation_port import TICKS
 from genshin_engine.special_reaction_actual import SpecialReactionPending
+from genshin_engine.special_reaction_contracts import stellar_swirl_coefficient
 from genshin_engine.special_reaction_port import reaction_config, reaction_profile
 from genshin_engine.special_reaction_reference import (
     copy_runtime as _copy_special_runtime_for_reference,
@@ -39,9 +41,12 @@ def validate_stellar_swirl_passthrough(
     if event_type == "special_reaction_damage_request":
         target_id = event.get("target_id")
         area_id = event.get("area_id")
+        reaction = "stellar_swirl_anemo"
+        base_factor = STELLAR_FACTOR[reaction]
+        adjustment = reaction_config(world.special_runtime, "stellar_swirl")["mechanics"].get("base_factor_adjustment")
         valid = (
             source == "reaction_packet"
-            and event.get("reaction_type") == "stellar_swirl_anemo"
+            and event.get("reaction_type") == reaction
             and isinstance(target_id, str)
             and bool(target_id)
             and isinstance(area_id, str)
@@ -52,6 +57,8 @@ def validate_stellar_swirl_passthrough(
             and event.get("reaction_base") is True
             and event.get("application") is None
             and event.get("component") == "immediate_anemo"
+            and event.get("system_factor") == base_factor
+            and event.get("reaction_coefficient") == stellar_swirl_coefficient(adjustment, reaction, base_factor)
         )
         if valid:
             valid = target_id in world.targets_in_area(area_id)
@@ -193,6 +200,8 @@ def stellar_swirl_pairs(
             and damage.get("damage_system") == "stellar"
             and damage.get("reaction_base") is True
             and damage.get("system_factor") == factor
+            and damage.get("reaction_coefficient") == stellar_swirl_coefficient(
+                mechanics.get("base_factor_adjustment"), reaction_type, factor)
             and isinstance(damage.get("owner"), str)
             and bool(damage["owner"])
             and damage.get("application") is None

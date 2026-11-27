@@ -10,34 +10,35 @@ from genshin_engine.mechanics_validation import (
 )
 from genshin_engine.rotation_port import repeat_origins as _origins
 from genshin_engine.rotation_port import rotation_issue as _issue
+from genshin_engine.target_scene import area_ids, target_ids
+from genshin_engine.target_scene_packet import annotate_contact_packets
 
 
-def project_mechanics_inputs(template, rotation, mechanics, issues):
-    """Project explicit patterns and action switches without mutating user input."""
-    t, model = copy.deepcopy(template), copy.deepcopy(rotation)
-    from genshin_engine.health_mechanics import validate_health_bindings
-    issues.extend(validate_health_bindings(mechanics, template, rotation))
-    if t.get("version") != 2:
-        issues.append(_issue("unsupported", "声明式机制需要伤害模板 v2 的稳定命中 ID。", "template_version"))
-        return t, model, []
-    hits = {h["id"]: h for h in t["hits"]}
-    actions = {a["id"]: a for a in model["actions"]}
-    abilities = {a["id"]: a for a in model["abilities"]}
+def project_action_hits(template, rotation, mechanics, issues, *, require_complete=True):
+    """Project the declared hit bindings without executing a mechanic."""
+    hits = {h["id"]: h for h in template["hits"]}
+    actions = {a["id"]: a for a in rotation["actions"]}
     runtime = []
-    linked, projected = set(), []
+    linked, projected = {}, []
     descriptors = []
-    for descriptor in mechanics["hit_events"]:
+    for index, descriptor in enumerate(mechanics["hit_events"]):
         hid = descriptor["hit_id"]
+        path = f"mechanics_model.hit_events[{index}]"
         if hid not in hits or descriptor["action_id"] not in actions or hid in linked:
-            issues.append(_issue("reference", "命中引用重复或不存在。", hid))
+            competing = ({"conflicting_bindings": [linked[hid], {"path": path, "action_id": descriptor["action_id"]}]}
+                         if hid in linked else {})
+            issues.append(_issue("reference", "命中引用重复或不存在。", hid,
+                                 source_path=path, action_id=descriptor["action_id"], **competing))
             continue
-        linked.add(hid)
+        linked[hid] = {"path": path, "action_id": descriptor["action_id"]}
         descriptors.append((copy.deepcopy(hits[hid]), descriptor))
     prototypes = set()
-    for pattern in mechanics["hit_patterns"]:
+    for pattern_index, pattern in enumerate(mechanics["hit_patterns"]):
         aid, proto = pattern["action_id"], pattern["prototype_hit_id"]
         if aid not in actions or proto not in hits or proto in linked:
-            issues.append(_issue("reference", "模式原型或动作不存在，或原型同时作为独立命中。", pattern["id"]))
+            issues.append(_issue("reference", "模式原型或动作不存在，或原型同时作为独立命中。", pattern["id"],
+                                 source_path=f"mechanics_model.hit_patterns[{pattern_index}]",
+                                 action_id=aid, prototype_hit_id=proto))
             continue
         if not pattern["offsets"] or len(pattern["offsets"]) != len(pattern["orders"]):
             issues.append(_issue("missing_information", "偏移和 order 必须非空且逐项对应。", pattern["id"]))
@@ -47,9 +48,10 @@ def project_mechanics_inputs(template, rotation, mechanics, issues):
             hit = copy.deepcopy(hits[proto])
             hit.update(id=f"{pattern['id']}:{index}", t=round(actions[aid]["start"] + offset, 6), count=1)
             descriptors.append((hit, {**pattern, "order": order, "pattern_occurrence": index}))
-    if set(hits) != linked | prototypes:
+    used = linked.keys() | prototypes
+    if require_complete and hits.keys() != used:
         issues.append(_issue("missing_information", "每个输入命中必须声明 hit_events 或用作 hit_patterns 原型。", "mechanics_model.hit_events",
-                             missing_hit_ids=sorted(set(hits)-linked-prototypes)))
+                             missing_hit_ids=sorted(hits.keys() - used)))
     ids = set()
     for hit, descriptor in descriptors:
         if hit["id"] in ids or hit.get("count", 1) != 1:
@@ -63,16 +65,35 @@ def project_mechanics_inputs(template, rotation, mechanics, issues):
         projected.append(hit)
         runtime.append({"id": hit["id"], "kind": "mechanics_hit", "time": _tick(hit["t"]), "order": descriptor["order"],
                         "data": {"hit": hit, "descriptor": descriptor, "repeat": action["repeat"], "action_id": action["id"]}})
+    return projected, runtime, descriptors, prototypes
+
+
+def project_mechanics_inputs(template, rotation, mechanics, issues):
+    """Project explicit patterns and action switches without mutating user input."""
+    t, model = copy.deepcopy(template), copy.deepcopy(rotation)
+    from genshin_engine.health_mechanics import validate_health_bindings
+    issues.extend(validate_health_bindings(mechanics, template, rotation))
+    if t.get("version") != 2:
+        issues.append(_issue("unsupported", "声明式机制需要伤害模板 v2 的稳定命中 ID。", "template_version"))
+        return t, model, []
+    actions = {a["id"]: a for a in model["actions"]}
+    abilities = {a["id"]: a for a in model["abilities"]}
+    projected, runtime, descriptors, _prototypes = project_action_hits(t, model, mechanics, issues)
     elemental = mechanics.get("elemental_model")
     if elemental:
         issues.extend(validate_elemental_counter_bindings(t, model, mechanics))
         profiles = {p["id"]: p for p in elemental["profiles"]}
+        targets = target_ids(mechanics)
 
         def check_application(application, path, element=None):
-            if application is None or application.get("profile_id") not in profiles or application.get("target_id") != elemental["target"]["id"]:
+            if application is None or application.get("profile_id") not in profiles or application.get("target_id") not in targets:
                 issues.append(_issue("reference", "每个命中/附着事件需要有效档案和明确目标。", path))
             elif element is not None and profiles[application["profile_id"]]["element"] != element:
                 issues.append(_issue("element_mismatch", "命中元素与附着档案不一致。", path))
+            elif "target_scene" in mechanics and application.get("area_id") not in area_ids(mechanics, application["target_id"]):
+                issues.append(_issue("target_scene_area", "多目标命中与附着必须填写该目标登记的 area_id。",
+                                     path, target_id=application["target_id"], area_id=application.get("area_id"),
+                                     expected_areas=list(area_ids(mechanics, application["target_id"]))))
         for hit, descriptor in descriptors:
             check_application(descriptor.get("application"), hit["id"], hit["element"])
             if hit.get("reaction") is not None or hit["damage_system"] != "classic":
@@ -111,10 +132,21 @@ def project_mechanics_inputs(template, rotation, mechanics, issues):
                 "data": copy.deepcopy(operation),
             })
     t["hits"] = projected
+    if "target_scene" in mechanics:
+        if model.get("damage_report", {}).get("mode") != "explicit":
+            issues.append(_issue("target_scene_finite_window", "静态多目标需要显式有限伤害统计窗口。",
+                                 "rotation_model.damage_report", severity="pending"))
+        if mechanics.get("special_reaction_model", {}).get("replacements", {}).get("stellar_swirl", {}).get("enabled"):
+            annotate_contact_packets(runtime, profiles, issues)
     model["action_hit_links"] = [{"action_id": x["data"]["action_id"], "hit_id": x["id"]} for x in runtime if x["kind"] == "mechanics_hit"]
-    t["switches"] = [{"t": 0, "character": model["initial_frontline"]}] + [
-        {"t": a["start"], "character": a["switch_to"]} for a in sorted(model["actions"], key=lambda a: (a["start"], a["order"]))
-        if abilities.get(a["ability_id"], {}).get("action_type_id") == "action.switch" and 0 in _origins(a["repeat"], 1)]
+    t["switches"] = project_action_switches(model)
     return t, model, runtime
+
+
+def project_action_switches(model):
+    ability_types = {a["id"]: a["action_type_id"] for a in model["abilities"]}
+    return [{"t": 0, "character": model["initial_frontline"]}] + [
+        {"t": a["start"], "character": a["switch_to"]} for a in sorted(model["actions"], key=lambda a: (a["start"], a["order"]))
+        if ability_types.get(a["ability_id"]) == "action.switch" and 0 in _origins(a["repeat"], 1)]
 
 __all__ = ["project_mechanics_inputs"]

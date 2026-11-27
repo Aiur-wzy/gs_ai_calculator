@@ -21,6 +21,11 @@ def calculation_diagnostics_contract():
             'request': {'view': 'groups或issues，默认groups', 'filters': diagnostics_contract()['filters'],
                         'limit': '1..200，默认50', 'cursor': '原样使用上页next_cursor；更改输入或筛选须重新开始'},
             'auxiliary_views': {
+                'rotation_preflight': {'request': '{view:"rotation_preflight"}',
+                                       'entrypoint': '原生 gs_diagnose_result(expected_revision, request)。'
+                                                     '独立 CLI 对应 engine check-rotation INPUT --preflight。',
+                                       'scope': '只读检查当前方案的命中关联、动作冷却及声明资源。'
+                                                '分项报告失败或未检查原因，不产生伤害结果。'},
                 'assistance': {'request': '{view:"assistance",section?:"all"|"energy"|"coverage",limit?,offset?,expected?,observations?}',
                                'contract': assistance_contract()},
                 'energy_trials': {'request': '{view:"energy_trials",trials:[...],include_baseline?}',

@@ -22,7 +22,13 @@ App 原生从 `capability_index` 的 `/special_reactions` 取真实资源及指�
 
 使用`direct_stellar_damage`或`direct_lunar_damage`专用事件；实际支持的reaction types从schema和`engine_catalog/damage`读取。1.0.2 的星烁能力直伤支持 `stellar_superconduct`（冰／雷）与 `stellar_swirl`（冰／风）。星超导取该区域已生效领域增益；能力星扩散使用能力自己的倍率，不读取自然风旋等级、不生成风旋。反应型星扩散仍由其状态机产生，两类分量不能互相代填。
 
+常规极星辉域每 4 秒结算一次。仅当方案要求模拟稳定的 384 快帧时，在星超导 mechanics 同时指定 status=assumed、settlement_clock=experimental_384f、settlement_interval_seconds=3.340596 和 override_reason。保留实测来源或估算依据。这个选项只改变领域结算和对应层数增益的到期时间，领域刷新保留已经排好的下一次结算。技能冷却、信标和角色动画分别建模。
+
 领域增强通过替换模型的 `mechanics` 输入：星超导 `initial_grant_layers` 只赋予新建领域到首次结算前的增益，不增加附着计数；`settlement_bonus_layers` 在窗口结算时额外增加增益层数，合计封顶12。刷新既有领域不再次发初始增益。星扩散 `initial_vortex_count` 和 `initial_upgrade_cooldown_seconds` 控制新风旋初始升级及全队共用冷却，后续正常反应继续计数。省略这些可选项保持旧行为。实际数值须查明来源；与受审目录不一致时明确采用有据的 assumed profile，不能只填 confirmed。
+
+星扩散反应基础系数的显式修正使用 `replacements.stellar_swirl.mechanics.base_factor_adjustment`，保留 `assumed`、`override_reason` 和精确来源。修正对象含 `provider_id`（实际队伍角色 ID）、`source`（文案或记录出处）、`components`（本次适用分项）与 `multiplier`（相对原系数的倍数）。分项可选 `stellar_swirl_anemo`（自然风伤，原系数 0.75）、`stellar_swirl_cryo_lv2`（一级风旋冰伤，原系数 2）、`stellar_swirl_cryo_lv3`（二级风旋冰伤，原系数 3）和 `stellar_swirl`（能力直伤系数，原系数 1）。每个分项只列一次。系数先乘倍数，再按原伤害公式执行，独立的反应加算仍在后面。风旋升级和冷却分别填写。能力直伤可单独选择，保留能力倍率与独立取样规则。
+
+安娜丝塔夏「未挽的悼亡」7.2.52 文案给出星扩散基础反应系数提升 10%。强度研究院的安娜示例在其 V3 模型使用 `multiplier=1.10`，自然风、冰和能力直伤均有相应方案。采用其范围进行试算时明确记作模拟器参考，实机分项与精度待核。伤害详情按执行回执显示原值、提供者、来源与生效值。较早版本文案为 15%，以题目实际采用的版本为准。[版本对比](https://gi.gachabase.net/diff/characters/10000149/anastasya?cur=beta_7.2.52_49468064&lang=chs&prev=beta_7.2.51_49319249) · [计算工作室](https://cs.gensri.wiki/anastasya/)
 
 能力直伤先核对该组件的转换资格。使用 v2 `ability_binding` 绑定实际角色、能力、组件、变体、有效等级、资料线和数据库指纹，并使用专用 profile 内容哈希。填写能力倍率、结算属性、次数、元素和关联领域。出伤时核该领域的真实状态与最近一次完成的结算，运行时由此取层数与基础系数。
 
@@ -31,6 +37,7 @@ App 原生从 `capability_index` 的 `/special_reactions` 取真实资源及指�
 - `confirmed`要求完整profile精确命中受审能力目录。实时`reviewed_profile_count`见`engine_catalog/damage`对应直伤子树；目录文件名是`direct-special-damage-profiles.json`，条目数不写死进机制页。
 - 未命中时只能按有据的`assumed + authority=explicit_assumption`路径声明，并完整披露来源/未知。其`database_fingerprint`仅记录资料来源，不证明DB登记、独立审核、队伍资格或完整App接纳。必要字段缺失仍须补齐。
 - 旧直伤profile v1只作迁移资料，不投影伤害；不得自行把假设改为confirmed、伪造目录条目或改指纹掩盖旧来源。
+- 换用新版数据库时，不能只改 `commit` 标签。重新查询该组件及相关角色资格，对照新版的变体、倍率和来源指纹后再更新绑定。
 
 能力直伤不附着、不修改元素底，也不进入多人反应贡献权重。同一动作组件、目标、区域和时点只交付一次。`count`只代表数值次数；若每段独立附着、消耗或触发，拆为独立事件。伤害方式转化时替换同一原组件，不能保留普通伤害后再追加专用直伤。
 
@@ -76,7 +83,7 @@ App 原生从 `capability_index` 的 `/special_reactions` 取真实资源及指�
 
 ## 数据匹配、历史与研究
 
-资格目录来自项目随包受审资源，不是上游天然同名字段。读取当前队伍投影及来源匹配原因；目录与活动DB失配须按有来源的完整发布修复，不能只改commit标签、自填confirmed或用assumed直伤绕资格。
+资格来自当前已接纳数据库随包提供的目录，旧版数据库可以使用对应的兼容目录。读取当前队伍投影和逐角色的原因。换库后若方案仍引用旧资料，用资料更新入口刷新装备来源，再组合核对实际形态和提供者。若新库已把特定角色的资格列为待核，回执会说明待核依据。能力直伤采用假设 profile 时也需要通过角色资格检查。
 
 旧static_layer_bridge及旧benchmark保留历史，不推荐为当前原生执行路径；没有实际重跑不能声称已迁移。相关旧数值/元素参考范围见[兼容入口](compatibility.md)。
 

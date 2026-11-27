@@ -1,6 +1,7 @@
 """Energy observations over the existing Mechanics state and source clock."""
 from __future__ import annotations
 
+from genshin_engine.beneficiary_selection import effective_recipient
 from genshin_engine.rotation_port import TICKS
 from genshin_engine.snapshot_capture import SnapshotCapturePending
 
@@ -77,12 +78,10 @@ def energy_recharge(runtime, cid, time, frontline, event=None):
         if rule.get("resource_gate"):
             continue
         for inst in runtime.state[rule["id"]]["instances"]:
-            if cid not in inst["beneficiaries"]:
+            if not effective_recipient(rule, inst, cid, frontline):
                 continue
             for effect in rule["effects"]:
                 if effect["benefit_type_id"] != "benefit.energy_recharge.all":
-                    continue
-                if rule["beneficiaries"]["scope"] == "current_frontline" and frontline != cid:
                     continue
                 if isinstance(effect["value"], dict) and effect["value"]["sample"] == "trigger":
                     value += sum(runtime.value(effect, rule, {**inst, "trigger_snapshot": sample}, cid,

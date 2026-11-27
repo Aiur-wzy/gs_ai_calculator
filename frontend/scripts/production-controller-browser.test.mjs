@@ -162,6 +162,8 @@ test("actual browser submits through the real SessionController and shares ident
     await until(()=>w.document.querySelector('[data-conversation-content]'),"Return from candidate to official conversation failed");
     const full=w.document.querySelector("[data-conversation-content]");assert.equal(full.dataset.conversationSession,sid);
     [...w.document.querySelectorAll("button")].find(button=>button.textContent.includes("排轴白板")).click();
+    await until(()=>w.document.querySelector('.gs-editor-workbench[data-embedded-assistant="closed"]'),"The editor did not open with its fresh-profile layout");
+    [...w.document.querySelectorAll(".gs-editor-toolbar button")].find(button=>button.textContent.trim()==="打开 AI 小窗").click();
     await until(()=>w.document.querySelector(".gs-editor-assistant [data-conversation-content]"),"Embedded Conversation not mounted");
     assert.equal(w.document.querySelectorAll("[data-conversation-content]").length,1);assert.equal(w.document.querySelector(".gs-editor-assistant [data-conversation-content]").dataset.conversationSession,sid);assert.ok(w.document.body.textContent.includes(prompt));assert.ok(w.document.body.textContent.includes("phase5b official answer"));
     [...w.document.querySelectorAll(".gs-editor-assistant button")].find(button=>button.textContent==="完整页面").click();

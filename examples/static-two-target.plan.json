@@ -1,0 +1,303 @@
+{
+  "kind": "genshin-plan",
+  "plan_version": 3,
+  "plan_id": "fa10ffba-d4c0-42ff-ad63-7a3047adf9cd",
+  "revision": 0,
+  "direct_energy_policy": "energy-direct-base-er-v1",
+  "manual_template": {
+    "version": 2,
+    "form": "resolved",
+    "id_registry_version": 1,
+    "type_definitions": {
+      "damage_types": []
+    },
+    "enemy": {
+      "level": 90,
+      "resistance": {
+        "default": 0.1
+      }
+    },
+    "characters": [
+      {
+        "id": "a",
+        "level": 90,
+        "stats": {
+          "atk": 100,
+          "base_atk": 50,
+          "em": 0,
+          "crit_rate": 0,
+          "crit_dmg": 0.5,
+          "energy_recharge": 1
+        },
+        "name": "工程攻击者"
+      }
+    ],
+    "hits": [
+      {
+        "id": "h0",
+        "t": 0.2,
+        "character": "a",
+        "skill": "工程技能",
+        "hit_name": "h0",
+        "damage_type_ids": [
+          "damage.elemental_skill"
+        ],
+        "damage_system": "classic",
+        "element": "pyro",
+        "multiplier": 1
+      },
+      {
+        "id": "h1",
+        "t": 0.2,
+        "character": "a",
+        "skill": "工程技能",
+        "hit_name": "h1",
+        "damage_type_ids": [
+          "damage.elemental_skill"
+        ],
+        "damage_system": "classic",
+        "element": "pyro",
+        "multiplier": 1
+      }
+    ],
+    "buffs": [],
+    "switches": [],
+    "loop_duration": 10,
+    "meta": {
+      "name": "静态双目标 · 一名融化一名普通受击",
+      "assumptions": [
+        "两名目标共用同一个敌方面板，冰附着只赋给主目标。参数仅用于确定性工程示例。"
+      ]
+    }
+  },
+  "equipment_inputs": {},
+  "effect_bindings": [],
+  "manual_effect_dependencies": [],
+  "rotation_tuning": {
+    "buff_hit_matches": []
+  },
+  "resolution": {
+    "state": "pending"
+  },
+  "resolved_template": null,
+  "rotation_model": {
+    "schema_version": 1,
+    "period": 10,
+    "max_cycles": 3,
+    "initial_frontline": "a",
+    "characters": [
+      {
+        "id": "a",
+        "element": "cryo",
+        "energy_recharge": 1,
+        "energy_capacity": 10,
+        "initial_energy": 10,
+        "status": "assumed",
+        "source": "虚构确定性工程情景"
+      }
+    ],
+    "abilities": [
+      {
+        "id": "e",
+        "character": "a",
+        "action_type_id": "action.elemental_skill",
+        "cooldown": null,
+        "energy": null,
+        "status": "assumed",
+        "source": "虚构确定性工程情景"
+      }
+    ],
+    "actions": [
+      {
+        "id": "cast",
+        "ability_id": "e",
+        "start": 0,
+        "occupation_end": 0.1,
+        "order": 0,
+        "repeat": {
+          "mode": "once"
+        },
+        "status": "assumed",
+        "source": "虚构确定性工程情景"
+      }
+    ],
+    "events": [],
+    "initial_cooldowns": [],
+    "damage_report": {
+      "contract": "damage-report-window-v1",
+      "mode": "explicit",
+      "end": 1
+    }
+  },
+  "mechanics_model": {
+    "schema_version": 1,
+    "rules": [],
+    "hit_events": [
+      {
+        "hit_id": "h0",
+        "action_id": "cast",
+        "order": 10,
+        "application": {
+          "profile_id": "pyro",
+          "target_id": "enemy",
+          "area_id": "battlefield.primary",
+          "landed": true,
+          "atomic_parent_id": "contact.0"
+        },
+        "target_id": "enemy"
+      },
+      {
+        "hit_id": "h1",
+        "action_id": "cast",
+        "order": 11,
+        "target_id": "enemy.b",
+        "application": {
+          "profile_id": "pyro",
+          "target_id": "enemy.b",
+          "area_id": "battlefield.primary",
+          "landed": true,
+          "atomic_parent_id": "contact.0"
+        }
+      }
+    ],
+    "hit_patterns": [],
+    "condition_events": [],
+    "initial_state": {
+      "rules": []
+    },
+    "elemental_model": {
+      "schema_version": 1,
+      "ruleset": "gauge-multi-aura-v4",
+      "target": {
+        "id": "enemy",
+        "kind": "ordinary",
+        "knowledge": "known",
+        "initial_auras": [
+          {
+            "element": "cryo",
+            "remaining_gu": 0.8,
+            "decay_gu_per_second": 0.001,
+            "source": "controlled initial layer",
+            "source_owner": "a"
+          }
+        ],
+        "freeze": {
+          "freezable": false,
+          "resistance": 0,
+          "status": "assumed",
+          "source": "controlled v4 adversarial fixture"
+        },
+        "status": "assumed",
+        "source": "controlled v4 adversarial fixture"
+      },
+      "profiles": [
+        {
+          "id": "pyro",
+          "element": "pyro",
+          "application": "apply",
+          "gauge_units": 1,
+          "icd": {
+            "kind": "none"
+          },
+          "status": "assumed",
+          "source": "controlled v4 adversarial fixture"
+        },
+        {
+          "id": "hydro",
+          "element": "hydro",
+          "application": "apply",
+          "gauge_units": 1,
+          "icd": {
+            "kind": "none"
+          },
+          "status": "assumed",
+          "source": "controlled v4 adversarial fixture"
+        },
+        {
+          "id": "cryo",
+          "element": "cryo",
+          "application": "apply",
+          "gauge_units": 1,
+          "icd": {
+            "kind": "none"
+          },
+          "status": "assumed",
+          "source": "controlled v4 adversarial fixture"
+        },
+        {
+          "id": "electro",
+          "element": "electro",
+          "application": "apply",
+          "gauge_units": 1,
+          "icd": {
+            "kind": "none"
+          },
+          "status": "assumed",
+          "source": "controlled v4 adversarial fixture"
+        },
+        {
+          "id": "anemo",
+          "element": "anemo",
+          "application": "apply",
+          "gauge_units": 1,
+          "icd": {
+            "kind": "none"
+          },
+          "status": "assumed",
+          "source": "controlled v4 adversarial fixture"
+        },
+        {
+          "id": "geo",
+          "element": "geo",
+          "application": "apply",
+          "gauge_units": 1,
+          "icd": {
+            "kind": "none"
+          },
+          "status": "assumed",
+          "source": "controlled v4 adversarial fixture"
+        }
+      ],
+      "swirl_damage": {
+        "icd": {
+          "kind": "sequence",
+          "reset_seconds": 0.5,
+          "sequence": [
+            1,
+            1,
+            0
+          ]
+        },
+        "status": "assumed",
+        "source": "controlled v4 adversarial fixture"
+      }
+    },
+    "target_scene": {
+      "schema_version": 1,
+      "primary_area_ids": [
+        "battlefield.primary"
+      ],
+      "additional_targets": [
+        {
+          "target": {
+            "id": "enemy.b",
+            "kind": "ordinary",
+            "knowledge": "known",
+            "initial_auras": [],
+            "freeze": {
+              "freezable": false,
+              "resistance": 0,
+              "status": "assumed",
+              "source": "controlled v4 adversarial fixture"
+            },
+            "status": "assumed",
+            "source": "controlled v4 adversarial fixture"
+          },
+          "area_ids": [
+            "battlefield.primary"
+          ]
+        }
+      ]
+    }
+  }
+}

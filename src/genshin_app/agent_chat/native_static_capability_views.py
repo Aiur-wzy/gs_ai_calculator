@@ -19,6 +19,11 @@ def _empty_model():
     return empty_mechanics_model()
 
 
+def _target_scene():
+    from genshin_engine.mechanics_schema import target_scene_capabilities
+    return target_scene_capabilities()
+
+
 def _special_schemas():
     from genshin_engine.special_reaction_schema import special_reaction_input_schemas
     return copy.deepcopy(special_reaction_input_schemas())
@@ -50,6 +55,7 @@ _VIEWS = {
     "mechanics_capabilities": {
         ("schema",): _mechanics_schema,
         ("empty_model",): _empty_model,
+        ("target_scene",): _target_scene,
     },
     "special_reaction_capabilities": {
         ("input_contract", "schemas"): _special_schemas,

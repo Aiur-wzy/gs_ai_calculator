@@ -31,6 +31,8 @@ from genshin_db.release_profile import (
 
 DISCOVERY_CONTRACT = "genshin-release-pair-latest-v2"
 DISCOVERY_SCHEMA_VERSION = 2
+QUALIFIED_DISCOVERY_CONTRACT = "genshin-release-pair-latest-v3"
+QUALIFIED_DISCOVERY_SCHEMA_VERSION = 3
 CACHE_CONTRACT = "genshin-release-pair-discovery-cache-v1"
 CACHE_SCHEMA_VERSION = 1
 RESULT_CONTRACT = "genshin-release-pair-discovery-result-v1"
@@ -170,7 +172,7 @@ def validate_latest_document(
     therefore remains informational until the App supplies a pinned verifier.
     """
 
-    if type(value) is not dict or set(value) != {
+    fields = {
         "contract",
         "schema_version",
         "channel",
@@ -178,13 +180,15 @@ def validate_latest_document(
         "database_manifest",
         "artifacts",
         "signature",
-    }:
+    }
+    if type(value) is not dict or type(value.get("schema_version")) is not int:
         raise ReleasePairDiscoveryError("release_pair_discovery_document_invalid")
-    if (
-        value["contract"] != DISCOVERY_CONTRACT
-        or value["schema_version"] != DISCOVERY_SCHEMA_VERSION
-    ):
+    envelope = (value.get("contract"), value.get("schema_version"))
+    qualified = envelope == (QUALIFIED_DISCOVERY_CONTRACT, QUALIFIED_DISCOVERY_SCHEMA_VERSION)
+    if not qualified and envelope != (DISCOVERY_CONTRACT, DISCOVERY_SCHEMA_VERSION):
         raise ReleasePairDiscoveryError("release_pair_discovery_document_unsupported")
+    if set(value) != (fields | {"database_qualification"} if qualified else fields):
+        raise ReleasePairDiscoveryError("release_pair_discovery_document_invalid")
     if expected_channel not in {"stable", "dev"} or value["channel"] != expected_channel:
         raise ReleasePairDiscoveryError("release_pair_discovery_channel_mismatch")
     try:
@@ -219,13 +223,23 @@ def validate_latest_document(
 
     signature = _validate_signature(value["signature"])
     signed_payload = {
-        "contract": DISCOVERY_CONTRACT,
-        "schema_version": DISCOVERY_SCHEMA_VERSION,
+        "contract": envelope[0],
+        "schema_version": envelope[1],
         "channel": expected_channel,
         "pair_manifest": pair,
         "database_manifest": database,
         "artifacts": artifacts,
     }
+    if qualified:
+        from genshin_db.release_qualification import load_database_install_qualification
+
+        if expected_channel != "stable" or artifacts["app"]["format"] != "app-zip":
+            raise ReleasePairDiscoveryError("release_pair_database_qualification_unsupported")
+        try:
+            load_database_install_qualification(value["database_qualification"], database)
+        except (ValueError, DatabaseReleaseError) as error:
+            raise ReleasePairDiscoveryError("release_pair_database_qualification_invalid") from error
+        signed_payload["database_qualification"] = copy.deepcopy(value["database_qualification"])
     trusted = False
     if signature is not None and trust_verifier is not None:
         try:

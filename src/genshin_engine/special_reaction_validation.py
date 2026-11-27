@@ -4,7 +4,7 @@ from __future__ import annotations
 import copy
 from typing import Any
 
-from genshin_engine.constants import LUNAR_FACTOR
+from genshin_engine.constants import LUNAR_FACTOR, STELLAR_FACTOR
 from genshin_engine.special_handler_registry import (
     special_handler_registry_capabilities,
     validate_resolved_handler_binding,
@@ -20,6 +20,10 @@ from genshin_engine.special_reaction_contracts import (
     REQUIRED_CAPABILITY_TAGS,
     SPECIAL_REACTION_SCHEMA_VERSION,
     SPECIAL_REACTION_TYPES,
+    STELLAR_FAST_CLOCK_384,
+    STELLAR_FAST_INTERVAL_384,
+    STELLAR_SWIRL_FACTOR_ADJUSTMENT_KEYS,
+    STELLAR_SWIRL_FACTOR_COMPONENTS,
     _finite_number,
     _issue,
     _seconds_to_ticks,
@@ -194,13 +198,43 @@ def validate_special_reaction_model(model: Any) -> list[dict]:
                         _seconds_to_ticks(value, path+".mechanics."+name)
                     except ValueError as exc:
                         issues.append(_issue("time_precision", str(exc), path+".mechanics."+name))
-            if mechanics.get("settlement_interval_seconds") != 4:
-                issues.append(_issue("mechanics_contract", "星超导按4秒窗口截取并清空层数。",
-                                     path+".mechanics.settlement_interval_seconds"))
+            interval = 4
+            if "settlement_clock" in mechanics:
+                if mechanics["settlement_clock"] != STELLAR_FAST_CLOCK_384 or mechanics_status != "assumed":
+                    issues.append(_issue("mechanics_contract", "实验时钟仅支持 assumed 档案的 experimental_384f。",
+                                         path+".mechanics.settlement_clock"))
+                else:
+                    interval = STELLAR_FAST_INTERVAL_384
+            if mechanics.get("settlement_interval_seconds") != interval:
+                issues.append(_issue("mechanics_contract", f"当前领域时钟的结算间隔应为 {interval} 秒。",
+                                     path+".mechanics.settlement_interval_seconds", expected=interval))
             if mechanics.get("refresh_mode") != "refresh_without_window_reset":
                 issues.append(_issue("refresh_mode", "重复星超导刷新领域但不重置4秒监听窗口。",
                                      path+".mechanics.refresh_mode"))
         elif reaction_type == "stellar_swirl":
+            if "base_factor_adjustment" in mechanics:
+                adjustment = mechanics["base_factor_adjustment"]
+                adjustment_path = path+".mechanics.base_factor_adjustment"
+                if not isinstance(adjustment, dict) or set(adjustment) != STELLAR_SWIRL_FACTOR_ADJUSTMENT_KEYS:
+                    issues.append(_issue(
+                        "schema", "基础系数修正需要provider_id、source、components和multiplier。", adjustment_path))
+                else:
+                    for name in ("provider_id", "source"):
+                        if not isinstance(adjustment[name], str) or not adjustment[name].strip():
+                            issues.append(_issue("value", f"{name}必须为非空文本。", adjustment_path+"."+name))
+                    components = adjustment["components"]
+                    known = (isinstance(components, list) and bool(components)
+                             and all(isinstance(x, str) and x in STELLAR_SWIRL_FACTOR_COMPONENTS
+                                     for x in components))
+                    if not known or len(set(components)) != len(components):
+                        issues.append(_issue(
+                            "value", "components必须列出唯一的星扩散反应分项或能力直伤。",
+                            adjustment_path+".components", allowed=sorted(STELLAR_SWIRL_FACTOR_COMPONENTS)))
+                    multiplier = adjustment["multiplier"]
+                    if (not _finite_number(multiplier, positive=True)
+                            or known and any(not _finite_number(STELLAR_FACTOR[x]*multiplier, positive=True)
+                                             for x in components)):
+                        issues.append(_issue("value", "修正倍数与生效系数必须为有限正数。", adjustment_path+".multiplier"))
             if "initial_vortex_count" in mechanics:
                 value = mechanics["initial_vortex_count"]
                 if type(value) is not int or not 1 <= value < 6:
@@ -419,6 +453,12 @@ def special_reaction_capabilities() -> dict:
                 "supported_elements": sorted(set().union(*DIRECT_STELLAR_ELEMENT_BY_REACTION.values())),
                 "elements_by_reaction": {key:sorted(values) for key,values in DIRECT_STELLAR_ELEMENT_BY_REACTION.items()},
                 "factor_policy": "event_time_last_completed_four_second_window",
+                "field_settlement": {
+                    "default_interval_seconds": 4,
+                    "experimental_mechanics": {"status": "assumed", "settlement_clock": STELLAR_FAST_CLOCK_384,
+                                               "settlement_interval_seconds": STELLAR_FAST_INTERVAL_384},
+                    "affects": "stellar_field_settlement_only",
+                },
                 "factor_policy_by_reaction": {"stellar_superconduct":"event_time_last_completed_four_second_window",
                     "stellar_swirl":"ability_coefficient_without_vortex_layers"},
                 "caller_supplied_layers_or_factor": False,
@@ -436,7 +476,7 @@ def special_reaction_capabilities() -> dict:
         },
         "boundaries": {
             "stellar_superconduct": "area Polestar Field; optional initial_grant_layers grants only the first window buff, not application counts; settlement_bonus_layers adds at completed settlement capped at 12; refresh does not regrant",
-            "stellar_swirl": "area packet runtime; optional initial_vortex_count upgrades fresh vortices under a party-shared initial_upgrade_cooldown_seconds; normal reaction counts, expiry and detonation remain active; direct ability damage uses its own coefficient without vortex level",
+            "stellar_swirl": "area packet runtime; optional initial_vortex_count upgrades fresh vortices under a party-shared initial_upgrade_cooldown_seconds; optional assumed mechanics.base_factor_adjustment multiplies only listed swirl components with provider_id, source, components and multiplier; direct ability damage is opt-in by the stellar_swirl component and never reads a vortex level",
             "lunar_electro": (
                 "one replaceable cloud per area; refresh extends six-second lifetime without "
                 "resetting existing attack phases; first strike 0.25s, same-target 2s cooldown, "

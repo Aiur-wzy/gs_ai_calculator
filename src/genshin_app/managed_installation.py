@@ -13,9 +13,12 @@ import subprocess
 import sys
 from contextlib import contextmanager, nullcontext
 from pathlib import Path
+from time import perf_counter
 from uuid import uuid4
 
 from genshin_db.locking import file_lock
+from genshin_db.release_profile import DatabaseReleaseError
+from genshin_db.release_qualification import read_qualified_database_identity
 
 from . import version
 from .database_transaction import atomic_json, profile_writer
@@ -47,8 +50,14 @@ from .product_install_contract import (
     FirstInstallError,
 )
 from .product_release_index import digest
-from .release_pair_update import _verify_app
+from .release_pair_update import _verify_app, qualified_database_from_signed_document
 from .windows_product_registration import APP_USER_MODEL_ID, DISPLAY_NAME
+
+_INSTALL_DATA_LOCKS = frozenset({"data/.update.lock", "data/.genshin.db.write.lock"})
+
+
+class _InstallDirectoryRenameError(OSError):
+    pass
 
 
 def _quiet(root=None):
@@ -91,6 +100,8 @@ def refresh_registered_installation(root):
 
 
 class ManagedInstallationCoordinator(_FirstInstallCoordinator):
+    _verifies_published_app = True
+
     def __init__(self, *, local, install_root=None, system_registration=None, **kwargs):
         super().__init__(local=local, **kwargs)
         self._system = system_registration
@@ -185,40 +196,60 @@ class ManagedInstallationCoordinator(_FirstInstallCoordinator):
         return choice
 
     def install(self, *, confirmation_digest, **kwargs):
+        started = perf_counter()
         choice = self.preview(**{key: value for key, value in kwargs.items() if key in {"app_only", "local_index"}})
         if choice["confirmation_digest"] != confirmation_digest:
             raise FirstInstallError("product_first_install_confirmation_mismatch")
         recheck_identity(choice["location_identity"])
+        confirmed = perf_counter()
         result = super().install(confirmation_digest=choice["selection_digest"], **kwargs)
-        return {**result, **self.refresh_registration()}
+        refresh_started = perf_counter()
+        registration = self.refresh_registration()
+        finished = perf_counter()
+        timing = {"elapsed_seconds": round(finished - started, 3), "phase_seconds": {
+            "confirming_location": round(confirmed - started, 3),
+            **result["timing"]["phase_seconds"],
+            "refreshing_registration": round(finished - refresh_started, 3),
+        }}
+        return {**result, **registration, "timing": timing}
 
     def _publish_first_profile(self, profile, registration):
-        with self._location_guard():
+        with self._location_guard(), file_lock(self.layout.maintenance / "installation.lock", timeout=0):
             return self._publish_first_profile_locked(profile, registration)
 
     def _publish_first_profile_locked(self, profile, registration):
         self._require_new_profile()
         root = self._profile
+        profile = checked_path(profile)
+        if profile != self._cache / "pending-install/profile":
+            raise FirstInstallError("product_install_recovery_path_invalid")
         row = read_registration(root)
         registration = {**registration, "layout_version": LAYOUT_VERSION,
                         "installation_id": row["installation_id"], "installation_state": "publishing"}
         document, _ = self._signed_installed_source(profile / "data", registration)
-        _verify_app(profile / "app", document["pair_manifest"], independent=True)
-        members = {}
-        for name in ("app", "data"):
-            if not (profile / name).exists():
-                continue
-            for path in safe_files(profile / name):
-                relative = path.relative_to(profile).as_posix()
-                if relative in {"data/.update.lock", "data/.genshin.db.write.lock"}:
-                    continue
-                if (root / relative).exists():
-                    error = FirstInstallError("product_install_target_file_exists")
-                    error.add_note(relative)
-                    raise error
-                members[relative] = sha256(path)
+        identity = path_identity(root)
+        # Move each empty destination as a verified tree. A retained data tree
+        # only needs a merge of the staged Data members, even when App moves.
+        directories = {}
+        if not os.path.lexists(root / "app"):
+            names = ("app",) if registration.get("database_state") == "database_not_installed" else ("app", "data")
+            for name in names:
+                if not os.path.lexists(root / name):
+                    source = path_identity(profile / name)
+                    if source["path"] == source["ancestor"] and source["device"] == identity["device"]:
+                        directories[name] = source
+        if "app" in directories:
+            for lock in _INSTALL_DATA_LOCKS:
+                checked_path(profile / lock).unlink(missing_ok=True)
+            members = self._publication_members(profile, ("data",),
+                signed_database_sha256=document["database_manifest"]["database"]["sha256"])
+        else:
+            directories = {}
+            members = self._publication_members(profile, ("app", "data"))
         operation = {"kind": "publish", "staged": str(profile), "registration": registration,
-                     "signed_release": document, "identity": path_identity(root), "state": "prepared", "members": members}
+                     "signed_release": document, "identity": identity, "state": "prepared", "members": members}
+        if directories:
+            operation["directories"] = directories
         journal = self.layout.maintenance / "operations" / "publish.json"
         save_maintenance_proof(root, document, app_root=profile / "app")
         atomic_json(journal, operation)
@@ -226,7 +257,32 @@ class ManagedInstallationCoordinator(_FirstInstallCoordinator):
         if self._system:
             self._system.write_location({"root": str(root), "installation_id": registration["installation_id"],
                                          "state": "publishing"})
-        self._finish_publication(operation)
+        try:
+            self._finish_publication(operation)
+        except _InstallDirectoryRenameError:
+            if not directories or any(os.path.lexists(root / name) for name in directories):
+                raise
+            # Windows isolation or a filesystem provider can refuse directory
+            # rename. Switch to the old journal only before any tree moved.
+            operation.pop("directories")
+            operation["members"] = self._publication_members(profile, ("app", "data"))
+            atomic_json(journal, operation)
+            self._finish_publication(operation)
+
+    def _publication_members(self, profile, names, *, signed_database_sha256=None):
+        members = {}
+        for name in names:
+            for path in safe_files(profile / name):
+                relative = path.relative_to(profile).as_posix()
+                if relative in _INSTALL_DATA_LOCKS:
+                    continue
+                if os.path.lexists(self._profile / relative):
+                    error = FirstInstallError("product_install_target_file_exists")
+                    error.add_note(relative)
+                    raise error
+                members[relative] = (signed_database_sha256
+                    if relative == "data/genshin.db" and signed_database_sha256 is not None else sha256(path))
+        return members
 
     def _cleanup_private_transaction(self, transaction):
         row = read_registration(self._profile)
@@ -235,17 +291,81 @@ class ManagedInstallationCoordinator(_FirstInstallCoordinator):
         super()._cleanup_private_transaction(transaction)
 
     def _finish_publication(self, operation):
+        if operation.get("kind") != "publish" or operation.get("state") != "prepared":
+            raise FirstInstallError("product_install_recovery_proof_invalid")
         root = recheck_identity(operation["identity"])
-        if root != self._profile or read_registration(root).get("installation_id") != operation["registration"]["installation_id"]:
+        row = read_registration(root)
+        registration = operation["registration"]
+        if root != self._profile or row != registration or row.get("installation_state") != "publishing":
             raise FirstInstallError("product_install_recovery_path_invalid")
         staged = checked_path(operation["staged"])
-        if not staged.is_relative_to(self._cache / "pending-install"):
+        if staged != self._cache / "pending-install/profile":
             raise FirstInstallError("product_install_recovery_path_invalid")
-        document, _, inventory = signed_inventory(root, operation["registration"], self._trust_verifier)
+        document, _, inventory = signed_inventory(root, registration, self._trust_verifier)
         if document != operation["signed_release"] or any(
                 not is_managed_relative(name, inventory, keep_user_data=True) for name in operation["members"]):
             raise FirstInstallError("product_install_recovery_proof_invalid")
-        for name, expected in operation["members"].items():
+        app_only = registration.get("database_state") == "database_not_installed"
+        if "directories" in operation:
+            self._finish_directory_publication(root, staged, operation, app_only=app_only)
+        else:
+            self._finish_member_publication(root, staged, operation["members"])
+        _verify_app(root / "app", document["pair_manifest"], independent=True)
+        if not app_only:
+            database = checked_path(root / "data/genshin.db")
+            database_manifest = document["database_manifest"]
+            qualification = qualified_database_from_signed_document(document)
+            if qualification is not None:
+                try:
+                    read_qualified_database_identity(database, database_manifest, qualification)
+                except DatabaseReleaseError as error:
+                    raise FirstInstallError("product_install_recovery_database_mismatch") from error
+            elif not database.is_file() or sha256(database) != database_manifest["database"]["sha256"]:
+                raise FirstInstallError("product_install_recovery_database_mismatch")
+        live_document, has_database = self._signed_installed_source(root / "data", registration)
+        if live_document != document or has_database == app_only:
+            raise FirstInstallError("product_install_recovery_proof_invalid")
+        atomic_json(root / REGISTRATION_FILENAME, {**registration, "installation_state": "registration_pending"})
+        atomic_json(self.layout.maintenance / "operations" / "publish.json", {**operation, "state": "complete"})
+
+    def _finish_directory_publication(self, root, staged, operation, *, app_only):
+        directories = operation["directories"]
+        members = operation["members"]
+        if (set(directories) not in ({"app"}, {"app", "data"})
+                or (app_only and (set(directories) != {"app"} or members))
+                or any(not name.startswith("data/") for name in members)):
+            raise FirstInstallError("product_install_recovery_path_invalid")
+        # Journal every whole-tree move before moving anything. Recovery must
+        # see exactly one copy of each directory with its recorded identity.
+        for name in (name for name in ("app", "data") if name in directories):
+            source, target = checked_path(staged / name), checked_path(root / name)
+            source_exists, target_exists = os.path.lexists(source), os.path.lexists(target)
+            if source_exists == target_exists:
+                raise FirstInstallError("product_install_recovery_conflict")
+            expected = directories[name]
+            if expected["path"] != str(source) or expected["ancestor"] != str(source):
+                raise FirstInstallError("product_install_recovery_path_invalid")
+            location = source if source_exists else target
+            if not location.is_dir():
+                raise FirstInstallError("product_install_recovery_path_invalid")
+            recheck_identity({**expected, "path": str(location), "ancestor": str(location)})
+            if source_exists:
+                try:
+                    source.rename(target)
+                except OSError as error:
+                    raise _InstallDirectoryRenameError(str(error)) from error
+                recheck_identity({**expected, "path": str(target), "ancestor": str(target)})
+        if "data" in directories:
+            actual = {path.relative_to(root).as_posix(): path for path in safe_files(root / "data")}
+            if set(actual) != set(members) or any(sha256(path) != members[name]
+                    for name, path in actual.items() if name != "data/genshin.db"):
+                raise FirstInstallError("product_install_recovery_content_changed")
+        elif members:
+            self._finish_member_publication(root, staged, members)
+
+    @staticmethod
+    def _finish_member_publication(root, staged, members):
+        for name, expected in members.items():
             relative = Path(name)
             if relative.is_absolute() or ".." in relative.parts or relative.parts[0] not in {"app", "data"}:
                 raise FirstInstallError("product_install_recovery_path_invalid")
@@ -259,15 +379,6 @@ class ManagedInstallationCoordinator(_FirstInstallCoordinator):
                 source.rename(target)
             elif not target.is_file() or sha256(target) != expected:
                 raise FirstInstallError("product_install_recovery_content_changed")
-        _verify_app(root / "app", document["pair_manifest"], independent=True)
-        database = root / "data/genshin.db"
-        if (operation["registration"].get("database_state") != "database_not_installed"
-                and (not database.is_file() or sha256(database) != document["database_manifest"]["database"]["sha256"])):
-            raise FirstInstallError("product_install_recovery_database_mismatch")
-        save_maintenance_proof(root, document)
-        row = {**operation["registration"], "installation_state": "registration_pending"}
-        atomic_json(root / REGISTRATION_FILENAME, row)
-        atomic_json(self.layout.maintenance / "operations" / "publish.json", {**operation, "state": "complete"})
 
     def maintenance_preview(self):
         if not (self._profile / REGISTRATION_FILENAME).exists():

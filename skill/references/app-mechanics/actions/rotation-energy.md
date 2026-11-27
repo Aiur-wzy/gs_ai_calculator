@@ -20,9 +20,14 @@ capabilities提供动作基础资源绑定契约时，适用的C0常规固定耗
 
 ```text
 engine check-rotation input.json
+engine check-rotation input.json --preflight
 engine check-rotation input.json --format json --output check.json
 engine check-rotation input.json --format xlsx --output check.xlsx
 ```
+
+需要快速定位时用 CLI 的 `--preflight`，原生 Agent 用 `gs_diagnose_result` 的 `request={"view":"rotation_preflight"}` 并传当前候选修订。读 `preflight.checks` 中的动作关联、动作与冷却及声明能量三项。声明能量失败给出对应动作、时间、当时余额和缺口。命中关联待补时，依赖齐全的声明资源仍可检查。某项显示未检查时沿 `first_issue` 的位置修正当前候选并重试。若组合缺项导致无法形成可检查的队伍、动作或面板，CLI 也可用独立动作检查文件验证人工声明。
+
+预检采用已声明的资源流水和动作条件。机制派生、取消、替换的回能以及同刻施放扣能的完整因果以正式执行为准。预检保留 `closure_verified=false`，命令成功退出表示取得了回执。遇到差异先确认预检和完整计算各自消费的输入，再确定该调时、补源还是改配装。保存、查询和修正草稿仍可继续。
 
 命令接在 `py -3.12 -m genshin_app` 或便携版 `GenshinCalc.exe` 后；全局 `--data-dir` 放子命令前。新结果默认不覆盖；明确覆盖时加 `--overwrite`。捆绑示例为 `examples/rotation-energy-check.json`，是合成能量机制示例，不是角色推荐轴。
 

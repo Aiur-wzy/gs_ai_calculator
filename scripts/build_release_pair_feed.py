@@ -18,8 +18,6 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT / "src") not in sys.path:
     sys.path.insert(0, str(ROOT / "src"))
 
-from release_supply_chain import SupplyChainError, write_package_file_manifest
-
 if __package__:
     from .product_site_publication import (
         OFFLINE_PAIR_CATALOG,
@@ -28,6 +26,7 @@ if __package__:
         site_downloads,
         validate_setup_locator,
     )
+    from .release_supply_chain import SupplyChainError, write_package_file_manifest
 else:
     from product_site_publication import (
         OFFLINE_PAIR_CATALOG,
@@ -36,6 +35,7 @@ else:
         site_downloads,
         validate_setup_locator,
     )
+    from release_supply_chain import SupplyChainError, write_package_file_manifest
 
 from genshin_app import version
 from genshin_app.package_integrity import (
@@ -49,6 +49,7 @@ from genshin_app.product_release_index import (
     _check_index_progress,
     _stamp,
     canonical,
+    release_options,
     validate_product_release_index,
 )
 from genshin_app.release_pair_coordinator import (
@@ -57,6 +58,8 @@ from genshin_app.release_pair_coordinator import (
     _sha256,
 )
 from genshin_app.release_pair_discovery import (
+    DISCOVERY_SCHEMA_VERSION,
+    QUALIFIED_DISCOVERY_SCHEMA_VERSION,
     ReleasePairDiscoveryError,
     validate_latest_document,
 )
@@ -90,6 +93,8 @@ def _parser() -> argparse.ArgumentParser:
     prepare.add_argument("--base-url", required=True)
     prepare.add_argument("--database-base-url")
     prepare.add_argument("--independent-app", action="store_true")
+    prepare.add_argument("--qualify-database-install", action="store_true",
+                         help="深检最终 SQLite 并签发新版安装证明，仅用于支持 v3 的索引")
     prepare.add_argument("--accepted-database-source-pair", type=Path,
                          help="原数据库压缩包对应的已签名配对，沿用原下载地址")
     prepare.add_argument("--accepted-database-archive", type=Path,
@@ -110,11 +115,24 @@ def _parser() -> argparse.ArgumentParser:
     following.add_argument("--released-at", required=True)
     following.add_argument("--expires-at", required=True)
     following.add_argument("--output", type=Path, required=True)
+    transition = commands.add_parser("prepare-update-transition", help="生成先更新 App、再更新数据库的两份待签索引")
+    transition.add_argument("--previous-index", type=Path, required=True)
+    transition.add_argument("--bridge-pair", type=Path, required=True, help="新 App 和当前数据库的已签 v2 配对")
+    transition.add_argument("--final-pair", type=Path, required=True, help="同一新 App 和新数据库的已签 v3 配对")
+    transition.add_argument("--released-at", required=True)
+    transition.add_argument("--expires-at", required=True)
+    transition.add_argument("--index-sequence-floor", type=int, default=0,
+                            help="已使用的最大索引序号，新索引必须高于该值")
+    transition.add_argument("--app-sequence-floor", type=int, default=0,
+                            help="已签过的最大程序序号，新程序必须高于该值")
+    transition.add_argument("--output", type=Path, required=True)
     app = commands.add_parser("prepare-app", help="从已核验构建生成无数据库的独立 App 工件目录")
     app.add_argument("--source", type=Path, required=True)
     app.add_argument("--updater", type=Path, required=True)
     app.add_argument("--maintenance", type=Path, required=True,
                      help="经冻结代码核验的安装/卸载程序，作为 App 的签名成员交付")
+    app.add_argument("--qualify-database", type=Path,
+                     help="深检已配套的最终 SQLite，在 App 内附带旧更新索引可传递的证明")
     app.add_argument("--output", type=Path, required=True)
     pair = commands.add_parser("prepare-pair", help="为独立 App 工件与 DB 清单建立精确配对")
     pair.add_argument("--app-root", type=Path, required=True)
@@ -133,6 +151,7 @@ def _parser() -> argparse.ArgumentParser:
     site.add_argument("--signature", type=Path, required=True)
     site.add_argument("--output", type=Path, required=True)
     site.add_argument("--setup-asset", type=Path, help="安装器 ZIP 的 HTTPS 地址、字节数和 SHA-256 JSON")
+    site.add_argument("--offline-bundle-asset", type=Path, help="完整离线安装 ZIP 的 HTTPS 地址、字节数和 SHA-256 JSON")
     signature = commands.add_parser("signature-json", help="将离线签名原始字节转为 Base64URL JSON")
     signature.add_argument("--raw", required=True, type=Path)
     signature.add_argument("--key-id", required=True)
@@ -140,7 +159,8 @@ def _parser() -> argparse.ArgumentParser:
     return parser
 
 
-def prepare_independent_app(source: Path, output: Path, *, updater: Path, maintenance: Path) -> dict:
+def prepare_independent_app(source: Path, output: Path, *, updater: Path, maintenance: Path,
+                            qualify_database: Path | None = None) -> dict:
     from genshin_app.portable_layout import PORTABLE_MARKER
     source, output = source.resolve(strict=True), output.resolve()
     if output.exists() or source in output.parents:
@@ -189,6 +209,17 @@ def prepare_independent_app(source: Path, output: Path, *, updater: Path, mainte
             '{"contract":"genshin-installation-layout-v2"}\n', encoding="utf-8")
         if _sha256(target / maintenance_member) != maintenance_verification["executable_sha256"]:
             raise ReleasePairFeedError("product_release_maintenance_changed")
+        qualification_member = "release-database-qualification.json"
+        if qualify_database is not None:
+            from genshin_db.release_migration import (
+                build_database_install_qualification,
+            )
+            from genshin_db.release_profile import load_database_release_manifest
+
+            manifest = load_database_release_manifest(source / "_internal" / "bundled" / "database-release-manifest.json")
+            qualification = build_database_install_qualification(qualify_database, manifest)
+            with (target / qualification_member).open("xb") as stream:
+                stream.write(canonical(qualification))
         receipt = write_package_file_manifest(target)
         _, _, target_inventory = _read_package_manifest(target)
         expected_inventory = {name: sha for name, sha in source_inventory.items()
@@ -196,6 +227,8 @@ def prepare_independent_app(source: Path, output: Path, *, updater: Path, mainte
         expected_inventory[PER_USER_UPDATER_RELATIVE] = updater_identity["sha256"]
         expected_inventory[maintenance_member] = maintenance_verification["executable_sha256"]
         expected_inventory[layout_member] = _sha256(target / layout_member)
+        if qualify_database is not None:
+            expected_inventory[qualification_member] = _sha256(target / qualification_member)
         if target_inventory != expected_inventory:
             raise ReleasePairFeedError("release_pair_feed_app_copy_mismatch")
         if verify_package_artifact(source) != before:
@@ -268,6 +301,18 @@ def prepare_next_index(previous_path: Path, pair_paths: Sequence[Path], released
     verifier = build_trust_verifier(trust_keys)
     past = _read_json(previous_path, "product_release_index_invalid")
     previous = validate_product_release_index(past, channel="stable", trust_verifier=verifier, for_install=False)
+    payload, index = _next_unsigned_index(previous, pair_paths, released_at, expires_at, trust_keys,
+                                          verifier, sequence=past["index_sequence"] + 1, renew=renew)
+    with output.open("xb") as stream:
+        stream.write(canonical({**payload, "signature": None}))
+    return {"status": "prepared", "index_sequence": payload["index_sequence"],
+            "release_pair_id": index["combinations"][index["latest"]], "added_pairs": len(pair_paths), "renewed": renew}
+
+
+def _next_unsigned_index(previous: dict, pair_paths: Sequence[Path], released_at: str, expires_at: str,
+                         trust_keys, verifier, *, sequence: int, renew: bool = False,
+                         app_sequence_floor: int = 0) -> tuple[dict, dict]:
+    past = previous["signed_index"]
     released, expires = _stamp(released_at), _stamp(expires_at)
     if (released <= _stamp(past["released_at"]) or expires <= released
             or (renew and expires <= _stamp(past["expires_at"]))):
@@ -275,7 +320,7 @@ def prepare_next_index(previous_path: Path, pair_paths: Sequence[Path], released
 
     app_sequences = dict(previous["app_sequences"])
     database_sequences = dict(previous["database_sequences"])
-    app_sequence = max(app_sequences.values())
+    app_sequence = max(max(app_sequences.values()), app_sequence_floor)
     latest_db_sequence = max(database_sequences.values())
     latest_pair_sequence = max(entry["pair_manifest"]["pair_sequence"] for entry in previous["pairs"].values())
     apps = list(past["apps"])
@@ -308,20 +353,80 @@ def prepare_next_index(previous_path: Path, pair_paths: Sequence[Path], released
         pairs.append(original)
 
     payload = {key: value for key, value in past.items() if key != "signature"}
-    payload.update(index_sequence=past["index_sequence"] + 1, released_at=released_at, expires_at=expires_at,
+    payload.update(index_sequence=sequence, released_at=released_at, expires_at=expires_at,
                    latest_app_release_id=max(app_sequences, key=app_sequences.get),
                    latest_database_release_id=max(database_sequences, key=database_sequences.get),
                    apps=apps, pairs=pairs)
     index = _qualify_unsigned_index(payload, previous=previous, trust_keys=trust_keys, trust_verifier=verifier,
                                     released=released)
-    with output.open("xb") as stream:
-        stream.write(canonical({**payload, "signature": None}))
-    return {"status": "prepared", "index_sequence": payload["index_sequence"],
-            "release_pair_id": index["combinations"][index["latest"]], "added_pairs": len(additions), "renewed": renew}
+    return payload, index
+
+
+def _latest_pair(index: dict) -> dict:
+    return index["pairs"][index["combinations"][index["latest"]]]
+
+
+def _require_transition_option(index: dict, installed: dict, expected_mode: str, expected_document: dict) -> None:
+    options = release_options(index, installed["pair_manifest"], installed["database_manifest"])
+    if (len(options) != 1 or options[0]["mode"] != expected_mode or options[0]["document"] != expected_document):
+        raise ReleasePairFeedError("product_release_update_transition_invalid")
+
+
+def prepare_update_transition(
+    previous_path: Path, bridge_path: Path, final_path: Path, released_at: str, expires_at: str,
+    output: Path, trust_keys, *, index_sequence_floor: int = 0, app_sequence_floor: int = 0,
+) -> dict:
+    """Qualify separate unsigned indexes for the deployed client and its successor."""
+    if index_sequence_floor < 0:
+        raise ReleasePairFeedError("product_release_update_transition_sequence_floor_invalid")
+    if app_sequence_floor < 0:
+        raise ReleasePairFeedError("product_release_update_transition_app_sequence_floor_invalid")
+    output = output.resolve()
+    if output.exists():
+        raise ReleasePairFeedError("release_pair_feed_output_exists")
+    verifier = build_trust_verifier(trust_keys)
+    previous = validate_product_release_index(
+        _read_json(previous_path, "product_release_index_invalid"),
+        channel="stable", trust_verifier=verifier, for_install=False,
+    )
+    sequence = max(previous["signed_index"]["index_sequence"], index_sequence_floor)
+    legacy_payload, legacy = _next_unsigned_index(
+        previous, [bridge_path], released_at, expires_at, trust_keys, verifier, sequence=sequence + 1,
+        app_sequence_floor=app_sequence_floor,
+    )
+    current_payload, current = _next_unsigned_index(
+        previous, [bridge_path, final_path], released_at, expires_at, trust_keys, verifier, sequence=sequence + 2,
+        app_sequence_floor=app_sequence_floor,
+    )
+    _check_index_progress(current, legacy)
+    if any(pair["schema_version"] != DISCOVERY_SCHEMA_VERSION for pair in legacy["pairs"].values()):
+        raise ReleasePairFeedError("product_release_update_transition_legacy_requires_v2")
+    if current_payload["pairs"][:-1] != legacy_payload["pairs"]:
+        raise ReleasePairFeedError("product_release_update_transition_invalid")
+
+    installed, bridge, final = _latest_pair(previous), _latest_pair(legacy), _latest_pair(current)
+    if (final["schema_version"] != QUALIFIED_DISCOVERY_SCHEMA_VERSION
+            or final["pair_manifest"]["pair_sequence"] != bridge["pair_manifest"]["pair_sequence"] + 1):
+        raise ReleasePairFeedError("product_release_update_transition_final_requires_forward_v3")
+    _require_transition_option(legacy, installed, "app_only", bridge)
+    _require_transition_option(current, bridge, "database_only", final)
+
+    output.parent.mkdir(parents=True, exist_ok=True)
+    with TemporaryDirectory(dir=output.parent, prefix=".product-update-transition-") as staging:
+        staged = Path(staging) / "transition"
+        staged.mkdir()
+        for name, payload in (("legacy", legacy_payload), ("current", current_payload)):
+            (staged / f"{name}-index.unsigned.json").write_bytes(canonical({**payload, "signature": None}))
+            (staged / f"{name}-index-signing-payload.canonical.json").write_bytes(canonical(payload))
+        staged.rename(output)
+    return {"status": "prepared", "legacy_index_sequence": sequence + 1, "current_index_sequence": sequence + 2,
+            "bridge_pair_id": bridge["pair_manifest"]["release_pair_id"],
+            "final_pair_id": final["pair_manifest"]["release_pair_id"]}
 
 
 def finalize_product_site(index_path: Path, signature_path: Path, output: Path, trust_keys, *,
-                          setup_asset_path: Path | None = None) -> dict:
+                          setup_asset_path: Path | None = None,
+                          offline_bundle_asset_path: Path | None = None) -> dict:
     output = output.resolve()
     if output.exists():
         raise ReleasePairFeedError("release_pair_feed_output_exists")
@@ -330,25 +435,32 @@ def finalize_product_site(index_path: Path, signature_path: Path, output: Path, 
     signed = {**payload, "signature": signature}
     validated = validate_product_release_index(signed, channel="stable", trust_verifier=build_trust_verifier(trust_keys))
     latest = validated["pairs"][validated["combinations"][validated["latest"]]]
-    artifacts = latest["artifacts"]
     application, database = validated["latest"]
     app_version = latest["pair_manifest"]["app"]["app_version"]
     data_version = latest["database_manifest"]["database"]["game_version"]
-    links = "".join(f'<li><a href="{html.escape(artifacts[kind]["url"], quote=True)}">{label}</a> '
-                    f'{html.escape(release_id)}（{artifacts[kind]["size_bytes"] / 1024**2:.1f} MiB）'
-                    f'<details><summary>SHA-256</summary><code>{artifacts[kind]["sha256"]}</code></details></li>'
-                    for kind, label, release_id in (("app", "免安装程序", application), ("database", "数据库包", database)))
-    setup = None
-    if setup_asset_path is not None:
+    optional_artifacts = {}
+    for kind, path in (("setup", setup_asset_path), ("offline_bundle", offline_bundle_asset_path)):
+        if path is None:
+            continue
+        reason = f"product_release_{kind}_asset_invalid"
         try:
-            setup = validate_setup_locator(_read_json(setup_asset_path, "product_release_setup_asset_invalid",
-                                                      maximum=64 * 1024))
+            optional_artifacts[kind] = validate_setup_locator(_read_json(path, reason, maximum=64 * 1024))
         except ValueError as error:
-            raise ReleasePairFeedError("product_release_setup_asset_invalid") from error
-        links = (f'<li><a href="{html.escape(setup["url"], quote=True)}">Windows 小安装器</a> '
-                 f'（{setup["size_bytes"] / 1024**2:.1f} MiB）'
-                 f'<details><summary>SHA-256</summary><code>{setup["sha256"]}</code></details></li>') + links
-    site_downloads(validated, latest, setup)
+            raise ReleasePairFeedError(reason) from error
+    downloads = site_downloads(validated, latest, **optional_artifacts)
+    links = []
+    for kind, label, release_id in (
+        ("setup", "Windows 小安装器", ""),
+        ("offline_bundle", "Windows 完整离线安装包", ""),
+        ("app", "独立 App 更新包", application),
+        ("database", "数据库包", database),
+    ):
+        locator = downloads.get(kind)
+        if locator is None:
+            continue
+        links.append(f'<li><a href="{html.escape(locator["url"], quote=True)}">{label}</a> '
+                     f'{html.escape(release_id)}（{locator["size_bytes"] / 1024**2:.1f} MiB）'
+                     f'<details><summary>SHA-256</summary><code>{locator["sha256"]}</code></details></li>')
     catalog = offline_pair_catalog(validated)
     catalog_links = []
     for row in catalog["pairs"]:
@@ -375,15 +487,16 @@ def finalize_product_site(index_path: Path, signature_path: Path, output: Path, 
             '<!doctype html><html lang="zh-CN"><meta charset="utf-8"><meta name="viewport" '
             'content="width=device-width,initial-scale=1"><title>原神拉表下载</title><main>'
             f'<h1>原神拉表</h1><p>当前兼容组合为应用 {html.escape(app_version)} '
-            f'和游戏数据 {html.escape(data_version)}。</p><ul>{links}</ul>'
+            f'和游戏数据 {html.escape(data_version)}。</p><ul>{"".join(links)}</ul>'
             f'<p><a href="{PRODUCT_RELEASE_NOTES["app"]}">安装器及应用发行说明</a> · '
             f'<a href="{PRODUCT_RELEASE_NOTES["database"]}">数据库发行说明</a></p>'
             '<p>Windows 工件未做代码签名。本页提供 SHA-256 校验值。</p>'
             '<p>建议由 GPT-6.1 Sol 或能力更强的模型通过 CLI 查询、编排和计算。GUI 适合看图、审核和寻找问题。'
             '应用内原生 Agent 与 DeepSeek 的复杂任务表现仍不稳定。</p>'
-            '<p>免安装版解压后直接打开。可以在应用内联网下载数据库，也可以选择本页的数据库包和'
-            '<a href="database-install-pair.json">本地补装签名清单</a>。'
-            '使用安装器作整套离线安装时，请同时下载应用包、数据库包和<a href="latest.json">签名更新索引</a>。</p>'
+            '<p>首次安装可用小安装器联网下载。完整离线安装包解压后，按包内说明运行 Setup。'
+            '独立 App 更新包供安装器和更新器使用。已安装应用可联网补装数据库，'
+            '也可以选择数据库包与<a href="database-install-pair.json">本地补装签名清单</a>。'
+            '分开下载做完整离线安装时，请提供应用包、数据库包和<a href="latest.json">签名更新索引</a>。</p>'
             f'{archive}'
             '<p>本项目为非官方工具，仅供学习参考。角色、武器和套装资料可能尚未正式上线。'
             '基础游戏数据整理自 <a href="https://gitlab.com/GuraFoundation/YuanShenResources">YuanShenResources</a>。'
@@ -411,6 +524,7 @@ def main(argv: list[str] | None = None) -> int:
                 accepted_database_source_pair=args.accepted_database_source_pair,
                 accepted_database_archive=args.accepted_database_archive,
                 trust_keys=version.DATABASE_RELEASE_TRUST_KEYS,
+                qualify_database_install=args.qualify_database_install,
             )
         elif args.command == "finalize":
             result = finalize_release_pair_feed(
@@ -423,8 +537,14 @@ def main(argv: list[str] | None = None) -> int:
         elif args.command == "index-next":
             result = prepare_next_index(args.previous_index, args.pair_document or (), args.released_at,
                                         args.expires_at, args.output, version.DATABASE_RELEASE_TRUST_KEYS, renew=args.renew)
+        elif args.command == "prepare-update-transition":
+            result = prepare_update_transition(args.previous_index, args.bridge_pair, args.final_pair, args.released_at,
+                                               args.expires_at, args.output, version.DATABASE_RELEASE_TRUST_KEYS,
+                                               index_sequence_floor=args.index_sequence_floor,
+                                               app_sequence_floor=args.app_sequence_floor)
         elif args.command == "prepare-app":
-            result = prepare_independent_app(args.source, args.output, updater=args.updater, maintenance=args.maintenance)
+            result = prepare_independent_app(args.source, args.output, updater=args.updater, maintenance=args.maintenance,
+                                             qualify_database=args.qualify_database)
         elif args.command == "prepare-pair":
             if args.output.exists() or (args.app_root / "_internal" / "bundled").exists():
                 raise ReleasePairFeedError("release_pair_feed_input_invalid")
@@ -449,7 +569,8 @@ def main(argv: list[str] | None = None) -> int:
             result = {"status": "prepared", "key_id": args.key_id}
         else:
             result = finalize_product_site(args.index, args.signature, args.output, version.DATABASE_RELEASE_TRUST_KEYS,
-                                           setup_asset_path=args.setup_asset)
+                                           setup_asset_path=args.setup_asset,
+                                           offline_bundle_asset_path=args.offline_bundle_asset)
         print(json.dumps(result, ensure_ascii=False, sort_keys=True))
         return 0
     except (ReleasePairFeedError, ReleasePairDiscoveryError, ReleasePairCoordinatorError,

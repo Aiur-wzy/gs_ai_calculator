@@ -151,7 +151,7 @@ def _compiled_document(checked):
     return signed
 
 
-def _install(sandbox, setup, signed, index, app_archive, database_archive):
+def _install(sandbox, setup, signed, index, app_archive, database_archive, *, measurements=None):
     from .product_first_install import REGISTRATION_FILENAME
 
     pair_id = signed["pair_manifest"]["release_pair_id"]
@@ -162,6 +162,8 @@ def _install(sandbox, setup, signed, index, app_archive, database_archive):
                             local_index=index, local_artifacts={"app": app_archive, "database": database_archive})
     _require(receipt["status"] == "complete" and receipt["release_pair_id"] == pair_id,
              "setup_qualification_install_incomplete")
+    if measurements is not None:
+        measurements.update(receipt.get("timing", {}))
     profile = Path(receipt["install_directory"])
     _require(profile.is_relative_to(sandbox), "setup_qualification_installed_identity_mismatch")
     registration = json.loads((profile / REGISTRATION_FILENAME).read_bytes())
@@ -195,11 +197,14 @@ def _verify_local_install(root, index, app_archive, database_archive):
     signed = _compiled_document(checked)
     setup = ManagedInstallationCoordinator(local=root, install_root=root / "自选 安装目录",
         url=version.DATABASE_RELEASE_MANIFEST_URL, trust_verifier=trust_verifier)
-    profile = _install(root, setup, signed, index, app_archive, database_archive)
+    timing = {}
+    profile = _install(root, setup, signed, index, app_archive, database_archive, measurements=timing)
     profile_data = resources.files("genshin_runtime").joinpath("resources", "profiles.json").read_bytes()
     return {
         "status": "verified", "app_release_id": version.APP_RELEASE_ID, "database_release_id": version.DATABASE_RELEASE_ID,
         "release_pair_id": version.RELEASE_PAIR_ID, "index_sha256": hashlib.sha256(raw_index).hexdigest(),
+        "installation_timing": timing,
+        "startup_admission": _verify_startup_admission(profile, signed),
         **_installed_identity(profile, signed),
         "managed_layout": {"layout_version": 2, "all_data_under_selected_root": True,
                            "maintenance_sha256": _sha256(profile / "maintenance" / "GenshinCalcSetup.exe"),
@@ -226,7 +231,8 @@ def _verify_local_lifecycle(root, index, app_archive, database_archive):
             url=version.DATABASE_RELEASE_MANIFEST_URL, trust_verifier=verifier)
 
     setup = coordinator(root / "自选 安装目录")
-    original = _install(root, setup, signed, index, app_archive, database_archive)
+    timing = {}
+    original = _install(root, setup, signed, index, app_archive, database_archive, measurements=timing)
     before = _installed_identity(original, signed)
     startup = _verify_startup_admission(original, signed)
     installed_at = perf_counter()
@@ -286,6 +292,7 @@ def _verify_local_lifecycle(root, index, app_archive, database_archive):
             "app_release_id": version.APP_RELEASE_ID, "database_release_id": version.DATABASE_RELEASE_ID,
             "release_pair_id": version.RELEASE_PAIR_ID, "index_sha256": hashlib.sha256(raw_index).hexdigest(),
             "initial_identity": before, "startup_admission": startup,
+            "installation_timing": timing,
             "app_only_then_database": later_database,
             "checked": ["custom_root", "migration_single_active_root", "personal_data_migration",
                         "damaged_app_uninstall", "retain_personal_data", "reinstall",
@@ -363,6 +370,8 @@ def _verify_app_only_then_database(root, signed, index_bytes, app_archive, datab
              "setup_qualification_later_database_cleanup_incomplete")
     return {"status": "verified", "transport": "signed_local_files_through_https_adapter",
             "archive_requests": requests, "installed_identity": identity, "startup_admission": startup,
+            "app_installation_timing": result.get("timing", {}),
+            "database_installation_timing": installed.get("timing", {}),
             "same_selected_root": True, "cleanup_complete": True}
 
 
@@ -442,6 +451,7 @@ def _verify_startup_admission(profile, target):
     app = profile / "app"
     executable, resource_dir = app / "GenshinCalc.exe", app / "_internal"
     _require(executable.is_file() and resource_dir.is_dir(), "setup_qualification_app_entry_missing")
+    started = perf_counter()
     # Setup embeds the same startup gate. Resolve paths against the newly
     # installed App's actual layout without invoking any packaged App process.
     with (patch.object(database_bootstrap, "resource_dir", lambda: resource_dir),
@@ -453,7 +463,10 @@ def _verify_startup_admission(profile, target):
                 "database_release_id": target["database_manifest"]["database_release_id"]}
     _require(all(receipt.get(field) == value for field, value in expected.items()),
              "setup_qualification_startup_admission_mismatch")
-    return {"execution_layer": "app_startup_gate_in_frozen_setup", **expected}
+    return {"execution_layer": "app_startup_gate_in_frozen_setup",
+            "elapsed_seconds": round(perf_counter() - started, 3),
+            "database_integrity_scope": receipt.get("database_integrity_scope"),
+            "phase_seconds": receipt.get("startup_timings_seconds", {}), **expected}
 
 
 def _verify_local_upgrade(root, previous_index, previous_app, index, app_archive, database_archive):

@@ -148,7 +148,7 @@ _RELEASE_MARKERS = (
     "release_pair", "release_identity", "database_release", "pair_mismatch",
     "database_live_manifest", "database_live_receipt", "package_integrity",
     "database_integrity", "database_corrupt", "manifest_signature",
-    "manifest_integrity",
+    "manifest_integrity", "database_special_capability_catalog_invalid",
 )
 _REQUEST_MARKERS = (
     "tool_input", "invalid_plan", "schema", "forbidden", "unauthorized",

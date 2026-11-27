@@ -86,7 +86,7 @@ PARTY_CAPABILITY_SCHEMA = obj({
     },
     "version_line": {"const": SPECIAL_CAPABILITY_VERSION_LINE},
     "catalog_id": {"const": SPECIAL_CAPABILITY_CATALOG_ID},
-    "catalog_revision": {"enum": [5, SPECIAL_CAPABILITY_CATALOG_REVISION]},
+    "catalog_revision": {"type": "integer", "minimum": 1, "maximum": 1000000000},
     "catalog_content_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"},
     "catalog_track": {"const": SPECIAL_CAPABILITY_CATALOG_TRACK},
     "catalog_source_upstream_commit": {"type": "string", "pattern": "^[0-9a-f]{40}$"},

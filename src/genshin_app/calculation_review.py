@@ -18,7 +18,7 @@ VIEWS = ("summary", "hits", "target_conditions", "mechanics", "sampling", "actio
          "resource_counters", "resource_counter_views", "resource_counter_frames", "resource_reactions", "attribute_callbacks",
          "resource_threshold_observers", "resource_threshold_triggers", "attributes", "static_inclusions",
          "damage_explanations", "special_states")
-_FILTERS = ("character", "skill", "damage_type_id", "event_id", "action_id", "source_id", "start", "end")
+_FILTERS = ("character", "skill", "damage_type_id", "event_id", "action_id", "source_id", "target_id", "start", "end")
 _ATTRIBUTE_FILTERS = ("stat", "basis", "receipt_id", "frame_id")
 
 
@@ -37,6 +37,9 @@ def review_contract():
         "scope": "仅检查已保存文件内部绑定并呈现实际条目；不认证游戏正确、预期段数或当前数据库一致性",
         "attribute_filters": {key:"仅attributes视图接受，按实际回执精确匹配" for key in _ATTRIBUTE_FILTERS},
         "damage_explanations": explanation_contract(),
+        "component_quota": {"view": "mechanics", "type": "quota",
+                            "unit": "damage_component_target",
+                            "lookup": "按规则来源 source_id 或伤害分项 event_id 读取同目标扣层凭据，按 component_hit_ids 关联伤害。"},
         "special_states": {"field": "special_state_timeline.states", "time_filter": "half_open_interval_intersection", "read_only": True},
         "static_inclusion_filters": {key: "仅按实际提供者或静态来源ID精确匹配；无事件时点"
                                      for key in ('character', 'source_id')},
@@ -244,6 +247,8 @@ def _row(item, pointer, *, extra=None):
             "damage_type_ids", "damage_system", "zones", "matched_effect_refs", "type", "status", "applied",
             "reason", "source_id", "fixed_source_id", "rule_id", "effect_id", "source", "predicate", "value",
             "property", "stat", "sample", "domain", "beneficiaries", "pool", "remaining", "consumed",
+            "unit", "before", "after", "position", "frontline", "candidates", "hit_ids", "component_hit_ids",
+            "selection_audit_id", "target_order",
             "coverage_key", "calculation_note", "non_overlap_note", "ability_id", "kind", "duration",
             "name_zh", "beneficiary", "instance_id", "evidence_status", "end_reason", "slices", "beneficiaries_scope", "filters",
             "layers", "system_factor", "area_id", "target_id", "scope", "knowledge", "start_boundary", "end_boundary", "expires_at", "cause", "source_refs")
@@ -265,6 +270,8 @@ def _row_size(item, pointer, extra, budget, maximum):
             "damage_type_ids", "damage_system", "zones", "matched_effect_refs", "type", "status", "applied",
             "reason", "source_id", "fixed_source_id", "rule_id", "effect_id", "source", "predicate", "value",
             "property", "stat", "sample", "domain", "beneficiaries", "pool", "remaining", "consumed",
+            "unit", "before", "after", "position", "frontline", "candidates", "hit_ids", "component_hit_ids",
+            "selection_audit_id", "target_order",
             "coverage_key", "calculation_note", "non_overlap_note", "ability_id", "kind", "duration",
             "name_zh", "beneficiary", "instance_id", "evidence_status", "end_reason", "slices", "beneficiaries_scope", "filters",
             "layers", "system_factor", "area_id", "target_id", "scope", "knowledge", "start_boundary", "end_boundary", "expires_at", "cause", "source_refs")
@@ -316,6 +323,7 @@ def _matches(item, filters, lineage, *, intervals=False):
         "skill": (item.get("skill"),), "damage_type_id": item.get("damage_type_ids", []),
         "event_id": (eid,), "action_id": (item.get("action_id"), links.get("action_id")),
         "source_id": (item.get("source_id"), item.get("fixed_source_id"), item.get("rule_id")),
+        "target_id": (item.get("target_id"),),
     }
     for key, value in filters.items():
         if key in ("start", "end"):
@@ -356,6 +364,7 @@ def _candidates(result, view, filters, lineage, budget, sections=None):
             source = document["sources"][event["source_ref"]]
             projection = {field: event[field] for field in ("event_id", "t", "character", "skill")}
             projection.update(id=key, action_id=source.get("action_id"), source_id=event["source_ref"],
+                              target_id=source.get("target_id"),
                               damage_type_ids=source.get("damage_type_ids", []), damage_system=source.get("damage_system"))
             if _matches(projection, filters, lineage):
                 detail = explanation_sections(document, event, sections or ("identity", "outcome"),

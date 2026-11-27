@@ -16,6 +16,7 @@ from uuid import uuid4
 
 from genshin_db import fetcher, raw_store
 from genshin_db.annotation_store import create_annotation_tables
+from genshin_db.capability_catalog_build import publish_capability_catalog
 from genshin_db.candidate_build_context import CandidateBuildContext
 from genshin_db.candidate_build_ports import CandidateBuildPorts
 from genshin_db.candidate_physical_layout import assert_rollback_database
@@ -309,6 +310,9 @@ def build_candidate_components(
                     separators=(",", ":"),
                 ),
             ),
+        )
+        run.stats["special_reaction_capability_catalog"] = publish_capability_catalog(
+            connection, run.base, run.game_version, run.selected_manifest["files"],
         )
     if run.content_requested:
         from genshin_db.content_change_set import apply_content_change_set

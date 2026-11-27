@@ -9,8 +9,6 @@ from __future__ import annotations
 import copy
 import hashlib
 import json
-import os
-from pathlib import Path
 
 import pytest
 from test_elemental_app import native
@@ -22,9 +20,7 @@ from genshin_db.queries import equipment_read_session
 from genshin_db.runtime_queries import query_runtime
 from genshin_engine.elemental import ElementalRuntime, validate_elemental_model
 
-ROOT = Path(__file__).resolve().parents[1]
-DB = ROOT / "data/genshin.db"
-RAW = Path(os.environ.get("GENSHIN_TEST_UPSTREAM_ROOT", ROOT / "data/upstream/repo")) / "ExcelBinOutput/AttackAttenuationExcelConfigData.json"
+SOURCE_PATH = "ExcelBinOutput/AttackAttenuationExcelConfigData.json"
 
 
 def sha(path):
@@ -33,15 +29,23 @@ def sha(path):
 
 
 @pytest.fixture(scope="module")
-def live_sources():
-    if not DB.is_file() or not RAW.is_file():
-        pytest.skip("optional project database and upstream snapshot are unavailable")
-    before = sha(DB)
-    with equipment_read_session(DB):
-        sources = {group: query_runtime(DB, {"action": "attenuation_profile", "group": group})
+def live_sources(accepted_source_database):
+    if not accepted_source_database.is_file():
+        pytest.skip("optional project database is unavailable")
+    before = sha(accepted_source_database)
+    with equipment_read_session(accepted_source_database):
+        sources = {group: query_runtime(accepted_source_database, {"action": "attenuation_profile", "group": group})
                    for group in ("default", "Diluc", "Shenhe_ElementalArt_L_Bullet", "Airborne_ChestAtk")}
         yield sources
-    assert sha(DB) == before, "read-only audit changed the project database"
+    assert sha(accepted_source_database) == before, "read-only audit changed the project database"
+
+
+@pytest.fixture(scope="module")
+def exact_source_bytes(live_sources, exact_upstream_source):
+    sample = live_sources["default"]
+    commit = sample["snapshot"]["upstream_commit"]
+    expected = sample["source"]["source_sha256"]
+    return exact_upstream_source(commit, SOURCE_PATH, expected)
 
 
 def bind(plan, sources, profile="pyro", group="default", counter_tag="review-pyro"):
@@ -64,15 +68,16 @@ def bind(plan, sources, profile="pyro", group="default", counter_tag="review-pyr
 
 
 @pytest.mark.parametrize("group", ["default", "Diluc", "Shenhe_ElementalArt_L_Bullet", "Airborne_ChestAtk"])
-def test_review_source_bytes_pointer_node_digest_and_field_projection(live_sources, group):
+def test_review_source_bytes_pointer_node_digest_and_field_projection(live_sources, exact_source_bytes, group):
     result = live_sources[group]
     origin = result["source"]
-    rows = json.loads(RAW.read_text("utf-8"))
+    assert origin["source_path"] == SOURCE_PATH
+    assert hashlib.sha256(exact_source_bytes).hexdigest() == origin["source_sha256"]
+    rows = json.loads(exact_source_bytes)
     record = rows[int(origin["json_pointer"].removeprefix("/"))]
     independent_node_bytes = json.dumps(record, sort_keys=True, separators=(",", ":"),
                                         ensure_ascii=False, allow_nan=False).encode("utf-8")
     assert record["group"] == group and record == result["raw_record"]
-    assert sha(RAW) == origin["source_sha256"]
     assert hashlib.sha256(independent_node_bytes).hexdigest() == origin["node_sha256"]
     assert origin["field_pointers"]["resetCycle"] == origin["json_pointer"] + "/resetCycle"
     assert result["execution"]["attack_binding"] == "not_evaluated"
@@ -100,13 +105,13 @@ def test_review_real_rounding_retains_exact_original_and_discloses_error(live_so
     assert projection["rounding_error_seconds"] == pytest.approx(-1.49011612e-9, abs=1e-18)
 
 
-def test_review_real_default_binding_matches_legacy_standard_and_preserves_input(live_sources):
+def test_review_real_default_binding_matches_legacy_standard_and_preserves_input(live_sources, accepted_source_database):
     source_plan = bind(native(), live_sources)
     legacy_plan = native()
     legacy_plan["mechanics_model"]["elemental_model"]["profiles"][0]["icd"] = {
         "kind": "standard", "group": "review-pyro"}
     original = copy.deepcopy(source_plan)
-    actual, expected = run_plan_calc(source_plan, DB), run_plan_calc(legacy_plan, DB)
+    actual, expected = run_plan_calc(source_plan, accepted_source_database), run_plan_calc(legacy_plan, accepted_source_database)
     assert actual["result"]["summary"] == expected["result"]["summary"]
     assert [hit["expected"] for hit in actual["result"]["hits"]] == pytest.approx([45, 67.5, 45, 45])
     assert [r["allowed"] for r in actual["result"]["elemental"]["trace"]] == [
@@ -119,10 +124,10 @@ def test_review_real_default_binding_matches_legacy_standard_and_preserves_input
     assert actual["result_receipt"]["elemental_sources"][0]["source"]["node_sha256"] == live_sources["default"]["source"]["node_sha256"]
 
 
-def test_review_conflicting_database_profiles_cannot_be_composed_as_ready(live_sources):
+def test_review_conflicting_database_profiles_cannot_be_composed_as_ready(live_sources, accepted_source_database):
     plan = bind(native(), live_sources, group="default", counter_tag="conflict")
     bind(plan, live_sources, profile="hydro", group="Diluc", counter_tag="conflict")
-    report = compose_equipment_plan(plan, DB)
+    report = compose_equipment_plan(plan, accepted_source_database)
     assert report["state"] == "pending"
     assert any("icd_group_conflict" in json.dumps(issue, ensure_ascii=False) for issue in report["missing_inputs"])
     task = report["elemental_counter_verification_tasks"][0]
@@ -142,10 +147,10 @@ def test_review_conflicting_database_profiles_cannot_be_composed_as_ready(live_s
     assert all(row["profile_path"] in row["source_paths"] and row["usage_paths"]
                for row in task["signature_bindings"])
     with pytest.raises(PlanError):
-        run_plan_calc(plan, DB)
+        run_plan_calc(plan, accepted_source_database)
 
 
-def test_review_same_named_rule_signature_conflict_has_top_level_audit_work_order(live_sources):
+def test_review_same_named_rule_signature_conflict_has_top_level_audit_work_order(live_sources, accepted_source_database):
     plan = native()
     pyro = next(profile for profile in plan["mechanics_model"]["elemental_model"]["profiles"]
                 if profile["id"] == "pyro")
@@ -153,7 +158,7 @@ def test_review_same_named_rule_signature_conflict_has_top_level_audit_work_orde
                    "reset_seconds": 5, "sequence": [1, 0, 0, 0, 0] * 6}
     bind(plan, live_sources, profile="hydro", group="default", counter_tag="database-hydro")
 
-    report = compose_equipment_plan(plan, DB)
+    report = compose_equipment_plan(plan, accepted_source_database)
 
     assert report["state"] == "pending"
     tasks = [task for task in report["elemental_counter_verification_tasks"]
@@ -174,7 +179,7 @@ def test_review_same_named_rule_signature_conflict_has_top_level_audit_work_orde
     assert "完整签名" in task["next_action"]
 
 
-def test_preexisting_named_rule_conflict_remains_schema_rejected_with_auditable_details():
+def test_preexisting_named_rule_conflict_remains_schema_rejected_with_auditable_details(accepted_source_database):
     plan = native()
     profiles = plan["mechanics_model"]["elemental_model"]["profiles"]
     for profile, reset, sequence in zip(profiles[:2], (2.5, 5),
@@ -184,7 +189,7 @@ def test_preexisting_named_rule_conflict_remains_schema_rejected_with_auditable_
                           "sequence": sequence}
 
     with pytest.raises(PlanError) as error:
-        compose_equipment_plan(plan, DB)
+        compose_equipment_plan(plan, accepted_source_database)
 
     issue = next(row for row in error.value.details if row["code"] == "icd_rule_group_conflict")
     assert {row["profile_id"] for row in issue["bindings"]} == {"pyro", "hydro"}
@@ -195,40 +200,40 @@ def test_preexisting_named_rule_conflict_remains_schema_rejected_with_auditable_
 
 
 @pytest.mark.parametrize("field", ["expected_snapshot_id", "expected_node_sha256"])
-def test_review_stale_confirmation_and_forged_cached_success_cannot_bypass_recompile(live_sources, field):
+def test_review_stale_confirmation_and_forged_cached_success_cannot_bypass_recompile(live_sources, accepted_source_database, field):
     plan = bind(native(), live_sources)
-    valid = compose_equipment_plan(plan, DB)
+    valid = compose_equipment_plan(plan, accepted_source_database)
     plan["resolution"] = copy.deepcopy(valid["plan"]["resolution"])
     plan["resolved_template"] = copy.deepcopy(valid["plan"]["resolved_template"])
     plan["elemental_sources"][0][field] = "0" * 64
     original = copy.deepcopy(plan)
-    stale = compose_equipment_plan(plan, DB)
+    stale = compose_equipment_plan(plan, accepted_source_database)
     assert stale["state"] == "pending" and stale["plan"]["resolved_template"] is None
     assert any(issue["code"] == "source_changed" for issue in stale["missing_inputs"])
     assert stale["elemental_compilations"][0]["required_confirmation"][field] == live_sources["default"][
         "snapshot" if field == "expected_snapshot_id" else "source"]["snapshot_id" if field == "expected_snapshot_id" else "node_sha256"]
     with pytest.raises(PlanError):
-        run_plan_calc(plan, DB)
+        run_plan_calc(plan, accepted_source_database)
     assert plan == original
 
 
-def test_review_nonbinary_real_source_remains_queryable_but_blocks_native_calc(live_sources):
+def test_review_nonbinary_real_source_remains_queryable_but_blocks_native_calc(live_sources, accepted_source_database):
     source = live_sources["Airborne_ChestAtk"]
     assert source["status"] == "ready" and source["execution"]["status"] == "pending"
     assert any(value not in (0, 1) for value in source["raw_record"]["durabilitySequence"])
     plan = bind(native(), live_sources, group="Airborne_ChestAtk")
-    report = compose_equipment_plan(plan, DB)
+    report = compose_equipment_plan(plan, accepted_source_database)
     assert report["state"] == "pending"
     assert any(issue["code"] == "unsupported_elemental_source" for issue in report["missing_inputs"])
     with pytest.raises(PlanError):
-        run_plan_calc(plan, DB)
+        run_plan_calc(plan, accepted_source_database)
 
 
-def test_review_manual_icd_cannot_duplicate_database_delivery(live_sources):
+def test_review_manual_icd_cannot_duplicate_database_delivery(live_sources, accepted_source_database):
     plan = bind(native(), live_sources)
     plan["mechanics_model"]["elemental_model"]["profiles"][0]["icd"] = {"kind": "standard", "group": "review-pyro"}
     with pytest.raises(PlanError) as error:
-        compose_equipment_plan(plan, DB)
+        compose_equipment_plan(plan, accepted_source_database)
     assert error.value.reason == "duplicate_delivery"
 
 

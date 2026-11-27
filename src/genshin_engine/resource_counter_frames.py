@@ -11,6 +11,7 @@ import hashlib
 import math
 
 from genshin_engine.attribute_graph import linear_value
+from genshin_engine.beneficiary_selection import position_matches
 from genshin_engine.mechanics_schema import EXPR
 from genshin_engine.registry import BENEFIT_TYPES
 from genshin_engine.resource_counter_views import CounterViewProgram
@@ -110,7 +111,7 @@ class FrameStore:
             if (type(rule) is not dict or not {'id', 'owner', 'effects', 'beneficiaries'} <= set(rule)
                     or type(rule.get('effects')) is not list
                     or type(rule.get('beneficiaries')) is not dict
-                    or rule['beneficiaries'].get('scope') not in ('locked', 'current_frontline')):
+                    or rule['beneficiaries'].get('scope') not in ('locked', 'current_frontline', 'current_offfield')):
                 raise FrameError('frame_reader_shape')
             rid = text(rule['id'])
             text(rule.get('owner'))
@@ -200,7 +201,7 @@ class FrameStore:
             rule = self._rules[rid]
             for inst in snapshot['state'].get(rid, {}).get('instances', []):
                 for recipient in sorted(recipients.intersection(inst['beneficiaries'])):
-                    if rule['beneficiaries']['scope'] == 'current_frontline' and snapshot['frontline'] != recipient:
+                    if not position_matches(rule, recipient, snapshot['frontline']):
                         continue
                     found.append({'rule_id': rid, 'effect_id': eid, 'instance_id': inst['instance_id'], 'recipient': recipient})
         return sorted(found, key=member_key)

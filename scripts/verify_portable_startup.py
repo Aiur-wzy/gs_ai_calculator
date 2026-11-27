@@ -33,7 +33,7 @@ def sha(path: Path) -> str:
         return hashlib.file_digest(stream, "sha256").hexdigest()
 
 
-def qualify(app: Path, report: Path) -> dict:
+def qualify(app: Path, report: Path, *, calculation_plan: Path | None = None) -> dict:
     app = checked_path(app.absolute())
     if app.name != "app" or (app.parent / "installation.json").exists():
         raise ValueError("Use an unregistered complete app/data portable layout")
@@ -43,6 +43,10 @@ def qualify(app: Path, report: Path) -> dict:
     report = checked_path(report.absolute())
     if report.is_relative_to(app.parent) or report.exists():
         raise ValueError("Use a new report outside the portable root")
+    if calculation_plan is not None:
+        calculation_plan = checked_path(calculation_plan.absolute())
+        if not calculation_plan.is_file() or calculation_plan.is_relative_to(data):
+            raise ValueError("Use an existing native plan outside the new portable data directory")
     if (app / PORTABLE_MARKER).read_bytes() != PORTABLE_MARKER_BYTES:
         raise ValueError("Portable marker missing or invalid")
     inventory = verify_package_artifact(app)
@@ -98,6 +102,21 @@ def qualify(app: Path, report: Path) -> dict:
                     for row in catalog.get("items", []) if isinstance(row, dict)
                 ):
                     raise ValueError("Catalog did not return the accepted released Kaeya entity")
+            if calculation_plan is not None:
+                calculated = Path(cwd) / "special.calculated.json"
+                calc = invoke("special_calculation", ["equipment", "calc", "--plan", str(calculation_plan),
+                    "--output", str(calculated), "--summary"])
+                observed = calc.get("validation_scope", {}).get("special_reactions", {})
+                if (calc.get("task_admission") != "accepted" or not calculated.is_file()
+                        or observed.get("execution_observed") is not True or not observed.get("trace_event_count")):
+                    raise ValueError("Portable calculation did not execute and save an accepted special reaction")
+                reopened = invoke("special_review", ["equipment", "review", "--calculated", str(calculated)])
+                if (reopened.get("validation") != "saved_result_fingerprint"
+                        or reopened.get("calculation_totals", {}).get("total_damage") != calc["summary"]["total_damage"]):
+                    raise ValueError("Portable saved result did not reopen with the same verified damage")
+                result["special_calculation"] = {"task_admission": calc["task_admission"],
+                    "trace_event_count": observed["trace_event_count"], "total_damage": calc["summary"]["total_damage"],
+                    "cold_review": "verified"}
             if sha(database) != database_sha or load_release_pair_manifest(data / "release-pair-live-manifest.json") != live_pair:
                 raise ValueError("Read-only warm startup changed admitted database identity")
             result.update(status="verified", database_sha256=database_sha)
@@ -115,8 +134,10 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--app-root", required=True, type=Path)
     parser.add_argument("--report", required=True, type=Path)
+    parser.add_argument("--calculation-plan", type=Path,
+                        help="Native star or lunar reaction plan for the bundled database snapshot")
     args = parser.parse_args()
-    print(json.dumps(qualify(args.app_root, args.report), ensure_ascii=False))
+    print(json.dumps(qualify(args.app_root, args.report, calculation_plan=args.calculation_plan), ensure_ascii=False))
     return 0
 
 

@@ -14,15 +14,15 @@ from typing import Any
 
 from genshin_engine.elemental import ElementalPending
 from genshin_engine.health_mechanics import handle_health_event
-from genshin_engine.mechanics_resource_observation import handle_resource_change
-from genshin_engine.resource_damage_emission import handle_resource_damage
 from genshin_engine.mechanics_execution_port import MechanicsExecutionPort
+from genshin_engine.mechanics_resource_observation import handle_resource_change
 from genshin_engine.mechanics_validation import (
     _freeze_reference,
     _multi_aura_v4,
     _swirl_v2,
     _tick,
 )
+from genshin_engine.resource_damage_emission import handle_resource_damage
 from genshin_engine.rotation_port import TICKS
 from genshin_engine.rotation_port import rotation_issue as _issue
 from genshin_engine.special_reaction_port import (
@@ -256,6 +256,8 @@ def prepare_elemental_application(self: MechanicsExecutionPort, ev, row, payload
     ability = self.data["abilities"][action["ability_id"]]
     event.update(event="application", action_id=action["id"], character=ability["character"],
                  action_type_id=ability["action_type_id"])
+    if self.target_scene:
+        event["target_id"] = payload["application"]["target_id"]
     return PreparedRuntimeEvent(event=event)
 
 
@@ -418,7 +420,8 @@ def execute_gameplay_contact(self: MechanicsExecutionPort, ev, row, frontline, p
                         self.attribute_runtime.stage(event, "reaction_created")
                     reaction_snapshot = self.snapshot()
         self.target_status_runtime.reactions(reactions or ([reaction] if reaction else []),
-            target_id=self.elemental.target, time=self.time, cycle=ev['origin'])
+            target_id=application["target_id"] if self.target_scene else self.elemental.target,
+            time=self.time, cycle=ev['origin'])
         from genshin_engine.runtime_reference_audit import audit_of
         if (reference_audit := audit_of(self)) is not None:
             reference_audit.reactions(ev, reactions or ([reaction] if reaction else []))
@@ -478,7 +481,7 @@ def execute_gameplay_contact(self: MechanicsExecutionPort, ev, row, frontline, p
                               callback_token=callback_token, commit_attribute=callback_token is not None)
         if reaction["type"] == "swirl":
             self.project_swirl_damage(ev, event, reaction, reaction_snapshot, payload.get("descriptor", {}).get("report", True))
-    if self.special_runtime() is not None and kind in ("mechanics_hit", "elemental_application"):
+    if (self.target_scene or self.special_runtime() is not None) and kind in ("mechanics_hit", "elemental_application"):
         self.drain_special_events(ev["origin"], ev)
     if kind == "action" and event["action_type_id"] == "action.switch":
         if row.get("cancelled_action"):

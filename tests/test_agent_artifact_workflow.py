@@ -46,6 +46,21 @@ def focus(session, phase, **options):
         "expected_stage_revision": session.stage_state["stage_revision"], "reason": "选择工作重点", **options})
 
 
+@pytest.mark.parametrize(("phase", "guide", "example"), [
+    ("action_checkpoint", "action-timing.md", "115 帧"),
+    ("action_checkpoint", "frame-rate-timing.md", "Σqᵢ"),
+    ("event_topology", "combat-references.md", "达妮卡"),
+])
+def test_artifact_work_card_can_discover_and_read_the_shared_research_guide(board, phase, guide, example):
+    assert focus(board, phase)["code"] == 0
+    resource = f"references/data/{guide}"
+    assert resource in board.stage_context()["recommended_skill_resources"]
+    reply = board.call_tool("gs_read_skill", {"resource": resource})
+    assert reply["code"] == 0
+    assert example in reply["data"]["text"]
+    assert reply["data"]["next_offset"] is None
+
+
 def test_empty_draft_focus_is_not_permission_and_cached_evidence_remains_readable(board):
     assert focus(board, "calculation_closure")["code"] == 0
     assert board._is_board() and board.workflow_stage == "calculation_closure"

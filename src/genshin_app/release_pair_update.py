@@ -237,9 +237,12 @@ def _workspace_path(workspace: Path, relative: str, *, directory: bool) -> Path:
     return target
 
 
-def _verify_app(root: Path, pair: Mapping[str, Any], *, independent: bool = False) -> dict[str, Any]:
+def _verify_app(root: Path, pair: Mapping[str, Any], *, independent: bool = False,
+                _verified_app=None) -> dict[str, Any]:
     try:
-        verification = verify_package_artifact(root)
+        verification = _verified_app.report_for(root) if _verified_app is not None else None
+        if verification is None:
+            verification = verify_package_artifact(root)
     except PackageIntegrityError as error:
         raise ReleasePairUpdateError(error.code) from error
     expected = pair["app"]["artifact_manifest"]["sha256"]
@@ -343,6 +346,16 @@ def _verify_database_package(
             },
         )
     return {"sha256": digest, "size_bytes": size}
+
+
+def qualified_database_from_signed_document(document: Mapping[str, Any]):
+    """Load the fast-install proof from an already authenticated release envelope."""
+    payload = document.get("database_qualification")
+    if payload is None:
+        return None
+    from genshin_db.release_qualification import load_database_install_qualification
+
+    return load_database_install_qualification(payload, document["database_manifest"])
 
 
 def _validated_pair(
@@ -640,11 +653,20 @@ def _validate_current(
     app_root = Path(current["app_root"])
     database_path = Path(current["database"])
     proof_root = database_path.parent if proof_directory is None else proof_directory
-    independent = read_live_product_proof(proof_root, pair, manifest) is not None
+    signed_document = read_live_product_proof(proof_root, pair, manifest)
+    independent = signed_document is not None
     app_verification = _verify_app(app_root, pair, independent=independent)
     try:
         receipt = validate_database_live_receipt(dict(current["live_receipt"]))
-        identity = read_database_identity(database_path)
+        qualification = qualified_database_from_signed_document(signed_document or {})
+        if qualification is None:
+            identity = read_database_identity(database_path)
+        else:
+            from genshin_db.release_qualification import (
+                read_qualified_database_identity,
+            )
+
+            identity = read_qualified_database_identity(database_path, manifest, qualification)
         receipt_matches = database_live_receipt_matches(receipt, identity, manifest)
     except DatabaseReleaseError as error:
         raise ReleasePairUpdateError(error.reason) from error
@@ -909,6 +931,7 @@ def prepare_release_pair_handoff(
     trust_assertion: Mapping[str, Any] | None,
     current: Mapping[str, Any] | None = None,
     reuse_installed_database: bool = False,
+    _verified_app=None,
 ) -> dict[str, Any]:
     """Verify staged artifacts and create one external-launcher handoff.
 
@@ -979,7 +1002,8 @@ def prepare_release_pair_handoff(
             _fail("release_pair_app_reuse_not_verified")
         app_verification = _verify_app(Path(current["app_root"]), pair, independent=True)
     else:
-        app_verification = _verify_app(Path(staged_app_root), pair, independent=independent)
+        app_verification = _verify_app(
+            Path(staged_app_root), pair, independent=independent, _verified_app=_verified_app)
     if reuse_installed_database:
         if rollback is None or not database_release_semantically_equal(
             rollback["database_manifest"], manifest
@@ -1090,6 +1114,7 @@ def begin_pair_update_activation(
     operation_id: str,
     active_app_root: Path | None = None,
     active_database: Path | None = None,
+    _verified_app=None,
 ) -> dict[str, Any]:
     """Authorize the external swap only after an independent rollback exists."""
 
@@ -1120,7 +1145,7 @@ def begin_pair_update_activation(
         app_root = Path(active_app_root)
     else:
         app_root = _workspace_path(root / "staging", app_relative, directory=True)
-    app_verification = _verify_app(app_root, pair, independent=independent)
+    app_verification = _verify_app(app_root, pair, independent=independent, _verified_app=_verified_app)
     if app_verification != handoff["target"]["app_verification"]:
         _fail("release_pair_update_target_identity_mismatch")
     if database_mode == "install":
@@ -1225,6 +1250,7 @@ def inspect_pair_update_handoff(
     workspace: Path,
     *,
     operation_id: str,
+    _verified_app=None,
 ) -> dict[str, Any]:
     """Return one validated handoff to the external updater process.
 
@@ -1251,7 +1277,7 @@ def inspect_pair_update_handoff(
     # stale path after consent and silently swap a different artifact.
     if app_relative is not None:
         staged_app = _workspace_path(root / "staging", app_relative, directory=True)
-        _verify_app(staged_app, pair, independent=independent)
+        _verify_app(staged_app, pair, independent=independent, _verified_app=_verified_app)
     elif not independent or database_mode != "install" or handoff.get("rollback") is None:
         _fail("release_pair_app_reuse_not_verified")
     staged_database = None
@@ -1274,12 +1300,14 @@ def inspect_pair_update_handoff(
         "database_mode": database_mode,
         "pair_manifest": pair,
         "database_manifest": database,
+        "database_qualification": qualified_database_from_signed_document(
+            handoff["target"]["trust_assertion"].get("signed_document", {})),
         "rollback_required": handoff.get("rollback") is not None,
         "expected_current_fingerprint": journal["rollback_fingerprint"],
     }
 
 
-def _load_accepted_database(data_dir: Path) -> tuple[dict, dict, dict]:
+def _load_accepted_database(data_dir: Path, *, qualification=None) -> tuple[dict, dict, dict]:
     manifest_value = _read_json(
         data_dir / LIVE_DATABASE_MANIFEST_FILENAME,
         "release_pair_live_database_manifest_invalid",
@@ -1291,7 +1319,14 @@ def _load_accepted_database(data_dir: Path) -> tuple[dict, dict, dict]:
     try:
         manifest = validate_database_release_manifest(manifest_value)
         receipt = validate_database_live_receipt(receipt_value)
-        identity = read_database_identity(data_dir / "genshin.db")
+        if qualification is None:
+            identity = read_database_identity(data_dir / "genshin.db")
+        else:
+            from genshin_db.release_qualification import (
+                read_qualified_database_identity,
+            )
+
+            identity = read_qualified_database_identity(data_dir / "genshin.db", manifest, qualification)
         matches = database_live_receipt_matches(receipt, identity, manifest)
     except DatabaseReleaseError as error:
         raise ReleasePairUpdateError(error.reason) from error
@@ -1307,6 +1342,7 @@ def postcheck_pair_update(
     data_dir: Path,
     *,
     operation_id: str,
+    _verified_app=None,
 ) -> dict[str, Any]:
     """Verify active paths and publish the pair identity as the final marker."""
 
@@ -1331,9 +1367,10 @@ def postcheck_pair_update(
     pair, target_database = _validated_handoff_target(handoff, journal)
     trust = handoff["target"]["trust_assertion"]
     independent = _independent_app(trust)
-    _verify_app(Path(active_app_root), pair, independent=independent)
+    _verify_app(Path(active_app_root), pair, independent=independent, _verified_app=_verified_app)
     accepted_manifest, _receipt, identity = _load_accepted_database(
-        Path(data_dir).resolve(strict=True)
+        Path(data_dir).resolve(strict=True), qualification=qualified_database_from_signed_document(
+            trust.get("signed_document", {}))
     )
     if (accepted_manifest != target_database
             or (independent and identity["sha256"] != target_database["database"]["sha256"])):
@@ -1379,10 +1416,11 @@ def confirm_pair_update_rollback(
     if rollback is None:
         _fail("release_pair_update_rollback_unavailable")
     pair = rollback["pair_manifest"]
-    independent = read_live_product_proof(Path(data_dir), pair, rollback["database_manifest"]) is not None
+    signed_document = read_live_product_proof(Path(data_dir), pair, rollback["database_manifest"])
+    independent = signed_document is not None
     _verify_app(Path(active_app_root), pair, independent=independent)
     accepted_manifest, receipt, identity = _load_accepted_database(
-        Path(data_dir).resolve(strict=True)
+        Path(data_dir).resolve(strict=True), qualification=qualified_database_from_signed_document(signed_document or {})
     )
     if (
         accepted_manifest != rollback["database_manifest"]

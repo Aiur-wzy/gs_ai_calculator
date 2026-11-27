@@ -54,6 +54,8 @@ def _effect_applicability(effects, beneficiaries, characters, scope, *, quota=Fa
                    "角色收益受声明角色范围约束；实际命中还须通过收益筛选和取样。")
         if frontline:
             message += "此项另受当前前台限制。"
+        elif not enemy and scope == "current_offfield":
+            message += "此项另受当前后台限制。"
         output.append({"effect_id": effect.get("id"), "domain": domain,
             "recipient_mode": "enemy_shared" if enemy else "declared_recipients" if manual else "instance_beneficiaries",
             "possible_characters": copy.deepcopy(possible), "requires_quota_receipt": quota,

@@ -55,8 +55,8 @@ border-radius:50%;animation:spin .9s linear infinite;flex:none}@keyframes spin{t
 p{line-height:1.65;margin:.65rem 0;color:#cbd5e1}code{font-family:Consolas,monospace;color:#fca5a5}
 #detail{font-size:.84rem;color:#94a3b8}body.failed .spinner{display:none}body.failed h1{color:#fca5a5}
 </style></head><body><main><div class="row"><span class="spinner"></span>
-<h1 id="title">正在校验数据库</h1></div><p id="message">正在读取本地发行凭据。</p>
-<p id="detail">校验大型数据库可能需要几十秒；完成前不会启动计算引擎或 Agent。</p>
+<h1 id="title">正在启动原神拉表</h1></div><p id="message">正在读取本地发行凭据。</p>
+<p id="detail">应用和数据库检查完成后即可使用白板。</p>
 <div id="recovery" hidden><p id="recovery-version"></p>
 <button id="inspect" onclick="window.pywebview.api.inspect_recovery()">检查配套数据库</button>
 <button id="confirm" hidden onclick="window.pywebview.api.confirm_recovery(window.confirmationDigest,true)">确认安装</button>
@@ -294,6 +294,19 @@ def _splash_script(function: str, value: Mapping) -> str:
     return f"window.{function}({payload})"
 
 
+def _start_local_service(manager: ServiceManager, emit_startup_status: bool) -> None:
+    try:
+        info = manager.ensure_running()
+        if emit_startup_status and info:
+            print(
+                f"数据服务: {info['base_url']}"
+                f"（{'本进程拉起' if info['owned'] else '复用已有实例'}）"
+            )
+    except (RuntimeError, OSError) as error:
+        if emit_startup_status:
+            print(f"警告：{error}")
+
+
 def _run_paired_database_gui(
     webview,
     data_dir: Path,
@@ -308,7 +321,7 @@ def _run_paired_database_gui(
     window_hidden: bool,
     emit_startup_status: bool,
 ) -> int:
-    """Show startup progress while deep admission runs off the GUI thread.
+    """Show startup progress while admission runs off the GUI thread.
 
     ``webview.start(callback)`` schedules the callback after the native event
     loop and startup page are live.  Only that callback may construct the data
@@ -344,7 +357,7 @@ def _run_paired_database_gui(
             from genshin_app.product_database_setup import build_database_setup
             database_setup = build_database_setup(data_dir)
             if database_setup is not None:
-                database_setup.validate_app_only()
+                database_setup.validate_app_only(startup=True)
                 prepared_data_dir = data_dir
                 prepared_data_dir.mkdir(parents=True, exist_ok=True)
                 gate = {"state": "database_not_installed"}
@@ -369,27 +382,21 @@ def _run_paired_database_gui(
             identity["service_mode"] = "database_setup" if database_setup else "local_database_service"
             manager = None if database_setup else ServiceManager(prepared_data_dir)
             runtime["manager"] = manager
+            # Whiteboard operations use the admitted SQLite database directly.
+            # The signed product can show them while the legacy HTTP child
+            # performs its own independent admission and service discovery.
+            background_service = gate.get("app_integrity_scope") == "startup_members"
             show_progress(
                 {
                     "message": (
                         "应用校验完成，可以进入数据库安装。"
-                        if database_setup else "数据库已通过应用校验，服务子进程会独立复核数据库。"
+                        if database_setup else "数据库已校验，正在打开白板。"
+                        if background_service else "数据库已通过应用校验，服务子进程会独立复核数据库。"
                     ),
                 }
             )
-            try:
-                info = manager.ensure_running() if manager is not None else None
-                if emit_startup_status and info:
-                    print(
-                        f"数据服务: {info['base_url']}"
-                        f"（{'本进程拉起' if info['owned'] else '复用已有实例'}）"
-                    )
-            except RuntimeError as error:
-                # Editing remains available without the legacy service.  This
-                # is after database admission and does not bypass the engine's
-                # direct database contract.
-                if emit_startup_status:
-                    print(f"警告：{error}")
+            if manager is not None and not background_service:
+                _start_local_service(manager, emit_startup_status)
             api = GuiApi(
                 prepared_data_dir,
                 startup_path=open_path,
@@ -412,6 +419,12 @@ def _run_paired_database_gui(
             install_close_guard(window, api)
             recovery._end_admission()
             splash.destroy()
+            if manager is not None and background_service:
+                thread = threading.Thread(
+                    target=_start_local_service, args=(manager, emit_startup_status),
+                    name="genshin-local-service-start", daemon=True,
+                )
+                thread.start()
             if main_window_callback is not None:
                 main_window_callback(window, api)
             runtime["error"] = None

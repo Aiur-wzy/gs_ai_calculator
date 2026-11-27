@@ -71,6 +71,17 @@ def test_native_capability_pointer_recovers_from_independent_cli_wrapper(board):
     assert wrong["details"]["recovery"]["resource"] == "capabilities"
 
 
+def test_native_discovers_current_static_target_scene_contract(board):
+    before = board.revision
+    result = board.call_tool("gs_read_context", {
+        "resource": "mechanics_capabilities",
+        "pointer": "/target_scene/contract",
+    })
+    assert result["code"] == 0, result
+    assert "static-target-scene-v1" in str(result["data"])
+    assert board.revision == before
+
+
 def test_context_pointer_length_has_actionable_bound(board):
     reply = board.call_tool("gs_read_context", {"resource": "runtime_contracts", "pointer": "/" + "x" * 4200})
     assert reply["reason"] == "agent_size_limit"

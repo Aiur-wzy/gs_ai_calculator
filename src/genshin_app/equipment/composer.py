@@ -105,7 +105,27 @@ def _compose(
     _resolved_provisional_uses=None, _readonly_provisional_context=None,
 ):
     """Run the one formal pipeline inside the caller's existing read scope."""
+    from genshin_engine.special_reaction_capabilities import use_special_reaction_capability_catalog
+    from .special_capability_authority import catalog_summary, load_database_capability_catalog
 
+    catalog, _ = (load_database_capability_catalog(db_path)
+                  if (plan.get("mechanics_model") or {}).get("special_reaction_model") is not None
+                  else (None, None))
+    with use_special_reaction_capability_catalog(catalog):
+        report = _compose_scoped(
+            plan, db_path, candidate_session=candidate_session,
+            _formal_provisional=_formal_provisional, _resolved_provisional_uses=_resolved_provisional_uses,
+            _readonly_provisional_context=_readonly_provisional_context,
+        )
+    if catalog is not None:
+        report["special_capability_catalog"] = catalog_summary(catalog)
+    return report
+
+
+def _compose_scoped(
+    plan, db_path, *, candidate_session=None, _formal_provisional=False,
+    _resolved_provisional_uses=None, _readonly_provisional_context=None,
+):
     request = ComposeRequest(
         plan=copy.deepcopy(plan),
         db_path=db_path,

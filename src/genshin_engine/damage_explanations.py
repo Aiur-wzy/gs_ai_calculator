@@ -5,6 +5,7 @@ before sealing, with no dangling references; they do not reject numeric damage.
 """
 from __future__ import annotations
 
+import copy
 import hashlib
 import json
 import math
@@ -97,6 +98,10 @@ class ExplanationBuilder:
         source = {key: hit[key] for key in ("character", "skill", "hit_name", "element", "damage_system", "damage_type_ids") if key in hit}
         source.update(action_id=None, ability_id=None, component_id=None,
                       lineage_status="declared_hit_only")
+        special_reaction = (hit.get("extensions") or {}).get("special_reaction")
+        coefficient = special_reaction.get("reaction_coefficient") if isinstance(special_reaction, dict) else None
+        if isinstance(coefficient, dict) and coefficient.get("effective_factor") == ctx.get("system_factor"):
+            source["reaction_coefficient"] = copy.deepcopy(coefficient)
         # Legacy inputs have no event ID. Keep their fallback stable across
         # pure display edits; retain every calculation/association field,
         # including legacy ``skill`` filters. Duplicate semantic occurrences

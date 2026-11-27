@@ -235,6 +235,7 @@ def _candidate_build_contract(target_commit: str) -> dict[str, Any]:
     an accepted base built by a different contract is conservatively rebuilt.
     """
 
+    from genshin_db.capability_catalog_build import CATALOG_BUILD_VERSION
     profile = for_commit(target_commit)
     normalization = (
         profile.receipt(target_commit)
@@ -261,6 +262,7 @@ def _candidate_build_contract(target_commit: str) -> dict[str, Any]:
             "indexer_version": INDEXER_VERSION,
         },
         "normalization": normalization,
+        "special_reaction_capability_catalog": CATALOG_BUILD_VERSION,
     }
 
 

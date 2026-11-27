@@ -111,6 +111,7 @@ export function installMechanicsVocabulary(MC: MechanicsEditor, ports: Mechanics
     next_switch: "实际接棒角色",
     locked: "锁定受益角色",
     current_frontline: "跟随当前前台",
+    current_offfield: "跟随当前后台",
     success: "成功触发时",
     attempt: "尝试触发时",
     independent: "每层独立到期",

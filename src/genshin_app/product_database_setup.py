@@ -12,7 +12,13 @@ from uuid import uuid4
 
 from genshin_app import version
 from genshin_app.database_transaction import atomic_json, profile_writer
-from genshin_app.package_integrity import verify_package_artifact
+from genshin_app.installation_timing import InstallationTiming
+from genshin_app.package_integrity import (
+    PackageIntegrityError,
+    verify_package_artifact,
+    verify_package_manifest_descriptor,
+    verify_signed_package_startup,
+)
 from genshin_app.paths import is_frozen
 from genshin_app.product_install_contract import (
     FIRST_INSTALL_CONTRACT,
@@ -39,7 +45,7 @@ from genshin_app.release_pair_trust import build_trust_verifier
 from genshin_app.release_pair_update import (
     LIVE_PAIR_MANIFEST_FILENAME,
     _sha256,
-    _verify_app,
+    qualified_database_from_signed_document,
 )
 from genshin_app.windows_known_folders import is_reparse_point, reject_reparse_chain
 from genshin_db.release_migration import (
@@ -86,13 +92,23 @@ class DatabaseSetup:
         self._progress = None
         self._portable = portable
 
-    def _check_app(self, document):
+    def _check_app(self, document, *, startup=False):
         pair = document["pair_manifest"]
         app = pair["app"]
         if (app["app_release_id"], app["app_version"], app["logic_profile"], app["data_contract_version"]) != (
                 self.app_release_id, self.app_version, self.logic_profile, self.data_contract_version):
             raise FirstInstallError("product_database_setup_app_identity_mismatch")
-        _verify_app(self.app_root, pair, independent=True)
+        expected = app["artifact_manifest"]["sha256"]
+        if ((self.app_root / "_internal" / "bundled").exists()
+                or not (self.app_root / PER_USER_UPDATER_RELATIVE).is_file()):
+            raise FirstInstallError("product_database_setup_app_identity_mismatch")
+        try:
+            if startup:
+                verify_signed_package_startup(self.app_root, expected)
+            elif verify_package_manifest_descriptor(self.app_root)["manifest_sha256"] != expected:
+                raise FirstInstallError("release_pair_app_artifact_mismatch")
+        except PackageIntegrityError as error:
+            raise FirstInstallError(error.code) from error
 
     def registered(self):
         if self.app_root != self.data_dir.parent / "app" or self.data_dir.name != "data":
@@ -114,7 +130,7 @@ class DatabaseSetup:
             return self.pending.is_file()
         return not (self.data_dir / "genshin.db").exists() or self.pending.is_file()
 
-    def validate_app_only(self):
+    def validate_app_only(self, *, startup=False):
         if not self.available():
             raise FirstInstallError("product_database_setup_app_only_required")
         reject_reparse_chain(self.app_root, reason="product_database_setup_app_path_invalid")
@@ -122,9 +138,12 @@ class DatabaseSetup:
         reject_reparse_chain(ancestor, reason="product_database_setup_data_path_invalid")
         if self.registered():
             self._check_app(_signed_document(_read_control(self.registration).get("signed_app_source"),
-                                             self.trust_verifier))
-        else:
-            verify_package_artifact(self.app_root)
+                                             self.trust_verifier), startup=startup)
+        elif startup:
+            try:
+                verify_package_artifact(self.app_root)
+            except PackageIntegrityError as error:
+                raise FirstInstallError(error.code) from error
         if self.pending.is_file():
             document = _signed_document(_read_control(self.pending), self.trust_verifier)
             self._check_app(document)
@@ -196,6 +215,7 @@ class DatabaseSetup:
             raise FirstInstallError("product_first_install_busy")
         self._cancel.clear()
         self._progress = {"phase": "preparing", "cancellable": True}
+        timing = InstallationTiming(self._record_progress)
         work = None
         try:
             if (local_database is None) != (local_document is None):
@@ -204,6 +224,7 @@ class DatabaseSetup:
             if confirmation_digest != expected:
                 raise FirstInstallError("product_first_install_confirmation_mismatch")
             pair, manifest = document["pair_manifest"], document["database_manifest"]
+            qualification = qualified_database_from_signed_document(document)
             artifact = document["artifacts"]["database"]
             if local_database is None:
                 self._require_direct_cache()
@@ -218,12 +239,15 @@ class DatabaseSetup:
                 package = work / "genshin.db"
                 compressed = artifact["format"] == "sqlite-gzip"
                 archive = work / "database.gz" if compressed else package
+                timing({"phase": "download", "cancellable": True})
                 _download_https(artifact, archive, timeout=30, maximum_bytes=MAX_DATABASE_BYTES,
                                 cancel_check=self._cancel.is_set, cache_dir=self.cache / "artifacts",
-                                progress=self._record_progress)
+                                progress=timing)
                 if compressed:
+                    timing({"phase": "extract_database", "cancellable": True})
                     _extract_database(archive, package, artifact, self._cancel.is_set)
             else:
+                timing({"phase": "verifying_archives", "cancellable": True})
                 selected = reject_reparse_chain(Path(local_database), reason="product_database_setup_local_path_invalid")
                 identity = manifest["database"]
                 if selected.stat().st_size == identity["size_bytes"] and _sha256(selected) == identity["sha256"]:
@@ -239,6 +263,7 @@ class DatabaseSetup:
                     work = self.cache / f"database-setup-{uuid4().hex}"
                     work.mkdir(parents=True)
                     package = work / "genshin.db"
+                    timing({"phase": "extract_database", "cancellable": True})
                     _extract_database(selected, package, artifact, self._cancel.is_set)
                 else:
                     raise FirstInstallError("product_database_setup_package_mismatch")
@@ -252,8 +277,11 @@ class DatabaseSetup:
                     raise FirstInstallError("product_first_install_cancelled")
                 if not self.available() or (self.pending.is_file() and _read_control(self.pending) != document):
                     raise FirstInstallError("product_database_setup_state_changed")
-                self._check_app(document)
-                self._progress = {"phase": "installing", "cancellable": False}
+                timing({"phase": "qualifying", "cancellable": True})
+                self._check_app(document, startup=True)
+                if self._cancel.is_set():
+                    raise FirstInstallError("product_first_install_cancelled")
+                timing({"phase": "installing", "cancellable": False})
                 if self.pending.is_file():
                     abandon_unpublished_database_attempt(self.data_dir, manifest, expected_old_sha256=None)
                 # Persist exact authorization so a restart can recover the same DB transaction.
@@ -265,7 +293,8 @@ class DatabaseSetup:
                     app_release_id=app["app_release_id"], release_pair_id=pair["release_pair_id"],
                     required_database_release_id=app["required_database_release_id"],
                     pair_policy=pair["pair_policy"], app_version=app["app_version"],
-                    app_artifact_manifest_sha256=app["artifact_manifest"]["sha256"], pair_manifest=pair)
+                    app_artifact_manifest_sha256=app["artifact_manifest"]["sha256"], pair_manifest=pair,
+                    **({"qualification": qualification} if qualification is not None else {}))
                 atomic_json(self.data_dir / LIVE_PAIR_PROOF_FILENAME, document)
                 atomic_json(self.data_dir / LIVE_PAIR_MANIFEST_FILENAME, pair)
                 self.pending.unlink()
@@ -275,8 +304,12 @@ class DatabaseSetup:
                     row = _read_control(self.registration)
                     row.update(database_state="installed", app_release_id=pair["app"]["app_release_id"])
                     atomic_json(self.registration, row)
+            timing({"phase": "cleanup", "cancellable": False})
+            if work is not None:
+                shutil.rmtree(work, ignore_errors=True)
+                work = None
             return {"status": "complete", "requires_restart": True,
-                    "database_release_id": manifest["database_release_id"]}
+                    "database_release_id": manifest["database_release_id"], "timing": timing.finish()}
         finally:
             if work is not None:
                 shutil.rmtree(work, ignore_errors=True)

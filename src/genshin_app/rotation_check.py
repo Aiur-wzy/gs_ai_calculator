@@ -66,21 +66,125 @@ def attach_rotation_check(result, template, model=None, *, native=False):
     return result
 
 
-def _preflight_result(check):
-    # The standalone checker sees declared resources, while the full
-    # calculation can also generate or prevent those events during execution.
+def _section_status(status):
+    return status if status in {"passed", "failed"} else "not_checked"
+
+
+def _preflight_result(check, association=None, *, composition_issue=None):
+    issues = check["issues"]
+    execution_issue = next((issue for issue in issues if issue.get("event_id")), None)
+    failed_row = next((row for row in check["event_log"] if row["status"] == "failed"), None)
+    primary_failure = execution_issue or next(iter(issues), None)
+    energy_failure = None
+    unchecked_action = next((row for row in check["event_log"]
+                             if row["status"] == "not_verified" and row["type"] == "action"), None)
+    if execution_issue and failed_row and execution_issue["code"] == "insufficient_energy":
+        energy_failure = {**execution_issue}
+        for key in ("action_id", "character", "before", "required", "amount", "deficit"):
+            if key in failed_row:
+                energy_failure[key] = failed_row[key]
+        if failed_row["type"] == "action":
+            energy_failure.setdefault("action_id", failed_row["id"])
+        else:
+            model = check.get("resolved_rotation_model") or {}
+            spend = next((event for event in model.get("events", [])
+                          if event["id"] == failed_row["id"]), {})
+            if "action_id" in spend:
+                energy_failure["action_id"] = spend["action_id"]
+    action_status = check["action_check"]["status"]
+    energy_status = check["energy_check"]["status"]
+    checked_cycles = check["energy_check"]["checked_cycles"]
+    completed_cycles = check["energy_check"]["completed_cycles"]
+    windows = check["cycles"]
+    action_timing_status = _section_status(action_status)
+    declared_energy_status = _section_status(energy_status)
+    if check["status"] in {"passed", "unproven"} and completed_cycles:
+        declared = check["resolved_rotation_model"]
+        has_resources = (any(event["type"].startswith("energy_") for event in declared.get("events", []))
+                         or any(ability.get("energy") for ability in declared.get("abilities", [])))
+        declared_energy_status = "passed" if has_resources else "not_applicable"
+        if not declared.get("actions"):
+            action_timing_status = "not_applicable"
+    association_details = association or {"issues": [], "bindings": [], "hit_count": 0}
+    association_failure = next((i for i in association_details["issues"] if i["severity"] == "error"), None)
+    association_issue = association_failure or next(iter(association_details["issues"]), None)
+    association_status = "not_checked"
+    if association_failure:
+        association_status = "failed"
+    elif association is not None and association_issue is None:
+        association_status = "passed" if association_details["hit_count"] else "not_applicable"
+    sections = {
+        "action_associations": {
+            "status": association_status,
+            "inspected_hit_count": association_details["hit_count"],
+            "first_issue": association_issue or (primary_failure if association is None else None),
+            "legacy_only_bindings": sum(row["source_path"].startswith("rotation_model.")
+                                        for row in association_details["bindings"]),
+        },
+        "action_timing": {
+            "status": action_timing_status,
+            "first_issue": primary_failure if action_status != "passed" else None,
+            "checked_cycles": checked_cycles,
+            "executed_actions": sum(row.get("executed_action_count", 0) for row in windows),
+        },
+        "declared_energy": {
+            "status": declared_energy_status,
+            "first_issue": energy_failure or (primary_failure if energy_status not in {"passed", "unproven"} else None),
+            "checked_cycles": checked_cycles,
+            "completed_cycles": completed_cycles,
+            "scope_status": energy_status,
+            "burst_spends": sum(row.get("burst_energy_spend_count", 0) for row in windows),
+            "first_unverified_action": ({"action_id": unchecked_action["id"], "t": unchecked_action["t"],
+                                         "cycle": unchecked_action["cycle"]} if unchecked_action else None),
+        },
+    }
+    if composition_issue:
+        for row in sections.values():
+            row.update(status="not_checked", first_issue=composition_issue)
+    # Preserve the legacy preflight state and expose which checks actually ran.
     check["preflight"] = {
         "scope": "declared_rotation_only",
         "declared_status": check["status"],
         "mechanics_executed": False,
         "closure_verified": False,
-        "message": "只检查已声明的动作、冷却和能量。机制产生或取消的资源未核验，首个问题供定位；正式结果须完整计算。",
+        "checks": sections,
+        "message": "此处只核已声明的输入。cycles 是模型检查窗口数，可能包括空窗口；按动作和扣能笔数核对覆盖。"
+                   "机制派生、取消或接管的资源应通过完整计算核对。"
+                   "检查未完成或失败时仍可修改同一草稿后重试。",
     }
+    if association is not None:
+        check["association_check"] = association
+        check["issues"] = [*association_details["issues"], *issues]
     check["status"] = "unproven"
     return check
 
 
-def check_document(document, db_path=None, *, preflight=False):
+def _check_preflight(template, model, *, mechanics=None, matches=None, native=False):
+    from genshin_engine.rotation import inspect_declared_rotation
+    resolved, bindings = resolve_rotation_model(template, model) if native else (model, [])
+    check, association = inspect_declared_rotation(template, resolved, mechanics)
+    check = describe_rotation_check(check, template, resolved, bindings,
+                                    mechanics_model=mechanics, matches=matches)
+    return _preflight_result(check, association)
+
+
+def _composition_preflight_failure(error, report):
+    from genshin_engine.rotation import check_rotation
+    missing = error.details.get("task_capability", {}).get("blocking") or error.details.get("missing_inputs", [])
+    issue = {"code": error.reason,
+             "message": "组合尚缺输入，未取得可核对的完整面板及动作模型。可修改同一方案后再查。"
+                        "CLI 可另用独立动作检查文件验证明确的手工输入。",
+             "missing_inputs_total": len(missing)}
+    if missing and isinstance(missing[0], dict):
+        issue["first_missing_input"] = {
+            key: missing[0][key] for key in ("code", "path", "message", "action", "repair_hint") if key in missing[0]
+        }
+    check = check_rotation(None)
+    check["input_fingerprint"] = report.get("input_fingerprint")
+    return _preflight_result(check, composition_issue=issue)
+
+
+def check_document(document, db_path=None, *, preflight=False, candidate_session=None):
     """Read a versioned standalone check input or recompose a native plan."""
     from genshin_engine import validate_template
 
@@ -89,21 +193,30 @@ def check_document(document, db_path=None, *, preflight=False):
         raise PlanError("检查文件必须是 JSON 对象", "invalid_rotation_check", {"path": "/", "expected_type": "object"})
     if document.get("kind") == "genshin-plan":
         from genshin_app.equipment import compose_equipment_plan
+        from genshin_app.equipment.schema import PlanError
         from genshin_app.equipment.service import require_ready
         if db_path is None:
-            from genshin_app.equipment.schema import PlanError
             raise PlanError("检查原生装备方案需要指定公共数据库", "database_missing", {"path": "/data_dir"})
         if document.get("plan_version") == 3 and not preflight:
             from genshin_app.equipment.service import run_plan_calc
             return run_plan_calc(document, Path(db_path))["result"]["rotation_check"]
-        report = compose_equipment_plan(document, Path(db_path))
-        require_ready(report)
+        if candidate_session is None:
+            report = compose_equipment_plan(document, Path(db_path))
+        else:
+            report = compose_equipment_plan(document, Path(db_path), candidate_session=candidate_session)
+        try:
+            require_ready(report)
+        except PlanError as error:
+            if preflight and error.reason == "missing_input":
+                return _composition_preflight_failure(error, report)
+            raise
         plan = report["plan"]
-        check = evaluate_rotation(
-            plan["resolved_template"],
-            report.get("compiled_rotation_model", plan.get("rotation_model")), native=True,
-        )
-        return _preflight_result(check) if preflight else check
+        template = plan["resolved_template"]
+        model = report.get("compiled_rotation_model", plan.get("rotation_model"))
+        if preflight:
+            return _check_preflight(template, model, native=True, mechanics=report.get("mechanics_model"),
+                                    matches=report.get("mechanics_matches"))
+        return evaluate_rotation(template, model, native=True)
     if document.get("kind") == "genshin-rotation-check":
         if (type(document.get("version")) is not int or document["version"] != 1
                 or set(document) - {"kind", "version", "template", "rotation_model"}
@@ -111,12 +224,14 @@ def check_document(document, db_path=None, *, preflight=False):
             from genshin_app.equipment.schema import PlanError
             raise PlanError("不支持的动作检查文件结构；需要 version=1、template 和 rotation_model", "invalid_rotation_check")
         validate_template(document["template"])
-        check = evaluate_rotation(document["template"], document["rotation_model"])
-        return _preflight_result(check) if preflight else check
+        if preflight:
+            return _check_preflight(document["template"], document["rotation_model"])
+        return evaluate_rotation(document["template"], document["rotation_model"])
     if document.get("form") == "resolved":
         validate_template(document)
-        check = evaluate_rotation(document)
-        return _preflight_result(check) if preflight else check
+        if preflight:
+            return _check_preflight(document, None)
+        return evaluate_rotation(document)
     from genshin_app.equipment.schema import PlanError
     raise PlanError("需要原生方案、独立动作检查文件或数值模板", "invalid_rotation_check")
 

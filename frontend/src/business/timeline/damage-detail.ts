@@ -85,6 +85,14 @@ export function renderDamageExplanation(box:HTMLElement,event:any,ports:any):voi
       "before_reaction_flat","after_reaction_flat","after_flat","def_reduction_effective","def_ignore_effective","no_crit","expected_per_count","critical_per_count"];
     fields(node,order.filter(key=>finite(points[key])).map(key=>[name(key),format(key,points[key])]));
     fields(node,Object.entries(record.zones||{}).filter(([,v])=>finite(v)).map(([key,value])=>[name(key),number(value as number)]));
+    const coefficient=source.reaction_coefficient;
+    if(coefficient&&finite(coefficient.base_factor)&&finite(coefficient.effective_factor)){
+      fields(node,[["原始反应系数",number(coefficient.base_factor)],
+        ["系数修正倍数",format("system_factor",coefficient.factor_multiplier)],
+        ["生效反应系数",number(coefficient.effective_factor)],
+        ["修正提供者",coefficient.provider_id?char(coefficient.provider_id):null],
+        ["修正来源",coefficient.source],["口径",coefficient.status==="assumed"?"显式假设":null]]);
+    }
     const normalization=record.normalization||{};
     if(normalization.status==="available"){
       fields(node,[[`相对本段${name(normalization.reference_stat)}的等效倍率`,`${number(normalization.value*100)}%`],

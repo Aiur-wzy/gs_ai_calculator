@@ -33,6 +33,16 @@ export function projectHits(context:TimelineContext) {
     }
     const trace = list(r?.mechanics_trace).map((row, index) => ({...row, trace_index:index})).filter(row => within(row.t));
     const tracesByHit = new Map(), samplesByHit = new Map<any,any>();
+    const componentQuotas = new Map<string, any[]>();
+    for (const row of trace) {
+      if (row.type !== "quota" || row.unit !== "damage_component_target") continue;
+      for (const hitId of list(row.component_hit_ids ?? row.hit_ids)) {
+        const id = key(hitId, row.t);
+        const records = componentQuotas.get(id) || [];
+        records.push({...row, name_zh:rules.get(row.rule_id)?.name_zh});
+        componentQuotas.set(id, records);
+      }
+    }
     const collect = (map:Map<any,any>, row:any) => {
       const id = key(row.event_id, row.t);
       if (!map.has(id)) map.set(id, []);
@@ -90,6 +100,8 @@ export function projectHits(context:TimelineContext) {
       const detail:any = {hit_id:id, action_id:lineage.action_id, source_lineage:copyLineage(lineage), input:copy(projected.get(id)?.hit || null),
         trace_index:entry.trace?.trace_index,
         execution_status:executionStatus,
+        ...(calc?.target_id ? {target_id:calc.target_id} : {}),
+        ...(componentQuotas.has(key(id, hit.t)) ? {component_quotas:copy(componentQuotas.get(key(id, hit.t)))} : {}),
         ...(calc && explanationFingerprint ? {explanation_ref:calc.explanation_ref ?? null, explanation_fingerprint:explanationFingerprint} : {}),
         ...(declaration ? {declared_special:true, preview:declaration.preview, declaration_id:descriptor.id,
           execution:copy(declaration.terminal), interpretation:declaration.preview
@@ -151,10 +163,12 @@ export function projectHits(context:TimelineContext) {
           detail:{hit_id:id, action_id:lineage.action_id, source_lineage:copyLineage(lineage),
             ...(explanationFingerprint ? {explanation_ref:calc.explanation_ref ?? null, explanation_fingerprint:explanationFingerprint} : {}),
             trace_index:entry.trace?.trace_index, hit:copy(calc), zones:copy(calc.zones || {}), matched_effect_refs:copy(calc.matched_effect_refs || []),
+            ...(detail.target_id ? {target_id:detail.target_id} : {}),
             ...(fixedValue ? {calculation_override:copy(fixedValue), interpretation:fixedValue.precision?.kind === "approximate"
               ? "该单事件使用有来源的受审近似固定值；角色、技能、总伤和DPS继承近似标记，状态后继仍由引擎事件决定。"
               : "该单事件使用有来源的受审固定值；汇总由逐事件账重新派生，状态后继仍由引擎事件决定。"} : {}),
             effects:copy(effectRows),applied_effects:appliedEffects,
+            ...(detail.component_quotas ? {component_quotas:copy(detail.component_quotas)} : {}),
             ...(otherMaterialized.length?{materialized_effects:otherMaterialized}:{}),
             sampling:copy(samplesByHit.get(key(id, hit.t)) || [])}});
       }

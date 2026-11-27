@@ -63,6 +63,8 @@ class ExecutionVerificationSession:
         self._busy = self._closed = self._stopped = False
         self._cache = []
         self._verified_windows = set()
+        self._replay_special_catalog = None
+        self.special_capability_proof_fingerprint = None
         self._last_failure = None
         self._usage = {key: 0 for key in ('requests', 'executions', 'cache_hits', 'work',
             'retained_input_bytes', 'retained_output_bytes', 'returned_bytes',
@@ -157,13 +159,21 @@ class ExecutionVerificationSession:
         self._usage['returned_bytes'] += output_size
         return detached
 
-    def _execution_input(self, execution):
+    def bind_replay_capability_catalog(self, catalog, *, proof_fingerprint):
+        """Retain an already verified source within this replay operation."""
+        self._check()
+        self._replay_special_catalog = copy.deepcopy(catalog)
+        self.special_capability_proof_fingerprint = proof_fingerprint
+
+    def _execution_input(self, execution, *, capability_hash=None):
         if type(execution) is not dict or set(execution) != KEYS:
             self._fail('verification_input', '核验需要完整模板、动作、最终机制和收益关联。')
         detached = self._walk(execution, role='input')[0]
         from .energy_policy import require_replay_energy_policy
         require_replay_energy_policy(detached)
         raw = json.dumps(detached, ensure_ascii=False, sort_keys=True, separators=(',', ':'), allow_nan=False).encode('utf8')
+        if capability_hash is not None:
+            raw += b"\0" + capability_hash.encode("ascii")
         return detached, raw
 
     def _retain_execution(self, raw, actual):
@@ -186,7 +196,8 @@ class ExecutionVerificationSession:
         self._check()
         self._busy = True
         try:
-            detached, raw = self._execution_input(execution)
+            from genshin_engine.special_reaction_capabilities import active_special_reaction_catalog_hash
+            detached, raw = self._execution_input(execution, capability_hash=active_special_reaction_catalog_hash())
             self._capacity('retained_input_bytes', len(raw), path='/input')
             from genshin_engine.mechanics import execute_mechanics
             from genshin_runtime.operation_timing import timed_call
@@ -241,7 +252,9 @@ class ExecutionVerificationSession:
         self._reserve('requests', 1)
         self._busy = True
         try:
-            detached, raw = self._execution_input(execution)
+            from genshin_engine.special_reaction_capabilities import use_special_reaction_capability_catalog
+            catalog = self._replay_special_catalog
+            detached, raw = self._execution_input(execution, capability_hash=catalog["content_hash"] if catalog else None)
             for old_raw, stored, output_size, metrics in self._cache:
                 self._reserve('work', math.ceil(min(len(old_raw), len(raw)) / 256) + 1)
                 if old_raw == raw:
@@ -250,7 +263,8 @@ class ExecutionVerificationSession:
             self._reserve('executions', 1)
             self._capacity('retained_input_bytes', len(raw), path='/input')
             from genshin_engine.mechanics import execute_mechanics
-            actual = execute_mechanics(**detached)
+            with use_special_reaction_capability_catalog(catalog):
+                actual = execute_mechanics(**detached)
             stored, output_size, metrics = self._retain_execution(raw, actual)
             return self._replay_result(stored, output_size, metrics, _result_fields, _response_fields)
         finally:
@@ -290,6 +304,8 @@ class ExecutionVerificationSession:
         if threading.current_thread() is not self._owner or self._busy:
             raise ExecutionVerificationError('verification_reentry', '核验期间不能跨线程或重入关闭会话。')
         self._cache.clear()
+        self._replay_special_catalog = None
+        self.special_capability_proof_fingerprint = None
         self._verified_windows.clear()
         self._usage['retained_input_bytes'] = self._usage['retained_output_bytes'] = 0
         self._closed = True

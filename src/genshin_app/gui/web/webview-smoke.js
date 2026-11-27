@@ -90,7 +90,9 @@
     await waitFor(()=>global.WB.state.path===path&&global.WB.state.board!==previous,deadline,"webview_smoke_document_open_failed","用户文件打开未完成。");
   }
   async function officialChat(deadline){
-    const embedded=await waitFor(()=>global.document.querySelector(".gs-editor-assistant"),deadline,"webview_smoke_assistant_missing","没有显示官方聊天入口。");
+    const workbench=await waitFor(()=>global.document.querySelector(".gs-editor-workbench"),deadline,"webview_smoke_editor_not_visible","没有显示正式白板工作台。");
+    if(!workbench.querySelector(".gs-editor-assistant"))await click("打开 AI 小窗",deadline,workbench);
+    const embedded=await waitFor(()=>workbench.querySelector(".gs-editor-assistant"),deadline,"webview_smoke_assistant_missing","打开 AI 小窗后没有显示官方聊天入口。");
     await click("完整页面",deadline,embedded);
     await waitFor(()=>global.document.querySelector("[data-conversation-content]")&&!global.document.querySelector(".gs-editor-assistant"),deadline,"webview_smoke_chat_not_visible","没有显示完整聊天页面。");
     const picker=[...global.document.querySelectorAll("button[aria-label]")].find(row=>visible(row)&&/^(Choose workspace|选择工作区)$/.test(row.getAttribute("aria-label")));

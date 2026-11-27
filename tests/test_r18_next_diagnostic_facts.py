@@ -34,21 +34,19 @@ def test_compaction_is_explicit_and_keeps_exact_full_detail_location():
 
 
 @pytest.fixture
-def catalog(monkeypatch):
-    data = {"collection_id": "test.catalog", "revision": 2, "content_hash": "c" * 64,
-            "version_line": "release", "source_upstream_commit": "a" * 40,
-            "source_target_version": "test", "entries": [{"character_id": 123,
-                "required_skill_depot_id": 321, "form_selection_required": True,
-                "runtime_support_status": "supported", "capability_tags": ["tag"],
-                "runtime_profile_id": "profile", "entry_fingerprint": "e" * 64}]}
-    monkeypatch.setattr(capabilities, "load_reviewed_special_reaction_capabilities", lambda commit=None: copy.deepcopy(data))
-    return data
+def catalog():
+    data = capabilities.load_reviewed_special_reaction_capabilities()
+    with capabilities.use_special_reaction_capability_catalog(data):
+        yield data
 
 
-def equipped():
-    return {"actor": {"character_ref": {"db_character_id": 123, "skill_depot_id": 321,
-                "version_line": "release"},
-            "data_version": {"version_line": "release", "upstream_commit": "a" * 40}}}
+def equipped(catalog):
+    entry = next(row for row in catalog["entries"]
+                 if row["form_selection_required"] and row["runtime_support_status"] == "supported")
+    return {"actor": {"character_ref": {"db_character_id": entry["character_id"],
+                "skill_depot_id": entry["required_skill_depot_id"], "version_line": catalog["version_line"]},
+            "data_version": {"version_line": catalog["version_line"],
+                             "upstream_commit": catalog["source_upstream_commit"]}}}
 
 
 def test_missing_identity_is_input_problem_not_database_failure(catalog):
@@ -67,7 +65,7 @@ def test_missing_identity_is_input_problem_not_database_failure(catalog):
     (lambda x: x["data_version"].update(upstream_commit="b" * 40), "equipment_upstream_commit_mismatch"),
 ])
 def test_different_rejections_have_precise_evidence(catalog, change, reason):
-    value = equipped()
+    value = equipped(catalog)
     change(value["actor"])
     result = capabilities.project_special_reaction_party_capabilities_detailed(value)
     assert result["diagnostics"][0]["code"] == reason
@@ -76,7 +74,8 @@ def test_different_rejections_have_precise_evidence(catalog, change, reason):
 
 
 def test_valid_projection_keeps_old_api_rows(catalog):
-    result = capabilities.project_special_reaction_party_capabilities_detailed(equipped())
+    equipment = equipped(catalog)
+    result = capabilities.project_special_reaction_party_capabilities_detailed(equipment)
     assert result["diagnostics"] == []
     assert result["rows"][0]["status"] == "confirmed"
-    assert capabilities.project_special_reaction_party_capabilities(equipped()) == result["rows"]
+    assert capabilities.project_special_reaction_party_capabilities(equipment) == result["rows"]

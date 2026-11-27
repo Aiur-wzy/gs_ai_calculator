@@ -50,6 +50,7 @@ from genshin_db.release_profile import (
     DatabaseReleaseError,
     create_database_live_receipt,
     database_live_receipt_matches,
+    manifest_fingerprint,
     manifest_supports_app,
     read_database_identity,
     release_pair_matches_database_manifest,
@@ -57,6 +58,15 @@ from genshin_db.release_profile import (
     validate_database_live_receipt,
     validate_database_release_manifest,
     validate_release_pair_manifest,
+)
+from genshin_db.release_qualification import (
+    QUALIFICATION_CONTRACT,
+    DatabaseInstallQualification,
+    check_qualified_destination,
+    hold_exact_database_bytes,
+    load_database_install_qualification,
+    qualified_database_identity,
+    read_qualified_database_identity,
 )
 from genshin_db.runtime_store import validate_runtime
 from genshin_db.semantic_store import validate_component as validate_semantic_component
@@ -481,6 +491,44 @@ def _validate_database(
         ) from error
 
 
+def build_database_install_qualification(
+    database: Path, manifest: Mapping[str, Any]
+) -> dict[str, Any]:
+    """Fully validate final frozen bytes before emitting a publisher-signable claim."""
+
+    checked = validate_database_release_manifest(dict(manifest))
+    expected = checked["database"]
+    with hold_exact_database_bytes(
+        database, size=expected["size_bytes"], sha256=expected["sha256"],
+    ) as path:
+        identity = _validate_database(
+            path, required_components=required_manifest_components(checked),
+        )
+        if not _manifest_database_matches(identity, expected):
+            _fail("database_install_qualification_manifest_mismatch")
+        identity = _integrity_identity(
+            path, identity, expected, mismatch_reason="database_install_qualification_manifest_mismatch"
+        )
+    qualification = load_database_install_qualification(
+        {
+            "contract": QUALIFICATION_CONTRACT,
+            "database_release_id": checked["database_release_id"],
+            "manifest_fingerprint": manifest_fingerprint(checked),
+            "sha256": identity["sha256"],
+            "size_bytes": identity["size_bytes"],
+            "release_core_sha256": identity["release_core_root"],
+            "meta_fingerprint": identity["meta_fingerprint"],
+            "mutable_layer_fingerprint": identity["mutable_layer_fingerprint"],
+            "manual_content_fingerprint": identity.get("manual_content_fingerprint"),
+        },
+        checked,
+    )
+    # The final seal is based on the on-disk standalone image. No writes to
+    # that image may follow the deep check and precede the publisher's signature.
+    read_qualified_database_identity(database, checked, qualification)
+    return qualification.payload()
+
+
 def _rollback_snapshot(live: Path, target: Path) -> None:
     target.parent.mkdir(parents=True, exist_ok=True)
     with closing(sqlite3.connect(live)) as source, closing(
@@ -532,6 +580,7 @@ def _finish_accepted_journal(
     manifest_path: Path,
     previous: Mapping[str, Any],
     checked_manifest: Mapping[str, Any],
+    qualification: DatabaseInstallQualification | None = None,
 ) -> dict[str, Any]:
     """Finish cleanup after a crash that occurred after the write fence reopened."""
 
@@ -550,7 +599,7 @@ def _finish_accepted_journal(
         verified = verify_accepted_recovery_identity(
             live=live, receipt_path=receipt_path, manifest_path=manifest_path,
             checked_manifest=checked_manifest, previous=previous,
-            ports=_migration_stage_ports(),
+            ports=_migration_stage_ports(), qualification=qualification,
         )
         active_identity = verified.active_identity
         receipt, live_manifest = verified.receipt, verified.live_manifest
@@ -651,6 +700,8 @@ def _install_locked(
     package_identity: Mapping[str, Any],
     production: bool,
     fault_hook: Callable[[str], None] | None,
+    qualification: DatabaseInstallQualification | None = None,
+    current_qualification: DatabaseInstallQualification | None = None,
 ) -> dict[str, Any]:
     target_release_id = checked_manifest["database_release_id"]
     target_database = checked_manifest["database"]
@@ -673,6 +724,7 @@ def _install_locked(
             manifest_path=manifest_path,
             previous=previous,
             checked_manifest=checked_manifest,
+            qualification=qualification,
         )
         return {
             "status": "already_current",
@@ -702,18 +754,23 @@ def _install_locked(
         if resumable_swap:
             try:
                 with database_lock(live, timeout=0):
-                    candidate_identity = _validate_database(
-                        live,
-                        required_components=required_manifest_components(
-                            checked_manifest
-                        ),
-                    )
-                    active_identity = _integrity_identity(
-                        live,
-                        candidate_identity,
-                        target_database,
-                        mismatch_reason="database_migration_interrupted_swap_mismatch",
-                    )
+                    if qualification is not None:
+                        active_identity = read_qualified_database_identity(
+                            live, checked_manifest, qualification,
+                        )
+                    else:
+                        candidate_identity = _validate_database(
+                            live,
+                            required_components=required_manifest_components(
+                                checked_manifest
+                            ),
+                        )
+                        active_identity = _integrity_identity(
+                            live,
+                            candidate_identity,
+                            target_database,
+                            mismatch_reason="database_migration_interrupted_swap_mismatch",
+                        )
                     live_receipt = create_database_live_receipt(
                         checked_manifest,
                         active_identity,
@@ -766,6 +823,7 @@ def _install_locked(
                 manifest_path=manifest_path,
                 previous=resumed,
                 checked_manifest=checked_manifest,
+                qualification=qualification,
             )
             return {
                 "status": "already_current",
@@ -792,16 +850,21 @@ def _install_locked(
         and previous["target_release_id"] == target_release_id
         and live.is_file()
     ):
-        current_identity = _validate_database(
-            live,
-            required_components=required_manifest_components(checked_manifest),
-        )
-        current_identity = _integrity_identity(
-            live,
-            current_identity,
-            target_database,
-            mismatch_reason="database_migration_active_release_core_mismatch",
-        )
+        if qualification is not None:
+            current_identity = read_qualified_database_identity(
+                live, checked_manifest, qualification,
+            )
+        else:
+            current_identity = _validate_database(
+                live,
+                required_components=required_manifest_components(checked_manifest),
+            )
+            current_identity = _integrity_identity(
+                live,
+                current_identity,
+                target_database,
+                mismatch_reason="database_migration_active_release_core_mismatch",
+            )
         receipt = _read_live_receipt(receipt_path)
         live_manifest = _read_live_manifest(manifest_path)
         try:
@@ -836,6 +899,7 @@ def _install_locked(
         minimum_headroom_bytes=MINIMUM_HEADROOM_BYTES,
         sqlite_work_allowance_bytes=SQLITE_WORK_ALLOWANCE_BYTES,
         ports=_migration_stage_ports(),
+        current_qualification=current_qualification,
     )
     previous_receipt_bytes = prepared.previous_receipt_bytes
     previous_manifest_bytes = prepared.previous_manifest_bytes
@@ -869,6 +933,7 @@ def _install_locked(
         copy_and_verify_package(
             package=package, staging=staging,
             target_database=target_database, ports=_migration_stage_ports(),
+            qualification=qualification,
         )
         _journal(
             journal_path,
@@ -895,6 +960,7 @@ def _install_locked(
                 previous_receipt_bytes=previous_receipt_bytes,
                 previous_manifest_bytes=previous_manifest_bytes,
                 ports=_migration_stage_ports(),
+                current_qualification=current_qualification,
             )
             old_sha, rollback_created = snapshot.old_sha, snapshot.rollback_created
             _fault(fault_hook, "after_rollback_snapshot")
@@ -937,6 +1003,7 @@ def _install_locked(
                 active_identity = postcheck_active_database(
                     live=live, package_identity=package_identity,
                     target_database=target_database, ports=_migration_stage_ports(),
+                    qualification=qualification, manifest=checked_manifest,
                 )
                 _fault(fault_hook, "after_active_postcheck")
                 live_receipt = prepare_acceptance_receipt(
@@ -976,6 +1043,13 @@ def _install_locked(
             except BaseException as error:
                 if publication_attempted:
                     try:
+                        if current_qualification is not None:
+                            _verify_package_bytes(
+                                rollback,
+                                {"sha256": current_qualification.sha256,
+                                 "size_bytes": current_qualification.size_bytes},
+                                reason="database_migration_restored_identity_mismatch",
+                            )
                         _restore_rollback(
                             live=live,
                             rollback=rollback,
@@ -983,7 +1057,15 @@ def _install_locked(
                         )
                         _restore_sidecar(receipt_path, previous_receipt_bytes)
                         _restore_sidecar(manifest_path, previous_manifest_bytes)
-                        restored_sha = _sha256(live) if live.exists() else None
+                        if current_qualification is not None:
+                            restored_manifest = _read_live_manifest(manifest_path)
+                            if restored_manifest is None:
+                                _fail("database_migration_restored_identity_mismatch")
+                            restored_sha = read_qualified_database_identity(
+                                live, restored_manifest, current_qualification,
+                            )["sha256"]
+                        else:
+                            restored_sha = _sha256(live) if live.exists() else None
                         _journal(
                             journal_path,
                             operation_id=operation_id,
@@ -1210,6 +1292,8 @@ def install_database_release(
     app_artifact_manifest_sha256: str | None = None,
     pair_manifest: Mapping[str, Any] | None = None,
     fault_hook: Callable[[str], None] | None = None,
+    qualification: DatabaseInstallQualification | None = None,
+    current_qualification: DatabaseInstallQualification | None = None,
 ) -> dict[str, Any]:
     """Install one verified database as a database-only subtransaction.
 
@@ -1225,6 +1309,8 @@ def install_database_release(
         _fail("database_migration_confirmation_required", "数据库升级需要用户确认")
     if type(production) is not bool:
         _fail("database_migration_mode_invalid")
+    if not production and (qualification is not None or current_qualification is not None):
+        _fail("database_install_qualification_requires_production")
     try:
         checked_manifest = validate_database_release_manifest(dict(manifest))
     except DatabaseReleaseError as error:
@@ -1276,8 +1362,16 @@ def install_database_release(
             "database_migration_release_pair_incompatible",
             "数据库发行包与当前App逻辑不兼容",
         )
-    data_dir = Path(data_dir).resolve()
-    package = Path(package_database).resolve()
+    if qualification is not None or current_qualification is not None:
+        data_dir = Path(os.path.abspath(data_dir))
+        try:
+            check_qualified_destination(data_dir / "build")
+        except DatabaseReleaseError as error:
+            raise DatabaseMigrationError(error.reason, str(error)) from error
+    else:
+        data_dir = Path(data_dir).resolve()
+    package = (Path(os.path.abspath(package_database)) if qualification is not None
+               else Path(package_database).resolve())
     live = data_dir / "genshin.db"
     if package == live or not package.is_file():
         _fail("database_migration_package_invalid", "数据库发行包不存在或指向在用库")
@@ -1286,29 +1380,41 @@ def install_database_release(
     build.mkdir(parents=True, exist_ok=True)
     journal_path = data_dir / JOURNAL_FILE
     target_database = checked_manifest["database"]
-    _verify_package_bytes(
-        package, target_database, reason="database_migration_package_identity_mismatch",
-    )
-    package_identity = _validate_database(
-        package,
-        required_components=required_manifest_components(checked_manifest),
-    )
-    if not _manifest_database_matches(package_identity, target_database):
-        _fail(
-            "database_migration_package_identity_mismatch",
-            "数据库发行包与manifest身份不一致",
+    if qualification is not None:
+        try:
+            package_identity = qualified_database_identity(checked_manifest, qualification)
+        except DatabaseReleaseError as error:
+            raise DatabaseMigrationError(error.reason, str(error)) from error
+    else:
+        _verify_package_bytes(
+            package, target_database, reason="database_migration_package_identity_mismatch",
         )
-    package_identity = _integrity_identity(
-        package,
-        package_identity,
-        target_database,
-        mismatch_reason="database_migration_package_release_core_mismatch",
-    )
-    _verify_package_bytes(
-        package, target_database, reason="database_migration_package_identity_mismatch",
-    )
+        package_identity = _validate_database(
+            package,
+            required_components=required_manifest_components(checked_manifest),
+        )
+        if not _manifest_database_matches(package_identity, target_database):
+            _fail(
+                "database_migration_package_identity_mismatch",
+                "数据库发行包与manifest身份不一致",
+            )
+        package_identity = _integrity_identity(
+            package,
+            package_identity,
+            target_database,
+            mismatch_reason="database_migration_package_release_core_mismatch",
+        )
+        _verify_package_bytes(
+            package, target_database, reason="database_migration_package_identity_mismatch",
+        )
 
     update_lock = data_dir / UPDATE_LOCK_FILE
+    qualification_arguments = {}
+    if qualification is not None or current_qualification is not None:
+        qualification_arguments = {
+            "qualification": qualification,
+            "current_qualification": current_qualification,
+        }
     try:
         with file_lock(update_lock, timeout=0):
             return _install_locked(
@@ -1321,7 +1427,10 @@ def install_database_release(
                 package_identity=package_identity,
                 production=production,
                 fault_hook=fault_hook,
+                **qualification_arguments,
             )
+    except DatabaseReleaseError as error:
+        raise DatabaseMigrationError(error.reason, str(error)) from error
     except LockBusyError as error:
         raise DatabaseMigrationError(
             "database_migration_busy",

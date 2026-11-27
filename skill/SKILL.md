@@ -25,6 +25,8 @@ description: 原神角色与装备资料查询、动作排轴、元素/能量与
 | 本次任务、五个可交错工作重点 | [工作法](references/workflow/index.md)；[白板接续](references/workflow/whiteboard.md) |
 | 原题容易遗漏、资料摘要丢条件、已算通但任务没完成 | [原题—解释—执行对照](references/workflow/task-evidence.md) |
 | 配装、动作、事件、数值或结果检查 | [按当前问题选工作卡](references/workflow/index.md#五张工作卡) |
+| 要给一招定时、缩短两招间的等待，或决定何时切人 | 先读[动作估时指南](references/data/action-timing.md)，按具体形态和后接操作查时点，再排轴 |
+| 后台少一跳、挂元素或产球有争议、帧率变化 | 按[排轴资料索引](references/data/combat-references.md)核具体事件，按[帧率与战斗计时](references/data/frame-rate-timing.md)查证可换算的时钟 |
 | 游戏规律、公式、附着/ICD、时序/取样、词条 | [伤害](references/mechanics/damage-formula.md)、[反应](references/mechanics/reactions.md)、[排轴](references/mechanics/rotation.md)、[配装](references/mechanics/artifacts.md) |
 | 怎样填写机制、查结果或修复错误 | [App机制适配索引](references/app-mechanics/index.md)，使用当前工具给出的参数合同 |
 | 角色/装备/附录与高级字段 | [数据查询](references/data/query.md)、[数据库说明](references/data/database-readme.md)、[角色附录](references/data/character-appendices.md) |

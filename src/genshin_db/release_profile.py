@@ -12,7 +12,7 @@ import hashlib
 import json
 import re
 import sqlite3
-from collections.abc import Mapping
+from collections.abc import Callable, Mapping
 from datetime import datetime
 from pathlib import Path
 from typing import Any
@@ -1304,11 +1304,13 @@ def inspect_database_profile(
     remote_manifest: Mapping[str, Any] | None = None,
     live_receipt: Mapping[str, Any] | None = None,
     journal_state: str | None = None,
+    identity_reader: Callable[[Path], dict] | None = None,
 ) -> dict:
     """Classify a local profile from explicit, already-fetched manifests.
 
-    Passing ``remote_manifest`` never performs network I/O. A caller may fetch
-    and cache the cloud manifest separately, then use this pure classification.
+    Passing ``remote_manifest`` never performs network I/O. An alternate
+    identity reader must validate the actual local database before returning
+    its identity, just as the default reader does.
     """
 
     if pair_policy not in PAIR_POLICIES:
@@ -1350,7 +1352,7 @@ def inspect_database_profile(
             "available_release_id": target["database_release_id"] if target else None,
         }
     try:
-        identity = read_database_identity(path)
+        identity = (identity_reader or read_database_identity)(path)
     except DatabaseReleaseError as error:
         return {
             "contract": PROFILE_CONTRACT,

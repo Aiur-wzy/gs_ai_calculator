@@ -1,0 +1,555 @@
+{
+  "kind": "genshin-plan",
+  "plan_version": 3,
+  "plan_id": "8fb7aa10-96f4-4efc-9ff2-155cb8dc3c2b",
+  "revision": 0,
+  "direct_energy_policy": "energy-direct-base-er-v1",
+  "manual_template": {
+    "version": 2,
+    "form": "resolved",
+    "id_registry_version": 1,
+    "type_definitions": {
+      "damage_types": []
+    },
+    "enemy": {
+      "level": 90,
+      "resistance": {
+        "default": 0.1
+      }
+    },
+    "characters": [
+      {
+        "id": "a",
+        "level": 90,
+        "stats": {
+          "atk": 100,
+          "base_atk": 100,
+          "em": 0,
+          "crit_rate": 0,
+          "crit_dmg": 0.5,
+          "energy_recharge": 1
+        },
+        "name": "风触发者"
+      },
+      {
+        "id": "b",
+        "level": 90,
+        "stats": {
+          "atk": 200,
+          "base_atk": 100,
+          "em": 0,
+          "crit_rate": 0,
+          "crit_dmg": 0.5,
+          "energy_recharge": 1
+        },
+        "name": "冰附着者"
+      },
+      {
+        "id": "c",
+        "level": 90,
+        "stats": {
+          "atk": 200,
+          "base_atk": 100,
+          "em": 0,
+          "crit_rate": 0,
+          "crit_dmg": 0.5,
+          "energy_recharge": 1
+        },
+        "name": "换入的第三人"
+      }
+    ],
+    "hits": [
+      {
+        "id": "h0",
+        "t": 0.2,
+        "character": "a",
+        "skill": "工程技能",
+        "hit_name": "h0",
+        "damage_type_ids": [
+          "damage.elemental_skill"
+        ],
+        "damage_system": "classic",
+        "element": "anemo",
+        "multiplier": 1
+      }
+    ],
+    "buffs": [],
+    "switches": [
+      {
+        "t": 1,
+        "character": "c"
+      }
+    ],
+    "loop_duration": 10,
+    "meta": {
+      "name": "星扩散双次数池工程样例",
+      "assumptions": [
+        "只演示次数消费和伤害分配。容量、触发时点、加算均为工程测试值。"
+      ]
+    }
+  },
+  "equipment_inputs": {
+    "b": {
+      "artifact_sets": [],
+      "character_entity_ref": null,
+      "character_ref": {
+        "db_character_id": 10000150,
+        "skill_depot_id": 15001,
+        "version_line": "release"
+      },
+      "data_version": {
+        "built_at": "2026-11-18T10:02:42-03:00",
+        "equipment_schema_version": 1,
+        "upstream_commit": "6044f5aae7dd79fbbe15c5748ef99b654f6132b7",
+        "version_line": "release"
+      },
+      "mode": "panel",
+      "panel_policy": "static_included",
+      "panel_provenance": {
+        "entered_by": "agent",
+        "note": "主词条与常驻已含；有效副词条 {'atk': 0, 'cr': 24, 'cd': 11, 'er': 0}",
+        "origin": "agent_constructed"
+      },
+      "progression": {
+        "ascension": 6,
+        "constellation": 0,
+        "source": "用户指定命座对照；其余配置沿用7.2.54千岩方案。",
+        "status": "confirmed",
+        "talent_base_levels": {
+          "burst": 10,
+          "normal": 10,
+          "skill": 10
+        }
+      },
+      "source_refs": [
+        {
+          "kind": "manual",
+          "note": "用户锁定奥黛塔C0新枝R5、幻灭4、35词；重新分配"
+        }
+      ],
+      "weapon": null
+    }
+  },
+  "effect_bindings": [
+    {
+      "binding_id": "binding",
+      "provider_character_id": "b",
+      "owner": {
+        "kind": "manual",
+        "note": "独立工程机制"
+      },
+      "source_refs": [
+        {
+          "kind": "manual",
+          "note": "确定性虚构案例，无游戏队伍答案"
+        }
+      ],
+      "source_fingerprint": "d8d99d28b8579a7861093b12e15e0dd1c946bd7ea7bfbd9d98bc8eb6ac7dd708",
+      "coverage": {
+        "state": "complete",
+        "reviewed_by": "工程测试",
+        "note": "已核对虚构输入范围",
+        "source_fingerprint": "d8d99d28b8579a7861093b12e15e0dd1c946bd7ea7bfbd9d98bc8eb6ac7dd708"
+      },
+      "parts": [
+        {
+          "part_id": "lead",
+          "label": "lead",
+          "state": "resolved",
+          "rule": {
+            "kind": "mechanics",
+            "rule_id": "lead"
+          },
+          "delivery": {
+            "kind": "mechanics"
+          },
+          "conditions": [],
+          "dependencies": {
+            "mode": "source_only",
+            "context_fingerprint": null,
+            "note": "显式声明"
+          },
+          "reason": null
+        },
+        {
+          "part_id": "chorus",
+          "label": "chorus",
+          "state": "resolved",
+          "rule": {
+            "kind": "mechanics",
+            "rule_id": "chorus"
+          },
+          "delivery": {
+            "kind": "mechanics"
+          },
+          "conditions": [],
+          "dependencies": {
+            "mode": "source_only",
+            "context_fingerprint": null,
+            "note": "显式声明"
+          },
+          "reason": null
+        }
+      ]
+    }
+  ],
+  "manual_effect_dependencies": [],
+  "rotation_tuning": {
+    "buff_hit_matches": []
+  },
+  "resolution": {
+    "state": "pending"
+  },
+  "resolved_template": null,
+  "rotation_model": {
+    "schema_version": 1,
+    "period": 10,
+    "max_cycles": 3,
+    "initial_frontline": "a",
+    "characters": [
+      {
+        "id": "a",
+        "element": "cryo",
+        "energy_recharge": 1,
+        "energy_capacity": 10,
+        "initial_energy": 10,
+        "status": "assumed",
+        "source": "虚构确定性工程情景"
+      },
+      {
+        "id": "b",
+        "element": "cryo",
+        "energy_recharge": 1,
+        "energy_capacity": 10,
+        "initial_energy": 10,
+        "status": "assumed",
+        "source": "虚构确定性工程情景"
+      },
+      {
+        "id": "c",
+        "element": "cryo",
+        "energy_recharge": 1,
+        "energy_capacity": 10,
+        "initial_energy": 10,
+        "status": "assumed",
+        "source": "虚构确定性工程情景"
+      }
+    ],
+    "abilities": [
+      {
+        "id": "e",
+        "character": "a",
+        "action_type_id": "action.elemental_skill",
+        "cooldown": null,
+        "energy": null,
+        "status": "assumed",
+        "source": "虚构确定性工程情景"
+      },
+      {
+        "id": "ac",
+        "character": "a",
+        "action_type_id": "action.switch",
+        "cooldown": null,
+        "energy": null,
+        "status": "assumed",
+        "source": "虚构确定性工程情景"
+      }
+    ],
+    "actions": [
+      {
+        "id": "cast",
+        "ability_id": "e",
+        "start": 0,
+        "occupation_end": 0.1,
+        "order": 0,
+        "repeat": {
+          "mode": "once"
+        },
+        "status": "assumed",
+        "source": "虚构确定性工程情景"
+      },
+      {
+        "id": "switch.c",
+        "ability_id": "ac",
+        "start": 1,
+        "occupation_end": 1.1,
+        "order": 0,
+        "repeat": {
+          "mode": "once"
+        },
+        "status": "assumed",
+        "source": "虚构确定性工程情景",
+        "switch_to": "c"
+      }
+    ],
+    "events": [],
+    "initial_cooldowns": []
+  },
+  "mechanics_model": {
+    "schema_version": 1,
+    "rules": [
+      {
+        "id": "lead",
+        "name_zh": "领唱工程样例",
+        "owner": "b",
+        "source_id": "binding:lead",
+        "trigger": {
+          "event": "switch",
+          "phase": "post"
+        },
+        "beneficiaries": {
+          "mode": "team",
+          "scope": "current_frontline"
+        },
+        "timing": {
+          "delay": 0,
+          "duration": 5,
+          "cooldown": 0,
+          "cooldown_anchor": "success"
+        },
+        "stacking": {
+          "max": 1,
+          "add": 1,
+          "policy": "refresh"
+        },
+        "effects": [
+          {
+            "id": "value",
+            "benefit_type_id": "benefit.reaction_flat.all",
+            "value": 100,
+            "domain": "provider"
+          }
+        ],
+        "status": "assumed",
+        "source": "虚构确定性工程情景",
+        "quota": {
+          "capacity": 1,
+          "scope": "team",
+          "refresh": "reset",
+          "consume": {
+            "event": "reaction_damage",
+            "phase": "pre",
+            "reaction_types": [
+              "stellar_swirl"
+            ]
+          },
+          "unit": "damage_component_target"
+        }
+      },
+      {
+        "id": "chorus",
+        "name_zh": "重唱工程样例",
+        "owner": "b",
+        "source_id": "binding:chorus",
+        "trigger": {
+          "event": "switch",
+          "phase": "post"
+        },
+        "beneficiaries": {
+          "mode": "team",
+          "scope": "current_offfield"
+        },
+        "timing": {
+          "delay": 0,
+          "duration": 5,
+          "cooldown": 0,
+          "cooldown_anchor": "success"
+        },
+        "stacking": {
+          "max": 1,
+          "add": 1,
+          "policy": "refresh"
+        },
+        "effects": [
+          {
+            "id": "value",
+            "benefit_type_id": "benefit.reaction_flat.all",
+            "value": 100,
+            "domain": "provider"
+          }
+        ],
+        "status": "assumed",
+        "source": "虚构确定性工程情景",
+        "quota": {
+          "capacity": 1,
+          "scope": "team",
+          "refresh": "reset",
+          "consume": {
+            "event": "reaction_damage",
+            "phase": "pre",
+            "reaction_types": [
+              "stellar_swirl"
+            ]
+          },
+          "unit": "damage_component_target"
+        }
+      }
+    ],
+    "hit_events": [
+      {
+        "hit_id": "h0",
+        "action_id": "cast",
+        "order": 10,
+        "application": {
+          "profile_id": "anemo",
+          "target_id": "enemy",
+          "landed": true,
+          "area_id": "battlefield.primary"
+        }
+      }
+    ],
+    "hit_patterns": [],
+    "condition_events": [],
+    "initial_state": {
+      "rules": [
+        {
+          "rule_id": "lead",
+          "cooldown_remaining": 0,
+          "instances": []
+        },
+        {
+          "rule_id": "chorus",
+          "cooldown_remaining": 0,
+          "instances": []
+        }
+      ]
+    },
+    "elemental_model": {
+      "schema_version": 1,
+      "ruleset": "gauge-multi-aura-v4",
+      "target": {
+        "id": "enemy",
+        "kind": "ordinary",
+        "knowledge": "known",
+        "initial_auras": [
+          {
+            "element": "cryo",
+            "remaining_gu": 0.7,
+            "decay_gu_per_second": 0.001,
+            "source": "controlled initial layer",
+            "source_owner": "b"
+          }
+        ],
+        "freeze": {
+          "freezable": false,
+          "resistance": 0,
+          "status": "assumed",
+          "source": "controlled v4 adversarial fixture"
+        },
+        "status": "assumed",
+        "source": "controlled v4 adversarial fixture"
+      },
+      "profiles": [
+        {
+          "id": "pyro",
+          "element": "pyro",
+          "application": "apply",
+          "gauge_units": 1,
+          "icd": {
+            "kind": "none"
+          },
+          "status": "assumed",
+          "source": "controlled v4 adversarial fixture"
+        },
+        {
+          "id": "hydro",
+          "element": "hydro",
+          "application": "apply",
+          "gauge_units": 1,
+          "icd": {
+            "kind": "none"
+          },
+          "status": "assumed",
+          "source": "controlled v4 adversarial fixture"
+        },
+        {
+          "id": "cryo",
+          "element": "cryo",
+          "application": "apply",
+          "gauge_units": 1,
+          "icd": {
+            "kind": "none"
+          },
+          "status": "assumed",
+          "source": "controlled v4 adversarial fixture"
+        },
+        {
+          "id": "electro",
+          "element": "electro",
+          "application": "apply",
+          "gauge_units": 1,
+          "icd": {
+            "kind": "none"
+          },
+          "status": "assumed",
+          "source": "controlled v4 adversarial fixture"
+        },
+        {
+          "id": "anemo",
+          "element": "anemo",
+          "application": "apply",
+          "gauge_units": 1,
+          "icd": {
+            "kind": "none"
+          },
+          "status": "assumed",
+          "source": "controlled v4 adversarial fixture"
+        },
+        {
+          "id": "geo",
+          "element": "geo",
+          "application": "apply",
+          "gauge_units": 1,
+          "icd": {
+            "kind": "none"
+          },
+          "status": "assumed",
+          "source": "controlled v4 adversarial fixture"
+        }
+      ],
+      "swirl_damage": {
+        "icd": {
+          "kind": "sequence",
+          "reset_seconds": 0.5,
+          "sequence": [
+            1,
+            1,
+            0
+          ]
+        },
+        "status": "assumed",
+        "source": "controlled v4 adversarial fixture"
+      }
+    },
+    "special_reaction_model": {
+      "schema_version": 1,
+      "replacements": {
+        "stellar_swirl": {
+          "enabled": true,
+          "qualification": {
+            "status": "confirmed",
+            "provider_ids": [
+              "b"
+            ],
+            "capability_tag": "native_reaction_qualification.stellar_swirl",
+            "source": "database capability fixture"
+          },
+          "mechanics": {
+            "status": "confirmed",
+            "source": "reviewed integration fixture",
+            "profile_id": "native.stellar_swirl.v1",
+            "profile_revision": 1,
+            "profile_content_hash": "1ecfc7c1a7a627fa38c8bb528605ccdcb607df8f6f5162eca1a9fdef3dd4b552",
+            "upgrade_threshold": 3,
+            "early_detonation_threshold": 6,
+            "detonation_delay_seconds": 3,
+            "ice_application_gu": 1,
+            "creation_batch_cap_once": true,
+            "existing_vortex_counts_each_reaction": true
+          }
+        }
+      }
+    },
+    "special_reaction_events": []
+  }
+}

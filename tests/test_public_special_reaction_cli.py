@@ -12,10 +12,14 @@ from genshin_app.agent_chat.native_special_reaction_contracts import (
 from genshin_app.cli import main
 
 
-def test_public_cli_exposes_complete_detached_special_contract(capsys):
-    assert main(['capabilities']) == 0
+@pytest.mark.parametrize('with_database', [False, True], ids=['detached', 'selected-database'])
+def test_public_cli_exposes_complete_detached_special_contract(
+    capsys, tmp_path, accepted_source_data_dir, with_database,
+):
+    data_dir = accepted_source_data_dir if with_database else tmp_path
+    assert main(['--data-dir', str(data_dir), 'capabilities']) == 0
     data = json.loads(capsys.readouterr().out)['data']
-    assert data['special_reaction_contract'] == special_reaction_capabilities()
+    assert data['special_reaction_contract'] == special_reaction_capabilities(data_dir / 'genshin.db')
     assert data['special_reaction_contract']['qualification_schema']
     assert data['special_reaction_contract']['engine_catalog']['profiles']
     assert data['input_hash_contract']['authority'] == 'none'

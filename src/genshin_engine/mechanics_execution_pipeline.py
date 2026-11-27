@@ -156,7 +156,7 @@ def execute_prepared_passes(run: MechanicsExecutionContext, services: MechanicsE
             if run.executor.counter_views and run.executor.counter_views.frames:
                 run.output["sampling_trace"] = run.executor.samples
             if run.executor.elemental:
-                run.output["elemental_trace"] = run.executor.elemental.trace
+                run.output["elemental_trace"] = run.executor._current_elemental().trace
             if run.executor.fixed_sources:
                 run.output.update(fixed_effect_sources=copy.deepcopy(list(run.executor.fixed_sources.values())),
                               target_condition_trace=run.executor.target_condition_trace)

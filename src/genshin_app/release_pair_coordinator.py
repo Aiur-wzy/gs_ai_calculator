@@ -621,15 +621,16 @@ class ReleasePairCoordinator:
                 reason = getattr(error, "reason", "release_pair_storage_input_invalid")
                 raise ReleasePairCoordinatorError(reason) from error
 
-            stage_release_pair_artifacts(
+            staged_artifacts = stage_release_pair_artifacts(
                 latest,
                 self.workspace,
                 confirmed_document_sha256=latest["document_sha256"] if selected is not None else confirmed_document_sha256,
                 cancel_check=cancelled,
                 reuse_installed_database=reuse_installed_database,
                 **({"reuse_installed_app": reuse_installed_app, "cache_dir": self.workspace / "artifact-cache",
-                    "progress": record} if selected is not None else {}),
+                    "progress": record, "verify_app_on_extract": True} if selected is not None else {}),
             )
+            verified_app = staged_artifacts.get("verified_app") if selected is not None else None
             try:
                 if cancelled():
                     _fail("release_pair_artifact_download_cancelled")
@@ -664,6 +665,7 @@ class ReleasePairCoordinator:
                     trust_assertion=trust_assertion,
                     current=current,
                     reuse_installed_database=reuse_installed_database,
+                    **({"_verified_app": verified_app} if verified_app is not None else {}),
                 )
             except Exception:
                 self._progress = None

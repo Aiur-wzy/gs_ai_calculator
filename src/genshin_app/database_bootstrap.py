@@ -6,8 +6,8 @@ into a fail-closed startup decision.  It never performs network I/O, downloads
 an update, migrates a database, or opens an explicitly supplied acceptance
 database.
 
-Deep database inspection is intentionally synchronous here so that callers can
-decide how to present progress.  The GUI launcher runs it from pywebview's
+Admission is synchronous here so that callers can decide how to present
+progress. The GUI launcher runs it from pywebview's
 startup callback while a small startup page is visible; engine, data service
 and Agent construction happen only after this function returns ``can_start``.
 """
@@ -21,6 +21,7 @@ import sys
 from collections.abc import Callable, Mapping
 from datetime import UTC, datetime
 from pathlib import Path
+from time import perf_counter
 from typing import Any
 from uuid import uuid4
 
@@ -33,7 +34,9 @@ from genshin_app.database_transaction import (
 )
 from genshin_app.package_integrity import (
     PackageIntegrityError,
+    read_signed_package_root_file,
     verify_package_artifact,
+    verify_signed_package_startup,
 )
 from genshin_app.paths import is_frozen, resource_dir
 from genshin_app.version import (
@@ -69,11 +72,13 @@ STARTUP_GATE_CONTRACT = "genshin-database-startup-gate-v1"
 LIVE_MANIFEST_FILENAME = "database-live-manifest.json"
 LIVE_PAIR_MANIFEST_FILENAME = "release-pair-live-manifest.json"
 MIGRATION_JOURNAL_FILENAME = "database-release-migration-journal.json"
+PACKAGED_DATABASE_QUALIFICATION_FILENAME = "release-database-qualification.json"
 _MAX_CONTROL_FILE_BYTES = 4 * 1024 * 1024
 _READY_STATES = {
     "exact": frozenset({"current_pair_ready"}),
     "current_only": frozenset({"current_dev_ready"}),
 }
+_VERIFIED_BUNDLED_CATALOG_SOURCE: tuple[Path, dict, dict] | None = None
 
 ProgressCallback = Callable[[dict[str, str]], None]
 
@@ -277,18 +282,106 @@ def _admit_packaged_pair_successor(
         )
 
 
-def _verify_app_artifact_manifest(pair: Mapping[str, Any], package_root: Path) -> str:
+def _verify_app_artifact_manifest(
+    pair: Mapping[str, Any],
+    package_root: Path,
+    *,
+    signed_startup: bool = False,
+) -> str:
     """Bind this running package to the content inventory named by PairManifest."""
 
     artifact = pair["app"]["artifact_manifest"]
     try:
-        verified = verify_package_artifact(Path(package_root))
+        if signed_startup:
+            verified = verify_signed_package_startup(Path(package_root), artifact["sha256"])
+        else:
+            verified = verify_package_artifact(Path(package_root))
     except PackageIntegrityError as error:
         raise DatabaseStartupError(error.code) from error
     digest = verified["manifest_sha256"]
     if digest != artifact["sha256"]:
         _fail("release_pair_app_artifact_mismatch")
     return digest
+
+
+def _remember_bundled_catalog_source(package_root: Path, pair: dict, database: dict) -> None:
+    """Retain the identity already verified by this process's bundled admission."""
+    global _VERIFIED_BUNDLED_CATALOG_SOURCE
+    previous = _VERIFIED_BUNDLED_CATALOG_SOURCE
+    source = (package_root, pair, database)
+    if previous is not None and previous[0] == package_root:
+        if previous != source:
+            _fail("database_bundled_catalog_source_changed")
+        return
+    _VERIFIED_BUNDLED_CATALOG_SOURCE = copy.deepcopy(source)
+
+
+def matches_verified_bundled_catalog_source(database: dict, *, live_pair: dict | None = None) -> bool:
+    """Verify portable catalog authority from this exact package, without opening SQLite."""
+    if not is_frozen() or DATABASE_PAIR_POLICY != "exact":
+        return False
+    from genshin_app.windows_known_folders import reject_reparse_chain
+
+    resources, policy, app_root, _ = _resolve_startup_flavor(
+        resource_root=None, pair_policy=None, app_package_root=None,
+    )
+    bundle = resources / "bundled"
+    pair_path = bundle / PAIR_MANIFEST_FILENAME
+    manifest_path = bundle / MANIFEST_FILENAME
+    if not (os.path.lexists(pair_path) or os.path.lexists(manifest_path)):
+        return False
+
+    def read_source() -> tuple[dict, dict]:
+        pair = _optional_pair_manifest(reject_reparse_chain(pair_path, reason="database_bundled_pair_invalid"))
+        manifest = _optional_manifest(reject_reparse_chain(manifest_path, reason="database_bundled_pair_invalid"))
+        if pair is None or manifest is None:
+            _fail("database_bundled_pair_missing")
+        return _validate_pair_for_app(pair, manifest, pair_policy=policy), manifest
+
+    pair, manifest = read_source()
+    if pair["channel"] != DATABASE_RELEASE_CHANNEL or database != manifest or (live_pair is not None and live_pair != pair):
+        return False
+    previous = _VERIFIED_BUNDLED_CATALOG_SOURCE
+    if previous is None or previous[0] != app_root:
+        # A cold review can run without DB startup. Verify the packaged
+        # anchor once, using the same inventory check as portable startup.
+        _verify_app_artifact_manifest(pair, app_root)
+        if read_source() != (pair, manifest):
+            _fail("database_bundled_catalog_source_changed")
+    _remember_bundled_catalog_source(app_root, pair, manifest)
+    return True
+
+
+def _read_packaged_database_qualification(package_root, manifest_sha256, live_manifest):
+    from genshin_db.release_qualification import load_database_install_qualification
+
+    reason = "database_install_qualification_invalid"
+    try:
+        raw = read_signed_package_root_file(
+            package_root, manifest_sha256, PACKAGED_DATABASE_QUALIFICATION_FILENAME,
+            maximum_bytes=16 * 1024,
+        )
+        if raw is None:
+            return None
+        proof = json.loads(raw)
+        if (
+            type(proof) is not dict
+            or type(proof.get("database_release_id")) is not str
+            or type(proof.get("sha256")) is not str
+        ):
+            _fail(reason)
+        if (
+            proof["database_release_id"] != live_manifest["database_release_id"]
+            or proof["sha256"] != live_manifest["database"]["sha256"]
+        ):
+            return None
+        return load_database_install_qualification(proof, live_manifest)
+    except PackageIntegrityError as error:
+        raise DatabaseStartupError(error.code) from error
+    except DatabaseReleaseError as error:
+        raise DatabaseStartupError(error.reason) from error
+    except (UnicodeError, json.JSONDecodeError, RecursionError) as error:
+        raise DatabaseStartupError(reason) from error
 
 
 def _write_json_atomic(path: Path, value: Mapping[str, Any]) -> None:
@@ -468,13 +561,14 @@ def _prepare_database_startup_locked(
     app_package_root: Path | None = None,
     progress: ProgressCallback | None = None,
 ) -> dict[str, Any]:
-    """Deeply validate the local App/database contract before runtime startup.
+    """Validate the local App/database contract before runtime startup.
 
     The explicit external-database acceptance route must not call this function:
     that route is intentionally read-only and is labelled as a bypass by the GUI
     launcher.  Normal startup has no bypass.
     """
 
+    started = perf_counter()
     directory = Path(data_dir)
     try:
         pending = read_activation_journal(directory)
@@ -507,11 +601,14 @@ def _prepare_database_startup_locked(
     live_receipt = _optional_receipt(directory / LIVE_RECEIPT_FILENAME)
     live_pair = _optional_pair_manifest(directory / LIVE_PAIR_MANIFEST_FILENAME)
     journal_state = _journal_state(directory)
+    app_check_started = perf_counter()
     signed_product_pair = False
+    qualification = None
     if policy == "exact":
         from genshin_app.release_pair_update import (
             LIVE_PAIR_PROOF_FILENAME,
             ReleasePairUpdateError,
+            qualified_database_from_signed_document,
             read_live_product_proof,
         )
 
@@ -519,9 +616,11 @@ def _prepare_database_startup_locked(
             if live_pair is None or live_manifest is None or live_receipt is None:
                 _fail("database_live_pair_incomplete")
             try:
-                if read_live_product_proof(directory, live_pair, live_manifest) is None:
+                signed_document = read_live_product_proof(directory, live_pair, live_manifest)
+                if signed_document is None:
                     _fail("product_release_live_pair_proof_invalid")
-            except ReleasePairUpdateError as error:
+                qualification = qualified_database_from_signed_document(signed_document)
+            except (DatabaseReleaseError, ReleasePairUpdateError) as error:
                 raise DatabaseStartupError(error.reason) from error
             app = live_pair["app"]
             if (app["app_release_id"], app["app_version"], app["logic_profile"], app["data_contract_version"]) != (
@@ -530,7 +629,12 @@ def _prepare_database_startup_locked(
                 _fail("release_pair_app_contract_mismatch")
             if bundled_pair is not None or bundled_manifest is not None:
                 _fail("release_pair_independent_app_contains_bundled_data")
-            _verify_app_artifact_manifest(live_pair, package_root)
+            _progress(progress, "app_integrity", "正在校验应用程序")
+            manifest_digest = _verify_app_artifact_manifest(live_pair, package_root, signed_startup=True)
+            if qualification is None:
+                qualification = _read_packaged_database_qualification(
+                    package_root, manifest_digest, live_manifest,
+                )
             signed_product_pair = True
     _require_frozen_artifact_flavor(
         frozen=frozen,
@@ -549,7 +653,9 @@ def _prepare_database_startup_locked(
             bundled_manifest,
             pair_policy=policy,
         )
+        _progress(progress, "app_integrity", "正在完整校验应用程序")
         _verify_app_artifact_manifest(bundled_pair, package_root)
+    app_seconds = perf_counter() - app_check_started
 
     if policy == "exact" and not signed_product_pair:
         # The packaged PairManifest is the App/database compatibility trust
@@ -564,11 +670,25 @@ def _prepare_database_startup_locked(
         if live_pair is not None and live_pair != bundled_pair:
             _fail("database_live_pair_not_bundled_release")
 
+    inspection_options = {}
+    if qualification is not None:
+        from genshin_db.release_qualification import read_qualified_database_identity
+
+        def read_identity(path: Path) -> dict:
+            return read_qualified_database_identity(path, live_manifest, qualification)
+
+        inspection_options["identity_reader"] = read_identity
+
     _progress(
         progress,
         "database_integrity",
-        "正在校验数据库结构、必需资料与发行核心；大型数据库可能需要几十秒",
+        (
+            "正在核对已签名数据库并检查能否打开"
+            if qualification is not None
+            else "正在校验数据库结构、必需资料与发行核心"
+        ),
     )
+    database_check_started = perf_counter()
     try:
         profile = inspect_database_profile(
             database,
@@ -583,9 +703,11 @@ def _prepare_database_startup_locked(
             bundled_manifest=bundled_manifest,
             live_receipt=live_receipt,
             journal_state=journal_state,
+            **inspection_options,
         )
     except DatabaseReleaseError as error:
         raise DatabaseStartupError(error.reason) from error
+    database_seconds = perf_counter() - database_check_started
 
     initialized_sidecars = False
     rebound_live_pair = False
@@ -635,7 +757,10 @@ def _prepare_database_startup_locked(
         identity = profile.get("live")
         if signed_product_pair and (not isinstance(identity, dict)
                 or identity.get("sha256") != live_manifest["database"]["sha256"]):
-            _fail("database_live_signed_artifact_mismatch")
+            _fail(
+                "database_live_signed_artifact_mismatch",
+                details={"state": profile.get("state"), "reasons": profile.get("reasons")},
+            )
         try:
             receipt_matches = (
                 type(identity) is dict
@@ -760,6 +885,8 @@ def _prepare_database_startup_locked(
     active_manifest = live_manifest or bundled_manifest
     if active_manifest is None:
         _fail("database_release_identity_unmanifested")
+    if frozen and policy == "exact" and not signed_product_pair:
+        _remember_bundled_catalog_source(package_root, bundled_pair, bundled_manifest)
     combination = (
         current_only_combination_fingerprint(active_manifest)
         if policy == "current_only"
@@ -780,6 +907,13 @@ def _prepare_database_startup_locked(
             (selected_pair or {}).get("release_pair_id") or RELEASE_PAIR_ID
         ),
         "database_release_id": active_manifest["database_release_id"],
+        "app_integrity_scope": "startup_members" if signed_product_pair else "full_or_source",
+        "database_integrity_scope": "signed_exact_bytes" if qualification is not None else "full",
+        "startup_timings_seconds": {
+            "app_admission": round(app_seconds, 3),
+            "database_admission": round(database_seconds, 3),
+            "total": round(perf_counter() - started, 3),
+        },
         "current_combination_fingerprint": combination,
         "initialized_sidecars": initialized_sidecars,
         "rebound_live_pair": rebound_live_pair,

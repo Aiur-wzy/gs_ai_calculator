@@ -1,0 +1,211 @@
+{
+  "contract": "genshin-database-readme-facts-v1",
+  "database_release_id": "db-7.2.54-r1",
+  "database_sha256": "65c75ba4a47114af2415698885bcc8a04b5f7d059ae79da5df31f4edc67bf79d",
+  "upstream_commit": "770b88c8baccce9ff8923f5fbc95978671342232",
+  "upstream_track": "OSCBWin",
+  "runtime_status": {
+    "built_at": "2026-11-26T09:26:42-03:00",
+    "counts": {
+      "runtime_definition": 214446,
+      "runtime_material_reference": 427,
+      "runtime_object_reference": 63626,
+      "runtime_parameter_binding": 6240,
+      "runtime_reference": 170074,
+      "runtime_source": 2755
+    },
+    "execution_support": "not_evaluated",
+    "index_state": "ready",
+    "indexer_version": "7",
+    "manifest_fingerprint": "3b01fdd78bdb678205c47bd7ebcb2af2fcb3d5fb41e7d892cbd9a9fd03038bc1",
+    "normalization": {
+      "mapping_fingerprint": "cb52e3904c2c67dddc9f9d0a48301b760e44f032d530a2e82b39cc35c899a648",
+      "normalization_version": 2,
+      "profile_id": "upstream-f11cf545-reviewed-schema-v1",
+      "upstream_commit": "770b88c8baccce9ff8923f5fbc95978671342232"
+    },
+    "normalization_state": "ready",
+    "profile_id": "upstream-combat-catalog-v1",
+    "profile_version": 1,
+    "reference_states": {
+      "ambiguous": 159,
+      "external_asset": 10702,
+      "missing": 165,
+      "resolved": 149392,
+      "unsupported_reference_form": 9656
+    },
+    "schema_version": 1,
+    "snapshot_id": "19122e387327dc06e1fd6392f27a5a767e9bae884d23ff08ead3240cb07fe829",
+    "source_capabilities": {
+      "ability": {
+        "requirement": "required",
+        "state": "ready"
+      },
+      "ability_path": {
+        "requirement": "required",
+        "state": "ready"
+      },
+      "animation_pattern": {
+        "requirement": "optional",
+        "state": "unavailable"
+      },
+      "animator": {
+        "requirement": "optional",
+        "state": "unavailable"
+      },
+      "avatar": {
+        "requirement": "required",
+        "state": "ready"
+      },
+      "excel": {
+        "requirement": "required",
+        "state": "ready"
+      },
+      "gadget": {
+        "requirement": "optional",
+        "state": "ready"
+      },
+      "gadget_excel": {
+        "requirement": "required",
+        "state": "ready"
+      },
+      "global_combat": {
+        "requirement": "optional",
+        "state": "ready"
+      },
+      "material_excel": {
+        "requirement": "required",
+        "state": "ready"
+      },
+      "public_config": {
+        "requirement": "required",
+        "state": "ready"
+      },
+      "talent": {
+        "requirement": "required",
+        "state": "ready"
+      },
+      "text_map": {
+        "requirement": "required",
+        "state": "ready"
+      }
+    },
+    "source_capability_contract": "genshin-runtime-source-capabilities-v1",
+    "source_capability_state": "degraded",
+    "state": "ready",
+    "upstream_commit": "770b88c8baccce9ff8923f5fbc95978671342232"
+  },
+  "counts": {
+    "character": 171,
+    "skill": 442,
+    "skill_with_character": 442
+  },
+  "entity_publication": {
+    "released": 446,
+    "unknown": 82,
+    "unreleased": 2
+  },
+  "runtime_unsupported_by_field": {
+    "abilityName": 4010,
+    "modifierName": 5646
+  },
+  "runtime_object_references": [
+    {
+      "relation": "gadget_ability_mount",
+      "resolution": "missing",
+      "count": 32
+    },
+    {
+      "relation": "gadget_ability_mount",
+      "resolution": "resolved",
+      "count": 20673
+    },
+    {
+      "relation": "gadget_config_name",
+      "resolution": "missing",
+      "count": 436
+    },
+    {
+      "relation": "gadget_config_name",
+      "resolution": "resolved",
+      "count": 24405
+    },
+    {
+      "relation": "gadget_config_name",
+      "resolution": "source_empty",
+      "count": 7805
+    },
+    {
+      "relation": "gadget_id_reference",
+      "resolution": "missing",
+      "count": 9
+    },
+    {
+      "relation": "gadget_id_reference",
+      "resolution": "resolved",
+      "count": 10266
+    }
+  ],
+  "runtime_material_references": {
+    "resolved": 427
+  },
+  "special_reaction_capability_catalog": {
+    "revision": 7,
+    "entries": 15,
+    "content_hash": "4295ec106fe279b69f188d18c85dcec028fef503a46cb7cac113da4ea6efc7b8"
+  },
+  "opaque_scan": {
+    "scope": "release runtime_source plus exact upstream witnesses",
+    "entries": [
+      {
+        "token": "BLDKFMFJDLI",
+        "occurrences": 1,
+        "file_count": 1,
+        "samples": [
+          {
+            "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Mitya.json",
+            "source_sha256": "0fe52c5d0f4163e44db148d3b84abf6a75e7353192ee95c904255c5e5ffd488a",
+            "json_pointer": "/0/Default/PGMKHCKJIKM/UNIQUE_Mitya_C2_Domain_Listen/BGPBLBIFCEG/0/BLDKFMFJDLI",
+            "value": true,
+            "parent_type": "GAOFBDHAABB"
+          }
+        ]
+      },
+      {
+        "token": "BFALOOLJIAE",
+        "occurrences": 2,
+        "file_count": 2,
+        "samples": [
+          {
+            "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Danica.json",
+            "source_sha256": "ddd6cfaaaec61278ee59c08631cc59d19264144af8d5b3674ee2250bef07469d",
+            "json_pointer": "/13/Default/HBNCGKIFKJH/0/BFALOOLJIAE",
+            "value": 202,
+            "parent_type": "KCMKPCNGFKG"
+          },
+          {
+            "source_path": "BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Mitya.json",
+            "source_sha256": "0fe52c5d0f4163e44db148d3b84abf6a75e7353192ee95c904255c5e5ffd488a",
+            "json_pointer": "/28/Default/HBNCGKIFKJH/0/BFALOOLJIAE",
+            "value": 102,
+            "parent_type": "KCMKPCNGFKG"
+          }
+        ]
+      },
+      {
+        "token": "AAMMODEMOCN",
+        "occurrences": 1,
+        "file_count": 1,
+        "samples": [
+          {
+            "source_path": "BinOutput/Ability/Temp/AnimalAbilities/ConfigAbility_Animal_JellyFish_N_01.json",
+            "source_sha256": "ac1baa5133c529aea9b98612acc7a8467656d6a834d3abdfeb2d922c4225ddeb",
+            "json_pointer": "/9/Default/HBNCGKIFKJH/1/$type",
+            "value": "AAMMODEMOCN",
+            "parent_type": "AAMMODEMOCN"
+          }
+        ]
+      }
+    ]
+  }
+}

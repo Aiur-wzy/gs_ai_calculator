@@ -1,0 +1,27 @@
+{
+  "app": {
+    "app_release_id": "app-1.0.4",
+    "app_version": "1.0.4",
+    "artifact_manifest": {
+      "contract": "genshin-package-file-manifest-v1",
+      "path": "PACKAGE-FILES.sha256",
+      "sha256": "743c19db7a25e4ffcceda3289094a0a09ec73c17866d563fdf00b0f34e96938c"
+    },
+    "contract_sha256": "7afef7b017253cd5bf6c3ad456697a1e1e2d0544b196a2d1fd75be0f8e4da868",
+    "data_contract_version": 1,
+    "logic_profile": "genshin-calculation-v1",
+    "required_database_release_id": "db-7.2.54-r1"
+  },
+  "channel": "stable",
+  "contract": "genshin-release-pair-manifest-v2",
+  "database": {
+    "database_release_id": "db-7.2.54-r1",
+    "manifest_sha256": "0383827f4e166ac654842252cc9d650908ac0242742a9bdbe30414cd1ec5f7d8",
+    "release_core_sha256": "2dd54bce9a03184fd8819d20f2fc78d198785f9879cf2eb8da80b7daab74f093"
+  },
+  "pair_policy": "exact",
+  "pair_sequence": 10,
+  "release_pair_id": "pair-1.0.4-db-7.2.54-r1",
+  "released_at": "2026-11-27T01:00:07+08:00",
+  "schema_version": 2
+}

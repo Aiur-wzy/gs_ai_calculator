@@ -124,10 +124,13 @@ def project_execution_result(run: MechanicsExecutionContext, services: Mechanics
                                       "complete_first_cycle": run.simulation_result["energy_check"]["completed_cycles"] >= 1,
                                       "execution_status": run.output["status"]}
     if run.executor.elemental:
-        run.output["elemental_trace"] = run.executor.elemental.trace
+        elemental_trace = run.executor._current_elemental().trace
+        run.output["elemental_trace"] = elemental_trace
         run.output["result"]["elemental"] = {"ruleset": run.executor.elemental.model["ruleset"], "mode": "simulated",
             "input_window_state": run.executor.elemental.window_state,
-            "final_checked_state": run.executor.elemental.state(), "trace": run.executor.elemental.trace}
+            "final_checked_state": run.executor.elemental.state(), "trace": elemental_trace}
+        if run.executor.target_scene:
+            run.executor.target_scene.attach_result(run.output["result"], resolved)
         if services.is_freeze_reference(run.request.mechanics_model):
             run.output["result"]["elemental"].update(evidence_tier="experimental_reference",
                 reference_contract=copy.deepcopy(services.reference_contract),

@@ -1,6 +1,24 @@
 """Separate current-user setup UI for the signed product release service."""
 from __future__ import annotations
 
+_INSTALL_PHASE_LABELS = {
+    "download": "正在下载并验证发行包…",
+    "verifying_archives": "正在核对发行包签名与摘要…",
+    "extract_app": "正在解包程序并校验文件…",
+    "extract_database": "正在解包数据库并校验文件…",
+    "qualifying": "正在核对程序与数据库的配对…",
+    "activating": "正在准备可用的安装…",
+    "activation_validate_handoff": "正在核对本次安装所选文件…",
+    "activation_preflight": "正在检查磁盘空间和目标目录…",
+    "activation_publish_app": "正在写入程序目录…",
+    "activation_database": "正在写入并检查数据库…",
+    "activation_final_check": "正在检查新安装能否使用…",
+    "activation_cleanup": "正在清理暂存文件…",
+    "committing": "正在提交到安装目录…",
+    "registering": "正在登记开始菜单与卸载入口…",
+    "cleanup": "正在清理安装临时文件…",
+}
+
 import argparse
 from pathlib import Path
 from queue import Empty, Queue
@@ -407,14 +425,24 @@ def main(argv=None):
             while True:
                 state, value = events.get_nowait()
                 if state == "progress":
-                    if value.get("phase") == "committing":
+                    phase = value.get("phase")
+                    if phase == "committing":
                         committing = True
                         cancel.configure(state="disabled")
-                        status.set("正在安全收尾，请稍候…")
-                    elif "bytes" in value and value.get("total_bytes"):
+                    if phase in _INSTALL_PHASE_LABELS:
+                        status.set(_INSTALL_PHASE_LABELS[phase])
+                    if "bytes" in value and value.get("total_bytes"):
+                        if str(progress.cget("mode")) != "determinate":
+                            progress.stop()
+                            progress.configure(mode="determinate", value=0)
                         progress.configure(value=100 * value["bytes"] / value["total_bytes"])
+                    elif phase in _INSTALL_PHASE_LABELS and str(progress.cget("mode")) != "indeterminate":
+                        progress.configure(mode="indeterminate")
+                        progress.start(35)
                     continue
                 active = False
+                progress.stop()
+                progress.configure(mode="determinate")
                 cancel.configure(state="normal", text="关闭")
                 path_entry.configure(state="readonly" if args.uninstall else "normal")
                 if not args.uninstall:

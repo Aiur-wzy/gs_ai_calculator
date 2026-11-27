@@ -2,6 +2,8 @@
 
 计算前读取当前`rotation_capabilities.damage_reporting`／动作schema。`damage-report-window-v1`把统计截止与完整执行周期分开；以下方法仅用于实际提供该合同的版本。
 
+手工 Buff 已逐次填写绝对时点时，在 `mechanics_model.manual_buff_repeat` 设 `once`。应随每个周期重放的手工窗口使用 `each_cycle`，能叠的窗口会保留实际份数。旧文件省略该字段时沿用 `each_cycle`。如果组合回执指出恰在统计截止出现额外窗口，先核实际施加次数，然后改正重复方式并按原截止重算。
+
 - 用户指定时间：在`rotation_model.damage_report`写`contract`、`mode="explicit"`、`end=T`。T须为正、位于执行周期内。不要擅自缩短用户要求。
 - 用户未指定：`mode="last_active_damage"`。按已核实的组件语义，将施放阶段直接命中的稳定ID列在`active_hit_ids`，能力直伤操作ID列在`active_operation_ids`。普通多段pattern的生成命中ID也可绑定。末次实际主动输出动作的这些命中中，最后结算时点就是T。
 - 主动操作不造成伤害时，在`non_damage_action_ids`明确登记并解释。纯等待／切人不作为输出锚点。`audit_action_ids`只用于有据的额外审计操作，不能把真实任务要求的输出改标以删除分母。后台首跳不因发生在施放占用内变为主动伤害，弹道直接命中也不因晚于占用结束变为后台。

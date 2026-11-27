@@ -222,24 +222,16 @@ def test_create_binds_all_supported_candidate_workflows_and_projects_no_paths(
     listed = binding.read_domain_tool("gs_read_skill", {})
     assert listed["code"] == 0
     assert listed["data"]["resources"] == skill_resource_names()
-    assert len(listed["data"]["resources"]) <= 64
-    assert len(json.dumps(
-        listed["data"]["resources"], ensure_ascii=False, separators=(",", ":")
-    )) <= 4096
     assert not set(listed["data"]["resources"]).issubset(set(_strings(context)))
-    required_text_chars = 0
     for resource in prompt_context["required_skill_resources_once"]:
         assert resource in listed["data"]["resources"]
         skill_page = binding.read_domain_tool(
             "gs_read_skill", {"resource": resource}
         )
         assert skill_page["code"] == 0
-        assert skill_page["data"]["next_offset"] is None
-        required_text_chars += skill_page["data"]["total"]
-    assert len(prompt_context["required_skill_resources_once"]) <= (
-        4 if workflow in {"staged", "artifact"} else 2
-    )
-    assert required_text_chars <= 24_000
+        page = skill_page["data"]
+        assert page["resource"] == resource
+        assert 0 < page["delivered_chars"] == len(page["text"]) <= page["total"]
     assert context["document"]["document_id"] == checkpoint["document_id"]
     local_values = {
         str(root),

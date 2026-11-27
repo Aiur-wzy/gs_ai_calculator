@@ -62,6 +62,7 @@ const renderDerived =(box:any)=>{
     if(detail.remaining_quota!=null)fact("本段剩余次数",WB.number(detail.remaining_quota));
     if(detail.layers!=null)fact("本段层数",WB.number(detail.layers));
     if(detail.beneficiaries_scope?.scope==="current_frontline")fact("受益范围","仅符合前台限制的角色命中时受益");
+    if(detail.beneficiaries_scope?.scope==="current_offfield")fact("受益范围","仅符合后台限制的角色命中时受益");
     for(const scope of detail.effect_applicability||[])if(scope.message)box.append(UI.el("p",`收益作用范围：${scope.message}`,"wb-note"));
   }
   if(event.value!=null)fact(event.kind==="external_damage"?"外部补充伤害":"期望伤害",WB.number(event.value));

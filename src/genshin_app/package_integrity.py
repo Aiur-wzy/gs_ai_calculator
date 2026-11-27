@@ -2,9 +2,9 @@
 
 The release pair is a detached descriptor and therefore cannot be part of the
 content inventory whose digest it carries.  Every other regular file is listed
-exactly once.  Formal startup currently performs the complete rehash as the
-safe default; the descriptor-only check exists for a future signed/cached
-startup policy and is not, by itself, an artifact-integrity trust decision.
+exactly once. Installs, recovery, and portable startup verify the whole tree.
+A signed product startup may defer the private DSH dependency directory to
+its own pre-launch verifier. A descriptor alone never proves file integrity.
 """
 
 from __future__ import annotations
@@ -12,6 +12,7 @@ from __future__ import annotations
 import hashlib
 import os
 import re
+import stat
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path, PurePosixPath, PureWindowsPath
 
@@ -25,6 +26,7 @@ PACKAGE_MANIFEST_DEFINITION = (
     "and the detached release-pair manifest"
 )
 MAX_PACKAGE_MANIFEST_BYTES = 128 * 1024 * 1024
+_DSH_DEPENDENCIES = "_internal/agent-runtime/node_modules"
 _ROW = re.compile(r"^([0-9a-f]{64})  ([^\r\n]+)$")
 
 
@@ -38,23 +40,35 @@ def _fail(code: str) -> None:
     raise PackageIntegrityError(code)
 
 
-def _sha256_file(path: Path) -> str:
-    digest = hashlib.sha256()
+def _linked(status: os.stat_result) -> bool:
+    return stat.S_ISLNK(status.st_mode) or bool(
+        getattr(status, "st_file_attributes", 0) & stat.FILE_ATTRIBUTE_REPARSE_POINT
+    )
+
+
+def _hash_package_batch(members: list[tuple[str, Path]]) -> list[tuple[str, str, int]]:
+    buffer = memoryview(bytearray(128 * 1024))
+    verified = []
     try:
-        with path.open("rb") as stream:
-            for block in iter(lambda: stream.read(1024 * 1024), b""):
-                digest.update(block)
+        for relative, path in members:
+            digest = hashlib.sha256()
+            with path.open("rb") as stream:
+                opened = os.fstat(stream.fileno())
+                while count := stream.readinto(buffer):
+                    digest.update(buffer[:count])
+                current = path.lstat()
+                if _linked(current) or not stat.S_ISREG(current.st_mode):
+                    _fail("supply_chain_package_link_unsupported")
+                if (
+                    not os.path.samestat(opened, current)
+                    or opened.st_size != current.st_size
+                    or opened.st_mtime_ns != current.st_mtime_ns
+                ):
+                    _fail("supply_chain_package_unreadable")
+            verified.append((relative, digest.hexdigest(), current.st_size))
     except OSError:
         _fail("supply_chain_package_unreadable")
-    return digest.hexdigest()
-
-
-def _hash_package_member(row: tuple[str, Path, int]) -> tuple[str, str, int]:
-    relative, path, size = row
-    digest = _sha256_file(path)
-    if _is_reparse_point(path) or not path.is_file():
-        _fail("supply_chain_package_link_unsupported")
-    return relative, digest, size
+    return verified
 
 
 def _is_reparse_point(path: Path) -> bool:
@@ -140,10 +154,8 @@ def _read_package_manifest(package_root: Path) -> tuple[Path, bytes, dict[str, s
 def verify_package_manifest_descriptor(package_root: Path) -> dict:
     """Validate the detached inventory descriptor without rehashing the package.
 
-    This is only the bounded descriptor parser.  It does not prove that the
-    listed package members still match their digests and must not replace the
-    complete verifier until a separately reviewed signature/cache trust model
-    has been adopted.
+    This is only the bounded descriptor parser. It does not check the bytes
+    of the listed files.
     """
 
     _root, raw, expected = _read_package_manifest(package_root)
@@ -157,62 +169,120 @@ def verify_package_manifest_descriptor(package_root: Path) -> dict:
 
 
 def verify_package_artifact(package_root: Path) -> dict:
-    """Fully rehash and compare every packaged file.
+    """Fully rehash and compare every packaged file."""
+    return _verify_package_members(*_read_package_manifest(package_root))
 
-    This remains the formal startup default as well as the build/install/
-    upgrade verifier.  Callers may move the full scan out of cold start only
-    after adopting an explicit signed or verified-cache policy.
+
+def verify_signed_package_startup(package_root: Path, manifest_sha256: str) -> dict:
+    """Verify startup members against an inventory from an authenticated pair.
+
+    Only DSH's private Node dependencies are deferred. The production
+    native DSH factory compares that whole dependency graph with its pinned
+    runtime manifest before starting Node. The root of the deferred directory
+    and every other package member are still checked here.
     """
-
     root, raw, expected = _read_package_manifest(package_root)
+    if hashlib.sha256(raw).hexdigest() != manifest_sha256:
+        _fail("release_pair_app_artifact_mismatch")
+    return _verify_package_members(root, raw, expected, defer_dsh_dependencies=True)
+
+
+def read_signed_package_root_file(
+    package_root: Path, manifest_sha256: str, filename: str, *, maximum_bytes: int,
+) -> bytes | None:
+    """Return an optional control file only if its actual bytes are authenticated."""
+    if "/" in _relative_path(filename):
+        _fail("supply_chain_package_manifest_path_invalid")
+    if not os.path.lexists(Path(package_root) / filename):
+        return None
+    root, manifest, expected = _read_package_manifest(package_root)
+    if hashlib.sha256(manifest).hexdigest() != manifest_sha256:
+        _fail("release_pair_app_artifact_mismatch")
+    if filename not in expected:
+        _fail("supply_chain_package_manifest_file_unlisted")
+    path = root / filename
+    try:
+        if _is_reparse_point(path) or not path.is_file():
+            _fail("supply_chain_package_link_unsupported")
+        with path.open("rb") as stream:
+            raw = stream.read(maximum_bytes + 1)
+    except OSError:
+        _fail("supply_chain_package_unreadable")
+    if len(raw) > maximum_bytes or hashlib.sha256(raw).hexdigest() != expected[filename]:
+        _fail("supply_chain_package_manifest_hash_mismatch")
+    return raw
+
+
+def _verify_package_members(
+    root: Path,
+    raw: bytes,
+    expected: dict[str, str],
+    *,
+    defer_dsh_dependencies: bool = False,
+) -> dict:
+    deferred = 0
+    if defer_dsh_dependencies:
+        startup_members = {
+            name: digest for name, digest in expected.items()
+            if not name.startswith(f"{_DSH_DEPENDENCIES}/")
+        }
+        deferred = len(expected) - len(startup_members)
+        expected = startup_members
+
     actual: dict[str, tuple[str, int]] = {}
     actual_folded: set[str] = set()
-    members: list[tuple[str, Path, int]] = []
-    for directory, names, files in os.walk(root, followlinks=False):
-        current = Path(directory)
-        if current != root and _is_reparse_point(current):
-            _fail("supply_chain_package_link_unsupported")
-        for name in names:
-            if _is_reparse_point(current / name):
+    members: list[tuple[str, Path]] = []
+    deferred_directory_found = False
+    pending = [(root, "")]
+    try:
+        while pending:
+            current, prefix = pending.pop()
+            if current != root and _linked(current.lstat()):
                 _fail("supply_chain_package_link_unsupported")
-        for name in files:
-            path = current / name
-            if _is_reparse_point(path):
-                _fail("supply_chain_package_link_unsupported")
-            relative = path.relative_to(root).as_posix()
-            if relative in PACKAGE_MANIFEST_EXCLUDED_PATHS:
-                continue
-            if not path.is_file():
-                _fail("supply_chain_package_unreadable")
-            folded = relative.casefold()
-            if relative in actual or folded in actual_folded:
-                _fail("supply_chain_package_file_duplicate")
-            try:
-                size = path.stat().st_size
-            except OSError:
-                _fail("supply_chain_package_unreadable")
-            members.append((relative, path, size))
-            actual_folded.add(folded)
+            with os.scandir(current) as entries:
+                for entry in entries:
+                    relative = f"{prefix}/{entry.name}" if prefix else entry.name
+                    status = entry.stat(follow_symlinks=False)
+                    if _linked(status):
+                        _fail("supply_chain_package_link_unsupported")
+                    if stat.S_ISDIR(status.st_mode):
+                        if defer_dsh_dependencies and relative == _DSH_DEPENDENCIES:
+                            if not deferred:
+                                _fail("supply_chain_package_manifest_file_unlisted")
+                            deferred_directory_found = True
+                        else:
+                            pending.append((Path(entry.path), relative))
+                        continue
+                    if relative in PACKAGE_MANIFEST_EXCLUDED_PATHS:
+                        continue
+                    if not stat.S_ISREG(status.st_mode):
+                        _fail("supply_chain_package_unreadable")
+                    folded = relative.casefold()
+                    if folded in actual_folded:
+                        _fail("supply_chain_package_file_duplicate")
+                    members.append((relative, Path(entry.path)))
+                    actual_folded.add(folded)
+    except OSError:
+        _fail("supply_chain_package_unreadable")
 
-    # The release carries tens of thousands of small Node dependency files.
-    # Hashing them serially turns a cold-start diagnostic into a multi-minute
-    # operation on Windows.  Parallel reads preserve the exact same complete
-    # file-set and digest contract while keeping build/install verification
-    # bounded on SSD-backed installations.
-    workers = min(32, max(8, (os.cpu_count() or 4) * 4))
-    with ThreadPoolExecutor(max_workers=workers) as executor:
-        for relative, digest, size in executor.map(_hash_package_member, members):
-            actual[relative] = (digest, size)
-
+    if deferred and not deferred_directory_found:
+        _fail("supply_chain_package_manifest_file_missing")
     expected_paths = set(expected)
-    actual_paths = set(actual)
+    actual_paths = {relative for relative, _path in members}
     if expected_paths - actual_paths:
         _fail("supply_chain_package_manifest_file_missing")
     if actual_paths - expected_paths:
         _fail("supply_chain_package_manifest_file_unlisted")
+    # Batching amortizes the task and buffer cost for thousands of small files.
+    workers = min(16, max(4, os.cpu_count() or 4))
+    batches = (members[index:index + 32] for index in range(0, len(members), 32))
+    with ThreadPoolExecutor(max_workers=workers) as executor:
+        for verified in executor.map(_hash_package_batch, batches):
+            for relative, digest, size in verified:
+                actual[relative] = (digest, size)
     if any(actual[path][0] != expected[path] for path in expected):
         _fail("supply_chain_package_manifest_hash_mismatch")
-    return {
+    result = {
         "contract": "genshin-package-file-manifest-verification-v1",
         "definition": PACKAGE_MANIFEST_DEFINITION,
         "status": "verified",
@@ -220,3 +290,6 @@ def verify_package_artifact(package_root: Path) -> dict:
         "bytes": sum(value[1] for value in actual.values()),
         "manifest_sha256": hashlib.sha256(raw).hexdigest(),
     }
+    if defer_dsh_dependencies:
+        result.update(status="startup_verified", deferred_dsh_dependency_files=deferred)
+    return result

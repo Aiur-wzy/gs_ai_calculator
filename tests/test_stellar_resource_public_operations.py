@@ -7,6 +7,22 @@ from test_special_reaction_mechanics_projection import _application_fixture, _en
 from test_stellar_periodic_resource import CONFIG
 
 from genshin_engine.mechanics import execute_mechanics
+from genshin_engine.mechanics_validation import validate_mechanics_model
+
+
+@pytest.mark.parametrize(("count", "exceeds_limit"), [(284, False), (2048, False), (2049, True)])
+def test_long_stellar_timeline_admission(count, exceeds_limit):
+    _, _, mechanics = fixture()
+    grant = mechanics["special_reaction_events"][0]
+    mechanics["special_reaction_events"] = [
+        dict(grant, id=f"grant.{index}", t=index / 10) for index in range(count)
+    ]
+    issues = validate_mechanics_model(mechanics)["issues"]
+    if exceeds_limit:
+        assert any(issue["code"] == "limit" and issue["path"] == "mechanics_model.special_reaction_events"
+                   for issue in issues)
+    else:
+        assert not issues
 
 
 def fixture():

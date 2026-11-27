@@ -2,6 +2,16 @@
 
 游戏附着原理见[反应](../../mechanics/reactions.md)。先按当前规则集声明目标ID、初态与`freeze.freezable`；不可冻结默认coexist，确需互相抵消才设`unfreezable_resolution=mutual_cancel`，不能将不可冻结共存称为Frozen。星月替换/领域/贡献者的独立合同见[特殊反应](special-reactions.md)，旧连续冻结参考另见[兼容范围](compatibility.md)。
 
+## 静态多目标
+
+要计算多名敌人时，原生 Agent 先读 `mechanics_capabilities` 的 `/target_scene`。独立 CLI 用 `capabilities --section plan_contract --pointer /mechanics_contract/target_scene`。场景写在 `mechanics_model.target_scene`。主目标和附着档案沿用 `elemental_model`，在 `primary_area_ids` 登记主目标所在区域，再逐个给 `additional_targets` 写入目标初态和区域。首版共用敌人等级与抗性面板，各目标分别维护元素底与附着计数。使用显式有限统计窗口。
+
+每个命中描述仍绑定动作、时点与实际目标，附着描述中的目标和区域必须一致。一次爆发命中两名敌人时可以共享动作 ID，分别声明真实接触。伤害 `count` 保持同目标的数值次数。普通直伤、本地反应和已支持的世界区域结算通过同一模式运行。
+
+同一段风攻击在同一时点命中多个目标时，为这些接触填写同一个 `application.atomic_parent_id`。每条使用自己的命中 ID、目标 ID 和 `order`，共用动作、附着档案和区域。按实际联系将组内接触排在一起；同刻切人排在整组之前或之后。属于不同攻击的接触各自使用独立父 ID。以各目标实际冰底和附着判定决定哪些接触触发星扩散。跨目标传播或其他特殊反应的范围使用当前能力和实际诊断核对。
+
+用 CLI `equipment review` 的 `target_id` 筛选实际出伤，GUI 逐击详情也显示目标。先检查每个目标的附着回执，再核对动作资源只发生了一次。有完整源码时，可在项目根目录打开 `examples/static-two-target.plan.json` 查看两目标声明。
+
 ## 逐攻击分量资料
 
 为每个可能参与反应的**实际攻击分量**建立附着清单，放入对应角色的分实体小文件。清单至少包含：动作与攻击分量身份、元素、GU、`application_mode=sequence|no_icd|no_application|pending`、`icd.counter_tag`、`icd.rule_group`、有限sequence或`timer_counter(reset_seconds, hit_interval, first_hit=1)`、作用目标、证据等级、资料版本与来源。初段/持续段/终结段、同技能不同 projectile、召唤物、命座追加攻击，以及附魔后的普通/重击/下落必须按各自事实分行；只有证据证明共享时才共用counter身份。

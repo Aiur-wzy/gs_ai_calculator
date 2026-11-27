@@ -1,7 +1,7 @@
 {
   "contract": "genshin-current-skill-resources-v1",
   "scope": "source_not_release_qualification",
-  "resource_count": 64,
+  "resource_count": 67,
   "resources": [
     {
       "resource": "references/app-mechanics/actions/admission.md",
@@ -96,8 +96,8 @@
         "能量事件与规则结论",
         "解释返回结果"
       ],
-      "bytes": 16171,
-      "sha256": "a102a17f0f8724c4fbec09cc2fbb84c00595d9cc982965739a4cd831a93dfb89"
+      "bytes": 17209,
+      "sha256": "56da8bafaa72d34fb9718c9f64bb50bfb52cc7b561335078c84a62ce369efeef"
     },
     {
       "resource": "references/app-mechanics/authoring-assistance.md",
@@ -145,6 +145,7 @@
       "title": "元素执行输入与逐击回执",
       "headings": [
         "元素执行输入与逐击回执",
+        "静态多目标",
         "逐攻击分量资料",
         "逐攻击分量核实工作单",
         "原生转换",
@@ -154,8 +155,8 @@
         "反应触发与反馈",
         "App与Excel同源"
       ],
-      "bytes": 21815,
-      "sha256": "42a03fc92f2e5718cf5eb2b471d9859328e02f380665f68a5cf028637df61b9a"
+      "bytes": 23521,
+      "sha256": "10443f9b860d1830bb815f09045156e7f79ad31e3c50d600fd5865e580cf63c5"
     },
     {
       "resource": "references/app-mechanics/elements/special-reactions.md",
@@ -167,11 +168,13 @@
         "直接能力伤害",
         "月绽放草露、转换核及消费收益",
         "贡献者、顺序与完整性",
+        "定时资源接口（1.0.3）",
         "数据匹配、历史与研究",
-        "有限额外多人雷击诊断"
+        "有限额外多人雷击诊断",
+        "概率次数的默认取整口径（1.0.3）"
       ],
-      "bytes": 13845,
-      "sha256": "5fd4faccb05e44491a879b56e05a6454cc3a584a3e24b5524b5d1907eb117b1f"
+      "bytes": 21561,
+      "sha256": "c4ae6dd196515b9546169b6c826adc36fe441e6105db158da9dce24172c77a31"
     },
     {
       "resource": "references/app-mechanics/execution/action-captures.md",
@@ -215,10 +218,11 @@
       "headings": [
         "资源、多跳与生命周期",
         "多跳和资源",
-        "真实反应触发的直接回能"
+        "真实反应触发的直接回能",
+        "概率次数的默认取整口径（1.0.3）"
       ],
-      "bytes": 15177,
-      "sha256": "380a78e91e0fc4c2935e3fe3f90daa1bbf335ef6dd549779e08246ecbad98a53"
+      "bytes": 17374,
+      "sha256": "5c208863c5a0f75cffaa7a873da53da881441d54608611954ee21567c41eb40b"
     },
     {
       "resource": "references/app-mechanics/execution/rules.md",
@@ -228,10 +232,11 @@
         "一个原生输入，两类声明",
         "来源部件必须接到规则",
         "交给引擎的机械工作",
+        "反应星扩散共用一次扣层",
         "执行与查看"
       ],
-      "bytes": 12385,
-      "sha256": "25521f0e98ba67313ed1eeb38e787678b6058140d8437ae649aa49bf8b090980"
+      "bytes": 14150,
+      "sha256": "b1157e55c9f5adfe35a0e48dad77c8f1e1d9b314c0ca75a7d7255859c845cfce"
     },
     {
       "resource": "references/app-mechanics/health.md",
@@ -339,8 +344,8 @@
       "headings": [
         "统计截止与完整任务校验"
       ],
-      "bytes": 2855,
-      "sha256": "59f1c0df3dbcda8c01b75d3fd699cc407516616bd8f7889cc5311fdfaa45f685"
+      "bytes": 3243,
+      "sha256": "2f7e1f07ce1bcd12ac924e8b7a631a5dc35b30af80992af63eb986105269999f"
     },
     {
       "resource": "references/app-mechanics/review/results.md",
@@ -474,6 +479,18 @@
       "sha256": "38d3165c8db543fb404cf54cdafe403d3620c2576c54d5c148b5cd0696728da5"
     },
     {
+      "resource": "references/data/action-timing.md",
+      "title": "查动作耗时：从外部资料排出相邻两招",
+      "headings": [
+        "查动作耗时：从外部资料排出相邻两招",
+        "gcsim：查命中和可接下一招的帧",
+        "强度研究院：从示例轴估计缺失的时点",
+        "KQM 与原始录像：补查取消点，核实分歧"
+      ],
+      "bytes": 4869,
+      "sha256": "6824e7d6cadce391718eb4f207bda34fda030ffcbc560e316897906e8f03c998"
+    },
+    {
       "resource": "references/data/character-appendices.md",
       "title": "角色动作资料附录",
       "headings": [
@@ -489,6 +506,15 @@
       ],
       "bytes": 13845,
       "sha256": "86253b7edc2e08ca489cbc79b685fd48b0d28074de22d707097c99ca8ac9b2b6"
+    },
+    {
+      "resource": "references/data/combat-references.md",
+      "title": "排轴资料索引",
+      "headings": [
+        "排轴资料索引"
+      ],
+      "bytes": 3943,
+      "sha256": "41044febc8102166eca46f20c806ef6159b53d643fc2294247e5169b93b8f8cd"
     },
     {
       "resource": "references/data/database-readme.md",
@@ -523,8 +549,22 @@
         "8. 版本维护检查",
         "当前原生Agent读取入口"
       ],
-      "bytes": 31010,
-      "sha256": "06234dbdb4b52f70d680e1736743225db8888bf9369b7b1c8f26ea61f659c2d9"
+      "bytes": 30550,
+      "sha256": "b20e2de5b2cabe21e818eab5da957d27a4aff2a7b3f52179b996b088b3ccba53"
+    },
+    {
+      "resource": "references/data/frame-rate-timing.md",
+      "title": "帧率、现实秒数与战斗计时",
+      "headings": [
+        "帧率、现实秒数与战斗计时",
+        "怎样换算",
+        "常用实际帧率的理论对照",
+        "研究报告里的快慢档",
+        "逐计时器查证",
+        "领域的已有观测和预测偏差"
+      ],
+      "bytes": 7225,
+      "sha256": "90a0782c07bfe07f6aa47b1723f229d74f7870c8de2acd2727f344ca05639d60"
     },
     {
       "resource": "references/data/gadget-sources.md",
@@ -594,8 +634,8 @@
         "运行与入口",
         "交付"
       ],
-      "bytes": 4649,
-      "sha256": "79e5a67be0f9d206d0aa8be792a9cf60c094995c5e7c869bcbc04486bd4c02e1"
+      "bytes": 4939,
+      "sha256": "134fd0e203fca2994b9af3fe800e69f8b8fe427357fc56675fb4767f3110ac80"
     },
     {
       "resource": "references/mechanics/artifacts.md",
@@ -694,8 +734,8 @@
         "八、快速检查清单",
         "附录：帧率对排轴的影响（附录级参考）"
       ],
-      "bytes": 11613,
-      "sha256": "d8048fff32ee95b02e064c0c4a709ffc79e8c12284a4a516c9fb4d18bd3504d6"
+      "bytes": 11713,
+      "sha256": "d810a1d3239bf9d7655fb84450c2cdcefb37ed018fde1fd9cacd40d6ea6dc24d"
     },
     {
       "resource": "references/outputs/app-and-excel.md",
@@ -807,8 +847,8 @@
       "headings": [
         "动作工作卡"
       ],
-      "bytes": 1511,
-      "sha256": "cd902694581ff6a8d9c1a1fbcf49e610fd91603e2f6859ff497c734a67401ebf"
+      "bytes": 1838,
+      "sha256": "cda70ab7189deadb99b6304326bd359946f06f6376b89b22085ee8f2ba2a2b27"
     },
     {
       "resource": "references/workflow/focus/closure.md",
@@ -828,8 +868,8 @@
       "headings": [
         "事件工作卡"
       ],
-      "bytes": 2437,
-      "sha256": "24041b7759569fffabea570d6ddb2443b4f454243271e51f65f2a50a27390b14"
+      "bytes": 2571,
+      "sha256": "e25d0a6cc852cc5501c57a53522af743df8cda672bf9aa3c17cf791db0946486"
     },
     {
       "resource": "references/workflow/focus/loadout.md",
@@ -837,8 +877,8 @@
       "headings": [
         "配装工作卡"
       ],
-      "bytes": 2088,
-      "sha256": "efb089aa605aec9357c0fb5b1eb22d41c0935a6297efb06222b5c4f6927eb84e"
+      "bytes": 2180,
+      "sha256": "f8e27c2255dee83bb1c007b98ae1569e14f8ecbe584af21c36a1b9b8f93cbc04"
     },
     {
       "resource": "references/workflow/focus/numbers.md",
@@ -899,8 +939,8 @@
         "拉表原则",
         "按当前问题读取"
       ],
-      "bytes": 4866,
-      "sha256": "7fdea4450aab2ea30d56931cae1da8f30d43a36d9afb50a2271192bea6bc2a3c"
+      "bytes": 5294,
+      "sha256": "da51452338b9f6f664c169448431e6b4f399a798b83ffaca3165c89eb250aa0c"
     }
   ],
   "authoring_navigation": {

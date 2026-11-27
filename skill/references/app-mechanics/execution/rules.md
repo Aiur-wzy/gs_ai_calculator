@@ -55,16 +55,26 @@ v3 保留手工 Buff 时，为 `manual_template.buffs[].extensions` 填写 `owne
 | 声明 | 实际字段与范围 |
 |---|---|
 | 触发点 | `trigger.event`：action_start/action_end/switch/hit/condition；`phase`：pre/post。元素事件另有 `elemental_reaction`（仅 post）和 `reaction_damage`，实际支持的反应及阶段查本次合同；可按动作、事件、角色、动作类型、伤害类型、元素、显式 condition 进一步过滤 |
-| 受益者 | `beneficiaries.mode`：self/team/characters/frontline/next_switch；scope 明确 locked 或 current_frontline。接棒受益者由实际切人确定 |
+| 受益者 | `beneficiaries.mode` 选择候选名单，scope 选择锁定名单、跟随当前前台或跟随当前后台。接棒受益者由实际切人确定 |
 | 持续与CD | timing 的 delay/duration/cooldown/cooldown_anchor；anchor 为 success 或 attempt |
 | 层数与刷新 | stacking 的 max/add/policy，枚举以本次schema为准。refresh保持已有层数、仅整体刷新；add_and_refresh按add加层至max并整体刷新；independent各层独立到期。不能仅因max/add已填就认定实际叠层，须核对执行账中的层数与刷新。 |
-| 有限次数 | quota 的 capacity/scope/refresh/consume；scope 为 per_beneficiary 或 team，refresh 为 reset/add/keep。当前消费限定 hit/pre，按单目标逐次命中扣除 |
+| 有限次数 | `quota` 声明容量、共享范围、刷新方式与消费选择器。默认逐次命中扣除。星扩散可以显式声明按实际伤害分项和目标扣一次，让符合位置的全部贡献者使用同一份加成 |
 | 收益 | effects 每项 id/benefit_type_id/value/domain，可另带 filter；分类从运行时注册表取得，不按中文名猜乘区 |
 | 初态 | initial_state.rules 为每条规则恰好声明一次 cooldown_remaining 和 instances；空 instances 表示未激活，未知不能写成已激活 |
 
+### 反应星扩散共用一次扣层
+
+配置两条来源绑定的规则时，用 `quota.scope="team"` 和 `quota.unit="damage_component_target"`。两条规则分别把 `beneficiaries.scope` 设为 `current_frontline` 和 `current_offfield`，消费选择器都用 `event="reaction_damage"`、`phase="pre"` 及 `reaction_types=["stellar_swirl"]`。同一条规则覆盖所声明的反应型和能力直伤型星扩散，分别声明领唱与重唱的容量、刷新、有效期和取值来源。
+
+同一名敌人的一段星扩散发生时，取当时的站位和真实参与者。两个池各自判定。后台两人都参与且剩一层时，重唱只扣一次，两人各获得一份反应平值。前台没人参与时，领唱余额保持原数。另一名敌人同刻受伤时独立扣层。检查伤害详情的次数消耗记录，或按 `rule_id` 读取机制流水中的目标、前后台、参与者和 `before/after`。加成数值用同一条伤害的收益来源与折前计算核对。
+
+沃雅妮莎的触发条件、数值、适用版本和证据状态从角色附录或资料工具核对。使用手工羽毛时间窗的旧方案可先打开核对，再在同一方案副本上移除相同来源的手工加值，改用相应规则并重算。
+
+有完整源码时，可在项目根目录打开 `examples/stellar-swirl-position-quota.plan.json` 查看来源绑定与输入。样例使用任意值演示执行。多目标时使用[目标场景](../elements/runtime.md#静态多目标)逐个声明实际接触。普通冰水羽毛与星扩散交替消耗时，仍需显式声明游戏状态和统一资源账。
+
 同一来源的触发/冷却、次数消费与各收益匹配是不同条件。次数应覆盖实际会消耗的命中，而非只挑高收益命中。引擎负责生成时段、选择合法受益者和扣次数，Agent 只检查规则解释是否正确，不再逐击手填份额。
 
-反应伤害筛选 `event="reaction_damage", reaction_types=["stellar_swirl"]` 覆盖星扩散的即时风伤与已支持的两级冰风旋伤害分量；执行流水保留各分量的精确类型，不要求把流水中的子类型填入公开枚举。只需要某种元素或某位贡献者时，继续添加 `reaction_elements`、`characters` 等条件。它不会匹配普通扩散、星超导或月反应，也不会自动推断某件装备或天赋应适用于哪些分量；适用范围仍需查资料后声明。
+反应伤害筛选 `event="reaction_damage", reaction_types=["stellar_swirl"]` 覆盖星扩散的即时反应风伤与冰风旋爆发。触发攻击的普通风伤、普通扩散和风旋生成状态均不匹配这条规则。一次攻击打到冰底和水底两名敌人时，冰底目标产生的真实星扩散风伤可以获益并扣层，水底目标的普通水扩散保持原伤害与库存。执行流水保留各分量的精确类型；需要某种元素或某位贡献者时，添加 `reaction_elements`、`characters` 等条件。具体装备和天赋的适用范围按资料声明。
 
 提供 `limited_hit_benefit_contract` 时，受审来源优先按[有限次数收益来源](../sources/limited-hit-benefits.md)生成规则，复用精确父档案和数据库参数，不再重复手工交付同源规则或加算值。本轴match不能退还次数或绕过提供者属性依赖；来源参考范围与公式表再生成要求见该参考。
 

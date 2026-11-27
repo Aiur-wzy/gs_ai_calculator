@@ -6,7 +6,7 @@ particular characters. The real attribute ledger still checks actual cycles.
 """
 from __future__ import annotations
 
-from genshin_engine.beneficiary_selection import effective_recipient, select_recipients
+from genshin_engine.beneficiary_selection import effective_recipient, position_matches, select_recipients
 from genshin_engine.registry import BENEFIT_TYPES
 
 
@@ -37,9 +37,7 @@ def _classification(runtime, rule, effect):
 def _current_candidates(runtime, rule):
     frontline = getattr(runtime, 'frontline', None)
     recipients = select_recipients(rule, runtime.data['chars'], frontline)
-    if rule['beneficiaries']['scope'] == 'current_frontline':
-        recipients = [actor for actor in recipients if actor == frontline]
-    return set(recipients)
+    return {actor for actor in recipients if position_matches(rule, actor, frontline)}
 
 
 def _active_recipients(runtime, rule):

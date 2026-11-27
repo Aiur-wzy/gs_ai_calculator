@@ -128,6 +128,9 @@ def _canonical_execute_mechanics_v1(template, rotation_model, mechanics_model, m
             return output
         projected, rotation, runtime = _project(template, rotation_model, mechanics_model, output["issues"])
         if output["issues"]:
+            if mechanics_model.get("target_scene") and all(
+                    issue["severity"] == "pending" for issue in output["issues"]):
+                output["status"] = "pending"
             return output
         chars = {c["id"] for c in rotation["characters"]}
         output["issues"].extend(validate_special_reaction_bindings(
@@ -386,7 +389,7 @@ def _canonical_execute_mechanics_v1(template, rotation_model, mechanics_model, m
             output.update(status="pending", rotation_check=result, issues=result["issues"],
                           mechanics_trace=executor.trace, sampling_trace=executor.samples)
             if executor.elemental:
-                output["elemental_trace"] = executor.elemental.trace
+                output["elemental_trace"] = executor._current_elemental().trace
             if executor.fixed_sources:
                 output.update(fixed_effect_sources=copy.deepcopy(list(executor.fixed_sources.values())),
                               target_condition_trace=executor.target_condition_trace)
@@ -460,10 +463,13 @@ def _canonical_execute_mechanics_v1(template, rotation_model, mechanics_model, m
                                           "complete_first_cycle": result["energy_check"]["completed_cycles"] >= 1,
                                           "execution_status": output["status"]}
         if executor.elemental:
-            output["elemental_trace"] = executor.elemental.trace
+            elemental_trace = executor._current_elemental().trace
+            output["elemental_trace"] = elemental_trace
             output["result"]["elemental"] = {"ruleset": executor.elemental.model["ruleset"], "mode": "simulated",
                 "input_window_state": executor.elemental.window_state,
-                "final_checked_state": executor.elemental.state(), "trace": executor.elemental.trace}
+                "final_checked_state": executor.elemental.state(), "trace": elemental_trace}
+            if executor.target_scene:
+                executor.target_scene.attach_result(output["result"], resolved)
             if _freeze_reference(mechanics_model):
                 output["result"]["elemental"].update(evidence_tier="experimental_reference",
                     reference_contract=copy.deepcopy(REFERENCE_CONTRACT),
@@ -508,7 +514,7 @@ def _canonical_execute_mechanics_v1(template, rotation_model, mechanics_model, m
         if executor.counter_views and executor.counter_views.frames:
             output["sampling_trace"] = executor.samples
         if executor.elemental:
-            output["elemental_trace"] = executor.elemental.trace
+            output["elemental_trace"] = executor._current_elemental().trace
         if executor.fixed_sources:
             output.update(fixed_effect_sources=copy.deepcopy(list(executor.fixed_sources.values())),
                           target_condition_trace=executor.target_condition_trace)

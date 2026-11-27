@@ -27,6 +27,13 @@ LIVE_PAIR_PROOF_FILENAME = "release-pair-live-signed.json"
 PER_USER_UPDATER_RELATIVE = "updater/GenshinCalcUpdater.exe"
 LEGACY_STABLE_INDEX = "https://aiur-wzy.github.io/gs_ai_calculator/latest.json"
 STABLE_INDEX = "https://aiur-wzy.github.io/gs_ai_calculator/stable/latest.json"
+STABLE_INDEX_V2 = "https://aiur-wzy.github.io/gs_ai_calculator/stable/v2/latest.json"
+QUALIFIED_STABLE_INDEX = "https://aiur-wzy.github.io/gs_ai_calculator/stable/v3/latest.json"
+_PRIOR_STABLE_INDEXES = {
+    STABLE_INDEX: (LEGACY_STABLE_INDEX,),
+    STABLE_INDEX_V2: (STABLE_INDEX, LEGACY_STABLE_INDEX),
+    QUALIFIED_STABLE_INDEX: (STABLE_INDEX_V2, STABLE_INDEX, LEGACY_STABLE_INDEX),
+}
 
 
 def _invalid(reason: str = "product_release_index_invalid") -> None:
@@ -111,6 +118,7 @@ def validate_product_release_index(value: Any, *, channel: str, trust_verifier,
     if type(value["pairs"]) is not list or not value["pairs"]:
         _invalid()
     combinations, pairs, databases, app_artifacts = {}, {}, {}, {}
+    database_qualifications = {}
     pair_sequences = set()
     for entry in value["pairs"]:
         document, verified = validate_latest_document(
@@ -131,6 +139,9 @@ def validate_product_release_index(value: Any, *, channel: str, trust_verifier,
         database_artifact = (database, document["artifacts"]["database"])
         if databases.setdefault(db_id, database_artifact) != database_artifact:
             _invalid("product_release_database_artifact_conflict")
+        qualification = document.get("database_qualification")
+        if qualification is not None and database_qualifications.setdefault(db_id, qualification) != qualification:
+            _invalid("product_release_database_qualification_conflict")
         combinations[app_id, db_id] = pair_id
         pairs[pair_id] = document
         pair_sequences.add(sequence)
@@ -281,8 +292,11 @@ def discover_product_index(url: str, cache_path: Path, *, channel: str, trust_ve
             # The legacy updater kept the bridge receipt in this same file.
             # Its ETag belongs to another URL, but its signed history still
             # constrains the first response from the successor endpoint.
-            if current is None and url == STABLE_INDEX and channel == "stable":
-                current = _load_cache(cache_path, expected_url=LEGACY_STABLE_INDEX, expected_channel=channel)
+            if current is None and channel == "stable":
+                for previous_url in _PRIOR_STABLE_INDEXES.get(url, ()):
+                    current = _load_cache(cache_path, expected_url=previous_url, expected_channel=channel)
+                    if current is not None:
+                        break
             if current is not None:
                 previous = validate_product_release_index(current["document"], channel=channel,
                                                           trust_verifier=trust_verifier, for_install=False)

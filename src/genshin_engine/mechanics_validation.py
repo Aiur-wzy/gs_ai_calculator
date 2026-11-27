@@ -35,6 +35,7 @@ from genshin_engine.particle_quantities import (
     quantity_model_issue,
 )
 from genshin_engine.reaction_event_capabilities import (
+    STELLAR_SWIRL_DAMAGE_COMPONENTS,
     reaction_event_available,
     reaction_listener_phase_supported,
 )
@@ -43,6 +44,7 @@ from genshin_engine.rotation_port import TICKS
 from genshin_engine.rotation_port import collect_schema_errors as _schema_errors
 from genshin_engine.rotation_port import rotation_issue as _issue
 from genshin_engine.special_reaction_port import validate_special_reaction_model
+from genshin_engine.target_scene import target_ids, validate_scene
 from genshin_engine.target_state import predicate_bounds_valid
 
 
@@ -109,6 +111,7 @@ def validate_mechanics_model(model, *, attribute_author=False, attribute_limits=
         elif (model.get("application_events") or model.get("elemental_state_events")
               or any("application" in h for h in [*model["hit_events"], *model["hit_patterns"]])):
             issues.append(_issue("missing_information", "元素附着或状态操作需要启用 elemental_model。", "mechanics_model"))
+        issues.extend(validate_scene(model))
         if "special_reaction_model" in model:
             issues.extend(
                 _issue(
@@ -125,7 +128,7 @@ def validate_mechanics_model(model, *, attribute_author=False, attribute_limits=
                 application_target = descriptor.get('application', {}).get('target_id')
                 runtime_target = model.get('elemental_model', {}).get('target', {}).get('id')
                 if any(target is not None and target != descriptor['target_id']
-                       for target in (application_target, runtime_target)):
+                       for target in ((application_target,) if "target_scene" in model else (application_target, runtime_target))):
                     issues.append(_issue('target_identity_conflict', '命中目标与附着或元素模型的目标不一致。',
                         'mechanics_model.hit_events.target_id',
                         event_id=descriptor.get('hit_id', descriptor.get('id')),
@@ -276,6 +279,23 @@ def validate_mechanics_model(model, *, attribute_author=False, attribute_limits=
                 issues.append(_issue("duplicate_id", "资源 ID 在同一规则内不可重复，且最多 16 项。", path))
             if rule.get("quota") and (rule["quota"]["consume"]["event"] not in ("hit", "reaction_damage") or rule["quota"]["consume"]["phase"] != "pre"):
                 issues.append(_issue("unsupported", "次数消费使用单目标命中的 pre 阶段，以本次消费回执决定收益。", path + ".quota.consume"))
+            if (rule["beneficiaries"]["scope"] == "current_offfield"
+                    and rule["beneficiaries"]["mode"] not in ("team", "characters", "self")):
+                issues.append(_issue("offfield_beneficiary_mode", "后台筛选需要全队、自身或显式角色名单。", path + ".beneficiaries"))
+            quota = rule.get("quota")
+            if quota and quota.get("unit") == "damage_component_target":
+                consume = quota["consume"]
+                if (quota["scope"] != "team" or consume["event"] != "reaction_damage"
+                        or consume.get("reaction_types") != ["stellar_swirl"]
+                        or rule["beneficiaries"]["scope"] not in ("current_frontline", "current_offfield")
+                        or rule["beneficiaries"]["mode"] not in ("team", "characters", "self")
+                        or rule["trigger"].get("event") not in ("action_start", "action_end", "switch")
+                        or rule["stacking"]["max"] != 1 or rule.get("resources") or rule.get("resource_gate")
+                        or len(rule["effects"]) != 1
+                        or rule["effects"][0]["benefit_type_id"] != "benefit.reaction_flat.all"):
+                    issues.append(_issue("damage_component_quota_scope",
+                        "星扩散按段与目标扣层需要动作或切换激活、单层团队实例、前台或后台受益范围及一份反应基础加值。",
+                        path + ".quota"))
             if rule["beneficiaries"]["mode"] != "characters" and "characters" in rule["beneficiaries"]:
                 issues.append(_issue("unused_field", "只有 characters 模式可以填写角色列表。", path + ".beneficiaries"))
             for key in ("delay", "duration", "cooldown"):
@@ -419,11 +439,6 @@ def validate_mechanics_model(model, *, attribute_author=False, attribute_limits=
     return {"status": ("invalid" if any(i["severity"] == "error" for i in issues) else "pending") if issues else "valid", "issues": issues}
 
 
-_STELLAR_SWIRL_DAMAGE_COMPONENTS = frozenset({
-    "stellar_swirl_anemo", "stellar_swirl_cryo_lv2", "stellar_swirl_cryo_lv3",
-})
-
-
 def _selector(selector, event):
     if selector.get("event") != event["event"]:
         return False
@@ -485,7 +500,7 @@ def _selector(selector, event):
             # accept arbitrary prefixes or change elemental trigger semantics.
             if not (event["event"] == "reaction_damage"
                     and "stellar_swirl" in selector["reaction_types"]
-                    and event.get("reaction_type") in _STELLAR_SWIRL_DAMAGE_COMPONENTS):
+                    and event.get("reaction_type") in STELLAR_SWIRL_DAMAGE_COMPONENTS):
                 return False
     if "damage_type_ids" in selector and not set(selector["damage_type_ids"]) & set(event.get("damage_type_ids", [])):
         return False
@@ -507,7 +522,7 @@ def validate_elemental_counter_bindings(template, rotation, mechanics):
     profiles = {p.get("id"): p for p in elemental.get("profiles", []) if isinstance(p, dict)}
     actions = {a.get("id"): a for a in rotation.get("actions", []) if isinstance(a, dict)}
     abilities = {a.get("id"): a for a in rotation.get("abilities", []) if isinstance(a, dict)}
-    target_id = (elemental.get("target") or {}).get("id")
+    targets = target_ids(mechanics)
     bindings, issues = {}, []
 
     def actor_for(action_id):
@@ -519,7 +534,8 @@ def validate_elemental_counter_bindings(template, rotation, mechanics):
         if not isinstance(application, dict) or actor is None:
             return
         profile = profiles.get(application.get("profile_id"))
-        if profile is None or application.get("target_id") != target_id:
+        target_id = application.get("target_id")
+        if profile is None or target_id not in targets:
             return
         icd = profile.get("icd", {})
         if icd.get("kind") not in ("standard", "sequence", "timer_counter"):

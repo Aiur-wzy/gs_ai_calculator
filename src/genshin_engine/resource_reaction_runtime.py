@@ -92,7 +92,8 @@ class Runtime:
         # ElementalRuntime deliberately returns a detached receipt. Bind that
         # exact returned object at the only real attempt hook, after comparing
         # the runtime-owned original. Later copies cannot be substituted.
-        actual = self.context.elemental.trace[-1]
+        scene = getattr(self.context, "target_scene", None)
+        actual = scene.actual_application(receipt) if scene else self.context.elemental.trace[-1]
         _bounded([actual, receipt], byte_limit=256 * 1024, charge_work=self.audit._charge)
         if digest(actual) != digest(receipt):
             raise ReactionResourceError('resource_reaction_actual_identity', '实际附着回执与元素账不一致。', severity='pending')

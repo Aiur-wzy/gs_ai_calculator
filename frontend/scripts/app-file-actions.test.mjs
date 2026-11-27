@@ -3,12 +3,15 @@ import {test} from "node:test";
 import {legacyDomainFixture} from "./legacy-domain-test-fixture.mjs";
 async function fixture(t){
   let view="whiteboard",picked="D:\\test\\chosen.whiteboard.json";const calls=[],input={value:"retained.plan.json"};
-  const {context,close}=await legacyDomainFixture(["whiteboard.js","agent-document-adapter.js","app-file-actions.js"],
-    {PL:{state:{plan:null,sourceEpoch:0},draftChanged:()=>false},RT:{state:{},tpl:()=>null},RS:{},WS:{tab:()=>view},
+  const {context,close}=await legacyDomainFixture(["result.js","whiteboard.js","agent-document-adapter.js","app-file-actions.js"],
+    {PL:{state:{plan:null,sourceEpoch:0},draftChanged:()=>false},RT:{state:{},tpl:()=>null},WS:{tab:()=>view},
       callApi:async(name,args)=>{calls.push([name,args]);return {code:0,data:{cancelled:picked===null,path:picked}};}});
   t.after(close);
   context.WB.render=()=>{};context.WB.replace({board:{board_id:"board-one",revision:0,title:"白板",team:[],actions:[]},path:"",file_sha:null},false,false);
-  const shows=[],port=context.AppEditorFileActions.create({root:{hidden:false},show:async page=>{view=page;shows.push(page);}});
+  const shows=[],port=context.AppEditorFileActions.create({root:{hidden:false},show:async page=>{
+    if(page==="result")context.RS.enterReport(view);
+    view=page;shows.push(page);
+  }});
   return {context,port,calls,shows,input,setPicked:value=>{picked=value;}};
 }
 test("user Save As uses the native picker and existing whiteboard save consumer",async t=>{
@@ -27,8 +30,10 @@ test("navigation completion is based on the real App display port",async t=>{
   const {port,shows}=await fixture(t);const result=await port.execute({action:"navigate_result"},port.capture());assert.equal(result.status,"completed");assert.deepEqual(shows,["result"]);
 });
 test("export invokes the existing verified result consumer and does not report a failed export as success",async t=>{
-  const {context:c,port,shows}=await fixture(t);let format;c.RS.exportResult=async value=>{format=value;return false;};
+  const {context:c,port,shows}=await fixture(t);let format;
+  c.RS.exportResult=async(value,onOutcome)=>{format=value;onOutcome("failed");return false;};
   const result=await port.execute({action:"export_result"},port.capture());assert.equal(format,"json");assert.equal(result.status,"failed");assert.equal(shows.at(-1),"result");
+  assert.equal(c.RS.sourceKind(),"whiteboard");
 });
 
 test("a save error with unconfirmed side effects stays unknown instead of being reported failed",async t=>{
@@ -36,6 +41,13 @@ test("a save error with unconfirmed side effects stays unknown instead of being 
   c.WB.save=async(_path,options)=>{options.onResponse({code:1,reason:"file_conflict",blocking_scope:"request",
     details:{published_paths:["chosen.json"],unknown_paths:[],pending_paths:[]}});return false;};
   await assert.rejects(port.execute({action:"save_as"},port.capture()),/app_action_execution_outcome_unknown/);
+});
+
+test("a write that could not be verified keeps the specific confirmation state",async t=>{
+  const {context:c,port}=await fixture(t);
+  c.WB.save=async(_path,options)=>{options.onResponse({code:1,reason:"file_conflict",
+    details:{publication_state:"written_unverified"}});return false;};
+  await assert.rejects(port.execute({action:"save_as"},port.capture()),/app_action_written_unverified/);
 });
 
 test("the publisher can prove a pre-write conflict without creating an unknown outcome",async t=>{

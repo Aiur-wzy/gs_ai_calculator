@@ -4,7 +4,7 @@ import {appendFullName} from "./display-names";
 import {TIMELINE_ACTION_HEIGHT,TIMELINE_VIEW_HEIGHT} from "./geometry";
 import {coverageHistory,recipientNames} from "./display-rows";
 import {updateDisclosureButton} from "./row-disclosure";
-import {isCoverageKind} from "./shared";
+import {finite,isCoverageKind} from "./shared";
 import {probabilityFields} from "./probability-detail";
 export function createTimelineDetail(ports:TimelineDomPorts){
   const TV=ports.view,RT=ports.editor,$=ports.query,TD=ports.projection,services=ports.services;
@@ -43,7 +43,8 @@ const showDetail = (selection:any,back:any=null,page=0) => {
     box.appendChild(viewEl("p",coverage?"选择一个区间查看接收角色、来源和刷新明细。":"选择一条记录查看详情；放大时间轴可分开相邻时间点。","tl-detail-hint"));
     for(const event of events.slice(page*size,(page+1)*size)){
       const names=coverage?recipients(event):[];
-      const entry=button(`${names.length?`接收：${names.join("、")} · `:""}${viewTime(event)} · ${viewName(event.label)}${TV.mode==="damage"&&Number.isFinite(event.value)?` · ${Math.round(event.value).toLocaleString("zh-CN")}`:""}`,
+      const target=event.detail?.target_id;
+      const entry=button(`${names.length?`接收：${names.join("、")} · `:""}${viewTime(event)} · ${viewName(event.label)}${target?` · ${target}`:""}${TV.mode==="damage"&&Number.isFinite(event.value)?` · ${Math.round(event.value).toLocaleString("zh-CN")}`:""}`,
         ()=>TV.showDetail(event,{selection,page}));entry.className="tl-detail-record";box.appendChild(entry);
     }
     if(page>0)box.appendChild(button("上一页",()=>TV.showDetail(selection,null,page-1)));
@@ -70,6 +71,7 @@ const showDetail = (selection:any,back:any=null,page=0) => {
   if(receiver)field("接收角色",receiver);
   else field("角色",TV.characterNames?.get(event.character)||"全队 / 未指定角色");
   field("时间",viewTime(event));
+  field("伤害目标",event.detail?.target_id);
   for(const [label,value] of probabilityFields(event.detail))field(label,value);
   if(event.detail?.special_state_contract && ["resource_inventory","resource_mode"].includes(event.detail.kind)){
     field("适用说明","库存、消费和生成是独立事实，不能据此推定伤害或增益已经生效。");
@@ -88,7 +90,7 @@ const showDetail = (selection:any,back:any=null,page=0) => {
     if(Number.isFinite(event.detail.ordinary_cryo_electro_bonus))
       field("普通冰／雷增益",`${Number((event.detail.ordinary_cryo_electro_bonus*100).toFixed(3))}%`);
     field("形成原因",({establish_or_refresh_field:"领域建立或刷新",count_successful_application:"有效附着计层",
-      settle_four_second_window:"四秒窗口完成结算"} as Record<string,string>)[event.detail.cause]||"已记录状态变化");
+      settle_four_second_window:"领域窗口完成结算"} as Record<string,string>)[event.detail.cause]||"已记录状态变化");
     field("结束原因",({layer_change:"层数变化",refresh:"领域刷新",settlement_clear:"窗口结算并清空累计",
       settlement:"下一窗口结算",field_expiry:"领域到期",buff_expiry:"结算增益到期",window_end:"到达轴末",
       execution_limit:"执行中断",state_observation_incomplete:"后续状态资料不完整",declared_expiry_unobserved:"已声明期限到达，缺少后续观察"} as Record<string,string>)[event.detail.end_reason]||"状态结束");
@@ -123,8 +125,20 @@ const showDetail = (selection:any,back:any=null,page=0) => {
   };
   if(TV.mode==="damage"&&["damage","calculation","external_damage"].includes(event.kind))
     renderDamageExplanation(box,event,ports);
+  if(TV.mode==="damage"&&event.detail?.component_quotas?.length){
+    const ledger=viewEl("details");
+    ledger.appendChild(viewEl("summary","本段伤害的次数消耗"));
+    for(const row of event.detail.component_quotas){
+      const position=row.position==="frontline"?"前台":"后台";
+      const names=(row.beneficiaries||[]).map((id:string)=>TV.characterNames?.get(id)||id).join("、");
+      const action=row.consumed?`扣 1 层，受益 ${names}`:row.reason==="empty"?"层数已用尽":`没有符合条件的${position}贡献者`;
+      ledger.appendChild(viewEl("p",`${row.name_zh||row.rule_id} · ${row.target_id} · ${row.before} → ${row.after} · ${action}`));
+    }
+    box.appendChild(ledger);
+  }
   if(event.kind==="coverage"){
     if(event.detail?.beneficiaries_scope?.scope==="current_frontline")box.appendChild(viewEl("p","该区间表示效果已激活，只有符合前台限制的角色命中时才受益。"));
+    if(event.detail?.beneficiaries_scope?.scope==="current_offfield")box.appendChild(viewEl("p","该区间表示效果已激活，只有在后台结算的合格角色受益。"));
     for(const scope of event.detail?.effect_applicability||[])if(scope.message)box.appendChild(viewEl("p",`收益作用范围：${scope.message}`));
   }
   if(TV.mode==="damage"&&event.kind==="damage"&&event.detail?.hit_id){
@@ -146,7 +160,10 @@ const showDetail = (selection:any,back:any=null,page=0) => {
       const readableSource=/[\u3400-\u9fff]/u.test(String(row.source_name||""))?row.source_name:
         row.type==="manual_effect_applied"?"手工收益（来源未记录）":"机制收益";
       const owner=row.owner?TV.characterNames?.get(row.owner):null;
+      const window=finite(row.window_start)&&finite(row.window_end)
+        ?`（${Number(row.window_start.toFixed(6))}–${Number(row.window_end.toFixed(6))} 秒）`:"";
       list.appendChild(viewEl("li",`${owner?`${owner} · `:""}${readableSource}：${described.label} ${described.value}`
+        +window
         +(row.consumption_status==="not_consumed"?"；已物化，本次公式未消费":row.consumption_status==="unknown"?"；已物化，公式消费记录不足，未核实":"")
         +(row.presentation?.purpose==="calculation_sampling"?`；计算采样（非游戏Buff寿命）：${row.presentation.reason}`:"")));
     }

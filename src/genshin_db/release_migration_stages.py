@@ -15,6 +15,12 @@ from typing import Any
 
 from genshin_db.release_migration_ports import MigrationStagePorts
 from genshin_db.release_profile import DatabaseReleaseError
+from genshin_db.release_qualification import (
+    DatabaseInstallQualification,
+    copy_qualified_database,
+    qualified_database_identity,
+    read_qualified_database_identity,
+)
 from genshin_runtime.diagnostics import diagnosed
 
 
@@ -60,6 +66,7 @@ def prepare_installation_artifacts(
     minimum_headroom_bytes: int,
     sqlite_work_allowance_bytes: int,
     ports: MigrationStagePorts,
+    current_qualification: DatabaseInstallQualification | None = None,
 ) -> PreparedInstallation:
     try:
         previous_receipt_bytes = (
@@ -106,7 +113,9 @@ def prepare_installation_artifacts(
     rollback_manifest = rollback_dir / f"database-rollback-{operation_id}.manifest.json"
     old_receipt_present = previous_receipt_bytes is not None
     old_manifest_present = previous_manifest_bytes is not None
-    old_sha = ports.sha256(live) if live.exists() else None
+    old_sha = None
+    if live.exists():
+        old_sha = current_qualification.sha256 if current_qualification else ports.sha256(live)
     return PreparedInstallation(
         previous_receipt_bytes,
         previous_manifest_bytes,
@@ -129,7 +138,11 @@ def copy_and_verify_package(
     staging: Path,
     target_database: Mapping[str, Any],
     ports: MigrationStagePorts,
+    qualification: DatabaseInstallQualification | None = None,
 ) -> None:
+    if qualification is not None:
+        copy_qualified_database(package, staging, qualification)
+        return
     shutil.copyfile(package, staging)
     ports.fsync_file(staging)
     ports.verify_package_bytes(
@@ -151,8 +164,13 @@ def snapshot_current_release(
     previous_receipt_bytes: bytes | None,
     previous_manifest_bytes: bytes | None,
     ports: MigrationStagePorts,
+    current_qualification: DatabaseInstallQualification | None = None,
 ) -> CurrentReleaseSnapshot:
-    old_sha = ports.sha256(live) if live.exists() else None
+    if current_qualification is not None and not old_manifest_present:
+        ports.fail("database_migration_recovery_required")
+    old_sha = None
+    if live.exists():
+        old_sha = current_qualification.sha256 if current_qualification else ports.sha256(live)
     if old_manifest_present:
         old_manifest = ports.read_live_manifest(manifest_path)
         old_receipt = ports.read_live_receipt(receipt_path)
@@ -161,15 +179,18 @@ def snapshot_current_release(
                 "database_migration_recovery_required",
                 "当前数据库的 accepted 身份不完整，需要人工恢复",
             )
-        old_identity = ports.integrity_identity(
-            live,
-            ports.validate_database(
+        if current_qualification is not None:
+            old_identity = qualified_database_identity(old_manifest, current_qualification)
+        else:
+            old_identity = ports.integrity_identity(
                 live,
-                required_components=ports.required_manifest_components(old_manifest),
-            ),
-            old_manifest["database"],
-            mismatch_reason="database_migration_current_release_core_mismatch",
-        )
+                ports.validate_database(
+                    live,
+                    required_components=ports.required_manifest_components(old_manifest),
+                ),
+                old_manifest["database"],
+                mismatch_reason="database_migration_current_release_core_mismatch",
+            )
         try:
             old_identity_matches = ports.database_live_receipt_matches(
                 old_receipt, old_identity, old_manifest
@@ -184,7 +205,10 @@ def snapshot_current_release(
     rollback_created = False
     if live.exists():
         rollback_dir.mkdir(parents=True, exist_ok=True)
-        ports.rollback_snapshot(live, rollback)
+        if current_qualification is not None:
+            copy_qualified_database(live, rollback, current_qualification)
+        else:
+            ports.rollback_snapshot(live, rollback)
         rollback_created = True
     if previous_receipt_bytes is not None:
         ports.write_bytes_atomic(rollback_receipt, previous_receipt_bytes)
@@ -215,7 +239,13 @@ def postcheck_active_database(
     package_identity: Mapping[str, Any],
     target_database: Mapping[str, Any],
     ports: MigrationStagePorts,
+    qualification: DatabaseInstallQualification | None = None,
+    manifest: Mapping[str, Any] | None = None,
 ) -> dict[str, Any]:
+    if qualification is not None:
+        if manifest is None:
+            ports.fail("database_install_qualification_mismatch")
+        return read_qualified_database_identity(live, manifest, qualification)
     # Keep an independent SQLite open/physical integrity check at the actual
     # active path. The hash binds the logical checks to those same bytes.
     ports.check_sqlite_integrity(live)
@@ -278,16 +308,20 @@ def verify_accepted_recovery_identity(
     checked_manifest: Mapping[str, Any],
     previous: Mapping[str, Any],
     ports: MigrationStagePorts,
+    qualification: DatabaseInstallQualification | None = None,
 ) -> VerifiedAcceptedIdentity:
-    active_identity = ports.validate_database(
-        live, required_components=ports.required_manifest_components(checked_manifest)
-    )
-    active_identity = ports.integrity_identity(
-        live,
-        active_identity,
-        checked_manifest["database"],
-        mismatch_reason="database_migration_active_release_core_mismatch",
-    )
+    if qualification is not None:
+        active_identity = read_qualified_database_identity(live, checked_manifest, qualification)
+    else:
+        active_identity = ports.validate_database(
+            live, required_components=ports.required_manifest_components(checked_manifest)
+        )
+        active_identity = ports.integrity_identity(
+            live,
+            active_identity,
+            checked_manifest["database"],
+            mismatch_reason="database_migration_active_release_core_mismatch",
+        )
     receipt = ports.read_live_receipt(receipt_path)
     live_manifest = ports.read_live_manifest(manifest_path)
     try:

@@ -43,11 +43,13 @@ def validate_setup_locator(value):
     return value
 
 
-def site_downloads(index, latest, setup=None):
+def site_downloads(index, latest, setup=None, *, offline_bundle=None):
     """Keep the latest public receipt keys and bind each retained URL once."""
     downloads = dict(latest["artifacts"])
     if setup is not None:
         downloads["setup"] = validate_setup_locator(setup)
+    if offline_bundle is not None:
+        downloads["offline_bundle"] = validate_setup_locator(offline_bundle)
     by_url = {}
 
     def bind(locator):

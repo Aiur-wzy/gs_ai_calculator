@@ -61,7 +61,10 @@ def _system_prompt(workflow):
     if workflow == "artifact":
         common = common.replace(
             "先读取 App 指定的当前阶段工作规范与最小上下文，再按五阶段候选流程工作。",
-            "先读取App指定的最小规范，再按需获取相关角色、装备和机制资料；工作重点只是上下文读取建议。")
+            "先读取 App 给出的最小规范，工作重点只用于推荐资料。要判断一招何时命中、能接招或能切人时，"
+            "直接用 gs_read_skill 读 references/data/action-timing.md 的对应段落，再核该角色和手法的依据。"
+            "遇到快帧、后台跳数或附着与产球时，从 references/data/combat-references.md 按问题查。"
+            "用已有同版本、同条件的证据时直接复用。")
     return f"{common}\n\n{_WORKFLOW_PROMPTS[workflow]}"
 
 

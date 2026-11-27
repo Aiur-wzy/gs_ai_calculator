@@ -174,9 +174,13 @@ def _page_args(page: int, page_size: int) -> tuple[int, int]:
 # ---------- 元信息 ----------
 
 def get_meta(db_path: Path) -> dict:
+    from genshin_db.capability_catalog_build import CATALOG_META_KEY, CATALOG_REVIEW_META_KEY
     conn = _connect(db_path)
     try:
-        meta = dict(conn.execute("SELECT key, value FROM meta").fetchall())
+        meta = dict(conn.execute(
+            "SELECT key, value FROM meta WHERE key NOT IN (?,?)",
+            (CATALOG_META_KEY, CATALOG_REVIEW_META_KEY),
+        ).fetchall())
         lines = conn.execute(
             "SELECT DISTINCT version_line FROM character ORDER BY version_line"
         ).fetchall()

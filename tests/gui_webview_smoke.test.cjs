@@ -9,11 +9,13 @@ const CONFIG={prompt:'fixture public prompt',board_path:'C:/out/result.whiteboar
   provider_mode:'deterministic_provider_transport'};
 
 function harness(options={}){
-  const dom=new JSDOM('<div id="dsh-app-root"></div><div id="genshin-legacy-editor"></div><div id="workspace-menubar"></div><section id="tab-whiteboard"></section>',
+  const dom=new JSDOM(`<div id="dsh-app-root">
+    <div class="gs-editor-workbench"><div class="gs-editor-toolbar"></div></div>
+  </div><div id="genshin-legacy-editor"></div><div id="workspace-menubar"></div><section id="tab-whiteboard"></section>`,
     {url:'https://guard-fixture.invalid/',runScripts:'outside-only'}),w=dom.window,d=w.document;
   // Accelerate polling only; this fixture has no Session/Turn reducer or loop.
   w.setTimeout=(fn,delay)=>setTimeout(fn,Math.min(delay,1));
-  const calls=[],effects={sent:0,review:0,apply:0,save:0,load:0,resultSave:0,resultImport:0,newSession:0};
+  const calls=[],effects={openAssistant:0,sent:0,review:0,apply:0,save:0,load:0,resultSave:0,resultImport:0,newSession:0};
   let sent=false,statusReads=0,savedBoard=null,page='whiteboard';
   const clone=value=>JSON.parse(JSON.stringify(value));
   const board=()=>({kind:'genshin-whiteboard',schema_version:3,board_id:'board-one',revision:0,
@@ -22,14 +24,15 @@ function harness(options={}){
     result:{summary:{total_damage:123},hits:[{id:'hit-one'}]},plan:{},report:{}};
   const add=(parent,label,run)=>{const n=d.createElement('button');n.textContent=label;n.addEventListener('click',run);parent.append(n);return n;};
   const app=d.getElementById('dsh-app-root'),editor=d.getElementById('genshin-legacy-editor');
+  const workbench=app.querySelector('.gs-editor-workbench');
   w.GenshinDshClient={ready:Promise.resolve()};w.GenshinEditorBridge={};
   w.WB={state:{board:null,path:'',fileSha:null,result:null,mode:'actions'}};
   w.WS={tab:()=>page};
-  const showWhiteboard=()=>{editor.hidden=false;page='whiteboard';};
+  const showWhiteboard=()=>{workbench.hidden=false;editor.hidden=false;page='whiteboard';};
   add(app,'排轴白板',showWhiteboard);
-  const embedded=d.createElement('div');embedded.className='gs-editor-assistant';app.append(embedded);
-  add(embedded,'完整页面',()=>{
-    embedded.remove();page='agent';editor.hidden=true;const conversation=d.createElement('div');conversation.dataset.conversationContent='';
+  function showFullConversation(){
+    workbench.hidden=true;page='agent';editor.hidden=true;
+    const conversation=d.createElement('div');conversation.dataset.conversationContent='';
     conversation.dataset.conversationSession='session-one';app.append(conversation);
     const input=d.createElement('div');input.setAttribute('contenteditable','true');app.append(input);
     input.addEventListener('paste',event=>{input.textContent=event.clipboardData.getData('text/plain');});
@@ -39,6 +42,11 @@ function harness(options={}){
     add(app,'新会话',()=>{effects.newSession++;conversation.dataset.conversationSession='session-two';});
     // Deliberately stale text: durable last_turn must decide completion.
     const badge=d.createElement('span');badge.textContent='正在使用工具';app.append(badge);
+  }
+  add(workbench.querySelector('.gs-editor-toolbar'),'打开 AI 小窗',()=>{
+    effects.openAssistant++;
+    const embedded=d.createElement('aside');embedded.className='gs-editor-assistant';workbench.append(embedded);
+    add(embedded,'完整页面',()=>{embedded.remove();showFullConversation();});
   });
   function popup(group){
     d.querySelector('.workspace-menu-popup')?.remove();const menu=d.createElement('div');menu.className='workspace-menu-popup';d.body.append(menu);
@@ -130,11 +138,12 @@ test('missing result DOM cannot be reported as verified after file effects settl
 });
 test('one acceptance invocation cannot duplicate prompt application or file effects',async()=>{
   const h=harness();try{
+    assert.equal(h.w.document.querySelector('.gs-editor-assistant'),null);
     assert.equal(h.w.GenshinWebviewSmoke.start(CONFIG),true);assert.equal(h.w.GenshinWebviewSmoke.start(CONFIG),false);
     const until=Date.now()+10000;let receipt;
     while(Date.now()<until){receipt=h.w.GenshinWebviewSmoke.snapshot();if(receipt.status!=='running')break;await new Promise(done=>setTimeout(done,2));}
     assert.equal(receipt.status,'verified');assert.equal(receipt.dom.damage_view,true);
-    assert.deepEqual(h.effects,{sent:1,review:1,apply:1,save:1,load:1,resultSave:1,resultImport:1,newSession:0});
+    assert.deepEqual(h.effects,{openAssistant:1,sent:1,review:1,apply:1,save:1,load:1,resultSave:1,resultImport:1,newSession:0});
     assert.equal(h.w.GenshinWebviewSmoke.start(CONFIG),false);
   }finally{h.dom.window.close();}
 });

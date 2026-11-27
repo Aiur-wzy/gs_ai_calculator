@@ -117,9 +117,9 @@ def request(**changes):
             "message": "补全计算", "model": "test-model", "effort": "high", "client_request_id": "request-0001", **changes}
 
 
-def finish(manager):
-    manager._worker.join(3)
-    assert not manager._worker.is_alive()
+def finish(manager, *, timeout=3):
+    manager._worker.join(timeout)
+    assert not manager._worker.is_alive(), f"Scripted agent turn still running after {timeout}s"
 
 
 @pytest.mark.parametrize("value,known,remaining", [({}, False, None),

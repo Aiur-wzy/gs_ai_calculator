@@ -90,6 +90,7 @@ def guarded(name, *args, **kwargs):
 builtins.__import__ = guarded
 from genshin_app.agent_chat.native_static_capability_views import independent_capability_document
 cases = [("mechanics_capabilities", ["schema"]), ("mechanics_capabilities", ["empty_model"]),
+         ("mechanics_capabilities", ["target_scene"]),
          ("special_reaction_capabilities", ["input_contract", "schemas"]),
          ("special_reaction_capabilities", ["qualification_schema"]),
          ("special_reaction_capabilities", ["engine_catalog", "profiles"])]
@@ -105,7 +106,7 @@ print(json.dumps({"views": len(cases)}))
     proc = subprocess.run([sys.executable, "-c", script], cwd=ROOT, text=True,
                           capture_output=True, env={**__import__("os").environ, "PYTHONPATH": str(ROOT / "src")}, timeout=30, check=False)
     assert proc.returncode == 0, proc.stderr
-    assert json.loads(proc.stdout) == {"views": 5}
+    assert json.loads(proc.stdout) == {"views": 6}
 
 
 def test_declared_roots_match_actual_registry_and_reject_new_family():
@@ -174,7 +175,7 @@ def test_static_view_values_are_exact_authoritative_values():
     )
     from genshin_engine.mechanics_schema import mechanics_capabilities
     for name, producer, prefixes in [
-        ("mechanics_capabilities", mechanics_capabilities, [("schema",), ("empty_model",)]),
+        ("mechanics_capabilities", mechanics_capabilities, [("schema",), ("empty_model",), ("target_scene",)]),
         ("special_reaction_capabilities", special_reaction_capabilities,
          [("input_contract", "schemas"), ("qualification_schema",), ("engine_catalog", "profiles")]),
     ]:

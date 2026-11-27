@@ -2,12 +2,12 @@
 
 <!-- database-readme-contract
 schema_version=1
-database_release_id=db-7.2.52-r1
-game_version=7.2.52
-upstream_commit=6044f5aae7dd79fbbe15c5748ef99b654f6132b7
+database_release_id=db-7.2.54-r1
+game_version=7.2.54
+upstream_commit=770b88c8baccce9ff8923f5fbc95978671342232
 runtime_indexer_version=7
 normalization_version=2
-last_reviewed=2026-11-19
+last_reviewed=2026-11-27
 -->
 
 ## 活动库与资料贡献边界
@@ -213,7 +213,7 @@ GlobalCombat是全局来源，不应强行绑定某个角色。取得原文也�
 
 ### H. opaque字段与未知`$type`的Agent研究入口
 
-opaque表示“原始键和值已完整保存，但项目尚未证明其规范名称或操作语义”，不表示数据损坏或不可读取。本次固定来源为`6044f5aae7dd79fbbe15c5748ef99b654f6132b7`。混淆token会随快照整体变化，不能继承旧版7个字段／2个类型的标签、次数或pointer，也不能把某个旧token的新拼写当成已证明语义。旧224708示例保留于仓库历史审计`docs/pm/audits/2026-11-07-r9-readme-old-opaque-example-archive.md`，不作为当前读取配方。
+opaque表示“原始键和值已完整保存，但项目尚未证明其规范名称或操作语义”，不表示数据损坏或不可读取。本次固定来源为`770b88c8baccce9ff8923f5fbc95978671342232`。混淆token会随快照整体变化，不能继承旧版7个字段／2个类型的标签、次数或pointer，也不能把某个旧token的新拼写当成已证明语义。旧224708示例保留于仓库历史审计`docs/pm/audits/2026-11-07-r9-readme-old-opaque-example-archive.md`，不作为当前读取配方。
 
 本版受审归一化profile明确翻译36个字段与35个类型；其它保留的原始键不因此自动获得规范含义。以下是从实际候选库保存原文字节重新读取的**代表性研究入口**，不是全部未知字段清单，也不声称它们是本次新增机制：
 
@@ -229,7 +229,7 @@ opaque表示“原始键和值已完整保存，但项目尚未证明其规范�
 - `BFALOOLJIAE`：`BinOutput/Ability/Temp/AvatarAbilities/ConfigAbility_Avatar_Danica.json`，`/13/Default/HBNCGKIFKJH/0/BFALOOLJIAE`；另一个样本在`ConfigAbility_Avatar_Mitya.json`的`/28/Default/HBNCGKIFKJH/0/BFALOOLJIAE`。
 - `$type=AAMMODEMOCN`：`BinOutput/Ability/Temp/AnimalAbilities/ConfigAbility_Animal_JellyFish_N_01.json`，`/9/Default/HBNCGKIFKJH/1/$type`。
 
-这些次数只统计当前已导入原文，不推断未导入的Monster或其它上游文件。维护审计`docs/pm/audits/2026-11-19-7.2.52-database-readme-facts.json`保留双根身份、样本值、源SHA和pointer。原始大范围token扫描只是定位候选；动态名称、不同来源族和未受审schema都可能有大批原始键，不能把扫描计数当作字段解释覆盖率或引擎缺陷数量。
+这些次数只统计当前已导入原文，不推断未导入的Monster或其它上游文件。7.2.54 复核记录`docs/pm/audits/2026-11-27-7.2.54-database-readme-facts.json`保留样本值、源SHA和pointer，且逐一与本次上游快照核对。7.2.52 的记录`docs/pm/audits/2026-11-19-7.2.52-database-readme-facts.json`保留为历史资料。原始大范围token扫描只是定位候选；动态名称、不同来源族和未受审schema都可能有大批原始键，不能把扫描计数当作字段解释覆盖率或引擎缺陷数量。
 
 Agent可以按以下边界利用这些内容：
 
@@ -263,21 +263,21 @@ Agent可以按以下边界利用这些内容：
 
 ## 5. 当前版本能力快照
 
-本节对应 App 1.0.3 配套的 db-7.2.52-r1。上游资料为 CNCBWin7.2.52，提交时间为 2026-11-18T10:02:42-03:00。数据库 SHA-256 为 `7f056d5dd52c554c5752acf4f514737cc3c951ebddc15a265cc437e7c3ba9f1f`。默认查询线为 `release`。请按实体的上线状态确认测试服资料使用范围。
+本节对应 App 1.0.4 配套的 db-7.2.54-r1。上游资料为 OSCBWin7.2.54，提交时间为 2026-11-26T09:26:42-03:00。数据库 SHA-256 为 `65c75ba4a47114af2415698885bcc8a04b5f7d059ae79da5df31f4edc67bf79d`。默认查询线为 `release`。请按实体的上线状态确认测试服资料使用范围。
 
 - 已保存全部 530 个角色、武器与套装实体的上线状态证据：446 个已上线、2 个明确未上线、82 个未知。状态仅针对实体，不证明具体技能数值已经与正式服逐项一致。涉及未上线、未知或冲突实体时，按资料使用规则先询问用户；未知仍如实标注未知，使用流程按未上线处理，不得因同名正式实体存在而替换身份。
 - 当前项目知识包含三条 `pending` 附录：71（哥伦比娅山月草露可等价消费）、72（奈芙尔转核后的普通草核清理）、73（哥伦比娅重施元素战技保留有效涟漪的引力）。按目标读取正文及适用条件；这些记录不是引擎的角色专属执行逻辑，仍须由 Agent 形成方案输入。重施技能的其它时序不能由这三条标题推断。
 
 - 171个角色目录、442个技能；442/442技能有目录`character_id`。目录归属不等于完整动作派发。
-- 2755份运行原文、214311条定义、169755条通用运行引用；149157条唯一解析、9592条`unsupported_reference_form`、165条`missing`、156条`ambiguous`、10685条`external_asset`。
-- 9592条未受审出现位置中，4013条字段为`abilityName`、5579条为`modifierName`。这表示当前关系提取器未证明该父操作／位置的操作语义，不等于其值无法读取；按G节逐项核实，不沿用旧版按owner推断的统计作为当前结论。
-- 10258条Gadget／Bullet数字引用中10249条唯一定位、9条missing；全部427条产球Material引用唯一定位。这只证明对象身份。
-- 32,641 条 GadgetExcel 配置名关系中，24,400 条为 resolved、436 条为 missing、7,805 条为 source_empty。20,700 条 Gadget→Ability 挂载中，20,668 条为 resolved、32 条为 missing。按 C 节从实际创建引用追查配置和挂载，逐段命中仍需核实。
+- 2755份运行原文、214446条定义、170074条通用运行引用；149392条唯一解析、9656条`unsupported_reference_form`、165条`missing`、159条`ambiguous`、10702条`external_asset`。
+- 9656条未受审出现位置中，4010条字段为`abilityName`、5646条为`modifierName`。这表示当前关系提取器未证明该父操作／位置的操作语义，不等于其值无法读取；按G节逐项核实，不沿用旧版按owner推断的统计作为当前结论。
+- 10275条Gadget／Bullet数字引用中10266条唯一定位、9条missing；全部427条产球Material引用唯一定位。这只证明对象身份。
+- 32,646 条 GadgetExcel 配置名关系中，24,405 条为 resolved、436 条为 missing、7,805 条为 source_empty。20,705 条 Gadget→Ability 挂载中，20,673 条为 resolved、32 条为 missing。按 C 节从实际创建引用追查配置和挂载，逐段命中仍需核实。
 - `global_combat`现为ready并保存1份公共战斗根配置；`animator`与`animation_pattern`仍unavailable。GlobalCombat原文与Gadget配置的收录增加研究材料，不自动证明时序、生命周期或引擎规则。
 - 归一化版本2、indexer7；本提交精确profile为`upstream-f11cf545-reviewed-schema-v1`，mapping fingerprint `cb52e3904c2c67dddc9f9d0a48301b760e44f032d530a2e82b39cc35c899a648`。旧token不跨版本复用；H节的新样本为Agent研究入口，仍没有执行权。
 - 正式`action_dispatch_profiles`与`gameplay_action_manifests`当前均为空；不能宣称真实角色端到端自动派发覆盖大于0。角色appendix是局部知识候选，不代替完整动作档案。
 - 装备资料可按实体 ID 查询。缺少名称、效果关系或数值时，请查该条目的质量提示。I 节列有非正式候选与正式例外。
-- 星月反应资格目录第 6 版按本次上游提交核对了 15 条角色及形态记录。米提亚可使用递变信标；冰元素旅行者须选择相应技能形态。静态属性登记 V5 识别出 36 条可核对的套装效果，另外 95 条保留待核。查看当前方案的来源回执可确认采用了哪些效果。
+- 星月反应资格目录第 7 版按本次上游提交核对了 15 条角色及形态记录。米提亚可使用递变信标；冰元素旅行者须选择相应技能形态。静态属性登记 V5 识别出 36 条可核对的套装效果，另外 95 条保留待核。查看当前方案的来源回执可确认采用了哪些效果。
 
 这些缺口只降低相应自动化能力。角色、技能原文、等级参数、装备、面板、通用元素规则以及Agent显式材料化后的计算仍可分别使用。
 

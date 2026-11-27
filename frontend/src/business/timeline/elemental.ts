@@ -19,7 +19,7 @@ export function projectElemental(context:TimelineContext) {
       if(String(row.type||"").startsWith("special_reaction_")){
         const specialType=row.reaction_type||row.special_reaction_type,reactionLabel=reactionNames[specialType]||"星月反应";
         const operations:Record<string,string>={establish_or_refresh_field:"建立或刷新星超导领域",count_successful_application:"记录领域内冰／雷附着",
-          settle_four_second_window:"结算四秒星超导窗口",expire_field:"星超导领域结束",expire_settlement_buff:"星超导结算效果结束",
+          settle_four_second_window:"结算星超导领域窗口",expire_field:"星超导领域结束",expire_settlement_buff:"星超导结算效果结束",
           create_or_upgrade_vortex:"建立或升级星扩散风旋",create_vortex_from_packet:"建立星扩散风旋",
           advance_existing_vortex_from_packet_child:"推进星扩散风旋",remaining_packet_children_do_not_reseed:"星扩散剩余子反应不重复建立风旋",
           detonate_vortex:"星扩散风旋爆发",replace_pending_ticks:"替换月感电待结算跳数",
@@ -38,7 +38,7 @@ export function projectElemental(context:TimelineContext) {
           character:row.character||row.owner||null,...source(row.character||row.owner||null,"special-reaction",specialType,reactionLabel),
           label,start:row.t,element:row.element,
           detail:{...copy(row),interpretation:row.type==="special_reaction_damage_projection"&&specialType==="stellar_superconduct"
-            ?"能力直伤已在事件时刻读取最近一次完成的四秒星超导结算层数；调用方不能手工提供层数或系数，实际伤害在伤害视图显示。"
+            ?"能力直伤已在事件时刻读取最近一次完成的星超导领域结算层数；调用方不能手工提供层数或系数，实际伤害在伤害视图显示。"
             :"星月专用状态机的执行回执；伤害请求及实际伤害在伤害视图单独显示。"}});continue;
       }
       if(row.type==="crystallize_shard_pickup"){

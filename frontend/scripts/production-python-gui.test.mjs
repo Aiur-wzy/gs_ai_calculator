@@ -40,6 +40,14 @@ class LocalAssets extends ResourceLoader{
   fetch(url){const parsed=new URL(url),path=parsed.protocol==="file:"?fileURLToPath(url):join(web,decodeURIComponent(parsed.pathname));if(!resolve(path).startsWith(resolve(web)+sep))throw new Error("Unreviewed browser resource");return readFile(path);}
 }
 function clickText(w,label,scope=w.document){const button=[...scope.querySelectorAll("button")].find(row=>row.textContent.trim()===label);assert.ok(button,`Missing button: ${label}`);button.click();return button;}
+async function openFullChatFromEditor(w){
+  const workbench=w.document.querySelector(".gs-editor-workbench");
+  assert.ok(workbench,"Business workbench is unavailable");
+  if(!workbench.querySelector(".gs-editor-assistant"))clickText(w,"打开 AI 小窗",workbench);
+  await until(()=>workbench.querySelector(".gs-editor-assistant"),"Embedded assistant missing");
+  clickText(w,"完整页面",workbench.querySelector(".gs-editor-assistant"));
+  await until(()=>w.document.querySelector("[data-conversation-content]")&&!w.document.querySelector(".gs-editor-assistant"),"Full official chat did not open");
+}
 async function reopenConversation(w,sessionId){
   const row=`[role="treeitem"][data-row-key="session:${sessionId}"]`;
   await until(()=>w.document.querySelector(row),"Original DSH session is missing from the visible sidebar");
@@ -87,33 +95,31 @@ for(const scenario of ["baseline","file-wait","ordinary-permissions"]) test(`pro
   const frontend=fileURLToPath(new URL("../",import.meta.url)),temp=await mkdtemp(join(frontend,".python-gui-"));let bridge,dom,passed=false;const errors=[];
   try{
     const setup=JSON.parse(execFileSync("python",["-m","tests.dsh_gui_projection_setup",temp],{cwd:root,encoding:"utf8",windowsHide:true}));
+    const script=JSON.parse(await readFile(setup.script,"utf8"));
+    const calculation=script.calls.at(-1);
+    assert.equal(calculation.tool,"gs_calculate");
+    const calculationRevision=calculation.arguments.expected_revision;
     if(candidateDraft){
-      const script=JSON.parse(await readFile(setup.script,"utf8"));
-      script.calls.push({tool:"gs_app_request_action",arguments:{action:"export_candidate_input_draft",expected_revision:3,reason:"先保存这份候选输入，随后审核并同步正式白板",suggested_name:"工程候选.gencdraft.json"}},
+      script.calls.push({tool:"gs_app_request_action",arguments:{action:"export_candidate_input_draft",expected_revision:calculationRevision,reason:"先保存这份候选输入，随后审核并同步正式白板",suggested_name:"工程候选.gencdraft.json"}},
         {tool:"ask_user_question",arguments:{questions:[{id:"candidate-draft",question:"可以保留计算结果供接下来查看吗？",options:[{label:"同意查看",description:"完成本轮对话；正式白板仍需在 App 审核"}]}]}});
-      await writeFile(setup.script,JSON.stringify(script));
     }
     if(fileWait){
-      const script=JSON.parse(await readFile(setup.script,"utf8"));
       script.calls.unshift({tool:"gs_app_request_action",arguments:{action:"save_as",reason:"请先保存当前正式白板，再回答问题继续计算",suggested_name:"工程白板.json"}},
         {tool:"ask_user_question",arguments:{questions:[{id:"file-saved",question:"请先在 App 操作卡中保存白板，再确认继续计算。",options:[{label:"继续计算",description:"文件已核对，继续当前同一轮任务"}]}]}});
-      await writeFile(setup.script,JSON.stringify(script));
     }
     const deniedFile=join(temp,"permission-denied.txt"),allowedFile=join(temp,"permission-allowed.txt");
     if(permissionWait){
-      const script=JSON.parse(await readFile(setup.script,"utf8")),call=(path,description)=>({tool:"pwsh",arguments:{
+      const call=(path,description)=>({tool:"pwsh",arguments:{
         description,command:`Set-Content -LiteralPath '${path.replaceAll("'","''")}' -Value 'offline-approved-write' -NoNewline`,
         sandbox_permissions:"danger-full-access",justification:"仅在本次隔离测试目录写入一个验证文件，核对官方权限提示与用户决定。"}});
       script.calls.push(call(deniedFile,"核对用户拒绝后不会写文件"),call(allowedFile,"核对用户批准后完成隔离写入"));
-      await writeFile(setup.script,JSON.stringify(script));
     }
+    await writeFile(setup.script,JSON.stringify(script));
     const bridgeArgs=["--root",join(temp,"runtime"),"--db",setup.database,"--script",setup.script,"--input",setup.input];
     bridge=bridgeProcess(bridgeArgs);
     dom=await mount(bridge,errors);const w=dom.window;console.info("joint: production client and business editor initialized");
     await openBoard(w,setup.input,bridge);assert.equal(w.WB.state.board.team.length,1);assert.equal(w.WB.state.board.actions.length,1);console.info("joint: actual user file-open loaded engineering board");
-    // Use the visible embedded presentation's public full-page command. The
-    // retained legacy header control is intentionally hidden in production.
-    await until(()=>w.document.querySelector('.gs-editor-assistant'),"Embedded assistant missing");clickText(w,"完整页面",w.document.querySelector('.gs-editor-assistant'));await until(()=>w.document.querySelector('[data-conversation-content]')&&!w.document.querySelector('.gs-editor-assistant'),"Full official chat did not open");
+    await openFullChatFromEditor(w);
     const workspace=[...w.document.querySelectorAll('button[aria-label]')].find(row=>/^(Choose workspace|选择工作区)$/.test(row.getAttribute("aria-label")));
     if(workspace){workspace.click();await until(()=>[...w.document.querySelectorAll('[role="menuitem"], [role="option"]')].some(row=>row.textContent.includes("原神排轴")),"Default App workspace missing");[...w.document.querySelectorAll('[role="menuitem"], [role="option"]')].find(row=>row.textContent.includes("原神排轴")).click();}
     await until(()=>w.document.querySelector('[data-conversation-content]')?.dataset.conversationSession&&w.document.querySelector('[contenteditable]'),"Session composer not selected");
@@ -170,7 +176,7 @@ for(const scenario of ["baseline","file-wait","ordinary-permissions"]) test(`pro
       clickText(w,"处理这项操作");
       await until(()=>existsSync(draft)&&w.document.body.textContent.includes("候选输入草稿已保存"),()=>`Draft card did not complete: ${w.document.body.textContent.slice(-2600)}`);
       const input=JSON.parse(await readFile(draft,"utf8"));
-      assert.equal(input.source.candidate_revision,3);
+      assert.equal(input.source.candidate_revision,calculationRevision);
       assert.equal(input.input.source_document.payload.team[0].name,"工程角色");
       assert.equal(w.WB.json(),official);
       const publication=bridge.calls.find(row=>row.method==="document_json_call"&&row.args[0]==="dsh_client_publish_candidate_input_draft");
@@ -197,7 +203,7 @@ for(const scenario of ["baseline","file-wait","ordinary-permissions"]) test(`pro
     clickText(w,"审核候选");
     await until(()=>[...w.document.querySelectorAll('[role="dialog"] button')].some(row=>row.textContent.trim()==="同意并同步"),()=>`Direct session review modal did not open: ${w.document.body.textContent.slice(-2500)}`);
     const review=w.document.querySelector('[role="dialog"]');
-    assert.ok(review.textContent.includes("候选版本 3")&&review.textContent.includes("工程角色")&&review.textContent.includes("1 名角色 · 1 个动作"));assert.equal(w.WB.state.result,null);
+    assert.ok(review.textContent.includes(`候选版本 ${calculationRevision}`)&&review.textContent.includes("工程角色")&&review.textContent.includes("1 名角色 · 1 个动作"));assert.equal(w.WB.state.result,null);
     const sync=clickText(w,"同意并同步",review);sync.click();
     await until(()=>w.WB.state.result?.result?.summary?.total_damage>0||w.WB.state.result?.summary?.total_damage>0,()=>`Real Renderer application incomplete: ${w.document.body.textContent.slice(-2800)}`);
     const formal=w.document.getElementById("tab-whiteboard");
@@ -237,8 +243,7 @@ for(const scenario of ["baseline","file-wait","ordinary-permissions"]) test(`pro
     }
     // After an accepted candidate changed the actual formal document, a second
     // ordinary prompt must retain its original Session binding and conversation.
-    await until(()=>w.document.querySelector('.gs-editor-assistant'),"Embedded chat not restored after save");
-    clickText(w,"完整页面",w.document.querySelector('.gs-editor-assistant'));
+    await openFullChatFromEditor(w);
     await until(()=>w.document.querySelector('[contenteditable]')&&!w.document.querySelector('.gs-editor-assistant'),"Full chat not restored for second message");
     assert.equal(w.document.querySelector('[data-conversation-content]').dataset.conversationSession,sessionId);
     const secondPrompt="请只解释刚才已经保存的工程计算结果，不修改白板，不重新运行计算。";

@@ -1,5 +1,11 @@
 # 发行构建输入
 
+App **1.0.4-r2** 构建使用 `accepted-1.0.4/release-pair-manifest.json` 作为上一份已验收的便携候选配对；它不构成公开更新路径。公开 1.0.3 的升级起点由 `accepted-1.0.3/stable-latest.json` 保留。本次精确数据库清单是 `1.0.4-r2/database-release-manifest.json`。构建须保留三个文件的原始字节。
+
+App **1.0.4** 使用 `1.0.3/release-pair-manifest.json` 作为正式前代配对。其 SHA-256 为 `06fef8ebed3b49da53df9a70e80f146eee0cf4e69e7e31f01144939ffdcfe056`。保留原始字节。
+
+新数据库清单是 `1.0.4/database-release-manifest.json`。执行完整旧版升级验收还需从旧数据发行取得 db-7.2.52-r1 的原始数据库文件，并将其与 `1.0.3/database-release-manifest.json` 一同交给构建器。
+
 App **1.0.2** 的构建前代清单为 `1.0.1/release-pair-manifest.json`，SHA-256 `0b99891fa54331a91012779bbbb01224e39524f76d70e8fe2f8d30c5d01d8b66`。数据库继续使用原 db-7.2.50-r6。
 
 

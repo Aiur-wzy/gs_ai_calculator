@@ -34,6 +34,8 @@ from genshin_app.release_pair_discovery import (
     DISCOVERY_CONTRACT,
     DISCOVERY_SCHEMA_VERSION,
     MAX_DOCUMENT_BYTES,
+    QUALIFIED_DISCOVERY_CONTRACT,
+    QUALIFIED_DISCOVERY_SCHEMA_VERSION,
     ReleasePairDiscoveryError,
     validate_latest_document,
 )
@@ -416,6 +418,7 @@ def prepare_release_pair_feed(
     accepted_database_source_pair: Path | None = None,
     accepted_database_archive: Path | None = None,
     trust_keys: Sequence[Mapping[str, Any]] = (),
+    qualify_database_install: bool = False,
 ) -> dict[str, Any]:
     """Create an exact signing payload, retaining an accepted database gzip when supplied."""
 
@@ -512,6 +515,18 @@ def prepare_release_pair_feed(
             "database_manifest": database_manifest,
             "artifacts": artifacts,
         }
+        if qualify_database_install:
+            from genshin_db.release_migration import (
+                build_database_install_qualification,
+            )
+
+            if not independent_app or pair["channel"] != "stable":
+                _fail("release_pair_database_qualification_unsupported")
+            payload.update(
+                contract=QUALIFIED_DISCOVERY_CONTRACT,
+                schema_version=QUALIFIED_DISCOVERY_SCHEMA_VERSION,
+                database_qualification=build_database_install_qualification(db, database_manifest),
+            )
         unsigned = {**copy.deepcopy(payload), "signature": None}
         # The discovery validator is also the publisher schema oracle.  An
         # unsigned stable document is expected to be untrusted, not invalid.

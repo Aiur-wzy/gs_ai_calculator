@@ -43,8 +43,11 @@
 | `references/app-mechanics/sources/static-inclusions.md` | 初始面板已经包含的静态装备来源 | [打开](../../../skill/references/app-mechanics/sources/static-inclusions.md) |
 | `references/app-mechanics/sources/target-conditions.md` | 逐击目标条件与固定装备来源 | [打开](../../../skill/references/app-mechanics/sources/target-conditions.md) |
 | `references/app-mechanics/sources/upstream-runtime.md` | 上游来源如何接入App执行输入 | [打开](../../../skill/references/app-mechanics/sources/upstream-runtime.md) |
+| `references/data/action-timing.md` | 查动作耗时：从外部资料排出相邻两招 | [打开](../../../skill/references/data/action-timing.md) |
 | `references/data/character-appendices.md` | 角色动作资料附录 | [打开](../../../skill/references/data/character-appendices.md) |
+| `references/data/combat-references.md` | 排轴资料索引 | [打开](../../../skill/references/data/combat-references.md) |
 | `references/data/database-readme.md` | 数据库 README：字段语义与关系范式 | [打开](../../../skill/references/data/database-readme.md) |
+| `references/data/frame-rate-timing.md` | 帧率、现实秒数与战斗计时 | [打开](../../../skill/references/data/frame-rate-timing.md) |
 | `references/data/gadget-sources.md` | 创建物资料：精确身份与挂载 | [打开](../../../skill/references/data/gadget-sources.md) |
 | `references/data/query.md` | 数据库接口使用指引 | [打开](../../../skill/references/data/query.md) |
 | `references/data/research.md` | 原生Agent公开研究与采用账 | [打开](../../../skill/references/data/research.md) |

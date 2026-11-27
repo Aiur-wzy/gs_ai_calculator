@@ -28,7 +28,7 @@ def publish_site(tmp_path, monkeypatch):
     monkeypatch.setattr(build_release_pair_feed, "build_trust_verifier", lambda _keys: _verify)
     monkeypatch.setattr(readback, "build_trust_verifier", lambda _keys: _verify)
 
-    def publish(payload, *, setup=None):
+    def publish(payload, *, setup=None, offline_bundle=None):
         unsigned, signature, site = (tmp_path / name for name in ("unsigned", "signature", "site"))
         unsigned.write_bytes(canonical({**payload, "signature": None}))
         signature.write_bytes(canonical(_signature(payload)))
@@ -36,8 +36,13 @@ def publish_site(tmp_path, monkeypatch):
         if setup is not None:
             setup_asset = tmp_path / "setup.json"
             setup_asset.write_bytes(canonical(setup))
+        offline_asset = None
+        if offline_bundle is not None:
+            offline_asset = tmp_path / "offline.json"
+            offline_asset.write_bytes(canonical(offline_bundle))
         receipt = build_release_pair_feed.finalize_product_site(unsigned, signature, site, (),
-                                                               setup_asset_path=setup_asset)
+                                                               setup_asset_path=setup_asset,
+                                                               offline_bundle_asset_path=offline_asset)
         assert receipt["offline_pair_documents"] == len(payload["pairs"])
         return site
 
@@ -65,7 +70,10 @@ def test_public_readback_verifies_every_retained_combination_and_unique_asset(pu
     setup_raw = b"downloaded setup archive"
     setup = {"url": "https://example.invalid/setup.zip", "size_bytes": len(setup_raw),
              "sha256": hashlib.sha256(setup_raw).hexdigest()}
-    site = publish_site(payload, setup=setup)
+    offline_raw = b"complete offline installation archive"
+    offline = {"url": "https://example.invalid/offline.zip", "size_bytes": len(offline_raw),
+               "sha256": hashlib.sha256(offline_raw).hexdigest()}
+    site = publish_site(payload, setup=setup, offline_bundle=offline)
     root_url = "https://example.invalid/pages"
     catalog = json.loads((site / OFFLINE_PAIR_CATALOG).read_bytes())
     assert catalog["current_pair_id"] == "pair-product-2-2"
@@ -79,15 +87,17 @@ def test_public_readback_verifies_every_retained_combination_and_unique_asset(pu
     site_files = {f"{root_url}/{member.relative_to(site).as_posix()}": member.read_bytes()
                   for member in site.rglob("*.json")}
     site_files[f"{root_url}/index.html"] = (site / "index.html").read_bytes()
-    public = {**site_files, **{url: path.read_bytes() for url, path in sources.items()}, setup["url"]: setup_raw}
+    public = {**site_files, **{url: path.read_bytes() for url, path in sources.items()},
+              setup["url"]: setup_raw, offline["url"]: offline_raw}
     calls = _local_public_http(monkeypatch, public)
-    result = readback.verify_public_site(site, {}, base_url=root_url, setup=setup)
+    result = readback.verify_public_site(site, {}, base_url=root_url, setup=setup, offline_bundle=offline)
     assert result["status"] == "verified" and result["verified_offline_pairs"] == 4
-    assert result["verified_asset_urls"] == 5
+    assert result["verified_asset_urls"] == 6
     assert set(calls) == set(public) and len(calls) == len(public)
     assert result["readback"]["app"]["url"] == documents[2, 2]["artifacts"]["app"]["url"]
     assert result["readback"]["database"]["url"] == documents[2, 2]["artifacts"]["database"]["url"]
     assert result["readback"]["setup"]["url"] == setup["url"]
+    assert result["readback"]["offline_bundle"]["url"] == offline["url"]
 
     historic_doc = f"{root_url}/{OFFLINE_PAIR_DIRECTORY}/pair-1.json"
     raw = public[historic_doc]

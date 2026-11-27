@@ -25,10 +25,12 @@ STAR_ABILITIES = ("ElementAbility_StarSwirl_Ice", "ElementAbility_StarSwirl_Ice_
 _LEGACY_COMMIT = "224708edc8056f27e9ffc4eacabe797d75274636"
 _F11_COMMIT = "f11cf545a7eee32a29999f960ebfba305f896ed3"
 _NOV18_COMMIT = "6044f5aae7dd79fbbe15c5748ef99b654f6132b7"
+_NOV26_COMMIT = "770b88c8baccce9ff8923f5fbc95978671342232"
 _RECIPES = {
     _LEGACY_COMMIT: "reaction_damage_profiles.json",
     _F11_COMMIT: "reaction_damage_f11cf545_profile.json",
     _NOV18_COMMIT: "reaction_damage_f11cf545_profile.json",
+    _NOV26_COMMIT: "reaction_damage_f11cf545_profile.json",
 }
 
 
@@ -40,10 +42,17 @@ def _recipe(element=None, *, commit=_LEGACY_COMMIT):
     path = resources.files("genshin_runtime").joinpath("resources", filename)
     recipe = json.loads(path.read_text(encoding="utf8"))
     if commit == _NOV18_COMMIT and recipe["commit"] == _F11_COMMIT:
-        # ConfigAbility_Element.json is byte-identical in both Git trees.
-        # All whole-node hash checks still apply to the selected database.
+        # The reviewed ordinary-swirl nodes retain their exact fingerprints.
         recipe["evidence_reference"]["identical_source_commit"] = _F11_COMMIT
         recipe.update(commit=commit, recipe_id="ordinary-swirl-origin-source-6044f5aa-v3")
+    if commit == _NOV26_COMMIT and recipe["commit"] == _F11_COMMIT:
+        # All three ordinary ability nodes retain the reviewed raw keys and
+        # node hashes. The full file SHA matches the 7.2.52 indexed source.
+        recipe["evidence_reference"].update(
+            identical_source_commit=_NOV18_COMMIT,
+            reviewed_source_sha256="c4e3bba12c9d3a45b9c085144b685f0b495d3f936882cbf6b82f8f5ae38798a8",
+        )
+        recipe.update(commit=commit, recipe_id="ordinary-swirl-origin-source-770b88c8-v3")
     if recipe["commit"] != commit:
         raise RuntimeConfigError("普通扩散资料提取配方与精确提交不匹配", "unsupported_source", 409)
     if element == "pyro" and commit == _LEGACY_COMMIT:
@@ -102,7 +111,9 @@ def get_runtime_reaction_damage_profile(db_path, *, element, reaction_type="swir
         nodes = _Nodes(conn, version_line)
         row = _unique_ability(conn, state, selected["ability_name"], recipe["source_path"])
         raw, ability_source = _origin(nodes, row)
-        if row["node_sha256"] != selected["expected_node_sha256"]:
+        reviewed_source_sha = recipe["evidence_reference"].get("reviewed_source_sha256")
+        if (row["node_sha256"] != selected["expected_node_sha256"]
+                or (reviewed_source_sha and ability_source["source_sha256"] != reviewed_source_sha)):
             raise RuntimeConfigError("普通扩散能力节点已变化，需重新审定字段与分支", "unsupported_source", 409,
                                      {"source": ability_source, "recipe_id": recipe["recipe_id"]})
         if sum(1 for _ in walk(raw)) > REACTION_LIMITS["max_nodes"]:

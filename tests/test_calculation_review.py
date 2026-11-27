@@ -53,6 +53,15 @@ def test_time_half_open_and_rejection_reason_are_visible():
     assert page["items"][0]["applied"] is False
 
 
+def test_target_filter_uses_the_saved_hit_target():
+    saved = _saved()
+    saved["result"]["hits"][0]["target_id"] = "enemy.a"
+    saved["result"]["hits"][1]["target_id"] = "enemy.b"
+    saved["result_receipt"]["result_fingerprint"] = fingerprint(saved["result"])
+    report = review_calculation(saved, {"view": "hits", "filters": {"target_id": "enemy.b"}})
+    assert [(hit["id"], hit["target_id"]) for hit in report["items"]] == [("cast.0.2", "enemy.b")]
+
+
 def test_resource_pages_keep_actual_units_source_identity_and_original_pointers():
     saved=_saved()
     saved['result']['resource_counters']={'trace':[

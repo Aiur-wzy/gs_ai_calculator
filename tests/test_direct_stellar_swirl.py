@@ -1,6 +1,7 @@
 import pytest
 from test_direct_stellar_damage_contract import direct_stellar_profile
 from test_special_reaction_mechanics_projection import _application_fixture, _enable
+from test_special_reactions import mechanics
 
 from genshin_engine.mechanics import execute_mechanics
 from genshin_engine.special_reactions import (
@@ -43,7 +44,8 @@ def test_swirl_element_contract(element, valid):
     assert (not validate_direct_stellar_damage_profile(p)) == valid
 
 
-def test_app_composition_cli_saved_plan_and_replay(tmp_path, monkeypatch, capsys):
+@pytest.mark.parametrize("coefficient", [None, 1.1])
+def test_app_composition_cli_saved_plan_and_replay(tmp_path, monkeypatch, capsys, coefficient):
     import json
 
     from test_plan_mechanics import native
@@ -63,6 +65,10 @@ def test_app_composition_cli_saved_plan_and_replay(tmp_path, monkeypatch, capsys
         lambda inputs,actor_ids=None:project({**inputs,'a':equipment},actor_ids=actor_ids))
     t,r,m=direct_fixture()
     t['characters'][0]['stats']['energy_recharge']=1
+    if coefficient is not None:
+        m['special_reaction_model']['replacements']['stellar_swirl']['mechanics'] = mechanics(
+            'stellar_swirl', base_factor_adjustment={'provider_id':'a', 'source':'explicit test fixture',
+                'components':['stellar_swirl'], 'multiplier':coefficient})
     plan=native()
     plan.update(manual_template=t,rotation_model=r,mechanics_model=m,effect_bindings=[])
     db=tmp_path/'absent.db'
@@ -70,6 +76,10 @@ def test_app_composition_cli_saved_plan_and_replay(tmp_path, monkeypatch, capsys
     assert out['result'],out['report']
     hits=[h for h in out['result']['hits'] if h['damage_system']=='stellar']
     assert len(hits)==1 and hits[0]['expected']>0
+    if coefficient is not None:
+        explanations = out['result']['damage_explanations']
+        source_ref = explanations['events'][hits[0]['explanation_ref']]['source_ref']
+        assert explanations['sources'][source_ref]['reaction_coefficient']['effective_factor'] == coefficient
     path=tmp_path/'swirl.plan.json'
     path.write_text(json.dumps(out['plan']),encoding='utf-8')
     monkeypatch.setattr('genshin_app.cli._require_runtime_database',lambda _: {'can_start':True})

@@ -79,6 +79,7 @@ from genshin_engine.special_reaction_contracts import (
     _finite_number,
     _issue,  # noqa: F401 -- preserved public/diagnostic facade
     _seconds_to_ticks,
+    stellar_swirl_coefficient,
 )
 from genshin_engine.special_reaction_profiles import (
     REVIEWED_SPECIAL_REACTION_PROFILES,
@@ -332,11 +333,13 @@ def calculate_weighted_special_damage(
     amplify: dict | None = None,
     role_provenance: dict | None = None,
     event_id: str = "calculate_weighted_special_damage",
+    reaction_coefficient: dict | None = None,
 ) -> dict:
     """Project through the pure formula layer with the existing public contract."""
     return _calculate_weighted_special_damage_impl(
         _formula_services(), reaction_type, contributors, amplify=amplify,
-        role_provenance=role_provenance, event_id=event_id)
+        role_provenance=role_provenance, event_id=event_id,
+        reaction_coefficient=reaction_coefficient)
 
 
 def calculate_direct_special_damage(
@@ -346,11 +349,13 @@ def calculate_direct_special_damage(
     multiplier: float,
     scaling: float,
     layers: int | None = None,
+    reaction_coefficient: dict | None = None,
 ) -> dict:
     """Project through the pure formula layer with the existing public contract."""
     return _calculate_direct_special_damage_impl(
         _formula_services(), reaction_type, contributor,
-        multiplier=multiplier, scaling=scaling, layers=layers)
+        multiplier=multiplier, scaling=scaling, layers=layers,
+        reaction_coefficient=reaction_coefficient)
 
 
 def resolve_special_damage_event(
@@ -1086,7 +1091,20 @@ class SpecialReactionRuntime:
         }
         if role_provenance is not None:
             request["role_provenance"] = copy.deepcopy(role_provenance)
+        if profile_type == "stellar_swirl":
+            coefficient = self._stellar_swirl_coefficient(reaction_type, factor, event_id)
+            if coefficient is not None:
+                request["reaction_coefficient"] = coefficient
         return request
+
+    def _stellar_swirl_coefficient(self, reaction_type, factor, event_id):
+        mechanics = self._config("stellar_swirl")["mechanics"]
+        coefficient = stellar_swirl_coefficient(mechanics.get("base_factor_adjustment"), reaction_type, factor)
+        if coefficient is not None and coefficient["provider_id"] not in (self.party_member_ids or ()):
+            raise SpecialReactionPending(
+                "stellar_swirl_factor_provider_absent", "基础系数修正的提供者不在实际队伍中。",
+                event_id, {"provider_id": coefficient["provider_id"], "source": coefficient["source"]})
+        return coefficient
 
     @staticmethod
     def _ordinary_bonus(layers: int) -> float:
@@ -1648,6 +1666,7 @@ class SpecialReactionRuntime:
         # completed settlement already includes it and must not be added twice.
         foundation = self._ordinary_bonus(0) if state["stellar_superconduct_active"] else 0.0
         settled_bonus = state["stellar_superconduct_ordinary_bonus"] if settled_active else 0.0
+        mechanics = (self._config("stellar_superconduct") or {}).get("mechanics", {})
         return {
             "area_id": area_id,
             "active": state["stellar_superconduct_active"],
@@ -1664,7 +1683,10 @@ class SpecialReactionRuntime:
                 state["stellar_superconduct_buff_expires_at"] / TICKS
                 if state["stellar_superconduct_buff_expires_at"] is not None else None
             ),
-            "sample_policy": "last_completed_four_second_window",
+            "sample_policy": ("last_completed_field_window" if "settlement_clock" in mechanics
+                              else "last_completed_four_second_window"),
+            **({key: mechanics[key] for key in ("settlement_clock", "settlement_interval_seconds")}
+               if "settlement_clock" in mechanics else {}),
         }
 
     def _admit_lunar_electro_tick_impl(
@@ -2007,14 +2029,20 @@ class SpecialReactionRuntime:
 
         return self._execute_direct_damage_atomically(commit)
 
-    def direct_stellar_snapshot(self, reaction_type: str, area_id: str) -> dict:
+    def direct_stellar_snapshot(self, reaction_type: str, area_id: str, *, event_id: str = "stellar_swirl") -> dict:
         """Ability Swirl uses its own coefficient, never a natural vortex level."""
         if reaction_type == "stellar_superconduct":
             return self.stellar_superconduct_snapshot(area_id)
         if reaction_type != "stellar_swirl":
             raise ValueError("不支持的能力直伤星烁类型。")
-        return {"area_id": area_id, "layers": None, "system_factor": STELLAR_FACTOR["stellar_swirl"],
-                "sample_policy": "ability_coefficient_without_vortex_layers"}
+        factor = STELLAR_FACTOR["stellar_swirl"]
+        snapshot = {"area_id": area_id, "layers": None, "system_factor": factor,
+                    "sample_policy": "ability_coefficient_without_vortex_layers"}
+        if self._config("stellar_swirl") is not None:
+            coefficient = self._stellar_swirl_coefficient(reaction_type, factor, event_id)
+            if coefficient is not None:
+                snapshot["reaction_coefficient"] = coefficient
+        return snapshot
 
     def request_direct_stellar_damage(
         self,
@@ -2068,7 +2096,7 @@ class SpecialReactionRuntime:
             self._reject_direct_deadline_id_collision(event_id, due)
             # Area membership was checked before advance.  Expiry clears the
             # state in place, so this read cannot create a typo bucket.
-            snapshot = self.direct_stellar_snapshot(reaction_type, area_id)
+            snapshot = self.direct_stellar_snapshot(reaction_type, area_id, event_id=event_id)
             request = {
                 "type": "special_reaction_damage_request",
                 "event_id": event_id,
@@ -2085,7 +2113,7 @@ class SpecialReactionRuntime:
                 "reaction_base": False,
                 "layers": snapshot["layers"],
                 "system_factor": snapshot["system_factor"],
-                "factor_policy": ("event_time_last_completed_four_second_window" if reaction_type == "stellar_superconduct"
+                "factor_policy": ("event_time_" + snapshot["sample_policy"] if reaction_type == "stellar_superconduct"
                                   else "ability_coefficient_without_vortex_layers"),
                 "settled_snapshot": copy.deepcopy(snapshot),
                 "element": parameters["element"],
@@ -2102,6 +2130,8 @@ class SpecialReactionRuntime:
                 "ability_profile": copy.deepcopy(ability_profile),
                 "status": "ready_for_stat_sample",
             }
+            if "reaction_coefficient" in snapshot:
+                request["reaction_coefficient"] = copy.deepcopy(snapshot["reaction_coefficient"])
             if resource_trigger is not None:
                 request['resource_trigger'] = copy.deepcopy(resource_trigger)
             if resource_consumption is not None:

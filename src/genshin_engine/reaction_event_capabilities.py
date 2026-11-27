@@ -12,6 +12,7 @@ OBSERVABLE_REACTION_TYPES = (
     "vaporize", "melt", "swirl", "freeze", "crystallize", "stellar_superconduct", "stellar_swirl",
     "lunar_electro", "lunar_bloom", "lunar_crystallize",
 )
+STELLAR_SWIRL_DAMAGE_COMPONENTS = ("stellar_swirl_anemo", "stellar_swirl_cryo_lv2", "stellar_swirl_cryo_lv3")
 
 
 def reaction_event_available(model, event):
@@ -38,6 +39,12 @@ def reaction_listener_capabilities():
         },
         "effect_filter": "收益筛选是独立用途；reaction_damage/pre可用于合法出伤收益筛选，不是pre监听。",
         "quota_consumption": "quota.consume支持hit/pre或实际reaction_damage/pre；消费在真实伤害入口执行，不新增pre触发监听。",
+        "component_target_quota": {
+            "unit": "damage_component_target",
+            "selection": "reaction_damage/pre；stellar_swirl；前台与后台分别声明团队池",
+            "events": [*STELLAR_SWIRL_DAMAGE_COMPONENTS, "stellar_swirl"],
+            "scope": "实际出伤分项与目标，每个规则实例扣一次；一份凭据适用于同位置全部合格贡献者。",
+        },
         "zero_occurrences": "完整模型本窗口没有实际反应是合法零触发；缺模型不能借手填反应倍率代替。",
         "authority": "仅声明实际事件产生与监听能力；不证明反应必然发生、数据库来源或游戏资格。",
     }

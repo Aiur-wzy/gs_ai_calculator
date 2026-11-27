@@ -84,7 +84,11 @@ def _reject_deprecated_database_write(operation: str) -> None:
     )
 
 def _cmd_capabilities(args: argparse.Namespace) -> dict:
-    document = _capabilities_doc()
+    from genshin_app.agent_chat.native_special_reaction_contracts import with_database_capability_catalog
+
+    data_dir = getattr(args, "data_dir", None)
+    document = with_database_capability_catalog(Path(data_dir) / "genshin.db" if data_dir else None,
+                                                _capabilities_doc)
     if any(getattr(args, name, None) is not None for name in ("command", "section", "pointer")):
         from genshin_app.cli_capability_query import query_capabilities
         return query_capabilities(document, command=args.command, section=args.section, pointer=args.pointer)
@@ -1642,16 +1646,16 @@ COMMANDS: list[dict] = [
     },
     {
         "path": ("engine", "check-rotation"),
-        "description": "检查动作、冷却与元素能量循环；原生v3默认完整执行，--preflight只检查声明的动作和资源",
+        "description": "检查动作、冷却与元素能量。原生 v3 默认完整执行，--preflight 快速定位当前声明输入的问题",
         "args": [
             {"name": "input", "kind": "positional", "description": "原生方案或 genshin-rotation-check 文件"},
             {"name": "--preflight", "kind": "flag", "default": False,
-             "description": "原生v3仅检查已声明时序和资源，不运行机制，不能用来证明完整循环"},
+             "description": "只读检查命中关联、动作冷却和声明资源。分项报告覆盖及首个问题，循环仍待完整执行验证"},
             {"name": "--output", "kind": "value", "default": None, "description": "检查结果写入文件；默认标准输出"},
             {"name": "--format", "kind": "value", "default": "json", "description": "json 或 xlsx"},
             {"name": "--overwrite", "kind": "flag", "default": False, "description": "明确允许覆盖指定结果文件"},
         ],
-        "output": "{status,action_check,energy_check,issues,event_log,cycles,gaps,panel_bindings,resolved_rotation_model,unchecked_constraints}",
+        "output": "{status,action_check,energy_check,issues,event_log,cycles,gaps,panel_bindings,resolved_rotation_model,unchecked_constraints,preflight?}",
         "examples": ["python -m genshin_app engine check-rotation examples/rotation-energy-check.json"],
         "handler": _cmd_engine_check_rotation,
     },

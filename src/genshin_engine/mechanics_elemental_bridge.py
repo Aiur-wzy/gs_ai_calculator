@@ -22,6 +22,7 @@ class MechanicsElementalPorts:
     count_event: Callable[..., None]
     dispatch_generated: Callable[[dict, int, dict], bool]
     observe_resource: Callable[[dict, int, dict], None] | None = None
+    has_world: bool = False
 
 
 class MechanicsElementalBridge:
@@ -33,7 +34,8 @@ class MechanicsElementalBridge:
 
     def record_special_event(self, row, cycle):
         if not isinstance(row, dict) or not (str(row.get("type", "")).startswith("special_reaction_")
-                                             or row.get("type") == "stellar_resource_receipt"):
+                                             or row.get("type") in {"stellar_resource_receipt",
+                                                                    "world_area_target_selection"}):
             return False
         key = (row.get("type"), row.get("event_id"), row.get("time_tick"), row.get("t"),
                row.get("operation"), row.get("reaction_type"),
@@ -57,9 +59,9 @@ class MechanicsElementalBridge:
             if self.record_special_event(row, cycle):
                 self.ports.count_event("special_reaction_event")
 
-    def drain_generated(self, cycle=0, parent=None, events=None):
+    def drain_generated(self, cycle=0, parent=None, events=None, *, sync=True):
         runtime = self.ports.get_special_runtime()
-        if runtime is None:
+        if runtime is None and not self.ports.has_world:
             return
         parent = parent or {"id": "@special_runtime", "run_id": f"{cycle}:@special_runtime",
                             "time": self.ports.get_time(), "order": 0, "origin": cycle, "causal": ()}
@@ -75,7 +77,8 @@ class MechanicsElementalBridge:
             handled = self.ports.dispatch_generated(row, cycle, parent)
             if not handled and new:
                 self.ports.count_event("special_reaction_event")
-        self.sync_trace(cycle)
+        if sync:
+            self.sync_trace(cycle)
 
     def advance_to(self, time, cycle=0, parent=None):
         """Apply only the boundary chosen by the root rotation observer."""
@@ -86,7 +89,7 @@ class MechanicsElementalBridge:
             transition["cycle"] = cycle
             self.ports.append_trace(copy.deepcopy(transition))
             self.ports.count_event("state_transition")
-        if self.ports.get_special_runtime() is not None:
+        if self.ports.get_special_runtime() is not None or self.ports.has_world:
             if callable(getattr(self.ports.get_elemental(), "drain_generated_events", None)):
                 self.drain_generated(cycle, parent)
             else:

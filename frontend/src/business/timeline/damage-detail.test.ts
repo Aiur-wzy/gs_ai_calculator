@@ -46,6 +46,15 @@ describe("damage explanation reference and lazy UI",()=>{
     expect(mods.textContent).toContain("750");expect(mods.textContent).toContain("表达式上限");
     expect(box.textContent).not.toContain("未消费的防御力");
   });
+  it("shows the original coefficient, effective coefficient and source from the execution receipt",()=>{
+    const f=fixture();
+    f.doc.sources.s.reaction_coefficient={base_factor:0.75,factor_multiplier:1.1,effective_factor:0.825,
+      provider_id:"b",source:"天赋版本记录",status:"assumed"};
+    const formula=open(render(f).box,0);
+    for(const text of ["原始反应系数","0.75","生效反应系数","0.825","队友","天赋版本记录","显式假设"]){
+      expect(formula.textContent).toContain(text);
+    }
+  });
   it.each(["fixed_override","external"])("labels %s without inventing a final formula",origin=>{
     const {box}=render(fixture(origin));expect(box.textContent).toContain(origin==="external"?"外部计算补充":"单事件固定值");
     expect(box.textContent).toContain("自动计算基线");

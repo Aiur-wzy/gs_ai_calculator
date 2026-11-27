@@ -188,7 +188,7 @@ SPECS = {
 
 
 SPECS["gs_diagnose_result"] = (
-    "分组或分页查看当前计算问题。request.view=assistance只读给逐Q/资源/输入与执行软对照，无计算时也可看输入；view=energy_trials/input_trials在副本用真实引擎比较明确面板或输入补丁，observations可核对真实结果，不更新候选/批准。先按需读diagnostics_capabilities的auxiliary_views；建议不影响准入。旧groups/issues仍读取当前修订缓存。",
+    "分组或分页查看当前计算问题。request.view=rotation_preflight可检查当前候选已声明的动作、冷却和资源，结果分项说明是否执行，不计算伤害。assistance提供逐Q、资源和输入对照；energy_trials/input_trials计算副本。按需读diagnostics_capabilities的auxiliary_views。这些视图不更新候选，旧groups/issues仍读取当前修订缓存。",
     _schema({"expected_revision": REVISION, "request": OBJECT}, ("expected_revision",)))
 SPECS['gs_adopt_attributes'] = (
     '读取并核对属性事实后显式采用当前基底和分类，自动对齐组件/上下文指纹。必须说明依据；unknown不自动变已知。修改进入候选，需重新计算和用户审核。',
@@ -823,7 +823,7 @@ def _fixed_context_getters(session):
                   if _capability_family(session) == "whiteboard_stage"
                   else whiteboard_capabilities if _capability_family(session) == "whiteboard" else plan_capabilities,
               "whiteboard_capabilities": whiteboard_capabilities, "mechanics_capabilities": mechanics_capabilities,
-              "special_reaction_capabilities": special_reaction_capabilities,
+              "special_reaction_capabilities": lambda: special_reaction_capabilities(getattr(session, "db_path", None)),
               "event_topology_contracts": event_topology_contracts,
               "whiteboard_schema": (lambda: _staged_whiteboard_schema(
                   staged_phase, whiteboard_schema())) if session.workflow == "staged" else whiteboard_schema,
@@ -946,6 +946,7 @@ _LOADOUT_SKILL_RESOURCES = {
 
 _ACTION_SKILL_RESOURCES = {
     "references/workflow/focus/actions.md", "references/workflow/context-use.md",
+    "references/data/action-timing.md", "references/data/frame-rate-timing.md",
     "references/app-mechanics/actions/cast-sequences.md", "references/workflow/coverage-and-review.md",
     "references/app-mechanics/actions/rotation-energy.md", "references/data/character-appendices.md",
     "references/data/database-readme.md",
@@ -953,6 +954,7 @@ _ACTION_SKILL_RESOURCES = {
 
 _EVENT_SKILL_RESOURCES = {
     "references/workflow/focus/events.md", "references/workflow/context-use.md",
+    "references/data/combat-references.md",
     "references/app-mechanics/actions/event-profiles.md",
     "references/data/character-appendices.md", "references/app-mechanics/elements/runtime.md",
     "references/app-mechanics/execution/materialization.md", "references/app-mechanics/actions/periodic.md",
@@ -2237,6 +2239,21 @@ def _calculated_package(session):
 def _diagnose(session, args):
     session._expect(args["expected_revision"])
     request = args.get("request") or {}
+    if request.get("view") == "rotation_preflight":
+        if set(request) != {"view"}:
+            raise PlanError("动作预检只接受 view。", "invalid_diagnostic_query")
+        from genshin_app.rotation_check import check_document
+        candidate = session.candidate
+        if candidate.get("kind") != "genshin-plan":
+            raise PlanError("请先将白板准备为可计算方案，再检查其中声明的动作和能量。",
+                            "rotation_preflight_input_unavailable",
+                            {"recovery": {"tool": "gs_transition_phase",
+                                          "arguments": {"prepare_calculation": True}}})
+        with session._read_db():
+            check = check_document(candidate, session.db_path, preflight=True, candidate_session=session)
+        session._expect(args["expected_revision"])
+        return {"status": check["status"], "candidate_revision": args["expected_revision"],
+                "input_fingerprint": check.get("input_fingerprint"), "preflight": check["preflight"]}
     if request.get("view") in {"assistance", "energy_trials", "input_trials"}:
         from genshin_app.calculation_assistance import diagnose_assistance
         value, selection = _assistance_evidence(session)

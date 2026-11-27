@@ -16,10 +16,12 @@ from genshin_engine import resource_counter_view_runtime as counter_view_runtime
 from genshin_engine.attribute_graph import linear_value
 from genshin_engine.attribute_ledger import AttributeLedgerError
 from genshin_engine.attribute_stats import STATS as GRAPH_STATS
-from genshin_engine.beneficiary_selection import effective_recipient
+from genshin_engine.beneficiary_selection import effective_recipient, position_matches
 from genshin_engine.constants import ENEMY_ZONES
 from genshin_engine.core import _consumes_effect
 from genshin_engine.damage_report_window import CONTRACT as DAMAGE_REPORT_CONTRACT
+from genshin_engine.elemental import ElementalPending
+from genshin_engine.mechanics_component_quota import UNIT
 from genshin_engine.mechanics_execution_port import MechanicsExecutionPort
 from genshin_engine.mechanics_snapshot_execution import capture_live_attribute_frame
 from genshin_engine.mechanics_validation import _freeze_reference, _selector
@@ -275,9 +277,15 @@ def execute_hit(self: MechanicsExecutionPort, event, payload):
     reaction_damage = event["event"] == "reaction_damage"
     if event.get("simulated_reaction", {}).get("type") in ("vaporize", "melt"):
         hit["reaction"] = {"type": "amplify", "factor": event["simulated_reaction"]["factor"]}
+    target_id = self.elemental.target if self.elemental else None
+    if self.target_scene:
+        target_id = event.get("target_id") or hit.get("extensions", {}).get("elemental", {}).get("target_id")
+        if target_id not in self.target_scene.targets:
+            raise ElementalPending("target_scene_damage_target_missing", "伤害投影缺少已登记的实际目标。", hit["id"])
+        hit.setdefault("extensions", {})["target_scene"] = {"target_id": target_id}
     if self.elemental and not reaction_damage:
         hit.setdefault("extensions", {})["elemental"] = {"mode": "simulated", "ruleset": self.elemental.model["ruleset"],
-            "target_id": self.elemental.target, "application_event_id": f"{event['origin']}:{event['id']}",
+            "target_id": target_id, "application_event_id": f"{event['origin']}:{event['id']}",
             "reaction": copy.deepcopy(event.get("simulated_reaction"))}
         if 'area_id' in (descriptor.get('application') or {}):
             # Preserve the actual declared contact area. Do not infer a bucket
@@ -307,7 +315,8 @@ def execute_hit(self: MechanicsExecutionPort, event, payload):
         event.get("reaction_snapshot") if reaction_damage else capture_live_attribute_frame(self)
     ) if graph else None
     condition_start = len(self.target_condition_trace)
-    receipts, effects = {}, self.fixed_effects(event, hit, descriptor.get("report", True))
+    receipts = dict(event.get("component_quota_receipts", {}))
+    effects = self.fixed_effects(event, hit, descriptor.get("report", True))
     condition_jobs = []
     if self.attribute_runtime and self.attribute_runtime.five_stats:
         applied_conditions = {row['projected_effect_id']: index
@@ -322,10 +331,12 @@ def execute_hit(self: MechanicsExecutionPort, event, payload):
     pool_gates = self.shared_pools.consume(self, event, hit) if self.shared_pools else {}
     for rid, state in self.state.items():
         rule, quota = self.rules[rid], self.rules[rid].get("quota")
-        for index, inst in enumerate(state["instances"]):
-            if cid not in inst["beneficiaries"]:
+        if not quota or quota.get("unit") == UNIT:
+            continue
+        for inst in state["instances"]:
+            if not effective_recipient(rule, inst, cid, self.frontline):
                 continue
-            if quota and self.filter(quota["consume"], event, rid):
+            if self.filter(quota["consume"], event, rid):
                 key = cid if quota["scope"] == "per_beneficiary" else "team"
                 before = inst["quota"].get(key, 0)
                 consumed = before > 0
@@ -355,11 +366,16 @@ def execute_hit(self: MechanicsExecutionPort, event, payload):
             for index, inst in enumerate(states[rule["id"]]["instances"]):
                 override = self.match_effect(rule["id"], effect["id"], hit["id"])
                 reason = None
-                if effect["domain"] != "enemy" and cid not in inst["beneficiaries"]:
+                quota = rule.get("quota")
+                if quota and quota.get("unit") == UNIT:
+                    if not receipts.get((rule["id"], inst["instance_id"]), False):
+                        reason = "no_consumption_receipt"
+                elif effect["domain"] != "enemy" and cid not in inst["beneficiaries"]:
                     reason = "recipient_mismatch"
-                elif effect["domain"] != "enemy" and rule["beneficiaries"]["scope"] == "current_frontline" and cid != (frozen["frontline"] if frozen else self.frontline):
-                    reason = "not_frontline"
-                elif rule.get("quota") and not receipts.get((rule["id"], inst["instance_id"]), False):
+                elif effect["domain"] != "enemy" and not position_matches(
+                        rule, cid, self.frontline if quota or frozen is None else frozen["frontline"]):
+                    reason = "not_offfield" if rule["beneficiaries"]["scope"] == "current_offfield" else "not_frontline"
+                elif quota and not receipts.get((rule["id"], inst["instance_id"]), False):
                     reason = "no_consumption_receipt"
                 elif rule.get("resource_gate") and inst["instance_id"] not in pool_gates.get(rule["id"], set()):
                     reason = "no_shared_pool_consumption_receipt"
@@ -434,7 +450,8 @@ def execute_hit(self: MechanicsExecutionPort, event, payload):
             effects.append(clone)
             self.trace.append({"type": "manual_effect_applied", "projected_effect_id": clone["id"],
                                "event_id": hit["id"], "cycle": event["origin"], "t": self.time/TICKS,
-                               "buff_id": buff["id"], "effect_id": effect["id"], "value": effect["value"], "sample_t": time/TICKS})
+                               "buff_id": buff["id"], "effect_id": effect["id"], "value": effect["value"], "sample_t": time/TICKS,
+                               "window_start": buff["start"], "window_end": buff["end"]})
     five_stats = bool(self.attribute_runtime and self.attribute_runtime.five_stats)
     in_reportable_input_window = (self.time < self.data["period"] or
         self.time == self.data["period"] and self.rotation.get("damage_report", {}).get("contract") == DAMAGE_REPORT_CONTRACT)
@@ -488,6 +505,7 @@ def execute_hit(self: MechanicsExecutionPort, event, payload):
                 self.trace.append({"type": "manual_effect_applied", "projected_effect_id": clone["id"],
                     "event_id": hit["id"], "cycle": event["origin"], "t": self.time/TICKS, "buff_id": job["buff"]["id"],
                     "effect_id": effect["id"], "value": value, "sample_t": job["sample_time"]/TICKS,
+                    "window_start": job["buff"]["start"], "window_end": job["buff"]["end"],
                     "attribute_receipt_id": em_receipt["receipt_id"], "attribute_node_id": job["node_id"]})
         if reaction_damage and hit.get("extensions", {}).get("elemental", {}).get("provider_stat_sample"):
             sampled_em = hit["extensions"]["elemental"]["provider_stat_sample"]["value"]
@@ -503,6 +521,7 @@ def execute_hit(self: MechanicsExecutionPort, event, payload):
     self.trace.append({"type": "reaction_damage" if reaction_damage else "hit", "event_id": hit["id"], "cycle": event["origin"], "t": self.time/TICKS,
                        "action_id": event.get("action_id"), "ability_id": action.get("ability_id"),
                        "run_id": event.get("run_id"),
+                       **({"target_id": target_id} if self.target_scene else {}),
                        **({'execution_ref': copy.deepcopy(event['execution_ref'])} if event.get('execution_ref') else {}),
                        "reported_damage": reported, "status": "executed", "effect_count": len(effects),
                        "in_input_window": in_reportable_input_window,

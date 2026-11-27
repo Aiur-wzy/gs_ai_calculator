@@ -53,8 +53,10 @@ def seal_fresh_calculation(
     override_receipt=None, computed_value_proof=None, display_context=None,
     resolved_provisional_uses=(), candidate_session=None, calculated_at=None, _session=None,
     _readonly_provisional_context=None, task_evidence_scope=None,
+    special_capability_proof=None,
 ):
     from .fresh_result_capacity import finish_fresh_result
+    from .special_capability_authority import FIELD as SPECIAL_CAPABILITY_SOURCE
 
     # The builder works on a private copy for each capacity attempt. Keep the
     # unchanged inputs as its source instead of copying the full audit twice.
@@ -94,6 +96,8 @@ def seal_fresh_calculation(
         report[OWNERSHIP_PROOF_FIELD] = copy.deepcopy(ownership_proof)
         if task_evidence_scope is not None:
             result["task_evidence_scope"] = copy.deepcopy(task_evidence_scope)
+        if special_capability_proof is not None:
+            result[SPECIAL_CAPABILITY_SOURCE] = copy.deepcopy(special_capability_proof)
         receipt = {"plan_id": plan["plan_id"], "revision": plan["revision"],
                    **{key: report[key] for key in ("input_fingerprint", "output_fingerprint", "source_fingerprint")},
                    "template_version": 2, "engine_version": APP_VERSION,
@@ -101,6 +105,8 @@ def seal_fresh_calculation(
                    "data_versions": report["data_versions"], "assumptions": report["assumptions"]}
         if task_evidence_scope is not None:
             receipt["task_evidence_scope"] = copy.deepcopy(task_evidence_scope)
+        if special_capability_proof is not None:
+            receipt[SPECIAL_CAPABILITY_SOURCE] = fingerprint(special_capability_proof)
         # This immutable policy was produced by the actual execution. Source
         # reconstruction validators consume it below, so place its one receipt
         # copy before those validators, not after their checks or the size gate.

@@ -146,15 +146,50 @@ def _content_receipt(
     cursor = connection.execute(query, parameters)
     for row in cursor:
         count += 1
-        row_hashes.append(hashlib.sha256(_canonical([_cell(value) for value in row])).digest())
-    row_hashes.sort()
+        row_hashes.append(_row_hash(row))
+    return count, _rows_hash(row_hashes)
+
+
+def _row_hash(row):
+    return hashlib.sha256(_canonical([_cell(value) for value in row])).digest()
+
+
+def _rows_hash(row_hashes):
     digest = hashlib.sha256()
     digest.update(b"genshin-database-table-content-v1\0")
-    digest.update(str(count).encode("ascii"))
+    digest.update(str(len(row_hashes)).encode("ascii"))
     digest.update(b"\0")
-    for row_hash in row_hashes:
+    for row_hash in sorted(row_hashes):
         digest.update(row_hash)
-    return count, digest.hexdigest()
+    return digest.hexdigest()
+
+
+def meta_row_witness(connection, key):
+    """Read a metadata value plus the sibling digests needed to prove its receipt."""
+    siblings = []
+    value = None
+    for row in connection.execute("SELECT * FROM meta LIMIT 1025"):
+        if row[0] == key:
+            value = row[1]
+        else:
+            siblings.append(_row_hash(row).hex())
+    if len(siblings) > 1023:
+        raise ValueError("数据库 meta 行数超出证明范围。")
+    return value, sorted(siblings)
+
+
+def verify_meta_row_witness(key, value, siblings, receipt):
+    """Prove the exact raw value against a previously admitted meta-table receipt."""
+    if (type(siblings) is not list or len(siblings) > 1023
+            or receipt.get("row_count") != len(siblings) + 1):
+        return False
+    try:
+        hashes = [bytes.fromhex(item) for item in siblings
+                  if isinstance(item, str) and len(item) == 64]
+    except ValueError:
+        return False
+    return (len(hashes) == len(siblings) and all(len(item) == 32 for item in hashes)
+            and _rows_hash([*hashes, _row_hash((key, value))]) == receipt.get("content_sha256"))
 
 
 def _table_names(connection: sqlite3.Connection) -> list[str]:

@@ -2,9 +2,12 @@ from __future__ import annotations
 
 import hashlib
 import io
+import json
+import os
+import shutil
 import zipfile
 from http.client import IncompleteRead
-from pathlib import Path
+from pathlib import Path, PurePosixPath
 
 import pytest
 
@@ -86,6 +89,115 @@ def test_stage_binds_confirmation_and_publishes_only_complete_tree(tmp_path, mon
             confirmed_document_sha256="0" * 64,
         )
     assert stale.value.reason == "release_pair_update_confirmation_mismatch"
+
+
+def test_verified_staging_uses_signed_member_digests_and_keeps_proof_in_process(tmp_path, monkeypatch):
+    app_path = tmp_path / "source.zip"
+    app = _app_archive(app_path)
+    database = tmp_path / "source.db"
+    database.write_bytes(b"sqlite-package")
+    result = _result(app, database.read_bytes())
+    with zipfile.ZipFile(app_path) as package:
+        manifest_sha256 = _sha(package.read("PACKAGE-FILES.sha256"))
+    result["pair_manifest"]["app"] = {"artifact_manifest": {"sha256": manifest_sha256}}
+
+    workspace = tmp_path / "work"
+    staging = workspace / "staging"
+    seen_extraction = []
+
+    def progress(event):
+        if event["phase"] == "extract_app":
+            seen_extraction.append(True)
+            assert staging.is_dir() and not (staging / transport.TRANSPORT_RECEIPT_FILENAME).exists()
+
+    monkeypatch.setattr(transport.os, "rename", lambda *_: pytest.fail("private staging should not need a rename"))
+    receipt = transport.stage_release_pair_artifacts(result, workspace, confirmed_document_sha256="d" * 64,
+        local_artifacts={"app": app_path, "database": database}, verify_app_on_extract=True, progress=progress)
+    disk_receipt = json.loads((staging / transport.TRANSPORT_RECEIPT_FILENAME).read_bytes())
+    proof = receipt.pop("verified_app")
+    assert receipt == disk_receipt and seen_extraction
+    source = staging / "app"
+    assert proof.report_for(source)["files"] == 1
+    copied = tmp_path / "copy"
+    shutil.copytree(source, copied)
+    assert proof.report_for(copied) is None
+
+
+@pytest.mark.parametrize(("manifest", "payload", "extra", "error"), [
+    ("bad-manifest", b"application", None, "release_pair_app_artifact_mismatch"),
+    ("signed", b"APPLICATION", None, "supply_chain_package_manifest_hash_mismatch"),
+    ("signed", b"application", "unlisted.dll", "supply_chain_package_manifest_file_unlisted"),
+])
+def test_verified_extraction_rejects_wrong_manifest_and_members(tmp_path, manifest, payload, extra, error):
+    archive = tmp_path / "app.zip"
+    raw = f"{_sha(b'application')}  app.bin\n".encode()
+    with zipfile.ZipFile(archive, "w") as package:
+        package.writestr("PACKAGE-FILES.sha256", raw if manifest == "signed" else b"different")
+        package.writestr("app.bin", payload)
+        if extra is not None:
+            package.writestr(extra, b"unsigned")
+    with pytest.raises(transport.ReleasePairTransportError, match=error):
+        transport._extract_app_archive(archive, tmp_path / "app", expected_manifest_sha256=_sha(raw))
+
+
+@pytest.mark.skipif(os.name != "nt", reason="Windows directory sharing semantics")
+def test_verified_archive_writer_denies_rename_of_active_prefix(tmp_path):
+    root = tmp_path.resolve() / "app"
+    root.mkdir()
+    with transport._archive_directory_writer(root, signed=True) as ensure:
+        directory = ensure(PurePosixPath("runtime/nested"))
+        (directory / "member.js").write_bytes(b"asset")
+        with pytest.raises(OSError):
+            directory.parent.rename(root / "moved")
+        assert ensure(PurePosixPath("runtime/nested")) == directory
+    directory.parent.rename(root / "moved")
+    assert (root / "moved/nested/member.js").read_bytes() == b"asset"
+
+
+@pytest.mark.skipif(os.name != "nt", reason="parallel extraction is Windows-only")
+def test_parallel_extraction_verifies_the_same_files_and_digests(tmp_path):
+    archive = tmp_path / "app.zip"
+    files = {f"internal/runtime-{index // 4}/asset-{index}.js": b"asset" * (index + 1) for index in range(24)}
+    raw = "".join(f"{_sha(body)}  {name}\n" for name, body in sorted(files.items())).encode()
+    with zipfile.ZipFile(archive, "w", zipfile.ZIP_DEFLATED) as package:
+        package.writestr("PACKAGE-FILES.sha256", raw)
+        for name, body in reversed(list(files.items())):
+            package.writestr(name, body)
+    baseline, parallel = tmp_path / "serial", tmp_path / "parallel"
+    reports = []
+    for workers, destination in ((1, baseline), (4, parallel)):
+        result = transport._extract_app_archive(archive, destination, expected_manifest_sha256=_sha(raw), workers=workers)
+        reports.append(result["verified_app"].report_for(destination))
+        assert {path.relative_to(destination).as_posix(): path.read_bytes() for path in destination.rglob("*.js")} == files
+    assert reports[0] == reports[1] and reports[1]["files"] == len(files)
+
+
+@pytest.mark.skipif(os.name != "nt", reason="parallel extraction is Windows-only")
+@pytest.mark.parametrize(("fault", "error"), [
+    ("corruption", "manifest_hash_mismatch"),
+    ("cancel", "download_cancelled"),
+    ("alias", "archive_member_invalid"),
+])
+def test_parallel_extraction_aborts_on_invalid_bytes_cancel_or_path_alias(tmp_path, fault, error):
+    archive = tmp_path / "app.zip"
+    names = ["runtime/alpha/module.js", "runtime/beta/module.js", "runtime/gamma/module.js"]
+    if fault == "alias":
+        names[1] = "Runtime/beta/module.js"
+    raw = "".join(f"{_sha(b'abc')}  {name}\n" for name in sorted(names)).encode()
+    with zipfile.ZipFile(archive, "w") as package:
+        package.writestr("PACKAGE-FILES.sha256", raw)
+        for index, name in enumerate(names):
+            package.writestr(name, b"ABC" if index == 1 and fault == "corruption" else b"abc")
+    checks = 0
+
+    def cancel():
+        nonlocal checks
+        checks += 1
+        return fault == "cancel" and checks >= 4
+
+    with pytest.raises(transport.ReleasePairTransportError, match=error):
+        transport._extract_app_archive(archive, tmp_path / "app", expected_manifest_sha256=_sha(raw), workers=4,
+                                       cancel_check=cancel)
 
 
 def test_stage_copy_fallback_keeps_incomplete_tree_without_receipt(tmp_path, monkeypatch):

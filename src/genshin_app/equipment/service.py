@@ -232,9 +232,11 @@ def run_plan_calc(
     """
     from genshin_db import queries
     from genshin_db.equipment_queries import equipment_read_session
+    from genshin_engine.special_reaction_capabilities import use_special_reaction_capability_catalog
     from genshin_runtime.operation_timing import timed_call
 
     from .damage_report_window_receipt import require_window_plan_support
+    from .special_capability_authority import load_database_capability_catalog
 
     require_window_plan_support(plan)
 
@@ -257,6 +259,10 @@ def run_plan_calc(
             _readonly_provisional_context=_readonly_provisional_context,
         )
         require_ready(report)
+        capability_catalog, capability_proof = (load_database_capability_catalog(path)
+                                                if "special_capability_catalog" in report else (None, None))
+        if capability_proof is not None:
+            _session.bind_replay_capability_catalog(capability_catalog, proof_fingerprint=fingerprint(capability_proof))
         plan = report["plan"]
         from genshin_app.task_evidence_scope import database_snapshot, evidence_scope
         task_evidence_scope = evidence_scope(database_snapshot(path), database_path=path)
@@ -326,8 +332,9 @@ def run_plan_calc(
             allow_none=not uses_direct_energy(model, report["mechanics_model"]))
         execution = {"template": report["plan"]["resolved_template"], "rotation_model": model,
                      "mechanics_model": report["mechanics_model"], "matches": report["mechanics_matches"]}
-        executed = (timed_call("execute_and_retain", _session.execute_fresh, execution)
-                    if model and "damage_report" in model else timed_call("engine_execute", execute_mechanics, **execution))
+        with use_special_reaction_capability_catalog(capability_catalog):
+            executed = (timed_call("execute_and_retain", _session.execute_fresh, execution)
+                        if model and "damage_report" in model else timed_call("engine_execute", execute_mechanics, **execution))
         if executed.get("result") is None or executed.get("resolved_template") is None:
             raise PlanError("机制输入尚不可执行", "mechanics_pending", executed)
         from .mechanism_contact_receipt import verify_contact_execution_scope
@@ -508,6 +515,7 @@ def run_plan_calc(
         candidate_session=candidate_session, calculated_at=datetime.now(UTC).isoformat(), _session=_session,
         _readonly_provisional_context=_readonly_provisional_context,
         task_evidence_scope=task_evidence_scope,
+        special_capability_proof=capability_proof,
     )
     if _readonly_provisional_context is not None:
         _readonly_provisional_context.bind_fresh_result(calculated)

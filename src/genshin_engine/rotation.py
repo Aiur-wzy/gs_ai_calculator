@@ -220,7 +220,7 @@ def _unique(items, ctx, path):
     return result
 
 
-def _semantic(model, template):
+def _semantic(model, template, *, hit_link_context=None):
     ctx = _Input(model)
     if any(auto_energy.automatic(a) for a in model["abilities"]):
         for path in auto_energy.namespace_conflicts({"rotation_model": model, "template": template}):
@@ -628,7 +628,7 @@ def _semantic(model, template):
                     and not (model.get("damage_report", {}).get("mode") == "explicit"
                              and template["loop_duration"] == model["damage_report"].get("end"))):
                 ctx.error("period_conflict", "伤害模板周期与动作检查周期不一致。", "period")
-            _check_links(template, actions, abilities, model, ctx)
+            _check_links(template, actions, abilities, model, ctx, hit_link_context=hit_link_context)
     # 保持输出为有限 JSON；荒谬的大数不进入浮点能量运算。
     for path, obj in [("characters", char) for char in chars.values()]:
         for key in ("energy_recharge", "energy_capacity", "initial_energy"):
@@ -650,36 +650,21 @@ def _semantic(model, template):
                   "sequence_specs": sequence_specs}
 
 
-def _check_links(template, actions, abilities, model, ctx):
+def _check_links(template, actions, abilities, model, ctx, *, hit_link_context=None):
     for field in ("hits", "switches"):
+        record_context = (hit_link_context if field == "hits" and hit_link_context is not None else ctx)
         records = template.get(field, [])
         if not isinstance(records, list) or any(not isinstance(item, dict) for item in records):
-            ctx.error("template", "伤害与切人记录必须是对象数组。", f"template.{field}")
+            record_context.error("template", "伤害与切人记录必须是对象数组。", f"template.{field}")
             return
         for item in records:
             time = item.get("t")
             if time is not None and (not isinstance(time, (int, float)) or isinstance(time, bool)
                                      or not math.isfinite(time)):
-                ctx.error("template", "伤害与切人时间必须是有限数值。", f"template.{field}.t")
+                record_context.error("template", "伤害与切人时间必须是有限数值。", f"template.{field}.t")
                 return
-    hits = {hit.get("id"): hit for hit in template.get("hits", []) if isinstance(hit, dict)}
-    linked = set()
-    for link in model.get("action_hit_links", []):
-        hid, aid = link["hit_id"], link["action_id"]
-        action, hit = actions.get(aid), hits.get(hid)
-        if not action or hit is None or hid in linked:
-            ctx.error("action_hit_link", "动作/伤害引用不存在或一个伤害重复关联。", hid)
-            continue
-        linked.add(hid)
-        ability = abilities.get(action["ability_id"])
-        if ability and hit.get("character") != ability["character"]:
-            ctx.error("action_hit_link", "伤害角色与来源动作角色不一致。", hid)
-        if hit.get("t") is not None and action.get("start") is not None and hit["t"] < action["start"]:
-            ctx.error("action_hit_link", "伤害先于来源动作。", hid)
-        if hit.get("count", 1) > 1:
-            ctx.pending("聚合伤害不能确认真实多段时序，请拆分或另行保留未检查结论。", str(hid))
-    for hid in hits.keys() - linked:
-        ctx.pending("伤害未关联独立施放动作。", str(hid))
+    _check_damage_links(template, actions, abilities, model,
+                        hit_link_context if hit_link_context is not None else ctx)
     switches = [(item.get("t"), item.get("character")) for item in template.get("switches", [])]
     if any(time is None or not isinstance(cid, str) for time, cid in switches):
         ctx.error("template", "切人记录缺少时间或角色身份。", "template.switches")
@@ -714,6 +699,27 @@ def _check_links(template, actions, abilities, model, ctx):
         ctx.error("switch_conflict", "切人记录须使用切人动作的 start（不是 occupation_end）；请按 differences 修正时间、角色或遗漏动作。",
                   "switches", differences=differences, expected_switches=[{"t": t, "character": c} for t, c in derived],
                   actual_switches=[{"t": t, "character": c} for t, c in switches])
+
+
+def _check_damage_links(template, actions, abilities, model, ctx):
+    hits = {hit.get("id"): hit for hit in template.get("hits", [])}
+    linked = set()
+    for link in model.get("action_hit_links", []):
+        hid, aid = link["hit_id"], link["action_id"]
+        action, hit = actions.get(aid), hits.get(hid)
+        if not action or hit is None or hid in linked:
+            ctx.error("action_hit_link", "动作/伤害引用不存在或一个伤害重复关联。", hid)
+            continue
+        linked.add(hid)
+        ability = abilities.get(action["ability_id"])
+        if ability and hit.get("character") != ability["character"]:
+            ctx.error("action_hit_link", "伤害角色与来源动作角色不一致。", hid)
+        if hit.get("t") is not None and action.get("start") is not None and hit["t"] < action["start"]:
+            ctx.error("action_hit_link", "伤害先于来源动作。", hid)
+        if hit.get("count", 1) > 1:
+            ctx.pending("聚合伤害不能确认真实多段时序，请拆分或另行保留未检查结论。", str(hid))
+    for hid in sorted(hits.keys() - linked, key=str):
+        ctx.pending("伤害未关联独立施放动作。", str(hid))
 
 
 def _origins(repeat, cycles):
@@ -797,7 +803,30 @@ def check_rotation(template, rotation_model=None):
     if validation["status"] == "invalid":
         return _base_result("invalid", validation["issues"])
     model = copy.deepcopy(rotation_model)
-    ctx, data = _semantic(model, template)
+    return _check_validated_rotation(template, model)
+
+
+def inspect_declared_rotation(template, rotation_model, mechanics_model=None):
+    """Check declared rotation independently of damage-only link problems."""
+    if rotation_model is None:
+        return _base_result("not_checked"), None
+    validation = validate_rotation_model(rotation_model)
+    if validation["status"] == "invalid":
+        return _base_result("invalid", validation["issues"]), None
+    model = copy.deepcopy(rotation_model)
+    link_context = _Input(model)
+    bindings = []
+    if mechanics_model is not None:
+        from genshin_engine.rotation_preflight_bindings import prepare_mechanics_bindings
+        template, model, bindings = prepare_mechanics_bindings(
+            template, model, mechanics_model, link_context.issues)
+    check = _check_validated_rotation(template, model, hit_link_context=link_context)
+    return check, {"issues": link_context.issues, "bindings": bindings,
+                   "hit_count": len(template.get("hits", []))}
+
+
+def _check_validated_rotation(template, model, *, hit_link_context=None):
+    ctx, data = _semantic(model, template, hit_link_context=hit_link_context)
     if ctx.issues:
         state = "invalid" if any(x["severity"] == "error" for x in ctx.issues) else "pending"
         return _base_result(state, ctx.issues, ctx.assumptions)
@@ -948,6 +977,7 @@ def _simulate(model, data, expanded, windows, finite_until, ctx, observer=None, 
         controlled_state = (isinstance(exc, StateRuntimeError) and getattr(observer, "state_runtime", None) is not None
                             and isinstance(issue, dict) and issue.get("code") in ("state_event_limit", "state_trace_limit", "state_context_limit", "state_capture_limit", "state_dispatch_pending", "state_position_limit", "state_pending_scan"))
         if not ((ledger is not None or capacity_ledger is not None or admission_ledger is not None
+                 or (ev is not None and ev.get("scene_packet_ids"))
                  or isinstance(exc, SnapshotCapturePending) or controlled_pool
                  or controlled_reaction_resource or controlled_attribute or controlled_state)
                 and isinstance(issue, dict) and issue.get("severity") == "pending"):
@@ -1472,7 +1502,24 @@ def _simulate(model, data, expanded, windows, finite_until, ctx, observer=None, 
                 row["ready_at"] = [ready / TICKS for ready in queues[group]]
             if not failure and observer is not None:
                 try:
-                    derived_events = observer.on_event(ev, row, frontline, dict(energy))
+                    if "scene_packet_ids" in ev:
+                        from genshin_engine.target_scene_packet import (
+                            remaining_packet_members,
+                        )
+
+                        members = remaining_packet_members(ev, expanded, cursor)
+                        member_rows = [row, *[
+                            {**row, "id": member["id"], "run_id": member["run_id"], "type": member["kind"],
+                             "order": member["order"], "source": member["data"].get("source")}
+                            for member in members[1:]
+                        ]]
+                        derived_events = observer.on_contact_packet(members, member_rows, frontline, dict(energy))
+                        cursor += len(members) - 1
+                        stepped += len(members) - 1
+                        result["event_log"].extend(member_rows)
+                        logged = True
+                    else:
+                        derived_events = observer.on_event(ev, row, frontline, dict(energy))
                 except Exception as exc:
                     # Known controlled pending must retain an already committed admission.
                     retain_pending(exc, row, ev, logged)

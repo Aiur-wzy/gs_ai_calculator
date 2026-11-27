@@ -31,6 +31,10 @@ from genshin_db.release_profile import (
     validate_database_live_receipt,
     validate_database_release_manifest,
 )
+from genshin_db.release_qualification import (
+    DatabaseInstallQualification,
+    read_qualified_database_identity,
+)
 
 LIVE_MANIFEST_FILENAME = "database-live-manifest.json"
 
@@ -65,6 +69,8 @@ def _write_json_atomic(path: Path, value: Mapping[str, Any]) -> None:
 def verified_reusable_database(
     data_dir: Path,
     target_manifest: Mapping[str, Any],
+    *,
+    current_qualification: DatabaseInstallQualification | None = None,
 ) -> dict[str, Any] | None:
     """Return the live identity only for a valid, semantically equal release."""
 
@@ -79,7 +85,12 @@ def verified_reusable_database(
         receipt = validate_database_live_receipt(
             json.loads(receipt_path.read_text(encoding="utf-8"))
         )
-        identity = read_database_identity(database_path)
+        if current_qualification is not None:
+            identity = read_qualified_database_identity(
+                database_path, current_manifest, current_qualification,
+            )
+        else:
+            identity = read_database_identity(database_path)
         valid = database_live_receipt_matches(receipt, identity, current_manifest)
         same_release = database_release_semantically_equal(
             current_manifest,

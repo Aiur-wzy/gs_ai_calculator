@@ -24,6 +24,22 @@ class SpecialFormulaServices:
     direct_damage: Callable[..., dict[str, Any]]
 
 
+def _resolved_stellar_coefficient(services, reaction_type, factor, evidence):
+    if evidence is None:
+        return factor
+    if not isinstance(evidence, dict):
+        raise ValueError("星扩散基础系数修正必须为对象。")
+    multiplier = evidence.get("factor_multiplier")
+    effective = evidence.get("effective_factor")
+    if (not reaction_type.startswith("stellar_swirl")
+            or evidence.get("base_factor") != factor
+            or not services.finite_number(multiplier, positive=True)
+            or not services.finite_number(effective, positive=True)
+            or effective != factor * multiplier):
+        raise ValueError("星扩散基础系数修正与该伤害分项不一致。")
+    return effective
+
+
 def calculate_weighted_special_damage(
     services: SpecialFormulaServices,
     reaction_type: str,
@@ -32,6 +48,7 @@ def calculate_weighted_special_damage(
     amplify: dict | None = None,
     role_provenance: dict | None = None,
     event_id: str = "calculate_weighted_special_damage",
+    reaction_coefficient: dict | None = None,
 ) -> dict:
     """Calculate one reaction-based Lunar/Stellar event with 0.6/0.3/.05/.05.
 
@@ -55,6 +72,7 @@ def calculate_weighted_special_damage(
             event_id=event_id,
         )
     kind, factor = services.factor_for(reaction_type)
+    factor = _resolved_stellar_coefficient(services, reaction_type, factor, reaction_coefficient)
     components = []
     for row in rows:
         ctx = {
@@ -201,12 +219,14 @@ def calculate_direct_special_damage(
     multiplier: float,
     scaling: float,
     layers: int | None = None,
+    reaction_coefficient: dict | None = None,
 ) -> dict:
     """Resolve direct Lunar/Stellar damage such as a direct Star-Superconduct hit."""
     row = services.validate_contributor(contributor, 0, reaction_base=False)
     if not services.finite_number(multiplier, minimum=0) or not services.finite_number(scaling, minimum=0):
         raise ValueError("直伤倍率与结算属性必须是有限非负数。")
     kind, factor = services.factor_for(reaction_type, layers=layers)
+    factor = _resolved_stellar_coefficient(services, reaction_type, factor, reaction_coefficient)
     ctx = {
         "level": row["level"],
         "multiplier": multiplier,
@@ -247,6 +267,7 @@ def resolve_special_damage_event(
     """Attach an auditable numeric result to a generated reaction damage request."""
     if not isinstance(event, dict) or event.get("type") != "special_reaction_damage_request":
         raise ValueError("只能结算星月运行时生成的伤害请求。")
+    coefficient = event.get("reaction_coefficient")
     if event.get("reaction_base") is False:
         if amplify is not None:
             raise ValueError("能力直伤星月请求不接受反应基数伤害的增幅参数。")
@@ -257,7 +278,9 @@ def resolve_special_damage_event(
         result = services.direct_damage(
             event["reaction_type"], contributors[0],
             multiplier=event.get("multiplier"), scaling=scaling,
-            layers=event.get("layers"))
+            layers=event.get("layers"),
+            **({"reaction_coefficient": coefficient} if coefficient is not None else {}),
+        )
     else:
         if scaling is not None:
             raise ValueError("反应基数星月伤害不接受直伤结算属性。")
@@ -265,6 +288,7 @@ def resolve_special_damage_event(
             event["reaction_type"], contributors, amplify=amplify,
             role_provenance=event.get("role_provenance"),
             event_id=event.get("event_id", "special_reaction_damage_request"),
+            **({"reaction_coefficient": coefficient} if coefficient is not None else {}),
         )
     return {
         **copy.deepcopy(event),

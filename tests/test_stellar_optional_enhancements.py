@@ -18,6 +18,38 @@ def enhanced(family, **parameters):
     return runtime(family, value=value)
 
 
+@pytest.mark.parametrize('clock,seconds,tick', [(None,4,4_000_000),('experimental_384f',3.340596,3_340_596)])
+def test_field_clock_refresh_preserves_cadence_and_buff_boundary(clock, seconds, tick):
+    params = {'settlement_bonus_layers': 2, 'settlement_interval_seconds': seconds}
+    if clock:
+        params['settlement_clock'] = clock
+    rt = enhanced('stellar_superconduct', **params)
+    rt.replace(reaction('stellar_superconduct', area_id='arena'), time=0)
+    rt.replace(reaction('stellar_superconduct', index=2, area_id='arena'), time=2_000_000)
+    rt.advance(tick-1)
+    assert rt.stellar_superconduct_snapshot('arena')['layers'] == 0
+    rt.advance(tick)
+    settled = rt.stellar_superconduct_snapshot('arena')
+    assert settled['layers'] == 2
+    assert settled['buff_expires_at'] == 2*seconds
+    if clock:
+        assert settled['settlement_clock'] == clock
+        assert settled['settlement_interval_seconds'] == seconds
+    assert rt.stellar_field_by_area['arena']['stellar_superconduct_next_settlement'] == 2*tick
+
+
+@pytest.mark.parametrize('fields', [
+    {'settlement_interval_seconds': 3.340596},
+    {'settlement_clock':'experimental_384f', 'settlement_interval_seconds':4},
+    {'settlement_clock':'unknown', 'settlement_interval_seconds':3.340596},
+    {'settlement_clock':'experimental_384f', 'settlement_interval_seconds':3.340596, 'status':'confirmed'},
+])
+def test_fast_clock_requires_matching_assumed_preset(fields):
+    m = model('stellar_superconduct')
+    m['replacements']['stellar_superconduct']['mechanics'] = mechanics('stellar_superconduct', **fields)
+    assert any(x['code']=='mechanics_contract' for x in validate_special_reaction_model(m))
+
+
 def test_initial_grant_is_not_an_application_and_refresh_does_not_regrant():
     rt = enhanced('stellar_superconduct', initial_grant_layers=2, settlement_bonus_layers=2)
     shadow = copy_runtime(rt)

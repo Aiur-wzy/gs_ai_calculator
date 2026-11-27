@@ -10,6 +10,9 @@ from genshin_engine.resource_source_identity import ownership_key
 def project_execution_inputs(run: MechanicsExecutionContext, services: MechanicsExecutionServices) -> bool:
     run.projected, run.rotation, run.runtime_events = services.project_inputs(run.request.template, run.request.rotation_model, run.request.mechanics_model, run.output["issues"])
     if run.output["issues"]:
+        if run.request.mechanics_model.get("target_scene") and all(
+                issue["severity"] == "pending" for issue in run.output["issues"]):
+            run.output["status"] = "pending"
         return False
     run.chars = {c["id"] for c in run.rotation["characters"]}
     return True

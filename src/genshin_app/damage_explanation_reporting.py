@@ -43,6 +43,9 @@ def _lineages(result, report):
             if row.get("hit_id"):
                 links.setdefault(row["hit_id"], {}).update({k: row[k] for k in
                     ("action_id", "ability_id", "prototype_hit_id", "channel_id", "ordinal") if k in row})
+    for hit in result.get("hits", []):
+        if isinstance(hit.get("target_id"), str):
+            links.setdefault(hit["id"], {})["target_id"] = hit["target_id"]
     template = report.get("plan", {}).get("resolved_template", {})
     for hit in template.get("hits", []):
         extension = hit.get("extensions", {})

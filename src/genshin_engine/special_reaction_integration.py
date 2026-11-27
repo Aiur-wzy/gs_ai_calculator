@@ -75,9 +75,14 @@ def validate_special_reaction_bindings(
     roster = set(character_ids)
     action_ids = set(action_ids)
     action_bindings = action_bindings or {}
+    from genshin_engine.target_scene import area_ids as scene_area_ids
+    from genshin_engine.target_scene import target_ids as scene_target_ids
     target_id = (elemental.get("target") or {}).get("id")
+    scene = mechanics_model.get("target_scene")
+    valid_targets = scene_target_ids(mechanics_model) if scene else {target_id}
     seen: set[str] = set()
     tags_by_character: dict[str, set[str]] = {}
+    pending_by_character = {}
     for index, row in enumerate(rows):
         path = f"mechanics_model.special_reaction_party_capabilities.{index}"
         cid = row.get("character_id")
@@ -88,10 +93,9 @@ def validate_special_reaction_bindings(
             issues.append(_issue("special_provider_absent", "星月能力投影引用的角色不在当前队伍。", path,
                                  character_id=cid))
         if row.get("status") == "pending":
-            issues.append(_issue(
-                "special_capability_pending", "数据库能力标签仍待核实，不能据此开启替换。",
-                path, severity="pending", character_id=cid,
-            ))
+            # A pending actor supplies no authority. Enabled consumers below
+            # decide whether the remaining roster proves their qualification.
+            pending_by_character[cid] = (path, row.get("capability_tags", []))
             continue
         commit = row.get("equipment_upstream_commit")
         catalog = load_reviewed_special_reaction_capabilities(commit)
@@ -151,6 +155,13 @@ def validate_special_reaction_bindings(
         providers = qualification.get("provider_ids", [])
         proven = [cid for cid in providers if cid in roster and expected in tags_by_character.get(cid, set())]
         if not proven:
+            pending = {cid: path for cid, (path, tags) in pending_by_character.items()
+                       if cid in providers or expected in tags}
+            for cid, path in pending.items():
+                pending_by_character.pop(cid)
+                issues.append(_issue(
+                    "special_capability_pending", "数据库能力标签仍待核实，不能据此开启替换。",
+                    path, severity="pending", character_id=cid))
             issues.append(_issue(
                 "special_capability_unproven",
                 "已开启替换没有同时满足入队与数据库能力标签的提供者。",
@@ -188,9 +199,12 @@ def validate_special_reaction_bindings(
         if event.get("action_id") not in action_ids:
             issues.append(_issue("reference", "星月操作引用的动作不存在。", path,
                                  action_id=event.get("action_id")))
-        if event.get("target_id") != target_id:
+        if event.get("target_id") not in valid_targets:
             issues.append(_issue("reference", "星月操作目标必须与元素运行时目标一致。", path,
                                  target_id=event.get("target_id"), elemental_target_id=target_id))
+        elif scene and event.get("area_id") not in scene_area_ids(mechanics_model, event["target_id"]):
+            issues.append(_issue("target_scene_area_mismatch", "星月操作区域须与目标登记区域一致。", path,
+                                 target_id=event["target_id"], area_id=event.get("area_id")))
         kind = event.get("kind")
         action = action_bindings.get(event.get("action_id"))
         requires_action = (kind in {"lunar_bloom_reserve_grant", "stellar_resource_operation"}

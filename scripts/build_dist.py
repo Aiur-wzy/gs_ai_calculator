@@ -73,7 +73,14 @@ from verify_production_web_assets import verify_production_web_assets
 from genshin_app import version as app_version
 from genshin_app.database_bootstrap import LIVE_MANIFEST_FILENAME
 from genshin_app.portable_layout import PORTABLE_MARKER, PORTABLE_MARKER_BYTES
+from genshin_app.product_release_index import validate_product_release_index
+from genshin_app.release_pair_discovery import (
+    DISCOVERY_SCHEMA_VERSION,
+    MAX_DOCUMENT_BYTES,
+    ReleasePairDiscoveryError,
+)
 from genshin_app.release_pair_helper import HELPER_RESULT_CONTRACT
+from genshin_app.release_pair_trust import build_trust_verifier
 from genshin_db.release_hygiene import validate_database_release_hygiene
 from genshin_db.release_profile import MANIFEST_FILENAME as DATABASE_MANIFEST_FILENAME
 from genshin_db.release_profile import (
@@ -485,6 +492,46 @@ def _write_build_qualification(
     return path
 
 
+def _validate_legacy_update_baseline(
+    path: Path, *, workspace_root: Path, build_root: Path, dist_root: Path,
+    expected_sha256: str, predecessor: dict, pair_manifest: dict, database_manifest: dict,
+) -> None:
+    source = path.resolve()
+    if (workspace_root.resolve() not in source.parents or not source.is_file()
+            or build_root.resolve() in source.parents or dist_root.resolve() in source.parents):
+        raise DatabaseReleaseError("accepted_legacy_update_index_path_invalid")
+    try:
+        with source.open("rb") as handle:
+            raw = handle.read(MAX_DOCUMENT_BYTES + 1)
+    except OSError as error:
+        raise DatabaseReleaseError("accepted_legacy_update_index_path_invalid") from error
+    if not 2 <= len(raw) <= MAX_DOCUMENT_BYTES:
+        raise DatabaseReleaseError("accepted_legacy_update_index_invalid")
+    if hashlib.sha256(raw).hexdigest() != expected_sha256:
+        raise DatabaseReleaseError("accepted_legacy_update_index_sha256_mismatch")
+    try:
+        index = validate_product_release_index(
+            json.loads(raw.decode("utf-8")), channel="stable", for_install=False,
+            trust_verifier=build_trust_verifier(app_version.DATABASE_RELEASE_TRUST_KEYS),
+        )
+    except (ValueError, RecursionError) as error:
+        reason = error.reason if isinstance(error, ReleasePairDiscoveryError) else "document_invalid"
+        raise DatabaseReleaseError(f"accepted_legacy_update_index_{reason}") from error
+
+    latest = index["pairs"][index["combinations"][index["latest"]]]
+    deployed_pair = latest["pair_manifest"]
+    deployed_database = latest["database_manifest"]
+    if (any(document["schema_version"] != DISCOVERY_SCHEMA_VERSION for document in index["pairs"].values())
+            or deployed_pair["pair_policy"] != "exact" or latest["artifacts"]["app"]["format"] != "app-zip"
+            or max(document["pair_manifest"]["pair_sequence"] for document in index["pairs"].values())
+            >= predecessor["pair_sequence"]
+            or pair_manifest["app"]["app_release_id"] in index["app_sequences"]
+            or pair_manifest["release_pair_id"] in index["pairs"]
+            or index["latest"][1] == database_manifest["database_release_id"]
+            or deployed_database["release_sequence"] >= database_manifest["release_sequence"]):
+        raise DatabaseReleaseError("accepted_legacy_update_index_bridge_invalid")
+
+
 def _load_accepted_predecessor_pair(
     path: Path,
     *,
@@ -496,6 +543,8 @@ def _load_accepted_predecessor_pair(
     expected_sha256: str,
     allow_database_upgrade: bool = False,
     app_only_bridge_from_to: tuple[int, int] | None = None,
+    legacy_update_index_path: Path | None = None,
+    expected_legacy_update_index_sha256: str | None = None,
 ) -> dict:
     """Load the exact reviewed predecessor and reject ambiguous lineage."""
 
@@ -520,10 +569,19 @@ def _load_accepted_predecessor_pair(
         )
     predecessor = load_release_pair_manifest(predecessor_path)
     prior, target = predecessor["pair_sequence"], pair_manifest["pair_sequence"]
-    bridged = (allow_database_upgrade and target == prior + 2
-               and app_only_bridge_from_to == (prior, target)
-               and predecessor.get("database", {}).get("database_release_id")
-               != database_manifest["database_release_id"])
+    bridge_slot = allow_database_upgrade and target == prior + 2 and app_only_bridge_from_to == (prior, target)
+    same_database = predecessor["database"]["database_release_id"] == database_manifest["database_release_id"]
+    if legacy_update_index_path is not None or expected_legacy_update_index_sha256 is not None:
+        if (legacy_update_index_path is None or expected_legacy_update_index_sha256 is None
+                or not bridge_slot or not same_database or predecessor["channel"] != "stable"
+                or predecessor["pair_policy"] != "exact"):
+            raise DatabaseReleaseError("accepted_legacy_update_index_bridge_invalid")
+        _validate_legacy_update_baseline(
+            legacy_update_index_path, workspace_root=workspace_root, build_root=build_root, dist_root=dist_root,
+            expected_sha256=expected_legacy_update_index_sha256, predecessor=predecessor,
+            pair_manifest=pair_manifest, database_manifest=database_manifest,
+        )
+    bridged = bridge_slot and (not same_database or legacy_update_index_path is not None)
     if prior != target - 1 and not bridged:
         raise DatabaseReleaseError("release_pair_predecessor_not_immediate")
     if (
@@ -867,6 +925,8 @@ def main() -> int:
         help="新DB升级验证的前代SQLite；缺省仅取受审前代Pair同目录的genshin.db")
     parser.add_argument("--accepted-predecessor-database-manifest", default=None,
         help="前代DB发行清单；缺省仅取受审前代Pair同目录的database-release-manifest.json")
+    parser.add_argument("--accepted-legacy-update-index", type=Path,
+        help="当已接纳前代与目标复用同一数据库时，校验现网旧版实际使用的已签索引并预留一个过渡配对")
     parser.add_argument(
         "--pair-policy",
         choices=("exact", "current_only"),
@@ -883,6 +943,8 @@ def main() -> int:
         ),
     )
     args = parser.parse_args()
+    if args.accepted_legacy_update_index is not None and args.accepted_predecessor_pair_manifest is None:
+        parser.error("--accepted-legacy-update-index 提供时必须同时提供 --accepted-predecessor-pair-manifest")
     if (args.accepted_database_manifest is None) == (not args.new_database_release):
         parser.error(
             "必须且只能选择一种数据库发行来源：复用既有发行时提供"
@@ -1035,6 +1097,9 @@ def main() -> int:
                 ),
                 allow_database_upgrade=True,
                 app_only_bridge_from_to=getattr(app_version, "APP_ONLY_BRIDGE_FROM_TO", None),
+                legacy_update_index_path=(ROOT / args.accepted_legacy_update_index
+                                          if args.accepted_legacy_update_index is not None else None),
+                expected_legacy_update_index_sha256=getattr(app_version, "ACCEPTED_LEGACY_UPDATE_INDEX_SHA256", None),
             )
             if not release_pair_matches_database_manifest(predecessor_pair, database_manifest):
                 predecessor_database = load_predecessor_database(

@@ -50,8 +50,10 @@ def test_real_trial_uses_identical_core_through_cli_and_native_and_keeps_origina
 def test_capabilities_exposes_actual_auxiliary_contracts(capsys):
     assert main(["capabilities", "--section", "calculation_diagnostics_contract", "--pointer", "/auxiliary_views"]) == 0
     value = json.loads(capsys.readouterr().out)["data"]["data"]
-    assert set(value) == {"assistance", "energy_trials", "input_trials"}
+    assert set(value) == {"assistance", "energy_trials", "input_trials", "rotation_preflight"}
     assert value["energy_trials"]["contract"]["acceptance_effect"] == "none"
+    assert value["rotation_preflight"]["request"] == '{view:"rotation_preflight"}'
+    assert "engine check-rotation INPUT --preflight" in value["rotation_preflight"]["entrypoint"]
 
 
 def test_input_trials_alias_uses_actual_cli_and_native_dispatch(tmp_path, monkeypatch, capsys):

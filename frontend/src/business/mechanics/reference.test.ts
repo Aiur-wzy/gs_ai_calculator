@@ -40,7 +40,8 @@ function fixture() {
 
 describe("mechanics editor ownership migration preserves frozen behavior",()=>{
   it("keeps labels and all existing public editor methods without browser globals in the modules",()=>{
-    const f=fixture();expect(copy(f.current.words)).toEqual(copy(f.old.words));
+    const f=fixture();
+    expect(copy(f.current.words)).toEqual({...copy(f.old.words),current_offfield:"跟随当前后台"});
     expect(Object.keys(f.current).sort()).toEqual(Object.keys(f.old).sort());
     expect(f.current.label("custom")).toBe(f.old.label("custom"));
   });

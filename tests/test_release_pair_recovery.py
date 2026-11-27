@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import shutil
+from pathlib import Path
 from types import SimpleNamespace
 
 import pytest
@@ -10,6 +11,7 @@ from genshin_app import release_pair_coordinator as coordinator
 from genshin_app import release_pair_helper as helper
 from genshin_app import release_pair_transport as transport
 from genshin_app import release_pair_update as update
+from genshin_app.product_install_contract import FIRST_INSTALL_CONTRACT
 from genshin_app.product_release_index import canonical
 from tests.test_product_release_index import (  # noqa: F401
     _install_facts,
@@ -53,6 +55,57 @@ def _prepare_profile(tmp_path, monkeypatch, releases, mode):  # noqa: F811
     handoff = service.prepare_and_launch(discovery, confirmed_document_sha256=option["confirmation_digest"],
                                          user_confirmed=True)
     return service, handoff["operation_id"], user_file
+
+
+def _register_managed_profile(app):
+    (app.parent / "installation.json").write_bytes(canonical({
+        "contract": FIRST_INSTALL_CONTRACT, "scope": "current_user", "app_directory": "app",
+        "data_directory": "data", "layout_version": 2, "installation_id": "0" * 32,
+        "installation_state": "installed",
+    }))
+
+
+def test_managed_app_upgrade_moves_verified_tree_between_same_user_paths(tmp_path, monkeypatch, releases):  # noqa: F811
+    service, operation_id, user_file = _prepare_profile(tmp_path, monkeypatch, releases, "app_only")
+    app, data, workspace = service.active_app_root, service.data_dir, service.workspace
+    _register_managed_profile(app)
+    staged = workspace / "staging/app"
+    inode = staged.stat().st_ino
+    old_database = _sha(data / "genshin.db")
+    copytree = helper.shutil.copytree
+
+    def copy_unrelated(source, destination, *args, **kwargs):
+        if Path(source) == staged:
+            pytest.fail("same-user update copied its validated App staging tree")
+        return copytree(source, destination, *args, **kwargs)
+
+    monkeypatch.setattr(helper.shutil, "copytree", copy_unrelated)
+    report = helper.execute_external_pair_update(workspace, app, data, operation_id=operation_id, current_user=True)
+    assert report["pair_operational"] and app.stat().st_ino == inode
+    assert _sha(data / "genshin.db") == old_database and user_file.read_bytes() == b'{"keep":true}'
+
+
+def test_managed_upgrade_can_recover_between_app_directory_moves(tmp_path, monkeypatch, releases):  # noqa: F811
+    service, operation_id, user_file = _prepare_profile(tmp_path, monkeypatch, releases, "app_only")
+    app, data, workspace = service.active_app_root, service.data_dir, service.workspace
+    _register_managed_profile(app)
+    old_executable = _sha(app / "app.bin")
+    replacement = app.with_name(f".app.next-{operation_id}")
+    replace = helper.os.replace
+
+    def interrupt(source, destination, *args, **kwargs):
+        if Path(source) == replacement and Path(destination) == app:
+            raise InterruptedUpdate()
+        return replace(source, destination, *args, **kwargs)
+
+    with monkeypatch.context() as fault:
+        fault.setattr(helper.os, "replace", interrupt)
+        with pytest.raises(InterruptedUpdate):
+            helper.execute_external_pair_update(workspace, app, data, operation_id=operation_id, current_user=True)
+    assert not app.exists() and update.read_pair_update_journal(workspace)["state"] == "activation_started"
+    recovered = helper.recover_interrupted_pair_update(workspace, app, data, operation_id=operation_id, user_confirmed=True)
+    assert recovered["action"] == "restored_previous_pair" and _sha(app / "app.bin") == old_executable
+    assert user_file.read_bytes() == b'{"keep":true}'
 
 
 @pytest.fixture

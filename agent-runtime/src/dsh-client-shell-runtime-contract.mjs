@@ -115,7 +115,7 @@ export async function auditDshClientShell({ runtimeRoot = RUNTIME_ROOT, assetsRo
   const node = await auditNodeExecutable(nodeExecutable)
   return {
     contract: DSH_CLIENT_SHELL_MANIFEST, phase: DSH_CLIENT_SHELL_PHASE,
-    app_version: '1.0.3', runtime_generation: DSH_CLIENT_SHELL_PHASE,
+    app_version: '1.0.4', runtime_generation: DSH_CLIENT_SHELL_PHASE,
     entry: DSH_CLIENT_SHELL_ENTRY, node_version: PINNED_NODE_VERSION, dsh_release: DSH_CLIENT_SHELL_RELEASE,
     runtime_files: closure.files, runtime_closure_hash: closure.runtimeClosureHash,
     dependency_lock_hash: closure.dependencyLockHash, node_binary_sha256: node.nodeBinarySha256,

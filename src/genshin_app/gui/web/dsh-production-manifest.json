@@ -1,13 +1,13 @@
 {
   "contract": "genshin-dsh-production-assets-v1",
   "dshRelease": "0.2.2-rc.3",
-  "acceptedSemanticSha256": "ef331c8376d64ba4bbd51ce9596714214d0acaf88d10b0c68b527639e3fb2713",
+  "acceptedSemanticSha256": "33ad4a3f049f4f123c8dbe6c5f5a16fde7310db0dc2cfdcfe5a5613e35cc640e",
   "buildInputs": {
     "contract": "genshin-production-inputs-v1",
-    "acceptedSemanticSha256": "ef331c8376d64ba4bbd51ce9596714214d0acaf88d10b0c68b527639e3fb2713",
+    "acceptedSemanticSha256": "33ad4a3f049f4f123c8dbe6c5f5a16fde7310db0dc2cfdcfe5a5613e35cc640e",
     "dshRelease": "0.2.2-rc.3",
     "inputs": {
-      "dsh-client-accepted-manifest.json": "e3fb10734da6ddb75b56f1f160c08eb9a7415da7ff20ee9960d543ed919a00d7",
+      "dsh-client-accepted-manifest.json": "03f7c9e336a7a2c24e403f112b9bbfac42fb12f1991f23d4b7c24fc79ca78f4e",
       "dsh-client-composition.json": "ddbc955cfc025752fd15fafa2728739fad8fe4151bd05ebde52b1ff50de80cbd",
       "package.json": "10d0b39ec9f2e09ac0d72ca3dbe6428fc3feb0903e511c85cdab934772362f59",
       "packages/dsh-client-domain/client.ts": "eba71bc4602d3513eba2757264f786d9aba9970798f994a78bf9a7b6de8355c2",
@@ -37,7 +37,7 @@
       "src/business/mechanics/reports.ts": "198c23907fc95a07447372618ba89d1ecfbf4dfbbfd683be1ac3738173090ca1",
       "src/business/mechanics/schema-form.ts": "c4b8940ec6f1c714ea5e84bf56db4d84ef24bac57d201351c9e1415d84a99204",
       "src/business/mechanics/view.ts": "cefadeedd183814da3e1a13db59b2a9704d8d75d204a566d2ae5f6449731afb7",
-      "src/business/mechanics/vocabulary.ts": "7237c9ce9454dd5a4367a9ba6fca5ea32d6f1067da5af2291cc23de8b36926da",
+      "src/business/mechanics/vocabulary.ts": "ac2408ad0e511978468d80880494ed78739ebdd8f95c6299fe1357046dde195b",
       "src/business/timeline-pointer.ts": "acaa78dab1f0a6cc6a4c6c9f71e3b8fb2d773f73055f256d73f49a7fac8d1001",
       "src/business/timeline/actions.ts": "6a03b15f031b226ab3048c48ffe20fe66ef30f0a5334e8913570e4508496b871",
       "src/business/timeline/axis-contrast.ts": "392b81516a72e177511c6432286d06e55424d01e84e4591cc35e4dd4020f1982",
@@ -45,16 +45,16 @@
       "src/business/timeline/context.ts": "3a2403cf5c07fec10ea3cddb9889102b3fbd968d91920a4e620b18bdd5adecbc",
       "src/business/timeline/controls.ts": "b079761aed4ac66497115ac4321c5614848e3f00cff254892f8ceab241f918c9",
       "src/business/timeline/coverage.ts": "6b8e6fd3ea2fa8043c679e1c3ba35ac6ec265a9c062286ef3e34575c13900249",
-      "src/business/timeline/damage-detail.ts": "e281e81f437e69f9df9cad1a90760dcd763843046b261ce4a65ace42a8865507",
+      "src/business/timeline/damage-detail.ts": "f808e1258a6a4919e671dcfada433722671708fd008adf758684b56773aa64c2",
       "src/business/timeline/damage-sources.ts": "8dedf602068a7d9194f09234b63e486336653c44067960aafdbb945bf34abbe4",
-      "src/business/timeline/detail.ts": "0308e3b4d5a3b0f847fbec71c30ee3ae4d3f1f54645f62ad440d889b6c4e5e23",
+      "src/business/timeline/detail.ts": "a252324516dfb87788f9c8cc5b7bb465a7e5c22ecbeba3a87a080f190f633d5e",
       "src/business/timeline/display-names.ts": "62dd75e460f5ab17045ebf368d1e2ba4f9261acedd7eae01e4ac8e7aa1f984d2",
       "src/business/timeline/display-rows.ts": "cb7c508c6798bab7f79de3e29f2f48736dd0341ea0ec753b873661a3cdeba87e",
       "src/business/timeline/dom.ts": "7173f648b7df9655f3515c859fbc685bf9100cf9c35ed3ff04f8b01efa3174fd",
-      "src/business/timeline/elemental.ts": "43e9ea2a63733421a1b023c5c24576d9e8311dbe001352912600312f6155ac53",
+      "src/business/timeline/elemental.ts": "36110f9869a02ddfbbbb1552a6028865747d1cd0df3cc367ee58880da9b2599c",
       "src/business/timeline/evidence-index.ts": "f16cc68645be0e77c7f3b6eb7ed37eb7c87290f34825cd31122e8a17533fa3a0",
       "src/business/timeline/geometry.ts": "5d604a5b2d6f0e477b4571ab50c64f41181b1edc9af0e8b4a7443bee41d748ff",
-      "src/business/timeline/hits.ts": "21343ff927a31715d0329b6a54f550725cc15424f6964c18c112aa0c538d7c93",
+      "src/business/timeline/hits.ts": "e02d80e6adab0bc3dcf2f23175bab3101702559f9b7c634f2c08f06a7b6c4999",
       "src/business/timeline/index.ts": "da2614bff042ffef5cc63aa08008852be7d4652a2a09726e0decb4ecb20d6c9f",
       "src/business/timeline/layout.ts": "d2f032df74ad2c435835a1d4a0392e7fa754d42ee921c351f58ed4864c974cc8",
       "src/business/timeline/navigation.ts": "78f82e86b6098a0f8f0cd5a421a328fda9ebc816a725086c7952e606aacfd750",
@@ -63,7 +63,7 @@
       "src/business/timeline/resources.ts": "a26db4c9ccfc52820fa9e174d741423f323b5f49ecf61794ec67cfae4ac5d5cd",
       "src/business/timeline/row-disclosure.ts": "2ceb66c5428c1bcd75aec880dd2d12705028eb18ff82e1765a557a704dc00e5b",
       "src/business/timeline/shared.ts": "c6cacccaf5b6f537536df87ecc2e844717a43bf8d331d5457cb2051aac8c8f50",
-      "src/business/timeline/special-states.ts": "b9b99f8f07edc54fde6c4232219e6005cef6705bc4a078e22f08640610ee565c",
+      "src/business/timeline/special-states.ts": "88d2f4aee955100bb728a6f047fa58260fc9ec09dbdab72781f08a6775992017",
       "src/business/timeline/svg.ts": "f0668edb2f41c5fea5b31ebdb6184f77f8a26a7a390d90e6b092ce345df8abeb",
       "src/business/user-file-actions.ts": "a8edaa6bf2f29ff7e9cb4fe89859fdffeda0b9a30557ede8cb4c93fdaaad4f97",
       "src/business/whiteboard/actions.ts": "c0f598f6eb300b4dee09259d91a53a6715da2d7eea9e23cfe1f628053b87d51a",
@@ -73,7 +73,7 @@
       "src/business/whiteboard/equipment.ts": "02a72ec85adb0e27758c7fb7758af2ad47559acf9e22bfa56246a7789c9c4041",
       "src/business/whiteboard/files.ts": "0d60472e93739af1810d16078541f831e7061bfb17dd7e49a6f754f5e1d67743",
       "src/business/whiteboard/index.ts": "434b20b07fc5af8ad5a3c014d293c237dbb003c5ae19909f5c08886ea55e82f1",
-      "src/business/whiteboard/inspector.ts": "cd9b953356eccd2ddd92ab157c96434507d18e3f5f856fe1c3a947c735a4f79d",
+      "src/business/whiteboard/inspector.ts": "0d43162801659f17a3a7e5c9131663e6d00a6b4701ed281e8093964fd953a4c1",
       "src/business/whiteboard/pointer.ts": "27d0129c7f3a91697c48dacebac149fccb39c4413386dda4e39fa3acaeb2a40f",
       "src/business/whiteboard/ports.ts": "c95df7e7ffcb052a45420c85422e0f8643c5dae4b482b6236176b92358a7176f",
       "src/business/whiteboard/projection.ts": "8a28e01678c7e0ce89b575a7277c4090fc5390f0576d332a2040b32782ec9f8f",
@@ -140,8 +140,8 @@
     },
     "children": {
       "business": {
-        "bytes": 339122,
-        "sha256": "03904cae81641bd2c8d3735df9fcc12c24a16ca625a53b99d76ac4ebff4b3540",
+        "bytes": 341315,
+        "sha256": "6b36502f00f52f96909dfd53fa54e1b3deeac6a06c0f6a16045341ecee4bb994",
         "sourceInputs": {
           "contract": "genshin-source-inputs-v1",
           "scope": "business",
@@ -172,7 +172,7 @@
             "src/business/mechanics/reports.ts": "198c23907fc95a07447372618ba89d1ecfbf4dfbbfd683be1ac3738173090ca1",
             "src/business/mechanics/schema-form.ts": "c4b8940ec6f1c714ea5e84bf56db4d84ef24bac57d201351c9e1415d84a99204",
             "src/business/mechanics/view.ts": "cefadeedd183814da3e1a13db59b2a9704d8d75d204a566d2ae5f6449731afb7",
-            "src/business/mechanics/vocabulary.ts": "7237c9ce9454dd5a4367a9ba6fca5ea32d6f1067da5af2291cc23de8b36926da",
+            "src/business/mechanics/vocabulary.ts": "ac2408ad0e511978468d80880494ed78739ebdd8f95c6299fe1357046dde195b",
             "src/business/timeline-pointer.ts": "acaa78dab1f0a6cc6a4c6c9f71e3b8fb2d773f73055f256d73f49a7fac8d1001",
             "src/business/timeline/actions.ts": "6a03b15f031b226ab3048c48ffe20fe66ef30f0a5334e8913570e4508496b871",
             "src/business/timeline/axis-contrast.ts": "392b81516a72e177511c6432286d06e55424d01e84e4591cc35e4dd4020f1982",
@@ -180,16 +180,16 @@
             "src/business/timeline/context.ts": "3a2403cf5c07fec10ea3cddb9889102b3fbd968d91920a4e620b18bdd5adecbc",
             "src/business/timeline/controls.ts": "b079761aed4ac66497115ac4321c5614848e3f00cff254892f8ceab241f918c9",
             "src/business/timeline/coverage.ts": "6b8e6fd3ea2fa8043c679e1c3ba35ac6ec265a9c062286ef3e34575c13900249",
-            "src/business/timeline/damage-detail.ts": "e281e81f437e69f9df9cad1a90760dcd763843046b261ce4a65ace42a8865507",
+            "src/business/timeline/damage-detail.ts": "f808e1258a6a4919e671dcfada433722671708fd008adf758684b56773aa64c2",
             "src/business/timeline/damage-sources.ts": "8dedf602068a7d9194f09234b63e486336653c44067960aafdbb945bf34abbe4",
-            "src/business/timeline/detail.ts": "0308e3b4d5a3b0f847fbec71c30ee3ae4d3f1f54645f62ad440d889b6c4e5e23",
+            "src/business/timeline/detail.ts": "a252324516dfb87788f9c8cc5b7bb465a7e5c22ecbeba3a87a080f190f633d5e",
             "src/business/timeline/display-names.ts": "62dd75e460f5ab17045ebf368d1e2ba4f9261acedd7eae01e4ac8e7aa1f984d2",
             "src/business/timeline/display-rows.ts": "cb7c508c6798bab7f79de3e29f2f48736dd0341ea0ec753b873661a3cdeba87e",
             "src/business/timeline/dom.ts": "7173f648b7df9655f3515c859fbc685bf9100cf9c35ed3ff04f8b01efa3174fd",
-            "src/business/timeline/elemental.ts": "43e9ea2a63733421a1b023c5c24576d9e8311dbe001352912600312f6155ac53",
+            "src/business/timeline/elemental.ts": "36110f9869a02ddfbbbb1552a6028865747d1cd0df3cc367ee58880da9b2599c",
             "src/business/timeline/evidence-index.ts": "f16cc68645be0e77c7f3b6eb7ed37eb7c87290f34825cd31122e8a17533fa3a0",
             "src/business/timeline/geometry.ts": "5d604a5b2d6f0e477b4571ab50c64f41181b1edc9af0e8b4a7443bee41d748ff",
-            "src/business/timeline/hits.ts": "21343ff927a31715d0329b6a54f550725cc15424f6964c18c112aa0c538d7c93",
+            "src/business/timeline/hits.ts": "e02d80e6adab0bc3dcf2f23175bab3101702559f9b7c634f2c08f06a7b6c4999",
             "src/business/timeline/index.ts": "da2614bff042ffef5cc63aa08008852be7d4652a2a09726e0decb4ecb20d6c9f",
             "src/business/timeline/layout.ts": "d2f032df74ad2c435835a1d4a0392e7fa754d42ee921c351f58ed4864c974cc8",
             "src/business/timeline/navigation.ts": "78f82e86b6098a0f8f0cd5a421a328fda9ebc816a725086c7952e606aacfd750",
@@ -198,7 +198,7 @@
             "src/business/timeline/resources.ts": "a26db4c9ccfc52820fa9e174d741423f323b5f49ecf61794ec67cfae4ac5d5cd",
             "src/business/timeline/row-disclosure.ts": "2ceb66c5428c1bcd75aec880dd2d12705028eb18ff82e1765a557a704dc00e5b",
             "src/business/timeline/shared.ts": "c6cacccaf5b6f537536df87ecc2e844717a43bf8d331d5457cb2051aac8c8f50",
-            "src/business/timeline/special-states.ts": "b9b99f8f07edc54fde6c4232219e6005cef6705bc4a078e22f08640610ee565c",
+            "src/business/timeline/special-states.ts": "88d2f4aee955100bb728a6f047fa58260fc9ec09dbdab72781f08a6775992017",
             "src/business/timeline/svg.ts": "f0668edb2f41c5fea5b31ebdb6184f77f8a26a7a390d90e6b092ce345df8abeb",
             "src/business/user-file-actions.ts": "a8edaa6bf2f29ff7e9cb4fe89859fdffeda0b9a30557ede8cb4c93fdaaad4f97",
             "src/business/whiteboard/actions.ts": "c0f598f6eb300b4dee09259d91a53a6715da2d7eea9e23cfe1f628053b87d51a",
@@ -208,7 +208,7 @@
             "src/business/whiteboard/equipment.ts": "02a72ec85adb0e27758c7fb7758af2ad47559acf9e22bfa56246a7789c9c4041",
             "src/business/whiteboard/files.ts": "0d60472e93739af1810d16078541f831e7061bfb17dd7e49a6f754f5e1d67743",
             "src/business/whiteboard/index.ts": "434b20b07fc5af8ad5a3c014d293c237dbb003c5ae19909f5c08886ea55e82f1",
-            "src/business/whiteboard/inspector.ts": "cd9b953356eccd2ddd92ab157c96434507d18e3f5f856fe1c3a947c735a4f79d",
+            "src/business/whiteboard/inspector.ts": "0d43162801659f17a3a7e5c9131663e6d00a6b4701ed281e8093964fd953a4c1",
             "src/business/whiteboard/pointer.ts": "27d0129c7f3a91697c48dacebac149fccb39c4413386dda4e39fa3acaeb2a40f",
             "src/business/whiteboard/ports.ts": "c95df7e7ffcb052a45420c85422e0f8643c5dae4b482b6236176b92358a7176f",
             "src/business/whiteboard/projection.ts": "8a28e01678c7e0ce89b575a7277c4090fc5390f0576d332a2040b32782ec9f8f",
@@ -276,7 +276,7 @@
       },
       "domain": {
         "bytes": 278966,
-        "sha256": "f5fa78a56fa5ab40d169970ae59ceac5ba162a235be61d0f9eb7989f56147ddd",
+        "sha256": "9536df3439b9e16e715f812e1f59fe4c8aeda43c4f9ef3263a3619ed881b487d",
         "sourceInputs": {
           "contract": "genshin-source-inputs-v1",
           "scope": "domain",
@@ -307,7 +307,7 @@
             "src/business/mechanics/reports.ts": "198c23907fc95a07447372618ba89d1ecfbf4dfbbfd683be1ac3738173090ca1",
             "src/business/mechanics/schema-form.ts": "c4b8940ec6f1c714ea5e84bf56db4d84ef24bac57d201351c9e1415d84a99204",
             "src/business/mechanics/view.ts": "cefadeedd183814da3e1a13db59b2a9704d8d75d204a566d2ae5f6449731afb7",
-            "src/business/mechanics/vocabulary.ts": "7237c9ce9454dd5a4367a9ba6fca5ea32d6f1067da5af2291cc23de8b36926da",
+            "src/business/mechanics/vocabulary.ts": "ac2408ad0e511978468d80880494ed78739ebdd8f95c6299fe1357046dde195b",
             "src/business/timeline-pointer.ts": "acaa78dab1f0a6cc6a4c6c9f71e3b8fb2d773f73055f256d73f49a7fac8d1001",
             "src/business/timeline/actions.ts": "6a03b15f031b226ab3048c48ffe20fe66ef30f0a5334e8913570e4508496b871",
             "src/business/timeline/axis-contrast.ts": "392b81516a72e177511c6432286d06e55424d01e84e4591cc35e4dd4020f1982",
@@ -315,16 +315,16 @@
             "src/business/timeline/context.ts": "3a2403cf5c07fec10ea3cddb9889102b3fbd968d91920a4e620b18bdd5adecbc",
             "src/business/timeline/controls.ts": "b079761aed4ac66497115ac4321c5614848e3f00cff254892f8ceab241f918c9",
             "src/business/timeline/coverage.ts": "6b8e6fd3ea2fa8043c679e1c3ba35ac6ec265a9c062286ef3e34575c13900249",
-            "src/business/timeline/damage-detail.ts": "e281e81f437e69f9df9cad1a90760dcd763843046b261ce4a65ace42a8865507",
+            "src/business/timeline/damage-detail.ts": "f808e1258a6a4919e671dcfada433722671708fd008adf758684b56773aa64c2",
             "src/business/timeline/damage-sources.ts": "8dedf602068a7d9194f09234b63e486336653c44067960aafdbb945bf34abbe4",
-            "src/business/timeline/detail.ts": "0308e3b4d5a3b0f847fbec71c30ee3ae4d3f1f54645f62ad440d889b6c4e5e23",
+            "src/business/timeline/detail.ts": "a252324516dfb87788f9c8cc5b7bb465a7e5c22ecbeba3a87a080f190f633d5e",
             "src/business/timeline/display-names.ts": "62dd75e460f5ab17045ebf368d1e2ba4f9261acedd7eae01e4ac8e7aa1f984d2",
             "src/business/timeline/display-rows.ts": "cb7c508c6798bab7f79de3e29f2f48736dd0341ea0ec753b873661a3cdeba87e",
             "src/business/timeline/dom.ts": "7173f648b7df9655f3515c859fbc685bf9100cf9c35ed3ff04f8b01efa3174fd",
-            "src/business/timeline/elemental.ts": "43e9ea2a63733421a1b023c5c24576d9e8311dbe001352912600312f6155ac53",
+            "src/business/timeline/elemental.ts": "36110f9869a02ddfbbbb1552a6028865747d1cd0df3cc367ee58880da9b2599c",
             "src/business/timeline/evidence-index.ts": "f16cc68645be0e77c7f3b6eb7ed37eb7c87290f34825cd31122e8a17533fa3a0",
             "src/business/timeline/geometry.ts": "5d604a5b2d6f0e477b4571ab50c64f41181b1edc9af0e8b4a7443bee41d748ff",
-            "src/business/timeline/hits.ts": "21343ff927a31715d0329b6a54f550725cc15424f6964c18c112aa0c538d7c93",
+            "src/business/timeline/hits.ts": "e02d80e6adab0bc3dcf2f23175bab3101702559f9b7c634f2c08f06a7b6c4999",
             "src/business/timeline/index.ts": "da2614bff042ffef5cc63aa08008852be7d4652a2a09726e0decb4ecb20d6c9f",
             "src/business/timeline/layout.ts": "d2f032df74ad2c435835a1d4a0392e7fa754d42ee921c351f58ed4864c974cc8",
             "src/business/timeline/navigation.ts": "78f82e86b6098a0f8f0cd5a421a328fda9ebc816a725086c7952e606aacfd750",
@@ -333,7 +333,7 @@
             "src/business/timeline/resources.ts": "a26db4c9ccfc52820fa9e174d741423f323b5f49ecf61794ec67cfae4ac5d5cd",
             "src/business/timeline/row-disclosure.ts": "2ceb66c5428c1bcd75aec880dd2d12705028eb18ff82e1765a557a704dc00e5b",
             "src/business/timeline/shared.ts": "c6cacccaf5b6f537536df87ecc2e844717a43bf8d331d5457cb2051aac8c8f50",
-            "src/business/timeline/special-states.ts": "b9b99f8f07edc54fde6c4232219e6005cef6705bc4a078e22f08640610ee565c",
+            "src/business/timeline/special-states.ts": "88d2f4aee955100bb728a6f047fa58260fc9ec09dbdab72781f08a6775992017",
             "src/business/timeline/svg.ts": "f0668edb2f41c5fea5b31ebdb6184f77f8a26a7a390d90e6b092ce345df8abeb",
             "src/business/user-file-actions.ts": "a8edaa6bf2f29ff7e9cb4fe89859fdffeda0b9a30557ede8cb4c93fdaaad4f97",
             "src/business/whiteboard/actions.ts": "c0f598f6eb300b4dee09259d91a53a6715da2d7eea9e23cfe1f628053b87d51a",
@@ -343,7 +343,7 @@
             "src/business/whiteboard/equipment.ts": "02a72ec85adb0e27758c7fb7758af2ad47559acf9e22bfa56246a7789c9c4041",
             "src/business/whiteboard/files.ts": "0d60472e93739af1810d16078541f831e7061bfb17dd7e49a6f754f5e1d67743",
             "src/business/whiteboard/index.ts": "434b20b07fc5af8ad5a3c014d293c237dbb003c5ae19909f5c08886ea55e82f1",
-            "src/business/whiteboard/inspector.ts": "cd9b953356eccd2ddd92ab157c96434507d18e3f5f856fe1c3a947c735a4f79d",
+            "src/business/whiteboard/inspector.ts": "0d43162801659f17a3a7e5c9131663e6d00a6b4701ed281e8093964fd953a4c1",
             "src/business/whiteboard/pointer.ts": "27d0129c7f3a91697c48dacebac149fccb39c4413386dda4e39fa3acaeb2a40f",
             "src/business/whiteboard/ports.ts": "c95df7e7ffcb052a45420c85422e0f8643c5dae4b482b6236176b92358a7176f",
             "src/business/whiteboard/projection.ts": "8a28e01678c7e0ce89b575a7277c4090fc5390f0576d332a2040b32782ec9f8f",
@@ -411,7 +411,7 @@
       },
       "foundation": {
         "bytes": 34471,
-        "sha256": "8bdf9c8db9a91d472611e3b72e0dca9fcde7cba63f43229ad5f2b5d86c569362",
+        "sha256": "612068983cf2d628ce91713d65db08a2ae1bcd742663536b2ee5ec850a344aaf",
         "sourceInputs": {
           "contract": "genshin-source-inputs-v1",
           "scope": "foundation",
@@ -442,7 +442,7 @@
             "src/business/mechanics/reports.ts": "198c23907fc95a07447372618ba89d1ecfbf4dfbbfd683be1ac3738173090ca1",
             "src/business/mechanics/schema-form.ts": "c4b8940ec6f1c714ea5e84bf56db4d84ef24bac57d201351c9e1415d84a99204",
             "src/business/mechanics/view.ts": "cefadeedd183814da3e1a13db59b2a9704d8d75d204a566d2ae5f6449731afb7",
-            "src/business/mechanics/vocabulary.ts": "7237c9ce9454dd5a4367a9ba6fca5ea32d6f1067da5af2291cc23de8b36926da",
+            "src/business/mechanics/vocabulary.ts": "ac2408ad0e511978468d80880494ed78739ebdd8f95c6299fe1357046dde195b",
             "src/business/timeline-pointer.ts": "acaa78dab1f0a6cc6a4c6c9f71e3b8fb2d773f73055f256d73f49a7fac8d1001",
             "src/business/timeline/actions.ts": "6a03b15f031b226ab3048c48ffe20fe66ef30f0a5334e8913570e4508496b871",
             "src/business/timeline/axis-contrast.ts": "392b81516a72e177511c6432286d06e55424d01e84e4591cc35e4dd4020f1982",
@@ -450,16 +450,16 @@
             "src/business/timeline/context.ts": "3a2403cf5c07fec10ea3cddb9889102b3fbd968d91920a4e620b18bdd5adecbc",
             "src/business/timeline/controls.ts": "b079761aed4ac66497115ac4321c5614848e3f00cff254892f8ceab241f918c9",
             "src/business/timeline/coverage.ts": "6b8e6fd3ea2fa8043c679e1c3ba35ac6ec265a9c062286ef3e34575c13900249",
-            "src/business/timeline/damage-detail.ts": "e281e81f437e69f9df9cad1a90760dcd763843046b261ce4a65ace42a8865507",
+            "src/business/timeline/damage-detail.ts": "f808e1258a6a4919e671dcfada433722671708fd008adf758684b56773aa64c2",
             "src/business/timeline/damage-sources.ts": "8dedf602068a7d9194f09234b63e486336653c44067960aafdbb945bf34abbe4",
-            "src/business/timeline/detail.ts": "0308e3b4d5a3b0f847fbec71c30ee3ae4d3f1f54645f62ad440d889b6c4e5e23",
+            "src/business/timeline/detail.ts": "a252324516dfb87788f9c8cc5b7bb465a7e5c22ecbeba3a87a080f190f633d5e",
             "src/business/timeline/display-names.ts": "62dd75e460f5ab17045ebf368d1e2ba4f9261acedd7eae01e4ac8e7aa1f984d2",
             "src/business/timeline/display-rows.ts": "cb7c508c6798bab7f79de3e29f2f48736dd0341ea0ec753b873661a3cdeba87e",
             "src/business/timeline/dom.ts": "7173f648b7df9655f3515c859fbc685bf9100cf9c35ed3ff04f8b01efa3174fd",
-            "src/business/timeline/elemental.ts": "43e9ea2a63733421a1b023c5c24576d9e8311dbe001352912600312f6155ac53",
+            "src/business/timeline/elemental.ts": "36110f9869a02ddfbbbb1552a6028865747d1cd0df3cc367ee58880da9b2599c",
             "src/business/timeline/evidence-index.ts": "f16cc68645be0e77c7f3b6eb7ed37eb7c87290f34825cd31122e8a17533fa3a0",
             "src/business/timeline/geometry.ts": "5d604a5b2d6f0e477b4571ab50c64f41181b1edc9af0e8b4a7443bee41d748ff",
-            "src/business/timeline/hits.ts": "21343ff927a31715d0329b6a54f550725cc15424f6964c18c112aa0c538d7c93",
+            "src/business/timeline/hits.ts": "e02d80e6adab0bc3dcf2f23175bab3101702559f9b7c634f2c08f06a7b6c4999",
             "src/business/timeline/index.ts": "da2614bff042ffef5cc63aa08008852be7d4652a2a09726e0decb4ecb20d6c9f",
             "src/business/timeline/layout.ts": "d2f032df74ad2c435835a1d4a0392e7fa754d42ee921c351f58ed4864c974cc8",
             "src/business/timeline/navigation.ts": "78f82e86b6098a0f8f0cd5a421a328fda9ebc816a725086c7952e606aacfd750",
@@ -468,7 +468,7 @@
             "src/business/timeline/resources.ts": "a26db4c9ccfc52820fa9e174d741423f323b5f49ecf61794ec67cfae4ac5d5cd",
             "src/business/timeline/row-disclosure.ts": "2ceb66c5428c1bcd75aec880dd2d12705028eb18ff82e1765a557a704dc00e5b",
             "src/business/timeline/shared.ts": "c6cacccaf5b6f537536df87ecc2e844717a43bf8d331d5457cb2051aac8c8f50",
-            "src/business/timeline/special-states.ts": "b9b99f8f07edc54fde6c4232219e6005cef6705bc4a078e22f08640610ee565c",
+            "src/business/timeline/special-states.ts": "88d2f4aee955100bb728a6f047fa58260fc9ec09dbdab72781f08a6775992017",
             "src/business/timeline/svg.ts": "f0668edb2f41c5fea5b31ebdb6184f77f8a26a7a390d90e6b092ce345df8abeb",
             "src/business/user-file-actions.ts": "a8edaa6bf2f29ff7e9cb4fe89859fdffeda0b9a30557ede8cb4c93fdaaad4f97",
             "src/business/whiteboard/actions.ts": "c0f598f6eb300b4dee09259d91a53a6715da2d7eea9e23cfe1f628053b87d51a",
@@ -478,7 +478,7 @@
             "src/business/whiteboard/equipment.ts": "02a72ec85adb0e27758c7fb7758af2ad47559acf9e22bfa56246a7789c9c4041",
             "src/business/whiteboard/files.ts": "0d60472e93739af1810d16078541f831e7061bfb17dd7e49a6f754f5e1d67743",
             "src/business/whiteboard/index.ts": "434b20b07fc5af8ad5a3c014d293c237dbb003c5ae19909f5c08886ea55e82f1",
-            "src/business/whiteboard/inspector.ts": "cd9b953356eccd2ddd92ab157c96434507d18e3f5f856fe1c3a947c735a4f79d",
+            "src/business/whiteboard/inspector.ts": "0d43162801659f17a3a7e5c9131663e6d00a6b4701ed281e8093964fd953a4c1",
             "src/business/whiteboard/pointer.ts": "27d0129c7f3a91697c48dacebac149fccb39c4413386dda4e39fa3acaeb2a40f",
             "src/business/whiteboard/ports.ts": "c95df7e7ffcb052a45420c85422e0f8643c5dae4b482b6236176b92358a7176f",
             "src/business/whiteboard/projection.ts": "8a28e01678c7e0ce89b575a7277c4090fc5390f0576d332a2040b32782ec9f8f",
@@ -573,7 +573,7 @@
     {
       "name": "dsh-production.js",
       "bytes": 4976969,
-      "sha256": "515f34b48a20c51b86e7d0d260f741bcdbb71fff17ce461b9ab91ec9f1277b50"
+      "sha256": "0ca1cdee986adba79236084afec4b55e074ed26a98e186c5a918445087d87637"
     },
     {
       "name": "dsh-production.css",
@@ -592,13 +592,13 @@
     },
     {
       "name": "business-ui.js",
-      "bytes": 339122,
-      "sha256": "03904cae81641bd2c8d3735df9fcc12c24a16ca625a53b99d76ac4ebff4b3540"
+      "bytes": 341315,
+      "sha256": "6b36502f00f52f96909dfd53fa54e1b3deeac6a06c0f6a16045341ecee4bb994"
     },
     {
       "name": "business-ui.js.map",
-      "bytes": 804642,
-      "sha256": "e666e95436dd310f4051839c4f1e5a43a6da0cb022f74c29329a28bfe2b68b8b"
+      "bytes": 809862,
+      "sha256": "e33d76bb15dec1b8d812747fd7767adb9908fa7b16a035e5de84544e70a41ffe"
     },
     {
       "name": "agent-window.html",
@@ -642,8 +642,8 @@
     },
     {
       "name": "app-file-actions.js",
-      "bytes": 9276,
-      "sha256": "fee9ec8637daa97bc78d3c9bf4f5919793858daf6b67c5f396ffa4400e517c08"
+      "bytes": 9312,
+      "sha256": "d1e3e8b71a570c44439a1718dd14e83133fb2dbac2fea895d54b9e5fad5b1fbe"
     },
     {
       "name": "result.js",
@@ -653,7 +653,7 @@
     {
       "name": "gui-foundation-v2.js",
       "bytes": 34471,
-      "sha256": "8bdf9c8db9a91d472611e3b72e0dca9fcde7cba63f43229ad5f2b5d86c569362"
+      "sha256": "612068983cf2d628ce91713d65db08a2ae1bcd742663536b2ee5ec850a344aaf"
     },
     {
       "name": "gui-foundation-tokens.css",
@@ -663,7 +663,7 @@
     {
       "name": "gui-foundation-manifest.json",
       "bytes": 391,
-      "sha256": "8c7b4ab9acb5ae5e4a1ab14550862d6b5e136ea916a49098f04b01a5cdc868f9"
+      "sha256": "2a5224a998a6db7e79093c4267c8fab7cad90e5819c8cfa2c2d256182f014f78"
     }
   ]
 }

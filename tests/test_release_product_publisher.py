@@ -4,6 +4,7 @@ import copy
 import json
 import shutil
 import subprocess
+import sys
 from datetime import UTC, datetime, timedelta
 from pathlib import Path
 
@@ -15,19 +16,35 @@ from genshin_app.product_release_index import (
     release_options,
     validate_product_release_index,
 )
-from genshin_app.release_pair_discovery import ReleasePairDiscoveryError
+from genshin_app.release_pair_discovery import (
+    QUALIFIED_DISCOVERY_CONTRACT,
+    QUALIFIED_DISCOVERY_SCHEMA_VERSION,
+    ReleasePairDiscoveryError,
+)
 from genshin_app.release_pair_feed import ReleasePairFeedError
 from genshin_app.release_pair_trust import build_trust_verifier
+from genshin_db.release_qualification import (
+    QUALIFICATION_CONTRACT,
+    manifest_fingerprint,
+)
 from tests.test_product_release_index import _signed, _verify, releases  # noqa: F401
 
 
 @pytest.fixture
 def publisher(monkeypatch):
-    monkeypatch.syspath_prepend(str(Path(__file__).resolve().parents[1] / "scripts"))
     from scripts import build_release_pair_feed
 
     monkeypatch.setattr(build_release_pair_feed, "build_trust_verifier", lambda _keys: _verify)
     return build_release_pair_feed
+
+
+def test_publisher_imports_in_fresh_offline_signing_process(tmp_path):
+    root = Path(__file__).resolve().parents[1]
+    load = ("import sys; sys.path.insert(0, sys.argv[1]); "
+            "from scripts.build_release_pair_feed import prepare_update_transition, finalize_product_site")
+    result = subprocess.run([sys.executable, "-I", "-c", load, str(root)], cwd=tmp_path,
+                            capture_output=True, timeout=20, check=False)
+    assert result.returncode == 0, result.stderr.decode(errors="replace")
 
 
 def _write(path, document):
@@ -41,6 +58,98 @@ def _prior(payload, pair, *, expired=False):
                     "latest_app_release_id": pair["pair_manifest"]["app"]["app_release_id"],
                     "latest_database_release_id": pair["database_manifest"]["database_release_id"],
                     "expires_at": expiry.isoformat()})
+
+
+def _qualified(pair, *, sequence=3):
+    manifest = pair["database_manifest"]
+    database = manifest["database"]
+    payload = {key: value for key, value in pair.items() if key != "signature"}
+    payload["pair_manifest"] = {**pair["pair_manifest"], "pair_sequence": sequence}
+    return _signed({**payload, "contract": QUALIFIED_DISCOVERY_CONTRACT,
+                    "schema_version": QUALIFIED_DISCOVERY_SCHEMA_VERSION, "database_qualification": {
+                        "contract": QUALIFICATION_CONTRACT,
+                        "database_release_id": manifest["database_release_id"],
+                        "manifest_fingerprint": manifest_fingerprint(manifest),
+                        "sha256": database["sha256"],
+                        "size_bytes": database["size_bytes"],
+                        "release_core_sha256": database["release_core"]["root_sha256"],
+                        "meta_fingerprint": database["meta_fingerprint"],
+                        "mutable_layer_fingerprint": "a" * 64,
+                        "manual_content_fingerprint": None,
+                    }})
+
+
+def test_prepare_update_transition_keeps_exact_signed_pairs_and_routes_only_one_asset(
+    tmp_path, publisher, releases,  # noqa: F811
+):
+    _, _, documents, _, payload = releases
+    installed, bridge, final = documents[1, 1], documents[2, 1], _qualified(documents[2, 2])
+    past = _prior(payload, installed)
+    paths = [_write(tmp_path / f"{name}.json", document)
+             for name, document in (("previous", past), ("bridge", bridge), ("final", final))]
+    released = datetime.now(UTC)
+    expires = released + timedelta(days=30)
+    output = tmp_path / "transition"
+    report = publisher.prepare_update_transition(
+        *paths, released.isoformat(), expires.isoformat(), output, (), index_sequence_floor=15, app_sequence_floor=5,
+    )
+    assert report["legacy_index_sequence"] == 16 and report["current_index_sequence"] == 17
+    assert report["bridge_pair_id"] == bridge["pair_manifest"]["release_pair_id"]
+    assert report["final_pair_id"] == final["pair_manifest"]["release_pair_id"]
+    assert paths[0].read_bytes() == canonical(past)
+    confirmed = {}
+    for name, expected_pairs in (("legacy", [installed, bridge]), ("current", [installed, bridge, final])):
+        unsigned = json.loads((output / f"{name}-index.unsigned.json").read_bytes())
+        assert unsigned.pop("signature") is None
+        assert unsigned["pairs"] == expected_pairs
+        assert unsigned["apps"][:-1] == past["apps"]
+        assert unsigned["apps"][-1]["release_sequence"] == 6
+        assert (output / f"{name}-index-signing-payload.canonical.json").read_bytes() == canonical(unsigned)
+        confirmed[name] = validate_product_release_index(_signed(unsigned), channel="stable",
+                                                         trust_verifier=_verify, now=released)
+    (app_only,) = release_options(confirmed["legacy"], installed["pair_manifest"], installed["database_manifest"])
+    assert (app_only["mode"], app_only["reuse_database"], app_only["reuse_app"]) == ("app_only", True, False)
+    (database_only,) = release_options(confirmed["current"], bridge["pair_manifest"], bridge["database_manifest"])
+    assert (database_only["mode"], database_only["reuse_database"], database_only["reuse_app"]) == (
+        "database_only", False, True,
+    )
+    assert not release_options(confirmed["current"], final["pair_manifest"], final["database_manifest"])
+
+
+@pytest.mark.parametrize(("case", "reason"), [
+    ("v3_bridge", "transition_legacy_requires_v2"),
+    ("v2_final", "transition_final_requires_forward_v3"),
+    ("pair_sequence_gap", "transition_final_requires_forward_v3"),
+    ("database_first", "transition_invalid"),
+    ("different_app_archive", "product_release_app_artifact_conflict"),
+])
+def test_prepare_update_transition_rejects_wrong_formats_and_routes(
+    tmp_path, publisher, releases, case, reason,  # noqa: F811
+):
+    _, _, documents, _, payload = releases
+    installed, bridge, final = documents[1, 1], documents[2, 1], _qualified(documents[2, 2])
+    if case == "v3_bridge":
+        bridge = _qualified(bridge, sequence=2)
+    elif case == "v2_final":
+        final = documents[2, 2]
+    elif case == "pair_sequence_gap":
+        final = _qualified(documents[2, 2], sequence=4)
+    elif case == "database_first":
+        bridge = documents[1, 2]
+        final = _qualified(documents[2, 2], sequence=4)
+    else:
+        final["artifacts"]["app"]["sha256"] = "f" * 64
+        final.pop("signature")
+        final = _signed(final)
+    paths = [_write(tmp_path / f"{name}.json", document) for name, document in (
+        ("previous", _prior(payload, installed)), ("bridge", bridge), ("final", final),
+    )]
+    output = tmp_path / "transition"
+    released = datetime.now(UTC)
+    expires = released + timedelta(days=30)
+    with pytest.raises((ReleasePairDiscoveryError, ReleasePairFeedError), match=reason):
+        publisher.prepare_update_transition(*paths, released.isoformat(), expires.isoformat(), output, ())
+    assert not output.exists()
 
 
 @pytest.mark.parametrize(("addition_ids", "latest", "modes"), [

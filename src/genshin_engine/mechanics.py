@@ -19,6 +19,7 @@ from genshin_engine import snapshot_capture as capture_contract
 from genshin_engine.attribute_ledger import AttributeLedgerError
 from genshin_engine.attribute_runtime import AttributeRuntime
 from genshin_engine.beneficiary_selection import (
+    position_matches,
     possible_recipients,
     qualification_errors,
     select_recipients,
@@ -162,6 +163,8 @@ from genshin_engine.state_runtime_mechanics import (
     route_event_id,
     validate_state_runtime_bindings,
 )
+from genshin_engine.target_scene import TargetSceneRuntime
+from genshin_engine.target_scene_packet import run_contact_packet
 from genshin_engine.target_state import (
     MAX_TARGET_CONDITION_CHECKS,
     MAX_TARGET_CONDITION_TRACE_BYTES,
@@ -176,9 +179,16 @@ MAX_MECHANICS_EVENTS = 40000
 
 
 class _Mechanics:
+    target_scene: TargetSceneRuntime | None = None
+    _active_contact_packet = None
+
     def __init__(self, template, rotation, model, data, matches):
         self.template, self.rotation, self.model, self.data = template, rotation, model, data
         self.rules = {r["id"]: r for r in model["rules"]}
+        self.component_quota_rules = tuple(
+            rule for rule in self.rules.values()
+            if (rule.get("quota") or {}).get("unit") == "damage_component_target")
+        self.committed_component_ids = set()
         self.has_beneficiary_eligibility = any("eligibility" in r["beneficiaries"] for r in self.rules.values())
         self.threshold_classic_rule_ids = _threshold_classic_rule_ids(model)
         self.fixed_sources = {s["id"]: s for s in model.get("fixed_effect_sources", [])}
@@ -218,7 +228,9 @@ class _Mechanics:
         self.resource_trigger_counts = {}
         self.expected_effect_counts = {}
         special_runtime = build_special_reaction_runtime(model, list(data["chars"]))
-        self.elemental = (ElementalRuntime(model["elemental_model"], special_runtime=special_runtime)
+        self.target_scene = TargetSceneRuntime(model, special_runtime) if "target_scene" in model else None
+        self.elemental = (self.target_scene.primary if self.target_scene else
+                          ElementalRuntime(model["elemental_model"], special_runtime=special_runtime)
                           if "elemental_model" in model else None)
         self.special_damage_groups = {}
         from genshin_engine.special_damage_echo import SpecialDamageEchoRuntime
@@ -233,6 +245,7 @@ class _Mechanics:
             "ordinary_bloom_core_created": self._record_ordinary_bloom_core_created,
             "bloom_replacement_core_created": self._record_ordinary_bloom_core_created,
             "bloom_replacement_core_expired": self._record_ordinary_bloom_core_created,
+            **({"elemental_application": self._check_world_application_callbacks} if self.target_scene else {}),
         })
         self.elemental_bridge = MechanicsElementalBridge(MechanicsElementalPorts(
             get_elemental=self._current_elemental,
@@ -242,6 +255,7 @@ class _Mechanics:
             count_event=self.count_event,
             dispatch_generated=self.generated_event_router.dispatch,
             observe_resource=self._observe_resource_change,
+            has_world=self.target_scene is not None,
         ))
         self.shared_pools = (pool_runtime.SharedPoolRuntime(model, list(data["chars"]),
             reserve_events=self._reserve_resource_events) if "shared_pools" in model else None)
@@ -294,7 +308,7 @@ class _Mechanics:
         return self.elemental_bridge.cursor
 
     def _current_elemental(self):
-        return self.elemental
+        return self.target_scene or self.elemental
 
     def _reserve_resource_events(self, count):
         self._reserve_events(count, "resource_counters")
@@ -441,6 +455,8 @@ class _Mechanics:
         return project_fixed_effects(self, event, hit, reported, missed=missed)
 
     def _special_runtime(self):
+        if self.target_scene:
+            return self.target_scene.world.special_runtime
         return self.elemental.special_runtime if self.elemental else None
 
     @staticmethod
@@ -545,10 +561,38 @@ class _Mechanics:
         self.trace.append(clone)
         self._count_event()
 
+    def _check_world_application_callbacks(self, row, cycle, _parent):
+        reactions = row.get("reactions", ())
+        if not reactions:
+            return
+        action = self.data["actions"].get(row["action_id"], {})
+        ability = self.data["abilities"].get(action.get("ability_id"), {})
+        application = {"origin": cycle, "action_id": row["action_id"],
+                       "action_type_id": ability.get("action_type_id"), "character": row["character"],
+                       "target_id": row["target_id"], "conditions": self.conditions}
+        for reaction in reactions:
+            event = self._reaction_event(application, reaction)
+            rules = [rule["id"] for rule in self.rules.values()
+                     if rule["trigger"].get("phase") == "post" and _selector(rule["trigger"], event)]
+            operations = [
+                operation["id"] for operation in self.shared_pools.config["operations"]
+                if operation["trigger"]["phase"] == "post" and _selector(operation["trigger"], event)
+                and not (self.resource_reactions and self.resource_reactions.excludes_operation(
+                    event, "post", {"kind": "elemental_application"}, operation))
+            ] if self.shared_pools else []
+            if rules or operations:
+                raise ElementalPending("target_scene_generated_reaction_callback_pending",
+                    "风旋派生附着已改变实际目标元素状态，但当前多目标入口不能为该后续反应运行声明的回调。",
+                    row["event_id"], {"target_id": row["target_id"], "reaction_type": reaction["type"],
+                                      "matching_rule_ids": rules, "matching_operation_ids": operations})
+
     def _observe_resource_change(self, row, cycle, parent):
         enqueue_resource_changes(self, row, cycle, parent)
 
     def _drain_special_events(self, cycle=0, parent=None, events=None):
+        packet = self._active_contact_packet
+        if packet is not None and packet.receipts is not None and events is None:
+            return packet.drain_for(self, cycle, parent)
         return self.elemental_bridge.drain_generated(cycle, parent, events)
 
     def _advance_elemental(self, time, cycle=0, parent=None):
@@ -566,7 +610,7 @@ class _Mechanics:
 
     def _next_elemental_deadline(self):
         horizon = self.data["period"]*self.rotation.get("max_cycles", 3)
-        return select_elemental_deadline(self.elemental, self._special_runtime, horizon)
+        return select_elemental_deadline(self._current_elemental(), self._special_runtime, horizon)
 
     def _keep_pending_elemental(self, ev):
         if ev["kind"] != "elemental_state_deadline":
@@ -581,11 +625,19 @@ class _Mechanics:
         return self.event_emitter.offer_deadline(deadline, target=self.elemental.target, origin=origin)
 
     def on_event(self, ev, row, frontline, energy):
+        return self._run_observed_event(ev, row, frontline, energy, schedule=True)
+
+    def on_contact_packet(self, members, rows, frontline, energy):
+        return run_contact_packet(self, members, rows, frontline, energy)
+
+    def _run_observed_event(self, ev, row, frontline, energy, *, schedule=False):
         frames = self.counter_views.frames if self.counter_views else None
         if frames:
             frames.begin(ev)
         try:
             derived = self._on_event(ev, row, frontline, energy)
+            if not schedule:
+                return derived
             deadline = self.schedule_deadline(ev["origin"])
             return [*derived, *([deadline] if deadline else [])]
         finally:
@@ -598,12 +650,15 @@ class _Mechanics:
         if self.attribute_runtime:
             self.attribute_runtime.stage(ev, "capture" if ev["kind"] == "mechanics_snapshot_capture" else "pre")
         self.expire(ev["time"])
-        if self.elemental:
+        packet = self._active_contact_packet
+        if self.elemental and not (packet is not None and packet.prepared):
             self._advance_elemental(ev["time"], ev["origin"], ev)
         self.frontline = frontline
         if self.health_runtime:
             from genshin_engine.health_mechanics import sync_health
             sync_health(self, ev)
+        if packet is not None and not packet.prepared:
+            packet.prepare(self)
         return dispatch_mechanics_event(self, ev, row, frontline)
 
     def _crystallize_trigger_sample(self, ev, event, application):
@@ -662,17 +717,30 @@ class _Mechanics:
             ]
         return sample
 
-    def _application(self, ev, event, application):
+    def _contact_arguments(self, ev, event, application):
         trigger_stat_sample = self._crystallize_trigger_sample(
             ev, event, application)
-        receipt = self.elemental.attempt(event_id=ev["run_id"], action_id=event["action_id"],
-            actor=event["character"], time=self.time, application=application,
-            damage_element=event.get("element") if ev["kind"] == "mechanics_hit" else None,
-            stable_event_id=ev["id"], contact=(ev["data"].get("descriptor", {}).get("contact")
-                if ev["kind"] == "mechanics_hit" else ev["data"].get("contact")),
-            trigger_stat_sample=trigger_stat_sample)
+        return {
+            "event_id": ev["run_id"], "action_id": event["action_id"], "actor": event["character"],
+            "time": self.time, "application": application, "stable_event_id": ev["id"],
+            "damage_element": event.get("element") if ev["kind"] == "mechanics_hit" else None,
+            "contact": (ev["data"].get("descriptor", {}).get("contact")
+                        if ev["kind"] == "mechanics_hit" else ev["data"].get("contact")),
+            "trigger_stat_sample": trigger_stat_sample,
+        }
+
+    def _application(self, ev, event, application):
+        packet = self._active_contact_packet
+        if packet is not None and packet.receipts is not None:
+            receipt = packet.receipts.pop(ev["run_id"])
+        else:
+            arguments = self._contact_arguments(ev, event, application)
+            if self.target_scene:
+                receipt = self.target_scene.attempt(arguments, ev["id"], ev["origin"])
+            else:
+                receipt = self.elemental.attempt(**arguments)
+                self.elemental.trace[-1]["cycle"] = ev["origin"]
         receipt["cycle"] = ev["origin"]
-        self.elemental.trace[-1]["cycle"] = ev["origin"]
         self.trace.append(copy.deepcopy(receipt))
         if self.resource_reactions:
             self.resource_reactions.observe_application(ev, event, receipt)
@@ -714,8 +782,7 @@ class _Mechanics:
                     if _selector(selector, candidate_event):
                         candidates.add(rule["id"])
                         selected = self.beneficiaries(rule, candidate_event)
-                        if rule['beneficiaries']['scope'] == 'current_frontline':
-                            selected = [actor for actor in selected if actor == self.frontline]
+                        selected = [actor for actor in selected if position_matches(rule, actor, self.frontline)]
                         candidate_recipients.setdefault(rule['id'], set()).update(selected)
         reads = package_attribute_reads(self, parent["character"], candidate_rule_ids=candidates,
                                         candidate_recipients=candidate_recipients)
@@ -745,8 +812,7 @@ class _Mechanics:
                         allowed = zone == "dmg_bonus" or (event["event"] == "elemental_reaction"
                             and zone == "res_shred" and stat == reaction["reaction_element"])
                         selected = self.beneficiaries(rule, event)
-                        if rule['beneficiaries']['scope'] == 'current_frontline':
-                            selected = [actor for actor in selected if actor == self.frontline]
+                        selected = [actor for actor in selected if position_matches(rule, actor, self.frontline)]
                         independent = independent_attribute_write(self, rule, effect, reads, recipients=selected)
                         allowed = allowed or independent
                         if isinstance(value, dict):
@@ -846,7 +912,7 @@ class _Mechanics:
             if self.attribute_runtime:
                 self.attribute_runtime.stage(boundary_event, 'pre')
             sync_health(self, boundary_event)
-        if self.elemental and self.elemental.freeze_state:
+        if self.target_scene or (self.elemental and self.elemental.freeze_state):
             self._advance_elemental(time, next_cycle-1)
         states = {}
         for rid, state in self.state.items():
@@ -913,7 +979,8 @@ class _Mechanics:
             in sorted(self.ordinary_bloom_damage_windows.items())
             if time < state["anchor"] + TICKS//2
         ]
-        return {**({"elemental": self.elemental.boundary(time, next_cycle)} if self.elemental else {}),
+        elemental = self._current_elemental()
+        return {**({"elemental": elemental.boundary(time, next_cycle)} if elemental else {}),
                 **({'resource_damage_source_actions': sorted(self.executed_source_actions)}
                    if any(r.get('resource_damage') for r in self.rules.values()) else {}),
                 **({'resource_trigger_counts': dict(self.resource_trigger_counts)} if self.resource_trigger_counts else {}),

@@ -9,9 +9,9 @@ from __future__ import annotations
 import json
 import urllib.request
 
-APP_VERSION = "1.0.3"
+APP_VERSION = "1.0.4"
 UPDATE_MANIFEST_URL = ""  # 更新渠道确定后在此配置
-APP_DIR_NAME = "GenshinCalc"
+APP_DIR_NAME = 'GenshinCalcStable'
 
 # App and database releases have separate identities. The portable package
 # carries its starting pair; a signed stable index may authorize other exact
@@ -24,31 +24,30 @@ APP_DIR_NAME = "GenshinCalc"
 # Advance the database ID/sequence only when database content or its own
 # release contract changes.  App compatibility is declared by PairManifest,
 # not by minting a duplicate database release.
-APP_RELEASE_ID = "app-1.0.3"
-RELEASE_PAIR_ID = "pair-1.0.3-db-7.2.52-r1"
+APP_RELEASE_ID = 'app-1.0.4-r2'
+RELEASE_PAIR_ID = 'pair-1.0.4-r2-db-7.2.54-r1'
 # APP_VERSION is the feature version; each release ID identifies one immutable
 # package and may never be reused for a different rebuild.
-RELEASE_PAIR_SEQUENCE = 8
-# Installed 1.0.3 first reuses the 1.0.2 database in pair 7. The portable
-# package goes from the last shipped portable pair (6) directly to pair 8.
-APP_ONLY_BRIDGE_FROM_TO = (6, 8)
+RELEASE_PAIR_SEQUENCE = 12
+# Installed 1.0.4 first reuses the 1.0.3 database in pair 9. The portable
+# package goes from the last shipped portable pair (8) directly to pair 10.
+APP_ONLY_BRIDGE_FROM_TO = (10, 12)
+ACCEPTED_LEGACY_UPDATE_INDEX_SHA256 = 'e29d7b4557e5a92634681a8b2f384ed005eb605004ae54b8735f007b141a1943'
 # Exact bytes of the last accepted predecessor pair used by the portable
 # release build.  This prevents a builder from selecting an arbitrary older
 # in-repository pair merely because its sequence and database happen to look
 # compatible.  Advance this pin only after accepting a new portable candidate.
-ACCEPTED_PREDECESSOR_PAIR_MANIFEST_SHA256 = (
-    "24e9fddec4e137cf5d17d3207bfb0bbfda696c3835d6f3a21d87681d18b79e85"
-)
-DATABASE_PAIR_POLICY = "current_only"
-DATABASE_RELEASE_ID = "db-7.2.52-r1"
-DATABASE_RELEASE_SEQUENCE = 9
+ACCEPTED_PREDECESSOR_PAIR_MANIFEST_SHA256 = '8ca8ecce2737422cadcc5f3994ed969ed1cb0b9a4c08fb370988ef36e958638c'
+DATABASE_PAIR_POLICY = 'exact'
+DATABASE_RELEASE_ID = "db-7.2.54-r1"
+DATABASE_RELEASE_SEQUENCE = 10
 DATABASE_RELEASE_CHANNEL = "stable"
-DATABASE_RELEASE_MANIFEST_URL = ""
+DATABASE_RELEASE_MANIFEST_URL = 'https://aiur-wzy.github.io/gs_ai_calculator/stable/v3/latest.json'
 # Public verification keys are release inputs, not user preferences.  Each
 # item is {key_id, algorithm="rsa-pss-sha256", modulus_hex, exponent}.  The
 # current development build intentionally has no production feed/key yet, so
 # remote installation remains disabled instead of trusting an unsigned URL.
-DATABASE_RELEASE_TRUST_KEYS: tuple[dict[str, object], ...] = ()
+DATABASE_RELEASE_TRUST_KEYS = ({'key_id': '8330b1e85d36355db432ce6fdfaf54ba3faad529724dba275d03c77c8440f1df', 'algorithm': 'rsa-pss-sha256', 'modulus_hex': 'eb3802468297c736e4051ef50c3c4b72e2cae9632349ffdf3529d3f9467a74e2a48f763d21d88b6d91f017dae50642d72d895fa52c20c1814531f77030b8c6860c363ffef9fada3dab01bed048e4b91f6357bf53347e278346495f4be08d1391efc03684b8ddfca823193bd5107f1543ecd38cfade1dc23968f724eafa1f89247b56c3d3ae4245b75798684ca9f706a8ef594bc3b7d6319584881ea4c17ee43957da68e0ea79f19478594d265794d5bf5da57d932be5324dd2370e49669a5aecce9c382e813ce5f5fad9c08ca59fc4d3f3f63851ef5ffb5322bb0a2d11b709dcc9ea15cba1881cbf5693b7d167ff66a5a181d951f0a7724f77abad88fa817da59f8e5c849bf99a9794b5db9e99aa1b42652a451957233332ba7d4bbd44c202109a73c17996542412a6a98e35a41fa05ed65587d1a1afd27f08bf4e8480a9b98a3390759bb6f7c3a1fde1b674476b12156ca4a33957565ca4bc36d47f49d724160fec01b034e0c9889b82027afa5237455998625af9c429d8a019fcd9da7bbb47', 'exponent': 65537},)
 DATABASE_LOGIC_PROFILE = "genshin-calculation-v1"
 DATABASE_DATA_CONTRACT_VERSION = 1
 
@@ -61,7 +60,7 @@ NATIVE_AGENT_RUNTIME_GENERATION = "dsh_client_shell"
 # pins belong to historical release evidence, not executable fallback paths.
 # Set after the final runtime + frontend cohort has been reviewed together.
 NATIVE_AGENT_DSH_SHELL_MANIFEST_SHA256 = (
-    "32ebe348d1b52ef7fe55443c0c543fea36d59911b118c421ebccc815a75d802a"
+    "7bf46cb68db0d6940682b92748c54bad8caf7f71b43189fb90466eba518c51c6"
 )
 NATIVE_AGENT_NODE_VERSION = "24.19.0"
 NATIVE_AGENT_NODE_BINARY_SHA256 = (

@@ -22,13 +22,20 @@ REQUIRED_CAPABILITY_TAGS = {
     for reaction_type in SPECIAL_REACTION_TYPES
 }
 
-WEIGHTED_REACTION_TYPES = (
+_STELLAR_SWIRL_REACTION_TYPES = (
     "stellar_swirl_anemo",
     "stellar_swirl_cryo_lv2",
     "stellar_swirl_cryo_lv3",
+)
+
+WEIGHTED_REACTION_TYPES = (
+    *_STELLAR_SWIRL_REACTION_TYPES,
     "lunar_electro",
     "lunar_crystallize",
 )
+
+STELLAR_SWIRL_FACTOR_COMPONENTS = frozenset((*_STELLAR_SWIRL_REACTION_TYPES, "stellar_swirl"))
+STELLAR_SWIRL_FACTOR_ADJUSTMENT_KEYS = frozenset(("provider_id", "source", "components", "multiplier"))
 
 LUNAR_STELLAR_WEIGHTS = (0.6, 0.3, 0.05, 0.05)
 
@@ -93,21 +100,24 @@ _BASE_MECHANICS_KEYS = _PROFILE_META_KEYS
 
 # Engine extensions are explicit assumptions layered over the unchanged DB
 # base profile. They are not silently registered as reviewed database facts.
+STELLAR_FAST_CLOCK_384 = "experimental_384f"
+# Stable fast-frame estimate: four nominal seconds × 0.835149 real seconds.
+STELLAR_FAST_INTERVAL_384 = 3.340596
 OPTIONAL_MECHANICS_KEYS = {
-    "stellar_superconduct": frozenset(("initial_grant_layers", "settlement_bonus_layers", "periodic_resource")),
-    "stellar_swirl": frozenset(("initial_vortex_count", "initial_upgrade_cooldown_seconds")),
+    "stellar_superconduct": frozenset(("initial_grant_layers", "settlement_bonus_layers", "periodic_resource", "settlement_clock")),
+    "stellar_swirl": frozenset(("initial_vortex_count", "initial_upgrade_cooldown_seconds", "base_factor_adjustment")),
 }
 
 _MECHANICS_KEYS = {
     "stellar_superconduct": _BASE_MECHANICS_KEYS | frozenset((
         "field_duration_seconds", "settlement_interval_seconds", "refresh_mode",
-        "initial_grant_layers", "settlement_bonus_layers", "periodic_resource",
+        "initial_grant_layers", "settlement_bonus_layers", "periodic_resource", "settlement_clock",
     )),
     "stellar_swirl": _BASE_MECHANICS_KEYS | frozenset((
         "upgrade_threshold", "early_detonation_threshold", "detonation_delay_seconds",
         "ice_application_gu", "creation_batch_cap_once",
         "existing_vortex_counts_each_reaction",
-        "initial_vortex_count", "initial_upgrade_cooldown_seconds",
+        "initial_vortex_count", "initial_upgrade_cooldown_seconds", "base_factor_adjustment",
     )),
     "lunar_electro": _BASE_MECHANICS_KEYS | frozenset((
         "first_tick_delay_seconds", "tick_interval_seconds", "duration_seconds",
@@ -148,6 +158,21 @@ def _finite_number(value: Any, *, minimum: float | None = None, positive: bool =
     if positive and value <= 0:
         return False
     return minimum is None or value >= minimum
+
+
+def stellar_swirl_coefficient(adjustment, reaction_type, base_factor):
+    """Trace a validated, scoped adjustment without changing the raw state coefficient."""
+    if adjustment is None or reaction_type not in adjustment["components"]:
+        return None
+    multiplier = adjustment["multiplier"]
+    return {
+        "base_factor": base_factor,
+        "factor_multiplier": multiplier,
+        "effective_factor": base_factor * multiplier,
+        "provider_id": adjustment["provider_id"],
+        "source": adjustment["source"],
+        "status": "assumed",
+    }
 
 
 def _seconds_to_ticks(value: float, path: str) -> int:

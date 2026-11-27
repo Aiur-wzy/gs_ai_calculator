@@ -317,7 +317,20 @@ class EquipmentGuiPort(GuiResponses):
             artifact = verification_failure_artifact(exc, plan)
             if artifact is not None:
                 return verification_failure_response(exc, artifact)
-            return {"code": 1, "message": str(exc), "reason": exc.reason,
+            message = str(exc)
+            if exc.reason == "mechanics_pending" and isinstance(exc.details, dict):
+                issues = exc.details.get("issues") or []
+                issue = next((row for row in issues if isinstance(row, dict)
+                              and (row.get("message") or row.get("code"))), None)
+                if issue:
+                    explanation = issue.get("message") or issue["code"]
+                    location = issue.get("path") or issue.get("event_id")
+                    message = f"{message}。{explanation}"
+                    if location:
+                        message += f"（{location}）"
+                    if issue.get("code") and issue["code"] != explanation:
+                        message += f" [{issue['code']}]"
+            return {"code": 1, "message": message, "reason": exc.reason,
                     "details": exc.details}
         except TransportError as exc:
             return {"code": 1, "message": exc.message, "reason": exc.code}

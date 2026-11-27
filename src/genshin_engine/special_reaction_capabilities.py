@@ -1,4 +1,4 @@
-"""Frozen database authority for characters that enable native reactions.
+"""Database authority for characters that enable native reactions.
 
 The combat runtime uses stable database character IDs.  Display names are
 kept only in this reviewed database resource and never participate in engine
@@ -9,6 +9,9 @@ from __future__ import annotations
 import copy
 import hashlib
 import json
+import re
+from contextlib import contextmanager
+from contextvars import ContextVar
 from functools import lru_cache
 from importlib import resources
 from typing import Any
@@ -29,6 +32,9 @@ _PENDING_SNAPSHOT_REASONS = {
     "equipment_version_line_mismatch": "装备快照资料线与角色引用或资格目录不一致",
     "equipment_upstream_commit_mismatch": "装备快照提交与资格目录来源提交不一致",
 }
+_AUTHORITY = ContextVar("reviewed_special_reaction_catalog", default=None)
+_SHA1 = re.compile(r"[0-9a-f]{40}\Z")
+_SHA256 = re.compile(r"[0-9a-f]{64}\Z")
 _VALID_TAGS = frozenset(REQUIRED_CAPABILITY_TAGS.values())
 _TOP_LEVEL_FIELDS = frozenset({
     "schema_version", "collection_id", "revision", "status", "version_line",
@@ -57,40 +63,50 @@ def _catalog_hash(data: dict[str, Any]) -> str:
 
 _UPSTREAM_7252 = "6044f5aae7dd79fbbe15c5748ef99b654f6132b7"
 _UPSTREAM_7250 = "f11cf545a7eee32a29999f960ebfba305f896ed3"
+_CATALOGS = {
+    _UPSTREAM_7252: (SPECIAL_CAPABILITY_CATALOG_REVISION, "special-reaction-capabilities-7.2.52.json"),
+    _UPSTREAM_7250: (5, "special-reaction-capabilities.json"),
+}
 
 
-@lru_cache(maxsize=2)
-def _load_reviewed_special_reaction_capabilities(new_snapshot=False) -> dict[str, Any]:
-    filename = ("special-reaction-capabilities-7.2.52.json" if new_snapshot
-                else "special-reaction-capabilities.json")
+@lru_cache(maxsize=len(_CATALOGS))
+def _load_reviewed_special_reaction_capabilities(commit: str) -> dict[str, Any]:
+    revision, filename = _CATALOGS[commit]
     path = resources.files("genshin_db").joinpath(
         "resources", "mechanics", filename)
     try:
         data = json.loads(path.read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError) as exc:
         raise RuntimeError("无法读取运行时数据库中的星月反应角色资格目录。") from exc
+    return validate_reviewed_special_reaction_catalog(
+        data, upstream_commit=commit, expected_revision=revision)
+
+
+def validate_reviewed_special_reaction_catalog(data, *, upstream_commit=None, expected_revision=None):
+    """Check the existing catalog contract independently of its trusted source."""
     if not isinstance(data, dict) or set(data) != _TOP_LEVEL_FIELDS:
         raise RuntimeError("星月反应角色资格目录字段不完整。")
-    if (data.get("schema_version") != 1
+    if (type(data.get("schema_version")) is not int or data["schema_version"] != 1
             or data.get("collection_id") != SPECIAL_CAPABILITY_CATALOG_ID
-            or data.get("revision") != (SPECIAL_CAPABILITY_CATALOG_REVISION if new_snapshot else 5)
-            or data.get("source_upstream_commit") != (_UPSTREAM_7252 if new_snapshot else _UPSTREAM_7250)
+            or type(data.get("revision")) is not int or not 1 <= data["revision"] <= 1000000000
+            or expected_revision is not None and data["revision"] != expected_revision
+            or upstream_commit is not None and data["source_upstream_commit"] != upstream_commit
             or data.get("status") != "reviewed"
             or data.get("version_line") != SPECIAL_CAPABILITY_VERSION_LINE
             or not isinstance(data.get("source_upstream_commit"), str)
-            or len(data["source_upstream_commit"]) != 40
+            or _SHA1.fullmatch(data["source_upstream_commit"]) is None
             or not isinstance(data.get("source_target_version"), str)
             or not data["source_target_version"].strip()
             or not isinstance(data.get("source_files"), dict)
             or len(data["source_files"]) != 4
             or any(not isinstance(name, str) or not isinstance(digest, str)
-                   or len(digest) != 64
+                   or _SHA256.fullmatch(digest) is None
                    for name, digest in data["source_files"].items())):
         raise RuntimeError("星月反应角色资格目录身份无效。")
     if data.get("content_hash") != _catalog_hash(data):
         raise RuntimeError("星月反应角色资格目录内容哈希不匹配。")
     entries = data.get("entries")
-    if not isinstance(entries, list) or not entries:
+    if not isinstance(entries, list) or not 1 <= len(entries) <= 10000:
         raise RuntimeError("星月反应角色资格目录必须包含受审条目。")
     seen: set[int] = set()
     for row in entries:
@@ -114,7 +130,7 @@ def _load_reviewed_special_reaction_capabilities(new_snapshot=False) -> dict[str
                 or isinstance(depot_id, bool) or not isinstance(depot_id, int)
                 or depot_id <= 0
                 or not isinstance(row.get("form_selection_required"), bool)
-                or not isinstance(tags, list) or not tags
+                or not isinstance(tags, list) or not tags or not all(isinstance(tag, str) for tag in tags)
                 or len(tags) != len(set(tags)) or not set(tags) <= _VALID_TAGS
                 or not isinstance(row.get("runtime_profile_id"), str)
                 or not row["runtime_profile_id"].strip()
@@ -133,8 +149,34 @@ def _load_reviewed_special_reaction_capabilities(new_snapshot=False) -> dict[str
     return data
 
 
+@contextmanager
+def use_special_reaction_capability_catalog(catalog):
+    """Set authority for a host operation. Plans never select this scope."""
+    value = (copy.deepcopy(validate_reviewed_special_reaction_catalog(catalog))
+             if catalog is not None else None)
+    token = _AUTHORITY.set(value)
+    try:
+        yield
+    finally:
+        _AUTHORITY.reset(token)
+
+
+def _catalog_for_commit(commit=None):
+    """Resolve a catalog using host authority before any legacy resources."""
+    active = _AUTHORITY.get()
+    if active is not None:
+        return active
+    key = commit if isinstance(commit, str) and commit in _CATALOGS else _UPSTREAM_7252
+    return _load_reviewed_special_reaction_capabilities(key)
+
+
+def active_special_reaction_catalog_hash():
+    catalog = _AUTHORITY.get()
+    return catalog["content_hash"] if catalog is not None else None
+
+
 def load_reviewed_special_reaction_capabilities(commit=None) -> dict[str, Any]:
-    return copy.deepcopy(_load_reviewed_special_reaction_capabilities(commit != _UPSTREAM_7250))
+    return copy.deepcopy(_catalog_for_commit(commit))
 
 
 def special_reaction_capability_catalog() -> dict[str, Any]:
@@ -143,7 +185,7 @@ def special_reaction_capability_catalog() -> dict[str, Any]:
 
 
 def special_reaction_capability_entry(db_character_id: int, commit=None) -> dict[str, Any] | None:
-    catalog = load_reviewed_special_reaction_capabilities(commit)
+    catalog = _catalog_for_commit(commit)
     for row in catalog["entries"]:
         if row["character_id"] == db_character_id:
             return copy.deepcopy(row)
@@ -151,9 +193,9 @@ def special_reaction_capability_entry(db_character_id: int, commit=None) -> dict
 
 
 def verified_capability_tags(row: dict[str, Any]) -> tuple[str, ...]:
-    """Return only tags proven by the exact frozen catalog snapshot."""
+    """Return only tags proven by the exact reviewed catalog snapshot."""
     commit = row.get("equipment_upstream_commit")
-    catalog = load_reviewed_special_reaction_capabilities(commit)
+    catalog = _catalog_for_commit(commit)
     if (row.get("status") != "confirmed"
             or row.get("projection_reason_code") != SPECIAL_CAPABILITY_SNAPSHOT_MATCH
             or row.get("catalog_track") != SPECIAL_CAPABILITY_CATALOG_TRACK
@@ -202,8 +244,8 @@ def project_special_reaction_party_capabilities_detailed(
     # for any actor whose snapshot differs from the selected catalog.
     commits = [item["data_version"].get("upstream_commit") for item in equipment_inputs.values()
                if isinstance(item, dict) and isinstance(item.get("data_version"), dict)]
-    legacy_only = _UPSTREAM_7250 in commits and _UPSTREAM_7252 not in commits
-    catalog = load_reviewed_special_reaction_capabilities(_UPSTREAM_7250 if legacy_only else _UPSTREAM_7252)
+    selected = next((commit for commit in _CATALOGS if commit in commits), _UPSTREAM_7252)
+    catalog = _catalog_for_commit(selected)
     entries = {entry["character_id"]: entry for entry in catalog["entries"]}
     rows: list[dict[str, Any]] = []
     diagnostics: list[dict[str, Any]] = []

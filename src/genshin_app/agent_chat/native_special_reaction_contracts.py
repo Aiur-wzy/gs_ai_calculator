@@ -7,6 +7,7 @@ a replacement.
 from __future__ import annotations
 
 import copy
+from pathlib import Path
 
 from genshin_engine.special_damage_echo import (
     capabilities as special_damage_echo_capabilities,
@@ -47,8 +48,43 @@ def _model_example(catalog, family, *, assumed=False):
     }
 
 
-def special_reaction_capabilities():
-    """Project public engine producers; no DB lookup, mutation or approval."""
+def with_database_capability_catalog(db_path, producer):
+    """Expose the active directory without requiring a database for schema help."""
+    if db_path is None or not Path(db_path).is_file():
+        return producer()
+    from genshin_app.equipment.special_capability_authority import (
+        load_database_capability_catalog,
+    )
+    from genshin_db.equipment_queries import (
+        borrow_read_connection,
+        equipment_read_session,
+    )
+    from genshin_engine.special_reaction_capabilities import (
+        load_reviewed_special_reaction_capabilities,
+        use_special_reaction_capability_catalog,
+    )
+
+    path = Path(db_path)
+    with equipment_read_session(path):
+        catalog, _ = load_database_capability_catalog(path)
+        if catalog is None:
+            conn = borrow_read_connection(path)
+            if conn.execute("SELECT 1 FROM sqlite_schema WHERE type='table' AND name='meta'").fetchone():
+                target = conn.execute("SELECT value FROM meta WHERE key='upstream_commit'").fetchone()
+                if target:
+                    fallback = load_reviewed_special_reaction_capabilities(target[0])
+                    if fallback["source_upstream_commit"] == target[0]:
+                        catalog = fallback
+        with use_special_reaction_capability_catalog(catalog):
+            return producer()
+
+
+def special_reaction_capabilities(db_path=None):
+    """Describe engine inputs and the selected snapshot; never attest a party."""
+    return with_database_capability_catalog(db_path, _special_reaction_capabilities)
+
+
+def _special_reaction_capabilities():
     catalog = engine_special_reaction_capabilities()
     families = list(catalog["profiles"])
     return {

@@ -12,7 +12,10 @@ window.AppEditorFileActions=Object.freeze({create({root,show}){
   const matches=snapshot=>snapshot.base?adapter.currentMatches(snapshot.base):!WB.state.board&&!PL.state.plan&&snapshot.empty.boardEpoch===WB.state.request&&snapshot.empty.planEpoch===PL.state.sourceEpoch;
   const outcome=(status,message,guard=false)=>({status,message,dirty_open_guard_passed:guard});
   const confirmedNoWrite=response=>window.GenshinBusinessUI?.confirmedNoFileWrite?.(response)===true;
-  const unconfirmed=response=>{throw new Error(response?.details?.publication_state==="written_unverified"?"app_action_written_unverified":response?.reason||"app_action_execution_outcome_unknown");};
+  const unconfirmed=response=>{
+    const code=response?.details?.publication_state==="written_unverified"?"app_action_written_unverified":"app_action_execution_outcome_unknown";
+    throw new Error(code,{cause:response?.reason});
+  };
   const pick=async(action,documentKind,suggested)=>{
     const response=await callApi("dsh_client_file_dialog",{action,document_kind:documentKind,suggested_name:suggested||null});
     if(response.code)throw new Error("用户文件选择器没有完成，请重新查看 App 状态。");

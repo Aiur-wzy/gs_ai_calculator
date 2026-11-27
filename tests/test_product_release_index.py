@@ -5,8 +5,10 @@ import hashlib
 import io
 import json
 import shutil
+import sqlite3
 import sys
 from concurrent.futures import ThreadPoolExecutor
+from contextlib import closing
 from datetime import UTC, datetime, timedelta
 from pathlib import Path
 from types import SimpleNamespace
@@ -89,7 +91,7 @@ def _install_facts(data, app, pair, manifest, document):
 
 
 @pytest.fixture
-def releases(tmp_path, monkeypatch):
+def releases(tmp_path, monkeypatch, request):
     monkeypatch.setattr(update, "build_trust_verifier", lambda _keys: _verify)
     for module in (release_profile, database_release_reuse, release_pair_feed, update):
         monkeypatch.setattr(module, "read_database_identity", lambda path, **_: _identity(path))
@@ -121,6 +123,12 @@ def releases(tmp_path, monkeypatch):
         database = tmp_path / f"db-source-{generation}.sqlite"
         _fixture_database(database, upstream_commit=str(generation) * 40,
                           annotation_prefix=f"version-{generation}", semantic_marker=f"version-{generation}")
+        if getattr(request, "param", None) == "qualified_database":
+            with closing(sqlite3.connect(database)) as connection, connection:
+                connection.execute("CREATE TABLE meta (key TEXT PRIMARY KEY, value TEXT)")
+                connection.executemany("INSERT INTO meta VALUES (?, ?)", [
+                    ("upstream_commit", str(generation) * 40), ("game_version", "7.0.0"),
+                ])
         manifest = _manifest(database, logic_profile=version.DATABASE_LOGIC_PROFILE,
                              release_id=f"db-7.0.0-r{generation}", release_sequence=generation)
         databases[generation] = (database, manifest)
@@ -158,6 +166,82 @@ def releases(tmp_path, monkeypatch):
                "apps": [{"app_release_id": f"app-product-{item}", "release_sequence": item,
                          "released_at": before} for item in apps], "pairs": list(documents.values())}
     return apps, databases, documents, sources, payload
+
+
+def test_database_qualification_is_bound_to_the_pair_signature_and_manifest(releases):
+    from genshin_app.release_pair_discovery import (
+        QUALIFIED_DISCOVERY_CONTRACT,
+        QUALIFIED_DISCOVERY_SCHEMA_VERSION,
+        validate_latest_document,
+    )
+    from genshin_db.release_qualification import (
+        QUALIFICATION_CONTRACT,
+        manifest_fingerprint,
+    )
+
+    _, _, documents, _, payload = releases
+    legacy = documents[2, 2]
+    manifest = legacy["database_manifest"]
+    database = manifest["database"]
+    proof = {
+        "contract": QUALIFICATION_CONTRACT,
+        "database_release_id": manifest["database_release_id"],
+        "manifest_fingerprint": manifest_fingerprint(manifest),
+        "sha256": database["sha256"],
+        "size_bytes": database["size_bytes"],
+        "release_core_sha256": database["release_core"]["root_sha256"],
+        "meta_fingerprint": database["meta_fingerprint"],
+        "mutable_layer_fingerprint": "a" * 64,
+        "manual_content_fingerprint": None,
+    }
+
+    def check(document):
+        return validate_latest_document(document, expected_channel="stable", trust_verifier=_verify,
+                                        allow_unsigned_dev=False)
+
+    assert check(legacy)[1] is True
+    assert update.qualified_database_from_signed_document(legacy) is None
+    unsigned = {key: value for key, value in legacy.items() if key != "signature"}
+    unsigned.update(contract=QUALIFIED_DISCOVERY_CONTRACT, schema_version=QUALIFIED_DISCOVERY_SCHEMA_VERSION,
+                    database_qualification=proof)
+    signed = _signed(unsigned)
+    assert check(signed) == (signed, True)
+    assert update.qualified_database_from_signed_document(signed).sha256 == database["sha256"]
+    tampered = {**signed, "database_qualification": {**proof, "mutable_layer_fingerprint": "b" * 64}}
+    assert check(tampered)[1] is False
+    mismatch = {**unsigned, "database_qualification": {**proof, "sha256": "b" * 64}}
+    with pytest.raises(ReleasePairDiscoveryError, match="release_pair_database_qualification_invalid"):
+        check(_signed(mismatch))
+
+    other = {key: value for key, value in documents[1, 2].items() if key != "signature"}
+    other.update(contract=QUALIFIED_DISCOVERY_CONTRACT, schema_version=QUALIFIED_DISCOVERY_SCHEMA_VERSION,
+                 database_qualification=tampered["database_qualification"])
+    mixed = _signed({**payload, "pairs": [documents[1, 1], documents[2, 1], _signed(other), signed]})
+    with pytest.raises(ReleasePairDiscoveryError, match="product_release_database_qualification_conflict"):
+        validate_product_release_index(mixed, channel="stable", trust_verifier=_verify)
+
+
+def test_first_qualified_endpoint_response_still_obeys_legacy_replay_guard(tmp_path, monkeypatch, releases):
+    _, _, _, _, payload = releases
+    legacy_url = product_release_index.STABLE_INDEX_V2
+    new_url = product_release_index.QUALIFIED_STABLE_INDEX
+    cache = tmp_path / "latest.json"
+    responses = {
+        legacy_url: _signed(payload),
+        new_url: _signed({**payload, "index_sequence": payload["index_sequence"] - 1}),
+    }
+
+    def fetch(url, *, etag, timeout):
+        assert etag is None
+        return 200, canonical(responses[url]), '"fixture"'
+
+    monkeypatch.setattr(product_release_index, "_fetch_https", fetch)
+    first = discover_product_index(legacy_url, cache, channel="stable", trust_verifier=_verify)
+    with pytest.raises(ReleasePairDiscoveryError, match="product_release_index_replay"):
+        discover_product_index(new_url, cache, channel="stable", trust_verifier=_verify)
+    responses[new_url] = _signed({**payload, "index_sequence": payload["index_sequence"] + 1})
+    second = discover_product_index(new_url, cache, channel="stable", trust_verifier=_verify)
+    assert second["latest"] == first["latest"]
 
 
 def test_index_options_expiry_and_replay(tmp_path, monkeypatch, releases):
@@ -217,6 +301,131 @@ def test_old_endpoint_offers_only_app_then_new_endpoint_only_database(tmp_path, 
     assert options(current, final) == []
     assert requests == [(legacy, None), (stable, None), (stable, None)]
     assert json.loads(cache.read_bytes())["url"] == stable
+
+
+@pytest.mark.parametrize("releases", ["qualified_database"], indirect=True)
+def test_legacy_app_updater_then_new_database_updater(monkeypatch, releases, first_install):
+    from genshin_app import managed_installation
+    from genshin_app.release_pair_discovery import (
+        DISCOVERY_CONTRACT,
+        QUALIFIED_DISCOVERY_CONTRACT,
+        QUALIFIED_DISCOVERY_SCHEMA_VERSION,
+    )
+    from genshin_app.setup_frozen_qualification import (
+        _create_profile_markers,
+        _installed_identity,
+    )
+
+    apps, databases, documents, _, payload = releases
+    setup, local, index, downloads = first_install
+    old, bridge, final_v2 = (documents[key] for key in ((1, 1), (2, 1), (2, 2)))
+    final = _signed({**{key: value for key, value in final_v2.items() if key != "signature"},
+        "contract": QUALIFIED_DISCOVERY_CONTRACT, "schema_version": QUALIFIED_DISCOVERY_SCHEMA_VERSION,
+        "database_qualification": release_migration.build_database_install_qualification(*databases[2])})
+    bridge_payload = {**payload, "latest_database_release_id": "db-7.0.0-r1", "pairs": [old, bridge]}
+    initial = {**bridge_payload, "latest_app_release_id": "app-product-1", "pairs": [old],
+        "apps": payload["apps"][:1], "index_sequence": payload["index_sequence"] - 1}
+    proposed = {**payload, "pairs": [old, bridge, final], "index_sequence": payload["index_sequence"] + 1}
+    legacy_url = product_release_index.STABLE_INDEX
+    successor_url = product_release_index.QUALIFIED_STABLE_INDEX
+    assert all(pair["contract"] == DISCOVERY_CONTRACT for pair in bridge_payload["pairs"])
+    assert bridge["artifacts"]["app"] == final["artifacts"]["app"]
+
+    profile = local / version.APP_DIR_NAME
+    monkeypatch.setattr(managed_installation, "_quiet", lambda *_a: None)
+    setup = managed_installation.ManagedInstallationCoordinator(
+        local=local, install_root=profile, url=setup._url, trust_verifier=_verify,
+    )
+    index[0] = canonical(_signed(initial))
+    preview = setup.preview()
+    setup.install(user_confirmed=True, confirmation_digest=preview["confirmation_digest"])
+    app, data, workspace = (profile / name for name in ("app", "data", "update-workspace"))
+    markers = _create_profile_markers(data)
+    original_markers = {label: _sha(path) for label, path in markers.items()}
+    original = _installed_identity(profile, old)
+    downloads.clear()
+
+    launch_calls, restarts, index_requests = [], [], []
+    responses = {legacy_url: _signed(bridge_payload), successor_url: _signed(proposed)}
+
+    def fetch(url, *, etag, timeout):
+        index_requests.append((url, etag))
+        return 200, canonical(responses[url]), f'"index-{responses[url]["index_sequence"]}"'
+
+    def launch(argv, **options):
+        assert argv[1] == "--current-user" and len(argv) == 3
+        binary, request_path = Path(argv[0]), Path(argv[2])
+        assert binary == workspace / "GenshinCalcUpdater.exe" and request_path.parent == workspace
+        assert options["cwd"] == str(workspace) and options["shell"] is False
+        launch_calls.append((binary, request_path, _sha(binary)))
+        return SimpleNamespace(pid=123 + len(launch_calls))
+
+    def restart(root, relative):
+        assert root == app and relative == "GenshinCalcGUI.exe"
+        restarts.append(_sha(root / relative))
+        return 456 + len(restarts)
+
+    monkeypatch.setattr(product_release_index, "_fetch_https", fetch)
+    monkeypatch.setattr(coordinator, "_current_user_profile", lambda: profile)
+    monkeypatch.setattr(coordinator, "is_windows_elevated", lambda: False)
+    monkeypatch.setattr(coordinator.subprocess, "Popen", launch)
+    monkeypatch.setattr(helper, "_wait_for_parent_exit", lambda *_args: None)
+    monkeypatch.setattr(helper, "_launch_replacement", restart)
+    monkeypatch.setattr(database_bootstrap, "DATABASE_RELEASE_CHANNEL", "stable")
+    monkeypatch.setattr(database_bootstrap, "DATABASE_PAIR_POLICY", "exact")
+    monkeypatch.setattr(database_bootstrap, "is_frozen", lambda: True)
+    monkeypatch.setattr(database_bootstrap, "resource_dir", lambda: app / "_internal")
+    monkeypatch.setattr(database_bootstrap, "sys", SimpleNamespace(executable=str(app / "app.bin")))
+
+    def fresh_service(generation, database_generation, endpoint, scope):
+        release = f"app-product-{generation}"
+        monkeypatch.setattr(database_bootstrap, "APP_RELEASE_ID", release)
+        current = database_bootstrap.prepare_database_startup(data)
+        assert current["can_start"] and current["app_release_id"] == release
+        assert current["release_pair_id"] == f"pair-product-{generation}-{database_generation}"
+        assert current["database_integrity_scope"] == scope
+        return coordinator.ReleasePairCoordinator(
+            data_dir=data, active_app_root=app, workspace=workspace, discovery_url=endpoint, channel="stable",
+            trust_verifier=_verify, updater_locator=lambda: coordinator._locate_current_user_updater(app, data),
+            launcher=lambda binary, request_path: coordinator._launch_current_user_updater(
+                binary, request_path, app_root=app, data_dir=data), restart_relative="GenshinCalcGUI.exe",
+        )
+
+    def apply_update(service, mode, source_generation, target):
+        discovered = service.discover()
+        option, = discovered["update_options"]
+        assert option["mode"] == mode and option["document"] == target
+        result = service.prepare_and_launch(discovered, confirmed_document_sha256=option["confirmation_digest"],
+                                            user_confirmed=True)
+        assert result["launcher"]["method"] == "windows_current_user" and result["requires_exit"]
+        staged_binary, request_path, digest = launch_calls[-1]
+        assert digest == _sha(apps[source_generation][0] / PER_USER_UPDATER_RELATIVE)
+        request = helper._request(request_path)
+        assert request["operation_id"] == result["operation_id"] and request["restart_relative"] == "GenshinCalcGUI.exe"
+        monkeypatch.setattr(helper, "sys", SimpleNamespace(frozen=True, executable=str(staged_binary)))
+        completed = helper.execute_external_pair_update(workspace, app, data, operation_id=request["operation_id"],
+            cleanup=request["cleanup"], parent_pid=request["parent_pid"],
+            parent_wait_timeout=request["parent_wait_timeout_seconds"], restart_relative=request["restart_relative"],
+            current_user=True)
+        assert completed["status"] == "complete" and completed["restart"]["started"]
+        assert update.read_pair_update_journal(workspace)["state"] == "cleanup_complete"
+        assert {label: _sha(path) for label, path in markers.items()} == original_markers
+        return _installed_identity(profile, target)
+
+    old_service = fresh_service(1, 1, legacy_url, "full")
+    bridged = apply_update(old_service, "app_only", 1, bridge)
+    assert downloads == [bridge["artifacts"]["app"]["url"]]
+    assert bridged["database_sha256"] == original["database_sha256"]
+    assert bridged["app_inventory_sha256"] != original["app_inventory_sha256"]
+    new_service = fresh_service(2, 1, successor_url, "full")
+    installed = apply_update(new_service, "database_only", 2, final)
+    assert downloads == [bridge["artifacts"]["app"]["url"], final["artifacts"]["database"]["url"]]
+    assert installed["app_inventory_sha256"] == bridged["app_inventory_sha256"]
+    assert installed["database_sha256"] != bridged["database_sha256"]
+    assert len(launch_calls) == 2 and launch_calls[0][2] != launch_calls[1][2]
+    assert restarts == [_sha(apps[2][0] / "GenshinCalcGUI.exe")] * 2
+    assert fresh_service(2, 2, successor_url, "signed_exact_bytes").discover()["update_options"] == []
+    assert index_requests[0] == (legacy_url, None) and (successor_url, None) in index_requests
 
 
 def test_index_304_observes_a_concurrent_cache_advance(tmp_path, monkeypatch, releases):
@@ -283,8 +492,12 @@ def test_public_site_publishes_the_exact_signed_index_and_offline_pair(tmp_path,
     setup_asset = tmp_path / "setup.json"
     setup_asset.write_bytes(canonical({"url": "https://example.invalid/Setup.zip",
                                        "size_bytes": 17_000_000, "sha256": "d" * 64}))
+    offline_asset = tmp_path / "offline.json"
+    offline_asset.write_bytes(canonical({"url": "https://example.invalid/Offline.zip",
+                                         "size_bytes": 620_000_000, "sha256": "e" * 64}))
     result = build_release_pair_feed.finalize_product_site(index_path, signature_path, site, (),
-                                                          setup_asset_path=setup_asset)
+                                                          setup_asset_path=setup_asset,
+                                                          offline_bundle_asset_path=offline_asset)
     assert result["status"] == "finalized"
     assert (site / "latest.json").read_bytes() == canonical(_signed(payload))
     assert (site / "database-install-pair.json").read_bytes() == canonical(documents[2, 2])
@@ -292,6 +505,8 @@ def test_public_site_publishes_the_exact_signed_index_and_offline_pair(tmp_path,
     assert all(locator["url"] in page and locator["sha256"] in page for locator in documents[2, 2]["artifacts"].values())
     assert "非官方工具" in page and "YuanShenResources" in page
     assert "https://example.invalid/Setup.zip" in page and "d" * 64 in page
+    assert "Windows 完整离线安装包" in page and "https://example.invalid/Offline.zip" in page and "e" * 64 in page
+    assert "独立 App 更新包" in page and "免安装版解压后直接打开" not in page
     assert "GPT-6.1 Sol" in page and (site / ".nojekyll").is_file()
 
 
@@ -711,7 +926,7 @@ def test_reinstall_uses_retained_signed_pair_and_preserves_database_and_user_fil
     phases.clear()
     assert installer.install(user_confirmed=True, confirmation_digest=reinstall["confirmation_digest"],
                              progress=phases.append)["status"] == "complete"
-    assert phases[-1] == {"phase": "committing"}
+    assert [event["phase"] for event in phases][-3:] == ["committing", "registering", "cleanup"]
     assert len(downloads) == 1 and downloads[0].endswith(".zip")
     assert _sha(data / "genshin.db") == original_db
     assert user_file.read_bytes() == b'{"keep":true}'
@@ -887,6 +1102,52 @@ def test_current_user_install_cold_boot_and_repeat_independent_updates(monkeypat
     (app / PER_USER_UPDATER_RELATIVE).write_bytes(b"changed helper")
     assert not service.availability()["available"]
     assert len(calls) == 3
+
+
+def test_setup_accepts_qualified_index_entry_for_same_signed_installation(releases, first_install):
+    from genshin_app.release_pair_discovery import (
+        QUALIFIED_DISCOVERY_CONTRACT,
+        QUALIFIED_DISCOVERY_SCHEMA_VERSION,
+    )
+    from genshin_db.release_qualification import (
+        QUALIFICATION_CONTRACT,
+        manifest_fingerprint,
+    )
+
+    _, databases, documents, _, payload = releases
+    setup, local, index, downloads = first_install
+    installed = documents[1, 1]
+    index[0] = canonical(_signed({**payload, "latest_app_release_id": "app-product-1",
+        "latest_database_release_id": "db-7.0.0-r1", "apps": payload["apps"][:1],
+        "pairs": [installed], "index_sequence": payload["index_sequence"] - 1}))
+    preview = setup.preview()
+    setup.install(user_confirmed=True, confirmation_digest=preview["confirmation_digest"])
+    downloads.clear()
+
+    path, manifest = databases[1]
+    database = manifest["database"]
+    qualified = _signed({**{key: value for key, value in installed.items() if key != "signature"},
+        "contract": QUALIFIED_DISCOVERY_CONTRACT, "schema_version": QUALIFIED_DISCOVERY_SCHEMA_VERSION,
+        "database_qualification": {
+            "contract": QUALIFICATION_CONTRACT, "database_release_id": manifest["database_release_id"],
+            "manifest_fingerprint": manifest_fingerprint(manifest), "sha256": database["sha256"],
+            "size_bytes": database["size_bytes"], "release_core_sha256": database["release_core"]["root_sha256"],
+            "meta_fingerprint": database["meta_fingerprint"],
+            "mutable_layer_fingerprint": build_mutable_layer_fingerprint(path), "manual_content_fingerprint": None,
+        }})
+    index[0] = canonical(_signed({**payload, "pairs": [qualified, documents[2, 1], documents[1, 2], documents[2, 2]]}))
+
+    assert setup.repair_preview()["release_pair_id"] == "pair-product-2-1"
+    assert not downloads
+    assert json.loads((local / version.APP_DIR_NAME / "data" / LIVE_PAIR_PROOF_FILENAME).read_bytes()) == installed
+
+    changed_archive = copy.deepcopy(qualified)
+    changed_archive["artifacts"]["app"]["sha256"] = "e" * 64
+    discovered = {"authoritative": True, "installed_pair": installed["pair_manifest"],
+                  "installed_database": manifest,
+                  "product_index": {"pairs": {installed["pair_manifest"]["release_pair_id"]: changed_archive}}}
+    with pytest.raises(product_first_install.FirstInstallError, match="installed_pair_not_in_signed_index"):
+        setup._repair_selection(SimpleNamespace(discover=lambda: discovered), installed)
 
 
 def test_standalone_setup_repairs_installed_app_with_its_exact_database(monkeypatch, releases, first_install):

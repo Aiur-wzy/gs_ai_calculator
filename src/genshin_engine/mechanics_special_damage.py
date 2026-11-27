@@ -54,6 +54,9 @@ def _special_damage_hit(request, contributor, index, *, cycle=0):
     factor = request.get("system_factor")
     if isinstance(factor, bool) or not isinstance(factor, (int, float)) or not math.isfinite(factor) or factor <= 0:
         raise ValueError("special_reaction_damage_request.system_factor必须是有限正数。")
+    coefficient = request.get("reaction_coefficient")
+    if coefficient is not None:
+        factor = coefficient["effective_factor"]
     hit = {
         "id": f"{event_id}:contributor:{index+1}:{contributor}",
         "t": request["t"],
@@ -91,6 +94,8 @@ def _special_damage_hit(request, contributor, index, *, cycle=0):
             },
         },
     }
+    if coefficient is not None:
+        hit["extensions"]["special_reaction"]["reaction_coefficient"] = copy.deepcopy(coefficient)
     if request.get('extra_damage_provenance') is not None:
         hit['extensions']['special_damage_echo'] = copy.deepcopy(request['extra_damage_provenance'])
         hit['description'] = '显式近似分支：复用实际父包贡献者与多人公式；不重放附着、GU、自然周期和触发回调。'
@@ -220,7 +225,8 @@ def _direct_stellar_damage_hit(request, *, cycle=0):
                     (reaction_type == "stellar_swirl" and layers is None and factor == 1.0))
     if (not valid_factor
             or not isinstance(snapshot, dict) or snapshot.get("layers") != layers
-            or snapshot.get("system_factor") != factor):
+            or snapshot.get("system_factor") != factor
+            or request.get("reaction_coefficient") != snapshot.get("reaction_coefficient")):
         raise ElementalPending(
             "direct_stellar_runtime_sample_mismatch",
             "直伤星超导层数与系数必须来自同一运行时结算快照。",
@@ -240,6 +246,12 @@ def _direct_stellar_damage_hit(request, *, cycle=0):
         multiplier *= request['resource_trigger']['quantity_weight']
     component = request["component"]
     label = "星超导" if reaction_type == "stellar_superconduct" else "星扩散"
+    coefficient = request.get("reaction_coefficient")
+    reaction = {"type": reaction_type}
+    if layers is not None:
+        reaction["layers"] = layers
+    if coefficient is not None:
+        reaction["factor"] = coefficient["effective_factor"]
     return {
         "id": f"{event_id}:direct:{owner}", "t": request["t"],
         "character": owner, "skill": label,
@@ -252,7 +264,7 @@ def _direct_stellar_damage_hit(request, *, cycle=0):
         "damage_type_ids": ["damage.reaction"], "damage_system": "stellar",
         "element": request["element"], "multiplier": multiplier,
         "scaling_stat": request["scaling_stat"], "reaction_base": False,
-        "reaction": ({"type": reaction_type, "layers": layers} if layers is not None else {"type": reaction_type}),
+        "reaction": reaction,
         "count": request["count"],
         "extensions": {
             "elemental": {
@@ -273,6 +285,7 @@ def _direct_stellar_damage_hit(request, *, cycle=0):
                 "settled_snapshot": copy.deepcopy(snapshot),
                 "layer_source": request.get("factor_policy"),
                 "contributor_weighting": "not_applicable",
+                **({"reaction_coefficient": copy.deepcopy(coefficient)} if coefficient is not None else {}),
             },
         },
     }

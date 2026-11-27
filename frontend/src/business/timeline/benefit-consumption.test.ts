@@ -56,4 +56,31 @@ describe("formula consumption rather than mere effect materialization",()=>{
     const box=render(detail(value));expect(box.textContent).toContain("自动计算基线实际消费的收益");
     expect(box.textContent).toContain("不用于反推补正后的有效结果");
   });
+  it("links both contributors to one target's shared consumption and shows the untouched front pool",()=>{
+    const value:any=fixture();
+    value.template.characters.push({id:"b",name:"第二角色"});
+    value.result.hits.push({...value.result.hits[0],id:"h2",character:"b"});
+    const ledger={type:"quota",unit:"damage_component_target",t:1,cycle:0,event_id:"vortex",
+      target_id:"敌人甲",component_hit_ids:["h","h2"],before:1};
+    value.result.mechanics_trace.push(
+      {...ledger,rule_id:"重唱",position:"offfield",beneficiaries:["a","b"],after:0,consumed:true},
+      {...ledger,rule_id:"领唱",position:"frontline",beneficiaries:[],after:1,consumed:false,reason:"no_eligible_contributor"},
+      {...ledger,rule_id:"其他目标",target_id:"敌人乙",component_hit_ids:["other"]});
+    const rows=buildTimelineProjection(value).views.damage.events.filter(e=>e.kind==="calculation");
+    expect(rows).toHaveLength(2);
+    for(const row of rows){
+      expect(row.detail.component_quotas.map((q:any)=>q.rule_id)).toEqual(["重唱","领唱"]);
+      const box=render(row);
+      expect(box.textContent).toContain("重唱 · 敌人甲 · 1 → 0 · 扣 1 层，受益 a、b");
+      expect(box.textContent).toContain("领唱 · 敌人甲 · 1 → 1 · 没有符合条件的前台贡献者");
+    }
+  });
+  it("shows the executed target for equal-name hits at the same time",()=>{
+    const value:any=fixture();
+    value.result.hits[0].target_id="敌人甲";
+    value.result.hits.push({...value.result.hits[0],id:"h2",target_id:"敌人乙"});
+    const rows=buildTimelineProjection(value).views.damage.events.filter(e=>e.kind==="calculation");
+    expect(rows.map(row=>row.detail.target_id)).toEqual(["敌人甲","敌人乙"]);
+    expect(render(rows[1]).textContent).toContain("伤害目标：敌人乙");
+  });
 });

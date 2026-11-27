@@ -26,6 +26,9 @@
 
 ## 资料与研究
 
+- [动作估时：查起手到命中、接下一招和最早切人的时间](data/action-timing.md)
+- [排轴资料索引：后台、附着、产球、时序和版本差异](data/combat-references.md)
+- [帧率与战斗计时：换算、证据和实测偏差](data/frame-rate-timing.md)
 - [角色动作资料附录](data/character-appendices.md)
 - [数据库 README：字段语义与关系范式](data/database-readme.md)
 - [创建物资料：精确身份与挂载](data/gadget-sources.md)

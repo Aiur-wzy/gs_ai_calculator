@@ -41,6 +41,34 @@ def accepted_source_data_dir():
 
 
 @pytest.fixture(scope="session")
+def accepted_source_database(accepted_source_data_dir):
+    return accepted_source_data_dir / "genshin.db"
+
+
+@pytest.fixture(scope="session")
+def exact_upstream_source(accepted_source_data_dir):
+    configured = os.environ.get("GENSHIN_TEST_UPSTREAM_ROOT")
+    root = Path(configured) if configured else accepted_source_data_dir / "upstream/repo"
+
+    def read(commit, relative_path, expected):
+        source = root / relative_path
+        actual = source.read_bytes() if source.is_file() else None
+        if actual is not None and hashlib.sha256(actual).hexdigest() == expected:
+            return actual
+        if configured:
+            pytest.fail(f"GENSHIN_TEST_UPSTREAM_ROOT must contain the exact {commit}:{relative_path} (SHA256 {expected})")
+        if (root / ".git").exists():
+            blob = subprocess.run(["git", "-C", str(root), "show", f"{commit}:{relative_path}"],
+                                  capture_output=True, check=False, timeout=15)
+            if blob.returncode == 0:
+                assert hashlib.sha256(blob.stdout).hexdigest() == expected
+                return blob.stdout
+        pytest.skip(f"Exact source {commit}:{relative_path} is absent from the default cache. Set GENSHIN_TEST_UPSTREAM_ROOT.")
+
+    return read
+
+
+@pytest.fixture(scope="session")
 def accepted_current_only_cli(tmp_path_factory, accepted_source_data_dir):
     """Real CLI/source profile independent of a pending packaged App pair.
 

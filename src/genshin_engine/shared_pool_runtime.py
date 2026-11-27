@@ -7,6 +7,7 @@ from __future__ import annotations
 
 import copy
 
+from genshin_engine.beneficiary_selection import effective_recipient
 from genshin_engine.attribute_ledger import AttributeLedgerError
 from genshin_engine.reaction_event_capabilities import (
     reaction_event_available,
@@ -201,7 +202,7 @@ class SharedPoolRuntime:
                            or relation == "frontline" and cid == ctx.frontline
                            or relation == "other_frontline" and cid == ctx.frontline and cid != rule["owner"])
             instances = [inst["instance_id"] for inst in ctx.state[rule["id"]]["instances"]
-                         if cid in inst["beneficiaries"] and (rule["beneficiaries"]["scope"] != "current_frontline" or cid == ctx.frontline)]
+                         if effective_recipient(rule, inst, cid, ctx.frontline)]
             selected = ctx.filter(consumer["filter"], event, rule["id"])
             eligible = bool(relation_ok and instances and selected)
             if self.counter_program is None and self.observer_program is None: ctx._count_event("shared_pool_consume")

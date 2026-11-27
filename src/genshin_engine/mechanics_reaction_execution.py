@@ -14,6 +14,13 @@ from genshin_engine.attribute_ledger import AttributeLedgerError
 from genshin_engine.constants import LUNAR_FACTOR
 from genshin_engine.elemental import ElementalPending
 from genshin_engine.elemental_schema import DYNAMIC_SWIRL_RULESET, MULTI_AURA_RULESET
+from genshin_engine.mechanics_component_quota import (
+    STELLAR_SWIRL_COMPONENTS,
+    commit_component_quota,
+    component_identity,
+    component_rules,
+    plan_component_quota,
+)
 from genshin_engine.mechanics_execution_port import MechanicsExecutionPort
 from genshin_engine.mechanics_special_damage import (
     _direct_lunar_damage_hit,
@@ -21,6 +28,7 @@ from genshin_engine.mechanics_special_damage import (
     _special_damage_hit,
 )
 from genshin_engine.rotation_port import TICKS
+from genshin_engine.runtime_event_match import register_runtime_matches
 from genshin_engine.runtime_reference_audit import (
     prepare_projected_damage,
     register_generated,
@@ -44,6 +52,42 @@ def project_special_damage(self: MechanicsExecutionPort, request, cycle, parent,
             {"request_time_tick": request.get("time_tick"), "runtime_time_tick": self.time},
         )
     register_generated(self, request, cycle)
+    if ("resolved_target_ids" in request
+            and request.get("reaction_type") in STELLAR_SWIRL_COMPONENTS):
+        targets = request["resolved_target_ids"]
+        if (request.get("reaction_base") is not True or request.get("target_id") is not None
+                or request.get("target_selection_policy") != "event_time_entities_in_area"
+                or request.get("target_snapshot_source") != "static_world_registry_v1"
+                or not isinstance(request.get("selection_audit_id"), str)
+                or not request["selection_audit_id"]
+                or request.get("target_snapshot_event_id") != request["selection_audit_id"]
+                or type(targets) is not list
+                or any(not isinstance(target, str) or not target for target in targets)
+                or len(targets) != len(set(targets))):
+            raise ElementalPending(
+                "stellar_swirl_target_selection_invalid",
+                "星扩散范围伤害需要世界层选定且不重复的目标列表。",
+                request["event_id"], {"area_id": request.get("area_id")},
+            )
+        if self.target_scene:
+            area_id = request["area_id"]
+            selected = sorted(target for target in self.target_scene.targets
+                              if area_id in self.target_scene.world.area_ids_for_target(target))
+            if targets != selected:
+                raise ElementalPending(
+                    "stellar_swirl_target_selection_invalid",
+                    "星扩散伤害目标与该事件时刻的场景区域登记不一致。",
+                    request["event_id"], {"area_id": area_id, "resolved_target_ids": targets},
+                )
+        # Target order is already resolved by the world event. Group identity
+        # is distinct for each target even if they share one aura occurrence.
+        parent_id = request["event_id"]
+        for index, target in enumerate(targets):
+            child = {key: value for key, value in request.items() if key != "resolved_target_ids"}
+            child.update(event_id=f"{parent_id}:target:{index}", target_id=target,
+                         parent_damage_event_id=parent_id, target_order=index)
+            project_special_damage(self, child, cycle, parent, _callbacks=_callbacks)
+        return
     if request.get("reaction_base") is False:
         if request.get("damage_system") == "lunar":
             return self.project_direct_lunar_damage(request, cycle, parent)
@@ -83,7 +127,12 @@ def project_special_damage(self: MechanicsExecutionPort, request, cycle, parent,
             event_id=request.get("event_id", "special_reaction_damage_request"),
         )
     group_id = f"{cycle}:{request['event_id']}"
+    grouped_rules = component_rules(self, request) if _callbacks else ()
+    identity = component_identity(self, request, cycle) if grouped_rules else None
+    if identity in self.committed_component_ids:
+        return
     projected_hit_ids = []
+    projections = []
     for index, contributor in enumerate(contributors):
         hit = _special_damage_hit(request, contributor, index, cycle=cycle)
         event = {
@@ -93,7 +142,23 @@ def project_special_damage(self: MechanicsExecutionPort, request, cycle, parent,
             "reaction_element": hit["element"], "damage_type_ids": ["damage.reaction"],
             "conditions": dict(self.conditions),
         }
-        prepare_projected_damage(self, event, {"hit": hit, "descriptor": {"report": True}}, request['event_id'])
+        target = request.get("target_id")
+        if target is not None and request.get("parent_damage_event_id"):
+            event["target_id"] = target
+        projections.append((event, {"hit": hit, "descriptor": {"report": True}}))
+    quota_receipts, planned = {}, []
+    if grouped_rules:
+        for event, payload in projections:
+            prepare_projected_damage(self, event, payload, request["event_id"])
+            register_runtime_matches(self, event, payload)
+        quota_receipts, planned = plan_component_quota(
+            self, request, [event for event, _ in projections], grouped_rules, identity[2])
+    quota_trace_start = len(self.trace)
+    for event, payload in projections:
+        hit = payload["hit"]
+        if not grouped_rules:
+            event["conditions"] = dict(self.conditions)
+            prepare_projected_damage(self, event, payload, request["event_id"])
         if not _callbacks and self.attribute_runtime:
             # Suppressing gameplay callbacks must not suppress the ordinary
             # attribute stage. A preceding contributor may have left a
@@ -110,7 +175,9 @@ def project_special_damage(self: MechanicsExecutionPort, request, cycle, parent,
         if _callbacks:
             self.phase(event, "pre", generated_parent)
         before = len(self.hit_rows)
-        self.hit(event, {"hit": hit, "descriptor": {"report": True}})
+        if hit["id"] in quota_receipts:
+            event["component_quota_receipts"] = quota_receipts[hit["id"]]
+        self.hit(event, payload)
         if _callbacks:
             self.phase(event, "post", generated_parent)
         elif self.attribute_runtime:
@@ -120,6 +187,8 @@ def project_special_damage(self: MechanicsExecutionPort, request, cycle, parent,
             self.attribute_runtime.stage(event, 'post')
         if len(self.hit_rows) > before:
             projected_hit_ids.append(hit["id"])
+    if identity is not None:
+        commit_component_quota(self, identity, planned, quota_trace_start)
     if projected_hit_ids:
         self.special_damage_groups[group_id] = {
             "request": copy.deepcopy(request), "cycle": cycle,
@@ -237,8 +306,12 @@ def project_direct_stellar_damage(self: MechanicsExecutionPort, request, cycle, 
     runtime = self.special_runtime()
     area_id = request.get("area_id")
     reaction_type = request.get("reaction_type")
+    target_id = request.get("target_id")
+    target_matches = (target_id in self.target_scene.targets
+                      and area_id in self.target_scene.world.area_ids_for_target(target_id)
+                      if self.target_scene else target_id == self.elemental.target)
     current_snapshot = (
-        runtime.direct_stellar_snapshot(reaction_type, area_id)
+        runtime.direct_stellar_snapshot(reaction_type, area_id, event_id=event_id)
         if runtime is not None and (reaction_type == "stellar_swirl" or area_id in runtime.stellar_field_by_area) else None)
     contract_ok = (
         request.get("type") == "special_reaction_damage_request"
@@ -247,11 +320,12 @@ def project_direct_stellar_damage(self: MechanicsExecutionPort, request, cycle, 
         and request.get("damage_system") == "stellar"
         and request.get("contributor_ids") == []
         and request.get("actor_sample_policy") == "event_time_owner_attribute"
+        and current_snapshot is not None
         and request.get("factor_policy")
-        == ("event_time_last_completed_four_second_window" if reaction_type == "stellar_superconduct"
+        == ("event_time_" + current_snapshot["sample_policy"] if reaction_type == "stellar_superconduct"
             else "ability_coefficient_without_vortex_layers")
         and isinstance(request.get("target_id"), str)
-        and request.get("target_id") == self.elemental.target
+        and target_matches
         and isinstance(action, dict) and isinstance(ability, dict)
         and owner in self.data["chars"] and ability.get("character") == owner
         and binding.get("character_id") == owner
@@ -262,6 +336,7 @@ def project_direct_stellar_damage(self: MechanicsExecutionPort, request, cycle, 
         and current_snapshot == request.get("settled_snapshot")
         and request.get("layers") == (current_snapshot or {}).get("layers")
         and request.get("system_factor") == (current_snapshot or {}).get("system_factor")
+        and request.get("reaction_coefficient") == (current_snapshot or {}).get("reaction_coefficient")
         and request.get("application") is None
     )
     if not contract_ok:
@@ -274,6 +349,10 @@ def project_direct_stellar_damage(self: MechanicsExecutionPort, request, cycle, 
              "runtime_target_id": self.elemental.target,
              "runtime_snapshot": copy.deepcopy(current_snapshot)},
         )
+    grouped_rules = component_rules(self, request)
+    identity = component_identity(self, request, cycle) if grouped_rules else None
+    if identity in self.committed_component_ids:
+        return
     hit = _direct_stellar_damage_hit(request, cycle=cycle)
     event = {
         "id": hit["id"], "origin": cycle, "run_id": f"{cycle}:{hit['id']}",
@@ -291,8 +370,18 @@ def project_direct_stellar_damage(self: MechanicsExecutionPort, request, cycle, 
     self.count_event("reaction_damage")
     prepare_projected_damage(self, event, {"hit": hit, "descriptor": {"report": True}}, event_id)
     self.phase(event, "pre", generated_parent)
-    self.hit(event, {"hit": hit, "descriptor": {"report": True}})
+    payload = {"hit": hit, "descriptor": {"report": True}}
+    quota_receipts, planned = {}, []
+    if grouped_rules:
+        register_runtime_matches(self, event, payload)
+        quota_receipts, planned = plan_component_quota(self, request, [event], grouped_rules, identity[2])
+    quota_trace_start = len(self.trace)
+    if hit["id"] in quota_receipts:
+        event["component_quota_receipts"] = quota_receipts[hit["id"]]
+    self.hit(event, payload)
     self.phase(event, "post", generated_parent)
+    if identity is not None:
+        commit_component_quota(self, identity, planned, quota_trace_start)
     projection = {
         "type": "special_reaction_damage_projection",
         "event_id": event_id+":projection", "request_id": event_id,
@@ -301,6 +390,8 @@ def project_direct_stellar_damage(self: MechanicsExecutionPort, request, cycle, 
         "owner": owner, "action_id": action_id, "hit_id": hit["id"],
         "area_id": area_id, "settled_layers": request["layers"],
         "system_factor": request["system_factor"],
+        **({"reaction_coefficient": copy.deepcopy(request["reaction_coefficient"])}
+           if "reaction_coefficient" in request else {}),
         "actor_sample_policy": request["actor_sample_policy"],
         "contributor_weighting": "not_applicable", "status": "executed",
     }
@@ -399,7 +490,9 @@ def project_ordinary_bloom_damage(self: MechanicsExecutionPort, request, cycle, 
              "runtime_time_tick": self.time},
         )
     owner, target_id = request.get("owner"), request.get("target_id")
-    if owner not in self.data["chars"] or target_id != self.elemental.target:
+    target = self.target_scene.targets.get(target_id) if self.target_scene else (
+        self.elemental if target_id == self.elemental.target else None)
+    if owner not in self.data["chars"] or target is None:
         raise ElementalPending(
             "ordinary_bloom_owner_or_target_missing",
             "草原核生成者或爆炸目标无法在当前队伍与目标模型中核对。",
@@ -445,7 +538,9 @@ def project_ordinary_bloom_damage(self: MechanicsExecutionPort, request, cycle, 
         "status": "executed",
     }
     self.trace.append(copy.deepcopy(admission))
-    self.elemental.trace.append(copy.deepcopy(admission))
+    target.trace.append(copy.deepcopy(admission))
+    if self.target_scene:
+        self.target_scene.trace.append(target.trace[-1])
     if not allowed:
         return
     register_generated(self, request, cycle)
@@ -530,14 +625,19 @@ def project_swirl_damage(self: MechanicsExecutionPort, ev, parent_event, reactio
             if attribute_receipt["value"] != em:
                 raise AttributeLedgerError("attribute_projection_mismatch", "属性账与实际精通投影不一致", actor)
             provider_sample["attribute_receipt_id"] = attribute_receipt["receipt_id"]
+    target = self.target_scene.targets[reaction["target_id"]] if self.target_scene else self.elemental
     try:
-        receipt = self.elemental.attempt_reaction_damage(reaction)
+        receipt = target.attempt_reaction_damage(reaction)
     except ElementalPending:
-        self.elemental.trace[-1]["cycle"] = ev["origin"]
-        self.trace.append(copy.deepcopy(self.elemental.trace[-1]))
+        target.trace[-1]["cycle"] = ev["origin"]
+        self.trace.append(copy.deepcopy(target.trace[-1]))
+        if self.target_scene:
+            self.target_scene.trace.append(target.trace[-1])
         raise
     receipt["cycle"] = ev["origin"]
-    self.elemental.trace[-1]["cycle"] = ev["origin"]
+    target.trace[-1]["cycle"] = ev["origin"]
+    if self.target_scene:
+        self.target_scene.trace.append(target.trace[-1])
     self.trace.append(copy.deepcopy(receipt))
     if not receipt["allowed"]:
         return

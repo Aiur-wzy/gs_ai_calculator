@@ -208,6 +208,22 @@ def validate_effective_execution_graph(
                 blocking_scope=exc.blocking_scope, retryable=False,
                 repair_hint="根据模板字段诊断修正当前有效执行图输入",
             )
+    rotation = graph.compiled_rotation or {}
+    report_window = rotation.get("damage_report") or {}
+    period = rotation.get("period")
+    if (not issues and period is not None and mechanics_model is not None and "manual_buff_repeat" not in mechanics_model
+            and report_window.get("mode") == "explicit" and report_window.get("end") == period):
+        buff_ids = [buff["id"] for buff in template.get("buffs", [])
+                    if buff["start"] == 0 and buff["end"] > period]
+        if buff_ids:
+            context.warnings.append({
+                "code": "manual_buff_repeat_at_report_end",
+                "path": "mechanics_model.manual_buff_repeat",
+                "buff_ids": buff_ids,
+                "t": period,
+                "repeat": "each_cycle",
+                "message": "当前手工增益按周期重复。以下零秒起效的增益在截止时会出现第二份窗口。若已逐轮写好所有施加时点，把 manual_buff_repeat 显式设为 once，再按原截止重算。",
+            })
     from .external_damage import review_external_damage
     external_components = sorted(sources + versions, key=fingerprint) if original_plan.get("external_damage_supplements") else []
     external_review = review_external_damage(original_plan, source_fp, source_components=external_components,

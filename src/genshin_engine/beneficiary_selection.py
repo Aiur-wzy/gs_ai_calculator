@@ -42,7 +42,16 @@ def select_recipients(rule, roster, frontline):
 def effective_recipient(rule, instance, actor, snapshot_frontline):
     """Read stored membership; a locked instance survives a later switch."""
     return (actor in instance["beneficiaries"]
-            and (rule["beneficiaries"]["scope"] != "current_frontline" or actor == snapshot_frontline))
+            and position_matches(rule, actor, snapshot_frontline))
+
+
+def position_matches(rule, actor, frontline):
+    scope = rule["beneficiaries"]["scope"]
+    if scope == "current_frontline":
+        return actor == frontline
+    if scope == "current_offfield":
+        return frontline is not None and actor != frontline
+    return True
 
 
 def selection_receipt(rule, roster, frontline, event_id, time):

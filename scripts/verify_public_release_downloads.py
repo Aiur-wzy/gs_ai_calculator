@@ -122,7 +122,8 @@ def _website_documents(site, raw, verified, selected):
     return documents
 
 
-def verify_public_site(site: Path, public_key_record: dict, *, base_url: str | None = None, setup=None):
+def verify_public_site(site: Path, public_key_record: dict, *, base_url: str | None = None, setup=None,
+                       offline_bundle=None):
     if not site.is_dir() or is_reparse_point(site):
         raise ValueError("local publication site is not a regular directory")
     raw = _read_document(site / "latest.json")
@@ -132,7 +133,7 @@ def verify_public_site(site: Path, public_key_record: dict, *, base_url: str | N
         raise ValueError("local published index is not canonical")
     selected = verified["pairs"][verified["combinations"][verified["latest"]]]
     documents = _website_documents(site, raw, verified, selected)
-    downloads = site_downloads(verified, selected, setup)
+    downloads = site_downloads(verified, selected, setup, offline_bundle=offline_bundle)
     links = _PageLinks()
     links.feed(documents["index.html"].decode("utf-8"))
     required = (set(documents) - {"index.html"}) | {locator["url"] for locator in downloads.values()}
@@ -183,12 +184,16 @@ def main() -> int:
     parser.add_argument("--base-url", help="公开 Pages 根地址。附件先上线时可省略，先验签并读回附件。")
     parser.add_argument("--public-key-record", type=Path, required=True)
     parser.add_argument("--setup-asset", type=Path, help="小安装器的 HTTPS 地址、长度和 SHA-256 JSON")
+    parser.add_argument("--offline-bundle-asset", type=Path, help="完整离线安装包的 HTTPS 地址、长度和 SHA-256 JSON")
     parser.add_argument("--report", type=Path, required=True)
     args = parser.parse_args()
     try:
         record = json.loads(_read_document(args.public_key_record, maximum=64 * 1024))
         setup = json.loads(_read_document(args.setup_asset, maximum=64 * 1024)) if args.setup_asset else None
-        receipt = verify_public_site(args.site, record, base_url=args.base_url, setup=setup)
+        offline_bundle = (json.loads(_read_document(args.offline_bundle_asset, maximum=64 * 1024))
+                          if args.offline_bundle_asset else None)
+        receipt = verify_public_site(args.site, record, base_url=args.base_url, setup=setup,
+                                     offline_bundle=offline_bundle)
         with args.report.open("x", encoding="utf-8", newline="\n") as stream:
             json.dump(receipt, stream, ensure_ascii=False, indent=2)
             stream.write("\n")

@@ -16,11 +16,17 @@ from genshin_app.equipment.files import fingerprint, input_view
 from genshin_app.equipment.schema import PlanError
 from genshin_app.whiteboard import read_whiteboard_result
 from genshin_app.whiteboard_equipment import apply_whiteboard_equipment
-from tests.test_agent_manager import Transport, finish, request
+from tests.test_agent_manager import Transport, finish as finish_worker, request
 from tests.test_calculation_delivery import delivery_plan
 from tests.test_whiteboard_review import real_package as _real_package
 
 real_package = _real_package
+
+
+def finish(manager):
+    # These scripted turns run real SQLite and archive publication, so they
+    # need more time than tests using only the fake candidate.
+    finish_worker(manager, timeout=15)
 
 _CALCULATE_TOOL_NAMES = frozenset({
     "gs_hash_input",

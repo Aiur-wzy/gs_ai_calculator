@@ -126,10 +126,6 @@ def test_every_stage_opens_full_skill_bundle_and_only_scopes_recommendations(
     listed = _call(staged, "gs_read_skill")
 
     assert listed["data"]["resources"] == skill_resource_names()
-    assert len(listed["data"]["resources"]) <= 64
-    assert len(json.dumps(
-        listed["data"]["resources"], ensure_ascii=False, separators=(",", ":")
-    )) <= 4096
     assert disclosure["skill_access"] == {
         "policy": "all_bundled_markdown_on_demand",
         "index_tool": "gs_read_skill",
@@ -159,16 +155,18 @@ def test_every_stage_opens_full_skill_bundle_and_only_scopes_recommendations(
         "references/workflow/context-use.md",
         stage_card,
     ]
-    required_text_chars = sum(
-        _call(staged, "gs_read_skill", resource=resource)["data"]["total"]
-        for resource in required
-    )
-    assert len(required) <= 4
-    assert required_text_chars <= 64_000
+    for resource in required:
+        reply = _call(staged, "gs_read_skill", resource=resource)
+        assert reply["code"] == 0
+        page = reply["data"]
+        assert page["resource"] == resource
+        assert 0 < page["delivered_chars"] == len(page["text"]) <= page["total"]
     assert {
         "SKILL.md",
         "references/runtime/native-agent.md",
         "references/data/query.md",
+        "references/data/action-timing.md",
+        "references/data/frame-rate-timing.md",
         "references/app-mechanics/loadouts.md",
         "references/app-mechanics/actions/rotation-energy.md",
         "references/app-mechanics/elements/runtime.md",

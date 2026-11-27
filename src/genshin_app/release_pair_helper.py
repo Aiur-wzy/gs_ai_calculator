@@ -31,6 +31,8 @@ from genshin_app.database_release_reuse import (
     verified_reusable_database,
 )
 from genshin_app.database_transaction import profile_writer
+from genshin_app.installation_timing import InstallationTiming
+from genshin_app.package_integrity import PACKAGE_MANIFEST_FILENAME
 from genshin_app.release_pair_storage import (
     ReleasePairStorageError,
     directory_shape,
@@ -282,22 +284,39 @@ def _swap_app(
     protected_rollback: Path,
     *,
     independent: bool = False,
+    staged_identity: Mapping[str, Any] | None = None,
 ) -> None:
     parent = active.parent
     parent.mkdir(parents=True, exist_ok=True)
     replacement = parent / f".{active.name}.next-{operation_id}"
     previous = protected_rollback / "app"
-    if replacement.exists() or previous.exists():
+    if os.path.lexists(replacement) or os.path.lexists(previous):
         _fail("release_pair_helper_app_swap_recovery_required")
     moved_old = False
     try:
-        # Copy user-writable staging into an administrator-owned directory,
-        # then authenticate that protected copy before it can become active.
-        shutil.copytree(staged, replacement)
-        if independent:
-            pair_update._verify_app(replacement, pair, independent=True)
-        else:
-            pair_update._verify_app(replacement, pair)
+        moved_stage = False
+        if independent and staged_identity is not None:
+            from .installation_location import recheck_identity
+
+            if recheck_identity(staged_identity) != staged:
+                _fail("release_pair_helper_staged_path_changed")
+            if staged_identity["device"] == parent.stat().st_dev:
+                try:
+                    _rename_verified_app(staged, replacement)
+                    moved_stage = True
+                except OSError:
+                    if not staged.is_dir() or os.path.lexists(replacement):
+                        raise
+                if moved_stage:
+                    recheck_identity({**staged_identity, "path": str(replacement), "ancestor": str(replacement)})
+        if not moved_stage:
+            # For elevated installs staging crosses an authority boundary.
+            # Authenticate the protected copy before activating it.
+            shutil.copytree(staged, replacement)
+            if independent:
+                pair_update._verify_app(replacement, pair, independent=True)
+            else:
+                pair_update._verify_app(replacement, pair)
         if active.exists():
             os.replace(active, previous)
             moved_old = True
@@ -307,8 +326,22 @@ def _swap_app(
             os.replace(previous, active)
         raise ReleasePairHelperError("release_pair_helper_app_swap_failed") from error
     finally:
-        if replacement.exists():
+        if replacement.exists() and not _is_reparse_point(replacement):
             shutil.rmtree(replacement, ignore_errors=True)
+
+
+def _rename_verified_app(source, target):
+    # A scanner may briefly hold the staged directory during verification.
+    # Retry sharing failures while the source and vacant target still agree.
+    for delay in (0.05, 0.15, None):
+        try:
+            source.rename(target)
+            return
+        except OSError as error:
+            if (delay is None or getattr(error, "winerror", None) not in {5, 32, 33}
+                    or not source.is_dir() or os.path.lexists(target)):
+                raise
+            time.sleep(delay)
 
 
 def _restore_protected_rollback(
@@ -518,9 +551,11 @@ def execute_external_pair_update(
     parent_wait_timeout: float = 60.0,
     restart_relative: str | None = None,
     current_user: bool = False,
+    progress=None,
 ) -> dict[str, Any]:
     """Execute one prepared handoff from outside the active App process."""
 
+    timing = InstallationTiming(progress)
     root = Path(workspace).resolve(strict=True)
     active_app = Path(active_app_root).resolve()
     data = Path(data_dir).resolve()
@@ -533,15 +568,36 @@ def execute_external_pair_update(
         _fail("release_pair_helper_path_topology_invalid")
     if _inside(helper, active_app):
         _fail("release_pair_helper_must_run_outside_active_app")
+    _emit_activation_phase(timing, "activation_wait_for_parent")
     _wait_for_parent_exit(parent_pid, parent_wait_timeout)
     from .installation_runtime import installation_mutation_lock
     with installation_mutation_lock(data.parent), profile_writer(data):
+        _emit_activation_phase(timing, "activation_validate_handoff")
         if current_user:
             from genshin_app.database_legacy_processes import packaged_peer_processes
 
             if packaged_peer_processes():
                 _fail("database_legacy_instance_running")
         handoff = pair_update.inspect_pair_update_handoff(root, operation_id=operation_id)
+        # The current-user App and its staging tree may be renamed while the
+        # installation lease is held. Separate or elevated roots still
+        # receive and authenticate their own copy.
+        staged_identity = None
+        installation = active_app.parent
+        if (current_user and root == installation / "update-workspace" and data == installation / "data"
+                and active_app.name == "app" and handoff["staged_app_root"] == root / "staging/app"
+                and (installation / "installation.json").is_file()):
+            from .installation_location import (
+                ACTIVE_STATES,
+                LAYOUT_VERSION,
+                path_identity,
+                read_registration,
+            )
+
+            registration = read_registration(installation)
+            if (registration.get("layout_version") == LAYOUT_VERSION
+                    and registration.get("installation_state") in ACTIVE_STATES):
+                staged_identity = path_identity(handoff["staged_app_root"])
         expected_current = _verify_frozen_active_pair(handoff, active_app, data)
         if current_user and (
             handoff["production"] is not True or not handoff["independent_app"] or expected_current is None
@@ -549,21 +605,31 @@ def execute_external_pair_update(
                                                   expected_current["database_manifest"]) is None
         ):
             _fail("release_pair_helper_current_user_signed_install_required")
-        result = _activate_prepared_pair(root, active_app, data, handoff, expected_current, cleanup=cleanup)
+        result = _activate_prepared_pair(root, active_app, data, handoff, expected_current, cleanup=cleanup,
+                                         staged_identity=staged_identity, progress=timing)
     if restart_relative is not None:
+        _emit_activation_phase(timing, "activation_restart")
         pid = _launch_replacement(active_app, restart_relative)
         result["restart"] = {"requested": True, "started": True, "pid": pid}
-    return result
+    return {**result, "timing": timing.finish()}
 
 
-def _install_in_fresh_profile(transaction_root: Path, *, operation_id: str) -> dict[str, Any]:
+def _emit_activation_phase(progress, phase):
+    if progress is not None:
+        progress({"phase": phase, "cancellable": False})
+
+
+def _install_in_fresh_profile(transaction_root: Path, *, operation_id: str, _verified_app=None,
+                              progress=None) -> dict[str, Any]:
     """Install into a new private profile owned by the unelevated bootstrap."""
     root = Path(transaction_root).resolve(strict=True)
     workspace = root / "workspace"
     profile = root / "profile"
     if _is_reparse_point(workspace) or os.path.lexists(profile):
         _fail("release_pair_helper_fresh_profile_invalid")
-    handoff = pair_update.inspect_pair_update_handoff(workspace, operation_id=operation_id)
+    _emit_activation_phase(progress, "activation_validate_handoff")
+    handoff = pair_update.inspect_pair_update_handoff(workspace, operation_id=operation_id,
+        **({"_verified_app": _verified_app} if _verified_app is not None else {}))
     if (handoff["state"] != "handoff_ready" or handoff["rollback_required"]
             or handoff["production"] is not True or not handoff["independent_app"]
             or handoff["staged_app_root"] is None or handoff["staged_database"] is None):
@@ -571,7 +637,7 @@ def _install_in_fresh_profile(transaction_root: Path, *, operation_id: str) -> d
     profile.mkdir()
     return _activate_prepared_pair(
         workspace, profile / "app", profile / "data", handoff, None,
-        cleanup=True,
+        cleanup=True, _verified_app=_verified_app, progress=progress,
     )
 
 
@@ -583,6 +649,9 @@ def _activate_prepared_pair(
     expected_current: dict[str, Any] | None,
     *,
     cleanup: bool,
+    _verified_app=None,
+    staged_identity: Mapping[str, Any] | None = None,
+    progress=None,
 ) -> dict[str, Any]:
     operation_id = handoff["operation_id"]
     pair = handoff["pair_manifest"]
@@ -592,8 +661,19 @@ def _activate_prepared_pair(
     )
     reuse_installed_app = handoff["staged_app_root"] is None
     rollback_required = handoff["rollback_required"]
+    staged_app = handoff["staged_app_root"]
+    verified_shape = (_verified_app.report_for(staged_app)
+        if _verified_app is not None and not rollback_required and not reuse_installed_app else None)
+    _emit_activation_phase(progress, "activation_preflight")
     try:
-        staged_shape = {"bytes": 0, "files": 0} if reuse_installed_app else directory_shape(handoff["staged_app_root"])
+        if reuse_installed_app:
+            staged_shape = {"bytes": 0, "files": 0}
+        elif verified_shape is not None:
+            # Keep capacity for the fallback copy, without another tree walk.
+            inventory_size = (staged_app / PACKAGE_MANIFEST_FILENAME).stat().st_size
+            staged_shape = {"bytes": verified_shape["bytes"] + inventory_size, "files": verified_shape["files"] + 1}
+        else:
+            staged_shape = directory_shape(staged_app)
         storage_plan = preflight_after_stage(
             active_app_root=active_app,
             data_dir=data,
@@ -632,23 +712,57 @@ def _activate_prepared_pair(
             operation_id=operation_id,
             active_app_root=active_app if rollback_required else None,
             active_database=(data / "genshin.db") if rollback_required else None,
+            **({"_verified_app": _verified_app} if verified_shape is not None else {}),
         )
     except Exception:
         if protected_rollback is not None:
             shutil.rmtree(protected_rollback, ignore_errors=True)
         raise
     swapped = False
+    moved_verified_app = False
     pair_operational = False
     try:
         if protected_rollback is None:
             _fail("release_pair_helper_protected_rollback_missing")
+        _emit_activation_phase(progress, "activation_publish_app")
         if not reuse_installed_app:
-            _swap_app(handoff["staged_app_root"], active_app, operation_id, pair, protected_rollback,
-                      independent=handoff.get("independent_app", False))
+            if (verified_shape is not None and _verified_app.report_for(staged_app) is not None
+                    and not os.path.lexists(active_app)):
+                try:
+                    _rename_verified_app(staged_app, active_app)
+                    moved_verified_app = True
+                except OSError:
+                    if not staged_app.is_dir() or os.path.lexists(active_app):
+                        raise
+            if not moved_verified_app:
+                _swap_app(staged_app, active_app, operation_id, pair, protected_rollback,
+                          independent=handoff.get("independent_app", False),
+                          staged_identity=staged_identity)
             swapped = True
+        _emit_activation_phase(progress, "activation_database")
         app = pair["app"]
+        database_qualification = handoff.get("database_qualification")
+        current_qualification = None
+        if handoff["production"] and expected_current is not None:
+            current_document = pair_update.read_live_product_proof(
+                data, expected_current["pair_manifest"], expected_current["database_manifest"],
+            )
+            if current_document is not None:
+                current_qualification = pair_update.qualified_database_from_signed_document(
+                    current_document
+                )
+            if (
+                current_qualification is None and reuse_installed_database
+                and expected_current["database_manifest"] == manifest
+            ):
+                current_qualification = database_qualification
         try:
-            reusable_identity = verified_reusable_database(data, manifest)
+            if current_qualification is None:
+                reusable_identity = verified_reusable_database(data, manifest)
+            else:
+                reusable_identity = verified_reusable_database(
+                    data, manifest, current_qualification=current_qualification,
+                )
         except DatabaseReleaseReuseError as error:
             raise ReleasePairHelperError(error.reason) from error
         if reuse_installed_database and reusable_identity is None:
@@ -671,19 +785,24 @@ def _activate_prepared_pair(
                 app_version=app["app_version"],
                 app_artifact_manifest_sha256=app["artifact_manifest"]["sha256"],
                 pair_manifest=pair,
+                qualification=database_qualification,
+                current_qualification=current_qualification,
             )
         else:
             try:
                 rebind_database_sidecars(data, manifest, reusable_identity)
             except DatabaseReleaseReuseError as error:
                 raise ReleasePairHelperError(error.reason) from error
+        _emit_activation_phase(progress, "activation_final_check")
         checked = pair_update.postcheck_pair_update(
             root,
             active_app,
             data,
             operation_id=operation_id,
+            **({"_verified_app": _verified_app} if moved_verified_app else {}),
         )
         pair_operational = True
+        _emit_activation_phase(progress, "activation_cleanup")
         shutil.rmtree(protected_rollback)
         cleaned = (
             pair_update.complete_pair_update_cleanup(

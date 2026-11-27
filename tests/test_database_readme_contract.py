@@ -81,7 +81,7 @@ def test_database_readme_is_discoverable_without_becoming_an_execution_rule():
 
 def test_database_readme_registers_current_opaque_tokens_as_agent_evidence_only():
     text, contract = _contract()
-    assert contract["upstream_commit"] == "6044f5aae7dd79fbbe15c5748ef99b654f6132b7"
+    assert contract["upstream_commit"] == "770b88c8baccce9ff8923f5fbc95978671342232"
 
     for token in (
         "BLDKFMFJDLI",
@@ -105,7 +105,7 @@ def test_database_readme_registers_current_opaque_tokens_as_agent_evidence_only(
     ):
         assert required in text
 
-    facts = json.loads((ROOT / "docs/pm/audits/2026-11-19-7.2.52-database-readme-facts.json").read_text(encoding="utf-8"))
+    facts = json.loads((ROOT / "docs/pm/audits/2026-11-27-7.2.54-database-readme-facts.json").read_text(encoding="utf-8"))
     assert facts["upstream_commit"] == contract["upstream_commit"]
     assert facts["counts"]["character"] == 171
     assert facts["counts"]["skill"] == 442

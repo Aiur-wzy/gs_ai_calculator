@@ -40,7 +40,10 @@ def _merge(target, supplied, path="mechanics_model"):
         if key not in target or target[key] is None:
             target[key] = copy.deepcopy(value)
         elif isinstance(value, list):
-            identity = "rule_id" if destination.endswith("initial_state.rules") else "id"
+            identity = {
+                "mechanics_model.initial_state.rules": "rule_id",
+                "mechanics_model.hit_events": "hit_id",
+            }.get(destination, "id")
             if destination.endswith("resource_ownership"):
                 if not isinstance(target[key], list):
                     _error("已有资源拥有者字段不是数组，先经普通编辑修正。", path=destination)
@@ -107,10 +110,23 @@ def _bindings(plan, new_rules, namespace, *, fixed=False):
 def _native_fragment(plan, payload, namespace):
     from genshin_engine.mechanics_schema import empty_mechanics_model
 
+    supplied = payload.get("mechanics_model", {})
     mechanics = plan.get("mechanics_model")
     if mechanics is None:
         mechanics = plan["mechanics_model"] = empty_mechanics_model()
-    supplied = payload.get("mechanics_model", {})
+        rotation = plan.get("rotation_model") or {}
+        actions = rotation.get("actions", [])
+        extra_actions = payload.get("rotation_actions", [])
+        if (isinstance(supplied, dict) and "manual_buff_repeat" not in supplied
+                and rotation.get("damage_report") and plan["manual_template"].get("buffs")
+                and isinstance(actions, list) and isinstance(extra_actions, list)
+                and (actions or extra_actions)
+                and all(isinstance(row, dict) and isinstance(row.get("repeat"), dict)
+                        and row["repeat"].get("mode") == "once"
+                        for row in actions + extra_actions)):
+            # A fresh explicit action list already enumerates all game rounds.
+            # Keep this choice in the authored model so reopening is repeatable.
+            mechanics["manual_buff_repeat"] = "once"
     _merge(mechanics, supplied)
     _bindings(plan, supplied.get("rules", []), namespace)
     _bindings(plan, supplied.get("fixed_effect_sources", []), namespace + ".fixed", fixed=True)

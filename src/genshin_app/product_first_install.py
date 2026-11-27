@@ -21,6 +21,7 @@ from genshin_app.database_transaction import (
     profile_writer,
     read_activation_journal,
 )
+from genshin_app.installation_timing import InstallationTiming
 from genshin_app.product_install_contract import (
     FIRST_INSTALL_CONTRACT,
     REGISTRATION_FILENAME,
@@ -78,6 +79,7 @@ def _emit_phase(progress, phase):
 
 
 class _FirstInstallCoordinator:
+    _verifies_published_app = False
     def __init__(self, *, local: Path, url: str, trust_verifier, programs_folder=None):
         self._local = local
         self._url = url
@@ -247,8 +249,12 @@ class _FirstInstallCoordinator:
         if not discovered.get("authoritative") or not discovered.get("product_index"):
             raise FirstInstallError(discovered.get("reason") or "product_repair_release_unavailable")
         pair, database = installed["pair_manifest"], installed["database_manifest"]
+        indexed = discovered["product_index"]["pairs"].get(pair["release_pair_id"])
+        # Both documents have passed signature validation. A new signature or a
+        # qualified envelope may attest to the same installed release bytes.
         if (discovered["installed_pair"] != pair or discovered["installed_database"] != database
-                or discovered["product_index"]["pairs"].get(pair["release_pair_id"]) != installed):
+                or indexed is None or indexed["pair_manifest"] != pair
+                or indexed["database_manifest"] != database or indexed["artifacts"] != installed["artifacts"]):
             raise FirstInstallError("product_repair_installed_pair_not_in_signed_index")
         choice = next((option for option in discovered["update_options"]
                        if option["mode"] == "app_only" and option["reuse_database"] and not option["reuse_app"]
@@ -551,6 +557,7 @@ class _FirstInstallCoordinator:
         local_artifacts=None,
     ) -> dict:
         """Verify and install both artifacts in private before publishing the profile."""
+        timing = InstallationTiming(progress)
         if user_confirmed is not True:
             raise FirstInstallError("product_first_install_confirmation_required")
 
@@ -572,7 +579,8 @@ class _FirstInstallCoordinator:
         document = choice["document"]
         reinstall = choice if choice.get("mode") == "reinstall" else None
         if app_only or reinstall is not None:
-            return self._install_app_only(document, check_cancelled, cancel_check, progress, reinstall=reinstall)
+            result = self._install_app_only(document, check_cancelled, cancel_check, timing, reinstall=reinstall)
+            return {**result, "timing": timing.finish()}
         pair, database = document["pair_manifest"], document["database_manifest"]
         selected = _result(status="available", source="signed_index", checked_at=_now(), document=document,
                            trusted=True)
@@ -595,20 +603,26 @@ class _FirstInstallCoordinator:
                 **({"download_cache": self._cache / "artifacts"} if progress is not None and local_index is None else {}),
             )
             check_cancelled()
-            stage_release_pair_artifacts(selected, workspace, confirmed_document_sha256=selected["document_sha256"],
-                                         cancel_check=cancel_check,
-                                         **({"local_artifacts": local_artifacts, "progress": progress}
-                                            if local_index is not None else
-                                            {"cache_dir": self._cache / "artifacts", "progress": progress}
-                                            if progress is not None else {}))
+            staged_artifacts = stage_release_pair_artifacts(
+                selected, workspace, confirmed_document_sha256=selected["document_sha256"],
+                cancel_check=cancel_check, progress=timing,
+                verify_app_on_extract=self._verifies_published_app,
+                **({"local_artifacts": local_artifacts} if local_index is not None else
+                   {"cache_dir": self._cache / "artifacts"} if progress is not None else {}))
+            verified_app = staged_artifacts.get("verified_app")
             check_cancelled()
+            _emit_phase(timing, "qualifying")
             handoff = prepare_release_pair_handoff(
                 workspace, staged / "app", staged / "genshin.db", database, pair,
                 user_confirmed=True, production=True, trust_assertion=assertion,
+                **({"_verified_app": verified_app} if verified_app is not None else {}),
             )
             operation_id = handoff["operation_id"]
             check_cancelled()
-            _install_in_fresh_profile(transaction, operation_id=operation_id)
+            _emit_phase(timing, "activating")
+            _install_in_fresh_profile(transaction, operation_id=operation_id,
+                                      progress=timing,
+                                      **({"_verified_app": verified_app} if verified_app is not None else {}))
             registration = {
                 "contract": FIRST_INSTALL_CONTRACT,
                 "scope": "current_user",
@@ -621,7 +635,7 @@ class _FirstInstallCoordinator:
             atomic_json(profile / REGISTRATION_FILENAME, registration)
             check_cancelled()
             self._require_new_profile()
-            _emit_phase(progress, "committing")
+            _emit_phase(timing, "committing")
             # Same-volume Windows rename fails if a different process created the destination.
             try:
                 self._publish_first_profile(profile, registration)
@@ -629,9 +643,11 @@ class _FirstInstallCoordinator:
                 reason = ("product_first_install_existing_profile" if os.path.lexists(self._profile)
                           else "product_first_install_publish_failed")
                 raise FirstInstallError(reason) from error
+            _emit_phase(timing, "registering")
             shortcut = self._write_shortcut(registration)
+            _emit_phase(timing, "cleanup")
         return {**registration, "status": "complete", "install_directory": str(self._profile),
-                "release_pair_id": pair["release_pair_id"], "shortcut": shortcut}
+                "release_pair_id": pair["release_pair_id"], "shortcut": shortcut, "timing": timing.finish()}
 
     def _install_app_only(self, document, check_cancelled, cancel_check, progress, *, reinstall=None):
         from genshin_app.release_pair_transport import (
@@ -654,13 +670,20 @@ class _FirstInstallCoordinator:
                 app_unpacked_files=artifact["unpacked_files"], target_database_bytes=0,
                 current_database_bytes=0, reuse_installed_database=True, download_cache=cache,
             )
+            _emit_phase(progress, "download")
             _download_https(artifact, archive, timeout=30, maximum_bytes=MAX_APP_ARCHIVE_BYTES,
                             cancel_check=cancel_check, cache_dir=cache, progress=progress)
-            extracted = _extract_app_archive(archive, profile / "app", cancel_check=cancel_check)
+            _emit_phase(progress, "extract_app")
+            proof_options = ({"expected_manifest_sha256": pair["app"]["artifact_manifest"]["sha256"]}
+                             if self._verifies_published_app and reinstall is None else {})
+            extracted = _extract_app_archive(archive, profile / "app", cancel_check=cancel_check, **proof_options)
             if (extracted["unpacked_size_bytes"], extracted["files"]) != (
                     artifact["unpacked_size_bytes"], artifact["unpacked_files"]):
                 raise FirstInstallError("release_pair_app_archive_declared_shape_mismatch")
-            _verify_app(profile / "app", pair, independent=True)
+            _emit_phase(progress, "qualifying")
+            verified_app = extracted.get("verified_app")
+            _verify_app(profile / "app", pair, independent=True,
+                        **({"_verified_app": verified_app} if verified_app is not None else {}))
             registration = {"contract": FIRST_INSTALL_CONTRACT, "scope": "current_user",
                             "operation_id": uuid4().hex, "app_directory": "app", "data_directory": "data",
                             "app_release_id": pair["app"]["app_release_id"],
@@ -677,7 +700,9 @@ class _FirstInstallCoordinator:
                     raise FirstInstallError("product_first_install_publish_failed") from error
             else:
                 registration = self._publish_reinstall(profile / "app", reinstall, check_cancelled, progress)
+            _emit_phase(progress, "registering")
             shortcut = self._write_shortcut(registration)
+            _emit_phase(progress, "cleanup")
         # Expose provenance identity, not the entire embedded signed document.
         return {**{key: value for key, value in registration.items() if key != "signed_app_source"},
                 "status": "complete", "install_directory": str(self._profile), "shortcut": shortcut}

@@ -31,9 +31,9 @@ from genshin_engine.resource_counter_schema import (
     RESOURCE_COUNTER_SCHEMA,
 )
 from genshin_engine.resource_counter_view_schema import RESOURCE_COUNTER_VIEW_SCHEMA
+from genshin_engine.resource_damage_emission import RESOURCE_DAMAGE_SCHEMA
 from genshin_engine.resource_reaction_program import REACTION_ELEMENTS, REACTION_TYPES
 from genshin_engine.resource_source_identity import TRIGGER_SOURCE_SCHEMA
-from genshin_engine.resource_damage_emission import RESOURCE_DAMAGE_SCHEMA
 from genshin_engine.resource_threshold_schema import RESOURCE_THRESHOLD_SCHEMA
 from genshin_engine.resource_threshold_trigger_schema import (
     RESOURCE_THRESHOLD_TRIGGER_SCHEMA,
@@ -74,6 +74,7 @@ from genshin_engine.state_runtime_schema import (
     STATE_RUNTIME_SCHEMA,
     STATE_RUNTIME_V2_SCHEMA,
 )
+from genshin_engine.target_scene import TARGET_SCENE_SCHEMA
 from genshin_engine.target_state import (
     GENERAL_TARGET_PREDICATE_SCHEMA,
     GENERAL_TARGET_PROFILE,
@@ -138,6 +139,7 @@ EFFECT = obj({"id": STRING, "benefit_type_id": {"enum": [*BENEFIT_TYPES, "benefi
               "filter": FILTER}, ["id", "benefit_type_id", "value", "domain"])
 QUOTA = obj({"capacity": {"type": "integer", "minimum": 1, "maximum": 10000},
              "scope": {"enum": ["per_beneficiary", "team"]},
+             "unit": {"enum": ["damage_component_target"]},
              "refresh": {"enum": ["reset", "add", "keep"]}, "consume": FILTER},
             ["capacity", "scope", "refresh", "consume"])
 RESOURCE = obj({"id": STRING, "kind": {"enum": ["energy_direct", "particles"]},
@@ -157,7 +159,7 @@ RULE = obj({
     "id": STRING, "name_zh": STRING, "owner": STRING, "source_id": STRING,
     "trigger": {"oneOf": [FILTER, THRESHOLD_TRIGGER]},
     "beneficiaries": obj({"mode": {"enum": ["self", "team", "characters", "frontline", "next_switch"]},
-                          "characters": arr(STRING), "scope": {"enum": ["locked", "current_frontline"]},
+                          "characters": arr(STRING), "scope": {"enum": ["locked", "current_frontline", "current_offfield"]},
                           "eligibility": ELIGIBILITY}, ["mode", "scope"]),
     "timing": obj({"delay": NONNEG, "duration": NONNEG, "cooldown": NONNEG,
                    "cooldown_anchor": {"enum": ["success", "attempt"]}},
@@ -286,12 +288,13 @@ MECHANICS_SCHEMA = obj({
     "assumptions": arr(STRING),
     "manual_buff_repeat": {"enum": ["each_cycle", "once"]},
     "elemental_model": ELEMENTAL_SCHEMA,
+    "target_scene": TARGET_SCENE_SCHEMA,
     "special_reaction_model": SPECIAL_REACTION_MODEL_SCHEMA,
     "special_reaction_party_capabilities": {
         **arr(PARTY_CAPABILITY_SCHEMA), "maxItems": 4,
     },
     "special_reaction_events": {
-        **arr(SPECIAL_REACTION_EVENT_SCHEMA), "maxItems": 256,
+        **arr(SPECIAL_REACTION_EVENT_SCHEMA), "maxItems": 2048,
     },
     "special_damage_echoes": SPECIAL_DAMAGE_ECHO_SCHEMA,
     "elemental_state_events": {
@@ -308,6 +311,25 @@ def empty_mechanics_model():
     """Fresh input skeleton; does not attest execution dependencies or ABI."""
     return {"schema_version": 1, "rules": [], "hit_events": [], "hit_patterns": [],
             "condition_events": [], "initial_state": {"rules": []}}
+
+
+def target_scene_capabilities():
+    return {
+        "contract": "static-target-scene-v1",
+        "input_field": "target_scene",
+        "schema": copy.deepcopy(TARGET_SCENE_SCHEMA),
+        "elemental_ruleset": "gauge-multi-aura-v4",
+        "requires_finite_window": True,
+        "enemy_panel": "shared_template_enemy",
+        "supported": "显式逐目标命中、独立元素底和附着冷却、同目标普通反应、星扩散能力直伤、同父星扩散接触与风旋的实际区域结算。",
+        "atomic_anemo_contacts": (
+            "逐目标声明接触，共用 application.atomic_parent_id、时刻、区域、来源动作与风附着档案。"
+            "每个目标各一条，按相邻的独立 order 执行。仍采用实际命中和附着冷却，"
+            "只有可触发冰扩散的目标进入同一次风旋状态变更；整组成功后才提交结果。"
+        ),
+        "pending": "逐目标敌方面板、动态位置、普通扩散的跨目标传播、其他星月替换、显式目标状态操作及特殊伤害回响。",
+        "review": "result.hits[].target_id；result.summary.by_target；equipment review 使用 filters.target_id。",
+    }
 
 
 def mechanics_capabilities():
@@ -332,6 +354,7 @@ def mechanics_capabilities():
     return {
         "mechanics_schema_version": 1, "schema": copy.deepcopy(MECHANICS_SCHEMA),
         "health": health_capabilities(),
+        "target_scene": target_scene_capabilities(),
         'resource_execution_budget': {'policy': normalize_resource_budget(), 'override_schema': copy.deepcopy(RESOURCE_LIMITS_SCHEMA),
             'engine_path': 'execution_options.resource_limits', 'app_path': 'calculation_options.resource_limits',
             'file_envelopes_independent': True},
@@ -368,7 +391,7 @@ def mechanics_capabilities():
         "beneficiary_eligibility": {"contract": "beneficiary-eligibility-v1",
             "supported_modes": ["self", "team", "characters", "frontline"],
             "unsupported_combinations": ["next_switch", "nonempty_resources", "enemy_effects"],
-            "semantics": "先按规则选择，取角色白名单交集并排除提供者；locked保留触发名单至到期，current_frontline另判前台。",
+            "semantics": "先按规则选择，取角色白名单交集并排除提供者；locked保留触发名单至到期，current_frontline/current_offfield另判取样时的前后台。",
             "empty_selection": "不激活、不取样、不刷新；attempt冷却计入，success冷却不计入。",
             "authority": "来源仍需独立核验；命中include不能越过实例受益者资格。"},
         "attribute_callbacks": {**attribute_callback_capabilities(),
@@ -531,8 +554,9 @@ def mechanics_capabilities():
         "snapshot_phase": "指定事件的前置规则提交后、后置规则提交前取样；被切人取消的动作在实际取消时发出结束事件。",
         "result_scope": "result/resolved_template 汇总完整显式输入窗口（origin0）的已执行伤害；检查窗口不等于游戏第一轮，不自动复制动作。",
         "initial_state": "每条规则必须显式声明初始冷却与实例（空实例表示未触发）；未知不得填成已激活。",
-        "manual_buff_repeat": "新机制路径手工 Buff 默认 each_cycle；可显式 once。旧 calculate 模板语义保持不变。",
-        "beneficiaries": "frontline+locked 锁定触发时前台；frontline+current_frontline 随实际前台变化。明确角色集合+current_frontline 取集合与当前前台的交集。",
+        "manual_buff_repeat": "手工 Buff 的绝对窗口已逐次编排时显式写 once。需要每周期重新开始的窗口用 each_cycle，重叠窗口分别生效。旧文件省略此项时沿用 each_cycle。统计截止可恰好等于执行周期。",
+        "beneficiaries": "frontline+locked 锁定触发时前台。current_frontline/current_offfield 从已登记的角色中筛选取样时位于前台/后台的角色。",
+        "component_target_quota": "quota.unit=damage_component_target：星扩散每段每个实际目标按规则实例扣一次团队池，前台/后台各自消耗并向同位置贡献者发放同一份收益。留空沿用逐命中次数。",
         "limits": {"max_rules": 128, "max_expanded_events": 40000, "max_layers": 1000},
         "supported": ["动作开始/结束、切人、命中、显式条件触发", "实际接棒者", "内部冷却与延迟", "整体刷新与独立层到期",
                       "每角色/全队次数池", "逐事件前后相位", "显式命中偏移展开", "自己冻结/提供者当前/敌方当前",

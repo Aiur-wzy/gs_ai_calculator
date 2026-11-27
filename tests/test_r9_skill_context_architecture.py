@@ -99,7 +99,7 @@ def test_special_profiles_keep_both_evidence_paths_without_catalog_count_claims(
     assert "confirmed" in text and "完整profile精确命中" in text
     assert "reviewed_profile_count" in text
     assert "reviewed profile数为0" not in text and "profiles: []" not in text
-    assert "不能只改commit标签" in text
+    assert "不能只改 `commit` 标签" in text
     assert "不进入多人反应贡献权重" in text
 
 
